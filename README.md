@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
+
 Event management and booking
 ============================
 
