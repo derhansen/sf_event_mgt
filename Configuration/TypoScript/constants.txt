@@ -1,0 +1,15 @@
+
+plugin.tx_sfeventmgt {
+	view {
+		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:sf_event_mgt/Resources/Private/Templates/
+		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:sf_event_mgt/Resources/Private/Partials/
+		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:sf_event_mgt/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_sfeventmgt//a; type=string; label=Default storage PID
+		storagePid =
+	}
+}

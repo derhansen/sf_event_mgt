@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt">
+		<header/>
+		<body>
+			<trans-unit id="tx_sfeventmgt_domain_model_event">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.startdate">
+				<source>Startdate</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enddate">
+				<source>Enddate</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.participants">
+				<source>Participants</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.currency">
+				<source>Currency</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.booking">
+				<source>Booking</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_category">
+				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking">
+				<source>Booking</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.firstname">
+				<source>Firstname</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.lastname">
+				<source>Lastname</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.gender">
+				<source>Gender</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.confirmed">
+				<source>Confirmed</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.paid">
+				<source>Paid</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_booking.dateofbirth">
+				<source>Dateofbirth</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

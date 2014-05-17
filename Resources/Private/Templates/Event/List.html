@@ -1,0 +1,49 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<h1>Listing for Event</h1>
+
+<f:flashMessages renderMode="div" />
+
+<table  class="tx_sfeventmgt" >
+	<tr>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.title" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.description" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.startdate" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.enddate" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.participants" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.price" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.currency" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{events}" as="event">
+		<tr>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.title}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.description}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.startdate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.enddate -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.participants}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.price}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.currency}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{event : event}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{event : event}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Event</f:link.action>
+</f:section>
