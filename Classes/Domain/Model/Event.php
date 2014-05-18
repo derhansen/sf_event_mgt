@@ -90,12 +90,12 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $category = NULL;
 
 	/**
-	 * Booking
+	 * Registration
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Booking>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Registration>
 	 * @cascade remove
 	 */
-	protected $booking = NULL;
+	protected $registration = NULL;
 
 	/**
 	 * __construct
@@ -115,7 +115,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected function initStorageObjects() {
 		$this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->booking = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -291,42 +291,42 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Adds a Booking
+	 * Adds a Registration
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Booking $booking
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
 	 * @return void
 	 */
-	public function addBooking(\SKYFILLERS\SfEventMgt\Domain\Model\Booking $booking) {
-		$this->booking->attach($booking);
+	public function addRegistration(\SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration) {
+		$this->registration->attach($registration);
 	}
 
 	/**
-	 * Removes a Booking
+	 * Removes a Registration
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Booking $bookingToRemove The Booking to be removed
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove The Registration to be removed
 	 * @return void
 	 */
-	public function removeBooking(\SKYFILLERS\SfEventMgt\Domain\Model\Booking $bookingToRemove) {
-		$this->booking->detach($bookingToRemove);
+	public function removeRegistration(\SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove) {
+		$this->registration->detach($registrationToRemove);
 	}
 
 	/**
-	 * Returns the booking
+	 * Returns the Registration
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Booking> $booking
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Registration> $registration
 	 */
-	public function getBooking() {
-		return $this->booking;
+	public function getRegistration() {
+		return $this->registration;
 	}
 
 	/**
-	 * Sets the booking
+	 * Sets the Registration
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Booking> $booking
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Registration> $registration
 	 * @return void
 	 */
-	public function setBooking(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $booking) {
-		$this->booking = $booking;
+	public function setRegistration(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration) {
+		$this->registration = $registration;
 	}
 
 }

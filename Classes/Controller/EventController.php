@@ -28,7 +28,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  ***************************************************************/
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
-use SKYFILLERS\SfEventMgt\Domain\Model\Booking;
+use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
 
 /**
  * EventController
@@ -46,7 +46,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Registration repository
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\BookingRepository
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository
 	 * @inject
 	 */
 	protected $registrationRepository = NULL;
@@ -72,23 +72,23 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
-	 * Booking view for an event
+	 * Registration view for an event
 	 *
 	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
 	 * @return void
 	 */
-	public function bookingAction(Event $event) {
+	public function registrationAction(Event $event) {
 		$this->view->assign('event', $event);
 	}
 
 	/**
 	 * Saves the registration
 	 *
-	 * @param $registration \SKYFILLERS\SfEventMgt\Domain\Model\Booking
+	 * @param $registration \SKYFILLERS\SfEventMgt\Domain\Model\Registration
 	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
 	 * @return void
 	 */
-	public function saveRegistrationAction(Booking $registration, Event $event) {
+	public function saveRegistrationAction(Registration $registration, Event $event) {
 		// Set event and event Pid for registration
 		$registration->setEvent($event);
 		$registration->setPid($event->getPid());

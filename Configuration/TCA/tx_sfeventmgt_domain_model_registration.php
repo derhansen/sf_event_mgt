@@ -1,7 +1,7 @@
 <?php
 return array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking',
+		'title'	=> 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration',
 		'label' => 'firstname',
 		'label_alt' => 'lastname, email',
 		'label_alt_force' => 1,
@@ -23,7 +23,7 @@ return array(
 			'endtime' => 'endtime',
 		),
 		'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,dateofbirth,',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_booking.gif'
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration.gif'
 	),
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, address, zip, city, phone, email, gender, confirmed, paid, dateofbirth',
@@ -58,8 +58,8 @@ return array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_sfeventmgt_domain_model_booking',
-				'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_booking.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_booking.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_sfeventmgt_domain_model_registration',
+				'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_registration.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_registration.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -119,7 +119,7 @@ return array(
 
 		'firstname' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.firstname',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.firstname',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -128,7 +128,7 @@ return array(
 		),
 		'lastname' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.lastname',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.lastname',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -137,7 +137,7 @@ return array(
 		),
 		'address' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.address',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.address',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -146,7 +146,7 @@ return array(
 		),
 		'zip' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.zip',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.zip',
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
@@ -155,7 +155,7 @@ return array(
 		),
 		'city' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.city',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.city',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -164,7 +164,7 @@ return array(
 		),
 		'phone' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.phone',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.phone',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -173,7 +173,7 @@ return array(
 		),
 		'email' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.email',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.email',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -182,7 +182,7 @@ return array(
 		),
 		'gender' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.gender',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -191,7 +191,7 @@ return array(
 		),
 		'confirmed' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.confirmed',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.confirmed',
 			'config' => array(
 				'type' => 'check',
 				'default' => 0
@@ -199,7 +199,7 @@ return array(
 		),
 		'paid' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.paid',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paid',
 			'config' => array(
 				'type' => 'check',
 				'default' => 0
@@ -207,7 +207,7 @@ return array(
 		),
 		'dateofbirth' => array(
 			'exclude' => 1,
-			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking.dateofbirth',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.dateofbirth',
 			'config' => array(
 				'type' => 'input',
 				'size' => 7,

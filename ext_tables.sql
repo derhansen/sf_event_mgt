@@ -14,7 +14,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	price double(11,2) DEFAULT '0.00' NOT NULL,
 	currency varchar(255) DEFAULT '' NOT NULL,
 	category int(11) unsigned DEFAULT '0' NOT NULL,
-	booking int(11) unsigned DEFAULT '0' NOT NULL,
+	registration int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -87,9 +87,9 @@ CREATE TABLE tx_sfeventmgt_domain_model_category (
 );
 
 #
-# Table structure for table 'tx_sfeventmgt_domain_model_booking'
+# Table structure for table 'tx_sfeventmgt_domain_model_registration'
 #
-CREATE TABLE tx_sfeventmgt_domain_model_booking (
+CREATE TABLE tx_sfeventmgt_domain_model_registration (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,

@@ -27,8 +27,8 @@
 			<trans-unit id="category.description">
 				<source>Category</source>
 			</trans-unit>
-			<trans-unit id="booking.description">
-				<source>Booking</source>
+			<trans-unit id="registration.description">
+				<source>Registration</source>
 			</trans-unit>
 		</body>
 	</file>

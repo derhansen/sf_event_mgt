@@ -28,9 +28,9 @@ namespace SKYFILLERS\SfEventMgt\Domain\Repository;
  ***************************************************************/
 
 /**
- * The repository for Bookings
+ * The repository for registrations
  */
-class BookingRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	
 }

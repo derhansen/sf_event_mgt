@@ -28,9 +28,9 @@ namespace SKYFILLERS\SfEventMgt\Domain\Model;
  ***************************************************************/
 
 /**
- * Booking
+ * Registration
  */
-class Booking extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Firstname

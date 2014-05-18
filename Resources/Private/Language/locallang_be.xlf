@@ -15,8 +15,8 @@
 			<trans-unit id="flexforms_general.mode.detail">
 				<source>Detail</source>
 			</trans-unit>
-			<trans-unit id="flexforms_general.mode.booking">
-				<source>Booking</source>
+			<trans-unit id="flexforms_general.mode.registration">
+				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.detailPid">
 				<source>Detail Pid</source>
@@ -24,8 +24,8 @@
 			<trans-unit id="flexforms_general.listPid">
 				<source>List Pid</source>
 			</trans-unit>
-			<trans-unit id="flexforms_general.bookingPid">
-				<source>Booking Pid</source>
+			<trans-unit id="flexforms_general.registrationPid">
+				<source>Registration Pid</source>
 			</trans-unit>
 		</body>
 	</file>

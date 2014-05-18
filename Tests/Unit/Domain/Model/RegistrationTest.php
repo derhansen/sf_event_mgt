@@ -27,21 +27,21 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Booking.
+ * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Registration.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class BookingTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Booking
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Booking();
+		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 	}
 
 	protected function tearDown() {

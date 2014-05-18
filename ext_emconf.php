@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Event management and booking',
-	'description' => 'Event management with booking option',
+	'title' => 'Event management and registration',
+	'description' => 'Event management with registration option',
 	'category' => 'plugin',
 	'author' => 'Torben Hansen',
 	'author_email' => 'derhansen@gmail.com',

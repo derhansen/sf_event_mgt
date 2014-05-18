@@ -268,26 +268,26 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function getBookingReturnsInitialValueForBooking() {
+	public function getRegistrationReturnsInitialValueForRegistration() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->subject->getBooking()
+			$this->subject->getRegistration()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setBookingForObjectStorageContainingBookingSetsBooking() {
-		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Booking();
-		$objectStorageHoldingExactlyOneBooking = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneBooking->attach($booking);
-		$this->subject->setBooking($objectStorageHoldingExactlyOneBooking);
+	public function setRegistrationForObjectStorageContainingRegistrationSetsRegistration() {
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$objectStorageHoldingExactlyOneRegistration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneRegistration->attach($registration);
+		$this->subject->setRegistration($objectStorageHoldingExactlyOneRegistration);
 
 		$this->assertAttributeEquals(
-			$objectStorageHoldingExactlyOneBooking,
-			'booking',
+			$objectStorageHoldingExactlyOneRegistration,
+			'registration',
 			$this->subject
 		);
 	}
@@ -295,25 +295,25 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function addBookingToObjectStorageHoldingBooking() {
-		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Booking();
+	public function addRegistrationToObjectStorageHoldingRegistration() {
+		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$bookingObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
 		$bookingObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($booking));
-		$this->inject($this->subject, 'booking', $bookingObjectStorageMock);
+		$this->inject($this->subject, 'registration', $bookingObjectStorageMock);
 
-		$this->subject->addBooking($booking);
+		$this->subject->addRegistration($booking);
 	}
 
 	/**
 	 * @test
 	 */
-	public function removeBookingFromObjectStorageHoldingBooking() {
-		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Booking();
+	public function removeRegistrationFromObjectStorageHoldingRegistration() {
+		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$bookingObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
 		$bookingObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($booking));
-		$this->inject($this->subject, 'booking', $bookingObjectStorageMock);
+		$this->inject($this->subject, 'registration', $bookingObjectStorageMock);
 
-		$this->subject->removeBooking($booking);
+		$this->subject->removeRegistration($booking);
 
 	}
 }

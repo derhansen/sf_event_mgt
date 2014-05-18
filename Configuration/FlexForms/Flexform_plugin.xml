@@ -22,8 +22,8 @@
                                 <numIndex index="1">Event->detail</numIndex>
                             </numIndex>
                             <numIndex index="3">
-                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.booking</numIndex>
-                                <numIndex index="1">Event->booking;Event->saveRegistration</numIndex>
+                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.registration</numIndex>
+                                <numIndex index="1">Event->registration;Event->saveRegistration</numIndex>
                             </numIndex>
                         </items>
                     </config>
@@ -60,7 +60,7 @@
                         <OR>
                             <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
                             <OR>
-                                <numIndex>FIELD:switchableControllerActions:=:Event->booking;Event->saveRegistration</numIndex>
+                                <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration</numIndex>
                             </OR>
                         </OR>
                     </displayCond>
@@ -82,9 +82,9 @@
             </settings.listPid>
 
             <!-- List Pid -->
-            <settings.bookingPid>
+            <settings.registrationPid>
                 <TCEforms>
-                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.bookingPid</label>
+                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.registrationPid</label>
                     <displayCond>
                         <OR>
                             <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
@@ -108,7 +108,7 @@
                         </wizards>
                     </config>
                 </TCEforms>
-            </settings.bookingPid>
+            </settings.registrationPid>
 
         </el>
     </ROOT>
