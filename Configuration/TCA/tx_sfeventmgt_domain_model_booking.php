@@ -3,6 +3,8 @@ return array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_booking',
 		'label' => 'firstname',
+		'label_alt' => 'lastname, email',
+		'label_alt_force' => 1,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
