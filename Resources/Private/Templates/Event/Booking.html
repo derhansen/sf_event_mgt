@@ -1,6 +1,6 @@
 <f:layout name="Default" />
 <f:section name="main">
-    <h1>Detail for Event</h1>
+    <h1>Booking for Event</h1>
 
     <f:translate key="tx_sfeventmgt_domain_model_event.title" />: {event.title} <br>
     <f:translate key="tx_sfeventmgt_domain_model_event.description" />: {event.description} <br>
@@ -10,7 +10,4 @@
     <f:translate key="tx_sfeventmgt_domain_model_event.price" />{event.price} {event.currency} <br>
 
     <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
-    <f:if condition="{settings.bookingPid} !=''">
-        <f:link.action action="booking" arguments="{event : event}" pageUid="{settings.bookingPid}"><f:translate key="event.booking" /></f:link.action>
-    </f:if>
 </f:section>

@@ -7,12 +7,12 @@ if (!defined('TYPO3_MODE')) {
 	'SKYFILLERS.' . $_EXTKEY,
 	'Pievent',
 	array(
-		'Event' => 'list, detail',
+		'Event' => 'list, detail, booking',
 		
 	),
 	// non-cacheable actions
 	array(
-		'Event' => '',
+		'Event' => 'booking',
 		
 	)
 );

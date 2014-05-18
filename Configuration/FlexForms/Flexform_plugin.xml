@@ -58,8 +58,10 @@
                     <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.listPid</label>
                     <displayCond>
                         <OR>
-                            <numIndex>FIELD:switchableControllerActions:=:Event->booking</numIndex>
                             <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
+                            <OR>
+                                <numIndex>FIELD:switchableControllerActions:=:Event->booking</numIndex>
+                            </OR>
                         </OR>
                     </displayCond>
                     <config>
@@ -86,7 +88,9 @@
                     <displayCond>
                         <OR>
                             <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
-                            <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
+                            <OR>
+                                <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
+                            </OR>
                         </OR>
                     </displayCond>
                     <config>

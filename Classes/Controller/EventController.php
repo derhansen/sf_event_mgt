@@ -61,4 +61,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	public function detailAction(Event $event) {
 		$this->view->assign('event', $event);
 	}
+
+	/**
+	 * Booking view for an event
+	 *
+	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @return void
+	 */
+	public function bookingAction(Event $event) {
+		$this->view->assign('event', $event);
+	}
 }

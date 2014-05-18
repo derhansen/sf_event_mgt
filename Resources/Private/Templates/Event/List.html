@@ -46,7 +46,9 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td>{event.price}</td>
 			<td>{event.currency}</td>
             <td>
-                <f:link.action action="booking" pageUid="{settings.bookingPid}"><f:translate key="event.booking" /></f:link.action>
+                <f:if condition="{settings.bookingPid} !=''">
+                    <f:link.action action="booking" arguments="{event : event}" pageUid="{settings.bookingPid}"><f:translate key="event.booking" /></f:link.action>
+                </f:if>
             </td>
 		</tr>
 	</f:for>
