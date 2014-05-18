@@ -23,7 +23,7 @@
                             </numIndex>
                             <numIndex index="3">
                                 <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.booking</numIndex>
-                                <numIndex index="1">Event->booking</numIndex>
+                                <numIndex index="1">Event->booking;Event->saveRegistration</numIndex>
                             </numIndex>
                         </items>
                     </config>
@@ -60,7 +60,7 @@
                         <OR>
                             <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
                             <OR>
-                                <numIndex>FIELD:switchableControllerActions:=:Event->booking</numIndex>
+                                <numIndex>FIELD:switchableControllerActions:=:Event->booking;Event->saveRegistration</numIndex>
                             </OR>
                         </OR>
                     </displayCond>

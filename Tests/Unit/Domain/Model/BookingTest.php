@@ -301,4 +301,13 @@ class BookingTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function setEventForEventSetsEvent() {
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$this->subject->setEvent($event);
+		$this->assertEquals($event, $this->subject->getEvent());
+	}
 }

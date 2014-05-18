@@ -28,6 +28,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  ***************************************************************/
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
+use SKYFILLERS\SfEventMgt\Domain\Model\Booking;
 
 /**
  * EventController
@@ -41,6 +42,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @inject
 	 */
 	protected $eventRepository = NULL;
+
+	/**
+	 * Registration repository
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\BookingRepository
+	 * @inject
+	 */
+	protected $registrationRepository = NULL;
 
 	/**
 	 * List view
@@ -70,5 +79,19 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function bookingAction(Event $event) {
 		$this->view->assign('event', $event);
+	}
+
+	/**
+	 * Saves the registration
+	 *
+	 * @param $registration \SKYFILLERS\SfEventMgt\Domain\Model\Booking
+	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @return void
+	 */
+	public function saveRegistrationAction(Booking $registration, Event $event) {
+		// Set event and event Pid for registration
+		$registration->setEvent($event);
+		$registration->setPid($event->getPid());
+		$this->registrationRepository->add($registration);
 	}
 }

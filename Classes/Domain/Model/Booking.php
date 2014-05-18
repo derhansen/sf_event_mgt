@@ -112,6 +112,11 @@ class Booking extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $dateofbirth = NULL;
 
 	/**
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 */
+	protected $event = NULL;
+
+	/**
 	 * Returns the firstname
 	 *
 	 * @return string $firstname
@@ -337,5 +342,24 @@ class Booking extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setDateofbirth(\DateTime $dateofbirth) {
 		$this->dateofbirth = $dateofbirth;
 	}
+
+	/**
+	 * Sets the event
+	 *
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
+	 */
+	public function setEvent($event) {
+		$this->event = $event;
+	}
+
+	/**
+	 * Returns the event
+	 *
+	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 */
+	public function getEvent() {
+		return $this->event;
+	}
+
 
 }
