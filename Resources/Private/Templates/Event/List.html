@@ -26,24 +26,30 @@ Otherwise your changes will be overwritten the next time you save the extension 
 		<th><f:translate key="tx_sfeventmgt_domain_model_event.participants" /></th>
 		<th><f:translate key="tx_sfeventmgt_domain_model_event.price" /></th>
 		<th><f:translate key="tx_sfeventmgt_domain_model_event.currency" /></th>
-		<th> </th>
-		<th> </th>
+        <th></th>
 	</tr>
 
 	<f:for each="{events}" as="event">
 		<tr>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.title}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.description}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.startdate -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.enddate -> f:format.date()}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.participants}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.price}</f:link.action></td>
-			<td><f:link.action action="show" arguments="{event : event}"> {event.currency}</f:link.action></td>
-			<td><f:link.action action="edit" arguments="{event : event}">Edit</f:link.action></td>
-			<td><f:link.action action="delete" arguments="{event : event}">Delete</f:link.action></td>
+            <f:if condition="{settings.detailPid} == ''">
+                <f:then>
+                    <td><f:link.action action="detail" arguments="{event : event}">{event.title}</f:link.action></td>
+                </f:then>
+                <f:else>
+                    <td><f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action></td>
+                </f:else>
+            </f:if>
+			<td>{event.description}</td>
+            <td><f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date></td>
+            <td><f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date></td>
+			<td>{event.participants}</td>
+			<td>{event.price}</td>
+			<td>{event.currency}</td>
+            <td>
+                <f:link.action action="booking" pageUid="{settings.bookingPid}"><f:translate key="event.booking" /></f:link.action>
+            </td>
 		</tr>
 	</f:for>
 </table>
 
-<f:link.action action="new">New Event</f:link.action>
 </f:section>

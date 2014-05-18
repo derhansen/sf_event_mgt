@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'SKYFILLERS.' . $_EXTKEY,
 	'Pievent',
 	array(
-		'Event' => 'list',
+		'Event' => 'list, detail',
 		
 	),
 	// non-cacheable actions

@@ -75,6 +75,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_booking.dateofbirth">
 				<source>Dateofbirth</source>
 			</trans-unit>
+			<trans-unit id="event.booking">
+				<source>Booking</source>
+			</trans-unit>
+			<trans-unit id="event.backtext">
+				<source>Back to listview</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -27,6 +27,8 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use SKYFILLERS\SfEventMgt\Domain\Model\Event;
+
 /**
  * EventController
  */
@@ -41,7 +43,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $eventRepository = NULL;
 
 	/**
-	 * action list
+	 * List view
 	 *
 	 * @return void
 	 */
@@ -50,4 +52,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$this->view->assign('events', $events);
 	}
 
+	/**
+	 * Detail view for an event
+	 *
+	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @return void
+	 */
+	public function detailAction(Event $event) {
+		$this->view->assign('event', $event);
+	}
 }
