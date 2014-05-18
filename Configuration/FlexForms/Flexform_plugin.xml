@@ -1,0 +1,115 @@
+<T3DataStructure>
+    <meta type="array">
+        <langDisable>1</langDisable>
+    </meta>
+    <ROOT>
+        <type>array</type>
+        <el>
+            <!-- View -->
+            <switchableControllerActions>
+                <TCEforms>
+                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode</label>
+                    <onChange>reload</onChange>
+                    <config>
+                        <type>select</type>
+                        <items>
+                            <numIndex index="1">
+                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.list</numIndex>
+                                <numIndex index="1">Event->list</numIndex>
+                            </numIndex>
+                            <numIndex index="2">
+                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.detail</numIndex>
+                                <numIndex index="1">Event->detail</numIndex>
+                            </numIndex>
+                            <numIndex index="3">
+                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.booking</numIndex>
+                                <numIndex index="1">Event->booking</numIndex>
+                            </numIndex>
+                        </items>
+                    </config>
+                </TCEforms>
+            </switchableControllerActions>
+
+            <!-- Detail Pid -->
+            <settings.detailPid>
+                <TCEforms>
+                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.detailPid</label>
+                    <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
+                    <config>
+                        <type>group</type>
+                        <internal_type>db</internal_type>
+                        <allowed>pages</allowed>
+                        <size>1</size>
+                        <maxitems>1</maxitems>
+                        <minitems>0</minitems>
+                        <show_thumbs>1</show_thumbs>
+                        <wizards>
+                            <suggest>
+                                <type>suggest</type>
+                            </suggest>
+                        </wizards>
+                    </config>
+                </TCEforms>
+            </settings.detailPid>
+
+            <!-- List Pid -->
+            <settings.listPid>
+                <TCEforms>
+                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.listPid</label>
+                    <displayCond>
+                        <OR>
+                            <numIndex>FIELD:switchableControllerActions:=:Event->booking</numIndex>
+                            <OR>
+                                <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
+                            </OR>
+                        </OR>
+                    </displayCond>
+                    <config>
+                        <type>group</type>
+                        <internal_type>db</internal_type>
+                        <allowed>pages</allowed>
+                        <size>1</size>
+                        <maxitems>1</maxitems>
+                        <minitems>0</minitems>
+                        <show_thumbs>1</show_thumbs>
+                        <wizards>
+                            <suggest>
+                                <type>suggest</type>
+                            </suggest>
+                        </wizards>
+                    </config>
+                </TCEforms>
+            </settings.listPid>
+
+            <!-- List Pid -->
+            <settings.bookingPid>
+                <TCEforms>
+                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.bookingPid</label>
+                    <displayCond>
+                        <OR>
+                            <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
+                            <OR>
+                                <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
+                            </OR>
+                        </OR>
+                    </displayCond>
+                    <config>
+                        <type>group</type>
+                        <internal_type>db</internal_type>
+                        <allowed>pages</allowed>
+                        <size>1</size>
+                        <maxitems>1</maxitems>
+                        <minitems>0</minitems>
+                        <show_thumbs>1</show_thumbs>
+                        <wizards>
+                            <suggest>
+                                <type>suggest</type>
+                            </suggest>
+                        </wizards>
+                    </config>
+                </TCEforms>
+            </settings.bookingPid>
+
+        </el>
+    </ROOT>
+</T3DataStructure>

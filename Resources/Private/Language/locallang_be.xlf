@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt">
+		<header/>
+		<body>
+			<trans-unit id="flexforms_tab.settings">
+				<source>Settings</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode">
+				<source>Mode</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode.list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode.detail">
+				<source>Detail</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode.booking">
+				<source>Booking</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.detailPid">
+				<source>Detail Pid</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.listPid">
+				<source>List Pid</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.bookingPid">
+				<source>Booking Pid</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
