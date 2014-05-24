@@ -95,7 +95,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->once())->method('getRegistration')->will($this->returnValue(10));
-		$event->expects($this->once())->method('getParticipants')->will($this->returnValue(10));
+		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('message',
@@ -117,7 +117,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->once())->method('getRegistration')->will($this->returnValue(9));
-		$event->expects($this->once())->method('getParticipants')->will($this->returnValue(10));
+		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
 
 		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
 			array('add'), array(), '', FALSE);

@@ -18,8 +18,8 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enddate">
 				<source>Enddate</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_event.participants">
-				<source>Participants</source>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
+				<source>Max. participants</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
 				<source>Price</source>

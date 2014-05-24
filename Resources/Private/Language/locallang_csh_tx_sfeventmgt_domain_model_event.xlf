@@ -15,7 +15,7 @@
 			<trans-unit id="enddate.description">
 				<source>Enddate and time</source>
 			</trans-unit>
-			<trans-unit id="participants.description">
+			<trans-unit id="maxParticipants.description">
 				<source>Max participants</source>
 			</trans-unit>
 			<trans-unit id="price.description">

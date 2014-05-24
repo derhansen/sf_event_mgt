@@ -66,7 +66,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var integer
 	 */
-	protected $participants = 0;
+	protected $maxParticipants = 0;
 
 	/**
 	 * Price
@@ -199,8 +199,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return integer $participants
 	 */
-	public function getParticipants() {
-		return $this->participants;
+	public function getMaxParticipants() {
+		return $this->maxParticipants;
 	}
 
 	/**
@@ -209,8 +209,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @param integer $participants
 	 * @return void
 	 */
-	public function setParticipants($participants) {
-		$this->participants = $participants;
+	public function setMaxParticipants($participants) {
+		$this->maxParticipants = $participants;
 	}
 
 	/**

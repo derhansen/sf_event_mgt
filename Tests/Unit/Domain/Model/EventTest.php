@@ -148,7 +148,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function getParticipantsReturnsInitialValueForInteger() {
 		$this->assertSame(
 			0,
-			$this->subject->getParticipants()
+			$this->subject->getMaxParticipants()
 		);
 	}
 
@@ -156,11 +156,11 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function setParticipantsForIntegerSetsParticipants() {
-		$this->subject->setParticipants(12);
+		$this->subject->setMaxParticipants(12);
 
 		$this->assertAttributeEquals(
 			12,
-			'participants',
+			'maxParticipants',
 			$this->subject
 		);
 	}
