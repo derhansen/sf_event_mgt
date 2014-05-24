@@ -283,7 +283,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the category
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Category> $category
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $category
 	 * @return void
 	 */
 	public function setCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $category) {
@@ -313,7 +313,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the Registration
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Registration> $registration
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration
 	 */
 	public function getRegistration() {
 		return $this->registration;
@@ -322,11 +322,23 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the Registration
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Registration> $registration
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration
 	 * @return void
 	 */
 	public function setRegistration(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration) {
 		$this->registration = $registration;
 	}
 
+	/**
+	 * Returns if the registration for this event is logically possible
+	 *
+	 * @return bool
+	 */
+	public function getRegistrationPossible() {
+		$maxParticipantsNotReached = TRUE;
+		if ($this->getMaxParticipants() > 0 && $this->getRegistration()->count() >= $this->maxParticipants) {
+			$maxParticipantsNotReached = FALSE;
+		}
+		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached;
+	}
 }

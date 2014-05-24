@@ -11,7 +11,11 @@
     <f:translate key="tx_sfeventmgt_domain_model_event.price" />{event.price} {event.currency} <br>
 
     <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
-    <f:if condition="{settings.registrationPid} !=''">
-        <f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}"><f:translate key="event.registration" /></f:link.action>
+    <f:if condition="{event.registrationPossible}">
+        <f:if condition="{settings.registrationPid} !=''">
+            <f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}">
+                <f:translate key="event.registration"/>
+            </f:link.action>
+        </f:if>
     </f:if>
 </f:section>

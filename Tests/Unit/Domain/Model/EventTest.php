@@ -26,6 +26,8 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
+
 /**
  * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Event.
  *
@@ -280,7 +282,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function setRegistrationForObjectStorageContainingRegistrationSetsRegistration() {
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$registration = new Registration();
 		$objectStorageHoldingExactlyOneRegistration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegistration->attach($registration);
 		$this->subject->setRegistration($objectStorageHoldingExactlyOneRegistration);
@@ -296,7 +298,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function addRegistrationToObjectStorageHoldingRegistration() {
-		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$booking = new Registration();
 		$bookingObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
 		$bookingObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($booking));
 		$this->inject($this->subject, 'registration', $bookingObjectStorageMock);
@@ -308,12 +310,63 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function removeRegistrationFromObjectStorageHoldingRegistration() {
-		$booking = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$booking = new Registration();
 		$bookingObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
 		$bookingObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($booking));
 		$this->inject($this->subject, 'registration', $bookingObjectStorageMock);
 
 		$this->subject->removeRegistration($booking);
-
 	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsFalseIfEventHasTakenPlace() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('yesterday'));
+		$this->subject->setStartdate($startdate);
+
+		$this->assertFalse($this->subject->getRegistrationPossible());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsFalseIfEventMaxParticipantsReached() {
+		$registration = new Registration();
+		$registration->setFirstname('John');
+		$registration->setLastname('Doe');
+
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$this->subject->setStartdate($startdate);
+		$this->subject->setMaxParticipants(1);
+		$this->subject->addRegistration($registration);
+
+		$this->assertFalse($this->subject->getRegistrationPossible());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsTrueIfMaxParticipantsNotSet() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$this->subject->setStartdate($startdate);
+
+		$this->assertTrue($this->subject->getRegistrationPossible());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsTrueIfRegistrationIsLogicallyPossible() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$this->subject->setStartdate($startdate);
+		$this->subject->setMaxParticipants(1);
+
+		$this->assertTrue($this->subject->getRegistrationPossible());
+	}
+
 }
