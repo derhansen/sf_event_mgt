@@ -29,6 +29,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
 use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * EventController
@@ -89,9 +90,29 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
-		// Set event and event Pid for registration
-		$registration->setEvent($event);
-		$registration->setPid($event->getPid());
-		$this->registrationRepository->add($registration);
+		$message = '';
+		$success = TRUE;
+		if ($event->getStartdate() < new \DateTime()) {
+			$message = LocalizationUtility::translate('event.message.registrationfailedeventexpired', 'SfEventMgt');
+			$success = FALSE;
+		}
+
+		if ($success && $event->getRegistration() === $event->getParticipants()) {
+			$message = LocalizationUtility::translate('event.message.registrationfailedmaxparticipants', 'SfEventMgt');
+			$success = FALSE;
+		}
+
+		// Only save new registration, if no logical or validation errors
+		if ($success) {
+			// Set event and event Pid for registration
+			$registration->setEvent($event);
+			$registration->setPid($event->getPid());
+			$this->registrationRepository->add($registration);
+
+			$message = LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt');
+		}
+
+		$this->view->assign('message', $message);
+		$this->view->assign('success', $success);
 	}
 }
