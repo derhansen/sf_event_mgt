@@ -223,10 +223,10 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function setGenderForStringSetsGender() {
-		$this->subject->setGender('Conceived at T3CON10');
+		$this->subject->setGender('m');
 
 		$this->assertAttributeEquals(
-			'Conceived at T3CON10',
+			'm',
 			'gender',
 			$this->subject
 		);
@@ -274,6 +274,19 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertAttributeEquals(
 			TRUE,
 			'paid',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setNotesForStringSetsNotes() {
+		$this->subject->setNotes('This is a longer text');
+
+		$this->assertAttributeEquals(
+			'This is a longer text',
+			'notes',
 			$this->subject
 		);
 	}
