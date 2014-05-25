@@ -84,6 +84,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.paid">
 				<source>Paid</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
+				<source>Notes</source>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 			</trans-unit>

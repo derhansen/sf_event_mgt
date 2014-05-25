@@ -107,6 +107,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $paid = FALSE;
 
 	/**
+	 * Notes
+	 *
+	 * @var string
+	 */
+	protected $notes = '';
+
+	/**
 	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Event
 	 */
 	protected $event = NULL;
@@ -337,5 +344,22 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $this->event;
 	}
 
+	/**
+	 * Setter for notes
+	 *
+	 * @param string $notes
+	 */
+	public function setNotes($notes) {
+		$this->notes = $notes;
+	}
+
+	/**
+	 * Getter for notes
+	 *
+	 * @return string
+	 */
+	public function getNotes() {
+		return $this->notes;
+	}
 
 }
