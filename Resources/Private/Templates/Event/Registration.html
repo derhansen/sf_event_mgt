@@ -7,15 +7,35 @@
     <f:translate key="tx_sfeventmgt_domain_model_event.startdate" />: <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date> <br>
     <f:translate key="tx_sfeventmgt_domain_model_event.enddate" />: <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date> <br>
     <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" />: {event.maxParticipants} <br>
-    <f:translate key="tx_sfeventmgt_domain_model_event.price" />{event.price} {event.currency} <br>
+    <f:translate key="tx_sfeventmgt_domain_model_event.price" />: {event.price} {event.currency} <br>
 
     <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}">
         <fieldset>
-            <label for="firstname"><f:translate key="search-subject" /></label>
-            <f:form.textfield id="firstname" property="firstname"/>
+            <label for="gender"><f:translate key="tx_sfeventmgt_domain_model_registration.gender" /></label>
+            <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" /><f:form.radio name="gender" property="gender" value=""/>
+            <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" /><f:form.radio name="gender" property="gender" value="m" />
+            <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" /><f:form.radio name="gender" property="gender" value="f" /><br>
 
-            <label for="lastname"><f:translate key="search-subject" /></label>
-            <f:form.textfield id="lastname" property="lastname"/>
+            <label for="firstname"><f:translate key="tx_sfeventmgt_domain_model_registration.firstname" /></label>
+            <f:form.textfield id="firstname" property="firstname"/><br>
+
+            <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.lastname" /></label>
+            <f:form.textfield id="lastname" property="lastname"/><br>
+
+            <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.address" /></label>
+            <f:form.textfield id="address" property="address"/><br>
+
+            <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.zip" /></label>
+            <f:form.textfield id="zip" property="zip"/><br>
+
+            <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.city" /></label>
+            <f:form.textfield id="city" property="city"/><br>
+
+            <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.email" /></label>
+            <f:form.textfield id="email" property="email"/><br>
+
+            <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.phone" /></label>
+            <f:form.textfield id="phone" property="phone"/><br>
 
             <f:form.submit value="{f:translate(key:'event.submit-registration')}"/>
         </fieldset>

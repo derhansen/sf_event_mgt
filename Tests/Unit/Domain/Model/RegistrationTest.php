@@ -281,30 +281,6 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function getDateofbirthReturnsInitialValueForDateTime() {
-		$this->assertEquals(
-			NULL,
-			$this->subject->getDateofbirth()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setDateofbirthForDateTimeSetsDateofbirth() {
-		$dateTimeFixture = new \DateTime();
-		$this->subject->setDateofbirth($dateTimeFixture);
-
-		$this->assertAttributeEquals(
-			$dateTimeFixture,
-			'dateofbirth',
-			$this->subject
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function setEventForEventSetsEvent() {
 		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
 		$this->subject->setEvent($event);

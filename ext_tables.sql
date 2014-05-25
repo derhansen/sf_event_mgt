@@ -103,10 +103,9 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	city varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
-	gender varchar(255) DEFAULT '' NOT NULL,
+	gender varchar(1) DEFAULT '' NOT NULL,
 	confirmed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	paid tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	dateofbirth int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

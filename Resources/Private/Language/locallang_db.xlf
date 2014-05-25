@@ -72,9 +72,6 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.paid">
 				<source>Paid</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_registration.dateofbirth">
-				<source>Dateofbirth</source>
-			</trans-unit>
 		</body>
 	</file>
 </xliff>

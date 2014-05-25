@@ -59,6 +59,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Zip
 	 *
 	 * @var integer
+	 * @validate Integer
 	 */
 	protected $zip = 0;
 
@@ -80,6 +81,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * E-Mail
 	 *
 	 * @var string
+	 * @validate EmailAddress
 	 */
 	protected $email = '';
 
@@ -103,13 +105,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var boolean
 	 */
 	protected $paid = FALSE;
-
-	/**
-	 * Date of birth
-	 *
-	 * @var \DateTime
-	 */
-	protected $dateofbirth = NULL;
 
 	/**
 	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Event
@@ -322,25 +317,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function isPaid() {
 		return $this->paid;
-	}
-
-	/**
-	 * Returns the dateofbirth
-	 *
-	 * @return \DateTime $dateofbirth
-	 */
-	public function getDateofbirth() {
-		return $this->dateofbirth;
-	}
-
-	/**
-	 * Sets the dateofbirth
-	 *
-	 * @param \DateTime $dateofbirth
-	 * @return void
-	 */
-	public function setDateofbirth(\DateTime $dateofbirth) {
-		$this->dateofbirth = $dateofbirth;
 	}
 
 	/**
