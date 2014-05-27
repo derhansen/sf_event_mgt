@@ -90,11 +90,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfMaxParticipantsReached() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
 
+		$registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$registrations->expects($this->once())->method('count')->will($this->returnValue(10));
+
 		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-		$event->expects($this->once())->method('getRegistration')->will($this->returnValue(10));
+		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -112,11 +115,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationSuccessfull() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
 
+		$registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$registrations->expects($this->once())->method('count')->will($this->returnValue(9));
+
 		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-		$event->expects($this->once())->method('getRegistration')->will($this->returnValue(9));
+		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
 
 		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
