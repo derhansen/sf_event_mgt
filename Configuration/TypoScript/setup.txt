@@ -12,38 +12,11 @@ plugin.tx_sfeventmgt {
 		# uncomment the following line to enable the new Property Mapper.
 		# rewrittenPropertyMapper = 1
 	}
+	settings {
+		eventDetails {
+			imageWidth = 200
+			imageHeight =
+		}
+	}
 }
 
-plugin.tx_sfeventmgt._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-sf-event-mgt table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-sf-event-mgt table th {
-		font-weight:bold;
-	}
-
-	.tx-sf-event-mgt table td {
-		vertical-align:top;
-	}
-
-	.typo3-messages .message-error {
-		color:red;
-	}
-
-	.typo3-messages .message-ok {
-		color:green;
-	}
-
-)

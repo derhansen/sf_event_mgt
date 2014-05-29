@@ -298,24 +298,75 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function addRegistrationToObjectStorageHoldingRegistration() {
-		$booking = new Registration();
-		$bookingObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
-		$bookingObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($booking));
-		$this->inject($this->subject, 'registration', $bookingObjectStorageMock);
+		$registration = new Registration();
+		$registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$registrationObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($registration));
+		$this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
-		$this->subject->addRegistration($booking);
+		$this->subject->addRegistration($registration);
 	}
 
 	/**
 	 * @test
 	 */
 	public function removeRegistrationFromObjectStorageHoldingRegistration() {
-		$booking = new Registration();
-		$bookingObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
-		$bookingObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($booking));
-		$this->inject($this->subject, 'registration', $bookingObjectStorageMock);
+		$registration = new Registration();
+		$registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$registrationObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($registration));
+		$this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
-		$this->subject->removeRegistration($booking);
+		$this->subject->removeRegistration($registration);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getImageReturnsInitialValueForImage() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->subject->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImageForObjectStorageContainingImageSetsImage() {
+		$image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$objectStorageHoldingExactlyOneImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneImage->attach($image);
+		$this->subject->setImage($objectStorageHoldingExactlyOneImage);
+
+		$this->assertAttributeEquals(
+			$objectStorageHoldingExactlyOneImage,
+			'image',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addImageToObjectStorageHoldingImage() {
+		$image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($image));
+		$this->inject($this->subject, 'image', $imageObjectStorageMock);
+
+		$this->subject->addImage($image);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeImageFromObjectStorageHoldingImage() {
+		$image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($image));
+		$this->inject($this->subject, 'image', $imageObjectStorageMock);
+
+		$this->subject->removeImage($image);
 	}
 
 	/**

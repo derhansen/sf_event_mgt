@@ -98,6 +98,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $registration = NULL;
 
 	/**
+	 * The image
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+	 */
+	protected $image = NULL;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -116,6 +123,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected function initStorageObjects() {
 		$this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -330,6 +338,45 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Adds an image
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
+	 * @return void
+	 */
+	public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image) {
+		$this->image->attach($image);
+	}
+
+	/**
+	 * Removes an image
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove The Image to be removed
+	 * @return void
+	 */
+	public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove) {
+		$this->image->detach($imageToRemove);
+	}
+
+	/**
+	 * Returns the image
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image
+	 */
+	public function getImage() {
+		return $this->image;
+	}
+
+	/**
+	 * Sets the image
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image
+	 * @return void
+	 */
+	public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image) {
+		$this->image = $image;
+	}
+
+	/**
 	 * Returns if the registration for this event is logically possible
 	 *
 	 * @return bool
@@ -341,4 +388,5 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		}
 		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached;
 	}
+
 }

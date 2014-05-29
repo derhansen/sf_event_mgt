@@ -30,6 +30,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
 				<source>Category</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
+				<source>Image</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.booking">
 				<source>Registration</source>
 			</trans-unit>

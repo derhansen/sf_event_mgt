@@ -21,14 +21,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,registration,',
+		'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, startdate, enddate, max_participants, price, currency, category, registration',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, startdate, enddate, max_participants, price, currency, category, image, registration',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description;;;richtext:rte_transform[mode=ts_links], startdate, enddate, max_participants, price, currency, category, registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, description;;;richtext:rte_transform[mode=ts_links], startdate, enddate, max_participants, price, currency, category, image, registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -229,6 +229,17 @@ return array(
 					),
 				),
 			),
+		),
+		'image' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.image',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', array(
+					'appearance' => array(
+						'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+					),
+					'minitems' => 0,
+					'maxitems' => 999,
+				), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
 		),
 		'registration' => array(
 			'exclude' => 1,
