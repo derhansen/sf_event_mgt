@@ -38,10 +38,20 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected $subject = NULL;
 
+	/**
+	 * Setup
+	 *
+	 * @return void
+	 */
 	protected function setUp() {
-		$this->subject = $this->getMock('SKYFILLERS\\SfEventMgt\\Controller\\EventController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$this->subject = $this->getMock('SKYFILLERS\\SfEventMgt\\Controller\\EventController', array('redirect', 'forward', 'addFlashMessage', 'createDemandObjectFromSettings'), array(), '', FALSE);
 	}
 
+	/**
+	 * Teardown
+	 *
+	 * @return void
+	 */
 	protected function tearDown() {
 		unset($this->subject);
 	}
@@ -50,11 +60,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView() {
-
+		$demand = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository', array('findAll'), array(), '', FALSE);
-		$eventRepository->expects($this->once())->method('findAll')->will($this->returnValue($allEvents));
+		$settings = array('settings');
+		$this->inject($this->subject, 'settings', $settings);
+
+		$this->subject->expects($this->once())->method('createDemandObjectFromSettings')
+			->with($settings)->will($this->returnValue($demand));
+
+		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository', array('findDemanded'), array(), '', FALSE);
+		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');

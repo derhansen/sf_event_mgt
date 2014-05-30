@@ -1,7 +1,6 @@
 <?php
 namespace SKYFILLERS\SfEventMgt\Domain\Model;
 
-
 /***************************************************************
  *
  *  Copyright notice

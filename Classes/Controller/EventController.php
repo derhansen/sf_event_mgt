@@ -53,12 +53,27 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $registrationRepository = NULL;
 
 	/**
+	 * Create a demand object with the given settings
+	 *
+	 * @param array $settings
+	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand
+	 */
+	public function createDemandObjectFromSettings($settings) {
+		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setDisplayMode($settings['displayMode']);
+		$demand->setStoragePage($settings['storagePage']);
+		return $demand;
+	}
+
+	/**
 	 * List view
 	 *
 	 * @return void
 	 */
 	public function listAction() {
-		$events = $this->eventRepository->findAll();
+		$demand = $this->createDemandObjectFromSettings($this->settings);
+
+		$events = $this->eventRepository->findDemanded($demand);
 		$this->view->assign('events', $events);
 	}
 

@@ -27,10 +27,57 @@ namespace SKYFILLERS\SfEventMgt\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand;
+
 /**
  * The repository for Events
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-	
+	/**
+	 * Disable the use of storage records, because the StoragePage can be set
+	 * in the plugin
+	 *
+	 * @return void
+	 */
+	public function initializeObject() {
+		$this->defaultQuerySettings = $this->objectManager->get('Tx_Extbase_Persistence_Typo3QuerySettings');
+		$this->defaultQuerySettings->setRespectStoragePage(FALSE);
+	}
+
+	/**
+	 * Returns the objects of this repository matching the given demand
+	 *
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findDemanded(EventDemand $eventDemand) {
+		$constraints = array();
+
+		$query = $this->createQuery();
+
+		/* Storage page */
+		if ($eventDemand->getStoragePage() != '') {
+			$pidList = GeneralUtility::intExplode(',', $eventDemand->getStoragePage(), TRUE);
+			$constraints[] = $query->in('pid', $pidList);
+		}
+
+		/* Display mode */
+		switch ($eventDemand->getDisplayMode()) {
+			case 'future':
+				$constraints[] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
+				break;
+			case 'past':
+				$constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
+				break;
+			default:
+				break;
+		}
+
+		if (count($constraints) > 0) {
+			$query->matching($query->logicalAnd($constraints));
+		}
+		return $query->execute();
+	}
 }

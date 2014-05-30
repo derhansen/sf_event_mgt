@@ -6,8 +6,11 @@
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
 			</trans-unit>
+			<trans-unit id="flexforms_tab.additional">
+				<source>Additional</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.mode">
-				<source>Mode</source>
+				<source>What to display</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.mode.list">
 				<source>List</source>
@@ -26,6 +29,21 @@
 			</trans-unit>
 			<trans-unit id="flexforms_general.registrationPid">
 				<source>Registration Pid</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode">
+				<source>Display mode</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.storagePage">
+				<source>Record storage page</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.all">
+				<source>Show all events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.future">
+				<source>Show only future events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.past">
+				<source>Show only past events</source>
 			</trans-unit>
 		</body>
 	</file>

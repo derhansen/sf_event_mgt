@@ -2,114 +2,180 @@
     <meta type="array">
         <langDisable>1</langDisable>
     </meta>
-    <ROOT>
-        <type>array</type>
-        <el>
-            <!-- View -->
-            <switchableControllerActions>
+    <sheets>
+        <!-- Sheet: Settings -->
+        <sDEF>
+            <ROOT>
                 <TCEforms>
-                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode</label>
-                    <onChange>reload</onChange>
-                    <config>
-                        <type>select</type>
-                        <items>
-                            <numIndex index="1">
-                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.list</numIndex>
-                                <numIndex index="1">Event->list</numIndex>
-                            </numIndex>
-                            <numIndex index="2">
-                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.detail</numIndex>
-                                <numIndex index="1">Event->detail</numIndex>
-                            </numIndex>
-                            <numIndex index="3">
-                                <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.registration</numIndex>
-                                <numIndex index="1">Event->registration;Event->saveRegistration</numIndex>
-                            </numIndex>
-                        </items>
-                    </config>
+                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_tab.settings</sheetTitle>
                 </TCEforms>
-            </switchableControllerActions>
+                <type>array</type>
+                <el>
+                    <!-- View -->
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.list</numIndex>
+                                        <numIndex index="1">Event->list</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.detail</numIndex>
+                                        <numIndex index="1">Event->detail</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.registration</numIndex>
+                                        <numIndex index="1">Event->registration;Event->saveRegistration</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
 
-            <!-- Detail Pid -->
-            <settings.detailPid>
+                    <!-- Detail Pid -->
+                    <settings.detailPid>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.detailPid</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.detailPid>
+
+                    <!-- List Pid -->
+                    <settings.listPid>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.listPid</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
+                                    <OR>
+                                        <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration</numIndex>
+                                    </OR>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>1</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.listPid>
+
+                    <!-- List Pid -->
+                    <settings.registrationPid>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.registrationPid</label>
+                            <displayCond>
+                                <OR>
+                                    <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
+                                    <OR>
+                                        <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
+                                    </OR>
+                                </OR>
+                            </displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.registrationPid>
+
+                    <!-- Display options -->
+                    <settings.displayMode>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.displayMode</label>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.displayMode.all</numIndex>
+                                        <numIndex index="1">all</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.displayMode.future</numIndex>
+                                        <numIndex index="1">future</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.displayMode.past</numIndex>
+                                        <numIndex index="1">past</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.displayMode>
+
+                    <settings.storagePage>
+                        <TCEforms>
+                            <exclude>1</exclude>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.storagePage</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>3</size>
+                                <maxitems>50</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.storagePage>
+
+                </el>
+            </ROOT>
+        </sDEF>
+
+        <!-- Sheet: Additional -->
+        <additional>
+            <ROOT>
                 <TCEforms>
-                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.detailPid</label>
-                    <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
-                    <config>
-                        <type>group</type>
-                        <internal_type>db</internal_type>
-                        <allowed>pages</allowed>
-                        <size>1</size>
-                        <maxitems>1</maxitems>
-                        <minitems>1</minitems>
-                        <show_thumbs>1</show_thumbs>
-                        <wizards>
-                            <suggest>
-                                <type>suggest</type>
-                            </suggest>
-                        </wizards>
-                    </config>
+                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_tab.additional</sheetTitle>
                 </TCEforms>
-            </settings.detailPid>
+                <type>array</type>
+                <el>
 
-            <!-- List Pid -->
-            <settings.listPid>
-                <TCEforms>
-                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.listPid</label>
-                    <displayCond>
-                        <OR>
-                            <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
-                            <OR>
-                                <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration</numIndex>
-                            </OR>
-                        </OR>
-                    </displayCond>
-                    <config>
-                        <type>group</type>
-                        <internal_type>db</internal_type>
-                        <allowed>pages</allowed>
-                        <size>1</size>
-                        <maxitems>1</maxitems>
-                        <minitems>1</minitems>
-                        <show_thumbs>1</show_thumbs>
-                        <wizards>
-                            <suggest>
-                                <type>suggest</type>
-                            </suggest>
-                        </wizards>
-                    </config>
-                </TCEforms>
-            </settings.listPid>
-
-            <!-- List Pid -->
-            <settings.registrationPid>
-                <TCEforms>
-                    <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.registrationPid</label>
-                    <displayCond>
-                        <OR>
-                            <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
-                            <OR>
-                                <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
-                            </OR>
-                        </OR>
-                    </displayCond>
-                    <config>
-                        <type>group</type>
-                        <internal_type>db</internal_type>
-                        <allowed>pages</allowed>
-                        <size>1</size>
-                        <maxitems>1</maxitems>
-                        <minitems>0</minitems>
-                        <show_thumbs>1</show_thumbs>
-                        <wizards>
-                            <suggest>
-                                <type>suggest</type>
-                            </suggest>
-                        </wizards>
-                    </config>
-                </TCEforms>
-            </settings.registrationPid>
-
-        </el>
-    </ROOT>
+                </el>
+            </ROOT>
+        </additional>
+    </sheets>
 </T3DataStructure>
