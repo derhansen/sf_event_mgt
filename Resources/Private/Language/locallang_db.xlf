@@ -42,6 +42,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_category.parent">
+				<source>Parent</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
 				<source>Registration</source>
 			</trans-unit>

@@ -24,10 +24,10 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_category.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, parent',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, parent, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -124,6 +124,25 @@ return array(
 				'eval' => 'trim'
 			),
 		),
-		
+		'parent' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_category.parent',
+			'config' => array(
+				'type' => 'select',
+				'renderMode' => 'tree',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => true,
+						'showHeader' => true,
+					),
+				),
+				'foreign_table' => 'tx_sfeventmgt_domain_model_category',
+				'foreign_table_where' => ' AND (tx_sfeventmgt_domain_model_category.sys_language_uid = 0 OR tx_sfeventmgt_domain_model_category.l10n_parent = 0) AND tx_sfeventmgt_domain_model_category.pid = ###CURRENT_PID### AND tx_sfeventmgt_domain_model_category.uid != ###THIS_UID### ORDER BY tx_sfeventmgt_domain_model_category.sorting ASC',
+				'minitems' => 0,
+				'maxitems' => 1,
+			),
+		),
+
 	),
 );

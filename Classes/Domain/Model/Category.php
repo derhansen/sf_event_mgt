@@ -40,6 +40,13 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
+	 * Parent
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Category
+	 */
+	protected $parent;
+
+	/**
 	 * Returns the title
 	 *
 	 * @return string $title
@@ -56,6 +63,25 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+	}
+
+	/**
+	 * Sets the parent category
+	 *
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Category $parent
+	 * @return void
+	 */
+	public function setParent($parent) {
+		$this->parent = $parent;
+	}
+
+	/**
+	 * Returns the parent category
+	 *
+	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Category
+	 */
+	public function getParent() {
+		return $this->parent;
 	}
 
 }

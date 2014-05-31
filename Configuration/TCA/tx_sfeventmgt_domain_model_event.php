@@ -195,39 +195,23 @@ return array(
 			),
 		),
 		'category' => array(
-			'exclude' => 1,
+			'exclude' => 0,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.category',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_sfeventmgt_domain_model_category',
-				'MM' => 'tx_sfeventmgt_event_category_mm',
-				'size' => 10,
-				'autoSizeMax' => 30,
-				'maxitems' => 9999,
-				'multiple' => 0,
-				'wizards' => array(
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
-					'add' => Array(
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => array(
-							'table' => 'tx_sfeventmgt_domain_model_category',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							),
-						'script' => 'wizard_add.php',
+				'renderMode' => 'tree',
+				'treeConfig' => array(
+					'parentField' => 'parent',
+					'appearance' => array(
+						'expandAll' => true,
+						'showHeader' => true,
 					),
 				),
+				'MM' => 'tx_sfeventmgt_event_category_mm',
+				'foreign_table' => 'tx_sfeventmgt_domain_model_category',
+				'foreign_table_where' => ' AND (tx_sfeventmgt_domain_model_category.sys_language_uid = 0 OR tx_sfeventmgt_domain_model_category.l10n_parent = 0) ORDER BY tx_sfeventmgt_domain_model_category.sorting ASC',
+				'minitems' => 0,
+				'maxitems' => 99,
 			),
 		),
 		'image' => array(

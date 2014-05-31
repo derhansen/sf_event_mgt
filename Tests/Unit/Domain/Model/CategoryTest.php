@@ -40,16 +40,29 @@ class CategoryTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected $subject = NULL;
 
+	/**
+	 * Setup
+	 *
+	 * @return void
+	 */
 	protected function setUp() {
 		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Category();
 	}
 
+	/**
+	 * Teardown
+	 *
+	 * @return void
+	 */
 	protected function tearDown() {
 		unset($this->subject);
 	}
 
 	/**
+	 * Test if initial value for title is returned
+	 *
 	 * @test
+	 * @return void
 	 */
 	public function getTitleReturnsInitialValueForString() {
 		$this->assertSame(
@@ -59,7 +72,10 @@ class CategoryTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Test if title can be set
+	 *
 	 * @test
+	 * @return void
 	 */
 	public function setTitleForStringSetsTitle() {
 		$this->subject->setTitle('Conceived at T3CON10');
@@ -69,5 +85,17 @@ class CategoryTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'title',
 			$this->subject
 		);
+	}
+
+	/**
+	 * Test if parent can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setParentForCategoryCanBeSet() {
+		$parent = new \SKYFILLERS\SfEventMgt\Domain\Model\Category();
+		$this->subject->setParent($parent);
+		$this->assertEquals($parent, $this->subject->getParent());
 	}
 }
