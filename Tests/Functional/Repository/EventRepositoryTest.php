@@ -123,4 +123,28 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 		$this->assertEquals(2, $events->count());
 	}
+
+	/**
+	 * Test if category restiction works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByCategory() {
+		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(5);
+
+		$demand->setCategory('1');
+		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+
+		$demand->setCategory('2');
+		$this->assertEquals(2, $this->eventRepository->findDemanded($demand)->count());
+
+		$demand->setCategory('3');
+		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+
+		$demand->setCategory('1,2,3,4');
+		$this->assertEquals(3, $this->eventRepository->findDemanded($demand)->count());
+	}
 }

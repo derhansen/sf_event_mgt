@@ -115,4 +115,14 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function getCategoryForStringSetsCategory() {
+		$this->subject->setCategory('1,2,3,4');
+		$this->assertEquals(
+			'1,2,3,4',
+			$this->subject->getCategory()
+		);
+	}
 }

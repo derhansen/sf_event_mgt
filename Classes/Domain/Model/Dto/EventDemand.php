@@ -53,6 +53,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $currentDateTime = NULL;
 
 	/**
+	 * Category
+	 *
+	 * @var string
+	 */
+	protected $category;
+
+	/**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
@@ -108,6 +115,26 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		} else {
 			return new \DateTime;
 		}
+	}
+
+	/**
+	 * Sets the category (seperated by comma)
+	 *
+	 * @param string $category
+	 * @return void
+	 */
+	public function setCategory($category) {
+		$this->category = $category;
+	}
+
+	/**
+	 * Returns the category (seperated by comma)
+	 *
+	 * @return string
+	 * @return void
+	 */
+	public function getCategory() {
+		return $this->category;
 	}
 
 }

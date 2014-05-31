@@ -44,5 +44,56 @@
         <enddate>1401703200</enddate>
     </tx_sfeventmgt_domain_model_event>
 
+    <!-- findRecordsByCategory -->
+    <!-- has 2 categories (1,2) -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>10</uid>
+        <pid>5</pid>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has 1 categories (4)-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>11</uid>
+        <pid>5</pid>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has 2 categories (2,3) -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>12</uid>
+        <pid>5</pid>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_sfeventmgt_domain_model_category>
+        <uid>1</uid>
+    </tx_sfeventmgt_domain_model_category>
+    <tx_sfeventmgt_domain_model_category>
+        <uid>2</uid>
+    </tx_sfeventmgt_domain_model_category>
+    <tx_sfeventmgt_domain_model_category>
+        <uid>3</uid>
+    </tx_sfeventmgt_domain_model_category>
+    <tx_sfeventmgt_domain_model_category>
+        <uid>4</uid>
+        <parent>3</parent>
+    </tx_sfeventmgt_domain_model_category>
+
+    <tx_sfeventmgt_event_category_mm>
+        <uid_local>10</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_sfeventmgt_event_category_mm>
+    <tx_sfeventmgt_event_category_mm>
+        <uid_local>10</uid_local>
+        <uid_foreign>2</uid_foreign>
+    </tx_sfeventmgt_event_category_mm>
+    <tx_sfeventmgt_event_category_mm>
+        <uid_local>11</uid_local>
+        <uid_foreign>4</uid_foreign>
+    </tx_sfeventmgt_event_category_mm>
+    <tx_sfeventmgt_event_category_mm>
+        <uid_local>12</uid_local>
+        <uid_foreign>2</uid_foreign>
+    </tx_sfeventmgt_event_category_mm>
+    <tx_sfeventmgt_event_category_mm>
+        <uid_local>12</uid_local>
+        <uid_foreign>3</uid_foreign>
+    </tx_sfeventmgt_event_category_mm>
 
 </dataset>

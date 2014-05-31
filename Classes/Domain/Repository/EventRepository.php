@@ -75,6 +75,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				break;
 		}
 
+		/* Category */
+		if ($eventDemand->getCategory() != '') {
+			$categoryConstraints = array();
+			$categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), TRUE);
+			foreach ($categories as $category) {
+				$categoryConstraints[]  = $query->contains('category', $category);
+			}
+			if (count($categoryConstraints) > 0) {
+				$constraints[] = $query->logicalOr($categoryConstraints);
+			}
+		}
+
 		if (count($constraints) > 0) {
 			$query->matching($query->logicalAnd($constraints));
 		}

@@ -33,6 +33,9 @@
 			<trans-unit id="flexforms_general.displayMode">
 				<source>Display mode</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.category">
+				<source>Category</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.storagePage">
 				<source>Record storage page</source>
 			</trans-unit>
