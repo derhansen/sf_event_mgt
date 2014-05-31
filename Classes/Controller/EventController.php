@@ -62,6 +62,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
 		$demand->setStoragePage($settings['storagePage']);
+		$demand->setCategory($settings['category']);
 		return $demand;
 	}
 
