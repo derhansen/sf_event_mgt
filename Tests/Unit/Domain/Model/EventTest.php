@@ -404,6 +404,18 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$this->subject->setStartdate($startdate);
+		$this->subject->setMaxParticipants(0);
+
+		$this->assertTrue($this->subject->getRegistrationPossible());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsTrueIfMaxParticipantsIsZero() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$this->subject->setStartdate($startdate);
 
 		$this->assertTrue($this->subject->getRegistrationPossible());
 	}

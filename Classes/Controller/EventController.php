@@ -111,7 +111,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		if ($event->getStartdate() < new \DateTime()) {
 			$message = LocalizationUtility::translate('event.message.registrationfailedeventexpired', 'SfEventMgt');
 			$success = FALSE;
-		} elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()) {
+		} elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
+			&& $event->getMaxParticipants() > 0) {
 			$message = LocalizationUtility::translate('event.message.registrationfailedmaxparticipants', 'SfEventMgt');
 			$success = FALSE;
 		}

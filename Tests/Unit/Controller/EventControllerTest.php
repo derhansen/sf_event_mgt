@@ -114,7 +114,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
-		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
+		$event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('message',
