@@ -53,6 +53,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $registrationRepository = NULL;
 
 	/**
+	 * Notification Service
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Service\NotificationService
+	 * @inject
+	 */
+	protected $notificationService = NULL;
+
+	/**
 	 * Create a demand object with the given settings
 	 *
 	 * @param array $settings
@@ -123,6 +131,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			$registration->setEvent($event);
 			$registration->setPid($event->getPid());
 			$this->registrationRepository->add($registration);
+
+			// Send notifications to user and admin
+			$this->notificationService->sendUserConfirmationMessage($event, $registration, $this->settings);
+			$this->notificationService->sendAdminNewRegistrationMessage($event, $registration, $this->settings);
 
 			$message = LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt');
 		}

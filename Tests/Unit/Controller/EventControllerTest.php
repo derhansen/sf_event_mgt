@@ -146,6 +146,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registrationRepository->expects($this->once())->method('add');
 		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
+		$notificationService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\NotificationService',
+			array(), array(), '', FALSE);
+		$notificationService->expects($this->once())->method('sendUserConfirmationMessage');
+		$notificationService->expects($this->once())->method('sendAdminNewRegistrationMessage');
+		$this->inject($this->subject, 'notificationService', $notificationService);
+
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('message',
 			LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt'));

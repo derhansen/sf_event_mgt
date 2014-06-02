@@ -10,12 +10,29 @@ plugin.tx_sfeventmgt {
 	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
-		# rewrittenPropertyMapper = 1
+		rewrittenPropertyMapper = 1
 	}
 	settings {
 		eventDetails {
 			imageWidth = 200
 			imageHeight =
+		}
+		confirmation {
+			linkValidity = {$plugin.tx_sfeventmgt.confirmation.linkValidity}
+		}
+		notification {
+			senderEmail = {$plugin.tx_sfeventmgt.notification.senderEmail}
+			senderName = {$plugin.tx_sfeventmgt.notification.senderName}
+			senderSignature = {$plugin.tx_sfeventmgt.notification.senderSignature}
+			adminEmail = {$plugin.tx_sfeventmgt.notification.adminEmail}
+			registrationNew {
+				userSubject = Your event registration
+				adminSubject = New unconfirmed event registration
+			}
+			registrationConfirmed {
+				userSubject = Event registration successfull
+				adminSubject = Event registration confirmed
+			}
 		}
 	}
 }

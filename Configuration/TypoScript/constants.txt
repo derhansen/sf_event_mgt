@@ -12,4 +12,21 @@ plugin.tx_sfeventmgt {
 		# cat=plugin.tx_sfeventmgt//a; type=string; label=Default storage PID
 		storagePid =
 	}
+	settings {
+		confirmation {
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validity of confirmation link in seconds
+			linkValidity = 3600
+		}
+		notification {
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
+			senderEmail =
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
+			senderName =
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
+			senderSignature =
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
+			adminEmail =
+		}
+	}
+
 }

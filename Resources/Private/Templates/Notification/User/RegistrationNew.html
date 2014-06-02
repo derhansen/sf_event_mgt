@@ -1,0 +1,11 @@
+<p>Hello {registration.firstname} {registration.firstname},</p>
+<p>we have received your registration for the following event:</p>
+<ul>
+    <li>{event.title} - ({f:format.date(date: '{event.startdate}', format: 'd.m.Y - H:i')}  - {f:format.date(date: '{event.enddate}', format: 'd.m.Y - H:i')})</li>
+</ul>
+<p>Please confirm your registration by opening the following confirmation link:</p>
+<p>@todo Link!</p>
+<p>Note, that your registration will be cancelled, if you do not open the confirmation link until {registration.confirmvalidity}</p>
+<p>Best regards,</p>
+<p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
+
