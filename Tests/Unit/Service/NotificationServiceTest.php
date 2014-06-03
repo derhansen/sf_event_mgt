@@ -67,14 +67,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function sendUserConfirmationMessageReturnsFalseIfNoArgumentsGiven() {
-		$result = $this->subject->sendUserConfirmationMessage(NULL, NULL, NULL);
-		$this->assertFalse($result);
-	}
-
-	/**
-	 * @test
-	 */
 	public function sendUserConfirmationReturnsFalseIfInvalidEmailInRegistration() {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
@@ -124,6 +116,24 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(FALSE));
 		$this->inject($this->subject, 'emailService', $emailService);
 
+		// Inject configuration and configurationManager
+		$configuration = array(
+			'plugin.' => array(
+				'tx_sfeventmgt.' => array(
+					'view.' => array(
+						'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+						'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
+					)
+				)
+			)
+		);
+
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($configuration));
+		$this->inject($this->subject, 'configurationManager', $configurationManager);
+
 		$result = $this->subject->sendUserConfirmationMessage($event, $registration, $settings);
 		$this->assertFalse($result);
 	}
@@ -146,16 +156,26 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(TRUE));
 		$this->inject($this->subject, 'emailService', $emailService);
 
+		// Inject configuration and configurationManager
+		$configuration = array(
+			'plugin.' => array(
+				'tx_sfeventmgt.' => array(
+					'view.' => array(
+						'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+						'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
+					)
+				)
+			)
+		);
+
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($configuration));
+		$this->inject($this->subject, 'configurationManager', $configurationManager);
+
 		$result = $this->subject->sendUserConfirmationMessage($event, $registration, $settings);
 		$this->assertTrue($result);
-	}
-
-	/**
-	 * @test
-	 */
-	public function sendAdminNewRegistrationMessageReturnsFalseIfNoArgumentsGiven() {
-		$result = $this->subject->sendAdminNewRegistrationMessage(NULL, NULL, NULL);
-		$this->assertFalse($result);
 	}
 
 	/**
@@ -191,6 +211,24 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(FALSE));
 		$this->inject($this->subject, 'emailService', $emailService);
 
+		// Inject configuration and configurationManager
+		$configuration = array(
+			'plugin.' => array(
+				'tx_sfeventmgt.' => array(
+					'view.' => array(
+						'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+						'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
+					)
+				)
+			)
+		);
+
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($configuration));
+		$this->inject($this->subject, 'configurationManager', $configurationManager);
+
 		$result = $this->subject->sendAdminNewRegistrationMessage($event, $registration, $settings);
 		$this->assertFalse($result);
 	}
@@ -212,6 +250,24 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			array('sendEmailMessage'), array(), '', FALSE);
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(TRUE));
 		$this->inject($this->subject, 'emailService', $emailService);
+
+		// Inject configuration and configurationManager
+		$configuration = array(
+			'plugin.' => array(
+				'tx_sfeventmgt.' => array(
+					'view.' => array(
+						'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+						'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
+					)
+				)
+			)
+		);
+
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($configuration));
+		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
 		$result = $this->subject->sendAdminNewRegistrationMessage($event, $registration, $settings);
 		$this->assertTrue($result);

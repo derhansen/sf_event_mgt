@@ -74,9 +74,9 @@ class NotificationService {
 			return FALSE;
 		}
 
-		$body = $this->getNotificationBody($event, $registration, $template, $settings);
 		if (GeneralUtility::validEmail($registration->getEmail()) &&
 			GeneralUtility::validEmail($settings['notification']['senderEmail'])) {
+			$body = $this->getNotificationBody($event, $registration, $template, $settings);
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],
 				$registration->getEmail(),
@@ -105,9 +105,9 @@ class NotificationService {
 			return FALSE;
 		}
 
-		$body = $this->getNotificationBody($event, $registration, $template, $settings);
 		if (GeneralUtility::validEmail($settings['notification']['senderEmail']) &&
 			GeneralUtility::validEmail($settings['notification']['adminEmail'])) {
+			$body = $this->getNotificationBody($event, $registration, $template, $settings);
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],
 				$settings['notification']['adminEmail'],
