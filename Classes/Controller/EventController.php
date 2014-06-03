@@ -29,6 +29,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
 use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
+use SKYFILLERS\SfEventMgt\Util\RegistrationResult;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -114,20 +115,19 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
-		$message = '';
 		$success = TRUE;
+		$result = RegistrationResult::REGISTRATION_SUCCESSFULL;
 		if ($event->getStartdate() < new \DateTime()) {
-			$message = LocalizationUtility::translate('event.message.registrationfailedeventexpired', 'SfEventMgt');
 			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
 		} elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
 			&& $event->getMaxParticipants() > 0) {
-			$message = LocalizationUtility::translate('event.message.registrationfailedmaxparticipants', 'SfEventMgt');
 			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
 		}
 
-		// Only save new registration, if no logical or validation errors
+		// Save registration if no errors
 		if ($success) {
-			// Set event and event Pid for registration
 			$registration->setEvent($event);
 			$registration->setPid($event->getPid());
 			$this->registrationRepository->add($registration);
@@ -135,11 +135,35 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			// Send notifications to user and admin
 			$this->notificationService->sendUserConfirmationMessage($event, $registration, $this->settings);
 			$this->notificationService->sendAdminNewRegistrationMessage($event, $registration, $this->settings);
+		}
 
-			$message = LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt');
+		$this->redirect('saveRegistrationResult', NULL, NULL,
+			array('result' => $result));
+	}
+
+	/**
+	 * Shows the result of the saveRegistrationAction
+	 *
+	 * @param int $result
+	 * @return void
+	 */
+	public function saveRegistrationResultAction($result) {
+		switch ($result) {
+			case RegistrationResult::REGISTRATION_SUCCESSFULL:
+				$message = LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt');
+				break;
+			case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
+				$message = LocalizationUtility::translate('event.message.registrationfailedeventexpired',
+					'SfEventMgt');
+				break;
+			case RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS:
+				$message = LocalizationUtility::translate('event.message.registrationfailedmaxparticipants',
+					'SfEventMgt');
+				break;
+			default:
+				$message = '';
 		}
 
 		$this->view->assign('message', $message);
-		$this->view->assign('success', $success);
 	}
 }

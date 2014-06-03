@@ -24,6 +24,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use SKYFILLERS\SfEventMgt\Util\RegistrationResult;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -69,7 +70,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->expects($this->once())->method('createDemandObjectFromSettings')
 			->with($settings)->will($this->returnValue($demand));
 
-		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository', array('findDemanded'), array(), '', FALSE);
+		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+			array('findDemanded'), array(), '', FALSE);
 		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
 
@@ -84,18 +86,16 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfEventExpired() {
-		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
+			array(), '', FALSE);
 
 		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('yesterday'));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationfailedeventexpired', 'SfEventMgt'));
-		$view->expects($this->at(1))->method('assign')->with('success', FALSE);
-		$this->inject($this->subject, 'view', $view);
+		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
+			array('result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED));
 
 		$this->subject->saveRegistrationAction($registration, $event);
 	}
@@ -104,7 +104,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfMaxParticipantsReached() {
-		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
+			array(), '', FALSE);
 
 		$registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$registrations->expects($this->once())->method('count')->will($this->returnValue(10));
@@ -116,11 +117,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationfailedmaxparticipants', 'SfEventMgt'));
-		$view->expects($this->at(1))->method('assign')->with('success', FALSE);
-		$this->inject($this->subject, 'view', $view);
+		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
+			array('result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS));
 
 		$this->subject->saveRegistrationAction($registration, $event);
 	}
@@ -129,7 +127,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationSuccessfull() {
-		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
+			array(), '', FALSE);
 
 		$registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$registrations->expects($this->once())->method('count')->will($this->returnValue(9));
@@ -152,12 +151,45 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$notificationService->expects($this->once())->method('sendAdminNewRegistrationMessage');
 		$this->inject($this->subject, 'notificationService', $notificationService);
 
+		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
+			array('result' => RegistrationResult::REGISTRATION_SUCCESSFULL));
+
+		$this->subject->saveRegistrationAction($registration, $event);
+	}
+
+	/**
+	 * @test
+	 */
+	public function saveRegistrationResultActionShowsExpectedMessageIfEventExpired() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('message',
+			LocalizationUtility::translate('event.message.registrationfailedeventexpired', 'SfEventMgt'));
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
+	}
+
+	/**
+	 * @test
+	 */
+	public function saveRegistrationResultActionShowsExpectedMessageIfEventFull() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('message',
+			LocalizationUtility::translate('event.message.registrationfailedmaxparticipants', 'SfEventMgt'));
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
+	}
+
+	/**
+	 * @test
+	 */
+	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationSuccessfull() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('message',
 			LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt'));
-		$view->expects($this->at(1))->method('assign')->with('success', TRUE);
 		$this->inject($this->subject, 'view', $view);
 
-		$this->subject->saveRegistrationAction($registration, $event);
+		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFULL);
 	}
 }
