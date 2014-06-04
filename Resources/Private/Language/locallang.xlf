@@ -108,6 +108,21 @@
 			<trans-unit id="event.message.registrationsuccessfull">
 				<source>Your registration was successfull.</source>
 			</trans-unit>
+			<trans-unit id="event.message.confirmation_successful">
+				<source>Your registration has been successfully confirmed.</source>
+			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_wrong_hmac">
+				<source>Confirmation failed, wrong HMAC.</source>
+			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_registration_not_found">
+				<source>Confirmation failed, registration not found.</source>
+			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_confirmation_until_expired">
+				<source>Confirmation failed, confirmation date has expired.</source>
+			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_already_confirmed">
+				<source>Confirmation failed, because the registration already has been confirmed.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

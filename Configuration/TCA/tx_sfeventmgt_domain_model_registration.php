@@ -26,10 +26,10 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, address, zip, city, phone, email, gender, confirmed, paid, notes',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, address, zip, city, phone, email, gender, confirmed, paid, notes, confirmation_until',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, address, zip, city, phone, email, gender, confirmed, paid, notes, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, address, zip, city, phone, email, gender, confirmation_until, confirmed, paid, notes, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -192,6 +192,18 @@ return array(
 				),
 				'size' => 1,
 				'maxitems' => 1,
+			),
+		),
+		'confirmation_until' => array(
+			'exclude' => 1,
+			'displayCond' => 'FIELD:confirmed:REQ:FALSE',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.confirmationUntil',
+			'config' => array(
+				'type' => 'input',
+				'size' => 10,
+				'eval' => 'datetime',
+				'checkbox' => 1,
+				'default' => time()
 			),
 		),
 		'confirmed' => array(

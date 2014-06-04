@@ -59,6 +59,14 @@ class NotificationService {
 	protected $emailService;
 
 	/**
+	 * Hash Service
+	 *
+	 * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+	 * @inject
+	 */
+	protected $hashService;
+
+	/**
 	 * Sends a confirmation message for new registrations
 	 *
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
@@ -140,9 +148,15 @@ class NotificationService {
 			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']);
 		$layoutRootPath = GeneralUtility::getFileAbsFileName(
 			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']);
+
 		$emailView->setLayoutRootPath($layoutRootPath);
 		$emailView->setTemplatePathAndFilename($templateRootPath . $template);
-		$emailView->assignMultiple(array('event' => $event, 'registration' => $registration, 'settings' => $settings));
+		$emailView->assignMultiple(array(
+			'event' => $event,
+			'registration' => $registration,
+			'settings' => $settings,
+			'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid())
+		));
 		$emailBody = $emailView->render();
 		return $emailBody;
 	}

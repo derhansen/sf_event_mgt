@@ -4,8 +4,10 @@
     <li>{event.title} - ({f:format.date(date: '{event.startdate}', format: 'd.m.Y - H:i')}  - {f:format.date(date: '{event.enddate}', format: 'd.m.Y - H:i')})</li>
 </ul>
 <p>Please confirm your registration by opening the following confirmation link:</p>
-<p>@todo Link!</p>
-<p>Note, that your registration will be cancelled, if you do not open the confirmation link until {registration.confirmvalidity}</p>
+<p>
+    <f:uri.action action="confirmRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
+</p>
+<p>Note, that your registration will be cancelled, if you do not open the confirmation link until {f:format.date(date: '{registration.confirmationUntil}', format: 'd.m.Y - H:i:s')}</p>
 <p>Best regards,</p>
 <p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
 

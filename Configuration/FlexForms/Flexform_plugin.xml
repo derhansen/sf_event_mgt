@@ -29,7 +29,7 @@
                                     </numIndex>
                                     <numIndex index="3">
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.mode.registration</numIndex>
-                                        <numIndex index="1">Event->registration;Event->saveRegistration;Event->saveRegistrationResult</numIndex>
+                                        <numIndex index="1">Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </numIndex>
                                 </items>
                             </config>
@@ -66,7 +66,7 @@
                                 <OR>
                                     <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
                                     <OR>
-                                        <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </OR>
                                 </OR>
                             </displayCond>

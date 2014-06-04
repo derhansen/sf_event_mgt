@@ -299,4 +299,18 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->setEvent($event);
 		$this->assertEquals($event, $this->subject->getEvent());
 	}
+
+	/**
+	 * @test
+	 */
+	public function setConfirmationUntilForDateTimeSetsConfirmationUntil() {
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setConfirmationUntil($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'confirmationUntil',
+			$this->subject
+		);
+	}
 }

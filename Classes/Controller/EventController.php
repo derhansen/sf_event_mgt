@@ -62,6 +62,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $notificationService = NULL;
 
 	/**
+	 * Hash Service
+	 *
+	 * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+	 * @inject
+	 */
+	protected $hashService;
+
+	/**
 	 * Create a demand object with the given settings
 	 *
 	 * @param array $settings
@@ -128,9 +136,21 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
 		// Save registration if no errors
 		if ($success) {
+			$linkValidity = $this->settings['confirmation']['linkValidity'];
+			if ($linkValidity === '' || !is_int($linkValidity)) {
+				// Use 3600 seconds as default value if not set
+				$linkValidity = 3600;
+			}
+			$confirmationUntil = new \DateTime();
+			$confirmationUntil->add(new \DateInterval('PT' . $linkValidity . 'S'));
+
 			$registration->setEvent($event);
 			$registration->setPid($event->getPid());
+			$registration->setConfirmationUntil($confirmationUntil);
 			$this->registrationRepository->add($registration);
+
+			// Persist registration, so we have an UID
+			$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
 			// Send notifications to user and admin
 			$this->notificationService->sendUserConfirmationMessage($event, $registration, $this->settings);
@@ -162,6 +182,55 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				break;
 			default:
 				$message = '';
+		}
+
+		$this->view->assign('message', $message);
+	}
+
+	/**
+	 * Confirms the registration if possible and sends e-mails to admin and user
+	 *
+	 * @param int $reguid UID of registration
+	 * @param string $hmac HMAC for parameters
+	 *
+	 * @return void
+	 */
+	public function confirmRegistrationAction($reguid, $hmac) {
+		/** @var Registration $registration */
+		$registration = NULL;
+		$failed = FALSE;
+		$message = LocalizationUtility::translate('event.message.confirmation_successful', 'SfEventMgt');
+
+		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
+			$failed = TRUE;
+			$message = LocalizationUtility::translate('event.message.confirmation_failed_wrong_hmac', 'SfEventMgt');
+		} else {
+			$registration = $this->registrationRepository->findByUid($reguid);
+		}
+
+		if (!$failed && is_null($registration)) {
+			$failed = TRUE;
+			$message = LocalizationUtility::translate('event.message.confirmation_failed_registration_not_found',
+				'SfEventMgt');
+		}
+
+		if (!$failed && $registration->getConfirmationUntil() < new \DateTime()) {
+			$failed = TRUE;
+			$message = LocalizationUtility::translate('event.message.confirmation_failed_confirmation_until_expired',
+				'SfEventMgt');
+		}
+
+		if (!$failed && $registration->getConfirmed() === TRUE) {
+			$failed = TRUE;
+			$message = LocalizationUtility::translate('event.message.confirmation_failed_already_confirmed',
+				'SfEventMgt');
+		}
+
+		if ($failed === FALSE) {
+			$registration->setConfirmed(TRUE);
+			$this->registrationRepository->update($registration);
+
+			// @todo - Send confirmation e-mails #38
 		}
 
 		$this->view->assign('message', $message);

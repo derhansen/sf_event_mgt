@@ -119,6 +119,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $event = NULL;
 
 	/**
+	 * DateTime until the registration must be confirmed
+	 *
+	 * @var \DateTime
+	 */
+	protected $confirmationUntil = NULL;
+
+	/**
 	 * Returns the firstname
 	 *
 	 * @return string $firstname
@@ -360,6 +367,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getNotes() {
 		return $this->notes;
+	}
+
+	/**
+	 * Sets confirmUntil
+	 *
+	 * @param \DateTime $confirmationUntil
+	 * @return void
+	 */
+	public function setConfirmationUntil($confirmationUntil) {
+		$this->confirmationUntil = $confirmationUntil;
+	}
+
+	/**
+	 * Returns confirmationUntil
+	 *
+	 * @return \DateTime
+	 */
+	public function getConfirmationUntil() {
+		return $this->confirmationUntil;
 	}
 
 }
