@@ -30,7 +30,7 @@ plugin.tx_sfeventmgt {
 				adminSubject = New unconfirmed event registration
 			}
 			registrationConfirmed {
-				userSubject = Event registration successfull
+				userSubject = Event registration successful
 				adminSubject = Event registration confirmed
 			}
 		}

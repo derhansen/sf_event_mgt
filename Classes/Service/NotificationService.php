@@ -73,7 +73,7 @@ class NotificationService {
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
 	 *
-	 * @return bool TRUE if successfull, else FALSE
+	 * @return bool TRUE if successful, else FALSE
 	 */
 	public function sendUserConfirmationMessage($event, $registration, $settings) {
 		$template = 'Notification/User/RegistrationNew.html';
@@ -104,7 +104,7 @@ class NotificationService {
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
 	 *
-	 * @return bool TRUE if successfull, else FALSE
+	 * @return bool TRUE if successful, else FALSE
 	 */
 	public function sendAdminNewRegistrationMessage($event, $registration, $settings) {
 		$template = 'Notification/Admin/RegistrationNew.html';

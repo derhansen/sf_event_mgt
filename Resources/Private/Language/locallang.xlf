@@ -105,8 +105,8 @@
 			<trans-unit id="event.message.registrationfailedmaxparticipants">
 				<source>Registration is not possible any more, because the max. participants reached.</source>
 			</trans-unit>
-			<trans-unit id="event.message.registrationsuccessfull">
-				<source>Your registration was successfull.</source>
+			<trans-unit id="event.message.registrationsuccessful">
+				<source>Your registration was successful.</source>
 			</trans-unit>
 			<trans-unit id="event.message.confirmation_successful">
 				<source>Your registration has been successfully confirmed.</source>

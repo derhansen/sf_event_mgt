@@ -141,7 +141,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function sendUserConfirmationReturnsTrueIfSendSuccessfull() {
+	public function sendUserConfirmationReturnsTrueIfSendSuccessful() {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -236,7 +236,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessfull() {
+	public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful() {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 

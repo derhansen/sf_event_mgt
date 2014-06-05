@@ -124,7 +124,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
 		$success = TRUE;
-		$result = RegistrationResult::REGISTRATION_SUCCESSFULL;
+		$result = RegistrationResult::REGISTRATION_SUCCESSFUL;
 		if ($event->getStartdate() < new \DateTime()) {
 			$success = FALSE;
 			$result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
@@ -169,8 +169,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function saveRegistrationResultAction($result) {
 		switch ($result) {
-			case RegistrationResult::REGISTRATION_SUCCESSFULL:
-				$message = LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt');
+			case RegistrationResult::REGISTRATION_SUCCESSFUL:
+				$message = LocalizationUtility::translate('event.message.registrationsuccessful', 'SfEventMgt');
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
 				$message = LocalizationUtility::translate('event.message.registrationfailedeventexpired',

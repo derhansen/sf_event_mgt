@@ -126,7 +126,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationSuccessfull() {
+	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationSuccessful() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
 
@@ -162,7 +162,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
-			array('result' => RegistrationResult::REGISTRATION_SUCCESSFULL));
+			array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
 
 		$this->subject->saveRegistrationAction($registration, $event);
 	}
@@ -194,13 +194,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationSuccessfull() {
+	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationSuccessful() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationsuccessfull', 'SfEventMgt'));
+			LocalizationUtility::translate('event.message.registrationsuccessful', 'SfEventMgt'));
 		$this->inject($this->subject, 'view', $view);
 
-		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFULL);
+		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFUL);
 	}
 
 	/**
