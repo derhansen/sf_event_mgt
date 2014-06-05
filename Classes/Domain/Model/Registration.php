@@ -81,7 +81,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * E-Mail
 	 *
 	 * @var string
-	 * @validate EmailAddress
+	 * @validate NotEmpty, EmailAddress
 	 */
 	protected $email = '';
 
