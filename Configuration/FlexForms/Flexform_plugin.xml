@@ -120,6 +120,7 @@
                     <settings.displayMode>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.displayMode</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
                             <config>
                                 <type>select</type>
                                 <items>
@@ -144,6 +145,7 @@
                     <settings.category>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.category</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
                             <config>
                                 <type>select</type>
                                 <renderMode>tree</renderMode>
@@ -169,6 +171,7 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.storagePage</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
