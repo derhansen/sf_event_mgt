@@ -1,6 +1,9 @@
 filter:
     excluded_paths:
-
+        - 'Documentation/*'
+    paths:
+        - 'Classes/*'
+        - 'Tests/*'
 tools:
 
     external_code_coverage:
