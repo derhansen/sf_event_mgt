@@ -1,7 +1,6 @@
 <?php
 namespace SKYFILLERS\SfEventMgt\Controller;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -120,6 +119,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 *
 	 * @param $registration \SKYFILLERS\SfEventMgt\Domain\Model\Registration
 	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @validate $registration \SKYFILLERS\SfEventMgt\Validation\Validator\RegistrationValidator
 	 * @return void
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
