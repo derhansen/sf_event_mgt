@@ -18,27 +18,35 @@
 
             <label for="firstname"><f:translate key="tx_sfeventmgt_domain_model_registration.firstname" /></label>
             <f:form.textfield id="firstname" property="firstname"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.firstname'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.lastname" /></label>
             <f:form.textfield id="lastname" property="lastname"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.lastname'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.address" /></label>
             <f:form.textfield id="address" property="address"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.address'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.zip" /></label>
             <f:form.textfield id="zip" property="zip"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.zip'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.city" /></label>
             <f:form.textfield id="city" property="city"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.city'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.email" /></label>
             <f:form.textfield id="email" property="email"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.email'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.phone" /></label>
             <f:form.textfield id="phone" property="phone"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.phone'}"/>
 
             <label for="notes"><f:translate key="tx_sfeventmgt_domain_model_registration.notes" /></label>
             <f:form.textarea id="notes" property="notes"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>
 
             <f:form.submit value="{f:translate(key:'event.submit-registration')}"/>
         </fieldset>
