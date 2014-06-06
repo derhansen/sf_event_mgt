@@ -112,7 +112,7 @@ class RegistrationValidator extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
 		$registration->setFirstname('John');
 		$registration->setLastname('Doe');
-		$registration->getEmail('email@domain.tld');
+		$registration->setEmail('email@domain.tld');
 
 		foreach ($fields as $key => $value) {
 			$registration->_setProperty($key, $value);
