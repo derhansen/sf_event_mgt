@@ -32,7 +32,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class RegistrationValidator extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager

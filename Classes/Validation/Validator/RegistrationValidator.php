@@ -54,7 +54,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	 * Validates the given registration according to required fields set in plugin settings
 	 *
 	 * @param Registration $value
-	 * @return bool|void
+	 * @return bool
 	 */
 	protected function isValid($value) {
 		$settings = $this->configurationManager->getConfiguration(
