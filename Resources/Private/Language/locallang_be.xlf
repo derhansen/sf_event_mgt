@@ -6,8 +6,8 @@
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
 			</trans-unit>
-			<trans-unit id="flexforms_tab.additional">
-				<source>Additional</source>
+			<trans-unit id="flexforms_tab.notification">
+				<source>Notification settings</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.mode">
 				<source>What to display</source>
@@ -47,6 +47,27 @@
 			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode.past">
 				<source>Show only past events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.sender_email">
+				<source>E-Mail address of e-mails sent to the user</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.sender_name">
+				<source>Name of the sender</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.admin_email">
+				<source>E-Mail address of website admin, who receives new/confirmed registrations</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_new_user_subject">
+				<source>Subject of e-mail sent to user when a new registration is created</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_new_admin_subject">
+				<source>Subject of e-mail sent to admin when a new registration is created</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_confirmed_user_subject">
+				<source>Subject of e-mail sent to user when a registration has been confirmed</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_confirmed_admin_subject">
+				<source>Subject of e-mail sent to admin when a registration has been confirmed</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -193,17 +193,88 @@
             </ROOT>
         </sDEF>
 
-        <!-- Sheet: Additional -->
-        <additional>
+        <!-- Sheet: Notification -->
+        <notification>
             <ROOT>
                 <TCEforms>
-                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_tab.additional</sheetTitle>
+                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_tab.notification</sheetTitle>
+                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</displayCond>
                 </TCEforms>
                 <type>array</type>
                 <el>
 
+                    <!-- Sender e-mail address -->
+                    <settings.notification.senderEmail>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.sender_email</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.senderEmail>
+
+                    <!-- Sender name -->
+                    <settings.notification.senderName>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.sender_name</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.senderName>
+
+                    <!-- Admin e-mail address -->
+                    <settings.notification.adminEmail>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.admin_email</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.adminEmail>
+
+                    <!-- New registration - subject of user e-mail -->
+                    <settings.notification.registrationNew.userSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.registration_new_user_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationNew.userSubject>
+
+                    <!-- New registration - subject of admin e-mail -->
+                    <settings.notification.registrationNew.adminSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.registration_new_admin_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationNew.adminSubject>
+
+                    <!-- Registration confirmed - subject of user e-mail -->
+                    <settings.notification.registrationConfirmed.userSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.registration_confirmed_user_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationConfirmed.userSubject>
+
+                    <!-- Registration confirmed - subject of admin e-mail -->
+                    <settings.notification.registrationConfirmed.adminSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_notification.registration_confirmed_admin_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationConfirmed.adminSubject>
+
                 </el>
             </ROOT>
-        </additional>
+        </notification>
     </sheets>
 </T3DataStructure>
