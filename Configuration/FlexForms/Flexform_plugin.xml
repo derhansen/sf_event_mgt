@@ -40,7 +40,14 @@
                     <settings.detailPid>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.detailPid</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -87,18 +94,11 @@
                         </TCEforms>
                     </settings.listPid>
 
-                    <!-- List Pid -->
+                    <!-- Registration Pid -->
                     <settings.registrationPid>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.registrationPid</label>
-                            <displayCond>
-                                <OR>
-                                    <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
-                                    <OR>
-                                        <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
-                                    </OR>
-                                </OR>
-                            </displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -120,7 +120,14 @@
                     <settings.displayMode>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.displayMode</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <items>
@@ -145,7 +152,14 @@
                     <settings.category>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.category</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderMode>tree</renderMode>
@@ -171,7 +185,14 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.storagePage</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->list</displayCond>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
