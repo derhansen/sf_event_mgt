@@ -22,13 +22,13 @@ plugin.tx_sfeventmgt {
 			requiredFields =
 		}
 		confirmation {
-			linkValidity = {$plugin.tx_sfeventmgt.confirmation.linkValidity}
+			linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
 		}
 		notification {
-			senderEmail = {$plugin.tx_sfeventmgt.notification.senderEmail}
-			senderName = {$plugin.tx_sfeventmgt.notification.senderName}
-			senderSignature = {$plugin.tx_sfeventmgt.notification.senderSignature}
-			adminEmail = {$plugin.tx_sfeventmgt.notification.adminEmail}
+			senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
+			senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
+			senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
+			adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
 			registrationNew {
 				userSubject = Your event registration
 				adminSubject = New unconfirmed event registration

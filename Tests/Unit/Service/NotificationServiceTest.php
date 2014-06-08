@@ -24,6 +24,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use SKYFILLERS\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -65,9 +66,29 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @test
+	 * Data provider for messageType
+	 *
+	 * @return array
 	 */
-	public function sendUserConfirmationReturnsFalseIfInvalidEmailInRegistration() {
+	public function messageTypeDataProvider() {
+		return array(
+			'messageTypeMissing' => array(
+				NULL
+			),
+			'messageTypeRegistrationNew' => array(
+				MessageType::REGISTRATION_NEW
+			),
+			'messageTypeRegistrationConfirmed' => array(
+				MessageType::REGISTRATION_CONFIRMED
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 * @dataProvider messageTypeDataProvider
+	 */
+	public function sendUserMessageReturnsFalseIfInvalidEmailInRegistration($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -77,14 +98,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
 
-		$result = $this->subject->sendUserConfirmationMessage($event, $registration, $settings);
+		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendUserConfirmationReturnsFalseIfInvalidEmailInSettings() {
+	public function sendUserMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -94,14 +116,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$settings = array('notification' => array('senderEmail' => 'invalid-email'));
 
-		$result = $this->subject->sendUserConfirmationMessage($event, $registration, $settings);
+		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendUserConfirmationReturnsFalseIfSendFailed() {
+	public function sendUserMessageReturnsFalseIfSendFailed($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -134,14 +157,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
-		$result = $this->subject->sendUserConfirmationMessage($event, $registration, $settings);
+		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendUserConfirmationReturnsTrueIfSendSuccessful() {
+	public function sendUserMessageReturnsTrueIfSendSuccessful($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -174,14 +198,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
-		$result = $this->subject->sendUserConfirmationMessage($event, $registration, $settings);
+		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertTrue($result);
 	}
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendAdminNewRegistrationMessageReturnsFalseIfInvalidEmailInSettings() {
+	public function sendAdminNewRegistrationMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -189,14 +214,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
 
 		$settings = array('notification' => array('senderEmail' => 'invalid-email', 'adminEmail' => 'invalid-email'));
-		$result = $this->subject->sendAdminNewRegistrationMessage($event, $registration, $settings);
+		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed() {
+	public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -229,14 +255,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
-		$result = $this->subject->sendAdminNewRegistrationMessage($event, $registration, $settings);
+		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful() {
+	public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType) {
 		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
 		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
 
@@ -269,7 +296,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
-		$result = $this->subject->sendAdminNewRegistrationMessage($event, $registration, $settings);
+		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
 		$this->assertTrue($result);
 	}
 }

@@ -28,13 +28,22 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
 use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
-use SKYFILLERS\SfEventMgt\Util\RegistrationResult;
+use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
+use SKYFILLERS\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * EventController
  */
 class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+
+	/**
+	 * Configuration Manager
+	 *
+	 * @var ConfigurationManagerInterface
+	 */
+	protected $configurationManager;
 
 	/**
 	 * eventRepository
@@ -89,7 +98,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function listAction() {
 		$demand = $this->createDemandObjectFromSettings($this->settings);
-
 		$events = $this->eventRepository->findDemanded($demand);
 		$this->view->assign('events', $events);
 	}
@@ -153,8 +161,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
 			// Send notifications to user and admin
-			$this->notificationService->sendUserConfirmationMessage($event, $registration, $this->settings);
-			$this->notificationService->sendAdminNewRegistrationMessage($event, $registration, $this->settings);
+			$this->notificationService->sendUserMessage($event, $registration, $this->settings,
+				MessageType::REGISTRATION_NEW);
+			$this->notificationService->sendAdminMessage($event, $registration, $this->settings,
+				MessageType::REGISTRATION_NEW);
 		}
 
 		$this->redirect('saveRegistrationResult', NULL, NULL,
@@ -230,9 +240,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			$registration->setConfirmed(TRUE);
 			$this->registrationRepository->update($registration);
 
-			// @todo - Send confirmation e-mails #38
+			// Send notifications to user and admin
+			$this->notificationService->sendUserMessage($registration->getEvent(), $registration, $this->settings,
+				MessageType::REGISTRATION_CONFIRMED);
+			$this->notificationService->sendAdminMessage($registration->getEvent(), $registration, $this->settings,
+				MessageType::REGISTRATION_CONFIRMED);
 		}
-
 		$this->view->assign('message', $message);
 	}
 }

@@ -24,7 +24,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\Util\RegistrationResult;
+use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
@@ -147,8 +147,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$notificationService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\NotificationService',
 			array(), array(), '', FALSE);
-		$notificationService->expects($this->once())->method('sendUserConfirmationMessage');
-		$notificationService->expects($this->once())->method('sendAdminNewRegistrationMessage');
+		$notificationService->expects($this->once())->method('sendUserMessage');
+		$notificationService->expects($this->once())->method('sendAdminMessage');
 		$this->inject($this->subject, 'notificationService', $notificationService);
 
 		$persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
@@ -319,6 +319,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registrationRepository->expects($this->once())->method('findByUid')->will($this->returnValue($registration));
 		$registrationRepository->expects($this->once())->method('update');
 		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+		$notificationService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\NotificationService',
+			array(), array(), '', FALSE);
+		$notificationService->expects($this->once())->method('sendUserMessage');
+		$notificationService->expects($this->once())->method('sendAdminMessage');
+		$this->inject($this->subject, 'notificationService', $notificationService);
 
 		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
 	}

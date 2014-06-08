@@ -26,6 +26,7 @@ namespace SKYFILLERS\SfEventMgt\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use SKYFILLERS\SfEventMgt\Utility\MessageType;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -67,16 +68,27 @@ class NotificationService {
 	protected $hashService;
 
 	/**
-	 * Sends a confirmation message for new registrations
+	 * Sends a message to the user based on the given type
 	 *
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
+	 * @param int $type
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
-	public function sendUserConfirmationMessage($event, $registration, $settings) {
+	public function sendUserMessage($event, $registration, $settings, $type) {
 		$template = 'Notification/User/RegistrationNew.html';
+		$subject = $settings['notification']['registrationNew']['userSubject'];
+		switch ($type) {
+			case MessageType::REGISTRATION_CONFIRMED:
+				$template = 'Notification/User/RegistrationConfirmed.html';
+				$subject = $settings['notification']['registrationConfirmed']['userSubject'];
+				break;
+			case MessageType::REGISTRATION_NEW:
+			default:
+				break;
+		}
 
 		if (is_null($event) || is_null($registration || !is_array($settings))) {
 			return FALSE;
@@ -88,7 +100,7 @@ class NotificationService {
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],
 				$registration->getEmail(),
-				$settings['notification']['registrationNew']['userSubject'],
+				$subject,
 				$body,
 				$settings['notification']['senderName']
 			);
@@ -98,16 +110,27 @@ class NotificationService {
 	}
 
 	/**
-	 * Sends a message to the admin if a new registration has been created
+	 * Sends a message to the admin based on the given type
 	 *
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
+	 * @param int $type
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
-	public function sendAdminNewRegistrationMessage($event, $registration, $settings) {
+	public function sendAdminMessage($event, $registration, $settings, $type) {
 		$template = 'Notification/Admin/RegistrationNew.html';
+		$subject = $settings['notification']['registrationNew']['adminSubject'];
+		switch ($type) {
+			case MessageType::REGISTRATION_CONFIRMED:
+				$template = 'Notification/Admin/RegistrationConfirmed.html';
+				$subject = $settings['notification']['registrationConfirmed']['adminSubject'];
+				break;
+			case MessageType::REGISTRATION_NEW:
+			default:
+				break;
+		}
 
 		if (is_null($event) || is_null($registration || !is_array($settings))) {
 			return FALSE;
@@ -119,7 +142,7 @@ class NotificationService {
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],
 				$settings['notification']['adminEmail'],
-				$settings['notification']['registrationNew']['adminSubject'],
+				$subject,
 				$body,
 				$settings['notification']['senderName']
 			);

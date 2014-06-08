@@ -1,5 +1,5 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Util;
+namespace SKYFILLERS\SfEventMgt\Utility;
 
 /***************************************************************
  *
