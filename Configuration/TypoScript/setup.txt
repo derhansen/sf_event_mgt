@@ -5,9 +5,6 @@ plugin.tx_sfeventmgt {
 		partialRootPath = {$plugin.tx_sfeventmgt.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_sfeventmgt.view.layoutRootPath}
 	}
-	persistence {
-		storagePid = {$plugin.tx_sfeventmgt.persistence.storagePid}
-	}
 	features {
 		# uncomment the following line to enable the new Property Mapper.
 		rewrittenPropertyMapper = 1
