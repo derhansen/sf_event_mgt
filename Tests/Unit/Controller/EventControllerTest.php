@@ -160,6 +160,16 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
+		$settingsService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\SettingsService', array('getClearCacheUids'),
+			array(), '', FALSE);
+		$settingsService->expects($this->once())->method('getClearCacheUids')->will(
+			$this->returnValue(array('0' => '1')));
+		$this->inject($this->subject, 'settingsService', $settingsService);
+
+		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array('clearPageCache'),
+			array(), '', FALSE);
+		$cacheService->expects($this->once())->method('clearPageCache');
+		$this->inject($this->subject, 'cacheService', $cacheService);
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
 			array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));

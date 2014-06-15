@@ -6,10 +6,13 @@ plugin.tx_sfeventmgt {
 		layoutRootPath = {$plugin.tx_sfeventmgt.view.layoutRootPath}
 	}
 	features {
-		# uncomment the following line to enable the new Property Mapper.
 		rewrittenPropertyMapper = 1
 	}
 	settings {
+		# List of pids, for which the cache should be cleared after registration data changed
+		# *MUST* be defined at template root level to work correct in scheduler task
+		clearCacheUids =
+
 		eventDetails {
 			imageWidth = 200
 			imageHeight =
@@ -38,4 +41,3 @@ plugin.tx_sfeventmgt {
 		}
 	}
 }
-

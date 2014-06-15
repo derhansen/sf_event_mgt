@@ -28,6 +28,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
 use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
+use SKYFILLERS\SfEventMgt\Utility\PluginSettings;
 use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
 use SKYFILLERS\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -44,6 +45,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @var ConfigurationManagerInterface
 	 */
 	protected $configurationManager;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Service\CacheService
+	 * @inject
+	 */
+	protected $cacheService;
 
 	/**
 	 * eventRepository
@@ -68,6 +75,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @inject
 	 */
 	protected $notificationService = NULL;
+
+	/**
+	 * Settings Service
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Service\SettingsService
+	 * @inject
+	 */
+	protected $settingsService = NULL;
 
 	/**
 	 * Hash Service
@@ -165,6 +180,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				MessageType::REGISTRATION_NEW);
 			$this->notificationService->sendAdminMessage($event, $registration, $this->settings,
 				MessageType::REGISTRATION_NEW);
+
+			// Clear cache for configured pages
+			$pidList = $this->settingsService->getClearCacheUids($this->settings);
+			if (count($pidList) > 0) {
+				$this->cacheService->clearPageCache($pidList);
+			}
 		}
 
 		$this->redirect('saveRegistrationResult', NULL, NULL,

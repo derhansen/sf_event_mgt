@@ -18,3 +18,8 @@ if (!defined('TYPO3_MODE')) {
 // DataHandler hook
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['SKYFILLERS.' . $_EXTKEY] =
 	'SKYFILLERS\SfEventMgt\Hooks\DataHandlerHooks';
+
+// Register cleanup command
+if (TYPO3_MODE === 'BE') {
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'SKYFILLERS\\SfEventMgt\\Command\\CleanupCommandController';
+}
