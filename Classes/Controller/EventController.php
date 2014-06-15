@@ -28,7 +28,6 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 
 use SKYFILLERS\SfEventMgt\Domain\Model\Event;
 use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
-use SKYFILLERS\SfEventMgt\Utility\PluginSettings;
 use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
 use SKYFILLERS\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
