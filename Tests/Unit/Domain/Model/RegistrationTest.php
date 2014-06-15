@@ -313,4 +313,14 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getHiddenReturnsInitialValueForBoolean() {
+		$this->assertSame(
+			FALSE,
+			$this->subject->getHidden()
+		);
+	}
 }

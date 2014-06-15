@@ -1,6 +1,5 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Domain\Repository;
-
+namespace SKYFILLERS\SfEventMgt\Service;
 
 /***************************************************************
  *
@@ -28,33 +27,35 @@ namespace SKYFILLERS\SfEventMgt\Domain\Repository;
  ***************************************************************/
 
 /**
- * The repository for registrations
+ * RegistrationService
  */
-class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class RegistrationService {
 
 	/**
-	 * Disable the use of storage records, because the StoragePage can be set
-	 * in the plugin
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository
+	 * @inject
+	 */
+	protected $registrationRepository;
+
+	/**
+	 * Handles expired registrations. If the $delete parameter is set, then registrations are deleted,
+	 * else just hidden
 	 *
+	 * @param bool $delete
 	 * @return void
 	 */
-	public function initializeObject() {
-		$this->defaultQuerySettings = $this->objectManager->get('Tx_Extbase_Persistence_Typo3QuerySettings');
-		$this->defaultQuerySettings->setRespectStoragePage(FALSE);
+	public function handleExpiredRegistrations($delete = FALSE) {
+		$registrations = $this->registrationRepository->findExpiredRegistrations(new \DateTime());
+		if ($registrations->count() > 0) {
+			foreach($registrations as $registration) {
+				/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
+				if ($delete) {
+					$this->registrationRepository->remove($registration);
+				} else {
+					$registration->setHidden(TRUE);
+					$this->registrationRepository->update($registration);
+				}
+			}
+		}
 	}
-
-	/**
-	 * Returns all registrations, where the confirmation date is less than the given date
-	 *
-	 * @param \datetime $dateNow
-	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
-	 */
-	public function findExpiredRegistrations($dateNow) {
-		$constraints = array();
-		$query = $this->createQuery();
-		$constraints[] = $query->lessThanOrEqual('confirmationUntil', $dateNow);
-		$constraints[] = $query->equals('confirmed', FALSE);
-		return $query->matching($query->logicalAnd($constraints))->execute();
-	}
-
 }

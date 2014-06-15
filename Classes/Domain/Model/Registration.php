@@ -126,6 +126,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $confirmationUntil = NULL;
 
 	/**
+	 * Indicates if record is hidden
+	 *
+	 * @var bool
+	 */
+	protected $hidden = FALSE;
+
+	/**
 	 * Returns the firstname
 	 *
 	 * @return string $firstname
@@ -386,6 +393,24 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getConfirmationUntil() {
 		return $this->confirmationUntil;
+	}
+
+	/**
+	 * Sets hidden
+	 *
+	 * @param boolean $hidden
+	 */
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
+	}
+
+	/**
+	 * Returns hidden
+	 *
+	 * @return boolean
+	 */
+	public function getHidden() {
+		return $this->hidden;
 	}
 
 }

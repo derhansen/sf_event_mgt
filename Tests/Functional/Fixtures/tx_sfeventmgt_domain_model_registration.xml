@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <!-- Confirmation until: 14.06.2014 10:00 AM / unconfirmed -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>1</uid>
+        <confirmed>0</confirmed>
+        <confirmation_until>1402740000</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>2</uid>
+        <confirmed>1</confirmed>
+        <confirmation_until>1402740000</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Confirmation until: 14.06.2014 11:00 AM / unconfirmed -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>3</uid>
+        <confirmed>0</confirmed>
+        <confirmation_until>1402743600</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>4</uid>
+        <confirmed>0</confirmed>
+        <confirmation_until>1402743600</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Confirmation until: 14.06.2014 11:00 AM / unconfirmed / hidden-->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>5</uid>
+        <confirmed>0</confirmed>
+        <confirmation_until>1402743600</confirmation_until>
+        <hidden>1</hidden>
+    </tx_sfeventmgt_domain_model_registration>
+
+</dataset>

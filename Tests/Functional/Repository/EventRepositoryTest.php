@@ -34,9 +34,10 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
 	protected $objectManager;
 
-	/** @var  \SKYFILLERS\SfEventMgt\Domain\Repository\EventRepository */
+	/** @var \SKYFILLERS\SfEventMgt\Domain\Repository\EventRepository */
 	protected $eventRepository;
 
+	/** @var array  */
 	protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
 
 	public function setUp() {
@@ -54,9 +55,9 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findRecordsByUid() {
-		$news = $this->eventRepository->findByUid(1);
+		$events = $this->eventRepository->findByUid(1);
 
-		$this->assertEquals($news->getTitle(), 'findRecordsByUid');
+		$this->assertEquals($events->getTitle(), 'findRecordsByUid');
 	}
 
 	/**

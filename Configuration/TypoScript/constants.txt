@@ -9,6 +9,10 @@ plugin.tx_sfeventmgt {
 		layoutRootPath = EXT:sf_event_mgt/Resources/Private/Layouts/
 	}
 	settings {
+		registration {
+			# cat=plugin.tx_sfeventmgt/a; type=boolean; label=Delete expired registrations
+			deleteExpiredRegistrations = 0
+		}
 		confirmation {
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validity of confirmation link in seconds
 			linkValidity = 3600
