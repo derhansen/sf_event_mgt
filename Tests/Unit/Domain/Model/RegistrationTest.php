@@ -317,6 +317,20 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function setDateOfBirthForDateTimeSetsDateOfBirth() {
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setDateOfBirth($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'dateOfBirth',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getHiddenReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			FALSE,

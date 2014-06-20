@@ -9,6 +9,8 @@
     <li>{registration.city}</li>
     <li>{registration.email}</li>
     <li>{registration.phone}</li>
+    <li>{f:format.date(date: '{registration.dateOfBirth}', format: 'd.m.Y')}</li>
+    <li>{registration.notes}</li>
 </ul>
 
 <p>The registration is not finished yet, as the user needs to confirm his/her registration</p>

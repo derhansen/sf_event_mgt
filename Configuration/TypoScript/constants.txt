@@ -12,6 +12,8 @@ plugin.tx_sfeventmgt {
 		registration {
 			# cat=plugin.tx_sfeventmgt/a; type=boolean; label=Delete expired registrations
 			deleteExpiredRegistrations = 0
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validation format for date of birth
+			formatDateOfBirth = d.m.Y
 		}
 		confirmation {
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validity of confirmation link in seconds

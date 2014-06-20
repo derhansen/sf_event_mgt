@@ -93,6 +93,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $gender = '';
 
 	/**
+	 * Date of birth
+	 *
+	 * @var \DateTime
+	 */
+	protected $dateOfBirth = NULL;
+
+	/**
 	 * Confirmed
 	 *
 	 * @var boolean
@@ -282,6 +289,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setGender($gender) {
 		$this->gender = $gender;
+	}
+
+	/**
+	 * Sets the date of birth
+	 *
+	 * @param \DateTime $dateOfBirth
+	 * @return void
+	 */
+	public function setDateOfBirth($dateOfBirth) {
+		$this->dateOfBirth = $dateOfBirth;
+	}
+
+	/**
+	 * Returns the date of birth
+	 *
+	 * @return \DateTime
+	 */
+	public function getDateOfBirth() {
+		return $this->dateOfBirth;
 	}
 
 	/**

@@ -32,6 +32,7 @@ use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
 use SKYFILLERS\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
  * EventController
@@ -134,6 +135,21 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function registrationAction(Event $event) {
 		$this->view->assign('event', $event);
+	}
+
+	/**
+	 * Set date format for field dateOfBirth
+	 *
+	 * @param void
+	 */
+	public function initializeSaveRegistrationAction() {
+		$this->arguments->getArgument('registration')
+			->getPropertyMappingConfiguration()->forProperty('dateOfBirth')
+			->setTypeConverterOption(
+				'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+				DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+				$this->settings['registration']['formatDateOfBirth']
+			);
 	}
 
 	/**
