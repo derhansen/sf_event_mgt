@@ -210,6 +210,17 @@
                         </TCEforms>
                     </settings.storagePage>
 
+                    <!-- Required fields for registration -->
+                    <settings.registration.requiredFields>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xml:flexforms_general.requiredFields</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</displayCond>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.registration.requiredFields>
+
                 </el>
             </ROOT>
         </sDEF>

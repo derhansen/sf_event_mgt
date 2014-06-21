@@ -48,6 +48,9 @@
 			<trans-unit id="flexforms_general.displayMode.past">
 				<source>Show only past events</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.requiredFields">
+				<source>Comma seperated list of fieldnames, which are required. The fields firstname, lastname and email are always required and cannot be overridden</source>
+			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>E-Mail address of e-mails sent to the user</source>
 			</trans-unit>
