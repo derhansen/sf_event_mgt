@@ -55,8 +55,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @retun void
 	 */
 	public function setup() {
-		$objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->objectManager = clone $objectManager;
+		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 
 		$this->validator = $this->getMock($this->validatorClassName, array('translateErrorMessage'));
 	}
