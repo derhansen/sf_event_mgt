@@ -383,6 +383,19 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getRegistrationPossibleReturnsFalseIfRegistrationNotEnabled() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$this->subject->setStartdate($startdate);
+
+		$this->subject->setEnableRegistration(FALSE);
+		$this->assertFalse($this->subject->getRegistrationPossible());
+	}
+
+
+	/**
+	 * @test
+	 */
 	public function getRegistrationPossibleReturnsFalseIfEventMaxParticipantsReached() {
 		$registration = new Registration();
 		$registration->setFirstname('John');
@@ -405,6 +418,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$this->subject->setStartdate($startdate);
 		$this->subject->setMaxParticipants(0);
+		$this->subject->setEnableRegistration(TRUE);
 
 		$this->assertTrue($this->subject->getRegistrationPossible());
 	}
@@ -416,6 +430,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$this->subject->setStartdate($startdate);
+		$this->subject->setEnableRegistration(TRUE);
 
 		$this->assertTrue($this->subject->getRegistrationPossible());
 	}
@@ -428,6 +443,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$this->subject->setStartdate($startdate);
 		$this->subject->setMaxParticipants(1);
+		$this->subject->setEnableRegistration(TRUE);
 
 		$this->assertTrue($this->subject->getRegistrationPossible());
 	}
@@ -442,6 +458,29 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertAttributeEquals(
 			$location,
 			'location',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getEnableRegistrationReturnsInitialValueForBoolean() {
+		$this->assertSame(
+			FALSE,
+			$this->subject->getEnableRegistration()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setEnableRegistrationForBooleanSetsEnableRegistration() {
+		$this->subject->setEnableRegistration(TRUE);
+
+		$this->assertAttributeEquals(
+			TRUE,
+			'enableRegistration',
 			$this->subject
 		);
 	}

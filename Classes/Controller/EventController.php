@@ -163,7 +163,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	public function saveRegistrationAction(Registration $registration, Event $event) {
 		$success = TRUE;
 		$result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-		if ($event->getStartdate() < new \DateTime()) {
+		if ($event->getEnableRegistration() === FALSE) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_NOT_ENABLED;
+		} elseif ($event->getStartdate() < new \DateTime()) {
 			$success = FALSE;
 			$result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
 		} elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
@@ -224,6 +227,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS:
 				$message = LocalizationUtility::translate('event.message.registrationfailedmaxparticipants',
+					'SfEventMgt');
+				break;
+			case RegistrationResult::REGISTRATION_NOT_ENABLED:
+				$message = LocalizationUtility::translate('event.message.registrationfailednotenabled',
 					'SfEventMgt');
 				break;
 			default:

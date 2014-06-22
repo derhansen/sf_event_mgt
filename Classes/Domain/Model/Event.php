@@ -112,6 +112,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $location = NULL;
 
 	/**
+	 * Enable registration
+	 *
+	 * @var bool
+	 */
+	protected $enableRegistration = FALSE;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -393,7 +400,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		if ($this->getMaxParticipants() > 0 && $this->getRegistration()->count() >= $this->maxParticipants) {
 			$maxParticipantsNotReached = FALSE;
 		}
-		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached;
+		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached && $this->getEnableRegistration();
 	}
 
 	/**
@@ -413,6 +420,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getLocation() {
 		return $this->location;
+	}
+
+	/**
+	 * Sets enableRegistration
+	 *
+	 * @param boolean $enableRegistration
+	 * @return void
+	 */
+	public function setEnableRegistration($enableRegistration) {
+		$this->enableRegistration = $enableRegistration;
+	}
+
+	/**
+	 * Returns if registration is enabled
+	 *
+	 * @return boolean
+	 */
+	public function getEnableRegistration() {
+		return $this->enableRegistration;
 	}
 
 }

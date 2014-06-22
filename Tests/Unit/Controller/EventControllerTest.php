@@ -85,6 +85,24 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationDisabled() {
+		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
+			array(), '', FALSE);
+
+		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(FALSE));
+
+		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
+			array('result' => RegistrationResult::REGISTRATION_NOT_ENABLED));
+
+		$this->subject->saveRegistrationAction($registration, $event);
+	}
+
+	/**
+	 * @test
+	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfEventExpired() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
@@ -92,6 +110,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('yesterday'));
+		$event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(TRUE));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
@@ -113,6 +132,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(TRUE));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
@@ -136,6 +156,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$event = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(TRUE));
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
@@ -211,6 +232,18 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFUL);
+	}
+
+	/**
+	 * @test
+	 */
+	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationNotEnabled() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('message',
+			LocalizationUtility::translate('event.message.registrationfailednotenabled', 'SfEventMgt'));
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_NOT_ENABLED);
 	}
 
 	/**

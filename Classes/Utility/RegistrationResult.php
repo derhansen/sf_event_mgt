@@ -30,7 +30,8 @@ namespace SKYFILLERS\SfEventMgt\Utility;
  * RegistrationResult
  */
 class RegistrationResult {
-	CONST REGISTRATION_SUCCESSFUL = 0;
+	const REGISTRATION_SUCCESSFUL = 0;
 	const REGISTRATION_FAILED_EVENT_EXPIRED = 1;
 	const REGISTRATION_FAILED_MAX_PARTICIPANTS = 2;
+	const REGISTRATION_NOT_ENABLED = 3;
 }

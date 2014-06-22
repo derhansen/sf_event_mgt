@@ -21,6 +21,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
 				<source>Max. participants</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
+				<source>Enable registration</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
 				<source>Price</source>
 			</trans-unit>
@@ -36,8 +39,8 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_event.booking">
-				<source>Registration</source>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
+				<source>Registrations</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Category</source>
@@ -99,8 +102,8 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
-			<trans-unit id="event.tabs.registrations">
-				<source>Registrations</source>
+			<trans-unit id="event.tabs.registration">
+				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
 				<source>Location</source>
