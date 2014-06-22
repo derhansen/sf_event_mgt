@@ -432,4 +432,17 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertTrue($this->subject->getRegistrationPossible());
 	}
 
+	/**
+	 * @test
+	 */
+	public function setLocationSetsLocation() {
+		$location = new \SKYFILLERS\SfEventMgt\Domain\Model\Location();
+		$this->subject->setLocation($location);
+
+		$this->assertAttributeEquals(
+			$location,
+			'location',
+			$this->subject
+		);
+	}
 }

@@ -27,6 +27,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
         <th><f:translate key="tx_sfeventmgt_domain_model_event.registrations" /></th>
 		<th><f:translate key="tx_sfeventmgt_domain_model_event.price" /></th>
 		<th><f:translate key="tx_sfeventmgt_domain_model_event.currency" /></th>
+		<th><f:translate key="tx_sfeventmgt_domain_model_event.location" /></th>
         <th></th>
 	</tr>
 
@@ -47,6 +48,7 @@ Otherwise your changes will be overwritten the next time you save the extension 
 			<td>{event.registration->f:count()}</td>
 			<td>{event.price}</td>
 			<td>{event.currency}</td>
+			<td>{event.location.title}</td>
             <td>
                 <f:if condition="{event.registrationPossible}">
                     <f:if condition="{settings.registrationPid} !=''">

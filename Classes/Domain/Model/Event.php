@@ -105,6 +105,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $image = NULL;
 
 	/**
+	 * The Location
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Location
+	 */
+	protected $location = NULL;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -387,6 +394,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 			$maxParticipantsNotReached = FALSE;
 		}
 		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached;
+	}
+
+	/**
+	 * Sets the location
+	 *
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Location $location
+	 * @return void
+	 */
+	public function setLocation($location) {
+		$this->location = $location;
+	}
+
+	/**
+	 * Returns the location
+	 *
+	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Location
+	 */
+	public function getLocation() {
+		return $this->location;
 	}
 
 }

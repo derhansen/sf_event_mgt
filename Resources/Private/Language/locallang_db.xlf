@@ -30,6 +30,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
 				<source>Category</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location">
+				<source>Location</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 			</trans-unit>
@@ -98,6 +101,12 @@
 			</trans-unit>
 			<trans-unit id="event.tabs.registrations">
 				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location">
+				<source>Location</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
+				<source>Title</source>
 			</trans-unit>
 
 		</body>
