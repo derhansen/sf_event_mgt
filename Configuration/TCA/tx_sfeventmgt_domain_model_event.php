@@ -190,7 +190,7 @@ return array(
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price',
 			'config' => array(
 				'type' => 'input',
-				'size' => 30,
+				'size' => 5,
 				'eval' => 'double2'
 			)
 		),
@@ -199,7 +199,7 @@ return array(
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.currency',
 			'config' => array(
 				'type' => 'input',
-				'size' => 30,
+				'size' => 5,
 				'eval' => 'trim'
 			),
 		),
