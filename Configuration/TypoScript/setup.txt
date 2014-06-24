@@ -1,4 +1,6 @@
-
+#==============================================
+# FE-Plugin configuration
+#==============================================
 plugin.tx_sfeventmgt {
 	view {
 		templateRootPath = {$plugin.tx_sfeventmgt.view.templateRootPath}
@@ -40,5 +42,14 @@ plugin.tx_sfeventmgt {
 				adminSubject = Event registration confirmed
 			}
 		}
+	}
+}
+
+#==============================================
+# BE-module configuration for EXT:sf_event_mgt
+#==============================================
+module.tx_sfeventmgt {
+	settings {
+		csvExportFields = {$module.tx_sfeventmgt.settings.csvExportFields}
 	}
 }

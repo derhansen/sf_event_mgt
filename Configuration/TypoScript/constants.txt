@@ -1,4 +1,6 @@
-
+#==============================================
+# FE-Plugin configuration
+#==============================================
 plugin.tx_sfeventmgt {
 	view {
 		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template root (FE)
@@ -30,5 +32,14 @@ plugin.tx_sfeventmgt {
 			adminEmail =
 		}
 	}
+}
 
+#==============================================
+# BE-module configuration for EXT:sf_event_mgt
+#==============================================
+module.tx_sfeventmgt {
+	settings {
+		# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
+		csvExportFields = uid, firstname, lastname, email
+	}
 }

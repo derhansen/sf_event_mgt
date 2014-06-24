@@ -1,0 +1,34 @@
+<tr class="db_list_normal">
+    <td class="title">
+        {event.title}
+    </td>
+    <td class="startdate">
+        <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date>
+    </td>
+    <td class="enddate">
+        <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date>
+    </td>
+    <td class="registrationenabled">
+        <f:if condition="{event.enableRegistration} == 0">
+            <f:then>
+                <f:translate key="label.false" />
+            </f:then>
+            <f:else>
+                <f:translate key="label.true" />
+            </f:else>
+        </f:if>
+    </td>
+    <td class="maxparticipants">
+        <f:if condition="{event.maxParticipants} == 0">
+            <f:then>
+                -
+            </f:then>
+            <f:else>
+                {event.maxParticipants}
+            </f:else>
+        </f:if>
+    </td>
+    <td class="registrations">
+        {event.registration->f:count()}
+    </td>
+</tr>

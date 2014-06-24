@@ -30,3 +30,19 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sfeventmgt_domain_model_registration', 'EXT:sf_event_mgt/Resources/Private/Language/locallang_csh_tx_sfeventmgt_domain_model_registration.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sfeventmgt_domain_model_registration');
+
+// Register Administration Module
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+	'SKYFILLERS.' . $_EXTKEY,
+	'web',
+	'tx_sfeventmgt_m1',
+	'',
+	array(
+		'Administration' => 'list',
+	),
+	array(
+		'access' => 'user,group',
+		'icon'   => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.gif',
+		'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
+	)
+);

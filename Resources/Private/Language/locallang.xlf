@@ -21,6 +21,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
 				<source>Max. participants</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
+				<source>Registration enabled</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Registrations</source>
 			</trans-unit>
@@ -131,6 +134,12 @@
 			</trans-unit>
 			<trans-unit id="event.message.confirmation_failed_already_confirmed">
 				<source>Confirmation failed, because the registration already has been confirmed.</source>
+			</trans-unit>
+			<trans-unit id="label.false">
+				<source>False</source>
+			</trans-unit>
+			<trans-unit id="label.true">
+				<source>True</source>
 			</trans-unit>
 		</body>
 	</file>

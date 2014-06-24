@@ -1,0 +1,40 @@
+
+<f:layout name="Backend" />
+
+<f:section name="main">
+    <h1>
+        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.title" />
+    </h1>
+
+    <f:be.widget.paginate objects="{events}" as="paginatedEvents">
+        <table cellpadding="0" cellmargin="0" cellspacing="0" class="t3-table">
+            <thead>
+            <tr class="t3-row-header">
+                <td class="title">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.title" />
+                </td>
+                <td class="startdate">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate" />
+                </td>
+                <td class="enddate">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate" />
+                </td>
+                <td class="registrationenabled">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.enable_registration" />
+                </td>
+                <td class="maxparticipants">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" />
+                </td>
+                <td class="registrations">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.registrations" />
+                </td>
+            </tr>
+            </thead>
+            <tbody>
+            <f:for each="{paginatedEvents}" as="event">
+                <f:render partial="Administration/ListItem" arguments="{event: event}" />
+            </f:for>
+            </tbody>
+        </table>
+    </f:be.widget.paginate>
+</f:section>
