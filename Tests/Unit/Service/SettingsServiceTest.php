@@ -38,19 +38,12 @@ class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected $subject = NULL;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager
-	 */
-	protected $objectManager;
-
-	/**
 	 * Setup
 	 *
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
-		$this->subject = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Service\\SettingsService');
+		$this->subject = new \SKYFILLERS\SfEventMgt\Service\SettingsService();
 	}
 
 	/**

@@ -40,19 +40,12 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected $subject = NULL;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager
-	 */
-	protected $objectManager;
-
-	/**
 	 * Setup
 	 *
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
-		$this->subject = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Service\\RegistrationService');
+		$this->subject = new \SKYFILLERS\SfEventMgt\Service\RegistrationService();
 	}
 
 	/**
@@ -73,7 +66,7 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registration->expects($this->once())->method('setHidden')->with(TRUE);
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-		$registrations = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$registrations->attach($registration);
 
 		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
@@ -94,7 +87,7 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			array(), array(), '', FALSE);
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-		$registrations = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$registrations->attach($registration);
 
 		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',

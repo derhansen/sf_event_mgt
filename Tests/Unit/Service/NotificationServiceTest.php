@@ -40,19 +40,12 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	protected $subject = NULL;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager
-	 */
-	protected $objectManager;
-
-	/**
 	 * Setup
 	 *
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
-		$this->subject = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Service\\NotificationService');
+		$this->subject = new \SKYFILLERS\SfEventMgt\Service\NotificationService();
 	}
 
 	/**
@@ -88,11 +81,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidEmailInRegistration($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('invalid-email');
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
@@ -106,11 +96,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('valid@email.tld');
 
 		$settings = array('notification' => array('senderEmail' => 'invalid-email'));
@@ -124,11 +111,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfSendFailed($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('valid@email.tld');
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
@@ -156,6 +140,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
+		$emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', FALSE);
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$this->inject($this->subject, 'hashService', $hashService);
+
 		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
@@ -165,11 +159,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsTrueIfSendSuccessful($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('valid@email.tld');
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
@@ -197,6 +188,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
+		$emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', FALSE);
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$this->inject($this->subject, 'hashService', $hashService);
+
 		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertTrue($result);
 	}
@@ -206,11 +207,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendAdminNewRegistrationMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 
 		$settings = array('notification' => array('senderEmail' => 'invalid-email', 'adminEmail' => 'invalid-email'));
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -222,11 +220,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
 			'adminEmail' => 'valid@email.tld'));
@@ -254,6 +249,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
+		$emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', FALSE);
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$this->inject($this->subject, 'hashService', $hashService);
+
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
@@ -263,11 +268,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Event $event */
-		$event = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Event');
-
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
 			'adminEmail' => 'valid@email.tld'));
@@ -294,6 +296,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$configurationManager->expects($this->once())->method('getConfiguration')->will(
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
+
+		$emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', FALSE);
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$this->inject($this->subject, 'hashService', $hashService);
 
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
 		$this->assertTrue($result);
