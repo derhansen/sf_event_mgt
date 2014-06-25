@@ -25,8 +25,6 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * Test case for class SKYFILLERS\SfEventMgt\Service\SettingsService.
  */

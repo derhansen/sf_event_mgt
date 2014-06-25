@@ -25,7 +25,6 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  ***************************************************************/
 
 use SKYFILLERS\SfEventMgt\Utility\MessageType;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class SKYFILLERS\SfEventMgt\Service\NotificationService.
