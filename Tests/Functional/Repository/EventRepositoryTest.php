@@ -57,7 +57,7 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	public function findRecordsByUid() {
 		$events = $this->eventRepository->findByUid(1);
 
-		$this->assertEquals($events->getTitle(), 'findRecordsByUid');
+		$this->assertEquals($events->getTitle(), 'findRecordsByUid-TEST');
 	}
 
 	/**

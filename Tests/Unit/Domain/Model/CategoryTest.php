@@ -66,7 +66,7 @@ class CategoryTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function getTitleReturnsInitialValueForString() {
 		$this->assertSame(
-			'',
+			'TEST',
 			$this->subject->getTitle()
 		);
 	}
