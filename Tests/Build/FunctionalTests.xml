@@ -1,12 +1,12 @@
 <phpunit
         backupGlobals="false"
         backupStaticAttributes="false"
-        bootstrap="../../../../../typo3/sysext/core/Build/UnitTestsBootstrap.php"
+        bootstrap="../../../../../typo3/sysext/core/Build/FunctionalTestsBootstrap.php"
         colors="true"
         convertErrorsToExceptions="true"
         convertWarningsToExceptions="true"
         forceCoversAnnotation="false"
-        processIsolation="false"
+        processIsolation="true"
         stopOnError="false"
         stopOnFailure="false"
         stopOnIncomplete="false"
@@ -16,7 +16,7 @@
 
     <testsuites>
         <testsuite name="EXT:sf_event mgt">
-            <directory>../Unit/</directory>
+            <directory>../Functional/</directory>
         </testsuite>
     </testsuites>
 </phpunit>
