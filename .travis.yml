@@ -30,13 +30,13 @@ script:
     if [[ "$COVERAGE" == "0" ]]; then
       echo;
       echo "Running unit tests";
-      ./bin/phpunit -c typo3conf/ext/sf_event_mgt/Tests/Build/UnitTests.xml
+      ./bin/phpunit --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/UnitTests.xml
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
       echo;
       echo "Running unit tests";
-      ./bin/phpunit --coverage-clover=coverage.clover -c typo3conf/ext/sf_event_mgt/Tests/Build/UnitTests.xml
+      ./bin/phpunit --coverage-clover=coverage.clover --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/UnitTests.xml
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
@@ -46,7 +46,7 @@ script:
       export typo3DatabaseHost="localhost";
       export typo3DatabaseUsername="root";
       export typo3DatabasePassword="";
-      ./bin/phpunit -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml
+      find . -wholename 'typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; ./bin/phpunit --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml {}'
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
