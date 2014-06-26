@@ -1,7 +1,9 @@
 <f:layout name="Default" />
 <f:section name="main">
     <h1>Registration results</h1>
-    <p>{message}</p>
+    <p>
+        <f:translate key="{messageKey}" />
+    </p>
 
     <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
 </f:section>

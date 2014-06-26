@@ -25,7 +25,6 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Controller;
  ***************************************************************/
 
 use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Test case for class SKYFILLERS\SfEventMgt\Controller\EventController.
@@ -203,8 +202,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfEventExpired() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationfailedeventexpired', 'SfEventMgt'));
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.registrationfailedeventexpired');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
@@ -215,8 +214,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfEventFull() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationfailedmaxparticipants', 'SfEventMgt'));
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.registrationfailedmaxparticipants');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
@@ -227,8 +226,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationSuccessful() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationsuccessful', 'SfEventMgt'));
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.registrationsuccessful');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFUL);
@@ -239,8 +238,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationNotEnabled() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.registrationfailednotenabled', 'SfEventMgt'));
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.registrationfailednotenabled');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_NOT_ENABLED);
@@ -251,8 +250,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfInvalidHMAC() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.confirmation_failed_wrong_hmac', 'SfEventMgt'));
+		$view->expects($this->once())->method('assign')->with('messageKey',
+			'event.message.confirmation_failed_wrong_hmac');
 		$this->inject($this->subject, 'view', $view);
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
@@ -268,8 +267,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfRegistrationNotFound() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.confirmation_failed_registration_not_found', 'SfEventMgt'));
+		$view->expects($this->once())->method('assign')->with('messageKey',
+			'event.message.confirmation_failed_registration_not_found');
 		$this->inject($this->subject, 'view', $view);
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
@@ -290,8 +289,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationUntilExpired() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.confirmation_failed_confirmation_until_expired', 'SfEventMgt'));
+		$view->expects($this->once())->method('assign')->with('messageKey',
+			'event.message.confirmation_failed_confirmation_until_expired');
 		$this->inject($this->subject, 'view', $view);
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
@@ -316,8 +315,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationAlreadyConfirmed() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.confirmation_failed_already_confirmed', 'SfEventMgt'));
+		$view->expects($this->once())->method('assign')->with('messageKey',
+			'event.message.confirmation_failed_already_confirmed');
 		$this->inject($this->subject, 'view', $view);
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
@@ -343,8 +342,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationSuccessful() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('message',
-			LocalizationUtility::translate('event.message.confirmation_successful', 'SfEventMgt'));
+		$view->expects($this->once())->method('assign')->with('messageKey',
+			'event.message.confirmation_successful');
 		$this->inject($this->subject, 'view', $view);
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',

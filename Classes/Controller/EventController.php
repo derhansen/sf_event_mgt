@@ -30,7 +30,6 @@ use SKYFILLERS\SfEventMgt\Domain\Model\Event;
 use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
 use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
 use SKYFILLERS\SfEventMgt\Utility\MessageType;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
@@ -219,25 +218,22 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	public function saveRegistrationResultAction($result) {
 		switch ($result) {
 			case RegistrationResult::REGISTRATION_SUCCESSFUL:
-				$message = LocalizationUtility::translate('event.message.registrationsuccessful', 'SfEventMgt');
+				$messageKey = 'event.message.registrationsuccessful';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
-				$message = LocalizationUtility::translate('event.message.registrationfailedeventexpired',
-					'SfEventMgt');
+				$messageKey = 'event.message.registrationfailedeventexpired';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS:
-				$message = LocalizationUtility::translate('event.message.registrationfailedmaxparticipants',
-					'SfEventMgt');
+				$messageKey = 'event.message.registrationfailedmaxparticipants';
 				break;
 			case RegistrationResult::REGISTRATION_NOT_ENABLED:
-				$message = LocalizationUtility::translate('event.message.registrationfailednotenabled',
-					'SfEventMgt');
+				$messageKey = 'event.message.registrationfailednotenabled';
 				break;
 			default:
-				$message = '';
+				$messageKey = '';
 		}
 
-		$this->view->assign('message', $message);
+		$this->view->assign('messageKey', $messageKey);
 	}
 
 	/**
@@ -252,31 +248,28 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		/** @var Registration $registration */
 		$registration = NULL;
 		$failed = FALSE;
-		$message = LocalizationUtility::translate('event.message.confirmation_successful', 'SfEventMgt');
+		$messageKey = 'event.message.confirmation_successful';
 
 		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
 			$failed = TRUE;
-			$message = LocalizationUtility::translate('event.message.confirmation_failed_wrong_hmac', 'SfEventMgt');
+			$messageKey = 'event.message.confirmation_failed_wrong_hmac';
 		} else {
 			$registration = $this->registrationRepository->findByUid($reguid);
 		}
 
 		if (!$failed && is_null($registration)) {
 			$failed = TRUE;
-			$message = LocalizationUtility::translate('event.message.confirmation_failed_registration_not_found',
-				'SfEventMgt');
+			$messageKey = 'event.message.confirmation_failed_registration_not_found';
 		}
 
 		if (!$failed && $registration->getConfirmationUntil() < new \DateTime()) {
 			$failed = TRUE;
-			$message = LocalizationUtility::translate('event.message.confirmation_failed_confirmation_until_expired',
-				'SfEventMgt');
+			$messageKey = 'event.message.confirmation_failed_confirmation_until_expired';
 		}
 
 		if (!$failed && $registration->getConfirmed() === TRUE) {
 			$failed = TRUE;
-			$message = LocalizationUtility::translate('event.message.confirmation_failed_already_confirmed',
-				'SfEventMgt');
+			$messageKey = 'event.message.confirmation_failed_already_confirmed';
 		}
 
 		if ($failed === FALSE) {
@@ -289,6 +282,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			$this->notificationService->sendAdminMessage($registration->getEvent(), $registration, $this->settings,
 				MessageType::REGISTRATION_CONFIRMED);
 		}
-		$this->view->assign('message', $message);
+		$this->view->assign('messageKey', $messageKey);
 	}
 }
