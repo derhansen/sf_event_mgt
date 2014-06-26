@@ -41,7 +41,6 @@ script:
   - >
     if [[ "$COVERAGE" == "1" ]]; then
       echo;
-      echo "Running functional tests";
       export typo3DatabaseName="typo3";
       export typo3DatabaseHost="localhost";
       export typo3DatabaseUsername="root";
