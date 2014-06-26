@@ -4,12 +4,12 @@ php:
   - 5.4
 
 env:
-  - DB=mysql TYPO3=master INTEGRATION=master COVERAGE=0
+  - DB=mysql TYPO3_BRANCH=master INTEGRATION=master COVERAGE=0
 
 matrix:
   include:
     - php: 5.5
-      env: DB=mysql TYPO3=master INTEGRATION=master COVERAGE=1
+      env: DB=mysql TYPO3_BRANCH=master INTEGRATION=master COVERAGE=1
 
 notifications:
   email:
