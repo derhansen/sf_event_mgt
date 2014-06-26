@@ -46,7 +46,7 @@ script:
       export typo3DatabaseHost="localhost";
       export typo3DatabaseUsername="root";
       export typo3DatabasePassword="";
-      find . -wholename 'typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; ./bin/phpunit --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml {}'
+      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; ./bin/phpunit --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml {}'
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
