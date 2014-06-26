@@ -78,7 +78,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function getDescriptionReturnsInitialValueForString() {
 		$this->assertSame(
-			'TEST',
+			'',
 			$this->subject->getDescription()
 		);
 	}
