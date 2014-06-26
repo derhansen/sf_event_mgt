@@ -37,7 +37,9 @@ script:
       echo;
       echo "Running unit tests";
       ./bin/phpunit --coverage-clover=coverage.clover -c typo3conf/ext/sf_event_mgt/Tests/Build/UnitTests.xml
-
+    fi
+  - >
+    if [[ "$COVERAGE" == "1" ]]; then
       echo;
       echo "Running functional tests";
       export typo3DatabaseName="typo3";
@@ -45,7 +47,9 @@ script:
       export typo3DatabaseUsername="root";
       export typo3DatabasePassword="";
       ./bin/phpunit -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml
-
+    fi
+  - >
+    if [[ "$COVERAGE" == "1" ]]; then
       echo;
       echo "Uploading code coverage results";
       wget https://scrutinizer-ci.com/ocular.phar
