@@ -35,11 +35,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager
-	 */
-	protected $objectManager;
-
-	/**
 	 * @var \TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator
 	 */
 	protected $validator;
@@ -55,8 +50,6 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @retun void
 	 */
 	public function setup() {
-		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
 		$this->validator = $this->getMock($this->validatorClassName, array('translateErrorMessage'));
 	}
 
@@ -65,7 +58,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 *
 	 * @return array
 	 */
-	public function settingsDataProvider() {
+	public function missingSettingsDataProvider() {
 		return array(
 			'emptySettings' => array(
 				array(),
@@ -77,24 +70,64 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 				array(),
 				FALSE
 			),
+		);
+	}
+
+	/**
+	 * Executes all validation tests defines by the given data provider
+	 *
+	 * @test
+	 * @dataProvider missingSettingsDataProvider
+	 */
+	public function validatorReturnsTrueWhenArgumentsMissing($settings, $fields, $expected) {
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$registration->setFirstname('John');
+		$registration->setLastname('Doe');
+		$registration->setEmail('email@domain.tld');
+
+		foreach ($fields as $key => $value) {
+			$registration->_setProperty($key, $value);
+		}
+
+		// Inject configuration and configurationManager
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($settings));
+		$this->inject($this->validator, 'configurationManager', $configurationManager);
+
+		$this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
+	}
+
+	/**
+	 * Data provider for settings
+	 *
+	 * @return array
+	 */
+	public function settingsDataProvider() {
+		return array(
 			'requiredFieldsSettingsForCityIfCityNotSet' => array(
 				array('registration' => array('requiredFields' => 'city')),
 				array(),
+				TRUE,
 				TRUE
 			),
 			'requiredFieldsSettingsForCityIfCitySet' => array(
 				array('registration' => array('requiredFields' => 'city')),
 				array('city' => 'Some city'),
+				FALSE,
 				FALSE
 			),
 			'requiredFieldsSettingsForCityAndZipWithWhitespace' => array(
 				array('registration' => array('requiredFields' => 'city, zip')),
 				array('city' => 'Some city', 'zip' => '12345'),
+				FALSE,
 				FALSE
 			),
 			'requiredFieldsSettingsForUnknownProperty' => array(
 				array('registration' => array('requiredFields' => 'unknown_field')),
 				array(),
+				FALSE,
 				FALSE
 			),
 		);
@@ -106,9 +139,8 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @dataProvider settingsDataProvider
 	 */
-	public function validatorReturnsExpectedResults($settings, $fields, $expected) {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
-		$registration = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration');
+	public function validatorReturnsExpectedResults($settings, $fields, $hasErrors, $expected) {
+		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 		$registration->setFirstname('John');
 		$registration->setLastname('Doe');
 		$registration->setEmail('email@domain.tld');
@@ -125,7 +157,22 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->validator, 'configurationManager', $configurationManager);
 
 		// Inject the object manager
-		$this->inject($this->validator, 'objectManager', $this->objectManager);
+		$validationError = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Error', array(), array(), '', FALSE);
+
+		$notEmptyValidatorResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', array(), array(), '', FALSE);
+		$notEmptyValidatorResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
+		$notEmptyValidatorResult->expects($this->any())->method('getErrors')->will(
+			$this->returnValue(array($validationError)));
+
+		$notEmptyValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator',
+			array(), array(), '', FALSE);
+		$notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
+			$notEmptyValidatorResult));
+
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array('get'), array(), '', FALSE);
+		$objectManager->expects($this->any())->method('get')->will($this->returnValue($notEmptyValidator));
+		$this->inject($this->validator, 'objectManager', $objectManager);
 
 		$this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
 	}
