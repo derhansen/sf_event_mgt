@@ -84,12 +84,22 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getStoragePageReturnsInitialValue() {
+		$this->assertSame(
+			NULL,
+			$this->subject->getStoragePage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function setStoragePageForStringSetsStoragePage() {
-		$this->subject->setDisplayMode('1,2,3');
+		$this->subject->setStoragePage('1,2,3');
 
 		$this->assertAttributeEquals(
 			'1,2,3',
-			'displayMode',
+			'storagePage',
 			$this->subject
 		);
 	}

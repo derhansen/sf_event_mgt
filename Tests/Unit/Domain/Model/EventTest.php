@@ -451,6 +451,16 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getLocationReturnsInitialValueForLocation() {
+		$this->assertEquals(
+			NULL,
+			$this->subject->getLocation()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function setLocationSetsLocation() {
 		$location = new \SKYFILLERS\SfEventMgt\Domain\Model\Location();
 		$this->subject->setLocation($location);
