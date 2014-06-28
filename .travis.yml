@@ -19,6 +19,7 @@ before_script:
   - cd ..
   - git clone --single-branch --branch $TYPO3_BRANCH --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .
+  - sudo apt-get install parallel
   - composer self-update
   - composer install
   - mkdir -p uploads typo3temp typo3conf/ext
@@ -40,12 +41,11 @@ script:
   - >
     if [[ "$COVERAGE" == "1" ]]; then
       echo;
-      echo "Running functional tests";
       export typo3DatabaseName="typo3";
       export typo3DatabaseHost="localhost";
       export typo3DatabaseUsername="root";
       export typo3DatabasePassword="";
-      ./bin/phpunit --coverage-clover=functionaltest-coverage.clover --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml
+      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; ./bin/phpunit --coverage-clover={}functionaltest-coverage.clover --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml {}'
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
@@ -54,5 +54,5 @@ script:
       wget https://scrutinizer-ci.com/ocular.phar
       cp -R typo3conf/ext/sf_event_mgt/.git .
       php ocular.phar code-coverage:upload --format=php-clover unittest-coverage.clover
-      php ocular.phar code-coverage:upload --format=php-clover functionaltest-coverage.clover
+      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | php ocular.phar code-coverage:upload --format=php-clover {}functionaltest-coverage.clover
     fi
