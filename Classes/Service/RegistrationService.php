@@ -47,7 +47,7 @@ class RegistrationService {
 	public function handleExpiredRegistrations($delete = FALSE) {
 		$registrations = $this->registrationRepository->findExpiredRegistrations(new \DateTime());
 		if ($registrations->count() > 0) {
-			foreach($registrations as $registration) {
+			foreach ($registrations as $registration) {
 				/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
 				if ($delete) {
 					$this->registrationRepository->remove($registration);
