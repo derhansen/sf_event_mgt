@@ -1,6 +1,7 @@
 filter:
     excluded_paths:
         - 'Documentation/*'
+        - 'Tests/*'
     paths:
         - 'Classes/*'
 tools:
@@ -8,9 +9,6 @@ tools:
     external_code_coverage:
         timeout: 700
         runs: 3
-        excluded_paths:
-          - 'Documentation/*'
-          - 'Tests/*'
 
     php_cpd:
         enabled: true
