@@ -54,5 +54,5 @@ script:
       wget https://scrutinizer-ci.com/ocular.phar
       cp -R typo3conf/ext/sf_event_mgt/.git .
       php ocular.phar code-coverage:upload --format=php-clover unittest-coverage.clover
-      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | php ocular.phar code-coverage:upload --format=php-clover {}functionaltest-coverage.clover
+      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' -exec php ocular.phar code-coverage:upload --format=php-clover {}functionaltest-coverage.clover \;
     fi
