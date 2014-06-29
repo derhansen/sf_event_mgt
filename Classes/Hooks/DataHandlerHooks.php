@@ -59,7 +59,8 @@ class DataHandlerHooks {
 					'settings.notification.registrationNew.userSubject',
 					'settings.notification.registrationNew.adminSubject',
 					'settings.notification.registrationConfirmed.userSubject',
-					'settings.notification.registrationConfirmed.adminSubject'
+					'settings.notification.registrationConfirmed.adminSubject',
+					'settings.registration.requiredFields'
 				),
 			);
 
