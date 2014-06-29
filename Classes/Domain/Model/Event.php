@@ -119,6 +119,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $enableRegistration = FALSE;
 
 	/**
+	 * Link
+	 *
+	 * @var string
+	 */
+	protected $link;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -439,6 +446,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getEnableRegistration() {
 		return $this->enableRegistration;
+	}
+
+	/**
+	 * Sets the link
+	 *
+	 * @param string $link
+	 * @return void
+	 */
+	public function setLink($link) {
+		$this->link = $link;
+	}
+
+	/**
+	 * Returns the link
+	 *
+	 * @return string
+	 */
+	public function getLink() {
+		return $this->link;
 	}
 
 }

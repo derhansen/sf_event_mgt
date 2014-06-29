@@ -494,4 +494,28 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getLinkReturnsInitialValueForLink() {
+		$this->assertSame(
+			NULL,
+			$this->subject->getLink()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setLinkForStringSetsLink() {
+		$this->subject->setLink('www.domain.tld');
+
+		$this->assertAttributeEquals(
+			'www.domain.tld',
+			'link',
+			$this->subject
+		);
+	}
+
 }
