@@ -467,4 +467,51 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $this->link;
 	}
 
+	/**
+	 * Returns the uri of the link
+	 *
+	 * @return mixed
+	 */
+	public function getLinkUrl() {
+		return $this->getLinkPart(0);
+	}
+
+	/**
+	 * Returns the target of the link
+	 *
+	 * @return string
+	 */
+	public function getLinkTarget() {
+		return $this->getLinkPart(1);
+	}
+
+	/**
+	 * Returns the title of the link
+	 *
+	 * @return string
+	 */
+	public function getLinkTitle() {
+		return $this->getLinkPart(3);
+	}
+
+	/**
+	 * Splits link to an array respection that a title with more than one word is
+	 * surrounded by quotation marks. Returns part of the link for usage in fluid
+	 * viewhelpers.
+	 *
+	 * @param int $part The part
+	 * @return string
+	 */
+	public function getLinkPart($part) {
+		$linkArray = str_getcsv($this->link, ' ', '"');
+		$ret = '';
+		if (count($linkArray) >= $part) {
+			$ret = $linkArray[$part];
+		}
+		if ($ret === '-') {
+			$ret = '';
+		}
+		return $ret;
+	}
+
 }

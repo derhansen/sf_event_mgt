@@ -518,4 +518,102 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 	}
 
+	/**
+	 * Data provider for settings
+	 *
+	 * @return array
+	 */
+	public function typolinkDataprovider() {
+		return array(
+			'emptyLink' => array(
+				'',
+				1,
+				''
+			),
+			'singleDomainLink' => array(
+				'www.domain.tld',
+				0,
+				'www.domain.tld'
+			),
+			'singlePageLink' => array(
+				'1',
+				0,
+				'1'
+			),
+			'EmptyTarget' => array(
+				'www.domain.tld',
+				1,
+				''
+			),
+			'TargetNotSet' => array(
+				'www.domain.tld - Title',
+				1,
+				''
+			),
+			'DomainTarget' => array(
+				'www.domain.tld _blank',
+				1,
+				'_blank'
+			),
+			'TitleWithoutQuotationMarks' => array(
+				'www.domain.tld - - Title',
+				3,
+				'Title'
+			),
+			'TitleWithQuotationMarks' => array(
+				'www.domain.tld - - "Title of link"',
+				3,
+				'Title of link'
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 * @dataProvider typolinkDataprovider
+	 */
+	public function getTypolinkPartTest($link, $part, $expected) {
+		$this->subject->setLink($link);
+
+		$this->assertEquals(
+			$expected,
+			$this->subject->getLinkPart($part)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLinkUrlTest() {
+		$this->subject->setLink('www.domain.tld _blank');
+
+		$this->assertEquals(
+			'www.domain.tld',
+			$this->subject->getLinkUrl()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLinkTargetTest() {
+		$this->subject->setLink('www.domain.tld _blank');
+
+		$this->assertEquals(
+			'_blank',
+			$this->subject->getLinkTarget()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLinkTitleTest() {
+		$this->subject->setLink('www.domain.tld _blank - "The title"');
+
+		$this->assertEquals(
+			'The title',
+			$this->subject->getLinkTitle()
+		);
+	}
 }
