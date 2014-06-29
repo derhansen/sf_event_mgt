@@ -370,6 +370,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the event
 	 *
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
+	 * @return void
 	 */
 	public function setEvent($event) {
 		$this->event = $event;
@@ -388,6 +389,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Setter for notes
 	 *
 	 * @param string $notes
+	 * @return void
 	 */
 	public function setNotes($notes) {
 		$this->notes = $notes;
@@ -425,6 +427,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets hidden
 	 *
 	 * @param boolean $hidden
+	 * @return void
 	 */
 	public function setHidden($hidden) {
 		$this->hidden = $hidden;

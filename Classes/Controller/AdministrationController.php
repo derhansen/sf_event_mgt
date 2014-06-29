@@ -42,7 +42,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * List action for backend module
 	 *
-	 * @todo Fill demand with settings from backend module (startdate, enddate, category, etc.)
+	 * @todo Fill demand with demand from backend module
 	 * @return void
 	 */
 	public function listAction() {

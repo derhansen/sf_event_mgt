@@ -51,7 +51,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	protected $objectManager;
 
 	/**
-	 * Validates the given registration according to required fields set in plugin settings
+	 * Validates the given registration according to required fields set in plugin
+	 * settings
 	 *
 	 * @param Registration $value
 	 * @return bool

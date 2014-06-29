@@ -325,7 +325,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Removes a Registration
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove The Registration to be removed
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove
 	 * @return void
 	 */
 	public function removeRegistration(\SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove) {
@@ -364,7 +364,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Removes an image
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove The Image to be removed
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove
 	 * @return void
 	 */
 	public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove) {

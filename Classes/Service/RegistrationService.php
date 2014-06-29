@@ -38,8 +38,8 @@ class RegistrationService {
 	protected $registrationRepository;
 
 	/**
-	 * Handles expired registrations. If the $delete parameter is set, then registrations are deleted,
-	 * else just hidden
+	 * Handles expired registrations. If the $delete parameter is set, then
+	 * registrations are deleted, else just hidden
 	 *
 	 * @param bool $delete
 	 * @return void

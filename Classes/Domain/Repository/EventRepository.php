@@ -72,7 +72,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				$constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
 				break;
 			default:
-				break;
 		}
 
 		/* Category */
@@ -84,7 +83,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			}
 			if (count($categoryConstraints) > 0) {
 				$constraints[] = $query->logicalOr($categoryConstraints);
-			}		}
+			}
+		}
 
 		if (count($constraints) > 0) {
 			$query->matching($query->logicalAnd($constraints));

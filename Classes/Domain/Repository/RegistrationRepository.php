@@ -44,7 +44,8 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
-	 * Returns all registrations, where the confirmation date is less than the given date
+	 * Returns all registrations, where the confirmation date is less than the
+	 * given date
 	 *
 	 * @param \datetime $dateNow
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array

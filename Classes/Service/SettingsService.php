@@ -50,9 +50,8 @@ class SettingsService {
 
 		if ($clearCacheUids == NULL) {
 			return array();
-		} else {
-			$return = preg_split('/,/', $clearCacheUids, NULL, PREG_SPLIT_NO_EMPTY);
-			return $return;
 		}
+		$return = preg_split('/,/', $clearCacheUids, NULL, PREG_SPLIT_NO_EMPTY);
+		return $return;
 	}
 }
