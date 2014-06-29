@@ -470,7 +470,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the uri of the link
 	 *
-	 * @return mixed
+	 * @return string
 	 */
 	public function getLinkUrl() {
 		return $this->getLinkPart(0);
