@@ -59,7 +59,14 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $category;
 
-	/**
+    /**
+     * StartDate
+     *
+     * @var \DateTime
+     */
+    protected $startDate = NULL;
+
+    /**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
@@ -137,5 +144,28 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getCategory() {
 		return $this->category;
 	}
+
+    /**
+     * Set the start date
+     *
+     * @param \DateTime $startDate
+     * @return void
+     */
+    public function setStartDate($startDate)
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * Returns the start date
+     *
+     * @return \DateTime
+     */
+    public function getStartDate()
+    {
+        return $this->startDate;
+    }
+
+
 
 }
