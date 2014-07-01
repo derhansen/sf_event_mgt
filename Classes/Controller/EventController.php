@@ -139,7 +139,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Set date format for field dateOfBirth
 	 *
-	 * @param void
+	 * @return void
 	 */
 	public function initializeSaveRegistrationAction() {
 		$this->arguments->getArgument('registration')

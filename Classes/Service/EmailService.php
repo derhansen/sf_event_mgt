@@ -34,6 +34,17 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailService {
 
 	/**
+	 * @var \TYPO3\CMS\Core\Mail\MailMessage
+	 */
+	protected $mailer = NULL;
+
+	/**
+	 * Constructor - creates new instance of mailer
+	 */
+	public function __construct() {
+		$this->mailer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+	}
+	/**
 	 * Sends an e-mail
 	 *
 	 * @param string $sender The sender
@@ -45,13 +56,11 @@ class EmailService {
 	 * @return TRUE/FALSE if message is sent
 	 */
 	public function sendEmailMessage($sender, $recipient, $subject, $body, $name = NULL) {
-		/** @var $mailer \TYPO3\CMS\Core\Mail\MailMessage */
-		$mailer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-		$mailer->setFrom($sender, $name);
-		$mailer->setSubject($subject);
-		$mailer->setBody($body, 'text/html');
-		$mailer->setTo($recipient);
-		$mailer->send();
-		return $mailer->isSent();
+		$this->mailer->setFrom($sender, $name);
+		$this->mailer->setSubject($subject);
+		$this->mailer->setBody($body, 'text/html');
+		$this->mailer->setTo($recipient);
+		$this->mailer->send();
+		return $this->mailer->isSent();
 	}
 }

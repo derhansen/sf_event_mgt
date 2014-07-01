@@ -119,6 +119,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $enableRegistration = FALSE;
 
 	/**
+	 * Link
+	 *
+	 * @var string
+	 */
+	protected $link;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -325,7 +332,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Removes a Registration
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove The Registration to be removed
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove
 	 * @return void
 	 */
 	public function removeRegistration(\SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove) {
@@ -364,7 +371,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Removes an image
 	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove The Image to be removed
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove
 	 * @return void
 	 */
 	public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove) {
@@ -439,6 +446,72 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getEnableRegistration() {
 		return $this->enableRegistration;
+	}
+
+	/**
+	 * Sets the link
+	 *
+	 * @param string $link
+	 * @return void
+	 */
+	public function setLink($link) {
+		$this->link = $link;
+	}
+
+	/**
+	 * Returns the link
+	 *
+	 * @return string
+	 */
+	public function getLink() {
+		return $this->link;
+	}
+
+	/**
+	 * Returns the uri of the link
+	 *
+	 * @return string
+	 */
+	public function getLinkUrl() {
+		return $this->getLinkPart(0);
+	}
+
+	/**
+	 * Returns the target of the link
+	 *
+	 * @return string
+	 */
+	public function getLinkTarget() {
+		return $this->getLinkPart(1);
+	}
+
+	/**
+	 * Returns the title of the link
+	 *
+	 * @return string
+	 */
+	public function getLinkTitle() {
+		return $this->getLinkPart(3);
+	}
+
+	/**
+	 * Splits link to an array respection that a title with more than one word is
+	 * surrounded by quotation marks. Returns part of the link for usage in fluid
+	 * viewhelpers.
+	 *
+	 * @param int $part The part
+	 * @return string
+	 */
+	public function getLinkPart($part) {
+		$linkArray = str_getcsv($this->link, ' ', '"');
+		$ret = '';
+		if (count($linkArray) >= $part) {
+			$ret = $linkArray[$part];
+		}
+		if ($ret === '-') {
+			$ret = '';
+		}
+		return $ret;
 	}
 
 }

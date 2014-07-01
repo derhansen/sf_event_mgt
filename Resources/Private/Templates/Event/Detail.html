@@ -10,6 +10,7 @@
     <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" />: {event.maxParticipants} <br>
     <f:translate key="tx_sfeventmgt_domain_model_event.registrations" />: {event.registration->f:count()} <br>
     <f:translate key="tx_sfeventmgt_domain_model_event.price" />: {event.price} {event.currency} <br>
+    <f:translate key="tx_sfeventmgt_domain_model_event.link" />: <f:link.page pageUid="{event.linkUrl}" target="{event.linkTarget}" title="{event.linkTitle}"><f:translate key="tx_sfeventmgt_domain_model_event.link" /></f:link.page> <br>
     <f:translate key="tx_sfeventmgt_domain_model_event.image" />
     <f:for each="{event.image}" as="image">
         <f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.eventDetails.imageWidth}" height="{settings.eventDetails.imageHeight}" />

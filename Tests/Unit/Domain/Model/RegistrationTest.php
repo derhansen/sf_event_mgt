@@ -258,6 +258,14 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function isConfirmedReturnsConfirmedState() {
+		$this->subject->setConfirmed(TRUE);
+		$this->assertTrue($this->subject->isConfirmed());
+	}
+
+	/**
+	 * @test
+	 */
 	public function getPaidReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			FALSE,
@@ -276,6 +284,21 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'paid',
 			$this->subject
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPaidReturnsPaidState() {
+		$this->subject->setPaid(TRUE);
+		$this->assertTrue($this->subject->isPaid());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getNotesReturnsInitialValueForString() {
+		$this->assertSame('', $this->subject->getNotes());
 	}
 
 	/**
@@ -303,6 +326,13 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getConfirmationUntilReturnsInitialValueForDateTime() {
+		$this->assertSame(NULL, $this->subject->getConfirmationUntil());
+	}
+
+	/**
+	 * @test
+	 */
 	public function setConfirmationUntilForDateTimeSetsConfirmationUntil() {
 		$dateTimeFixture = new \DateTime();
 		$this->subject->setConfirmationUntil($dateTimeFixture);
@@ -312,6 +342,13 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'confirmationUntil',
 			$this->subject
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getDateOfBirthReturnsInitialValueForDateTime() {
+		$this->assertNull($this->subject->getDateOfBirth());
 	}
 
 	/**
@@ -336,6 +373,14 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			FALSE,
 			$this->subject->getHidden()
 		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setHiddenSetsHiddenFlag() {
+		$this->subject->setHidden(TRUE);
+		$this->assertTrue($this->subject->getHidden());
 	}
 
 }

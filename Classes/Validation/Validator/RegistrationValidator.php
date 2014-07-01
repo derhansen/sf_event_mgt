@@ -51,7 +51,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	protected $objectManager;
 
 	/**
-	 * Validates the given registration according to required fields set in plugin settings
+	 * Validates the given registration according to required fields set in plugin
+	 * settings
 	 *
 	 * @param Registration $value
 	 * @return bool
@@ -72,7 +73,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 		$requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields']));
 		$result = TRUE;
 
-		foreach($requiredFields as $requiredField) {
+		foreach ($requiredFields as $requiredField) {
 			if ($value->_hasProperty($requiredField)) {
 				/** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
 				$validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');

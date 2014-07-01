@@ -87,7 +87,6 @@ class NotificationService {
 				break;
 			case MessageType::REGISTRATION_NEW:
 			default:
-				break;
 		}
 
 		if (is_null($event) || is_null($registration || !is_array($settings))) {
@@ -104,9 +103,8 @@ class NotificationService {
 				$body,
 				$settings['notification']['senderName']
 			);
-		} else {
-			return FALSE;
 		}
+		return FALSE;
 	}
 
 	/**
@@ -129,7 +127,6 @@ class NotificationService {
 				break;
 			case MessageType::REGISTRATION_NEW:
 			default:
-				break;
 		}
 
 		if (is_null($event) || is_null($registration || !is_array($settings))) {
@@ -146,9 +143,8 @@ class NotificationService {
 				$body,
 				$settings['notification']['senderName']
 			);
-		} else {
-			return FALSE;
 		}
+		return FALSE;
 	}
 
 	/**

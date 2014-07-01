@@ -34,8 +34,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class DataHandlerHooks {
 
 	/**
-	 * Checks if the fields defined in $checkFields are set in the data-array of pi_flexform. If a field is
-	 * present and contains an empty value, the field is unset.
+	 * Checks if the fields defined in $checkFields are set in the data-array of pi_flexform.
+	 * If a field is present and contains an empty value, the field is unset.
 	 *
 	 * Structure of the checkFields array:
 	 *
@@ -59,14 +59,15 @@ class DataHandlerHooks {
 					'settings.notification.registrationNew.userSubject',
 					'settings.notification.registrationNew.adminSubject',
 					'settings.notification.registrationConfirmed.userSubject',
-					'settings.notification.registrationConfirmed.adminSubject'
+					'settings.notification.registrationConfirmed.adminSubject',
+					'settings.registration.requiredFields'
 				),
 			);
 
 			$flexformData =  GeneralUtility::xml2array($fieldArray['pi_flexform']);
 
 			foreach ($checkFields as $sheet => $fields) {
-				foreach($fields as $field) {
+				foreach ($fields as $field) {
 					if (isset($flexformData['data'][$sheet]['lDEF'][$field]['vDEF']) &&
 						$flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === '') {
 						unset($flexformData['data'][$sheet]['lDEF'][$field]);

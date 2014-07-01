@@ -12,6 +12,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
+				<source>Link</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.startdate">
 				<source>Startdate</source>
 			</trans-unit>

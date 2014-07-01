@@ -47,7 +47,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * Setup
 	 *
-	 * @retun void
+	 * @return void
 	 */
 	public function setup() {
 		$this->validator = $this->getMock($this->validatorClassName, array('translateErrorMessage'));

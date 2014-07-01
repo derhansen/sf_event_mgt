@@ -92,6 +92,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
+	 */
+	public function sendUserMessageReturnsFalseIfInvalidArgumentsGiven() {
+		$result = $this->subject->sendUserMessage(NULL, NULL, NULL, MessageType::REGISTRATION_NEW);
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * @test
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
@@ -259,6 +268,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'hashService', $hashService);
 
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function sendAdminMessageReturnsFalseIfInvalidArgumentsGiven() {
+		$result = $this->subject->sendAdminMessage(NULL, NULL, NULL, MessageType::REGISTRATION_NEW);
 		$this->assertFalse($result);
 	}
 

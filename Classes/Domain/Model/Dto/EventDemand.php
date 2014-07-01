@@ -63,6 +63,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
+	 * @return void
 	 */
 	public function setDisplayMode($displayMode) {
 		$this->displayMode = $displayMode;
@@ -81,6 +82,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the storage page
 	 *
 	 * @param string $storagePage
+	 * @return void
 	 */
 	public function setStoragePage($storagePage) {
 		$this->storagePage = $storagePage;
@@ -99,6 +101,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Sets the current DateTime
 	 *
 	 * @param \DateTime $currentDateTime
+	 * @return void
 	 */
 	public function setCurrentDateTime($currentDateTime) {
 		$this->currentDateTime = $currentDateTime;
@@ -112,9 +115,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getCurrentDateTime() {
 		if ($this->currentDateTime != NULL) {
 			return $this->currentDateTime;
-		} else {
-			return new \DateTime;
 		}
+		return new \DateTime;
 	}
 
 	/**
@@ -131,7 +133,6 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Returns the category (seperated by comma)
 	 *
 	 * @return string
-	 * @return void
 	 */
 	public function getCategory() {
 		return $this->category;
