@@ -5,17 +5,25 @@
         <uid>1</uid>
         <pid>1</pid>
         <title>findRecordsByUid</title>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
     <!-- findRecordsByStoragePage -->
     <tx_sfeventmgt_domain_model_event>
         <pid>3</pid>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <tx_sfeventmgt_domain_model_event>
         <pid>3</pid>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <tx_sfeventmgt_domain_model_event>
         <pid>3</pid>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
     <!-- findRecordsByDisplayMode -->
@@ -24,24 +32,32 @@
         <pid>4</pid>
         <startdate>1401444000</startdate>
         <enddate>1401451200</enddate>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- 20.05.2014 10:00 - 20.05.2014 14:00 -->
     <tx_sfeventmgt_domain_model_event>
         <pid>4</pid>
         <startdate>1400580000</startdate>
         <enddate>1400594400</enddate>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
     <tx_sfeventmgt_domain_model_event>
         <pid>4</pid>
         <startdate>1401616800</startdate>
         <enddate>1401624000</enddate>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- 01.06.2014 10:00 - 02.06.2014 10:00 -->
     <tx_sfeventmgt_domain_model_event>
         <pid>4</pid>
         <startdate>1401616800</startdate>
         <enddate>1401703200</enddate>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
     <!-- findRecordsByCategory -->
@@ -49,16 +65,22 @@
     <tx_sfeventmgt_domain_model_event>
         <uid>10</uid>
         <pid>5</pid>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- has 1 categories (4)-->
     <tx_sfeventmgt_domain_model_event>
         <uid>11</uid>
         <pid>5</pid>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- has 2 categories (2,3) -->
     <tx_sfeventmgt_domain_model_event>
         <uid>12</uid>
         <pid>5</pid>
+        <description>test</description>
+        <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
     <tx_sfeventmgt_domain_model_category>
