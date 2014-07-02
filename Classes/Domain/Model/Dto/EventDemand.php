@@ -59,28 +59,28 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $category;
 
-    /**
-     * StartDate
-     *
-     * @var \DateTime
-     */
-    protected $startDate = NULL;
+	/**
+	 * StartDate
+	 *
+	 * @var \DateTime
+	 */
+	protected $startDate = NULL;
 
-    /**
-     * EndDate
-     *
-     * @var \DateTime
-     */
-    protected $endDate = NULL;
+	/**
+	 * EndDate
+	 *
+	 * @var \DateTime
+	 */
+	protected $endDate = NULL;
 
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title = '';
+	/**
+	 * Title
+	 *
+	 * @var string
+	 */
+	protected $title = '';
 
-    /**
+	/**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
@@ -159,71 +159,61 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $this->category;
 	}
 
-    /**
-     * Set the start date
-     *
-     * @param \DateTime $startDate
-     * @return void
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-    }
+	/**
+	 * Set the start date
+	 *
+	 * @param \DateTime $startDate
+	 * @return void
+	 */
+	public function setStartDate($startDate) {
+		$this->startDate = $startDate;
+	}
 
-    /**
-     * Returns the start date
-     *
-     * @return \DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
+	/**
+	 * Returns the start date
+	 *
+	 * @return \DateTime
+	 */
+	public function getStartDate() {
+		return $this->startDate;
+	}
 
-    /**
-     * Set the end date
-     *
-     * @param \DateTime $endDate
-     * @return void
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-    }
+	/**
+	 * Set the end date
+	 *
+	 * @param \DateTime $endDate
+	 * @return void
+	 */
+	public function setEndDate($endDate) {
+		$this->endDate = $endDate;
+	}
 
-    /**
-     * Get the end date
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
+	/**
+	 * Get the end date
+	 * @return \DateTime
+	 */
+	public function getEndDate() {
+		return $this->endDate;
+	}
 
-    /**
-     * Set the title
-     *
-     * @param string $title
-     * @return void
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
+	/**
+	 * Set the title
+	 *
+	 * @param string $title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
 
-    /**
-     * Get the title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-
-
-
+	/**
+	 * Get the title
+	 *
+	 * @return string
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
 
 
 }
