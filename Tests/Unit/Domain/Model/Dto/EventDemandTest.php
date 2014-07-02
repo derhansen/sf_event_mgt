@@ -156,4 +156,46 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
             $this->subject->getStartDate()
         );
     }
+
+    /**
+     * @test
+     */
+    public function getEndDateReturnsNullIfNoValueSet() {
+        $this->assertSame(
+            NULL,
+            $this->subject->getEndDate()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getEndDateReturnsGivenValueIfValueSet() {
+        $this->subject->setEndDate(new \DateTime('01.01.2014 10:00:00'));
+        $this->assertEquals(
+            new \DateTime('01.01.2014 10:00:00'),
+            $this->subject->getEndDate()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getTitleReturnsEmptyStringIfNoValueSet() {
+        $this->assertSame(
+            '',
+            $this->subject->getTitle()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getTitleReturnsGivenValueIfValueSet() {
+        $this->subject->setTitle('test title');
+        $this->assertEquals(
+            'test title',
+            $this->subject->getTitle()
+        );
+    }
 }
