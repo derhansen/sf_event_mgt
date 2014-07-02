@@ -86,6 +86,22 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			}
 		}
 
+		/* StartDate */
+		if($eventDemand->getStartDate() !== NULL) {
+			$constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getStartDate());
+		}
+
+		/* EndDate */
+		if($eventDemand->getEndDate() !== NULL) {
+			$constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getEndDate());
+		}
+
+		/* Title */
+		if($eventDemand->getEndDate() !== '') {
+			$constraints[] = $query->like('title', '%' . $eventDemand->getTitle() . '%', FALSE);
+		}
+
+
 		if (count($constraints) > 0) {
 			$query->matching($query->logicalAnd($constraints));
 		}
