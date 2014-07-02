@@ -79,7 +79,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			$categoryConstraints = array();
 			$categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), TRUE);
 			foreach ($categories as $category) {
-				$categoryConstraints[]  = $query->contains('category', $category);
+				$categoryConstraints[] = $query->contains('category', $category);
 			}
 			if (count($categoryConstraints) > 0) {
 				$constraints[] = $query->logicalOr($categoryConstraints);
@@ -87,20 +87,19 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 
 		/* StartDate */
-		if($eventDemand->getStartDate() !== NULL) {
+		if ($eventDemand->getStartDate() !== NULL) {
 			$constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getStartDate());
 		}
 
 		/* EndDate */
-		if($eventDemand->getEndDate() !== NULL) {
+		if ($eventDemand->getEndDate() !== NULL) {
 			$constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getEndDate());
 		}
 
 		/* Title */
-		if($eventDemand->getEndDate() !== '') {
+		if ($eventDemand->getEndDate() !== '') {
 			$constraints[] = $query->like('title', '%' . $eventDemand->getTitle() . '%', FALSE);
 		}
-
 
 		if (count($constraints) > 0) {
 			$query->matching($query->logicalAnd($constraints));
