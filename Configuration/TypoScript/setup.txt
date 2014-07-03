@@ -51,5 +51,8 @@ plugin.tx_sfeventmgt {
 module.tx_sfeventmgt {
 	settings {
 		csvExportFields = {$module.tx_sfeventmgt.settings.csvExportFields}
+		list {
+			itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}
+		}
 	}
 }
