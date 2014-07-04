@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z"
+		  product-name="sf_event_mgt">
 		<header/>
 		<body>
 			<trans-unit id="flexforms_tab.settings">
@@ -49,7 +50,9 @@
 				<source>Show only past events</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.requiredFields">
-				<source>Comma seperated list of fieldnames, which are required. The fields firstname, lastname and email are always required and cannot be overridden</source>
+				<source>Comma seperated list of fieldnames, which are required. The fields firstname, lastname and email
+					are always required and cannot be overridden
+				</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>E-Mail address of e-mails sent to the user</source>
@@ -76,8 +79,8 @@
 				<source>Event Administration</source>
 			</trans-unit>
 			<trans-unit id="administration.newEvent">
-            	<source>Create new event</source>
-            </trans-unit>
+				<source>Create new event</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
