@@ -32,7 +32,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Controller;
 class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Controller\EventController
+	 * @var \SKYFILLERS\SfEventMgt\Controller\AdministrationController | \PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected $subject = NULL;
 
@@ -42,7 +42,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = $this->getMock('SKYFILLERS\\SfEventMgt\\Controller\\AdministrationController', array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Controller\\AdministrationController', array('redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getCurrentPageUid'), array(), '', FALSE);
 	}
 
 	/**
@@ -78,4 +78,22 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->listAction();
 	}
 
+	/**
+	 * @test
+	 */
+	public function newActionRedirectsToExpectedUrl() {
+		$expected = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][0]=new&returnUrl=mod.php' .
+			'%3FM%3Dweb_SfEventMgtTxSfeventmgtM1%26id%3D0%26moduleToken%3DdummyToken';
+		$this->subject->expects($this->once())->method('redirectToUri')->with($expected);
+		$this->subject->expects($this->any())->method('getCurrentPageUid')->will($this->returnValue(0));
+		$this->subject->newEventAction();
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCurrentPageUidReturnsExpectedUid() {
+		$this->subject->expects($this->once())->method('getCurrentPageUid')->will($this->returnValue(11));
+		$this->assertSame(11, $this->subject->_call('getCurrentPageUid'));
+	}
 }
