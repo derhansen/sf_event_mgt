@@ -40,6 +40,23 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $eventRepository = NULL;
 
 	/**
+	 * Page uid
+	 *
+	 * @var integer
+	 */
+	protected $pageUid = 0;
+
+	/**
+	 * Function will be called before every other action
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+		$this->pageUid = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
+		parent::initializeAction();
+	}
+
+	/**
 	 * List action for backend module
 	 *
 	 * @todo Fill demand with demand from backend module
@@ -49,5 +66,38 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$events = $this->eventRepository->findDemanded($demand);
 		$this->view->assign('events', $events);
+	}
+
+	/**
+	 * Add an event in backend module
+	 *
+	 * @return void
+	 */
+	public function newEventAction() {
+		$this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_event');
+	}
+
+	/**
+	 * Redirect to tceform creating a new record
+	 *
+	 * @param string $table table name
+	 * @return void
+	 */
+	private function redirectToCreateNewRecord($table) {
+		$pid = $this->pageUid;
+
+		$returnUrl = 'mod.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $this->pageUid . $this->getToken();
+		$url = 'alt_doc.php?edit[' . $table . '][' . $pid . ']=new&returnUrl=' . urlencode($returnUrl);
+
+		\TYPO3\CMS\Core\Utility\HttpUtility::redirect($url);
+	}
+
+	/**
+	 * Get a CSRF token
+	 *
+	 * @return string
+	 */
+	protected function getToken() {
+		return '&moduleToken=' . \TYPO3\CMS\Core\FormProtection\FormProtectionFactory::get()->generateToken('moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
 	}
 }
