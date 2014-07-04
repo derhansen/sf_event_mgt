@@ -97,7 +97,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		}
 
 		/* Title */
-		if ($eventDemand->getEndDate() !== '') {
+		if ($eventDemand->getTitle() !== '') {
 			$constraints[] = $query->like('title', '%' . $eventDemand->getTitle() . '%', FALSE);
 		}
 
