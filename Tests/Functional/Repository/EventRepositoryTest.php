@@ -148,4 +148,55 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 		$demand->setCategory('1,2,3,4');
 		$this->assertEquals(3, $this->eventRepository->findDemanded($demand)->count());
 	}
+
+	/**
+	 * Test if startDate restriction in demand works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByStartDate() {
+		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(6);
+
+		$demand->setStartDate(new \DateTime('30.05.2014 14:00:00'));
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals(2, $events->count());
+	}
+
+	/**
+	 * Test if endDate restriction in demand works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByEndDate() {
+		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(7);
+
+		$demand->setEndDate(new \DateTime('02.06.2014 08:00'));
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals(2, $events->count());
+	}
+
+	/**
+	 * Test if title restriction in demand works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByTitle() {
+		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(8);
+
+		$demand->setTitle('TYPO3 CMS course');
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals(2, $events->count());
+	}
 }

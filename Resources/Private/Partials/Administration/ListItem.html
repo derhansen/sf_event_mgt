@@ -1,6 +1,8 @@
 <tr class="db_list_normal">
     <td class="title">
-        {event.title}
+        <a href="" title="UID: {event.uid}" onclick="window.location.href='alt_doc.php?returnUrl='+T3_THIS_LOCATION+'&edit[tx_sfeventmgt_domain_model_event][{event.uid}]=edit'; return false;">
+            {event.title}
+        </a>
     </td>
     <td class="startdate">
         <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date>

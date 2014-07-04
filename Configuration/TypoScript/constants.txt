@@ -41,5 +41,8 @@ module.tx_sfeventmgt {
 	settings {
 		# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
 		csvExportFields = uid, firstname, lastname, email
+		list {
+			itemsPerPage = 10
+		}
 	}
 }
