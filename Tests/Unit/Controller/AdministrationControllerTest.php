@@ -42,7 +42,8 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Controller\\AdministrationController', array('redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getCurrentPageUid'), array(), '', FALSE);
+		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Controller\\AdministrationController',
+			array('redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getCurrentPageUid'), array(), '', FALSE);
 	}
 
 	/**
@@ -56,8 +57,18 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
-	public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView() {
+	public function initializeActionAssignsDefaultPid() {
+		$this->subject->initializeAction();
+		$this->assertSame(0, $this->subject->_get('pid'));
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function listActionFetchesEventsFromRepositoryForNoStoragePageAndAssignsThemToView() {
 		$demand = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
@@ -80,6 +91,36 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
+	 */
+	public function listActionFetchesAllEventsForGivenStoragePidAndAssignsThemToView() {
+		$this->subject->_set('pid', 1);
+
+		$demand = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+			array(), array(), '', FALSE);
+		$demand->expects($this->once())->method('setStoragePage')->with(1);
+		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array('get'), array(), '', FALSE);
+		$objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+			array('findDemanded'), array(), '', FALSE);
+		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+		$this->inject($this->subject, 'eventRepository', $eventRepository);
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->once())->method('assign')->with('events', $allEvents);
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->listAction();
+	}
+
+	/**
+	 * @test
+	 * @return void
 	 */
 	public function newActionRedirectsToExpectedUrl() {
 		$expected = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][0]=new&returnUrl=mod.php' .
@@ -89,11 +130,4 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->newEventAction();
 	}
 
-	/**
-	 * @test
-	 */
-	public function getCurrentPageUidReturnsExpectedUid() {
-		$this->subject->expects($this->once())->method('getCurrentPageUid')->will($this->returnValue(11));
-		$this->assertSame(11, $this->subject->_call('getCurrentPageUid'));
-	}
 }

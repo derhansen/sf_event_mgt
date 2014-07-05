@@ -39,6 +39,17 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 */
 	protected $eventRepository = NULL;
 
+	protected $pid = 0;
+
+	/**
+	 * Initialize action
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+		$this->pid = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
+	}
+
 	/**
 	 * List action for backend module
 	 *
@@ -46,7 +57,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function listAction() {
+		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		if ($this->pid > 0) {
+			$demand->setStoragePage($this->pid);
+		}
 		$events = $this->eventRepository->findDemanded($demand);
 		$this->view->assign('events', $events);
 	}
@@ -57,12 +72,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function newEventAction() {
-		$pageUid = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
 		$token = '&moduleToken=' . \TYPO3\CMS\Core\FormProtection\FormProtectionFactory::get()->generateToken(
 				'moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
 
-		$returnUrl = 'mod.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $pageUid . $token;
-		$url = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][' . $pageUid .
+		$returnUrl = 'mod.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $this->pid . $token;
+		$url = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][' . $this->pid .
 			']=new&returnUrl=' . urlencode($returnUrl);
 		$this->redirectToUri($url);
 	}
