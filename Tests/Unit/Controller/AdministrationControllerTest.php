@@ -59,7 +59,8 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
-	public function initializeActionAssignsDefaultPid() {
+	public function initializeActionAssignsPid() {
+		$this->subject->_set('pid', 1);
 		$this->subject->initializeAction();
 		$this->assertSame(0, $this->subject->_get('pid'));
 	}
