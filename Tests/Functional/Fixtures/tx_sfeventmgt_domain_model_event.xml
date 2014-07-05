@@ -82,85 +82,6 @@
         <description>test</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
-    <!-- findRecordsByStartDate -->
-    <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>13</uid>
-        <pid>6</pid>
-        <description>test</description>
-        <link>link</link>
-        <startdate>1401444000</startdate>
-        <enddate>1401451200</enddate>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>14</uid>
-        <pid>6</pid>
-        <description>test</description>
-        <link>link</link>
-        <startdate>1401616800</startdate>
-        <enddate>1401624000</enddate>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- 01.06.2014 10:00 - 02.06.2014 10:00 -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>15</uid>
-        <pid>6</pid>
-        <description>test</description>
-        <link>link</link>
-        <startdate>1401616800</startdate>
-        <enddate>1401703200</enddate>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- findRecordsByEndDate -->
-    <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>16</uid>
-        <pid>7</pid>
-        <description>test</description>
-        <link>link</link>
-        <startdate>1401444000</startdate>
-        <enddate>1401451200</enddate>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>17</uid>
-        <pid>7</pid>
-        <description>test</description>
-        <link>link</link>
-        <startdate>1401616800</startdate>
-        <enddate>1401624000</enddate>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- 01.06.2014 10:00 - 02.06.2014 10:00 -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>18</uid>
-        <pid>7</pid>
-        <description>test</description>
-        <link>link</link>
-        <startdate>1401616800</startdate>
-        <enddate>1401703200</enddate>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- findRecordsByTitle -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>19</uid>
-        <pid>8</pid>
-        <title>TYPO3 CMS course in Flensburg</title>
-        <description>test</description>
-        <link>link</link>
-    </tx_sfeventmgt_domain_model_event>
-    <tx_sfeventmgt_domain_model_event>
-        <uid>20</uid>
-        <pid>8</pid>
-        <title>Next TYPO3 CMS course in Kopenhagen</title>
-        <description>test</description>
-        <link>link</link>
-    </tx_sfeventmgt_domain_model_event>
-    <tx_sfeventmgt_domain_model_event>
-        <uid>21</uid>
-        <pid>8</pid>
-        <title>TYPO3 Neos course in Hamburg</title>
-        <description>test</description>
-        <link>link</link>
-    </tx_sfeventmgt_domain_model_event>
-
 
     <tx_sfeventmgt_domain_model_category>
         <uid>1</uid>
@@ -197,4 +118,84 @@
         <uid_foreign>3</uid_foreign>
     </tx_sfeventmgt_event_category_mm>
 
+    <!-- findRecordsByStartDate -->
+    <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>13</uid>
+        <pid>6</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401444000</startdate>
+        <enddate>1401451200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>14</uid>
+        <pid>6</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401616800</startdate>
+        <enddate>1401624000</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 01.06.2014 10:00 - 02.06.2014 10:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>15</uid>
+        <pid>6</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401616800</startdate>
+        <enddate>1401703200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+
+    <!-- findRecordsByEndDate -->
+    <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>16</uid>
+        <pid>7</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401444000</startdate>
+        <enddate>1401451200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>17</uid>
+        <pid>7</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401616800</startdate>
+        <enddate>1401624000</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 01.06.2014 10:00 - 02.06.2014 10:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>18</uid>
+        <pid>7</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401616800</startdate>
+        <enddate>1401703200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+
+    <!-- findRecordsByTitle -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>19</uid>
+        <pid>8</pid>
+        <title>TYPO3 CMS course in Flensburg</title>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>20</uid>
+        <pid>8</pid>
+        <title>Next TYPO3 CMS course in Kopenhagen</title>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>21</uid>
+        <pid>8</pid>
+        <title>TYPO3 Neos course in Hamburg</title>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
 </dataset>
