@@ -144,6 +144,9 @@
 			<trans-unit id="label.true">
 				<source>True</source>
 			</trans-unit>
+			<trans-unit id="admin.no_events_available">
+				<source>No events available</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
