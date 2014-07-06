@@ -40,16 +40,27 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected $subject = NULL;
 
+	/**
+	 * Setup
+	 *
+	 * @return void
+	 */
 	protected function setUp() {
 		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
 	}
 
+	/**
+	 * Teardown
+	 *
+	 * @return void
+	 */
 	protected function tearDown() {
 		unset($this->subject);
 	}
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getFirstnameReturnsInitialValueForString() {
 		$this->assertSame(
@@ -60,6 +71,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setFirstnameForStringSetsFirstname() {
 		$this->subject->setFirstname('Conceived at T3CON10');
@@ -73,6 +85,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getLastnameReturnsInitialValueForString() {
 		$this->assertSame(
@@ -83,6 +96,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setLastnameForStringSetsLastname() {
 		$this->subject->setLastname('Conceived at T3CON10');
@@ -96,6 +110,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getAddressReturnsInitialValueForString() {
 		$this->assertSame(
@@ -106,6 +121,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setAddressForStringSetsAddress() {
 		$this->subject->setAddress('Conceived at T3CON10');
@@ -119,6 +135,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getZipReturnsInitialValueForInteger() {
 		$this->assertSame(
@@ -129,6 +146,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setZipForIntegerSetsZip() {
 		$this->subject->setZip(12);
@@ -142,6 +160,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getCityReturnsInitialValueForString() {
 		$this->assertSame(
@@ -152,6 +171,18 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
+	 */
+	public function getCountryReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getCountry()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
 	 */
 	public function setCityForStringSetsCity() {
 		$this->subject->setCity('Conceived at T3CON10');
@@ -165,6 +196,21 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
+	 */
+	public function setCountryForStringSetsCountry() {
+		$this->subject->setCountry('A country');
+
+		$this->assertAttributeEquals(
+			'A country',
+			'country',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
 	 */
 	public function getPhoneReturnsInitialValueForString() {
 		$this->assertSame(
@@ -175,6 +221,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setPhoneForStringSetsPhone() {
 		$this->subject->setPhone('Conceived at T3CON10');
@@ -188,6 +235,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getEmailReturnsInitialValueForString() {
 		$this->assertSame(
@@ -198,6 +246,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setEmailForStringSetsEmail() {
 		$this->subject->setEmail('Conceived at T3CON10');
@@ -211,6 +260,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getGenderReturnsInitialValueForString() {
 		$this->assertSame(
@@ -221,6 +271,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setGenderForStringSetsGender() {
 		$this->subject->setGender('m');
@@ -234,6 +285,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getConfirmedReturnsInitialValueForBoolean() {
 		$this->assertSame(
@@ -244,6 +296,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setConfirmedForBooleanSetsConfirmed() {
 		$this->subject->setConfirmed(TRUE);
@@ -257,6 +310,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function isConfirmedReturnsConfirmedState() {
 		$this->subject->setConfirmed(TRUE);
@@ -265,6 +319,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getPaidReturnsInitialValueForBoolean() {
 		$this->assertSame(
@@ -275,6 +330,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setPaidForBooleanSetsPaid() {
 		$this->subject->setPaid(TRUE);
@@ -288,6 +344,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function isPaidReturnsPaidState() {
 		$this->subject->setPaid(TRUE);
@@ -296,6 +353,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getNotesReturnsInitialValueForString() {
 		$this->assertSame('', $this->subject->getNotes());
@@ -303,6 +361,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setNotesForStringSetsNotes() {
 		$this->subject->setNotes('This is a longer text');
@@ -316,6 +375,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setEventForEventSetsEvent() {
 		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
@@ -325,6 +385,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getConfirmationUntilReturnsInitialValueForDateTime() {
 		$this->assertSame(NULL, $this->subject->getConfirmationUntil());
@@ -332,6 +393,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setConfirmationUntilForDateTimeSetsConfirmationUntil() {
 		$dateTimeFixture = new \DateTime();
@@ -346,6 +408,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getDateOfBirthReturnsInitialValueForDateTime() {
 		$this->assertNull($this->subject->getDateOfBirth());
@@ -353,6 +416,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setDateOfBirthForDateTimeSetsDateOfBirth() {
 		$dateTimeFixture = new \DateTime();
@@ -367,6 +431,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function getHiddenReturnsInitialValueForBoolean() {
 		$this->assertSame(
@@ -377,6 +442,7 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function setHiddenSetsHiddenFlag() {
 		$this->subject->setHidden(TRUE);

@@ -72,6 +72,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.city">
 				<source>City</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.country">
+				<source>Country</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.phone">
 				<source>Phone</source>
 			</trans-unit>

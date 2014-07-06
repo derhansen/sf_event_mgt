@@ -36,6 +36,10 @@
             <f:form.textfield id="city" property="city"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.city'}"/>
 
+            <label for="country"><f:translate key="tx_sfeventmgt_domain_model_registration.country" /></label>
+            <f:form.textfield id="country" property="country"/><br>
+            <f:render partial="FormErrors" arguments="{field: 'registration.country'}"/>
+
             <label for="email"><f:translate key="tx_sfeventmgt_domain_model_registration.email" /></label>
             <f:form.textfield id="email" property="email"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.email'}"/>

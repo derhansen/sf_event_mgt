@@ -71,6 +71,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $city = '';
 
 	/**
+	 * Country
+	 *
+	 * @var string
+	 */
+	protected $country = '';
+
+	/**
 	 * Phone
 	 *
 	 * @var string
@@ -232,6 +239,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setCity($city) {
 		$this->city = $city;
+	}
+
+	/**
+	 * Returns the country
+	 *
+	 * @return string $country
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
+
+	/**
+	 * Sets the country
+	 *
+	 * @param string $country
+	 * @return void
+	 */
+	public function setCountry($country) {
+		$this->country = $country;
 	}
 
 	/**

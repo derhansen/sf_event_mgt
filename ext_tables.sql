@@ -146,6 +146,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	address varchar(255) DEFAULT '' NOT NULL,
 	zip int(11) DEFAULT '0' NOT NULL,
 	city varchar(255) DEFAULT '' NOT NULL,
+	country varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	gender varchar(1) DEFAULT '' NOT NULL,
