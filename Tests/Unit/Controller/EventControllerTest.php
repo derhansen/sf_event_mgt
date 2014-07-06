@@ -44,7 +44,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = $this->getMock('SKYFILLERS\\SfEventMgt\\Controller\\EventController', array('redirect', 'forward', 'addFlashMessage', 'createDemandObjectFromSettings'), array(), '', FALSE);
+		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Controller\\EventController',
+			array('redirect', 'forward', 'addFlashMessage', 'createDemandObjectFromSettings'), array(), '', FALSE);
 	}
 
 	/**
@@ -58,6 +59,74 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
+	 */
+	public function createDemandObjectFromSettingsCreated() {
+		$mockController = $this->getMock('SKYFILLERS\\SfEventMgt\\Controller\\EventController',
+			array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+
+		$settings = array(
+			'displayMode' => 'all',
+			'storagePage' => 1,
+			'category' => 10
+		);
+
+		$mockDemand = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+			array(), array(), '', FALSE);
+		$mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
+		$mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
+		$mockDemand->expects($this->at(2))->method('setCategory')->with(10);
+
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
+		$this->inject($mockController, 'objectManager', $objectManager);
+
+		$mockController->createDemandObjectFromSettings($settings);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function initializeSaveRegistrationActionSetsDateFormat() {
+		$settings = array(
+			'registration' => array(
+				'formatDateOfBirth' => 'd.m.Y'
+			)
+		);
+
+		$mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+			array(), array(), '', FALSE);
+		$mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
+			$this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
+			$this->equalTo('dateFormat'),
+			$this->equalTo('d.m.Y')
+		);
+
+		$mockDateOfBirthPmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+			array(), array(), '', FALSE);
+		$mockDateOfBirthPmConfig->expects($this->once())->method('forProperty')->with('dateOfBirth')->will(
+			$this->returnValue($mockPropertyMapperConfig));
+
+		$mockRegistrationArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
+			array(), array(), '', FALSE);
+		$mockRegistrationArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
+			$this->returnValue($mockDateOfBirthPmConfig));
+
+		$mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
+			array(), array(), '', FALSE);
+		$mockArguments->expects($this->at(0))->method('getArgument')->with('registration')->will(
+			$this->returnValue($mockRegistrationArgument));
+
+		$this->subject->_set('arguments', $mockArguments);
+		$this->subject->_set('settings', $settings);
+		$this->subject->initializeSaveRegistrationAction();
+	}
+
+	/**
+	 * @test
+	 * @return void
 	 */
 	public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView() {
 		$demand = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
@@ -83,6 +152,35 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
+	 */
+	public function detailActionAssignsEventToView() {
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->once())->method('assign')->with('event', $event);
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->detailAction($event);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function registrationActionAssignsEventToView() {
+		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->once())->method('assign')->with('event', $event);
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->registrationAction($event);
+	}
+
+	/**
+	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationDisabled() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
@@ -101,6 +199,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfEventExpired() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
@@ -120,6 +219,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfMaxParticipantsReached() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
@@ -144,6 +244,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationSuccessful() {
 		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration', array(),
@@ -199,6 +300,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfEventExpired() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -211,6 +313,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfEventFull() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -223,6 +326,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationSuccessful() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -235,6 +339,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationNotEnabled() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -247,8 +352,22 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
-	public function confirmRegistrationActionShowsExpectedMessageIfInvalidHMAC() {
+	public function saveRegistrationResultActionShowsNoMessageIfUnknownResultGiven() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'');
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->saveRegistrationResultAction(-1);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function confirmRegistrationActionShowsExpectedMessageIfInvalidHmac() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->once())->method('assign')->with('messageKey',
 			'event.message.confirmation_failed_wrong_hmac');
@@ -264,6 +383,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfRegistrationNotFound() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -286,6 +406,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationUntilExpired() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -312,6 +433,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationAlreadyConfirmed() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
@@ -339,6 +461,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @return void
 	 */
 	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationSuccessful() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
