@@ -54,5 +54,8 @@ module.tx_sfeventmgt {
 		list {
 			itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}
 		}
+		search {
+			dateFormat = {$module.tx_sfeventmgt.settings.search.dateFormat}
+		}
 	}
 }

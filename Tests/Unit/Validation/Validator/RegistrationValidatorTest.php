@@ -25,8 +25,6 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Validation\Validator;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * Test case for class SKYFILLERS\SfEventMgt\Validation\Validator\RegistrationValidator.
  *

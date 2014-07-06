@@ -43,7 +43,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected function setUp() {
 		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Controller\\AdministrationController',
-			array('redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getCurrentPageUid'), array(), '', FALSE);
+			array('redirect', 'forward', 'addFlashMessage', 'redirectToUri'), array(), '', FALSE);
 	}
 
 	/**
@@ -84,10 +84,32 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(1))->method('assign')->with('demand', $demand);
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->listAction();
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function listActionFetchesEventsFromRepositoryForNoStoragePageAndGivenDemandAndAssignsThemToView() {
+		$demand = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+
+		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+			array('findDemanded'), array(), '', FALSE);
+		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+		$this->inject($this->subject, 'eventRepository', $eventRepository);
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(1))->method('assign')->with('demand', $demand);
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->listAction($demand);
 	}
 
 	/**
@@ -100,12 +122,8 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$demand = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
 			array(), array(), '', FALSE);
 		$demand->expects($this->once())->method('setStoragePage')->with(1);
-		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-			array('get'), array(), '', FALSE);
-		$objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
-		$this->inject($this->subject, 'objectManager', $objectManager);
+		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
 		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
 			array('findDemanded'), array(), '', FALSE);
@@ -113,10 +131,11 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->once())->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(1))->method('assign')->with('demand', $demand);
 		$this->inject($this->subject, 'view', $view);
 
-		$this->subject->listAction();
+		$this->subject->listAction($demand);
 	}
 
 	/**
@@ -131,4 +150,52 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->newEventAction();
 	}
 
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function initializeListActionSetsDateFormat() {
+		$settings = array(
+			'search' => array(
+				'dateFormat' => 'd.m.Y'
+			)
+		);
+
+		$mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+			array(), array(), '', FALSE);
+		$mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
+			$this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
+			$this->equalTo('dateFormat'),
+			$this->equalTo('d.m.Y')
+		);
+
+		$mockStartDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+			array(), array(), '', FALSE);
+		$mockStartDatePmConfig->expects($this->once())->method('forProperty')->with('startDate')->will(
+			$this->returnValue($mockPropertyMapperConfig));
+		$mockEndDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+			array(), array(), '', FALSE);
+		$mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
+			$this->returnValue($mockPropertyMapperConfig));
+
+		$mockStartDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
+			array(), array(), '', FALSE);
+		$mockStartDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
+			$this->returnValue($mockStartDatePmConfig));
+		$mockEndDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
+			array(), array(), '', FALSE);
+		$mockEndDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
+			$this->returnValue($mockEndDatePmConfig));
+
+		$mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
+			array(), array(), '', FALSE);
+		$mockArguments->expects($this->at(0))->method('getArgument')->with('demand')->will(
+			$this->returnValue($mockStartDateArgument));
+		$mockArguments->expects($this->at(1))->method('getArgument')->with('demand')->will(
+			$this->returnValue($mockEndDateArgument));
+
+		$this->subject->_set('arguments', $mockArguments);
+		$this->subject->_set('settings', $settings);
+		$this->subject->initializeListAction();
+	}
 }

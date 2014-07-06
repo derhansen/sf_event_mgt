@@ -44,5 +44,8 @@ module.tx_sfeventmgt {
 		list {
 			itemsPerPage = 10
 		}
+		search {
+			dateFormat = d.m.Y
+		}
 	}
 }

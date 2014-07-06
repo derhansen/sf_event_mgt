@@ -1,10 +1,62 @@
 
+{namespace e=SKYFILLERS\SfEventMgt\ViewHelpers}
 <f:layout name="Backend" />
 
 <f:section name="main">
+    <e:be.inlineSettingsArray settings="{
+        datePickerUSmode: 0,
+        dateFormat: {0:settings.dateFormat, 1:'{settings.search.dateFormat}'}
+    }"/>
+
     <h1>
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.title" />
     </h1>
+
+    <f:form name="demand" object="{demand}">
+        <h2>
+            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settings"/>
+        </h2>
+        <div class="settings">
+            <div class="field">
+                <label for="title">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+                </label>
+                <f:form.textfield property="title" id="title"/>
+                <div class="clear"></div>
+            </div>
+
+            <div class="field">
+                <label for="startDate">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                </label>
+                <f:form.textfield property="startDate" id="tceforms-datetimefield-startDate"
+                                  value="{demand.startDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
+                <span style="cursor:pointer;" id="picker-tceforms-datetimefield-startDate"
+                      class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date">
+                    &nbsp;
+                </span>
+                <f:render partial="FormErrors" arguments="{field: 'demand.startDate'}"/>
+                <div class="clear"></div>
+            </div>
+
+            <div class="field">
+                <label for="endDate">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                </label>
+                <f:form.textfield property="endDate" id="tceforms-datetimefield-endDate"
+                                  value="{demand.endDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
+                <span style="cursor:pointer;" id="picker-tceforms-datetimefield-endDate"
+                      class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date">
+                    &nbsp;
+                </span>
+                <f:render partial="FormErrors" arguments="{field: 'demand.endDate'}"/>
+                <div class="clear"></div>
+            </div>
+
+            <f:form.submit value="{f:translate(key:'LLL:EXT:lang/locallang_common.xlf:search')}" class="submit"/>
+        </div>
+    </f:form>
+
     <f:if condition="{events}">
         <f:then>
             <f:be.widget.paginate objects="{events}" as="paginatedEvents"

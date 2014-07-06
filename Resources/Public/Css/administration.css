@@ -1,0 +1,25 @@
+.event-administration .settings {
+    background-color: #EDEDED;
+    border-top: 1px solid #CDCDCD;
+    border-bottom: 1px solid #CDCDCD;
+    padding: 12px;
+    margin-bottom: 24px;
+}
+
+.event-administration .error {
+    color: #ff0000;
+}
+
+.event-administration .settings .field {
+    padding: 2px 0;
+}
+
+.event-administration .settings .field label {
+    display: block;
+    float: left;
+    width: 100px;
+}
+
+.event-administration .settings .submit {
+    margin: 5px 0 3px 100px;
+}

@@ -26,6 +26,8 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+
 /**
  * AdministrationController
  */
@@ -51,19 +53,45 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 
 	/**
-	 * List action for backend module
+	 * Set date format for field dateOfBirth
 	 *
-	 * @todo Fill demand with demand from backend module
 	 * @return void
 	 */
-	public function listAction() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+	public function initializeListAction() {
+		$this->arguments->getArgument('demand')
+			->getPropertyMappingConfiguration()->forProperty('startDate')
+			->setTypeConverterOption(
+				'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+				DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+				$this->settings['search']['dateFormat']
+			);
+		$this->arguments->getArgument('demand')
+			->getPropertyMappingConfiguration()->forProperty('endDate')
+			->setTypeConverterOption(
+				'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+				DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+				$this->settings['search']['dateFormat']
+			);
+	}
+
+	/**
+	 * List action for backend module
+	 *
+	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+	 * @return void
+	 */
+	public function listAction($demand = NULL) {
+		if ($demand === NULL) {
+			$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		}
+
 		if ($this->pid > 0) {
 			$demand->setStoragePage($this->pid);
 		}
+
 		$events = $this->eventRepository->findDemanded($demand);
 		$this->view->assign('events', $events);
+		$this->view->assign('demand', $demand);
 	}
 
 	/**
