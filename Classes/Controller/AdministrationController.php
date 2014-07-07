@@ -41,6 +41,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 */
 	protected $eventRepository = NULL;
 
+	/**
+	 * The current page uid
+	 *
+	 * @var int
+	 */
 	protected $pid = 0;
 
 	/**
