@@ -198,4 +198,11 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->_set('settings', $settings);
 		$this->subject->initializeListAction();
 	}
+
+	/**
+	 * @test
+	 */
+	public function exportActionOutputsFileToStream() {
+		$this->markTestIncomplete();
+	}
 }

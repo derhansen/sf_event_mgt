@@ -81,6 +81,9 @@
 			<trans-unit id="administration.newEvent">
 				<source>Create new event</source>
 			</trans-unit>
+			<trans-unit id="administration.export">
+				<source>Export event</source>
+			</trans-unit>
 			<trans-unit id="administration.settings">
 				<source>Settings</source>
 			</trans-unit>
