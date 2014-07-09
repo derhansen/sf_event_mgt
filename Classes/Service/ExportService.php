@@ -52,7 +52,7 @@ class ExportService {
 	public function exportToCsvFile($uid, $settings = array()) {
 		$fieldsArray = array_map('trim', explode(',', $settings['fields']));
 		$registrations = $this->registrationRepository->findByEvent($uid);
-		$exportedRegistrations = Utility\GeneralUtility::csvValues($fieldsArray, $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);;
+		$exportedRegistrations = Utility\GeneralUtility::csvValues($fieldsArray, $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
 		foreach ($registrations as $registration) {
 			$exportedRegistration = array();
 			foreach ($fieldsArray as $field) {
