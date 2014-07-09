@@ -130,14 +130,12 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function exportAction($uid) {
-		$registrations = $this->exportService->exportToCsvFile($uid, $this->settings['csvExportFields']);
+		$registrations = $this->exportService->exportToCsvFile($uid, $this->settings['csvExport']);
 		$temp = tmpfile();
 		fwrite($temp, $registrations);
 		fseek($temp, 0);
 		header('Content-Type: application/octet-stream');
-		header('Content-Description: File Transfer');
 		header('Content-Disposition: attachment; filename=event_registration_export.csv');
-		header('Content-Transfer-Encoding: binary');
 		fpassthru($temp);
 		fclose($temp);
 		exit;
