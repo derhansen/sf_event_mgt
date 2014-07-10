@@ -50,7 +50,12 @@ plugin.tx_sfeventmgt {
 #==============================================
 module.tx_sfeventmgt {
 	settings {
-		csvExportFields = {$module.tx_sfeventmgt.settings.csvExportFields}
+		csvExport {
+			fields = {$module.tx_sfeventmgt.settings.csvExport.fields}
+			fieldDelimiter = {$module.tx_sfeventmgt.settings.csvExport.fieldDelimiter}
+			fieldQuoteCharacter = {$module.tx_sfeventmgt.settings.csvExport.fieldQuoteCharacter}
+
+		}
 		list {
 			itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}
 		}

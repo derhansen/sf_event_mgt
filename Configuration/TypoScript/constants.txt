@@ -39,7 +39,15 @@ plugin.tx_sfeventmgt {
 #==============================================
 module.tx_sfeventmgt {
 	settings {
-		# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
+		csvExport {
+			# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
+			fields = uid, firstname, lastname, email
+			# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list delimiter
+			fieldDelimiter = ,
+			# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list quote character
+			fieldQuoteCharacter = "
+
+		}
 		csvExportFields = uid, firstname, lastname, email
 		list {
 			itemsPerPage = 10

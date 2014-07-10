@@ -27,6 +27,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use SKYFILLERS\SfEventMgt\Service;
 
 /**
  * AdministrationController
@@ -47,6 +48,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @var int
 	 */
 	protected $pid = 0;
+
+	/**
+	 * exportService
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Service\ExportService
+	 * @inject
+	 */
+	protected $exportService = NULL;
 
 	/**
 	 * Initialize action
@@ -112,6 +121,24 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		$url = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][' . $this->pid .
 			']=new&returnUrl=' . urlencode($returnUrl);
 		$this->redirectToUri($url);
+	}
+
+	/**
+	 * export registrations for a given event
+	 *
+	 * @param int $uid
+	 * @return void
+	 */
+	public function exportAction($uid) {
+		$registrations = $this->exportService->exportToCsvFile($uid, $this->settings['csvExport']);
+		$temp = tmpfile();
+		fwrite($temp, $registrations);
+		fseek($temp, 0);
+		header('Content-Type: application/octet-stream');
+		header('Content-Disposition: attachment; filename=event_registration_export.csv');
+		fpassthru($temp);
+		fclose($temp);
+		exit;
 	}
 
 }
