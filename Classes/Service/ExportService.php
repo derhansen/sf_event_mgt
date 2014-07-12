@@ -42,16 +42,44 @@ class ExportService {
 	protected $registrationRepository;
 
 	/**
-	 * Export Registrations as a CSV string
+	 * ResourceFactory
 	 *
-	 * @param int $uid
+	 * @var \TYPO3\CMS\Core\Resource\ResourceFactory
+	 * @inject
+	 */
+	protected $resourceFactory = NULL;
+
+	/**
+	 * Initiates the CSV downloads for registrations of the given event uid
+	 *
+	 * @param int $eventUid
+	 * @param array $settings
+	 * @throws \RuntimeException
+	 * @return void
+	 */
+	public function downloadRegistrationsCsv($eventUid, $settings = array()) {
+		$storage = $this->resourceFactory->getDefaultStorage();
+		if ($storage === NULL) {
+			throw new RuntimeException('Could not get the default storage', 1475590001);
+		}
+		$registrations = $this->exportRegistrationsCsv($eventUid, $settings);
+		$tempFolder = $storage->getFolder('_temp_');
+		$tempFile = $storage->createFile('sf_events_export.csv', $tempFolder);
+		$tempFile->setContents($registrations);
+		$storage->dumpFileContents($tempFile, TRUE, 'registrations_' . date('dmY_His') . '.csv');
+	}
+
+	/**
+	 * Returns all Registrations for the given eventUid as a CSV string
+	 *
+	 * @param int $eventUid
 	 * @param array $settings
 	 * @throws \RuntimeException
 	 * @return string
 	 */
-	public function exportRegistrationsCsv($uid, $settings = array()) {
+	public function exportRegistrationsCsv($eventUid, $settings = array()) {
 		$fieldsArray = array_map('trim', explode(',', $settings['fields']));
-		$registrations = $this->registrationRepository->findByEvent($uid);
+		$registrations = $this->registrationRepository->findByEvent($eventUid);
 		$exportedRegistrations = Utility\GeneralUtility::csvValues($fieldsArray,
 				$settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
 		foreach ($registrations as $registration) {
@@ -61,7 +89,7 @@ class ExportService {
 					$exportedRegistration[] = $registration->_getCleanProperty($field);
 				} else {
 					throw new RuntimeException('Field ' . $field .
-						' is not a Property of Model Registration, please check your TS configuration');
+						' is not a Property of Model Registration, please check your TS configuration', 1475590002);
 				}
 			}
 			$exportedRegistrations .= Utility\GeneralUtility::csvValues($exportedRegistration,
@@ -69,4 +97,5 @@ class ExportService {
 		}
 		return $exportedRegistrations;
 	}
+
 } 

@@ -35,7 +35,7 @@
     </td>
     <td>
         <f:if condition="{event.enableRegistration}">
-            <f:link.action action="export" arguments="{uid: '{event.uid}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
+            <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
                 {f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}
             </f:link.action>
         </f:if>

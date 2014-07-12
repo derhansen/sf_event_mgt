@@ -27,6 +27,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  ***************************************************************/
 
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use SKYFILLERS\SfEventMgt\Service;
 
 /**
@@ -126,19 +127,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * export registrations for a given event
 	 *
-	 * @param int $uid
+	 * @param int $eventUid
 	 * @return void
 	 */
-	public function exportAction($uid) {
-		$registrations = $this->exportService->exportRegistrationsCsv($uid, $this->settings['csvExport']);
-		$temp = tmpfile();
-		fwrite($temp, $registrations);
-		fseek($temp, 0);
-		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename=event_registration_export.csv');
-		fpassthru($temp);
-		fclose($temp);
-		exit;
+	public function exportAction($eventUid) {
+		$this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
 	}
 
 }

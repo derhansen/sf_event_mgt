@@ -123,6 +123,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 * @expectedException RuntimeException
+	 * @return void
 	 */
 	public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel() {
 		$mockRegistration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
@@ -182,5 +183,45 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$returnValue = $this->subject->exportRegistrationsCsv($uid, $fields);
 		$this->assertSame($expected, $returnValue);
 	}
+
+	/**
+	 * @test
+	 * @expectedException RuntimeException
+	 * @return void
+	 */
+	public function downloadRegistrationsCsvThrowsExceptionIfDefaultStorageNotFound() {
+		$mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
+			array(), array(), '', FALSE);
+		$mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(NULL));
+		$this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
+		$this->subject->downloadRegistrationsCsv(1, array('settings'));
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function downloadRegistrationsCsvDumpsRegistrationsContent() {
+		$mockExportService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\ExportService',
+			array('exportRegistrationsCsv'), array(), '', FALSE);
+		$mockExportService->expects($this->once())->method('exportRegistrationsCsv')->will(
+			$this->returnValue('CSV-DATA'));
+
+		$mockFile = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', array(), array(), '', FALSE);
+		$mockFile->expects($this->once())->method('setContents')->with('CSV-DATA');
+
+		$mockStorageRepository = $this->getMock('TYPO3\CMS\Core\Resource\StorageRepository',
+			array('getFolder', 'createFile', 'dumpFileContents'), array(), '', FALSE);
+		$mockStorageRepository->expects($this->at(0))->method('getFolder')->with('_temp_');
+		$mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
+		$mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
+
+		$mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
+			array('getDefaultStorage'), array(), '', FALSE);
+		$mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
+			$this->returnValue($mockStorageRepository));
+		$this->inject($mockExportService, 'resourceFactory', $mockResourceFactory);
+
+		$mockExportService->downloadRegistrationsCsv(1, array('settings'));
+	}
 }
- 

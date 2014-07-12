@@ -198,4 +198,23 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->_set('settings', $settings);
 		$this->subject->initializeListAction();
 	}
+
+	/**
+	 * @test1
+	 * @return void
+	 */
+	public function exportActionCallsExportServiceDownloadRegistrationsCsv() {
+		$settings = array('csvExport' =>
+			array('some settings')
+		);
+		$exportService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\ExportService',
+			array(), array(), '', FALSE);
+		$exportService->expects($this->once())->method('downloadRegistrationsCsv')->with(
+			$this->equalTo(1),
+			$this->equalTo(array('some settings'))
+		);
+		$this->inject($this->subject, 'exportService', $exportService);
+		$this->subject->_set('settings', $settings);
+		$this->subject->exportAction(1);
+	}
 }
