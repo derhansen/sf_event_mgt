@@ -130,7 +130,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function exportAction($uid) {
-		$registrations = $this->exportService->exportToCsvFile($uid, $this->settings['csvExport']);
+		$registrations = $this->exportService->exportRegistrationsCsv($uid, $this->settings['csvExport']);
 		$temp = tmpfile();
 		fwrite($temp, $registrations);
 		fseek($temp, 0);

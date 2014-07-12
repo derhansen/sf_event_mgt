@@ -127,9 +127,12 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel() {
 		$mockRegistration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
 			array('_hasProperty'), array(), '', FALSE);
-		$mockRegistration->expects($this->at(0))->method('_hasProperty')->with($this->equalTo('uid'))->will($this->returnValue(TRUE));
-		$mockRegistration->expects($this->at(1))->method('_hasProperty')->with($this->equalTo('firstname'))->will($this->returnValue(TRUE));
-		$mockRegistration->expects($this->at(2))->method('_hasProperty')->with($this->equalTo('wrongfield'))->will($this->returnValue(FALSE));
+		$mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
+			$this->equalTo('uid'))->will($this->returnValue(TRUE));
+		$mockRegistration->expects($this->at(1))->method('_hasProperty')->with(
+			$this->equalTo('firstname'))->will($this->returnValue(TRUE));
+		$mockRegistration->expects($this->at(2))->method('_hasProperty')->with(
+			$this->equalTo('wrongfield'))->will($this->returnValue(FALSE));
 
 		$allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$allRegistrations->attach($mockRegistration);
@@ -139,7 +142,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registrationRepository->expects($this->once())->method('findByEvent')->will($this->returnValue($allRegistrations));
 		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-		$this->subject->exportToCsvFile(1, array(
+		$this->subject->exportRegistrationsCsv(1, array(
 			'fields' => 'uid, firstname, wrongfield',
 			'fieldDelimiter' => ',',
 			'fieldQuoteCharacter' => '"'
@@ -154,22 +157,29 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected) {
 		$mockRegistration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
 			array('_hasProperty', '_getCleanProperty'), array(), '', FALSE);
-		$mockRegistration->expects($this->at(0))->method('_hasProperty')->with($this->equalTo('uid'))->will($this->returnValue(TRUE));
-		$mockRegistration->expects($this->at(2))->method('_hasProperty')->with($this->equalTo('firstname'))->will($this->returnValue(TRUE));
-		$mockRegistration->expects($this->at(4))->method('_hasProperty')->with($this->equalTo('lastname'))->will($this->returnValue(TRUE));
-		$mockRegistration->expects($this->at(1))->method('_getCleanProperty')->with($this->equalTo('uid'))->will($this->returnValue(1));
-		$mockRegistration->expects($this->at(3))->method('_getCleanProperty')->with($this->equalTo('firstname'))->will($this->returnValue('Max'));
-		$mockRegistration->expects($this->at(5))->method('_getCleanProperty')->with($this->equalTo('lastname'))->will($this->returnValue('Mustermann'));
+		$mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
+			$this->equalTo('uid'))->will($this->returnValue(TRUE));
+		$mockRegistration->expects($this->at(2))->method('_hasProperty')->with(
+			$this->equalTo('firstname'))->will($this->returnValue(TRUE));
+		$mockRegistration->expects($this->at(4))->method('_hasProperty')->with(
+			$this->equalTo('lastname'))->will($this->returnValue(TRUE));
+		$mockRegistration->expects($this->at(1))->method('_getCleanProperty')->with(
+			$this->equalTo('uid'))->will($this->returnValue(1));
+		$mockRegistration->expects($this->at(3))->method('_getCleanProperty')->with(
+			$this->equalTo('firstname'))->will($this->returnValue('Max'));
+		$mockRegistration->expects($this->at(5))->method('_getCleanProperty')->with(
+			$this->equalTo('lastname'))->will($this->returnValue('Mustermann'));
 
 		$allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$allRegistrations->attach($mockRegistration);
 
 		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\Registration',
 			array('findByEvent'), array(), '', FALSE);
-		$registrationRepository->expects($this->once())->method('findByEvent')->will($this->returnValue($allRegistrations));
+		$registrationRepository->expects($this->once())->method('findByEvent')->will(
+			$this->returnValue($allRegistrations));
 		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-		$returnValue = $this->subject->exportToCsvFile($uid, $fields);
+		$returnValue = $this->subject->exportRegistrationsCsv($uid, $fields);
 		$this->assertSame($expected, $returnValue);
 	}
 }

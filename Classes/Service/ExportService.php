@@ -42,27 +42,30 @@ class ExportService {
 	protected $registrationRepository;
 
 	/**
-	 * Export Registrations to CSV File
+	 * Export Registrations as a CSV string
 	 *
 	 * @param int $uid
 	 * @param array $settings
 	 * @throws \RuntimeException
 	 * @return string
 	 */
-	public function exportToCsvFile($uid, $settings = array()) {
+	public function exportRegistrationsCsv($uid, $settings = array()) {
 		$fieldsArray = array_map('trim', explode(',', $settings['fields']));
 		$registrations = $this->registrationRepository->findByEvent($uid);
-		$exportedRegistrations = Utility\GeneralUtility::csvValues($fieldsArray, $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
+		$exportedRegistrations = Utility\GeneralUtility::csvValues($fieldsArray,
+				$settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
 		foreach ($registrations as $registration) {
 			$exportedRegistration = array();
 			foreach ($fieldsArray as $field) {
 				if ($registration->_hasProperty($field)) {
 					$exportedRegistration[] = $registration->_getCleanProperty($field);
 				} else {
-					throw new RuntimeException('Field ' . $field . ' is not a Property of Model Registration, please check your TS configuration');
+					throw new RuntimeException('Field ' . $field .
+						' is not a Property of Model Registration, please check your TS configuration');
 				}
 			}
-			$exportedRegistrations .= Utility\GeneralUtility::csvValues($exportedRegistration, $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
+			$exportedRegistrations .= Utility\GeneralUtility::csvValues($exportedRegistration,
+					$settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
 		}
 		return $exportedRegistrations;
 	}
