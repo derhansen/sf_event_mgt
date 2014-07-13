@@ -20,10 +20,21 @@ plugin.tx_sfeventmgt {
 			imageHeight =
 		}
 		registration {
-			# The fields firstname, lastname and email are always required and cannot be overridden
-			requiredFields =
 			deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
 			formatDateOfBirth = {$plugin.tx_sfeventmgt.settings.registration.formatDateOfBirth}
+			# The fields firstname, lastname and email are always required and cannot be overridden
+			requiredFields =
+			# Prefill fields - registration field = fe_user field
+			prefillFields {
+				firstname = first_name
+				lastname = last_name
+				address = address
+				zip = zip
+				city = city
+				country = country
+				email = email
+				phone = telephone
+			}
 		}
 		confirmation {
 			linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
