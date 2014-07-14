@@ -28,6 +28,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use SKYFILLERS\SfEventMgt\Service;
 
 /**
@@ -57,6 +58,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @inject
 	 */
 	protected $exportService = NULL;
+
+	/**
+	 * registrationService
+	 *
+	 * @var \SKYFILLERS\SfEventMgt\Service\RegistrationService
+	 * @inject
+	 */
+	protected $registrationService = NULL;
 
 	/**
 	 * Initialize action
@@ -93,15 +102,22 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * List action for backend module
 	 *
 	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+	 * @param int $messageId
 	 * @return void
 	 */
-	public function listAction($demand = NULL) {
+	public function listAction($demand = NULL, $messageId = NULL) {
 		if ($demand === NULL) {
 			$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		}
 
 		if ($this->pid > 0) {
 			$demand->setStoragePage($this->pid);
+		}
+
+		if ($messageId !== NULL && is_numeric($messageId)) {
+			$this->view->assign('showMessage', TRUE);
+			$this->view->assign('messageTitleKey', 'administration.message-' . $messageId . '.title');
+			$this->view->assign('messageContentKey', 'administration.message-' . $messageId . '.content');
 		}
 
 		$events = $this->eventRepository->findDemanded($demand);
@@ -134,4 +150,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		$this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
 	}
 
+	/**
+	 * Calls the handleExpiredRegistrations Service
+	 *
+	 * @return void
+	 */
+	public function handleExpiredRegistrationsAction() {
+		$this->registrationService->handleExpiredRegistrations(
+			$this->settings['registration']['deleteExpiredRegistrations']);
+		$this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => NULL, 'messageId' => 1));
+	}
 }

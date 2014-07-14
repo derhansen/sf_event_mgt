@@ -142,6 +142,36 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
+	public function listActionAssignsMessageIfMessageIdGivenToView() {
+		$this->subject->_set('pid', 1);
+
+		$demand = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+			array(), array(), '', FALSE);
+		$demand->expects($this->once())->method('setStoragePage')->with(1);
+
+		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+
+		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+			array('findDemanded'), array(), '', FALSE);
+		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+		$this->inject($this->subject, 'eventRepository', $eventRepository);
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+
+		$view->expects($this->at(0))->method('assign')->with('showMessage', TRUE);
+		$view->expects($this->at(1))->method('assign')->with('messageTitleKey', 'administration.message-123.title');
+		$view->expects($this->at(2))->method('assign')->with('messageContentKey', 'administration.message-123.content');
+		$view->expects($this->at(3))->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(4))->method('assign')->with('demand', $demand);
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->listAction($demand, 123);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
 	public function newActionRedirectsToExpectedUrl() {
 		$expected = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][0]=new&returnUrl=mod.php' .
 			'%3FM%3Dweb_SfEventMgtTxSfeventmgtM1%26id%3D0%26moduleToken%3DdummyToken';
@@ -217,4 +247,19 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->_set('settings', $settings);
 		$this->subject->exportAction(1);
 	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView() {
+		$mockRegistrationService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\RegistrationService',
+			array('handleExpiredRegistrations'), array(), '', FALSE);
+		$mockRegistrationService->expects($this->once())->method('handleExpiredRegistrations');
+		$this->inject($this->subject, 'registrationService', $mockRegistrationService);
+
+		$this->subject->expects($this->once())->method('redirect');
+		$this->subject->handleExpiredRegistrationsAction();
+	}
+
 }

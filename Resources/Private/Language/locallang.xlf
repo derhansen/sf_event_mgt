@@ -150,6 +150,12 @@
 			<trans-unit id="admin.no_events_available">
 				<source>No events available</source>
 			</trans-unit>
+			<trans-unit id="administration.message-1.title">
+				<source>Information</source>
+			</trans-unit>
+			<trans-unit id="administration.message-1.content">
+				<source>All expired registrations have been marked as hidden/deleted.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

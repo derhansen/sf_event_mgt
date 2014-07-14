@@ -87,6 +87,9 @@
 			<trans-unit id="administration.settings">
 				<source>Settings</source>
 			</trans-unit>
+			<trans-unit id="administration.handleExpiredRegistrations">
+				<source>Remove/hide expired registrations</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
