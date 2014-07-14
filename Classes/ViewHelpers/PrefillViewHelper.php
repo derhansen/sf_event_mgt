@@ -50,6 +50,12 @@ class PrefillViewHelper extends AbstractViewHelper {
 			!array_key_exists($fieldname, $prefillSettings)) {
 			return '';
 		}
+		// If mapping errors occured for form, return value that has been submitted
+		$originalRequest = $this->controllerContext->getRequest()->getOriginalRequest();
+		if ($originalRequest) {
+			$submittedValues = $originalRequest->getArguments();
+			return $submittedValues['registration'][$fieldname];
+		}
 		return strval($GLOBALS['TSFE']->fe_user->user[$prefillSettings[$fieldname]]);
 	}
 

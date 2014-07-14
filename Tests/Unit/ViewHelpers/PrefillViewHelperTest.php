@@ -90,7 +90,19 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$GLOBALS['TSFE']->fe_user->user = array(
 			'first_name' => 'John'
 		);
-		$viewHelper = new PrefillViewHelper();
+
+		$mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
+			array('getOriginalRequest'), array(), '', FALSE);
+		$mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(NULL));
+
+		$mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
+			array('getRequest'), array(), '', FALSE);
+		$mockControllerContext->expects($this->once())->method('getRequest')->will(
+			$this->returnValue($mockRequest));
+
+		$viewHelper = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+			array('dummy'), array(), '', FALSE);
+		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$actual = $viewHelper->render('firstname', array('firstname' => 'unknown_field'));
 		$this->assertSame('', $actual);
 	}
@@ -107,9 +119,58 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'first_name' => 'John',
 			'last_name' => 'Doe'
 		);
-		$viewHelper = new PrefillViewHelper();
+		$mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
+			array('getOriginalRequest'), array(), '', FALSE);
+		$mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(NULL));
+
+		$mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
+			array('getRequest'), array(), '', FALSE);
+		$mockControllerContext->expects($this->once())->method('getRequest')->will(
+			$this->returnValue($mockRequest));
+
+		$viewHelper = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+			array('dummy'), array(), '', FALSE);
+		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$actual = $viewHelper->render('lastname', array('lastname' => 'last_name'));
 		$this->assertSame('Doe', $actual);
 	}
 
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function viewReturnsSubmittedValueIfValidationError() {
+		$GLOBALS['TSFE'] = new \stdClass();
+		$GLOBALS['TSFE']->loginUser = 1;
+		$GLOBALS['TSFE']->fe_user = new \stdClass();
+		$GLOBALS['TSFE']->fe_user->user = array(
+			'first_name' => 'John',
+			'last_name' => 'Doe'
+		);
+
+		$arguments = array(
+			'registration' => array(
+				'lastname' => 'Submitted Lastname'
+			)
+		);
+
+		$mockOriginalRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
+			array('getArguments'), array(), '', FALSE);
+		$mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
+
+		$mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
+			array('getOriginalRequest'), array(), '', FALSE);
+		$mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue($mockOriginalRequest));
+
+		$mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
+			array('getRequest'), array(), '', FALSE);
+		$mockControllerContext->expects($this->once())->method('getRequest')->will(
+			$this->returnValue($mockRequest));
+
+		$viewHelper = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+			array('dummy'), array(), '', FALSE);
+		$viewHelper->_set('controllerContext', $mockControllerContext);
+		$actual = $viewHelper->render('lastname', array('lastname' => 'last_name'));
+		$this->assertSame('Submitted Lastname', $actual);
+	}
 }
