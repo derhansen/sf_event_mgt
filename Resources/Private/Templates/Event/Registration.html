@@ -18,35 +18,35 @@
             <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" /><f:form.radio name="gender" property="gender" value="f" /><br>
 
             <label for="firstname"><f:translate key="tx_sfeventmgt_domain_model_registration.firstname" /></label>
-            <f:form.textfield id="firstname" property="firstname"/><br>
+            <f:form.textfield id="firstname" property="firstname" value="{e:prefill(fieldname: 'firstname', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.firstname'}"/>
 
             <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.lastname" /></label>
-            <f:form.textfield id="lastname" property="lastname"/><br>
+            <f:form.textfield id="lastname" property="lastname" value="{e:prefill(fieldname: 'lastname', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.lastname'}"/>
 
             <label for="address"><f:translate key="tx_sfeventmgt_domain_model_registration.address" /></label>
-            <f:form.textfield id="address" property="address"/><br>
+            <f:form.textfield id="address" property="address" value="{e:prefill(fieldname: 'address', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.address'}"/>
 
             <label for="zip"><f:translate key="tx_sfeventmgt_domain_model_registration.zip" /></label>
-            <f:form.textfield id="zip" property="zip"/><br>
+            <f:form.textfield id="zip" property="zip" value="{e:prefill(fieldname: 'zip', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.zip'}"/>
 
             <label for="city"><f:translate key="tx_sfeventmgt_domain_model_registration.city" /></label>
-            <f:form.textfield id="city" property="city"/><br>
+            <f:form.textfield id="city" property="city" value="{e:prefill(fieldname: 'city', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.city'}"/>
 
             <label for="country"><f:translate key="tx_sfeventmgt_domain_model_registration.country" /></label>
-            <f:form.textfield id="country" property="country"/><br>
+            <f:form.textfield id="country" property="country" value="{e:prefill(fieldname: 'country', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.country'}"/>
 
             <label for="email"><f:translate key="tx_sfeventmgt_domain_model_registration.email" /></label>
-            <f:form.textfield id="email" property="email"/><br>
+            <f:form.textfield id="email" property="email" value="{e:prefill(fieldname: 'email', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.email'}"/>
 
             <label for="phone"><f:translate key="tx_sfeventmgt_domain_model_registration.phone" /></label>
-            <f:form.textfield id="phone" property="phone"/><br>
+            <f:form.textfield id="phone" property="phone" value="{e:prefill(fieldname: 'phone', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.phone'}"/>
 
             <label for="dateOfBirth"><f:translate key="tx_sfeventmgt_domain_model_registration.date_of_birth" /></label>
