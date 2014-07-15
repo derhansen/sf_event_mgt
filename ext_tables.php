@@ -42,7 +42,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 	),
 	array(
 		'access' => 'user,group',
-		'icon'   => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.gif',
+		'icon'   => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.png',
 		'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
 	)
 );

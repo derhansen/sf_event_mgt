@@ -23,3 +23,7 @@
 .event-administration .settings .submit {
     margin: 5px 0 3px 100px;
 }
+
+.left a:hover {
+    text-decoration: none;
+}
