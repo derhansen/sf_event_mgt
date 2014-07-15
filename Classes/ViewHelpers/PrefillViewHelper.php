@@ -29,11 +29,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Prefill ViewHelper
- *
- * Usage:
- *
- * {e:prefill(fieldname: fieldname, prefillSettings: '{settings.registration.prefillFields}')}
- *
  */
 class PrefillViewHelper extends AbstractViewHelper {
 
