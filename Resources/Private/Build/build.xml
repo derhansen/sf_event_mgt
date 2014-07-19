@@ -1,0 +1,63 @@
+<project name="TYPO3-62-Extbase-Extension" default="build" basedir=".">
+    <property environment="env"/>
+
+    <target name="build" depends="init, unittests-setup, unittests, phpcs, phpmd, phpcpd, cleanup">
+    </target>
+
+    <target name="init">
+        <mkdir dir="${env.WORKSPACE}/build"/>
+        <mkdir dir="${env.WORKSPACE}/build/phpcs"/>
+        <mkdir dir="${env.WORKSPACE}/build/phpunit"/>
+        <mkdir dir="${env.WORKSPACE}/typo3_core"/>
+    </target>
+
+    <target name="unittests-setup">
+        <exec executable="git" failonerror="true">
+            <arg line="clone --single-branch --branch master --depth 1 https://github.com/TYPO3/TYPO3.CMS.git ${env.WORKSPACE}/typo3_core" />
+        </exec>
+
+        <exec executable="composer">
+            <arg line="install --working-dir ${env.WORKSPACE}/typo3_core" />
+        </exec>
+
+        <mkdir dir="${env.WORKSPACE}/typo3_core/uploads"/>
+        <mkdir dir="${env.WORKSPACE}/typo3_core/typo3temp"/>
+        <mkdir dir="${env.WORKSPACE}/typo3_core/typo3conf/ext"/>
+
+        <symlink link="${env.WORKSPACE}/typo3_core/typo3conf/ext/${env.JOB_NAME}" resource="${env.WORKSPACE}/${env.JOB_NAME}"/>
+    </target>
+
+    <target name="unittests">
+        <exec executable="/bin/sh">
+            <arg value="-c"/>
+            <arg value="cd ${env.WORKSPACE}/typo3_core; phpunit --log-junit ${env.WORKSPACE}/build/phpunit/unittests.xml  --bootstrap typo3/sysext/core/Build/UnitTestsBootstrap.php typo3conf/ext/${env.JOB_NAME}/Tests/Unit"/>
+        </exec>
+    </target>
+
+    <target name="phpcs">
+        <exec executable="phpcs">
+            <arg line="--report=checkstyle
+                               --report-file=${env.WORKSPACE}/build/phpcs/checkstyle.xml
+                               --standard=TYPO3CMS
+                               --extensions=php,inc
+                               ${env.WORKSPACE}/${env.JOB_NAME}" />
+        </exec>
+    </target>
+
+    <target name="phpmd">
+        <exec executable="phpmd">
+            <arg line=" ${env.WORKSPACE}/${env.JOB_NAME} xml codesize,unusedcode,naming,design --reportfile ${env.WORKSPACE}/build/messdetector.xml --exclude Tests/" />
+        </exec>
+    </target>
+
+    <target name="phpcpd">
+        <exec executable="phpcpd">
+            <arg line=" --log-pmd ${env.WORKSPACE}/build/phpcpd.xml ${env.WORKSPACE}/${env.JOB_NAME}" />
+        </exec>
+    </target>
+
+    <target name="cleanup">
+        <delete dir="${env.WORKSPACE}/typo3_core"/>
+    </target>
+
+</project>
