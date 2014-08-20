@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Service;
+namespace DERHANSEN\SfEventMgt\Service;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -32,7 +32,7 @@ namespace SKYFILLERS\SfEventMgt\Service;
 class RegistrationService {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
 	 * @inject
 	 */
 	protected $registrationRepository;
@@ -48,7 +48,7 @@ class RegistrationService {
 		$registrations = $this->registrationRepository->findExpiredRegistrations(new \DateTime());
 		if ($registrations->count() > 0) {
 			foreach ($registrations as $registration) {
-				/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration */
+				/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
 				if ($delete) {
 					$this->registrationRepository->remove($registration);
 				} else {

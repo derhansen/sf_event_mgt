@@ -1,5 +1,5 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\ViewHelpers\Be;
+namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
 /***************************************************************
  *  Copyright notice

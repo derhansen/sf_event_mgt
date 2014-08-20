@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,14 +26,14 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  ***************************************************************/
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Service\RegistrationService.
+ * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Service\RegistrationService
+	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
 	 */
 	protected $subject = NULL;
 
@@ -43,7 +43,7 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Service\RegistrationService();
+		$this->subject = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
 	}
 
 	/**
@@ -59,7 +59,7 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function handleExpiredRegistrationsWithoutDeleteOption() {
-		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
+		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
 			array('setHidden'), array(), '', FALSE);
 		$registration->expects($this->once())->method('setHidden')->with(TRUE);
 
@@ -67,7 +67,7 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$registrations->attach($registration);
 
-		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
 			array('findExpiredRegistrations', 'update'), array(), '', FALSE);
 		$registrationRepository->expects($this->once())->method('findExpiredRegistrations')->will(
 			$this->returnValue($registrations));
@@ -81,14 +81,14 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function handleExpiredRegistrationsWithDeleteOption() {
-		$registration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
+		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
 			array(), array(), '', FALSE);
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
 		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$registrations->attach($registration);
 
-		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
 			array('findExpiredRegistrations', 'remove'), array(), '', FALSE);
 		$registrationRepository->expects($this->once())->method('findExpiredRegistrations')->will(
 			$this->returnValue($registrations));

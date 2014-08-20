@@ -4,7 +4,7 @@ if (!defined('TYPO3_MODE')) {
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'SKYFILLERS.' . $_EXTKEY,
+	'DERHANSEN.' . $_EXTKEY,
 	'Pievent',
 	array(
 		'Event' => 'list, detail, registration'
@@ -16,10 +16,10 @@ if (!defined('TYPO3_MODE')) {
 );
 
 // DataHandler hook
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['SKYFILLERS.' . $_EXTKEY] =
-	'SKYFILLERS\SfEventMgt\Hooks\DataHandlerHooks';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['DERHANSEN.' . $_EXTKEY] =
+	'DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks';
 
 // Register cleanup command
 if (TYPO3_MODE === 'BE') {
-	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'SKYFILLERS\\SfEventMgt\\Command\\CleanupCommandController';
+	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'DERHANSEN\\SfEventMgt\\Command\\CleanupCommandController';
 }

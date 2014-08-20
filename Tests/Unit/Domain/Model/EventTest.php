@@ -1,11 +1,11 @@
 <?php
 
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,10 +26,10 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 /**
- * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Event.
+ * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Event.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -38,12 +38,12 @@ use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
  */
 class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 */
 	protected $subject = NULL;
 
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
+		$this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 	}
 
 	protected function tearDown() {
@@ -230,7 +230,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function setCategoryForObjectStorageContainingCategorySetsCategory() {
-		$category = new \SKYFILLERS\SfEventMgt\Domain\Model\Category();
+		$category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
 		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneCategory->attach($category);
 		$this->subject->setCategory($objectStorageHoldingExactlyOneCategory);
@@ -246,7 +246,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function addCategoryToObjectStorageHoldingCategory() {
-		$category = new \SKYFILLERS\SfEventMgt\Domain\Model\Category();
+		$category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
 		$categoryObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
 		$categoryObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($category));
 		$this->inject($this->subject, 'category', $categoryObjectStorageMock);
@@ -258,7 +258,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function removeCategoryFromObjectStorageHoldingCategory() {
-		$category = new \SKYFILLERS\SfEventMgt\Domain\Model\Category();
+		$category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
 		$categoryObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
 		$categoryObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($category));
 		$this->inject($this->subject, 'category', $categoryObjectStorageMock);
@@ -462,7 +462,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 */
 	public function setLocationSetsLocation() {
-		$location = new \SKYFILLERS\SfEventMgt\Domain\Model\Location();
+		$location = new \DERHANSEN\SfEventMgt\Domain\Model\Location();
 		$this->subject->setLocation($location);
 
 		$this->assertAttributeEquals(

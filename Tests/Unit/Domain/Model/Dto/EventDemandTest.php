@@ -1,11 +1,11 @@
 <?php
 
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model\Dto;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 	/***************************************************************
 	 *  Copyright notice
 	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
 	 *
 	 *  All rights reserved
 	 *
@@ -27,7 +27,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 	 ***************************************************************/
 
 /**
- * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand.
+ * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -36,7 +36,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  */
 class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
 	protected $subject = NULL;
 
@@ -46,7 +46,7 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
 	}
 
 	/**

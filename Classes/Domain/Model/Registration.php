@@ -1,12 +1,12 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Domain\Model;
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -128,7 +128,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $notes = '';
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 */
 	protected $event = NULL;
 
@@ -395,7 +395,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the event
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
 	 * @return void
 	 */
 	public function setEvent($event) {
@@ -405,7 +405,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the event
 	 *
-	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 */
 	public function getEvent() {
 		return $this->event;

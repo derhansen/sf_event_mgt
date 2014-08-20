@@ -1,9 +1,9 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -24,17 +24,17 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\Utility\MessageType;
+use DERHANSEN\SfEventMgt\Utility\MessageType;
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Service\NotificationService.
+ * Test case for class DERHANSEN\SfEventMgt\Service\NotificationService.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Service\NotificationService
+	 * @var \DERHANSEN\SfEventMgt\Service\NotificationService
 	 */
 	protected $subject = NULL;
 
@@ -44,7 +44,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Service\NotificationService();
+		$this->subject = new \DERHANSEN\SfEventMgt\Service\NotificationService();
 	}
 
 	/**
@@ -80,8 +80,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidEmailInRegistration($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('invalid-email');
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
@@ -104,8 +104,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('valid@email.tld');
 
 		$settings = array('notification' => array('senderEmail' => 'invalid-email'));
@@ -119,13 +119,13 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsFalseIfSendFailed($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('valid@email.tld');
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
 
-		$emailService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\EmailService',
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
 			array('sendEmailMessage'), array(), '', FALSE);
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(FALSE));
 		$this->inject($this->subject, 'emailService', $emailService);
@@ -167,13 +167,13 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendUserMessageReturnsTrueIfSendSuccessful($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setEmail('valid@email.tld');
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
 
-		$emailService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\EmailService',
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
 			array('sendEmailMessage'), array(), '', FALSE);
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(TRUE));
 		$this->inject($this->subject, 'emailService', $emailService);
@@ -215,8 +215,8 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendAdminNewRegistrationMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
 		$settings = array('notification' => array('senderEmail' => 'invalid-email', 'adminEmail' => 'invalid-email'));
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -228,13 +228,13 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
 			'adminEmail' => 'valid@email.tld'));
 
-		$emailService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\EmailService',
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
 			array('sendEmailMessage'), array(), '', FALSE);
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(FALSE));
 		$this->inject($this->subject, 'emailService', $emailService);
@@ -285,13 +285,13 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider messageTypeDataProvider
 	 */
 	public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType) {
-		$event = new \SKYFILLERS\SfEventMgt\Domain\Model\Event();
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
 		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
 			'adminEmail' => 'valid@email.tld'));
 
-		$emailService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\EmailService',
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
 			array('sendEmailMessage'), array(), '', FALSE);
 		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(TRUE));
 		$this->inject($this->subject, 'emailService', $emailService);

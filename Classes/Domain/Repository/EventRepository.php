@@ -1,12 +1,12 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Domain\Repository;
+namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -28,7 +28,7 @@ namespace SKYFILLERS\SfEventMgt\Domain\Repository;
  ***************************************************************/
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand;
+use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 
 /**
  * The repository for Events
@@ -49,7 +49,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Returns the objects of this repository matching the given demand
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findDemanded(EventDemand $eventDemand) {

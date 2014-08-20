@@ -33,7 +33,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 
 // Register Administration Module
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-	'SKYFILLERS.' . $_EXTKEY,
+	'DERHANSEN.' . $_EXTKEY,
 	'web',
 	'tx_sfeventmgt_m1',
 	'',

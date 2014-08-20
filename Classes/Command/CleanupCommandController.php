@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Command;
+namespace DERHANSEN\SfEventMgt\Command;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -46,7 +46,7 @@ class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 	protected $cacheService;
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Service\RegistrationService
+	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
 	 * @inject
 	 */
 	protected $registrationService;

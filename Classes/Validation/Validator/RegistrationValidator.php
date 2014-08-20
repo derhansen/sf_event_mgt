@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Validation\Validator;
+namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 	/***************************************************************
 	 *
 	 *  Copyright notice
 	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
 	 *
 	 *  All rights reserved
 	 *
@@ -26,7 +26,7 @@ namespace SKYFILLERS\SfEventMgt\Validation\Validator;
 	 *  This copyright notice MUST APPEAR in all copies of the script!
 	 ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**

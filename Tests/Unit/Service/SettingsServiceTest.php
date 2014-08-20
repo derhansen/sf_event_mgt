@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,12 +26,12 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  ***************************************************************/
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Service\SettingsService.
+ * Test case for class DERHANSEN\SfEventMgt\Service\SettingsService.
  */
 class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Service\SettingsService
+	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
 	 */
 	protected $subject = NULL;
 
@@ -41,7 +41,7 @@ class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Service\SettingsService();
+		$this->subject = new \DERHANSEN\SfEventMgt\Service\SettingsService();
 	}
 
 	/**

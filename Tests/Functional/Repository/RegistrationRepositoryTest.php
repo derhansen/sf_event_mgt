@@ -1,11 +1,11 @@
 <?php
 
-namespace SKYFILLERS\SfEventMgt\Tests\Functional\Repository;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 	/***************************************************************
 	 *  Copyright notice
 	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
 	 *
 	 *  All rights reserved
 	 *
@@ -29,13 +29,13 @@ namespace SKYFILLERS\SfEventMgt\Tests\Functional\Repository;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case for class \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository
+ * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
  */
 class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
 	protected $objectManager;
 
-	/** @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository */
+	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository */
 	protected $registrationRepository;
 
 	/** @var array */
@@ -44,7 +44,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 	public function setUp() {
 		parent::setUp();
 		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->registrationRepository = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\RegistrationRepository');
+		$this->registrationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository');
 
 		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_registration.xml');
 	}

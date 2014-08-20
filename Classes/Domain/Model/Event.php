@@ -1,12 +1,12 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Domain\Model;
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -85,14 +85,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Category
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
 	 */
 	protected $category = NULL;
 
 	/**
 	 * Registration
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Registration>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
 	 * @cascade remove
 	 */
 	protected $registration = NULL;
@@ -107,7 +107,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * The Location
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Location
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
 	 */
 	protected $location = NULL;
 
@@ -283,27 +283,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Adds a Category
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Category $category
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $category
 	 * @return void
 	 */
-	public function addCategory(\SKYFILLERS\SfEventMgt\Domain\Model\Category $category) {
+	public function addCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $category) {
 		$this->category->attach($category);
 	}
 
 	/**
 	 * Removes a Category
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
 	 * @return void
 	 */
-	public function removeCategory(\SKYFILLERS\SfEventMgt\Domain\Model\Category $categoryToRemove) {
+	public function removeCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove) {
 		$this->category->detach($categoryToRemove);
 	}
 
 	/**
 	 * Returns the category
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\SKYFILLERS\SfEventMgt\Domain\Model\Category> $category
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category> $category
 	 */
 	public function getCategory() {
 		return $this->category;
@@ -322,20 +322,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Adds a Registration
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
 	 * @return void
 	 */
-	public function addRegistration(\SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration) {
+	public function addRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration) {
 		$this->registration->attach($registration);
 	}
 
 	/**
 	 * Removes a Registration
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove
 	 * @return void
 	 */
-	public function removeRegistration(\SKYFILLERS\SfEventMgt\Domain\Model\Registration $registrationToRemove) {
+	public function removeRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove) {
 		$this->registration->detach($registrationToRemove);
 	}
 
@@ -413,7 +413,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the location
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Location $location
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location
 	 * @return void
 	 */
 	public function setLocation($location) {
@@ -423,7 +423,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the location
 	 *
-	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Location
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
 	 */
 	public function getLocation() {
 		return $this->location;

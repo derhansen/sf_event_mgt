@@ -1,10 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /***************************************************************
  *
  *  Copyright notice
  *
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *  (c) 2014 Thies Kracht <t.kracht@skyfillers.com>, Skyfillers GmbH
  *
  *  All rights reserved
@@ -27,7 +28,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  ***************************************************************/
 
 use RuntimeException;
-use \SKYFILLERS\SfEventMgt\Service\ExportService;
+use \DERHANSEN\SfEventMgt\Service\ExportService;
 
 /**
  * Class ExportServiceTest
@@ -39,7 +40,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected $subject = NULL;
 
-	/** @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository */
+	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository */
 	protected $registrationRepository;
 
 	/**
@@ -126,7 +127,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel() {
-		$mockRegistration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
 			array('_hasProperty'), array(), '', FALSE);
 		$mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
 			$this->equalTo('uid'))->will($this->returnValue(TRUE));
@@ -138,7 +139,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$allRegistrations->attach($mockRegistration);
 
-		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\Registration',
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\Registration',
 			array('findByEvent'), array(), '', FALSE);
 		$registrationRepository->expects($this->once())->method('findByEvent')->will($this->returnValue($allRegistrations));
 		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
@@ -156,7 +157,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider fieldValuesInTypoScriptDataProvider
 	 */
 	public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected) {
-		$mockRegistration = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Registration',
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
 			array('_hasProperty', '_getCleanProperty'), array(), '', FALSE);
 		$mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
 			$this->equalTo('uid'))->will($this->returnValue(TRUE));
@@ -174,7 +175,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$allRegistrations->attach($mockRegistration);
 
-		$registrationRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\Registration',
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\Registration',
 			array('findByEvent'), array(), '', FALSE);
 		$registrationRepository->expects($this->once())->method('findByEvent')->will(
 			$this->returnValue($allRegistrations));
@@ -202,7 +203,7 @@ class ExportServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function downloadRegistrationsCsvDumpsRegistrationsContent() {
-		$mockExportService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\ExportService',
+		$mockExportService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ExportService',
 			array('exportRegistrationsCsv'), array(), '', FALSE);
 		$mockExportService->expects($this->once())->method('exportRegistrationsCsv')->will(
 			$this->returnValue('CSV-DATA'));

@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Controller;
+namespace DERHANSEN\SfEventMgt\Controller;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -29,7 +29,7 @@ namespace SKYFILLERS\SfEventMgt\Controller;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use SKYFILLERS\SfEventMgt\Service;
+use DERHANSEN\SfEventMgt\Service;
 
 /**
  * AdministrationController
@@ -39,7 +39,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * eventRepository
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\EventRepository
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
 	 * @inject
 	 */
 	protected $eventRepository = NULL;
@@ -54,7 +54,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * exportService
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Service\ExportService
+	 * @var \DERHANSEN\SfEventMgt\Service\ExportService
 	 * @inject
 	 */
 	protected $exportService = NULL;
@@ -62,7 +62,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * registrationService
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Service\RegistrationService
+	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
 	 * @inject
 	 */
 	protected $registrationService = NULL;
@@ -101,13 +101,13 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * List action for backend module
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
 	 * @param int $messageId
 	 * @return void
 	 */
 	public function listAction($demand = NULL, $messageId = NULL) {
 		if ($demand === NULL) {
-			$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+			$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		}
 
 		if ($this->pid > 0) {

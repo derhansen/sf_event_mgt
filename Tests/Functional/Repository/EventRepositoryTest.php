@@ -1,11 +1,11 @@
 <?php
 
-namespace SKYFILLERS\SfEventMgt\Tests\Functional\Repository;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 	/***************************************************************
 	 *  Copyright notice
 	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
 	 *
 	 *  All rights reserved
 	 *
@@ -28,13 +28,13 @@ namespace SKYFILLERS\SfEventMgt\Tests\Functional\Repository;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
- * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Category.
+ * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Category.
  */
 class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
 	protected $objectManager;
 
-	/** @var \SKYFILLERS\SfEventMgt\Domain\Repository\EventRepository */
+	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository */
 	protected $eventRepository;
 
 	/** @var array  */
@@ -43,7 +43,7 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->eventRepository = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository');
+		$this->eventRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository');
 
 		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_event.xml');
 	}
@@ -67,8 +67,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByStoragePage() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(3);
 		$events = $this->eventRepository->findDemanded($demand);
 
@@ -82,8 +82,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByDisplayModeAll() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(4);
 		$demand->setDisplayMode('all');
 		$events = $this->eventRepository->findDemanded($demand);
@@ -98,8 +98,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByDisplayModePast() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(4);
 		$demand->setDisplayMode('past');
 		$demand->setCurrentDateTime(new \DateTime('30.05.2014'));
@@ -115,8 +115,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByDisplayModeFuture() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(4);
 		$demand->setDisplayMode('future');
 		$demand->setCurrentDateTime(new \DateTime('30.05.2014 14:00:00'));
@@ -132,8 +132,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByCategory() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(5);
 
 		$demand->setCategory('1');
@@ -156,8 +156,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByStartDate() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(6);
 
 		$demand->setStartDate(new \DateTime('30.05.2014 14:00:00'));
@@ -173,8 +173,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByEndDate() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(7);
 
 		$demand->setEndDate(new \DateTime('02.06.2014 08:00'));
@@ -190,8 +190,8 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findDemandedRecordsByTitle() {
-		/** @var \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(8);
 
 		$demand->setTitle('TYPO3 CMS course');

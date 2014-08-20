@@ -1,11 +1,11 @@
 <?php
 
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -27,7 +27,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
  ***************************************************************/
 
 /**
- * Test case for class \SKYFILLERS\SfEventMgt\Domain\Model\Location.
+ * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Location.
  *
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -36,7 +36,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Domain\Model;
  */
 class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Location
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
 	 */
 	protected $subject = NULL;
 
@@ -46,7 +46,7 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Domain\Model\Location();
+		$this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Location();
 	}
 
 	/**

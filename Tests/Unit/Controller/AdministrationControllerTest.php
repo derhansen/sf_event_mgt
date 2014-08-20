@@ -1,9 +1,9 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Controller;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -25,14 +25,14 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Controller;
  ***************************************************************/
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Controller\AdministrationController.
+ * Test case for class DERHANSEN\SfEventMgt\Controller\AdministrationController.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
 class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Controller\AdministrationController | \PHPUnit_Framework_MockObject_MockObject
+	 * @var \DERHANSEN\SfEventMgt\Controller\AdministrationController | \PHPUnit_Framework_MockObject_MockObject
 	 */
 	protected $subject = NULL;
 
@@ -42,7 +42,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Controller\\AdministrationController',
+		$this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\AdministrationController',
 			array('redirect', 'forward', 'addFlashMessage', 'redirectToUri'), array(), '', FALSE);
 	}
 
@@ -70,7 +70,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function listActionFetchesEventsFromRepositoryForNoStoragePageAndAssignsThemToView() {
-		$demand = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
 		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
@@ -78,7 +78,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+		$eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
 			array('findDemanded'), array(), '', FALSE);
 		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -96,10 +96,10 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function listActionFetchesEventsFromRepositoryForNoStoragePageAndGivenDemandAndAssignsThemToView() {
-		$demand = new \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+		$eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
 			array('findDemanded'), array(), '', FALSE);
 		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -119,13 +119,13 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function listActionFetchesAllEventsForGivenStoragePidAndAssignsThemToView() {
 		$this->subject->_set('pid', 1);
 
-		$demand = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+		$demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
 			array(), array(), '', FALSE);
 		$demand->expects($this->once())->method('setStoragePage')->with(1);
 
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+		$eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
 			array('findDemanded'), array(), '', FALSE);
 		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -145,13 +145,13 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function listActionAssignsMessageIfMessageIdGivenToView() {
 		$this->subject->_set('pid', 1);
 
-		$demand = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+		$demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
 			array(), array(), '', FALSE);
 		$demand->expects($this->once())->method('setStoragePage')->with(1);
 
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 
-		$eventRepository = $this->getMock('SKYFILLERS\\SfEventMgt\\Domain\\Repository\\EventRepository',
+		$eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
 			array('findDemanded'), array(), '', FALSE);
 		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
 		$this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -237,7 +237,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$settings = array('csvExport' =>
 			array('some settings')
 		);
-		$exportService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\ExportService',
+		$exportService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ExportService',
 			array(), array(), '', FALSE);
 		$exportService->expects($this->once())->method('downloadRegistrationsCsv')->with(
 			$this->equalTo(1),
@@ -253,7 +253,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView() {
-		$mockRegistrationService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\RegistrationService',
+		$mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
 			array('handleExpiredRegistrations'), array(), '', FALSE);
 		$mockRegistrationService->expects($this->once())->method('handleExpiredRegistrations');
 		$this->inject($this->subject, 'registrationService', $mockRegistrationService);

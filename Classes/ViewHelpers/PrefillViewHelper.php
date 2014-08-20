@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *

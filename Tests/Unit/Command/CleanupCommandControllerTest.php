@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Command;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Command;
 
 	/***************************************************************
 	 *  Copyright notice
 	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
 	 *
 	 *  All rights reserved
 	 *
@@ -26,12 +26,12 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Command;
 	 ***************************************************************/
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Command\CleanupCommandController.
+ * Test case for class DERHANSEN\SfEventMgt\Command\CleanupCommandController.
  */
 class CleanupCommandControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Command\CleanupCommandController
+	 * @var \DERHANSEN\SfEventMgt\Command\CleanupCommandController
 	 */
 	protected $subject = NULL;
 
@@ -41,7 +41,7 @@ class CleanupCommandControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = new \SKYFILLERS\SfEventMgt\Command\CleanupCommandController();
+		$this->subject = new \DERHANSEN\SfEventMgt\Command\CleanupCommandController();
 	}
 
 	/**
@@ -79,7 +79,7 @@ class CleanupCommandControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'configurationManager', $configurationManager);
 
-		$registrationService = $this->getMock('SKYFILLERS\\SfEventMgt\\Service\\RegistrationService',
+		$registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
 			array('handleExpiredRegistrations'), array(), '', FALSE);
 		$registrationService->expects($this->once())->method('handleExpiredRegistrations')->with(0)->will(
 			$this->returnValue($configuration));

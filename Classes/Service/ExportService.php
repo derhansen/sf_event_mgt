@@ -1,10 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Service;
+namespace DERHANSEN\SfEventMgt\Service;
 
 /***************************************************************
  *
  *  Copyright notice
  *
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *  (c) 2014 Thies Kracht <t.kracht@skyfillers.com>, Skyfillers GmbH
  *
  *  All rights reserved
@@ -36,7 +37,7 @@ class ExportService {
 	/**
 	 * Repository with registrations for the events
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
 	 * @inject
 	 */
 	protected $registrationRepository;

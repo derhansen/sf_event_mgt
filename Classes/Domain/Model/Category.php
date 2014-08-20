@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Domain\Model;
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -42,7 +42,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Parent
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Model\Category
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Category
 	 */
 	protected $parent;
 
@@ -68,7 +68,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the parent category
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Category $parent
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $parent
 	 * @return void
 	 */
 	public function setParent($parent) {
@@ -78,7 +78,7 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the parent category
 	 *
-	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Category
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Category
 	 */
 	public function getParent() {
 		return $this->parent;

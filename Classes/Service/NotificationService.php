@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Service;
+namespace DERHANSEN\SfEventMgt\Service;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,7 +26,7 @@ namespace SKYFILLERS\SfEventMgt\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\Utility\MessageType;
+use DERHANSEN\SfEventMgt\Utility\MessageType;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -54,7 +54,7 @@ class NotificationService {
 	/**
 	 * Email Service
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Service\EmailService
+	 * @var \DERHANSEN\SfEventMgt\Service\EmailService
 	 * @inject
 	 */
 	protected $emailService;
@@ -70,8 +70,8 @@ class NotificationService {
 	/**
 	 * Sends a message to the user based on the given type
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
 	 * @param int $type
 	 *
@@ -110,8 +110,8 @@ class NotificationService {
 	/**
 	 * Sends a message to the admin based on the given type
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
 	 * @param int $type
 	 *
@@ -150,8 +150,8 @@ class NotificationService {
 	/**
 	 * Returns the rendered HTML for the given template
 	 *
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Event $event
-	 * @param \SKYFILLERS\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
 	 * @param string $template
 	 * @param array $settings
 	 *

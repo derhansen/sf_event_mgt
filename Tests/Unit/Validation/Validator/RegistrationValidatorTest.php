@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Validation\Validator;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,7 +26,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Validation\Validator;
  ***************************************************************/
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Validation\Validator\RegistrationValidator.
+ * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
@@ -40,7 +40,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @var string
 	 */
-	protected $validatorClassName = 'SKYFILLERS\\SfEventMgt\\Validation\\Validator\\RegistrationValidator';
+	protected $validatorClassName = 'DERHANSEN\\SfEventMgt\\Validation\\Validator\\RegistrationValidator';
 
 	/**
 	 * Setup
@@ -78,7 +78,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider missingSettingsDataProvider
 	 */
 	public function validatorReturnsTrueWhenArgumentsMissing($settings, $fields, $expected) {
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setFirstname('John');
 		$registration->setLastname('Doe');
 		$registration->setEmail('email@domain.tld');
@@ -138,7 +138,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @dataProvider settingsDataProvider
 	 */
 	public function validatorReturnsExpectedResults($settings, $fields, $hasErrors, $expected) {
-		$registration = new \SKYFILLERS\SfEventMgt\Domain\Model\Registration();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setFirstname('John');
 		$registration->setLastname('Doe');
 		$registration->setEmail('email@domain.tld');

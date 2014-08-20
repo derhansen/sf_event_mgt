@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -24,15 +24,15 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\Service;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use SKYFILLERS\SfEventMgt\Command\CleanupCommandController;
+use DERHANSEN\SfEventMgt\Command\CleanupCommandController;
 
 /**
- * Test case for class SKYFILLERS\SfEventMgt\Service\EmailService.
+ * Test case for class DERHANSEN\SfEventMgt\Service\EmailService.
  */
 class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
-	 * @var \SKYFILLERS\SfEventMgt\Service\EmailService
+	 * @var \DERHANSEN\SfEventMgt\Service\EmailService
 	 */
 	protected $subject = NULL;
 
@@ -42,7 +42,7 @@ class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	protected function setUp() {
-		$this->subject = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\Service\\EmailService', array('dummy'));
+		$this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\EmailService', array('dummy'));
 	}
 
 	/**

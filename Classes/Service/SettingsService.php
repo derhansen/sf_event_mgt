@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Service;
+namespace DERHANSEN\SfEventMgt\Service;
 
 	/***************************************************************
 	 *
 	 *  Copyright notice
 	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
 	 *
 	 *  All rights reserved
 	 *

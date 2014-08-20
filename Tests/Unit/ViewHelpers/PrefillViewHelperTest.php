@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -25,7 +25,7 @@ namespace SKYFILLERS\SfEventMgt\Tests\Unit\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\ViewHelpers\PrefillViewHelper;
+use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 
 /**
  * Test case for prefill viewhelper
@@ -100,7 +100,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockControllerContext->expects($this->once())->method('getRequest')->will(
 			$this->returnValue($mockRequest));
 
-		$viewHelper = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
 			array('dummy'), array(), '', FALSE);
 		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$actual = $viewHelper->render('firstname', array('firstname' => 'unknown_field'));
@@ -128,7 +128,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockControllerContext->expects($this->once())->method('getRequest')->will(
 			$this->returnValue($mockRequest));
 
-		$viewHelper = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
 			array('dummy'), array(), '', FALSE);
 		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$actual = $viewHelper->render('lastname', array('lastname' => 'last_name'));
@@ -167,7 +167,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockControllerContext->expects($this->once())->method('getRequest')->will(
 			$this->returnValue($mockRequest));
 
-		$viewHelper = $this->getAccessibleMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
 			array('dummy'), array(), '', FALSE);
 		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$actual = $viewHelper->render('lastname', array('lastname' => 'last_name'));

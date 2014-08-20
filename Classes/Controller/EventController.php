@@ -1,11 +1,11 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Controller;
+namespace DERHANSEN\SfEventMgt\Controller;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,10 +26,10 @@ namespace SKYFILLERS\SfEventMgt\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use SKYFILLERS\SfEventMgt\Domain\Model\Event;
-use SKYFILLERS\SfEventMgt\Domain\Model\Registration;
-use SKYFILLERS\SfEventMgt\Utility\RegistrationResult;
-use SKYFILLERS\SfEventMgt\Utility\MessageType;
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use DERHANSEN\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
@@ -54,7 +54,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * eventRepository
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\EventRepository
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
 	 * @inject
 	 */
 	protected $eventRepository = NULL;
@@ -62,7 +62,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Registration repository
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Domain\Repository\RegistrationRepository
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
 	 * @inject
 	 */
 	protected $registrationRepository = NULL;
@@ -70,7 +70,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Notification Service
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Service\NotificationService
+	 * @var \DERHANSEN\SfEventMgt\Service\NotificationService
 	 * @inject
 	 */
 	protected $notificationService = NULL;
@@ -78,7 +78,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Settings Service
 	 *
-	 * @var \SKYFILLERS\SfEventMgt\Service\SettingsService
+	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
 	 * @inject
 	 */
 	protected $settingsService = NULL;
@@ -95,10 +95,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * Create a demand object with the given settings
 	 *
 	 * @param array $settings
-	 * @return \SKYFILLERS\SfEventMgt\Domain\Model\Dto\EventDemand
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
 	public function createDemandObjectFromSettings($settings) {
-		$demand = $this->objectManager->get('SKYFILLERS\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
 		$demand->setStoragePage($settings['storagePage']);
 		$demand->setCategory($settings['category']);
@@ -119,7 +119,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Detail view for an event
 	 *
-	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 * @return void
 	 */
 	public function detailAction(Event $event) {
@@ -129,7 +129,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Registration view for an event
 	 *
-	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
+	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 * @return void
 	 */
 	public function registrationAction(Event $event) {
@@ -154,9 +154,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Saves the registration
 	 *
-	 * @param $registration \SKYFILLERS\SfEventMgt\Domain\Model\Registration
-	 * @param $event \SKYFILLERS\SfEventMgt\Domain\Model\Event
-	 * @validate $registration \SKYFILLERS\SfEventMgt\Validation\Validator\RegistrationValidator
+	 * @param $registration \DERHANSEN\SfEventMgt\Domain\Model\Registration
+	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
+	 * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator
 	 * @return void
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {

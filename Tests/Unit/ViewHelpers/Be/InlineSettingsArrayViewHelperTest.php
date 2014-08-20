@@ -1,10 +1,10 @@
 <?php
-namespace SKYFILLERS\SfEventMgt\Tests\Unit\ViewHelpers\Be;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Be;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>, Skyfillers GmbH
+ *  (c) 2014 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -51,7 +51,7 @@ class InlineSettingsArrayViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCa
 		$mockDocTemplate->expects($this->once())->method('getPageRenderer')->will(
 			$this->returnValue($mockPageRenderer));
 
-		$viewHelper = $this->getMock('SKYFILLERS\\SfEventMgt\\ViewHelpers\\Be\\InlineSettingsArrayViewHelper',
+		$viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Be\\InlineSettingsArrayViewHelper',
 			array('getDocInstance'), array(), '', FALSE);
 		$viewHelper->expects($this->once())->method('getDocInstance')->will($this->returnValue($mockDocTemplate));
 
