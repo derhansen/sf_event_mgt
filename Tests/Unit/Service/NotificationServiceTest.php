@@ -156,6 +156,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
 		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
 		$this->inject($this->subject, 'hashService', $hashService);
 
 		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -204,6 +205,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
 		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
 		$this->inject($this->subject, 'hashService', $hashService);
 
 		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -265,6 +267,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
 		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
 		$this->inject($this->subject, 'hashService', $hashService);
 
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -322,6 +325,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
 		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
 		$this->inject($this->subject, 'hashService', $hashService);
 
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
