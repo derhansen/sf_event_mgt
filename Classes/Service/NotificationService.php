@@ -174,7 +174,8 @@ class NotificationService {
 			'event' => $event,
 			'registration' => $registration,
 			'settings' => $settings,
-			'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid())
+			'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
+			'reghmac' => $this->hashService->appendHmac($registration->getUid())
 		));
 		$emailBody = $emailView->render();
 		return $emailBody;
