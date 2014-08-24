@@ -76,5 +76,17 @@ module.tx_sfeventmgt {
 		registration {
 			deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
 		}
+		notification {
+			senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
+			senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
+			senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
+			customNotifications {
+				thanksForParticipation {
+					title = Thank you message
+					template = ThanksForParticipation.html
+					subject = Thank you for participation
+				}
+			}
+		}
 	}
 }

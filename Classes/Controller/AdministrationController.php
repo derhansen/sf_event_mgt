@@ -26,9 +26,9 @@ namespace DERHANSEN\SfEventMgt\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use DERHANSEN\SfEventMgt\Utility\MessageType;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use DERHANSEN\SfEventMgt\Service;
 
 /**
@@ -45,13 +45,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $eventRepository = NULL;
 
 	/**
-	 * The current page uid
-	 *
-	 * @var int
-	 */
-	protected $pid = 0;
-
-	/**
 	 * exportService
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\ExportService
@@ -66,6 +59,29 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @inject
 	 */
 	protected $registrationService = NULL;
+
+	/**
+	 * notificationService
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Service\NotificationService
+	 * @inject
+	 */
+	protected $notificationService = NULL;
+
+	/**
+	 * settingsService
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
+	 * @inject
+	 */
+	protected $settingsService = NULL;
+
+	/**
+	 * The current page uid
+	 *
+	 * @var int
+	 */
+	protected $pid = 0;
 
 	/**
 	 * Initialize action
@@ -159,5 +175,32 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		$this->registrationService->handleExpiredRegistrations(
 			$this->settings['registration']['deleteExpiredRegistrations']);
 		$this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => NULL, 'messageId' => 1));
+	}
+
+	/**
+	 * The index notify action
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @return void
+	 */
+	public function indexNotifyAction(\DERHANSEN\SfEventMgt\Domain\Model\Event $event) {
+		$customNotifications = $this->settingsService->getCustomNotifications($this->settings);
+		$this->view->assignMultiple(array(
+			'event' => $event,
+			'customNotifications' => $customNotifications
+		));
+	}
+
+	/**
+	 * Notify action
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param string $customNotification
+	 * @return void
+	 */
+	public function notifyAction(\DERHANSEN\SfEventMgt\Domain\Model\Event $event, $customNotification) {
+		$result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
+		// @todo: Add log entry for notification
+		$this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => NULL, 'messageId' => 2));
 	}
 }

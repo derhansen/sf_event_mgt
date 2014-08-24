@@ -54,11 +54,11 @@ class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
-	 * Data provider for settings
+	 * Data provider for settings (clear cache uids)
 	 *
 	 * @return array
 	 */
-	public function settingsDataProvider() {
+	public function clearCacheSettingsDataProvider() {
 		return array(
 			'emptySettings' => array(
 				array(),
@@ -122,10 +122,66 @@ class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
-	 * @dataProvider settingsDataProvider
+	 * @dataProvider clearCacheSettingsDataProvider
 	 */
 	public function getClearCacheUids($settings, $expected) {
 		$this->assertEquals($expected, $this->subject->getClearCacheUids($settings));
 	}
 
+	/**
+	 * Data provider for settings (custom notifications)
+	 *
+	 * @return array
+	 */
+	public function customNotificationsSettingsDataProvider() {
+		return array(
+			'emptySettings' => array(
+				array(),
+				array()
+			),
+			'oneEntry' => array(
+				array(
+					'notification' => array(
+						'customNotifications' => array(
+							'firstEntry' => array(
+								'title' => 'First title',
+								'template' => 'First template',
+								'subject' => 'First subject'
+							)
+						)
+					)
+				),
+				array('firstEntry' => 'First title')
+			),
+			'twoEntry' => array(
+				array(
+					'notification' => array(
+						'customNotifications' => array(
+							'firstEntry' => array(
+								'title' => 'First title',
+								'template' => 'First template',
+								'subject' => 'First subject'
+							),
+							'secondEntry' => array(
+								'title' => 'Second title',
+								'template' => 'Second template',
+								'subject' => 'Second subject'
+							)
+
+						)
+					)
+				),
+				array('firstEntry' => 'First title', 'secondEntry' => 'Second title')
+			),
+		);
+	}
+
+	/**
+	 * @test
+	 * @dataProvider customNotificationsSettingsDataProvider
+	 */
+	public function getCustomNotificationsTest($settings, $expected) {
+		$result = $this->subject->getCustomNotifications($settings);
+		$this->assertEquals($expected, $result);
+	}
 }

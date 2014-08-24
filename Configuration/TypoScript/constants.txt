@@ -54,5 +54,13 @@ module.tx_sfeventmgt {
 		search {
 			dateFormat = d.m.Y
 		}
+		notification {
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
+			senderEmail =
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
+			senderName =
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
+			senderSignature =
+		}
 	}
 }

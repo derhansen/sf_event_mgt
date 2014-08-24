@@ -32,4 +32,5 @@ namespace DERHANSEN\SfEventMgt\Utility;
 class MessageType {
 	const REGISTRATION_NEW = 0;
 	const REGISTRATION_CONFIRMED = 1;
+	const CUSTOM_NOTIFICATION = 2;
 }

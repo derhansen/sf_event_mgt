@@ -71,7 +71,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			),
 			'messageTypeRegistrationConfirmed' => array(
 				MessageType::REGISTRATION_CONFIRMED
-			),
+			)
 		);
 	}
 
@@ -330,5 +330,67 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
 		$this->assertTrue($result);
+	}
+
+	/**
+	 * @test
+	 */
+	public function sendUserMessageReturnsFalseIfNoCustomMessageGiven() {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration->setEmail('valid@email.tld');
+
+		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
+
+		$result = $this->subject->sendUserMessage($event, $registration, $settings, MessageType::CUSTOM_NOTIFICATION, '');
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function sendCustomNotificationWithoutParameters() {
+		$result = $this->subject->sendCustomNotification(NULL, '', array());
+		$this->assertEquals(0, $result);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable() {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration->setConfirmed(FALSE);
+		$event->addRegistration($registration);
+
+		$result = $this->subject->sendCustomNotification($event, 'aTemplate', array('someSettings'));
+		$this->assertEquals(0, $result);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent() {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration1 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration1->setConfirmed(FALSE);
+		$registration2 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration2->setConfirmed(TRUE);
+		$registration3 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration3->setConfirmed(TRUE);
+		$event->addRegistration($registration1);
+		$event->addRegistration($registration2);
+		$event->addRegistration($registration3);
+
+		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+			array('sendUserMessage'));
+		$mockNotificationService->expects($this->at(0))->method('sendUserMessage')->will($this->returnValue(TRUE));
+		$mockNotificationService->expects($this->at(1))->method('sendUserMessage')->will($this->returnValue(TRUE));
+
+		$result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', array('someSettings'));
+		$this->assertEquals(2, $result);
 	}
 }

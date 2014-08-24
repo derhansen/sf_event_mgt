@@ -156,6 +156,12 @@
 			<trans-unit id="administration.message-1.content">
 				<source>All expired registrations have been marked as hidden/deleted.</source>
 			</trans-unit>
+			<trans-unit id="administration.message-2.title">
+				<source>Information</source>
+			</trans-unit>
+			<trans-unit id="administration.message-2.content">
+				<source>The selected e-mail has been sent to all participants of the event.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

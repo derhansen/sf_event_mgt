@@ -262,4 +262,41 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->handleExpiredRegistrationsAction();
 	}
 
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function indexNotifyActionAssignsExpectedObjectsToView() {
+		$customNotifications = array('key' => 'value');
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$mockSettingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService',
+			array('getCustomNotifications'), array(), '', FALSE);
+		$mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
+			$this->returnValue($customNotifications));
+		$this->inject($this->subject, 'settingsService', $mockSettingsService);
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->once())->method('assignMultiple')->with($this->equalTo(
+			array('event' => $event, 'customNotifications' => $customNotifications)));
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->indexNotifyAction($event);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function notifyActionSendsNotificationsLogsAndRedirects() {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+
+		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+			array('sendCustomNotification'), array(), '', FALSE);
+		$mockNotificationService->expects($this->once())->method('sendCustomNotification')->will(
+			$this->returnValue(1));
+		$this->inject($this->subject, 'notificationService', $mockNotificationService);
+
+		$this->subject->expects($this->once())->method('redirect');
+		$this->subject->notifyAction($event, 'customNotification');
+	}
 }

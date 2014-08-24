@@ -78,17 +78,44 @@
 			<trans-unit id="administration.title">
 				<source>Event Administration</source>
 			</trans-unit>
+			<trans-unit id="administration.notify">
+				<source>Notify participants</source>
+			</trans-unit>
 			<trans-unit id="administration.newEvent">
 				<source>Create new event</source>
 			</trans-unit>
 			<trans-unit id="administration.export">
-				<source>Export event</source>
+				<source>Export participants</source>
+			</trans-unit>
+			<trans-unit id="administration.notify">
+				<source>Notify participants</source>
 			</trans-unit>
 			<trans-unit id="administration.settings">
 				<source>Settings</source>
 			</trans-unit>
-			<trans-unit id="administration.handleExpiredRegistrations">
-				<source>Remove/hide expired registrations</source>
+			<trans-unit id="administration.notify.description">
+				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.description">
+				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.event">
+				<source>Event:</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.recipients">
+				<source>recipients</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.label.template">
+				<source>Template:</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.senderEmailError">
+				<source>The sender e-mail address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.sendNotifications">
+				<source>Send notifications</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.cancelSendNotifications">
+				<source>Back to event listing</source>
 			</trans-unit>
 		</body>
 	</file>

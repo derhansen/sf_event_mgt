@@ -35,10 +35,16 @@
     </td>
     <td>
         <f:if condition="{event.enableRegistration}">
+            <f:link.action action="indexNotify" arguments="{event: '{event}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify')}">
+                <span class="t3-icon sf-event-mgt-admin-motify">&nbsp;</span>
+            </f:link.action>
+        </f:if>
+    </td>
+    <td>
+        <f:if condition="{event.enableRegistration}">
             <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
                 <span class="t3-icon t3-icon-mimetypes t3-icon-mimetypes-text t3-icon-text-csv">&nbsp;</span>
             </f:link.action>
         </f:if>
     </td>
-
 </tr>

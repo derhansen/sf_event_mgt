@@ -27,6 +27,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  ***************************************************************/
 
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -68,16 +69,49 @@ class NotificationService {
 	protected $hashService;
 
 	/**
+	 * Sends a custom notification defined by the given customNotification key
+	 * to all confirmed users of the event
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param string $customNotification
+	 * @param array $settings
+	 * @return int Number of notifications sent
+	 */
+	public function sendCustomNotification($event, $customNotification, $settings) {
+		if (is_null($event) || $customNotification == '' || $settings == '' || !is_array($settings)) {
+			return 0;
+		}
+		$count = 0;
+		foreach ($event->getRegistration() as $registration) {
+			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
+			if ($registration->isConfirmed()) {
+				$result = $this->sendUserMessage(
+					$event,
+					$registration,
+					$settings,
+					MessageType::CUSTOM_NOTIFICATION,
+					$customNotification
+				);
+				if ($result) {
+					$count += 1;
+				}
+			}
+		}
+		return $count;
+	}
+
+	/**
 	 * Sends a message to the user based on the given type
 	 *
 	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
 	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
 	 * @param array $settings
 	 * @param int $type
+	 * @param string $customNotification
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
-	public function sendUserMessage($event, $registration, $settings, $type) {
+	public function sendUserMessage($event, $registration, $settings, $type, $customNotification = '') {
 		$template = 'Notification/User/RegistrationNew.html';
 		$subject = $settings['notification']['registrationNew']['userSubject'];
 		switch ($type) {
@@ -85,11 +119,15 @@ class NotificationService {
 				$template = 'Notification/User/RegistrationConfirmed.html';
 				$subject = $settings['notification']['registrationConfirmed']['userSubject'];
 				break;
+			case MessageType::CUSTOM_NOTIFICATION:
+				$template = 'Notification/User/Custom/' . $settings['notification']['customNotifications'][$customNotification]['template'];
+				$subject = $settings['notification']['customNotifications'][$customNotification]['subject'];
+				break;
 			case MessageType::REGISTRATION_NEW:
 			default:
 		}
 
-		if (is_null($event) || is_null($registration || !is_array($settings))) {
+		if (is_null($event) || is_null($registration) || !is_array($settings) || (substr($template, -5) != '.html')) {
 			return FALSE;
 		}
 
@@ -175,7 +213,7 @@ class NotificationService {
 			'registration' => $registration,
 			'settings' => $settings,
 			'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
-			'reghmac' => $this->hashService->appendHmac($registration->getUid())
+			'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
 		));
 		$emailBody = $emailView->render();
 		return $emailBody;
