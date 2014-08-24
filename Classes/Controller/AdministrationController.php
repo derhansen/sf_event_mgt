@@ -26,8 +26,6 @@ namespace DERHANSEN\SfEventMgt\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DERHANSEN\SfEventMgt\Utility\MessageType;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use DERHANSEN\SfEventMgt\Service;
 
@@ -43,6 +41,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @inject
 	 */
 	protected $eventRepository = NULL;
+
+	/**
+	 * customNotificationLogRepository
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
+	 * @inject
+	 */
+	protected $customNotificationLogRepository = NULL;
 
 	/**
 	 * exportService
@@ -185,9 +191,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 */
 	public function indexNotifyAction(\DERHANSEN\SfEventMgt\Domain\Model\Event $event) {
 		$customNotifications = $this->settingsService->getCustomNotifications($this->settings);
+		$logEntries = $this->customNotificationLogRepository->findByEvent($event);
 		$this->view->assignMultiple(array(
 			'event' => $event,
-			'customNotifications' => $customNotifications
+			'customNotifications' => $customNotifications,
+			'logEntries' => $logEntries,
 		));
 	}
 
@@ -199,8 +207,10 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function notifyAction(\DERHANSEN\SfEventMgt\Domain\Model\Event $event, $customNotification) {
+		$customNotifications = $this->settingsService->getCustomNotifications($this->settings);
 		$result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
-		// @todo: Add log entry for notification
+		$this->notificationService->createCustomNotificationLogentry($event,
+			$customNotifications[$customNotification], $result);
 		$this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => NULL, 'messageId' => 2));
 	}
 }

@@ -117,6 +117,15 @@
 			<trans-unit id="administration.notify.cancelSendNotifications">
 				<source>Back to event listing</source>
 			</trans-unit>
+			<trans-unit id="administration.notify.date">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.details">
+				<source>Details</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.emailsSent">
+				<source>E-Mails sent</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

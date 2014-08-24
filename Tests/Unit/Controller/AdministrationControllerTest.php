@@ -268,7 +268,15 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function indexNotifyActionAssignsExpectedObjectsToView() {
 		$customNotifications = array('key' => 'value');
+		$logEntries = array('SomeResult');
 		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+
+		$mockLogRepo = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CustomNotificationRepository',
+			array('findByEvent'), array(), '', FALSE);
+		$mockLogRepo->expects($this->once())->method('findByEvent')->will(
+			$this->returnValue($logEntries));
+		$this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
+
 		$mockSettingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService',
 			array('getCustomNotifications'), array(), '', FALSE);
 		$mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
@@ -277,7 +285,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->once())->method('assignMultiple')->with($this->equalTo(
-			array('event' => $event, 'customNotifications' => $customNotifications)));
+			array('event' => $event, 'customNotifications' => $customNotifications, 'logEntries' => $logEntries)));
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->indexNotifyAction($event);
@@ -288,12 +296,20 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function notifyActionSendsNotificationsLogsAndRedirects() {
+		$customNotifications = array('key' => 'value');
 		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
+		$mockSettingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService',
+			array('getCustomNotifications'), array(), '', FALSE);
+		$mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
+			$this->returnValue($customNotifications));
+		$this->inject($this->subject, 'settingsService', $mockSettingsService);
+
 		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-			array('sendCustomNotification'), array(), '', FALSE);
+			array('sendCustomNotification','createCustomNotificationLogentry'), array(), '', FALSE);
 		$mockNotificationService->expects($this->once())->method('sendCustomNotification')->will(
 			$this->returnValue(1));
+		$mockNotificationService->expects($this->once())->method('createCustomNotificationLogentry');
 		$this->inject($this->subject, 'notificationService', $mockNotificationService);
 
 		$this->subject->expects($this->once())->method('redirect');

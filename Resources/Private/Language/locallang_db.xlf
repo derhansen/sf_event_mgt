@@ -117,7 +117,21 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
 			</trans-unit>
-
+			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
+				<source>Notificationlog</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details">
+				<source>Details</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent">
+				<source>E-Mails sent</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.cruser">
+				<source>User</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

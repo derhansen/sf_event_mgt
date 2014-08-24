@@ -27,7 +27,6 @@ namespace DERHANSEN\SfEventMgt\Service;
  ***************************************************************/
 
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
@@ -69,6 +68,14 @@ class NotificationService {
 	protected $hashService;
 
 	/**
+	 * customNotificationLogRepository
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
+	 * @inject
+	 */
+	protected $customNotificationLogRepository = NULL;
+
+	/**
 	 * Sends a custom notification defined by the given customNotification key
 	 * to all confirmed users of the event
 	 *
@@ -98,6 +105,22 @@ class NotificationService {
 			}
 		}
 		return $count;
+	}
+
+	/**
+	 * Adds a logentry to the custom notification log
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param string $details
+	 * @param int $emailsSent
+	 * @return void
+	 */
+	public function createCustomNotificationLogentry($event, $details, $emailsSent) {
+		$notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
+		$notificationlogEntry->setEvent($event);
+		$notificationlogEntry->setDetails($details);
+		$notificationlogEntry->setEmailsSent($emailsSent);
+		$this->customNotificationLogRepository->add($notificationlogEntry);
 	}
 
 	/**

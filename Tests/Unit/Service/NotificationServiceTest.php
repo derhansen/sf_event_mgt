@@ -393,4 +393,18 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', array('someSettings'));
 		$this->assertEquals(2, $result);
 	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function createCustomNotificationLogentryCreatesLog() {
+		$mockLogRepo = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CustomNotificationRepository',
+			array('add'), array(), '', FALSE);
+		$mockLogRepo->expects($this->once())->method('add');
+		$this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
+
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$this->subject->createCustomNotificationLogentry($event, 'A description', 1);
+	}
 }

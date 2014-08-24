@@ -2,6 +2,7 @@
     clear: both;
 }
 
+.event-administration .notifyhead,
 .event-administration .settings {
     background-color: #EDEDED;
     border-top: 1px solid #CDCDCD;
@@ -31,10 +32,14 @@
     margin: 5px 0 3px 100px;
 }
 
-.event-administration  .sf-event-mgt-admin-motify {
+.event-administration  .sf-event-mgt-admin-notify {
     background: url(../Icons/notify-icon.png) no-repeat;
     width: 16px;
     height: 16px
+}
+
+tr.db_list_normal td.logdate {
+    width: 130px;
 }
 
 .left a:hover {

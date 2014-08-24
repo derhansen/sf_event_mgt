@@ -7,41 +7,58 @@
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify" />
     </h1>
 
-    <p><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.description" /></p>
-
-    <p>
-        <strong>
-            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.event" />
-        </strong>
+    <h2>
+        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.event" />
         {event.title} (<f:count subject="{event.registration}"/> <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.recipients" />)
-    </p>
+    </h2>
 
-    <p>
-        @todo: show list of sent notifications
-    </p>
+    <div class="notifyhead">
+        <f:if condition="{settings.notification.senderEmail} == ''">
+            <f:then>
+                <p class="error">
+                    <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.senderEmailError"/>
+                </p>
+            </f:then>
+            <f:else>
+                <p><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.description" /></p>
 
-    <f:if condition="{settings.notification.senderEmail} == ''">
-        <f:then>
-            <p class="error">
-                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.senderEmailError"/>
-            </p>
-        </f:then>
-        <f:else>
-            <f:form name="notify" action="notify" arguments="{event: '{event}', template: 'test.html'}" class="backendForm">
-                <div class="field">
-                    <label for="customNotification">
-                        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.template"/>
-                    </label>
-                    <f:form.select id="customNotification" name="customNotification" options="{customNotifications}" />
-                    <div class="clear"></div>
-                </div>
-                <f:form.submit value="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sendNotifications')}" class="submit"/>
-            </f:form>
+                <f:form name="notify" action="notify" arguments="{event: '{event}', template: 'test.html'}" class="backendForm">
+                    <div class="field">
+                        <label for="customNotification">
+                            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.template"/>
+                        </label>
+                        <f:form.select id="customNotification" name="customNotification" options="{customNotifications}" />
+                        <div class="clear"></div>
+                    </div>
+                    <f:form.submit value="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sendNotifications')}" class="submit"/>
+                </f:form>
+            </f:else>
+        </f:if>
+    </div>
 
-            <f:link.action action="list">
-                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.cancelSendNotifications" />
-            </f:link.action>
-        </f:else>
-    </f:if>
+    <h3>Notification history</h3>
+
+    <table cellpadding="0" cellmargin="0" cellspacing="0" class="t3-table">
+        <thead>
+            <tr class="t3-row-header">
+                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.date"/></th>
+                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.details"/></th>
+                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.emailsSent"/></th>
+            </tr>
+        </thead>
+        <tbody>
+            <f:for each="{logEntries}" as="logEntry">
+                <tr class="db_list_normal">
+                    <td class="logdate"><f:format.date format="d.m.Y - H:i:s">{logEntry.tstamp}</f:format.date></td>
+                    <td>{logEntry.details}</td>
+                    <td>{logEntry.emailsSent}</td>
+                </tr>
+            </f:for>
+        </tbody>
+    </table>
+
+    <f:link.action action="list">
+        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.cancelSendNotifications" />
+    </f:link.action>
 
 </f:section>

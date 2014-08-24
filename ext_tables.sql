@@ -92,6 +92,25 @@ CREATE TABLE tx_sfeventmgt_domain_model_category (
 );
 
 #
+# Table structure for table 'tx_sfeventmgt_domain_model_customnotificationlog'
+#
+CREATE TABLE tx_sfeventmgt_domain_model_customnotificationlog (
+
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	event int(11) unsigned DEFAULT '0' NOT NULL,
+	details text NOT NULL,
+	emails_sent int(11) DEFAULT '0' NOT NULL,
+
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+
+	PRIMARY KEY (uid),
+);
+
+#
 # Table structure for table 'tx_sfeventmgt_domain_model_location'
 #
 CREATE TABLE tx_sfeventmgt_domain_model_location (
