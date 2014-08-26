@@ -166,10 +166,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * export registrations for a given event
 	 *
 	 * @param int $eventUid
-	 * @return void
+	 * @return bool Always FALSE, since no view should be rendered
 	 */
 	public function exportAction($eventUid) {
 		$this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
+		return FALSE;
 	}
 
 	/**
