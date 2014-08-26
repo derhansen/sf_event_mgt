@@ -1,63 +1,109 @@
-
 <f:layout name="Default" />
 
-This Template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>Listing for Event</h1>
+
+<h1><f:translate key="list.title" /></h1>
 
 <f:flashMessages renderMode="div" />
 
-<table  class="tx_sfeventmgt" >
-	<tr>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.title" /></th>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.description" /></th>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.startdate" /></th>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.enddate" /></th>
-        <th><f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" /></th>
-        <th><f:translate key="tx_sfeventmgt_domain_model_event.registrations" /></th>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.price" /></th>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.currency" /></th>
-		<th><f:translate key="tx_sfeventmgt_domain_model_event.location" /></th>
-        <th></th>
-	</tr>
-
-	<f:for each="{events}" as="event">
-		<tr>
-            <f:if condition="{settings.detailPid} == ''">
-                <f:then>
-                    <td><f:link.action action="detail" arguments="{event : event}">{event.title}</f:link.action></td>
-                </f:then>
-                <f:else>
-                    <td><f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action></td>
-                </f:else>
-            </f:if>
-			<td>{event.description}</td>
-            <td><f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date></td>
-            <td><f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date></td>
-			<td>{event.maxParticipants}</td>
-			<td>{event.registration->f:count()}</td>
-			<td>{event.price}</td>
-			<td>{event.currency}</td>
-			<td>{event.location.title}</td>
-            <td>
-                <f:if condition="{event.registrationPossible}">
-                    <f:if condition="{settings.registrationPid} !=''">
-                        <f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}"><f:translate key="event.registration" /></f:link.action>
+    <f:for each="{events}" as="event">
+        <div class="event-list-item">
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+                </div>
+                <div class="event-title">
+                    <f:if condition="{settings.detailPid} == ''">
+                        <f:then>
+                            <f:link.action action="detail" arguments="{event : event}">{event.title}</f:link.action>
+                        </f:then>
+                        <f:else>
+                            <f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action>
+                        </f:else>
                     </f:if>
-                </f:if>
-            </td>
-		</tr>
-	</f:for>
-</table>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.description"/>
+                </div>
+                <div class="event-list-value event-description">
+                    <f:format.html>{event.description}</f:format.html>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                </div>
+                <div class="event-list-value event-startdate">
+                    <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                </div>
+                <div class="event-list-value event-enddate">
+                    <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                </div>
+                <div class="event-list-value event-maxparticipants">
+                    {event.maxParticipants}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                </div>
+                <div class="event-list-value event-registrations">
+                    {event.registration->f:count()}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <f:if condition="{event.price} > 0">
+                <div class="event-list-row">
+                    <div class="event-list-label">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
+                    </div>
+                    <div class="event-list-value event-price">
+                        {event.price} {event.currency}
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </f:if>
+            <f:if condition="{event.location} > 0">
+                <div class="event-list-row">
+                    <div class="event-list-label">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+                    </div>
+                    <div class="event-list-value event-price">
+                        {event.location.title}
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </f:if>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                </div>
+                <div class="event-list-value event-registration">
+                    <f:if condition="{event.registrationPossible}">
+                        <f:if condition="{settings.registrationPid} !=''">
+                            <f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}"><f:translate key="event.registration" /></f:link.action>
+                        </f:if>
+                    </f:if>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </f:for>
 
 </f:section>

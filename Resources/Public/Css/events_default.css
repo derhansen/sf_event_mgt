@@ -1,0 +1,23 @@
+.event-list-item {
+	margin-bottom: 15px;
+}
+
+.event-list-row {
+	margin-bottom: 5px;
+}
+
+.event-list-label {
+	float: left;
+	display: block;
+	width: 150px;
+	min-height: 1px;
+	font-weight: bold;
+}
+
+.event-list-value {
+	float: left;
+}
+
+.tx-sf-event-mgt .clear {
+	clear: both;
+}
