@@ -2,10 +2,12 @@
 	margin-bottom: 15px;
 }
 
+.event-detail-row,
 .event-list-row {
 	margin-bottom: 5px;
 }
 
+.event-detail-label,
 .event-list-label {
 	float: left;
 	display: block;
@@ -14,10 +16,32 @@
 	font-weight: bold;
 }
 
+.event-detail-value,
 .event-list-value {
 	float: left;
 }
 
 .tx-sf-event-mgt .clear {
 	clear: both;
+}
+
+.tx-sf-event-mgt form.registration fieldset {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.tx-sf-event-mgt form.registration label {
+	display: block;
+	width: 150px;
+	float: left;
+}
+
+.tx-sf-event-mgt form.registration .error {
+	margin-left: 150px;
+	color: #ff0000;
+}
+
+.tx-sf-event-mgt form.registration .submit {
+	margin-left: 150px;
 }

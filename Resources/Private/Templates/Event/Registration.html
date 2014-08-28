@@ -1,16 +1,81 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <f:layout name="Default" />
 <f:section name="main">
+
     <h1><f:translate key="registration.title" /></h1>
 
-    <f:translate key="tx_sfeventmgt_domain_model_event.title" />: {event.title} <br>
-    <f:translate key="tx_sfeventmgt_domain_model_event.description" />: {event.description} <br>
-    <f:translate key="tx_sfeventmgt_domain_model_event.startdate" />: <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date> <br>
-    <f:translate key="tx_sfeventmgt_domain_model_event.enddate" />: <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date> <br>
-    <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" />: {event.maxParticipants} <br>
-    <f:translate key="tx_sfeventmgt_domain_model_event.price" />: {event.price} {event.currency} <br>
+    <div class="event-detail-row">
+        <div class="event-detail-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.title" />
+        </div>
+        <div class="event-detail-value event-title">
+            {event.title}
+        </div>
+        <div class="clear"></div>
+    </div>
 
-    <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}">
+    <div class="event-list-row">
+        <div class="event-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+        </div>
+        <div class="event-list-value event-startdate">
+            <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="event-list-row">
+        <div class="event-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+        </div>
+        <div class="event-list-value event-enddate">
+            <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="event-list-row">
+        <div class="event-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+        </div>
+        <div class="event-list-value event-maxparticipants">
+            {event.maxParticipants}
+        </div>
+        <div class="clear"></div>
+    </div>
+    <div class="event-list-row">
+        <div class="event-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+        </div>
+        <div class="event-list-value event-registrations">
+            {event.registration->f:count()}
+        </div>
+        <div class="clear"></div>
+    </div>
+    <f:if condition="{event.price} > 0">
+        <div class="event-list-row">
+            <div class="event-list-label">
+                <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
+            </div>
+            <div class="event-list-value event-price">
+                {event.price} {event.currency}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </f:if>
+    <f:if condition="{event.location}">
+        <div class="event-list-row">
+            <div class="event-list-label">
+                <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+            </div>
+            <div class="event-list-value event-price">
+                {event.location.title}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </f:if>
+
+    <h2><f:translate key="registration.form.header" /></h2>
+
+    <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration">
         <fieldset>
             <label for="gender"><f:translate key="tx_sfeventmgt_domain_model_registration.gender" /></label>
             <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" /><f:form.radio name="gender" property="gender" value=""/>
@@ -57,7 +122,7 @@
             <f:form.textarea id="notes" property="notes"/><br>
             <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>
 
-            <f:form.submit value="{f:translate(key:'event.submit-registration')}"/>
+            <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
         </fieldset>
     </f:form>
 

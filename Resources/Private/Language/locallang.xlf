@@ -108,6 +108,9 @@
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 			</trans-unit>
+			<trans-unit id="registration.form.header">
+				<source>Registration form</source>
+			</trans-unit>
 			<trans-unit id="event.backtext">
 				<source>Back to listview</source>
 			</trans-unit>
