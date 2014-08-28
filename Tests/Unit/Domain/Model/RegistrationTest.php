@@ -112,6 +112,56 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
+	public function getTitleReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getTitle()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setTitleForStringSetsTitle() {
+		$this->subject->setTitle('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'title',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getCompanyReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getCompany()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setCompanyForStringSetsCompany() {
+		$this->subject->setCompany('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'company',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
 	public function getAddressReturnsInitialValueForString() {
 		$this->assertSame(
 			'',

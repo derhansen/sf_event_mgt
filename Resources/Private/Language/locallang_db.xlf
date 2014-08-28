@@ -63,6 +63,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.lastname">
 				<source>Lastname</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.company">
+				<source>Company</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.address">
 				<source>Address</source>
 			</trans-unit>

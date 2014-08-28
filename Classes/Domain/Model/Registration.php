@@ -49,6 +49,20 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $lastname = '';
 
 	/**
+	 * Title
+	 *
+	 * @var string
+	 */
+	protected $title = '';
+
+	/**
+	 * company
+	 *
+	 * @var string
+	 */
+	protected $company = '';
+
+	/**
 	 * Address
 	 *
 	 * @var string
@@ -182,6 +196,44 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setLastname($lastname) {
 		$this->lastname = $lastname;
+	}
+
+	/**
+	 * Returns the title
+	 *
+	 * @return string $title
+	 */
+	public function getTitle() {
+		return $this->title;
+	}
+
+	/**
+	 * Sets the title
+	 *
+	 * @param string $title
+	 * @return void
+	 */
+	public function setTitle($title) {
+		$this->title = $title;
+	}
+
+	/**
+	 * Returns the company
+	 *
+	 * @return string $company
+	 */
+	public function getCompany() {
+		return $this->company;
+	}
+
+	/**
+	 * Sets the company
+	 *
+	 * @param string $company
+	 * @return void
+	 */
+	public function setCompany($company) {
+		$this->company = $company;
 	}
 
 	/**

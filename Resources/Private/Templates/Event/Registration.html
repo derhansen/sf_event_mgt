@@ -97,6 +97,18 @@
             </div>
 
             <div class="event-registration-row">
+                <label for="title"><f:translate key="tx_sfeventmgt_domain_model_registration.title" /></label>
+                <f:form.textfield id="title" property="title" value="{e:prefill(fieldname: 'title', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                <f:render partial="FormErrors" arguments="{field: 'registration.title'}"/>
+            </div>
+
+            <div class="event-registration-row">
+                <label for="company"><f:translate key="tx_sfeventmgt_domain_model_registration.company" /></label>
+                <f:form.textfield id="company" property="company" value="{e:prefill(fieldname: 'company', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                <f:render partial="FormErrors" arguments="{field: 'registration.company'}"/>
+            </div>
+
+            <div class="event-registration-row">
                 <label for="address"><f:translate key="tx_sfeventmgt_domain_model_registration.address" /></label>
                 <f:form.textfield id="address" property="address" value="{e:prefill(fieldname: 'address', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
                 <f:render partial="FormErrors" arguments="{field: 'registration.address'}"/>
