@@ -411,6 +411,15 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Returns the amount of free places
+	 *
+	 * @return int
+	 */
+	public function getFreePlaces() {
+		return $this->maxParticipants - $this->getRegistration()->count();
+	}
+
+	/**
 	 * Sets the location
 	 *
 	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location

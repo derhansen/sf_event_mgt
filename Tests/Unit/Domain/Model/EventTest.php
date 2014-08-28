@@ -616,4 +616,33 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject->getLinkTitle()
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getFreePlacesWithoutRegistrationsTest() {
+		$this->subject->setMaxParticipants(10);
+
+		$this->assertEquals(
+			10,
+			$this->subject->getFreePlaces()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFreePlacesWithRegistrationsTest() {
+		$this->subject->setMaxParticipants(10);
+
+		$registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('count'), array(), '', FALSE);
+		$registrationObjectStorageMock->expects($this->once())->method('count')->will($this->returnValue(5));
+		$this->inject($this->subject, 'registration', $registrationObjectStorageMock);
+
+		$this->assertEquals(
+			5,
+			$this->subject->getFreePlaces()
+		);
+	}
+
 }
