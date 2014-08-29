@@ -48,6 +48,22 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
+	public function viewReturnsCurrentFieldValueIfValueInGPAvailable() {
+		\TYPO3\CMS\Core\Utility\GeneralUtility::_GETset(array(
+			'tx_sfeventmgt_pievent' => array(
+				'registration' => array('fieldname' => 'Existing Value'))
+			)
+		);
+		$GLOBALS['TSFE'] = new \stdClass();
+		$viewHelper = new PrefillViewHelper();
+		$actual = $viewHelper->render('fieldname', array());
+		$this->assertSame('Existing Value', $actual);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
 	public function viewReturnsEmptyStringIfNoTsfeLoginuserNotAvailabe() {
 		$GLOBALS['TSFE'] = new \stdClass();
 		$viewHelper = new PrefillViewHelper();

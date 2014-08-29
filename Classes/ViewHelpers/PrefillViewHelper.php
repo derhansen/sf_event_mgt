@@ -41,6 +41,10 @@ class PrefillViewHelper extends AbstractViewHelper {
 	 * @return string
 	 */
 	public function render($fieldname, $prefillSettings = array()) {
+		$piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_sfeventmgt_pievent');
+		if (isset($piVars['registration'][$fieldname]) && $piVars['registration'][$fieldname] != '') {
+			return $piVars['registration'][$fieldname];
+		}
 		if (!isset($GLOBALS['TSFE']) || !$GLOBALS['TSFE']->loginUser || empty($prefillSettings) ||
 			!array_key_exists($fieldname, $prefillSettings)) {
 			return '';
