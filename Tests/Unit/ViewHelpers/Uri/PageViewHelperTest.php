@@ -105,7 +105,7 @@ class PageViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($mockUriBuilderPageUid));
 
 		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-			array('buildTSFE'), array(), '', FALSE);
+			array('buildTsfe'), array(), '', FALSE);
 		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$viewHelper->expects($this->once())->method('buildTSFE');
 
@@ -138,7 +138,28 @@ class PageViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$viewHelper->expects($this->once())->method('getTimeTrackerInstance')->will(
 			$this->returnValue($mockTimeTracker));
 		$viewHelper->expects($this->once())->method('getTsfeInstance')->will($this->returnValue($mockTsfe));
-		$viewHelper->_call('buildTSFE');
+		$viewHelper->_call('buildTsfe');
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function buildTsfeWithTtSet() {
+		$GLOBALS['TT'] = new \stdClass();
+		$mockTsfe = $this->getMock(
+			'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', array('initFEuser', 'fetch_the_id',
+			'getPageAndRootline', 'initTemplate', 'getConfigArray'), array(), '', FALSE);
+		$mockTsfe->expects($this->once())->method('initFEuser');
+		$mockTsfe->expects($this->once())->method('fetch_the_id');
+		$mockTsfe->expects($this->once())->method('getPageAndRootline');
+		$mockTsfe->expects($this->once())->method('initTemplate');
+		$mockTsfe->expects($this->once())->method('getConfigArray');
+
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+			array('getTsfeInstance', 'getTimeTrackerInstance'), array(), '', FALSE);
+		$viewHelper->expects($this->once())->method('getTsfeInstance')->will($this->returnValue($mockTsfe));
+		$viewHelper->_call('buildTsfe');
 	}
 
 	/**
