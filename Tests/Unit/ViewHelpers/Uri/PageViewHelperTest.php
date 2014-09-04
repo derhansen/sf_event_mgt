@@ -109,9 +109,58 @@ class PageViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$viewHelper->_set('controllerContext', $mockControllerContext);
 		$viewHelper->expects($this->once())->method('buildTSFE');
 
-		// Just callrender method - parameters do not matter in this case, since everything is mocked
+		// Just callrender method - parameters do not matter in this case,
+		// since everything is mocked
 		$actual = $viewHelper->render();
 		$this->assertSame('The Uri', $actual);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function buildTsfeWithoutTtSet() {
+		$mockTimeTracker = $this->getMock('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker',
+			array('start'), array(), '', FALSE);
+		$mockTimeTracker->expects($this->once())->method('start');
+
+		$mockTsfe = $this->getMock(
+			'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', array('initFEuser', 'fetch_the_id',
+			'getPageAndRootline', 'initTemplate', 'getConfigArray'), array(), '', FALSE);
+		$mockTsfe->expects($this->once())->method('initFEuser');
+		$mockTsfe->expects($this->once())->method('fetch_the_id');
+		$mockTsfe->expects($this->once())->method('getPageAndRootline');
+		$mockTsfe->expects($this->once())->method('initTemplate');
+		$mockTsfe->expects($this->once())->method('getConfigArray');
+
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+			array('getTsfeInstance', 'getTimeTrackerInstance'), array(), '', FALSE);
+		$viewHelper->expects($this->once())->method('getTimeTrackerInstance')->will(
+			$this->returnValue($mockTimeTracker));
+		$viewHelper->expects($this->once())->method('getTsfeInstance')->will($this->returnValue($mockTsfe));
+		$viewHelper->_call('buildTSFE');
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getTsfeInstanceReturnsInstanceOfTsfeController() {
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+			array('dummy'), array(), '', FALSE);
+		$result = $viewHelper->_call('getTsfeInstance');
+		$this->assertInstanceOf('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $result);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getTimeTrackerInstanceReturnsInstanceOfTsfeController() {
+		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+			array('dummy'), array(), '', FALSE);
+		$result = $viewHelper->_call('getTimeTrackerInstance');
+		$this->assertInstanceOf('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker', $result);
 	}
 
 }

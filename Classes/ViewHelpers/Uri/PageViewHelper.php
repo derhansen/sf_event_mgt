@@ -26,8 +26,9 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
  ***************************************************************/
 
 /**
- * A viewhelper with the same functionality as the f:uri.page viewhelper, but this viewhelper builds
- * frontend links with buildFrontendUri, so links to FE pages can get generated in the TYPO3 backend
+ * A viewhelper with the same functionality as the f:uri.page viewhelper,
+ * but this viewhelper builds frontend links with buildFrontendUri, so links
+ * to FE pages can get generated in the TYPO3 backend
  */
 class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
@@ -36,21 +37,37 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 	 *
 	 * @return void
 	 */
-	public function buildTSFE() {
+	protected function buildTsfe() {
 		if (!is_object($GLOBALS['TT'])) {
-			$GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker;
+			$GLOBALS['TT'] = $this->getTimeTrackerInstance();
 			$GLOBALS['TT']->start();
 		}
-		$tsfeClassname = 'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController';
-		$GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($tsfeClassname,
-			$GLOBALS['TYPO3_CONF_VARS'], $this->pid, '0', 1, '', '', '', '');
+		$GLOBALS['TSFE'] = $this->getTsfeInstance();
 		$GLOBALS['TSFE']->initFEuser();
 		$GLOBALS['TSFE']->fetch_the_id();
 		$GLOBALS['TSFE']->getPageAndRootline();
 		$GLOBALS['TSFE']->initTemplate();
-		$GLOBALS['TSFE']->tmpl->getFileName_backPath = PATH_site;
-		$GLOBALS['TSFE']->forceTemplateParsing = 1;
 		$GLOBALS['TSFE']->getConfigArray();
+	}
+
+	/**
+	 * Returns a new instance of the TypoScriptFrontendController
+	 *
+	 * @return object
+	 */
+	protected function getTsfeInstance() {
+		$tsfeClassname = 'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController';
+		return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($tsfeClassname,
+			$GLOBALS['TYPO3_CONF_VARS'], $this->pid, '0', 1, '', '', '', '');
+	}
+
+	/**
+	 * Returns a new instance of TimeTracker
+	 *
+	 * @return object
+	 */
+	protected function getTimeTrackerInstance() {
+		return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker');
 	}
 
 	/**
@@ -68,7 +85,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 	 * @return string Rendered page URI
 	 */
 	public function render($pageUid = NULL, array $additionalParams = array(), $pageType = 0, $noCache = FALSE, $noCacheHash = FALSE, $section = '', $linkAccessRestrictedPages = FALSE, $absolute = FALSE, $addQueryString = FALSE, array $argumentsToBeExcludedFromQueryString = array(), $addQueryStringMethod = NULL) {
-		$this->buildTSFE();
+		$this->buildTsfe();
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		$uri = $uriBuilder->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->setAddQueryStringMethod($addQueryStringMethod)->buildFrontendUri();
 		return $uri;
