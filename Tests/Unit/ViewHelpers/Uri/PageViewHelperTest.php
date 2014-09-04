@@ -105,8 +105,9 @@ class PageViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($mockUriBuilderPageUid));
 
 		$viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-			array('dummy'), array(), '', FALSE);
+			array('buildTSFE'), array(), '', FALSE);
 		$viewHelper->_set('controllerContext', $mockControllerContext);
+		$viewHelper->expects($this->once())->method('buildTSFE');
 
 		// Just callrender method - parameters do not matter in this case, since everything is mocked
 		$actual = $viewHelper->render();

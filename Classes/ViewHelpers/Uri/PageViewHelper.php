@@ -32,6 +32,28 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 	/**
+	 * Creates a TSFE object which can be used in Backend
+	 *
+	 * @return void
+	 */
+	public function buildTSFE() {
+		if (!is_object($GLOBALS['TT'])) {
+			$GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker;
+			$GLOBALS['TT']->start();
+		}
+		$tsfeClassname = 'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController';
+		$GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance($tsfeClassname,
+			$GLOBALS['TYPO3_CONF_VARS'], $this->pid, '0', 1, '', '', '', '');
+		$GLOBALS['TSFE']->initFEuser();
+		$GLOBALS['TSFE']->fetch_the_id();
+		$GLOBALS['TSFE']->getPageAndRootline();
+		$GLOBALS['TSFE']->initTemplate();
+		$GLOBALS['TSFE']->tmpl->getFileName_backPath = PATH_site;
+		$GLOBALS['TSFE']->forceTemplateParsing = 1;
+		$GLOBALS['TSFE']->getConfigArray();
+	}
+
+	/**
 	 * @param integer|NULL $pageUid target PID
 	 * @param array $additionalParams query parameters to be attached to the resulting URI
 	 * @param integer $pageType type of the target page. See typolink.parameter
@@ -46,6 +68,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 	 * @return string Rendered page URI
 	 */
 	public function render($pageUid = NULL, array $additionalParams = array(), $pageType = 0, $noCache = FALSE, $noCacheHash = FALSE, $section = '', $linkAccessRestrictedPages = FALSE, $absolute = FALSE, $addQueryString = FALSE, array $argumentsToBeExcludedFromQueryString = array(), $addQueryStringMethod = NULL) {
+		$this->buildTSFE();
 		$uriBuilder = $this->controllerContext->getUriBuilder();
 		$uri = $uriBuilder->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->setAddQueryStringMethod($addQueryStringMethod)->buildFrontendUri();
 		return $uri;
