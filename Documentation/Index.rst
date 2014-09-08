@@ -8,7 +8,7 @@
 .. _start:
 
 =============================================================
-Event management and booking
+Event management and registration
 =============================================================
 
 .. only:: html
@@ -23,10 +23,10 @@ Event management and booking
 		en
 
 	:Description:
-		Event management with booking option
+		Event management and registration
 
 	:Keywords:
-		comma,separated,list,of,keywords
+		events, registration
 
 	:Copyright:
 		2014
@@ -56,7 +56,7 @@ Event management and booking
 
 	Introduction/Index
 	User/Index
-	Administrator/Index
+	Administration/Index
 	Configuration/Index
 	Developer/Index
 	KnownProblems/Index

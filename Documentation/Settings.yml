@@ -9,8 +9,8 @@
 ---
 conf.py:
   copyright: 2014
-  project: Event management and booking
-  version: 0.0.0
+  project: Event management and registration
+  version: 0.5.0
   release: 0.0.0
   intersphinx_mapping:
     t3tsref:
@@ -19,7 +19,7 @@ conf.py:
   latex_documents:
   - - Index
     - sf_event_mgt.tex
-    - Event management and booking
+    - Event management and registration
     - Torben Hansen
     - manual
   latex_elements:
