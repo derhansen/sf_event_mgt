@@ -11,7 +11,5 @@
 Known Problems
 ==============
 
-Say where bugs can be reported / followed up. Is it a
-`bug tracker <http://forge.typo3.org/projects/typo3cms-doc-official-extension-template/issues>`_?
-Use this section for informing about any type of of problem
-that are not necessarily named in the bug tracker such as performance issues, ...
+None at the moment. If you find a bug or have a feature request for this extension,
+please use the bugtracker on GitHub at https://github.com/derhansen/sf_event_mgt

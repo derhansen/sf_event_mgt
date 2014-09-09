@@ -58,8 +58,5 @@ Event management and registration
 	User/Index
 	Administration/Index
 	Configuration/Index
-	Developer/Index
 	KnownProblems/Index
-	ToDoList/Index
-	ChangeLog/Index
-	Targets
+	Faq/Index

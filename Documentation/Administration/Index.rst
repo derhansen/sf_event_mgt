@@ -20,3 +20,4 @@ Administration
    ClearCacheUids/Index
    Cronjob/Index
    CustomNotifications/Index
+   BackendModule/Index

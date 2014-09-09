@@ -6,7 +6,7 @@
 .. include:: ../Includes.txt
 
 
-.. custom-notifications:
+.. _custom-notifications:
 
 Custom notifications
 ====================
