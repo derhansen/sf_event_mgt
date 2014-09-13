@@ -84,6 +84,9 @@
 			<trans-unit id="administration.newEvent">
 				<source>Create new event</source>
 			</trans-unit>
+			<trans-unit id="administration.handleExpiredRegistrations">
+				<source>Hide/delete expired registrations</source>
+			</trans-unit>
 			<trans-unit id="administration.export">
 				<source>Export participants</source>
 			</trans-unit>
