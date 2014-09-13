@@ -116,6 +116,12 @@ Registration
          participation to the event.
 
  - :Field:
+         Registration deadline
+
+   :Description:
+         If set, registration is only possible until the given date.
+
+ - :Field:
          Max. participants
 
    :Description:

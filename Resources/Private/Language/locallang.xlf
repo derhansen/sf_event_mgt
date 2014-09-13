@@ -126,6 +126,9 @@
 			<trans-unit id="event.message.registrationfailedeventexpired">
 				<source>Registration is not possible any more, because the event startdate is reached.</source>
 			</trans-unit>
+			<trans-unit id="event.message.registrationfaileddeadlineexpired">
+				<source>Registration is not possible any more, because the registration deadline is reached.</source>
+			</trans-unit>
 			<trans-unit id="event.message.registrationfailednotenabled">
 				<source>Registration failed, because registration is disabled.</source>
 			</trans-unit>

@@ -68,15 +68,15 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 	public function findExpiredRegistrationsDataProvider() {
 		return array(
 			'allRegistrationsExpired' => array(
-				1402826400, // 15.06.2014 10:00
+				1402826400, /* 15.06.2014 10:00 */
 				3
 			),
 			'noRegistrationsExpired' => array(
-				1402736400, // 14.06.2014 09:00
+				1402736400, /* 14.06.2014 09:00 */
 				0
 			),
 			'nowIs1030Am' => array(
-				1402741800, // 14.06.2014 10:30
+				1402741800, /* 14.06.2014 10:30 */
 				1
 			),
 		);

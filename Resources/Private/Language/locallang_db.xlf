@@ -45,6 +45,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Registrations</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
+				<source>Registration deadline</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Category</source>
 			</trans-unit>

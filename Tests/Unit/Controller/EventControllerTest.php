@@ -182,7 +182,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
-	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationDisabled() {
+	public function saveRegistrationActionRedirectsWithMessageIfRegistrationDisabled() {
 		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
 
@@ -201,7 +201,27 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
-	public function saveRegistrationActionAssignsExpectedObjectsToViewIfEventExpired() {
+	public function saveRegistrationActionRedirectsWithMessageIfRegistrationDeadlineExpired() {
+		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+			array(), '', FALSE);
+
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$deadline = new \DateTime();
+		$deadline->add(\DateInterval::createFromDateString('yesterday'));
+		$event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(TRUE));
+		$event->expects($this->any())->method('getRegistrationDeadline')->will($this->returnValue($deadline));
+
+		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
+			array('result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED));
+
+		$this->subject->saveRegistrationAction($registration, $event);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function saveRegistrationActionRedirectsWithMessageIfEventExpired() {
 		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
 
@@ -221,7 +241,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
-	public function saveRegistrationActionAssignsExpectedObjectsToViewIfMaxParticipantsReached() {
+	public function saveRegistrationRedirectsWithMessageIfMaxParticipantsReached() {
 		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
 
@@ -246,7 +266,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
-	public function saveRegistrationActionAssignsExpectedObjectsToViewIfRegistrationSuccessful() {
+	public function saveRegistrationActionRedirectsWithMessageIfRegistrationSuccessful() {
 		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
 
@@ -309,6 +329,19 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationDeadlineExpired() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.registrationfaileddeadlineexpired');
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED);
 	}
 
 	/**

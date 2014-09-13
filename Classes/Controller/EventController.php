@@ -165,6 +165,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		if ($event->getEnableRegistration() === FALSE) {
 			$success = FALSE;
 			$result = RegistrationResult::REGISTRATION_NOT_ENABLED;
+		} elseif ($event->getRegistrationDeadline() != NULL && $event->getRegistrationDeadline() < new \DateTime()) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
 		} elseif ($event->getStartdate() < new \DateTime()) {
 			$success = FALSE;
 			$result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
@@ -228,6 +231,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				break;
 			case RegistrationResult::REGISTRATION_NOT_ENABLED:
 				$messageKey = 'event.message.registrationfailednotenabled';
+				break;
+			case RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED:
+				$messageKey = 'event.message.registrationfaileddeadlineexpired';
 				break;
 			default:
 				$messageKey = '';

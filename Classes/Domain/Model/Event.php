@@ -98,6 +98,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $registration = NULL;
 
 	/**
+	 * Registration deadline date
+	 *
+	 * @var \DateTime
+	 */
+	protected $registrationDeadline = NULL;
+
+	/**
 	 * The image
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
@@ -407,7 +414,12 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		if ($this->getMaxParticipants() > 0 && $this->getRegistration()->count() >= $this->maxParticipants) {
 			$maxParticipantsNotReached = FALSE;
 		}
-		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached && $this->getEnableRegistration();
+		$deadlineNotReached = TRUE;
+		if ($this->getRegistrationDeadline() != NULL && $this->getRegistrationDeadline() <= new \DateTime()) {
+				$deadlineNotReached = FALSE;
+		}
+		return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached &&
+			$this->getEnableRegistration() && $deadlineNotReached;
 	}
 
 	/**
@@ -455,6 +467,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getEnableRegistration() {
 		return $this->enableRegistration;
+	}
+
+	/**
+	 * Sets the registration deadline
+	 *
+	 * @param \DateTime $registrationDeadline
+	 * @return void
+	 */
+	public function setRegistrationDeadline($registrationDeadline) {
+		$this->registrationDeadline = $registrationDeadline;
+	}
+
+	/**
+	 * Returns the registration deadline
+	 *
+	 * @return \DateTime
+	 */
+	public function getRegistrationDeadline() {
+		return $this->registrationDeadline;
 	}
 
 	/**

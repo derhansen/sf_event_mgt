@@ -376,6 +376,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('yesterday'));
 		$this->subject->setStartdate($startdate);
+		$this->subject->setEnableRegistration(TRUE);
 
 		$this->assertFalse($this->subject->getRegistrationPossible());
 	}
@@ -392,6 +393,21 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertFalse($this->subject->getRegistrationPossible());
 	}
 
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsFalseIfRegistrationDeadlineReached() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$deadline = new \DateTime();
+		$deadline->add(\DateInterval::createFromDateString('yesterday'));
+		$this->subject->setStartdate($startdate);
+		$this->subject->setMaxParticipants(1);
+		$this->subject->setRegistrationDeadline($deadline);
+		$this->subject->setEnableRegistration(TRUE);
+
+		$this->assertFalse($this->subject->getRegistrationPossible());
+	}
 
 	/**
 	 * @test
@@ -430,6 +446,22 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
 		$this->subject->setStartdate($startdate);
+		$this->subject->setEnableRegistration(TRUE);
+
+		$this->assertTrue($this->subject->getRegistrationPossible());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationPossibleReturnsTrueIfRegistrationDeadlineNotReached() {
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$deadline = new \DateTime();
+		$deadline->add(\DateInterval::createFromDateString('tomorrow'));
+		$this->subject->setStartdate($startdate);
+		$this->subject->setMaxParticipants(1);
+		$this->subject->setRegistrationDeadline($deadline);
 		$this->subject->setEnableRegistration(TRUE);
 
 		$this->assertTrue($this->subject->getRegistrationPossible());
@@ -642,6 +674,30 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertEquals(
 			5,
 			$this->subject->getFreePlaces()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getRegistrationDeadlineReturnsInitialValueForDateTime() {
+		$this->assertEquals(
+			NULL,
+			$this->subject->getRegistrationDeadline()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setRegistrationDeadlineForDateTimeSetsStartdate() {
+		$dateTimeFixture = new \DateTime();
+		$this->subject->setRegistrationDeadline($dateTimeFixture);
+
+		$this->assertAttributeEquals(
+			$dateTimeFixture,
+			'registrationDeadline',
+			$this->subject
 		);
 	}
 
