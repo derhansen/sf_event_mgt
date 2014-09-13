@@ -3,7 +3,7 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../Includes.txt
+.. include:: ../../Includes.txt
 
 
 .. _clearcacheuids:
@@ -25,4 +25,5 @@ So if you use the registration option, please configure the following TypoScript
             clearCacheUids = pid1,pid2
         }
     }
-Make sure, you configure this setting at **template root level**.
+
+Make sure, you configure this setting at **template root level**

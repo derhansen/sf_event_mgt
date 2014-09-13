@@ -1,4 +1,4 @@
-﻿.. ==================================================
+.. ==================================================
 .. FOR YOUR INFORMATION
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
@@ -6,17 +6,16 @@
 .. include:: ../Includes.txt
 
 
-.. _introduction:
+.. _templates:
 
-Introduction
-============
+Templates
+=========
 
 .. toctree::
    :maxdepth: 5
    :titlesonly:
    :glob:
 
-   WhatDoesItDo/Index
-   Screenshots/Index
-   FeedbackUpdates/Index
-   Thanks/Index
+   Changing/Index
+   Objects/Index
+   Viewhelpers/Index

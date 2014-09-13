@@ -3,7 +3,7 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../Includes.txt
+.. include:: ../../Includes.txt
 
 
 .. _registrations:
@@ -27,7 +27,6 @@ process and also some administration fields like "confirmed" or "paid"
 
    :Description:
          Description:
-
 
  - :Field:
          Firstname
@@ -89,10 +88,10 @@ process and also some administration fields like "confirmed" or "paid"
    :Description:
          Date of birth of the participant
 
-  - :Field:
+ - :Field:
          Notes
 
-    :Description:
+   :Description:
          Notes from the participant
 
  - :Field:
@@ -113,5 +112,3 @@ process and also some administration fields like "confirmed" or "paid"
 
    :Description:
          Administration field used to set if the user has paid for the event
-
-

@@ -46,10 +46,5 @@ Is it possible to extend events/registrations with own fields?
 
 Yes, just use the extension builder to extend sf_event_mgt with custom fields.
 
-Which objects are available in Fluid for templating?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Please take a look at the templates included in the extension. They nearly contain
-all available objects you can use in your own templates.
 
 

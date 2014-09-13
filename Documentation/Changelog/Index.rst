@@ -6,17 +6,10 @@
 .. include:: ../Includes.txt
 
 
-.. _introduction:
+.. _changelog:
 
-Introduction
-============
+Changelog
+=========
 
-.. toctree::
-   :maxdepth: 5
-   :titlesonly:
-   :glob:
-
-   WhatDoesItDo/Index
-   Screenshots/Index
-   FeedbackUpdates/Index
-   Thanks/Index
+At the moment there is no changelog for this extension, since the current version
+is the first released on TER.
