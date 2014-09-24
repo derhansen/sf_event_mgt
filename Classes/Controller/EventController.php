@@ -262,10 +262,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$registration = NULL;
 		$failed = FALSE;
 		$messageKey = 'event.message.confirmation_successful';
+		$titleKey = 'confirmRegistration.title.successful';
 
 		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_wrong_hmac';
+			$titleKey = 'confirmRegistration.title.failed';
 		} else {
 			$registration = $this->registrationRepository->findByUid($reguid);
 		}
@@ -273,16 +275,19 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		if (!$failed && is_null($registration)) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_registration_not_found';
+			$titleKey = 'confirmRegistration.title.failed';
 		}
 
 		if (!$failed && $registration->getConfirmationUntil() < new \DateTime()) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_confirmation_until_expired';
+			$titleKey = 'confirmRegistration.title.failed';
 		}
 
 		if (!$failed && $registration->getConfirmed() === TRUE) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_already_confirmed';
+			$titleKey = 'confirmRegistration.title.failed';
 		}
 
 		if ($failed === FALSE) {
@@ -296,5 +301,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				MessageType::REGISTRATION_CONFIRMED);
 		}
 		$this->view->assign('messageKey', $messageKey);
+		$this->view->assign('titleKey', $titleKey);
 	}
 }
