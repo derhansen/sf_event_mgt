@@ -326,6 +326,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.registrationfailedeventexpired');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'registrationResult.title.failed');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
@@ -339,6 +341,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.registrationfaileddeadlineexpired');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'registrationResult.title.failed');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED);
@@ -352,6 +356,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.registrationfailedmaxparticipants');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'registrationResult.title.failed');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
@@ -365,6 +371,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.registrationsuccessful');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'registrationResult.title.successful');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFUL);
@@ -378,6 +386,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.registrationfailednotenabled');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'registrationResult.title.failed');
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_NOT_ENABLED);
@@ -390,6 +400,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function saveRegistrationResultActionShowsNoMessageIfUnknownResultGiven() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
 			'');
 		$this->inject($this->subject, 'view', $view);
 

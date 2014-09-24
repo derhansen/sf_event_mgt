@@ -222,24 +222,31 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		switch ($result) {
 			case RegistrationResult::REGISTRATION_SUCCESSFUL:
 				$messageKey = 'event.message.registrationsuccessful';
+				$titleKey = 'registrationResult.title.successful';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
 				$messageKey = 'event.message.registrationfailedeventexpired';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS:
 				$messageKey = 'event.message.registrationfailedmaxparticipants';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			case RegistrationResult::REGISTRATION_NOT_ENABLED:
 				$messageKey = 'event.message.registrationfailednotenabled';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED:
 				$messageKey = 'event.message.registrationfaileddeadlineexpired';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			default:
 				$messageKey = '';
+				$titleKey = '';
 		}
 
 		$this->view->assign('messageKey', $messageKey);
+		$this->view->assign('titleKey', $titleKey);
 	}
 
 	/**
