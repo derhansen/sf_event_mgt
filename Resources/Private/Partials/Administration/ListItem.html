@@ -11,13 +11,10 @@
         <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date>
     </td>
     <td class="registrationenabled">
-        <f:if condition="{event.enableRegistration} == 0">
+        <f:if condition="{event.enableRegistration} == 1">
             <f:then>
-                <f:translate key="label.false" />
+                <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-status-permission-granted">&nbsp;</span>
             </f:then>
-            <f:else>
-                <f:translate key="label.true" />
-            </f:else>
         </f:if>
     </td>
     <td class="maxparticipants">
