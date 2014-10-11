@@ -34,4 +34,42 @@
         <hidden>1</hidden>
     </tx_sfeventmgt_domain_model_registration>
 
+
+    <!-- findNotificationRegistrations -->
+    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 1 / paid 0 -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>10</uid>
+        <event>1</event>
+        <paid>0</paid>
+        <confirmed>1</confirmed>
+        <confirmation_until>1402740000</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 1 / paid 1 -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>11</uid>
+        <event>1</event>
+        <paid>1</paid>
+        <confirmed>1</confirmed>
+        <confirmation_until>1402740000</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Confirmation until: 14.06.2014 11:00 AM / confirmed / event 1 / paid 1 -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>12</uid>
+        <event>1</event>
+        <paid>1</paid>
+        <confirmed>1</confirmed>
+        <confirmation_until>1402743600</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 2 / paid 0 -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>13</uid>
+        <event>2</event>
+        <paid>0</paid>
+        <confirmed>1</confirmed>
+        <confirmation_until>1402740000</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
 </dataset>

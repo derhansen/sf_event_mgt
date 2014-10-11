@@ -58,4 +58,46 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query->matching($query->logicalAnd($constraints))->execute();
 	}
 
+	/**
+	 * Returns all registrations for the given event with the given constraints
+	 * Constraints are combined with a logical AND
+	 *
+	 * @param $event
+	 * @param $findConstraints
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findNotificationRegistrations($event, $findConstraints) {
+		$constraints = array();
+		$query = $this->createQuery();
+		$constraints[] = $query->equals('event', $event);
+
+		if (!is_array($findConstraints) || count($findConstraints) == 0) {
+			return $query->matching($query->logicalAnd($constraints))->execute();
+		}
+
+		foreach ($findConstraints as $findConstraint => $value) {
+			$condition = key($value);
+			switch ($condition) {
+				case 'equals':
+					$constraints[] = $query->equals($findConstraint, $value[$condition]);
+					break;
+				case 'lessThan':
+					$constraints[] = $query->lessThan($findConstraint, $value[$condition]);
+					break;
+				case 'lessThanOrEqual':
+					$constraints[] = $query->lessThanOrEqual($findConstraint, $value[$condition]);
+					break;
+				case 'greaterThan':
+					$constraints[] = $query->greaterThan($findConstraint, $value[$condition]);
+					break;
+				case 'greaterThanOrEqual':
+					$constraints[] = $query->greaterThanOrEqual($findConstraint, $value[$condition]);
+					break;
+				default:
+			}
+		}
+
+		return $query->matching($query->logicalAnd($constraints))->execute();
+	}
+
 }

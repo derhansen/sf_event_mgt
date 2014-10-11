@@ -52,6 +52,14 @@ class NotificationService {
 	protected $configurationManager;
 
 	/**
+	 * Registration repository
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
+	 * @inject
+	 */
+	protected $registrationRepository = NULL;
+
+	/**
 	 * Email Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\EmailService
@@ -89,7 +97,10 @@ class NotificationService {
 			return 0;
 		}
 		$count = 0;
-		foreach ($event->getRegistration() as $registration) {
+
+		$constraints = $settings['notification']['customNotifications'][$customNotification]['constraints'];
+		$registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
+		foreach ($registrations as $registration) {
 			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
 			if ($registration->isConfirmed()) {
 				$result = $this->sendUserMessage(

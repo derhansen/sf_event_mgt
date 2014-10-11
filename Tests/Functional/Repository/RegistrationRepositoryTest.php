@@ -32,15 +32,27 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
  */
 class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
-	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager
+	 */
 	protected $objectManager;
 
-	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository */
+	/**
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
+	 */
 	protected $registrationRepository;
 
-	/** @var array */
+	/**
+	 * @var array
+	 */
 	protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
 
+	/**
+	 * Setup
+	 *
+	 * @throws \TYPO3\CMS\Core\Tests\Exception
+	 * @return void
+	 */
 	public function setUp() {
 		parent::setUp();
 		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
@@ -57,7 +69,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 	 */
 	public function findAll() {
 		$registrations = $this->registrationRepository->findAll();
-		$this->assertEquals(4, $registrations->count());
+		$this->assertEquals(8, $registrations->count());
 	}
 
 	/**
@@ -90,4 +102,91 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 		$registrations = $this->registrationRepository->findExpiredRegistrations($dateNow);
 		$this->assertEquals($expected, $registrations->count());
 	}
+
+	/**
+	 * Test with no parameters
+	 *
+	 * @test
+	 */
+	public function findNotificationRegistrationsWithNoParameters() {
+		$registrations = $this->registrationRepository->findNotificationRegistrations(NULL, NULL);
+		$this->assertEquals(0, $registrations->count());
+	}
+
+	/**
+	 * Test for match on Event
+	 *
+	 * @test
+	 */
+	public function findNotificationRegistrationsForEventUid2() {
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$event->expects($this->once())->method('getUid')->will($this->returnValue(2));
+		$registrations = $this->registrationRepository->findNotificationRegistrations($event, NULL);
+		$this->assertEquals(1, $registrations->count());
+	}
+
+	/**
+	 * Data provider for findExpiredRegistrations
+	 *
+	 * @return array
+	 */
+	public function findNotificationRegistrationsDataProvider() {
+		return array(
+			'withEmptyConstraints' => array(
+				array(),
+				3
+			),
+			'allPaidEquals1' => array(
+				array(
+					'paid' => array('equals' => '1')
+				),
+				2
+			),
+			'confirmationUntilLessThan' => array(
+				array(
+					'confirmationUntil' => array('lessThan' => '1402743600')
+				),
+				2
+			),
+			'confirmationUntilLessThanOrEqual' => array(
+				array(
+					'confirmationUntil' => array('lessThanOrEqual' => '1402743600')
+				),
+				3
+			),
+			'confirmationUntilGreaterThan' => array(
+				array(
+					'confirmationUntil' => array('greaterThan' => '1402740000')
+				),
+				1
+			),
+			'confirmationUntilGreaterThanOrEqual' => array(
+				array(
+					'confirmationUntil' => array('greaterThanOrEqual' => '1402740000')
+				),
+				3
+			),
+			'multipleContraints' => array(
+				array(
+					'confirmationUntil' => array('lessThan' => '1402743600'),
+					'paid' => array('equals' => '0')
+				),
+				1
+			),
+		);
+	}
+
+	/**
+	 * Test for match on Event
+	 *
+	 * @dataProvider findNotificationRegistrationsDataProvider
+	 * @test
+	 */
+	public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected) {
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$event->expects($this->once())->method('getUid')->will($this->returnValue(1));
+		$registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
+		$this->assertEquals($expected, $registrations->count());
+	}
+
 }

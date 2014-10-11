@@ -361,9 +361,19 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable() {
 		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+
 		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration->setConfirmed(FALSE);
-		$event->addRegistration($registration);
+
+		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$registrations->attach($registration);
+
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findNotificationRegistrations'), array(), '', FALSE);
+		$registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
+			$this->returnValue($registrations));
+		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
 		$result = $this->subject->sendCustomNotification($event, 'aTemplate', array('someSettings'));
 		$this->assertEquals(0, $result);
@@ -375,20 +385,30 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent() {
 		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+
 		$registration1 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration1->setConfirmed(FALSE);
 		$registration2 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration2->setConfirmed(TRUE);
 		$registration3 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration3->setConfirmed(TRUE);
-		$event->addRegistration($registration1);
-		$event->addRegistration($registration2);
-		$event->addRegistration($registration3);
+
+		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$registrations->attach($registration1);
+		$registrations->attach($registration2);
+		$registrations->attach($registration3);
 
 		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
 			array('sendUserMessage'));
 		$mockNotificationService->expects($this->at(0))->method('sendUserMessage')->will($this->returnValue(TRUE));
 		$mockNotificationService->expects($this->at(1))->method('sendUserMessage')->will($this->returnValue(TRUE));
+
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findNotificationRegistrations'), array(), '', FALSE);
+		$registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
+			$this->returnValue($registrations));
+		$this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
 		$result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', array('someSettings'));
 		$this->assertEquals(2, $result);
