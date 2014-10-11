@@ -4,17 +4,17 @@
 
     <h1><f:translate key="registration.title" /></h1>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
+    <div class="event-registration-row">
+        <div class="event-registration-label">
             <f:translate key="tx_sfeventmgt_domain_model_event.title" />
         </div>
-        <div class="event-detail-value event-title">
+        <div class="event-registration-value event-title">
             {event.title}
         </div>
         <div class="clear"></div>
     </div>
 
-    <div class="event-list-row">
+    <div class="event-registration-row">
         <div class="event-list-label">
             <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
         </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="event-list-row">
+    <div class="event-registration-row">
         <div class="event-list-label">
             <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
         </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="event-list-row">
+    <div class="event-registration-row">
         <div class="event-list-label">
             <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
         </div>
@@ -41,7 +41,7 @@
         </div>
         <div class="clear"></div>
     </div>
-    <div class="event-list-row">
+    <div class="event-registration-row">
         <div class="event-list-label">
             <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
         </div>
@@ -51,7 +51,7 @@
         <div class="clear"></div>
     </div>
     <f:if condition="{event.price} > 0">
-        <div class="event-list-row">
+        <div class="event-registration-row">
             <div class="event-list-label">
                 <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
             </div>
@@ -62,7 +62,7 @@
         </div>
     </f:if>
     <f:if condition="{event.location}">
-        <div class="event-list-row">
+        <div class="event-registration-row">
             <div class="event-list-label">
                 <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
             </div>

@@ -8,6 +8,7 @@
 	margin-bottom: 5px;
 }
 
+.event-registration-label,
 .event-detail-label,
 .event-list-label {
 	float: left;
@@ -17,6 +18,7 @@
 	font-weight: bold;
 }
 
+.event-registration-value,
 .event-detail-value,
 .event-list-value {
 	float: left;

@@ -30,6 +30,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Registrations</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.freePlaces">
+				<source>Free places</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
 				<source>Price</source>
 			</trans-unit>

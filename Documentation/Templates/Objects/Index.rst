@@ -13,6 +13,9 @@ Template objects
 
 The following objects are available in the different views.
 
+Please have a look at the templates included with the extension, since they show many of the properties
+of the given objects and how to use them.
+
 Tip: You can use <f:debug>{object}</f:debug> in your template to see available properties of each object.
 
 List view
