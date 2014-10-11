@@ -53,7 +53,7 @@ class EmailService {
 	 * @param string $body E-Mail body
 	 * @param string $name Optional sendername
 	 *
-	 * @return TRUE/FALSE if message is sent
+	 * @return bool TRUE/FALSE if message is sent
 	 */
 	public function sendEmailMessage($sender, $recipient, $subject, $body, $name = NULL) {
 		$this->mailer->setFrom($sender, $name);

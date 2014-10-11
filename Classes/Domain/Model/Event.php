@@ -310,7 +310,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the category
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category> $category
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function getCategory() {
 		return $this->category;
