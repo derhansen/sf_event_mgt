@@ -183,11 +183,17 @@
 			<trans-unit id="registration.title">
 				<source>Registration for event</source>
 			</trans-unit>
-			<trans-unit id="confirmRegistration.title">
-				<source>Registration confirmation result</source>
+			<trans-unit id="confirmRegistration.title.successful">
+				<source>Registration confirmed</source>
 			</trans-unit>
-			<trans-unit id="registrationResult.title">
-				<source>Registration result</source>
+			<trans-unit id="confirmRegistration.title.failed">
+				<source>Registration confirmation failed</source>
+			</trans-unit>
+			<trans-unit id="registrationResult.title.successful">
+				<source>Registration successful</source>
+			</trans-unit>
+			<trans-unit id="registrationResult.title.failed">
+				<source>Registration failed</source>
 			</trans-unit>
 		</body>
 	</file>

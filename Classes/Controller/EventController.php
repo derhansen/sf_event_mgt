@@ -222,24 +222,31 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		switch ($result) {
 			case RegistrationResult::REGISTRATION_SUCCESSFUL:
 				$messageKey = 'event.message.registrationsuccessful';
+				$titleKey = 'registrationResult.title.successful';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
 				$messageKey = 'event.message.registrationfailedeventexpired';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS:
 				$messageKey = 'event.message.registrationfailedmaxparticipants';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			case RegistrationResult::REGISTRATION_NOT_ENABLED:
 				$messageKey = 'event.message.registrationfailednotenabled';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED:
 				$messageKey = 'event.message.registrationfaileddeadlineexpired';
+				$titleKey = 'registrationResult.title.failed';
 				break;
 			default:
 				$messageKey = '';
+				$titleKey = '';
 		}
 
 		$this->view->assign('messageKey', $messageKey);
+		$this->view->assign('titleKey', $titleKey);
 	}
 
 	/**
@@ -255,10 +262,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$registration = NULL;
 		$failed = FALSE;
 		$messageKey = 'event.message.confirmation_successful';
+		$titleKey = 'confirmRegistration.title.successful';
 
 		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_wrong_hmac';
+			$titleKey = 'confirmRegistration.title.failed';
 		} else {
 			$registration = $this->registrationRepository->findByUid($reguid);
 		}
@@ -266,16 +275,19 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		if (!$failed && is_null($registration)) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_registration_not_found';
+			$titleKey = 'confirmRegistration.title.failed';
 		}
 
 		if (!$failed && $registration->getConfirmationUntil() < new \DateTime()) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_confirmation_until_expired';
+			$titleKey = 'confirmRegistration.title.failed';
 		}
 
 		if (!$failed && $registration->getConfirmed() === TRUE) {
 			$failed = TRUE;
 			$messageKey = 'event.message.confirmation_failed_already_confirmed';
+			$titleKey = 'confirmRegistration.title.failed';
 		}
 
 		if ($failed === FALSE) {
@@ -289,5 +301,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				MessageType::REGISTRATION_CONFIRMED);
 		}
 		$this->view->assign('messageKey', $messageKey);
+		$this->view->assign('titleKey', $titleKey);
 	}
 }
