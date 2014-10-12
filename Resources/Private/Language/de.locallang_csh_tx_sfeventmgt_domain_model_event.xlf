@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="de">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="startdate.description">
+				<source>Startdate and time</source>
+				<target>Startdatum und Uhrzeit</target>
+			</trans-unit>
+			<trans-unit id="enddate.description">
+				<source>Enddate and time</source>
+				<target>Enddatum und Uhrzeit</target>
+			</trans-unit>
+			<trans-unit id="maxParticipants.description">
+				<source>Max. participants</source>
+				<target>Max. Teilnehmer</target>
+			</trans-unit>
+			<trans-unit id="price.description">
+				<source>Price</source>
+				<target>Preis</target>
+			</trans-unit>
+			<trans-unit id="currency.description">
+				<source>Currency</source>
+				<target>Währung</target>
+			</trans-unit>
+			<trans-unit id="category.description">
+				<source>Category</source>
+				<target>Kategorie</target>
+			</trans-unit>
+			<trans-unit id="registration.description">
+				<source>Registration</source>
+				<target>Anmeldungen</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z"
+		  product-name="sf_event_mgt" target-language="de">
+		<header/>
+		<body>
+			<trans-unit id="flexforms_tab.settings">
+				<source>Settings</source>
+				<target>Einstellungen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_tab.notification">
+				<source>Notification settings</source>
+				<target>Benachrichtungseinstellungen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode">
+				<source>What to display</source>
+				<target>Was soll angezeigt werden</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode.list">
+				<source>List</source>
+				<target>Listenansicht</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode.detail">
+				<source>Detail</source>
+				<target>Detailansicht</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.mode.registration">
+				<source>Registration</source>
+				<target>Anmeldeansicht</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.detailPid">
+				<source>Detail Pid</source>
+				<target>Detail Pid</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.listPid">
+				<source>List Pid</source>
+				<target>Listen Pid</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.registrationPid">
+				<source>Registration Pid</source>
+				<target>Anmelde Pid</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode">
+				<source>Display mode</source>
+				<target>Anzeigemodus</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.category">
+				<source>Category</source>
+				<target>Kategorie</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.storagePage">
+				<source>Record storage page</source>
+				<target>Seite/Ordner mit Datensätzen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.all">
+				<source>Show all events</source>
+				<target>Alle Veranstaltungen anzeigen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.future">
+				<source>Show only future events</source>
+				<target>Nur zukünftige Veranstaltungen anzeigen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.past">
+				<source>Show only past events</source>
+				<target>Nur vergangene Veranstaltungen anzeigen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.requiredFields">
+				<source>Comma seperated list of fieldnames, which are required. The fields firstname, lastname and email
+					are always required and cannot be overridden
+				</source>
+				<target>Komma getrennte liste mit Felnamen, welche für die Anmeldung erforderlich sind. Die Felder
+					Vorname, Nachname und E-Mail sind immer erforderlich. Dieses kann nicht geändert werden.
+				</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.sender_email">
+				<source>E-Mail address of e-mails sent to the user</source>
+				<target>Absende-E-Mail Adresse</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.sender_name">
+				<source>Name of the sender</source>
+				<target>Name des Absenders</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.admin_email">
+				<source>E-Mail address of website admin, who receives new/confirmed registrations</source>
+				<target>E-Mail-Adresse des Webseiten Administrators, welche neue/bestätigte Anmeldungen erhält</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_new_user_subject">
+				<source>Subject of e-mail sent to user when a new registration is created</source>
+				<target>Betreff der E-Mail, welche der Benutzer erhält, wenn er sich anmeldet</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_new_admin_subject">
+				<source>Subject of e-mail sent to admin when a new registration is created</source>
+				<target>Betreff der E-Mail, welche der Webseiten Administrator erhält, wenn ein Benutzer sich anmeldet</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_confirmed_user_subject">
+				<source>Subject of e-mail sent to user when a registration has been confirmed</source>
+				<target>Betreff der E-Mail, welche der Benutzer erhält, wenn er die Anmeldung besätigt hat</target>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_confirmed_admin_subject">
+				<source>Subject of e-mail sent to admin when a registration has been confirmed</source>
+				<target>Betreff der E-Mail, welche der Webseiten Administrator erhält, wenn ein Benutzer die Anmeldung abgeschlossen hat</target>
+			</trans-unit>
+			<trans-unit id="administration.title">
+				<source>Event Administration</source>
+				<target>Verwaltung for Veranstaltungen</target>
+			</trans-unit>
+			<trans-unit id="administration.notify">
+				<source>Notify participants</source>
+				<target>Teilnehmer benachrichtigen</target>
+			</trans-unit>
+			<trans-unit id="administration.newEvent">
+				<source>Create new event</source>
+				<target>Neue Veranstaltung erstellen</target>
+			</trans-unit>
+			<trans-unit id="administration.handleExpiredRegistrations">
+				<source>Hide/delete expired registrations</source>
+				<target>Lösche/verstecke abgelaufene Anmeldungen</target>
+			</trans-unit>
+			<trans-unit id="administration.export">
+				<source>Export participants</source>
+				<target>Teilnehmer exportieren</target>
+			</trans-unit>
+			<trans-unit id="administration.settings">
+				<source>Settings</source>
+				<target>Einstellungen</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.description">
+				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
+				<target>Bitte wählen Sie eine E-Mail-Vorlage, welche benutzt werden soll. Um eine eigene E-Mail-Vorlage zu erstellen, lesen Sie bitte die Dokumentation</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.event">
+				<source>Event:</source>
+				<target>Veranstaltung:</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.recipients">
+				<source>recipients</source>
+				<target>Empfänger</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.label.template">
+				<source>Template:</source>
+				<target>Vorlage:</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.senderEmailError">
+				<source>The sender e-mail address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+				<target>Die Absende-E-Mail Adresse konnte nicht gefunden werden. Bitte stellen Sie sicher, dass die Einstellung plugin.tx_sfeventmgt.notification konfiguriert wurde und dass der Ordner mit den Veranstaltungen Zugriff auf diese Einstellung hat</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.sendNotifications">
+				<source>Send notifications</source>
+				<target>Benachrichtigung absenden</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.cancelSendNotifications">
+				<source>Back to event listing</source>
+				<target>Zurück zur Listenansicht</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.date">
+				<source>Date</source>
+				<target>Datum</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.details">
+				<source>Details</source>
+				<target>Details</target>
+			</trans-unit>
+			<trans-unit id="administration.notify.emailsSent">
+				<source>E-Mails sent</source>
+				<target>E-Mails gesendet</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
