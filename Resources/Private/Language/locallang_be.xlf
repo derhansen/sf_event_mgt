@@ -4,6 +4,9 @@
 		  product-name="sf_event_mgt">
 		<header/>
 		<body>
+			<trans-unit id="plugin.title">
+				<source>Events and event-registration</source>
+			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
 			</trans-unit>
@@ -92,6 +95,9 @@
 			</trans-unit>
 			<trans-unit id="administration.notify">
 				<source>Notify participants</source>
+			</trans-unit>
+			<trans-unit id="administration.notificationHistory">
+				<source>Notification history</source>
 			</trans-unit>
 			<trans-unit id="administration.settings">
 				<source>Settings</source>

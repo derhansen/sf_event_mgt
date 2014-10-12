@@ -4,6 +4,10 @@
 		  product-name="sf_event_mgt" target-language="de">
 		<header/>
 		<body>
+			<trans-unit id="plugin.title">
+				<source>Events and event-registration</source>
+				<target>Veranstaltungen und Veranstaltungs-Anmeldung</target>
+			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
 				<target>Einstellungen</target>
@@ -107,6 +111,10 @@
 			<trans-unit id="administration.notify">
 				<source>Notify participants</source>
 				<target>Teilnehmer benachrichtigen</target>
+			</trans-unit>
+			<trans-unit id="administration.notificationHistory">
+				<source>Notification history</source>
+				<target>Benachrichtigungshistorie</target>
 			</trans-unit>
 			<trans-unit id="administration.newEvent">
 				<source>Create new event</source>
