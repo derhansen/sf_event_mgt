@@ -50,6 +50,12 @@ General
          A link (e.g. external link) for the event.
 
  - :Field:
+         Top event
+
+   :Description:
+         If checked, the event is considered as a top event
+
+ - :Field:
          Startdate
 
    :Description:

@@ -107,6 +107,25 @@ Tab settings
          displayMode
 
  - :Property:
+         Top event restriction
+
+   :View:
+         List
+
+   :Description:
+         With this setting the plugin can be configured to show **only top event** events, to
+         **except top events** or to ignore the top event restriction.
+
+         Available options
+
+         * 0 (None - ignore top event restriction)
+         * 1 (Only top events)
+         * 2 (Except top events)
+
+   :Key:
+         topEventRestriction
+
+ - :Property:
          Category
 
    :View:
