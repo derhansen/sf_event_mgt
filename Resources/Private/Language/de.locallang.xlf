@@ -71,6 +71,10 @@
 				<source>Image</source>
 				<target>Bild</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
+				<source>YouTube</source>
+				<target>YouTube</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Category</source>
 				<target>Kategorie</target>

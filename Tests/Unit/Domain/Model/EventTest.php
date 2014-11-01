@@ -380,6 +380,27 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getYoutubeReturnsInitialValueForString() {
+		$this->assertEquals(
+			'',
+			$this->subject->getYoutube()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setYoutubeForStringSetsYoutube() {
+		$this->subject->setYoutube('<iframe width="1280" height="750" src="//www.youtube.com/embed/IcSnlfB2ol4"></iframe>');
+		$this->assertEquals(
+			'<iframe width="1280" height="750" src="//www.youtube.com/embed/IcSnlfB2ol4"></iframe>',
+			$this->subject->getYoutube()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function addImageToObjectStorageHoldingImage() {
 		$image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
 		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);

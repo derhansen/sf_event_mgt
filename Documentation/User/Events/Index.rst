@@ -103,6 +103,12 @@ General
    :Description:
          One or more images.
 
+ - :Field:
+         YouTube embed code
+
+   :Description:
+         A YouTube embed code
+
 .. figure:: ../../Images/event-registration.png
    :align: left
    :alt: Event record (Tab: registration)

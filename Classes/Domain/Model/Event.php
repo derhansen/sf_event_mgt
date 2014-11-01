@@ -119,6 +119,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $image = NULL;
 
 	/**
+	 * YouTube Embed code
+	 *
+	 * @var string
+	 */
+	protected $youtube = '';
+
+	/**
 	 * The Location
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
@@ -435,6 +442,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image) {
 		$this->image = $image;
+	}
+
+	/**
+	 * Returns YouTube embed code
+	 *
+	 * @return string
+	 */
+	public function getYoutube() {
+		return $this->youtube;
+	}
+
+	/**
+	 * Sets YouTube embed code
+	 *
+	 * @param string $youtube
+	 * @return void
+	 */
+	public function setYoutube($youtube) {
+		$this->youtube = $youtube;
 	}
 
 	/**

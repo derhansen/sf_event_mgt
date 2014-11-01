@@ -63,6 +63,10 @@
 				<source>Image</source>
 				<target>Bild</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
+				<source>YouTube embed code</source>
+				<target>YouTube Einbettungs Code</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Participants</source>
 				<target>Teilnehmer</target>
