@@ -68,7 +68,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$settings = array(
 			'displayMode' => 'all',
 			'storagePage' => 1,
-			'category' => 10
+			'category' => 10,
+			'topEventRestriction' => 2
 		);
 
 		$mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
@@ -76,6 +77,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
 		$mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
 		$mockDemand->expects($this->at(2))->method('setCategory')->with(10);
+		$mockDemand->expects($this->at(3))->method('setTopEventRestriction')->with(2);
 
 		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array(), array(), '', FALSE);

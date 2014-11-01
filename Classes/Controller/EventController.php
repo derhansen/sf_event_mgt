@@ -98,10 +98,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
 	public function createDemandObjectFromSettings($settings) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
 		$demand->setStoragePage($settings['storagePage']);
 		$demand->setCategory($settings['category']);
+		$demand->setTopEventRestriction((int)$settings['topEventRestriction']);
 		return $demand;
 	}
 

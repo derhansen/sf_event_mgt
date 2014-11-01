@@ -34,6 +34,18 @@
 			<trans-unit id="flexforms_general.registrationPid">
 				<source>Registration Pid</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.topEventRestriction">
+				<source>Top event restriction</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.none">
+				<source>None</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.onlyTopEvents">
+				<source>Only top events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.exceptTopEvents">
+				<source>Except top events</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode">
 				<source>Display mode</source>
 			</trans-unit>

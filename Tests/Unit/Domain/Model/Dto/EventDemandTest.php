@@ -71,6 +71,27 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getTopEventRestrictionReturnsInitialValueForInteger() {
+		$this->assertSame(
+			0,
+			$this->subject->getTopEventRestriction()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTopEventRestrictionForIntegerSetsTopEventRestriction() {
+		$this->subject->setTopEventRestriction(1);
+		$this->assertSame(
+			1,
+			$this->subject->getTopEventRestriction()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function setDisplayModeForStringSetsDisplayMode() {
 		$this->subject->setDisplayMode('past');
 

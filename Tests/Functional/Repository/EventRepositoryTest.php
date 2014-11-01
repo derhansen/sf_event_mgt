@@ -199,4 +199,44 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 		$this->assertEquals(2, $events->count());
 	}
+
+	/**
+	 * Data provider for findDemandedRecordsByTopEvent
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByTopEventDataProvider() {
+		return array(
+			'noRestriction' => array(
+				0,
+				2
+			),
+			'onlyTopEvents' => array(
+				1,
+				1
+			),
+			'exceptTopEvents' => array(
+				2,
+				1
+			),
+		);
+	}
+
+	/**
+	 * Test if top event restriction in demand works
+	 *
+	 * @dataProvider findDemandedRecordsByTopEventDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByTopEvent($topEventRestriction, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(30);
+
+		$demand->setTopEventRestriction($topEventRestriction);
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals($expected, $events->count());
+	}
 }

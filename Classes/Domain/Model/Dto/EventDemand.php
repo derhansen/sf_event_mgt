@@ -74,6 +74,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $endDate = NULL;
 
 	/**
+	 * Top event
+	 *
+	 * @var int
+	 */
+	protected $topEventRestriction = 0;
+
+	/**
 	 * Title
 	 *
 	 * @var string
@@ -213,6 +220,25 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+
+	/**
+	 * Returns topEventRestriction
+	 *
+	 * @return int
+	 */
+	public function getTopEventRestriction() {
+		return $this->topEventRestriction;
+	}
+
+	/**
+	 * Sets topEventRestriction
+	 *
+	 * @param int $topEventRestriction
+	 * @return void
+	 */
+	public function setTopEventRestriction($topEventRestriction) {
+		$this->topEventRestriction = $topEventRestriction;
 	}
 
 

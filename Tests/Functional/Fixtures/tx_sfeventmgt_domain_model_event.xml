@@ -198,4 +198,16 @@
         <description>test</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
+
+    <!-- findRecordsByTopEvent -->
+    <tx_sfeventmgt_domain_model_event>
+        <pid>30</pid>
+        <description>test</description>
+        <top_event>0</top_event>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <pid>30</pid>
+        <description>test</description>
+        <top_event>1</top_event>
+    </tx_sfeventmgt_domain_model_event>
 </dataset>
