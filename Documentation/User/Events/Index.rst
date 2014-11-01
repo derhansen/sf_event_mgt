@@ -38,6 +38,12 @@ General
          Title of the event.
 
  - :Field:
+         Teaser
+
+   :Description:
+         The teaser for the event.
+
+ - :Field:
          Description
 
    :Description:

@@ -11,6 +11,10 @@
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.teaser">
+				<source>Teaser</source>
+				<target>Teaser</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.description">
 				<source>Description</source>
 				<target>Beschreibung</target>

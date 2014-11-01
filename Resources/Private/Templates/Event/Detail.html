@@ -16,10 +16,20 @@
 
     <div class="event-detail-row">
         <div class="event-detail-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.teaser" />
+        </div>
+        <div class="event-detail-value event-teaser">
+            {event.teaser}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="event-detail-row">
+        <div class="event-detail-label">
             <f:translate key="tx_sfeventmgt_domain_model_event.description" />
         </div>
         <div class="event-detail-value event-description">
-            {event.description}
+            <f:format.html>{event.description}</f:format.html>
         </div>
         <div class="clear"></div>
     </div>

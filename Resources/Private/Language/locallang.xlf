@@ -9,6 +9,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.teaser">
+				<source>Teaser</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.description">
 				<source>Description</source>
 			</trans-unit>

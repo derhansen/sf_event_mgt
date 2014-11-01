@@ -41,6 +41,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
+	 * Teaser
+	 *
+	 * @var string
+	 */
+	protected $teaser = '';
+
+	/**
 	 * Description
 	 *
 	 * @var string
@@ -178,6 +185,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+	}
+
+	/**
+	 * Returns the teaser
+	 *
+	 * @return string
+	 */
+	public function getTeaser() {
+		return $this->teaser;
+	}
+
+	/**
+	 * Sets the teaser
+	 *
+	 * @param string $teaser
+	 * @return void
+	 */
+	public function setTeaser($teaser) {
+		$this->teaser = $teaser;
 	}
 
 	/**

@@ -7,6 +7,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	teaser text,
 	description text NOT NULL,
 	startdate int(11) DEFAULT '0' NOT NULL,
 	enddate int(11) DEFAULT '0' NOT NULL,

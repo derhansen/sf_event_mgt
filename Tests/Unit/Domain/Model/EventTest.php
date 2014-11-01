@@ -99,6 +99,29 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getTeaserReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getTeaser()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setTeaserForStringSetsTeaser() {
+		$this->subject->setTeaser('This is a teaser');
+
+		$this->assertAttributeEquals(
+			'This is a teaser',
+			'teaser',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getStartdateReturnsInitialValueForDateTime() {
 		$this->assertEquals(
 			NULL,
