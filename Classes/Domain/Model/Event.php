@@ -133,6 +133,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $link;
 
 	/**
+	 * Top event
+	 *
+	 * @var bool
+	 */
+	protected $topEvent = FALSE;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -554,4 +561,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $ret;
 	}
 
+	/**
+	 * Sets topEvent
+	 *
+	 * @param boolean $topEvent
+	 * @return void
+	 */
+	public function setTopEvent($topEvent) {
+		$this->topEvent = $topEvent;
+	}
+
+	/**
+	 * Returns if topEvent is checked
+	 *
+	 * @return boolean
+	 */
+	public function getTopEvent() {
+		return $this->topEvent;
+	}
 }

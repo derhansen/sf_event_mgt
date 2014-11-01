@@ -19,6 +19,10 @@
 				<source>Link</source>
 				<target>Link</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.top_event">
+				<source>Top event</source>
+				<target>Top Veranstaltung</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.startdate">
 				<source>Startdate</source>
 				<target>Startdatum</target>

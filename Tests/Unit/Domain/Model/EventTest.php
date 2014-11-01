@@ -157,6 +157,15 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getTopEventReturnsInitialValueForBoolean() {
+		$this->assertFalse(
+			$this->subject->getTopEvent()
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function setParticipantsForIntegerSetsParticipants() {
 		$this->subject->setMaxParticipants(12);
 
@@ -701,4 +710,16 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function setTopEventForBooleanSetsTopEvent() {
+		$this->subject->setTopEvent(TRUE);
+
+		$this->assertAttributeEquals(
+			TRUE,
+			'topEvent',
+			$this->subject
+		);
+	}
 }
