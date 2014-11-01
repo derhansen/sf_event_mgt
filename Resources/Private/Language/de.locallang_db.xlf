@@ -163,6 +163,10 @@
 				<source>Notes</source>
 				<target>Anmerkungen</target>
 			</trans-unit>
+			<trans-unit id="event.tabs.media">
+				<source>Media</source>
+				<target>Medien</target>
+			</trans-unit>
 			<trans-unit id="event.tabs.registration">
 				<source>Registration</source>
 				<target>Anmeldung</target>
