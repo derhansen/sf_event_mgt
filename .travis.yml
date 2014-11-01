@@ -6,6 +6,7 @@ php:
 
 env:
   - DB=mysql TYPO3_BRANCH=TYPO3_6-2 COVERAGE=0
+  - DB=mysql TYPO3_BRANCH=master COVERAGE=0
 
 matrix:
   include:
