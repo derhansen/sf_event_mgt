@@ -36,6 +36,12 @@ List view
    :Description:
          An object holding all events that matched the configured demand in the plugin settings
 
+ - :Object:
+         {categories}
+
+   :Description:
+         All available categories
+
 Detail view
 ~~~~~~~~~~~
 

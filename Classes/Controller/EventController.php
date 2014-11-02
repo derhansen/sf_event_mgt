@@ -68,6 +68,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $registrationRepository = NULL;
 
 	/**
+	 * Category repository
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
+	 * @inject
+	 */
+	protected $categoryRepository = NULL;
+
+	/**
 	 * Notification Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\NotificationService
@@ -115,7 +123,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	public function listAction() {
 		$demand = $this->createDemandObjectFromSettings($this->settings);
 		$events = $this->eventRepository->findDemanded($demand);
+		$categories = $this->categoryRepository->findAll();
 		$this->view->assign('events', $events);
+		$this->view->assign('categories', $categories);
 	}
 
 	/**
