@@ -139,8 +139,8 @@ Tab settings
          Available options
 
          * 0 (None - ignore top event restriction)
-         * 1 (Only top events)
-         * 2 (Except top events)
+         * 1 (Except top events)
+         * 2 (Only top events)
 
    :Key:
          topEventRestriction

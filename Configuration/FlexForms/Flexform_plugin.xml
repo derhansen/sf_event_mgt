@@ -193,11 +193,11 @@
                                         <numIndex index="1"></numIndex>
                                     </numIndex>
                                     <numIndex index="1">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.onlyTopEvents</numIndex>
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.exceptTopEvents</numIndex>
                                         <numIndex index="1">1</numIndex>
                                     </numIndex>
                                     <numIndex index="2">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.exceptTopEvents</numIndex>
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.onlyTopEvents</numIndex>
                                         <numIndex index="1">2</numIndex>
                                     </numIndex>
                                 </items>

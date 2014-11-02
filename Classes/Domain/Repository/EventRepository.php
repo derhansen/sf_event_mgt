@@ -103,11 +103,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 		/* Top event restriction */
 		if ($eventDemand->getTopEventRestriction() > 0) {
-			if ($eventDemand->getTopEventRestriction() === 1) {
-				$constraints[] = $query->equals('topEvent', TRUE);
-			} else {
-				$constraints[] = $query->equals('topEvent', FALSE);
-			}
+			$constraints[] = $query->equals('topEvent', (bool)($eventDemand->getTopEventRestriction() - 1));
 		}
 
 		if (count($constraints) > 0) {
