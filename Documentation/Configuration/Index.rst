@@ -18,3 +18,4 @@ Configuration
 
    Plugin/Index
    TsReference/Index
+   PageTSConfig/Index

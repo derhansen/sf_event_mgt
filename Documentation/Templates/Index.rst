@@ -17,5 +17,6 @@ Templates
    :glob:
 
    Changing/Index
+   Layouts/Index
    Objects/Index
    Viewhelpers/Index

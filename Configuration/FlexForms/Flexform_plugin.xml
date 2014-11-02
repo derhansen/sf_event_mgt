@@ -36,6 +36,31 @@
                         </TCEforms>
                     </switchableControllerActions>
 
+                    <!-- Template Layout -->
+                    <settings.templateLayout>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.templateLayout</label>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
+                            <config>
+                                <type>select</type>
+                                <itemsProcFunc>DERHANSEN\SfEventMgt\Hooks\TemplateLayouts->user_templateLayout</itemsProcFunc>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0"></numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.templateLayout>
+
                     <!-- Detail Pid -->
                     <settings.detailPid>
                         <TCEforms>

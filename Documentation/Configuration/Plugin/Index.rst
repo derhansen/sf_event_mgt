@@ -107,6 +107,26 @@ Tab settings
          displayMode
 
  - :Property:
+         Template layout
+
+   :View:
+         List
+
+   :Description:
+         With this setting the plugin can be configured to show different template layouts.
+         Template layouts can be configured with Page TSConfig like shown below.::
+
+           tx_sfeventmgt.templateLayouts {
+             1 = 2 column layout
+             2 = Event-Slider
+           }
+
+         Template layout can be used/set by TypoScript (settings.templateLayout)
+
+   :Key:
+         templateLayout
+
+ - :Property:
          Top event restriction
 
    :View:

@@ -69,6 +69,9 @@
 					are always required and cannot be overridden
 				</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.templateLayout">
+				<source>Template layout</source>
+			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>E-Mail address of e-mails sent to the user</source>
 			</trans-unit>
