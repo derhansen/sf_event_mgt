@@ -10,6 +10,13 @@
 Screenshots
 -----------
 
+.. figure:: ../../Images/event-event.png
+   :align: left
+   :width: 500px
+   :alt: Event details
+
+Event details
+
 .. figure:: ../../Images/event-admin.png
    :align: left
    :width: 500px

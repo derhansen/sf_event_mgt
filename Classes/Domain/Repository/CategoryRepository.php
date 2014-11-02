@@ -1,7 +1,6 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
-
 /***************************************************************
  *
  *  Copyright notice

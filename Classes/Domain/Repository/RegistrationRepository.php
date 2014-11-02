@@ -62,7 +62,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Returns all registrations for the given event with the given constraints
 	 * Constraints are combined with a logical AND
 	 *
-	 * @param $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
 	 * @param $findConstraints
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
