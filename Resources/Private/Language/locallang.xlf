@@ -132,6 +132,9 @@
 			<trans-unit id="event.backtext">
 				<source>Back to listview</source>
 			</trans-unit>
+			<trans-unit id="event.allEvents">
+				<source>All events</source>
+			</trans-unit>
 			<trans-unit id="event.submit-registration">
 				<source>Send registration</source>
 			</trans-unit>

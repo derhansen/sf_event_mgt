@@ -171,6 +171,10 @@
 				<source>Back to listview</source>
 				<target>Zurück zur Listenansicht</target>
 			</trans-unit>
+			<trans-unit id="event.allEvents">
+				<source>All events</source>
+				<target>Alle Veranstaltungen</target>
+			</trans-unit>
 			<trans-unit id="event.submit-registration">
 				<source>Send registration</source>
 				<target>Anmeldung absenden</target>

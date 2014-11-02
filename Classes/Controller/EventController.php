@@ -103,14 +103,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * Create a demand object with the given settings
 	 *
 	 * @param array $settings
+	 * @param int $category
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
-	public function createDemandObjectFromSettings($settings) {
+	public function createDemandObjectFromSettings($settings, $category = 0) {
+		if ($category === 0) {
+			$category = $settings['category'];
+		}
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
 		$demand->setStoragePage($settings['storagePage']);
-		$demand->setCategory($settings['category']);
+		$demand->setCategory($category);
 		$demand->setTopEventRestriction((int)$settings['topEventRestriction']);
 		return $demand;
 	}
@@ -118,14 +122,16 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * List view
 	 *
+	 * @param int $category
 	 * @return void
 	 */
-	public function listAction() {
-		$demand = $this->createDemandObjectFromSettings($this->settings);
+	public function listAction($category = 0) {
+		$demand = $this->createDemandObjectFromSettings($this->settings, $category);
 		$events = $this->eventRepository->findDemanded($demand);
 		$categories = $this->categoryRepository->findAll();
 		$this->view->assign('events', $events);
 		$this->view->assign('categories', $categories);
+		$this->view->assign('selectedCategoryUid', $category);
 	}
 
 	/**

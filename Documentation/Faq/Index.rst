@@ -47,4 +47,12 @@ Is it possible to extend events/registrations with own fields?
 Yes, just use the extension builder to extend sf_event_mgt with custom fields.
 
 
+Is it possible to filter by categories in the listview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Yes, filtering of events by a category is possible if you pass the category to the listview.::
+
+  <f:link.action action="list" controller="Event" arguments="{category: '{category.uid}'}">{category.title}</f:link.action>
+
+This only works, if you create links with f:link.action as shown above. If you want to display the
+categories in a select-box, then I suggest you create a CSS only select box (e.g. UL menu)

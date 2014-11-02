@@ -42,6 +42,12 @@ List view
    :Description:
          All available categories
 
+ - :Object:
+         {selectedCategoryUid}
+
+   :Description:
+         The UID of the selected category
+
 Detail view
 ~~~~~~~~~~~
 
