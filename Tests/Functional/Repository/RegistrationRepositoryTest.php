@@ -189,4 +189,15 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 		$this->assertEquals($expected, $registrations->count());
 	}
 
+	/**
+	 * Test for match on Event with unknown condition
+	 *
+	 * @expectedException \InvalidArgumentException
+	 * @test
+	 */
+	public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition() {
+		$constraints = array('confirmationUntil' => array('wrongcondition' => '0'));
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$this->registrationRepository->findNotificationRegistrations($event, $constraints);
+	}
 }

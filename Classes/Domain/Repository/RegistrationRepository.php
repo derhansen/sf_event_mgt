@@ -94,6 +94,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 					$constraints[] = $query->greaterThanOrEqual($findConstraint, $value[$condition]);
 					break;
 				default:
+					throw new \InvalidArgumentException('An error occured - Unknown condition: ' . $condition);
 			}
 		}
 
