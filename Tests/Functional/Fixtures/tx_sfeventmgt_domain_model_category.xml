@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <!-- findAll -->
+    <tx_sfeventmgt_domain_model_category>
+        <uid>1</uid>
+        <pid>1</pid>
+        <title>category 1</title>
+    </tx_sfeventmgt_domain_model_category>
+    <tx_sfeventmgt_domain_model_category>
+        <uid>2</uid>
+        <pid>2</pid>
+        <title>category 2</title>
+    </tx_sfeventmgt_domain_model_category>
+
+</dataset>
