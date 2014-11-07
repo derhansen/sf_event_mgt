@@ -28,6 +28,12 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Covered with unit and functional tests
 * Actively maintained
 
+## Documentation
+
+The extension includes a detailed documentation in ReST format. You can view the extension manual on TYPO3 TER or use
+ext:sphinx to view the documentation directly in your TYPO3 CMS installation.
+
 ## Feedback and updates
 
-This extension is hosted in GitHub. Please report feedback, bugs and change requests directly at https://github.com/derhansen/sf_event_mgt
+This extension is hosted in GitHub. Please report feedback, bugs and change requests directly at 
+https://github.com/derhansen/sf_event_mgt
