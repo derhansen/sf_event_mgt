@@ -116,6 +116,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$demand->setStoragePage($settings['storagePage']);
 		$demand->setCategory($category);
 		$demand->setTopEventRestriction((int)$settings['topEventRestriction']);
+		$demand->setOrderField($settings['orderField']);
+		$demand->setOrderDirection($settings['orderDirection']);
 		return $demand;
 	}
 

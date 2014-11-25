@@ -107,6 +107,38 @@ Tab settings
          displayMode
 
  - :Property:
+         Sort by
+
+   :View:
+         List
+
+   :Description:
+         Defines which field should be used for sorting events in the frontend. The default sorting field is
+         "startdate", which can be overridden by using this setting.
+
+   :Key:
+         orderField
+
+ - :Property:
+         Sorting direction
+
+   :View:
+         List
+
+   :Description:
+         Defines the sorting direction for orderField. The default sorting direction is
+         "asc", which can be overridden by using this setting.
+
+         Possible values:
+
+         * <empty value>
+         * asc
+         * desc
+
+   :Key:
+         orderDirection
+
+ - :Property:
          Template layout
 
    :View:

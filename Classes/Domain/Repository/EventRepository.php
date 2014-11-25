@@ -70,11 +70,29 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$this->setStartEndDateConstraint($query, $eventDemand, $constraints);
 		$this->setTitleConstraint($query, $eventDemand, $constraints);
 		$this->setTopEventConstraint($query, $eventDemand, $constraints);
+		$this->setOrderingsFromDemand($query, $eventDemand);
 
 		if (count($constraints) > 0) {
 			$query->matching($query->logicalAnd($constraints));
 		}
 		return $query->execute();
+	}
+
+	/**
+	 * Sets the ordering to the given query for the given demand
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @return void
+	 */
+	protected function setOrderingsFromDemand($query, EventDemand $eventDemand) {
+		$orderings = array();
+		if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '') {
+			$orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
+				\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
+				\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+			$query->setOrderings($orderings);
+		}
 	}
 
 	/**

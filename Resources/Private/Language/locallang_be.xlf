@@ -49,6 +49,27 @@
 			<trans-unit id="flexforms_general.displayMode">
 				<source>Display mode</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.orderField">
+				<source>Sort by</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.startdate">
+				<source>Startdate</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.enddate">
+				<source>Enddate</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderDirection">
+				<source>Sorting direction</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderDirection.ascending">
+				<source>Ascending</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderDirection.descending">
+				<source>Descending</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.category">
 				<source>Category</source>
 			</trans-unit>
