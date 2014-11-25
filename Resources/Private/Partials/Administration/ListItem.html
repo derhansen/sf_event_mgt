@@ -5,10 +5,10 @@
         </a>
     </td>
     <td class="startdate">
-        <f:format.date format="d.m.Y - H:i">{event.startdate}</f:format.date>
+        <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
     </td>
     <td class="enddate">
-        <f:format.date format="d.m.Y - H:i">{event.enddate}</f:format.date>
+        <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
     </td>
     <td class="registrationenabled">
         <f:if condition="{event.enableRegistration} == 1">

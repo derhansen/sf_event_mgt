@@ -51,7 +51,7 @@
         <tbody>
             <f:for each="{logEntries}" as="logEntry">
                 <tr class="db_list_normal">
-                    <td class="logdate"><f:format.date format="d.m.Y - H:i:s">{logEntry.tstamp}</f:format.date></td>
+                    <td class="logdate"><f:format.date format="%d.%m.%Y - %H:%M:s">{logEntry.tstamp}</f:format.date></td>
                     <td>{logEntry.details}</td>
                     <td>{logEntry.emailsSent}</td>
                 </tr>
