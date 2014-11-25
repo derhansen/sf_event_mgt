@@ -12,7 +12,7 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Event management and registration',
-	'description' => 'Event management with registration option',
+	'description' => 'Configurable event management and registration extension based on ExtBase and Fluid',
 	'category' => 'plugin',
 	'author' => 'Torben Hansen',
 	'author_email' => 'derhansen@gmail.com',
