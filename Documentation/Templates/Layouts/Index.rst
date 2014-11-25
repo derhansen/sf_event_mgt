@@ -23,7 +23,7 @@ layout selectbox in the plugin settings like shown below.
 
 .. figure:: ../../Images/plugin-template-layout.png
    :align: left
-   :width: 500px
+   :width: 253px
    :alt: Different template layouts
 
 The choosen template layout can be used in the fluid templates as shown below.::
