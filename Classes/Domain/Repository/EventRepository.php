@@ -36,6 +36,15 @@ use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
+	 * Set default sorting
+	 *
+	 * @var array
+	 */
+	protected $defaultOrderings = array(
+		'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+	);
+
+	/**
 	 * Disable the use of storage records, because the StoragePage can be set
 	 * in the plugin
 	 *
