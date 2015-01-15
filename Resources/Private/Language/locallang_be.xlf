@@ -34,6 +34,9 @@
 			<trans-unit id="flexforms_general.registrationPid">
 				<source>Registration Pid</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.queryLimit">
+				<source>Max records displayed</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.topEventRestriction">
 				<source>Top event restriction</source>
 			</trans-unit>

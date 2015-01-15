@@ -310,4 +310,22 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 		$this->assertEquals($expected, $events->getFirst()->getTitle());
 	}
+
+	/**
+	 * Test if limit restriction works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsSetsLimit() {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(4);
+		$demand->setDisplayMode('all');
+		$demand->setQueryLimit(2);
+
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals(2, $events->count());
+	}
 }

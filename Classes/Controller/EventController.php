@@ -118,6 +118,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$demand->setTopEventRestriction((int)$settings['topEventRestriction']);
 		$demand->setOrderField($settings['orderField']);
 		$demand->setOrderDirection($settings['orderDirection']);
+		$demand->setQueryLimit($settings['queryLimit']);
 		return $demand;
 	}
 

@@ -44,6 +44,26 @@
 				<source>Registration Pid</source>
 				<target>Anmelde Pid</target>
 			</trans-unit>
+			<trans-unit id="flexforms_general.queryLimit">
+				<source>Max records displayed</source>
+				<target>Max. Anzahl Events anzeigen</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.topEventRestriction">
+				<source>Top event restriction</source>
+				<target>Top events</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.none">
+				<source>None</source>
+				<target>Keine Einschränkung</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.onlyTopEvents">
+				<source>Only top events</source>
+				<target>Nur Top Events</target>
+			</trans-unit>
+			<trans-unit id="flexforms_general.exceptTopEvents">
+				<source>Except top events</source>
+				<target>Alle außer Top Events</target>
+			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode">
 				<source>Display mode</source>
 				<target>Anzeigemodus</target>

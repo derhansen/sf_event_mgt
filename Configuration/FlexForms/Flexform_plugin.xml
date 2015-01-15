@@ -273,6 +273,26 @@
                         </TCEforms>
                     </settings.topEventRestriction>
 
+                    <!-- Query Limit -->
+                    <settings.queryLimit>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.queryLimit</label>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
+                            <config>
+                                <type>input</type>
+                                <eval>int</eval>
+                                <size>5</size>
+                            </config>
+                        </TCEforms>
+                    </settings.queryLimit>
+
                     <!-- category -->
                     <settings.category>
                         <TCEforms>

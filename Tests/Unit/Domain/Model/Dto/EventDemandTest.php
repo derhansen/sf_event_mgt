@@ -265,4 +265,25 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject->getOrderField()
 		);
 	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getQueryLimitReturnsNullIfNoValueSet() {
+		$this->assertNull($this->subject->getQueryLimit());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getQueryLimitReturnsExpectedQueryLimit() {
+		$this->subject->setQueryLimit(10);
+		$this->assertSame(
+			10,
+			$this->subject->getQueryLimit()
+		);
+	}
+
 }

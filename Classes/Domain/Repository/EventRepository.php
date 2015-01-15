@@ -27,6 +27,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Core\Utility\MathUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 
@@ -75,7 +76,24 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		if (count($constraints) > 0) {
 			$query->matching($query->logicalAnd($constraints));
 		}
+
+		$this->setQueryLimitFromDemand($query, $eventDemand);
 		return $query->execute();
+	}
+
+	/**
+	 * Sets a query limit to the given query for the given demand
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @return void
+	 */
+	protected function setQueryLimitFromDemand($query, EventDemand $eventDemand) {
+		if ($eventDemand->getQueryLimit() != NULL &&
+			MathUtility::canBeInterpretedAsInteger($eventDemand->getQueryLimit()) &&
+			(int)$eventDemand->getQueryLimit() > 0) {
+				$query->setLimit((int)$eventDemand->getQueryLimit());
+		}
 	}
 
 	/**

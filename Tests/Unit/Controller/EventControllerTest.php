@@ -71,7 +71,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'category' => 10,
 			'topEventRestriction' => 2,
 			'orderField' => 'title',
-			'orderDirection' => 'asc'
+			'orderDirection' => 'asc',
+			'queryLimit' => 10
 		);
 
 		$mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
@@ -82,6 +83,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockDemand->expects($this->at(3))->method('setTopEventRestriction')->with(2);
 		$mockDemand->expects($this->at(4))->method('setOrderField')->with('title');
 		$mockDemand->expects($this->at(5))->method('setOrderDirection')->with('asc');
+		$mockDemand->expects($this->at(6))->method('setQueryLimit')->with(10);
 
 		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array(), array(), '', FALSE);

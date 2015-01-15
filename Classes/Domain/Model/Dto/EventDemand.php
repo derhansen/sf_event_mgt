@@ -102,6 +102,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $orderDirection = '';
 
 	/**
+	 * Query limit
+	 *
+	 * @var int
+	 */
+	protected $queryLimit = NULL;
+
+	/**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
@@ -293,4 +300,22 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->orderField = $orderField;
 	}
 
+	/**
+	 * Returns the query limit
+	 *
+	 * @return int
+	 */
+	public function getQueryLimit() {
+		return $this->queryLimit;
+	}
+
+	/**
+	 * Sets the query limit
+	 *
+	 * @param int $queryLimit
+	 * @return void
+	 */
+	public function setQueryLimit($queryLimit) {
+		$this->queryLimit = $queryLimit;
+	}
 }
