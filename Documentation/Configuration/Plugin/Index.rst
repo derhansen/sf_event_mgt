@@ -178,6 +178,18 @@ Tab settings
          topEventRestriction
 
  - :Property:
+         Max records displayed
+
+   :View:
+         List
+
+   :Description:
+        The maximum number of records shown
+
+   :Key:
+        queryLimit
+
+ - :Property:
          Category
 
    :View:
