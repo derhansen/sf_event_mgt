@@ -56,3 +56,15 @@ Yes, filtering of events by a category is possible if you pass the category to t
 
 This only works, if you create links with f:link.action as shown above. If you want to display the
 categories in a select-box, then I suggest you create a CSS only select box (e.g. UL menu)
+
+When does {event.registrationPossible} return TRUE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For each event, the attribute registrationPossible returns TRUE or FALSE, if registration for
+the event is possible. TRUE is returned, when all conditions below are
+
+* Registration option is activated for the event
+* Max participants is not reached (if max. participants > 0)
+* Date set at registration deadline ist not reached
+* Startdate of event is not reached
+
