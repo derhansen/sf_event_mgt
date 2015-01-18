@@ -192,6 +192,10 @@
 				<source>E-Mails sent</source>
 				<target>E-Mails gesendet</target>
 			</trans-unit>
+			<trans-unit id="administration.notify.sentBy">
+				<source>Sent by</source>
+				<target>Versandt von</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
