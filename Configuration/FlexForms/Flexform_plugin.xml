@@ -287,7 +287,7 @@
                             </displayCond>
                             <config>
                                 <type>input</type>
-                                <eval>int</eval>
+                                <eval>num</eval>
                                 <size>5</size>
                             </config>
                         </TCEforms>
