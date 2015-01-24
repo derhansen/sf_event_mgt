@@ -214,6 +214,7 @@ return array(
 		'registration_deadline' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_deadline',
+			'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
 			'config' => array(
 				'type' => 'input',
 				'size' => 10,

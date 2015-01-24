@@ -32,7 +32,8 @@
         <pid>4</pid>
         <startdate>1401444000</startdate>
         <enddate>1401451200</enddate>
-        <description>test</description>
+        <title>Test1</title>
+        <description>Test 30.05.2014</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- 20.05.2014 10:00 - 20.05.2014 14:00 -->
@@ -40,7 +41,8 @@
         <pid>4</pid>
         <startdate>1400580000</startdate>
         <enddate>1400594400</enddate>
-        <description>test</description>
+        <title>Test2</title>
+        <description>Test 20.05.2014</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
@@ -48,7 +50,8 @@
         <pid>4</pid>
         <startdate>1401616800</startdate>
         <enddate>1401624000</enddate>
-        <description>test</description>
+        <title>Test3</title>
+        <description>Test 01.06.2014</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
     <!-- 01.06.2014 10:00 - 02.06.2014 10:00 -->
@@ -56,7 +59,8 @@
         <pid>4</pid>
         <startdate>1401616800</startdate>
         <enddate>1401703200</enddate>
-        <description>test</description>
+        <title>Test4</title>
+        <description>Test 02.06.2014</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 

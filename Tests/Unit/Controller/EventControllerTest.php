@@ -69,7 +69,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'displayMode' => 'all',
 			'storagePage' => 1,
 			'category' => 10,
-			'topEventRestriction' => 2
+			'topEventRestriction' => 2,
+			'orderField' => 'title',
+			'orderDirection' => 'asc',
+			'queryLimit' => 10
 		);
 
 		$mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
@@ -78,6 +81,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
 		$mockDemand->expects($this->at(2))->method('setCategory')->with(10);
 		$mockDemand->expects($this->at(3))->method('setTopEventRestriction')->with(2);
+		$mockDemand->expects($this->at(4))->method('setOrderField')->with('title');
+		$mockDemand->expects($this->at(5))->method('setOrderDirection')->with('asc');
+		$mockDemand->expects($this->at(6))->method('setQueryLimit')->with(10);
 
 		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array(), array(), '', FALSE);
@@ -99,7 +105,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'displayMode' => 'all',
 			'storagePage' => 1,
 			'category' => 10,
-			'topEventRestriction' => 2
+			'topEventRestriction' => 2,
+			'orderField' => 'title',
+			'orderDirection' => 'asc'
 		);
 
 		$mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
@@ -108,6 +116,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
 		$mockDemand->expects($this->at(2))->method('setCategory')->with(20);
 		$mockDemand->expects($this->at(3))->method('setTopEventRestriction')->with(2);
+		$mockDemand->expects($this->at(4))->method('setOrderField')->with('title');
+		$mockDemand->expects($this->at(5))->method('setOrderDirection')->with('asc');
 
 		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array(), array(), '', FALSE);

@@ -219,4 +219,71 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject->getTitle()
 		);
 	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getOrderFieldReturnsEmptyStringIfNoValueSet() {
+		$this->assertSame(
+			'',
+			$this->subject->getOrderField()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getOrderFieldReturnsGivenValueIfValueSet() {
+		$this->subject->setOrderField('title');
+		$this->assertSame(
+			'title',
+			$this->subject->getOrderField()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getOrderDirectionReturnsEmptyStringIfNoValueSet() {
+		$this->assertSame(
+			'',
+			$this->subject->getOrderField()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getOrderDirectionReturnsGivenValueIfValueSet() {
+		$this->subject->setOrderField('asc');
+		$this->assertSame(
+			'asc',
+			$this->subject->getOrderField()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getQueryLimitReturnsNullIfNoValueSet() {
+		$this->assertNull($this->subject->getQueryLimit());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getQueryLimitReturnsExpectedQueryLimit() {
+		$this->subject->setQueryLimit(10);
+		$this->assertSame(
+			10,
+			$this->subject->getQueryLimit()
+		);
+	}
+
 }

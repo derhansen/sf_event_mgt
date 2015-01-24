@@ -246,4 +246,86 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 		$this->assertEquals($expected, $events->count());
 	}
+
+	/**
+	 * Data provider for findDemandedRecordsByTopEvent
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByOrderingDataProvider() {
+		return array(
+			'noSorting' => array(
+				'',
+				'',
+				'Test2'
+			),
+			'titleAsc' => array(
+				'title',
+				'asc',
+				'Test1'
+			),
+			'titleDesc' => array(
+				'title',
+				'desc',
+				'Test4'
+			),
+			'startdateAsc' => array(
+				'startdate',
+				'asc',
+				'Test2'
+			),
+			'startdateDesc' => array(
+				'startdate',
+				'desc',
+				'Test3'
+			),
+			'enddateAsc' => array(
+				'enddate',
+				'asc',
+				'Test2'
+			),
+			'enddateDesc' => array(
+				'enddate',
+				'desc',
+				'Test4'
+			),
+		);
+	}
+
+	/**
+	 * Test if ordering for findDemanded works
+	 *
+	 * @dataProvider findDemandedRecordsByOrderingDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByOrdering($orderField, $orderDirection, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(4);
+		$demand->setDisplayMode('all');
+		$demand->setOrderField($orderField);
+		$demand->setOrderDirection($orderDirection);
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals($expected, $events->getFirst()->getTitle());
+	}
+
+	/**
+	 * Test if limit restriction works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsSetsLimit() {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(4);
+		$demand->setDisplayMode('all');
+		$demand->setQueryLimit(2);
+
+		$events = $this->eventRepository->findDemanded($demand);
+
+		$this->assertEquals(2, $events->count());
+	}
 }

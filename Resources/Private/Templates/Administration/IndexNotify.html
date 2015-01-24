@@ -46,14 +46,16 @@
                 <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.date"/></th>
                 <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.details"/></th>
                 <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.emailsSent"/></th>
+                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sentBy"/></th>
             </tr>
         </thead>
         <tbody>
             <f:for each="{logEntries}" as="logEntry">
                 <tr class="db_list_normal">
-                    <td class="logdate"><f:format.date format="d.m.Y - H:i:s">{logEntry.tstamp}</f:format.date></td>
+                    <td class="logdate"><f:format.date format="%d.%m.%Y - %H:%M:%s">{logEntry.tstamp}</f:format.date></td>
                     <td>{logEntry.details}</td>
                     <td>{logEntry.emailsSent}</td>
+                    <td>{logEntry.cruserId.username}</td>
                 </tr>
             </f:for>
         </tbody>

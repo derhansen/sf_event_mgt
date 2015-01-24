@@ -112,4 +112,15 @@ class CustomNotificationLogTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertEquals($tstamp, $this->subject->getTstamp());
 	}
 
+	/**
+	 * Test if backend user can be set to field cruser_id
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setCruserIdForBackendUserSetsBackendUser() {
+		$beuser = new \TYPO3\CMS\Beuser\Domain\Model\BackendUser();
+		$this->subject->setCruserId($beuser);
+		$this->assertEquals($beuser, $this->subject->getCruserId());
+	}
 }

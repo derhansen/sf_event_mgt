@@ -88,6 +88,27 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
+	 * Order field
+	 *
+	 * @var string
+	 */
+	protected $orderField = '';
+
+	/**
+	 * Order direction
+	 *
+	 * @var string
+	 */
+	protected $orderDirection = '';
+
+	/**
+	 * Query limit
+	 *
+	 * @var int
+	 */
+	protected $queryLimit = NULL;
+
+	/**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
@@ -241,5 +262,60 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->topEventRestriction = $topEventRestriction;
 	}
 
+	/**
+	 * Returns the order direction
+	 *
+	 * @return string
+	 */
+	public function getOrderDirection() {
+		return $this->orderDirection;
+	}
 
+	/**
+	 * Sets the order direction
+	 *
+	 * @param string $orderDirection
+	 * @return void
+	 */
+	public function setOrderDirection($orderDirection) {
+		$this->orderDirection = $orderDirection;
+	}
+
+	/**
+	 * Returns the order field
+	 *
+	 * @return string
+	 */
+	public function getOrderField() {
+		return $this->orderField;
+	}
+
+	/**
+	 * Sets the order field
+	 *
+	 * @param string $orderField
+	 * @return void
+	 */
+	public function setOrderField($orderField) {
+		$this->orderField = $orderField;
+	}
+
+	/**
+	 * Returns the query limit
+	 *
+	 * @return int
+	 */
+	public function getQueryLimit() {
+		return $this->queryLimit;
+	}
+
+	/**
+	 * Sets the query limit
+	 *
+	 * @param int $queryLimit
+	 * @return void
+	 */
+	public function setQueryLimit($queryLimit) {
+		$this->queryLimit = $queryLimit;
+	}
 }
