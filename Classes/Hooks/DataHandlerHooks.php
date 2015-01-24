@@ -62,6 +62,17 @@ class DataHandlerHooks {
 					'settings.notification.registrationConfirmed.adminSubject',
 				),
 				'sDEF' => array(
+					'settings.templateLayout',
+					'settings.detailPid',
+					'settings.listPid',
+					'settings.registrationPid',
+					'settings.displayMode',
+					'settings.orderField',
+					'settings.orderDirection',
+					'settings.topEventRestriction',
+					'settings.queryLimit',
+					'settings.category',
+					'settings.storagePage',
 					'settings.registration.requiredFields'
 				)
 			);
