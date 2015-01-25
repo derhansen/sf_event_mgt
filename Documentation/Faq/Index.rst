@@ -23,6 +23,16 @@ shown below::
 		events = EXT:Resources/Public/Css/events_default.css
 	}
 
+Is it possible to extend events/registrations with own fields?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I have created a demo extension, which shows how to add new fields to the event and registration
+domain model.
+
+Demo Extension: https://github.com/derhansen/sf_event_mgt_extend_demo
+
+The extension contains a short manual (README.md) how to add your own fields to existing domain models.
+
 How do I export registered participants to a CSV file?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -40,12 +50,6 @@ Yes, you can use the following objects in you e-mail templates
 
 * {hmac} = HMAC of uid
 * {reghmac} = appended uid+HMAC
-
-Is it possible to extend events/registrations with own fields?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Yes, just use the extension builder to extend sf_event_mgt with custom fields.
-
 
 Is it possible to filter by categories in the listview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
