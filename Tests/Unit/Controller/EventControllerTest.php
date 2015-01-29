@@ -316,10 +316,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Checks, if a saveRegistration action with no autoConfirmation saves the
+	 * registration and redirects to the saveRegistrationResult action.
+	 *
 	 * @test
 	 * @return void
 	 */
-	public function saveRegistrationActionRedirectsWithMessageIfRegistrationSuccessful() {
+	public function saveRegistrationActionWithoutAutoConfirmationRedirectsToWithMessageIfRegistrationSuccessful() {
 		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
 
@@ -367,6 +370,76 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
 			array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
+
+		$this->subject->saveRegistrationAction($registration, $event);
+	}
+
+	/**
+	 * Checks, if a saveRegistration action with autoConfirmation saves the
+	 * registration and redirects to the confirmationRegistration action.
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function saveRegistrationWithAutoConfirmationActionRedirectsToConfirmationWithMessageIfRegistrationSuccessful() {
+		$regUid = 1;
+		$regHmac = 'someRandomHMAC';
+
+		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+			array(), '', FALSE);
+		$registration->expects($this->any())->method('getUid')->will($this->returnValue($regUid));
+
+		$registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$registrations->expects($this->once())->method('count')->will($this->returnValue(9));
+
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$startdate = new \DateTime();
+		$startdate->add(\DateInterval::createFromDateString('tomorrow'));
+		$event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(TRUE));
+		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+		$event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
+		$event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
+
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('add'), array(), '', FALSE);
+		$registrationRepository->expects($this->once())->method('add');
+		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+		$persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
+			array('persistAll'), array(), '', FALSE);
+		$persistenceManager->expects($this->once())->method('persistAll');
+
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array('get'), array(), '', FALSE);
+		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array('getClearCacheUids'),
+			array(), '', FALSE);
+		$settingsService->expects($this->once())->method('getClearCacheUids')->will(
+			$this->returnValue(array('0' => '1')));
+		$this->inject($this->subject, 'settingsService', $settingsService);
+
+		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array('clearPageCache'),
+			array(), '', FALSE);
+		$cacheService->expects($this->once())->method('clearPageCache');
+		$this->inject($this->subject, 'cacheService', $cacheService);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+			array('generateHmac'), array(), '', FALSE);
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
+		$this->inject($this->subject, 'hashService', $hashService);
+
+		// Inject settings so autoconfirmation is disabled
+		$settings = array(
+			'registration' => array(
+				'autoConfirmation' => 1
+			)
+		);
+		$this->inject($this->subject, 'settings', $settings);
+
+		$this->subject->expects($this->once())->method('redirect')->with('confirmRegistration', NULL, NULL,
+			array('reguid' => $regUid, 'hmac' => $regHmac));
 
 		$this->subject->saveRegistrationAction($registration, $event);
 	}

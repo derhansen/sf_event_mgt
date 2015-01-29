@@ -181,6 +181,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
+		$autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'];
 		$success = TRUE;
 		$result = RegistrationResult::REGISTRATION_SUCCESSFUL;
 		if ($event->getEnableRegistration() === FALSE) {
@@ -216,11 +217,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			// Persist registration, so we have an UID
 			$this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
-			// Send notifications to user and admin
-			$this->notificationService->sendUserMessage($event, $registration, $this->settings,
-				MessageType::REGISTRATION_NEW);
-			$this->notificationService->sendAdminMessage($event, $registration, $this->settings,
-				MessageType::REGISTRATION_NEW);
+			// Send notifications to user and admin if confirmation link should be sent
+			if (!$autoConfirmation) {
+				$this->notificationService->sendUserMessage($event, $registration, $this->settings,
+					MessageType::REGISTRATION_NEW);
+				$this->notificationService->sendAdminMessage($event, $registration, $this->settings,
+					MessageType::REGISTRATION_NEW);
+			}
 
 			// Clear cache for configured pages
 			$pidList = $this->settingsService->getClearCacheUids($this->settings);
@@ -229,8 +232,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			}
 		}
 
-		$this->redirect('saveRegistrationResult', NULL, NULL,
-			array('result' => $result));
+		if ($autoConfirmation && $success) {
+			$this->redirect('confirmRegistration', NULL, NULL,
+				array('reguid' => $registration->getUid(),
+					'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid())));
+		} else {
+			$this->redirect('saveRegistrationResult', NULL, NULL,
+				array('result' => $result));
+		}
 	}
 
 	/**

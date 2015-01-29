@@ -12,6 +12,8 @@ plugin.tx_sfeventmgt {
 	}
 	settings {
 		registration {
+			# cat=plugin.tx_sfeventmgt/a; type=boolean; label=New registrations are automatically confirmed
+			autoConfirmation = 0
 			# cat=plugin.tx_sfeventmgt/a; type=boolean; label=Delete expired registrations
 			deleteExpiredRegistrations = 0
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validation format for date of birth

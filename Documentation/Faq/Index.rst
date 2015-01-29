@@ -72,3 +72,9 @@ the event is possible. TRUE is returned, when all conditions below are
 * Date set at registration deadline ist not reached
 * Startdate of event is not reached
 
+How can I disable double opt in for event registration?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can enable autoConfirmation for new registrations as described in the :ref:`tsref` section.
+With autoConfirmation enabled, new registrations will automatically be confirmed and the user
+will not receive a confirmation e-mail.
