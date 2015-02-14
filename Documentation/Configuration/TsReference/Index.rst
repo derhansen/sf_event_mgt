@@ -102,6 +102,19 @@ plugin.tx_sfeventmgt
          Empty
 
  - :Property:
+         settings.registration.autoConfirmation
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set to true, new registration will automatically be confirmed by redirecting
+         the user to the confirmRegistration-Action.
+
+   :Default:
+         0 (false)
+
+ - :Property:
          settings.registration.deleteExpiredRegistrations
 
    :Date type:
