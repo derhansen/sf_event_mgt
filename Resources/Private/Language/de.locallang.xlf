@@ -67,6 +67,14 @@
 				<source>Location</source>
 				<target>Ort</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.title">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 				<target>Bild</target>

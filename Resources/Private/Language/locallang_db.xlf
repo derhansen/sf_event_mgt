@@ -138,6 +138,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
+				<source>Description</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
 				<source>Notificationlog</source>
 			</trans-unit>

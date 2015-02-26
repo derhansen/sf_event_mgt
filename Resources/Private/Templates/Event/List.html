@@ -96,12 +96,12 @@
                     <div class="clear"></div>
                 </div>
             </f:if>
-            <f:if condition="{event.location}">
+            <f:if condition="{event.location.title}">
                 <div class="event-list-row">
                     <div class="event-list-label">
                         <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
                     </div>
-                    <div class="event-list-value event-price">
+                    <div class="event-list-value event-location">
                         {event.location.title}
                     </div>
                     <div class="clear"></div>
