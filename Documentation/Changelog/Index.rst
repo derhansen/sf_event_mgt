@@ -11,5 +11,4 @@
 Changelog
 =========
 
-At the moment there is no changelog for this extension, since the current version
-is the first released on TER.
+A list of changes can be found on GitHub at https://github.com/derhansen/sf_event_mgt/releases
