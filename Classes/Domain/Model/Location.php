@@ -46,6 +46,20 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $description = '';
 
 	/**
+	 * Longitude
+	 *
+	 * @var float
+	 */
+	protected $longitude = 0.0;
+
+	/**
+	 * Latitude
+	 *
+	 * @var float
+	 */
+	protected $latitide = 0.0;
+
+	/**
 	 * Returns the title
 	 *
 	 * @return string $title
@@ -83,5 +97,45 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+	}
+
+	/**
+	 * Returns the longitude
+	 *
+	 * @return float
+	 */
+	public function getLongitude() {
+		return $this->longitude;
+	}
+
+	/**
+	 * Sets the the longitude
+	 *
+	 * @param float $longitude The longitude
+	 *
+	 * @return void
+	 */
+	public function setLongitude($longitude) {
+		$this->longitude = $longitude;
+	}
+
+	/**
+	 * Returns the latitude
+	 *
+	 * @return float
+	 */
+	public function getLatitide() {
+		return $this->latitide;
+	}
+
+	/**
+	 * Sets the latitude
+	 *
+	 * @param float $latitide The latitude
+	 *
+	 * @return void
+	 */
+	public function setLatitide($latitide) {
+		$this->latitide = $latitide;
 	}
 }

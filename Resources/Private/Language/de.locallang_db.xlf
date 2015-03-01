@@ -187,6 +187,14 @@
 				<source>Description</source>
 				<target>Beschreibung</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.longitude">
+				<source>Longitude</source>
+				<target>Längengrad</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.latitude">
+				<source>Latitude</source>
+				<target>Breitengrad</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
 				<source>Notificationlog</source>
 				<target>Benachrichtigungsverlauf</target>

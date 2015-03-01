@@ -141,6 +141,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.latitude">
+				<source>Latitude</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
 				<source>Notificationlog</source>
 			</trans-unit>
