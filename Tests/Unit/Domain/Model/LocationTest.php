@@ -112,4 +112,46 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * Test if initial value is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLongitudeReturnsInitialValueForFloat() {
+		$this->assertSame(0.0, $this->subject->getLongitude());
+	}
+
+	/**
+	 * Test if longitude can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setLongitudeSetsLongitude() {
+		$this->subject->setLongitude(12.345678);
+		$this->assertSame(12.345678, $this->subject->getLongitude());
+	}
+
+	/**
+	 * Test if initial value is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLatitudeReturnsInitialValueForFloat() {
+		$this->assertSame(0.0, $this->subject->getLatitide());
+	}
+
+	/**
+	 * Test if latitude can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setLatitudeSetsLatitude() {
+		$this->subject->setLatitide(12.345678);
+		$this->assertSame(12.345678, $this->subject->getLatitide());
+	}
 }
