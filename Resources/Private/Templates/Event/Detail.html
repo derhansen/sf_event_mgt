@@ -160,6 +160,8 @@
         </div>
     </f:if>
 
+    <f:link.action action="icalDownload" arguments="{event : event}"><f:translate key="event.icalDownload" /></f:link.action>
+
     <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
     <f:if condition="{event.registrationPossible}">
         <f:if condition="{settings.registrationPid} !=''">

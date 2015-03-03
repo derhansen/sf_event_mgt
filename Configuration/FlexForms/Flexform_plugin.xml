@@ -25,7 +25,7 @@
                                     </numIndex>
                                     <numIndex index="2">
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.detail</numIndex>
-                                        <numIndex index="1">Event->detail</numIndex>
+                                        <numIndex index="1">Event->detail;Event->icalDownload</numIndex>
                                     </numIndex>
                                     <numIndex index="3">
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.registration</numIndex>

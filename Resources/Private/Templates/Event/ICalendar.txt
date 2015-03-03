@@ -1,0 +1,13 @@
+{namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
+<f:layout name="ICalendar" />
+<f:section name="main">
+UID:{event.uid}-{event.pid}@{typo3Host}
+CLASS: PUBLIC
+SUMMARY:{event.title}
+DESCRIPTION:<e:format.ICalendarDescription>{event.description}</e:format.ICalendarDescription>
+<f:if condition="{event.location}">
+LOCATION:{event.location.title}
+</f:if>
+DTSTART:<e:format.ICalendarDate>{event.startdate}</e:format.ICalendarDate>
+DTEND:<e:format.ICalendarDate>{event.enddate}</e:format.ICalendarDate>
+</f:section>

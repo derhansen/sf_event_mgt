@@ -218,6 +218,22 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Test if ICalendarService is called when downloading a iCal file
+	 *
+	 * @test
+	 *
+	 * @return void
+	 */
+	public function icalDownloadActionCallsICalendarServiceDownloadiCalendarFile() {
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array());
+		$icalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
+			array(), array(), '', FALSE);
+		$icalendarService->expects($this->once())->method('downloadiCalendarFile')->with($this->equalTo($event));
+		$this->inject($this->subject, 'icalendarService', $icalendarService);
+		$this->subject->icalDownloadAction($event);
+	}
+
+	/**
 	 * @test
 	 * @return void
 	 */

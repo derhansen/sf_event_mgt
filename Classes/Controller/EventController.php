@@ -84,6 +84,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $notificationService = NULL;
 
 	/**
+	 * ICalendar Service
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
+	 * @inject
+	 */
+	protected $icalendarService = NULL;
+
+	/**
 	 * Settings Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
@@ -145,6 +153,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function detailAction(Event $event) {
 		$this->view->assign('event', $event);
+	}
+
+	/**
+	 * Initiates the iCalendar download for the given event
+	 *
+	 * @param Event $event The event
+	 *
+	 * @return bool
+	 */
+	public function icalDownloadAction(Event $event) {
+		$this->icalendarService->downloadiCalendarFile($event);
+		return FALSE;
 	}
 
 	/**

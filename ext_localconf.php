@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'DERHANSEN.' . $_EXTKEY,
 	'Pievent',
 	array(
-		'Event' => 'list, detail, registration'
+		'Event' => 'list, detail, registration, icalDownload'
 	),
 	// non-cacheable actions
 	array(
