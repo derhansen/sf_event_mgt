@@ -88,8 +88,6 @@ class ICalendarService {
 	 * @return string
 	 */
 	public function getiCalendarContent(\DERHANSEN\SfEventMgt\Domain\Model\Event $event) {
-		$_SERVER['HTTP_HOST'] = 'myhostname.tld';
-
 		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
 		$icalView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		$icalView->setFormat('txt');

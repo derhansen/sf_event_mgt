@@ -88,6 +88,8 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function getiCalendarContentAssignsVariablesToView() {
+		$_SERVER['HTTP_HOST'] = 'myhostname.tld';
+
 		$mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
 			array(), array(), '', FALSE);
 
