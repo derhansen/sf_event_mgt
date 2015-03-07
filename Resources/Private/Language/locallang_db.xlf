@@ -30,6 +30,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
 				<source>Max. participants</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser">
+				<source>Max. simultaneous registrations per user</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
 				<source>Enable registration</source>
 			</trans-unit>

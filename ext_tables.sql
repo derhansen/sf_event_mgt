@@ -12,6 +12,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	startdate int(11) DEFAULT '0' NOT NULL,
 	enddate int(11) DEFAULT '0' NOT NULL,
 	max_participants int(11) DEFAULT '0' NOT NULL,
+	max_registrations_per_user int(11) DEFAULT '1' NOT NULL,
 	price double(11,2) DEFAULT '0.00' NOT NULL,
 	currency varchar(255) DEFAULT '' NOT NULL,
 	category int(11) unsigned DEFAULT '0' NOT NULL,

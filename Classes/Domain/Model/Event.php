@@ -76,6 +76,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $maxParticipants = 0;
 
 	/**
+	 * Max registrations per user
+	 *
+	 * @var integer
+	 */
+	protected $maxRegistrationsPerUser = 1;
+
+	/**
 	 * Price
 	 *
 	 * @var float
@@ -631,4 +638,24 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getTopEvent() {
 		return $this->topEvent;
 	}
+
+	/**
+	 * Returns max regisrations per user
+	 *
+	 * @return int
+	 */
+	public function getMaxRegistrationsPerUser() {
+		return $this->maxRegistrationsPerUser;
+	}
+
+	/**
+	 * Sets max registrations per user
+	 *
+	 * @param int $maxRegistrationsPerUser
+	 * @return void
+	 */
+	public function setMaxRegistrationsPerUser($maxRegistrationsPerUser) {
+		$this->maxRegistrationsPerUser = $maxRegistrationsPerUser;
+	}
+
 }
