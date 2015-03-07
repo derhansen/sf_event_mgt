@@ -168,6 +168,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $hidden = FALSE;
 
 	/**
+	 * Amount of registrations (if multiple registrations created by one user)
+	 *
+	 * @var int
+	 */
+	protected $amountOfRegistrations = 1;
+
+	/**
 	 * Returns the firstname
 	 *
 	 * @return string $firstname
@@ -545,5 +552,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getHidden() {
 		return $this->hidden;
 	}
+
+	/**
+	 * Returns amountOfRegistrations
+	 *
+	 * @return int
+	 */
+	public function getAmountOfRegistrations() {
+		return $this->amountOfRegistrations;
+	}
+
+	/**
+	 * Sets amountOfRegistrations
+	 *
+	 * @param int $amountOfRegistrations
+	 * @return void
+	 */
+	public function setAmountOfRegistrations($amountOfRegistrations) {
+		$this->amountOfRegistrations = $amountOfRegistrations;
+	}
+
 
 }

@@ -517,4 +517,20 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertTrue($this->subject->getHidden());
 	}
 
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function amountOfRegistrationReturnsInitialValue() {
+		$this->assertEquals(1, $this->subject->getAmountOfRegistrations());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function amountOfRegistrationSetsAmountOfRegistrations() {
+		$this->subject->setAmountOfRegistrations(2);
+		$this->assertEquals(2, $this->subject->getAmountOfRegistrations());
+	}
 }
