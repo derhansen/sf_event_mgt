@@ -179,6 +179,10 @@
 				<source>Back to listview</source>
 				<target>Zurück zur Listenansicht</target>
 			</trans-unit>
+			<trans-unit id="event.backDetailsText">
+				<source>Back to event details</source>
+				<target>Zurück zur Detailansicht</target>
+			</trans-unit>
 			<trans-unit id="event.allEvents">
 				<source>All events</source>
 				<target>Alle Veranstaltungen</target>

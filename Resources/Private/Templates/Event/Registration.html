@@ -161,5 +161,9 @@
         </fieldset>
     </f:form>
 
+    <f:if condition="{settings.detailPid}">
+        <f:link.action action="detail" pageUid="{settings.detailPid}" arguments="{event: event}"><f:translate key="event.backDetailsText" /></f:link.action>
+    </f:if>
+
     <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
 </f:section>
