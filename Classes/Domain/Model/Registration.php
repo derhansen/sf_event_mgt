@@ -147,6 +147,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $event = NULL;
 
 	/**
+	 * Main registration (if available)
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
+	 */
+	protected $mainRegistration = NULL;
+
+	/**
 	 * DateTime until the registration must be confirmed
 	 *
 	 * @var \DateTime
@@ -461,6 +468,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getEvent() {
 		return $this->event;
+	}
+
+	/**
+	 * Sets the mainRegistration
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @return void
+	 */
+	public function setMainRegistration($registration) {
+		$this->mainRegistration = $registration;
+	}
+
+	/**
+	 * Returns the event
+	 *
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration
+	 */
+	public function getMainRegistration() {
+		return $this->mainRegistration;
 	}
 
 	/**

@@ -437,6 +437,24 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
+	public function getMainRegistrationReturnsInitialValue() {
+		$this->assertEquals(NULL, $this->subject->getMainRegistration());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setMainRegistrationForRegistrationSetsRegistration() {
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$this->subject->setMainRegistration($registration);
+		$this->assertEquals($registration, $this->subject->getMainRegistration());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
 	public function getConfirmationUntilReturnsInitialValueForDateTime() {
 		$this->assertSame(NULL, $this->subject->getConfirmationUntil());
 	}
