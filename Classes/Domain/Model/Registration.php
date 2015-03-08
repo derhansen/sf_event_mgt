@@ -107,6 +107,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $email = '';
 
 	/**
+	 * Ignore notifications
+	 *
+	 * @var boolean
+	 */
+	protected $ignoreNotifications = FALSE;
+
+	/**
 	 * gender
 	 *
 	 * @var string
@@ -362,6 +369,34 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
+	}
+
+	/**
+	 * Returns boolean state of ignoreNotifications
+	 *
+	 * @return boolean
+	 */
+	public function isIgnoreNotifications() {
+		return $this->ignoreNotifications;
+	}
+
+	/**
+	 * Returns ignoreNotifications
+	 *
+	 * @return boolean
+	 */
+	public function getIgnoreNotifications() {
+		return $this->ignoreNotifications;
+	}
+
+	/**
+	 * Sets ignoreNotifications
+	 *
+	 * @param boolean $ignoreNotifications
+	 * @return void
+	 */
+	public function setIgnoreNotifications($ignoreNotifications) {
+		$this->ignoreNotifications = $ignoreNotifications;
 	}
 
 	/**

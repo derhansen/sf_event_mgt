@@ -92,6 +92,22 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @dataProvider messageTypeDataProvider
+	 */
+	public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet($messageType) {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration->setEmail('valid@email.tld');
+		$registration->setIgnoreNotifications(TRUE);
+
+		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
+
+		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * @test
 	 * @return void
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidArgumentsGiven() {
@@ -355,31 +371,53 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertEquals(0, $result);
 	}
 
+	public function customNotificationDataProvider () {
+		return array(
+			'noConfirmedRegistration' => array(
+				FALSE,
+				FALSE,
+			),
+			'ignoreNotificationsFlagSet' => array(
+				TRUE,
+				TRUE
+			)
+		);
+	}
+
 	/**
 	 * @test
+	 * @dataProvider customNotificationDataProvider
 	 * @return void
 	 */
-	public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable() {
+	public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable($confirmed, $ignoreNotifications) {
 		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
 		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
-		$registration->setConfirmed(FALSE);
+		$registration->setConfirmed($confirmed);
+		$registration->setIgnoreNotifications($ignoreNotifications);
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
 		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$registrations->attach($registration);
 
+		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+			array('sendUserMessage'));
+		$mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(TRUE));
+
 		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
 			array('findNotificationRegistrations'), array(), '', FALSE);
 		$registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
 			$this->returnValue($registrations));
-		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+		$this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
-		$result = $this->subject->sendCustomNotification($event, 'aTemplate', array('someSettings'));
+		$result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', array('someSettings'));
 		$this->assertEquals(0, $result);
 	}
 
 	/**
+	 * Test that only confirmed registrations get notified. Also test, if the ignoreNotifications
+	 * flag is evaluated
+	 *
 	 * @test
 	 * @return void
 	 */
@@ -392,17 +430,20 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$registration2->setConfirmed(TRUE);
 		$registration3 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 		$registration3->setConfirmed(TRUE);
+		$registration4 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$registration4->setConfirmed(TRUE);
+		$registration4->setIgnoreNotifications(TRUE);
 
 		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
 		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$registrations->attach($registration1);
 		$registrations->attach($registration2);
 		$registrations->attach($registration3);
+		$registrations->attach($registration4);
 
 		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
 			array('sendUserMessage'));
-		$mockNotificationService->expects($this->at(0))->method('sendUserMessage')->will($this->returnValue(TRUE));
-		$mockNotificationService->expects($this->at(1))->method('sendUserMessage')->will($this->returnValue(TRUE));
+		$mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(TRUE));
 
 		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
 			array('findNotificationRegistrations'), array(), '', FALSE);

@@ -135,6 +135,10 @@
 				<source>Email</source>
 				<target>E-Mail</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications">
+				<source>No e-mail notifications</source>
+				<target>Keine E-Mail Benachrichtigungen</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.gender">
 				<source>Gender</source>
 				<target>Geschlecht</target>

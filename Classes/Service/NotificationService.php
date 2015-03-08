@@ -102,7 +102,7 @@ class NotificationService {
 		$registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
 		foreach ($registrations as $registration) {
 			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
-			if ($registration->isConfirmed()) {
+			if ($registration->isConfirmed() && !$registration->isIgnoreNotifications()) {
 				$result = $this->sendUserMessage(
 					$event,
 					$registration,
@@ -167,7 +167,8 @@ class NotificationService {
 		}
 
 		if (GeneralUtility::validEmail($registration->getEmail()) &&
-			GeneralUtility::validEmail($settings['notification']['senderEmail'])) {
+			GeneralUtility::validEmail($settings['notification']['senderEmail']) &&
+			!$registration->isIgnoreNotifications()) {
 			$body = $this->getNotificationBody($event, $registration, $template, $settings);
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],

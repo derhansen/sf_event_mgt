@@ -533,4 +533,21 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->setAmountOfRegistrations(2);
 		$this->assertEquals(2, $this->subject->getAmountOfRegistrations());
 	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function ignoreNotificationsReturnsInitialValue() {
+		$this->assertFalse($this->subject->getIgnoreNotifications());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function ignoreNotificationsCanBeSet() {
+		$this->subject->setIgnoreNotifications(TRUE);
+		$this->assertTrue($this->subject->getIgnoreNotifications());
+	}
 }

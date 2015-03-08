@@ -179,6 +179,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	country varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
+	ignore_notifications tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	gender varchar(1) DEFAULT '' NOT NULL,
 	confirmed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	paid tinyint(1) unsigned DEFAULT '0' NOT NULL,
