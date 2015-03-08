@@ -167,6 +167,10 @@
 				<source>Notes</source>
 				<target>Bemerkungen</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+				<source>Amount of registrations</source>
+				<target>Anzahl Anmeldungen</target>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 				<target>Anmeldung</target>

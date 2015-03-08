@@ -129,6 +129,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+				<source>Amount of registrations</source>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 			</trans-unit>

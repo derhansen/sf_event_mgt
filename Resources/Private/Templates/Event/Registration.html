@@ -151,6 +151,13 @@
                 <f:render partial="FormErrors" arguments="{field: 'registration.dateOfBirth'}"/>
             </div>
 
+            <f:if condition="{event.maxRegistrationsPerUser} > 1">
+                <div class="event-registration-row">
+                    <label for="amountOfRegistrations"><f:translate key="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" /></label>
+                    <f:form.select property="amountOfRegistrations" options="{e:event.simultaneousRegistrations(event: '{event}')}" />
+                </div>
+            </f:if>
+
             <div class="event-registration-row">
                 <label for="notes"><f:translate key="tx_sfeventmgt_domain_model_registration.notes" /></label>
                 <f:form.textarea id="notes" property="notes"/><br>
