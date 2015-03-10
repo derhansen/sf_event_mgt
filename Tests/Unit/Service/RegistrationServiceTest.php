@@ -98,4 +98,59 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->subject->handleExpiredRegistrations(TRUE);
 	}
 
+	/**
+	 * @test
+	 */
+	public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations() {
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+		$mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(5));
+
+		$newRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+		$newRegistration->expects($this->any())->method('setMainRegistration');
+		$newRegistration->expects($this->any())->method('setAmountOfRegistrations');
+		$newRegistration->expects($this->any())->method('setIgnoreNotifications');
+
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->any())->method('get')->will($this->returnValue($newRegistration));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('add'), array(), '', FALSE);
+		$registrationRepository->expects($this->exactly(4))->method('add')->with($newRegistration);
+		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+		$this->subject->createDependingRegistrations($mockRegistration);
+	}
+
+	/**
+	 * @test
+	 */
+	public function confirmDependingRegistrationsConfirmsDependingRegistrations() {
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+
+		$foundRegistration1 = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+		$foundRegistration1->expects($this->any())->method('setConfirmed');
+
+		$foundRegistration2 = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+		$foundRegistration2->expects($this->any())->method('setConfirmed');
+
+		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$registrations->attach($foundRegistration1);
+		$registrations->attach($foundRegistration2);
+
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findByMainRegistration', 'update'), array(), '', FALSE);
+		$registrationRepository->expects($this->once())->method('findByMainRegistration')->will($this->returnValue($registrations));
+		$registrationRepository->expects($this->exactly(2))->method('update');
+		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+		$this->subject->confirmDependingRegistrations($mockRegistration);
+	}
 }

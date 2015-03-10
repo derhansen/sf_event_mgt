@@ -211,6 +211,14 @@
 				<source>Registration is not possible any more, because the max. participants reached.</source>
 				<target>Die Anmeldung ist nicht mehr möglich, weil die max. Teilnehmeranzahl erreicht wurde.</target>
 			</trans-unit>
+			<trans-unit id="event.message.registrationfailednotenoughfreeplaces">
+				<source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+				<target>Die Anmeldung ist nicht möglich, weil die Anzahl der Anmeldungen die Anzahl der freien Plätze überschreitet</target>
+			</trans-unit>
+			<trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded">
+				<source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+				<target>Die Anmeldung ist nicht möglich, weil die Anzahl der gleichzeitigen Anmeldungen in einer Anmeldung überschritten wurde.</target>
+			</trans-unit>
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 				<target>Ihre Anmeldung war erfolgreich</target>

@@ -162,6 +162,12 @@
 			<trans-unit id="event.message.registrationfailedmaxparticipants">
 				<source>Registration is not possible any more, because the max. participants reached.</source>
 			</trans-unit>
+			<trans-unit id="event.message.registrationfailednotenoughfreeplaces">
+				<source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+			</trans-unit>
+			<trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded">
+				<source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+			</trans-unit>
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 			</trans-unit>
