@@ -13,7 +13,9 @@ Events
 
 Events are the main record of this extesion. An event contains several fields, which can be used to
 describe the event in detail. For each event, it is possible to enable registration and to limit the
-amount of free places, so only a limited amount of people can participate to the event.
+amount of free places, so only a limited amount of people can participate to the event. It is
+possible to allow the user to create multiple registrations at once, if the field "Max. simultaneous
+registrations per user" is set to a value greater than 1.
 
 .. figure:: ../../Images/event-event.png
    :align: left
@@ -144,6 +146,14 @@ Registration
 
    :Description:
          The amount af max. participants. If the value is zero, there is no limitation.
+
+ - :Field:
+         Max. simultaneous registrations per user
+
+   :Description:
+         The amount of registrations the participant can create with one single registration. If this
+         field contains a value greater than 1, a dropdown box can be shown in the registration view
+         where the user can select how many registrations should be created.
 
  - :Field:
          Registrations

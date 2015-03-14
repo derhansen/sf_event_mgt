@@ -126,3 +126,25 @@ Notification views
    :Description:
          Appended HMAC for the registration UID
 
+iCalendar view
+~~~~~~~~~~~~~~
+
+The iCalendar view is used to render an iCal file which can be downloaded by the user for the given event.
+Please note, that the iCalendar view is a simple textfile. If you choose to extend the view, be sure that
+new fields are compliant with RFC 5545 https://tools.ietf.org/html/rfc5545
+
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+         Description:
+
+ - :Object:
+         {event}
+
+   :Description:
+         An object holding the given event

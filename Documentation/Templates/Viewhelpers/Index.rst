@@ -77,3 +77,29 @@ This viewhelper is used in e-mail templates, when you want to link to a
 given page in you TYPO3 website.
 
 Usage: http://docs.typo3.org/typo3cms/ExtbaseGuide/stable/Fluid/ViewHelper/Uri/Page.html
+
+Event.SimultaneousRegistrationsViewHelper
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This viewhelper renders an array of possible simultaneous registration for
+the given event. The viewhelper respects the max. amount of simultaneous
+registrations per user and also respects the amount of remaining participants
+for the event.
+
+The index of the array returned starts with 1, so the resulting array can be used
+directly in the f:form.select viewhelper.
+
+**Example**::
+
+  <f:form.select id="amountOfRegistrations" property="amountOfRegistrations" options="{e:event.simultaneousRegistrations(event: '{event}')}" />
+
+
+Format.ICalendarDateViewHelper
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Formats the given DateTime object according to rfc5545, so it can be used in the iCalendar view
+
+Format.ICalendarDescriptionViewHelper
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Formats the given string according to rfc5545, so it can be used in the iCalendar view

@@ -33,4 +33,22 @@ data of the location.
          Title
 
    :Description:
-         Title of the category.
+         Title of the location.
+
+ - :Field:
+         Description
+
+   :Description:
+         Description (RTE field) of the location.
+
+ - :Field:
+         Latitude
+
+   :Description:
+         Latitude of the location.
+
+ - :Field:
+         Longitude
+
+   :Description:
+         Longitude of the location.

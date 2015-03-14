@@ -11,5 +11,7 @@
 Known Problems
 ==============
 
-None at the moment. If you find a bug or have a feature request for this extension,
-please use the bugtracker on GitHub at https://github.com/derhansen/sf_event_mgt
+Known problems are listed on GitHub GitHub at https://github.com/derhansen/sf_event_mgt
+
+If you find a bug or have a feature request for this extension,
+please use the issuetracker on GitHub at https://github.com/derhansen/sf_event_mgt

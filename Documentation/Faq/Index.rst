@@ -78,3 +78,22 @@ How can I disable double opt in for event registration?
 You can enable autoConfirmation for new registrations as described in the :ref:`tsref` section.
 With autoConfirmation enabled, new registrations will automatically be confirmed and the user
 will not receive a confirmation e-mail.
+
+How does the simultaneous registration process work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the field "Max. simultaneous registrations per user" is set to a value greater than 1 for the given
+event, a user is able to create multiple registrations at once. If the user in the registration view
+chooses to create more than one registration, there will be created the given amount of registrations
+in the backend for the user. All fields (e.g. firstname, lastname, email) will contain the same values.
+
+The first registration saved is the "main registration", and all other registrations saved later will
+depend on the "main registration". All "dependent registrations" will automatically get the option
+"No e-mail notifications" set to true, so custom notifications are only sent to the e-mail address
+of the "main registration".
+
+If automatic confirmation is turned off (default), the user has to confirm the registration by clicking
+a link in the confirmation e-mail. When the user confirms the registration, all "dependent registrations"
+of the "main registration will automatically also be confirmed.
+
+

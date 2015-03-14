@@ -58,7 +58,7 @@ Event management and registration
 	User/Index
 	Administration/Index
 	Configuration/Index
-	KnownProblems/Index
 	Templates/Index
 	Faq/Index
+	KnownProblems/Index
 	Changelog/Index
