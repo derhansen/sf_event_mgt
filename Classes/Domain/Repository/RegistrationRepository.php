@@ -70,6 +70,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$constraints = array();
 		$query = $this->createQuery();
 		$constraints[] = $query->equals('event', $event);
+		$constraints[] = $query->equals('ignoreNotifications', FALSE);
 
 		if (!is_array($findConstraints) || count($findConstraints) == 0) {
 			return $query->matching($query->logicalAnd($constraints))->execute();

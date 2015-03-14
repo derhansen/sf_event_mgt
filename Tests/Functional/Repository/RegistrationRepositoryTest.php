@@ -69,7 +69,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 	 */
 	public function findAll() {
 		$registrations = $this->registrationRepository->findAll();
-		$this->assertEquals(8, $registrations->count());
+		$this->assertEquals(10, $registrations->count());
 	}
 
 	/**
@@ -200,4 +200,17 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
 		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
 		$this->registrationRepository->findNotificationRegistrations($event, $constraints);
 	}
+
+	/**
+	 * Test if ignoreNotifications is respected
+	 *
+	 * @test
+	 */
+	public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3() {
+		$event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$event->expects($this->once())->method('getUid')->will($this->returnValue(3));
+		$registrations = $this->registrationRepository->findNotificationRegistrations($event, NULL);
+		$this->assertEquals(1, $registrations->count());
+	}
+
 }
