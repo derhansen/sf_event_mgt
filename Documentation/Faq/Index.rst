@@ -20,7 +20,7 @@ EXT:Resources/Public/Css/events_default.css which must be included manually like
 shown below::
 
 	page.includeCSS {
-		events = EXT:Resources/Public/Css/events_default.css
+	        events = EXT:sf_event_mgt/Resources/Public/Css/events_default.css
 	}
 
 Is it possible to extend events/registrations with own fields?
