@@ -56,10 +56,20 @@
 
     <div class="event-detail-row">
         <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.location" />
+            <f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.title" />
         </div>
-        <div class="event-detail-value event-location">
+        <div class="event-detail-value event-location-title">
             {event.location.title}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="event-detail-row">
+        <div class="event-detail-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.description" />
+        </div>
+        <div class="event-detail-value event-location-description">
+            <f:format.html>{event.location.description}</f:format.html>
         </div>
         <div class="clear"></div>
     </div>
@@ -149,6 +159,8 @@
             <div class="clear"></div>
         </div>
     </f:if>
+
+    <f:link.action action="icalDownload" arguments="{event : event}"><f:translate key="event.icalDownload" /></f:link.action>
 
     <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
     <f:if condition="{event.registrationPossible}">

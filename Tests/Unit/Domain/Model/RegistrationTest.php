@@ -437,6 +437,24 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
+	public function getMainRegistrationReturnsInitialValue() {
+		$this->assertEquals(NULL, $this->subject->getMainRegistration());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setMainRegistrationForRegistrationSetsRegistration() {
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+		$this->subject->setMainRegistration($registration);
+		$this->assertEquals($registration, $this->subject->getMainRegistration());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
 	public function getConfirmationUntilReturnsInitialValueForDateTime() {
 		$this->assertSame(NULL, $this->subject->getConfirmationUntil());
 	}
@@ -499,4 +517,37 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertTrue($this->subject->getHidden());
 	}
 
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function amountOfRegistrationReturnsInitialValue() {
+		$this->assertEquals(1, $this->subject->getAmountOfRegistrations());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function amountOfRegistrationSetsAmountOfRegistrations() {
+		$this->subject->setAmountOfRegistrations(2);
+		$this->assertEquals(2, $this->subject->getAmountOfRegistrations());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function ignoreNotificationsReturnsInitialValue() {
+		$this->assertFalse($this->subject->getIgnoreNotifications());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function ignoreNotificationsCanBeSet() {
+		$this->subject->setIgnoreNotifications(TRUE);
+		$this->assertTrue($this->subject->getIgnoreNotifications());
+	}
 }

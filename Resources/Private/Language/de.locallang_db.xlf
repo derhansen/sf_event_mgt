@@ -39,6 +39,10 @@
 				<source>Max. participants</source>
 				<target>Max. Teilnehmer</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser">
+				<source>Max. amount of simultaneous registrations per user</source>
+				<target>Max. Anzahl gleichzeitiger Anmeldungen pro Benutzer</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
 				<source>Enable registration</source>
 				<target>Anmeldung aktivieren</target>
@@ -131,6 +135,14 @@
 				<source>Email</source>
 				<target>E-Mail</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications">
+				<source>No e-mail notifications</source>
+				<target>Keine E-Mail Benachrichtigungen</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.mainRegistration">
+				<source>Parent registration</source>
+				<target>Übergeordnete Anmeldung</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.gender">
 				<source>Gender</source>
 				<target>Geschlecht</target>
@@ -167,6 +179,10 @@
 				<source>Notes</source>
 				<target>Anmerkungen</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+				<source>Amount of registrations (if user created multiple registrations at the same time)</source>
+				<target>Anzahl Anmeldungen (falls der Benutzer mehrere Anmeldungen gleichzeitig vorgenommen hat)</target>
+			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 				<target>Medien</target>
@@ -182,6 +198,18 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
 				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.longitude">
+				<source>Longitude</source>
+				<target>Längengrad</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.latitude">
+				<source>Latitude</source>
+				<target>Breitengrad</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
 				<source>Notificationlog</source>

@@ -30,6 +30,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
 				<source>Max. participants</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser">
+				<source>Max. simultaneous registrations per user</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
 				<source>Enable registration</source>
 			</trans-unit>
@@ -99,6 +102,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.email">
 				<source>Email</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications">
+				<source>No e-mail notifications</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.mainRegistration">
+				<source>Parent registration</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.gender">
 				<source>Gender</source>
 			</trans-unit>
@@ -126,6 +135,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+				<source>Amount of registrations (if user created multiple registrations at the same time)</source>
+			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 			</trans-unit>
@@ -137,6 +149,15 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.latitude">
+				<source>Latitude</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
 				<source>Notificationlog</source>

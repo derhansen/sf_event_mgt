@@ -26,10 +26,20 @@ namespace DERHANSEN\SfEventMgt\Service;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+
 /**
  * RegistrationService
  */
 class RegistrationService {
+
+	/**
+	 * The object manager
+	 *
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 * @inject
+	 */
+	protected $objectManager;
 
 	/**
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
@@ -56,6 +66,43 @@ class RegistrationService {
 					$this->registrationRepository->update($registration);
 				}
 			}
+		}
+	}
+
+	/**
+	 * Duplicates (all public accessable properties) the given registration the
+	 * amount of times configured in amountOfRegistrations
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @return void
+	 */
+	public function createDependingRegistrations($registration) {
+		for ($i = 1; $i <= $registration->getAmountOfRegistrations() - 1; $i++) {
+			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $newReg */
+			$newReg = $this->objectManager->get('DERHANSEN\SfEventMgt\Domain\Model\Registration');
+			$properties = ObjectAccess::getGettableProperties($registration);
+			foreach ($properties as $propertyName => $propertyValue) {
+				ObjectAccess::setProperty($newReg, $propertyName, $propertyValue);
+			}
+			$newReg->setMainRegistration($registration);
+			$newReg->setAmountOfRegistrations(1);
+			$newReg->setIgnoreNotifications(TRUE);
+			$this->registrationRepository->add($newReg);
+		}
+	}
+
+	/**
+	 * Confirms all depending registrations based on the given main registration
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @return void
+	 */
+	public function confirmDependingRegistrations($registration) {
+		$registrations = $this->registrationRepository->findByMainRegistration($registration);
+		foreach($registrations as $foundRegistration) {
+			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $foundRegistration */
+			$foundRegistration->setConfirmed(TRUE);
+			$this->registrationRepository->update($foundRegistration);
 		}
 	}
 }

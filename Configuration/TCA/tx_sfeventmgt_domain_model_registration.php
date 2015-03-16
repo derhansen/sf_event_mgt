@@ -30,10 +30,10 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, gender, date_of_birth, confirmed, paid, notes, confirmation_until',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, confirmed, paid, notes, confirmation_until, amount_of_registrations, main_registration',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, title, company, address, zip, city, country, phone, email, gender, date_of_birth, confirmation_until, confirmed, paid, notes, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, confirmation_until, confirmed, paid, notes, amount_of_registrations, main_registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -211,6 +211,14 @@ return array(
 				'eval' => 'trim,required'
 			),
 		),
+		'ignore_notifications' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.ignoreNotifications',
+			'config' => array(
+				'type' => 'check',
+				'default' => 0
+			)
+		),
 		'gender' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender',
@@ -277,5 +285,29 @@ return array(
 				'type' => 'passthrough',
 			),
 		),
+		'amount_of_registrations' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.amountOfRegistrations',
+			'displayCond' => 'FIELD:amount_of_registrations:>:1',
+			'config' => array(
+				'type' => 'input',
+				'size' => 4,
+				'readOnly' => 1
+			)
+		),
+		'main_registration' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.mainRegistration',
+			'displayCond' => 'FIELD:main_registration:>:0',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_sfeventmgt_domain_model_registration',
+				'maxitems' => 1,
+				'size' => 1,
+				'readOnly' => 1
+			),
+		),
+
 	),
 );

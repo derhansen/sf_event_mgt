@@ -67,6 +67,14 @@
 				<source>Location</source>
 				<target>Ort</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.title">
+				<source>Title</source>
+				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
+				<source>Description</source>
+				<target>Beschreibung</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 				<target>Bild</target>
@@ -159,6 +167,10 @@
 				<source>Notes</source>
 				<target>Bemerkungen</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+				<source>Amount of registrations</source>
+				<target>Anzahl Anmeldungen</target>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 				<target>Anmeldung</target>
@@ -170,6 +182,10 @@
 			<trans-unit id="event.backtext">
 				<source>Back to listview</source>
 				<target>Zurück zur Listenansicht</target>
+			</trans-unit>
+			<trans-unit id="event.backDetailsText">
+				<source>Back to event details</source>
+				<target>Zurück zur Detailansicht</target>
 			</trans-unit>
 			<trans-unit id="event.allEvents">
 				<source>All events</source>
@@ -195,6 +211,14 @@
 				<source>Registration is not possible any more, because the max. participants reached.</source>
 				<target>Die Anmeldung ist nicht mehr möglich, weil die max. Teilnehmeranzahl erreicht wurde.</target>
 			</trans-unit>
+			<trans-unit id="event.message.registrationfailednotenoughfreeplaces">
+				<source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+				<target>Die Anmeldung ist nicht möglich, weil die Anzahl der Anmeldungen die Anzahl der freien Plätze überschreitet</target>
+			</trans-unit>
+			<trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded">
+				<source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+				<target>Die Anmeldung ist nicht möglich, weil die Anzahl der gleichzeitigen Anmeldungen in einer Anmeldung überschritten wurde.</target>
+			</trans-unit>
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 				<target>Ihre Anmeldung war erfolgreich</target>
@@ -218,6 +242,10 @@
 			<trans-unit id="event.message.confirmation_failed_already_confirmed">
 				<source>Confirmation failed, because the registration already has been confirmed.</source>
 				<target>Bestätigung fehlgeschlagen, weil die Anmeldung bereits bestätigt wurde.</target>
+			</trans-unit>
+			<trans-unit id="event.icalDownload">
+				<source>Download iCal file</source>
+				<target>Download iCal Datei</target>
 			</trans-unit>
 			<trans-unit id="label.false">
 				<source>False</source>

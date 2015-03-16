@@ -51,6 +51,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location">
 				<source>Location</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
+				<source>Description</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 			</trans-unit>
@@ -123,6 +129,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+				<source>Amount of registrations</source>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 			</trans-unit>
@@ -131,6 +140,9 @@
 			</trans-unit>
 			<trans-unit id="event.backtext">
 				<source>Back to listview</source>
+			</trans-unit>
+			<trans-unit id="event.backDetailsText">
+				<source>Back to event details</source>
 			</trans-unit>
 			<trans-unit id="event.allEvents">
 				<source>All events</source>
@@ -150,6 +162,12 @@
 			<trans-unit id="event.message.registrationfailedmaxparticipants">
 				<source>Registration is not possible any more, because the max. participants reached.</source>
 			</trans-unit>
+			<trans-unit id="event.message.registrationfailednotenoughfreeplaces">
+				<source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+			</trans-unit>
+			<trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded">
+				<source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+			</trans-unit>
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 			</trans-unit>
@@ -167,6 +185,9 @@
 			</trans-unit>
 			<trans-unit id="event.message.confirmation_failed_already_confirmed">
 				<source>Confirmation failed, because the registration already has been confirmed.</source>
+			</trans-unit>
+			<trans-unit id="event.icalDownload">
+				<source>Download iCal file</source>
 			</trans-unit>
 			<trans-unit id="label.false">
 				<source>False</source>

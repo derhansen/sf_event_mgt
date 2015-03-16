@@ -112,3 +112,24 @@ process and also some administration fields like "confirmed" or "paid"
 
    :Description:
          Administration field used to set if the user has paid for the event
+
+ - :Field:
+         No e-mail notifications
+
+   :Description:
+         It this field is set to true, the participant will not receive notifications sent by the
+         backend module.
+
+ - :Field:
+         Amount of registrations
+
+   :Description:
+         Read-only field which shows the number of registrations the participant has created. Only
+         shown, if participant has created more than one registration
+
+ - :Field:
+         Parent registration
+
+   :Description:
+         Read-only field which shows the parent registration. Only shown, if the registration depends
+         on another registration (multiple registrations created by the same participant)

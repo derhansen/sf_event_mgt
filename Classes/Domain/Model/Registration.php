@@ -107,6 +107,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $email = '';
 
 	/**
+	 * Ignore notifications
+	 *
+	 * @var boolean
+	 */
+	protected $ignoreNotifications = FALSE;
+
+	/**
 	 * gender
 	 *
 	 * @var string
@@ -147,6 +154,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $event = NULL;
 
 	/**
+	 * Main registration (if available)
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
+	 */
+	protected $mainRegistration = NULL;
+
+	/**
 	 * DateTime until the registration must be confirmed
 	 *
 	 * @var \DateTime
@@ -159,6 +173,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var bool
 	 */
 	protected $hidden = FALSE;
+
+	/**
+	 * Amount of registrations (if multiple registrations created by one user)
+	 *
+	 * @var int
+	 */
+	protected $amountOfRegistrations = 1;
 
 	/**
 	 * Returns the firstname
@@ -351,6 +372,34 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Returns boolean state of ignoreNotifications
+	 *
+	 * @return boolean
+	 */
+	public function isIgnoreNotifications() {
+		return $this->ignoreNotifications;
+	}
+
+	/**
+	 * Returns ignoreNotifications
+	 *
+	 * @return boolean
+	 */
+	public function getIgnoreNotifications() {
+		return $this->ignoreNotifications;
+	}
+
+	/**
+	 * Sets ignoreNotifications
+	 *
+	 * @param boolean $ignoreNotifications
+	 * @return void
+	 */
+	public function setIgnoreNotifications($ignoreNotifications) {
+		$this->ignoreNotifications = $ignoreNotifications;
+	}
+
+	/**
 	 * Returns the gender
 	 *
 	 * @return string $gender
@@ -464,6 +513,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
+	 * Sets the mainRegistration
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @return void
+	 */
+	public function setMainRegistration($registration) {
+		$this->mainRegistration = $registration;
+	}
+
+	/**
+	 * Returns the event
+	 *
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration
+	 */
+	public function getMainRegistration() {
+		return $this->mainRegistration;
+	}
+
+	/**
 	 * Setter for notes
 	 *
 	 * @param string $notes
@@ -519,5 +587,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getHidden() {
 		return $this->hidden;
 	}
+
+	/**
+	 * Returns amountOfRegistrations
+	 *
+	 * @return int
+	 */
+	public function getAmountOfRegistrations() {
+		return $this->amountOfRegistrations;
+	}
+
+	/**
+	 * Sets amountOfRegistrations
+	 *
+	 * @param int $amountOfRegistrations
+	 * @return void
+	 */
+	public function setAmountOfRegistrations($amountOfRegistrations) {
+		$this->amountOfRegistrations = $amountOfRegistrations;
+	}
+
 
 }

@@ -250,7 +250,7 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function getOrderDirectionReturnsEmptyStringIfNoValueSet() {
 		$this->assertSame(
 			'',
-			$this->subject->getOrderField()
+			$this->subject->getOrderDirection()
 		);
 	}
 
@@ -259,10 +259,10 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function getOrderDirectionReturnsGivenValueIfValueSet() {
-		$this->subject->setOrderField('asc');
+		$this->subject->setOrderDirection('asc');
 		$this->assertSame(
 			'asc',
-			$this->subject->getOrderField()
+			$this->subject->getOrderDirection()
 		);
 	}
 

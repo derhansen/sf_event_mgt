@@ -12,6 +12,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	startdate int(11) DEFAULT '0' NOT NULL,
 	enddate int(11) DEFAULT '0' NOT NULL,
 	max_participants int(11) DEFAULT '0' NOT NULL,
+	max_registrations_per_user int(11) DEFAULT '1' NOT NULL,
 	price double(11,2) DEFAULT '0.00' NOT NULL,
 	currency varchar(255) DEFAULT '' NOT NULL,
 	category int(11) unsigned DEFAULT '0' NOT NULL,
@@ -123,6 +124,9 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	description text NOT NULL,
+	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
+	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -163,6 +167,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	event int(11) unsigned DEFAULT '0' NOT NULL,
+	main_registration int(11) unsigned DEFAULT '0' NOT NULL,
 
 	firstname varchar(255) DEFAULT '' NOT NULL,
 	lastname varchar(255) DEFAULT '' NOT NULL,
@@ -174,12 +179,14 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	country varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
+	ignore_notifications tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	gender varchar(1) DEFAULT '' NOT NULL,
 	confirmed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	paid tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	notes mediumtext,
 	date_of_birth int(11) unsigned DEFAULT '0' NOT NULL,
 	confirmation_until int(11) unsigned DEFAULT '0' NOT NULL,
+	amount_of_registrations int(11) DEFAULT '1' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

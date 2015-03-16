@@ -84,6 +84,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $notificationService = NULL;
 
 	/**
+	 * ICalendar Service
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
+	 * @inject
+	 */
+	protected $icalendarService = NULL;
+
+	/**
 	 * Settings Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
@@ -98,6 +106,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @inject
 	 */
 	protected $hashService;
+
+	/**
+	 * registrationService
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
+	 * @inject
+	 */
+	protected $registrationService = NULL;
 
 	/**
 	 * Create a demand object with the given settings
@@ -148,6 +164,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
+	 * Initiates the iCalendar download for the given event
+	 *
+	 * @param Event $event The event
+	 *
+	 * @return bool
+	 */
+	public function icalDownloadAction(Event $event) {
+		$this->icalendarService->downloadiCalendarFile($event);
+		return FALSE;
+	}
+
+	/**
 	 * Registration view for an event
 	 *
 	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
@@ -182,22 +210,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
 		$autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'];
-		$success = TRUE;
 		$result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-		if ($event->getEnableRegistration() === FALSE) {
-			$success = FALSE;
-			$result = RegistrationResult::REGISTRATION_NOT_ENABLED;
-		} elseif ($event->getRegistrationDeadline() != NULL && $event->getRegistrationDeadline() < new \DateTime()) {
-			$success = FALSE;
-			$result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
-		} elseif ($event->getStartdate() < new \DateTime()) {
-			$success = FALSE;
-			$result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
-		} elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
-			&& $event->getMaxParticipants() > 0) {
-			$success = FALSE;
-			$result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
-		}
+		$success = $this->checkRegistrationSuccess($event, $registration, $result);
 
 		// Save registration if no errors
 		if ($success) {
@@ -225,6 +239,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 					MessageType::REGISTRATION_NEW);
 			}
 
+			// Create given amount of registrations if necessary
+			if ($registration->getAmountOfRegistrations() > 1) {
+				$this->registrationService->createDependingRegistrations($registration);
+			}
+
 			// Clear cache for configured pages
 			$pidList = $this->settingsService->getClearCacheUids($this->settings);
 			if (count($pidList) > 0) {
@@ -240,6 +259,41 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			$this->redirect('saveRegistrationResult', NULL, NULL,
 				array('result' => $result));
 		}
+	}
+
+	/**
+	 * Checks, if the registration can successfully be created. Note, that
+	 * $result is passed by reference!
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @param RegistrationResult $result
+	 *
+	 * @return bool
+	 */
+	protected function checkRegistrationSuccess($event, $registration, &$result) {
+		$success = TRUE;
+		if ($event->getEnableRegistration() === FALSE) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_NOT_ENABLED;
+		} elseif ($event->getRegistrationDeadline() != NULL && $event->getRegistrationDeadline() < new \DateTime()) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
+		} elseif ($event->getStartdate() < new \DateTime()) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
+		} elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
+			&& $event->getMaxParticipants() > 0) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
+		} elseif ($event->getFreePlaces() < $registration->getAmountOfRegistrations()) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES;
+		} elseif ($event->getMaxRegistrationsPerUser() < $registration->getAmountOfRegistrations()) {
+			$success = FALSE;
+			$result = RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED;
+		}
+		return $success;
 	}
 
 	/**
@@ -268,6 +322,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				break;
 			case RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED:
 				$messageKey = 'event.message.registrationfaileddeadlineexpired';
+				$titleKey = 'registrationResult.title.failed';
+				break;
+			case RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES:
+				$messageKey = 'event.message.registrationfailednotenoughfreeplaces';
+				$titleKey = 'registrationResult.title.failed';
+				break;
+			case RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED:
+				$messageKey = 'event.message.registrationfailedmaxamountregistrationsexceeded';
 				$titleKey = 'registrationResult.title.failed';
 				break;
 			default:
@@ -329,6 +391,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				MessageType::REGISTRATION_CONFIRMED);
 			$this->notificationService->sendAdminMessage($registration->getEvent(), $registration, $this->settings,
 				MessageType::REGISTRATION_CONFIRMED);
+
+			// Confirm registrations depending on main registration if necessary
+			if ($registration->getAmountOfRegistrations() > 1) {
+				$this->registrationService->confirmDependingRegistrations($registration);
+			}
 		}
 		$this->view->assign('messageKey', $messageKey);
 		$this->view->assign('titleKey', $titleKey);

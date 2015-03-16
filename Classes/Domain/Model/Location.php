@@ -39,6 +39,27 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
+	 * Description
+	 *
+	 * @var string
+	 */
+	protected $description = '';
+
+	/**
+	 * Longitude
+	 *
+	 * @var float
+	 */
+	protected $longitude = 0.0;
+
+	/**
+	 * Latitude
+	 *
+	 * @var float
+	 */
+	protected $latitide = 0.0;
+
+	/**
 	 * Returns the title
 	 *
 	 * @return string $title
@@ -50,11 +71,71 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the title
 	 *
-	 * @param string $title
+	 * @param string $title The title
+	 *
 	 * @return void
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
 	}
 
+	/**
+	 * Returns the description
+	 *
+	 * @return string $description
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * Sets the description
+	 *
+	 * @param string $description The description
+	 *
+	 * @return void
+	 */
+	public function setDescription($description) {
+		$this->description = $description;
+	}
+
+	/**
+	 * Returns the longitude
+	 *
+	 * @return float
+	 */
+	public function getLongitude() {
+		return $this->longitude;
+	}
+
+	/**
+	 * Sets the the longitude
+	 *
+	 * @param float $longitude The longitude
+	 *
+	 * @return void
+	 */
+	public function setLongitude($longitude) {
+		$this->longitude = $longitude;
+	}
+
+	/**
+	 * Returns the latitude
+	 *
+	 * @return float
+	 */
+	public function getLatitide() {
+		return $this->latitide;
+	}
+
+	/**
+	 * Sets the latitude
+	 *
+	 * @param float $latitide The latitude
+	 *
+	 * @return void
+	 */
+	public function setLatitide($latitide) {
+		$this->latitide = $latitide;
+	}
 }

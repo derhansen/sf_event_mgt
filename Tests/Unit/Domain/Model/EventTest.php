@@ -766,4 +766,22 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function maxRegistrationsPerUserReturnsInitialValue() {
+		$this->assertEquals(1, $this->subject->getMaxRegistrationsPerUser());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function maxRegistrationsPerUserSetsMaxRegistrationsPerUser() {
+		$this->subject->setMaxRegistrationsPerUser(2);
+		$this->assertEquals(2, $this->subject->getMaxRegistrationsPerUser());
+	}
+
 }

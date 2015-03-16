@@ -7,7 +7,7 @@ if (!defined('TYPO3_MODE')) {
 	'DERHANSEN.' . $_EXTKEY,
 	'Pievent',
 	array(
-		'Event' => 'list, detail, registration'
+		'Event' => 'list, detail, registration, icalDownload'
 	),
 	// non-cacheable actions
 	array(
@@ -23,3 +23,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['proc
 if (TYPO3_MODE === 'BE') {
 	$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'DERHANSEN\\SfEventMgt\\Command\\CleanupCommandController';
 }
+
+// Register longitude- and latitude-evaluator for TCA
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['DERHANSEN\\SfEventMgt\\Evaluation\\LongitudeEvaluator'] = 'EXT:sf_event_mgt/Classes/Evaluation/LongitudeEvaluator.php';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['DERHANSEN\\SfEventMgt\\Evaluation\\LatitudeEvaluator'] = 'EXT:sf_event_mgt/Classes/Evaluation/LatitudeEvaluator.php';

@@ -1,0 +1,8 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:https://github.com/derhansen/sf_event_mgt
+METHOD:PUBLISH
+BEGIN:VEVENT
+<f:render section="main" />
+END:VEVENT
+END:VCALENDAR

@@ -230,7 +230,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @test1
+	 * @test
 	 * @return void
 	 */
 	public function exportActionCallsExportServiceDownloadRegistrationsCsv() {

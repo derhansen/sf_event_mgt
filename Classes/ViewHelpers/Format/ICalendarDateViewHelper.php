@@ -1,11 +1,10 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Utility;
+namespace DERHANSEN\SfEventMgt\ViewHelpers\Format;
 
 /***************************************************************
- *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ *  (c) 2015 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -26,15 +25,30 @@ namespace DERHANSEN\SfEventMgt\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /**
- * RegistrationResult
+ * ICalendar Description viewhelper
  */
-class RegistrationResult {
-	const REGISTRATION_SUCCESSFUL = 0;
-	const REGISTRATION_FAILED_EVENT_EXPIRED = 1;
-	const REGISTRATION_FAILED_MAX_PARTICIPANTS = 2;
-	const REGISTRATION_NOT_ENABLED = 3;
-	const REGISTRATION_FAILED_DEADLINE_EXPIRED = 4;
-	const REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES = 5;
-	const REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED = 6;
+class ICalendarDateViewHelper extends AbstractViewHelper {
+
+	/**
+	 * Formats the given date according to rfc5545
+	 *
+	 * @param \DateTime $date The DateTime object
+	 *
+	 * @see http://tools.ietf.org/html/rfc5545#section-3.3.5
+	 * @return string
+	 */
+	public function render($date = NULL) {
+		if ($date === NULL) {
+			$date = $this->renderChildren();
+		}
+		if ($date instanceof \DateTime) {
+			return gmdate('Ymd\THis\Z', $date->getTimestamp());
+		} else {
+			return '';
+		}
+	}
+
 }

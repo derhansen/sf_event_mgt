@@ -1,11 +1,11 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Utility;
+namespace DERHANSEN\SfEventMgt\Evaluation;
 
 /***************************************************************
  *
  *  Copyright notice
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ *  (c) 2015 Torben Hansen <derhansen@gmail.com>
  *
  *  All rights reserved
  *
@@ -25,16 +25,30 @@ namespace DERHANSEN\SfEventMgt\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
- * RegistrationResult
+ * LatitudeEvaluator
  */
-class RegistrationResult {
-	const REGISTRATION_SUCCESSFUL = 0;
-	const REGISTRATION_FAILED_EVENT_EXPIRED = 1;
-	const REGISTRATION_FAILED_MAX_PARTICIPANTS = 2;
-	const REGISTRATION_NOT_ENABLED = 3;
-	const REGISTRATION_FAILED_DEADLINE_EXPIRED = 4;
-	const REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES = 5;
-	const REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED = 6;
+class LatitudeEvaluator {
+
+	/**
+	 * Validates the given latitude value (between -90 and 90 degrees)
+	 * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
+	 *
+	 * @param mixed $value The value that has to be checked
+	 * @param string $is_in Is-In String
+	 * @param int $set Determines if the field can be set (value correct) or not
+	 *
+	 * @return string The new value of the field
+	 */
+	public function evaluateFieldValue($value, $is_in, &$set) {
+		$newValue = '0.000000';
+		$set = TRUE;
+		if (MathUtility::canBeInterpretedAsFloat($value) &&
+			((float)$value >= -90 && (float)$value <= 90)) {
+			$newValue = number_format((float)$value, 6);
+		}
+		return $newValue;
+	}
 }
