@@ -42,7 +42,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.templateLayout</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -65,7 +65,7 @@
                     <settings.detailPid>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.detailPid</label>
-                            <displayCond>FIELD:switchableControllerActions:!=:Event->detail</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -89,7 +89,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.listPid</label>
                             <displayCond>
                                 <OR>
-                                    <numIndex>FIELD:switchableControllerActions:=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:=:Event->detail;Event->icalDownload</numIndex>
                                     <OR>
                                         <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </OR>
@@ -140,7 +140,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.displayMode</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -172,7 +172,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderField</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -208,7 +208,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -240,7 +240,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.topEventRestriction</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -272,7 +272,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.queryLimit</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -292,7 +292,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.category</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
@@ -325,7 +325,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.storagePage</label>
                             <displayCond>
                                 <AND>
-                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail</numIndex>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </AND>
