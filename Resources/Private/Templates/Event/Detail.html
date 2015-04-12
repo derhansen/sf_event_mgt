@@ -2,172 +2,174 @@
 
 <f:section name="main">
 
-    <h1><f:translate key="detail.title" /></h1>
+	<f:if condition="{event}">
+		<h1><f:translate key="detail.title" /></h1>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.title" />
-        </div>
-        <div class="event-detail-value event-title">
-            {event.title}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.title" />
+			</div>
+			<div class="event-detail-value event-title">
+				{event.title}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.teaser" />
-        </div>
-        <div class="event-detail-value event-teaser">
-            {event.teaser}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.teaser" />
+			</div>
+			<div class="event-detail-value event-teaser">
+				{event.teaser}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.description" />
-        </div>
-        <div class="event-detail-value event-description">
-            <f:format.html>{event.description}</f:format.html>
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.description" />
+			</div>
+			<div class="event-detail-value event-description">
+				<f:format.html>{event.description}</f:format.html>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.startdate" />
-        </div>
-        <div class="event-detail-value event-startdate">
-            <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.startdate" />
+			</div>
+			<div class="event-detail-value event-startdate">
+				<f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.enddate" />
-        </div>
-        <div class="event-detail-value event-enddate">
-            <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.enddate" />
+			</div>
+			<div class="event-detail-value event-enddate">
+				<f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.title" />
-        </div>
-        <div class="event-detail-value event-location-title">
-            {event.location.title}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.title" />
+			</div>
+			<div class="event-detail-value event-location-title">
+				{event.location.title}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.description" />
-        </div>
-        <div class="event-detail-value event-location-description">
-            <f:format.html>{event.location.description}</f:format.html>
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.description" />
+			</div>
+			<div class="event-detail-value event-location-description">
+				<f:format.html>{event.location.description}</f:format.html>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" />
-        </div>
-        <div class="event-detail-value event-maxParticipants">
-            {event.maxParticipants}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants" />
+			</div>
+			<div class="event-detail-value event-maxParticipants">
+				{event.maxParticipants}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.registrations" />
-        </div>
-        <div class="event-detail-value event-registrations">
-            {event.registration->f:count()}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.registrations" />
+			</div>
+			<div class="event-detail-value event-registrations">
+				{event.registration->f:count()}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.freePlaces" />
-        </div>
-        <div class="event-detail-value event-freePlaces">
-            {event.freePlaces}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.freePlaces" />
+			</div>
+			<div class="event-detail-value event-freePlaces">
+				{event.freePlaces}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.price" />
-        </div>
-        <div class="event-detail-value event-price">
-            {event.price} {event.currency}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.price" />
+			</div>
+			<div class="event-detail-value event-price">
+				{event.price} {event.currency}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.link" />
-        </div>
-        <div class="event-detail-value event-link">
-            <f:link.page pageUid="{event.linkUrl}" target="{event.linkTarget}" title="{event.linkTitle}"><f:translate key="tx_sfeventmgt_domain_model_event.link" /></f:link.page>
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.link" />
+			</div>
+			<div class="event-detail-value event-link">
+				<f:link.page pageUid="{event.linkUrl}" target="{event.linkTarget}" title="{event.linkTitle}"><f:translate key="tx_sfeventmgt_domain_model_event.link" /></f:link.page>
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <div class="event-detail-row">
-        <div class="event-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.top_event" />
-        </div>
-        <div class="event-detail-value event-price">
-            {event.topEvent}
-        </div>
-        <div class="clear"></div>
-    </div>
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.top_event" />
+			</div>
+			<div class="event-detail-value event-price">
+				{event.topEvent}
+			</div>
+			<div class="clear"></div>
+		</div>
 
-    <f:if condition="{event.image}">
-        <div class="event-detail-row">
-            <div class="event-detail-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.image" />
-            </div>
-            <div class="event-detail-value event-image">
-                <f:for each="{event.image}" as="image">
-                    <f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.eventDetails.imageWidth}" height="{settings.eventDetails.imageHeight}" />
-                </f:for>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </f:if>
+		<f:if condition="{event.image}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.image" />
+				</div>
+				<div class="event-detail-value event-image">
+					<f:for each="{event.image}" as="image">
+						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.eventDetails.imageWidth}" height="{settings.eventDetails.imageHeight}" />
+					</f:for>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
 
-    <f:if condition="{event.youtube}">
-        <div class="event-detail-row">
-            <div class="event-detail-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.youtube" />
-            </div>
-            <div class="event-detail-value event-youtube">
-                <f:format.raw>{event.youtube}</f:format.raw>
-            </div>
-            <div class="clear"></div>
-        </div>
-    </f:if>
+		<f:if condition="{event.youtube}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.youtube" />
+				</div>
+				<div class="event-detail-value event-youtube">
+					<f:format.raw>{event.youtube}</f:format.raw>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
 
-    <f:link.action action="icalDownload" arguments="{event : event}"><f:translate key="event.icalDownload" /></f:link.action>
+		<f:link.action action="icalDownload" arguments="{event : event}"><f:translate key="event.icalDownload" /></f:link.action>
 
-    <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
-    <f:if condition="{event.registrationPossible}">
-        <f:if condition="{settings.registrationPid} !=''">
-            <f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}">
-                <f:translate key="event.registration"/>
-            </f:link.action>
-        </f:if>
-    </f:if>
+		<f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
+		<f:if condition="{event.registrationPossible}">
+			<f:if condition="{settings.registrationPid} !=''">
+				<f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}">
+					<f:translate key="event.registration"/>
+				</f:link.action>
+			</f:if>
+		</f:if>
+	</f:if>
 </f:section>

@@ -159,7 +159,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 * @return void
 	 */
-	public function detailAction(Event $event) {
+	public function detailAction(Event $event = NULL) {
 		$this->view->assign('event', $event);
 	}
 
