@@ -226,6 +226,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			$registration->setEvent($event);
 			$registration->setPid($event->getPid());
 			$registration->setConfirmationUntil($confirmationUntil);
+			$registration->_setProperty('_languageUid', $GLOBALS['TSFE']->sys_language_uid);
 			$this->registrationRepository->add($registration);
 
 			// Persist registration, so we have an UID
