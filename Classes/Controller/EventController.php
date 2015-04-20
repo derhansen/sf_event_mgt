@@ -215,7 +215,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
 		// Save registration if no errors
 		if ($success) {
-			$linkValidity = $this->settings['confirmation']['linkValidity'];
+			$linkValidity = (int)$this->settings['confirmation']['linkValidity'];
 			if ($linkValidity === '' || !is_int($linkValidity)) {
 				// Use 3600 seconds as default value if not set
 				$linkValidity = 3600;
