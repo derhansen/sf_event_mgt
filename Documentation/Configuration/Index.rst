@@ -19,3 +19,4 @@ Configuration
    Plugin/Index
    TsReference/Index
    PageTSConfig/Index
+   RealUrl/Index
