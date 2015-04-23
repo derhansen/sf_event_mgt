@@ -2,175 +2,187 @@
 <f:layout name="Default" />
 <f:section name="main">
 
-    <h1><f:translate key="registration.title" /></h1>
+    <f:if condition="{event.registrationPossible}">
+        <f:then>
 
-    <div class="event-registration-row">
-        <div class="event-registration-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.title" />
-        </div>
-        <div class="event-registration-value event-title">
-            {event.title}
-        </div>
-        <div class="clear"></div>
-    </div>
+            <h1><f:translate key="registration.title" /></h1>
 
-    <div class="event-registration-row">
-        <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
-        </div>
-        <div class="event-list-value event-startdate">
-            <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="event-registration-row">
-        <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
-        </div>
-        <div class="event-list-value event-enddate">
-            <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="event-registration-row">
-        <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
-        </div>
-        <div class="event-list-value event-maxparticipants">
-            {event.maxParticipants}
-        </div>
-        <div class="clear"></div>
-    </div>
-    <div class="event-registration-row">
-        <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
-        </div>
-        <div class="event-list-value event-registrations">
-            {event.registration->f:count()}
-        </div>
-        <div class="clear"></div>
-    </div>
-    <f:if condition="{event.price} > 0">
-        <div class="event-registration-row">
-            <div class="event-list-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
-            </div>
-            <div class="event-list-value event-price">
-                {event.price} {event.currency}
-            </div>
-            <div class="clear"></div>
-        </div>
-    </f:if>
-    <f:if condition="{event.location}">
-        <div class="event-registration-row">
-            <div class="event-list-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
-            </div>
-            <div class="event-list-value event-price">
-                {event.location.title}
-            </div>
-            <div class="clear"></div>
-        </div>
-    </f:if>
-
-    <h2><f:translate key="registration.form.header" /></h2>
-
-    <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration">
-        <fieldset>
             <div class="event-registration-row">
-                <label for="gender"><f:translate key="tx_sfeventmgt_domain_model_registration.gender" /></label>
-                <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" /><f:form.radio name="gender" property="gender" value=""/>
-                <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" /><f:form.radio name="gender" property="gender" value="m" />
-                <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" /><f:form.radio name="gender" property="gender" value="f" />
+                <div class="event-registration-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.title" />
+                </div>
+                <div class="event-registration-value event-title">
+                    {event.title}
+                </div>
+                <div class="clear"></div>
             </div>
 
             <div class="event-registration-row">
-                <label for="firstname"><f:translate key="tx_sfeventmgt_domain_model_registration.firstname" /></label>
-                <f:form.textfield id="firstname" property="firstname" value="{e:prefill(fieldname: 'firstname', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.firstname'}"/>
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                </div>
+                <div class="event-list-value event-startdate">
+                    <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
+                </div>
+                <div class="clear"></div>
             </div>
-
             <div class="event-registration-row">
-                <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.lastname" /></label>
-                <f:form.textfield id="lastname" property="lastname" value="{e:prefill(fieldname: 'lastname', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.lastname'}"/>
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                </div>
+                <div class="event-list-value event-enddate">
+                    <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
+                </div>
+                <div class="clear"></div>
             </div>
-
             <div class="event-registration-row">
-                <label for="title"><f:translate key="tx_sfeventmgt_domain_model_registration.title" /></label>
-                <f:form.textfield id="title" property="title" value="{e:prefill(fieldname: 'title', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.title'}"/>
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                </div>
+                <div class="event-list-value event-maxparticipants">
+                    {event.maxParticipants}
+                </div>
+                <div class="clear"></div>
             </div>
-
             <div class="event-registration-row">
-                <label for="company"><f:translate key="tx_sfeventmgt_domain_model_registration.company" /></label>
-                <f:form.textfield id="company" property="company" value="{e:prefill(fieldname: 'company', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.company'}"/>
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                </div>
+                <div class="event-list-value event-registrations">
+                    {event.registration->f:count()}
+                </div>
+                <div class="clear"></div>
             </div>
-
-            <div class="event-registration-row">
-                <label for="address"><f:translate key="tx_sfeventmgt_domain_model_registration.address" /></label>
-                <f:form.textfield id="address" property="address" value="{e:prefill(fieldname: 'address', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.address'}"/>
-            </div>
-
-            <div class="event-registration-row">
-                <label for="zip"><f:translate key="tx_sfeventmgt_domain_model_registration.zip" /></label>
-                <f:form.textfield id="zip" property="zip" value="{e:prefill(fieldname: 'zip', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.zip'}"/>
-            </div>
-
-            <div class="event-registration-row">
-                <label for="city"><f:translate key="tx_sfeventmgt_domain_model_registration.city" /></label>
-                <f:form.textfield id="city" property="city" value="{e:prefill(fieldname: 'city', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.city'}"/>
-            </div>
-
-            <div class="event-registration-row">
-                <label for="country"><f:translate key="tx_sfeventmgt_domain_model_registration.country" /></label>
-                <f:form.textfield id="country" property="country" value="{e:prefill(fieldname: 'country', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.country'}"/>
-            </div>
-
-            <div class="event-registration-row">
-                <label for="email"><f:translate key="tx_sfeventmgt_domain_model_registration.email" /></label>
-                <f:form.textfield id="email" property="email" value="{e:prefill(fieldname: 'email', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.email'}"/>
-            </div>
-
-            <div class="event-registration-row">
-                <label for="phone"><f:translate key="tx_sfeventmgt_domain_model_registration.phone" /></label>
-                <f:form.textfield id="phone" property="phone" value="{e:prefill(fieldname: 'phone', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.phone'}"/>
-            </div>
-
-
-            <div class="event-registration-row">
-                <label for="dateOfBirth"><f:translate key="tx_sfeventmgt_domain_model_registration.date_of_birth" /></label>
-                <f:form.textfield id="dateOfBirth" property="dateOfBirth" /><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.dateOfBirth'}"/>
-            </div>
-
-            <f:if condition="{event.maxRegistrationsPerUser} > 1">
+            <f:if condition="{event.price} > 0">
                 <div class="event-registration-row">
-                    <label for="amountOfRegistrations"><f:translate key="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" /></label>
-                    <f:form.select id="amountOfRegistrations" property="amountOfRegistrations" options="{e:event.simultaneousRegistrations(event: '{event}')}" />
+                    <div class="event-list-label">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
+                    </div>
+                    <div class="event-list-value event-price">
+                        {event.price} {event.currency}
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </f:if>
+            <f:if condition="{event.location}">
+                <div class="event-registration-row">
+                    <div class="event-list-label">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+                    </div>
+                    <div class="event-list-value event-price">
+                        {event.location.title}
+                    </div>
+                    <div class="clear"></div>
                 </div>
             </f:if>
 
-            <div class="event-registration-row">
-                <label for="notes"><f:translate key="tx_sfeventmgt_domain_model_registration.notes" /></label>
-                <f:form.textarea id="notes" property="notes"/><br>
-                <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>
-            </div>
+            <h2><f:translate key="registration.form.header" /></h2>
 
-            <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
-        </fieldset>
-    </f:form>
+            <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration">
+                <fieldset>
+                    <div class="event-registration-row">
+                        <label for="gender"><f:translate key="tx_sfeventmgt_domain_model_registration.gender" /></label>
+                        <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" /><f:form.radio name="gender" property="gender" value=""/>
+                        <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" /><f:form.radio name="gender" property="gender" value="m" />
+                        <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" /><f:form.radio name="gender" property="gender" value="f" />
+                    </div>
 
-    <f:if condition="{settings.detailPid}">
-        <f:link.action action="detail" pageUid="{settings.detailPid}" arguments="{event: event}"><f:translate key="event.backDetailsText" /></f:link.action>
+                    <div class="event-registration-row">
+                        <label for="firstname"><f:translate key="tx_sfeventmgt_domain_model_registration.firstname" /></label>
+                        <f:form.textfield id="firstname" property="firstname" value="{e:prefill(fieldname: 'firstname', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.firstname'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="lastname"><f:translate key="tx_sfeventmgt_domain_model_registration.lastname" /></label>
+                        <f:form.textfield id="lastname" property="lastname" value="{e:prefill(fieldname: 'lastname', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.lastname'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="title"><f:translate key="tx_sfeventmgt_domain_model_registration.title" /></label>
+                        <f:form.textfield id="title" property="title" value="{e:prefill(fieldname: 'title', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.title'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="company"><f:translate key="tx_sfeventmgt_domain_model_registration.company" /></label>
+                        <f:form.textfield id="company" property="company" value="{e:prefill(fieldname: 'company', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.company'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="address"><f:translate key="tx_sfeventmgt_domain_model_registration.address" /></label>
+                        <f:form.textfield id="address" property="address" value="{e:prefill(fieldname: 'address', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.address'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="zip"><f:translate key="tx_sfeventmgt_domain_model_registration.zip" /></label>
+                        <f:form.textfield id="zip" property="zip" value="{e:prefill(fieldname: 'zip', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.zip'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="city"><f:translate key="tx_sfeventmgt_domain_model_registration.city" /></label>
+                        <f:form.textfield id="city" property="city" value="{e:prefill(fieldname: 'city', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.city'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="country"><f:translate key="tx_sfeventmgt_domain_model_registration.country" /></label>
+                        <f:form.textfield id="country" property="country" value="{e:prefill(fieldname: 'country', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.country'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="email"><f:translate key="tx_sfeventmgt_domain_model_registration.email" /></label>
+                        <f:form.textfield id="email" property="email" value="{e:prefill(fieldname: 'email', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.email'}"/>
+                    </div>
+
+                    <div class="event-registration-row">
+                        <label for="phone"><f:translate key="tx_sfeventmgt_domain_model_registration.phone" /></label>
+                        <f:form.textfield id="phone" property="phone" value="{e:prefill(fieldname: 'phone', prefillSettings: '{settings.registration.prefillFields}')}"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.phone'}"/>
+                    </div>
+
+
+                    <div class="event-registration-row">
+                        <label for="dateOfBirth"><f:translate key="tx_sfeventmgt_domain_model_registration.date_of_birth" /></label>
+                        <f:form.textfield id="dateOfBirth" property="dateOfBirth" /><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.dateOfBirth'}"/>
+                    </div>
+
+                    <f:if condition="{event.maxRegistrationsPerUser} > 1">
+                        <div class="event-registration-row">
+                            <label for="amountOfRegistrations"><f:translate key="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" /></label>
+                            <f:form.select id="amountOfRegistrations" property="amountOfRegistrations" options="{e:event.simultaneousRegistrations(event: '{event}')}" />
+                        </div>
+                    </f:if>
+
+                    <div class="event-registration-row">
+                        <label for="notes"><f:translate key="tx_sfeventmgt_domain_model_registration.notes" /></label>
+                        <f:form.textarea id="notes" property="notes"/><br>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>
+                    </div>
+
+                    <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
+                </fieldset>
+            </f:form>
+
+            <f:if condition="{settings.detailPid}">
+                <f:link.action action="detail" pageUid="{settings.detailPid}" arguments="{event: event}"><f:translate key="event.backDetailsText" /></f:link.action>
+            </f:if>
+
+            <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
+
+        </f:then>
+        <f:else>
+
+            <f:translate key="event.message.registrationnotpossible"/>
+
+        </f:else>
     </f:if>
 
-    <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
 </f:section>

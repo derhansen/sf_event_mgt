@@ -219,6 +219,10 @@
 				<source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
 				<target>Die Anmeldung ist nicht möglich, weil die Anzahl der gleichzeitigen Anmeldungen in einer Anmeldung überschritten wurde.</target>
 			</trans-unit>
+			<trans-unit id="event.message.registrationnotpossible">
+				<source>Unable to show registration form - possible reasons: Event expired, deadline or max. participants reached.</source>
+				<target>Das Registrierungsformular kann nicht angezeigt werden - mögliche Gründe: Start-Datum der Veranstaltung ist bereits erreicht, Anmeldefrist oder max. Anzahl Teilnehmer überschritten.</target>
+			</trans-unit>
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 				<target>Ihre Anmeldung war erfolgreich</target>

@@ -168,6 +168,9 @@
 			<trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded">
 				<source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
 			</trans-unit>
+			<trans-unit id="event.message.registrationnotpossible">
+				<source>Unable to show registration form - possible reasons: Event expired, deadline or max. participants reached.</source>
+			</trans-unit>
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 			</trans-unit>
