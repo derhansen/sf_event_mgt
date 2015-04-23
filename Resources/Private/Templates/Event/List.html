@@ -85,17 +85,22 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <f:if condition="{event.price} > 0">
-                <div class="event-list-row">
-                    <div class="event-list-label">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
-                    </div>
-                    <div class="event-list-value event-price">
-                        {event.price} {event.currency}
-                    </div>
-                    <div class="clear"></div>
+            <div class="event-list-row">
+                <div class="event-list-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
                 </div>
-            </f:if>
+                <div class="event-list-value event-price">
+                    <f:if condition="{event.price} == 0">
+                        <f:then>
+                            <f:translate key="event.freeofcharge" />
+                        </f:then>
+                        <f:else>
+                            {event.price} {event.currency}
+                        </f:else>
+                    </f:if>
+                </div>
+                <div class="clear"></div>
+            </div>
             <f:if condition="{event.location.title}">
                 <div class="event-list-row">
                     <div class="event-list-label">

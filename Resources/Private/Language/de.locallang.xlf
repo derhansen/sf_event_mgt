@@ -251,6 +251,10 @@
 				<source>Download iCal file</source>
 				<target>Download iCal Datei</target>
 			</trans-unit>
+			<trans-unit id="event.freeofcharge">
+				<source>Free of charge</source>
+				<target>Kostenlos</target>
+			</trans-unit>
 			<trans-unit id="label.false">
 				<source>False</source>
 				<target>Nein</target>
