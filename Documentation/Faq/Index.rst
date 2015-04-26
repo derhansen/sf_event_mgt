@@ -79,8 +79,8 @@ You can enable autoConfirmation for new registrations as described in the :ref:`
 With autoConfirmation enabled, new registrations will automatically be confirmed and the user
 will not receive a confirmation e-mail.
 
-How does the simultaneous registration process work
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How does the simultaneous registration process work?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If the field "Max. simultaneous registrations per user" is set to a value greater than 1 for the given
 event, a user is able to create multiple registrations at once. If the user in the registration view
@@ -96,4 +96,12 @@ If automatic confirmation is turned off (default), the user has to confirm the r
 a link in the confirmation e-mail. When the user confirms the registration, all "dependent registrations"
 of the "main registration will automatically also be confirmed.
 
+How can I set a default currency?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+You can set default values for many fields in TYPO3 by using TCAdefaults. To set a default value for the
+currency field, add the following to the Page TSConfig, which sets € as the default currency for new records::
+
+ TCAdefaults {
+   tx_sfeventmgt_domain_model_event.currency = €
+ }
