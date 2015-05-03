@@ -167,6 +167,15 @@
                         <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>
                     </div>
 
+                    <div class="event-registration-row checkbox">
+                        <label for="accepttc">
+                            <f:form.checkbox id="accepttc" property="accepttc" value="1"/>
+                            <f:translate key="tx_sfeventmgt_domain_model_registration.accepttc"/>
+                        </label>
+                    </div>
+                    <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
+
+                    <br/>
                     <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
                 </fieldset>
             </f:form>

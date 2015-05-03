@@ -167,6 +167,10 @@
 				<source>Confirmation until</source>
 				<target>Bestätigung bis</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc">
+				<source>Accepted terms and conditions</source>
+				<target>AGB bestätigt</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed">
 				<source>Confirmed</source>
 				<target>Bestätigt</target>

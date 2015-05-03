@@ -181,6 +181,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	email varchar(255) DEFAULT '' NOT NULL,
 	ignore_notifications tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	gender varchar(1) DEFAULT '' NOT NULL,
+	accepttc tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	confirmed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	paid tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	notes mediumtext,

@@ -120,6 +120,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth">
 				<source>Date of birth</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc">
+				<source>Accept terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed">
 				<source>Confirmed</source>
 			</trans-unit>

@@ -128,6 +128,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $dateOfBirth = NULL;
 
 	/**
+	 * Accept terms and conditions
+	 *
+	 * @var boolean
+	 */
+	protected $accepttc = FALSE;
+
+	/**
 	 * Confirmed
 	 *
 	 * @var boolean
@@ -435,6 +442,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getDateOfBirth() {
 		return $this->dateOfBirth;
+	}
+
+	/**
+	 * Returns accept terms and conditions
+	 *
+	 * @return boolean $accepttc
+	 */
+	public function getAccepttc() {
+		return $this->accepttc;
+	}
+
+	/**
+	 * Sets accept terms and conditions
+	 *
+	 * @param boolean $accepttc
+	 * @return void
+	 */
+	public function setAccepttc($accepttc) {
+		$this->accepttc = $accepttc;
 	}
 
 	/**

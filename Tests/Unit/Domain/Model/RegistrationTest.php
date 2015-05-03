@@ -337,6 +337,31 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
+	public function getAccepttcReturnsInitialValueForBoolean() {
+		$this->assertSame(
+			FALSE,
+			$this->subject->getAccepttc()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setAccepttcForBooleanSetsConfirmed() {
+		$this->subject->setAccepttc(TRUE);
+
+		$this->assertAttributeEquals(
+			TRUE,
+			'accepttc',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
 	public function getConfirmedReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			FALSE,

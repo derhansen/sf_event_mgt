@@ -48,7 +48,8 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function setup() {
-		$this->validator = $this->getMock($this->validatorClassName, array('translateErrorMessage'));
+		$this->validator = $this->getAccessibleMock($this->validatorClassName, array('translateErrorMessage', 'getValidator'),
+			array(), '', FALSE);
 	}
 
 	/**
@@ -122,6 +123,12 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 				FALSE,
 				FALSE
 			),
+			'requiredFieldsSettingsForAccepttcBoolean' => array(
+				array('registration' => array('requiredFields' => 'accepttc')),
+				array('accepttc' => false),
+				FALSE,
+				FALSE
+			),
 			'requiredFieldsSettingsForUnknownProperty' => array(
 				array('registration' => array('requiredFields' => 'unknown_field')),
 				array(),
@@ -132,7 +139,8 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
-	 * Executes all validation tests defines by the given data provider
+	 * Executes all validation tests defined by the given data provider
+	 * Not really testing, just mocking if everything is called as expected
 	 *
 	 * @test
 	 * @dataProvider settingsDataProvider
@@ -157,22 +165,65 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		// Inject the object manager
 		$validationError = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Error', array(), array(), '', FALSE);
 
-		$notEmptyValidatorResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', array(), array(), '', FALSE);
-		$notEmptyValidatorResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
-		$notEmptyValidatorResult->expects($this->any())->method('getErrors')->will(
+		$validationResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', array(), array(), '', FALSE);
+		$validationResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
+		$validationResult->expects($this->any())->method('getErrors')->will(
 			$this->returnValue(array($validationError)));
 
 		$notEmptyValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator',
 			array(), array(), '', FALSE);
 		$notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
-			$notEmptyValidatorResult));
+			$validationResult));
 
-		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-			array('get'), array(), '', FALSE);
-		$objectManager->expects($this->any())->method('get')->will($this->returnValue($notEmptyValidator));
-		$this->inject($this->validator, 'objectManager', $objectManager);
+		$booleanValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
+			array(), array(), '', FALSE);
+		$booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
+			$validationResult));
+
+		// Create a map of arguments to return values
+		$map = array(
+			array('string', $notEmptyValidator),
+			array('boolean', $booleanValidator)
+		);
+
+		$this->validator->expects($this->any())->method('getValidator')->will($this->returnValueMap($map));
 
 		$this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
 	}
 
+	/**
+	 * Data povider for getValidator
+	 *
+	 * @return array
+	 */
+	public function getValidatorDataProvider() {
+		return array(
+			'string' => array(
+				'string',
+				new \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator(),
+				\TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator::class
+			),
+			'boolean' => array(
+				'boolean',
+				new \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator(),
+				\TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator::class
+			)
+		);
+	}
+
+	/**
+	 * @test
+	 * @@dataProvider getValidatorDataProvider
+	 */
+	public function getValidatorReturnsValidatorTest($type, $returnedObject, $expectedClass) {
+		$validator = $this->getAccessibleMock($this->validatorClassName, array('dummy'), array(), '', FALSE);
+
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array('get'), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($returnedObject));
+		$this->inject($validator, 'objectManager', $objectManager);
+
+		$result = $validator->_call('getValidator', $type);
+		$this->assertInstanceOf($expectedClass, $result);
+	}
 }

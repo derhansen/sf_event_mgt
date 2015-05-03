@@ -105,3 +105,18 @@ currency field, add the following to the Page TSConfig, which sets € as the de
  TCAdefaults {
    tx_sfeventmgt_domain_model_event.currency = €
  }
+
+
+How to make the field "Accept terms and conditions" mandatory
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The field "Accept terms and conditions" is part of the registration domain model, but it is not required
+during registration. To make the field required, add the field to the list of required field like shown below::
+
+ plugin.tx_sfeventmgt {
+   settings {
+     registration {
+       requiredFields = accepttc
+     }
+   }
+ }

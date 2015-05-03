@@ -52,7 +52,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 
 	/**
 	 * Validates the given registration according to required fields set in plugin
-	 * settings
+	 * settings. For boolean fields, the booleanValidator is used and it is assumed,
+	 * that boolean fields must have the value "TRUE" (for checkboxes)
 	 *
 	 * @param Registration $value
 	 * @return bool
@@ -75,9 +76,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 
 		foreach ($requiredFields as $requiredField) {
 			if ($value->_hasProperty($requiredField)) {
-				/** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
-				$validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');
-
+				$validator = $this->getValidator(gettype($value->_getProperty($requiredField)));
 				/** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
 				$validationResult = $validator->validate($value->_getProperty($requiredField));
 				if ($validationResult->hasErrors()) {
@@ -89,5 +88,25 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 			}
 		}
 		return $result;
+	}
+
+	/**
+	 * Returns a validator object depending on the given type of the property
+	 *
+	 * @param string $type
+	 * @return \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+	 */
+	protected function getValidator($type) {
+		switch ($type) {
+			case 'boolean':
+				/** @var \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator $validator */
+				$validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
+					array('is' => true));
+				break;
+			default:
+				/** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
+				$validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');
+		}
+		return $validator;
 	}
 }

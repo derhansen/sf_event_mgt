@@ -40,6 +40,15 @@
 	float: left;
 }
 
+.tx-sf-event-mgt form.registration .checkbox {
+    margin-left: 150px;
+}
+
+.tx-sf-event-mgt form.registration .checkbox label {
+    float: none;
+    width: auto;
+}
+
 .tx-sf-event-mgt form.registration .error {
 	margin-left: 150px;
 	color: #ff0000;

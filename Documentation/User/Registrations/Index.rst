@@ -108,6 +108,12 @@ process and also some administration fields like "confirmed" or "paid"
          Administration field. Will be set automatically, when the user confirms the registration.
 
  - :Field:
+         Accepted terms and conditions
+
+   :Description:
+         Indicates, that the user has confirmed the terms and conditions (if field is used in template)
+
+ - :Field:
          Paid
 
    :Description:
