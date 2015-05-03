@@ -2,6 +2,7 @@
 # FE-Plugin configuration
 #==============================================
 plugin.tx_sfeventmgt {
+	mvc.callDefaultActionIfActionCantBeResolved = 1
 	view {
 		templateRootPath = {$plugin.tx_sfeventmgt.view.templateRootPath}
 		partialRootPath = {$plugin.tx_sfeventmgt.view.partialRootPath}
