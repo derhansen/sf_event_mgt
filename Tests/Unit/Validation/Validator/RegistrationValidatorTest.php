@@ -201,12 +201,12 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'string' => array(
 				'string',
 				new \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator(),
-				\TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator::class
+				'\TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator'
 			),
 			'boolean' => array(
 				'boolean',
 				new \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator(),
-				\TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator::class
+				'\TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator'
 			)
 		);
 	}
