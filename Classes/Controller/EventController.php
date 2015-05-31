@@ -118,19 +118,16 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Create a demand object with the given settings
 	 *
-	 * @param array $settings
-	 * @param int $category
+	 * @param array $settings The settings
+	 *
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
-	public function createDemandObjectFromSettings($settings, $category = 0) {
-		if ($category === 0) {
-			$category = $settings['category'];
-		}
+	public function createDemandObjectFromSettings($settings) {
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
 		$demand->setStoragePage($settings['storagePage']);
-		$demand->setCategory($category);
+		$demand->setCategory($settings['category']);
 		$demand->setTopEventRestriction((int)$settings['topEventRestriction']);
 		$demand->setOrderField($settings['orderField']);
 		$demand->setOrderDirection($settings['orderDirection']);
@@ -139,18 +136,37 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
+	 * Overwrites a given demand object by an propertyName =>  $propertyValue array
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+	 * @param array $overwriteDemand
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
+	 */
+	protected function overwriteDemandObject($demand, $overwriteDemand) {
+		foreach ($overwriteDemand as $propertyName => $propertyValue) {
+			\TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
+		}
+		return $demand;
+	}
+
+	/**
 	 * List view
 	 *
-	 * @param int $category
+	 * @param array $overwriteDemand
 	 * @return void
 	 */
-	public function listAction($category = 0) {
-		$demand = $this->createDemandObjectFromSettings($this->settings, $category);
+	public function listAction(array $overwriteDemand = NULL) {
+		$demand = $this->createDemandObjectFromSettings($this->settings);
+		$selectedCategoryUid = 0;
+		if ($overwriteDemand !== NULL) {
+			$demand = $this->overwriteDemandObject($demand, $overwriteDemand);
+			$selectedCategoryUid = isset($overwriteDemand['category']) ? $overwriteDemand['category'] : 0;
+		}
 		$events = $this->eventRepository->findDemanded($demand);
 		$categories = $this->categoryRepository->findAll();
 		$this->view->assign('events', $events);
 		$this->view->assign('categories', $categories);
-		$this->view->assign('selectedCategoryUid', $category);
+		$this->view->assign('selectedCategoryUid', $selectedCategoryUid);
 	}
 
 	/**
