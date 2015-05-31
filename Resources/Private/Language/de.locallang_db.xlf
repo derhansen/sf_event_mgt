@@ -84,8 +84,8 @@
 				<target>Anmeldefrist</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
-				<source>Category</source>
-				<target>Kategorie</target>
+				<source>Event - Category</source>
+				<target>Veranstaltung - Kategorie</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
 				<source>Title</source>
@@ -96,8 +96,8 @@
 				<target>Übergeordnet</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
-				<source>Registration</source>
-				<target>Anmeldung</target>
+				<source>Event - Registration</source>
+				<target>Veranstaltung - Anmeldung</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
 				<source>Firstname</source>
@@ -200,8 +200,8 @@
 				<target>Anmeldung</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
-				<source>Location</source>
-				<target>Ort</target>
+				<source>Event - Location</source>
+				<target>Veranstaltung - Ort</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
@@ -220,8 +220,8 @@
 				<target>Breitengrad</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
-				<source>Notificationlog</source>
-				<target>Benachrichtigungsverlauf</target>
+				<source>Event - Notificationlog</source>
+				<target>Veranstaltung - Benachrichtigungsverlauf</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event">
 				<source>Event</source>

@@ -64,7 +64,7 @@
 				<source>Registration deadline</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
-				<source>Category</source>
+				<source>Event - Category</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
 				<source>Title</source>
@@ -73,7 +73,7 @@
 				<source>Parent</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
-				<source>Registration</source>
+				<source>Event - Registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
 				<source>Firstname</source>
@@ -151,7 +151,7 @@
 				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
-				<source>Location</source>
+				<source>Event - Location</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
@@ -166,7 +166,7 @@
 				<source>Latitude</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
-				<source>Notificationlog</source>
+				<source>Event - Notificationlog</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event">
 				<source>Event</source>
