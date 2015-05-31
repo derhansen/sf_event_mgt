@@ -79,6 +79,10 @@
 				<source>Image</source>
 				<target>Bild</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
+				<source>Files</source>
+				<target>Dateien</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
 				<source>YouTube</source>
 				<target>YouTube</target>
@@ -294,6 +298,10 @@
 			<trans-unit id="detail.title">
 				<source>Event details</source>
 				<target>Veranstaltungsdetails</target>
+			</trans-unit>
+			<trans-unit id="detail.download">
+				<source>Download</source>
+				<target>Download</target>
 			</trans-unit>
 			<trans-unit id="registration.title">
 				<source>Registration for event</source>

@@ -42,10 +42,16 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected $subject = NULL;
 
+	/**
+	 * Setup
+	 */
 	protected function setUp() {
 		$this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 	}
 
+	/**
+	 * Teardown
+	 */
 	protected function tearDown() {
 		unset($this->subject);
 	}
@@ -420,6 +426,57 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'image', $imageObjectStorageMock);
 
 		$this->subject->removeImage($image);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFilesReturnsInitialValueForfiles() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->subject->getFiles()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setFilesForObjectStorageContainingFilesSetsFiles() {
+		$file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$objectStorageHoldingExactlyOneFile = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneFile->attach($file);
+		$this->subject->setFiles($objectStorageHoldingExactlyOneFile);
+
+		$this->assertAttributeEquals(
+			$objectStorageHoldingExactlyOneFile,
+			'files',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addFilesToObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'files', $imageObjectStorageMock);
+
+		$this->subject->addFiles($files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeFilesFromObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'files', $imageObjectStorageMock);
+
+		$this->subject->removeFiles($files);
 	}
 
 	/**

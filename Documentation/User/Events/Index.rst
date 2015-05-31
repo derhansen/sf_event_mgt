@@ -99,11 +99,23 @@ General
    :Description:
          One or more categories.
 
+Media
+~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
  - :Field:
          Image
 
    :Description:
          One or more images.
+
+ - :Field:
+         Files
+
+   :Description:
+         One or more files.
 
  - :Field:
          YouTube embed code

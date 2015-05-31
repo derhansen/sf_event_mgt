@@ -18,6 +18,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	category int(11) unsigned DEFAULT '0' NOT NULL,
 	registration int(11) unsigned DEFAULT '0' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
+	files int DEFAULT '0' NOT NULL,
 	youtube text,
 	location int(11) unsigned DEFAULT '0' NOT NULL,
 	enable_registration tinyint(4) unsigned DEFAULT '0' NOT NULL,

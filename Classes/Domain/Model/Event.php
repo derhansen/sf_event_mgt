@@ -1,7 +1,6 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
-
 /***************************************************************
  *
  *  Copyright notice
@@ -126,6 +125,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $image = NULL;
 
 	/**
+	 * Additional files
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+	 */
+	protected $files = NULL;
+
+	/**
 	 * YouTube Embed code
 	 *
 	 * @var string
@@ -180,6 +186,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -449,6 +456,45 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image) {
 		$this->image = $image;
+	}
+
+	/**
+	 * Adds a file
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file
+	 * @return void
+	 */
+	public function addFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $file) {
+		$this->files->attach($file);
+	}
+
+	/**
+	 * Removes a file
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove
+	 * @return void
+	 */
+	public function removeFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove) {
+		$this->files->detach($fileToRemove);
+	}
+
+	/**
+	 * Returns the files
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files
+	 */
+	public function getFiles() {
+		return $this->files;
+	}
+
+	/**
+	 * Sets the files
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files
+	 * @return void
+	 */
+	public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files) {
+		$this->files = $files;
 	}
 
 	/**

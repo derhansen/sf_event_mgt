@@ -156,6 +156,27 @@
 			</div>
 		</f:if>
 
+		<f:if condition="{event.files}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.files" />
+				</div>
+				<div class="event-detail-value files">
+					<f:for each="{event.files}" as="file">
+						<f:if condition="{file.originalResource.title}">
+							<f:then>
+								<a href="{file.originalResource.publicUrl}" target="_blank">{file.originalResource.title}</a>
+							</f:then>
+							<f:else>
+								<a href="{file.originalResource.publicUrl}" target="_blank"><f:translate key="detail.download"/></a>
+							</f:else>
+						</f:if>
+					</f:for>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
+
 		<f:if condition="{event.youtube}">
 			<div class="event-detail-row">
 				<div class="event-detail-label">
