@@ -68,6 +68,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$this->setStoragePageConstraint($query, $eventDemand, $constraints);
 		$this->setDisplayModeConstraint($query, $eventDemand, $constraints);
 		$this->setCategoryConstraint($query, $eventDemand, $constraints);
+		$this->setLocationConstraint($query, $eventDemand, $constraints);
 		$this->setStartEndDateConstraint($query, $eventDemand, $constraints);
 		$this->setTitleConstraint($query, $eventDemand, $constraints);
 		$this->setTopEventConstraint($query, $eventDemand, $constraints);
@@ -166,6 +167,20 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 			if (count($categoryConstraints) > 0) {
 				$constraints[] = $query->logicalOr($categoryConstraints);
 			}
+		}
+	}
+
+	/**
+	 * Sets the location constraint to the given constraints array
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @param array $constraints
+	 * @return void
+	 */
+	protected function setLocationConstraint($query, $eventDemand, &$constraints) {
+		if ($eventDemand->getLocation() !== NULL) {
+			$constraints[] = $query->equals('location', $eventDemand->getLocation());
 		}
 	}
 

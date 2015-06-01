@@ -286,4 +286,24 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		);
 	}
 
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getLocationReturnsNullIfNoValueSet() {
+		$this->assertNull($this->subject->getLocation());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getLocationReturnsExpectedLocation() {
+		$location = new \DERHANSEN\SfEventMgt\Domain\Model\Location();
+		$this->subject->setLocation($location);
+		$this->assertSame(
+			$location,
+			$this->subject->getLocation()
+		);
+	}
 }

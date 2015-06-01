@@ -214,4 +214,39 @@
         <description>test</description>
         <top_event>1</top_event>
     </tx_sfeventmgt_domain_model_event>
+
+    <!-- findRecordsByLocation -->
+    <!-- has location 1 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>41</uid>
+        <pid>40</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>1</location>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has location 2-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>42</uid>
+        <pid>40</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>2</location>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has no location -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>43</uid>
+        <pid>40</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_sfeventmgt_domain_model_location>
+        <uid>1</uid>
+    </tx_sfeventmgt_domain_model_location>
+    <tx_sfeventmgt_domain_model_location>
+        <uid>2</uid>
+    </tx_sfeventmgt_domain_model_location>
+    <tx_sfeventmgt_domain_model_location>
+        <uid>3</uid>
+    </tx_sfeventmgt_domain_model_location>
 </dataset>

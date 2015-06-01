@@ -38,6 +38,9 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository */
 	protected $eventRepository;
 
+	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
+	protected $locationRepository;
+
 	/** @var array  */
 	protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
 
@@ -51,6 +54,7 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 		parent::setUp();
 		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 		$this->eventRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository');
+		$this->locationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository');
 
 		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_event.xml');
 	}
@@ -154,6 +158,31 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 		$demand->setCategory('1,2,3,4');
 		$this->assertEquals(3, $this->eventRepository->findDemanded($demand)->count());
+	}
+
+	/**
+	 * Test if location restriction works
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByLocation() {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(40);
+
+		$location = $this->locationRepository->findByUid(1);
+		$demand->setLocation($location);
+		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+
+		$location = $this->locationRepository->findByUid(2);
+		$demand->setLocation($location);
+		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+
+		$location = $this->locationRepository->findByUid(3);
+		$demand->setLocation($location);
+		$this->assertEquals(0, $this->eventRepository->findDemanded($demand)->count());
+
 	}
 
 	/**

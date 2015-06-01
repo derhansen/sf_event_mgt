@@ -14,6 +14,12 @@
         strict="false"
         verbose="false">
 
+    <filter>
+        <blacklist>
+            <directory>typo3</directory>
+        </blacklist>
+    </filter>
+
     <testsuites>
         <testsuite name="EXT:sf_event mgt">
             <directory>../Functional/</directory>

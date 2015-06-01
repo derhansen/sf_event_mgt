@@ -109,6 +109,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $queryLimit = NULL;
 
 	/**
+	 * Location
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
+	 */
+	protected $location = NULL;
+
+	/**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode
@@ -318,4 +325,24 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setQueryLimit($queryLimit) {
 		$this->queryLimit = $queryLimit;
 	}
+
+	/**
+	 * Returns the location
+	 *
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
+	 */
+	public function getLocation() {
+		return $this->location;
+	}
+
+	/**
+	 * Sets the location
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location
+	 * @return void
+	 */
+	public function setLocation($location) {
+		$this->location = $location;
+	}
+
 }
