@@ -16,8 +16,8 @@
 
     <filter>
         <blacklist>
-            <directory>typo3</directory>
-            <directory>typo3temp</directory>
+            <directory>../../../../../typo3</directory>
+            <directory>../../../../../typo3temp</directory>
         </blacklist>
     </filter>
 
