@@ -38,7 +38,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Zip
 	 *
-	 * @var string
+	 * @var int
 	 * @validate Integer
 	 */
 	protected $zip = 0;
