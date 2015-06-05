@@ -125,6 +125,10 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	address varchar(255) DEFAULT '' NOT NULL,
+	zip int(11) DEFAULT '0' NOT NULL,
+	city varchar(255) DEFAULT '' NOT NULL,
+	country varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,

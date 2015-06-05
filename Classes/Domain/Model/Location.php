@@ -29,6 +29,35 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
+	 * Address
+	 *
+	 * @var string
+	 */
+	protected $address = '';
+
+	/**
+	 * Zip
+	 *
+	 * @var string
+	 * @validate Integer
+	 */
+	protected $zip = 0;
+
+	/**
+	 * City
+	 *
+	 * @var string
+	 */
+	protected $city = '';
+
+	/**
+	 * Country
+	 *
+	 * @var string
+	 */
+	protected $country = '';
+
+	/**
 	 * Description
 	 *
 	 * @var string
@@ -67,6 +96,82 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+	}
+
+	/**
+	 * Returns the address
+	 *
+	 * @return string $address
+	 */
+	public function getAddress() {
+		return $this->address;
+	}
+
+	/**
+	 * Sets the address
+	 *
+	 * @param string $address
+	 * @return void
+	 */
+	public function setAddress($address) {
+		$this->address = $address;
+	}
+
+	/**
+	 * Returns the zip
+	 *
+	 * @return int $zip
+	 */
+	public function getZip() {
+		return $this->zip;
+	}
+
+	/**
+	 * Sets the zip
+	 *
+	 * @param int $zip
+	 * @return void
+	 */
+	public function setZip($zip) {
+		$this->zip = $zip;
+	}
+
+	/**
+	 * Returns the city
+	 *
+	 * @return string $city
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * Sets the city
+	 *
+	 * @param string $city
+	 * @return void
+	 */
+	public function setCity($city) {
+		$this->city = $city;
+	}
+
+	/**
+	 * Returns the country
+	 *
+	 * @return string $country
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
+
+	/**
+	 * Sets the country
+	 *
+	 * @param string $country
+	 * @return void
+	 */
+	public function setCountry($country) {
+		$this->country = $country;
 	}
 
 	/**

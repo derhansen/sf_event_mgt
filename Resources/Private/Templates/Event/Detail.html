@@ -67,6 +67,48 @@
 
 		<div class="event-detail-row">
 			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.address" />
+			</div>
+			<div class="event-detail-value event-location-address">
+				<f:format.nl2br>{event.location.address}</f:format.nl2br>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<f:if condition="{event.location.zip}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.zip" />
+				</div>
+				<div class="event-detail-value event-location-zip">
+					{event.location.zip}
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
+
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.city" />
+			</div>
+			<div class="event-detail-value event-location-city">
+				{event.location.city}
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.country" />
+			</div>
+			<div class="event-detail-value event-location-country">
+				{event.location.country}
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="event-detail-row">
+			<div class="event-detail-label">
 				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.description" />
 			</div>
 			<div class="event-detail-value event-location-description">

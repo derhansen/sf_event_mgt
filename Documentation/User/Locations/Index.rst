@@ -35,6 +35,30 @@ data of the location.
    :Description:
          Title of the location.
 
+- :Field:
+         Address
+
+   :Description:
+         Address of the location
+
+ - :Field:
+         Zip
+
+   :Description:
+         Zip of the location
+
+ - :Field:
+         City
+
+   :Description:
+         City of the location
+
+ - :Field:
+         Country
+
+   :Description:
+         Country of the location
+
  - :Field:
          Description
 

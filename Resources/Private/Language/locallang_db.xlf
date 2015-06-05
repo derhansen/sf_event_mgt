@@ -156,6 +156,18 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.country">
+				<source>Country</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
 				<source>Description</source>
 			</trans-unit>

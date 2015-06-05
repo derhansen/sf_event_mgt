@@ -74,6 +74,105 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getAddressReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getAddress()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setAddressForStringSetsAddress() {
+		$this->subject->setAddress('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'address',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getZipReturnsInitialValueForInteger() {
+		$this->assertSame(
+			0,
+			$this->subject->getZip()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setZipForIntegerSetsZip() {
+		$this->subject->setZip(12);
+
+		$this->assertAttributeEquals(
+			12,
+			'zip',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getCityReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getCity()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getCountryReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getCountry()
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setCityForStringSetsCity() {
+		$this->subject->setCity('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'city',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function setCountryForStringSetsCountry() {
+		$this->subject->setCountry('A country');
+
+		$this->assertAttributeEquals(
+			'A country',
+			'country',
+			$this->subject
+		);
+	}
 
 	/**
 	 * Test if description returns initial value

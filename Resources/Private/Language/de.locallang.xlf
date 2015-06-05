@@ -71,6 +71,22 @@
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.address">
+				<source>Address</source>
+				<target>Adresse</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.zip">
+				<source>Zip</source>
+				<target>Plz.</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.city">
+				<source>City</source>
+				<target>Stadt</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.country">
+				<source>Country</source>
+				<target>Land</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
 				<source>Description</source>
 				<target>Beschreibung</target>

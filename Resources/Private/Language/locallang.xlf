@@ -54,6 +54,18 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.country">
+				<source>Country</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
 				<source>Description</source>
 			</trans-unit>
