@@ -18,17 +18,17 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
+ * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CategoryRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
+class LocationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
 	protected $objectManager;
 
-	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository */
-	protected $categoryRepository;
+	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
+	protected $locationRepository;
 
 	/** @var array  */
 	protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
@@ -42,9 +42,9 @@ class CategoryRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	public function setUp() {
 		parent::setUp();
 		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->categoryRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository');
+		$this->locationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository');
 
-		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_category.xml');
+		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.xml');
 	}
 
 	/**
@@ -54,9 +54,9 @@ class CategoryRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	 * @return void
 	 */
 	public function findRecordsByUid() {
-		$categories = $this->categoryRepository->findAll();
+		$locations = $this->locationRepository->findAll();
 
-		$this->assertEquals(2, $categories->count());
+		$this->assertEquals(2, $locations->count());
 	}
 
 }
