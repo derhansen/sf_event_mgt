@@ -72,6 +72,10 @@
 				<source>Category</source>
 				<target>Kategorie</target>
 			</trans-unit>
+			<trans-unit id="flexforms_general.location">
+				<source>Location</source>
+				<target>Ort</target>
+			</trans-unit>
 			<trans-unit id="flexforms_general.storagePage">
 				<source>Record storage page</source>
 				<target>Seite/Ordner mit Datensätzen</target>
