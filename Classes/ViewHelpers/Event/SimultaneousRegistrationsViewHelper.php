@@ -30,7 +30,7 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper {
 	 *
 	 * The returned array index starts at 1 if at least one registration is possible
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
 	 *
 	 * @return array
 	 */

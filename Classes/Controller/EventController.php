@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
@@ -36,13 +37,15 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $configurationManager;
 
 	/**
+	 * CacheService
+	 *
 	 * @var \TYPO3\CMS\Extbase\Service\CacheService
 	 * @inject
 	 */
 	protected $cacheService;
 
 	/**
-	 * eventRepository
+	 * EventRepository
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
 	 * @inject
@@ -98,7 +101,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $hashService;
 
 	/**
-	 * registrationService
+	 * RegistrationService
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
 	 * @inject
@@ -112,7 +115,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 *
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
-	public function createDemandObjectFromSettings($settings) {
+	public function createDemandObjectFromSettings(array $settings) {
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
@@ -129,11 +132,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Overwrites a given demand object by an propertyName =>  $propertyValue array
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
-	 * @param array $overwriteDemand
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
+	 * @param array $overwriteDemand OwerwriteDemand
+	 *
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
-	protected function overwriteDemandObject($demand, $overwriteDemand) {
+	protected function overwriteDemandObject(EventDemand $demand, array $overwriteDemand) {
 		foreach ($overwriteDemand as $propertyName => $propertyValue) {
 			\TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
 		}
@@ -143,7 +147,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * List view
 	 *
-	 * @param array $overwriteDemand
+	 * @param array $overwriteDemand OverwriteDemand
+	 *
 	 * @return void
 	 */
 	public function listAction(array $overwriteDemand = NULL) {
@@ -163,7 +168,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Detail view for an event
 	 *
-	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 *
 	 * @return void
 	 */
 	public function detailAction(Event $event = NULL) {
@@ -185,7 +191,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Registration view for an event
 	 *
-	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 *
 	 * @return void
 	 */
 	public function registrationAction(Event $event) {
@@ -210,9 +217,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Saves the registration
 	 *
-	 * @param $registration \DERHANSEN\SfEventMgt\Domain\Model\Registration
-	 * @param $event \DERHANSEN\SfEventMgt\Domain\Model\Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
 	 * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator
+	 *
 	 * @return void
 	 */
 	public function saveRegistrationAction(Registration $registration, Event $event) {
@@ -273,13 +281,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * Checks, if the registration can successfully be created. Note, that
 	 * $result is passed by reference!
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param RegistrationResult $result
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param RegistrationResult $result Result
 	 *
 	 * @return bool
 	 */
-	protected function checkRegistrationSuccess($event, $registration, &$result) {
+	protected function checkRegistrationSuccess(Event $event, Registration $registration, &$result) {
 		$success = TRUE;
 		if ($event->getEnableRegistration() === FALSE) {
 			$success = FALSE;
@@ -307,7 +315,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * Shows the result of the saveRegistrationAction
 	 *
-	 * @param int $result
+	 * @param int $result Result
+	 *
 	 * @return void
 	 */
 	public function saveRegistrationResultAction($result) {
@@ -358,7 +367,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function confirmRegistrationAction($reguid, $hmac) {
-		/** @var Registration $registration */
+		/* @var $registration Registration */
 		$registration = NULL;
 		$failed = FALSE;
 		$messageKey = 'event.message.confirmation_successful';

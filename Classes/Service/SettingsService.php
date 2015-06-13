@@ -25,7 +25,8 @@ class SettingsService {
 	 * Returns an array (key-value pair) of custom notifications that can be used in
 	 * select boxes
 	 *
-	 * @param $settings
+	 * @param array $settings Settings
+	 *
 	 * @return array
 	 */
 	public function getCustomNotifications($settings) {
@@ -42,7 +43,8 @@ class SettingsService {
 	/**
 	 * Returns an array of page uids for which the cache should be cleared
 	 *
-	 * @param $settings
+	 * @param array $settings Settings
+	 *
 	 * @return array
 	 */
 	public function getClearCacheUids($settings) {

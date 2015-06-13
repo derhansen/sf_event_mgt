@@ -24,6 +24,8 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailService {
 
 	/**
+	 * Mailmessage
+	 *
 	 * @var \TYPO3\CMS\Core\Mail\MailMessage
 	 */
 	protected $mailer = NULL;

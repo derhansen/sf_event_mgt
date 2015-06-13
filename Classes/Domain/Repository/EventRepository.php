@@ -48,8 +48,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Returns the objects of this repository matching the given demand
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 *
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface QueryResultInterface
 	 */
 	public function findDemanded(EventDemand $eventDemand) {
 		$constraints = array();
@@ -74,8 +75,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets a query limit to the given query for the given demand
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 *
 	 * @return void
 	 */
 	protected function setQueryLimitFromDemand($query, EventDemand $eventDemand) {
@@ -89,8 +91,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the ordering to the given query for the given demand
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 *
 	 * @return void
 	 */
 	protected function setOrderingsFromDemand($query, EventDemand $eventDemand) {
@@ -106,9 +109,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the storagePage constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setStoragePageConstraint($query, $eventDemand, &$constraints) {
@@ -121,9 +125,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the displayMode constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setDisplayModeConstraint($query, $eventDemand, &$constraints) {
@@ -141,9 +146,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the category constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setCategoryConstraint($query, $eventDemand, &$constraints) {
@@ -162,9 +168,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the location constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setLocationConstraint($query, $eventDemand, &$constraints) {
@@ -176,9 +183,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the start- and enddate constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setStartEndDateConstraint($query, $eventDemand, &$constraints) {
@@ -196,9 +204,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the title constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setTitleConstraint($query, $eventDemand, &$constraints) {
@@ -210,9 +219,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the topEvent constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setTopEventConstraint($query, $eventDemand, &$constraints) {

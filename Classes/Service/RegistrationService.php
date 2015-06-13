@@ -32,6 +32,8 @@ class RegistrationService {
 	protected $objectManager;
 
 	/**
+	 * RegistrationRepository
+	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
 	 * @inject
 	 */
@@ -41,7 +43,8 @@ class RegistrationService {
 	 * Handles expired registrations. If the $delete parameter is set, then
 	 * registrations are deleted, else just hidden
 	 *
-	 * @param bool $delete
+	 * @param bool $delete Delete
+	 *
 	 * @return void
 	 */
 	public function handleExpiredRegistrations($delete = FALSE) {
@@ -63,11 +66,13 @@ class RegistrationService {
 	 * Duplicates (all public accessable properties) the given registration the
 	 * amount of times configured in amountOfRegistrations
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 *
 	 * @return void
 	 */
 	public function createDependingRegistrations($registration) {
-		for ($i = 1; $i <= $registration->getAmountOfRegistrations() - 1; $i++) {
+		$registrations = $registration->getAmountOfRegistrations();
+		for ($i = 1; $i <= $registrations - 1; $i++) {
 			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $newReg */
 			$newReg = $this->objectManager->get('DERHANSEN\SfEventMgt\Domain\Model\Registration');
 			$properties = ObjectAccess::getGettableProperties($registration);
@@ -84,12 +89,13 @@ class RegistrationService {
 	/**
 	 * Confirms all depending registrations based on the given main registration
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 *
 	 * @return void
 	 */
 	public function confirmDependingRegistrations($registration) {
 		$registrations = $this->registrationRepository->findByMainRegistration($registration);
-		foreach($registrations as $foundRegistration) {
+		foreach ($registrations as $foundRegistration) {
 			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $foundRegistration */
 			$foundRegistration->setConfirmed(TRUE);
 			$this->registrationRepository->update($foundRegistration);

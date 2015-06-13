@@ -24,18 +24,24 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController {
 
 	/**
+	 * Configurationmanager
+	 *
 	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
 	 * @inject
 	 */
 	protected $configurationManager;
 
 	/**
+	 * Cacheservice
+	 *
 	 * @var \TYPO3\CMS\Extbase\Service\CacheService
 	 * @inject
 	 */
 	protected $cacheService;
 
 	/**
+	 * Registrationservice
+	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
 	 * @inject
 	 */

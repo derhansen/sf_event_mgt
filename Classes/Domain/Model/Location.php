@@ -110,7 +110,8 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the address
 	 *
-	 * @param string $address
+	 * @param string $address Address
+	 *
 	 * @return void
 	 */
 	public function setAddress($address) {
@@ -129,7 +130,8 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the zip
 	 *
-	 * @param int $zip
+	 * @param int $zip Zip
+	 *
 	 * @return void
 	 */
 	public function setZip($zip) {
@@ -148,7 +150,8 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the city
 	 *
-	 * @param string $city
+	 * @param string $city City
+	 *
 	 * @return void
 	 */
 	public function setCity($city) {
@@ -167,7 +170,8 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the country
 	 *
-	 * @param string $country
+	 * @param string $country Country
+	 *
 	 * @return void
 	 */
 	public function setCountry($country) {

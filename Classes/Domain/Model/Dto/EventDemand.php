@@ -108,7 +108,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the displayMode
 	 *
-	 * @param string $displayMode
+	 * @param string $displayMode Displaymode
+	 *
 	 * @return void
 	 */
 	public function setDisplayMode($displayMode) {
@@ -127,7 +128,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the storage page
 	 *
-	 * @param string $storagePage
+	 * @param string $storagePage Storagepage
+	 *
 	 * @return void
 	 */
 	public function setStoragePage($storagePage) {
@@ -146,10 +148,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the current DateTime
 	 *
-	 * @param \DateTime $currentDateTime
+	 * @param \DateTime $currentDateTime CurrentDateTime
+	 *
 	 * @return void
 	 */
-	public function setCurrentDateTime($currentDateTime) {
+	public function setCurrentDateTime(\DateTime $currentDateTime) {
 		$this->currentDateTime = $currentDateTime;
 	}
 
@@ -168,7 +171,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the category (seperated by comma)
 	 *
-	 * @param string $category
+	 * @param string $category Category
+	 *
 	 * @return void
 	 */
 	public function setCategory($category) {
@@ -187,10 +191,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set the start date
 	 *
-	 * @param \DateTime $startDate
+	 * @param \DateTime $startDate StartDate
+	 *
 	 * @return void
 	 */
-	public function setStartDate($startDate) {
+	public function setStartDate(\DateTime $startDate) {
 		$this->startDate = $startDate;
 	}
 
@@ -206,10 +211,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set the end date
 	 *
-	 * @param \DateTime $endDate
+	 * @param \DateTime $endDate EndDate
+	 *
 	 * @return void
 	 */
-	public function setEndDate($endDate) {
+	public function setEndDate(\DateTime $endDate) {
 		$this->endDate = $endDate;
 	}
 
@@ -224,7 +230,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set the title
 	 *
-	 * @param string $title
+	 * @param string $title Title
+	 *
 	 * @return void
 	 */
 	public function setTitle($title) {
@@ -252,7 +259,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets topEventRestriction
 	 *
-	 * @param int $topEventRestriction
+	 * @param int $topEventRestriction TopEventRestriction
+	 *
 	 * @return void
 	 */
 	public function setTopEventRestriction($topEventRestriction) {
@@ -271,7 +279,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the order direction
 	 *
-	 * @param string $orderDirection
+	 * @param string $orderDirection OrderDirection
+	 *
 	 * @return void
 	 */
 	public function setOrderDirection($orderDirection) {
@@ -290,7 +299,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the order field
 	 *
-	 * @param string $orderField
+	 * @param string $orderField OrderField
+	 *
 	 * @return void
 	 */
 	public function setOrderField($orderField) {
@@ -309,7 +319,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the query limit
 	 *
-	 * @param int $queryLimit
+	 * @param int $queryLimit QueryLimit
+	 *
 	 * @return void
 	 */
 	public function setQueryLimit($queryLimit) {
@@ -328,7 +339,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the location
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
+	 *
 	 * @return void
 	 */
 	public function setLocation($location) {

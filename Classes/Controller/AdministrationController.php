@@ -15,6 +15,8 @@ namespace DERHANSEN\SfEventMgt\Controller;
  */
 
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
 
 /**
@@ -25,7 +27,7 @@ use DERHANSEN\SfEventMgt\Service;
 class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * eventRepository
+	 * EventRepository
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
 	 * @inject
@@ -33,7 +35,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $eventRepository = NULL;
 
 	/**
-	 * customNotificationLogRepository
+	 * CustomNotificationLogRepository
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
 	 * @inject
@@ -41,7 +43,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $customNotificationLogRepository = NULL;
 
 	/**
-	 * exportService
+	 * ExportService
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\ExportService
 	 * @inject
@@ -49,7 +51,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $exportService = NULL;
 
 	/**
-	 * registrationService
+	 * RegistrationService
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
 	 * @inject
@@ -57,7 +59,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $registrationService = NULL;
 
 	/**
-	 * notificationService
+	 * NotificationService
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\NotificationService
 	 * @inject
@@ -65,7 +67,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	protected $notificationService = NULL;
 
 	/**
-	 * settingsService
+	 * SettingsService
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
 	 * @inject
@@ -113,11 +115,12 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * List action for backend module
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
-	 * @param int $messageId
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
+	 * @param int $messageId MessageID
+	 *
 	 * @return void
 	 */
-	public function listAction($demand = NULL, $messageId = NULL) {
+	public function listAction(EventDemand $demand = NULL, $messageId = NULL) {
 		if ($demand === NULL) {
 			$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		}
@@ -153,9 +156,10 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	}
 
 	/**
-	 * export registrations for a given event
+	 * Export registrations for a given event
 	 *
-	 * @param int $eventUid
+	 * @param int $eventUid Event UID
+	 *
 	 * @return bool Always FALSE, since no view should be rendered
 	 */
 	public function exportAction($eventUid) {
@@ -177,10 +181,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * The index notify action
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 *
 	 * @return void
 	 */
-	public function indexNotifyAction(\DERHANSEN\SfEventMgt\Domain\Model\Event $event) {
+	public function indexNotifyAction(Event $event) {
 		$customNotifications = $this->settingsService->getCustomNotifications($this->settings);
 		$logEntries = $this->customNotificationLogRepository->findByEvent($event);
 		$this->view->assignMultiple(array(
@@ -193,11 +198,12 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	/**
 	 * Notify action
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param string $customNotification
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param string $customNotification CustomNotification
+	 *
 	 * @return void
 	 */
-	public function notifyAction(\DERHANSEN\SfEventMgt\Domain\Model\Event $event, $customNotification) {
+	public function notifyAction(Event $event, $customNotification) {
 		$customNotifications = $this->settingsService->getCustomNotifications($this->settings);
 		$result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
 		$this->notificationService->createCustomNotificationLogentry($event,

@@ -27,8 +27,9 @@ class PrefillViewHelper extends AbstractViewHelper {
 	 * Returns a property from fe_user (if logged in and if the given field is
 	 * configured to be prefilled)
 	 *
-	 * @param string $fieldname
-	 * @param array $prefillSettings
+	 * @param string $fieldname FieldName
+	 * @param array $prefillSettings PrefillSettings
+	 *
 	 * @return string
 	 */
 	public function render($fieldname, $prefillSettings = array()) {

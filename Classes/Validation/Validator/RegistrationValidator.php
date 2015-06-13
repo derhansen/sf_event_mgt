@@ -45,7 +45,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	 * settings. For boolean fields, the booleanValidator is used and it is assumed,
 	 * that boolean fields must have the value "TRUE" (for checkboxes)
 	 *
-	 * @param Registration $value
+	 * @param Registration $value Registration
+	 *
 	 * @return bool
 	 */
 	protected function isValid($value) {
@@ -83,7 +84,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 	/**
 	 * Returns a validator object depending on the given type of the property
 	 *
-	 * @param string $type
+	 * @param string $type Type
+	 *
 	 * @return \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 	 */
 	protected function getValidator($type) {

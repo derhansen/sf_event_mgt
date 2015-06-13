@@ -26,7 +26,8 @@ class TemplateLayouts {
 	/**
 	 * Itemsproc function to extend the selection of templateLayouts in the plugin
 	 *
-	 * @param array &$config configuration array
+	 * @param array $config Configuration array
+	 *
 	 * @return void
 	 */
 	public function user_templateLayout(array &$config) {
@@ -43,7 +44,8 @@ class TemplateLayouts {
 	/**
 	 * Get template layouts defined in TsConfig
 	 *
-	 * @param $pageUid
+	 * @param int $pageUid PageUID
+	 *
 	 * @return array
 	 */
 	protected function getTemplateLayoutsFromTsConfig($pageUid) {

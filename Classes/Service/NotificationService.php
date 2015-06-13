@@ -66,7 +66,7 @@ class NotificationService {
 	protected $hashService;
 
 	/**
-	 * customNotificationLogRepository
+	 * CustomNotificationLogRepository
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
 	 * @inject
@@ -77,9 +77,10 @@ class NotificationService {
 	 * Sends a custom notification defined by the given customNotification key
 	 * to all confirmed users of the event
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param string $customNotification
-	 * @param array $settings
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param string $customNotification CustomNotification
+	 * @param array $settings Settings
+	 *
 	 * @return int Number of notifications sent
 	 */
 	public function sendCustomNotification($event, $customNotification, $settings) {
@@ -111,9 +112,10 @@ class NotificationService {
 	/**
 	 * Adds a logentry to the custom notification log
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param string $details
-	 * @param int $emailsSent
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param string $details Details
+	 * @param int $emailsSent E-Mails sent
+	 *
 	 * @return void
 	 */
 	public function createCustomNotificationLogentry($event, $details, $emailsSent) {
@@ -128,11 +130,11 @@ class NotificationService {
 	/**
 	 * Sends a message to the user based on the given type
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param array $settings
-	 * @param int $type
-	 * @param string $customNotification
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param array $settings Settings
+	 * @param int $type Type
+	 * @param string $customNotification CustomNotification
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
@@ -174,10 +176,10 @@ class NotificationService {
 	/**
 	 * Sends a message to the admin based on the given type
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param array $settings
-	 * @param int $type
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param array $settings Settings
+	 * @param int $type Type
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
@@ -214,10 +216,10 @@ class NotificationService {
 	/**
 	 * Returns the rendered HTML for the given template
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param string $template
-	 * @param array $settings
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param string $template Template
+	 * @param array $settings Settings
 	 *
 	 * @return string
 	 */

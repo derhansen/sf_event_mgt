@@ -47,7 +47,8 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the title
 	 *
-	 * @param string $title
+	 * @param string $title Title
+	 *
 	 * @return void
 	 */
 	public function setTitle($title) {
@@ -57,7 +58,8 @@ class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the parent category
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $parent
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $parent Parent
+	 *
 	 * @return void
 	 */
 	public function setParent($parent) {

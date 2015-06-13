@@ -43,9 +43,10 @@ class ExportService {
 	/**
 	 * Initiates the CSV downloads for registrations of the given event uid
 	 *
-	 * @param int $eventUid
-	 * @param array $settings
-	 * @throws \RuntimeException
+	 * @param int $eventUid EventUid
+	 * @param array $settings Settings
+	 *
+	 * @throws \RuntimeException RuntimeException
 	 * @return void
 	 */
 	public function downloadRegistrationsCsv($eventUid, $settings = array()) {
@@ -63,9 +64,10 @@ class ExportService {
 	/**
 	 * Returns all Registrations for the given eventUid as a CSV string
 	 *
-	 * @param int $eventUid
-	 * @param array $settings
-	 * @throws \RuntimeException
+	 * @param int $eventUid EventUid
+	 * @param array $settings Settings
+	 *
+	 * @throws \RuntimeException RuntimeException
 	 * @return string
 	 */
 	public function exportRegistrationsCsv($eventUid, $settings = array()) {
@@ -89,4 +91,4 @@ class ExportService {
 		return $exportedRegistrations;
 	}
 
-} 
+}

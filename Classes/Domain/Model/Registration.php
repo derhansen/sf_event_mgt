@@ -45,7 +45,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title = '';
 
 	/**
-	 * company
+	 * Company
 	 *
 	 * @var string
 	 */
@@ -61,7 +61,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Zip
 	 *
-	 * @var integer
+	 * @var int
 	 * @validate Integer
 	 */
 	protected $zip = 0;
@@ -98,12 +98,12 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Ignore notifications
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $ignoreNotifications = FALSE;
 
 	/**
-	 * gender
+	 * Gender
 	 *
 	 * @var string
 	 */
@@ -119,21 +119,21 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Accept terms and conditions
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $accepttc = FALSE;
 
 	/**
 	 * Confirmed
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $confirmed = FALSE;
 
 	/**
 	 * Paid
 	 *
-	 * @var boolean
+	 * @var bool
 	 */
 	protected $paid = FALSE;
 
@@ -145,6 +145,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $notes = '';
 
 	/**
+	 * Event
+	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
 	 */
 	protected $event = NULL;
@@ -189,7 +191,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the firstname
 	 *
-	 * @param string $firstname
+	 * @param string $firstname Firstname
+	 *
 	 * @return void
 	 */
 	public function setFirstname($firstname) {
@@ -208,7 +211,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the lastname
 	 *
-	 * @param string $lastname
+	 * @param string $lastname Lastname
+	 *
 	 * @return void
 	 */
 	public function setLastname($lastname) {
@@ -227,7 +231,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the title
 	 *
-	 * @param string $title
+	 * @param string $title Title
+	 *
 	 * @return void
 	 */
 	public function setTitle($title) {
@@ -246,7 +251,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the company
 	 *
-	 * @param string $company
+	 * @param string $company Company
+	 *
 	 * @return void
 	 */
 	public function setCompany($company) {
@@ -265,7 +271,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the address
 	 *
-	 * @param string $address
+	 * @param string $address Address
+	 *
 	 * @return void
 	 */
 	public function setAddress($address) {
@@ -275,7 +282,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the zip
 	 *
-	 * @return integer $zip
+	 * @return int $zip
 	 */
 	public function getZip() {
 		return $this->zip;
@@ -284,7 +291,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the zip
 	 *
-	 * @param integer $zip
+	 * @param int $zip Zip
+	 *
 	 * @return void
 	 */
 	public function setZip($zip) {
@@ -303,7 +311,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the city
 	 *
-	 * @param string $city
+	 * @param string $city City
+	 *
 	 * @return void
 	 */
 	public function setCity($city) {
@@ -322,7 +331,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the country
 	 *
-	 * @param string $country
+	 * @param string $country Country
+	 *
 	 * @return void
 	 */
 	public function setCountry($country) {
@@ -341,7 +351,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the phone
 	 *
-	 * @param string $phone
+	 * @param string $phone Phone
+	 *
 	 * @return void
 	 */
 	public function setPhone($phone) {
@@ -360,7 +371,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the email
 	 *
-	 * @param string $email
+	 * @param string $email E-Mail
+	 *
 	 * @return void
 	 */
 	public function setEmail($email) {
@@ -370,7 +382,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns boolean state of ignoreNotifications
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isIgnoreNotifications() {
 		return $this->ignoreNotifications;
@@ -379,7 +391,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns ignoreNotifications
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getIgnoreNotifications() {
 		return $this->ignoreNotifications;
@@ -388,7 +400,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets ignoreNotifications
 	 *
-	 * @param boolean $ignoreNotifications
+	 * @param bool $ignoreNotifications IgnoreNotifications
+	 *
 	 * @return void
 	 */
 	public function setIgnoreNotifications($ignoreNotifications) {
@@ -407,7 +420,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the gender
 	 *
-	 * @param string $gender
+	 * @param string $gender Gender
+	 *
 	 * @return void
 	 */
 	public function setGender($gender) {
@@ -417,7 +431,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the date of birth
 	 *
-	 * @param \DateTime $dateOfBirth
+	 * @param \DateTime $dateOfBirth DateOfBirth
+	 *
 	 * @return void
 	 */
 	public function setDateOfBirth($dateOfBirth) {
@@ -436,7 +451,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns accept terms and conditions
 	 *
-	 * @return boolean $accepttc
+	 * @return bool $accepttc
 	 */
 	public function getAccepttc() {
 		return $this->accepttc;
@@ -445,7 +460,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets accept terms and conditions
 	 *
-	 * @param boolean $accepttc
+	 * @param bool $accepttc Accept terms and conditions
+	 *
 	 * @return void
 	 */
 	public function setAccepttc($accepttc) {
@@ -455,7 +471,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the confirmed
 	 *
-	 * @return boolean $confirmed
+	 * @return bool $confirmed Confirmed
 	 */
 	public function getConfirmed() {
 		return $this->confirmed;
@@ -464,7 +480,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the confirmed
 	 *
-	 * @param boolean $confirmed
+	 * @param bool $confirmed Confirmed
+	 *
 	 * @return void
 	 */
 	public function setConfirmed($confirmed) {
@@ -474,7 +491,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the boolean state of confirmed
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isConfirmed() {
 		return $this->confirmed;
@@ -483,7 +500,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the paid
 	 *
-	 * @return boolean $paid
+	 * @return bool $paid
 	 */
 	public function getPaid() {
 		return $this->paid;
@@ -492,7 +509,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the paid
 	 *
-	 * @param boolean $paid
+	 * @param bool $paid Paid
+	 *
 	 * @return void
 	 */
 	public function setPaid($paid) {
@@ -502,7 +520,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the boolean state of paid
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function isPaid() {
 		return $this->paid;
@@ -511,7 +529,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the event
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 *
 	 * @return void
 	 */
 	public function setEvent($event) {
@@ -530,7 +549,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the mainRegistration
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 *
 	 * @return void
 	 */
 	public function setMainRegistration($registration) {
@@ -549,7 +569,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Setter for notes
 	 *
-	 * @param string $notes
+	 * @param string $notes Notes
+	 *
 	 * @return void
 	 */
 	public function setNotes($notes) {
@@ -568,7 +589,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets confirmUntil
 	 *
-	 * @param \DateTime $confirmationUntil
+	 * @param \DateTime $confirmationUntil Confirmation Until
+	 *
 	 * @return void
 	 */
 	public function setConfirmationUntil($confirmationUntil) {
@@ -587,7 +609,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets hidden
 	 *
-	 * @param boolean $hidden
+	 * @param bool $hidden Hidden
+	 *
 	 * @return void
 	 */
 	public function setHidden($hidden) {
@@ -597,7 +620,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns hidden
 	 *
-	 * @return boolean
+	 * @return bool
 	 */
 	public function getHidden() {
 		return $this->hidden;
@@ -615,12 +638,12 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets amountOfRegistrations
 	 *
-	 * @param int $amountOfRegistrations
+	 * @param int $amountOfRegistrations AmountOfRegistrations
+	 *
 	 * @return void
 	 */
 	public function setAmountOfRegistrations($amountOfRegistrations) {
 		$this->amountOfRegistrations = $amountOfRegistrations;
 	}
-
 
 }

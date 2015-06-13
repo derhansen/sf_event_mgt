@@ -59,7 +59,8 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
 	/**
 	 * Sets the details
 	 *
-	 * @param string $details
+	 * @param string $details Details
+	 *
 	 * @return void
 	 */
 	public function setDetails($details) {
@@ -78,10 +79,11 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
 	/**
 	 * Sets the event
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 *
 	 * @return void
 	 */
-	public function setEvent($event) {
+	public function setEvent(Event $event) {
 		$this->event = $event;
 	}
 
@@ -97,7 +99,8 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
 	/**
 	 * Sets emailsSent
 	 *
-	 * @param int $emailsSent
+	 * @param int $emailsSent E-Mails sent
+	 *
 	 * @return void
 	 */
 	public function setEmailsSent($emailsSent) {
@@ -125,10 +128,11 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
 	/**
 	 * Sets the timestamp
 	 *
-	 * @param \DateTime $tstamp
+	 * @param \DateTime $tstamp Tstamp
+	 *
 	 * @return void
 	 */
-	public function setTstamp($tstamp) {
+	public function setTstamp(\DateTime $tstamp) {
 		$this->tstamp = $tstamp;
 	}
 
@@ -144,7 +148,8 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
 	/**
 	 * Sets the backend user
 	 *
-	 * @param \TYPO3\CMS\Beuser\Domain\Model\BackendUser $cruserId
+	 * @param \TYPO3\CMS\Beuser\Domain\Model\BackendUser $cruserId CruserId
+	 *
 	 * @return void
 	 */
 	public function setCruserId($cruserId) {

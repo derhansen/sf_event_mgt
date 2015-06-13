@@ -36,7 +36,8 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Returns all registrations, where the confirmation date is less than the
 	 * given date
 	 *
-	 * @param \datetime $dateNow
+	 * @param \Datetime $dateNow Date
+	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
 	 */
 	public function findExpiredRegistrations($dateNow) {
@@ -51,8 +52,9 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * Returns all registrations for the given event with the given constraints
 	 * Constraints are combined with a logical AND
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param $findConstraints
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param array $findConstraints FindConstraints
+	 *
 	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
 	public function findNotificationRegistrations($event, $findConstraints) {
