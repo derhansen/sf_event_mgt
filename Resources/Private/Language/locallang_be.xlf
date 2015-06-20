@@ -106,7 +106,7 @@
 				<source>Name of the sender</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.admin_email">
-				<source>E-Mail address of website admin, who receives new/confirmed registrations</source>
+				<source>E-Mail address(es) of website admin(s), who receives new/confirmed registrations. Multiple E-Mail addresses must be separated with a comma.</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_new_user_subject">
 				<source>Subject of e-mail sent to user when a new registration is created</source>

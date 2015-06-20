@@ -339,6 +339,58 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Test if the adminEmail settings get exploded and only 2 e-mails get sent
+	 *
+	 * @test
+	 * @dataProvider messageTypeDataProvider
+	 * @return void
+	 */
+	public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType) {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+
+		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
+			'adminEmail' => 'valid1@email.tld,valid2@email.tld ,invalid-email,,'));
+
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
+			array('sendEmailMessage'), array(), '', FALSE);
+		$emailService->expects($this->exactly(2))->method('sendEmailMessage')->will($this->returnValue(TRUE));
+		$this->inject($this->subject, 'emailService', $emailService);
+
+		// Inject configuration and configurationManager
+		$configuration = array(
+			'plugin.' => array(
+				'tx_sfeventmgt.' => array(
+					'view.' => array(
+						'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+						'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
+					)
+				)
+			)
+		);
+
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($configuration));
+		$this->inject($this->subject, 'configurationManager', $configurationManager);
+
+		$emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', FALSE);
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+		$this->inject($this->subject, 'hashService', $hashService);
+
+		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
+		$this->assertTrue($result);
+	}
+
+	/**
 	 * @test
 	 */
 	public function sendUserMessageReturnsFalseIfNoCustomMessageGiven() {
