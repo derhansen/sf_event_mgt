@@ -48,3 +48,9 @@ Configure your TypoScript setup like shown below (note the **plural** of the pat
   }
 
 Doing so, you can just **override single files** from the original templates.
+
+Note about e-mail notification templates
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Please note, that ``plugin.tx_sfeventmgt.view.templateRootPaths`` (plural!) does not work for e-mail templates if you use
+TYPO3 6.2. In order to change e-mail templates, you must use ``plugin.tx_sfeventmgt.view.templateRootPath`` (singular!)
