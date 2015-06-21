@@ -37,7 +37,7 @@ class EmailService {
 		$this->mailer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
 	}
 	/**
-	 * Sends an e-mail
+	 * Sends an e-mail, if sender and recipient is an valid e-mail address
 	 *
 	 * @param string $sender The sender
 	 * @param string $recipient The recipient
@@ -48,11 +48,15 @@ class EmailService {
 	 * @return bool TRUE/FALSE if message is sent
 	 */
 	public function sendEmailMessage($sender, $recipient, $subject, $body, $name = NULL) {
-		$this->mailer->setFrom($sender, $name);
-		$this->mailer->setSubject($subject);
-		$this->mailer->setBody($body, 'text/html');
-		$this->mailer->setTo($recipient);
-		$this->mailer->send();
-		return $this->mailer->isSent();
+		if (GeneralUtility::validEmail($sender) && GeneralUtility::validEmail($recipient)) {
+			$this->mailer->setFrom($sender, $name);
+			$this->mailer->setSubject($subject);
+			$this->mailer->setBody($body, 'text/html');
+			$this->mailer->setTo($recipient);
+			$this->mailer->send();
+			return $this->mailer->isSent();
+		} else {
+			return FALSE;
+		}
 	}
 }

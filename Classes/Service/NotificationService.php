@@ -158,9 +158,7 @@ class NotificationService {
 			return FALSE;
 		}
 
-		if (GeneralUtility::validEmail($registration->getEmail()) &&
-			GeneralUtility::validEmail($settings['notification']['senderEmail']) &&
-			!$registration->isIgnoreNotifications()) {
+		if (!$registration->isIgnoreNotifications()) {
 			$body = $this->getNotificationBody($event, $registration, $template, $settings);
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],
@@ -199,24 +197,20 @@ class NotificationService {
 			return FALSE;
 		}
 
-		if (GeneralUtility::validEmail($settings['notification']['senderEmail'])) {
-			$adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], TRUE);
+		$adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], TRUE);
+		$allEmailsSent = FALSE;
+		$body = $this->getNotificationBody($event, $registration, $template, $settings);
+		foreach ($adminEmailArr as $adminEmail) {
 			$allEmailsSent = TRUE;
-			$body = $this->getNotificationBody($event, $registration, $template, $settings);
-			foreach ($adminEmailArr as $adminEmail) {
-				if (GeneralUtility::validEmail($adminEmail)) {
-					$allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-							$settings['notification']['senderEmail'],
-							$adminEmail,
-							$subject,
-							$body,
-							$settings['notification']['senderName']
-						);
-				}
-			}
-			return $allEmailsSent;
+			$allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
+					$settings['notification']['senderEmail'],
+					$adminEmail,
+					$subject,
+					$body,
+					$settings['notification']['senderName']
+				);
 		}
-		return FALSE;
+		return $allEmailsSent;
 	}
 
 	/**

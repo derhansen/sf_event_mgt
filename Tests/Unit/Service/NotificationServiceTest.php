@@ -69,21 +69,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @dataProvider messageTypeDataProvider
 	 */
-	public function sendUserMessageReturnsFalseIfInvalidEmailInRegistration($messageType) {
-		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
-		$registration->setEmail('invalid-email');
-
-		$settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
-
-		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
-		$this->assertFalse($result);
-	}
-
-	/**
-	 * @test
-	 * @dataProvider messageTypeDataProvider
-	 */
 	public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet($messageType) {
 		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
@@ -102,21 +87,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function sendUserMessageReturnsFalseIfInvalidArgumentsGiven() {
 		$result = $this->subject->sendUserMessage(NULL, NULL, NULL, MessageType::REGISTRATION_NEW);
-		$this->assertFalse($result);
-	}
-
-	/**
-	 * @test
-	 * @dataProvider messageTypeDataProvider
-	 */
-	public function sendUserMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
-		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
-		$registration->setEmail('valid@email.tld');
-
-		$settings = array('notification' => array('senderEmail' => 'invalid-email'));
-
-		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertFalse($result);
 	}
 
@@ -216,19 +186,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
 		$this->assertTrue($result);
-	}
-
-	/**
-	 * @test
-	 * @dataProvider messageTypeDataProvider
-	 */
-	public function sendAdminNewRegistrationMessageReturnsFalseIfInvalidEmailInSettings($messageType) {
-		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
-
-		$settings = array('notification' => array('senderEmail' => 'invalid-email', 'adminEmail' => 'invalid-email'));
-		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-		$this->assertFalse($result);
 	}
 
 	/**
@@ -354,7 +311,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
 			array('sendEmailMessage'), array(), '', FALSE);
-		$emailService->expects($this->exactly(2))->method('sendEmailMessage')->will($this->returnValue(TRUE));
+		$emailService->expects($this->exactly(3))->method('sendEmailMessage')->will($this->returnValue(TRUE));
 		$this->inject($this->subject, 'emailService', $emailService);
 
 		// Inject configuration and configurationManager
