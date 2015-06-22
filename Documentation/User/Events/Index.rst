@@ -52,6 +52,12 @@ General
          The description for the event.
 
  - :Field:
+         Program
+
+   :Description:
+         The program/schedule for the event.
+
+ - :Field:
          Link
 
    :Description:

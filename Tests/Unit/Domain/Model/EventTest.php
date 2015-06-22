@@ -91,6 +91,29 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getProgramReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getProgram()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setProgramForStringSetsProgram() {
+		$this->subject->setProgram('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'program',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getTeaserReturnsInitialValueForString() {
 		$this->assertSame(
 			'',

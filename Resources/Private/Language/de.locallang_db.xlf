@@ -19,6 +19,10 @@
 				<source>Description</source>
 				<target>Beschreibung</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
+				<source>Program/Schedule</source>
+				<target>Programm/Ablauf</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
 				<source>Link</source>
 				<target>Link</target>

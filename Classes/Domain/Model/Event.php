@@ -44,6 +44,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $description = '';
 
 	/**
+	 * Program/Schedule
+	 *
+	 * @var string
+	 */
+	protected $program = '';
+
+	/**
 	 * Startdate and time
 	 *
 	 * @var \DateTime
@@ -245,6 +252,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
+	}
+
+	/**
+	 * Returns the program
+	 *
+	 * @return string $program
+	 */
+	public function getProgram() {
+			return $this->program;
+	}
+
+	/**
+	 * Sets the program
+	 *
+	 * @param string $program The program
+	 *
+	 * @return void
+	 */
+	public function setProgram($program) {
+		$this->program = $program;
 	}
 
 	/**

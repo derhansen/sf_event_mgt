@@ -35,6 +35,18 @@
 			<div class="clear"></div>
 		</div>
 
+		<f:if condition="{event.program}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.program" />
+				</div>
+				<div class="event-detail-value event-program">
+					<f:format.html>{event.program}</f:format.html>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
+
 		<div class="event-detail-row">
 			<div class="event-detail-label">
 				<f:translate key="tx_sfeventmgt_domain_model_event.startdate" />
@@ -152,14 +164,14 @@
 				<f:translate key="tx_sfeventmgt_domain_model_event.price" />
 			</div>
 			<div class="event-detail-value event-price">
-                <f:if condition="{event.price} == 0">
-                    <f:then>
-                        <f:translate key="event.freeofcharge" />
-                    </f:then>
-                    <f:else>
-                        {event.price} {event.currency}
-                    </f:else>
-                </f:if>
+				<f:if condition="{event.price} == 0">
+					<f:then>
+						<f:translate key="event.freeofcharge" />
+					</f:then>
+					<f:else>
+						{event.price} {event.currency}
+					</f:else>
+				</f:if>
 			</div>
 			<div class="clear"></div>
 		</div>
