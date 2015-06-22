@@ -103,6 +103,10 @@
 				<source>YouTube</source>
 				<target>YouTube</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+				<source>Additional Images</source>
+				<target>Zusätzliche Bilder</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Category</source>
 				<target>Kategorie</target>

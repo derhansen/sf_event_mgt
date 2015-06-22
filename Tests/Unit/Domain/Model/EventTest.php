@@ -468,6 +468,57 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getAdditionalImageReturnsInitialValueForfiles() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->subject->getAdditionalImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdditionalImageForObjectStorageContainingFilesSetsFiles() {
+		$file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$objectStorageHoldingExactlyOneFile = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneFile->attach($file);
+		$this->subject->setAdditionalImage($objectStorageHoldingExactlyOneFile);
+
+		$this->assertAttributeEquals(
+			$objectStorageHoldingExactlyOneFile,
+			'additionalImage',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addAdditionalImageToObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
+
+		$this->subject->addAdditionalImage($files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeAdditionalImageFromObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
+
+		$this->subject->removeAdditionalImage($files);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getRegistrationPossibleReturnsFalseIfEventHasTakenPlace() {
 		$startdate = new \DateTime();
 		$startdate->add(\DateInterval::createFromDateString('yesterday'));

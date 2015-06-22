@@ -157,6 +157,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $topEvent = FALSE;
 
 	/**
+	 * The additionalImage
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+	 */
+	protected $additionalImage = NULL;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -177,6 +184,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -720,6 +728,49 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setMaxRegistrationsPerUser($maxRegistrationsPerUser) {
 		$this->maxRegistrationsPerUser = $maxRegistrationsPerUser;
+	}
+
+
+	/**
+	 * Adds an additionalImage
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage The Image
+	 *
+	 * @return void
+	 */
+	public function addAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage) {
+		$this->additionalImage->attach($additionalImage);
+	}
+
+	/**
+	 * Removes an additionalImage
+	 *
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove The Image
+	 *
+	 * @return void
+	 */
+	public function removeAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove) {
+		$this->additionalImage->detach($additionalImageToRemove);
+	}
+
+	/**
+	 * Returns the additionalImage
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage
+	 */
+	public function getAdditionalImage() {
+		return $this->additionalImage;
+	}
+
+	/**
+	 * Sets the additionalImage
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage The Image
+	 *
+	 * @return void
+	 */
+	public function setAdditionalImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage) {
+		$this->additionalImage = $additionalImage;
 	}
 
 }

@@ -123,6 +123,12 @@ Media
    :Description:
          A YouTube embed code
 
+ - :Field:
+         Additional images
+
+   :Description:
+         One or more additional images (e.g. images from the event).
+
 .. figure:: ../../Images/event-registration.png
    :align: left
    :alt: Event record (Tab: registration)

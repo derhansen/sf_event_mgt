@@ -78,6 +78,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
 				<source>YouTube</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+				<source>Additional Images</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.booking">
 				<source>Booking</source>
 			</trans-unit>

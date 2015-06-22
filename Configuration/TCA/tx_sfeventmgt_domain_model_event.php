@@ -26,10 +26,10 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, files, youtube, registration, location',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, files, youtube, additional_image, registration, location',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, teaser, description;;;richtext:rte_transform[mode=ts_links], link, top_event, startdate, enddate, location, price, currency, category, --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media, image, files, youtube, --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration, enable_registration, registration_deadline, max_participants, max_registrations_per_user, registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, teaser, description;;;richtext:rte_transform[mode=ts_links], link, top_event, startdate, enddate, location, price, currency, category, --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media, image, files, youtube,additional_image, --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration, enable_registration, registration_deadline, max_participants, max_registrations_per_user, registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -324,6 +324,17 @@ return array(
 				'cols' => 60,
 				'rows' => 3,
 			)
+		),
+		'additional_image' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.additional_image',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('additional_image', array(
+				'appearance' => array(
+					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+				),
+				'minitems' => 0,
+				'maxitems' => 999,
+			), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
 		),
 		'registration' => array(
 			'exclude' => 1,

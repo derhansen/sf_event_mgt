@@ -198,6 +198,22 @@
 			</div>
 		</f:if>
 
+		<f:if condition="{event.additionalImage}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.additional_image"/>
+				</div>
+				<div class="event-detail-value event-additional-image">
+					<f:for each="{event.additionalImage}" as="image">
+						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE"
+								 width="{settings.eventDetails.imageWidth}"
+								 height="{settings.eventDetails.imageHeight}"/>
+					</f:for>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
+
 		<f:if condition="{event.files}">
 			<div class="event-detail-row">
 				<div class="event-detail-label">
