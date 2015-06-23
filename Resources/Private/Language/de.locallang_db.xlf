@@ -263,6 +263,30 @@
 				<source>User</source>
 				<target>Benutzer</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+				<target>Organisator/Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator">
+				<source>Organisator</source>
+				<target>Event - Organisator/Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+				<source>E-Mail</source>
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+				<source>Phone number</source>
+				<target>Telefon</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+				<source>Image</source>
+				<target>Bild</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

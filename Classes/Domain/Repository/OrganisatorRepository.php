@@ -15,11 +15,11 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  */
 
 /**
- * The repository for Categories
+ * The repository for Organisator
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class OrganisatorRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	/**
 	 * Disable the use of storage records, because the StoragePage can be set
