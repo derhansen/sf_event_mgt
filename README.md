@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/derhansen/sf_event_mgt.svg?branch=master)](https://travis-ci.org/derhansen/sf_event_mgt)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
+[![Coverage Status](https://coveralls.io/repos/derhansen/sf_event_mgt/badge.svg)](https://coveralls.io/r/derhansen/sf_event_mgt)
 
 Event management and registration
 =================================
