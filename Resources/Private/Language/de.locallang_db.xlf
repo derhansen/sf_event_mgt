@@ -203,6 +203,18 @@
 				<source>Amount of registrations (if user created multiple registrations at the same time)</source>
 				<target>Anzahl Anmeldungen (falls der Benutzer mehrere Anmeldungen gleichzeitig vorgenommen hat)</target>
 			</trans-unit>
+			<trans-unit id="event.tabs.additional">
+				<source>Additional</source>
+				<target>Zusätzlich</target>
+			</trans-unit>
+			<trans-unit id="event.tabs.category">
+				<source>Category</source>
+				<target>Kategorie</target>
+			</trans-unit>
+			<trans-unit id="event.tabs.notification">
+				<source>Notification</source>
+				<target>Benachrichtigung</target>
+			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 				<target>Medien</target>

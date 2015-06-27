@@ -12,10 +12,8 @@ Events
 ======
 
 Events are the main record of this extesion. An event contains several fields, which can be used to
-describe the event in detail. For each event, it is possible to enable registration and to limit the
-amount of free places, so only a limited amount of people can participate to the event. It is
-possible to allow the user to create multiple registrations at once, if the field "Max. simultaneous
-registrations per user" is set to a value greater than 1.
+describe the event in detail. The general tab is used to add general information about the event like
+a title, start- and enddate and a description.
 
 .. figure:: ../../Images/event-event.png
    :align: left
@@ -34,40 +32,22 @@ General
          Description:
 
  - :Field:
-         Title
+         Hide
 
    :Description:
-         Title of the event.
-
- - :Field:
-         Teaser
-
-   :Description:
-         The teaser for the event.
-
- - :Field:
-         Description
-
-   :Description:
-         The description for the event.
-
- - :Field:
-         Program
-
-   :Description:
-         The program/schedule for the event.
-
- - :Field:
-         Link
-
-   :Description:
-         A link (e.g. external link) for the event.
+         If checked, the event is hidden
 
  - :Field:
          Top event
 
    :Description:
          If checked, the event is considered as a top event
+
+ - :Field:
+         Title
+
+   :Description:
+         Title of the event.
 
  - :Field:
          Startdate
@@ -82,16 +62,31 @@ General
          Date and time, when the event ends.
 
  - :Field:
-         Location
+         Teaser
 
    :Description:
-         The location of the event choosen from the location records created.
+         The teaser for the event.
 
  - :Field:
-         Organisator
+         Description
 
    :Description:
-         The organisator of the event choosen from the organisator records created.
+         The description for the event.
+
+Additional
+~~~~~~~~~~
+
+The additional tab contains additional fields for the event like price, location, organiser, link and
+program/schedule.
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
 
  - :Field:
          Price
@@ -106,16 +101,42 @@ General
          The currency for the price.
 
  - :Field:
-         Category
+         Location
 
    :Description:
-         One or more categories.
+         The location of the event choosen from the location records created.
+
+ - :Field:
+         Organisator
+
+   :Description:
+         The organisator of the event choosen from the organisator records created.
+
+ - :Field:
+         Link
+
+   :Description:
+         A link (e.g. external link) for the event.
+
+ - :Field:
+         Program
+
+   :Description:
+         The program/schedule for the event.
 
 Media
 ~~~~~
 
+The media tab contains fields which holds media-data for the event.
+
 .. t3-field-list-table::
  :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+             Description:
 
  - :Field:
          Image
@@ -141,13 +162,38 @@ Media
    :Description:
          One or more additional images (e.g. images from the event).
 
-.. figure:: ../../Images/event-registration.png
-   :align: left
-   :alt: Event record (Tab: registration)
+Category
+~~~~~~~~
+
+You can assign one or multiple categories to an event.
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
+
+ - :Field:
+         Category
+
+   :Description:
+         One or multiple categories for the event
 
 
 Registration
 ~~~~~~~~~~~~
+
+For each event, it is possible to enable registration and to limit the
+amount of free places, so only a limited amount of people can participate to the event. It is also
+possible to allow the user to create multiple registrations at once, if the field "Max. simultaneous
+registrations per user" is set to a value greater than 1.
+
+.. figure:: ../../Images/event-registration.png
+   :align: left
+   :alt: Event record (Tab: registration)
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -190,4 +236,28 @@ Registration
 
    :Description:
          A list of participants registered to the event.
+
+Access
+~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
+
+ - :Field:
+         Start
+
+   :Description:
+         Date/time when event should be shown automatically (by TYPO3)
+
+ - :Field:
+         Stop
+
+   :Description:
+         Date/time when event should be hidden automatically (by TYPO3)
 
