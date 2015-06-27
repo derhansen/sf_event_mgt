@@ -901,4 +901,30 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertEquals(2, $this->subject->getMaxRegistrationsPerUser());
 	}
 
+	/**
+	 * Test if initial value for organisator is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getOrganisatorReturnsInitialValueForOrganisator() {
+		$this->assertNull($this->subject->getOrganisator());
+	}
+
+	/**
+	 * Test if organisator can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setPhoneForStringSetsPhone() {
+		$organisator = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
+		$this->subject->setOrganisator($organisator);
+
+		$this->assertAttributeEquals(
+			$organisator,
+			'organisator',
+			$this->subject
+		);
+	}
 }

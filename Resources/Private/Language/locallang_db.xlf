@@ -51,6 +51,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location">
 				<source>Location</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 			</trans-unit>

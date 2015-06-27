@@ -88,6 +88,12 @@ General
          The location of the event choosen from the location records created.
 
  - :Field:
+         Organisator
+
+   :Description:
+         The organisator of the event choosen from the organisator records created.
+
+ - :Field:
          Price
 
    :Description:

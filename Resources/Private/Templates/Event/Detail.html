@@ -121,10 +121,20 @@
 
 		<div class="event-detail-row">
 			<div class="event-detail-label">
-				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.description" />
+				<f:translate key="tx_sfeventmgt_domain_model_event.organisator" />
 			</div>
-			<div class="event-detail-value event-location-description">
-				<f:format.html>{event.location.description}</f:format.html>
+			<div class="event-detail-value event-organisator">
+				<f:format.html>{event.organisator.name}</f:format.html>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="event-detail-row">
+			<div class="event-detail-label">
+				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.title" />
+			</div>
+			<div class="event-detail-value event-location-title">
+				{event.location.title}
 			</div>
 			<div class="clear"></div>
 		</div>

@@ -67,6 +67,10 @@
 				<source>Location</source>
 				<target>Ort</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+				<target>Event - Organisator/Ansprechpartner</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 				<target>Bild</target>

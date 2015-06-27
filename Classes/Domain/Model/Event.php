@@ -171,6 +171,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $additionalImage = NULL;
 
 	/**
+	 * The organisator
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
+	 */
+	protected $organisator = NULL;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -798,6 +805,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setAdditionalImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage) {
 		$this->additionalImage = $additionalImage;
+	}
+
+	/**
+	 * Returns the organisator
+	 *
+	 * @return Organisator
+	 */
+	public function getOrganisator() {
+		return $this->organisator;
+	}
+
+	/**
+	 * Sets the organisator
+	 *
+	 * @param Organisator $organisator The organisator
+	 *
+	 * @return void
+	 */
+	public function setOrganisator($organisator) {
+		$this->organisator = $organisator;
 	}
 
 }
