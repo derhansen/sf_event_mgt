@@ -11,9 +11,7 @@
 Locations
 =========
 
-Locations can be assigned to an event. In the current version, the location contains only the field
-title. Future versions of this extension may contain additional fields like the address or the geographical
-data of the location.
+Locations can be assigned to an event.
 
 .. figure:: ../../Images/location.png
    :align: left
