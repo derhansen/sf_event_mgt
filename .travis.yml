@@ -8,6 +8,9 @@ env:
   - DB=mysql TYPO3_BRANCH=TYPO3_6-2 COVERAGE=0
   - DB=mysql TYPO3_BRANCH=master COVERAGE=0
 
+  global:
+    secure: EaC12XhFg8EROI3io3W7WUPJbd/yivFZLq4eJFoHJ4n1s4vWNhcy8Yg1FxCQB7yS+yaTwYTFQ2B/Fl+T37bUfe6Ve0gr/f7MN+p4bJlF2o+LOA7Sfng35hD3lm1CstQ9MPDAdnRK4e/B4U6D34qgDCJR0DI3387jqXYgH4GG78c=
+
 matrix:
   fast_finish: true
   include:
@@ -32,6 +35,7 @@ before_script:
   - mkdir parallel && cd parallel && wget http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2 && tar xvf parallel-latest.tar.bz2 -C . --strip-components=1 && ./configure && make && cd ..
   - git clone --single-branch --branch $TYPO3_BRANCH --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .
+  - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH; fi
   - composer install
   - mkdir -p uploads typo3temp typo3conf/ext
   - mv sf_event_mgt typo3conf/ext/
