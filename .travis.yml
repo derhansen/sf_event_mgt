@@ -22,6 +22,11 @@ matrix:
 
 sudo: false
 
+addons:
+  apt:
+    packages:
+      - parallel
+
 cache:
   directories:
     - $HOME/.composer/cache
@@ -32,7 +37,6 @@ notifications:
 
 before_script:
   - cd ..
-  - mkdir parallel && cd parallel && wget http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2 && tar xvf parallel-latest.tar.bz2 -C . --strip-components=1 && ./configure && make && cd ..
   - git clone --single-branch --branch $TYPO3_BRANCH --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .
   - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH; fi
@@ -60,7 +64,7 @@ script:
       export typo3DatabaseHost="localhost";
       export typo3DatabaseUsername="root";
       export typo3DatabasePassword="";
-      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | ./parallel/src/parallel --gnu --will-cite 'echo; echo "Running functional test suite {}"; ./bin/phpunit --coverage-clover={}functionaltest-coverage.clover --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml {}'
+      find . -wholename '*/typo3conf/ext/sf_event_mgt/Tests/Functional/*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; ./bin/phpunit --coverage-clover={}functionaltest-coverage.clover --colors -c typo3conf/ext/sf_event_mgt/Tests/Build/FunctionalTests.xml {}'
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
