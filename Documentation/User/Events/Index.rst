@@ -232,35 +232,23 @@ registrations per user" is set to a value greater than 1.
          where the user can select how many registrations should be created.
 
  - :Field:
+         Notify admin
+
+   :Description:
+         When enabled, the administrator will receive an email for new event registrations (create/confirm)
+
+ - :Field:
+         Notify organisator
+
+   :Description:
+         When enabled, the organisator will receive an email for new event registrations (create/confirm). The e-mail
+         sent will use the same template as the admin e-mail.
+
+ - :Field:
          Registrations
 
    :Description:
          A list of participants registered to the event.
-
-Notification
-~~~~~~~~~~~~
-
-.. t3-field-list-table::
- :header-rows: 1
-
- - :Field:
-         Field:
-
-   :Description:
-             Description:
-
-     - :Field:
-             Notify admin
-
-       :Description:
-             When enabled, the administrator will receive an email for new event registrations (create/confirm)
-
-     - :Field:
-             Notify organisator
-
-       :Description:
-             When enabled, the organisator will receive an email for new event registrations (create/confirm)
-
 
 Access
 ~~~~~~

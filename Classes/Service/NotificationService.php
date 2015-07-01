@@ -193,18 +193,29 @@ class NotificationService {
 			default:
 		}
 
-		if (is_null($event) || is_null($registration || !is_array($settings))) {
+		if (is_null($event) || is_null($registration || !is_array($settings)) ||
+			($event->getNotifyAdmin() === FALSE && $event->getNotifyOrganisator() === FALSE)) {
 			return FALSE;
 		}
 
-		$adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], TRUE);
-		$allEmailsSent = FALSE;
+		$allEmailsSent = TRUE;
 		$body = $this->getNotificationBody($event, $registration, $template, $settings);
-		foreach ($adminEmailArr as $adminEmail) {
-			$allEmailsSent = TRUE;
+		if ($event->getNotifyAdmin()) {
+			$adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], TRUE);
+			foreach ($adminEmailArr as $adminEmail) {
+				$allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
+						$settings['notification']['senderEmail'],
+						$adminEmail,
+						$subject,
+						$body,
+						$settings['notification']['senderName']
+					);
+			}
+		}
+		if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
 			$allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
 					$settings['notification']['senderEmail'],
-					$adminEmail,
+					$event->getOrganisator()->getEmail(),
 					$subject,
 					$body,
 					$settings['notification']['senderName']

@@ -296,6 +296,81 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * @test
+	 * @dataProvider messageTypeDataProvider
+	 */
+	public function sendAdminMessageDoesNotSendEmailIfNotifyAdminAndNotifyOrganiserIsFalse($messageType) {
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$event->setNotifyAdmin(FALSE);
+		$event->setNotifyOrganisator(FALSE);
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+
+		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
+			'adminEmail' => 'valid@email.tld'));
+
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
+			array('sendEmailMessage'), array(), '', FALSE);
+		$emailService->expects($this->never())->method('sendEmailMessage');
+		$this->inject($this->subject, 'emailService', $emailService);
+
+		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * @test
+	 * @dataProvider messageTypeDataProvider
+	 */
+	public function sendAdminMessageSendsEmailToOrganisatorIfConfigured($messageType) {
+		$organisator = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
+		$event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+		$event->setNotifyAdmin(FALSE);
+		$event->setNotifyOrganisator(TRUE);
+		$event->setOrganisator($organisator);
+		$registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+
+		$settings = array('notification' => array('senderEmail' => 'valid@email.tld',
+			'adminEmail' => 'valid@email.tld'));
+
+		$emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
+			array('sendEmailMessage'), array(), '', FALSE);
+		$emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(TRUE));
+		$this->inject($this->subject, 'emailService', $emailService);
+
+		// Inject configuration and configurationManager
+		$configuration = array(
+			'plugin.' => array(
+				'tx_sfeventmgt.' => array(
+					'view.' => array(
+						'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+						'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
+					)
+				)
+			)
+		);
+
+		$configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+			array('getConfiguration'), array(), '', FALSE);
+		$configurationManager->expects($this->once())->method('getConfiguration')->will(
+			$this->returnValue($configuration));
+		$this->inject($this->subject, 'configurationManager', $configurationManager);
+
+		$emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', FALSE);
+		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array(), array(), '', FALSE);
+		$objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
+		$this->inject($this->subject, 'objectManager', $objectManager);
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+		$hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+		$hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+		$this->inject($this->subject, 'hashService', $hashService);
+
+		$result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
+		$this->assertTrue($result);
+	}
+
+	/**
 	 * Test if the adminEmail settings get exploded and only 2 e-mails get sent
 	 *
 	 * @test
@@ -370,6 +445,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertEquals(0, $result);
 	}
 
+	/**
+	 * Data provider for customNotification
+	 *
+	 * @return array
+	 */
 	public function customNotificationDataProvider () {
 		return array(
 			'noConfirmedRegistration' => array(
