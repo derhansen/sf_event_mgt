@@ -72,6 +72,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
 				<source>Registration deadline</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin">
+				<source>Admin</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
+				<source>Organisator</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Event - Category</source>
 			</trans-unit>
@@ -159,14 +165,14 @@
 			<trans-unit id="event.tabs.category">
 				<source>Category</source>
 			</trans-unit>
-			<trans-unit id="event.tabs.notification">
-				<source>Notification</source>
-			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 			</trans-unit>
 			<trans-unit id="event.tabs.registration">
 				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="event.sections.notification">
+				<source>When a registration is created or confirmed, send a notification e-mail to:</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
 				<source>Event - Location</source>

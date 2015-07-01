@@ -28,6 +28,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	link tinytext NOT NULL,
 	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	organisator int(11) unsigned DEFAULT '0' NOT NULL,
+	notify_admin tinyint(4) unsigned DEFAULT '1' NOT NULL,
+	notify_organisator tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

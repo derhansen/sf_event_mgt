@@ -927,4 +927,47 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * Test if initial value for notifyAdmin (TRUE) is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getNotityAdminReturnsInitialValue() {
+		$this->assertTrue($this->subject->getNotifyAdmin());
+	}
+
+	/**
+	 * Test if notifyAdmin can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setNotifyAdminSetsValueForNotifyAdmin() {
+		$this->subject->setNotifyAdmin(FALSE);
+		$this->assertFalse($this->subject->getNotifyAdmin());
+	}
+
+	/**
+	 * Test if initial value for notifyOrganisator (FALSE) is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getNotityOrganisatorReturnsInitialValue() {
+		$this->assertFalse($this->subject->getNotifyOrganisator());
+	}
+
+	/**
+	 * Test if notifyOrganisator can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setNotifyOrganisatorSetsValueForNotifyOrganisator() {
+		$this->subject->setNotifyOrganisator(TRUE);
+		$this->assertTrue($this->subject->getNotifyOrganisator());
+	}
+
 }

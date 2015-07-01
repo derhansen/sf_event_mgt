@@ -178,6 +178,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $organisator = NULL;
 
 	/**
+	 * Notify admin
+	 *
+	 * @var bool
+	 */
+	protected $notifyAdmin = TRUE;
+
+	/**
+	 * Notify organisator
+	 *
+	 * @var bool
+	 */
+	protected $notifyOrganisator = FALSE;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -825,6 +839,46 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setOrganisator($organisator) {
 		$this->organisator = $organisator;
+	}
+
+	/**
+	 * Returns notifyAdmin
+	 *
+	 * @return bool
+	 */
+	public function getNotifyAdmin() {
+		return $this->notifyAdmin;
+	}
+
+	/**
+	 * Sets notifyAdmin
+	 *
+	 * @param bool $notifyAdmin NotifyAdmin
+	 *
+	 * @return void
+	 */
+	public function setNotifyAdmin($notifyAdmin) {
+		$this->notifyAdmin = $notifyAdmin;
+	}
+
+	/**
+	 * Returns if notifyAdmin is set
+	 *
+	 * @return bool
+	 */
+	public function getNotifyOrganisator() {
+		return $this->notifyOrganisator;
+	}
+
+	/**
+	 * Sets notifyOrganisator
+	 *
+	 * @param bool $notifyOrganisator NotifyOrganisator
+	 *
+	 * @return void
+	 */
+	public function setNotifyOrganisator($notifyOrganisator) {
+		$this->notifyOrganisator = $notifyOrganisator;
 	}
 
 }

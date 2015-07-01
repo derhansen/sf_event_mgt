@@ -95,6 +95,14 @@
 				<source>Registration deadline</source>
 				<target>Anmeldefrist</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin">
+				<source>Admin</source>
+				<target>Admin</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
+				<target>Organisator</target>
+				<source>Organisator/Ansprechpartner</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Event - Category</source>
 				<target>Veranstaltung - Kategorie</target>
@@ -211,10 +219,6 @@
 				<source>Category</source>
 				<target>Kategorie</target>
 			</trans-unit>
-			<trans-unit id="event.tabs.notification">
-				<source>Notification</source>
-				<target>Benachrichtigung</target>
-			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 				<target>Medien</target>
@@ -222,6 +226,10 @@
 			<trans-unit id="event.tabs.registration">
 				<source>Registration</source>
 				<target>Anmeldung</target>
+			</trans-unit>
+			<trans-unit id="event.sections.notification">
+				<source>When a registration is created or confirmed, send a notification e-mail to:</source>
+				<target>Wenn eine neue Anmeldung erstellt oder bestätigt wird, Benachrichtugung per E-Mail an:</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
 				<source>Event - Location</source>
