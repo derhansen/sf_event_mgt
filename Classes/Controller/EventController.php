@@ -69,6 +69,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $categoryRepository = NULL;
 
 	/**
+	 * Location repository
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
+	 * @inject
+	 */
+	protected $locationRepository = NULL;
+
+	/**
 	 * Notification Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\NotificationService
@@ -160,8 +168,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		}
 		$events = $this->eventRepository->findDemanded($demand);
 		$categories = $this->categoryRepository->findAll();
+		$locations = $this->locationRepository->findAll();
 		$this->view->assign('events', $events);
 		$this->view->assign('categories', $categories);
+		$this->view->assign('locations', $locations);
 		$this->view->assign('selectedCategoryUid', $selectedCategoryUid);
 	}
 

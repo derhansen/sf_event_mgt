@@ -134,6 +134,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$category = 0;
 
 		$settings = array('settings');
@@ -152,10 +153,16 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$categoryRepository->expects($this->once())->method('findAll')->will($this->returnValue($allCategories));
 		$this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
+		$locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+			array('findAll'), array(), '', FALSE);
+		$locationRepository->expects($this->once())->method('findAll')->will($this->returnValue($allLocations));
+		$this->inject($this->subject, 'locationRepository', $locationRepository);
+
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
 		$view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-		$view->expects($this->at(2))->method('assign')->with('selectedCategoryUid', $category);
+		$view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
+		$view->expects($this->at(3))->method('assign')->with('selectedCategoryUid', $category);
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->listAction();
@@ -169,6 +176,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$category = 10;
 
 		$settings = array('settings');
@@ -187,10 +195,16 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$categoryRepository->expects($this->once())->method('findAll')->will($this->returnValue($allCategories));
 		$this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
+		$locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+			array('findAll'), array(), '', FALSE);
+		$locationRepository->expects($this->once())->method('findAll')->will($this->returnValue($allLocations));
+		$this->inject($this->subject, 'locationRepository', $locationRepository);
+
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
 		$view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-		$view->expects($this->at(2))->method('assign')->with('selectedCategoryUid', $category);
+		$view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
+		$view->expects($this->at(3))->method('assign')->with('selectedCategoryUid', $category);
 		$this->inject($this->subject, 'view', $view);
 
 		$overrideDemand = array('category' => 10);
