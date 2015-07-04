@@ -175,7 +175,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	 * @return void
 	 */
 	protected function setLocationConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getLocation() !== NULL) {
+		if ($eventDemand->getLocation() !== NULL && $eventDemand->getLocation() != '') {
 			$constraints[] = $query->equals('location', $eventDemand->getLocation());
 		}
 	}
