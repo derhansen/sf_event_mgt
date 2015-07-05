@@ -5,11 +5,18 @@
 <h1><f:translate key="list.title" /></h1>
 
 <f:flashMessages renderMode="div" />
-
+<f:debug>{overwriteDemand.category}</f:debug>
     <!-- The code below shows how you can filter events by categories. You can e.g. create an UL which acts like a select-box -->
     <f:link.action action="list" controller="Event"><f:translate key="event.allEvents"/></f:link.action>
     <f:for each="{categories}" as="category">
-        <f:link.action action="list" controller="Event" arguments="{overwriteDemand:{category: category}}">{category.title}</f:link.action>
+		<f:if condition="{overwriteDemand.category} == {category.uid}">
+			<f:then>
+				<f:link.action action="list" controller="Event" arguments="{overwriteDemand:{category: category}}" class="active">{category.title}</f:link.action>
+			</f:then>
+			<f:else>
+				<f:link.action action="list" controller="Event" arguments="{overwriteDemand:{category: category}}">{category.title}</f:link.action>
+			</f:else>
+		</f:if>
     </f:for>
 
     <!-- Output all events -->
