@@ -12,15 +12,18 @@ Events
 ======
 
 Events are the main record of this extesion. An event contains several fields, which can be used to
-describe the event in detail. The general tab is used to add general information about the event like
-a title, start- and enddate and a description.
-
-.. figure:: ../../Images/event-event.png
-   :align: left
-   :alt: Event record
+describe the event in detail.
 
 General
 ~~~~~~~
+
+The general tab is used to add general information about the event like a title, start- and enddate
+and a description.
+
+.. figure:: ../../Images/event-event.png
+   :align: left
+   :width: 500px
+   :alt: Event general tab
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -79,6 +82,11 @@ Additional
 The additional tab contains additional fields for the event like price, location, organiser, link and
 program/schedule.
 
+.. figure:: ../../Images/event-additional.png
+   :align: left
+   :width: 500px
+   :alt: Event additional tab
+
 .. t3-field-list-table::
  :header-rows: 1
 
@@ -124,10 +132,40 @@ program/schedule.
    :Description:
          The program/schedule for the event.
 
+Category
+~~~~~~~~
+
+You can assign one or multiple categories to an event.
+
+.. figure:: ../../Images/event-category.png
+   :align: left
+   :width: 500px
+   :alt: Event category tab
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
+
+ - :Field:
+         Category
+
+   :Description:
+         One or multiple categories for the event
+
 Media
 ~~~~~
 
 The media tab contains fields which holds media-data for the event.
+
+.. figure:: ../../Images/event-media.png
+   :align: left
+   :width: 500px
+   :alt: Event media tab
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -161,27 +199,6 @@ The media tab contains fields which holds media-data for the event.
 
    :Description:
          One or more additional images (e.g. images from the event).
-
-Category
-~~~~~~~~
-
-You can assign one or multiple categories to an event.
-
-.. t3-field-list-table::
- :header-rows: 1
-
- - :Field:
-         Field:
-
-   :Description:
-         Description:
-
- - :Field:
-         Category
-
-   :Description:
-         One or multiple categories for the event
-
 
 Registration
 ~~~~~~~~~~~~

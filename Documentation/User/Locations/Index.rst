@@ -33,7 +33,7 @@ Locations can be assigned to an event.
    :Description:
          Title of the location.
 
-- :Field:
+ - :Field:
          Address
 
    :Description:
