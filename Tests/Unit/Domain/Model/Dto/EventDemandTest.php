@@ -292,4 +292,47 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject->getLocation()
 		);
 	}
+
+	/**
+	 * Test if default value is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCityReturnsDefaultValue() {
+		$this->assertSame('', $this->subject->getLocationCity());
+	}
+
+	/**
+	 * Test if value can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCityReturnsExpectedValue() {
+		$this->subject->setLocationCity('Flensburg');
+		$this->assertSame('Flensburg', $this->subject->getLocationCity());
+	}
+
+	/**
+	 * Test if default value is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCountryReturnsDefaultValue() {
+		$this->assertSame('', $this->subject->getLocationCountry());
+	}
+
+	/**
+	 * Test if value can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCountryReturnsExpectedValue() {
+		$this->subject->setLocationCountry('Germany');
+		$this->assertSame('Germany', $this->subject->getLocationCountry());
+	}
+
 }

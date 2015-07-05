@@ -106,6 +106,20 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $location = NULL;
 
 	/**
+	 * City for location
+	 *
+	 * @var string
+	 */
+	protected $locationCity = '';
+
+	/**
+	 * Country for location
+	 *
+	 * @var string
+	 */
+	protected $locationCountry = '';
+
+	/**
 	 * Sets the displayMode
 	 *
 	 * @param string $displayMode Displaymode
@@ -345,6 +359,46 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setLocation($location) {
 		$this->location = $location;
+	}
+
+	/**
+	 * Returns locationCity
+	 *
+	 * @return string
+	 */
+	public function getLocationCity() {
+		return $this->locationCity;
+	}
+
+	/**
+	 * Sets locationCity
+	 *
+	 * @param string $locationCity LocationCity
+	 *
+	 * @return void
+	 */
+	public function setLocationCity($locationCity) {
+		$this->locationCity = $locationCity;
+	}
+
+	/**
+	 * Returns locationCountry
+	 *
+	 * @return string
+	 */
+	public function getLocationCountry() {
+		return $this->locationCountry;
+	}
+
+	/**
+	 * Sets locationCountry
+	 *
+	 * @param string $locationCountry LocationCountry
+	 *
+	 * @return void
+	 */
+	public function setLocationCountry($locationCountry) {
+		$this->locationCountry = $locationCountry;
 	}
 
 }

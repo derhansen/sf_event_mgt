@@ -249,4 +249,83 @@
     <tx_sfeventmgt_domain_model_location>
         <uid>3</uid>
     </tx_sfeventmgt_domain_model_location>
+
+    <!-- findRecordsByLocationCity -->
+    <!-- has location 4 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>51</uid>
+        <pid>50</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>4</location>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has location 5-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>52</uid>
+        <pid>50</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>5</location>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has location 6-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>53</uid>
+        <pid>50</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>6</location>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_sfeventmgt_domain_model_location>
+        <uid>4</uid>
+        <city>Flensburg</city>
+    </tx_sfeventmgt_domain_model_location>
+    <tx_sfeventmgt_domain_model_location>
+        <uid>5</uid>
+        <city>Hamburg</city>
+    </tx_sfeventmgt_domain_model_location>
+    <tx_sfeventmgt_domain_model_location>
+        <uid>6</uid>
+        <city>Flensburg</city>
+    </tx_sfeventmgt_domain_model_location>
+
+    <!-- findRecordsByLocationCountry -->
+    <!-- has location 7 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>61</uid>
+        <pid>60</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>7</location>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has location 8-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>62</uid>
+        <pid>60</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>7</location>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has location 9-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>63</uid>
+        <pid>60</pid>
+        <description>test</description>
+        <link>link</link>
+        <location>9</location>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_sfeventmgt_domain_model_location>
+        <uid>7</uid>
+        <country>Germany</country>
+    </tx_sfeventmgt_domain_model_location>
+    <tx_sfeventmgt_domain_model_location>
+        <uid>8</uid>
+        <country>Germany</country>
+    </tx_sfeventmgt_domain_model_location>
+    <tx_sfeventmgt_domain_model_location>
+        <uid>9</uid>
+        <country>Denmark</country>
+    </tx_sfeventmgt_domain_model_location>
+
 </dataset>

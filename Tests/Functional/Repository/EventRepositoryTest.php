@@ -128,52 +128,152 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	}
 
 	/**
+	 * DataProvider for findDemandedRecordsByCategory
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByCategoryDataProvider() {
+		return array(
+			'category 1' => array(
+				'1',
+				1
+			),
+			'category 2' => array(
+				'2',
+				2
+			),
+			'category 3' => array(
+				'3',
+				1
+			),
+			'category 1,2,3,4' => array(
+				'1,2,3,4',
+				3
+			)
+		);
+	}
+
+	/**
 	 * Test if category restiction works
 	 *
+	 * @dataProvider findDemandedRecordsByCategoryDataProvider
 	 * @test
 	 * @return void
 	 */
-	public function findDemandedRecordsByCategory() {
+	public function findDemandedRecordsByCategory($category, $expected) {
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(5);
 
-		$demand->setCategory('1');
-		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+		$demand->setCategory($category);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+	}
 
-		$demand->setCategory('2');
-		$this->assertEquals(2, $this->eventRepository->findDemanded($demand)->count());
-
-		$demand->setCategory('3');
-		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
-
-		$demand->setCategory('1,2,3,4');
-		$this->assertEquals(3, $this->eventRepository->findDemanded($demand)->count());
+	/**
+	 * DataProvider for findDemandedRecordsByLocation
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByLocationDataProvider() {
+		return array(
+			'location 1' => array(
+				1,
+				1
+			),
+			'location 2' => array(
+				2,
+				1
+			),
+			'location 3' => array(
+				3,
+				0
+			)
+		);
 	}
 
 	/**
 	 * Test if location restriction works
 	 *
+	 * @dataProvider findDemandedRecordsByLocationDataProvider
 	 * @test
 	 * @return void
 	 */
-	public function findDemandedRecordsByLocation() {
+	public function findDemandedRecordsByLocation($locationUid, $expected) {
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(40);
 
-		$location = $this->locationRepository->findByUid(1);
+		$location = $this->locationRepository->findByUid($locationUid);
 		$demand->setLocation($location);
-		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+	}
 
-		$location = $this->locationRepository->findByUid(2);
-		$demand->setLocation($location);
-		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+	/**
+	 * DataProvider for findDemandedRecordsByLocationCity
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByLocationCityDataProvider() {
+		return array(
+			'City: Flensburg' => array(
+				'Flensburg',
+				2
+			),
+			'City: Hamburg' => array(
+				'Hamburg',
+				1
+			)
+		);
+	}
 
-		$location = $this->locationRepository->findByUid(3);
-		$demand->setLocation($location);
-		$this->assertEquals(0, $this->eventRepository->findDemanded($demand)->count());
+	/**
+	 * Test if location.city restriction works
+	 *
+	 * @dataProvider findDemandedRecordsByLocationCityDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByLocationCity($locationCity, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(50);
 
+		$demand->setLocationCity($locationCity);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+	}
+
+	/**
+	 * DataProvider for findDemandedRecordsByLocationCountry
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByLocationCountryDataProvider() {
+		return array(
+			'Country: Germany' => array(
+				'Germany',
+				2
+			),
+			'Country: Denmark' => array(
+				'Denmark',
+				1
+			)
+		);
+	}
+
+	/**
+	 * Test if location.country restriction works
+	 *
+	 * @dataProvider findDemandedRecordsByLocationCountryDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByLocationCountry($locationCountry, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(60);
+
+		$demand->setLocationCountry($locationCountry);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
 	}
 
 	/**

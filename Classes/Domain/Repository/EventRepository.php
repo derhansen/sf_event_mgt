@@ -59,6 +59,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$this->setDisplayModeConstraint($query, $eventDemand, $constraints);
 		$this->setCategoryConstraint($query, $eventDemand, $constraints);
 		$this->setLocationConstraint($query, $eventDemand, $constraints);
+		$this->setLocationCityConstraint($query, $eventDemand, $constraints);
+		$this->setLocationCountryConstraint($query, $eventDemand, $constraints);
 		$this->setStartEndDateConstraint($query, $eventDemand, $constraints);
 		$this->setTitleConstraint($query, $eventDemand, $constraints);
 		$this->setTopEventConstraint($query, $eventDemand, $constraints);
@@ -177,6 +179,36 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	protected function setLocationConstraint($query, $eventDemand, &$constraints) {
 		if ($eventDemand->getLocation() !== NULL && $eventDemand->getLocation() != '') {
 			$constraints[] = $query->equals('location', $eventDemand->getLocation());
+		}
+	}
+
+	/**
+	 * Sets the location.city constraint to the given constraints array
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
+	 * @return void
+	 */
+	protected function setLocationCityConstraint($query, $eventDemand, &$constraints) {
+		if ($eventDemand->getLocationCity() !== NULL && $eventDemand->getLocationCity() != '') {
+			$constraints[] = $query->equals('location.city', $eventDemand->getLocationCity());
+		}
+	}
+
+	/**
+	 * Sets the location.country constraint to the given constraints array
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
+	 * @return void
+	 */
+	protected function setLocationCountryConstraint($query, $eventDemand, &$constraints) {
+		if ($eventDemand->getLocationCountry() !== NULL && $eventDemand->getLocationCountry() != '') {
+			$constraints[] = $query->equals('location.country', $eventDemand->getLocationCountry());
 		}
 	}
 
