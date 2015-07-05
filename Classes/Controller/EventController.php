@@ -117,6 +117,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $registrationService = NULL;
 
 	/**
+	 * Properties in this array will be ignored by overwriteDemandObject()
+	 *
+	 * @var array
+	 */
+	protected $ignoredSettingsForOverwriteDemand = array('storagePage');
+
+	/**
 	 * Create a demand object with the given settings
 	 *
 	 * @param array $settings The settings
@@ -146,6 +153,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
 	protected function overwriteDemandObject(EventDemand $demand, array $overwriteDemand) {
+		foreach ($this->ignoredSettingsForOverwriteDemand as $property) {
+			unset($overwriteDemand[$property]);
+		}
+
 		foreach ($overwriteDemand as $propertyName => $propertyValue) {
 			\TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
 		}

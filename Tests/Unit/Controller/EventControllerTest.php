@@ -86,6 +86,38 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Test if overwriteDemand ignores properties in $ignoredSettingsForOverwriteDemand
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function overwriteDemandObjectIgnoresIgnoredProperties() {
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$overwriteDemand = array('storagePage' => 1, 'category' => 1);
+
+		$mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
+			array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$resultDemand = $mockController->_call('overwriteDemandObject', $demand, $overwriteDemand);
+		$this->assertNull($resultDemand->getStoragePage());
+	}
+
+	/**
+	 * Test if overwriteDemand sets a property in the given demand
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function overwriteDemandObjectSetsCategoryProperty() {
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$overwriteDemand = array('category' => 1);
+
+		$mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
+			array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$resultDemand = $mockController->_call('overwriteDemandObject', $demand, $overwriteDemand);
+		$this->assertSame(1, $resultDemand->getCategory());
+	}
+
+	/**
 	 * @test
 	 * @return void
 	 */
