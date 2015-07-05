@@ -162,7 +162,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
 		$view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
 		$view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-		$view->expects($this->at(3))->method('assign')->with('selectedCategoryUid', $category);
+		$view->expects($this->at(3))->method('assign')->with('overwriteDemand', NULL);
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->listAction();
@@ -177,7 +177,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
-		$category = 10;
+		$overrideDemand = array('category' => 10);
 
 		$settings = array('settings');
 		$this->inject($this->subject, 'settings', $settings);
@@ -204,10 +204,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
 		$view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
 		$view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-		$view->expects($this->at(3))->method('assign')->with('selectedCategoryUid', $category);
+		$view->expects($this->at(3))->method('assign')->with('overwriteDemand', $overrideDemand);
 		$this->inject($this->subject, 'view', $view);
 
-		$overrideDemand = array('category' => 10);
 		$this->subject->listAction($overrideDemand);
 	}
 
