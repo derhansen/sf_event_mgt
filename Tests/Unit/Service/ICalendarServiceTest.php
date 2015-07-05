@@ -46,6 +46,27 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 	/**
 	 * @test
+	 * @expectedException \RuntimeException
+	 * @return void
+	 */
+	public function downloadiCalendarFileThrowsExceptionIfNoDefaultStorageFound() {
+		$mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
+			array(), array(), '', FALSE);
+
+		$mockIcalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
+			array('getiCalendarContent'), array(), '', FALSE);
+
+		$mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
+			array('getDefaultStorage'), array(), '', FALSE);
+		$mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
+			$this->returnValue(NULL));
+		$this->inject($mockIcalendarService, 'resourceFactory', $mockResourceFactory);
+
+		$mockIcalendarService->downloadiCalendarFile($mockEvent);
+	}
+
+	/**
+	 * @test
 	 * @return void
 	 */
 	public function downloadiCalendarFileDumpsCsvFile() {
