@@ -161,10 +161,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function listAction(array $overwriteDemand = NULL) {
 		$demand = $this->createDemandObjectFromSettings($this->settings);
-		$selectedCategoryUid = 0;
 		if ($overwriteDemand !== NULL) {
 			$demand = $this->overwriteDemandObject($demand, $overwriteDemand);
-			$selectedCategoryUid = isset($overwriteDemand['category']) ? $overwriteDemand['category'] : 0;
 		}
 		$events = $this->eventRepository->findDemanded($demand);
 		$categories = $this->categoryRepository->findAll();
@@ -172,7 +170,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$this->view->assign('events', $events);
 		$this->view->assign('categories', $categories);
 		$this->view->assign('locations', $locations);
-		$this->view->assign('selectedCategoryUid', $selectedCategoryUid);
+		$this->view->assign('overwriteDemand', $overwriteDemand);
 	}
 
 	/**
