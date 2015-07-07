@@ -2,34 +2,25 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
-	/***************************************************************
-	 *  Copyright notice
-	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
-	 *
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
@@ -37,6 +28,9 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 
 	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository */
 	protected $eventRepository;
+
+	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
+	protected $locationRepository;
 
 	/** @var array  */
 	protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
@@ -51,6 +45,7 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 		parent::setUp();
 		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 		$this->eventRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository');
+		$this->locationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository');
 
 		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_event.xml');
 	}
@@ -133,27 +128,152 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
 	}
 
 	/**
+	 * DataProvider for findDemandedRecordsByCategory
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByCategoryDataProvider() {
+		return array(
+			'category 1' => array(
+				'1',
+				1
+			),
+			'category 2' => array(
+				'2',
+				2
+			),
+			'category 3' => array(
+				'3',
+				1
+			),
+			'category 1,2,3,4' => array(
+				'1,2,3,4',
+				3
+			)
+		);
+	}
+
+	/**
 	 * Test if category restiction works
 	 *
+	 * @dataProvider findDemandedRecordsByCategoryDataProvider
 	 * @test
 	 * @return void
 	 */
-	public function findDemandedRecordsByCategory() {
+	public function findDemandedRecordsByCategory($category, $expected) {
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setStoragePage(5);
 
-		$demand->setCategory('1');
-		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+		$demand->setCategory($category);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+	}
 
-		$demand->setCategory('2');
-		$this->assertEquals(2, $this->eventRepository->findDemanded($demand)->count());
+	/**
+	 * DataProvider for findDemandedRecordsByLocation
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByLocationDataProvider() {
+		return array(
+			'location 1' => array(
+				1,
+				1
+			),
+			'location 2' => array(
+				2,
+				1
+			),
+			'location 3' => array(
+				3,
+				0
+			)
+		);
+	}
 
-		$demand->setCategory('3');
-		$this->assertEquals(1, $this->eventRepository->findDemanded($demand)->count());
+	/**
+	 * Test if location restriction works
+	 *
+	 * @dataProvider findDemandedRecordsByLocationDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByLocation($locationUid, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(40);
 
-		$demand->setCategory('1,2,3,4');
-		$this->assertEquals(3, $this->eventRepository->findDemanded($demand)->count());
+		$location = $this->locationRepository->findByUid($locationUid);
+		$demand->setLocation($location);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+	}
+
+	/**
+	 * DataProvider for findDemandedRecordsByLocationCity
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByLocationCityDataProvider() {
+		return array(
+			'City: Flensburg' => array(
+				'Flensburg',
+				2
+			),
+			'City: Hamburg' => array(
+				'Hamburg',
+				1
+			)
+		);
+	}
+
+	/**
+	 * Test if location.city restriction works
+	 *
+	 * @dataProvider findDemandedRecordsByLocationCityDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByLocationCity($locationCity, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(50);
+
+		$demand->setLocationCity($locationCity);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+	}
+
+	/**
+	 * DataProvider for findDemandedRecordsByLocationCountry
+	 *
+	 * @return array
+	 */
+	public function findDemandedRecordsByLocationCountryDataProvider() {
+		return array(
+			'Country: Germany' => array(
+				'Germany',
+				2
+			),
+			'Country: Denmark' => array(
+				'Denmark',
+				1
+			)
+		);
+	}
+
+	/**
+	 * Test if location.country restriction works
+	 *
+	 * @dataProvider findDemandedRecordsByLocationCountryDataProvider
+	 * @test
+	 * @return void
+	 */
+	public function findDemandedRecordsByLocationCountry($locationCountry, $expected) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+		$demand->setStoragePage(60);
+
+		$demand->setLocationCountry($locationCountry);
+		$this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
 	}
 
 	/**

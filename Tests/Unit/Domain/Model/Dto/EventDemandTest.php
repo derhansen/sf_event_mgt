@@ -2,35 +2,21 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
-	/***************************************************************
-	 *  Copyright notice
-	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
-	 *
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand.
- *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
@@ -284,6 +270,69 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			10,
 			$this->subject->getQueryLimit()
 		);
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getLocationReturnsNullIfNoValueSet() {
+		$this->assertNull($this->subject->getLocation());
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function getLocationReturnsExpectedLocation() {
+		$location = new \DERHANSEN\SfEventMgt\Domain\Model\Location();
+		$this->subject->setLocation($location);
+		$this->assertSame(
+			$location,
+			$this->subject->getLocation()
+		);
+	}
+
+	/**
+	 * Test if default value is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCityReturnsDefaultValue() {
+		$this->assertSame('', $this->subject->getLocationCity());
+	}
+
+	/**
+	 * Test if value can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCityReturnsExpectedValue() {
+		$this->subject->setLocationCity('Flensburg');
+		$this->assertSame('Flensburg', $this->subject->getLocationCity());
+	}
+
+	/**
+	 * Test if default value is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCountryReturnsDefaultValue() {
+		$this->assertSame('', $this->subject->getLocationCountry());
+	}
+
+	/**
+	 * Test if value can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getLocationCountryReturnsExpectedValue() {
+		$this->subject->setLocationCountry('Germany');
+		$this->assertSame('Germany', $this->subject->getLocationCountry());
 	}
 
 }

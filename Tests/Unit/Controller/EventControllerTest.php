@@ -1,28 +1,18 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
-/***************************************************************
- *  Copyright notice
+
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 
@@ -72,7 +62,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'topEventRestriction' => 2,
 			'orderField' => 'title',
 			'orderDirection' => 'asc',
-			'queryLimit' => 10
+			'queryLimit' => 10,
+			'location' => 1
 		);
 
 		$mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
@@ -84,6 +75,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockDemand->expects($this->at(4))->method('setOrderField')->with('title');
 		$mockDemand->expects($this->at(5))->method('setOrderDirection')->with('asc');
 		$mockDemand->expects($this->at(6))->method('setQueryLimit')->with(10);
+		$mockDemand->expects($this->at(7))->method('setLocation')->with(1);
 
 		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array(), array(), '', FALSE);
@@ -94,37 +86,35 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Test if overwriteDemand ignores properties in $ignoredSettingsForOverwriteDemand
+	 *
 	 * @test
 	 * @return void
 	 */
-	public function createDemandObjectFromSettingsWithCategory() {
-		$mockController = $this->getMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
+	public function overwriteDemandObjectIgnoresIgnoredProperties() {
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$overwriteDemand = array('storagePage' => 1, 'category' => 1);
+
+		$mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
 			array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$resultDemand = $mockController->_call('overwriteDemandObject', $demand, $overwriteDemand);
+		$this->assertNull($resultDemand->getStoragePage());
+	}
 
-		$settings = array(
-			'displayMode' => 'all',
-			'storagePage' => 1,
-			'category' => 10,
-			'topEventRestriction' => 2,
-			'orderField' => 'title',
-			'orderDirection' => 'asc'
-		);
+	/**
+	 * Test if overwriteDemand sets a property in the given demand
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function overwriteDemandObjectSetsCategoryProperty() {
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$overwriteDemand = array('category' => 1);
 
-		$mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-			array(), array(), '', FALSE);
-		$mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
-		$mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
-		$mockDemand->expects($this->at(2))->method('setCategory')->with(20);
-		$mockDemand->expects($this->at(3))->method('setTopEventRestriction')->with(2);
-		$mockDemand->expects($this->at(4))->method('setOrderField')->with('title');
-		$mockDemand->expects($this->at(5))->method('setOrderDirection')->with('asc');
-
-		$objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-			array(), array(), '', FALSE);
-		$objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
-		$this->inject($mockController, 'objectManager', $objectManager);
-
-		$mockController->createDemandObjectFromSettings($settings, 20);
+		$mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
+			array('redirect', 'forward', 'addFlashMessage'), array(), '', FALSE);
+		$resultDemand = $mockController->_call('overwriteDemandObject', $demand, $overwriteDemand);
+		$this->assertSame(1, $resultDemand->getCategory());
 	}
 
 	/**
@@ -176,6 +166,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
 		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$category = 0;
 
 		$settings = array('settings');
@@ -194,13 +185,61 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$categoryRepository->expects($this->once())->method('findAll')->will($this->returnValue($allCategories));
 		$this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
+		$locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+			array('findAll'), array(), '', FALSE);
+		$locationRepository->expects($this->once())->method('findAll')->will($this->returnValue($allLocations));
+		$this->inject($this->subject, 'locationRepository', $locationRepository);
+
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
 		$view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-		$view->expects($this->at(2))->method('assign')->with('selectedCategoryUid', $category);
+		$view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
+		$view->expects($this->at(3))->method('assign')->with('overwriteDemand', NULL);
 		$this->inject($this->subject, 'view', $view);
 
 		$this->subject->listAction();
+	}
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView() {
+		$demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+		$allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
+		$overrideDemand = array('category' => 10);
+
+		$settings = array('settings');
+		$this->inject($this->subject, 'settings', $settings);
+
+		$this->subject->expects($this->once())->method('createDemandObjectFromSettings')
+			->with($settings)->will($this->returnValue($demand));
+
+		$eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+			array('findDemanded'), array(), '', FALSE);
+		$eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+		$this->inject($this->subject, 'eventRepository', $eventRepository);
+
+		$categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+			array('findAll'), array(), '', FALSE);
+		$categoryRepository->expects($this->once())->method('findAll')->will($this->returnValue($allCategories));
+		$this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+		$locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+			array('findAll'), array(), '', FALSE);
+		$locationRepository->expects($this->once())->method('findAll')->will($this->returnValue($allLocations));
+		$this->inject($this->subject, 'locationRepository', $locationRepository);
+
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('events', $allEvents);
+		$view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
+		$view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
+		$view->expects($this->at(3))->method('assign')->with('overwriteDemand', $overrideDemand);
+		$this->inject($this->subject, 'view', $view);
+
+		$this->subject->listAction($overrideDemand);
 	}
 
 	/**

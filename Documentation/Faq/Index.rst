@@ -54,9 +54,9 @@ Yes, you can use the following objects in you e-mail templates
 Is it possible to filter by categories in the listview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Yes, filtering of events by a category is possible if you pass the category to the listview.::
+Yes, filtering of events by a category is possible if you pass the category to the overrideDemand setting of the listview.::
 
-  <f:link.action action="list" controller="Event" arguments="{category: '{category.uid}'}">{category.title}</f:link.action>
+ <f:link.action action="list" controller="Event" arguments="{overwriteDemand:{category: category}}">{category.title}</f:link.action>
 
 This only works, if you create links with f:link.action as shown above. If you want to display the
 categories in a select-box, then I suggest you create a CSS only select box (e.g. UL menu)
@@ -120,3 +120,15 @@ during registration. To make the field required, add the field to the list of re
      }
    }
  }
+
+How do I add my own custom translations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can override all language files with your own translations/labels. As an example, the following code
+overrides/extends the ``locallang_db.xlf`` and the ``locallang.xlf``
+
+Add this example code to a ``ext_localconf.php`` file (e.g. in a site package extension).::
+
+ $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['de']['EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf'][] = 'EXT:your_ext/Resources/Private/Language/de.custom_locallang_db.xlf';
+ $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['de']['EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf'][] = 'EXT:your_ext/Resources/Private/Language/de.custom_locallang.xlf';
+

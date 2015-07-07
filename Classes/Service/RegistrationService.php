@@ -1,35 +1,25 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Service;
 
-/***************************************************************
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  Copyright notice
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * RegistrationService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationService {
 
@@ -42,6 +32,8 @@ class RegistrationService {
 	protected $objectManager;
 
 	/**
+	 * RegistrationRepository
+	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
 	 * @inject
 	 */
@@ -51,7 +43,8 @@ class RegistrationService {
 	 * Handles expired registrations. If the $delete parameter is set, then
 	 * registrations are deleted, else just hidden
 	 *
-	 * @param bool $delete
+	 * @param bool $delete Delete
+	 *
 	 * @return void
 	 */
 	public function handleExpiredRegistrations($delete = FALSE) {
@@ -73,11 +66,13 @@ class RegistrationService {
 	 * Duplicates (all public accessable properties) the given registration the
 	 * amount of times configured in amountOfRegistrations
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 *
 	 * @return void
 	 */
 	public function createDependingRegistrations($registration) {
-		for ($i = 1; $i <= $registration->getAmountOfRegistrations() - 1; $i++) {
+		$registrations = $registration->getAmountOfRegistrations();
+		for ($i = 1; $i <= $registrations - 1; $i++) {
 			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $newReg */
 			$newReg = $this->objectManager->get('DERHANSEN\SfEventMgt\Domain\Model\Registration');
 			$properties = ObjectAccess::getGettableProperties($registration);
@@ -94,12 +89,13 @@ class RegistrationService {
 	/**
 	 * Confirms all depending registrations based on the given main registration
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 *
 	 * @return void
 	 */
 	public function confirmDependingRegistrations($registration) {
 		$registrations = $this->registrationRepository->findByMainRegistration($registration);
-		foreach($registrations as $foundRegistration) {
+		foreach ($registrations as $foundRegistration) {
 			/** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $foundRegistration */
 			$foundRegistration->setConfirmed(TRUE);
 			$this->registrationRepository->update($foundRegistration);

@@ -1,33 +1,23 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
-/***************************************************************
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  Copyright notice
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Location
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
@@ -37,6 +27,35 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var string
 	 */
 	protected $title = '';
+
+	/**
+	 * Address
+	 *
+	 * @var string
+	 */
+	protected $address = '';
+
+	/**
+	 * Zip
+	 *
+	 * @var int
+	 * @validate Integer
+	 */
+	protected $zip = 0;
+
+	/**
+	 * City
+	 *
+	 * @var string
+	 */
+	protected $city = '';
+
+	/**
+	 * Country
+	 *
+	 * @var string
+	 */
+	protected $country = '';
 
 	/**
 	 * Description
@@ -77,6 +96,86 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setTitle($title) {
 		$this->title = $title;
+	}
+
+	/**
+	 * Returns the address
+	 *
+	 * @return string $address
+	 */
+	public function getAddress() {
+		return $this->address;
+	}
+
+	/**
+	 * Sets the address
+	 *
+	 * @param string $address Address
+	 *
+	 * @return void
+	 */
+	public function setAddress($address) {
+		$this->address = $address;
+	}
+
+	/**
+	 * Returns the zip
+	 *
+	 * @return int $zip
+	 */
+	public function getZip() {
+		return $this->zip;
+	}
+
+	/**
+	 * Sets the zip
+	 *
+	 * @param int $zip Zip
+	 *
+	 * @return void
+	 */
+	public function setZip($zip) {
+		$this->zip = $zip;
+	}
+
+	/**
+	 * Returns the city
+	 *
+	 * @return string $city
+	 */
+	public function getCity() {
+		return $this->city;
+	}
+
+	/**
+	 * Sets the city
+	 *
+	 * @param string $city City
+	 *
+	 * @return void
+	 */
+	public function setCity($city) {
+		$this->city = $city;
+	}
+
+	/**
+	 * Returns the country
+	 *
+	 * @return string $country
+	 */
+	public function getCountry() {
+		return $this->country;
+	}
+
+	/**
+	 * Sets the country
+	 *
+	 * @param string $country Country
+	 *
+	 * @return void
+	 */
+	public function setCountry($country) {
+		$this->country = $country;
 	}
 
 	/**

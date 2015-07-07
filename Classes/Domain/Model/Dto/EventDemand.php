@@ -1,33 +1,23 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
-	/***************************************************************
-	 *
-	 *  Copyright notice
-	 *
-	 *  (c) 2014 Torben Hansen <derhansen@gmail.com>
-	 *
-	 *  All rights reserved
-	 *
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 3 of the License, or
-	 *  (at your option) any later version.
-	 *
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***************************************************************/
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Event demand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
@@ -109,9 +99,31 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $queryLimit = NULL;
 
 	/**
+	 * Location
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
+	 */
+	protected $location = NULL;
+
+	/**
+	 * City for location
+	 *
+	 * @var string
+	 */
+	protected $locationCity = '';
+
+	/**
+	 * Country for location
+	 *
+	 * @var string
+	 */
+	protected $locationCountry = '';
+
+	/**
 	 * Sets the displayMode
 	 *
-	 * @param string $displayMode
+	 * @param string $displayMode Displaymode
+	 *
 	 * @return void
 	 */
 	public function setDisplayMode($displayMode) {
@@ -130,7 +142,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the storage page
 	 *
-	 * @param string $storagePage
+	 * @param string $storagePage Storagepage
+	 *
 	 * @return void
 	 */
 	public function setStoragePage($storagePage) {
@@ -149,10 +162,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the current DateTime
 	 *
-	 * @param \DateTime $currentDateTime
+	 * @param \DateTime $currentDateTime CurrentDateTime
+	 *
 	 * @return void
 	 */
-	public function setCurrentDateTime($currentDateTime) {
+	public function setCurrentDateTime(\DateTime $currentDateTime) {
 		$this->currentDateTime = $currentDateTime;
 	}
 
@@ -171,7 +185,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the category (seperated by comma)
 	 *
-	 * @param string $category
+	 * @param string $category Category
+	 *
 	 * @return void
 	 */
 	public function setCategory($category) {
@@ -190,10 +205,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set the start date
 	 *
-	 * @param \DateTime $startDate
+	 * @param \DateTime $startDate StartDate
+	 *
 	 * @return void
 	 */
-	public function setStartDate($startDate) {
+	public function setStartDate(\DateTime $startDate) {
 		$this->startDate = $startDate;
 	}
 
@@ -209,10 +225,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set the end date
 	 *
-	 * @param \DateTime $endDate
+	 * @param \DateTime $endDate EndDate
+	 *
 	 * @return void
 	 */
-	public function setEndDate($endDate) {
+	public function setEndDate(\DateTime $endDate) {
 		$this->endDate = $endDate;
 	}
 
@@ -227,7 +244,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Set the title
 	 *
-	 * @param string $title
+	 * @param string $title Title
+	 *
 	 * @return void
 	 */
 	public function setTitle($title) {
@@ -255,7 +273,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets topEventRestriction
 	 *
-	 * @param int $topEventRestriction
+	 * @param int $topEventRestriction TopEventRestriction
+	 *
 	 * @return void
 	 */
 	public function setTopEventRestriction($topEventRestriction) {
@@ -274,7 +293,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the order direction
 	 *
-	 * @param string $orderDirection
+	 * @param string $orderDirection OrderDirection
+	 *
 	 * @return void
 	 */
 	public function setOrderDirection($orderDirection) {
@@ -293,7 +313,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the order field
 	 *
-	 * @param string $orderField
+	 * @param string $orderField OrderField
+	 *
 	 * @return void
 	 */
 	public function setOrderField($orderField) {
@@ -312,10 +333,72 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the query limit
 	 *
-	 * @param int $queryLimit
+	 * @param int $queryLimit QueryLimit
+	 *
 	 * @return void
 	 */
 	public function setQueryLimit($queryLimit) {
 		$this->queryLimit = $queryLimit;
 	}
+
+	/**
+	 * Returns the location
+	 *
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
+	 */
+	public function getLocation() {
+		return $this->location;
+	}
+
+	/**
+	 * Sets the location
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
+	 *
+	 * @return void
+	 */
+	public function setLocation($location) {
+		$this->location = $location;
+	}
+
+	/**
+	 * Returns locationCity
+	 *
+	 * @return string
+	 */
+	public function getLocationCity() {
+		return $this->locationCity;
+	}
+
+	/**
+	 * Sets locationCity
+	 *
+	 * @param string $locationCity LocationCity
+	 *
+	 * @return void
+	 */
+	public function setLocationCity($locationCity) {
+		$this->locationCity = $locationCity;
+	}
+
+	/**
+	 * Returns locationCountry
+	 *
+	 * @return string
+	 */
+	public function getLocationCountry() {
+		return $this->locationCountry;
+	}
+
+	/**
+	 * Sets locationCountry
+	 *
+	 * @param string $locationCountry LocationCountry
+	 *
+	 * @return void
+	 */
+	public function setLocationCountry($locationCountry) {
+		$this->locationCountry = $locationCountry;
+	}
+
 }

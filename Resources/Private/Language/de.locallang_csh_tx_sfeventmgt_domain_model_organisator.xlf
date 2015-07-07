@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="de">
+		<header/>
+		<body>
+			<trans-unit id="name.description">
+				<source>Name</source>
+				<target>Name</targat>
+			</trans-unit>
+			<trans-unit id="email.description">
+				<source>E-Mail</source>
+				<target>E-Mail</targat>
+			</trans-unit>
+			<trans-unit id="phone.description">
+				<source>Phone</source>
+				<target>Telefon</targat>
+			</trans-unit>
+			<trans-unit id="image.description">
+				<source>Image</source>
+				<target>Bild</targat>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

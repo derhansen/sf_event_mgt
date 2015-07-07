@@ -5,16 +5,31 @@ php:
   - 5.6
 
 env:
-  - DB=mysql TYPO3_BRANCH=TYPO3_6-2 COVERAGE=0
-  - DB=mysql TYPO3_BRANCH=master COVERAGE=0
+  matrix:
+    - DB=mysql TYPO3_BRANCH=TYPO3_6-2 COVERAGE=0
+    - DB=mysql TYPO3_BRANCH=master COVERAGE=0
+  global:
+    secure: INo+FZa/Z2hTw6UwwMh0qjKllgIlqSz8S7S76HGR15L4sqnmG22spT4IwXjavV2jfR/Glo6PxR5dz9Bn9Br03dh72MThLKqBAI9pJR+Ig3SNcvOGCm/8h4hrKUKJDkge+GQEzL4HuXO0OenEIPXCSlNFlBxQN824TMJFQgvGHnA=
 
 matrix:
+  fast_finish: true
   include:
     - php: 5.6
       env: DB=mysql TYPO3_BRANCH=master COVERAGE=1
   exclude:
     - php: 5.4
       env: DB=mysql TYPO3_BRANCH=master COVERAGE=0
+
+sudo: false
+
+addons:
+  apt:
+    packages:
+      - parallel
+
+cache:
+  directories:
+    - $HOME/.composer/cache
 
 notifications:
   email:
@@ -24,8 +39,7 @@ before_script:
   - cd ..
   - git clone --single-branch --branch $TYPO3_BRANCH --depth 1 https://github.com/TYPO3/TYPO3.CMS.git typo3_core
   - mv typo3_core/* .
-  - sudo apt-get install parallel
-  - composer self-update
+  - if [ "$GITHUB_COMPOSER_AUTH" ]; then composer config -g github-oauth.github.com $GITHUB_COMPOSER_AUTH; fi
   - composer install
   - mkdir -p uploads typo3temp typo3conf/ext
   - mv sf_event_mgt typo3conf/ext/

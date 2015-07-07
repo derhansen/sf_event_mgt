@@ -1,31 +1,18 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
-
-/***************************************************************
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  Copyright notice
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 use \TYPO3\CMS\Core\Utility\MathUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -33,6 +20,8 @@ use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 
 /**
  * The repository for Events
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
@@ -59,8 +48,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Returns the objects of this repository matching the given demand
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 *
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface QueryResultInterface
 	 */
 	public function findDemanded(EventDemand $eventDemand) {
 		$constraints = array();
@@ -68,6 +58,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		$this->setStoragePageConstraint($query, $eventDemand, $constraints);
 		$this->setDisplayModeConstraint($query, $eventDemand, $constraints);
 		$this->setCategoryConstraint($query, $eventDemand, $constraints);
+		$this->setLocationConstraint($query, $eventDemand, $constraints);
+		$this->setLocationCityConstraint($query, $eventDemand, $constraints);
+		$this->setLocationCountryConstraint($query, $eventDemand, $constraints);
 		$this->setStartEndDateConstraint($query, $eventDemand, $constraints);
 		$this->setTitleConstraint($query, $eventDemand, $constraints);
 		$this->setTopEventConstraint($query, $eventDemand, $constraints);
@@ -84,8 +77,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets a query limit to the given query for the given demand
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 *
 	 * @return void
 	 */
 	protected function setQueryLimitFromDemand($query, EventDemand $eventDemand) {
@@ -99,8 +93,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the ordering to the given query for the given demand
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 *
 	 * @return void
 	 */
 	protected function setOrderingsFromDemand($query, EventDemand $eventDemand) {
@@ -116,9 +111,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the storagePage constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setStoragePageConstraint($query, $eventDemand, &$constraints) {
@@ -131,9 +127,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the displayMode constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setDisplayModeConstraint($query, $eventDemand, &$constraints) {
@@ -151,9 +148,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the category constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setCategoryConstraint($query, $eventDemand, &$constraints) {
@@ -170,11 +168,57 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	}
 
 	/**
+	 * Sets the location constraint to the given constraints array
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
+	 * @return void
+	 */
+	protected function setLocationConstraint($query, $eventDemand, &$constraints) {
+		if ($eventDemand->getLocation() !== NULL && $eventDemand->getLocation() != '') {
+			$constraints[] = $query->equals('location', $eventDemand->getLocation());
+		}
+	}
+
+	/**
+	 * Sets the location.city constraint to the given constraints array
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
+	 * @return void
+	 */
+	protected function setLocationCityConstraint($query, $eventDemand, &$constraints) {
+		if ($eventDemand->getLocationCity() !== NULL && $eventDemand->getLocationCity() != '') {
+			$constraints[] = $query->equals('location.city', $eventDemand->getLocationCity());
+		}
+	}
+
+	/**
+	 * Sets the location.country constraint to the given constraints array
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
+	 * @return void
+	 */
+	protected function setLocationCountryConstraint($query, $eventDemand, &$constraints) {
+		if ($eventDemand->getLocationCountry() !== NULL && $eventDemand->getLocationCountry() != '') {
+			$constraints[] = $query->equals('location.country', $eventDemand->getLocationCountry());
+		}
+	}
+
+	/**
 	 * Sets the start- and enddate constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setStartEndDateConstraint($query, $eventDemand, &$constraints) {
@@ -192,9 +236,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the title constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setTitleConstraint($query, $eventDemand, &$constraints) {
@@ -206,9 +251,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 	/**
 	 * Sets the topEvent constraint to the given constraints array
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
-	 * @param array $constraints
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+	 * @param array $constraints Constraints
+	 *
 	 * @return void
 	 */
 	protected function setTopEventConstraint($query, $eventDemand, &$constraints) {

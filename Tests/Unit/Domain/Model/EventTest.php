@@ -2,37 +2,23 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Event.
- *
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
@@ -42,10 +28,16 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	protected $subject = NULL;
 
+	/**
+	 * Setup
+	 */
 	protected function setUp() {
 		$this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 	}
 
+	/**
+	 * Teardown
+	 */
 	protected function tearDown() {
 		unset($this->subject);
 	}
@@ -92,6 +84,29 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->assertAttributeEquals(
 			'Conceived at T3CON10',
 			'description',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getProgramReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getProgram()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setProgramForStringSetsProgram() {
+		$this->subject->setProgram('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'program',
 			$this->subject
 		);
 	}
@@ -420,6 +435,108 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$this->inject($this->subject, 'image', $imageObjectStorageMock);
 
 		$this->subject->removeImage($image);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getFilesReturnsInitialValueForfiles() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->subject->getFiles()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setFilesForObjectStorageContainingFilesSetsFiles() {
+		$file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$objectStorageHoldingExactlyOneFile = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneFile->attach($file);
+		$this->subject->setFiles($objectStorageHoldingExactlyOneFile);
+
+		$this->assertAttributeEquals(
+			$objectStorageHoldingExactlyOneFile,
+			'files',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addFilesToObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'files', $imageObjectStorageMock);
+
+		$this->subject->addFiles($files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeFilesFromObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'files', $imageObjectStorageMock);
+
+		$this->subject->removeFiles($files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAdditionalImageReturnsInitialValueForfiles() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->subject->getAdditionalImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setAdditionalImageForObjectStorageContainingFilesSetsFiles() {
+		$file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$objectStorageHoldingExactlyOneFile = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneFile->attach($file);
+		$this->subject->setAdditionalImage($objectStorageHoldingExactlyOneFile);
+
+		$this->assertAttributeEquals(
+			$objectStorageHoldingExactlyOneFile,
+			'additionalImage',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addAdditionalImageToObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
+
+		$this->subject->addAdditionalImage($files);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeAdditionalImageFromObjectStorageHoldingFiles() {
+		$files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+		$imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'), array(), '', FALSE);
+		$imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
+		$this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
+
+		$this->subject->removeAdditionalImage($files);
 	}
 
 	/**
@@ -782,6 +899,75 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function maxRegistrationsPerUserSetsMaxRegistrationsPerUser() {
 		$this->subject->setMaxRegistrationsPerUser(2);
 		$this->assertEquals(2, $this->subject->getMaxRegistrationsPerUser());
+	}
+
+	/**
+	 * Test if initial value for organisator is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getOrganisatorReturnsInitialValueForOrganisator() {
+		$this->assertNull($this->subject->getOrganisator());
+	}
+
+	/**
+	 * Test if organisator can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setPhoneForStringSetsPhone() {
+		$organisator = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
+		$this->subject->setOrganisator($organisator);
+
+		$this->assertAttributeEquals(
+			$organisator,
+			'organisator',
+			$this->subject
+		);
+	}
+
+	/**
+	 * Test if initial value for notifyAdmin (TRUE) is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getNotityAdminReturnsInitialValue() {
+		$this->assertTrue($this->subject->getNotifyAdmin());
+	}
+
+	/**
+	 * Test if notifyAdmin can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setNotifyAdminSetsValueForNotifyAdmin() {
+		$this->subject->setNotifyAdmin(FALSE);
+		$this->assertFalse($this->subject->getNotifyAdmin());
+	}
+
+	/**
+	 * Test if initial value for notifyOrganisator (FALSE) is returned
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function getNotityOrganisatorReturnsInitialValue() {
+		$this->assertFalse($this->subject->getNotifyOrganisator());
+	}
+
+	/**
+	 * Test if notifyOrganisator can be set
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function setNotifyOrganisatorSetsValueForNotifyOrganisator() {
+		$this->subject->setNotifyOrganisator(TRUE);
+		$this->assertTrue($this->subject->getNotifyOrganisator());
 	}
 
 }

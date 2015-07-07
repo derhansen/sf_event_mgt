@@ -15,6 +15,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
+				<source>Program/Schedule</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
 				<source>Link</source>
 			</trans-unit>
@@ -54,14 +57,32 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.country">
+				<source>Country</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
+				<source>Files</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
 				<source>YouTube</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+				<source>Additional Images</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.booking">
 				<source>Booking</source>
@@ -225,6 +246,9 @@
 			<trans-unit id="detail.title">
 				<source>Event details</source>
 			</trans-unit>
+			<trans-unit id="detail.download">
+				<source>Download</source>
+			</trans-unit>
 			<trans-unit id="registration.title">
 				<source>Registration for event</source>
 			</trans-unit>
@@ -239,6 +263,21 @@
 			</trans-unit>
 			<trans-unit id="registrationResult.title.failed">
 				<source>Registration failed</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+				<source>Phone number</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+				<source>Image</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -1,33 +1,23 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
-/***************************************************************
- *  Copyright notice
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  All rights reserved
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
-use DERHANSEN\SfEventMgt\Command\CleanupCommandController;
+ * The TYPO3 project - inspiring people to share!
+ */
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\EmailService.
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
@@ -55,11 +45,46 @@ class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Data provider for invalid emails
+	 *
+	 * @return array
+	 */
+	public function invalidEmailsDataProvider() {
+		return array(
+			'invalidSender' => array(
+				'invalid',
+				'recipient@domain.tld',
+			),
+			'invalidRecipient' => array(
+				'sender@domain.tld',
+				'invalid',
+			),
+		);
+	}
+
+	/**
+	 * Test if e-mail-service returns false, if e-mails are invalid
+	 *
+	 * @dataProvider invalidEmailsDataProvider
 	 * @test
 	 * @return void
 	 */
-	public function sendEmailMessageTest() {
-		$sender = 'name@domain.tld';
+	public function sendEmailMessageWithInvalidEmailsTest($sender, $recipient) {
+		$subject = 'A subject';
+		$body = 'A body';
+		$senderName = 'Sender name';
+		$result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
+		$this->assertFalse($result);
+	}
+
+	/**
+	 * Test if e-mail-service sends mails, if e-mails are valid
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function sendEmailMessageWithValidEmailsTest() {
+		$sender = 'sender@domain.tld';
 		$recipient = 'recipient@domain.tld';
 		$subject = 'A subject';
 		$body = 'A body';
@@ -71,9 +96,10 @@ class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));
 		$mailer->expects($this->once())->method('setTo')->with($recipient);
 		$mailer->expects($this->once())->method('send');
+		$mailer->expects($this->once())->method('isSent')->will($this->returnValue(TRUE));
 		$this->subject->_set('mailer', $mailer);
 
-		$this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
+		$result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
+		$this->assertTrue($result);
 	}
-
 }

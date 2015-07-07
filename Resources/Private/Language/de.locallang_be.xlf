@@ -72,6 +72,10 @@
 				<source>Category</source>
 				<target>Kategorie</target>
 			</trans-unit>
+			<trans-unit id="flexforms_general.location">
+				<source>Location</source>
+				<target>Ort</target>
+			</trans-unit>
 			<trans-unit id="flexforms_general.storagePage">
 				<source>Record storage page</source>
 				<target>Seite/Ordner mit Datensätzen</target>
@@ -105,8 +109,8 @@
 				<target>Name des Absenders</target>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.admin_email">
-				<source>E-Mail address of website admin, who receives new/confirmed registrations</source>
-				<target>E-Mail-Adresse des Webseiten Administrators, welche neue/bestätigte Anmeldungen erhält</target>
+				<source>E-Mail address(es) of website admin(s), who receives new/confirmed registrations. Multiple E-Mail addresses must be separated with a comma.</source>
+				<target>E-Mail-Adresse(n) des/der Webseiten Administrators/en, welche neue/bestätigte Anmeldungen erhält/erhalten. Mehrere E-Mail-Adressen mit Komma trennen.</target>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_new_user_subject">
 				<source>Subject of e-mail sent to user when a new registration is created</source>

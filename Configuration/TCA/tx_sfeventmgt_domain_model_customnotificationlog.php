@@ -8,6 +8,7 @@ return array(
 		'cruser_id' => 'cruser_id',
 		'searchFields' => 'title,',
 		'hideTable' => TRUE,
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/logfile.png'
 	),
 	'interface' => array(
 		'showRecordFieldList' => '',

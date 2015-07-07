@@ -15,6 +15,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.description">
 				<source>Description</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
+				<source>Program/Schedule</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
 				<source>Link</source>
 			</trans-unit>
@@ -48,11 +51,20 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location">
 				<source>Location</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
+				<source>Files</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
 				<source>YouTube embed code</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+				<source>Additional images (e.g. images from the event)</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Registrations</source>
@@ -60,8 +72,14 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
 				<source>Registration deadline</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin">
+				<source>Admin</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
+				<source>Organisator</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
-				<source>Category</source>
+				<source>Event - Category</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
 				<source>Title</source>
@@ -70,7 +88,7 @@
 				<source>Parent</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
-				<source>Registration</source>
+				<source>Event - Registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
 				<source>Firstname</source>
@@ -141,17 +159,38 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
 				<source>Amount of registrations (if user created multiple registrations at the same time)</source>
 			</trans-unit>
+			<trans-unit id="event.tabs.additional">
+				<source>Additional</source>
+			</trans-unit>
+			<trans-unit id="event.tabs.category">
+				<source>Category</source>
+			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 			</trans-unit>
 			<trans-unit id="event.tabs.registration">
 				<source>Registration</source>
 			</trans-unit>
+			<trans-unit id="event.sections.notification">
+				<source>When a registration is created or confirmed, send a notification e-mail to:</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
-				<source>Location</source>
+				<source>Event - Location</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.country">
+				<source>Country</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
 				<source>Description</source>
@@ -163,7 +202,7 @@
 				<source>Latitude</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
-				<source>Notificationlog</source>
+				<source>Event - Notificationlog</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event">
 				<source>Event</source>
@@ -176,6 +215,24 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.cruser">
 				<source>User</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator">
+				<source>Event - Organisator</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+				<source>E-Mail</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+				<source>Phone number</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+				<source>Image</source>
 			</trans-unit>
 		</body>
 	</file>

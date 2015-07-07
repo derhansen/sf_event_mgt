@@ -71,17 +71,45 @@
 				<source>Title</source>
 				<target>Titel</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.address">
+				<source>Address</source>
+				<target>Adresse</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.zip">
+				<source>Zip</source>
+				<target>Plz.</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.city">
+				<source>City</source>
+				<target>Stadt</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.location.country">
+				<source>Country</source>
+				<target>Land</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
 				<source>Description</source>
 				<target>Beschreibung</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
+				<source>Program/Schedule</source>
+				<target>Programm/Ablauf</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 				<target>Bild</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
+				<source>Files</source>
+				<target>Dateien</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
 				<source>YouTube</source>
 				<target>YouTube</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+				<source>Additional Images</source>
+				<target>Zusätzliche Bilder</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
 				<source>Category</source>
@@ -295,6 +323,10 @@
 				<source>Event details</source>
 				<target>Veranstaltungsdetails</target>
 			</trans-unit>
+			<trans-unit id="detail.download">
+				<source>Download</source>
+				<target>Download</target>
+			</trans-unit>
 			<trans-unit id="registration.title">
 				<source>Registration for event</source>
 				<target>Anmeldung für Veranstaltung</target>
@@ -314,6 +346,26 @@
 			<trans-unit id="registrationResult.title.failed">
 				<source>Registration failed</source>
 				<target>Anmeldung fehlgeschlagen</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+				<target>Organisator/Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+				<source>E-Mail</source>
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+				<source>Phone number</source>
+				<target>Telefon</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+				<source>Image</source>
+				<target>Bild</target>
 			</trans-unit>
 		</body>
 	</file>

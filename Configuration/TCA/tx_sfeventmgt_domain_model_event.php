@@ -26,16 +26,51 @@ return array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, youtube, registration, location',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, teaser, description;;;richtext:rte_transform[mode=ts_links], link, top_event, startdate, enddate, location, price, currency, category, --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media, image, youtube, --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration, enable_registration, registration_deadline, max_participants, max_registrations_per_user, registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array(
+			'showitem' => 'l10n_parent, l10n_diffsource,
+			--palette--;;paletteCore, title,--palette--;;paletteDates, teaser,
+			description;;;richtext:rte_transform[mode=ts_links],
+
+			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
+				--palette--;;palettePrice, location, organisator, link, program;;;richtext:rte_transform[mode=ts_links],
+
+			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
+				image, files, youtube,additional_image,
+
+			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.category,
+				category,
+
+			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration,
+				enable_registration, registration_deadline, max_participants, max_registrations_per_user, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification, registration,
+
+			--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
+		),
 	),
 	'palettes' => array(
-		'1' => array('showitem' => ''),
+		'1' => array(
+			'showitem' => '',
+		),
+		'paletteCore' => array(
+			'showitem' => 'sys_language_uid, top_event, hidden,',
+			'canNotCollapse' => TRUE
+		),
+		'paletteDates' => array(
+			'showitem' => 'startdate, enddate,',
+			'canNotCollapse' => TRUE
+		),
+		'palettePrice' => array(
+			'showitem' => 'price, currency,',
+			'canNotCollapse' => TRUE
+		),
+		'paletteNotification' => array(
+			'showitem' => 'notify_admin, notify_organisator,',
+			'canNotCollapse' => TRUE
+		),
 	),
 	'columns' => array(
-	
 		'sys_language_uid' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
@@ -67,7 +102,6 @@ return array(
 				'type' => 'passthrough',
 			),
 		),
-
 		't3ver_label' => array(
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
 			'config' => array(
@@ -76,7 +110,6 @@ return array(
 				'max' => 255,
 			)
 		),
-	
 		'hidden' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
@@ -116,7 +149,6 @@ return array(
 				),
 			),
 		),
-
 		'title' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.title',
@@ -138,6 +170,26 @@ return array(
 		'description' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.description',
+			'config' => array(
+				'type' => 'text',
+				'cols' => 40,
+				'rows' => 15,
+				'eval' => 'trim',
+				'wizards' => array(
+					'RTE' => array(
+						'icon' => 'wizard_rte2.gif',
+						'notNewRecords' => 1,
+						'RTEonly' => 1,
+						'script' => 'wizard_rte.php',
+						'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
+						'type' => 'script'
+					)
+				)
+			),
+		),
+		'program' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.program',
 			'config' => array(
 				'type' => 'text',
 				'cols' => 40,
@@ -278,6 +330,24 @@ return array(
 				),
 			),
 		),
+		'organisator' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.organisator',
+			'config' => array(
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tx_sfeventmgt_domain_model_organisator',
+				'foreign_table' => 'tx_sfeventmgt_domain_model_organisator',
+				'size' => 1,
+				'minitems' => 0,
+				'maxitems' => 1,
+				'wizards' => array(
+					'suggest' => array(
+						'type' => 'suggest',
+					),
+				),
+			),
+		),
 		'category' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.category',
@@ -309,6 +379,16 @@ return array(
 					'maxitems' => 999,
 				), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
 		),
+		'files' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.files',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('files', array(
+					'appearance' => array(
+						'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+					),
+				)
+			),
+		),
 		'youtube' => array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.youtube',
@@ -317,6 +397,17 @@ return array(
 				'cols' => 60,
 				'rows' => 3,
 			)
+		),
+		'additional_image' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.additional_image',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('additional_image', array(
+				'appearance' => array(
+					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+				),
+				'minitems' => 0,
+				'maxitems' => 999,
+			), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
 		),
 		'registration' => array(
 			'exclude' => 1,
@@ -336,8 +427,23 @@ return array(
 					'showAllLocalizationLink' => 1
 				),
 			),
-
 		),
-		
+		'notify_admin' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_admin',
+			'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+			'config' => array(
+				'type' => 'check',
+			),
+		),
+		'notify_organisator' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_organisator',
+			'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+			'config' => array(
+				'type' => 'check',
+			),
+		),
+
 	),
 );

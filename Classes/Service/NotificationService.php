@@ -1,30 +1,18 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Service;
 
-/***************************************************************
+/*
+ * This file is part of the TYPO3 CMS project.
  *
- *  Copyright notice
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
- *  (c) 2014 Torben Hansen <derhansen@gmail.com>
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
  *
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * The TYPO3 project - inspiring people to share!
+ */
 
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -32,6 +20,8 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * NotificationService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationService {
 
@@ -76,7 +66,7 @@ class NotificationService {
 	protected $hashService;
 
 	/**
-	 * customNotificationLogRepository
+	 * CustomNotificationLogRepository
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
 	 * @inject
@@ -87,9 +77,10 @@ class NotificationService {
 	 * Sends a custom notification defined by the given customNotification key
 	 * to all confirmed users of the event
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param string $customNotification
-	 * @param array $settings
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param string $customNotification CustomNotification
+	 * @param array $settings Settings
+	 *
 	 * @return int Number of notifications sent
 	 */
 	public function sendCustomNotification($event, $customNotification, $settings) {
@@ -121,9 +112,10 @@ class NotificationService {
 	/**
 	 * Adds a logentry to the custom notification log
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param string $details
-	 * @param int $emailsSent
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param string $details Details
+	 * @param int $emailsSent E-Mails sent
+	 *
 	 * @return void
 	 */
 	public function createCustomNotificationLogentry($event, $details, $emailsSent) {
@@ -138,11 +130,11 @@ class NotificationService {
 	/**
 	 * Sends a message to the user based on the given type
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param array $settings
-	 * @param int $type
-	 * @param string $customNotification
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param array $settings Settings
+	 * @param int $type Type
+	 * @param string $customNotification CustomNotification
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
@@ -166,9 +158,7 @@ class NotificationService {
 			return FALSE;
 		}
 
-		if (GeneralUtility::validEmail($registration->getEmail()) &&
-			GeneralUtility::validEmail($settings['notification']['senderEmail']) &&
-			!$registration->isIgnoreNotifications()) {
+		if (!$registration->isIgnoreNotifications()) {
 			$body = $this->getNotificationBody($event, $registration, $template, $settings);
 			return $this->emailService->sendEmailMessage(
 				$settings['notification']['senderEmail'],
@@ -184,10 +174,10 @@ class NotificationService {
 	/**
 	 * Sends a message to the admin based on the given type
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param array $settings
-	 * @param int $type
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param array $settings Settings
+	 * @param int $type Type
 	 *
 	 * @return bool TRUE if successful, else FALSE
 	 */
@@ -203,31 +193,44 @@ class NotificationService {
 			default:
 		}
 
-		if (is_null($event) || is_null($registration || !is_array($settings))) {
+		if (is_null($event) || is_null($registration || !is_array($settings)) ||
+			($event->getNotifyAdmin() === FALSE && $event->getNotifyOrganisator() === FALSE)) {
 			return FALSE;
 		}
 
-		if (GeneralUtility::validEmail($settings['notification']['senderEmail']) &&
-			GeneralUtility::validEmail($settings['notification']['adminEmail'])) {
-			$body = $this->getNotificationBody($event, $registration, $template, $settings);
-			return $this->emailService->sendEmailMessage(
-				$settings['notification']['senderEmail'],
-				$settings['notification']['adminEmail'],
-				$subject,
-				$body,
-				$settings['notification']['senderName']
-			);
+		$allEmailsSent = TRUE;
+		$body = $this->getNotificationBody($event, $registration, $template, $settings);
+		if ($event->getNotifyAdmin()) {
+			$adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], TRUE);
+			foreach ($adminEmailArr as $adminEmail) {
+				$allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
+						$settings['notification']['senderEmail'],
+						$adminEmail,
+						$subject,
+						$body,
+						$settings['notification']['senderName']
+					);
+			}
 		}
-		return FALSE;
+		if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
+			$allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
+					$settings['notification']['senderEmail'],
+					$event->getOrganisator()->getEmail(),
+					$subject,
+					$body,
+					$settings['notification']['senderName']
+				);
+		}
+		return $allEmailsSent;
 	}
 
 	/**
 	 * Returns the rendered HTML for the given template
 	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-	 * @param string $template
-	 * @param array $settings
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 * @param string $template Template
+	 * @param array $settings Settings
 	 *
 	 * @return string
 	 */

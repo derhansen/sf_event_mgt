@@ -11,8 +11,14 @@
         stopOnFailure="false"
         stopOnIncomplete="false"
         stopOnSkipped="false"
-        strict="false"
         verbose="false">
+
+    <filter>
+        <blacklist>
+            <directory>../../../../../typo3</directory>
+            <directory>../../../../../typo3temp</directory>
+        </blacklist>
+    </filter>
 
     <testsuites>
         <testsuite name="EXT:sf_event mgt">

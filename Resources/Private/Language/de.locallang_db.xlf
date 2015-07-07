@@ -19,6 +19,10 @@
 				<source>Description</source>
 				<target>Beschreibung</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
+				<source>Program/Schedule</source>
+				<target>Programm/Ablauf</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
 				<source>Link</source>
 				<target>Link</target>
@@ -63,13 +67,25 @@
 				<source>Location</source>
 				<target>Ort</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+				<target>Event - Organisator/Ansprechpartner</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Image</source>
 				<target>Bild</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
+				<source>Files</source>
+				<target>Dateien</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
 				<source>YouTube embed code</source>
 				<target>YouTube Einbettungs Code</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+				<source>Additional images (e.g. images from the event)</source>
+				<target>Zusätzliche Bilder (z.B. Bilder von der Veranstaltung)</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Participants</source>
@@ -79,9 +95,17 @@
 				<source>Registration deadline</source>
 				<target>Anmeldefrist</target>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin">
+				<source>Admin</source>
+				<target>Admin</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
+				<target>Organisator</target>
+				<source>Organisator/Ansprechpartner</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category">
-				<source>Category</source>
-				<target>Kategorie</target>
+				<source>Event - Category</source>
+				<target>Veranstaltung - Kategorie</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
 				<source>Title</source>
@@ -92,8 +116,8 @@
 				<target>Übergeordnet</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
-				<source>Registration</source>
-				<target>Anmeldung</target>
+				<source>Event - Registration</source>
+				<target>Veranstaltung - Anmeldung</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
 				<source>Firstname</source>
@@ -187,6 +211,14 @@
 				<source>Amount of registrations (if user created multiple registrations at the same time)</source>
 				<target>Anzahl Anmeldungen (falls der Benutzer mehrere Anmeldungen gleichzeitig vorgenommen hat)</target>
 			</trans-unit>
+			<trans-unit id="event.tabs.additional">
+				<source>Additional</source>
+				<target>Zusätzlich</target>
+			</trans-unit>
+			<trans-unit id="event.tabs.category">
+				<source>Category</source>
+				<target>Kategorie</target>
+			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 				<target>Medien</target>
@@ -195,13 +227,33 @@
 				<source>Registration</source>
 				<target>Anmeldung</target>
 			</trans-unit>
+			<trans-unit id="event.sections.notification">
+				<source>When a registration is created or confirmed, send a notification e-mail to:</source>
+				<target>Wenn eine neue Anmeldung erstellt oder bestätigt wird, Benachrichtugung per E-Mail an:</target>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
-				<source>Location</source>
-				<target>Ort</target>
+				<source>Event - Location</source>
+				<target>Veranstaltung - Ort</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.title">
 				<source>Title</source>
 				<target>Titel</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.address">
+				<source>Address</source>
+				<target>Anschrift</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.zip">
+				<source>Zip</source>
+				<target>Plz.</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.city">
+				<source>City</source>
+				<target>Stadt</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_location.country">
+				<source>Country</source>
+				<target>Land</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location.description">
 				<source>Description</source>
@@ -216,8 +268,8 @@
 				<target>Breitengrad</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
-				<source>Notificationlog</source>
-				<target>Benachrichtigungsverlauf</target>
+				<source>Event - Notificationlog</source>
+				<target>Veranstaltung - Benachrichtigungsverlauf</target>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event">
 				<source>Event</source>
@@ -234,6 +286,30 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.cruser">
 				<source>User</source>
 				<target>Benutzer</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+				<source>Organisator</source>
+				<target>Organisator/Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator">
+				<source>Organisator</source>
+				<target>Event - Organisator/Ansprechpartner</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+				<source>Name</source>
+				<target>Name</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+				<source>E-Mail</source>
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+				<source>Phone number</source>
+				<target>Telefon</target>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+				<source>Image</source>
+				<target>Bild</target>
 			</trans-unit>
 		</body>
 	</file>

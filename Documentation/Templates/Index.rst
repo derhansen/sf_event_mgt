@@ -20,3 +20,4 @@ Templates
    Layouts/Index
    Objects/Index
    Viewhelpers/Index
+   Filtering/Index

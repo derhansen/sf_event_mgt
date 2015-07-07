@@ -196,10 +196,22 @@ Tab settings
          List
 
    :Description:
-         Restrict events to be shown be one or more category
+         Restrict events to be shown by one or more category
 
    :Key:
          category
+
+ - :Property:
+         Location
+
+   :View:
+         List
+
+   :Description:
+         Restrict events to be shown by one location
+
+   :Key:
+         location
 
  - :Property:
          Record storage page
@@ -289,13 +301,14 @@ Tab notification
          notification.senderName
 
  - :Property:
-         E-Mail address of website admin
+         E-Mail address(es) of website admin
 
    :View:
          Registration
 
    :Description:
-         E-Mail address of website admin, who receives new/confirmed registrations
+         E-Mail address(es) of website admin(s), who receives new/confirmed registrations. Multiple E-Mail addresses
+         must be separated with a comma.
 
    :Key:
          notification.adminEmail

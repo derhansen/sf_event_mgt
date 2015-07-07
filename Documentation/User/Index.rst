@@ -19,4 +19,5 @@ Users Manual
    Events/Index
    Categories/Index
    Locations/Index
+   Organisator/Index
    Registrations/Index

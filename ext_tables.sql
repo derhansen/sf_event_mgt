@@ -9,6 +9,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	title varchar(255) DEFAULT '' NOT NULL,
 	teaser text,
 	description text NOT NULL,
+	program text NOT NULL,
 	startdate int(11) DEFAULT '0' NOT NULL,
 	enddate int(11) DEFAULT '0' NOT NULL,
 	max_participants int(11) DEFAULT '0' NOT NULL,
@@ -18,12 +19,17 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	category int(11) unsigned DEFAULT '0' NOT NULL,
 	registration int(11) unsigned DEFAULT '0' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
+	files int(11) DEFAULT '0' NOT NULL,
 	youtube text,
+	additional_image varchar(255) DEFAULT '' NOT NULL,
 	location int(11) unsigned DEFAULT '0' NOT NULL,
 	enable_registration tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	registration_deadline int(11) DEFAULT '0' NOT NULL,
 	link tinytext NOT NULL,
 	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	organisator int(11) unsigned DEFAULT '0' NOT NULL,
+	notify_admin tinyint(4) unsigned DEFAULT '1' NOT NULL,
+	notify_organisator tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -97,6 +103,49 @@ CREATE TABLE tx_sfeventmgt_domain_model_category (
 );
 
 #
+# Table structure for table 'tx_sfeventmgt_domain_model_organisator'
+#
+CREATE TABLE tx_sfeventmgt_domain_model_organisator (
+
+	uid int(11) NOT NULL auto_increment,
+	pid int(11) DEFAULT '0' NOT NULL,
+
+	name varchar(255) DEFAULT '' NOT NULL,
+	email varchar(255) DEFAULT '' NOT NULL,
+	phone varchar(255) DEFAULT '' NOT NULL,
+	image varchar(255) DEFAULT '' NOT NULL,
+
+	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
+	crdate int(11) unsigned DEFAULT '0' NOT NULL,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
+	deleted tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	starttime int(11) unsigned DEFAULT '0' NOT NULL,
+	endtime int(11) unsigned DEFAULT '0' NOT NULL,
+
+	t3ver_oid int(11) DEFAULT '0' NOT NULL,
+	t3ver_id int(11) DEFAULT '0' NOT NULL,
+	t3ver_wsid int(11) DEFAULT '0' NOT NULL,
+	t3ver_label varchar(255) DEFAULT '' NOT NULL,
+	t3ver_state tinyint(4) DEFAULT '0' NOT NULL,
+	t3ver_stage int(11) DEFAULT '0' NOT NULL,
+	t3ver_count int(11) DEFAULT '0' NOT NULL,
+	t3ver_tstamp int(11) DEFAULT '0' NOT NULL,
+	t3ver_move_id int(11) DEFAULT '0' NOT NULL,
+	sorting int(11) DEFAULT '0' NOT NULL,
+
+	sys_language_uid int(11) DEFAULT '0' NOT NULL,
+	l10n_parent int(11) DEFAULT '0' NOT NULL,
+	l10n_diffsource mediumblob,
+
+	PRIMARY KEY (uid),
+	KEY parent (pid),
+	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
+ KEY language (l10n_parent,sys_language_uid)
+
+);
+
+#
 # Table structure for table 'tx_sfeventmgt_domain_model_customnotificationlog'
 #
 CREATE TABLE tx_sfeventmgt_domain_model_customnotificationlog (
@@ -124,6 +173,10 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	title varchar(255) DEFAULT '' NOT NULL,
+	address varchar(255) DEFAULT '' NOT NULL,
+	zip int(11) DEFAULT '0' NOT NULL,
+	city varchar(255) DEFAULT '' NOT NULL,
+	country varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
