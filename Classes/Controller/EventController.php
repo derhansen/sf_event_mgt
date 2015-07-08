@@ -172,7 +172,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function listAction(array $overwriteDemand = NULL) {
 		$demand = $this->createDemandObjectFromSettings($this->settings);
-		if ($overwriteDemand !== NULL) {
+		if ($this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== NULL) {
 			$demand = $this->overwriteDemandObject($demand, $overwriteDemand);
 		}
 		$events = $this->eventRepository->findDemanded($demand);
