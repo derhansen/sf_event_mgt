@@ -265,7 +265,7 @@
                             </config>
                         </TCEforms>
                     </settings.topEventRestriction>
-
+					
                     <!-- Query Limit -->
                     <settings.queryLimit>
                         <TCEforms>
@@ -377,6 +377,16 @@
                             </config>
                         </TCEforms>
                     </settings.storagePage>
+					
+					<!-- disable overrideDemand -->
+					<settings.disableOverrideDemand>
+						<TCEforms>
+							<label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.disableOverrideDemand</label>
+							<config>
+								<type>check</type>
+							</config>
+						</TCEforms>
+					</settings.disableOverrideDemand>
 
                     <!-- Required fields for registration -->
                     <settings.registration.requiredFields>
