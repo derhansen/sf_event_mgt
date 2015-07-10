@@ -100,6 +100,10 @@
 					Vorname, Nachname und E-Mail sind immer erforderlich. Dieses kann nicht geändert werden.
 				</target>
 			</trans-unit>
+			<trans-unit id="flexforms_general.disableOverrideDemand">
+				<source>Disable override demand</source>
+				<target>"overrideDemand" deaktivieren</target>
+			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>E-Mail address of e-mails sent to the user</source>
 				<target>Absende-E-Mail Adresse</target>

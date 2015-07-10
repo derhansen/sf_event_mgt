@@ -226,6 +226,18 @@ Tab settings
          storagePage
 
  - :Property:
+         Disable Override demand
+
+   :View:
+         List
+
+   :Description:
+         If set, the settings of the plugin can't be overridden by arguments in the URL.
+
+   :Key:
+         disableOverrideDemand
+
+ - :Property:
          Comma seperated list of fieldnames, which are required.
 
    :View:
