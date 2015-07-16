@@ -36,6 +36,8 @@ enabled with the registration option. If the list of fields exported does'nt fit
 needs, you can adjust the fields in the module TypoScript settings as described in the
 configuration section of this extension.
 
+Make sure the **user** (or user group) has **read and write access** to the folder ``fileadmin/_temp_/``
+
 Sending custom notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
