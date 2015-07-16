@@ -76,7 +76,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @var float
 	 */
-	protected $latitide = 0.0;
+	protected $latitude = 0.0;
 
 	/**
 	 * Returns the title
@@ -223,18 +223,18 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return float
 	 */
-	public function getLatitide() {
-		return $this->latitide;
+	public function getlatitude() {
+		return $this->latitude;
 	}
 
 	/**
 	 * Sets the latitude
 	 *
-	 * @param float $latitide The latitude
+	 * @param float $latitude The latitude
 	 *
 	 * @return void
 	 */
-	public function setLatitide($latitide) {
-		$this->latitide = $latitide;
+	public function setlatitude($latitude) {
+		$this->latitude = $latitude;
 	}
 }

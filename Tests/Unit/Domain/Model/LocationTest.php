@@ -231,7 +231,7 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function getLatitudeReturnsInitialValueForFloat() {
-		$this->assertSame(0.0, $this->subject->getLatitide());
+		$this->assertSame(0.0, $this->subject->getlatitude());
 	}
 
 	/**
@@ -241,7 +241,7 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function setLatitudeSetsLatitude() {
-		$this->subject->setLatitide(12.345678);
-		$this->assertSame(12.345678, $this->subject->getLatitide());
+		$this->subject->setlatitude(12.345678);
+		$this->assertSame(12.345678, $this->subject->getlatitude());
 	}
 }
