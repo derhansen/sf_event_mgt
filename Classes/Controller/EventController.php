@@ -321,7 +321,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			&& $event->getMaxParticipants() > 0) {
 			$success = FALSE;
 			$result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
-		} elseif ($event->getFreePlaces() < $registration->getAmountOfRegistrations()) {
+		} elseif ($event->getFreePlaces() < $registration->getAmountOfRegistrations()
+			&& $event->getMaxParticipants() > 0) {
 			$success = FALSE;
 			$result = RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES;
 		} elseif ($event->getMaxRegistrationsPerUser() < $registration->getAmountOfRegistrations()) {

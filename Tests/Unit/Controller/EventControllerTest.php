@@ -423,7 +423,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsGreaterThanRemainingPlaces() {
 		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
 			array(), '', FALSE);
-		$registration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(11));
+		$registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
 
 		$registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', FALSE);
 		$registrations->expects($this->any())->method('count')->will($this->returnValue(10));
@@ -435,6 +435,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
+		$event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
 			array('result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES));
@@ -461,6 +462,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 		$event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
 		$event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
+		$event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
 		$event->expects($this->once())->method('getMaxRegistrationsPerUser')->will($this->returnValue(5));
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
