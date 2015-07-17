@@ -5,19 +5,19 @@
 		<body>
 			<trans-unit id="name.description">
 				<source>Name</source>
-				<target>Name</targat>
+				<target>Name</target>
 			</trans-unit>
 			<trans-unit id="email.description">
 				<source>E-Mail</source>
-				<target>E-Mail</targat>
+				<target>E-Mail</target>
 			</trans-unit>
 			<trans-unit id="phone.description">
 				<source>Phone</source>
-				<target>Telefon</targat>
+				<target>Telefon</target>
 			</trans-unit>
 			<trans-unit id="image.description">
 				<source>Image</source>
-				<target>Bild</targat>
+				<target>Bild</target>
 			</trans-unit>
 		</body>
 	</file>
