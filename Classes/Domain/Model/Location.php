@@ -38,10 +38,9 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Zip
 	 *
-	 * @var int
-	 * @validate Integer
+	 * @var string
 	 */
-	protected $zip = 0;
+	protected $zip = '';
 
 	/**
 	 * City
@@ -121,7 +120,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the zip
 	 *
-	 * @return int $zip
+	 * @return string $zip
 	 */
 	public function getZip() {
 		return $this->zip;
@@ -130,7 +129,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the zip
 	 *
-	 * @param int $zip Zip
+	 * @param string $zip Zip
 	 *
 	 * @return void
 	 */

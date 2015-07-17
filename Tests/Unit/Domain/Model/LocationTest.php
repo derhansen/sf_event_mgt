@@ -105,7 +105,7 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 */
 	public function getZipReturnsInitialValueForInteger() {
 		$this->assertSame(
-			0,
+			'',
 			$this->subject->getZip()
 		);
 	}
@@ -115,10 +115,10 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function setZipForIntegerSetsZip() {
-		$this->subject->setZip(12);
+		$this->subject->setZip('12');
 
-		$this->assertAttributeEquals(
-			12,
+		$this->assertAttributeSame(
+			'12',
 			'zip',
 			$this->subject
 		);
