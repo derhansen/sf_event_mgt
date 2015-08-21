@@ -209,7 +209,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return void
 	 */
-	public function setStartDate(\DateTime $startDate) {
+	public function setStartDate($startDate) {
 		$this->startDate = $startDate;
 	}
 
@@ -229,7 +229,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 * @return void
 	 */
-	public function setEndDate(\DateTime $endDate) {
+	public function setEndDate($endDate) {
 		$this->endDate = $endDate;
 	}
 
