@@ -93,6 +93,9 @@
                                     <OR>
                                         <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
                                     </OR>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
+                                    </AND>
                                 </OR>
                             </displayCond>
                             <config>
