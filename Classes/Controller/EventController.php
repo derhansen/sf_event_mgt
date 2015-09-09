@@ -19,6 +19,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use DERHANSEN\SfEventMgt\Utility\Page;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
@@ -134,7 +135,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
-		$demand->setStoragePage($settings['storagePage']);
+		$demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
 		$demand->setCategory($settings['category']);
 		$demand->setTopEventRestriction((int)$settings['topEventRestriction']);
 		$demand->setOrderField($settings['orderField']);
