@@ -16,7 +16,6 @@ $EM_CONF[$_EXTKEY] = array(
 	'category' => 'plugin',
 	'author' => 'Torben Hansen',
 	'author_email' => 'derhansen@gmail.com',
-	'author_company' => 'Skyfillers GmbH',
 	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => '0',
