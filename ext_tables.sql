@@ -8,8 +8,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	teaser text,
-	description text NOT NULL,
-	program text NOT NULL,
+	description text,
+	program text,
 	startdate int(11) DEFAULT '0' NOT NULL,
 	enddate int(11) DEFAULT '0' NOT NULL,
 	max_participants int(11) DEFAULT '0' NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	location int(11) unsigned DEFAULT '0' NOT NULL,
 	enable_registration tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	registration_deadline int(11) DEFAULT '0' NOT NULL,
-	link tinytext NOT NULL,
+	link tinytext,
 	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	organisator int(11) unsigned DEFAULT '0' NOT NULL,
 	notify_admin tinyint(4) unsigned DEFAULT '1' NOT NULL,
@@ -177,7 +177,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	zip varchar(32) DEFAULT '' NOT NULL,
 	city varchar(255) DEFAULT '' NOT NULL,
 	country varchar(255) DEFAULT '' NOT NULL,
-	description text NOT NULL,
+	description text,
 	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 
