@@ -172,7 +172,6 @@ return array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
-				'eval' => 'int'
 			)
 		),
 		'city' => array(
