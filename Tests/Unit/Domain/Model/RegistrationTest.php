@@ -173,9 +173,9 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @test
 	 * @return void
 	 */
-	public function getZipReturnsInitialValueForInteger() {
+	public function getZipReturnsInitialValueForString() {
 		$this->assertSame(
-			0,
+			'',
 			$this->subject->getZip()
 		);
 	}
@@ -185,10 +185,10 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	 * @return void
 	 */
 	public function setZipForIntegerSetsZip() {
-		$this->subject->setZip(12);
+		$this->subject->setZip('01234');
 
 		$this->assertAttributeEquals(
-			12,
+			'01234',
 			'zip',
 			$this->subject
 		);
