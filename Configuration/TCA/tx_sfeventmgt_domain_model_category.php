@@ -117,7 +117,7 @@ return array(
 
 		'title' => array(
 			'exclude' => 1,
-			'label' => \DERHANSEN\SfEventMgt\Service\TestService::getBackendUser() . 'TEST',
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_category.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
