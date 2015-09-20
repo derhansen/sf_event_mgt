@@ -1,0 +1,8 @@
+<p>Hello {registration.firstname} {registration.lastname},</p>
+<p>your registration for the following event has successfully been cancelled:</p>
+<ul>
+    <li>{event.title} - ({f:format.date(date: '{event.startdate}', format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: '{event.enddate}', format: '%d.%m.%Y - %H:%M')})</li>
+</ul>
+<p>Best regards,</p>
+<p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
+

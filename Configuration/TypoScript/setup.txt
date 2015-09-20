@@ -12,7 +12,7 @@ plugin.tx_sfeventmgt {
 		rewrittenPropertyMapper = 1
 	}
 	settings {
-		# List of pids, for which the cache should be cleared after registration data changed
+		# List of uids, for which the cache should be cleared after registration data changed
 		# *MUST* be defined at template root level to work correct in scheduler task
 		clearCacheUids =
 
@@ -53,6 +53,10 @@ plugin.tx_sfeventmgt {
 			registrationConfirmed {
 				userSubject = Event registration successful
 				adminSubject = Event registration confirmed
+			}
+			registrationCancelled {
+				userSubject = Event registration cancelled successful
+				adminSubject = Event registration cancelled
 			}
 		}
 	}

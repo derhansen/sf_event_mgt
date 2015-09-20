@@ -142,4 +142,31 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$this->subject->confirmDependingRegistrations($mockRegistration);
 	}
+
+	/**
+	 * @test
+	 */
+	public function cancelDependingRegistrationsRemovesDependingRegistrations() {
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+
+		$foundRegistration1 = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+
+		$foundRegistration2 = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+			array(), array(), '', FALSE);
+
+		/** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+		$registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$registrations->attach($foundRegistration1);
+		$registrations->attach($foundRegistration2);
+
+		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findByMainRegistration', 'remove'), array(), '', FALSE);
+		$registrationRepository->expects($this->once())->method('findByMainRegistration')->will($this->returnValue($registrations));
+		$registrationRepository->expects($this->exactly(2))->method('remove');
+		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+		$this->subject->cancelDependingRegistrations($mockRegistration);
+	}
 }

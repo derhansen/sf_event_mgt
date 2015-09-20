@@ -11,7 +11,7 @@ if (!defined('TYPO3_MODE')) {
 	),
 	// non-cacheable actions
 	array(
-		'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, icalDownload',
+		'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload',
 	)
 );
 

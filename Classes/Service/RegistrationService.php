@@ -101,4 +101,18 @@ class RegistrationService {
 			$this->registrationRepository->update($foundRegistration);
 		}
 	}
+
+	/**
+	 * Cancels all depending registrations based on the given main registration
+	 *
+	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+	 *
+	 * @return void
+	 */
+	public function cancelDependingRegistrations($registration) {
+		$registrations = $this->registrationRepository->findByMainRegistration($registration);
+		foreach ($registrations as $foundRegistration) {
+			$this->registrationRepository->remove($foundRegistration);
+		}
+	}
 }

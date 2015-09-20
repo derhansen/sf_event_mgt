@@ -437,4 +437,65 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$this->view->assign('messageKey', $messageKey);
 		$this->view->assign('titleKey', $titleKey);
 	}
+
+	/**
+	 * Cancels the registration if possible and sends e-mails to admin and user
+	 *
+	 * @param int $reguid UID of registration
+	 * @param string $hmac HMAC for parameters
+	 *
+	 * @return void
+	 */
+	public function cancelRegistrationAction($reguid, $hmac) {
+		/* @var $registration Registration */
+		$registration = NULL;
+		$failed = FALSE;
+		$messageKey = 'event.message.cancel_successful';
+		$titleKey = 'cancelRegistration.title.successful';
+
+		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
+			$failed = TRUE;
+			$messageKey = 'event.message.cancel_failed_wrong_hmac';
+			$titleKey = 'cancelRegistration.title.failed';
+		} else {
+			$registration = $this->registrationRepository->findByUid($reguid);
+		}
+
+		if (!$failed && is_null($registration)) {
+			$failed = TRUE;
+			$messageKey = 'event.message.cancel_failed_registration_not_found_or_cancelled';
+			$titleKey = 'cancelRegistration.title.failed';
+		}
+
+		if (!$failed && $registration->getEvent()->getEnableCancel() === FALSE) {
+			$failed = TRUE;
+			$messageKey = 'event.message.confirmation_failed_cancel_disabled';
+			$titleKey = 'cancelRegistration.title.failed';
+		}
+
+		if (!$failed && $registration->getEvent()->getCancelDeadline() > 0
+			&& $registration->getEvent()->getCancelDeadline() < new \DateTime()) {
+			$failed = TRUE;
+			$messageKey = 'event.message.cancel_failed_deadline_expired';
+			$titleKey = 'cancelRegistration.title.failed';
+		}
+
+		if ($failed === FALSE) {
+			// Send notifications (must run before cancelling the registration)
+			$this->notificationService->sendUserMessage($registration->getEvent(), $registration, $this->settings,
+				MessageType::REGISTRATION_CANCELLED);
+			$this->notificationService->sendAdminMessage($registration->getEvent(), $registration, $this->settings,
+				MessageType::REGISTRATION_CANCELLED);
+
+			// First cancel depending registrations
+			if ($registration->getAmountOfRegistrations() > 1) {
+				$this->registrationService->cancelDependingRegistrations($registration);
+			}
+
+			// Finally cancel registration
+			$this->registrationRepository->remove($registration);
+		}
+		$this->view->assign('messageKey', $messageKey);
+		$this->view->assign('titleKey', $titleKey);
+	}
 }

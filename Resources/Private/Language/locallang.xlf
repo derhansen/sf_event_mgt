@@ -213,6 +213,21 @@
 			<trans-unit id="event.message.confirmation_failed_already_confirmed">
 				<source>Confirmation failed, because the registration already has been confirmed.</source>
 			</trans-unit>
+			<trans-unit id="event.message.cancel_successful">
+				<source>Your registration has been successfully cancelled.</source>
+			</trans-unit>
+			<trans-unit id="event.message.cancel_failed_wrong_hmac">
+				<source>Cancellation failed, wrong HMAC.</source>
+			</trans-unit>
+			<trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled">
+				<source>Cancellation failed, registration not found or already cancelled.</source>
+			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_cancel_disabled">
+				<source>Cancellation failed, cancel option for this event is not enabled.</source>
+			</trans-unit>
+			<trans-unit id="event.message.cancel_failed_deadline_expired">
+				<source>Cancellation failed, cancellation date has expired.</source>
+			</trans-unit>
 			<trans-unit id="event.icalDownload">
 				<source>Download iCal file</source>
 			</trans-unit>
@@ -257,6 +272,12 @@
 			</trans-unit>
 			<trans-unit id="confirmRegistration.title.failed">
 				<source>Registration confirmation failed</source>
+			</trans-unit>
+			<trans-unit id="cancelRegistration.title.successful">
+				<source>Registration cancelled</source>
+			</trans-unit>
+			<trans-unit id="cancelRegistration.title.failed">
+				<source>Cancellation failed</source>
 			</trans-unit>
 			<trans-unit id="registrationResult.title.successful">
 				<source>Registration successful</source>

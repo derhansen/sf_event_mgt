@@ -146,6 +146,10 @@ class NotificationService {
 				$template = 'Notification/User/RegistrationConfirmed.html';
 				$subject = $settings['notification']['registrationConfirmed']['userSubject'];
 				break;
+			case MessageType::REGISTRATION_CANCELLED:
+				$template = 'Notification/User/RegistrationCancelled.html';
+				$subject = $settings['notification']['registrationCancelled']['userSubject'];
+				break;
 			case MessageType::CUSTOM_NOTIFICATION:
 				$template = 'Notification/User/Custom/' . $settings['notification']['customNotifications'][$customNotification]['template'];
 				$subject = $settings['notification']['customNotifications'][$customNotification]['subject'];
@@ -188,6 +192,10 @@ class NotificationService {
 			case MessageType::REGISTRATION_CONFIRMED:
 				$template = 'Notification/Admin/RegistrationConfirmed.html';
 				$subject = $settings['notification']['registrationConfirmed']['adminSubject'];
+				break;
+			case MessageType::REGISTRATION_CANCELLED:
+				$template = 'Notification/Admin/RegistrationCancelled.html';
+				$subject = $settings['notification']['registrationCancelled']['adminSubject'];
 				break;
 			case MessageType::REGISTRATION_NEW:
 			default:

@@ -192,6 +192,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $notifyOrganisator = FALSE;
 
 	/**
+	 * Enable cancel of registration
+	 *
+	 * @var bool
+	 */
+	protected $enableCancel = FALSE;
+
+	/**
+	 * Deadline for cancel
+	 *
+	 * @var \DateTime
+	 */
+	protected $cancelDeadline = NULL;
+
+	/**
 	 * __construct
 	 */
 	public function __construct() {
@@ -881,4 +895,43 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->notifyOrganisator = $notifyOrganisator;
 	}
 
+	/**
+	 * Sets enableCancel
+	 *
+	 * @param bool $enableCancel EnableCancel
+	 *
+	 * @return void
+	 */
+	public function setEnableCancel($enableCancel) {
+		$this->enableCancel = $enableCancel;
+	}
+
+	/**
+	 * Returns if registration can be canceled
+	 *
+	 * @return bool
+	 */
+	public function getEnableCancel() {
+		return $this->enableCancel;
+	}
+
+	/**
+	 * Sets the cancel deadline
+	 *
+	 * @param \DateTime $cancelDeadline RegistrationDeadline
+	 *
+	 * @return void
+	 */
+	public function setCancelDeadline(\DateTime $cancelDeadline) {
+		$this->cancelDeadline = $cancelDeadline;
+	}
+
+	/**
+	 * Returns the cancel deadline
+	 *
+	 * @return \DateTime
+	 */
+	public function getCancelDeadline() {
+		return $this->cancelDeadline;
+	}
 }

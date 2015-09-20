@@ -21,7 +21,7 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'requestUpdate' => 'enable_registration',
+		'requestUpdate' => 'enable_registration, enable_cancel',
 		'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
 	),
@@ -44,7 +44,7 @@ return array(
 				category,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration,
-				enable_registration, registration_deadline, max_participants, max_registrations_per_user, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification, registration,
+				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation, max_participants, max_registrations_per_user, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification, registration,
 
 			--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
 		),
@@ -67,6 +67,10 @@ return array(
 		),
 		'paletteNotification' => array(
 			'showitem' => 'notify_admin, notify_organisator,',
+			'canNotCollapse' => TRUE
+		),
+		'paletteCancellation' => array(
+			'showitem' => 'enable_cancel, cancel_deadline,',
 			'canNotCollapse' => TRUE
 		),
 	),
@@ -267,6 +271,25 @@ return array(
 			'exclude' => 1,
 			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_deadline',
 			'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+			'config' => array(
+				'type' => 'input',
+				'size' => 10,
+				'eval' => 'datetime',
+				'checkbox' => 1
+			),
+		),
+		'enable_cancel' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_cancel',
+			'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+			'config' => array(
+				'type' => 'check',
+			),
+		),
+		'cancel_deadline' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.cancel_deadline',
+			'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
 			'config' => array(
 				'type' => 'input',
 				'size' => 10,

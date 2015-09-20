@@ -29,7 +29,7 @@
                                     </numIndex>
                                     <numIndex index="3">
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.registration</numIndex>
-                                        <numIndex index="1">Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex index="1">Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </numIndex>
                                 </items>
                             </config>
@@ -44,7 +44,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -91,7 +91,7 @@
                                 <OR>
                                     <numIndex>FIELD:switchableControllerActions:=:Event->detail;Event->icalDownload</numIndex>
                                     <OR>
-                                        <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </OR>
                                     <AND>
                                         <numIndex>FIELD:switchableControllerActions:=:Event->list</numIndex>
@@ -119,7 +119,7 @@
                     <settings.registrationPid>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.registrationPid</label>
-                            <displayCond>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -145,7 +145,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -177,7 +177,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -213,7 +213,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -245,7 +245,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -268,7 +268,7 @@
                             </config>
                         </TCEforms>
                     </settings.topEventRestriction>
-					
+
                     <!-- Query Limit -->
                     <settings.queryLimit>
                         <TCEforms>
@@ -277,7 +277,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -297,7 +297,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -330,7 +330,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -360,7 +360,7 @@
                                 <AND>
                                     <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
                                     <AND>
-                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</numIndex>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
                                     </AND>
                                 </AND>
                             </displayCond>
@@ -395,7 +395,7 @@
                     <settings.registration.requiredFields>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.requiredFields</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</displayCond>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</displayCond>
                             <config>
                                 <type>input</type>
                             </config>
@@ -411,7 +411,7 @@
             <ROOT>
                 <TCEforms>
                     <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_tab.notification</sheetTitle>
-                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration</displayCond>
+                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</displayCond>
                 </TCEforms>
                 <type>array</type>
                 <el>
@@ -485,6 +485,26 @@
                             </config>
                         </TCEforms>
                     </settings.notification.registrationConfirmed.adminSubject>
+
+                    <!-- Registration cancelled - subject of user e-mail -->
+                    <settings.notification.registrationCancelled.userSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_cancelled_user_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationCancelled.userSubject>
+
+                    <!-- Registration cancelled - subject of admin e-mail -->
+                    <settings.notification.registrationCancelled.adminSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_cancelled_admin_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationCancelled.adminSubject>
 
                 </el>
             </ROOT>

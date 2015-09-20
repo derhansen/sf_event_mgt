@@ -39,6 +39,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
 				<source>Enable registration</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_cancel">
+				<source>Enable cancellation</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
 				<source>Price</source>
 			</trans-unit>
@@ -71,6 +74,9 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
 				<source>Registration deadline</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.cancel_deadline">
+				<source>Cancellation deadline</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin">
 				<source>Admin</source>
@@ -172,7 +178,10 @@
 				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="event.sections.notification">
-				<source>When a registration is created or confirmed, send a notification e-mail to:</source>
+				<source>When a registration is created,confirmed or cancelled, send a notification e-mail to:</source>
+			</trans-unit>
+			<trans-unit id="event.sections.cancellation">
+				<source>Cancellation options:</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
 				<source>Event - Location</source>

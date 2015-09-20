@@ -123,6 +123,12 @@
 			<trans-unit id="flexforms_notification.registration_confirmed_admin_subject">
 				<source>Subject of e-mail sent to admin when a registration has been confirmed</source>
 			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_cancelled_user_subject">
+				<source>Subject of e-mail sent to user when a registration has been cancelled</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_cancelled_admin_subject">
+				<source>Subject of e-mail sent to admin when a registration has been cancelled</source>
+			</trans-unit>
 			<trans-unit id="administration.title">
 				<source>Event Administration</source>
 			</trans-unit>

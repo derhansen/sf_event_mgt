@@ -1,0 +1,19 @@
+<p>A user has successfully cancelled the registration to the following event</p>
+
+<p>{event.title} - ({f:format.date(date: '{event.startdate}', format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: '{event.enddate}', format: '%d.%m.%Y - %H:%M')})</p>
+
+<p>Registration data:</p>
+
+<ul>
+    <li>{registration.gender}</li>
+    <li>{registration.firstname}</li>
+    <li>{registration.lastname}</li>
+    <li>{registration.address}</li>
+    <li>{registration.zip}</li>
+    <li>{registration.city}</li>
+    <li>{registration.country}</li>
+    <li>{registration.email}</li>
+    <li>{registration.phone}</li>
+    <li>{f:format.date(date: '{registration.dateOfBirth}', format: 'd.m.Y')}</li>
+    <li>{registration.notes}</li>
+</ul>

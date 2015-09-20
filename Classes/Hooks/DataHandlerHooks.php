@@ -50,6 +50,8 @@ class DataHandlerHooks {
 					'settings.notification.registrationNew.adminSubject',
 					'settings.notification.registrationConfirmed.userSubject',
 					'settings.notification.registrationConfirmed.adminSubject',
+					'settings.notification.registrationCancelled.userSubject',
+					'settings.notification.registrationCancelled.adminSubject',
 				),
 				'sDEF' => array(
 					'settings.templateLayout',
@@ -67,7 +69,7 @@ class DataHandlerHooks {
 				)
 			);
 
-			$flexformData =  GeneralUtility::xml2array($fieldArray['pi_flexform']);
+			$flexformData = GeneralUtility::xml2array($fieldArray['pi_flexform']);
 			foreach ($checkFields as $sheet => $fields) {
 				foreach ($fields as $field) {
 					if (isset($flexformData['data'][$sheet]['lDEF'][$field]['vDEF']) &&
