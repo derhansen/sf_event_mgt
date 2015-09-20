@@ -76,10 +76,11 @@ class CleanupCommandControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($configuration));
 		$this->inject($this->subject, 'registrationService', $registrationService);
 
-		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-			array('clearPageCache'), array(), '', FALSE);
-		$cacheService->expects($this->once())->method('clearPageCache')->with(array(1,2,3));
-		$this->inject($this->subject, 'cacheService', $cacheService);
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+			array('clearCacheForConfiguredUids'), array(), '', FALSE);
+		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids')->
+			with($configuration['plugin.']['tx_sfeventmgt.']['settings.']);
+		$this->inject($this->subject, 'utilityService', $utilityService);
 
 		$this->subject->cleanupCommand();
 	}

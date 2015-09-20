@@ -37,14 +37,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $configurationManager;
 
 	/**
-	 * CacheService
-	 *
-	 * @var \TYPO3\CMS\Extbase\Service\CacheService
-	 * @inject
-	 */
-	protected $cacheService;
-
-	/**
 	 * EventRepository
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
@@ -93,14 +85,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $icalendarService = NULL;
 
 	/**
-	 * Settings Service
-	 *
-	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-	 * @inject
-	 */
-	protected $settingsService = NULL;
-
-	/**
 	 * Hash Service
 	 *
 	 * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
@@ -115,6 +99,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @inject
 	 */
 	protected $registrationService = NULL;
+
+	/**
+	 * UtilityService
+	 *
+	 * @var \DERHANSEN\SfEventMgt\Service\UtilityService
+	 * @inject
+	 */
+	protected $utilityService = NULL;
 
 	/**
 	 * Properties in this array will be ignored by overwriteDemandObject()
@@ -280,10 +272,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			}
 
 			// Clear cache for configured pages
-			$pidList = $this->settingsService->getClearCacheUids($this->settings);
-			if (count($pidList) > 0) {
-				$this->cacheService->clearPageCache($pidList);
-			}
+			$this->utilityService->clearCacheForConfiguredUids($this->settings);
 		}
 
 		if ($autoConfirmation && $success) {
@@ -494,6 +483,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
 			// Finally cancel registration
 			$this->registrationRepository->remove($registration);
+
+			// Clear cache for configured pages
+			$this->utilityService->clearCacheForConfiguredUids($this->settings);
 		}
 		$this->view->assign('messageKey', $messageKey);
 		$this->view->assign('titleKey', $titleKey);

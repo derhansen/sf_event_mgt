@@ -513,16 +513,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array('getClearCacheUids'),
-			array(), '', FALSE);
-		$settingsService->expects($this->once())->method('getClearCacheUids')->will(
-			$this->returnValue(array('0' => '1')));
-		$this->inject($this->subject, 'settingsService', $settingsService);
-
-		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array('clearPageCache'),
-			array(), '', FALSE);
-		$cacheService->expects($this->once())->method('clearPageCache');
-		$this->inject($this->subject, 'cacheService', $cacheService);
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+			array('clearCacheForConfiguredUids'), array(), '', FALSE);
+		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
+		$this->inject($this->subject, 'utilityService', $utilityService);
 
 		$this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', NULL, NULL,
 			array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
@@ -570,16 +564,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array('getClearCacheUids'),
-			array(), '', FALSE);
-		$settingsService->expects($this->once())->method('getClearCacheUids')->will(
-			$this->returnValue(array('0' => '1')));
-		$this->inject($this->subject, 'settingsService', $settingsService);
-
-		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array('clearPageCache'),
-			array(), '', FALSE);
-		$cacheService->expects($this->once())->method('clearPageCache');
-		$this->inject($this->subject, 'cacheService', $cacheService);
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+			array('clearCacheForConfiguredUids'), array(), '', FALSE);
+		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
+		$this->inject($this->subject, 'utilityService', $utilityService);
 
 		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
 			array('generateHmac'), array(), '', FALSE);
@@ -645,16 +633,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array('getClearCacheUids'),
-			array(), '', FALSE);
-		$settingsService->expects($this->once())->method('getClearCacheUids')->will(
-			$this->returnValue(array('0' => '1')));
-		$this->inject($this->subject, 'settingsService', $settingsService);
-
-		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array('clearPageCache'),
-			array(), '', FALSE);
-		$cacheService->expects($this->once())->method('clearPageCache');
-		$this->inject($this->subject, 'cacheService', $cacheService);
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+			array('clearCacheForConfiguredUids'), array(), '', FALSE);
+		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
+		$this->inject($this->subject, 'utilityService', $utilityService);
 
 		$registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
 			array('createDependingRegistrations'), array(), '', FALSE);

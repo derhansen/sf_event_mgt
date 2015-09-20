@@ -32,12 +32,12 @@ class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 	protected $configurationManager;
 
 	/**
-	 * Cacheservice
+	 * UtilityService
 	 *
-	 * @var \TYPO3\CMS\Extbase\Service\CacheService
+	 * @var \DERHANSEN\SfEventMgt\Service\UtilityService
 	 * @inject
 	 */
-	protected $cacheService;
+	protected $utilityService = NULL;
 
 	/**
 	 * Registrationservice
@@ -63,7 +63,7 @@ class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 		$this->registrationService->handleExpiredRegistrations(
 			$settings['registration.']['deleteExpiredRegistrations']);
 
-		$pidList = explode(',', $settings['clearCacheUids']);
-		$this->cacheService->clearPageCache($pidList);
+		// Clear cache for configured pages
+		$this->utilityService->clearCacheForConfiguredUids($settings);
 	}
 }
