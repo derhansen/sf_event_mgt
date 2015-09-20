@@ -373,3 +373,26 @@ Tab notification
    :Key:
          notification.registrationConfirmed.adminSubject
 
+ - :Property:
+         Subject of e-mail sent to user when a registration has been cancelled
+
+   :View:
+         Registration
+
+   :Description:
+         Subject of e-mail sent to user when a registration has been cancelled
+
+   :Key:
+         notification.registrationCancelled.userSubject
+
+ - :Property:
+         Subject of e-mail sent to admin when a registration has been cancelled
+
+   :View:
+         Registration
+
+   :Description:
+         Subject of e-mail sent to admin when a registration has been cancelled
+
+   :Key:
+         notification.registrationCancelled.adminSubject

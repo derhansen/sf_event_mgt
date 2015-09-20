@@ -299,6 +299,30 @@ plugin.tx_sfeventmgt
    :Default:
          Event registration confirmed
 
+ - :Property:
+         settings.notification.registrationCancelled.userSubject
+
+   :Date type:
+         String
+
+   :Description:
+         User-Subject for cancelled registration
+
+   :Default:
+         Event registration cancelled successful
+
+ - :Property:
+         settings.notification.registrationCancelled.adminSubject
+
+   :Date type:
+         String
+
+   :Description:
+         Admin-Subject for cancelled registration
+
+   :Default:
+         Event registration cancelled
+
 
 module.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~

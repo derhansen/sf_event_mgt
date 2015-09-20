@@ -62,3 +62,4 @@ Event management and registration
 	Faq/Index
 	KnownProblems/Index
 	Changelog/Index
+	BreakingChanges/Index

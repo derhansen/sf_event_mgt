@@ -235,6 +235,19 @@ registrations per user" is set to a value greater than 1.
          If set, registration is only possible until the given date.
 
  - :Field:
+         Enable cancellation
+
+   :Description:
+         Option to enable cancellation of registrations for the event. If enabled, users can cancel their
+         registration to the event.
+
+ - :Field:
+         Cancellation deadline
+
+   :Description:
+         If set, cancellation is only possible until the given date.
+
+ - :Field:
          Max. participants
 
    :Description:
