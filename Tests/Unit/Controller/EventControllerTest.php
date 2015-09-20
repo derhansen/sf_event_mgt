@@ -770,10 +770,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
+	 * Test if expected message is shown if checkConfirmRegistration fails
+	 *
 	 * @test
 	 * @return void
 	 */
-	public function confirmRegistrationActionShowsExpectedMessageIfInvalidHmac() {
+	public function confirmRegistrationActionShowsExpectedMessageIfCheckConfirmRegistrationFailed() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.confirmation_failed_wrong_hmac');
@@ -781,103 +783,29 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'confirmRegistration.title.failed');
 		$this->inject($this->subject, 'view', $view);
 
-		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-			array('validateHmac'), array(), '', FALSE);
-		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(FALSE));
-		$this->inject($this->subject, 'hashService', $hashService);
+		$returnedArray = array(
+			TRUE,
+			NULL,
+			'event.message.confirmation_failed_wrong_hmac',
+			'confirmRegistration.title.failed'
+		);
+
+		$mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+			array('checkConfirmRegistration'), array(), '', FALSE);
+		$mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
+		$this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
 		$this->subject->confirmRegistrationAction(1, 'INVALID-HMAC');
 	}
 
 	/**
+	 * Test if expected message is shown if checkConfirmRegistration succeeds.
+	 * Also checks, if messages are sent and if registration gets confirmed.
+	 *
 	 * @test
 	 * @return void
 	 */
-	public function confirmRegistrationActionShowsExpectedMessageIfRegistrationNotFound() {
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('messageKey',
-			'event.message.confirmation_failed_registration_not_found');
-		$view->expects($this->at(1))->method('assign')->with('titleKey',
-			'confirmRegistration.title.failed');
-		$this->inject($this->subject, 'view', $view);
-
-		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-			array('validateHmac'), array(), '', FALSE);
-		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
-		$this->inject($this->subject, 'hashService', $hashService);
-
-		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-			array('findByUid'), array(), '', FALSE);
-		$registrationRepository->expects($this->once())->method('findByUid')->will($this->returnValue(NULL));
-		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationUntilExpired() {
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('messageKey',
-			'event.message.confirmation_failed_confirmation_until_expired');
-		$view->expects($this->at(1))->method('assign')->with('titleKey',
-			'confirmRegistration.title.failed');
-		$this->inject($this->subject, 'view', $view);
-
-		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-			array('validateHmac'), array(), '', FALSE);
-		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
-		$this->inject($this->subject, 'hashService', $hashService);
-
-		$expiredConfirmationDateTime = new \DateTime('yesterday');
-		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
-		$registration->expects($this->once())->method('getConfirmationUntil')->will($this->returnValue($expiredConfirmationDateTime));
-
-		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-			array('findByUid'), array(), '', FALSE);
-		$registrationRepository->expects($this->once())->method('findByUid')->will($this->returnValue($registration));
-		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationAlreadyConfirmed() {
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('messageKey',
-			'event.message.confirmation_failed_already_confirmed');
-		$view->expects($this->at(1))->method('assign')->with('titleKey',
-			'confirmRegistration.title.failed');
-		$this->inject($this->subject, 'view', $view);
-
-		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-			array('validateHmac'), array(), '', FALSE);
-		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
-		$this->inject($this->subject, 'hashService', $hashService);
-
-		$expiredConfirmationDateTime = new \DateTime('tomorrow');
-		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
-		$registration->expects($this->once())->method('getConfirmationUntil')->will($this->returnValue($expiredConfirmationDateTime));
-		$registration->expects($this->once())->method('getConfirmed')->will($this->returnValue(TRUE));
-
-		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-			array('findByUid'), array(), '', FALSE);
-		$registrationRepository->expects($this->once())->method('findByUid')->will($this->returnValue($registration));
-		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function confirmRegistrationActionShowsExpectedMessageIfConfirmationSuccessful() {
+	public function confirmRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
 			'event.message.confirmation_successful');
@@ -885,70 +813,33 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			'confirmRegistration.title.successful');
 		$this->inject($this->subject, 'view', $view);
 
-		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-			array('validateHmac'), array(), '', FALSE);
-		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
-		$this->inject($this->subject, 'hashService', $hashService);
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$mockRegistration->expects($this->once())->method('setConfirmed')->with(TRUE);
+		$mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
-		$expiredConfirmationDateTime = new \DateTime('tomorrow');
-		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
-		$registration->expects($this->once())->method('getConfirmationUntil')->will($this->returnValue($expiredConfirmationDateTime));
-		$registration->expects($this->once())->method('getConfirmed')->will($this->returnValue(FALSE));
+		$returnedArray = array(
+			FALSE,
+			$mockRegistration,
+			'event.message.confirmation_successful',
+			'confirmRegistration.title.successful'
+		);
 
-		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-			array('findByUid', 'update'), array(), '', FALSE);
-		$registrationRepository->expects($this->once())->method('findByUid')->will($this->returnValue($registration));
-		$registrationRepository->expects($this->once())->method('update');
-		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
+		$mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+			array('checkConfirmRegistration', 'confirmDependingRegistrations'), array(), '', FALSE);
+		$mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
+		$mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')->with($mockRegistration);
+		$this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-		$notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
 			array(), array(), '', FALSE);
-		$notificationService->expects($this->once())->method('sendUserMessage');
-		$notificationService->expects($this->once())->method('sendAdminMessage');
-		$this->inject($this->subject, 'notificationService', $notificationService);
+		$mockNotificationService->expects($this->once())->method('sendUserMessage');
+		$mockNotificationService->expects($this->once())->method('sendAdminMessage');
+		$this->inject($this->subject, 'notificationService', $mockNotificationService);
 
-		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
-	}
-
-	/**
-	 * @test
-	 * @return void
-	 */
-	public function confirmRegistrationActionConfirmsDependentRegistrations() {
-		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-		$view->expects($this->at(0))->method('assign')->with('messageKey',
-			'event.message.confirmation_successful');
-		$view->expects($this->at(1))->method('assign')->with('titleKey',
-			'confirmRegistration.title.successful');
-		$this->inject($this->subject, 'view', $view);
-
-		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-			array('validateHmac'), array(), '', FALSE);
-		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
-		$this->inject($this->subject, 'hashService', $hashService);
-
-		$expiredConfirmationDateTime = new \DateTime('tomorrow');
-		$registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
-		$registration->expects($this->once())->method('getConfirmationUntil')->will($this->returnValue($expiredConfirmationDateTime));
-		$registration->expects($this->once())->method('getConfirmed')->will($this->returnValue(FALSE));
-		$registration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
-
-		$registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-			array('findByUid', 'update'), array(), '', FALSE);
-		$registrationRepository->expects($this->once())->method('findByUid')->will($this->returnValue($registration));
-		$registrationRepository->expects($this->once())->method('update');
-		$this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-		$notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-			array(), array(), '', FALSE);
-		$notificationService->expects($this->once())->method('sendUserMessage');
-		$notificationService->expects($this->once())->method('sendAdminMessage');
-		$this->inject($this->subject, 'notificationService', $notificationService);
-
-		$registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-			array('confirmDependingRegistrations'), array(), '', FALSE);
-		$registrationService->expects($this->once())->method('confirmDependingRegistrations')->with($registration);
-		$this->inject($this->subject, 'registrationService', $registrationService);
+		$mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('update'), array(), '', FALSE);
+		$mockRegistrationRepository->expects($this->once())->method('update');
+		$this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
 		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
 	}
@@ -992,9 +883,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds() {
 		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 		$view->expects($this->at(0))->method('assign')->with('messageKey',
-			'event.message.cancel_failed_wrong_hmac');
+			'event.message.cancel_successful');
 		$view->expects($this->at(1))->method('assign')->with('titleKey',
-			'cancelRegistration.title.failed');
+			'cancelRegistration.title.successful');
 		$this->inject($this->subject, 'view', $view);
 
 		$mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
@@ -1008,8 +899,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$returnedArray = array(
 			FALSE,
 			$mockRegistration,
-			'event.message.cancel_failed_wrong_hmac',
-			'cancelRegistration.title.failed'
+			'event.message.cancel_successful',
+			'cancelRegistration.title.successful'
 		);
 
 		$mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
