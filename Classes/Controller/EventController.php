@@ -437,37 +437,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function cancelRegistrationAction($reguid, $hmac) {
 		/* @var $registration Registration */
-		$registration = NULL;
-		$failed = FALSE;
-		$messageKey = 'event.message.cancel_successful';
-		$titleKey = 'cancelRegistration.title.successful';
-
-		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
-			$failed = TRUE;
-			$messageKey = 'event.message.cancel_failed_wrong_hmac';
-			$titleKey = 'cancelRegistration.title.failed';
-		} else {
-			$registration = $this->registrationRepository->findByUid($reguid);
-		}
-
-		if (!$failed && is_null($registration)) {
-			$failed = TRUE;
-			$messageKey = 'event.message.cancel_failed_registration_not_found_or_cancelled';
-			$titleKey = 'cancelRegistration.title.failed';
-		}
-
-		if (!$failed && $registration->getEvent()->getEnableCancel() === FALSE) {
-			$failed = TRUE;
-			$messageKey = 'event.message.confirmation_failed_cancel_disabled';
-			$titleKey = 'cancelRegistration.title.failed';
-		}
-
-		if (!$failed && $registration->getEvent()->getCancelDeadline() > 0
-			&& $registration->getEvent()->getCancelDeadline() < new \DateTime()) {
-			$failed = TRUE;
-			$messageKey = 'event.message.cancel_failed_deadline_expired';
-			$titleKey = 'cancelRegistration.title.failed';
-		}
+		list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkCancelRegistration($reguid, $hmac);
 
 		if ($failed === FALSE) {
 			// Send notifications (must run before cancelling the registration)

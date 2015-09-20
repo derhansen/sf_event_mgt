@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 /**
  * RegistrationService
@@ -38,6 +39,14 @@ class RegistrationService {
 	 * @inject
 	 */
 	protected $registrationRepository;
+
+	/**
+	 * Hash Service
+	 *
+	 * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+	 * @inject
+	 */
+	protected $hashService;
 
 	/**
 	 * Handles expired registrations. If the $delete parameter is set, then
@@ -114,5 +123,55 @@ class RegistrationService {
 		foreach ($registrations as $foundRegistration) {
 			$this->registrationRepository->remove($foundRegistration);
 		}
+	}
+
+	/**
+	 * Checks if the registration can be cancelled and returns an array of variables
+	 *
+	 * @param int $reguid UID of registration
+	 * @param string $hmac HMAC for parameters
+	 *
+	 * @return array
+	 */
+	public function checkCancelRegistration($reguid, $hmac) {
+		/* @var $registration Registration */
+		$registration = NULL;
+		$failed = FALSE;
+		$messageKey = 'event.message.cancel_successful';
+		$titleKey = 'cancelRegistration.title.successful';
+
+		if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
+			$failed = TRUE;
+			$messageKey = 'event.message.cancel_failed_wrong_hmac';
+			$titleKey = 'cancelRegistration.title.failed';
+		} else {
+			$registration = $this->registrationRepository->findByUid($reguid);
+		}
+
+		if (!$failed && is_null($registration)) {
+			$failed = TRUE;
+			$messageKey = 'event.message.cancel_failed_registration_not_found_or_cancelled';
+			$titleKey = 'cancelRegistration.title.failed';
+		}
+
+		if (!$failed && $registration->getEvent()->getEnableCancel() === FALSE) {
+			$failed = TRUE;
+			$messageKey = 'event.message.confirmation_failed_cancel_disabled';
+			$titleKey = 'cancelRegistration.title.failed';
+		}
+
+		if (!$failed && $registration->getEvent()->getCancelDeadline() > 0
+			&& $registration->getEvent()->getCancelDeadline() < new \DateTime()) {
+			$failed = TRUE;
+			$messageKey = 'event.message.cancel_failed_deadline_expired';
+			$titleKey = 'cancelRegistration.title.failed';
+		}
+
+		return array(
+			$failed,
+			$registration,
+			$messageKey,
+			$titleKey
+		);
 	}
 }

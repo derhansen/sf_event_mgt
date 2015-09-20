@@ -952,4 +952,88 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
 	}
+
+	/**
+	 * Test if expected message is shown if checkCancelRegistration fails
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationFailed() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.cancel_failed_wrong_hmac');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'cancelRegistration.title.failed');
+		$this->inject($this->subject, 'view', $view);
+
+		$returnedArray = array(
+			TRUE,
+			NULL,
+			'event.message.cancel_failed_wrong_hmac',
+			'cancelRegistration.title.failed'
+		);
+
+		$mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+			array('checkCancelRegistration'), array(), '', FALSE);
+		$mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
+		$this->inject($this->subject, 'registrationService', $mockRegistrationService);
+
+		$this->subject->cancelRegistrationAction(1, 'INVALID-HMAC');
+	}
+
+	/**
+	 * Test if expected message is shown if checkCancelRegistration succeeds.
+	 * Also checks, if messages are sent and if registration gets removed.
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds() {
+		$view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+		$view->expects($this->at(0))->method('assign')->with('messageKey',
+			'event.message.cancel_failed_wrong_hmac');
+		$view->expects($this->at(1))->method('assign')->with('titleKey',
+			'cancelRegistration.title.failed');
+		$this->inject($this->subject, 'view', $view);
+
+		$mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(TRUE));
+		$mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('yesterday')));
+
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
+		$mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
+
+		$returnedArray = array(
+			FALSE,
+			$mockRegistration,
+			'event.message.cancel_failed_wrong_hmac',
+			'cancelRegistration.title.failed'
+		);
+
+		$mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+			array('checkCancelRegistration', 'cancelDependingRegistrations'), array(), '', FALSE);
+		$mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
+		$mockRegistrationService->expects($this->once())->method('cancelDependingRegistrations')->with($mockRegistration);
+		$this->inject($this->subject, 'registrationService', $mockRegistrationService);
+
+		$mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+			array(), array(), '', FALSE);
+		$mockNotificationService->expects($this->once())->method('sendUserMessage');
+		$mockNotificationService->expects($this->once())->method('sendAdminMessage');
+		$this->inject($this->subject, 'notificationService', $mockNotificationService);
+
+		$mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('remove'), array(), '', FALSE);
+		$mockRegistrationRepository->expects($this->once())->method('remove');
+		$this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+		$mockUtilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+			array('clearCacheForConfiguredUids'), array(), '', FALSE);
+		$mockUtilityService->expects($this->once())->method('clearCacheForConfiguredUids');
+		$this->inject($this->subject, 'utilityService', $mockUtilityService);
+
+		$this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
+	}
 }

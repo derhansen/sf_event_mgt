@@ -169,4 +169,132 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 
 		$this->subject->cancelDependingRegistrations($mockRegistration);
 	}
+
+	/**
+	 * Test if expected array is returned if HMAC validations fails
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function checkCancelRegistrationIfHmacValidationFailsTest() {
+		$reguid = 1;
+		$hmac = 'invalid-hmac';
+
+		$hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+			array('validateHmac'), array(), '', FALSE);
+		$hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(FALSE));
+		$this->inject($this->subject, 'hashService', $hashService);
+
+		$result = $this->subject->checkCancelRegistration($reguid, $hmac);
+		$expected = array(
+			TRUE,
+			NULL,
+			'event.message.cancel_failed_wrong_hmac',
+			'cancelRegistration.title.failed'
+		);
+		$this->assertEquals($expected, $result);
+	}
+
+	/**
+	 * Test if expected array is returned if no Registration found
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function checkCancelRegistrationIfNoRegistrationTest() {
+		$reguid = 1;
+		$hmac = 'valid-hmac';
+
+		$mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findByUid'), array(), '', FALSE);
+		$mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1);
+		$this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+		$mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+			array('validateHmac'), array(), '', FALSE);
+		$mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
+		$this->inject($this->subject, 'hashService', $mockHashService);
+
+		$result = $this->subject->checkCancelRegistration($reguid, $hmac);
+		$expected = array(
+			TRUE,
+			NULL,
+			'event.message.cancel_failed_registration_not_found_or_cancelled',
+			'cancelRegistration.title.failed'
+		);
+		$this->assertEquals($expected, $result);
+	}
+
+	/**
+	 * Test if expected array is returned if cancellation is not enabled
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function checkCancelRegistrationIfCancellationIsNotEnabledTest() {
+		$reguid = 1;
+		$hmac = 'valid-hmac';
+
+		$mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(FALSE));
+
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
+
+		$mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findByUid'), array(), '', FALSE);
+		$mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
+		$this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+		$mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+			array('validateHmac'), array(), '', FALSE);
+		$mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
+		$this->inject($this->subject, 'hashService', $mockHashService);
+
+		$result = $this->subject->checkCancelRegistration($reguid, $hmac);
+		$expected = array(
+			TRUE,
+			$mockRegistration,
+			'event.message.confirmation_failed_cancel_disabled',
+			'cancelRegistration.title.failed'
+		);
+		$this->assertEquals($expected, $result);
+	}
+
+	/**
+	 * Test if expected array is returned if cancellation deadline expired
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function checkCancelRegistrationIfCancellationDeadlineExpiredTest() {
+		$reguid = 1;
+		$hmac = 'valid-hmac';
+
+		$mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', FALSE);
+		$mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(TRUE));
+		$mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('yesterday')));
+
+		$mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '', FALSE);
+		$mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
+
+		$mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+			array('findByUid'), array(), '', FALSE);
+		$mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
+		$this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+		$mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+			array('validateHmac'), array(), '', FALSE);
+		$mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(TRUE));
+		$this->inject($this->subject, 'hashService', $mockHashService);
+
+		$result = $this->subject->checkCancelRegistration($reguid, $hmac);
+		$expected = array(
+			TRUE,
+			$mockRegistration,
+			'event.message.cancel_failed_deadline_expired',
+			'cancelRegistration.title.failed'
+		);
+		$this->assertEquals($expected, $result);
+	}
 }
