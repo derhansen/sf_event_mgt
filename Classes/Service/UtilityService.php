@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Extbase\Service\CacheService;
-use \DERHANSEN\SfEventMgt\Service\SettingsService;
-
 /**
  * UtilityService
  *
@@ -42,22 +39,22 @@ class UtilityService {
 	/**
 	 * Injects the cache Service
 	 *
-	 * @param CacheService $cacheService The cache service
+	 * @param \TYPO3\CMS\Extbase\Service\CacheService $cacheService The cache service
 	 *
 	 * @return void
 	 */
-	public function injectCacheService(CacheService $cacheService) {
+	public function injectCacheService(\TYPO3\CMS\Extbase\Service\CacheService $cacheService) {
 		$this->cacheService = $cacheService;
 	}
 
 	/**
 	 * Injects the settings service
 	 *
-	 * @param SettingsService $settingsService The settings service
+	 * @param \DERHANSEN\SfEventMgt\Service\SettingsService $settingsService The settings service
 	 *
 	 * @return void
 	 */
-	public function injectSettingsService(SettingsService $settingsService) {
+	public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService) {
 		$this->settingsService = $settingsService;
 	}
 
