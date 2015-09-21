@@ -8,9 +8,6 @@ plugin.tx_sfeventmgt {
 		partialRootPath = {$plugin.tx_sfeventmgt.view.partialRootPath}
 		layoutRootPath = {$plugin.tx_sfeventmgt.view.layoutRootPath}
 	}
-	features {
-		rewrittenPropertyMapper = 1
-	}
 	settings {
 		# List of uids, for which the cache should be cleared after registration data changed
 		# *MUST* be defined at template root level to work correct in scheduler task
