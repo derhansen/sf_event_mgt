@@ -1,13 +1,7 @@
-
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <f:layout name="Backend" />
 
 <f:section name="main">
-    <e:be.inlineSettingsArray settings="{
-        datePickerUSmode: 0,
-        dateFormat: {0:settings.dateFormat, 1:'{settings.search.dateFormat}'}
-    }"/>
-
     <f:if condition="{showMessage}">
         <script>
             TYPO3.Flashmessage.display(
@@ -42,10 +36,6 @@
                 </label>
                 <f:form.textfield property="startDate" id="tceforms-datetimefield-startDate"
                                   value="{demand.startDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
-                <span style="cursor:pointer;" id="picker-tceforms-datetimefield-startDate"
-                      class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date">
-                    &nbsp;
-                </span>
                 <f:render partial="FormErrors" arguments="{field: 'demand.startDate'}"/>
                 <div class="clear"></div>
             </div>
@@ -56,10 +46,6 @@
                 </label>
                 <f:form.textfield property="endDate" id="tceforms-datetimefield-endDate"
                                   value="{demand.endDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
-                <span style="cursor:pointer;" id="picker-tceforms-datetimefield-endDate"
-                      class="t3-icon t3-icon-actions t3-icon-actions-edit t3-icon-edit-pick-date">
-                    &nbsp;
-                </span>
                 <f:render partial="FormErrors" arguments="{field: 'demand.endDate'}"/>
                 <div class="clear"></div>
             </div>
