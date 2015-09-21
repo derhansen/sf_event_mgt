@@ -25,6 +25,7 @@ class UtilityService {
 	 * CacheService
 	 *
 	 * @var \TYPO3\CMS\Extbase\Service\CacheService
+	 * @inject
 	 */
 	protected $cacheService;
 
@@ -32,30 +33,9 @@ class UtilityService {
 	 * Settings Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
+	 * @inject
 	 */
 	protected $settingsService = NULL;
-
-	/**
-	 * Injects the cache Service
-	 *
-	 * @param \TYPO3\CMS\Extbase\Service\CacheService $cacheService The cache service
-	 *
-	 * @return void
-	 */
-	public function injectCacheService(\TYPO3\CMS\Extbase\Service\CacheService $cacheService) {
-		$this->cacheService = $cacheService;
-	}
-
-	/**
-	 * Injects the settings service
-	 *
-	 * @param \DERHANSEN\SfEventMgt\Service\SettingsService $settingsService The settings service
-	 *
-	 * @return void
-	 */
-	public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService) {
-		$this->settingsService = $settingsService;
-	}
 
 	/**
 	 * Clears the cache of configured pages in TypoScript
