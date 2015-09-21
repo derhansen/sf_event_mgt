@@ -32,7 +32,6 @@ class UtilityService {
 	 * Settings Service
 	 *
 	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-	 * @inject
 	 */
 	protected $settingsService = NULL;
 
