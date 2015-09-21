@@ -68,7 +68,7 @@ class UtilityServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(),
 			'', FALSE);
 		$settingsService->expects($this->once())->method('getClearCacheUids')->with(array())->will($this->returnValue(array()));
-		$this->subject->injectSettingsService($settingsService);
+		$this->inject($this->subject, 'settingsService', $settingsService);
 
 		$this->subject->clearCacheForConfiguredUids(array());
 	}
@@ -84,11 +84,11 @@ class UtilityServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '', FALSE);
 		$settingsService->expects($this->once())->method('getClearCacheUids')->with($settings)->
 			will($this->returnValue(array(1,2,3,4)));
-		$this->subject->injectSettingsService($settingsService);
+		$this->inject($this->subject, 'settingsService', $settingsService);
 
 		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array(), array(), '', FALSE);
 		$cacheService->expects($this->once())->method('clearPageCache')->with(array(1,2,3,4));
-		$this->subject->injectCacheService($cacheService);
+		$this->inject($this->subject, 'cacheService', $cacheService);
 
 		$this->subject->clearCacheForConfiguredUids($settings);
 	}
