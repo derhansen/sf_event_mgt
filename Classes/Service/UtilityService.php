@@ -35,7 +35,7 @@ class UtilityService {
 	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
 	 * @inject
 	 */
-	protected $settingsService = NULL;
+	protected $settingsService;
 
 	/**
 	 * Clears the cache of configured pages in TypoScript
@@ -45,9 +45,10 @@ class UtilityService {
 	 * @return void
 	 */
 	public function clearCacheForConfiguredUids($settings) {
-		$pidList = $this->settingsService->getClearCacheUids($settings);
-		if (count($pidList) > 0) {
+//		$pidList = $this->settingsService->getClearCacheUids($settings);
+//		if (count($pidList) > 0) {
+		$pidList = array(1,2,3,4);
 			$this->cacheService->clearPageCache($pidList);
-		}
+//		}
 	}
 }
