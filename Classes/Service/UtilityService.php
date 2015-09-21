@@ -45,10 +45,9 @@ class UtilityService {
 	 * @return void
 	 */
 	public function clearCacheForConfiguredUids($settings) {
-//		$pidList = $this->settingsService->getClearCacheUids($settings);
-//		if (count($pidList) > 0) {
-		$pidList = array(1,2,3,4);
+		$pidList = $this->settingsService->getClearCacheUids($settings);
+		if (count($pidList) > 0) {
 			$this->cacheService->clearPageCache($pidList);
-//		}
+		}
 	}
 }

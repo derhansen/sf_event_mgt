@@ -513,7 +513,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
 			array('clearCacheForConfiguredUids'), array(), '', FALSE);
 		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
 		$this->inject($this->subject, 'utilityService', $utilityService);
@@ -564,7 +564,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
 			array('clearCacheForConfiguredUids'), array(), '', FALSE);
 		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
 		$this->inject($this->subject, 'utilityService', $utilityService);
@@ -633,7 +633,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
 		$this->inject($this->subject, 'objectManager', $objectManager);
 
-		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+		$utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
 			array('clearCacheForConfiguredUids'), array(), '', FALSE);
 		$utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
 		$this->inject($this->subject, 'utilityService', $utilityService);
@@ -920,7 +920,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 		$mockRegistrationRepository->expects($this->once())->method('remove');
 		$this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-		$mockUtilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\utilityService',
+		$mockUtilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
 			array('clearCacheForConfiguredUids'), array(), '', FALSE);
 		$mockUtilityService->expects($this->once())->method('clearCacheForConfiguredUids');
 		$this->inject($this->subject, 'utilityService', $mockUtilityService);
