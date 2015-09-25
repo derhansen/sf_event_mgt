@@ -153,6 +153,12 @@
 			<trans-unit id="administration.settings">
 				<source>Settings</source>
 			</trans-unit>
+			<trans-unit id="administration.settingsError.title">
+				<source>TypoScript settings missing</source>
+			</trans-unit>
+			<trans-unit id="administration.settingsError.description">
+				<source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
+			</trans-unit>
 			<trans-unit id="administration.notify.description">
 				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
 			</trans-unit>

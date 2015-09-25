@@ -171,22 +171,19 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	}
 
 	/**
-	 * @test
-	 * @return void
+	 * Returns the argument mock-object required for initializeListAction tests
+	 *
+	 * @param string $settingsSearchDateFormat Settings for searchDateFormat
+	 *
+	 * @return mixed
 	 */
-	public function initializeListActionSetsDateFormat() {
-		$settings = array(
-			'search' => array(
-				'dateFormat' => 'd.m.Y'
-			)
-		);
-
+	protected function getInitializeListActionArgumentMock($settingsSearchDateFormat = NULL) {
 		$mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
 			array(), array(), '', FALSE);
 		$mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
 			$this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
 			$this->equalTo('dateFormat'),
-			$this->equalTo('d.m.Y')
+			$this->equalTo($settingsSearchDateFormat)
 		);
 
 		$mockStartDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
@@ -213,8 +210,32 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->returnValue($mockStartDateArgument));
 		$mockArguments->expects($this->at(1))->method('getArgument')->with('demand')->will(
 			$this->returnValue($mockEndDateArgument));
+		return $mockArguments;
+	}
 
-		$this->subject->_set('arguments', $mockArguments);
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function initializeListActionRedirectsToErrorPageIfNoSettingsFound() {
+		$this->subject->_set('arguments', $this->getInitializeListActionArgumentMock());
+		$this->subject->expects($this->once())->method('redirect')->with('settingsError');
+		$this->subject->initializeListAction();
+	}
+
+
+	/**
+	 * @test
+	 * @return void
+	 */
+	public function initializeListActionSetsDateFormat() {
+		$settings = array(
+			'search' => array(
+				'dateFormat' => 'd.m.Y'
+			)
+		);
+
+		$this->subject->_set('arguments', $this->getInitializeListActionArgumentMock('d.m.Y'));
 		$this->subject->_set('settings', $settings);
 		$this->subject->initializeListAction();
 	}

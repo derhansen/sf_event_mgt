@@ -96,6 +96,9 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 	 * @return void
 	 */
 	public function initializeListAction() {
+		if ($this->settings === NULL) {
+			$this->redirect('settingsError');
+		}
 		$this->arguments->getArgument('demand')
 			->getPropertyMappingConfiguration()->forProperty('startDate')
 			->setTypeConverterOption(
@@ -209,5 +212,13 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 		$this->notificationService->createCustomNotificationLogentry($event,
 			$customNotifications[$customNotification], $result);
 		$this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => NULL, 'messageId' => 2));
+	}
+
+	/**
+	 * Shows the settings error view
+	 *
+	 * @return void
+	 */
+	public function settingsErrorAction() {
 	}
 }

@@ -41,7 +41,7 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignat
 	'tx_sfeventmgt_m1',
 	'',
 	array(
-		'Administration' => 'list, newEvent, export, handleExpiredRegistrations, indexNotify, notify',
+		'Administration' => 'list, newEvent, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
 	),
 	array(
 		'access' => 'user,group',
