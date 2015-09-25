@@ -66,7 +66,7 @@ Tab settings
          List pid
 
    :View:
-         Details, Registration
+         List, Details, Registration
 
    :Description:
          Page, where the listview for events is shown. Only available,

@@ -349,7 +349,8 @@ module.tx_sfeventmgt
          String
 
    :Description:
-         Comma seperated list of fields to include in CSV export
+         Comma seperated list of fields to include in CSV export. Please note, that you must write the **property
+         names** of the fields to export (e.g. firstname, lastname, dateOfBirth)
 
    :Default:
          uid, gender, firstname, lastname, title, company, email, address, zip, city, country
