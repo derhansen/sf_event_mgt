@@ -59,6 +59,7 @@ class ExportService {
 		$tempFile = $storage->createFile('sf_events_export.csv', $tempFolder);
 		$tempFile->setContents($registrations);
 		$storage->dumpFileContents($tempFile, TRUE, 'registrations_' . date('dmY_His') . '.csv');
+		$tempFile->delete();
 	}
 
 	/**
