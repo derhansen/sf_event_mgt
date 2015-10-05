@@ -244,8 +244,11 @@ class NotificationService {
 			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']);
 		$layoutRootPath = GeneralUtility::getFileAbsFileName(
 			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']);
+		$partialRootPath = GeneralUtility::getFileAbsFileName(
+			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['partialRootPath']);
 
 		$emailView->setLayoutRootPath($layoutRootPath);
+		$emailView->setPartialRootPath($partialRootPath);
 		$emailView->setTemplatePathAndFilename($templateRootPath . $template);
 		$emailView->assignMultiple(array(
 			'event' => $event,
