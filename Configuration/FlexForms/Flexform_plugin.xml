@@ -374,6 +374,14 @@
                     <settings.recursive>
                         <TCEforms>
                             <label>LLL:EXT:lang/locallang_general.xlf:LGL.recursive</label>
+                            <displayCond>
+                                <AND>
+                                    <numIndex>FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
+                                    <AND>
+                                        <numIndex>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
+                                    </AND>
+                                </AND>
+                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <items type="array">
