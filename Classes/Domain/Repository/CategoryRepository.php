@@ -19,17 +19,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
-	/**
-	 * Disable the use of storage records, because the StoragePage can be set
-	 * in the plugin
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		$this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-		$this->defaultQuerySettings->setRespectStoragePage(FALSE);
-	}
+class CategoryRepository extends AbstractForeignRecordRepository {
 
 }

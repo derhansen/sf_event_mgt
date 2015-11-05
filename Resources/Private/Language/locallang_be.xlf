@@ -82,6 +82,9 @@
 			<trans-unit id="flexforms_general.storagePage">
 				<source>Record storage page</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage">
+				<source>Restrict categories and locations to storagePage setting (including recursive option)</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode.all">
 				<source>Show all events</source>
 			</trans-unit>

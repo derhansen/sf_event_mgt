@@ -117,13 +117,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $ignoredSettingsForOverwriteDemand = array('storagePage');
 
 	/**
-	 * Create a demand object with the given settings
+	 * Creates an event demand object with the given settings
 	 *
 	 * @param array $settings The settings
 	 *
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
-	public function createDemandObjectFromSettings(array $settings) {
+	public function createEventDemandObjectFromSettings(array $settings) {
 		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
 		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
 		$demand->setDisplayMode($settings['displayMode']);
@@ -138,6 +138,21 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
+	 * Creates a foreign record demand object with the given settings
+	 *
+	 * @param array $settings The settings
+	 *
+	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand
+	 */
+	public function createForeignRecordDemandObjectFromSettings(array $settings) {
+		/** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand */
+		$demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\ForeignRecordDemand');
+		$demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+		$demand->setRestrictForeignRecordsToStoragePage((int)$settings['restrictForeignRecordsToStoragePage']);
+		return $demand;
+	}
+
+	/**
 	 * Overwrites a given demand object by an propertyName =>  $propertyValue array
 	 *
 	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
@@ -145,7 +160,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 *
 	 * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
 	 */
-	protected function overwriteDemandObject(EventDemand $demand, array $overwriteDemand) {
+	protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand) {
 		foreach ($this->ignoredSettingsForOverwriteDemand as $property) {
 			unset($overwriteDemand[$property]);
 		}
@@ -164,13 +179,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function listAction(array $overwriteDemand = NULL) {
-		$demand = $this->createDemandObjectFromSettings($this->settings);
+		$eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
+		$foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
 		if ($this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== NULL) {
-			$demand = $this->overwriteDemandObject($demand, $overwriteDemand);
+			$eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
 		}
-		$events = $this->eventRepository->findDemanded($demand);
-		$categories = $this->categoryRepository->findAll();
-		$locations = $this->locationRepository->findAll();
+		$events = $this->eventRepository->findDemanded($eventDemand);
+		$categories = $this->categoryRepository->findDemanded($foreignRecordDemand);
+		$locations = $this->locationRepository->findDemanded($foreignRecordDemand);
 		$this->view->assign('events', $events);
 		$this->view->assign('categories', $categories);
 		$this->view->assign('locations', $locations);

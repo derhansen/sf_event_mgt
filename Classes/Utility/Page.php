@@ -14,10 +14,12 @@ namespace DERHANSEN\SfEventMgt\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Page
  *
- * @author Torben Hansen <derhansen@gmail.com>
+ * @author Georg Ringer <typo3@ringerge.org>
  */
 class Page {
 
@@ -35,9 +37,9 @@ class Page {
 			return $pidList;
 		}
 
-		$queryGenerator = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
+		$queryGenerator = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
 		$recursiveStoragePids = $pidList;
-		$storagePids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $pidList);
+		$storagePids =GeneralUtility::intExplode(',', $pidList);
 		foreach ($storagePids as $startPid) {
 			$pids = $queryGenerator->getTreeList($startPid, $recursive, 0, 1);
 			if (strlen($pids) > 0) {
