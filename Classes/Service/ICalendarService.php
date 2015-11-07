@@ -22,82 +22,85 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class ICalendarService {
+class ICalendarService
+{
 
-	/**
-	 * The object manager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-	 * @inject
-	 */
-	protected $objectManager;
+    /**
+     * The object manager
+     *
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @inject
+     */
+    protected $objectManager;
 
-	/**
-	 * The configuration manager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-	 * @inject
-	 */
-	protected $configurationManager;
+    /**
+     * The configuration manager
+     *
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     * @inject
+     */
+    protected $configurationManager;
 
-	/**
-	 * ResourceFactory
-	 *
-	 * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-	 * @inject
-	 */
-	protected $resourceFactory = NULL;
+    /**
+     * ResourceFactory
+     *
+     * @var \TYPO3\CMS\Core\Resource\ResourceFactory
+     * @inject
+     */
+    protected $resourceFactory = null;
 
-	/**
-	 * Initiates the ICS download for the given event
-	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
-	 *
-	 * @throws \RuntimeException Exception
-	 *
-	 * @return void
-	 */
-	public function downloadiCalendarFile(\DERHANSEN\SfEventMgt\Domain\Model\Event $event) {
-		$storage = $this->resourceFactory->getDefaultStorage();
-		if ($storage === NULL) {
-			throw new \RuntimeException('Could not get the default storage', 1475590001);
-		}
-		$icalContent = $this->getICalendarContent($event);
-		$tempFolder = $storage->getFolder('_temp_');
-		$tempFile = $storage->createFile('event.ics', $tempFolder);
-		$tempFile->setContents($icalContent);
-		$storage->dumpFileContents($tempFile, TRUE, 'event_' . $event->getUid() . '.ics');
-	}
+    /**
+     * Initiates the ICS download for the given event
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
+     *
+     * @throws \RuntimeException Exception
+     *
+     * @return void
+     */
+    public function downloadiCalendarFile(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    {
+        $storage = $this->resourceFactory->getDefaultStorage();
+        if ($storage === null) {
+            throw new \RuntimeException('Could not get the default storage', 1475590001);
+        }
+        $icalContent = $this->getICalendarContent($event);
+        $tempFolder = $storage->getFolder('_temp_');
+        $tempFile = $storage->createFile('event.ics', $tempFolder);
+        $tempFile->setContents($icalContent);
+        $storage->dumpFileContents($tempFile, true, 'event_' . $event->getUid() . '.ics');
+    }
 
-	/**
-	 * Returns the rendered iCalendar entry for the given event
-	 * according to RFC 2445
-	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
-	 *
-	 * @return string
-	 */
-	public function getiCalendarContent(\DERHANSEN\SfEventMgt\Domain\Model\Event $event) {
-		/** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
-		$icalView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
-		$icalView->setFormat('txt');
-		$extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$templateRootPath = GeneralUtility::getFileAbsFileName(
-			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']);
-		$layoutRootPath = GeneralUtility::getFileAbsFileName(
-			$extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']);
+    /**
+     * Returns the rendered iCalendar entry for the given event
+     * according to RFC 2445
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
+     *
+     * @return string
+     */
+    public function getiCalendarContent(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    {
+        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
+        $icalView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        $icalView->setFormat('txt');
+        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        $templateRootPath = GeneralUtility::getFileAbsFileName(
+            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']);
+        $layoutRootPath = GeneralUtility::getFileAbsFileName(
+            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']);
 
-		$icalView->setLayoutRootPath($layoutRootPath);
-		$icalView->setTemplatePathAndFilename($templateRootPath . 'Event/ICalendar.txt');
-		$icalView->assignMultiple(array(
-			'event' => $event,
-			'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
-		));
-		// Render view and remove empty lines
-		$icalContent = preg_replace('/^\h*\v+/m', '', $icalView->render());
-		// Finally replace new lines with CRLF
-		$icalContent = str_replace(chr(10), chr(13) . chr(10), $icalContent);
-		return $icalContent;
-	}
+        $icalView->setLayoutRootPath($layoutRootPath);
+        $icalView->setTemplatePathAndFilename($templateRootPath . 'Event/ICalendar.txt');
+        $icalView->assignMultiple(array(
+            'event' => $event,
+            'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
+        ));
+        // Render view and remove empty lines
+        $icalContent = preg_replace('/^\h*\v+/m', '', $icalView->render());
+        // Finally replace new lines with CRLF
+        $icalContent = str_replace(chr(10), chr(13) . chr(10), $icalContent);
+        return $icalContent;
+    }
 }

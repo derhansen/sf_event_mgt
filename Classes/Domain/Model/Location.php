@@ -19,221 +19,238 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * Title
-	 *
-	 * @var string
-	 */
-	protected $title = '';
+    /**
+     * Title
+     *
+     * @var string
+     */
+    protected $title = '';
 
-	/**
-	 * Address
-	 *
-	 * @var string
-	 */
-	protected $address = '';
+    /**
+     * Address
+     *
+     * @var string
+     */
+    protected $address = '';
 
-	/**
-	 * Zip
-	 *
-	 * @var string
-	 */
-	protected $zip = '';
+    /**
+     * Zip
+     *
+     * @var string
+     */
+    protected $zip = '';
 
-	/**
-	 * City
-	 *
-	 * @var string
-	 */
-	protected $city = '';
+    /**
+     * City
+     *
+     * @var string
+     */
+    protected $city = '';
 
-	/**
-	 * Country
-	 *
-	 * @var string
-	 */
-	protected $country = '';
+    /**
+     * Country
+     *
+     * @var string
+     */
+    protected $country = '';
 
-	/**
-	 * Description
-	 *
-	 * @var string
-	 */
-	protected $description = '';
+    /**
+     * Description
+     *
+     * @var string
+     */
+    protected $description = '';
 
-	/**
-	 * Longitude
-	 *
-	 * @var float
-	 */
-	protected $longitude = 0.0;
+    /**
+     * Longitude
+     *
+     * @var float
+     */
+    protected $longitude = 0.0;
 
-	/**
-	 * Latitude
-	 *
-	 * @var float
-	 */
-	protected $latitude = 0.0;
+    /**
+     * Latitude
+     *
+     * @var float
+     */
+    protected $latitude = 0.0;
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title The title
-	 *
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title The title
+     *
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the address
-	 *
-	 * @return string $address
-	 */
-	public function getAddress() {
-		return $this->address;
-	}
+    /**
+     * Returns the address
+     *
+     * @return string $address
+     */
+    public function getAddress()
+    {
+        return $this->address;
+    }
 
-	/**
-	 * Sets the address
-	 *
-	 * @param string $address Address
-	 *
-	 * @return void
-	 */
-	public function setAddress($address) {
-		$this->address = $address;
-	}
+    /**
+     * Sets the address
+     *
+     * @param string $address Address
+     *
+     * @return void
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
 
-	/**
-	 * Returns the zip
-	 *
-	 * @return string $zip
-	 */
-	public function getZip() {
-		return $this->zip;
-	}
+    /**
+     * Returns the zip
+     *
+     * @return string $zip
+     */
+    public function getZip()
+    {
+        return $this->zip;
+    }
 
-	/**
-	 * Sets the zip
-	 *
-	 * @param string $zip Zip
-	 *
-	 * @return void
-	 */
-	public function setZip($zip) {
-		$this->zip = $zip;
-	}
+    /**
+     * Sets the zip
+     *
+     * @param string $zip Zip
+     *
+     * @return void
+     */
+    public function setZip($zip)
+    {
+        $this->zip = $zip;
+    }
 
-	/**
-	 * Returns the city
-	 *
-	 * @return string $city
-	 */
-	public function getCity() {
-		return $this->city;
-	}
+    /**
+     * Returns the city
+     *
+     * @return string $city
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
 
-	/**
-	 * Sets the city
-	 *
-	 * @param string $city City
-	 *
-	 * @return void
-	 */
-	public function setCity($city) {
-		$this->city = $city;
-	}
+    /**
+     * Sets the city
+     *
+     * @param string $city City
+     *
+     * @return void
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
 
-	/**
-	 * Returns the country
-	 *
-	 * @return string $country
-	 */
-	public function getCountry() {
-		return $this->country;
-	}
+    /**
+     * Returns the country
+     *
+     * @return string $country
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
 
-	/**
-	 * Sets the country
-	 *
-	 * @param string $country Country
-	 *
-	 * @return void
-	 */
-	public function setCountry($country) {
-		$this->country = $country;
-	}
+    /**
+     * Sets the country
+     *
+     * @param string $country Country
+     *
+     * @return void
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+    }
 
-	/**
-	 * Returns the description
-	 *
-	 * @return string $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * Sets the description
-	 *
-	 * @param string $description The description
-	 *
-	 * @return void
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * Sets the description
+     *
+     * @param string $description The description
+     *
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-	/**
-	 * Returns the longitude
-	 *
-	 * @return float
-	 */
-	public function getLongitude() {
-		return $this->longitude;
-	}
+    /**
+     * Returns the longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
 
-	/**
-	 * Sets the the longitude
-	 *
-	 * @param float $longitude The longitude
-	 *
-	 * @return void
-	 */
-	public function setLongitude($longitude) {
-		$this->longitude = $longitude;
-	}
+    /**
+     * Sets the the longitude
+     *
+     * @param float $longitude The longitude
+     *
+     * @return void
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
 
-	/**
-	 * Returns the latitude
-	 *
-	 * @return float
-	 */
-	public function getlatitude() {
-		return $this->latitude;
-	}
+    /**
+     * Returns the latitude
+     *
+     * @return float
+     */
+    public function getlatitude()
+    {
+        return $this->latitude;
+    }
 
-	/**
-	 * Sets the latitude
-	 *
-	 * @param float $latitude The latitude
-	 *
-	 * @return void
-	 */
-	public function setlatitude($latitude) {
-		$this->latitude = $latitude;
-	}
+    /**
+     * Sets the latitude
+     *
+     * @param float $latitude The latitude
+     *
+     * @return void
+     */
+    public function setlatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
 }

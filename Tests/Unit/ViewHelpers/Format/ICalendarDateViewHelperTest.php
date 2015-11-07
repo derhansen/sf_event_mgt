@@ -21,54 +21,58 @@ use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDateViewHelper;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class ICalendarDateViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class ICalendarDateViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 * Data Provider for unit tests
-	 *
-	 * @return array
-	 */
-	public function iCalendarDateDataProvider() {
-		return array(
-			'emptyValue' => array(
-				'',
-				''
-			),
-			'dateTimeObject' => array(
-				new \DateTime('@1425234250'),
-				'20150301T182410Z'
-			)
-		);
-	}
+    /**
+     * Data Provider for unit tests
+     *
+     * @return array
+     */
+    public function iCalendarDateDataProvider()
+    {
+        return array(
+            'emptyValue' => array(
+                '',
+                ''
+            ),
+            'dateTimeObject' => array(
+                new \DateTime('@1425234250'),
+                '20150301T182410Z'
+            )
+        );
+    }
 
-	/**
-	 * Check if the viewhelper returns the expected values
-	 *
-	 * @test
-	 *
-	 * @dataProvider iCalendarDateDataProvider
-	 *
-	 * @return void
-	 */
-	public function viewHelperReturnsExpectedValues($value, $expected) {
-		$viewHelper = new ICalendarDateViewHelper();
-		$actual = $viewHelper->render($value);
-		$this->assertSame($expected, $actual);
-	}
+    /**
+     * Check if the viewhelper returns the expected values
+     *
+     * @test
+     *
+     * @dataProvider iCalendarDateDataProvider
+     *
+     * @return void
+     */
+    public function viewHelperReturnsExpectedValues($value, $expected)
+    {
+        $viewHelper = new ICalendarDateViewHelper();
+        $actual = $viewHelper->render($value);
+        $this->assertSame($expected, $actual);
+    }
 
-	/**
-	 * Check if the viewhelper calls renderChildren if no value given
-	 *
-	 * @test
-	 *
-	 * @return void
-	 */
-	public function viewHelperRendersChildrenIfNoValueGiven() {
-		$viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper',
-			array('renderChildren'));
-		$viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue(new \DateTime('@1425234250')));
-		$actual = $viewHelper->render();
-		$this->assertSame('20150301T182410Z', $actual);
-	}
+    /**
+     * Check if the viewhelper calls renderChildren if no value given
+     *
+     * @test
+     *
+     * @return void
+     */
+    public function viewHelperRendersChildrenIfNoValueGiven()
+    {
+        $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper',
+            array('renderChildren'));
+        $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue(new \DateTime('@1425234250')));
+        $actual = $viewHelper->render();
+        $this->assertSame('20150301T182410Z', $actual);
+    }
 
 }

@@ -21,49 +21,51 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController {
+class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController
+{
 
-	/**
-	 * Configurationmanager
-	 *
-	 * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-	 * @inject
-	 */
-	protected $configurationManager;
+    /**
+     * Configurationmanager
+     *
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @inject
+     */
+    protected $configurationManager;
 
-	/**
-	 * UtilityService
-	 *
-	 * @var \DERHANSEN\SfEventMgt\Service\UtilityService
-	 * @inject
-	 */
-	protected $utilityService = NULL;
+    /**
+     * UtilityService
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\UtilityService
+     * @inject
+     */
+    protected $utilityService = null;
 
-	/**
-	 * Registrationservice
-	 *
-	 * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-	 * @inject
-	 */
-	protected $registrationService;
+    /**
+     * Registrationservice
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
+     * @inject
+     */
+    protected $registrationService;
 
-	/**
-	 * The cleanup command
-	 *
-	 * @return void
-	 */
-	public function cleanupCommand() {
-		$fullSettings = $this->configurationManager->getConfiguration(
-			ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
-			'SfEventMgt',
-			'Pievent'
-		);
+    /**
+     * The cleanup command
+     *
+     * @return void
+     */
+    public function cleanupCommand()
+    {
+        $fullSettings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT,
+            'SfEventMgt',
+            'Pievent'
+        );
 
-		$settings = $fullSettings['plugin.']['tx_sfeventmgt.']['settings.'];
-		$this->registrationService->handleExpiredRegistrations(
-			$settings['registration.']['deleteExpiredRegistrations']);
+        $settings = $fullSettings['plugin.']['tx_sfeventmgt.']['settings.'];
+        $this->registrationService->handleExpiredRegistrations(
+            $settings['registration.']['deleteExpiredRegistrations']);
 
-		// Clear cache for configured pages
-		$this->utilityService->clearCacheForConfiguredUids($settings);
-	}
+        // Clear cache for configured pages
+        $this->utilityService->clearCacheForConfiguredUids($settings);
+    }
 }

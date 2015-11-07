@@ -21,70 +21,74 @@ use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class ICalendarDescriptionViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class ICalendarDescriptionViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 * Data Provider for unit tests
-	 *
-	 * @return array
-	 */
-	public function iCalendarDescriptionDataProvider() {
-		return array(
-			'emptyValue' => array(
-				'',
-				''
-			),
-			'shortDescriptionLess75Chars' => array(
-				'This is just a short text with less than 75 chars',
-				'This is just a short text with less than 75 chars'
-			),
-			'shortDescriptionLess75CharsWithHtml' => array(
-				'This is just a short text <b>with</b> less&nbsp;than 75 chars',
-				'This is just a short text with less than 75 chars'
-			),
-			'shortDescriptionLess75CharsWithHtmlAndLineBreak' => array(
-				'This is just a short text <b>with</b> less&nbsp;than 75 chars' . chr(13) . ' and some more text',
-				'This is just a short text with less than 75 chars\n\n and some more text'
-			),
-			'longDescriptionWithoutLineBreaks' => array(
-				'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
-				'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ' . chr(10) . ' sed diam'
-			),
-			'longDescriptionWithLineBreaks' => array(
-				'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ' . chr(13) . 'nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
-				'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er' . chr(10) . ' at, sed diam'
-			)
-		);
-	}
+    /**
+     * Data Provider for unit tests
+     *
+     * @return array
+     */
+    public function iCalendarDescriptionDataProvider()
+    {
+        return array(
+            'emptyValue' => array(
+                '',
+                ''
+            ),
+            'shortDescriptionLess75Chars' => array(
+                'This is just a short text with less than 75 chars',
+                'This is just a short text with less than 75 chars'
+            ),
+            'shortDescriptionLess75CharsWithHtml' => array(
+                'This is just a short text <b>with</b> less&nbsp;than 75 chars',
+                'This is just a short text with less than 75 chars'
+            ),
+            'shortDescriptionLess75CharsWithHtmlAndLineBreak' => array(
+                'This is just a short text <b>with</b> less&nbsp;than 75 chars' . chr(13) . ' and some more text',
+                'This is just a short text with less than 75 chars\n\n and some more text'
+            ),
+            'longDescriptionWithoutLineBreaks' => array(
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ' . chr(10) . ' sed diam'
+            ),
+            'longDescriptionWithLineBreaks' => array(
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ' . chr(13) . 'nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er' . chr(10) . ' at, sed diam'
+            )
+        );
+    }
 
-	/**
-	 * Check if the viewhelper returns the expected values
-	 *
-	 * @test
-	 *
-	 * @dataProvider iCalendarDescriptionDataProvider
-	 *
-	 * @return void
-	 */
-	public function viewHelperReturnsExpectedValues($value, $expected) {
-		$viewHelper = new ICalendarDescriptionViewHelper();
-		$actual = $viewHelper->render($value);
-		$this->assertEquals($expected, $actual);
-	}
+    /**
+     * Check if the viewhelper returns the expected values
+     *
+     * @test
+     *
+     * @dataProvider iCalendarDescriptionDataProvider
+     *
+     * @return void
+     */
+    public function viewHelperReturnsExpectedValues($value, $expected)
+    {
+        $viewHelper = new ICalendarDescriptionViewHelper();
+        $actual = $viewHelper->render($value);
+        $this->assertEquals($expected, $actual);
+    }
 
-	/**
-	 * Check if the viewhelper calls renderChildren if no value given
-	 *
-	 * @test
-	 *
-	 * @return void
-	 */
-	public function viewHelperRendersChildrenIfNoValueGiven() {
-		$viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper',
-			array('renderChildren'));
-		$viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));
-		$actual = $viewHelper->render();
-		$this->assertSame('Just some text', $actual);
-	}
+    /**
+     * Check if the viewhelper calls renderChildren if no value given
+     *
+     * @test
+     *
+     * @return void
+     */
+    public function viewHelperRendersChildrenIfNoValueGiven()
+    {
+        $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper',
+            array('renderChildren'));
+        $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));
+        $actual = $viewHelper->render();
+        $this->assertSame('Just some text', $actual);
+    }
 
 }

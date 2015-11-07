@@ -19,87 +19,93 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 * @var \DERHANSEN\SfEventMgt\Service\EmailService
-	 */
-	protected $subject = NULL;
+    /**
+     * @var \DERHANSEN\SfEventMgt\Service\EmailService
+     */
+    protected $subject = null;
 
-	/**
-	 * Setup
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		$this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\EmailService', array('dummy'));
-	}
+    /**
+     * Setup
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\EmailService', array('dummy'));
+    }
 
-	/**
-	 * Teardown
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		unset($this->subject);
-	}
+    /**
+     * Teardown
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * Data provider for invalid emails
-	 *
-	 * @return array
-	 */
-	public function invalidEmailsDataProvider() {
-		return array(
-			'invalidSender' => array(
-				'invalid',
-				'recipient@domain.tld',
-			),
-			'invalidRecipient' => array(
-				'sender@domain.tld',
-				'invalid',
-			),
-		);
-	}
+    /**
+     * Data provider for invalid emails
+     *
+     * @return array
+     */
+    public function invalidEmailsDataProvider()
+    {
+        return array(
+            'invalidSender' => array(
+                'invalid',
+                'recipient@domain.tld',
+            ),
+            'invalidRecipient' => array(
+                'sender@domain.tld',
+                'invalid',
+            ),
+        );
+    }
 
-	/**
-	 * Test if e-mail-service returns false, if e-mails are invalid
-	 *
-	 * @dataProvider invalidEmailsDataProvider
-	 * @test
-	 * @return void
-	 */
-	public function sendEmailMessageWithInvalidEmailsTest($sender, $recipient) {
-		$subject = 'A subject';
-		$body = 'A body';
-		$senderName = 'Sender name';
-		$result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
-		$this->assertFalse($result);
-	}
+    /**
+     * Test if e-mail-service returns false, if e-mails are invalid
+     *
+     * @dataProvider invalidEmailsDataProvider
+     * @test
+     * @return void
+     */
+    public function sendEmailMessageWithInvalidEmailsTest($sender, $recipient)
+    {
+        $subject = 'A subject';
+        $body = 'A body';
+        $senderName = 'Sender name';
+        $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
+        $this->assertFalse($result);
+    }
 
-	/**
-	 * Test if e-mail-service sends mails, if e-mails are valid
-	 *
-	 * @test
-	 * @return void
-	 */
-	public function sendEmailMessageWithValidEmailsTest() {
-		$sender = 'sender@domain.tld';
-		$recipient = 'recipient@domain.tld';
-		$subject = 'A subject';
-		$body = 'A body';
-		$senderName = 'Sender name';
+    /**
+     * Test if e-mail-service sends mails, if e-mails are valid
+     *
+     * @test
+     * @return void
+     */
+    public function sendEmailMessageWithValidEmailsTest()
+    {
+        $sender = 'sender@domain.tld';
+        $recipient = 'recipient@domain.tld';
+        $subject = 'A subject';
+        $body = 'A body';
+        $senderName = 'Sender name';
 
-		$mailer = $this->getMock('TYPO3\\CMS\\Core\\Mail\\MailMessage', array(), array(), '', FALSE);
-		$mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
-		$mailer->expects($this->once())->method('setSubject')->with($subject);
-		$mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));
-		$mailer->expects($this->once())->method('setTo')->with($recipient);
-		$mailer->expects($this->once())->method('send');
-		$mailer->expects($this->once())->method('isSent')->will($this->returnValue(TRUE));
-		$this->subject->_set('mailer', $mailer);
+        $mailer = $this->getMock('TYPO3\\CMS\\Core\\Mail\\MailMessage', array(), array(), '', false);
+        $mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
+        $mailer->expects($this->once())->method('setSubject')->with($subject);
+        $mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));
+        $mailer->expects($this->once())->method('setTo')->with($recipient);
+        $mailer->expects($this->once())->method('send');
+        $mailer->expects($this->once())->method('isSent')->will($this->returnValue(true));
+        $this->subject->_set('mailer', $mailer);
 
-		$result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
-		$this->assertTrue($result);
-	}
+        $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
+        $this->assertTrue($result);
+    }
 }

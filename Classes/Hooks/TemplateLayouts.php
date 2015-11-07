@@ -21,41 +21,45 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class TemplateLayouts {
+class TemplateLayouts
+{
 
-	/**
-	 * Itemsproc function to extend the selection of templateLayouts in the plugin
-	 *
-	 * @param array $config Configuration array
-	 *
-	 * @return void
-	 */
-	public function user_templateLayout(array &$config) {
-		$templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['row']['pid']);
-		foreach ($templateLayouts as $index => $layout) {
-			$additionalLayout = array(
-				$GLOBALS['LANG']->sL($layout, TRUE),
-				$index
-			);
-			array_push($config['items'], $additionalLayout);
-		}
-	}
+    /**
+     * Itemsproc function to extend the selection of templateLayouts in the plugin
+     *
+     * @param array $config Configuration array
+     *
+     * @return void
+     */
+    public function user_templateLayout(array &$config)
+    {
+        $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['row']['pid']);
+        foreach ($templateLayouts as $index => $layout) {
+            $additionalLayout = array(
+                $GLOBALS['LANG']->sL($layout, true),
+                $index
+            );
+            array_push($config['items'], $additionalLayout);
+        }
+    }
 
-	/**
-	 * Get template layouts defined in TsConfig
-	 *
-	 * @param int $pageUid PageUID
-	 *
-	 * @return array
-	 */
-	protected function getTemplateLayoutsFromTsConfig($pageUid) {
-		$templateLayouts = array();
-		$pagesTsConfig = BackendUtility::getPagesTSconfig($pageUid);
-		if (isset($pagesTsConfig['tx_sfeventmgt.']['templateLayouts.']) &&
-			is_array($pagesTsConfig['tx_sfeventmgt.']['templateLayouts.'])) {
-			$templateLayouts = $pagesTsConfig['tx_sfeventmgt.']['templateLayouts.'];
-		}
-		return $templateLayouts;
-	}
+    /**
+     * Get template layouts defined in TsConfig
+     *
+     * @param int $pageUid PageUID
+     *
+     * @return array
+     */
+    protected function getTemplateLayoutsFromTsConfig($pageUid)
+    {
+        $templateLayouts = array();
+        $pagesTsConfig = BackendUtility::getPagesTSconfig($pageUid);
+        if (isset($pagesTsConfig['tx_sfeventmgt.']['templateLayouts.']) &&
+            is_array($pagesTsConfig['tx_sfeventmgt.']['templateLayouts.'])
+        ) {
+            $templateLayouts = $pagesTsConfig['tx_sfeventmgt.']['templateLayouts.'];
+        }
+        return $templateLayouts;
+    }
 
 }

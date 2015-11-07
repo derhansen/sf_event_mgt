@@ -22,41 +22,44 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class LocationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase {
+class LocationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
+{
 
-	/** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
-	protected $objectManager;
+    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
+    protected $objectManager;
 
-	/** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
-	protected $locationRepository;
+    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
+    protected $locationRepository;
 
-	/** @var array  */
-	protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
+    /** @var array */
+    protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
 
-	/**
-	 * Setup
-	 *
-	 * @throws \TYPO3\CMS\Core\Tests\Exception
-	 * @return void
-	 */
-	public function setUp() {
-		parent::setUp();
-		$this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->locationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository');
+    /**
+     * Setup
+     *
+     * @throws \TYPO3\CMS\Core\Tests\Exception
+     * @return void
+     */
+    public function setUp()
+    {
+        parent::setUp();
+        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+        $this->locationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository');
 
-		$this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.xml');
-	}
+        $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.xml');
+    }
 
-	/**
-	 * Test if startingpoint is ignored
-	 *
-	 * @test
-	 * @return void
-	 */
-	public function findRecordsByUid() {
-		$locations = $this->locationRepository->findAll();
+    /**
+     * Test if startingpoint is ignored
+     *
+     * @test
+     * @return void
+     */
+    public function findRecordsByUid()
+    {
+        $locations = $this->locationRepository->findAll();
 
-		$this->assertEquals(2, $locations->count());
-	}
+        $this->assertEquals(2, $locations->count());
+    }
 
 }

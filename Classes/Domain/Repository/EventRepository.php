@@ -23,244 +23,259 @@ use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * Set default sorting
-	 *
-	 * @var array
-	 */
-	protected $defaultOrderings = array(
-		'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-	);
+    /**
+     * Set default sorting
+     *
+     * @var array
+     */
+    protected $defaultOrderings = array(
+        'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+    );
 
-	/**
-	 * Disable the use of storage records, because the StoragePage can be set
-	 * in the plugin
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		$this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-		$this->defaultQuerySettings->setRespectStoragePage(FALSE);
-	}
+    /**
+     * Disable the use of storage records, because the StoragePage can be set
+     * in the plugin
+     *
+     * @return void
+     */
+    public function initializeObject()
+    {
+        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings->setRespectStoragePage(false);
+    }
 
-	/**
-	 * Returns the objects of this repository matching the given demand
-	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 *
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface QueryResultInterface
-	 */
-	public function findDemanded(EventDemand $eventDemand) {
-		$constraints = array();
-		$query = $this->createQuery();
-		$this->setStoragePageConstraint($query, $eventDemand, $constraints);
-		$this->setDisplayModeConstraint($query, $eventDemand, $constraints);
-		$this->setCategoryConstraint($query, $eventDemand, $constraints);
-		$this->setLocationConstraint($query, $eventDemand, $constraints);
-		$this->setLocationCityConstraint($query, $eventDemand, $constraints);
-		$this->setLocationCountryConstraint($query, $eventDemand, $constraints);
-		$this->setStartEndDateConstraint($query, $eventDemand, $constraints);
-		$this->setTitleConstraint($query, $eventDemand, $constraints);
-		$this->setTopEventConstraint($query, $eventDemand, $constraints);
-		$this->setOrderingsFromDemand($query, $eventDemand);
+    /**
+     * Returns the objects of this repository matching the given demand
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface QueryResultInterface
+     */
+    public function findDemanded(EventDemand $eventDemand)
+    {
+        $constraints = array();
+        $query = $this->createQuery();
+        $this->setStoragePageConstraint($query, $eventDemand, $constraints);
+        $this->setDisplayModeConstraint($query, $eventDemand, $constraints);
+        $this->setCategoryConstraint($query, $eventDemand, $constraints);
+        $this->setLocationConstraint($query, $eventDemand, $constraints);
+        $this->setLocationCityConstraint($query, $eventDemand, $constraints);
+        $this->setLocationCountryConstraint($query, $eventDemand, $constraints);
+        $this->setStartEndDateConstraint($query, $eventDemand, $constraints);
+        $this->setTitleConstraint($query, $eventDemand, $constraints);
+        $this->setTopEventConstraint($query, $eventDemand, $constraints);
+        $this->setOrderingsFromDemand($query, $eventDemand);
 
-		if (count($constraints) > 0) {
-			$query->matching($query->logicalAnd($constraints));
-		}
+        if (count($constraints) > 0) {
+            $query->matching($query->logicalAnd($constraints));
+        }
 
-		$this->setQueryLimitFromDemand($query, $eventDemand);
-		return $query->execute();
-	}
+        $this->setQueryLimitFromDemand($query, $eventDemand);
+        return $query->execute();
+    }
 
-	/**
-	 * Sets a query limit to the given query for the given demand
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 *
-	 * @return void
-	 */
-	protected function setQueryLimitFromDemand($query, EventDemand $eventDemand) {
-		if ($eventDemand->getQueryLimit() != NULL &&
-			MathUtility::canBeInterpretedAsInteger($eventDemand->getQueryLimit()) &&
-			(int)$eventDemand->getQueryLimit() > 0) {
-				$query->setLimit((int)$eventDemand->getQueryLimit());
-		}
-	}
+    /**
+     * Sets a query limit to the given query for the given demand
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     *
+     * @return void
+     */
+    protected function setQueryLimitFromDemand($query, EventDemand $eventDemand)
+    {
+        if ($eventDemand->getQueryLimit() != null &&
+            MathUtility::canBeInterpretedAsInteger($eventDemand->getQueryLimit()) &&
+            (int)$eventDemand->getQueryLimit() > 0
+        ) {
+            $query->setLimit((int)$eventDemand->getQueryLimit());
+        }
+    }
 
-	/**
-	 * Sets the ordering to the given query for the given demand
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 *
-	 * @return void
-	 */
-	protected function setOrderingsFromDemand($query, EventDemand $eventDemand) {
-		$orderings = array();
-		if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '') {
-			$orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
-				\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
-				\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
-			$query->setOrderings($orderings);
-		}
-	}
+    /**
+     * Sets the ordering to the given query for the given demand
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     *
+     * @return void
+     */
+    protected function setOrderingsFromDemand($query, EventDemand $eventDemand)
+    {
+        $orderings = array();
+        if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '') {
+            $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
+                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
+                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+            $query->setOrderings($orderings);
+        }
+    }
 
-	/**
-	 * Sets the storagePage constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setStoragePageConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getStoragePage() != '') {
-			$pidList = GeneralUtility::intExplode(',', $eventDemand->getStoragePage(), TRUE);
-			$constraints[] = $query->in('pid', $pidList);
-		}
-	}
+    /**
+     * Sets the storagePage constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setStoragePageConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getStoragePage() != '') {
+            $pidList = GeneralUtility::intExplode(',', $eventDemand->getStoragePage(), true);
+            $constraints[] = $query->in('pid', $pidList);
+        }
+    }
 
-	/**
-	 * Sets the displayMode constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setDisplayModeConstraint($query, $eventDemand, &$constraints) {
-		switch ($eventDemand->getDisplayMode()) {
-			case 'future':
-				$constraints[] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
-				break;
-			case 'past':
-				$constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
-				break;
-			default:
-		}
-	}
+    /**
+     * Sets the displayMode constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setDisplayModeConstraint($query, $eventDemand, &$constraints)
+    {
+        switch ($eventDemand->getDisplayMode()) {
+            case 'future':
+                $constraints[] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
+                break;
+            case 'past':
+                $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
+                break;
+            default:
+        }
+    }
 
-	/**
-	 * Sets the category constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setCategoryConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getCategory() != '') {
-			$categoryConstraints = array();
-			$categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), TRUE);
-			foreach ($categories as $category) {
-				$categoryConstraints[] = $query->contains('category', $category);
-			}
-			if (count($categoryConstraints) > 0) {
-				$constraints[] = $query->logicalOr($categoryConstraints);
-			}
-		}
-	}
+    /**
+     * Sets the category constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setCategoryConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getCategory() != '') {
+            $categoryConstraints = array();
+            $categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), true);
+            foreach ($categories as $category) {
+                $categoryConstraints[] = $query->contains('category', $category);
+            }
+            if (count($categoryConstraints) > 0) {
+                $constraints[] = $query->logicalOr($categoryConstraints);
+            }
+        }
+    }
 
-	/**
-	 * Sets the location constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setLocationConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getLocation() !== NULL && $eventDemand->getLocation() != '') {
-			$constraints[] = $query->equals('location', $eventDemand->getLocation());
-		}
-	}
+    /**
+     * Sets the location constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setLocationConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() != '') {
+            $constraints[] = $query->equals('location', $eventDemand->getLocation());
+        }
+    }
 
-	/**
-	 * Sets the location.city constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setLocationCityConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getLocationCity() !== NULL && $eventDemand->getLocationCity() != '') {
-			$constraints[] = $query->equals('location.city', $eventDemand->getLocationCity());
-		}
-	}
+    /**
+     * Sets the location.city constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setLocationCityConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() != '') {
+            $constraints[] = $query->equals('location.city', $eventDemand->getLocationCity());
+        }
+    }
 
-	/**
-	 * Sets the location.country constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setLocationCountryConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getLocationCountry() !== NULL && $eventDemand->getLocationCountry() != '') {
-			$constraints[] = $query->equals('location.country', $eventDemand->getLocationCountry());
-		}
-	}
+    /**
+     * Sets the location.country constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setLocationCountryConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() != '') {
+            $constraints[] = $query->equals('location.country', $eventDemand->getLocationCountry());
+        }
+    }
 
-	/**
-	 * Sets the start- and enddate constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setStartEndDateConstraint($query, $eventDemand, &$constraints) {
-		/* StartDate */
-		if ($eventDemand->getStartDate() !== NULL) {
-			$constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getStartDate());
-		}
+    /**
+     * Sets the start- and enddate constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setStartEndDateConstraint($query, $eventDemand, &$constraints)
+    {
+        /* StartDate */
+        if ($eventDemand->getStartDate() !== null) {
+            $constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getStartDate());
+        }
 
-		/* EndDate */
-		if ($eventDemand->getEndDate() !== NULL) {
-			$constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getEndDate());
-		}
-	}
+        /* EndDate */
+        if ($eventDemand->getEndDate() !== null) {
+            $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getEndDate());
+        }
+    }
 
-	/**
-	 * Sets the title constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setTitleConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getTitle() !== '') {
-			$constraints[] = $query->like('title', '%' . $eventDemand->getTitle() . '%', FALSE);
-		}
-	}
+    /**
+     * Sets the title constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setTitleConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getTitle() !== '') {
+            $constraints[] = $query->like('title', '%' . $eventDemand->getTitle() . '%', false);
+        }
+    }
 
-	/**
-	 * Sets the topEvent constraint to the given constraints array
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
-	 * @param array $constraints Constraints
-	 *
-	 * @return void
-	 */
-	protected function setTopEventConstraint($query, $eventDemand, &$constraints) {
-		if ($eventDemand->getTopEventRestriction() > 0) {
-			$constraints[] = $query->equals('topEvent', (bool)($eventDemand->getTopEventRestriction() - 1));
-		}
-	}
+    /**
+     * Sets the topEvent constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setTopEventConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getTopEventRestriction() > 0) {
+            $constraints[] = $query->equals('topEvent', (bool)($eventDemand->getTopEventRestriction() - 1));
+        }
+    }
 
 }

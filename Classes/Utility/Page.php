@@ -21,31 +21,33 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Georg Ringer <typo3@ringerge.org>
  */
-class Page {
+class Page
+{
 
-	/**
-	 * Find all ids from given ids and level
-	 *
-	 * @param string $pidList comma separated list of ids
-	 * @param integer $recursive recursive levels
-	 * @return string comma separated list of ids
-	 */
-	public static function extendPidListByChildren($pidList = '', $recursive = 0) {
-		$recursive = (int)$recursive;
+    /**
+     * Find all ids from given ids and level
+     *
+     * @param string $pidList comma separated list of ids
+     * @param integer $recursive recursive levels
+     * @return string comma separated list of ids
+     */
+    public static function extendPidListByChildren($pidList = '', $recursive = 0)
+    {
+        $recursive = (int)$recursive;
 
-		if ($recursive <= 0) {
-			return $pidList;
-		}
+        if ($recursive <= 0) {
+            return $pidList;
+        }
 
-		$queryGenerator = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
-		$recursiveStoragePids = $pidList;
-		$storagePids =GeneralUtility::intExplode(',', $pidList);
-		foreach ($storagePids as $startPid) {
-			$pids = $queryGenerator->getTreeList($startPid, $recursive, 0, 1);
-			if (strlen($pids) > 0) {
-				$recursiveStoragePids .= ',' . $pids;
-			}
-		}
-		return $recursiveStoragePids;
-	}
+        $queryGenerator = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
+        $recursiveStoragePids = $pidList;
+        $storagePids = GeneralUtility::intExplode(',', $pidList);
+        foreach ($storagePids as $startPid) {
+            $pids = $queryGenerator->getTreeList($startPid, $recursive, 0, 1);
+            if (strlen($pids) > 0) {
+                $recursiveStoragePids .= ',' . $pids;
+            }
+        }
+        return $recursiveStoragePids;
+    }
 }

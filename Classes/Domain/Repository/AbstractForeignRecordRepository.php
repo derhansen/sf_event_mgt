@@ -21,7 +21,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
     /**
      * Disable the use of storage records, because the StoragePage can be set
@@ -29,7 +30,8 @@ abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persis
      *
      * @return void
      */
-    public function initializeObject() {
+    public function initializeObject()
+    {
         $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         $this->defaultQuerySettings->setRespectStoragePage(false);
     }
@@ -41,12 +43,13 @@ abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persis
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findDemanded($demand) {
+    public function findDemanded($demand)
+    {
         $constraints = array();
         $query = $this->createQuery();
 
         if ($demand->getRestrictForeignRecordsToStoragePage()) {
-            $pidList = GeneralUtility::intExplode(',', $demand->getStoragePage(), TRUE);
+            $pidList = GeneralUtility::intExplode(',', $demand->getStoragePage(), true);
             $constraints[] = $query->in('pid', $pidList);
         }
 

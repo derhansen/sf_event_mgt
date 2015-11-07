@@ -19,17 +19,19 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class OrganisatorRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class OrganisatorRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+{
 
-	/**
-	 * Disable the use of storage records, because the StoragePage can be set
-	 * in the plugin
-	 *
-	 * @return void
-	 */
-	public function initializeObject() {
-		$this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
-		$this->defaultQuerySettings->setRespectStoragePage(FALSE);
-	}
+    /**
+     * Disable the use of storage records, because the StoragePage can be set
+     * in the plugin
+     *
+     * @return void
+     */
+    public function initializeObject()
+    {
+        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings->setRespectStoragePage(false);
+    }
 
 }

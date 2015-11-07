@@ -19,35 +19,37 @@ namespace DERHANSEN\SfEventMgt\Service;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UtilityService {
+class UtilityService
+{
 
-	/**
-	 * CacheService
-	 *
-	 * @var \TYPO3\CMS\Extbase\Service\CacheService
-	 * @inject
-	 */
-	protected $cacheService;
+    /**
+     * CacheService
+     *
+     * @var \TYPO3\CMS\Extbase\Service\CacheService
+     * @inject
+     */
+    protected $cacheService;
 
-	/**
-	 * Settings Service
-	 *
-	 * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-	 * @inject
-	 */
-	protected $settingsService;
+    /**
+     * Settings Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\SettingsService
+     * @inject
+     */
+    protected $settingsService;
 
-	/**
-	 * Clears the cache of configured pages in TypoScript
-	 *
-	 * @param array $settings The settings
-	 *
-	 * @return void
-	 */
-	public function clearCacheForConfiguredUids($settings) {
-		$pidList = $this->settingsService->getClearCacheUids($settings);
-		if (count($pidList) > 0) {
-			$this->cacheService->clearPageCache($pidList);
-		}
-	}
+    /**
+     * Clears the cache of configured pages in TypoScript
+     *
+     * @param array $settings The settings
+     *
+     * @return void
+     */
+    public function clearCacheForConfiguredUids($settings)
+    {
+        $pidList = $this->settingsService->getClearCacheUids($settings);
+        if (count($pidList) > 0) {
+            $this->cacheService->clearPageCache($pidList);
+        }
+    }
 }

@@ -19,6 +19,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CategoryRepository extends AbstractForeignRecordRepository {
+class CategoryRepository extends AbstractForeignRecordRepository
+{
 
 }

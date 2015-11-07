@@ -21,25 +21,28 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class LongitudeEvaluator {
+class LongitudeEvaluator
+{
 
-	/**
-	 * Validates the given longitude value (between -180 and 180 degrees)
-	 * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
-	 *
-	 * @param mixed $value The value that has to be checked.
-	 * @param string $is_in Is-In String
-	 * @param int $set Determines if the field can be set (value correct) or not
-	 *
-	 * @return string The new value of the field
-	 */
-	public function evaluateFieldValue($value, $is_in, &$set) {
-		$newValue = '0.000000';
-		$set = TRUE;
-		if (MathUtility::canBeInterpretedAsFloat($value) &&
-			((float)$value >= -180 && (float)$value <= 180)) {
-			$newValue = number_format((float)$value, 6);
-		}
-		return $newValue;
-	}
+    /**
+     * Validates the given longitude value (between -180 and 180 degrees)
+     * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
+     *
+     * @param mixed $value The value that has to be checked.
+     * @param string $is_in Is-In String
+     * @param int $set Determines if the field can be set (value correct) or not
+     *
+     * @return string The new value of the field
+     */
+    public function evaluateFieldValue($value, $is_in, &$set)
+    {
+        $newValue = '0.000000';
+        $set = true;
+        if (MathUtility::canBeInterpretedAsFloat($value) &&
+            ((float)$value >= -180 && (float)$value <= 180)
+        ) {
+            $newValue = number_format((float)$value, 6);
+        }
+        return $newValue;
+    }
 }

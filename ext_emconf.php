@@ -11,26 +11,24 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Event management and registration',
-	'description' => 'Configurable event management and registration extension based on ExtBase and Fluid',
-	'category' => 'plugin',
-	'author' => 'Torben Hansen',
-	'author_email' => 'derhansen@gmail.com',
-	'state' => 'stable',
-	'internal' => '',
-	'uploadfolder' => '0',
-	'createDirs' => '',
-	'clearCacheOnLoad' => 1,
-	'version' => '1.2.1-dev',
-	'constraints' => array(
-		'depends' => array(
-			'extbase' => '6.2.0',
-			'fluid' => '6.2.0',
-			'typo3' => '6.2.0-7.99.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
+    'title' => 'Event management and registration',
+    'description' => 'Configurable event management and registration extension based on ExtBase and Fluid',
+    'category' => 'plugin',
+    'author' => 'Torben Hansen',
+    'author_email' => 'derhansen@gmail.com',
+    'state' => 'stable',
+    'internal' => '',
+    'uploadfolder' => '0',
+    'createDirs' => '',
+    'clearCacheOnLoad' => 1,
+    'version' => '1.2.1-dev',
+    'constraints' => array(
+        'depends' => array(
+            'extbase' => '6.2.0',
+            'fluid' => '6.2.0',
+            'typo3' => '6.2.0-7.99.99',
+        ),
+        'conflicts' => array(),
+        'suggests' => array(),
+    ),
 );

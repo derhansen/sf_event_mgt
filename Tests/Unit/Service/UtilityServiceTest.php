@@ -19,63 +19,70 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UtilityServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class UtilityServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 * @var \DERHANSEN\SfEventMgt\Service\UtilityService
-	 */
-	protected $subject = NULL;
+    /**
+     * @var \DERHANSEN\SfEventMgt\Service\UtilityService
+     */
+    protected $subject = null;
 
-	/**
-	 * Setup
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		$this->subject = new \DERHANSEN\SfEventMgt\Service\UtilityService();
-	}
+    /**
+     * Setup
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        $this->subject = new \DERHANSEN\SfEventMgt\Service\UtilityService();
+    }
 
-	/**
-	 * Teardown
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		unset($this->subject);
-	}
+    /**
+     * Teardown
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * Test for clearCacheForConfiguredUids with empty settings
-	 *
-	 * @test
-	 * @return void
-	 */
-	public function clearCacheForConfiguredUidsWithEmptySettingsTest() {
-		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '', FALSE);
-		$settingsService->expects($this->once())->method('getClearCacheUids')->with(array())->will($this->returnValue(array()));
-		$this->inject($this->subject, 'settingsService', $settingsService);
+    /**
+     * Test for clearCacheForConfiguredUids with empty settings
+     *
+     * @test
+     * @return void
+     */
+    public function clearCacheForConfiguredUidsWithEmptySettingsTest()
+    {
+        $settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '',
+            false);
+        $settingsService->expects($this->once())->method('getClearCacheUids')->with(array())->will($this->returnValue(array()));
+        $this->inject($this->subject, 'settingsService', $settingsService);
 
-		$this->subject->clearCacheForConfiguredUids(array());
-	}
+        $this->subject->clearCacheForConfiguredUids(array());
+    }
 
-	/**
-	 * Test for clearCacheForConfiguredUids with empty settings
-	 *
-	 * @test
-	 * @return void
-	 */
-	public function clearCacheForConfiguredUidsWithSettingsTest() {
-		$settings = array('clearCacheUids' => '1,2,3,4');
-		$settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '', FALSE);
-		$settingsService->expects($this->once())->method('getClearCacheUids')->with($settings)->
-			will($this->returnValue(array(1,2,3,4)));
-		$this->inject($this->subject, 'settingsService', $settingsService);
+    /**
+     * Test for clearCacheForConfiguredUids with empty settings
+     *
+     * @test
+     * @return void
+     */
+    public function clearCacheForConfiguredUidsWithSettingsTest()
+    {
+        $settings = array('clearCacheUids' => '1,2,3,4');
+        $settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '',
+            false);
+        $settingsService->expects($this->once())->method('getClearCacheUids')->with($settings)->
+        will($this->returnValue(array(1, 2, 3, 4)));
+        $this->inject($this->subject, 'settingsService', $settingsService);
 
-		$cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array(), array(), '', FALSE);
-		$cacheService->expects($this->once())->method('clearPageCache')->with(array(1,2,3,4));
-		$this->inject($this->subject, 'cacheService', $cacheService);
+        $cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array(), array(), '', false);
+        $cacheService->expects($this->once())->method('clearPageCache')->with(array(1, 2, 3, 4));
+        $this->inject($this->subject, 'cacheService', $cacheService);
 
-		$this->subject->clearCacheForConfiguredUids($settings);
-	}
+        $this->subject->clearCacheForConfiguredUids($settings);
+    }
 
 }

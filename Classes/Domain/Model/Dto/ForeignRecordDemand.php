@@ -19,60 +19,65 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * Storage page
-	 *
-	 * @var string
-	 */
-	protected $storagePage;
+    /**
+     * Storage page
+     *
+     * @var string
+     */
+    protected $storagePage;
 
-	/**
-	 * Restrict foreign records to storagePage
-	 *
-	 * @var bool
-	 */
-	protected $restrictForeignRecordsToStoragePage = FALSE;
+    /**
+     * Restrict foreign records to storagePage
+     *
+     * @var bool
+     */
+    protected $restrictForeignRecordsToStoragePage = false;
 
-	/**
-	 * Sets the storage page
-	 *
-	 * @param string $storagePage Storagepage
-	 *
-	 * @return void
-	 */
-	public function setStoragePage($storagePage) {
-		$this->storagePage = $storagePage;
-	}
+    /**
+     * Sets the storage page
+     *
+     * @param string $storagePage Storagepage
+     *
+     * @return void
+     */
+    public function setStoragePage($storagePage)
+    {
+        $this->storagePage = $storagePage;
+    }
 
-	/**
-	 * Returns the storage page
-	 *
-	 * @return string
-	 */
-	public function getStoragePage() {
-		return $this->storagePage;
-	}
+    /**
+     * Returns the storage page
+     *
+     * @return string
+     */
+    public function getStoragePage()
+    {
+        return $this->storagePage;
+    }
 
-	/**
-	 * Returns restrictForeignRecordsToStoragePage
-	 *
-	 * @return bool
-	 */
-	public function getRestrictForeignRecordsToStoragePage() {
-		return $this->restrictForeignRecordsToStoragePage;
-	}
+    /**
+     * Returns restrictForeignRecordsToStoragePage
+     *
+     * @return bool
+     */
+    public function getRestrictForeignRecordsToStoragePage()
+    {
+        return $this->restrictForeignRecordsToStoragePage;
+    }
 
-	/**
-	 * Sets restrictForeignRecordsToStoragePage
-	 *
-	 * @param bool $restrictForeignRecordsToStoragePage
-	 *
-	 * @return void
-	 */
-	public function setRestrictForeignRecordsToStoragePage($restrictForeignRecordsToStoragePage) {
-		$this->restrictForeignRecordsToStoragePage = $restrictForeignRecordsToStoragePage;
-	}
+    /**
+     * Sets restrictForeignRecordsToStoragePage
+     *
+     * @param bool $restrictForeignRecordsToStoragePage
+     *
+     * @return void
+     */
+    public function setRestrictForeignRecordsToStoragePage($restrictForeignRecordsToStoragePage)
+    {
+        $this->restrictForeignRecordsToStoragePage = $restrictForeignRecordsToStoragePage;
+    }
 
 }

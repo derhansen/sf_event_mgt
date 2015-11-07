@@ -19,83 +19,88 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class LatitudeEvaluatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
+class LatitudeEvaluatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+{
 
-	/**
-	 * LatitudeEvaluator
-	 *
-	 * @var \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator
-	 */
-	protected $subject = NULL;
+    /**
+     * LatitudeEvaluator
+     *
+     * @var \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator
+     */
+    protected $subject = null;
 
-	/**
-	 * Setup
-	 *
-	 * @return void
-	 */
-	protected function setUp() {
-		$this->subject = new \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator();
-	}
+    /**
+     * Setup
+     *
+     * @return void
+     */
+    protected function setUp()
+    {
+        $this->subject = new \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator();
+    }
 
-	/**
-	 * Teardown
-	 *
-	 * @return void
-	 */
-	protected function tearDown() {
-		unset($this->subject);
-	}
+    /**
+     * Teardown
+     *
+     * @return void
+     */
+    protected function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * Data Provider for latitudeEvaluatorTest
-	 *
-	 * @return array
-	 */
-	public function latitudeEvaluatorDataProvider() {
-		return array(
-			'emptyValue' => array(
-				NULL,
-				'0.000000'
-			),
-			'givenIntegerGetsConvertedToFloatWith6Decimals' => array(
-				1,
-				'1.000000'
-			),
-			'maxValuePossible' => array(
-				90,
-				'90.000000'
-			),
-			'minValuePossible' => array(
-				-90,
-				'-90.000000'
-			),
-			'greaterThanMaxValueNotPossible' => array(
-				90.000001,
-				'0.000000'
-			),
-			'lessThanMinValueNotPossible' => array(
-				-90.000001,
-				'0.000000'
-			),
-			'validLongitudeIsReturned' => array(
-				12.345678,
-				'12.345678'
-			),
-		);
-	}
+    /**
+     * Data Provider for latitudeEvaluatorTest
+     *
+     * @return array
+     */
+    public function latitudeEvaluatorDataProvider()
+    {
+        return array(
+            'emptyValue' => array(
+                null,
+                '0.000000'
+            ),
+            'givenIntegerGetsConvertedToFloatWith6Decimals' => array(
+                1,
+                '1.000000'
+            ),
+            'maxValuePossible' => array(
+                90,
+                '90.000000'
+            ),
+            'minValuePossible' => array(
+                -90,
+                '-90.000000'
+            ),
+            'greaterThanMaxValueNotPossible' => array(
+                90.000001,
+                '0.000000'
+            ),
+            'lessThanMinValueNotPossible' => array(
+                -90.000001,
+                '0.000000'
+            ),
+            'validLongitudeIsReturned' => array(
+                12.345678,
+                '12.345678'
+            ),
+        );
+    }
 
-	/**
-	 * Tests for latitudeEvaluator with the given dataProvider
-	 *
-	 * @test
-	 * @dataProvider latitudeEvaluatorDataProvider
-	 *
-	 * @return void
-	 */
-	public function latitudeEvaluatorTest($value, $expected){
-		$set = NULL;
-		$actual = $this->subject->evaluateFieldValue($value, NULL, $set);
-		$this->assertSame($actual, $expected);
-	}
+    /**
+     * Tests for latitudeEvaluator with the given dataProvider
+     *
+     * @test
+     * @dataProvider latitudeEvaluatorDataProvider
+     *
+     * @return void
+     */
+    public function latitudeEvaluatorTest($value, $expected)
+    {
+        $set = null;
+        $actual = $this->subject->evaluateFieldValue($value, null, $set);
+        $this->assertSame($actual, $expected);
+    }
 
 }

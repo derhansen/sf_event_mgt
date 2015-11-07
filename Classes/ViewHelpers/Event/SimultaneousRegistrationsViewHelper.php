@@ -21,31 +21,33 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class SimultaneousRegistrationsViewHelper extends AbstractViewHelper {
+class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * Returns an array with the amount of possible simultaneous registrations
-	 * respecting the maxRegistrationsPerUser setting and also respects the amount
-	 * of remaining free places.
-	 *
-	 * The returned array index starts at 1 if at least one registration is possible
-	 *
-	 * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-	 *
-	 * @return array
-	 */
-	public function render($event) {
-		$minPossibleRegistrations = 1;
-		$maxPossibleRegistrations = $event->getFreePlaces();
-		$result = array($maxPossibleRegistrations);
-		if ($event->getMaxRegistrationsPerUser() <= $maxPossibleRegistrations) {
-			$maxPossibleRegistrations = $event->getMaxRegistrationsPerUser();
-		}
-		if ($maxPossibleRegistrations >= $minPossibleRegistrations) {
-			$arrayWithZeroAsIndex = range($minPossibleRegistrations, $maxPossibleRegistrations);
-			$result = array_combine(range(1, count($arrayWithZeroAsIndex)), $arrayWithZeroAsIndex);
-		}
-		return $result;
-	}
+    /**
+     * Returns an array with the amount of possible simultaneous registrations
+     * respecting the maxRegistrationsPerUser setting and also respects the amount
+     * of remaining free places.
+     *
+     * The returned array index starts at 1 if at least one registration is possible
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     *
+     * @return array
+     */
+    public function render($event)
+    {
+        $minPossibleRegistrations = 1;
+        $maxPossibleRegistrations = $event->getFreePlaces();
+        $result = array($maxPossibleRegistrations);
+        if ($event->getMaxRegistrationsPerUser() <= $maxPossibleRegistrations) {
+            $maxPossibleRegistrations = $event->getMaxRegistrationsPerUser();
+        }
+        if ($maxPossibleRegistrations >= $minPossibleRegistrations) {
+            $arrayWithZeroAsIndex = range($minPossibleRegistrations, $maxPossibleRegistrations);
+            $result = array_combine(range(1, count($arrayWithZeroAsIndex)), $arrayWithZeroAsIndex);
+        }
+        return $result;
+    }
 
 }

@@ -19,9 +19,10 @@ namespace DERHANSEN\SfEventMgt\Utility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class MessageType {
-	const REGISTRATION_NEW = 0;
-	const REGISTRATION_CONFIRMED = 1;
-	const CUSTOM_NOTIFICATION = 2;
-	const REGISTRATION_CANCELLED = 3;
+class MessageType
+{
+    const REGISTRATION_NEW = 0;
+    const REGISTRATION_CONFIRMED = 1;
+    const CUSTOM_NOTIFICATION = 2;
+    const REGISTRATION_CANCELLED = 3;
 }
