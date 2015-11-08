@@ -66,6 +66,7 @@ class DataHandlerHooks
                     'settings.topEventRestriction',
                     'settings.queryLimit',
                     'settings.category',
+                    'settings.restrictForeignRecordsToStoragePage',
                     'settings.storagePage',
                     'settings.registration.requiredFields'
                 )

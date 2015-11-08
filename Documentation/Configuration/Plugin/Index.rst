@@ -214,6 +214,18 @@ Tab settings
          location
 
  - :Property:
+         Restrict foreign records to storage page
+
+   :View:
+         List
+
+   :Description:
+         Categories and locations will only be loaded from the configured storage page (recursive)
+
+   :Key:
+         restrictForeignRecordsToStoragePage
+
+ - :Property:
          Record storage page
 
    :View:
