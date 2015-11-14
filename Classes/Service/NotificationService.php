@@ -218,22 +218,22 @@ class NotificationService
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
             foreach ($adminEmailArr as $adminEmail) {
                 $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                        $settings['notification']['senderEmail'],
-                        $adminEmail,
-                        $subject,
-                        $body,
-                        $settings['notification']['senderName']
-                    );
-            }
-        }
-        if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
-            $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
                     $settings['notification']['senderEmail'],
-                    $event->getOrganisator()->getEmail(),
+                    $adminEmail,
                     $subject,
                     $body,
                     $settings['notification']['senderName']
                 );
+            }
+        }
+        if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
+            $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
+                $settings['notification']['senderEmail'],
+                $event->getOrganisator()->getEmail(),
+                $subject,
+                $body,
+                $settings['notification']['senderName']
+            );
         }
         return $allEmailsSent;
     }
@@ -254,13 +254,17 @@ class NotificationService
         $emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailView->setFormat('html');
         $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
         $templateRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']);
+            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']
+        );
         $layoutRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']);
+            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']
+        );
         $partialRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['partialRootPath']);
+            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['partialRootPath']
+        );
 
         $emailView->setLayoutRootPath($layoutRootPath);
         $emailView->setPartialRootPath($partialRootPath);
