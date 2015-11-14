@@ -121,6 +121,13 @@ return array(
             ),
         ),
 
+        'language' => array(
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.language',
+            'config' => array(
+                'type' => 'input',
+            ),
+        ),
         'firstname' => array(
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.firstname',

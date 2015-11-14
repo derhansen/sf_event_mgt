@@ -180,6 +180,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $amountOfRegistrations = 1;
 
     /**
+     * The language (e.g. de)
+     *
+     * @var string
+     */
+    protected $language = '';
+
+    /**
      * Returns the firstname
      *
      * @return string $firstname
@@ -692,5 +699,27 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->amountOfRegistrations = $amountOfRegistrations;
     }
+
+    /**
+     * Returns the language
+     *
+     * @return string
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * Sets the language
+     *
+     * @param string $language
+     * @return void
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+    }
+
 
 }

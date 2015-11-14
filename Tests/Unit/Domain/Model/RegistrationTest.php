@@ -609,4 +609,23 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setIgnoreNotifications(true);
         $this->assertTrue($this->subject->getIgnoreNotifications());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getLanguageReturnsDefaultForString()
+    {
+        $this->assertEmpty($this->subject->getLanguage());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setLanguageSetsGivenLanguage()
+    {
+        $this->subject->setLanguage('de');
+        $this->assertEquals('de', $this->subject->getLanguage());
+    }
 }

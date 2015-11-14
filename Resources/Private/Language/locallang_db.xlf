@@ -96,6 +96,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
 				<source>Event - Registration</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.language">
+				<source>Language</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
 				<source>Firstname</source>
 			</trans-unit>
