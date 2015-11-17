@@ -218,8 +218,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     {
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
-        $this->notificationService->createCustomNotificationLogentry($event,
-            $customNotifications[$customNotification], $result);
+        $this->notificationService->createCustomNotificationLogentry(
+            $event,
+            $customNotifications[$customNotification],
+            $result
+        );
         $this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => null, 'messageId' => 2));
     }
 
