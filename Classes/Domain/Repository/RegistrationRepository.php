@@ -32,6 +32,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
         $this->defaultQuerySettings->setRespectStoragePage(false);
+        $this->defaultQuerySettings->setRespectSysLanguage(false);
     }
 
     /**

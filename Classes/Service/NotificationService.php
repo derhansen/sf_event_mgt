@@ -266,6 +266,12 @@ class NotificationService
             $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['partialRootPath']
         );
 
+        if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
+            // Temporary set Language of current BE user to given language
+            $GLOBALS['BE_USER']->uc['lang'] = $registration->getLanguage();
+            $emailView->getRequest()->setControllerExtensionName('SfEventMgt');
+        }
+
         $emailView->setLayoutRootPath($layoutRootPath);
         $emailView->setPartialRootPath($partialRootPath);
         $emailView->setTemplatePathAndFilename($templateRootPath . $template);
