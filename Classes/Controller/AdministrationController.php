@@ -154,8 +154,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      */
     public function newEventAction()
     {
-        $token = '&moduleToken=' . \TYPO3\CMS\Core\FormProtection\FormProtectionFactory::get()->generateToken(
-                'moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
+        $token = '&moduleToken=' . \TYPO3\CMS\Core\FormProtection\FormProtectionFactory::get()->generateToken('moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
 
         $returnUrl = 'mod.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $this->pid . $token;
         $url = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][' . $this->pid .
@@ -183,8 +182,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      */
     public function handleExpiredRegistrationsAction()
     {
-        $this->registrationService->handleExpiredRegistrations(
-            $this->settings['registration']['deleteExpiredRegistrations']);
+        $this->registrationService->handleExpiredRegistrations($this->settings['registration']['deleteExpiredRegistrations']);
         $this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => null, 'messageId' => 1));
     }
 

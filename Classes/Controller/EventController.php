@@ -288,10 +288,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
             // Send notifications to user and admin if confirmation link should be sent
             if (!$autoConfirmation) {
-                $this->notificationService->sendUserMessage($event, $registration, $this->settings,
-                    MessageType::REGISTRATION_NEW);
-                $this->notificationService->sendAdminMessage($event, $registration, $this->settings,
-                    MessageType::REGISTRATION_NEW);
+                $this->notificationService->sendUserMessage(
+                    $event,
+                    $registration,
+                    $this->settings,
+                    MessageType::REGISTRATION_NEW
+                );
+                $this->notificationService->sendAdminMessage(
+                    $event,
+                    $registration,
+                    $this->settings,
+                    MessageType::REGISTRATION_NEW
+                );
             }
 
             // Create given amount of registrations if necessary
@@ -304,14 +312,22 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         if ($autoConfirmation && $success) {
-            $this->redirect('confirmRegistration', null, null,
+            $this->redirect(
+                'confirmRegistration',
+                null,
+                null,
                 array(
                     'reguid' => $registration->getUid(),
                     'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid())
-                ));
+                )
+            );
         } else {
-            $this->redirect('saveRegistrationResult', null, null,
-                array('result' => $result));
+            $this->redirect(
+                'saveRegistrationResult',
+                null,
+                null,
+                array('result' => $result)
+            );
         }
     }
 
@@ -412,18 +428,25 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function confirmRegistrationAction($reguid, $hmac)
     {
         /* @var $registration Registration */
-        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkConfirmRegistration($reguid,
-            $hmac);
+        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkConfirmRegistration($reguid, $hmac);
 
         if ($failed === false) {
             $registration->setConfirmed(true);
             $this->registrationRepository->update($registration);
 
             // Send notifications to user and admin
-            $this->notificationService->sendUserMessage($registration->getEvent(), $registration, $this->settings,
-                MessageType::REGISTRATION_CONFIRMED);
-            $this->notificationService->sendAdminMessage($registration->getEvent(), $registration, $this->settings,
-                MessageType::REGISTRATION_CONFIRMED);
+            $this->notificationService->sendUserMessage(
+                $registration->getEvent(),
+                $registration,
+                $this->settings,
+                MessageType::REGISTRATION_CONFIRMED
+            );
+            $this->notificationService->sendAdminMessage(
+                $registration->getEvent(),
+                $registration,
+                $this->settings,
+                MessageType::REGISTRATION_CONFIRMED
+            );
 
             // Confirm registrations depending on main registration if necessary
             if ($registration->getAmountOfRegistrations() > 1) {
@@ -445,15 +468,22 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function cancelRegistrationAction($reguid, $hmac)
     {
         /* @var $registration Registration */
-        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkCancelRegistration($reguid,
-            $hmac);
+        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkCancelRegistration($reguid, $hmac);
 
         if ($failed === false) {
             // Send notifications (must run before cancelling the registration)
-            $this->notificationService->sendUserMessage($registration->getEvent(), $registration, $this->settings,
-                MessageType::REGISTRATION_CANCELLED);
-            $this->notificationService->sendAdminMessage($registration->getEvent(), $registration, $this->settings,
-                MessageType::REGISTRATION_CANCELLED);
+            $this->notificationService->sendUserMessage(
+                $registration->getEvent(),
+                $registration,
+                $this->settings,
+                MessageType::REGISTRATION_CANCELLED
+            );
+            $this->notificationService->sendAdminMessage(
+                $registration->getEvent(),
+                $registration,
+                $this->settings,
+                MessageType::REGISTRATION_CANCELLED
+            );
 
             // First cancel depending registrations
             if ($registration->getAmountOfRegistrations() > 1) {
