@@ -57,7 +57,7 @@ plugin.tx_sfeventmgt {
 			}
 		}
 		reCAPTCHA{
-			apiUrl = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.apiUrl}
+			apiUrl = https://www.google.com/recaptcha/api.js
 		  	siteKey = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.siteKey}
 			secretKey = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.secretKey}
 		}
