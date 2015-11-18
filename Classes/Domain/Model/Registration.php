@@ -187,6 +187,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $language = '';
 
     /**
+     * reCaptcha
+     *
+     * @var string
+     */
+    protected $recaptcha = '';
+
+    /**
      * Returns the firstname
      *
      * @return string $firstname

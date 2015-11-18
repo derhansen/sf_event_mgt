@@ -331,6 +331,13 @@ return array(
                 'readOnly' => 1
             ),
         ),
-
+        'recaptcha' => array (
+            'exclude' => 0,
+            'label' => 'LLL:EXT:pxa_sfeventmgt/Resources/Private/Language/locallang.xlf:event.registration.label',
+            'config' => array (
+                'type' => 'input',
+                'size' => '30',
+            ),
+        )
     ),
 );

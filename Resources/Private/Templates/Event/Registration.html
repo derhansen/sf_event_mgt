@@ -1,7 +1,7 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <f:layout name="Default" />
 <f:section name="main">
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <f:if condition="{event.registrationPossible}">
         <f:then>
 
@@ -174,7 +174,12 @@
                         </label>
                     </div>
                     <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
-
+                    
+                    <f:if condition="{settings.reCAPTCHA.siteKey}">
+                        <div class="g-recaptcha" data-sitekey="{settings.reCAPTCHA.siteKey}">
+                        </div>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.recaptcha'}"/>
+                    </f:if>
                     <br/>
                     <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
                 </fieldset>

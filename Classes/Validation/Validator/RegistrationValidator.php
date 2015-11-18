@@ -16,6 +16,8 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * RegistrationValidator
@@ -62,7 +64,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
         if ($settings['registration']['requiredFields'] === '' ||
             !isset($settings['registration']['requiredFields'])
         ) {
-            return true;
+            $result = true;
         }
 
         $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields']));
@@ -80,6 +82,54 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                     }
                 }
             }
+        }
+
+        if ($value->_hasProperty('recaptcha')) {
+            $result = TRUE;
+            $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
+            if ($response !== NULL) {
+                    // Only check if a response is set
+
+                    $configurationManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+                    $fullTs = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+                    $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCAPTCHA.'];
+
+                    if (
+                        isset($reCaptchaSettings) &&
+                        is_array($reCaptchaSettings) &&
+                        isset($reCaptchaSettings['secretKey']) &&
+                        $reCaptchaSettings['secretKey']
+                    ) {
+                        $ch = curl_init();
+
+                        $fields = array(
+                            'secret' => $reCaptchaSettings['secretKey'],
+                            'response' => $response
+                        );
+
+                        //url-ify the data for the POST
+                        $fieldsString = '';
+                        foreach ($fields as $key => $value) {
+                            $fieldsString .= $key . '=' . $value . '&';
+                        }
+                        rtrim($fieldsString, '&');
+
+                        //set the url, number of POST vars, POST data
+                        curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+                        curl_setopt($ch, CURLOPT_POST, count($fields));
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
+
+                        //execute post
+                        $resultCH = json_decode(curl_exec($ch));
+                        if (!(bool)$resultCH->success) {
+                            $this->result->forProperty('recaptcha')->addError(new \TYPO3\CMS\Extbase\Error\Error(LocalizationUtility::translate('validation.possible_robot', 'sf_event_mgt')));
+                            $result = FALSE;
+                        }
+                    } else {
+                        throw new InvalidVariableException(LocalizationUtility::translate('error.no_secretKey', 'sf_event_mgt'), 1358349150);
+                    }
+                }
         }
         return $result;
     }
