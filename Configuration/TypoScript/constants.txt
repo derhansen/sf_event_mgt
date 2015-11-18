@@ -33,6 +33,13 @@ plugin.tx_sfeventmgt {
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
 			adminEmail =
 		}
+		reCAPTCHA{
+			apiUrl =
+			#site key you get after sign up for an API key pair, site key is used to display the widget on your site; type=string
+		  	siteKey =
+		  	#secretKey you get after sign up for an API key pair, secretKey authorizes communication between your application backend and the reCAPTCHA server to verify the user's respons; type=string
+			secretKey =
+		}
 	}
 }
 

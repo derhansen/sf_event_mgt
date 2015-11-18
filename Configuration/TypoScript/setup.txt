@@ -56,6 +56,11 @@ plugin.tx_sfeventmgt {
 				adminSubject = Event registration cancelled
 			}
 		}
+		reCAPTCHA{
+			apiUrl = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.apiUrl}
+		  	siteKey = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.siteKey}
+			secretKey = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.secretKey}
+		}
 	}
 }
 
