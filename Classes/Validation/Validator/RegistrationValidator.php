@@ -97,13 +97,13 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                     if (
                         isset($reCaptchaSettings) &&
                         is_array($reCaptchaSettings) &&
-                        isset($reCaptchaSettings['secretKey']) &&
-                        $reCaptchaSettings['secretKey']
+                        isset($reCaptchaSettings['SecretKey']) &&
+                        $reCaptchaSettings['SecretKey']
                     ) {
                         $ch = curl_init();
 
                         $fields = array(
-                            'secret' => $reCaptchaSettings['secretKey'],
+                            'secret' => $reCaptchaSettings['SecretKey'],
                             'response' => $response
                         );
 
