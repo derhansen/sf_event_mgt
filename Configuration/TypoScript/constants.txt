@@ -35,9 +35,9 @@ plugin.tx_sfeventmgt {
 		}
 		reCAPTCHA{
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=siteKey for reCaptcha
-		  	siteKey =
+		  	SiteKey =
 		  	# cat=plugin.tx_sfeventmgt//a; type=string; label=secretKey for reCaptcha
-			secretKey =
+			SecretKey =
 		}
 	}
 }
