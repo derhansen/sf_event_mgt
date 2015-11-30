@@ -174,9 +174,9 @@
                     </div>
                     <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
 
-                    <f:if condition="{settings.reCAPTCHA.SiteKey}">
+                    <f:if condition="{settings.reCAPTCHA.siteKey}">
                     <script src="{settings.reCAPTCHA.apiUrl}" async defer></script>
-                        <div class="g-recaptcha" data-sitekey="{settings.reCAPTCHA.SiteKey}">
+                        <div class="g-recaptcha" data-sitekey="{settings.reCAPTCHA.siteKey}">
                         </div>
                         <f:render partial="FormErrors" arguments="{field: 'registration.recaptcha'}"/>
                     </f:if>

@@ -34,10 +34,10 @@ plugin.tx_sfeventmgt {
 			adminEmail =
 		}
 		reCAPTCHA{
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=siteKey for reCaptcha
-		  	SiteKey =
-		  	# cat=plugin.tx_sfeventmgt//a; type=string; label=secretKey for reCaptcha
-			SecretKey =
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
+		  	siteKey =
+		  	# cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
+			secretKey =
 		}
 	}
 }
