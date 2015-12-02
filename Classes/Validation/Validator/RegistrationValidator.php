@@ -64,7 +64,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
         if ($settings['registration']['requiredFields'] === '' ||
             !isset($settings['registration']['requiredFields'])
         ) {
-            $result = true;
+            return true;
         }
 
         $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields']));
