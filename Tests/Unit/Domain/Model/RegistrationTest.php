@@ -628,4 +628,24 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setLanguage('de');
         $this->assertEquals('de', $this->subject->getLanguage());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getRecaptchaReturnsDefaultForString()
+    {
+        $this->assertEmpty($this->subject->getRecaptcha());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setRecaptchaSetsGivenLanguage()
+    {
+        $this->subject->setRecaptcha('1234567890');
+        $this->assertEquals('1234567890', $this->subject->getRecaptcha());
+    }
+
 }

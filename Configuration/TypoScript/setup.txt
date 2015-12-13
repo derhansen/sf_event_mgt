@@ -56,10 +56,10 @@ plugin.tx_sfeventmgt {
 				adminSubject = Event registration cancelled
 			}
 		}
-		reCAPTCHA{
+		reCaptcha {
 			apiUrl = https://www.google.com/recaptcha/api.js
-		  	siteKey = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.siteKey}
-			secretKey = {$plugin.tx_sfeventmgt.settings.reCAPTCHA.secretKey}
+		  	siteKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.siteKey}
+			secretKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.secretKey}
 		}
 	}
 }

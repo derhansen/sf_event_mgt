@@ -20,19 +20,19 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * Validator for recaptcha.
- *
  */
-class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator {
+class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+{
 
-	/**
-	 * This validator always needs to be executed even if the given value is empty.
-	 * See AbstractValidator::validate()
-	 *
-	 * @var boolean
-	 */
-	protected $acceptsEmptyValues = FALSE;
+    /**
+     * This validator always needs to be executed even if the given value is empty.
+     * See AbstractValidator::validate()
+     *
+     * @var boolean
+     */
+    protected $acceptsEmptyValues = false;
 
-	    /**
+    /**
      * Object Manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
@@ -40,23 +40,22 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
      */
     protected $objectManager;
 
-	/**
-	 * Checks if the given value is a valid recaptcha.
-	 *
-	 * @param mixed $value The value that should be validated
-	 * @return void
-	 */
-	public function isValid($value) {
+    /**
+     * Checks if the given value is a valid recaptcha.
+     *
+     * @param mixed $value The value that should be validated
+     * @throws InvalidVariableException
+     */
+    public function isValid($value)
+    {
         $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
-        if ($response !== NULL) {
+        if ($response !== null) {
             // Only check if a response is set
-
             $configurationManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
             $fullTs = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-            $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCAPTCHA.'];
+            $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCaptcha.'];
 
-            if (
-                isset($reCaptchaSettings) &&
+            if (isset($reCaptchaSettings) &&
                 is_array($reCaptchaSettings) &&
                 isset($reCaptchaSettings['secretKey']) &&
                 $reCaptchaSettings['secretKey']
@@ -68,26 +67,32 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
                     'response' => $response
                 );
 
-                //url-ify the data for the POST
+                // url-ify the data for the POST
                 $fieldsString = '';
                 foreach ($fields as $key => $value) {
                     $fieldsString .= $key . '=' . $value . '&';
                 }
                 rtrim($fieldsString, '&');
 
-                //set the url, number of POST vars, POST data
+                // set the url, number of POST vars, POST data
                 curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
                 curl_setopt($ch, CURLOPT_POST, count($fields));
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $fieldsString);
 
-                //execute post
+                // execute post
                 $resultCH = json_decode(curl_exec($ch));
                 if (!(bool)$resultCH->success) {
-                    $this->addError(LocalizationUtility::translate('validation.possible_robot', 'sf_event_mgt'), 1231423345);
+                    $this->addError(
+                        LocalizationUtility::translate('validation.possible_robot', 'sf_event_mgt'),
+                        1231423345
+                    );
                 }
             } else {
-                throw new InvalidVariableException(LocalizationUtility::translate('error.no_secretKey', 'sf_event_mgt'), 1358349150);
+                throw new InvalidVariableException(
+                    LocalizationUtility::translate('error.no_secretKey', 'sf_event_mgt'),
+                    1358349150
+                );
             }
         }
     }

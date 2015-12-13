@@ -130,6 +130,18 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 false,
                 false
             ),
+            'requiredFieldsSettingsForRecaptchaIfRecatchaNotSet' => array(
+                array('registration' => array('requiredFields' => 'recaptcha')),
+                array(),
+                true,
+                true
+            ),
+            'requiredFieldsSettingsForRecaptchaIfRecatchaSet' => array(
+                array('registration' => array('requiredFields' => 'recaptcha')),
+                array('recaptcha' => 'recaptcha-value'),
+                false,
+                false
+            ),
         );
     }
 
@@ -176,10 +188,18 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
             $validationResult));
 
+        $recaptchaValidator = $this->getMock('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator',
+            array(), array(), '', false);
+        $recaptchaValidator->expects($this->any())->method('validate')->will($this->returnValue(
+            $validationResult));
+
+
         // Create a map of arguments to return values
         $map = array(
-            array('string', $notEmptyValidator),
-            array('boolean', $booleanValidator)
+            array('string', 'city', $notEmptyValidator),
+            array('string', 'zip', $notEmptyValidator),
+            array('string', 'recaptcha', $recaptchaValidator),
+            array('boolean', 'accepttc', $booleanValidator)
         );
 
         $this->validator->expects($this->any())->method('getValidator')->will($this->returnValueMap($map));
@@ -221,7 +241,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($returnedObject));
         $this->inject($validator, 'objectManager', $objectManager);
 
-        $result = $validator->_call('getValidator', $type);
+        $result = $validator->_call('getValidator', $type, '');
         $this->assertInstanceOf($expectedClass, $result);
     }
 }

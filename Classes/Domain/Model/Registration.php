@@ -728,5 +728,25 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->language = $language;
     }
 
+    /**
+     * Returns recaptcha
+     *
+     * @return string
+     */
+    public function getRecaptcha()
+    {
+        return $this->recaptcha;
+    }
+
+    /**
+     * Sets recaptcha
+     *
+     * @param string $recaptcha
+     * @return void
+     */
+    public function setRecaptcha($recaptcha)
+    {
+        $this->recaptcha = $recaptcha;
+    }
 
 }

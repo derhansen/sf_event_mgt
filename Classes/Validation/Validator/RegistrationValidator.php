@@ -91,6 +91,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      * Returns a validator object depending on the given type of the property
      *
      * @param string $type Type
+     * @param string $field The field
      *
      * @return \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
      */
@@ -99,14 +100,16 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
         switch ($type) {
             case 'boolean':
                 /** @var \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator $validator */
-                $validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
-                    array('is' => true));
+                $validator = $this->objectManager->get(
+                    'TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
+                    array('is' => true)
+                );
                 break;
             default:
-                if ($field == 'recaptcha'){
+                if ($field == 'recaptcha') {
                     /** @var \DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator $validator */
                     $validator = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator');
-                }else{
+                } else {
                     /** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
                     $validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');
                 }
