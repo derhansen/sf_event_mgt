@@ -1,7 +1,6 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <f:layout name="Default" />
 <f:section name="main">
-
     <f:if condition="{event.registrationPossible}">
         <f:then>
 
@@ -161,6 +160,7 @@
                         </div>
                     </f:if>
 
+                    <br/>
                     <div class="event-registration-row">
                         <label for="notes"><f:translate key="tx_sfeventmgt_domain_model_registration.notes" /></label>
                         <f:form.textarea id="notes" property="notes"/><br>
@@ -175,6 +175,13 @@
                     </div>
                     <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
 
+                    <f:if condition="{settings.reCaptcha.siteKey}">
+                        <div class="event-registration-row recaptcha">
+                            <script src="{settings.reCaptcha.apiUrl}" async defer></script>
+                            <div class="g-recaptcha" data-sitekey="{settings.reCaptcha.siteKey}"></div>
+                            <f:render partial="FormErrors" arguments="{field: 'registration.recaptcha'}"/>
+                        </div>
+                    </f:if>
                     <br/>
                     <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
                 </fieldset>

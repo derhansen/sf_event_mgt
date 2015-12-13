@@ -40,6 +40,7 @@
 	float: left;
 }
 
+.tx-sf-event-mgt form.registration .recaptcha,
 .tx-sf-event-mgt form.registration .checkbox {
     margin-left: 150px;
 }
