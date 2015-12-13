@@ -244,6 +244,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	date_of_birth int(11) unsigned DEFAULT '0' NOT NULL,
 	confirmation_until int(11) unsigned DEFAULT '0' NOT NULL,
 	amount_of_registrations int(11) DEFAULT '1' NOT NULL,
+	recaptcha varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

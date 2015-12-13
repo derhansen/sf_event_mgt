@@ -1,7 +1,6 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <f:layout name="Default" />
 <f:section name="main">
-
     <f:if condition="{event.registrationPossible}">
         <f:then>
 
@@ -175,6 +174,12 @@
                     </div>
                     <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
 
+                    <f:if condition="{settings.reCAPTCHA.siteKey}">
+                    <script src="{settings.reCAPTCHA.apiUrl}" async defer></script>
+                        <div class="g-recaptcha" data-sitekey="{settings.reCAPTCHA.siteKey}">
+                        </div>
+                        <f:render partial="FormErrors" arguments="{field: 'registration.recaptcha'}"/>
+                    </f:if>
                     <br/>
                     <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>
                 </fieldset>

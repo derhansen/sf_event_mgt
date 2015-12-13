@@ -16,6 +16,8 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * RegistrationValidator
@@ -70,7 +72,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 
         foreach ($requiredFields as $requiredField) {
             if ($value->_hasProperty($requiredField)) {
-                $validator = $this->getValidator(gettype($value->_getProperty($requiredField)));
+                $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
                 /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
                 $validationResult = $validator->validate($value->_getProperty($requiredField));
                 if ($validationResult->hasErrors()) {
@@ -81,6 +83,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                 }
             }
         }
+
         return $result;
     }
 
@@ -91,7 +94,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      *
      * @return \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
      */
-    protected function getValidator($type)
+    protected function getValidator($type, $field)
     {
         switch ($type) {
             case 'boolean':
@@ -100,8 +103,13 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                     array('is' => true));
                 break;
             default:
-                /** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
-                $validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');
+                if ($field == 'recaptcha'){
+                    /** @var \DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator $validator */
+                    $validator = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator');
+                }else{
+                    /** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
+                    $validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');
+                }
         }
         return $validator;
     }

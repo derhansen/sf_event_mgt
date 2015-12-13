@@ -331,6 +331,12 @@ return array(
                 'readOnly' => 1
             ),
         ),
-
+        'recaptcha' => array (
+            'exclude' => 0,
+            'config' => array (
+                'type' => 'input',
+                'size' => '30',
+            ),
+        )
     ),
 );

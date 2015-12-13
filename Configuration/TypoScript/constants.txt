@@ -33,6 +33,12 @@ plugin.tx_sfeventmgt {
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
 			adminEmail =
 		}
+		reCAPTCHA{
+			# cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
+		  	siteKey =
+		  	# cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
+			secretKey =
+		}
 	}
 }
 
