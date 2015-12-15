@@ -416,10 +416,6 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function setImageForObjectStorageContainingImageSetsImage()
     {
-        $this->markTestIncomplete(
-            'Problems with PHP 7 - see core #71567'
-        );
-
         $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
         $objectStorageHoldingExactlyOneImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $objectStorageHoldingExactlyOneImage->attach($image);

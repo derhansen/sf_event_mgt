@@ -20,6 +20,8 @@ matrix:
   exclude:
     - php: 5.4
       env: DB=mysql TYPO3_BRANCH=master COVERAGE=0
+  allow_failures:
+      - php: 7.0
 
 sudo: false
 
