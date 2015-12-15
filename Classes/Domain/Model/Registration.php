@@ -194,6 +194,13 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $recaptcha = '';
 
     /**
+     * FrontendUser if available
+     *
+     * @var int
+     */
+    protected $feUser = 0;
+
+    /**
      * Returns the firstname
      *
      * @return string $firstname
@@ -747,6 +754,27 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setRecaptcha($recaptcha)
     {
         $this->recaptcha = $recaptcha;
+    }
+
+    /**
+     * Returns the frontenduser
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     */
+    public function getFeUser()
+    {
+        return $this->feUser;
+    }
+
+    /**
+     * Sets the frontenduser
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feUser
+     * @return void
+     */
+    public function setFeUser($feUser)
+    {
+        $this->feUser = $feUser;
     }
 
 }

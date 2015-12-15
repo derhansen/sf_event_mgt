@@ -439,4 +439,41 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         );
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * Test if expected value is returned if no frontend user logged in
+     *
+     * @test
+     * @return void
+     */
+    public function getCurrentFeUserObjectReturnsNullIfNoFeUser()
+    {
+        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE']->fe_user->user = null;
+        $this->assertNull($this->subject->getCurrentFeUserObject());
+    }
+
+    /**
+     * Test if expected value is returned if a frontend user logged in
+     *
+     * @test
+     * @return void
+     */
+    public function getCurrentFeUserObjectReturnsFeUser()
+    {
+        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE']->fe_user->user = array();
+        $GLOBALS['TSFE']->fe_user->user['uid'] = 1;
+
+        $feUser = new \TYPO3\CMS\Extbase\Domain\Model\FrontendUser();
+
+        $mockFeUserRepository = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository', array(), array(), '', false);
+        $mockFeUserRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($feUser));
+        $this->inject($this->subject, 'frontendUserRepository', $mockFeUserRepository);
+
+        $this->assertEquals($this->subject->getCurrentFeUserObject(), $feUser);
+    }
+
 }

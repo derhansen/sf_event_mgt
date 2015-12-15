@@ -548,6 +548,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
+        $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+            array('getCurrentFeUserObject'), array(), '', false);
+        $registrationService->expects($this->once())->method('getCurrentFeUserObject');
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
             array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
 
@@ -600,6 +605,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             array('clearCacheForConfiguredUids'), array(), '', false);
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
+
+        $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+            array('getCurrentFeUserObject'), array(), '', false);
+        $registrationService->expects($this->once())->method('getCurrentFeUserObject');
+        $this->inject($this->subject, 'registrationService', $registrationService);
 
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
             array('generateHmac'), array(), '', false);

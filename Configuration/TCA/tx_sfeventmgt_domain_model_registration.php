@@ -26,14 +26,14 @@ return array(
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ),
-        'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,notes,',
+        'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,notes,fe_user,',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.gif'
     ),
     'interface' => array(
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, accepttc, confirmed, paid, notes, confirmation_until, amount_of_registrations, main_registration',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paid, notes, confirmation_until, amount_of_registrations, main_registration',
     ),
     'types' => array(
-        '1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, confirmation_until, confirmed, accepttc, paid, notes, amount_of_registrations, main_registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+        '1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, confirmation_until, confirmed, accepttc, paid, notes, amount_of_registrations, main_registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -337,6 +337,24 @@ return array(
                 'type' => 'input',
                 'size' => '30',
             ),
-        )
+        ),
+        'fe_user' => array(
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.fe_user',
+            'config' => array(
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'fe_users',
+                'foreign_table' => 'fe_users',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
+                'wizards' => array(
+                    'suggest' => array(
+                        'type' => 'suggest',
+                    ),
+                ),
+            ),
+        ),
     ),
 );

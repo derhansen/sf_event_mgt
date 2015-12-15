@@ -42,6 +42,14 @@ class RegistrationService
     protected $registrationRepository;
 
     /**
+     * FrontendUserRepository
+     *
+     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
+     * @inject
+     */
+    protected $frontendUserRepository;
+
+    /**
      * Hash Service
      *
      * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
@@ -230,5 +238,19 @@ class RegistrationService
             $messageKey,
             $titleKey
         );
+    }
+
+    /**
+     * Returns the current frontend user object if available
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser|null
+     */
+    public function getCurrentFeUserObject()
+    {
+        if (isset($GLOBALS['TSFE']->fe_user->user['uid'])) {
+            return $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+        } else {
+            return null;
+        }
     }
 }
