@@ -264,7 +264,7 @@ return array(
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.confirmationUntil',
             'config' => array(
                 'type' => 'input',
-                'size' => 10,
+                'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1,
                 'default' => time()
