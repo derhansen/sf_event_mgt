@@ -264,7 +264,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'];
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        $success = $this->checkRegistrationSuccess($event, $registration, $result);
+        $success = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
 
         // Save registration if no errors
         if ($success) {
@@ -330,45 +330,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 array('result' => $result)
             );
         }
-    }
-
-    /**
-     * Checks, if the registration can successfully be created. Note, that
-     * $result is passed by reference!
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     * @param RegistrationResult $result Result
-     *
-     * @return bool
-     */
-    protected function checkRegistrationSuccess(Event $event, Registration $registration, &$result)
-    {
-        $success = true;
-        if ($event->getEnableRegistration() === false) {
-            $success = false;
-            $result = RegistrationResult::REGISTRATION_NOT_ENABLED;
-        } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new \DateTime()) {
-            $success = false;
-            $result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
-        } elseif ($event->getStartdate() < new \DateTime()) {
-            $success = false;
-            $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
-        } elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
-            && $event->getMaxParticipants() > 0
-        ) {
-            $success = false;
-            $result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
-        } elseif ($event->getFreePlaces() < $registration->getAmountOfRegistrations()
-            && $event->getMaxParticipants() > 0
-        ) {
-            $success = false;
-            $result = RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES;
-        } elseif ($event->getMaxRegistrationsPerUser() < $registration->getAmountOfRegistrations()) {
-            $success = false;
-            $result = RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED;
-        }
-        return $success;
     }
 
     /**

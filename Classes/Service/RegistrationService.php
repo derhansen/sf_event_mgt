@@ -16,6 +16,8 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 
 /**
  * RegistrationService
@@ -252,5 +254,44 @@ class RegistrationService
         } else {
             return null;
         }
+    }
+
+    /**
+     * Checks, if the registration can successfully be created. Note, that
+     * $result is passed by reference!
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param RegistrationResult $result Result
+     *
+     * @return bool
+     */
+    public function checkRegistrationSuccess($event, $registration, &$result)
+    {
+        $success = true;
+        if ($event->getEnableRegistration() === false) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_NOT_ENABLED;
+        } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new \DateTime()) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
+        } elseif ($event->getStartdate() < new \DateTime()) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
+        } elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
+            && $event->getMaxParticipants() > 0
+        ) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
+        } elseif ($event->getFreePlaces() < $registration->getAmountOfRegistrations()
+            && $event->getMaxParticipants() > 0
+        ) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES;
+        } elseif ($event->getMaxRegistrationsPerUser() < $registration->getAmountOfRegistrations()) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED;
+        }
+        return $success;
     }
 }

@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
@@ -476,4 +477,170 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->assertEquals($this->subject->getCurrentFeUserObject(), $feUser);
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfRegistrationNotEnabled()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(false));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_NOT_ENABLED);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfRegistrationDeadlineExpired()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $deadline = new \DateTime();
+        $deadline->add(\DateInterval::createFromDateString('yesterday'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->any())->method('getRegistrationDeadline')->will($this->returnValue($deadline));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfEventExpired()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('yesterday'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
+    }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfMaxParticipantsReached()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations->expects($this->once())->method('count')->will($this->returnValue(10));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
+    }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfAmountOfRegistrationsGreaterThanRemainingPlaces()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+        $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES);
+    }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+        $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(6));
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
+        $event->expects($this->once())->method('getMaxRegistrationsPerUser')->will($this->returnValue(5));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED);
+    }
+
+
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessSucceedsWhenAllConditionsMet()
+    {
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertTrue($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_SUCCESSFUL);
+
+    }
 }

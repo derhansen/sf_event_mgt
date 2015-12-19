@@ -361,12 +361,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDisabled()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
 
         $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(false));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
@@ -381,6 +382,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDeadlineExpired()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
 
@@ -402,6 +406,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationActionRedirectsWithMessageIfEventExpired()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
 
@@ -423,6 +430,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfMaxParticipantsReached()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
 
@@ -449,6 +459,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsGreaterThanRemainingPlaces()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
@@ -477,6 +490,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(6));
@@ -509,6 +525,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationRedirectsToWithMessageIfRegistrationSuccessful()
     {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
             array(), '', false);
 
@@ -547,11 +566,6 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             array('clearCacheForConfiguredUids'), array(), '', false);
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
-
-        $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('getCurrentFeUserObject'), array(), '', false);
-        $registrationService->expects($this->once())->method('getCurrentFeUserObject');
-        $this->inject($this->subject, 'registrationService', $registrationService);
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
             array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
