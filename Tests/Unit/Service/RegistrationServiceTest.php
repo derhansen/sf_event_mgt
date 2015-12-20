@@ -588,6 +588,37 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES);
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function checkRegistrationSuccessFailsIfUniqueEmailCheckEnabledAndEmailRegisteredToEvent()
+    {
+        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            array('findEventRegistrationsByEmail'), array(), '', false);
+        $registrationRepository->expects($this->once())->method('findEventRegistrationsByEmail')->will(
+            $this->returnValue(1));
+        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+        $registration->expects($this->any())->method('getEmail')->will($this->returnValue('email@domain.tld'));
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(1));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getUniqueEmailCheck')->will($this->returnValue(true));
+
+        $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        $this->assertFalse($success);
+        $this->assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE);
+    }
 
     /**
      * @test

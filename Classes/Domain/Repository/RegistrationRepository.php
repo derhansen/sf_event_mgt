@@ -98,4 +98,19 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
+    /**
+     * Returns all registrations for the given event matching the given e-mail address
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param string $email E-Mail
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findEventRegistrationsByEmail($event, $email)
+    {
+        $constraints = array();
+        $query = $this->createQuery();
+        $constraints[] = $query->equals('event', $event);
+        $constraints[] = $query->equals('email', $email);
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
 }

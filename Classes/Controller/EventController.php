@@ -370,6 +370,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $messageKey = 'event.message.registrationfailedmaxamountregistrationsexceeded';
                 $titleKey = 'registrationResult.title.failed';
                 break;
+            case RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE:
+                $messageKey = 'event.message.registrationfailedemailnotunique';
+                $titleKey = 'registrationResult.title.failed';
+                break;
             default:
                 $messageKey = '';
                 $titleKey = '';

@@ -63,7 +63,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
     public function findAll()
     {
         $registrations = $this->registrationRepository->findAll();
-        $this->assertEquals(10, $registrations->count());
+        $this->assertEquals(11, $registrations->count());
     }
 
     /**
@@ -212,6 +212,19 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
         $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
         $event->expects($this->once())->method('getUid')->will($this->returnValue(3));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
+        $this->assertEquals(1, $registrations->count());
+    }
+
+    /**
+     * Test if findEventRegistrationsByEmail finds expected amount of registrations
+     *
+     * @test
+     */
+    public function findEventRegistrationsByEmailReturnsExpectedAmountOfRegistrations()
+    {
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event->expects($this->once())->method('getUid')->will($this->returnValue(10));
+        $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, 'email@domain.tld');
         $this->assertEquals(1, $registrations->count());
     }
 

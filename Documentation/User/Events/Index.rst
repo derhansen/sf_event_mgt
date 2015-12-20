@@ -200,8 +200,8 @@ The media tab contains fields which holds media-data for the event.
    :Description:
          One or more additional images (e.g. images from the event).
 
-Registration
-~~~~~~~~~~~~
+Registration Options
+~~~~~~~~~~~~~~~~~~~~
 
 For each event, it is possible to enable registration and to limit the
 amount of free places, so only a limited amount of people can participate to the event. It is also
@@ -262,6 +262,12 @@ registrations per user" is set to a value greater than 1.
          where the user can select how many registrations should be created.
 
  - :Field:
+         Enable unique e-mail check for registration
+
+   :Description:
+         If set, e-mail adresses of registrations are checked for uniqueness for the event.
+
+ - :Field:
          Notify admin
 
    :Description:
@@ -274,11 +280,25 @@ registrations per user" is set to a value greater than 1.
          When enabled, the organisator will receive an email for new event registrations (create/confirm). The e-mail
          sent will use the same template as the admin e-mail.
 
+
+Registrations
+~~~~~~~~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
+
  - :Field:
          Registrations
 
    :Description:
          A list of participants registered to the event.
+
 
 Access
 ~~~~~~

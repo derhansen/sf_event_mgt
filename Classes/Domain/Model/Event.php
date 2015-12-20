@@ -207,6 +207,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $cancelDeadline = null;
 
     /**
+     * Unique e-mail check
+     *
+     * @var bool
+     */
+    protected $uniqueEmailCheck = false;
+
+    /**
      * __construct
      */
     public function __construct()
@@ -1005,4 +1012,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->cancelDeadline;
     }
+
+    /**
+     * Returns uniqueEmailCheck
+     *
+     * @return boolean
+     */
+    public function getUniqueEmailCheck()
+    {
+        return $this->uniqueEmailCheck;
+    }
+
+    /**
+     * Sets UniqueEmailCheck
+     *
+     * @param boolean $uniqueEmailCheck
+     * @return void
+     */
+    public function setUniqueEmailCheck($uniqueEmailCheck)
+    {
+        $this->uniqueEmailCheck = $uniqueEmailCheck;
+    }
+
+
 }

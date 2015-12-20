@@ -517,6 +517,42 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     }
 
     /**
+     * @test
+     * @return void
+     */
+    public function saveRegistrationRedirectsWithMessageIfUniqueEmailCheckEnabledAndEmailAlreadyRegistered()
+    {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
+        // Inject mock of registrationRepository to registrationService
+        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            array('findEventRegistrationsByEmail'), array(), '', false);
+        $registrationRepository->expects($this->once())->method('findEventRegistrationsByEmail')->will($this->returnValue(1));
+        $this->inject($registrationService, 'registrationRepository', $registrationRepository);
+
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
+            array(), '', false);
+        $registration->expects($this->any())->method('getEmail')->will($this->returnValue('email@domain.tld'));
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getUniqueEmailCheck')->will($this->returnValue(true));
+
+        $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
+            array('result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE));
+
+        $this->subject->saveRegistrationAction($registration, $event);
+    }
+
+    /**
      * Checks, if a saveRegistration action with no autoConfirmation saves the
      * registration and redirects to the saveRegistrationResult action.
      *
@@ -816,6 +852,22 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function saveRegistrationResultActionShowsExpectedMessageIfEmailNotUnique()
+    {
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->at(0))->method('assign')->with('messageKey',
+            'event.message.registrationfailedemailnotunique');
+        $view->expects($this->at(1))->method('assign')->with('titleKey',
+            'registrationResult.title.failed');
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE);
     }
 
     /**

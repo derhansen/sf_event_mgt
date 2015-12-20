@@ -72,7 +72,7 @@
         <confirmation_until>1402740000</confirmation_until>
     </tx_sfeventmgt_domain_model_registration>
 
-    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 1 / paid 0 / ignoreNotification 1 -->
+    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 3 / paid 0 / ignoreNotification 1 -->
     <tx_sfeventmgt_domain_model_registration>
         <uid>14</uid>
         <event>3</event>
@@ -82,7 +82,7 @@
         <confirmation_until>1402740000</confirmation_until>
     </tx_sfeventmgt_domain_model_registration>
 
-    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 1 / paid 0 / ignoreNotification 1 -->
+    <!-- Confirmation until: 14.06.2014 10:00 AM / confirmed / event 3 / paid 0 / ignoreNotification 1 -->
     <tx_sfeventmgt_domain_model_registration>
         <uid>15</uid>
         <event>3</event>
@@ -90,6 +90,14 @@
         <confirmed>1</confirmed>
         <ignore_notifications>0</ignore_notifications>
         <confirmation_until>1402740000</confirmation_until>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- findEventRegistrationsByEmail -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>20</uid>
+        <event>10</event>
+        <email>email@domain.tld</email>
+        <confirmed>1</confirmed>
     </tx_sfeventmgt_domain_model_registration>
 
 </dataset>

@@ -1057,4 +1057,22 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->assertTrue($this->subject->getNotifyOrganisator());
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function uniqueEmailCheckReturnsInitialValue()
+    {
+        $this->assertFalse($this->subject->getUniqueEmailCheck());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function uniqueEmailCheckSetsValueForBoolen()
+    {
+        $this->subject->setUniqueEmailCheck(true);
+        $this->assertTrue($this->subject->getUniqueEmailCheck());
+    }
 }

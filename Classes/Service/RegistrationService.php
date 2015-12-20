@@ -291,6 +291,11 @@ class RegistrationService
         } elseif ($event->getMaxRegistrationsPerUser() < $registration->getAmountOfRegistrations()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED;
+        } elseif ($event->getUniqueEmailCheck() &&
+            $this->registrationRepository->findEventRegistrationsByEmail($event, $registration->getEmail())
+        ) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE;
         }
         return $success;
     }
