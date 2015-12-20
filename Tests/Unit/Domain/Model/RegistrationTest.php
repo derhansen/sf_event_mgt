@@ -648,4 +648,23 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->assertEquals('1234567890', $this->subject->getRecaptcha());
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function getFeUserReturnsInitialValue()
+    {
+        $this->assertNull($this->subject->getFeUser());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setFeUserSetsFeUser()
+    {
+        $user = new \TYPO3\CMS\Extbase\Domain\Model\FrontendUser();
+        $this->subject->setFeUser($user);
+        $this->assertSame($this->subject->getFeUser(), $user);
+    }
 }

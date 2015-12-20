@@ -198,7 +198,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
-    protected $feUser = 0;
+    protected $feUser = null;
 
     /**
      * Returns the firstname
