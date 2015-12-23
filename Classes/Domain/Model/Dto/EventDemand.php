@@ -51,32 +51,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $category;
 
     /**
-     * StartDate
-     *
-     * @var \DateTime
-     */
-    protected $startDate = null;
-
-    /**
-     * EndDate
-     *
-     * @var \DateTime
-     */
-    protected $endDate = null;
-
-    /**
      * Top event
      *
      * @var int
      */
     protected $topEventRestriction = 0;
-
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title = '';
 
     /**
      * Order field
@@ -119,6 +98,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $locationCountry = '';
+
+    /**
+     * Search Demand
+     *
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
+     */
+    protected $searchDemand = null;
 
     /**
      * Sets the displayMode
@@ -209,71 +195,6 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getCategory()
     {
         return $this->category;
-    }
-
-    /**
-     * Set the start date
-     *
-     * @param \DateTime $startDate StartDate
-     *
-     * @return void
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * Returns the start date
-     *
-     * @return \DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set the end date
-     *
-     * @param \DateTime $endDate EndDate
-     *
-     * @return void
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-    }
-
-    /**
-     * Get the end date
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * Set the title
-     *
-     * @param string $title Title
-     *
-     * @return void
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * Get the title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -428,6 +349,27 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLocationCountry($locationCountry)
     {
         $this->locationCountry = $locationCountry;
+    }
+
+    /**
+     * Returns the searchDemand
+     *
+     * @return SearchDemand
+     */
+    public function getSearchDemand()
+    {
+        return $this->searchDemand;
+    }
+
+    /**
+     * Sets the searchDemand
+     *
+     * @param SearchDemand $searchDemand
+     * @return void
+     */
+    public function setSearchDemand($searchDemand)
+    {
+        $this->searchDemand = $searchDemand;
     }
 
 }

@@ -16,6 +16,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
 
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
 
@@ -102,14 +103,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         if ($this->settings === null) {
             $this->redirect('settingsError');
         }
-        $this->arguments->getArgument('demand')
+        $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('startDate')
             ->setTypeConverterOption(
                 'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['search']['dateFormat']
             );
-        $this->arguments->getArgument('demand')
+        $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('endDate')
             ->setTypeConverterOption(
                 'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
@@ -121,16 +122,20 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * List action for backend module
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
      * @param int $messageId MessageID
      *
      * @return void
      */
-    public function listAction(EventDemand $demand = null, $messageId = null)
+    public function listAction(SearchDemand $searchDemand = null, $messageId = null)
     {
-        if ($demand === null) {
-            $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        /** @var EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+
+        if ($searchDemand !== null) {
+            $searchDemand->setFields($this->settings['search']['fields']);
         }
+        $demand->setSearchDemand($searchDemand);
 
         if ($this->pid > 0) {
             $demand->setStoragePage($this->pid);
@@ -144,7 +149,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
 
         $events = $this->eventRepository->findDemanded($demand);
         $this->view->assign('events', $events);
-        $this->view->assign('demand', $demand);
+        $this->view->assign('searchDemand', $searchDemand);
     }
 
     /**

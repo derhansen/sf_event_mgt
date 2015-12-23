@@ -17,6 +17,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 use \TYPO3\CMS\Core\Utility\MathUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * The repository for Events
@@ -65,7 +66,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setLocationCityConstraint($query, $eventDemand, $constraints);
         $this->setLocationCountryConstraint($query, $eventDemand, $constraints);
         $this->setStartEndDateConstraint($query, $eventDemand, $constraints);
-        $this->setTitleConstraint($query, $eventDemand, $constraints);
+        $this->setSearchConstraint($query, $eventDemand, $constraints);
         $this->setTopEventConstraint($query, $eventDemand, $constraints);
         $this->setOrderingsFromDemand($query, $eventDemand);
 
@@ -236,18 +237,18 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setStartEndDateConstraint($query, $eventDemand, &$constraints)
     {
         /* StartDate */
-        if ($eventDemand->getStartDate() !== null) {
-            $constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getStartDate());
+        if ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
+            $constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getSearchDemand()->getStartDate());
         }
 
         /* EndDate */
-        if ($eventDemand->getEndDate() !== null) {
-            $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getEndDate());
+        if ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getEndDate() !== null) {
+            $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getSearchDemand()->getEndDate());
         }
     }
 
     /**
-     * Sets the title constraint to the given constraints array
+     * Sets the search constraint to the given constraints array
      *
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
@@ -255,10 +256,29 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @return void
      */
-    protected function setTitleConstraint($query, $eventDemand, &$constraints)
+    protected function setSearchConstraint($query, $eventDemand, &$constraints)
     {
-        if ($eventDemand->getTitle() !== '') {
-            $constraints[] = $query->like('title', '%' . $eventDemand->getTitle() . '%', false);
+        if ($eventDemand->getSearchDemand() &&
+            $eventDemand->getSearchDemand()->getSearch() !== null &&
+            $eventDemand->getSearchDemand()->getSearch() !== ''
+        ) {
+            $searchFields = GeneralUtility::trimExplode(',', $eventDemand->getSearchDemand()->getFields(), true);
+            $searchConstraints = [];
+
+            if (count($searchFields) === 0) {
+                throw new \UnexpectedValueException('No search fields defined', 1318497755);
+            }
+
+            $searchSubject = $eventDemand->getSearchDemand()->getSearch();
+            foreach ($searchFields as $field) {
+                if (!empty($searchSubject)) {
+                    $searchConstraints[] = $query->like($field, '%' . $searchSubject . '%', false);
+                }
+            }
+
+            if (count($searchConstraints)) {
+                $constraints[] = $query->logicalOr($searchConstraints);
+            }
         }
     }
 

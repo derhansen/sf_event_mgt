@@ -297,13 +297,17 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      * @test
      * @return void
      */
-    public function findDemandedRecordsByStartDate()
+    public function findSearchDemandedRecordsByStartDate()
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setStoragePage(6);
 
-        $demand->setStartDate(new \DateTime('30.05.2014 14:00:00'));
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand */
+        $searchDemand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand');
+        $searchDemand->setStartDate(new \DateTime('30.05.2014 14:00:00'));
+        $demand->setSearchDemand($searchDemand);
+
         $events = $this->eventRepository->findDemanded($demand);
 
         $this->assertEquals(2, $events->count());
@@ -315,13 +319,17 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      * @test
      * @return void
      */
-    public function findDemandedRecordsByEndDate()
+    public function findSearchDemandedRecordsByEndDate()
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setStoragePage(7);
 
-        $demand->setEndDate(new \DateTime('02.06.2014 08:00'));
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand */
+        $searchDemand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand');
+        $searchDemand->setEndDate(new \DateTime('02.06.2014 08:00'));
+        $demand->setSearchDemand($searchDemand);
+
         $events = $this->eventRepository->findDemanded($demand);
 
         $this->assertEquals(2, $events->count());
@@ -333,13 +341,18 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      * @test
      * @return void
      */
-    public function findDemandedRecordsByTitle()
+    public function findSearchDemandedRecordsByFieldTitle()
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setStoragePage(8);
 
-        $demand->setTitle('TYPO3 CMS course');
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand */
+        $searchDemand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand');
+        $searchDemand->setSearch('TYPO3 CMS course');
+        $searchDemand->setFields('title');
+        $demand->setSearchDemand($searchDemand);
+
         $events = $this->eventRepository->findDemanded($demand);
 
         $this->assertEquals(2, $events->count());

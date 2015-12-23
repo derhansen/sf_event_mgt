@@ -65,8 +65,11 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function listActionFetchesEventsFromRepositoryForNoStoragePageAndAssignsThemToView()
     {
-        $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+            array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with(null);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             array('get'), array(), '', false);
@@ -80,7 +83,7 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('demand', $demand);
+        $view->expects($this->at(1))->method('assign')->with('searchDemand', $searchDemand);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
@@ -92,8 +95,17 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function listActionFetchesEventsFromRepositoryForNoStoragePageAndGivenDemandAndAssignsThemToView()
     {
-        $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+        $searchDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+            array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+
+        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+            array('get'), array(), '', false);
+        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             array('findDemanded'), array(), '', false);
@@ -102,10 +114,10 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('demand', $demand);
+        $view->expects($this->at(1))->method('assign')->with('searchDemand', $searchDemand);
         $this->inject($this->subject, 'view', $view);
 
-        $this->subject->listAction($demand);
+        $this->subject->listAction($searchDemand);
     }
 
     /**
@@ -116,11 +128,18 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->subject->_set('pid', 1);
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            array(), array(), '', false);
-        $demand->expects($this->once())->method('setStoragePage')->with(1);
-
+        $searchDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
+            array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects($this->any())->method('setStoragePage')->with(1);
+
+        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+            array('get'), array(), '', false);
+        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             array('findDemanded'), array(), '', false);
@@ -129,10 +148,10 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('demand', $demand);
+        $view->expects($this->at(1))->method('assign')->with('searchDemand', $searchDemand);
         $this->inject($this->subject, 'view', $view);
 
-        $this->subject->listAction($demand);
+        $this->subject->listAction($searchDemand);
     }
 
     /**
@@ -143,11 +162,18 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->subject->_set('pid', 1);
 
+        $searchDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+
         $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
             array(), array(), '', false);
-        $demand->expects($this->once())->method('setStoragePage')->with(1);
+        $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects($this->any())->method('setStoragePage')->with(1);
 
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+            array('get'), array(), '', false);
+        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             array('findDemanded'), array(), '', false);
@@ -160,10 +186,10 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(1))->method('assign')->with('messageTitleKey', 'administration.message-123.title');
         $view->expects($this->at(2))->method('assign')->with('messageContentKey', 'administration.message-123.content');
         $view->expects($this->at(3))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(4))->method('assign')->with('demand', $demand);
+        $view->expects($this->at(4))->method('assign')->with('searchDemand', $searchDemand);
         $this->inject($this->subject, 'view', $view);
 
-        $this->subject->listAction($demand, 123);
+        $this->subject->listAction($searchDemand, 123);
     }
 
     /**
@@ -216,9 +242,9 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
             array(), array(), '', false);
-        $mockArguments->expects($this->at(0))->method('getArgument')->with('demand')->will(
+        $mockArguments->expects($this->at(0))->method('getArgument')->with('searchDemand')->will(
             $this->returnValue($mockStartDateArgument));
-        $mockArguments->expects($this->at(1))->method('getArgument')->with('demand')->will(
+        $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
             $this->returnValue($mockEndDateArgument));
         return $mockArguments;
     }

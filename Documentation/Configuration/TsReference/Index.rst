@@ -401,7 +401,19 @@ module.tx_sfeventmgt
          Date format for search fields in backend module
 
    :Default:
-         d.m.Y
+         d.m.Y H:i
+
+ - :Property:
+         settings.search.fiels
+
+   :Date type:
+         String
+
+   :Description:
+         Fields to be included in a query from the backend module
+
+   :Default:
+         title, teaser
 
  - :Property:
          settings.notification.senderEmail

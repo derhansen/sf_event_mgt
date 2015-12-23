@@ -80,6 +80,7 @@ module.tx_sfeventmgt {
 		}
 		search {
 			dateFormat = {$module.tx_sfeventmgt.settings.search.dateFormat}
+			fields = {$module.tx_sfeventmgt.settings.search.fields}
 		}
 		registration {
 			deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}

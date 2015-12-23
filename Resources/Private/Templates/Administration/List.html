@@ -17,16 +17,16 @@
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.title" />
     </h1>
 
-    <f:form name="demand" object="{demand}">
+    <f:form name="searchDemand" object="{searchDemand}">
         <h2>
             <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settings"/>
         </h2>
         <div class="settings">
             <div class="field">
-                <label for="title">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+                <label for="search">
+                    <f:translate key="LLL:EXT:lang/locallang_common.xlf:search" />
                 </label>
-                <f:form.textfield property="title" id="title"/>
+                <f:form.textfield property="search" id="search"/>
                 <div class="clear"></div>
             </div>
 
@@ -35,8 +35,8 @@
                     <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
                 </label>
                 <f:form.textfield property="startDate" id="tceforms-datetimefield-startDate"
-                                  value="{demand.startDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
-                <f:render partial="FormErrors" arguments="{field: 'demand.startDate'}"/>
+                                  value="{searchDemand.startDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
+                <f:render partial="FormErrors" arguments="{field: 'searchDemand.startDate'}"/>
                 <div class="clear"></div>
             </div>
 
@@ -45,8 +45,8 @@
                     <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
                 </label>
                 <f:form.textfield property="endDate" id="tceforms-datetimefield-endDate"
-                                  value="{demand.endDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
-                <f:render partial="FormErrors" arguments="{field: 'demand.endDate'}"/>
+                                  value="{searchDemand.endDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
+                <f:render partial="FormErrors" arguments="{field: 'searchDemand.endDate'}"/>
                 <div class="clear"></div>
             </div>
 

@@ -60,7 +60,8 @@ module.tx_sfeventmgt {
 			itemsPerPage = 10
 		}
 		search {
-			dateFormat = d.m.Y
+			dateFormat = d.m.Y H:i
+			fields = title, teaser
 		}
 		notification {
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
