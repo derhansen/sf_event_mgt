@@ -116,6 +116,7 @@ class NotificationService
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @param array $settings
+     * @param string $customNotification
      *
      * @return bool
      */
