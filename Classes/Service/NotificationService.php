@@ -86,7 +86,8 @@ class NotificationService
      */
     public function sendCustomNotification($event, $customNotification, $settings)
     {
-        if (is_null($event) || $customNotification == '' || $settings == '' || !is_array($settings)) {
+        $cantSend = is_null($event) || $customNotification == '' || $settings == '' || !is_array($settings);
+        if ($cantSend) {
             return 0;
         }
         $count = 0;
