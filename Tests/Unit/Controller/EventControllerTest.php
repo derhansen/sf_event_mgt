@@ -212,7 +212,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
         $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
         $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', null);
+        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', array());
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
@@ -1153,7 +1153,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
         $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
         $view->expects($this->at(3))->method('assign')->with('searchDemand', null);
-        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', null);
+        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', array());
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->searchAction();
@@ -1205,7 +1205,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
         $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
         $view->expects($this->at(3))->method('assign')->with('searchDemand', $searchDemand);
-        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', null);
+        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', array());
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->searchAction($searchDemand);

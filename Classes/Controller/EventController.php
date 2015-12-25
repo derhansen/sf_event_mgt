@@ -183,11 +183,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @return void
      */
-    public function listAction(array $overwriteDemand = null)
+    public function listAction(array $overwriteDemand = array())
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
-        if ($this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== null) {
+        if ($this->isOverwriteDemand($overwriteDemand)) {
             $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         }
         $events = $this->eventRepository->findDemanded($eventDemand);
@@ -500,7 +500,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @return void
      */
-    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = null)
+    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = array())
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
@@ -508,17 +508,17 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
+
+            if ($this->settings['search']['adjustTime'] && $searchDemand->getStartDate() !== null) {
+                $searchDemand->getStartDate()->setTime(0, 0, 0);
+            }
+
+            if ($this->settings['search']['adjustTime'] && $searchDemand->getEndDate() !== null) {
+                $searchDemand->getEndDate()->setTime(23, 59, 59);
+            }
         }
 
-        if ($searchDemand && $this->settings['search']['adjustTime'] && $searchDemand->getStartDate() !== null) {
-            $searchDemand->getStartDate()->setTime(0, 0, 0);
-        }
-
-        if ($searchDemand && $this->settings['search']['adjustTime'] && $searchDemand->getEndDate() !== null) {
-            $searchDemand->getEndDate()->setTime(23, 59, 59);
-        }
-
-        if ($this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== null) {
+        if ($this->isOverwriteDemand($overwriteDemand)) {
             $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         }
 
@@ -533,4 +533,16 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->view->assign('searchDemand', $searchDemand);
         $this->view->assign('overwriteDemand', $overwriteDemand);
     }
+
+    /**
+     * Returns if a demand object can be overwritten with the given overwriteDemand array
+     *
+     * @param array $overwriteDemand
+     * @return bool
+     */
+    protected function isOverwriteDemand($overwriteDemand)
+    {
+        return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== array();
+    }
+
 }
