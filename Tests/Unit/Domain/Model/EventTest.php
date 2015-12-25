@@ -1075,4 +1075,41 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setUniqueEmailCheck(true);
         $this->assertTrue($this->subject->getUniqueEmailCheck());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function enableCancelReturnsDefaultValue()
+    {
+        $this->assertFalse($this->subject->getEnableCancel());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setEnableCancelSetsEnableCancelForBoolean()
+    {
+        $this->subject->setEnableCancel(true);
+        $this->assertTrue($this->subject->getEnableCancel());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getCancelDeallineReturnsDefaultValue() {
+        $this->assertEquals(0, $this->subject->getCancelDeadline());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setCancelDeallineSetsCancelDeadlineForDate() {
+        $date = new \DateTime();
+        $this->subject->setCancelDeadline($date);
+        $this->assertEquals($date, $this->subject->getCancelDeadline());
+    }
 }
