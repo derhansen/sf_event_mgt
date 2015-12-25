@@ -86,8 +86,7 @@ class NotificationService
      */
     public function sendCustomNotification($event, $customNotification, $settings)
     {
-        $cantSend = is_null($event) || $customNotification == '' || $settings == '' || !is_array($settings);
-        if ($cantSend) {
+        if ($this->cantSendCustomNotification($event, $customNotification, $settings)) {
             return 0;
         }
         $count = 0;
@@ -110,6 +109,19 @@ class NotificationService
             }
         }
         return $count;
+    }
+
+    /**
+     * Returns true if conditions are not met to send a custom notification
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param array $settings
+     *
+     * @return bool
+     */
+    protected function cantSendCustomNotification($event, $settings, $customNotification)
+    {
+        return is_null($event) || $customNotification == '' || $settings == '' || !is_array($settings);
     }
 
     /**
