@@ -1,0 +1,59 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+<h1><f:translate key="search.title" /></h1>
+
+    <f:form name="searchDemand" object="{searchDemand}">
+        <div class="settings">
+            <div class="field">
+                <label for="search">
+                    <f:translate key="search.searchFor" />
+                </label>
+                <f:form.textfield property="search" id="search"/>
+                <div class="clear"></div>
+            </div>
+
+
+            <div class="field">
+                <label for="startDate">
+                    <f:translate key="search.startdate"/>
+                </label>
+                <f:form.textfield property="startDate" id="startDate" type="date"
+                                  value="{searchDemand.startDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
+                <f:render partial="FormErrors" arguments="{field: 'searchDemand.startDate'}"/>
+                <div class="clear"></div>
+            </div>
+
+            <div class="field">
+                <label for="endDate">
+                    <f:translate key="search.enddate"/>
+                </label>
+                <f:form.textfield property="endDate" id="endDate" type="date"
+                                  value="{searchDemand.endDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
+                <f:render partial="FormErrors" arguments="{field: 'searchDemand.endDate'}"/>
+                <div class="clear"></div>
+            </div>
+
+            <div class="field">
+
+            <f:form.submit value="{f:translate(key:'search.submit')}" class="submit"/>
+        </div>
+    </f:form>
+
+    <f:if condition="{searchDemand.hasQuery}">
+        <h2><f:translate key="search.searchResult" /></h2>
+    </f:if>
+
+    <!-- Output all events -->
+    <f:if condition="{events}">
+        <f:then>
+            <f:for each="{events}" as="event">
+                <f:render partial="Event/ListItem" arguments="{_all}"/>
+            </f:for>
+        </f:then>
+        <f:else>
+            <f:translate key="search.noResultsFound" />
+        </f:else>
+    </f:if>
+</f:section>

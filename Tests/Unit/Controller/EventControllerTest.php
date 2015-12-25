@@ -1050,4 +1050,338 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
     }
+
+    /**
+     * Returns the argument mock-object required for initializeSearchAction tests
+     *
+     * @param string $settingsSearchDateFormat Settings for searchDateFormat
+     *
+     * @return mixed
+     */
+    protected function getInitializeSearchActionArgumentMock($settingsSearchDateFormat = null)
+    {
+        $mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+            array(), array(), '', false);
+        $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
+            $this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
+            $this->equalTo('dateFormat'),
+            $this->equalTo($settingsSearchDateFormat)
+        );
+
+        $mockStartDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+            array(), array(), '', false);
+        $mockStartDatePmConfig->expects($this->once())->method('forProperty')->with('startDate')->will(
+            $this->returnValue($mockPropertyMapperConfig));
+        $mockEndDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
+            array(), array(), '', false);
+        $mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
+            $this->returnValue($mockPropertyMapperConfig));
+
+        $mockStartDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
+            array(), array(), '', false);
+        $mockStartDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
+            $this->returnValue($mockStartDatePmConfig));
+        $mockEndDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
+            array(), array(), '', false);
+        $mockEndDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
+            $this->returnValue($mockEndDatePmConfig));
+
+        $mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
+            array(), array(), '', false);
+        $mockArguments->expects($this->at(0))->method('getArgument')->with('searchDemand')->will(
+            $this->returnValue($mockStartDateArgument));
+        $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
+            $this->returnValue($mockEndDateArgument));
+        return $mockArguments;
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function initializeSearchActionSetsDateFormat()
+    {
+        $settings = array(
+            'search' => array(
+                'dateFormat' => 'Y-m-d'
+            )
+        );
+
+        $this->subject->_set('arguments', $this->getInitializeSearchActionArgumentMock('Y-m-d'));
+        $this->subject->_set('settings', $settings);
+        $this->subject->initializeSearchAction();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewForNoSearchDemand()
+    {
+        $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+        $foreignRecordDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand();
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+
+        $settings = array('settings');
+        $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($demand));
+
+        $this->subject->expects($this->once())->method('createForeignRecordDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($foreignRecordDemand));
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+            array('findDemanded'), array(), '', false);
+        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+            array('findDemanded'), array(), '', false);
+        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+        $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+            array('findDemanded'), array(), '', false);
+        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
+        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
+        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
+        $view->expects($this->at(3))->method('assign')->with('searchDemand', null);
+        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', null);
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->searchAction();
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewWithSearchDemand()
+    {
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand->expects($this->once())->method('setFields');
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+
+        $foreignRecordDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand();
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+
+        $settings = array('settings');
+        $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($demand));
+
+        $this->subject->expects($this->once())->method('createForeignRecordDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($foreignRecordDemand));
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+            array('findDemanded'), array(), '', false);
+        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+            array('findDemanded'), array(), '', false);
+        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+        $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+            array('findDemanded'), array(), '', false);
+        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
+        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
+        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
+        $view->expects($this->at(3))->method('assign')->with('searchDemand', $searchDemand);
+        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', null);
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->searchAction($searchDemand);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function searchActionSetsSearchDemandFieldsIfSearchDemandGiven()
+    {
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand->expects($this->once())->method('setFields');
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+
+        $settings = array('settings');
+        $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($demand));
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+            array('findDemanded'), array(), '', false);
+        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+            array('findDemanded'), array(), '', false);
+        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+        $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+            array('findDemanded'), array(), '', false);
+        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->searchAction($searchDemand);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function searchActionSetsAdjustsDateFieldsIfAdjustDateSettingSetAndDateFieldsGiven()
+    {
+        $mockStartDate = $this->getMock('\DateTime', array(), array(), '', false);
+        $mockStartDate->expects($this->once())->method('setTime')->with(0, 0, 0);
+
+        $mockEndDate = $this->getMock('\DateTime', array(), array(), '', false);
+        $mockEndDate->expects($this->once())->method('setTime')->with(23, 59, 59);
+
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand->expects($this->once())->method('setFields');
+        $searchDemand->expects($this->any())->method('getStartDate')->will($this->returnValue($mockStartDate));
+        $searchDemand->expects($this->any())->method('getEndDate')->will($this->returnValue($mockEndDate));
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+
+        $settings = array(
+            'search' => array(
+                'adjustTime' => 1
+            )
+        );
+        $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($demand));
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+            array('findDemanded'), array(), '', false);
+        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+            array('findDemanded'), array(), '', false);
+        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+        $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+            array('findDemanded'), array(), '', false);
+        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->searchAction($searchDemand);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function searchActionOverwritesDemandFieldsIfOverwriteDemandObjectGiven()
+    {
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand->expects($this->once())->method('setFields');
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+
+        $overrideDemand = array('category' => 10);
+        $this->subject->expects($this->once())->method('overwriteEventDemandObject')->will($this->returnValue($demand));
+
+        $settings = array('disableOverrideDemand' => 0);
+        $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($demand));
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+            array('findDemanded'), array(), '', false);
+        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+            array('findDemanded'), array(), '', false);
+        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+        $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+            array('findDemanded'), array(), '', false);
+        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->searchAction($searchDemand, $overrideDemand);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function searchActionDoesNotOverridesDemandIfOverwriteDemandDisabled()
+    {
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand->expects($this->once())->method('setFields');
+
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+
+        $overrideDemand = array('category' => 10);
+        $this->subject->expects($this->never())->method('overwriteEventDemandObject');
+
+        $settings = array('disableOverrideDemand' => 1);
+        $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($demand));
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
+            array('findDemanded'), array(), '', false);
+        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
+            array('findDemanded'), array(), '', false);
+        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $this->inject($this->subject, 'categoryRepository', $categoryRepository);
+
+        $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
+            array('findDemanded'), array(), '', false);
+        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->searchAction($searchDemand, $overrideDemand);
+    }
 }

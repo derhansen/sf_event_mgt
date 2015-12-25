@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
@@ -464,5 +465,72 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $this->view->assign('messageKey', $messageKey);
         $this->view->assign('titleKey', $titleKey);
+    }
+
+    /**
+     * Set date format for field startDate and endDate
+     *
+     * @return void
+     */
+    public function initializeSearchAction()
+    {
+        if ($this->settings !== null && $this->settings['search']['dateFormat']) {
+            $this->arguments->getArgument('searchDemand')
+                ->getPropertyMappingConfiguration()->forProperty('startDate')
+                ->setTypeConverterOption(
+                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+                    $this->settings['search']['dateFormat']
+                );
+            $this->arguments->getArgument('searchDemand')
+                ->getPropertyMappingConfiguration()->forProperty('endDate')
+                ->setTypeConverterOption(
+                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+                    $this->settings['search']['dateFormat']
+                );
+        }
+    }
+
+    /**
+     * Search view
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
+     * @param array $overwriteDemand OverwriteDemand
+     *
+     * @return void
+     */
+    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = null)
+    {
+        $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
+        $eventDemand->setSearchDemand($searchDemand);
+        $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
+
+        if ($searchDemand !== null) {
+            $searchDemand->setFields($this->settings['search']['fields']);
+        }
+
+        if ($searchDemand && $this->settings['search']['adjustTime'] && $searchDemand->getStartDate() !== null) {
+            $searchDemand->getStartDate()->setTime(0, 0, 0);
+        }
+
+        if ($searchDemand && $this->settings['search']['adjustTime'] && $searchDemand->getEndDate() !== null) {
+            $searchDemand->getEndDate()->setTime(23, 59, 59);
+        }
+
+        if ($this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== null) {
+            $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
+        }
+
+        $categories = $this->categoryRepository->findDemanded($foreignRecordDemand);
+        $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
+
+        $events = $this->eventRepository->findDemanded($eventDemand);
+
+        $this->view->assign('events', $events);
+        $this->view->assign('categories', $categories);
+        $this->view->assign('locations', $locations);
+        $this->view->assign('searchDemand', $searchDemand);
+        $this->view->assign('overwriteDemand', $overwriteDemand);
     }
 }

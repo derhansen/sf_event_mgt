@@ -7,11 +7,11 @@ if (!defined('TYPO3_MODE')) {
     'DERHANSEN.' . $_EXTKEY,
     'Pievent',
     array(
-        'Event' => 'list, detail, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload'
+        'Event' => 'list, detail, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search'
     ),
     // non-cacheable actions
     array(
-        'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload',
+        'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
     )
 );
 

@@ -27,7 +27,7 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $search;
+    protected $search = '';
 
     /**
      * Search fields
@@ -136,5 +136,13 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->fields = $fields;
     }
 
-
+    /**
+     * Returns if the demand object has at least one search property set
+     *
+     * @return bool
+     */
+    public function getHasQuery()
+    {
+        return $this->search !== '' || $this->startDate !== null || $this->endDate !== null;
+    }
 }

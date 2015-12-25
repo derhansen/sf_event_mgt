@@ -94,7 +94,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     }
 
     /**
-     * Set date format for field dateOfBirth
+     * Set date format for fields startDate and endDate
      *
      * @return void
      */

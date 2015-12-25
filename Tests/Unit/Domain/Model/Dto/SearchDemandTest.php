@@ -103,7 +103,7 @@ class SearchDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getSearchReturnsEmptyStringIfNotSet()
     {
-        $this->assertEmpty($this->subject->getSearch());
+        $this->assertEquals('', $this->subject->getSearch());
     }
 
     /**
@@ -140,4 +140,44 @@ class SearchDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             $this->subject->getFields()
         );
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getHasQueryReturnsFalseIfNoQuerySet()
+    {
+        $this->assertEquals(false, $this->subject->getHasQuery());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getHasQueryReturnsTrueIfSearchSet()
+    {
+        $this->subject->setSearch('Test');
+        $this->assertEquals(true, $this->subject->getHasQuery());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getHasQueryReturnsTrueIfStartDateSet()
+    {
+        $this->subject->setStartDate(new \DateTime());
+        $this->assertEquals(true, $this->subject->getHasQuery());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getHasQueryReturnsTrueIfEndDateSet()
+    {
+        $this->subject->setEndDate(new \DateTime());
+        $this->assertEquals(true, $this->subject->getHasQuery());
+    }
+
 }

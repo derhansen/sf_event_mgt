@@ -258,6 +258,9 @@
 			<trans-unit id="administration.message-2.content">
 				<source>The selected e-mail has been sent to all participants of the event.</source>
 			</trans-unit>
+			<trans-unit id="search.title">
+				<source>Search</source>
+			</trans-unit>
 			<trans-unit id="list.title">
 				<source>Events</source>
 			</trans-unit>
@@ -308,6 +311,24 @@
 			</trans-unit>
 			<trans-unit id="error.no_secretKey">
 				<source>No secretKey set in TypoScript!</source>
+			</trans-unit>
+			<trans-unit id="search.searchFor">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="search.startdate">
+				<source>Startdate</source>
+			</trans-unit>
+			<trans-unit id="search.enddate">
+				<source>Enddate</source>
+			</trans-unit>
+			<trans-unit id="search.submit">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="search.searchResult">
+				<source>Searchresult</source>
+			</trans-unit>
+			<trans-unit id="search.noResultsFound">
+				<source>Your search did not match any events</source>
 			</trans-unit>
 		</body>
 	</file>

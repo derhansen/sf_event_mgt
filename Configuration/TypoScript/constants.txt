@@ -39,6 +39,11 @@ plugin.tx_sfeventmgt {
 		  	# cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
 			secretKey =
 		}
+		search {
+			fields = title, teaser
+			dateFormat = Y-m-d
+			adjustTime = 1
+		}
 	}
 }
 
