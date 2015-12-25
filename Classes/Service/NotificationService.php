@@ -143,24 +143,7 @@ class NotificationService
      */
     public function sendUserMessage($event, $registration, $settings, $type, $customNotification = '')
     {
-        $template = 'Notification/User/RegistrationNew.html';
-        $subject = $settings['notification']['registrationNew']['userSubject'];
-        switch ($type) {
-            case MessageType::REGISTRATION_CONFIRMED:
-                $template = 'Notification/User/RegistrationConfirmed.html';
-                $subject = $settings['notification']['registrationConfirmed']['userSubject'];
-                break;
-            case MessageType::REGISTRATION_CANCELLED:
-                $template = 'Notification/User/RegistrationCancelled.html';
-                $subject = $settings['notification']['registrationCancelled']['userSubject'];
-                break;
-            case MessageType::CUSTOM_NOTIFICATION:
-                $template = 'Notification/User/Custom/' . $settings['notification']['customNotifications'][$customNotification]['template'];
-                $subject = $settings['notification']['customNotifications'][$customNotification]['subject'];
-                break;
-            case MessageType::REGISTRATION_NEW:
-            default:
-        }
+        list($template, $subject) = $this->getUserMessageTemplateSubject($settings, $type, $customNotification);
 
         if (is_null($event) || is_null($registration) || !is_array($settings) || (substr($template, -5) != '.html')) {
             return false;
@@ -180,6 +163,40 @@ class NotificationService
     }
 
     /**
+     * Returns an array with template and subject for the user message
+     *
+     * @param array $settings
+     * @param int $type Type
+     * @param string $customNotification
+     * @return array
+     */
+    protected function getUserMessageTemplateSubject($settings, $type, $customNotification)
+    {
+        $template = 'Notification/User/RegistrationNew.html';
+        $subject = $settings['notification']['registrationNew']['userSubject'];
+        switch ($type) {
+            case MessageType::REGISTRATION_CONFIRMED:
+                $template = 'Notification/User/RegistrationConfirmed.html';
+                $subject = $settings['notification']['registrationConfirmed']['userSubject'];
+                break;
+            case MessageType::REGISTRATION_CANCELLED:
+                $template = 'Notification/User/RegistrationCancelled.html';
+                $subject = $settings['notification']['registrationCancelled']['userSubject'];
+                break;
+            case MessageType::CUSTOM_NOTIFICATION:
+                $template = 'Notification/User/Custom/' . $settings['notification']['customNotifications'][$customNotification]['template'];
+                $subject = $settings['notification']['customNotifications'][$customNotification]['subject'];
+                break;
+            case MessageType::REGISTRATION_NEW:
+            default:
+        }
+        return array(
+            $template,
+            $subject
+        );
+    }
+
+    /**
      * Sends a message to the admin based on the given type
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
@@ -191,20 +208,8 @@ class NotificationService
      */
     public function sendAdminMessage($event, $registration, $settings, $type)
     {
-        $template = 'Notification/Admin/RegistrationNew.html';
-        $subject = $settings['notification']['registrationNew']['adminSubject'];
-        switch ($type) {
-            case MessageType::REGISTRATION_CONFIRMED:
-                $template = 'Notification/Admin/RegistrationConfirmed.html';
-                $subject = $settings['notification']['registrationConfirmed']['adminSubject'];
-                break;
-            case MessageType::REGISTRATION_CANCELLED:
-                $template = 'Notification/Admin/RegistrationCancelled.html';
-                $subject = $settings['notification']['registrationCancelled']['adminSubject'];
-                break;
-            case MessageType::REGISTRATION_NEW:
-            default:
-        }
+        list($template, $subject) = $this->getAdminMessageTemplateSubject($settings, $type);
+
 
         if (is_null($event) || is_null($registration || !is_array($settings)) ||
             ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false)
@@ -236,6 +241,35 @@ class NotificationService
             );
         }
         return $allEmailsSent;
+    }
+
+    /**
+     * Returns an array with template and subject for the admin message
+     *
+     * @param array $settings
+     * @param int $type Type
+     * @return array
+     */
+    protected function getAdminMessageTemplateSubject($settings, $type)
+    {
+        $template = 'Notification/Admin/RegistrationNew.html';
+        $subject = $settings['notification']['registrationNew']['adminSubject'];
+        switch ($type) {
+            case MessageType::REGISTRATION_CONFIRMED:
+                $template = 'Notification/Admin/RegistrationConfirmed.html';
+                $subject = $settings['notification']['registrationConfirmed']['adminSubject'];
+                break;
+            case MessageType::REGISTRATION_CANCELLED:
+                $template = 'Notification/Admin/RegistrationCancelled.html';
+                $subject = $settings['notification']['registrationCancelled']['adminSubject'];
+                break;
+            case MessageType::REGISTRATION_NEW:
+            default:
+        }
+        return array(
+            $template,
+            $subject
+        );
     }
 
     /**
