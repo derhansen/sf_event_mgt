@@ -86,7 +86,7 @@ class NotificationService
      */
     public function sendCustomNotification($event, $customNotification, $settings)
     {
-        if ($this->cantSendCustomNotification($event, $customNotification, $settings)) {
+        if ($this->cantSendCustomNotification($event, $settings, $customNotification)) {
             return 0;
         }
         $count = 0;
