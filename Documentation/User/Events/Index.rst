@@ -132,6 +132,49 @@ program/schedule.
    :Description:
          The program/schedule for the event.
 
+Media
+~~~~~
+
+The media tab contains fields which holds media-data for the event.
+
+.. figure:: ../../Images/event-media.png
+   :align: left
+   :width: 500px
+   :alt: Event media tab
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+                Description:
+
+    - :Field:
+            Image
+
+      :Description:
+            One or more images.
+
+    - :Field:
+            Files
+
+      :Description:
+            One or more files.
+
+    - :Field:
+            YouTube embed code
+
+      :Description:
+            A YouTube embed code
+
+    - :Field:
+            Additional images
+
+      :Description:
+            One or more additional images (e.g. images from the event).
+
 Category
 ~~~~~~~~
 
@@ -157,49 +200,6 @@ You can assign one or multiple categories to an event.
    :Description:
          One or multiple categories for the event
 
-Media
-~~~~~
-
-The media tab contains fields which holds media-data for the event.
-
-.. figure:: ../../Images/event-media.png
-   :align: left
-   :width: 500px
-   :alt: Event media tab
-
-.. t3-field-list-table::
- :header-rows: 1
-
- - :Field:
-         Field:
-
-   :Description:
-             Description:
-
- - :Field:
-         Image
-
-   :Description:
-         One or more images.
-
- - :Field:
-         Files
-
-   :Description:
-         One or more files.
-
- - :Field:
-         YouTube embed code
-
-   :Description:
-         A YouTube embed code
-
- - :Field:
-         Additional images
-
-   :Description:
-         One or more additional images (e.g. images from the event).
-
 Registration Options
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -208,9 +208,10 @@ amount of free places, so only a limited amount of people can participate to the
 possible to allow the user to create multiple registrations at once, if the field "Max. simultaneous
 registrations per user" is set to a value greater than 1.
 
-.. figure:: ../../Images/event-registration.png
+.. figure:: ../../Images/event-registration-options.png
    :align: left
-   :alt: Event record (Tab: registration)
+   :width: 500px
+   :alt: Event record (Tab: registration options)
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -283,6 +284,13 @@ registrations per user" is set to a value greater than 1.
 
 Registrations
 ~~~~~~~~~~~~~
+
+Contains all registrations for the event.
+
+.. figure:: ../../Images/event-registrations.png
+   :align: left
+   :width: 500px
+   :alt: Event record (Tab: registrations)
 
 .. t3-field-list-table::
  :header-rows: 1

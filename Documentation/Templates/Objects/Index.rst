@@ -43,10 +43,16 @@ List view
          All available categories
 
  - :Object:
-         {selectedCategoryUid}
+         {locations}
 
    :Description:
-         The UID of the selected category
+         All available locations
+
+ - :Object:
+         {overwriteDemand}
+
+   :Description:
+         The overwriteDemand object
 
 Detail view
 ~~~~~~~~~~~
@@ -83,6 +89,48 @@ Registration view
 
    :Description:
          An object holding the given event
+
+Search view
+~~~~~~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+             Description:
+
+ - :Object:
+         {events}
+
+   :Description:
+         An object holding all events that matched the configured demand in the plugin settings and the given searchdemand
+
+ - :Object:
+         {categories}
+
+   :Description:
+         All available categories
+
+ - :Object:
+         {locations}
+
+   :Description:
+         All available locations
+
+ - :Object:
+         {searchDemand}
+
+   :Description:
+         The searchDemand object
+
+ - :Object:
+         {overwriteDemand}
+
+   :Description:
+         The overwriteDemand object
 
 Notification views
 ~~~~~~~~~~~~~~~~~~

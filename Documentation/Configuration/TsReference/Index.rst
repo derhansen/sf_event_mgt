@@ -162,9 +162,34 @@ plugin.tx_sfeventmgt
          * dateOfBirth
          * notes
          * accepttc
+         * recaptcha
 
          Note, that all fields are just checked, if they are empty or not. If the field "accepttc" (or any other
          boolean field) is included in the list of required fields, it is checked if the field value is true.
+
+   :Default:
+         empty
+
+ - :Property:
+         settings.reCaptcha.siteKey
+
+   :Date type:
+         string
+
+   :Description:
+         Sitekey for reCATCHA check. Note: If this setting is left blank, the reCAPTCHA field will not be shown
+
+   :Default:
+         empty
+
+ - :Property:
+         settings.reCaptcha.secretKey
+
+   :Date type:
+         string
+
+   :Description:
+         SecretKey for reCATCHA check.
 
    :Default:
          empty
@@ -323,6 +348,43 @@ plugin.tx_sfeventmgt
    :Default:
          Event registration cancelled
 
+ - :Property:
+         settings.search.dateFormat
+
+   :Date type:
+         String
+
+   :Description:
+         Date format for date fields in the search view
+
+   :Default:
+         Y-m-d
+
+ - :Property:
+         settings.search.fields
+
+   :Date type:
+         String
+
+   :Description:
+         Fields to be included in a query for the search view
+
+   :Default:
+         title, teaser
+
+ - :Property:
+         settings.search.adjustTime
+
+   :Date type:
+         boolean
+
+   :Description:
+         When the setting `settings.search.dateFormat` is set to a date only, it is recommended to set this option
+         to true. The time for a given startdate will be set to 00:00:00 and the time for a given enddate will be set
+         to 23:59:59, so all events for the given dates will be found by a search.
+
+   :Default:
+         true
 
 module.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~
@@ -404,7 +466,7 @@ module.tx_sfeventmgt
          d.m.Y H:i
 
  - :Property:
-         settings.search.fiels
+         settings.search.fields
 
    :Date type:
          String

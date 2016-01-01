@@ -132,3 +132,13 @@ Add this example code to a ``ext_localconf.php`` file (e.g. in a site package ex
  $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['de']['EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf'][] = 'EXT:your_ext/Resources/Private/Language/de.custom_locallang_db.xlf';
  $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['de']['EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf'][] = 'EXT:your_ext/Resources/Private/Language/de.custom_locallang.xlf';
 
+
+How can I use the overwriteDemand feature for the search view
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is also possible to use the overwriteDemand feature for the search view in order to limit the
+events that the search result includes. If you for example wish to limit the search to a special
+category, you must pass the category UID as shown below (teh value field contains the category UID).::
+
+ <f:form.textfield name="overwriteDemand[category]" value="1"/>
+
