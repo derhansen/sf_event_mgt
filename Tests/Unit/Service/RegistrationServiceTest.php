@@ -594,10 +594,13 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfUniqueEmailCheckEnabledAndEmailRegisteredToEvent()
     {
+        $repoRegistrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
+
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
             array('findEventRegistrationsByEmail'), array(), '', false);
         $registrationRepository->expects($this->once())->method('findEventRegistrationsByEmail')->will(
-            $this->returnValue(1));
+            $this->returnValue($repoRegistrations));
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),

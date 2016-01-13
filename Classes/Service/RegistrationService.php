@@ -292,11 +292,24 @@ class RegistrationService
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED;
         } elseif ($event->getUniqueEmailCheck() &&
-            $this->registrationRepository->findEventRegistrationsByEmail($event, $registration->getEmail())
+            $this->emailNotUnique($event, $registration->getEmail())
         ) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE;
         }
         return $success;
+    }
+
+    /**
+     * Returns if the given e-mail is registered to the given event
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param string $email
+     * @return bool
+     */
+    protected function emailNotUnique($event, $email)
+    {
+        $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, $email);
+        return $registrations->count() >= 1;
     }
 }

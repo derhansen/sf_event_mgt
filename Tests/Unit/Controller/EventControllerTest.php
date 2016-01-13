@@ -525,10 +525,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
+        $repoRegistrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
+
         // Inject mock of registrationRepository to registrationService
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
             array('findEventRegistrationsByEmail'), array(), '', false);
-        $registrationRepository->expects($this->once())->method('findEventRegistrationsByEmail')->will($this->returnValue(1));
+        $registrationRepository->expects($this->any())->method('findEventRegistrationsByEmail')->will($this->returnValue($repoRegistrations));
         $this->inject($registrationService, 'registrationRepository', $registrationRepository);
 
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
