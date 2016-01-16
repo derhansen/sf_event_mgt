@@ -242,7 +242,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	confirmed tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	paid tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	notes mediumtext,
-	date_of_birth int(11) unsigned DEFAULT '0' NOT NULL,
+	date_of_birth int(11) DEFAULT '0' NOT NULL,
 	confirmation_until int(11) unsigned DEFAULT '0' NOT NULL,
 	amount_of_registrations int(11) DEFAULT '1' NOT NULL,
 	recaptcha varchar(255) DEFAULT '' NOT NULL,
