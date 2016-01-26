@@ -14,7 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Core\Utility;
+use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \RuntimeException;
 
 /**
@@ -77,22 +77,38 @@ class ExportService
     {
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
         $registrations = $this->registrationRepository->findByEvent($eventUid);
-        $exportedRegistrations = Utility\GeneralUtility::csvValues($fieldsArray,
+        $exportedRegistrations = GeneralUtility::csvValues($fieldsArray,
                 $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
         foreach ($registrations as $registration) {
             $exportedRegistration = array();
             foreach ($fieldsArray as $field) {
                 if ($registration->_hasProperty($field)) {
-                    $exportedRegistration[] = $registration->_getCleanProperty($field);
+                    $exportedRegistration[] = $this->getFieldValue($registration, $field);
                 } else {
                     throw new RuntimeException('Field ' . $field .
                         ' is not a Property of Model Registration, please check your TS configuration', 1475590002);
                 }
             }
-            $exportedRegistrations .= Utility\GeneralUtility::csvValues($exportedRegistration,
+            $exportedRegistrations .= GeneralUtility::csvValues($exportedRegistration,
                     $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
         }
         return $exportedRegistrations;
     }
 
+    /**
+     * Returns the requested field from the given registration. If the field is a DateTime object,
+     * a formatted date string is returned
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param string $field
+     * @return string
+     */
+    protected function getFieldValue($registration, $field)
+    {
+        $value = $registration->_getCleanProperty($field);
+        if ($value instanceof \DateTime) {
+            $value = $value->format('d.m.Y');
+        }
+        return $value;
+    }
 }
