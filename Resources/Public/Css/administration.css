@@ -49,3 +49,25 @@ tr.db_list_normal td.logdate {
 .left a:hover {
     text-decoration: none;
 }
+
+/**
+ * Action Buttons
+ */
+
+.btn-default {
+    float: left;
+}
+
+.btn-typo3-62 {
+    border: none;
+    margin-right: 5px;
+    background: none;
+}
+
+.btn-typo3-76 {
+    margin-right: 5px;
+}
+
+#typo3-docheader .typo3-docheader-buttons-typo3-76 {
+    height: 38px;
+}

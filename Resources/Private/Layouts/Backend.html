@@ -13,21 +13,30 @@
                 </div>
             </div>
 
-            <div class="typo3-docheader-buttons">
+            <div class="typo3-docheader-buttons typo3-docheader-buttons-{e:Be.Typo3VersionClass()}">
                 <div class="left">
-                    <a href="{e:Be.NewRecord()}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.newEvent')}">
-                        <f:image src="{f:uri.resource(path:'Icons/tx_sfeventmgt_domain_model_event_add.gif')}" />
-                    </a>
-                    <f:link.action action="handleExpiredRegistrations" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.handleExpiredRegistrations')}">
-                        <f:image src="{f:uri.resource(path:'Icons/tx_sfeventmgt_domain_model_event_handle_expired.gif')}" />
-                    </f:link.action>
+                    <div class="x-btn btn btn-default btn-sm x-btn-noicon btn-{e:Be.Typo3VersionClass()}" style="width: auto;">
+                        <span class="t3js-icon icon icon-size-small icon-state-default">
+                                <a href="{e:Be.NewRecord()}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.newEvent')}">
+                                    <f:image src="{f:uri.resource(path:'Icons/tx_sfeventmgt_domain_model_event_add.gif')}" />
+                                </a>
+                        </span>
+                    </div>
+                    <div class="x-btn btn btn-default btn-sm x-btn-noicon btn-{e:Be.Typo3VersionClass()}" style="width: auto;">
+                        <span class="t3js-icon icon icon-size-small icon-state-default">
+                                <f:link.action action="handleExpiredRegistrations" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.handleExpiredRegistrations')}">
+                                    <f:image src="{f:uri.resource(path:'Icons/tx_sfeventmgt_domain_model_event_handle_expired.gif')}" />
+                                </f:link.action>
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
                 </div>
                 <div class="right">
                     <f:be.buttons.shortcut />
                 </div>
             </div>
         </div>
-        <div id="typo3-docbody">
+        <div id="typo3-docbody" class="typo3-docbody-{e:Be.Typo3VersionClass()}">
             <div id="typo3-inner-docbody" class="event-administration">
                 <f:render section="main" />
             </div>
