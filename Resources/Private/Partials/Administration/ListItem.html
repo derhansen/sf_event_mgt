@@ -1,6 +1,7 @@
+{namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <tr class="db_list_normal">
     <td class="title">
-        <a href="" title="UID: {event.uid}" onclick="window.location.href='alt_doc.php?returnUrl='+T3_THIS_LOCATION+'&edit[tx_sfeventmgt_domain_model_event][{event.uid}]=edit'; return false;">
+        <a href="{e:Be.EditRecord(uid:event.uid)}" title="UID: {event.uid}">
             {event.title}
         </a>
     </td>

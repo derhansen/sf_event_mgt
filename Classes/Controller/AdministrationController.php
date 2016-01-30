@@ -153,21 +153,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     }
 
     /**
-     * Add an event in backend module
-     *
-     * @return void
-     */
-    public function newEventAction()
-    {
-        $token = '&moduleToken=' . \TYPO3\CMS\Core\FormProtection\FormProtectionFactory::get()->generateToken('moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
-
-        $returnUrl = 'mod.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $this->pid . $token;
-        $url = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][' . $this->pid .
-            ']=new&returnUrl=' . urlencode($returnUrl);
-        $this->redirectToUri($url);
-    }
-
-    /**
      * Export registrations for a given event
      *
      * @param int $eventUid Event UID

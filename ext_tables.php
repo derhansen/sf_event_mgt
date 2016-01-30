@@ -30,7 +30,7 @@ if (!defined('TYPO3_MODE')) {
     'tx_sfeventmgt_m1',
     '',
     array(
-        'Administration' => 'list, newEvent, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
+        'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
     ),
     array(
         'access' => 'user,group',

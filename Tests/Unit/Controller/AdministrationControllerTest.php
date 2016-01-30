@@ -193,19 +193,6 @@ class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     }
 
     /**
-     * @test
-     * @return void
-     */
-    public function newActionRedirectsToExpectedUrl()
-    {
-        $expected = 'alt_doc.php?edit[tx_sfeventmgt_domain_model_event][0]=new&returnUrl=mod.php' .
-            '%3FM%3Dweb_SfEventMgtTxSfeventmgtM1%26id%3D0%26moduleToken%3DdummyToken';
-        $this->subject->expects($this->once())->method('redirectToUri')->with($expected);
-        $this->subject->expects($this->any())->method('getCurrentPageUid')->will($this->returnValue(0));
-        $this->subject->newEventAction();
-    }
-
-    /**
      * Returns the argument mock-object required for initializeListAction tests
      *
      * @param string $settingsSearchDateFormat Settings for searchDateFormat
