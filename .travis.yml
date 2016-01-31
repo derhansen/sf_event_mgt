@@ -20,7 +20,11 @@ matrix:
       env: DB=mysql TYPO3_BRANCH=TYPO3_7-6 COVERAGE=1
   exclude:
     - php: 5.4
+      env: DB=mysql TYPO3_BRANCH=TYPO3_7-6 COVERAGE=0
+    - php: 5.4
       env: DB=mysql TYPO3_BRANCH=master COVERAGE=0
+    - php: 7.0
+      env: DB=mysql TYPO3_BRANCH=TYPO3_6-2 COVERAGE=0
   allow_failures:
       - php: 7.0
       - php: 5.5
