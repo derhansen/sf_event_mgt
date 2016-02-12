@@ -347,6 +347,7 @@ class NotificationService
             }
         }
         if (empty($templatePaths)) {
+            $templatePaths = [];
             $templatePaths[] = 'EXT:sf_event_mgt/Resources/Private/' . ucfirst($part) . 's/';
         }
 
