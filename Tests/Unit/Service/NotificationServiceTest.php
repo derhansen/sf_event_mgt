@@ -127,7 +127,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
             array('getConfiguration'), array(), '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
+        $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
@@ -177,7 +177,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
             array('getConfiguration'), array(), '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
+        $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
@@ -231,7 +231,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
             array('getConfiguration'), array(), '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
+        $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
@@ -295,7 +295,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
             array('getConfiguration'), array(), '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
+        $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
@@ -380,7 +380,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
             array('getConfiguration'), array(), '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
+        $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
@@ -437,7 +437,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
             array('getConfiguration'), array(), '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
+        $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 

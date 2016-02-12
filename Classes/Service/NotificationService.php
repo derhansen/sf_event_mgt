@@ -301,18 +301,8 @@ class NotificationService
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
         $emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailView->setFormat('html');
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-        );
-        $templateRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']
-        );
-        $layoutRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']
-        );
-        $partialRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['partialRootPath']
-        );
+        $layoutRootPaths = $this->getTemplateFolders('layout');
+        $partialRootPaths = $this->getTemplateFolders('partial');
 
         if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
@@ -320,9 +310,9 @@ class NotificationService
             $emailView->getRequest()->setControllerExtensionName('SfEventMgt');
         }
 
-        $emailView->setLayoutRootPath($layoutRootPath);
-        $emailView->setPartialRootPath($partialRootPath);
-        $emailView->setTemplatePathAndFilename($templateRootPath . $template);
+        $emailView->setLayoutRootPaths($layoutRootPaths);
+        $emailView->setPartialRootPaths($partialRootPaths);
+        $emailView->setTemplatePathAndFilename($this->getTemplatePath($template));
         $emailView->assignMultiple(array(
             'event' => $event,
             'registration' => $registration,
@@ -334,4 +324,72 @@ class NotificationService
         return $emailBody;
     }
 
+    /**
+     * Returns the template folders for the given part
+     *
+     * @param string $part
+     * @return array
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     */
+    protected function getTemplateFolders($part = 'template')
+    {
+        $extbaseConfig = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+        );
+
+        if (!empty($extbaseConfig[$part . 'RootPaths'])) {
+            $templatePaths = $extbaseConfig[$part . 'RootPaths'];
+        }
+        if (empty($templatePaths)) {
+            $path = $extbaseConfig[$part . 'RootPath'];
+            if (!empty($path)) {
+                $templatePaths = $path;
+            }
+        }
+        if (empty($templatePaths)) {
+            $templatePaths[] = 'EXT:sf_event_mgt/Resources/Private/' . ucfirst($part) . 's/';
+        }
+
+        $absolutePaths = [];
+        foreach ($templatePaths as $templatePath) {
+            $absolutePaths[] = GeneralUtility::getFileAbsFileName($templatePath);
+        }
+        return $absolutePaths;
+    }
+
+    /**
+     * Return path and filename for a file or path.
+     *        Only the first existing file/path will be returned.
+     *        respect *RootPaths and *RootPath
+     *
+     * @param string $pathAndFilename e.g. Email/Name.html
+     * @param string $part "template", "partial", "layout"
+     * @return string Filename/path
+     */
+    protected function getTemplatePath($pathAndFilename, $part = 'template')
+    {
+        $matches = $this->getTemplatePaths($pathAndFilename, $part);
+        return !empty($matches) ? end($matches) : '';
+    }
+
+    /**
+     * Return path and filename for one or many files/paths.
+     *        Only existing files/paths will be returned.
+     *        respect *RootPaths and *RootPath
+     *
+     * @param string $pathAndFilename Path/filename (Email/Name.html) or path
+     * @param string $part "template", "partial", "layout"
+     * @return array All existing matches found
+     */
+    protected function getTemplatePaths($pathAndFilename, $part = 'template')
+    {
+        $matches = [];
+        $absolutePaths = $this->getTemplateFolders($part);
+        foreach ($absolutePaths as $absolutePath) {
+            if (file_exists($absolutePath . $pathAndFilename)) {
+                $matches[] = $absolutePath . $pathAndFilename;
+            }
+        }
+        return $matches;
+    }
 }
