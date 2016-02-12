@@ -14,20 +14,6 @@ Changing paths of the template
 Please do never change templates directly in the Ressources folder of the extensions,
 since your changes will get overwritten by extension updates.
 
-You may change the paths to the templates, layouts and partials in the constant settings
-of the extension like shown below.::
-
-  plugin.tx_sfeventmgt {
-    view {
-      templateRootPath = fileadmin/templates/events/Templates/
-      partialRootPath = fileadmin/templates/events/Partials/
-      layoutRootPath = fileadmin/templates/events/Layouts/
-    }
-  }
-
-If you don't want to change all templates, layouts and partials, you can also use the
-new override function for templates, layouts and partials, which is available since TYPO3 6.2
-
 Configure your TypoScript setup like shown below (note the **plural** of the path-name)::
 
   plugin.tx_sfeventmgt {
@@ -48,9 +34,3 @@ Configure your TypoScript setup like shown below (note the **plural** of the pat
   }
 
 Doing so, you can just **override single files** from the original templates.
-
-Note about e-mail notification templates
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Please note, that ``plugin.tx_sfeventmgt.view.templateRootPaths`` (plural!) does not work for e-mail templates if you use
-TYPO3 6.2. In order to change e-mail templates, you must use ``plugin.tx_sfeventmgt.view.templateRootPath`` (singular!)
