@@ -38,11 +38,12 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
     public function render($event)
     {
         $minPossibleRegistrations = 1;
-        $maxPossibleRegistrations = $event->getFreePlaces();
-        $result = array($maxPossibleRegistrations);
-        if ($event->getMaxRegistrationsPerUser() <= $maxPossibleRegistrations) {
+        if ($event->getMaxParticipants() > 0 && $event->getMaxRegistrationsPerUser() >= $event->getFreePlaces()) {
+            $maxPossibleRegistrations = $event->getFreePlaces();
+        } else {
             $maxPossibleRegistrations = $event->getMaxRegistrationsPerUser();
         }
+        $result = array($maxPossibleRegistrations);
         if ($maxPossibleRegistrations >= $minPossibleRegistrations) {
             $arrayWithZeroAsIndex = range($minPossibleRegistrations, $maxPossibleRegistrations);
             $result = array_combine(range(1, count($arrayWithZeroAsIndex)), $arrayWithZeroAsIndex);
