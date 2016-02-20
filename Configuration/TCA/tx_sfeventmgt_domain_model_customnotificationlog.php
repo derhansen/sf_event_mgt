@@ -26,6 +26,7 @@ return array(
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.cruser',
             'config' => array(
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'be_users',
                 'foreign_class' => '\TYPO3\CMS\Beuser\Domain\Model\BackendUser',
                 'maxitems' => 1
