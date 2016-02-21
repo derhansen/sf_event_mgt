@@ -201,6 +201,9 @@
 			<trans-unit id="administration.notify.sentBy">
 				<source>Sent by</source>
 			</trans-unit>
+			<trans-unit id="events-folder">
+				<source>Events</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
