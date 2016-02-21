@@ -220,6 +220,37 @@ class LocationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     }
 
     /**
+     * Test if link returns initial value
+     *
+     * @test
+     * @return void
+     */
+    public function getLinkReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getLink()
+        );
+    }
+
+    /**
+     * Test if link can be set
+     *
+     * @test
+     * @return void
+     */
+    public function setLinkForStringSetsLink()
+    {
+        $this->subject->setLink('http://www.typo3.org');
+
+        $this->assertAttributeEquals(
+            'http://www.typo3.org',
+            'link',
+            $this->subject
+        );
+    }
+
+    /**
      * Test if initial value is returned
      *
      * @test

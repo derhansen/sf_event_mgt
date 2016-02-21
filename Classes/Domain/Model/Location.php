@@ -65,6 +65,13 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $description = '';
 
     /**
+     * Link
+     *
+     * @var string
+     */
+    protected $link = '';
+
+    /**
      * Longitude
      *
      * @var float
@@ -208,6 +215,27 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * Returns link
+     *
+     * @return string
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Sets link
+     *
+     * @param string $link
+     * @return void
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
     }
 
     /**

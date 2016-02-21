@@ -181,6 +181,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	city varchar(255) DEFAULT '' NOT NULL,
 	country varchar(255) DEFAULT '' NOT NULL,
 	description text,
+	link tinytext,
 	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 

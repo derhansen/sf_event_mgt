@@ -24,10 +24,10 @@ return array(
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_location.gif'
     ),
     'interface' => array(
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, longitude, latitude',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, link, longitude, latitude',
     ),
     'types' => array(
-        '1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, address, zip, city, country, description;;;richtext:rte_transform[mode=ts_links], longitude, latitude, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+        '1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, address, zip, city, country, description, link;;;richtext:rte_transform[mode=ts_links], longitude, latitude, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
     ),
     'palettes' => array(
         '1' => array('showitem' => ''),
@@ -183,6 +183,31 @@ return array(
                     )
                 )
             ),
+        ),
+        'link' => array(
+            'exclude' => 0,
+            'l10n_mode' => 'mergeIfNotBlank',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.link',
+            'config' => array(
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'wizards' => array(
+                    '_PADDING' => 2,
+                    'link' => array(
+                        'type' => 'popup',
+                        'title' => 'Link',
+                        'icon' => 'link_popup.gif',
+                        'module' => array(
+                            'name' => 'wizard_element_browser',
+                            'urlParameters' => array(
+                                'mode' => 'wizard'
+                            )
+                        ),
+                        'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1'
+                    )
+                )
+            )
         ),
         'longitude' => array(
             'exclude' => 1,

@@ -64,6 +64,12 @@ Locations can be assigned to an event.
          Description (RTE field) of the location.
 
  - :Field:
+         Link
+
+   :Description:
+         Link to location or link to a map (e.g. OpenStreetMap)
+
+ - :Field:
          Latitude
 
    :Description:
