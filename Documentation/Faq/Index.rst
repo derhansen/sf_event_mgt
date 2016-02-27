@@ -142,3 +142,16 @@ category, you must pass the category UID as shown below (teh value field contain
 
  <f:form.textfield name="overwriteDemand[category]" value="1"/>
 
+
+How can I add pagination to the listview?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You can use the Paginate ViewHelper that comes with TYPO3 Fluid. Below follows example code which
+should be added to the List-Template.::
+
+ <f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{itemsPerPage: 5, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: 10}">
+     <f:for each="{paginatedEvents}" as="event">
+         <f:render partial="Event/ListItem" arguments="{_all}"/>
+     </f:for>
+ </f:widget.paginate>
+
