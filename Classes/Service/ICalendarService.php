@@ -93,10 +93,10 @@ class ICalendarService
 
         $icalView->setLayoutRootPath($layoutRootPath);
         $icalView->setTemplatePathAndFilename($templateRootPath . 'Event/ICalendar.txt');
-        $icalView->assignMultiple(array(
+        $icalView->assignMultiple([
             'event' => $event,
             'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
-        ));
+        ]);
         // Render view and remove empty lines
         $icalContent = preg_replace('/^\h*\v+/m', '', $icalView->render());
         // Finally replace new lines with CRLF

@@ -56,17 +56,17 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function messageTypeDataProvider()
     {
-        return array(
-            'messageTypeMissing' => array(
+        return [
+            'messageTypeMissing' => [
                 null
-            ),
-            'messageTypeRegistrationNew' => array(
+            ],
+            'messageTypeRegistrationNew' => [
                 MessageType::REGISTRATION_NEW
-            ),
-            'messageTypeRegistrationConfirmed' => array(
+            ],
+            'messageTypeRegistrationConfirmed' => [
                 MessageType::REGISTRATION_CONFIRMED
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -80,7 +80,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registration->setEmail('valid@email.tld');
         $registration->setIgnoreNotifications(true);
 
-        $settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
+        $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
         $this->assertFalse($result);
@@ -106,34 +106,34 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
         $registration->setEmail('valid@email.tld');
 
-        $settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
+        $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
@@ -156,34 +156,34 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
         $registration->setEmail('valid@email.tld');
 
-        $settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
+        $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
@@ -205,39 +205,39 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
-        $settings = array(
-            'notification' => array(
+        $settings = [
+            'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'adminEmail' => 'valid@email.tld'
-            )
-        );
+            ]
+        ];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
@@ -269,39 +269,39 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
-        $settings = array(
-            'notification' => array(
+        $settings = [
+            'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'adminEmail' => 'valid@email.tld'
-            )
-        );
+            ]
+        ];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
@@ -325,15 +325,15 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->setNotifyOrganisator(false);
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
-        $settings = array(
-            'notification' => array(
+        $settings = [
+            'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'adminEmail' => 'valid@email.tld'
-            )
-        );
+            ]
+        ];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->never())->method('sendEmailMessage');
         $this->inject($this->subject, 'emailService', $emailService);
 
@@ -354,39 +354,39 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->setOrganisator($organisator);
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
-        $settings = array(
-            'notification' => array(
+        $settings = [
+            'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'adminEmail' => 'valid@email.tld'
-            )
-        );
+            ]
+        ];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
@@ -411,39 +411,39 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
 
-        $settings = array(
-            'notification' => array(
+        $settings = [
+            'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'adminEmail' => 'valid1@email.tld,valid2@email.tld ,invalid-email,,'
-            )
-        );
+            ]
+        ];
 
         $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            array('sendEmailMessage'), array(), '', false);
+            ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->exactly(3))->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->any())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
@@ -465,7 +465,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
         $registration->setEmail('valid@email.tld');
 
-        $settings = array('notification' => array('senderEmail' => 'valid@email.tld'));
+        $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, MessageType::CUSTOM_NOTIFICATION,
             '');
@@ -478,7 +478,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function sendCustomNotificationWithoutParameters()
     {
-        $result = $this->subject->sendCustomNotification(null, '', array());
+        $result = $this->subject->sendCustomNotification(null, '', []);
         $this->assertEquals(0, $result);
     }
 
@@ -489,16 +489,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function customNotificationDataProvider()
     {
-        return array(
-            'noConfirmedRegistration' => array(
+        return [
+            'noConfirmedRegistration' => [
                 false,
                 false,
-            ),
-            'ignoreNotificationsFlagSet' => array(
+            ],
+            'ignoreNotificationsFlagSet' => [
                 true,
                 true
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -521,16 +521,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrations->attach($registration);
 
         $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            array('sendUserMessage'));
+            ['sendUserMessage']);
         $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('findNotificationRegistrations'), array(), '', false);
+            ['findNotificationRegistrations'], [], '', false);
         $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
             $this->returnValue($registrations));
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
-        $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', array('someSettings'));
+        $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
         $this->assertEquals(0, $result);
     }
 
@@ -563,16 +563,16 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrations->attach($registration4);
 
         $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            array('sendUserMessage'));
+            ['sendUserMessage']);
         $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('findNotificationRegistrations'), array(), '', false);
+            ['findNotificationRegistrations'], [], '', false);
         $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
             $this->returnValue($registrations));
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
-        $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', array('someSettings'));
+        $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
         $this->assertEquals(2, $result);
     }
 
@@ -583,7 +583,7 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function createCustomNotificationLogentryCreatesLog()
     {
         $mockLogRepo = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CustomNotificationRepository',
-            array('add'), array(), '', false);
+            ['add'], [], '', false);
         $mockLogRepo->expects($this->once())->method('add');
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 

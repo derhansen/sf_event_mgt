@@ -33,7 +33,7 @@ class PrefillViewHelper extends AbstractViewHelper
      *
      * @return string
      */
-    public function render($fieldname, $prefillSettings = array())
+    public function render($fieldname, $prefillSettings = [])
     {
         $piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_sfeventmgt_pievent');
         if (isset($piVars['registration'][$fieldname]) && $piVars['registration'][$fieldname] != '') {

@@ -62,10 +62,10 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
             ) {
                 $ch = curl_init();
 
-                $fields = array(
+                $fields = [
                     'secret' => $reCaptchaSettings['secretKey'],
                     'response' => $response
-                );
+                ];
 
                 // url-ify the data for the POST
                 $fieldsString = '';

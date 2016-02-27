@@ -43,8 +43,8 @@ class DataHandlerHooks
     public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$reference)
     {
         if ($table === 'tt_content' && $status == 'update' && isset($fieldArray['pi_flexform'])) {
-            $checkFields = array(
-                'notification' => array(
+            $checkFields = [
+                'notification' => [
                     'settings.notification.senderEmail',
                     'settings.notification.senderName',
                     'settings.notification.adminEmail',
@@ -54,8 +54,8 @@ class DataHandlerHooks
                     'settings.notification.registrationConfirmed.adminSubject',
                     'settings.notification.registrationCancelled.userSubject',
                     'settings.notification.registrationCancelled.adminSubject',
-                ),
-                'sDEF' => array(
+                ],
+                'sDEF' => [
                     'settings.templateLayout',
                     'settings.detailPid',
                     'settings.listPid',
@@ -69,8 +69,8 @@ class DataHandlerHooks
                     'settings.restrictForeignRecordsToStoragePage',
                     'settings.storagePage',
                     'settings.registration.requiredFields'
-                )
-            );
+                ]
+            ];
 
             $flexformData = GeneralUtility::xml2array($fieldArray['pi_flexform']);
             foreach ($checkFields as $sheet => $fields) {
@@ -83,7 +83,7 @@ class DataHandlerHooks
                 }
 
                 // If remaining sheet does not contain fields, then remove the sheet
-                if (isset($flexformData['data'][$sheet]['lDEF']) && $flexformData['data'][$sheet]['lDEF'] === array()) {
+                if (isset($flexformData['data'][$sheet]['lDEF']) && $flexformData['data'][$sheet]['lDEF'] === []) {
                     unset($flexformData['data'][$sheet]);
                 }
             }

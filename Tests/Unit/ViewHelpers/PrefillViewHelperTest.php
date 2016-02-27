@@ -31,7 +31,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function viewReturnsEmptyStringIfTsfeNotAvailabe()
     {
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('a field', array());
+        $actual = $viewHelper->render('a field', []);
         $this->assertSame('', $actual);
     }
 
@@ -41,15 +41,15 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function viewReturnsCurrentFieldValueIfValueInGPAvailable()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::_GETset(array(
-                'tx_sfeventmgt_pievent' => array(
-                    'registration' => array('fieldname' => 'Existing Value')
-                )
-            )
+        \TYPO3\CMS\Core\Utility\GeneralUtility::_GETset([
+                'tx_sfeventmgt_pievent' => [
+                    'registration' => ['fieldname' => 'Existing Value']
+                ]
+            ]
         );
         $GLOBALS['TSFE'] = new \stdClass();
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('fieldname', array());
+        $actual = $viewHelper->render('fieldname', []);
         $this->assertSame('Existing Value', $actual);
     }
 
@@ -61,7 +61,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $GLOBALS['TSFE'] = new \stdClass();
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('a field', array());
+        $actual = $viewHelper->render('a field', []);
         $this->assertSame('', $actual);
     }
 
@@ -74,7 +74,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $GLOBALS['TSFE'] = new \stdClass();
         $GLOBALS['TSFE']->loginUser = 1;
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('a field', array());
+        $actual = $viewHelper->render('a field', []);
         $this->assertSame('', $actual);
     }
 
@@ -87,7 +87,7 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $GLOBALS['TSFE'] = new \stdClass();
         $GLOBALS['TSFE']->loginUser = 1;
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('lastname', array('firstname' => 'first_name'));
+        $actual = $viewHelper->render('lastname', ['firstname' => 'first_name']);
         $this->assertSame('', $actual);
     }
 
@@ -100,23 +100,23 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $GLOBALS['TSFE'] = new \stdClass();
         $GLOBALS['TSFE']->loginUser = 1;
         $GLOBALS['TSFE']->fe_user = new \stdClass();
-        $GLOBALS['TSFE']->fe_user->user = array(
+        $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John'
-        );
+        ];
 
         $mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            array('getOriginalRequest'), array(), '', false);
+            ['getOriginalRequest'], [], '', false);
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
         $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            array('getRequest'), array(), '', false);
+            ['getRequest'], [], '', false);
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
             $this->returnValue($mockRequest));
 
         $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
-            array('dummy'), array(), '', false);
+            ['dummy'], [], '', false);
         $viewHelper->_set('controllerContext', $mockControllerContext);
-        $actual = $viewHelper->render('firstname', array('firstname' => 'unknown_field'));
+        $actual = $viewHelper->render('firstname', ['firstname' => 'unknown_field']);
         $this->assertSame('', $actual);
     }
 
@@ -129,23 +129,23 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $GLOBALS['TSFE'] = new \stdClass();
         $GLOBALS['TSFE']->loginUser = 1;
         $GLOBALS['TSFE']->fe_user = new \stdClass();
-        $GLOBALS['TSFE']->fe_user->user = array(
+        $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
             'last_name' => 'Doe'
-        );
+        ];
         $mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            array('getOriginalRequest'), array(), '', false);
+            ['getOriginalRequest'], [], '', false);
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
         $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            array('getRequest'), array(), '', false);
+            ['getRequest'], [], '', false);
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
             $this->returnValue($mockRequest));
 
         $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
-            array('dummy'), array(), '', false);
+            ['dummy'], [], '', false);
         $viewHelper->_set('controllerContext', $mockControllerContext);
-        $actual = $viewHelper->render('lastname', array('lastname' => 'last_name'));
+        $actual = $viewHelper->render('lastname', ['lastname' => 'last_name']);
         $this->assertSame('Doe', $actual);
     }
 
@@ -158,34 +158,34 @@ class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $GLOBALS['TSFE'] = new \stdClass();
         $GLOBALS['TSFE']->loginUser = 1;
         $GLOBALS['TSFE']->fe_user = new \stdClass();
-        $GLOBALS['TSFE']->fe_user->user = array(
+        $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
             'last_name' => 'Doe'
-        );
+        ];
 
-        $arguments = array(
-            'registration' => array(
+        $arguments = [
+            'registration' => [
                 'lastname' => 'Submitted Lastname'
-            )
-        );
+            ]
+        ];
 
         $mockOriginalRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            array('getArguments'), array(), '', false);
+            ['getArguments'], [], '', false);
         $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
 
         $mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            array('getOriginalRequest'), array(), '', false);
+            ['getOriginalRequest'], [], '', false);
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue($mockOriginalRequest));
 
         $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            array('getRequest'), array(), '', false);
+            ['getRequest'], [], '', false);
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
             $this->returnValue($mockRequest));
 
         $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
-            array('dummy'), array(), '', false);
+            ['dummy'], [], '', false);
         $viewHelper->_set('controllerContext', $mockControllerContext);
-        $actual = $viewHelper->render('lastname', array('lastname' => 'last_name'));
+        $actual = $viewHelper->render('lastname', ['lastname' => 'last_name']);
         $this->assertSame('Submitted Lastname', $actual);
     }
 }

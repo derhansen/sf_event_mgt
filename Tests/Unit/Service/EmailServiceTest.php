@@ -34,7 +34,7 @@ class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\EmailService', array('dummy'));
+        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\EmailService', ['dummy']);
     }
 
     /**
@@ -54,16 +54,16 @@ class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function invalidEmailsDataProvider()
     {
-        return array(
-            'invalidSender' => array(
+        return [
+            'invalidSender' => [
                 'invalid',
                 'recipient@domain.tld',
-            ),
-            'invalidRecipient' => array(
+            ],
+            'invalidRecipient' => [
                 'sender@domain.tld',
                 'invalid',
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -96,7 +96,7 @@ class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $body = 'A body';
         $senderName = 'Sender name';
 
-        $mailer = $this->getMock('TYPO3\\CMS\\Core\\Mail\\MailMessage', array(), array(), '', false);
+        $mailer = $this->getMock('TYPO3\\CMS\\Core\\Mail\\MailMessage', [], [], '', false);
         $mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
         $mailer->expects($this->once())->method('setSubject')->with($subject);
         $mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));

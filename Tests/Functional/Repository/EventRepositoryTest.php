@@ -34,7 +34,7 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
     protected $locationRepository;
 
     /** @var array */
-    protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
+    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup
@@ -141,24 +141,24 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      */
     public function findDemandedRecordsByCategoryDataProvider()
     {
-        return array(
-            'category 1' => array(
+        return [
+            'category 1' => [
                 '1',
                 1
-            ),
-            'category 2' => array(
+            ],
+            'category 2' => [
                 '2',
                 2
-            ),
-            'category 3' => array(
+            ],
+            'category 3' => [
                 '3',
                 1
-            ),
-            'category 1,2,3,4' => array(
+            ],
+            'category 1,2,3,4' => [
                 '1,2,3,4',
                 3
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -185,20 +185,20 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      */
     public function findDemandedRecordsByLocationDataProvider()
     {
-        return array(
-            'location 1' => array(
+        return [
+            'location 1' => [
                 1,
                 1
-            ),
-            'location 2' => array(
+            ],
+            'location 2' => [
                 2,
                 1
-            ),
-            'location 3' => array(
+            ],
+            'location 3' => [
                 3,
                 0
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -226,16 +226,16 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      */
     public function findDemandedRecordsByLocationCityDataProvider()
     {
-        return array(
-            'City: Flensburg' => array(
+        return [
+            'City: Flensburg' => [
                 'Flensburg',
                 2
-            ),
-            'City: Hamburg' => array(
+            ],
+            'City: Hamburg' => [
                 'Hamburg',
                 1
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -262,16 +262,16 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      */
     public function findDemandedRecordsByLocationCountryDataProvider()
     {
-        return array(
-            'Country: Germany' => array(
+        return [
+            'Country: Germany' => [
                 'Germany',
                 2
-            ),
-            'Country: Denmark' => array(
+            ],
+            'Country: Denmark' => [
                 'Denmark',
                 1
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -365,20 +365,20 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      */
     public function findDemandedRecordsByTopEventDataProvider()
     {
-        return array(
-            'noRestriction' => array(
+        return [
+            'noRestriction' => [
                 0,
                 2
-            ),
-            'onlyTopEvents' => array(
+            ],
+            'onlyTopEvents' => [
                 1,
                 1
-            ),
-            'exceptTopEvents' => array(
+            ],
+            'exceptTopEvents' => [
                 2,
                 1
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -407,43 +407,43 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      */
     public function findDemandedRecordsByOrderingDataProvider()
     {
-        return array(
-            'noSorting' => array(
+        return [
+            'noSorting' => [
                 '',
                 '',
                 'Test2'
-            ),
-            'titleAsc' => array(
+            ],
+            'titleAsc' => [
                 'title',
                 'asc',
                 'Test1'
-            ),
-            'titleDesc' => array(
+            ],
+            'titleDesc' => [
                 'title',
                 'desc',
                 'Test4'
-            ),
-            'startdateAsc' => array(
+            ],
+            'startdateAsc' => [
                 'startdate',
                 'asc',
                 'Test2'
-            ),
-            'startdateDesc' => array(
+            ],
+            'startdateDesc' => [
                 'startdate',
                 'desc',
                 'Test3'
-            ),
-            'enddateAsc' => array(
+            ],
+            'enddateAsc' => [
                 'enddate',
                 'asc',
                 'Test2'
-            ),
-            'enddateDesc' => array(
+            ],
+            'enddateDesc' => [
                 'enddate',
                 'desc',
                 'Test4'
-            ),
-        );
+            ],
+        ];
     }
 
     /**

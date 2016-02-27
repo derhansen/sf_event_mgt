@@ -37,14 +37,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected function setUp()
     {
         $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
-            array(
+            [
                 'redirect',
                 'forward',
                 'addFlashMessage',
                 'createEventDemandObjectFromSettings',
                 'createForeignRecordDemandObjectFromSettings',
                 'overwriteEventDemandObject'
-            ), array(), '', false);
+            ], [], '', false);
     }
 
     /**
@@ -64,9 +64,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function createEventDemandObjectFromSettingsWithoutCategory()
     {
         $mockController = $this->getMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
-            array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+            ['redirect', 'forward', 'addFlashMessage'], [], '', false);
 
-        $settings = array(
+        $settings = [
             'displayMode' => 'all',
             'storagePage' => 1,
             'category' => 10,
@@ -75,10 +75,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'orderDirection' => 'asc',
             'queryLimit' => 10,
             'location' => 1
-        );
+        ];
 
         $mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
         $mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
         $mockDemand->expects($this->at(2))->method('setCategory')->with(10);
@@ -89,7 +89,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $mockDemand->expects($this->at(7))->method('setLocation')->with(1);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
         $this->inject($mockController, 'objectManager', $objectManager);
 
@@ -105,10 +105,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function overwriteDemandObjectIgnoresIgnoredProperties()
     {
         $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
-        $overwriteDemand = array('storagePage' => 1, 'category' => 1);
+        $overwriteDemand = ['storagePage' => 1, 'category' => 1];
 
         $mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
-            array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+            ['redirect', 'forward', 'addFlashMessage'], [], '', false);
         $resultDemand = $mockController->_call('overwriteEventDemandObject', $demand, $overwriteDemand);
         $this->assertNull($resultDemand->getStoragePage());
     }
@@ -122,10 +122,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function overwriteDemandObjectSetsCategoryProperty()
     {
         $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
-        $overwriteDemand = array('category' => 1);
+        $overwriteDemand = ['category' => 1];
 
         $mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
-            array('redirect', 'forward', 'addFlashMessage'), array(), '', false);
+            ['redirect', 'forward', 'addFlashMessage'], [], '', false);
         $resultDemand = $mockController->_call('overwriteEventDemandObject', $demand, $overwriteDemand);
         $this->assertSame(1, $resultDemand->getCategory());
     }
@@ -136,14 +136,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function initializeSaveRegistrationActionSetsDateFormat()
     {
-        $settings = array(
-            'registration' => array(
+        $settings = [
+            'registration' => [
                 'formatDateOfBirth' => 'd.m.Y'
-            )
-        );
+            ]
+        ];
 
         $mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
             $this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
             $this->equalTo('dateFormat'),
@@ -151,17 +151,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         );
 
         $mockDateOfBirthPmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockDateOfBirthPmConfig->expects($this->once())->method('forProperty')->with('dateOfBirth')->will(
             $this->returnValue($mockPropertyMapperConfig));
 
         $mockRegistrationArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockRegistrationArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
             $this->returnValue($mockDateOfBirthPmConfig));
 
         $mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockArguments->expects($this->at(0))->method('getArgument')->with('registration')->will(
             $this->returnValue($mockRegistrationArgument));
 
@@ -179,12 +179,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
         $foreignRecordDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $category = 0;
 
-        $settings = array('settings');
+        $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
@@ -194,17 +194,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ->with($settings)->will($this->returnValue($foreignRecordDemand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -212,7 +212,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
         $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
         $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', array());
+        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', []);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
@@ -225,12 +225,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $eventDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $overrideDemand = array('category' => 10);
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $overrideDemand = ['category' => 10];
 
-        $settings = array('settings');
+        $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
@@ -238,17 +238,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->expects($this->once())->method('overwriteEventDemandObject')->will($this->returnValue($eventDemand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -269,12 +269,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
         $eventDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $overrideDemand = array('category' => 10);
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $overrideDemand = ['category' => 10];
 
-        $settings = array('disableOverrideDemand' => 1);
+        $settings = ['disableOverrideDemand' => 1];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
@@ -284,17 +284,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->expects($this->never())->method('overwriteDemandObject');
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -332,9 +332,9 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function icalDownloadActionCallsICalendarServiceDownloadiCalendarFile()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array());
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', []);
         $icalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
-            array(), array(), '', false);
+            [], [], '', false);
         $icalendarService->expects($this->once())->method('downloadiCalendarFile')->with($this->equalTo($event));
         $this->inject($this->subject, 'icalendarService', $icalendarService);
         $this->subject->icalDownloadAction($event);
@@ -364,14 +364,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(false));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_NOT_ENABLED));
+            ['result' => RegistrationResult::REGISTRATION_NOT_ENABLED]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -385,17 +385,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $deadline = new \DateTime();
         $deadline->add(\DateInterval::createFromDateString('yesterday'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->any())->method('getRegistrationDeadline')->will($this->returnValue($deadline));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED));
+            ['result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -409,17 +409,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('yesterday'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED));
+            ['result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -433,13 +433,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->once())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -448,7 +448,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS));
+            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -462,14 +462,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -479,7 +479,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES));
+            ['result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -493,14 +493,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(6));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -511,7 +511,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->once())->method('getMaxRegistrationsPerUser')->will($this->returnValue(5));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED));
+            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -525,23 +525,23 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $repoRegistrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $repoRegistrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
         // Inject mock of registrationRepository to registrationService
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('findEventRegistrationsByEmail'), array(), '', false);
+            ['findEventRegistrationsByEmail'], [], '', false);
         $registrationRepository->expects($this->any())->method('findEventRegistrationsByEmail')->will($this->returnValue($repoRegistrations));
         $this->inject($registrationService, 'registrationRepository', $registrationRepository);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
         $registration->expects($this->any())->method('getEmail')->will($this->returnValue('email@domain.tld'));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -550,7 +550,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->any())->method('getUniqueEmailCheck')->will($this->returnValue(true));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE));
+            ['result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -567,13 +567,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -582,32 +582,32 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('add'), array(), '', false);
+            ['add'], [], '', false);
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            array(), array(), '', false);
+            [], [], '', false);
         $notificationService->expects($this->once())->method('sendUserMessage');
         $notificationService->expects($this->once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
 
         $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
-            array('persistAll'), array(), '', false);
+            ['persistAll'], [], '', false);
         $persistenceManager->expects($this->once())->method('persistAll');
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array('get'), array(), '', false);
+            ['get'], [], '', false);
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            array('clearCacheForConfiguredUids'), array(), '', false);
+            ['clearCacheForConfiguredUids'], [], '', false);
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -625,14 +625,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $regUid = 1;
         $regHmac = 'someRandomHMAC';
 
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
         $registration->expects($this->any())->method('getUid')->will($this->returnValue($regUid));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -641,44 +641,44 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('add'), array(), '', false);
+            ['add'], [], '', false);
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
-            array('persistAll'), array(), '', false);
+            ['persistAll'], [], '', false);
         $persistenceManager->expects($this->once())->method('persistAll');
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array('get'), array(), '', false);
+            ['get'], [], '', false);
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            array('clearCacheForConfiguredUids'), array(), '', false);
+            ['clearCacheForConfiguredUids'], [], '', false);
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
         $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('getCurrentFeUserObject'), array(), '', false);
+            ['getCurrentFeUserObject'], [], '', false);
         $registrationService->expects($this->once())->method('getCurrentFeUserObject');
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            array('generateHmac'), array(), '', false);
+            ['generateHmac'], [], '', false);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
         $this->inject($this->subject, 'hashService', $hashService);
 
         // Inject settings so autoconfirmation is disabled
-        $settings = array(
-            'registration' => array(
+        $settings = [
+            'registration' => [
                 'autoConfirmation' => 1
-            )
-        );
+            ]
+        ];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('redirect')->with('confirmRegistration', null, null,
-            array('reguid' => $regUid, 'hmac' => $regHmac));
+            ['reguid' => $regUid, 'hmac' => $regHmac]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -692,14 +692,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreatherThanOne()
     {
-        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(),
-            array(), '', false);
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -710,37 +710,37 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue(2));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('add'), array(), '', false);
+            ['add'], [], '', false);
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            array(), array(), '', false);
+            [], [], '', false);
         $notificationService->expects($this->once())->method('sendUserMessage');
         $notificationService->expects($this->once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
 
         $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
-            array('persistAll'), array(), '', false);
+            ['persistAll'], [], '', false);
         $persistenceManager->expects($this->once())->method('persistAll');
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array('get'), array(), '', false);
+            ['get'], [], '', false);
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            array('clearCacheForConfiguredUids'), array(), '', false);
+            ['clearCacheForConfiguredUids'], [], '', false);
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
         $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('createDependingRegistrations'), array(), '', false);
+            ['createDependingRegistrations'], [], '', false);
         $registrationService->expects($this->once())->method('createDependingRegistrations')->with($registration);
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            array('result' => RegistrationResult::REGISTRATION_SUCCESSFUL));
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL]);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -904,15 +904,15 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'confirmRegistration.title.failed');
         $this->inject($this->subject, 'view', $view);
 
-        $returnedArray = array(
+        $returnedArray = [
             true,
             null,
             'event.message.confirmation_failed_wrong_hmac',
             'confirmRegistration.title.failed'
-        );
+        ];
 
         $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('checkConfirmRegistration'), array(), '', false);
+            ['checkConfirmRegistration'], [], '', false);
         $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
@@ -935,32 +935,32 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'confirmRegistration.title.successful');
         $this->inject($this->subject, 'view', $view);
 
-        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '',
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
             false);
         $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
         $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
-        $returnedArray = array(
+        $returnedArray = [
             false,
             $mockRegistration,
             'event.message.confirmation_successful',
             'confirmRegistration.title.successful'
-        );
+        ];
 
         $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('checkConfirmRegistration', 'confirmDependingRegistrations'), array(), '', false);
+            ['checkConfirmRegistration', 'confirmDependingRegistrations'], [], '', false);
         $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
         $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')->with($mockRegistration);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockNotificationService->expects($this->once())->method('sendUserMessage');
         $mockNotificationService->expects($this->once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
         $mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('update'), array(), '', false);
+            ['update'], [], '', false);
         $mockRegistrationRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
@@ -982,15 +982,15 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'cancelRegistration.title.failed');
         $this->inject($this->subject, 'view', $view);
 
-        $returnedArray = array(
+        $returnedArray = [
             true,
             null,
             'event.message.cancel_failed_wrong_hmac',
             'cancelRegistration.title.failed'
-        );
+        ];
 
         $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('checkCancelRegistration'), array(), '', false);
+            ['checkCancelRegistration'], [], '', false);
         $mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
@@ -1013,41 +1013,41 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'cancelRegistration.title.successful');
         $this->inject($this->subject, 'view', $view);
 
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(true));
         $mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('yesterday')));
 
-        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', array(), array(), '',
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
             false);
         $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
         $mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
-        $returnedArray = array(
+        $returnedArray = [
             false,
             $mockRegistration,
             'event.message.cancel_successful',
             'cancelRegistration.title.successful'
-        );
+        ];
 
         $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('checkCancelRegistration', 'cancelDependingRegistrations'), array(), '', false);
+            ['checkCancelRegistration', 'cancelDependingRegistrations'], [], '', false);
         $mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
         $mockRegistrationService->expects($this->once())->method('cancelDependingRegistrations')->with($mockRegistration);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockNotificationService->expects($this->once())->method('sendUserMessage');
         $mockNotificationService->expects($this->once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
         $mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            array('remove'), array(), '', false);
+            ['remove'], [], '', false);
         $mockRegistrationRepository->expects($this->once())->method('remove');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
         $mockUtilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            array('clearCacheForConfiguredUids'), array(), '', false);
+            ['clearCacheForConfiguredUids'], [], '', false);
         $mockUtilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $mockUtilityService);
 
@@ -1064,7 +1064,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     protected function getInitializeSearchActionArgumentMock($settingsSearchDateFormat = null)
     {
         $mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
             $this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
             $this->equalTo('dateFormat'),
@@ -1072,25 +1072,25 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         );
 
         $mockStartDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockStartDatePmConfig->expects($this->once())->method('forProperty')->with('startDate')->will(
             $this->returnValue($mockPropertyMapperConfig));
         $mockEndDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
             $this->returnValue($mockPropertyMapperConfig));
 
         $mockStartDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockStartDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
             $this->returnValue($mockStartDatePmConfig));
         $mockEndDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockEndDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
             $this->returnValue($mockEndDatePmConfig));
 
         $mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
-            array(), array(), '', false);
+            [], [], '', false);
         $mockArguments->expects($this->at(0))->method('getArgument')->with('searchDemand')->will(
             $this->returnValue($mockStartDateArgument));
         $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
@@ -1104,11 +1104,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function initializeSearchActionSetsDateFormat()
     {
-        $settings = array(
-            'search' => array(
+        $settings = [
+            'search' => [
                 'dateFormat' => 'Y-m-d'
-            )
-        );
+            ]
+        ];
 
         $this->subject->_set('arguments', $this->getInitializeSearchActionArgumentMock('Y-m-d'));
         $this->subject->_set('settings', $settings);
@@ -1123,11 +1123,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $demand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
         $foreignRecordDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
-        $settings = array('settings');
+        $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
@@ -1137,17 +1137,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ->with($settings)->will($this->returnValue($foreignRecordDemand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -1156,7 +1156,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
         $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
         $view->expects($this->at(3))->method('assign')->with('searchDemand', null);
-        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', array());
+        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', []);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->searchAction();
@@ -1168,18 +1168,18 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewWithSearchDemand()
     {
-        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', [], [], '', false);
         $searchDemand->expects($this->once())->method('setFields');
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', ['setSearchDemand'], [], '', false);
         $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
 
         $foreignRecordDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
-        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array(), array(), '', false);
+        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
-        $settings = array('settings');
+        $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
@@ -1189,17 +1189,17 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ->with($settings)->will($this->returnValue($foreignRecordDemand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -1208,7 +1208,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
         $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
         $view->expects($this->at(3))->method('assign')->with('searchDemand', $searchDemand);
-        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', array());
+        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', []);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->searchAction($searchDemand);
@@ -1220,30 +1220,30 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function searchActionSetsSearchDemandFieldsIfSearchDemandGiven()
     {
-        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', [], [], '', false);
         $searchDemand->expects($this->once())->method('setFields');
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', ['setSearchDemand'], [], '', false);
         $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
 
-        $settings = array('settings');
+        $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -1259,42 +1259,42 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function searchActionSetsAdjustsDateFieldsIfAdjustDateSettingSetAndDateFieldsGiven()
     {
-        $mockStartDate = $this->getMock('\DateTime', array(), array(), '', false);
+        $mockStartDate = $this->getMock('\DateTime', [], [], '', false);
         $mockStartDate->expects($this->once())->method('setTime')->with(0, 0, 0);
 
-        $mockEndDate = $this->getMock('\DateTime', array(), array(), '', false);
+        $mockEndDate = $this->getMock('\DateTime', [], [], '', false);
         $mockEndDate->expects($this->once())->method('setTime')->with(23, 59, 59);
 
-        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', [], [], '', false);
         $searchDemand->expects($this->once())->method('setFields');
         $searchDemand->expects($this->any())->method('getStartDate')->will($this->returnValue($mockStartDate));
         $searchDemand->expects($this->any())->method('getEndDate')->will($this->returnValue($mockEndDate));
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', ['setSearchDemand'], [], '', false);
         $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
 
-        $settings = array(
-            'search' => array(
+        $settings = [
+            'search' => [
                 'adjustTime' => 1
-            )
-        );
+            ]
+        ];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -1310,33 +1310,33 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function searchActionOverwritesDemandFieldsIfOverwriteDemandObjectGiven()
     {
-        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', [], [], '', false);
         $searchDemand->expects($this->once())->method('setFields');
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', ['setSearchDemand'], [], '', false);
         $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
 
-        $overrideDemand = array('category' => 10);
+        $overrideDemand = ['category' => 10];
         $this->subject->expects($this->once())->method('overwriteEventDemandObject')->will($this->returnValue($demand));
 
-        $settings = array('disableOverrideDemand' => 0);
+        $settings = ['disableOverrideDemand' => 0];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
@@ -1352,33 +1352,33 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function searchActionDoesNotOverridesDemandIfOverwriteDemandDisabled()
     {
-        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', array(), array(), '', false);
+        $searchDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\SearchDemand', [], [], '', false);
         $searchDemand->expects($this->once())->method('setFields');
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', array('setSearchDemand'), array(), '', false);
+        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand', ['setSearchDemand'], [], '', false);
         $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
 
-        $overrideDemand = array('category' => 10);
+        $overrideDemand = ['category' => 10];
         $this->subject->expects($this->never())->method('overwriteEventDemandObject');
 
-        $settings = array('disableOverrideDemand' => 1);
+        $settings = ['disableOverrideDemand' => 1];
         $this->inject($this->subject, 'settings', $settings);
 
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository',
-            array('findDemanded'), array(), '', false);
+            ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 

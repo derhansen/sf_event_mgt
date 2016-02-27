@@ -81,7 +81,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      */
     public function render(
         $pageUid = null,
-        array $additionalParams = array(),
+        array $additionalParams = [],
         $pageType = 0,
         $noCache = false,
         $noCacheHash = false,
@@ -89,7 +89,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         $linkAccessRestrictedPages = false,
         $absolute = false,
         $addQueryString = false,
-        array $argumentsToBeExcludedFromQueryString = array(),
+        array $argumentsToBeExcludedFromQueryString = [],
         $addQueryStringMethod = null
     ) {
         $this->buildTsfe();

@@ -56,70 +56,70 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
      */
     public function simultaneousRegistrationsDataProvider()
     {
-        return array(
-            'maxRegistrationsAndFreePlacesEqual' => array(
+        return [
+            'maxRegistrationsAndFreePlacesEqual' => [
                 5,
                 1,
                 1,
-                array(
+                [
                     1 => 1
-                )
-            ),
-            'moreMaxRegistrationsThanFreePlaces' => array(
+                ]
+            ],
+            'moreMaxRegistrationsThanFreePlaces' => [
                 5,
                 1,
                 2,
-                array(
+                [
                     1 => 1
-                )
-            ),
-            'moreFreePlacesThanMaxRegistrations' => array(
+                ]
+            ],
+            'moreFreePlacesThanMaxRegistrations' => [
                 5,
                 10,
                 1,
-                array(
+                [
                     1 => 1
-                )
-            ),
-            'moreFreePlacesThanMaxRegistrationsWithSimultaneousAllowed' => array(
+                ]
+            ],
+            'moreFreePlacesThanMaxRegistrationsWithSimultaneousAllowed' => [
                 5,
                 10,
                 5,
-                array(
+                [
                     1 => 1,
                     2 => 2,
                     3 => 3,
                     4 => 4,
                     5 => 5
-                )
-            ),
-            'noFreePlacesAvailable' => array(
+                ]
+            ],
+            'noFreePlacesAvailable' => [
                 5,
                 0,
                 1,
-                array(
+                [
                     0 => 0
-                )
-            ),
-            'noFreePlacesAndNoMaxRegistrations' => array(
+                ]
+            ],
+            'noFreePlacesAndNoMaxRegistrations' => [
                 5,
                 0,
                 0,
-                array(
+                [
                     0 => 0
-                )
-            ),
-            'noMaxParticipants' => array(
+                ]
+            ],
+            'noMaxParticipants' => [
                 0,
                 0,
                 3,
-                array(
+                [
                     1 => 1,
                     2 => 2,
                     3 => 3
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 
     /**
@@ -129,7 +129,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
      */
     public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $expected)
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array());
+        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', []);
         $mockEvent->expects($this->any())->method('getFreePlaces')->will($this->returnValue($freePlaces));
         $mockEvent->expects($this->any())->method('getMaxParticipants')->will($this->returnValue($maxParticipants));
         $mockEvent->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue($maxRegistrations));

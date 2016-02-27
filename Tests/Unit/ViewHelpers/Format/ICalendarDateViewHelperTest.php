@@ -31,16 +31,16 @@ class ICalendarDateViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function iCalendarDateDataProvider()
     {
-        return array(
-            'emptyValue' => array(
+        return [
+            'emptyValue' => [
                 '',
                 ''
-            ),
-            'dateTimeObject' => array(
+            ],
+            'dateTimeObject' => [
                 new \DateTime('@1425234250'),
                 '20150301T182410Z'
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -69,7 +69,7 @@ class ICalendarDateViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
         $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper',
-            array('renderChildren'));
+            ['renderChildren']);
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue(new \DateTime('@1425234250')));
         $actual = $viewHelper->render();
         $this->assertSame('20150301T182410Z', $actual);

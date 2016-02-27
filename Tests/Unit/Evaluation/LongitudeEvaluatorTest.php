@@ -56,36 +56,36 @@ class LongitudeEvaluatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function longitudeEvaluatorDataProvider()
     {
-        return array(
-            'emptyValue' => array(
+        return [
+            'emptyValue' => [
                 null,
                 '0.000000'
-            ),
-            'givenIntegerGetsConvertedToFloatWith6Decimals' => array(
+            ],
+            'givenIntegerGetsConvertedToFloatWith6Decimals' => [
                 1,
                 '1.000000'
-            ),
-            'maxValuePossible' => array(
+            ],
+            'maxValuePossible' => [
                 180,
                 '180.000000'
-            ),
-            'minValuePossible' => array(
+            ],
+            'minValuePossible' => [
                 -180,
                 '-180.000000'
-            ),
-            'greaterThanMaxValueNotPossible' => array(
+            ],
+            'greaterThanMaxValueNotPossible' => [
                 180.000001,
                 '0.000000'
-            ),
-            'lessThanMinValueNotPossible' => array(
+            ],
+            'lessThanMinValueNotPossible' => [
                 -180.000001,
                 '0.000000'
-            ),
-            'validLongitudeIsReturned' => array(
+            ],
+            'validLongitudeIsReturned' => [
                 12.345678,
                 '12.345678'
-            ),
-        );
+            ],
+        ];
     }
 
     /**

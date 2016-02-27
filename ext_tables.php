@@ -29,14 +29,14 @@ if (!defined('TYPO3_MODE')) {
     'web',
     'tx_sfeventmgt_m1',
     '',
-    array(
+    [
         'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
-    ),
-    array(
+    ],
+    [
         'access' => 'user,group',
         'icon' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.gif',
         'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
-    )
+    ]
 );
 
 if (TYPO3_MODE === 'BE') {
@@ -48,9 +48,9 @@ if (TYPO3_MODE === 'BE') {
     );
 
     /* Add Backend folder icon to contains plugin select box */
-    $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = array(
+    $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
         0 => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:events-folder',
         1 => 'events',
         2 => '../typo3conf/ext/sf_event_mgt/Resources/Public/Icons/events.gif'
-    );
+    ];
 }

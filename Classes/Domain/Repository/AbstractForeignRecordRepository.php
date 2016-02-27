@@ -45,7 +45,7 @@ abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persis
      */
     public function findDemanded($demand)
     {
-        $constraints = array();
+        $constraints = [];
         $query = $this->createQuery();
 
         if ($demand->getRestrictForeignRecordsToStoragePage()) {

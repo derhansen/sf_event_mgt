@@ -42,10 +42,10 @@ class TemplateLayouts
             $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['row']['pid']);
         }
         foreach ($templateLayouts as $index => $layout) {
-            $additionalLayout = array(
+            $additionalLayout = [
                 $GLOBALS['LANG']->sL($layout, true),
                 $index
-            );
+            ];
             array_push($config['items'], $additionalLayout);
         }
     }
@@ -59,7 +59,7 @@ class TemplateLayouts
      */
     protected function getTemplateLayoutsFromTsConfig($pageUid)
     {
-        $templateLayouts = array();
+        $templateLayouts = [];
         $pagesTsConfig = BackendUtility::getPagesTSconfig($pageUid);
         if (isset($pagesTsConfig['tx_sfeventmgt.']['templateLayouts.']) &&
             is_array($pagesTsConfig['tx_sfeventmgt.']['templateLayouts.'])

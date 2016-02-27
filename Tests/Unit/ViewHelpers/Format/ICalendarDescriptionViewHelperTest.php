@@ -31,32 +31,32 @@ class ICalendarDescriptionViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestC
      */
     public function iCalendarDescriptionDataProvider()
     {
-        return array(
-            'emptyValue' => array(
+        return [
+            'emptyValue' => [
                 '',
                 ''
-            ),
-            'shortDescriptionLess75Chars' => array(
+            ],
+            'shortDescriptionLess75Chars' => [
                 'This is just a short text with less than 75 chars',
                 'This is just a short text with less than 75 chars'
-            ),
-            'shortDescriptionLess75CharsWithHtml' => array(
+            ],
+            'shortDescriptionLess75CharsWithHtml' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars',
                 'This is just a short text with less than 75 chars'
-            ),
-            'shortDescriptionLess75CharsWithHtmlAndLineBreak' => array(
+            ],
+            'shortDescriptionLess75CharsWithHtmlAndLineBreak' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars' . chr(13) . ' and some more text',
                 'This is just a short text with less than 75 chars\n\n and some more text'
-            ),
-            'longDescriptionWithoutLineBreaks' => array(
+            ],
+            'longDescriptionWithoutLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ' . chr(10) . ' sed diam'
-            ),
-            'longDescriptionWithLineBreaks' => array(
+            ],
+            'longDescriptionWithLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ' . chr(13) . 'nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er' . chr(10) . ' at, sed diam'
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -85,7 +85,7 @@ class ICalendarDescriptionViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestC
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
         $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper',
-            array('renderChildren'));
+            ['renderChildren']);
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));
         $actual = $viewHelper->render();
         $this->assertSame('Just some text', $actual);

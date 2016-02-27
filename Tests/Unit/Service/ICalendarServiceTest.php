@@ -55,13 +55,13 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function downloadiCalendarFileThrowsExceptionIfNoDefaultStorageFound()
     {
         $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
-            array(), array(), '', false);
+            [], [], '', false);
 
         $mockIcalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
-            array('getiCalendarContent'), array(), '', false);
+            ['getiCalendarContent'], [], '', false);
 
         $mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
-            array('getDefaultStorage'), array(), '', false);
+            ['getDefaultStorage'], [], '', false);
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
             $this->returnValue(null));
         $this->inject($mockIcalendarService, 'resourceFactory', $mockResourceFactory);
@@ -76,24 +76,24 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function downloadiCalendarFileDumpsCsvFile()
     {
         $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
-            array(), array(), '', false);
+            [], [], '', false);
 
         $mockICalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
-            array('getiCalendarContent'), array(), '', false);
+            ['getiCalendarContent'], [], '', false);
         $mockICalendarService->expects($this->once())->method('getiCalendarContent')->with($mockEvent)->will(
             $this->returnValue('iCalendar Data'));
 
-        $mockFile = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', array(), array(), '', false);
+        $mockFile = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', [], [], '', false);
         $mockFile->expects($this->once())->method('setContents')->with('iCalendar Data');
 
         $mockStorageRepository = $this->getMock('TYPO3\CMS\Core\Resource\StorageRepository',
-            array('getFolder', 'createFile', 'dumpFileContents'), array(), '', false);
+            ['getFolder', 'createFile', 'dumpFileContents'], [], '', false);
         $mockStorageRepository->expects($this->at(0))->method('getFolder')->with('_temp_');
         $mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
         $mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
 
         $mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
-            array('getDefaultStorage'), array(), '', false);
+            ['getDefaultStorage'], [], '', false);
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
             $this->returnValue($mockStorageRepository));
         $this->inject($mockICalendarService, 'resourceFactory', $mockResourceFactory);
@@ -110,35 +110,35 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $_SERVER['HTTP_HOST'] = 'myhostname.tld';
 
         $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
-            array(), array(), '', false);
+            [], [], '', false);
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'view.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'view.' => [
                         'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
                         'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    )
-                )
-            )
-        );
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $iCalendarView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', array(), array(), '', false);
+        $iCalendarView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $iCalendarView->expects($this->once())->method('setFormat')->with('txt');
-        $iCalendarView->expects($this->once())->method('assignMultiple')->with(array(
+        $iCalendarView->expects($this->once())->method('assignMultiple')->with([
             'event' => $mockEvent,
             'typo3Host' => 'myhostname.tld'
-        ));
+        ]);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array(), array(), '', false);
+            [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($iCalendarView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 

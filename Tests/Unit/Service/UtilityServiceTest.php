@@ -55,12 +55,12 @@ class UtilityServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function clearCacheForConfiguredUidsWithEmptySettingsTest()
     {
-        $settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '',
+        $settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', [], [], '',
             false);
-        $settingsService->expects($this->once())->method('getClearCacheUids')->with(array())->will($this->returnValue(array()));
+        $settingsService->expects($this->once())->method('getClearCacheUids')->with([])->will($this->returnValue([]));
         $this->inject($this->subject, 'settingsService', $settingsService);
 
-        $this->subject->clearCacheForConfiguredUids(array());
+        $this->subject->clearCacheForConfiguredUids([]);
     }
 
     /**
@@ -71,15 +71,15 @@ class UtilityServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function clearCacheForConfiguredUidsWithSettingsTest()
     {
-        $settings = array('clearCacheUids' => '1,2,3,4');
-        $settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', array(), array(), '',
+        $settings = ['clearCacheUids' => '1,2,3,4'];
+        $settingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService', [], [], '',
             false);
         $settingsService->expects($this->once())->method('getClearCacheUids')->with($settings)->
-        will($this->returnValue(array(1, 2, 3, 4)));
+        will($this->returnValue([1, 2, 3, 4]));
         $this->inject($this->subject, 'settingsService', $settingsService);
 
-        $cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', array(), array(), '', false);
-        $cacheService->expects($this->once())->method('clearPageCache')->with(array(1, 2, 3, 4));
+        $cacheService = $this->getMock('TYPO3\\CMS\\Extbase\\Service\\CacheService', [], [], '', false);
+        $cacheService->expects($this->once())->method('clearPageCache')->with([1, 2, 3, 4]);
         $this->inject($this->subject, 'cacheService', $cacheService);
 
         $this->subject->clearCacheForConfiguredUids($settings);

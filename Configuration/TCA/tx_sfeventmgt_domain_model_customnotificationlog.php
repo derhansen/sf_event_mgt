@@ -1,6 +1,6 @@
 <?php
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog',
         'label' => 'title',
         'tstamp' => 'tstamp',
@@ -9,62 +9,62 @@ return array(
         'searchFields' => 'title,',
         'hideTable' => true,
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/logfile.png'
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => '',
-    ),
-    'types' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'palettes' => array(
-        '1' => array('showitem' => ''),
-    ),
-    'columns' => array(
+    ],
+    'types' => [
+        '1' => ['showitem' => ''],
+    ],
+    'palettes' => [
+        '1' => ['showitem' => ''],
+    ],
+    'columns' => [
 
-        'cruser_id' => array(
+        'cruser_id' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.cruser',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'be_users',
                 'foreign_class' => '\TYPO3\CMS\Beuser\Domain\Model\BackendUser',
                 'maxitems' => 1
-            )
-        ),
-        'event' => array(
+            ]
+        ],
+        'event' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.event',
-            'config' => array(
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_event',
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-            ),
-        ),
-        'details' => array(
+            ],
+        ],
+        'details' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.details',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-            ),
-        ),
-        'emails_sent' => array(
+            ],
+        ],
+        'emails_sent' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.emailsSent',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-            ),
-        ),
-        'tstamp' => array(
+            ],
+        ],
+        'tstamp' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.emailsSent',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
-            ),
-        ),
+            ],
+        ],
 
-    ),
-);
+    ],
+];

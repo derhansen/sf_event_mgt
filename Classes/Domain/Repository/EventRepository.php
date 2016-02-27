@@ -32,9 +32,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @var array
      */
-    protected $defaultOrderings = array(
+    protected $defaultOrderings = [
         'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-    );
+    ];
 
     /**
      * Disable the use of storage records, because the StoragePage can be set
@@ -57,7 +57,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findDemanded(EventDemand $eventDemand)
     {
-        $constraints = array();
+        $constraints = [];
         $query = $this->createQuery();
         $this->setStoragePageConstraint($query, $eventDemand, $constraints);
         $this->setDisplayModeConstraint($query, $eventDemand, $constraints);
@@ -106,7 +106,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setOrderingsFromDemand($query, EventDemand $eventDemand)
     {
-        $orderings = array();
+        $orderings = [];
         if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '') {
             $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
                 \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
@@ -166,7 +166,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setCategoryConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getCategory() != '') {
-            $categoryConstraints = array();
+            $categoryConstraints = [];
             $categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), true);
             foreach ($categories as $category) {
                 $categoryConstraints[] = $query->contains('category', $category);

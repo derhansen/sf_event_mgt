@@ -37,7 +37,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
     /**
      * @var array
      */
-    protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
+    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup
@@ -73,20 +73,20 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findExpiredRegistrationsDataProvider()
     {
-        return array(
-            'allRegistrationsExpired' => array(
+        return [
+            'allRegistrationsExpired' => [
                 1402826400, /* 15.06.2014 10:00 */
                 3
-            ),
-            'noRegistrationsExpired' => array(
+            ],
+            'noRegistrationsExpired' => [
                 1402736400, /* 14.06.2014 09:00 */
                 0
-            ),
-            'nowIs1030Am' => array(
+            ],
+            'nowIs1030Am' => [
                 1402741800, /* 14.06.2014 10:30 */
                 1
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -117,7 +117,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findNotificationRegistrationsForEventUid2()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $event->expects($this->once())->method('getUid')->will($this->returnValue(2));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
         $this->assertEquals(1, $registrations->count());
@@ -130,49 +130,49 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findNotificationRegistrationsDataProvider()
     {
-        return array(
-            'withEmptyConstraints' => array(
-                array(),
+        return [
+            'withEmptyConstraints' => [
+                [],
                 3
-            ),
-            'allPaidEquals1' => array(
-                array(
-                    'paid' => array('equals' => '1')
-                ),
+            ],
+            'allPaidEquals1' => [
+                [
+                    'paid' => ['equals' => '1']
+                ],
                 2
-            ),
-            'confirmationUntilLessThan' => array(
-                array(
-                    'confirmationUntil' => array('lessThan' => '1402743600')
-                ),
+            ],
+            'confirmationUntilLessThan' => [
+                [
+                    'confirmationUntil' => ['lessThan' => '1402743600']
+                ],
                 2
-            ),
-            'confirmationUntilLessThanOrEqual' => array(
-                array(
-                    'confirmationUntil' => array('lessThanOrEqual' => '1402743600')
-                ),
+            ],
+            'confirmationUntilLessThanOrEqual' => [
+                [
+                    'confirmationUntil' => ['lessThanOrEqual' => '1402743600']
+                ],
                 3
-            ),
-            'confirmationUntilGreaterThan' => array(
-                array(
-                    'confirmationUntil' => array('greaterThan' => '1402740000')
-                ),
+            ],
+            'confirmationUntilGreaterThan' => [
+                [
+                    'confirmationUntil' => ['greaterThan' => '1402740000']
+                ],
                 1
-            ),
-            'confirmationUntilGreaterThanOrEqual' => array(
-                array(
-                    'confirmationUntil' => array('greaterThanOrEqual' => '1402740000')
-                ),
+            ],
+            'confirmationUntilGreaterThanOrEqual' => [
+                [
+                    'confirmationUntil' => ['greaterThanOrEqual' => '1402740000']
+                ],
                 3
-            ),
-            'multipleContraints' => array(
-                array(
-                    'confirmationUntil' => array('lessThan' => '1402743600'),
-                    'paid' => array('equals' => '0')
-                ),
+            ],
+            'multipleContraints' => [
+                [
+                    'confirmationUntil' => ['lessThan' => '1402743600'],
+                    'paid' => ['equals' => '0']
+                ],
                 1
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -183,7 +183,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected)
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $event->expects($this->once())->method('getUid')->will($this->returnValue(1));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
         $this->assertEquals($expected, $registrations->count());
@@ -197,8 +197,8 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition()
     {
-        $constraints = array('confirmationUntil' => array('wrongcondition' => '0'));
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $constraints = ['confirmationUntil' => ['wrongcondition' => '0']];
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $this->registrationRepository->findNotificationRegistrations($event, $constraints);
     }
 
@@ -209,7 +209,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $event->expects($this->once())->method('getUid')->will($this->returnValue(3));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
         $this->assertEquals(1, $registrations->count());
@@ -222,7 +222,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
      */
     public function findEventRegistrationsByEmailReturnsExpectedAmountOfRegistrations()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', array(), array(), '', false);
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $event->expects($this->once())->method('getUid')->will($this->returnValue(10));
         $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, 'email@domain.tld');
         $this->assertEquals(1, $registrations->count());

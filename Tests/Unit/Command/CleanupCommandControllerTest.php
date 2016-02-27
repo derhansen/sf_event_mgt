@@ -55,33 +55,33 @@ class CleanupCommandControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
 
         // Inject configuration and configurationManager
-        $configuration = array(
-            'plugin.' => array(
-                'tx_sfeventmgt.' => array(
-                    'settings.' => array(
+        $configuration = [
+            'plugin.' => [
+                'tx_sfeventmgt.' => [
+                    'settings.' => [
                         'clearCacheUids' => '1,2,3',
-                        'registration.' => array(
+                        'registration.' => [
                             'deleteExpiredRegistrations' => 0
-                        )
-                    )
-                )
-            )
-        );
+                        ]
+                    ]
+                ]
+            ]
+        ];
 
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
         $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            array('handleExpiredRegistrations'), array(), '', false);
+            ['handleExpiredRegistrations'], [], '', false);
         $registrationService->expects($this->once())->method('handleExpiredRegistrations')->with(0)->will(
             $this->returnValue($configuration));
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            array('clearCacheForConfiguredUids'), array(), '', false);
+            ['clearCacheForConfiguredUids'], [], '', false);
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids')->
         with($configuration['plugin.']['tx_sfeventmgt.']['settings.']);
         $this->inject($this->subject, 'utilityService', $utilityService);

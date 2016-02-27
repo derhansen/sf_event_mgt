@@ -45,7 +45,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findExpiredRegistrations($dateNow)
     {
-        $constraints = array();
+        $constraints = [];
         $query = $this->createQuery();
         $constraints[] = $query->lessThanOrEqual('confirmationUntil', $dateNow);
         $constraints[] = $query->equals('confirmed', false);
@@ -63,7 +63,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findNotificationRegistrations($event, $findConstraints)
     {
-        $constraints = array();
+        $constraints = [];
         $query = $this->createQuery();
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('ignoreNotifications', false);
@@ -107,7 +107,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function findEventRegistrationsByEmail($event, $email)
     {
-        $constraints = array();
+        $constraints = [];
         $query = $this->createQuery();
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('email', $email);

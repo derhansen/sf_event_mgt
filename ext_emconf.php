@@ -10,7 +10,7 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
     'title' => 'Event management and registration',
     'description' => 'Configurable event management and registration extension based on ExtBase and Fluid',
     'category' => 'plugin',
@@ -22,13 +22,14 @@ $EM_CONF[$_EXTKEY] = array(
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
     'version' => '1.3.1-dev',
-    'constraints' => array(
-        'depends' => array(
+    'constraints' => [
+        'depends' => [
             'extbase' => '6.2.0',
             'fluid' => '6.2.0',
-            'typo3' => '6.2.0-7.99.99',
-        ),
-        'conflicts' => array(),
-        'suggests' => array(),
-    ),
-);
+            'typo3' => '6.2.0-7.6.99',
+            'php' => '5.4.0-7.0.99',
+        ],
+        'conflicts' => [],
+        'suggests' => [],
+    ],
+];

@@ -40,8 +40,8 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setup()
     {
         $this->validator = $this->getAccessibleMock($this->validatorClassName,
-            array('translateErrorMessage', 'getValidator'),
-            array(), '', false);
+            ['translateErrorMessage', 'getValidator'],
+            [], '', false);
     }
 
     /**
@@ -51,18 +51,18 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function missingSettingsDataProvider()
     {
-        return array(
-            'emptySettings' => array(
-                array(),
-                array(),
+        return [
+            'emptySettings' => [
+                [],
+                [],
                 false
-            ),
-            'noRequiredFieldsSettings' => array(
-                array('registration' => array('requiredFields' => '')),
-                array(),
+            ],
+            'noRequiredFieldsSettings' => [
+                ['registration' => ['requiredFields' => '']],
+                [],
                 false
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -84,7 +84,7 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         // Inject configuration and configurationManager
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
             $this->returnValue($settings));
         $this->inject($this->validator, 'configurationManager', $configurationManager);
@@ -99,50 +99,50 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function settingsDataProvider()
     {
-        return array(
-            'requiredFieldsSettingsForCityIfCityNotSet' => array(
-                array('registration' => array('requiredFields' => 'city')),
-                array(),
+        return [
+            'requiredFieldsSettingsForCityIfCityNotSet' => [
+                ['registration' => ['requiredFields' => 'city']],
+                [],
                 true,
                 true
-            ),
-            'requiredFieldsSettingsForCityIfCitySet' => array(
-                array('registration' => array('requiredFields' => 'city')),
-                array('city' => 'Some city'),
+            ],
+            'requiredFieldsSettingsForCityIfCitySet' => [
+                ['registration' => ['requiredFields' => 'city']],
+                ['city' => 'Some city'],
                 false,
                 false
-            ),
-            'requiredFieldsSettingsForCityAndZipWithWhitespace' => array(
-                array('registration' => array('requiredFields' => 'city, zip')),
-                array('city' => 'Some city', 'zip' => '12345'),
+            ],
+            'requiredFieldsSettingsForCityAndZipWithWhitespace' => [
+                ['registration' => ['requiredFields' => 'city, zip']],
+                ['city' => 'Some city', 'zip' => '12345'],
                 false,
                 false
-            ),
-            'requiredFieldsSettingsForAccepttcBoolean' => array(
-                array('registration' => array('requiredFields' => 'accepttc')),
-                array('accepttc' => false),
+            ],
+            'requiredFieldsSettingsForAccepttcBoolean' => [
+                ['registration' => ['requiredFields' => 'accepttc']],
+                ['accepttc' => false],
                 false,
                 false
-            ),
-            'requiredFieldsSettingsForUnknownProperty' => array(
-                array('registration' => array('requiredFields' => 'unknown_field')),
-                array(),
+            ],
+            'requiredFieldsSettingsForUnknownProperty' => [
+                ['registration' => ['requiredFields' => 'unknown_field']],
+                [],
                 false,
                 false
-            ),
-            'requiredFieldsSettingsForRecaptchaIfRecatchaNotSet' => array(
-                array('registration' => array('requiredFields' => 'recaptcha')),
-                array(),
+            ],
+            'requiredFieldsSettingsForRecaptchaIfRecatchaNotSet' => [
+                ['registration' => ['requiredFields' => 'recaptcha']],
+                [],
                 true,
                 true
-            ),
-            'requiredFieldsSettingsForRecaptchaIfRecatchaSet' => array(
-                array('registration' => array('requiredFields' => 'recaptcha')),
-                array('recaptcha' => 'recaptcha-value'),
+            ],
+            'requiredFieldsSettingsForRecaptchaIfRecatchaSet' => [
+                ['registration' => ['requiredFields' => 'recaptcha']],
+                ['recaptcha' => 'recaptcha-value'],
                 false,
                 false
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -165,42 +165,42 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         // Inject configuration and configurationManager
         $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            array('getConfiguration'), array(), '', false);
+            ['getConfiguration'], [], '', false);
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
             $this->returnValue($settings));
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
         // Inject the object manager
-        $validationError = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Error', array(), array(), '', false);
+        $validationError = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Error', [], [], '', false);
 
-        $validationResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', array(), array(), '', false);
+        $validationResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', [], [], '', false);
         $validationResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
         $validationResult->expects($this->any())->method('getErrors')->will(
-            $this->returnValue(array($validationError)));
+            $this->returnValue([$validationError]));
 
         $notEmptyValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator',
-            array(), array(), '', false);
+            [], [], '', false);
         $notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
             $validationResult));
 
         $booleanValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
-            array(), array(), '', false);
+            [], [], '', false);
         $booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
             $validationResult));
 
         $recaptchaValidator = $this->getMock('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator',
-            array(), array(), '', false);
+            [], [], '', false);
         $recaptchaValidator->expects($this->any())->method('validate')->will($this->returnValue(
             $validationResult));
 
 
         // Create a map of arguments to return values
-        $map = array(
-            array('string', 'city', $notEmptyValidator),
-            array('string', 'zip', $notEmptyValidator),
-            array('string', 'recaptcha', $recaptchaValidator),
-            array('boolean', 'accepttc', $booleanValidator)
-        );
+        $map = [
+            ['string', 'city', $notEmptyValidator],
+            ['string', 'zip', $notEmptyValidator],
+            ['string', 'recaptcha', $recaptchaValidator],
+            ['boolean', 'accepttc', $booleanValidator]
+        ];
 
         $this->validator->expects($this->any())->method('getValidator')->will($this->returnValueMap($map));
 
@@ -214,18 +214,18 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getValidatorDataProvider()
     {
-        return array(
-            'string' => array(
+        return [
+            'string' => [
                 'string',
                 new \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator(),
                 '\TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator'
-            ),
-            'boolean' => array(
+            ],
+            'boolean' => [
                 'boolean',
                 new \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator(),
                 '\TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator'
-            )
-        );
+            ]
+        ];
     }
 
     /**
@@ -234,10 +234,10 @@ class RegistrationValidatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getValidatorReturnsValidatorTest($type, $returnedObject, $expectedClass)
     {
-        $validator = $this->getAccessibleMock($this->validatorClassName, array('dummy'), array(), '', false);
+        $validator = $this->getAccessibleMock($this->validatorClassName, ['dummy'], [], '', false);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            array('get'), array(), '', false);
+            ['get'], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($returnedObject));
         $this->inject($validator, 'objectManager', $objectManager);
 

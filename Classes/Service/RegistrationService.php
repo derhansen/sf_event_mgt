@@ -167,12 +167,12 @@ class RegistrationService
             $titleKey = 'confirmRegistration.title.failed';
         }
 
-        return array(
+        return [
             $failed,
             $registration,
             $messageKey,
             $titleKey
-        );
+        ];
     }
 
     /**
@@ -234,12 +234,12 @@ class RegistrationService
             $titleKey = 'cancelRegistration.title.failed';
         }
 
-        return array(
+        return [
             $failed,
             $registration,
             $messageKey,
             $titleKey
-        );
+        ];
     }
 
     /**

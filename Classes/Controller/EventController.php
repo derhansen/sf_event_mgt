@@ -116,7 +116,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @var array
      */
-    protected $ignoredSettingsForOverwriteDemand = array('storagePage');
+    protected $ignoredSettingsForOverwriteDemand = ['storagePage'];
 
     /**
      * Creates an event demand object with the given settings
@@ -183,7 +183,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @return void
      */
-    public function listAction(array $overwriteDemand = array())
+    public function listAction(array $overwriteDemand = [])
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
@@ -318,17 +318,17 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 'confirmRegistration',
                 null,
                 null,
-                array(
+                [
                     'reguid' => $registration->getUid(),
                     'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid())
-                )
+                ]
             );
         } else {
             $this->redirect(
                 'saveRegistrationResult',
                 null,
                 null,
-                array('result' => $result)
+                ['result' => $result]
             );
         }
     }
@@ -500,7 +500,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @return void
      */
-    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = array())
+    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
@@ -542,7 +542,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function isOverwriteDemand($overwriteDemand)
     {
-        return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== array();
+        return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== [];
     }
 
 }

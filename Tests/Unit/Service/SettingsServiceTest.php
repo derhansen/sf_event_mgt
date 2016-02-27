@@ -54,65 +54,65 @@ class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function clearCacheSettingsDataProvider()
     {
-        return array(
-            'emptySettings' => array(
-                array(),
-                array()
-            ),
-            'settingsWithNoListAndDetail' => array(
-                array(
+        return [
+            'emptySettings' => [
+                [],
+                []
+            ],
+            'settingsWithNoListAndDetail' => [
+                [
                     'clearCacheUids' => 1
-                ),
-                array(
+                ],
+                [
                     '0' => 1
-                )
-            ),
-            'settingsWithListAndNoDetail' => array(
-                array(
+                ]
+            ],
+            'settingsWithListAndNoDetail' => [
+                [
                     'clearCacheUids' => 1,
                     'listPid' => 2
-                ),
-                array(
+                ],
+                [
                     '0' => 1,
                     '1' => 2
-                )
-            ),
-            'settingsWithListAndDetail' => array(
-                array(
+                ]
+            ],
+            'settingsWithListAndDetail' => [
+                [
                     'clearCacheUids' => 1,
                     'detailPid' => 3,
                     'listPid' => 2
-                ),
-                array(
+                ],
+                [
                     '0' => 1,
                     '1' => 3,
                     '2' => 2
-                )
-            ),
-            'multipleClearCacheUidsWithListAndDetail' => array(
-                array(
+                ]
+            ],
+            'multipleClearCacheUidsWithListAndDetail' => [
+                [
                     'clearCacheUids' => '1,2,3',
                     'detailPid' => 5,
                     'listPid' => 4
-                ),
-                array(
+                ],
+                [
                     '0' => 1,
                     '1' => 2,
                     '2' => 3,
                     '3' => 5,
                     '4' => 4
-                )
-            ),
-            'wrongClearCacheUids' => array(
-                array(
+                ]
+            ],
+            'wrongClearCacheUids' => [
+                [
                     'clearCacheUids' => '1,,3',
-                ),
-                array(
+                ],
+                [
                     '0' => 1,
                     '1' => 3
-                )
-            ),
-        );
+                ]
+            ],
+        ];
     }
 
     /**
@@ -131,46 +131,46 @@ class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function customNotificationsSettingsDataProvider()
     {
-        return array(
-            'emptySettings' => array(
-                array(),
-                array()
-            ),
-            'oneEntry' => array(
-                array(
-                    'notification' => array(
-                        'customNotifications' => array(
-                            'firstEntry' => array(
+        return [
+            'emptySettings' => [
+                [],
+                []
+            ],
+            'oneEntry' => [
+                [
+                    'notification' => [
+                        'customNotifications' => [
+                            'firstEntry' => [
                                 'title' => 'First title',
                                 'template' => 'First template',
                                 'subject' => 'First subject'
-                            )
-                        )
-                    )
-                ),
-                array('firstEntry' => 'First title')
-            ),
-            'twoEntry' => array(
-                array(
-                    'notification' => array(
-                        'customNotifications' => array(
-                            'firstEntry' => array(
+                            ]
+                        ]
+                    ]
+                ],
+                ['firstEntry' => 'First title']
+            ],
+            'twoEntry' => [
+                [
+                    'notification' => [
+                        'customNotifications' => [
+                            'firstEntry' => [
                                 'title' => 'First title',
                                 'template' => 'First template',
                                 'subject' => 'First subject'
-                            ),
-                            'secondEntry' => array(
+                            ],
+                            'secondEntry' => [
                                 'title' => 'Second title',
                                 'template' => 'Second template',
                                 'subject' => 'Second subject'
-                            )
+                            ]
 
-                        )
-                    )
-                ),
-                array('firstEntry' => 'First title', 'secondEntry' => 'Second title')
-            ),
-        );
+                        ]
+                    ]
+                ],
+                ['firstEntry' => 'First title', 'secondEntry' => 'Second title']
+            ],
+        ];
     }
 
     /**

@@ -188,7 +188,7 @@ class OrganisatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
         $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            array('attach'), array(), '', false);
+            ['attach'], [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($images));
         $this->inject($this->subject, 'image', $imageObjectStorageMock);
         $this->subject->addImage($images);
@@ -204,7 +204,7 @@ class OrganisatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
         $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            array('detach'), array(), '', false);
+            ['detach'], [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($images));
         $this->inject($this->subject, 'image', $imageObjectStorageMock);
         $this->subject->removeImage($images);

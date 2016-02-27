@@ -50,7 +50,7 @@ class ExportService
      * @throws \RuntimeException RuntimeException
      * @return void
      */
-    public function downloadRegistrationsCsv($eventUid, $settings = array())
+    public function downloadRegistrationsCsv($eventUid, $settings = [])
     {
         $storage = $this->resourceFactory->getDefaultStorage();
         if ($storage === null) {
@@ -73,14 +73,14 @@ class ExportService
      * @throws \RuntimeException RuntimeException
      * @return string
      */
-    public function exportRegistrationsCsv($eventUid, $settings = array())
+    public function exportRegistrationsCsv($eventUid, $settings = [])
     {
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
         $registrations = $this->registrationRepository->findByEvent($eventUid);
         $exportedRegistrations = GeneralUtility::csvValues($fieldsArray,
                 $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
         foreach ($registrations as $registration) {
-            $exportedRegistration = array();
+            $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
                 if ($registration->_hasProperty($field)) {
                     $exportedRegistration[] = $this->getFieldValue($registration, $field);

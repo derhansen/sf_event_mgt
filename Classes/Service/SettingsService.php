@@ -33,9 +33,9 @@ class SettingsService
     public function getCustomNotifications($settings)
     {
         if (!is_array($settings['notification']['customNotifications'])) {
-            return array();
+            return [];
         }
-        $notifications = array();
+        $notifications = [];
         foreach ($settings['notification']['customNotifications'] as $notificationKey => $notificationValue) {
             $notifications[$notificationKey] = $notificationValue['title'];
         }
@@ -62,7 +62,7 @@ class SettingsService
         }
 
         if ($clearCacheUids == null) {
-            return array();
+            return [];
         }
         $return = preg_split('/,/', $clearCacheUids, null, PREG_SPLIT_NO_EMPTY);
         return $return;

@@ -32,7 +32,7 @@ class LocationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
     protected $locationRepository;
 
     /** @var array */
-    protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
+    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup

@@ -43,7 +43,7 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
         } else {
             $maxPossibleRegistrations = $event->getMaxRegistrationsPerUser();
         }
-        $result = array($maxPossibleRegistrations);
+        $result = [$maxPossibleRegistrations];
         if ($maxPossibleRegistrations >= $minPossibleRegistrations) {
             $arrayWithZeroAsIndex = range($minPossibleRegistrations, $maxPossibleRegistrations);
             $result = array_combine(range(1, count($arrayWithZeroAsIndex)), $arrayWithZeroAsIndex);

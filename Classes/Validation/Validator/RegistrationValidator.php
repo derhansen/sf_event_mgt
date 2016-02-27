@@ -102,7 +102,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                 /** @var \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator $validator */
                 $validator = $this->objectManager->get(
                     'TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
-                    array('is' => true)
+                    ['is' => true]
                 );
                 break;
             default:

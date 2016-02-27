@@ -319,8 +319,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function addCategoryToObjectStorageHoldingCategory()
     {
         $category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
-        $categoryObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'),
-            array(), '', false);
+        $categoryObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
         $categoryObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($category));
         $this->inject($this->subject, 'category', $categoryObjectStorageMock);
 
@@ -333,8 +333,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function removeCategoryFromObjectStorageHoldingCategory()
     {
         $category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
-        $categoryObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'),
-            array(), '', false);
+        $categoryObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
         $categoryObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($category));
         $this->inject($this->subject, 'category', $categoryObjectStorageMock);
 
@@ -378,7 +378,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $registration = new Registration();
         $registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            array('attach'), array(), '', false);
+            ['attach'], [], '', false);
         $registrationObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($registration));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
@@ -392,7 +392,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $registration = new Registration();
         $registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            array('detach'), array(), '', false);
+            ['detach'], [], '', false);
         $registrationObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($registration));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
@@ -457,8 +457,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function addImageToObjectStorageHoldingImage()
     {
         $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'),
-            array(), '', false);
+        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($image));
         $this->inject($this->subject, 'image', $imageObjectStorageMock);
 
@@ -471,8 +471,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function removeImageFromObjectStorageHoldingImage()
     {
         $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'),
-            array(), '', false);
+        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($image));
         $this->inject($this->subject, 'image', $imageObjectStorageMock);
 
@@ -514,8 +514,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function addFilesToObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'),
-            array(), '', false);
+        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
         $this->inject($this->subject, 'files', $imageObjectStorageMock);
 
@@ -528,8 +528,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function removeFilesFromObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'),
-            array(), '', false);
+        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
         $this->inject($this->subject, 'files', $imageObjectStorageMock);
 
@@ -571,8 +571,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function addAdditionalImageToObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('attach'),
-            array(), '', false);
+        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
         $this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
 
@@ -585,8 +585,8 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function removeAdditionalImageFromObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', array('detach'),
-            array(), '', false);
+        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
         $this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
 
@@ -795,48 +795,48 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function typolinkDataprovider()
     {
-        return array(
-            'emptyLink' => array(
+        return [
+            'emptyLink' => [
                 '',
                 1,
                 ''
-            ),
-            'singleDomainLink' => array(
+            ],
+            'singleDomainLink' => [
                 'www.domain.tld',
                 0,
                 'www.domain.tld'
-            ),
-            'singlePageLink' => array(
+            ],
+            'singlePageLink' => [
                 '1',
                 0,
                 '1'
-            ),
-            'EmptyTarget' => array(
+            ],
+            'EmptyTarget' => [
                 'www.domain.tld',
                 1,
                 ''
-            ),
-            'TargetNotSet' => array(
+            ],
+            'TargetNotSet' => [
                 'www.domain.tld - Title',
                 1,
                 ''
-            ),
-            'DomainTarget' => array(
+            ],
+            'DomainTarget' => [
                 'www.domain.tld _blank',
                 1,
                 '_blank'
-            ),
-            'TitleWithoutQuotationMarks' => array(
+            ],
+            'TitleWithoutQuotationMarks' => [
                 'www.domain.tld - - Title',
                 3,
                 'Title'
-            ),
-            'TitleWithQuotationMarks' => array(
+            ],
+            'TitleWithQuotationMarks' => [
                 'www.domain.tld - - "Title of link"',
                 3,
                 'Title of link'
-            ),
-        );
+            ],
+        ];
     }
 
     /**
@@ -913,7 +913,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setMaxParticipants(10);
 
         $registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            array('count'), array(), '', false);
+            ['count'], [], '', false);
         $registrationObjectStorageMock->expects($this->once())->method('count')->will($this->returnValue(5));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 

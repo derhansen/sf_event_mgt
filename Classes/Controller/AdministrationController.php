@@ -173,7 +173,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     public function handleExpiredRegistrationsAction()
     {
         $this->registrationService->handleExpiredRegistrations($this->settings['registration']['deleteExpiredRegistrations']);
-        $this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => null, 'messageId' => 1));
+        $this->redirect('list', 'Administration', 'SfEventMgt', ['demand' => null, 'messageId' => 1]);
     }
 
     /**
@@ -187,11 +187,11 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     {
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
-        $this->view->assignMultiple(array(
+        $this->view->assignMultiple([
             'event' => $event,
             'customNotifications' => $customNotifications,
             'logEntries' => $logEntries,
-        ));
+        ]);
     }
 
     /**
@@ -211,7 +211,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
             $customNotifications[$customNotification],
             $result
         );
-        $this->redirect('list', 'Administration', 'SfEventMgt', array('demand' => null, 'messageId' => 2));
+        $this->redirect('list', 'Administration', 'SfEventMgt', ['demand' => null, 'messageId' => 2]);
     }
 
     /**

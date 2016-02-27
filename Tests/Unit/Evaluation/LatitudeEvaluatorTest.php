@@ -56,36 +56,36 @@ class LatitudeEvaluatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function latitudeEvaluatorDataProvider()
     {
-        return array(
-            'emptyValue' => array(
+        return [
+            'emptyValue' => [
                 null,
                 '0.000000'
-            ),
-            'givenIntegerGetsConvertedToFloatWith6Decimals' => array(
+            ],
+            'givenIntegerGetsConvertedToFloatWith6Decimals' => [
                 1,
                 '1.000000'
-            ),
-            'maxValuePossible' => array(
+            ],
+            'maxValuePossible' => [
                 90,
                 '90.000000'
-            ),
-            'minValuePossible' => array(
+            ],
+            'minValuePossible' => [
                 -90,
                 '-90.000000'
-            ),
-            'greaterThanMaxValueNotPossible' => array(
+            ],
+            'greaterThanMaxValueNotPossible' => [
                 90.000001,
                 '0.000000'
-            ),
-            'lessThanMinValueNotPossible' => array(
+            ],
+            'lessThanMinValueNotPossible' => [
                 -90.000001,
                 '0.000000'
-            ),
-            'validLongitudeIsReturned' => array(
+            ],
+            'validLongitudeIsReturned' => [
                 12.345678,
                 '12.345678'
-            ),
-        );
+            ],
+        ];
     }
 
     /**

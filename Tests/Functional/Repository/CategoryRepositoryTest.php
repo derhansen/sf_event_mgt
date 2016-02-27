@@ -32,7 +32,7 @@ class CategoryRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
     protected $categoryRepository;
 
     /** @var array */
-    protected $testExtensionsToLoad = array('typo3conf/ext/sf_event_mgt');
+    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup

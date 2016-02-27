@@ -204,10 +204,10 @@ class NotificationService
             case MessageType::REGISTRATION_NEW:
             default:
         }
-        return array(
+        return [
             $template,
             $subject
-        );
+        ];
     }
 
     /**
@@ -280,10 +280,10 @@ class NotificationService
             case MessageType::REGISTRATION_NEW:
             default:
         }
-        return array(
+        return [
             $template,
             $subject
-        );
+        ];
     }
 
     /**
@@ -313,13 +313,13 @@ class NotificationService
         $emailView->setLayoutRootPaths($layoutRootPaths);
         $emailView->setPartialRootPaths($partialRootPaths);
         $emailView->setTemplatePathAndFilename($this->getTemplatePath($template));
-        $emailView->assignMultiple(array(
+        $emailView->assignMultiple([
             'event' => $event,
             'registration' => $registration,
             'settings' => $settings,
             'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
             'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
-        ));
+        ]);
         $emailBody = $emailView->render();
         return $emailBody;
     }

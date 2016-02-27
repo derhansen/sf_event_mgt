@@ -1,7 +1,7 @@
 <?php
 
-return array(
-    'ctrl' => array(
+return [
+    'ctrl' => [
         'title' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event',
         'label' => 'title',
         'tstamp' => 'tstamp',
@@ -16,20 +16,20 @@ return array(
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
         'delete' => 'deleted',
-        'enablecolumns' => array(
+        'enablecolumns' => [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
-        ),
+        ],
         'requestUpdate' => 'enable_registration, enable_cancel',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
-    ),
-    'interface' => array(
+    ],
+    'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check',
-    ),
-    'types' => array(
-        '1' => array(
+    ],
+    'types' => [
+        '1' => [
             'showitem' => 'l10n_parent, l10n_diffsource,
 			--palette--;;paletteCore, title,--palette--;;paletteDates, teaser,
 			description;;;richtext:rte_transform[mode=ts_links],
@@ -50,309 +50,309 @@ return array(
 				registration,
 
 			--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
-        ),
-    ),
-    'palettes' => array(
-        '1' => array(
+        ],
+    ],
+    'palettes' => [
+        '1' => [
             'showitem' => '',
-        ),
-        'paletteCore' => array(
+        ],
+        'paletteCore' => [
             'showitem' => 'sys_language_uid, top_event, hidden,',
             'canNotCollapse' => true
-        ),
-        'paletteDates' => array(
+        ],
+        'paletteDates' => [
             'showitem' => 'startdate, enddate,',
             'canNotCollapse' => true
-        ),
-        'palettePrice' => array(
+        ],
+        'palettePrice' => [
             'showitem' => 'price, currency,',
             'canNotCollapse' => true
-        ),
-        'paletteNotification' => array(
+        ],
+        'paletteNotification' => [
             'showitem' => 'notify_admin, notify_organisator,',
             'canNotCollapse' => true
-        ),
-        'paletteCancellation' => array(
+        ],
+        'paletteCancellation' => [
             'showitem' => 'enable_cancel, cancel_deadline,',
             'canNotCollapse' => true
-        ),
-    ),
-    'columns' => array(
-        'sys_language_uid' => array(
+        ],
+    ],
+    'columns' => [
+        'sys_language_uid' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'sys_language',
                 'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => array(
-                    array('LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1),
-                    array('LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0)
-                ),
-            ),
-        ),
-        'l10n_parent' => array(
+                'items' => [
+                    ['LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1],
+                    ['LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0]
+                ],
+            ],
+        ],
+        'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.l18n_parent',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'items' => array(
-                    array('', 0),
-                ),
+                'items' => [
+                    ['', 0],
+                ],
                 'foreign_table' => 'tx_sfeventmgt_domain_model_event',
                 'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_event.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_event.sys_language_uid IN (-1,0)',
-            ),
-        ),
-        'l10n_diffsource' => array(
-            'config' => array(
+            ],
+        ],
+        'l10n_diffsource' => [
+            'config' => [
                 'type' => 'passthrough',
-            ),
-        ),
-        't3ver_label' => array(
+            ],
+        ],
+        't3ver_label' => [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.versionLabel',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            )
-        ),
-        'hidden' => array(
+            ]
+        ],
+        'hidden' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.hidden',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'starttime' => array(
+            ],
+        ],
+        'starttime' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
+                'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'endtime' => array(
+                ],
+            ],
+        ],
+        'endtime' => [
             'exclude' => 1,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'max' => 20,
                 'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
-                'range' => array(
+                'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ),
-            ),
-        ),
-        'title' => array(
+                ],
+            ],
+        ],
+        'title' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.title',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
-            ),
-        ),
-        'teaser' => array(
+            ],
+        ],
+        'teaser' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.teaser',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 5,
-            )
-        ),
-        'description' => array(
+            ]
+        ],
+        'description' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.description',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => array(
-                    'RTE' => array(
+                'wizards' => [
+                    'RTE' => [
                         'icon' => 'wizard_rte2.gif',
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_rte',
-                        ),
+                        ],
                         'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
                         'type' => 'script'
-                    )
-                )
-            ),
-        ),
-        'program' => array(
+                    ]
+                ]
+            ],
+        ],
+        'program' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.program',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => array(
-                    'RTE' => array(
+                'wizards' => [
+                    'RTE' => [
                         'icon' => 'wizard_rte2.gif',
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_rte',
-                        ),
+                        ],
                         'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
                         'type' => 'script'
-                    )
-                )
-            ),
-        ),
-        'link' => array(
+                    ]
+                ]
+            ],
+        ],
+        'link' => [
             'exclude' => 0,
             'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.link',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
-                'wizards' => array(
+                'wizards' => [
                     '_PADDING' => 2,
-                    'link' => array(
+                    'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
                         'icon' => 'link_popup.gif',
-                        'module' => array(
+                        'module' => [
                             'name' => 'wizard_element_browser',
-                            'urlParameters' => array(
+                            'urlParameters' => [
                                 'mode' => 'wizard'
-                            )
-                        ),
+                            ]
+                        ],
                         'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1'
-                    )
-                )
-            )
-        ),
-        'top_event' => array(
+                    ]
+                ]
+            ]
+        ],
+        'top_event' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.top_event',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'startdate' => array(
+            ],
+        ],
+        'startdate' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1,
                 'default' => time()
-            ),
-        ),
-        'enddate' => array(
+            ],
+        ],
+        'enddate' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enddate',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1,
                 'default' => time()
-            ),
-        ),
-        'enable_registration' => array(
+            ],
+        ],
+        'enable_registration' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_registration',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'registration_deadline' => array(
+            ],
+        ],
+        'registration_deadline' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_deadline',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1
-            ),
-        ),
-        'enable_cancel' => array(
+            ],
+        ],
+        'enable_cancel' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_cancel',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'cancel_deadline' => array(
+            ],
+        ],
+        'cancel_deadline' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.cancel_deadline',
             'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1
-            ),
-        ),
-        'max_participants' => array(
+            ],
+        ],
+        'max_participants' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxParticipants',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int'
-            )
-        ),
-        'max_registrations_per_user' => array(
+            ]
+        ],
+        'max_registrations_per_user' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 4,
                 'eval' => 'int'
-            )
-        ),
-        'price' => array(
+            ]
+        ],
+        'price' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 5,
                 'eval' => 'double2'
-            )
-        ),
-        'currency' => array(
+            ]
+        ],
+        'currency' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.currency',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'size' => 5,
                 'eval' => 'trim'
-            ),
-        ),
-        'location' => array(
+            ],
+        ],
+        'location' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.location',
-            'config' => array(
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_location',
@@ -360,17 +360,17 @@ return array(
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-        'organisator' => array(
+                    ],
+                ],
+            ],
+        ],
+        'organisator' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.organisator',
-            'config' => array(
+            'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_organisator',
@@ -378,118 +378,118 @@ return array(
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
-                'wizards' => array(
-                    'suggest' => array(
+                'wizards' => [
+                    'suggest' => [
                         'type' => 'suggest',
-                    ),
-                ),
-            ),
-        ),
-        'category' => array(
+                    ],
+                ],
+            ],
+        ],
+        'category' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.category',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'renderMode' => 'tree',
-                'treeConfig' => array(
+                'treeConfig' => [
                     'parentField' => 'parent',
-                    'appearance' => array(
+                    'appearance' => [
                         'expandAll' => true,
                         'showHeader' => true,
-                    ),
-                ),
+                    ],
+                ],
                 'MM' => 'tx_sfeventmgt_event_category_mm',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_category',
                 'foreign_table_where' => ' AND (tx_sfeventmgt_domain_model_category.sys_language_uid = 0 OR tx_sfeventmgt_domain_model_category.l10n_parent = 0) ORDER BY tx_sfeventmgt_domain_model_category.sorting ASC',
                 'minitems' => 0,
                 'maxitems' => 99,
-            ),
-        ),
-        'image' => array(
+            ],
+        ],
+        'image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', array(
-                'appearance' => array(
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
+                'appearance' => [
                     'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
-                ),
+                ],
                 'minitems' => 0,
                 'maxitems' => 999,
-            ), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
-        ),
-        'files' => array(
+            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
+        ],
+        'files' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.files',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('files', array(
-                    'appearance' => array(
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('files', [
+                    'appearance' => [
                         'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
-                    ),
-                )
+                    ],
+                ]
             ),
-        ),
-        'youtube' => array(
+        ],
+        'youtube' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.youtube',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 3,
-            )
-        ),
-        'additional_image' => array(
+            ]
+        ],
+        'additional_image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.additional_image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('additional_image',
-                array(
-                    'appearance' => array(
+                [
+                    'appearance' => [
                         'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
-                    ),
+                    ],
                     'minitems' => 0,
                     'maxitems' => 999,
-                ), $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
-        ),
-        'registration' => array(
+                ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
+        ],
+        'registration' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registrations',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_registration',
                 'foreign_field' => 'event',
                 'maxitems' => 9999,
-                'appearance' => array(
+                'appearance' => [
                     'collapseAll' => 1,
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
                     'showAllLocalizationLink' => 1
-                ),
-            ),
-        ),
-        'notify_admin' => array(
+                ],
+            ],
+        ],
+        'notify_admin' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_admin',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'notify_organisator' => array(
+            ],
+        ],
+        'notify_organisator' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_organisator',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
-        'unique_email_check' => array(
+            ],
+        ],
+        'unique_email_check' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.unique_email_check',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
-            'config' => array(
+            'config' => [
                 'type' => 'check',
-            ),
-        ),
+            ],
+        ],
 
-    ),
-);
+    ],
+];

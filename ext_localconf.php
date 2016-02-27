@@ -6,13 +6,13 @@ if (!defined('TYPO3_MODE')) {
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'DERHANSEN.' . $_EXTKEY,
     'Pievent',
-    array(
+    [
         'Event' => 'list, detail, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search'
-    ),
+    ],
     // non-cacheable actions
-    array(
+    [
         'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
-    )
+    ]
 );
 
 // DataHandler hook
