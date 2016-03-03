@@ -113,24 +113,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->any())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -141,6 +123,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
         $this->assertFalse($result);
@@ -163,24 +150,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->any())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -191,6 +160,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -217,24 +191,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->any())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -245,6 +201,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertFalse($result);
@@ -281,24 +242,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->any())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -309,6 +252,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -366,24 +314,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->any())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -394,6 +324,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -423,24 +358,6 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->exactly(3))->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->any())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -451,6 +368,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);

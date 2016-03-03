@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * ICalenderService
@@ -48,6 +47,14 @@ class ICalendarService
      * @inject
      */
     protected $resourceFactory = null;
+
+    /**
+     * FluidStandaloneService
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
+     * @inject
+     */
+    protected $fluidStandaloneService;
 
     /**
      * Initiates the ICS download for the given event
@@ -84,15 +91,12 @@ class ICalendarService
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
         $icalView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $icalView->setFormat('txt');
-        $extbaseFrameworkConfiguration = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        $templateRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['templateRootPath']);
-        $layoutRootPath = GeneralUtility::getFileAbsFileName(
-            $extbaseFrameworkConfiguration['plugin.']['tx_sfeventmgt.']['view.']['layoutRootPath']);
+        $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');
+        $partialRootPaths = $this->fluidStandaloneService->getTemplateFolders('partial');
 
-        $icalView->setLayoutRootPath($layoutRootPath);
-        $icalView->setTemplatePathAndFilename($templateRootPath . 'Event/ICalendar.txt');
+        $icalView->setLayoutRootPaths($layoutRootPaths);
+        $icalView->setPartialRootPaths($partialRootPaths);
+        $icalView->setTemplatePathAndFilename($this->fluidStandaloneService->getTemplatePath('Event/ICalendar.txt'));
         $icalView->assignMultiple([
             'event' => $event,
             'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')

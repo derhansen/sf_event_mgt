@@ -112,24 +112,6 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
             [], [], '', false);
 
-        // Inject configuration and configurationManager
-        $configuration = [
-            'plugin.' => [
-                'tx_sfeventmgt.' => [
-                    'view.' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                        'layoutRootPath' => 'EXT:sf_event_mgt/Resources/Private/Layouts/'
-                    ]
-                ]
-            ]
-        ];
-
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
-        $this->inject($this->subject, 'configurationManager', $configurationManager);
-
         $iCalendarView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $iCalendarView->expects($this->once())->method('setFormat')->with('txt');
         $iCalendarView->expects($this->once())->method('assignMultiple')->with([
@@ -141,6 +123,11 @@ class ICalendarServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             [], [], '', false);
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($iCalendarView));
         $this->inject($this->subject, 'objectManager', $objectManager);
+
+        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+            [], [], '', false);
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $this->subject->getiCalendarContent($mockEvent);
     }

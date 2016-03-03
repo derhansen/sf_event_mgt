@@ -16,7 +16,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * NotificationService
@@ -33,14 +32,6 @@ class NotificationService
      * @inject
      */
     protected $objectManager;
-
-    /**
-     * The configuration manager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-     * @inject
-     */
-    protected $configurationManager;
 
     /**
      * Registration repository
@@ -65,6 +56,14 @@ class NotificationService
      * @inject
      */
     protected $hashService;
+
+    /**
+     * FluidStandaloneService
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
+     * @inject
+     */
+    protected $fluidStandaloneService;
 
     /**
      * CustomNotificationLogRepository
@@ -237,22 +236,22 @@ class NotificationService
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
             foreach ($adminEmailArr as $adminEmail) {
                 $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                    $settings['notification']['senderEmail'],
-                    $adminEmail,
-                    $subject,
-                    $body,
-                    $settings['notification']['senderName']
-                );
+                        $settings['notification']['senderEmail'],
+                        $adminEmail,
+                        $subject,
+                        $body,
+                        $settings['notification']['senderName']
+                    );
             }
         }
         if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
             $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                $settings['notification']['senderEmail'],
-                $event->getOrganisator()->getEmail(),
-                $subject,
-                $body,
-                $settings['notification']['senderName']
-            );
+                    $settings['notification']['senderEmail'],
+                    $event->getOrganisator()->getEmail(),
+                    $subject,
+                    $body,
+                    $settings['notification']['senderName']
+                );
         }
         return $allEmailsSent;
     }
@@ -301,8 +300,8 @@ class NotificationService
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
         $emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
         $emailView->setFormat('html');
-        $layoutRootPaths = $this->getTemplateFolders('layout');
-        $partialRootPaths = $this->getTemplateFolders('partial');
+        $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');
+        $partialRootPaths = $this->fluidStandaloneService->getTemplateFolders('partial');
 
         if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
@@ -312,7 +311,7 @@ class NotificationService
 
         $emailView->setLayoutRootPaths($layoutRootPaths);
         $emailView->setPartialRootPaths($partialRootPaths);
-        $emailView->setTemplatePathAndFilename($this->getTemplatePath($template));
+        $emailView->setTemplatePathAndFilename($this->fluidStandaloneService->getTemplatePath($template));
         $emailView->assignMultiple([
             'event' => $event,
             'registration' => $registration,
@@ -322,75 +321,5 @@ class NotificationService
         ]);
         $emailBody = $emailView->render();
         return $emailBody;
-    }
-
-    /**
-     * Returns the template folders for the given part
-     *
-     * @param string $part
-     * @return array
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
-     */
-    protected function getTemplateFolders($part = 'template')
-    {
-        $extbaseConfig = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
-        );
-
-        if (!empty($extbaseConfig[$part . 'RootPaths'])) {
-            $templatePaths = $extbaseConfig[$part . 'RootPaths'];
-        }
-        if (empty($templatePaths)) {
-            $path = $extbaseConfig[$part . 'RootPath'];
-            if (!empty($path)) {
-                $templatePaths = $path;
-            }
-        }
-        if (empty($templatePaths)) {
-            $templatePaths = [];
-            $templatePaths[] = 'EXT:sf_event_mgt/Resources/Private/' . ucfirst($part) . 's/';
-        }
-
-        $absolutePaths = [];
-        foreach ($templatePaths as $templatePath) {
-            $absolutePaths[] = GeneralUtility::getFileAbsFileName($templatePath);
-        }
-        return $absolutePaths;
-    }
-
-    /**
-     * Return path and filename for a file or path.
-     *        Only the first existing file/path will be returned.
-     *        respect *RootPaths and *RootPath
-     *
-     * @param string $pathAndFilename e.g. Email/Name.html
-     * @param string $part "template", "partial", "layout"
-     * @return string Filename/path
-     */
-    protected function getTemplatePath($pathAndFilename, $part = 'template')
-    {
-        $matches = $this->getTemplatePaths($pathAndFilename, $part);
-        return !empty($matches) ? end($matches) : '';
-    }
-
-    /**
-     * Return path and filename for one or many files/paths.
-     *        Only existing files/paths will be returned.
-     *        respect *RootPaths and *RootPath
-     *
-     * @param string $pathAndFilename Path/filename (Email/Name.html) or path
-     * @param string $part "template", "partial", "layout"
-     * @return array All existing matches found
-     */
-    protected function getTemplatePaths($pathAndFilename, $part = 'template')
-    {
-        $matches = [];
-        $absolutePaths = $this->getTemplateFolders($part);
-        foreach ($absolutePaths as $absolutePath) {
-            if (file_exists($absolutePath . $pathAndFilename)) {
-                $matches[] = $absolutePath . $pathAndFilename;
-            }
-        }
-        return $matches;
     }
 }
