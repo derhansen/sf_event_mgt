@@ -53,16 +53,16 @@ plugin.tx_sfeventmgt {
 			senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
 			adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
 			registrationNew {
-				userSubject = Your event registration
-				adminSubject = New unconfirmed event registration
+				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.userSubject}
+				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.adminSubject}
 			}
 			registrationConfirmed {
-				userSubject = Event registration successful
-				adminSubject = Event registration confirmed
+				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.userSubject}
+				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.adminSubject}
 			}
 			registrationCancelled {
-				userSubject = Event registration cancelled successful
-				adminSubject = Event registration cancelled
+				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.userSubject}
+				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.adminSubject}
 			}
 		}
 		reCaptcha {

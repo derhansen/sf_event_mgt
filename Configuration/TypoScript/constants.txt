@@ -32,6 +32,24 @@ plugin.tx_sfeventmgt {
 			senderSignature =
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
 			adminEmail =
+			registrationNew {
+				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration
+				userSubject = Your event registration
+				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration
+				adminSubject = New unconfirmed event registration
+			}
+			registrationConfirmed {
+				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration
+				userSubject = Event registration successful
+				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration
+				adminSubject = Event registration confirmed
+			}
+			registrationCancelled {
+				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on cancelled registration
+				userSubject = Event registration cancelled successful
+				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on cancelled registration
+				adminSubject = Event registration cancelled
+			}
 		}
 		reCaptcha {
 			# cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
