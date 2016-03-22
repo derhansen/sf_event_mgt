@@ -3,17 +3,19 @@
 #==============================================
 plugin.tx_sfeventmgt {
 	mvc.callDefaultActionIfActionCantBeResolved = 1
-	templateRootPaths {
-		0 = EXT:sf_event_mgt/Resources/Private/Templates/
-		1 = {$plugin.tx_sfeventmgt.view.templateRootPath}
-	}
-	partialRootPaths {
-		0 = EXT:sf_event_mgt/Resources/Private/Partials/
-		1 = {$plugin.tx_sfeventmgt.view.partialRootPath}
-	}
-	layoutRootPaths {
-		0 = EXT:sf_event_mgt/Resources/Private/Layouts/
-		1 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
+	view {
+		templateRootPaths {
+			0 = EXT:sf_event_mgt/Resources/Private/Templates/
+			1 = {$plugin.tx_sfeventmgt.view.templateRootPath}
+		}
+		partialRootPaths {
+			0 = EXT:sf_event_mgt/Resources/Private/Partials/
+			1 = {$plugin.tx_sfeventmgt.view.partialRootPath}
+		}
+		layoutRootPaths {
+			0 = EXT:sf_event_mgt/Resources/Private/Layouts/
+			1 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
+		}
 	}
 	settings {
 		# List of uids, for which the cache should be cleared after registration data changed
