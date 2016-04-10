@@ -21,7 +21,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * CSV export for all registrations of an event
 * Configurable e-mail templates to notify event participants
 * Extendable with own fields through own extension
-* Configurable template layouts for listview
+* Configurable template layouts for the listview
 * Searchview for events
 * Create multiple registrations at once by a single user
 * Optionally check e-mail address of registrations for uniqueness per event
