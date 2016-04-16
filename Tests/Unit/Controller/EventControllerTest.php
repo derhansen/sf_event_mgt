@@ -586,6 +586,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['update'], [], '', false);
+        $eventRepository->expects($this->once())->method('update');
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
         $notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
             [], [], '', false);
         $notificationService->expects($this->once())->method('sendUserMessage');
@@ -644,6 +649,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['add'], [], '', false);
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['update'], [], '', false);
+        $eventRepository->expects($this->once())->method('update');
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
             ['persistAll'], [], '', false);
@@ -713,6 +723,11 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['add'], [], '', false);
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['update'], [], '', false);
+        $eventRepository->expects($this->once())->method('update');
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
             [], [], '', false);

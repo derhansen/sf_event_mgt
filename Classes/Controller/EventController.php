@@ -288,6 +288,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             // Persist registration, so we have an UID
             $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
+            // Add new registration to event
+            $event->addRegistration($registration);
+            $this->eventRepository->update($event);
+
             // Send notifications to user and admin if confirmation link should be sent
             if (!$autoConfirmation) {
                 $this->notificationService->sendUserMessage(
