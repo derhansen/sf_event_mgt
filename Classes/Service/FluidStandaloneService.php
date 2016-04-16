@@ -46,11 +46,12 @@ class FluidStandaloneService
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
         );
 
-        if (!empty($extbaseConfig[$part . 'RootPaths'])) {
-            $templatePaths = $extbaseConfig[$part . 'RootPaths'];
+        if (!empty($extbaseConfig['view'][$part . 'RootPaths'])) {
+            $templatePaths = $extbaseConfig['view'][$part . 'RootPaths'];
+            $templatePaths = array_values($templatePaths);
         }
         if (empty($templatePaths)) {
-            $path = $extbaseConfig[$part . 'RootPath'];
+            $path = $extbaseConfig['view'][$part . 'RootPath'];
             if (!empty($path)) {
                 $templatePaths = $path;
             }
