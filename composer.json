@@ -16,7 +16,7 @@
   ],
   "keywords": ["TYPO3 CMS", "event management", "event registration", "fluid", "extbase"],
   "license": ["GPL-2.0+"],
-  "version": "1.4.1-dev",
+  "version": "1.4.1",
   "autoload": {
 	"psr-4": {
 	  "DERHANSEN\\SfEventMgt\\": "Classes"
@@ -27,7 +27,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.4.x-dev"
+      "dev-master": "1.5.x-dev"
     }
   }
 }
