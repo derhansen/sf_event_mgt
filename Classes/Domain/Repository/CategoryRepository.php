@@ -14,12 +14,38 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * The repository for Categories
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CategoryRepository extends AbstractForeignRecordRepository
+class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {
+
+    /**
+     * Returns all categories depending on the settings in the demand object
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand ForeignRecordDemand
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findDemanded($demand)
+    {
+        $constraints = [];
+        $query = $this->createQuery();
+
+        if ($demand->getRestrictForeignRecordsToStoragePage()) {
+            $pidList = GeneralUtility::intExplode(',', $demand->getStoragePage(), true);
+            $constraints[] = $query->in('pid', $pidList);
+        }
+
+        if (count($constraints) > 0) {
+            $query->matching($query->logicalAnd($constraints));
+        }
+
+        return $query->execute();
+    }
 
 }

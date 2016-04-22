@@ -19,65 +19,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class Category extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
 {
-
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title = '';
-
-    /**
-     * Parent
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Category
-     */
-    protected $parent;
-
-    /**
-     * Returns the title
-     *
-     * @return string $title
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Sets the title
-     *
-     * @param string $title Title
-     *
-     * @return void
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * Sets the parent category
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $parent Parent
-     *
-     * @return void
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-    }
-
-    /**
-     * Returns the parent category
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Category
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
 
 }

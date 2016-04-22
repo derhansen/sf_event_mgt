@@ -1,0 +1,14 @@
+config.tx_extbase{
+    persistence.classes {
+        DERHANSEN\SfEventMgt\Domain\Model\Category {
+            mapping {
+                tableName = sys_category
+            }
+        }
+    }
+    objects{
+        TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository {
+            className = DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
+        }
+    }
+}

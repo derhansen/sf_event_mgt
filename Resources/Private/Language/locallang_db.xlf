@@ -87,15 +87,6 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
 				<source>Organisator</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_category">
-				<source>Event - Category</source>
-			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_category.parent">
-				<source>Parent</source>
-			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
 				<source>Event - Registration</source>
 			</trans-unit>

@@ -7,10 +7,6 @@ if (!defined('TYPO3_MODE')) {
     'EXT:sf_event_mgt/Resources/Private/Language/locallang_csh_tx_sfeventmgt_domain_model_event.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sfeventmgt_domain_model_event');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sfeventmgt_domain_model_category',
-    'EXT:sf_event_mgt/Resources/Private/Language/locallang_csh_tx_sfeventmgt_domain_model_category.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sfeventmgt_domain_model_category');
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sfeventmgt_domain_model_location',
     'EXT:sf_event_mgt/Resources/Private/Language/locallang_csh_tx_sfeventmgt_domain_model_location.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sfeventmgt_domain_model_location');
@@ -36,6 +32,20 @@ if (!defined('TYPO3_MODE')) {
         'access' => 'user,group',
         'icon' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.gif',
         'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
+    ]
+);
+
+// Add an extra categories selection field to the events table
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
+    'DERHANSEN.' . $_EXTKEY,
+    'tx_sfeventmgt_domain_model_event',
+    'category',
+    [
+        'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:tx_sfeventmgt_domain_model_event.category',
+        'exclude' => false,
+        'fieldConfiguration' => [
+            'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
+        ]
     ]
 );
 

@@ -87,40 +87,50 @@
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
-    <tx_sfeventmgt_domain_model_category>
+    <sys_category>
         <uid>1</uid>
-    </tx_sfeventmgt_domain_model_category>
-    <tx_sfeventmgt_domain_model_category>
+    </sys_category>
+    <sys_category>
         <uid>2</uid>
-    </tx_sfeventmgt_domain_model_category>
-    <tx_sfeventmgt_domain_model_category>
+    </sys_category>
+    <sys_category>
         <uid>3</uid>
-    </tx_sfeventmgt_domain_model_category>
-    <tx_sfeventmgt_domain_model_category>
+    </sys_category>
+    <sys_category>
         <uid>4</uid>
         <parent>3</parent>
-    </tx_sfeventmgt_domain_model_category>
+    </sys_category>
 
-    <tx_sfeventmgt_event_category_mm>
-        <uid_local>10</uid_local>
-        <uid_foreign>1</uid_foreign>
-    </tx_sfeventmgt_event_category_mm>
-    <tx_sfeventmgt_event_category_mm>
-        <uid_local>10</uid_local>
-        <uid_foreign>2</uid_foreign>
-    </tx_sfeventmgt_event_category_mm>
-    <tx_sfeventmgt_event_category_mm>
-        <uid_local>11</uid_local>
-        <uid_foreign>4</uid_foreign>
-    </tx_sfeventmgt_event_category_mm>
-    <tx_sfeventmgt_event_category_mm>
-        <uid_local>12</uid_local>
-        <uid_foreign>2</uid_foreign>
-    </tx_sfeventmgt_event_category_mm>
-    <tx_sfeventmgt_event_category_mm>
-        <uid_local>12</uid_local>
-        <uid_foreign>3</uid_foreign>
-    </tx_sfeventmgt_event_category_mm>
+    <sys_category_record_mm>
+        <uid_local>1</uid_local>
+        <uid_foreign>10</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>2</uid_local>
+        <uid_foreign>10</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>4</uid_local>
+        <uid_foreign>11</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>2</uid_local>
+        <uid_foreign>12</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>3</uid_local>
+        <uid_foreign>12</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
 
     <!-- findRecordsByStartDate -->
     <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->

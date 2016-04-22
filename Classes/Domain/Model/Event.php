@@ -96,7 +96,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Category
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
      */
     protected $category = null;
 
@@ -440,11 +440,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Category
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $category Category
+     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category Category
      *
      * @return void
      */
-    public function addCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $category)
+    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
     {
         $this->category->attach($category);
     }
@@ -452,11 +452,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Category
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
+     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove The Category to be removed
      *
      * @return void
      */
-    public function removeCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove)
+    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove)
     {
         $this->category->detach($categoryToRemove);
     }

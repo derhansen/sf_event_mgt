@@ -385,26 +385,6 @@ return [
                 ],
             ],
         ],
-        'category' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.category',
-            'config' => [
-                'type' => 'select',
-                'renderMode' => 'tree',
-                'treeConfig' => [
-                    'parentField' => 'parent',
-                    'appearance' => [
-                        'expandAll' => true,
-                        'showHeader' => true,
-                    ],
-                ],
-                'MM' => 'tx_sfeventmgt_event_category_mm',
-                'foreign_table' => 'tx_sfeventmgt_domain_model_category',
-                'foreign_table_where' => ' AND (tx_sfeventmgt_domain_model_category.sys_language_uid = 0 OR tx_sfeventmgt_domain_model_category.l10n_parent = 0) ORDER BY tx_sfeventmgt_domain_model_category.sorting ASC',
-                'minitems' => 0,
-                'maxitems' => 99,
-            ],
-        ],
         'image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.image',

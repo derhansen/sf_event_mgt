@@ -87,12 +87,6 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.booking">
 				<source>Booking</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_category">
-				<source>Category</source>
-			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_category.title">
-				<source>Title</source>
-			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
 				<source>Registration</source>
 			</trans-unit>
