@@ -149,31 +149,31 @@ The media tab contains fields which holds media-data for the event.
          Field:
 
    :Description:
-                Description:
+         Description:
 
-    - :Field:
-            Image
+ - :Field:
+         Image
 
-      :Description:
-            One or more images.
+   :Description:
+         One or more images.
 
-    - :Field:
-            Files
+ - :Field:
+         Files
 
-      :Description:
-            One or more files.
+   :Description:
+         One or more files.
 
-    - :Field:
-            YouTube embed code
+ - :Field:
+         YouTube embed code
 
-      :Description:
-            A YouTube embed code
+   :Description:
+         A YouTube embed code
 
-    - :Field:
-            Additional images
+ - :Field:
+         Additional images
 
-      :Description:
-            One or more additional images (e.g. images from the event).
+   :Description:
+         One or more additional images (e.g. images from the event).
 
 Category
 ~~~~~~~~
