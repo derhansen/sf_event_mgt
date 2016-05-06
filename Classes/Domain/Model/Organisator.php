@@ -46,7 +46,7 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Image of Organisator
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $image = null;
 
@@ -117,54 +117,9 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * __construct
-     */
-    public function __construct()
-    {
-        $this->initStorageObjects();
-    }
-
-    /**
-     * Initializes all ObjectStorage properties
-     * Do not modify this method!
-     * It will be rewritten on each save in the extension builder
-     * You may modify the constructor of this class instead
-     *
-     * @return void
-     */
-    protected function initStorageObjects()
-    {
-        $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
-
-    /**
-     * Adds an image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image The image
-     *
-     * @return void
-     */
-    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
-    {
-        $this->image->attach($image);
-    }
-
-    /**
-     * Removes an image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove The image
-     *
-     * @return void
-     */
-    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
-    {
-        $this->image->detach($imageToRemove);
-    }
-
-    /**
      * Returns the image
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      */
     public function getImage()
     {
@@ -174,11 +129,11 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the image
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image The image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image The image
      *
      * @return void
      */
-    public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
+    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
     {
         $this->image = $image;
     }
