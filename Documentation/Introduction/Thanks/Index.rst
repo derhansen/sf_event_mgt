@@ -21,3 +21,4 @@ Thanks from me to:
 * Thies Kracht from Skyfillers GmbH who developed the CSV export
 * Phat Hoang and Oleksandr Bachynskyi from Pixelant AB for their ideas and contributions
 * Phat Hoang from Pixelant AB for the reCAPTCHA implementation
+* Jean-François Sillen from Wikafi S.P.R.L for sponsoring the sys_category refactoring

@@ -155,8 +155,8 @@ class ext_update
          * Finished category migration
          */
         $message = 'All categories are updated. Run <strong>DB compare</strong> in the install tool to remove the ' .
-            'now obsolete `tx_sfeventmgt_domain_model_category` table and run the <strong>DB check</strong> to ' .
-            'update the reference index.';
+            'now obsolete `tx_sfeventmgt_domain_model_category` and `tx_sfeventmgt_event_category_mm` tables and ' .
+            'run the <strong>DB check</strong> to update the reference index.';
         $status = FlashMessage::OK;
         $title = 'Updated all categories!';
         $this->messageArray[] = [$status, $title, $message];
