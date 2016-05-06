@@ -61,7 +61,7 @@
 				<source>Organisator</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
-				<source>Image</source>
+				<source>Images</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
 				<source>Files</source>
