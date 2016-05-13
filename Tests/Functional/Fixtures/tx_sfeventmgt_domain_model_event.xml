@@ -89,16 +89,20 @@
 
     <sys_category>
         <uid>1</uid>
+        <l10n_diffsource></l10n_diffsource>
     </sys_category>
     <sys_category>
         <uid>2</uid>
+        <l10n_diffsource></l10n_diffsource>
     </sys_category>
     <sys_category>
         <uid>3</uid>
+        <l10n_diffsource></l10n_diffsource>
     </sys_category>
     <sys_category>
         <uid>4</uid>
         <parent>3</parent>
+        <l10n_diffsource></l10n_diffsource>
     </sys_category>
 
     <sys_category_record_mm>
