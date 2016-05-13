@@ -90,19 +90,27 @@
     <sys_category>
         <uid>1</uid>
         <l10n_diffsource></l10n_diffsource>
+        <title>Category 1</title>
+        <description></description>
     </sys_category>
     <sys_category>
         <uid>2</uid>
         <l10n_diffsource></l10n_diffsource>
+        <title>Category 2</title>
+        <description></description>
     </sys_category>
     <sys_category>
         <uid>3</uid>
         <l10n_diffsource></l10n_diffsource>
+        <title>Category 3</title>
+        <description></description>
     </sys_category>
     <sys_category>
         <uid>4</uid>
         <parent>3</parent>
         <l10n_diffsource></l10n_diffsource>
+        <title>Subcategory 3.1</title>
+        <description></description>
     </sys_category>
 
     <sys_category_record_mm>
