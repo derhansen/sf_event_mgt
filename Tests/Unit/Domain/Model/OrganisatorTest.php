@@ -151,11 +151,7 @@ class OrganisatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function getImageReturnsInitialValueForfiles()
     {
-        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->assertEquals(
-            $newObjectStorage,
-            $this->subject->getImage()
-        );
+        $this->assertNull($this->subject->getImage());
     }
 
     /**
@@ -167,47 +163,13 @@ class OrganisatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function setImageForObjectStorageContainingImageSetsImage()
     {
         $file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $objectStorageHoldingExactlyOneFile = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $objectStorageHoldingExactlyOneFile->attach($file);
-        $this->subject->setImage($objectStorageHoldingExactlyOneFile);
+        $this->subject->setImage($file);
 
         $this->assertAttributeEquals(
-            $objectStorageHoldingExactlyOneFile,
+            $file,
             'image',
             $this->subject
         );
-    }
-
-    /**
-     * Test if image can be attached
-     *
-     * @test
-     * @return void
-     */
-    public function addImageToObjectStorageHoldingImages()
-    {
-        $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'], [], '', false);
-        $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($images));
-        $this->inject($this->subject, 'image', $imageObjectStorageMock);
-        $this->subject->addImage($images);
-    }
-
-    /**
-     * Test if image can be removed
-     *
-     * @test
-     * @return void
-     */
-    public function removeImageFromObjectStorageHoldingImages()
-    {
-        $images = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'], [], '', false);
-        $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($images));
-        $this->inject($this->subject, 'image', $imageObjectStorageMock);
-        $this->subject->removeImage($images);
     }
 
 }
