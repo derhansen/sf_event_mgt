@@ -12,7 +12,8 @@ Plugin settings
 ===============
 
 Nearly all important settings can be made through the plugin, which override the
-settings made with TypoScript.
+settings made with TypoScript. All plugin settings can also be configured with TypoScript
+(use ``plugin.tx_sfeventmgt.`` with the keys shown below).
 
 Tab settings
 ~~~~~~~~~~~~
@@ -200,6 +201,18 @@ Tab settings
 
    :Key:
          category
+
+ - :Property:
+         Include subcategory
+
+   :View:
+         List
+
+   :Description:
+         Includes subcategories of the selected category
+
+   :Key:
+         includeSubcategories
 
  - :Property:
          Location
@@ -408,3 +421,47 @@ Tab notification
 
    :Key:
          notification.registrationCancelled.adminSubject
+
+Tab category menu
+~~~~~~~~~~~~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Property:
+         Property:
+
+   :View:
+         View:
+
+   :Description:
+         Description:
+
+   :Key:
+         Key:
+
+
+ - :Property:
+         Categories
+
+   :View:
+         List
+
+   :Description:
+         A subset of categories which will be shown in the category menu. If empty, all
+         categories will be shown
+
+   :Key:
+         categoryMenu.categories
+
+ - :Property:
+         Include Subcategories
+
+   :View:
+         List
+
+   :Description:
+         Includes subcategories of selected categories to the category menu
+
+   :Key:
+         categoryMenu.includeSubcategories

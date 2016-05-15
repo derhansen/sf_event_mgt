@@ -11,6 +11,8 @@
 TypoScript reference
 ====================
 
+More TypoScript settings are available on the :ref:`plugin-settings` page.
+
 plugin.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~
 
