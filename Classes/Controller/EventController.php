@@ -132,6 +132,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $demand->setDisplayMode($settings['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setCategory($settings['category']);
+        $demand->setIncludeSubcategories($settings['includeSubcategories']);
         $demand->setTopEventRestriction((int)$settings['topEventRestriction']);
         $demand->setOrderField($settings['orderField']);
         $demand->setOrderDirection($settings['orderDirection']);
@@ -152,7 +153,25 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\ForeignRecordDemand');
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
-        $demand->setRestrictForeignRecordsToStoragePage((int)$settings['restrictForeignRecordsToStoragePage']);
+        $demand->setRestrictForeignRecordsToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
+        return $demand;
+    }
+
+    /**
+     * Creates a category demand object with the given settings
+     *
+     * @param array $settings The settings
+     *
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
+     */
+    public function createCategoryDemandObjectFromSettings(array $settings)
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\CategoryDemand');
+        $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+        $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
+        $demand->setCategories($settings['categoryMenu']['categories']);
+        $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
         return $demand;
     }
 
@@ -187,11 +206,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
+        $categoryDemand = $this->createCategoryDemandObjectFromSettings($this->settings);
         if ($this->isOverwriteDemand($overwriteDemand)) {
             $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         }
         $events = $this->eventRepository->findDemanded($eventDemand);
-        $categories = $this->categoryRepository->findDemanded($foreignRecordDemand);
+        $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
         $this->view->assign('events', $events);
         $this->view->assign('categories', $categories);

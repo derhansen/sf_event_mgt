@@ -42,6 +42,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
                 'forward',
                 'addFlashMessage',
                 'createEventDemandObjectFromSettings',
+                'createCategoryDemandObjectFromSettings',
                 'createForeignRecordDemandObjectFromSettings',
                 'overwriteEventDemandObject'
             ], [], '', false);
@@ -63,13 +64,19 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function createEventDemandObjectFromSettingsWithoutCategory()
     {
-        $mockController = $this->getMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
-            ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+        $mockController = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\Controller\\EventController',
+            ['redirect', 'forward', 'addFlashMessage'],
+            [],
+            '',
+            false
+        );
 
         $settings = [
             'displayMode' => 'all',
             'storagePage' => 1,
             'category' => 10,
+            'includeSubcategories' => true,
             'topEventRestriction' => 2,
             'orderField' => 'title',
             'orderDirection' => 'asc',
@@ -82,11 +89,12 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
         $mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
         $mockDemand->expects($this->at(2))->method('setCategory')->with(10);
-        $mockDemand->expects($this->at(3))->method('setTopEventRestriction')->with(2);
-        $mockDemand->expects($this->at(4))->method('setOrderField')->with('title');
-        $mockDemand->expects($this->at(5))->method('setOrderDirection')->with('asc');
-        $mockDemand->expects($this->at(6))->method('setQueryLimit')->with(10);
-        $mockDemand->expects($this->at(7))->method('setLocation')->with(1);
+        $mockDemand->expects($this->at(3))->method('setIncludeSubcategories')->with(true);
+        $mockDemand->expects($this->at(4))->method('setTopEventRestriction')->with(2);
+        $mockDemand->expects($this->at(5))->method('setOrderField')->with('title');
+        $mockDemand->expects($this->at(6))->method('setOrderDirection')->with('asc');
+        $mockDemand->expects($this->at(7))->method('setQueryLimit')->with(10);
+        $mockDemand->expects($this->at(8))->method('setLocation')->with(1);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -94,6 +102,43 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->inject($mockController, 'objectManager', $objectManager);
 
         $mockController->createEventDemandObjectFromSettings($settings);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function createCategoryDemandObjectFromSettingsTest()
+    {
+        $mockController = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\Controller\\EventController',
+            ['redirect', 'forward', 'addFlashMessage'],
+            [],
+            '',
+            false
+        );
+
+        $settings = [
+            'storagePage' => 1,
+            'category' => 10,
+            'restrictForeignRecordsToStoragePage' => false,
+            'categoryMenu' => [
+                'categories' => '1,2,3',
+                'includeSubcategories' => false
+            ]
+        ];
+
+        $mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\CategoryDemand', [], [], '', false);
+        $mockDemand->expects($this->at(0))->method('setStoragePage')->with(1);
+        $mockDemand->expects($this->at(1))->method('setRestrictToStoragePage')->with(false);
+        $mockDemand->expects($this->at(2))->method('setCategories')->with('1,2,3');
+        $mockDemand->expects($this->at(3))->method('setIncludeSubcategories')->with(false);
+
+        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager', [], [], '', false);
+        $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
+        $this->inject($mockController, 'objectManager', $objectManager);
+
+        $mockController->createCategoryDemandObjectFromSettings($settings);
     }
 
     /**
@@ -225,6 +270,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $eventDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+        $categoryDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand();
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
@@ -233,6 +279,8 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
+        $this->subject->expects($this->once())->method('createCategoryDemandObjectFromSettings')
+            ->with($settings)->will($this->returnValue($categoryDemand));
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($eventDemand));
         $this->subject->expects($this->once())->method('overwriteEventDemandObject')->will($this->returnValue($eventDemand));

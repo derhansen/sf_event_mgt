@@ -157,6 +157,14 @@ class EventDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * @test
+     */
+    public function setIncludeSubcategoriesReturnsInitialValueForBoolean()
+    {
+        $this->assertFalse($this->subject->getIncludeSubcategories());
+    }
+
+    /**
+     * @test
      * @return void
      */
     public function getOrderFieldReturnsEmptyStringIfNoValueSet()

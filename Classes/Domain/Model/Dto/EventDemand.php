@@ -51,6 +51,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $category;
 
     /**
+     * Include subcategories
+     *
+     * @var bool
+     */
+    protected $includeSubcategories = false;
+
+    /**
      * Top event
      *
      * @var int
@@ -195,6 +202,27 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Returns includeSubcategories
+     *
+     * @return boolean
+     */
+    public function getIncludeSubcategories()
+    {
+        return $this->includeSubcategories;
+    }
+
+    /**
+     * Sets includeSubcategories
+     *
+     * @param boolean $includeSubcategories
+     * @return void
+     */
+    public function setIncludeSubcategories($includeSubcategories)
+    {
+        $this->includeSubcategories = $includeSubcategories;
     }
 
     /**

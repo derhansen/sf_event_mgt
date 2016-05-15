@@ -22,6 +22,11 @@
 	  "DERHANSEN\\SfEventMgt\\": "Classes"
 	}
   },
+  "autoload-dev": {
+    "psr-4": {
+      "DERHANSEN\\SfEventMgt\\Tests\\": "Tests"
+    }
+  },
   "replace": {
 	"sf_event_mgt": "*"
   },

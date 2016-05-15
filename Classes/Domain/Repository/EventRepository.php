@@ -14,10 +14,10 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Core\Utility\MathUtility;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Service\CategoryService;
 
 /**
  * The repository for Events
@@ -167,7 +167,12 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         if ($eventDemand->getCategory() != '') {
             $categoryConstraints = [];
-            $categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), true);
+            if ($eventDemand->getIncludeSubcategories()) {
+                $categoryList = CategoryService::getCategoryListWithChilds($eventDemand->getCategory());
+                $categories = GeneralUtility::intExplode(',', $categoryList, true);
+            } else {
+                $categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), true);
+            }
             foreach ($categories as $category) {
                 $categoryConstraints[] = $query->contains('category', $category);
             }

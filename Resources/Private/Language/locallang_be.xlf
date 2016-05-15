@@ -13,6 +13,9 @@
 			<trans-unit id="flexforms_tab.notification">
 				<source>Notification settings</source>
 			</trans-unit>
+			<trans-unit id="flexforms_tab.categoryMenu">
+				<source>Category menu</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.mode">
 				<source>What to display</source>
 			</trans-unit>
@@ -79,6 +82,9 @@
 			<trans-unit id="flexforms_general.category">
 				<source>Category</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.includeSubcategories">
+				<source>Include subcategories</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.location">
 				<source>Location</source>
 			</trans-unit>
@@ -134,6 +140,12 @@
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_cancelled_admin_subject">
 				<source>Subject of e-mail sent to admin when a registration has been cancelled</source>
+			</trans-unit>
+			<trans-unit id="flexforms_categorymenu.categories">
+				<source>Categories (if empty, all categories will be shown in the category menu)</source>
+			</trans-unit>
+			<trans-unit id="flexforms_categorymenu.includeSubcategories">
+				<source>Include subcategories</source>
 			</trans-unit>
 			<trans-unit id="administration.title">
 				<source>Event Administration</source>

@@ -144,19 +144,28 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
         return [
             'category 1' => [
                 '1',
+                false,
                 1
             ],
             'category 2' => [
                 '2',
+                false,
                 2
             ],
             'category 3' => [
                 '3',
+                false,
                 1
             ],
             'category 1,2,3,4' => [
                 '1,2,3,4',
+                false,
                 3
+            ],
+            'category 3 including subcategories' => [
+                '3',
+                true,
+                2
             ]
         ];
     }
@@ -168,11 +177,12 @@ class EventRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCase
      * @test
      * @return void
      */
-    public function findDemandedRecordsByCategory($category, $expected)
+    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setStoragePage(5);
+        $demand->setIncludeSubcategories($includeSubcategory);
 
         $demand->setCategory($category);
         $this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
