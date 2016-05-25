@@ -529,6 +529,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
+        $categoryDemand = $this->createCategoryDemandObjectFromSettings($this->settings);
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
@@ -546,7 +547,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         }
 
-        $categories = $this->categoryRepository->findDemanded($foreignRecordDemand);
+        $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
 
         $events = $this->eventRepository->findDemanded($eventDemand);
