@@ -21,6 +21,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
@@ -111,6 +112,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $utilityService = null;
 
+    /**
+     * PaymentMethodService
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\PaymentService
+     * @inject
+     */
+    protected $paymentService = null;
+    
     /**
      * Properties in this array will be ignored by overwriteDemandObject()
      *
@@ -254,6 +263,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function registrationAction(Event $event)
     {
         $this->view->assign('event', $event);
+
+        // @todo: Only assign enabled payment methods for event
+        $this->view->assign('paymentMethods', $this->paymentService->getPaymentMethods());
     }
 
     /**

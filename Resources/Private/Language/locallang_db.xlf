@@ -153,6 +153,15 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed">
 				<source>Confirmed</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod">
+				<source>Payment method</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod.notSet">
+				<source>Not set</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.payment_reference">
+				<source>Payment reference</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.paid">
 				<source>Paid</source>
 			</trans-unit>
@@ -176,6 +185,9 @@
 			</trans-unit>
 			<trans-unit id="event.tabs.registrations">
 				<source>Registrations</source>
+			</trans-unit>
+			<trans-unit id="event.tabs.payment">
+				<source>Payment</source>
 			</trans-unit>
 			<trans-unit id="event.sections.notification">
 				<source>When a registration is created,confirmed or cancelled, send a notification e-mail to:</source>

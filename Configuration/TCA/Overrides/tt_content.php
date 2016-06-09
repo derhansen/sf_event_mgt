@@ -2,7 +2,7 @@
 defined('TYPO3_MODE') or die();
 
 /**
- * Plugin
+ * Plugins
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'sf_event_mgt',
@@ -10,13 +10,20 @@ defined('TYPO3_MODE') or die();
     'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.title'
 );
 
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'sf_event_mgt',
+    'Pieventpayment',
+    'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin_payment.title'
+);
+
 /**
  * Remove unused fields
  */
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sfeventmgt_pievent'] = 'layout,recursive,select_key,pages';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sfeventmgt_pieventpayment'] = 'layout,recursive,select_key,pages';
 
 /**
- * Add Flexform
+ * Add Flexform for event plugin
  */
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_pievent'] = 'pi_flexform';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(

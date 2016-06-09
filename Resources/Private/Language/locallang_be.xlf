@@ -7,6 +7,9 @@
 			<trans-unit id="plugin.title">
 				<source>Events and event-registration</source>
 			</trans-unit>
+			<trans-unit id="plugin_payment.title">
+				<source>Events and event-registration - Payment</source>
+			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
 			</trans-unit>

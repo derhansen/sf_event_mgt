@@ -667,4 +667,43 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setFeUser($user);
         $this->assertSame($this->subject->getFeUser(), $user);
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getPaymentmethodReturnsInitialValue()
+    {
+        $this->assertEmpty($this->subject->getPaymentmethod());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setPaymentmethodSetsPaymentmethod()
+    {
+        $this->subject->setPaymentmethod('invoice');
+        $this->assertEquals('invoice', $this->subject->getPaymentmethod());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getPaymentReferenceReturnsInitialValue()
+    {
+        $this->assertEmpty($this->subject->getPaymentReference());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setPaymentReferenceSetsPaymentmethod()
+    {
+        $this->subject->setPaymentReference('paid-1234567890');
+        $this->assertEquals('paid-1234567890', $this->subject->getPaymentReference());
+    }
+
 }

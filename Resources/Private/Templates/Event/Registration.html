@@ -162,6 +162,12 @@
 
                     <br/>
                     <div class="event-registration-row">
+                        <label for="paymentMethod"><f:translate key="tx_sfeventmgt_domain_model_registration.paymentMethod" /></label>
+                        <f:form.select id="paymentMethod" property="paymentMethod" options="{paymentMethods}" />
+                    </div>
+
+                    <br/>
+                    <div class="event-registration-row">
                         <label for="notes"><f:translate key="tx_sfeventmgt_domain_model_registration.notes" /></label>
                         <f:form.textarea id="notes" property="notes"/><br>
                         <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>

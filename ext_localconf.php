@@ -7,11 +7,23 @@ if (!defined('TYPO3_MODE')) {
     'DERHANSEN.' . $_EXTKEY,
     'Pievent',
     [
-        'Event' => 'list, detail, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search'
+        'Event' => 'list, detail, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
     ],
     // non-cacheable actions
     [
         'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'DERHANSEN.' . $_EXTKEY,
+    'Pieventpayment',
+    [
+        'Payment' => 'redirect, success, failure, cancel, notify',
+    ],
+    // non-cacheable actions
+    [
+        'Payment' => 'redirect, success, failure, cancel, notify',
     ]
 );
 
@@ -27,3 +39,15 @@ if (TYPO3_MODE === 'BE') {
 // Register longitude- and latitude-evaluator for TCA
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['DERHANSEN\\SfEventMgt\\Evaluation\\LongitudeEvaluator'] = 'EXT:sf_event_mgt/Classes/Evaluation/LongitudeEvaluator.php';
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['DERHANSEN\\SfEventMgt\\Evaluation\\LatitudeEvaluator'] = 'EXT:sf_event_mgt/Classes/Evaluation/LatitudeEvaluator.php';
+
+// Register default payment methods
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
+    'invoice' => [
+        'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Invoice',
+        'extkey' => 'sf_event_mgt'
+    ],
+    'transfer' => [
+        'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Transfer',
+        'extkey' => 'sf_event_mgt'
+    ]
+];

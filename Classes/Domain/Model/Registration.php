@@ -201,6 +201,20 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $feUser = null;
 
     /**
+     * Payment method
+     *
+     * @var string
+     */
+    protected $paymentmethod = '';
+
+    /**
+     * Payment reference (e.g. from Payment provider)
+     *
+     * @var string
+     */
+    protected $paymentReference = '';
+    
+    /**
      * Returns the firstname
      *
      * @return string $firstname
@@ -775,6 +789,48 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setFeUser($feUser)
     {
         $this->feUser = $feUser;
+    }
+
+    /**
+     * Returns the payment method
+     *
+     * @return string
+     */
+    public function getPaymentmethod()
+    {
+        return $this->paymentmethod;
+    }
+
+    /**
+     * Sets the payment method
+     *
+     * @param string $paymentmethod
+     * @return void
+     */
+    public function setPaymentmethod($paymentmethod)
+    {
+        $this->paymentmethod = $paymentmethod;
+    }
+
+    /**
+     * Returns paymentReference
+     *
+     * @return string
+     */
+    public function getPaymentReference()
+    {
+        return $this->paymentReference;
+    }
+
+    /**
+     * Sets paymentReference
+     *
+     * @param string $paymentReference
+     * @return void
+     */
+    public function setPaymentReference($paymentReference)
+    {
+        $this->paymentReference = $paymentReference;
     }
 
 }

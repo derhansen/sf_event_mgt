@@ -396,8 +396,14 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
+        $mockPaymentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\PaymentService', ['getPaymentMethods'],
+            [], '', false);
+        $mockPaymentService->expects($this->once())->method('getPaymentMethods')->will($this->returnValue(['invoice']));
+        $this->inject($this->subject, 'paymentService', $mockPaymentService);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('event', $event);
+        $view->expects($this->at(0))->method('assign')->with('event', $event);
+        $view->expects($this->at(1))->method('assign')->with('paymentMethods', ['invoice']);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->registrationAction($event);

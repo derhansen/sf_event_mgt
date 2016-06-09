@@ -26,14 +26,24 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,notes,fe_user,',
+        'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,paymentmethod,payment_reference,notes,fe_user,',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paid, notes, confirmation_until, amount_of_registrations, main_registration',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paymentmethod, payment_reference, paid, notes, confirmation_until, amount_of_registrations, main_registration',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, confirmation_until, confirmed, accepttc, paid, notes, amount_of_registrations, main_registration, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => [
+            'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, 
+            firstname, lastname, title, company, address, zip, city, country, phone, email,
+            ignore_notifications, gender, date_of_birth, fe_user, confirmation_until, confirmed,
+            accepttc, notes, amount_of_registrations, main_registration, 
+            
+            --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
+                paid, paymentmethod, payment_reference, 
+                
+            --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
+        ],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -288,6 +298,29 @@ return [
                 'type' => 'check',
                 'default' => 0
             ]
+        ],
+        'paymentmethod' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paymentmethod',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paymentmethod.notSet', '']
+                ],
+                'itemsProcFunc' => 'DERHANSEN\SfEventMgt\Hooks\ItemsProcFunc->getPaymentMethods',
+                'size' => 1,
+                'maxitems' => 1,
+            ]
+        ],
+        'payment_reference' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.payment_reference',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
         ],
         'paid' => [
             'exclude' => 1,
