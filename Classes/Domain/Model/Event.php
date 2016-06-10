@@ -94,6 +94,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $currency = '';
 
     /**
+     * Enable payment
+     *
+     * @var bool
+     */
+    protected $enablePayment = false;
+
+    /**
      * Category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
@@ -435,6 +442,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCurrency($currency)
     {
         $this->currency = $currency;
+    }
+
+    /**
+     * Returns if payment is enabled
+     *
+     * @return boolean
+     */
+    public function getEnablePayment()
+    {
+        return $this->enablePayment;
+    }
+
+    /**
+     * Sets enablePayment
+     *
+     * @param boolean $enablePayment
+     * @return void
+     */
+    public function setEnablePayment($enablePayment)
+    {
+        $this->enablePayment = $enablePayment;
     }
 
     /**

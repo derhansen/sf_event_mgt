@@ -1112,4 +1112,23 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setCancelDeadline($date);
         $this->assertEquals($date, $this->subject->getCancelDeadline());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getEnablePaymentReturnsDefaultValue()
+    {
+        $this->assertFalse($this->subject->getEnablePayment());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setEnablePaymentSetsEnablePaymentForBoolean()
+    {
+        $this->subject->setEnablePayment(true);
+        $this->assertTrue($this->subject->getEnablePayment());
+    }
 }
