@@ -456,6 +456,24 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $this->registrationService->confirmDependingRegistrations($registration);
             }
         }
+
+        // Redirect to payment provider if payment/redifect is enabled
+        if (!$failed && $this->registrationService->redirectPaymentEnabled($registration)) {
+            $this->uriBuilder->reset();
+            $this->uriBuilder->setTargetPageUid(27); // @todo - Set from settings
+            $uri =  $this->uriBuilder->uriFor(
+                'redirectAction',
+                [
+                    'registration' => $registration,
+                    'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid())
+                ],
+                'payment',
+                'sfeventmgt',
+                'Pieventpayment'
+            );
+            $this->redirectToUri($uri);
+        }
+
         $this->view->assign('messageKey', $messageKey);
         $this->view->assign('titleKey', $titleKey);
     }

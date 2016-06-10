@@ -342,9 +342,4 @@ class RegistrationService
         }
     }
 
-    public function handlePaymentRedirect($registration)
-    {
-        // @todo
-        // 1. Redirect user to redirect action of payment controller
-    }
 }
