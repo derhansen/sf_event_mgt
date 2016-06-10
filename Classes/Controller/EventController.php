@@ -460,17 +460,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         // Redirect to payment provider if payment/redirect is enabled
         $paymentPid = (int)$this->settings['paymentPid'];
         if (!$failed && $paymentPid > 0 && $this->registrationService->redirectPaymentEnabled($registration)) {
-            $this->uriBuilder->reset();
-            $this->uriBuilder->setTargetPageUid($paymentPid);
+            $this->uriBuilder->reset()
+                ->setTargetPageUid($paymentPid)
+                ->setUseCacheHash(false);
             $uri =  $this->uriBuilder->uriFor(
-                'redirectAction',
+                'redirect',
                 [
                     'registration' => $registration,
                     'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid())
                 ],
-                'payment',
+                'Payment',
                 'sfeventmgt',
-                'Pieventpayment'
+                'Pipayment'
             );
             $this->redirectToUri($uri);
         }

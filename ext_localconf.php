@@ -17,7 +17,7 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'DERHANSEN.' . $_EXTKEY,
-    'Pieventpayment',
+    'Pipayment',
     [
         'Payment' => 'redirect, success, failure, cancel, notify',
     ],

@@ -113,16 +113,16 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->processWithAction($registration, $this->actionMethodName);
 
         $values = [
-            'successUrl' => $this->getPaymentUriForAction('successAction', $registration),
-            'failureUrl' => $this->getPaymentUriForAction('failureAction', $registration),
-            'cancelUrl' => $this->getPaymentUriForAction('cancelAction', $registration),
-            'notifyUrl' => $this->getPaymentUriForAction('notifyAction', $registration),
+            'sfEventMgtSettings' => $this->settings,
+            'successUrl' => $this->getPaymentUriForAction('success', $registration),
+            'failureUrl' => $this->getPaymentUriForAction('failure', $registration),
+            'cancelUrl' => $this->getPaymentUriForAction('cancel', $registration),
+            'notifyUrl' => $this->getPaymentUriForAction('notify', $registration),
             'registration' => $registration,
             'html' => ''
         ];
 
-        // @todo: Get from Registration!
-        $paymentMethod = 'paypal';
+        $paymentMethod = $registration->getPaymentmethod();
 
         /**
          * If true, the externally called BeforeRedirect method was successful and the registration can be updated
@@ -153,8 +153,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $values = ['html' => ''];
 
-        // @todo: Get from Registration!
-        $paymentMethod = 'paypal';
+        $paymentMethod = $registration->getPaymentmethod();
 
         /**
          * If true, the externally called ProcessSuccess method was successful and the registration can be updated
@@ -185,8 +184,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $values = ['html' => ''];
 
-        // @todo: Get from Registration!
-        $paymentMethod = 'paypal';
+        $paymentMethod = $registration->getPaymentmethod();
 
         /**
          * If true, the externally called ProcessSuccess method was successful and the registration can be updated
@@ -217,8 +215,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $values = ['html' => ''];
 
-        // @todo: Get from Registration!
-        $paymentMethod = 'paypal';
+        $paymentMethod = $registration->getPaymentmethod();
 
         /**
          * If true, the externally called ProcessSuccess method was successful and the registration can be updated
@@ -247,8 +244,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         $values = ['html' => ''];
 
-        // @todo: Get from Registration!
-        $paymentMethod = 'paypal';
+        $paymentMethod = $registration->getPaymentmethod();
 
         /**
          * If true, the externally called ProcessSuccess method was successful and the registration can be updated
@@ -310,15 +306,18 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     protected function getPaymentUriForAction($action, $registration)
     {
+        $this->uriBuilder
+            ->setCreateAbsoluteUri(true)
+            ->setUseCacheHash(false);
         return $this->uriBuilder->uriFor(
             $action,
             [
                 'registration' => $registration,
                 'hmac' => $this->hashService->generateHmac($action . '-' . $registration->getUid())
             ],
-            'payment',
+            'Payment',
             'sfeventmgt',
-            'Pieventpayment'
+            'Pipayment'
         );
     }
 
