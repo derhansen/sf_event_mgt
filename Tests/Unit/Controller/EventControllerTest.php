@@ -1020,7 +1020,6 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['checkConfirmRegistration', 'confirmDependingRegistrations', 'redirectPaymentEnabled'], [], '', false);
         $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
         $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')->with($mockRegistration);
-        $mockRegistrationService->expects($this->once())->method('redirectPaymentEnabled')->with($mockRegistration)->will($this->returnValue(false));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',

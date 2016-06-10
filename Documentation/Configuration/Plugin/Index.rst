@@ -89,6 +89,18 @@ Tab settings
          registrationPid
 
  - :Property:
+         Payment pid
+
+   :View:
+         Registration
+
+   :Description:
+         Page, where plugin is configured to handle payments for registration
+
+   :Key:
+         paymentPid
+
+ - :Property:
          Display mode
 
    :View:

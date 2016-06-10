@@ -60,6 +60,7 @@ class DataHandlerHooks
                     'settings.detailPid',
                     'settings.listPid',
                     'settings.registrationPid',
+                    'settings.paymentPid',
                     'settings.displayMode',
                     'settings.orderField',
                     'settings.orderDirection',

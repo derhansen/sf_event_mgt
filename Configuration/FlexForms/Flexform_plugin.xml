@@ -130,6 +130,34 @@
                         </TCEforms>
                     </settings.registrationPid>
 
+                    <!-- Payment Pid -->
+                    <settings.paymentPid>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.paymentPid</label>
+                            <displayCond>
+                                <AND>
+                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->list</numIndex>
+                                    <numIndex index="2">FIELD:switchableControllerActions:!=:Event->search</numIndex>
+                                </AND>
+                            </displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.paymentPid>
+
                     <!-- Display options -->
                     <settings.displayMode>
                         <TCEforms>
