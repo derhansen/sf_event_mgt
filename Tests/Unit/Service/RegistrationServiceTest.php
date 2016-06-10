@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 
 /**
@@ -675,6 +676,62 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         $this->assertTrue($success);
         $this->assertEquals($result, RegistrationResult::REGISTRATION_SUCCESSFUL);
+    }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function redirectPaymentEnabledReturnsFalseIfPaymentNotEnabled()
+    {
+        $event = new Event();
+        $event->setEnablePayment(false);
+
+        $mockRegistration = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+            ['getEvent'],
+            [],
+            '',
+            false
+        );
+        $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($event));
+
+        $this->assertFalse($this->subject->redirectPaymentEnabled($mockRegistration));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function redirectPaymentEnabledReturnsTrueIfPaymentRedirectEnabled()
+    {
+        $event = new Event();
+        $event->setEnablePayment(true);
+
+        $mockRegistration = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
+            ['getEvent', 'getPaymentMethod'],
+            [],
+            '',
+            false
+        );
+        $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($event));
+        $mockRegistration->expects($this->once())->method('getPaymentMethod');
+
+        // Payment mock object with redirect enabled
+        $mockInvoice = $this->getMock('DERHANSEN\\SfEventMgt\\Payment\\Invoice', ['isRedirectEnabled'], [], '', false);
+        $mockInvoice->expects($this->once())->method('isRedirectEnabled')->will($this->returnValue(true));
+
+        $mockPaymentService = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\Domain\\Service\\PaymentService',
+            ['getPaymentInstance'],
+            [],
+            '',
+            false
+        );
+        $mockPaymentService->expects($this->once())->method('getPaymentInstance')->will($this->returnValue($mockInvoice));
+        $this->inject($this->subject, 'paymentService', $mockPaymentService);
+
+        $this->assertTrue($this->subject->redirectPaymentEnabled($mockRegistration));
     }
 }

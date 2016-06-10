@@ -40,19 +40,6 @@ class PaymentService
         return $paymentMethods;
     }
 
-    public function isPaymentMethodRedirect($registration)
-    {
-        // @todo
-        // 1. Check if payment method is enabled for event
-        // 2. Check if payment redirect is enabled for payment method
-    }
-
-    public function handlePaymentRedirect($registration)
-    {
-        // @todo
-        // 1. Redirect user to redirect action of payment controller
-    }
-
     /**
      * Returns an instance of the given payment method
      *

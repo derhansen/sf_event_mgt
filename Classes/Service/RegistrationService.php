@@ -14,10 +14,10 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
-use DERHANSEN\SfEventMgt\Domain\Model\Event;
 
 /**
  * RegistrationService
@@ -58,6 +58,14 @@ class RegistrationService
      * @inject
      */
     protected $hashService;
+
+    /**
+     * Payment Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\PaymentService
+     * @inject
+     */
+    protected $paymentService;
 
     /**
      * Handles expired registrations. If the $delete parameter is set, then
@@ -311,5 +319,32 @@ class RegistrationService
     {
         $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, $email);
         return $registrations->count() >= 1;
+    }
+
+    /**
+     * Returns, if payment redirect for the payment method is enabled
+     *
+     * @param Registration $registration
+     * @return bool
+     */
+    public function redirectPaymentEnabled($registration)
+    {
+        if ($registration->getEvent()->getEnablePayment() === false) {
+            return false;
+        }
+
+        /** @var AbstractPayment $paymentInstance */
+        $paymentInstance = $this->paymentService->getPaymentInstance($registration->getPaymentmethod());
+        if ($paymentInstance !== null && $paymentInstance->isRedirectEnabled()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function handlePaymentRedirect($registration)
+    {
+        // @todo
+        // 1. Redirect user to redirect action of payment controller
     }
 }
