@@ -16,6 +16,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
+use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
@@ -54,6 +55,13 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected $registrationRepository = null;
 
     /**
+     * Registration Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
+     */
+    protected $registrationService;
+
+    /**
      * DI for paymentService
      *
      * @param PaymentService $paymentService
@@ -81,6 +89,16 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     public function injectRegistrationRepository(RegistrationRepository $registrationRepository)
     {
         $this->registrationRepository = $registrationRepository;
+    }
+
+    /**
+     * DI for registrationService
+     *
+     * @param RegistrationService $registrationService
+     */
+    public function injectRegistrationService(RegistrationService $registrationService)
+    {
+        $this->registrationService = $registrationService;
     }
 
     /**
@@ -125,9 +143,12 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * If true, the externally called BeforeRedirect method was successful and the registration can be updated
+         * Initialize update-flag
+         *
+         * If true, the externally called BeforeRedirect method requested, that the registration should be updated
          */
         $updateRegistration = false;
+
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'BeforeRedirect' . ucfirst($paymentMethod),
@@ -155,9 +176,12 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * If true, the externally called ProcessSuccess method was successful and the registration can be updated
+         * Initialize update-flag
+         *
+         * If true, the externally called ProcessSuccess method requested, that the registration should be updated
          */
         $updateRegistration = false;
+
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'ProcessSuccess' . ucfirst($paymentMethod),
@@ -185,17 +209,27 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * If true, the externally called ProcessSuccess method was successful and the registration can be updated
+         * Initialize update- and remove flags
          */
         $updateRegistration = false;
+        $removeRegistration = false;
+
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'ProcessFailure' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, $registration, GeneralUtility::_GET(), $this]
+            [&$values, &$updateRegistration, &$removeRegistration, $registration, GeneralUtility::_GET(), $this]
         );
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
+        }
+
+        if ($removeRegistration) {
+            // First cancel depending registrations
+            if ($registration->getAmountOfRegistrations() > 1) {
+                $this->registrationService->cancelDependingRegistrations($registration);
+            }
+            $this->registrationRepository->remove($registration);
         }
 
         $this->view->assign('result', $values);
@@ -215,17 +249,27 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * If true, the externally called ProcessSuccess method was successful and the registration can be updated
+         * Initialize update- and remove flags
          */
         $updateRegistration = false;
+        $removeRegistration = false;
+
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'ProcessCancel' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, $registration, GeneralUtility::_GET(), $this]
+            [&$values, &$updateRegistration, &$removeRegistration, $registration, GeneralUtility::_GET(), $this]
         );
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
+        }
+
+        if ($removeRegistration) {
+            // First cancel depending registrations
+            if ($registration->getAmountOfRegistrations() > 1) {
+                $this->registrationService->cancelDependingRegistrations($registration);
+            }
+            $this->registrationRepository->remove($registration);
         }
 
         $this->view->assign('result', $values);
@@ -245,9 +289,12 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * If true, the externally called ProcessSuccess method was successful and the registration can be updated
+         * Initialize update-flag
+         *
+         * If true, the externally called ProcessNotify method requested, that the registration should be updated
          */
         $updateRegistration = false;
+
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'ProcessNotify' . ucfirst($paymentMethod),
