@@ -22,6 +22,7 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * PaymentController
@@ -91,10 +92,11 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function processRequest(RequestInterface $request, ResponseInterface $response)
     {
-        // @todo Catch Hash Exceptions
         try {
             parent::processRequest($request, $response);
         } catch (\DERHANSEN\SfEventMgt\Exception $e) {
+            $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
+        } catch (InvalidHashException $e) {
             $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
         }
     }
@@ -107,10 +109,8 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function redirectAction($registration, $hmac)
     {
-        // @todo Validate hmac
-
-        // @todo Check if action is enabled for payment method
-        $this->processWithAction($registration, $this->actionMethodName);
+        $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
+        $this->proceedWithAction($registration, $this->actionMethodName);
 
         $values = [
             'sfEventMgtSettings' => $this->settings,
@@ -147,9 +147,8 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function successAction($registration, $hmac)
     {
-        // @todo Validate hmac
-
-        // @todo Check if action is enabled for payment method
+        $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
+        $this->proceedWithAction($registration, $this->actionMethodName);
 
         $values = ['html' => ''];
 
@@ -178,9 +177,8 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function failureAction($registration, $hmac)
     {
-        // @todo Validate hmac
-
-        // @todo Check if action is enabled for payment method
+        $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
+        $this->proceedWithAction($registration, $this->actionMethodName);
 
         $values = ['html' => ''];
 
@@ -209,9 +207,8 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function cancelAction($registration, $hmac)
     {
-        // @todo Validate hmac
-
-        // @todo Check if action is enabled for payment method
+        $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
+        $this->proceedWithAction($registration, $this->actionMethodName);
 
         $values = ['html' => ''];
 
@@ -240,7 +237,8 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function notifyAction($registration, $hmac)
     {
-        // @todo Validate hmac
+        $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
+        $this->proceedWithAction($registration, $this->actionMethodName);
 
         $values = ['html' => ''];
 
@@ -264,20 +262,36 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
     /**
-     * Checks if the given action may be called for the given registration / event
+     * Checks if the given action can be called for the given registration / event and throws
+     * an exception if action should not proceed
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration$registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
      * @param string $actionName
      * @throws PaymentException
      * @return void
      */
-    protected function processWithAction($registration, $actionName)
+    protected function proceedWithAction($registration, $actionName)
     {
+        if ($registration->getEvent()->getEnablePayment() === false) {
+            $message = LocalizationUtility::translate('payment.messages.paymentNotEnabled', 'sf_event_mgt');
+            throw new PaymentException($message, 1899934881);
+        }
+
+        if ($this->paymentService->paymentActionEnabled($registration->getPaymentmethod(), $actionName) === false) {
+            $message = LocalizationUtility::translate('payment.messages.actionNotEnabled', 'sf_event_mgt');
+            throw new PaymentException($message, 1899934882);
+        }
+
+        if ($registration->getPaid()) {
+            $message = LocalizationUtility::translate('payment.messages.paymentAlreadyProcessed', 'sf_event_mgt');
+            throw new PaymentException($message, 1899934883);
+        }
+
         // @todo - Should do the following:
-        // 1. Check, if payment is enabled for Event
+        // 1. Check, if payment is enabled for Event (OK)
         // 2. Check, if payment method is enabled for Event
-        // 3. Check, if action is configured for payment method
-        // 4. Check, if "paid" is false for registration
+        // 3. Check, if action is configured for payment method (OK)
+        // 4. Check, if "paid" is false for registration (OK)
         // If a condition does not match, throw a PaymentException
         // @todo - move to service
     }
@@ -285,15 +299,18 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     /**
      * Checks the HMAC for the given action and registration
      *
-     * @param $registration
-     * @param $hmac
-     * @param $action
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param string $hmac
+     * @param string $action
      * @throws InvalidHashException
      */
     protected function validateHmacForAction($registration, $hmac, $action)
     {
-        // Should throw an InvalidHmac exception
-        // @todo - move to service
+        $result = $this->hashService->validateHmac($action . '-' . $registration->getUid(), $hmac);
+        if (!$result) {
+            $message = LocalizationUtility::translate('payment.messages.invalidHmac', 'sf_event_mgt');
+            throw new InvalidHashException($message, 1899934890);
+        }
     }
 
     /**
@@ -313,7 +330,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             $action,
             [
                 'registration' => $registration,
-                'hmac' => $this->hashService->generateHmac($action . '-' . $registration->getUid())
+                'hmac' => $this->hashService->generateHmac($action . 'Action-' . $registration->getUid())
             ],
             'Payment',
             'sfeventmgt',
@@ -322,4 +339,3 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     }
 
 }
-

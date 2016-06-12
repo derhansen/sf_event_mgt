@@ -333,6 +333,18 @@
 			<trans-unit id="payment.title.transfer">
 				<source>Transfer</source>
 			</trans-unit>
+			<trans-unit id="payment.messages.invalidHmac">
+				<source>Error: The given HMAC could not be validated. Possible data manipulation.</source>
+			</trans-unit>
+			<trans-unit id="payment.messages.paymentNotEnabled">
+				<source>Error: Unable to process payment for this registration, since payment not enabled for the event.</source>
+			</trans-unit>
+			<trans-unit id="payment.messages.actionNotEnabled">
+				<source>Error: The requested action is not enabled for the payment method.</source>
+			</trans-unit>
+			<trans-unit id="payment.messages.paymentAlreadyProcessed">
+				<source>Error: The payment for this registration has already been processed.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

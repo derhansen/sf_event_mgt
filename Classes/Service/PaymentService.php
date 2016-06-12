@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -44,7 +45,7 @@ class PaymentService
      * Returns an instance of the given payment method
      *
      * @param string $paymentMethod
-     * @return null|object
+     * @return null|AbstractPayment
      */
     public function getPaymentInstance($paymentMethod)
     {
@@ -55,6 +56,37 @@ class PaymentService
             $paymentInstance = GeneralUtility::makeInstance($configuredPaymentMethods[$paymentMethod]['class']);
         }
         return $paymentInstance;
+    }
+
+    /**
+     * Returns, if the given action is enabled for the payment method
+     *
+     * @param string $paymentMethod
+     * @param string $action
+     * @return bool
+     */
+    public function paymentActionEnabled($paymentMethod, $action)
+    {
+        $result = false;
+        $paymentInstance = $this->getPaymentInstance($paymentMethod);
+        switch ($action) {
+            case 'redirectAction':
+                $result = $paymentInstance->isRedirectEnabled();
+                break;
+            case 'successAction':
+                $result = $paymentInstance->isSuccessLinkEnabled();
+                break;
+            case 'failureAction':
+                $result = $paymentInstance->isFailureLinkEnabled();
+                break;
+            case 'cancelAction':
+                $result = $paymentInstance->isCancelLinkEnabled();
+                break;
+            case 'notifyAction':
+                $result = $paymentInstance->isNotifyLinkEnabled();
+                break;
+        }
+        return $result;
     }
 
 }
