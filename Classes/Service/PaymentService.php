@@ -27,18 +27,37 @@ class PaymentService
 {
 
     /**
-     * Returns an array of configured payment methods
+     * Returns an array of configured payment methods available for all events
      *
      * @return array
      */
     public function getPaymentMethods()
     {
         $paymentMethods = [];
-        $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
+        $configuredPaymentMethods = $this->getConfiguredPaymentMethodConfig();
         foreach ($configuredPaymentMethods as $key => $value) {
             $paymentMethods[$key] = LocalizationUtility::translate('payment.title.' . $key, $value['extkey']);
         }
         return $paymentMethods;
+    }
+
+    /**
+     * Returns an array of payment method configurations and respects enabled/disabled payment methods from
+     * the extension configuration
+     *
+     * @return array
+     */
+    protected function getConfiguredPaymentMethodConfig()
+    {
+        $extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sf_event_mgt']);
+        $allPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
+        if ((bool)$extensionConfiguration['enableInvoice'] === false) {
+            unset($allPaymentMethods['invoice']);
+        }
+        if ((bool)$extensionConfiguration['enableTransfer'] === false) {
+            unset($allPaymentMethods['transfer']);
+        }
+        return $allPaymentMethods;
     }
 
     /**

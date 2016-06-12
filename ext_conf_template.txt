@@ -1,0 +1,7 @@
+# Payment
+###########################
+	# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableInvoice
+enableInvoice = 1
+
+	# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableTransfer
+enableTransfer = 1
