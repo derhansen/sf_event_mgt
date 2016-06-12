@@ -186,9 +186,6 @@
 			<trans-unit id="event.tabs.registration_options">
 				<source>Registration options</source>
 			</trans-unit>
-			<trans-unit id="event.tabs.payment_options">
-				<source>Payment options</source>
-			</trans-unit>
 			<trans-unit id="event.tabs.registrations">
 				<source>Registrations</source>
 			</trans-unit>
