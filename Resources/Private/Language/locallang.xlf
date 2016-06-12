@@ -345,6 +345,9 @@
 			<trans-unit id="payment.messages.paymentAlreadyProcessed">
 				<source>Error: The payment for this registration has already been processed.</source>
 			</trans-unit>
+			<trans-unit id="payment.messages.paymentMethodNotAvailable">
+				<source>Error: The payment method is not configured for the event.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

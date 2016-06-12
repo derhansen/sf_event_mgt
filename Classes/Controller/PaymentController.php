@@ -287,13 +287,13 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             throw new PaymentException($message, 1899934883);
         }
 
-        // @todo - Should do the following:
-        // 1. Check, if payment is enabled for Event (OK)
-        // 2. Check, if payment method is enabled for Event
-        // 3. Check, if action is configured for payment method (OK)
-        // 4. Check, if "paid" is false for registration (OK)
-        // If a condition does not match, throw a PaymentException
-        // @todo - move to service
+        if ($registration->getEvent()->getRestrictPaymentMethods()) {
+            $selectedPaymentMethods = explode(',', $registration->getEvent()->getSelectedPaymentMethods());
+            if (!in_array($registration->getPaymentmethod(), $selectedPaymentMethods)) {
+                $message = LocalizationUtility::translate('payment.messages.paymentMethodNotAvailable', 'sf_event_mgt');
+                throw new PaymentException($message, 1899934884);
+            }
+        }
     }
 
     /**
