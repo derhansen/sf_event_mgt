@@ -1131,4 +1131,43 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setEnablePayment(true);
         $this->assertTrue($this->subject->getEnablePayment());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getRestrictPaymentMethodsReturnsDefaultValue()
+    {
+        $this->assertFalse($this->subject->getRestrictPaymentMethods());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setRestrictPaymentMethodsSetsRestrictPaymentMethodsForBoolean()
+    {
+        $this->subject->setRestrictPaymentMethods(true);
+        $this->assertTrue($this->subject->getRestrictPaymentMethods());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getSelectedPaymentMethodsReturnsDefaultValue()
+    {
+        $this->assertEmpty($this->subject->getSelectedPaymentMethods());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setSelectedPaymentMethodsSetsSelectedPaymentMethodforString()
+    {
+        $this->subject->setSelectedPaymentMethods('invoice,transfer');
+        $this->assertEquals('invoice,transfer', $this->subject->getSelectedPaymentMethods());
+    }
+
 }

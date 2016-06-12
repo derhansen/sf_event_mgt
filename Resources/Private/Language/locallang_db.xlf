@@ -54,6 +54,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment">
 				<source>Enable payment</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.restrict_payment_methods">
+				<source>Restrict available payment methods</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.selected_payment_methods">
+				<source>Selected payment methods</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
 				<source>Category</source>
 			</trans-unit>

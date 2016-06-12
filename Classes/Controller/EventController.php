@@ -262,10 +262,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function registrationAction(Event $event)
     {
+        if ($event->getRestrictPaymentMethods()) {
+            $paymentMethods = $this->paymentService->getRestrictedPaymentMethods($event);
+        } else {
+            $paymentMethods = $this->paymentService->getPaymentMethods();
+        }
         $this->view->assign('event', $event);
-
-        // @todo: Only assign enabled payment methods for event
-        $this->view->assign('paymentMethods', $this->paymentService->getPaymentMethods());
+        $this->view->assign('paymentMethods', $paymentMethods);
     }
 
     /**

@@ -101,6 +101,20 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $enablePayment = false;
 
     /**
+     * Restrict payment methods
+     *
+     * @var bool
+     */
+    protected $restrictPaymentMethods = false;
+
+    /**
+     * Selected payment methods
+     *
+     * @var string
+     */
+    protected $selectedPaymentMethods = '';
+
+    /**
      * Category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
@@ -463,6 +477,48 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEnablePayment($enablePayment)
     {
         $this->enablePayment = $enablePayment;
+    }
+
+    /**
+     * Returns if payment methods should be restricted
+     *
+     * @return boolean
+     */
+    public function getRestrictPaymentMethods()
+    {
+        return $this->restrictPaymentMethods;
+    }
+
+    /**
+     * Sets if payment methods should be restricted
+     *
+     * @param boolean $restrictPaymentMethods
+     * @return void
+     */
+    public function setRestrictPaymentMethods($restrictPaymentMethods)
+    {
+        $this->restrictPaymentMethods = $restrictPaymentMethods;
+    }
+
+    /**
+     * Returns selected payment methods
+     *
+     * @return string
+     */
+    public function getSelectedPaymentMethods()
+    {
+        return $this->selectedPaymentMethods;
+    }
+
+    /**
+     * Sets selected payment methods
+     *
+     * @param string $selectedPaymentMethods
+     * @return void
+     */
+    public function setSelectedPaymentMethods($selectedPaymentMethods)
+    {
+        $this->selectedPaymentMethods = $selectedPaymentMethods;
     }
 
     /**
@@ -1061,6 +1117,5 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->uniqueEmailCheck = $uniqueEmailCheck;
     }
-
 
 }

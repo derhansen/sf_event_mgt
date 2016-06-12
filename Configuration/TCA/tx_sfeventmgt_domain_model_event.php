@@ -21,7 +21,7 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'requestUpdate' => 'enable_registration, enable_cancel, enable_payment',
+        'requestUpdate' => 'enable_registration, enable_cancel, enable_payment, restrict_payment_methods',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
@@ -50,7 +50,7 @@ return [
 				registration,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
-                 enable_payment,
+                 enable_payment, restrict_payment_methods, selected_payment_methods,
 
 			--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
         ],
@@ -359,6 +359,26 @@ return [
             'config' => [
                 'type' => 'check',
             ],
+        ],
+        'restrict_payment_methods' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.restrict_payment_methods',
+            'displayCond' => 'FIELD:enable_payment:REQ:TRUE',
+            'config' => [
+                'type' => 'check',
+            ],
+        ],
+        'selected_payment_methods' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.selected_payment_methods',
+            'displayCond' => 'FIELD:restrict_payment_methods:REQ:TRUE',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectCheckBox',
+                'size' => 5,
+                'maxitems' => 99,
+                'itemsProcFunc' => 'DERHANSEN\SfEventMgt\Hooks\ItemsProcFunc->getPaymentMethods',
+            ]
         ],
         'location' => [
             'exclude' => 0,

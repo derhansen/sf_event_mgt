@@ -17,6 +17,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	price double(11,2) DEFAULT '0.00' NOT NULL,
 	currency varchar(255) DEFAULT '' NOT NULL,
 	enable_payment tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	restrict_payment_methods tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	selected_payment_methods text,
 	category int(11) unsigned DEFAULT '0' NOT NULL,
 	registration int(11) unsigned DEFAULT '0' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,

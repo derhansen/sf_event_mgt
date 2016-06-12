@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,6 +40,25 @@ class PaymentService
             $paymentMethods[$key] = LocalizationUtility::translate('payment.title.' . $key, $value['extkey']);
         }
         return $paymentMethods;
+    }
+
+    /**
+     * Returns an array of payment methods configured in the event
+     *
+     * @param Event $event
+     * @return array
+     */
+    public function getRestrictedPaymentMethods($event)
+    {
+        $restrictedPaymentMethods = [];
+        $allPaymentMethods = $this->getPaymentMethods();
+        $selectedPaymentMethods = explode(',', $event->getSelectedPaymentMethods());
+        foreach ($selectedPaymentMethods as $selectedPaymentMethod) {
+            if (isset($allPaymentMethods[$selectedPaymentMethod])) {
+                $restrictedPaymentMethods[$selectedPaymentMethod] = $allPaymentMethods[$selectedPaymentMethod];
+            }
+        }
+        return $restrictedPaymentMethods;
     }
 
     /**
