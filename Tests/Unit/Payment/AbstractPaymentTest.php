@@ -13,7 +13,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
      *
      * The TYPO3 project - inspiring people to share!
      */
-use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Payment\AbstractPayment.
@@ -35,7 +34,7 @@ class AbstractPaymentTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getAccessibleMockForAbstractClass(AbstractPayment::class);
+        $this->subject = $this->getAccessibleMockForAbstractClass('DERHANSEN\\SfEventMgt\\Payment\\AbstractPayment');
     }
 
     /**

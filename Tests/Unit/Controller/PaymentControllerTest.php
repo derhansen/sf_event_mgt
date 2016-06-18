@@ -14,12 +14,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
-use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Controller\PaymentController;
-
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\PaymentController.
  *
@@ -71,13 +65,13 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function redirectActionCallsBeforeRedirectSignal()
     {
-        $mockRegistration = $this->getMock(Registration::class, [], [], '', [], false);
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock(UriBuilder::class, ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
-        $mockHashService = $this->getMock(HashService::class, [], [], '', [], false);
+        $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
         $this->inject($this->subject, 'hashService', $mockHashService);
 
         $values = [
@@ -92,9 +86,9 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $updateRegistration = false;
         $arguments = [&$values, &$updateRegistration, $mockRegistration, $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getAccessibleMock('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher', ['dispatch']);
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
+            'DERHANSEN\SfEventMgt\Controller\PaymentController',
             'redirectActionBeforeRedirectPaypal',
             $arguments
         );
@@ -114,13 +108,13 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function successActionCallsProcessSuccessSignal()
     {
-        $mockRegistration = $this->getMock(Registration::class, [], [], '', [], false);
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock(UriBuilder::class, ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
-        $mockHashService = $this->getMock(HashService::class, [], [], '', [], false);
+        $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
         $this->inject($this->subject, 'hashService', $mockHashService);
 
         $values = [
@@ -129,9 +123,9 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $updateRegistration = false;
         $arguments = [&$values, &$updateRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getAccessibleMock('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher', ['dispatch']);
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
+            'DERHANSEN\SfEventMgt\Controller\PaymentController',
             'successActionProcessSuccessPaypal',
             $arguments
         );
@@ -151,13 +145,13 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function failureActionCallsProcessFailureSignal()
     {
-        $mockRegistration = $this->getMock(Registration::class, [], [], '', [], false);
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock(UriBuilder::class, ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
-        $mockHashService = $this->getMock(HashService::class, [], [], '', [], false);
+        $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
         $this->inject($this->subject, 'hashService', $mockHashService);
 
         $values = [
@@ -167,9 +161,9 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $removeRegistration = false;
         $arguments = [&$values, &$updateRegistration, &$removeRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getAccessibleMock('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher', ['dispatch']);
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
+            'DERHANSEN\SfEventMgt\Controller\PaymentController',
             'failureActionProcessFailurePaypal',
             $arguments
         );
@@ -189,13 +183,13 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function cancelActionCallsProcessCancelSignal()
     {
-        $mockRegistration = $this->getMock(Registration::class, [], [], '', [], false);
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock(UriBuilder::class, ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
-        $mockHashService = $this->getMock(HashService::class, [], [], '', [], false);
+        $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
         $this->inject($this->subject, 'hashService', $mockHashService);
 
         $values = [
@@ -205,9 +199,9 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $removeRegistration = false;
         $arguments = [&$values, &$updateRegistration, &$removeRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getAccessibleMock('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher', ['dispatch']);
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
+            'DERHANSEN\SfEventMgt\Controller\PaymentController',
             'cancelActionProcessCancelPaypal',
             $arguments
         );
@@ -227,13 +221,13 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      */
     public function notifyActionCallsProcessNotifySignal()
     {
-        $mockRegistration = $this->getMock(Registration::class, [], [], '', [], false);
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock(UriBuilder::class, ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
-        $mockHashService = $this->getMock(HashService::class, [], [], '', [], false);
+        $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
         $this->inject($this->subject, 'hashService', $mockHashService);
 
         $values = [
@@ -242,9 +236,9 @@ class PaymentControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $updateRegistration = false;
         $arguments = [&$values, &$updateRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getAccessibleMock('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher', ['dispatch']);
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
+            'DERHANSEN\SfEventMgt\Controller\PaymentController',
             'notifyActionProcessNotifyPaypal',
             $arguments
         );
