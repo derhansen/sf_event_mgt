@@ -143,8 +143,6 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * Initialize update-flag
-         *
          * If true, the externally called BeforeRedirect method requested, that the registration should be updated
          */
         $updateRegistration = false;
@@ -176,8 +174,6 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * Initialize update-flag
-         *
          * If true, the externally called ProcessSuccess method requested, that the registration should be updated
          */
         $updateRegistration = false;
@@ -209,7 +205,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * Initialize update- and remove flags
+         * Update- and remove flags
          */
         $updateRegistration = false;
         $removeRegistration = false;
@@ -249,7 +245,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $paymentMethod = $registration->getPaymentmethod();
 
         /**
-         * Initialize update- and remove flags
+         * Update- and remove flags
          */
         $updateRegistration = false;
         $removeRegistration = false;

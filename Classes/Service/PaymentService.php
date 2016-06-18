@@ -37,9 +37,22 @@ class PaymentService
         $paymentMethods = [];
         $configuredPaymentMethods = $this->getConfiguredPaymentMethodConfig();
         foreach ($configuredPaymentMethods as $key => $value) {
-            $paymentMethods[$key] = LocalizationUtility::translate('payment.title.' . $key, $value['extkey']);
+            $paymentMethods[$key] = $this->translate('payment.title.' . $key, $value['extkey']);
         }
         return $paymentMethods;
+    }
+
+    /**
+     * Translates the given key (required, so translations can be mocked)
+     *
+     * @param $key
+     * @param $extension
+     * @param null $arguments
+     * @return NULL|string
+     */
+    protected function translate($key, $extension, $arguments = null)
+    {
+        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, $extension, $arguments);
     }
 
     /**
