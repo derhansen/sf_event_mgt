@@ -114,7 +114,7 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             parent::processRequest($request, $response);
         } catch (\DERHANSEN\SfEventMgt\Exception $e) {
             $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
-        } catch (InvalidHashException $e) {
+        } catch (\TYPO3\CMS\Extbase\Security\Exception\InvalidHashException $e) {
             $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
         }
     }
