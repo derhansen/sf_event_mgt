@@ -16,7 +16,10 @@
   ],
   "keywords": ["TYPO3 CMS", "event management", "event registration", "fluid", "extbase"],
   "license": ["GPL-2.0+"],
-  "version": "1.5.0",
+  "replace": {
+    "sf_event_mgt": "self.version",
+    "typo3-ter/sf-event-mgt": "self.version"
+  },
   "autoload": {
 	"psr-4": {
 	  "DERHANSEN\\SfEventMgt\\": "Classes"
@@ -27,12 +30,9 @@
       "DERHANSEN\\SfEventMgt\\Tests\\": "Tests"
     }
   },
-  "replace": {
-	"sf_event_mgt": "*"
-  },
   "extra": {
     "branch-alias": {
-      "dev-master": "1.5.x-dev"
+      "dev-master": "1.6.x-dev"
     }
   }
 }
