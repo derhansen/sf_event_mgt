@@ -28,6 +28,9 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Optionally check e-mail address of registrations for uniqueness per event
 * Optional Spam-Protection with reCAPTCHA
 * Download of iCal file for events
+* Uses TYPO3 system categories to structure events by category
+* Payment processing after successful registration
+* Configurable payment methods
 
 **Background**
 

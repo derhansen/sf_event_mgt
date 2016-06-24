@@ -155,3 +155,23 @@ should be added to the List-Template.::
      </f:for>
  </f:widget.paginate>
 
+
+How does the payment process work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For each event with registration enabled, you can also enable payment. If payment is enabled, you can output
+available payment methods for the event in the registration form. When a user registers for an event, he
+can select a payment method.
+
+The extension comes with 2 default payment methods "debit" and "transfer". Both payment methods do not include
+any further payment processing.
+
+It is possible to extend the extension with own payment methods that include furter payment processing (e.g. by
+an external payment provider).
+
+For more information on how to add custom payment methods, see :ref:`developer_payment` section
+
+The default payment methods are missing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Open the extension settings in the extension manager and press the "Save" button.

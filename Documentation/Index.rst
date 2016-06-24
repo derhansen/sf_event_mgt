@@ -55,10 +55,9 @@ Event management and registration
 	:glob:
 
 	Introduction/Index
-	User/Index
-	Administration/Index
-	Configuration/Index
-	Templates/Index
+	ForEditors/Index
+	ForAdministrators/Index
+	ForDevelopers/Index
 	Faq/Index
 	KnownProblems/Index
 	Changelog/Index
