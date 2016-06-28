@@ -11,7 +11,7 @@
 TypoScript reference
 ====================
 
-More TypoScript settings are available on the :ref:`plugin-settings` page.
+More TypoScript settings are available on the :ref:`eventplugin-settings` page.
 
 plugin.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~
@@ -528,7 +528,7 @@ module.tx_sfeventmgt
 
          **Example for default custom notification**
 
-         .. figure:: ../../Images/event-custom-notification.png
+         .. figure:: ../../../Images/event-custom-notification.png
              :align: left
              :alt: Custom notifications
 
