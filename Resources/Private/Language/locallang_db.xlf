@@ -48,6 +48,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
 				<source>Price</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.price_options">
+				<source>Price options</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.currency">
 				<source>Currency</source>
 			</trans-unit>
@@ -266,6 +269,15 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
 				<source>Image</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_priceoption">
+				<source>Price option</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_priceoption.price">
+				<source>Price</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until">
+				<source>Date until the price is valid (includes selected date)</source>
 			</trans-unit>
 		</body>
 	</file>

@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 /**
@@ -1168,6 +1169,125 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     {
         $this->subject->setSelectedPaymentMethods('invoice,transfer');
         $this->assertEquals('invoice,transfer', $this->subject->getSelectedPaymentMethods());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getPriceOptionsReturnsInitialValueforObjectStorage()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getPriceOptions()
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setPriceOptionSetsPriceOptionForPriceOption()
+    {
+        $priceOption = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
+        $this->subject->setPriceOptions($priceOption);
+        $this->assertEquals($priceOption, $this->subject->getPriceOptions());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function addPriceOptionAddsPriceOptionForPriceOption()
+    {
+        $priceOption = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
+        $priceOptionObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
+        $priceOptionObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($priceOption));
+        $this->inject($this->subject, 'priceOptions', $priceOptionObjectStorageMock);
+
+        $this->subject->addPriceOptions($priceOption);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function remocePriceOptionRemovedPriceOptionForPriceOption()
+    {
+        $priceOption = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
+        $priceOptionObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
+        $priceOptionObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($priceOption));
+        $this->inject($this->subject, 'priceOptions', $priceOptionObjectStorageMock);
+
+        $this->subject->removePriceOptions($priceOption);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getActivePriceOptionsReturnsOnlyActivePriceOptions()
+    {
+        $dateYesterday = new \DateTime('yesterday');
+        $dateToday = new \DateTime('today');
+        $dateTomorrow = new \DateTime('tomorrow');
+
+        $priceOption1 = new PriceOption();
+        $priceOption1->setPrice(10.00);
+        $priceOption1->setValidUntil($dateYesterday);
+
+        $priceOption2 = new PriceOption();
+        $priceOption2->setPrice(12.00);
+        $priceOption2->setValidUntil($dateToday);
+
+        $priceOption3 = new PriceOption();
+        $priceOption3->setPrice(14.00);
+        $priceOption3->setValidUntil($dateTomorrow);
+
+        $this->subject->addPriceOptions($priceOption1);
+        $this->subject->addPriceOptions($priceOption2);
+        $this->subject->addPriceOptions($priceOption3);
+
+        $expected = [];
+        $expected[$dateToday->getTimestamp()] = $priceOption2;
+        $expected[$dateTomorrow->getTimestamp()] = $priceOption3;
+
+        $this->assertEquals($expected, $this->subject->getActivePriceOptions());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getCurrentPriceReturnsPriceIfNoPriceOptionsSet()
+    {
+        $this->subject->setPrice(12.99);
+        $this->assertEquals(12.99, $this->subject->getCurrentPrice());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getCurrentPriceReturnsPriceOptionIfSet()
+    {
+        $this->subject->setPrice(19.99);
+
+        $priceOption1 = new PriceOption();
+        $priceOption1->setPrice(14.99);
+        $priceOption1->setValidUntil(new \DateTime('today'));
+
+        $priceOption2 = new PriceOption();
+        $priceOption2->setPrice(16.99);
+        $priceOption2->setValidUntil(new \DateTime('tomorrow'));
+
+        $this->subject->addPriceOptions($priceOption1);
+        $this->subject->addPriceOptions($priceOption2);
+
+        $this->assertEquals(14.99, $this->subject->getCurrentPrice());
     }
 
 }

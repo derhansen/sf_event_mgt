@@ -74,12 +74,12 @@
             <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
         </div>
         <div class="event-list-value event-price">
-            <f:if condition="{event.price} == 0">
+            <f:if condition="{event.currentPrice} == 0">
                 <f:then>
                     <f:translate key="event.freeofcharge" />
                 </f:then>
                 <f:else>
-                    {event.price} {event.currency}
+                    {event.currentPrice} {event.currency}
                 </f:else>
             </f:if>
         </div>

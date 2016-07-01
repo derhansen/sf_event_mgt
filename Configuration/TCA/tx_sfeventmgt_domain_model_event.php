@@ -26,7 +26,7 @@ return [
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment,price_options',
     ],
     'types' => [
         '1' => [
@@ -35,7 +35,7 @@ return [
 			description;;;richtext:rte_transform[mode=ts_links],
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
-				--palette--;;palettePrice, location, organisator, link, program;;;richtext:rte_transform[mode=ts_links],
+				--palette--;;palettePrice, price_options, location, organisator, link, program;;;richtext:rte_transform[mode=ts_links],
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
 				image, files, youtube,additional_image,
@@ -499,6 +499,25 @@ return [
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
                 'type' => 'check',
+            ],
+        ],
+        'price_options' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price_options',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_priceoption',
+                'foreign_field' => 'event',
+                'foreign_default_sortby' => 'valid_until DESC',
+                'maxitems' => 100,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'useSortable' => 0,
+                    'showAllLocalizationLink' => 1
+                ],
             ],
         ],
 

@@ -235,6 +235,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $uniqueEmailCheck = false;
 
     /**
+     * Price options
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
+     * @cascade remove
+     */
+    protected $priceOptions = null;
+
+    /**
      * __construct
      */
     public function __construct()
@@ -258,6 +266,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->priceOptions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -1118,4 +1127,85 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->uniqueEmailCheck = $uniqueEmailCheck;
     }
 
+    /**
+     * Returns price options
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getPriceOptions()
+    {
+        return $this->priceOptions;
+    }
+
+    /**
+     * Sets price options
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $priceOptions
+     * @return void
+     */
+    public function setPriceOptions($priceOptions)
+    {
+        $this->priceOptions = $priceOptions;
+    }
+
+    /**
+     * Adds a price option
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
+     *
+     * @return void
+     */
+    public function addPriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
+    {
+        $this->priceOptions->attach($priceOption);
+    }
+
+    /**
+     * Removes a Registration
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
+     *
+     * @return void
+     */
+    public function removePriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
+    {
+        $this->priceOptions->detach($priceOption);
+    }
+
+    /**
+     * Returns all active price options sorted by date ASC
+     *
+     * @return array
+     */
+    public function getActivePriceOptions()
+    {
+        $activePriceOptions = [];
+        if ($this->getPriceOptions()) {
+            $compareDate = new \DateTime('today midnight');
+            foreach ($this->getPriceOptions() as $priceOption) {
+                if ($priceOption->getValidUntil() >= $compareDate) {
+                    $activePriceOptions[$priceOption->getValidUntil()->getTimestamp()] = $priceOption;
+                }
+            }
+        }
+        ksort($activePriceOptions);
+        return $activePriceOptions;
+    }
+
+    /**
+     * Returns the current price of the event respecting possible price options
+     *
+     * @return float
+     */
+    public function getCurrentPrice()
+    {
+        $activePriceOptions = $this->getActivePriceOptions();
+        if (count($activePriceOptions) >= 1) {
+            // Sort active price options and return first element
+            return reset($activePriceOptions)->getPrice();
+        } else {
+            // Just return the price field
+            return $this->price;
+        }
+    }
 }
