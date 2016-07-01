@@ -175,3 +175,9 @@ The default payment methods are missing
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open the extension settings in the extension manager and press the "Save" button.
+
+Configured price options do not show up in frontend
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Make sure that the date for the price option is valid also make sure, that you use ``{event.currentPrice}`` in your
+Fluid template to output the current price.

@@ -84,7 +84,7 @@ program/schedule.
 
 .. figure:: ../../Images/event-additional.png
    :align: left
-   :width: 500px
+   :width: 800px
    :alt: Event additional tab
 
 .. t3-field-list-table::
@@ -107,6 +107,18 @@ program/schedule.
 
    :Description:
          The currency for the price.
+
+ - :Field:
+         Price options
+
+   :Description:
+         If the event has prices based on a selected date (e.g. early bird price), you can define one or multiple
+         price options. The following fields are availabe for price options.
+
+         * Price
+         * Date until the price is valid (selected date is included)
+
+         The event management will automatically output the current price if the ``{event.currentPrice}`` getter is used.
 
  - :Field:
          Location
@@ -329,7 +341,7 @@ Custom payment methods can be added. For documentation, please refer to the :ref
          Description:
 
  - :Field:
-            Enable Payment
+         Enable Payment
 
    :Description:
          If checked, a user registering for an event can select available payment options
