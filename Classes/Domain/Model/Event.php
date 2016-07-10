@@ -118,6 +118,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @lazy
      */
     protected $category = null;
 
@@ -125,6 +126,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Related
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Event>
+     * @lazy
      */
     protected $related;
 
@@ -133,6 +135,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
      * @cascade remove
+     * @lazy
      */
     protected $registration = null;
 
@@ -147,6 +150,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The image
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @lazy
      */
     protected $image = null;
 
@@ -154,6 +158,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Additional files
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @lazy
      */
     protected $files = null;
 
@@ -196,6 +201,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The additionalImage
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @lazy
      */
     protected $additionalImage = null;
 
@@ -246,6 +252,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
      * @cascade remove
+     * @lazy
      */
     protected $priceOptions = null;
 
