@@ -269,6 +269,27 @@
 			</div>
 		</f:if>
 
+		<f:if condition="{event.related}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.related" />
+				</div>
+				<div class="event-detail-value event-related">
+					<f:for each="{event.related}" as="relatedevent">
+						<f:if condition="{settings.detailPid} == ''">
+							<f:then>
+								<f:link.action action="detail" arguments="{event : relatedevent}">{relatedevent.title}</f:link.action>
+							</f:then>
+							<f:else>
+								<f:link.action action="detail" arguments="{event : relatedevent}" pageUid="{settings.detailPid}">{relatedevent.title}</f:link.action>
+							</f:else>
+						</f:if>
+					</f:for>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
+
 		<f:link.action action="icalDownload" arguments="{event : event}"><f:translate key="event.icalDownload" /></f:link.action>
 
 		<f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>

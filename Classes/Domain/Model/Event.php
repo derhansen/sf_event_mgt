@@ -122,6 +122,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $category = null;
 
     /**
+     * Related
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Event>
+     */
+    protected $related;
+
+    /**
      * Registration
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
@@ -262,6 +269,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected function initStorageObjects()
     {
         $this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->related = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -574,6 +582,49 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $category)
     {
         $this->category = $category;
+    }
+
+    /**
+     * Returns related events
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getRelated()
+    {
+        return $this->related;
+    }
+
+    /**
+     * Sets related events
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $related
+     * @return void
+     */
+    public function setRelated($related)
+    {
+        $this->related = $related;
+    }
+
+    /**
+     * Adds a related event
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function addRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    {
+        $this->related->attach($event);
+    }
+
+    /**
+     * Removes a related event
+     *
+     * @param Event $event
+     * @return void
+     */
+    public function removeRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    {
+        $this->related->detach($event);
     }
 
     /**

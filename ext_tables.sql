@@ -24,6 +24,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	price_options int(11) unsigned DEFAULT '0' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
 	files int(11) DEFAULT '0' NOT NULL,
+	related int(11) DEFAULT '0' NOT NULL,
 	youtube text,
 	additional_image varchar(255) DEFAULT '' NOT NULL,
 	location int(11) unsigned DEFAULT '0' NOT NULL,
@@ -66,6 +67,18 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
  KEY language (l10n_parent,sys_language_uid)
 
+);
+
+#
+# Table structure for table 'tx_sfeventmgt_domain_model_event_related_mm'
+#
+CREATE TABLE tx_sfeventmgt_domain_model_event_related_mm (
+	uid_local int(11) DEFAULT '0' NOT NULL,
+	uid_foreign int(11) DEFAULT '0' NOT NULL,
+	sorting int(11) DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) DEFAULT '0' NOT NULL,
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );
 
 #

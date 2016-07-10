@@ -22,7 +22,7 @@ and a description.
 
 .. figure:: ../../Images/event-event.png
    :align: left
-   :width: 500px
+   :width: 700px
    :alt: Event general tab
 
 .. t3-field-list-table::
@@ -84,7 +84,7 @@ program/schedule.
 
 .. figure:: ../../Images/event-additional.png
    :align: left
-   :width: 800px
+   :width: 700px
    :alt: Event additional tab
 
 .. t3-field-list-table::
@@ -121,6 +121,37 @@ program/schedule.
          The event management will automatically output the current price if the ``{event.currentPrice}`` getter is used.
 
  - :Field:
+         Link
+
+   :Description:
+         A link (e.g. external link) for the event.
+
+ - :Field:
+         Program
+
+   :Description:
+         The program/schedule for the event.
+
+Relations
+~~~~~~~~~
+
+The relations tab contains fields which holds relations locations, organisators and related events.
+
+.. figure:: ../../Images/event-related.png
+   :align: left
+   :width: 700px
+   :alt: Event related tab
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
+
+ - :Field:
          Location
 
    :Description:
@@ -133,16 +164,10 @@ program/schedule.
          The organisator of the event choosen from the organisator records created.
 
  - :Field:
-         Link
+         Related events
 
    :Description:
-         A link (e.g. external link) for the event.
-
- - :Field:
-         Program
-
-   :Description:
-         The program/schedule for the event.
+         One or more related events
 
 Media
 ~~~~~
@@ -151,7 +176,7 @@ The media tab contains fields which holds media-data for the event.
 
 .. figure:: ../../Images/event-media.png
    :align: left
-   :width: 500px
+   :width: 700px
    :alt: Event media tab
 
 .. t3-field-list-table::
@@ -194,7 +219,7 @@ You can assign one or multiple categories to an event.
 
 .. figure:: ../../Images/event-category.png
    :align: left
-   :width: 500px
+   :width: 700px
    :alt: Event category tab
 
 .. t3-field-list-table::
@@ -222,7 +247,7 @@ registrations per user" is set to a value greater than 1.
 
 .. figure:: ../../Images/event-registration-options.png
    :align: left
-   :width: 500px
+   :width: 700px
    :alt: Event record (Tab: registration options)
 
 .. t3-field-list-table::
@@ -301,7 +326,7 @@ Contains all registrations for the event. Only visible, when registration is ena
 
 .. figure:: ../../Images/event-registrations.png
    :align: left
-   :width: 500px
+   :width: 700px
    :alt: Event record (Tab: registrations)
 
 .. t3-field-list-table::
@@ -328,7 +353,7 @@ Custom payment methods can be added. For documentation, please refer to the :ref
 
 .. figure:: ../../Images/event-payment.png
    :align: left
-   :width: 500px
+   :width: 700px
    :alt: Event record (Tab: payment)
 
 .. t3-field-list-table::

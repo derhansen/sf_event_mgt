@@ -1214,7 +1214,7 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      * @test
      * @return void
      */
-    public function remocePriceOptionRemovedPriceOptionForPriceOption()
+    public function removePriceOptionRemovesPriceOptionForPriceOption()
     {
         $priceOption = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
         $priceOptionObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
@@ -1288,6 +1288,60 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->addPriceOptions($priceOption2);
 
         $this->assertEquals(14.99, $this->subject->getCurrentPrice());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getRelatedReturnsInitialValueForObjectStorage()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getRelated()
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setRelatedSetsRelatedForRelated()
+    {
+        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $this->subject->setRelated($event);
+        $this->assertEquals($event, $this->subject->getRelated());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function addRelatedAddsRelatedForRelated()
+    {
+        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $relatedObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
+        $relatedObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($event));
+        $this->inject($this->subject, 'related', $relatedObjectStorageMock);
+
+        $this->subject->addRelated($event);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function removeRelatedRemovesRelatedForRelated()
+    {
+        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $relatedObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
+        $relatedObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($event));
+        $this->inject($this->subject, 'related', $relatedObjectStorageMock);
+
+        $this->subject->removeRelated($event);
     }
 
 }

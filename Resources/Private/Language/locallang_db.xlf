@@ -66,6 +66,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
 				<source>Category</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.related">
+				<source>Related events</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location">
 				<source>Location</source>
 			</trans-unit>
@@ -188,6 +191,9 @@
 			</trans-unit>
 			<trans-unit id="event.tabs.category">
 				<source>Category</source>
+			</trans-unit>
+			<trans-unit id="event.tabs.relations">
+				<source>Relations</source>
 			</trans-unit>
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
