@@ -103,7 +103,8 @@ RealURL Configuration::
                                             'register' => 'registration',
                                             'register-save' => 'saveRegistration',
                                             'registration-result' => 'saveRegistrationResult',
-                                            'registration-confirm' => 'confirmRegistration'
+                                            'registration-confirm' => 'confirmRegistration',
+                                            'registration-cancel' => 'cancelRegistration'
                                     ),
                                     'noMatch' => 'bypass'
                             ),
