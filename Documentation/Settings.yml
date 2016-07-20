@@ -10,8 +10,8 @@
 conf.py:
   copyright: 2014 - 2016
   project: Event management and registration
-  version: 1.6.0
-  release: 1.6.0
+  version: 1.6.1
+  release: 1.6.1
   intersphinx_mapping:
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/
