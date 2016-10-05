@@ -39,6 +39,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
 				<source>Enable registration</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist">
+				<source>Enable waitlist</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_cancel">
 				<source>Enable cancellation</source>
 			</trans-unit>

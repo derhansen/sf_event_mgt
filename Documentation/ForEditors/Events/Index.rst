@@ -300,6 +300,12 @@ registrations per user" is set to a value greater than 1.
          where the user can select how many registrations should be created.
 
  - :Field:
+         Enable waitlist
+
+   :Description:
+         Option to enable a waitlist for the event, if the max. amount of registrations is reached.
+
+ - :Field:
          Enable unique e-mail check for registration
 
    :Description:

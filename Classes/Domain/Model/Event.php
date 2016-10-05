@@ -184,6 +184,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $enableRegistration = false;
 
     /**
+     * Enable waitlist
+     *
+     * @var bool
+     */
+    protected $enableWaitlist = false;
+
+    /**
      * Link
      *
      * @var string
@@ -851,6 +858,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getEnableRegistration()
     {
         return $this->enableRegistration;
+    }
+
+    /**
+     * Returns enableWaitlist
+     *
+     * @return boolean
+     */
+    public function getEnableWaitlist()
+    {
+        return $this->enableWaitlist;
+    }
+
+    /**
+     * Sets enableWaitlist
+     *
+     * @param boolean $enableWaitlist
+     * @return void
+     */
+    public function setEnableWaitlist($enableWaitlist)
+    {
+        $this->enableWaitlist = $enableWaitlist;
     }
 
     /**

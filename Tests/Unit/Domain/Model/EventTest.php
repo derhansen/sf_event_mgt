@@ -767,6 +767,31 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     /**
      * @test
      */
+    public function getEnableWaitlistReturnsInitialValueForBoolean()
+    {
+        $this->assertSame(
+            false,
+            $this->subject->getEnableWaitlist()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setEnableWaitlistForBooleanSetsEnableWaitlist()
+    {
+        $this->subject->setEnableWaitlist(true);
+
+        $this->assertAttributeEquals(
+            true,
+            'enableWaitlist',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
     public function getLinkReturnsInitialValueForLink()
     {
         $this->assertSame(
