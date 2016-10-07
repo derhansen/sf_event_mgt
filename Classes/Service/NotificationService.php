@@ -188,9 +188,17 @@ class NotificationService
         $template = 'Notification/User/RegistrationNew.html';
         $subject = $settings['notification']['registrationNew']['userSubject'];
         switch ($type) {
+            case MessageType::REGISTRATION_WAITLIST_NEW:
+                $template = 'Notification/User/RegistrationWaitlistNew.html';
+                $subject = $settings['notification']['registrationWaitlistNew']['userSubject'];
+                break;
             case MessageType::REGISTRATION_CONFIRMED:
                 $template = 'Notification/User/RegistrationConfirmed.html';
                 $subject = $settings['notification']['registrationConfirmed']['userSubject'];
+                break;
+            case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
+                $template = 'Notification/User/RegistrationWaitlistConfirmed.html';
+                $subject = $settings['notification']['registrationWaitlistConfirmed']['userSubject'];
                 break;
             case MessageType::REGISTRATION_CANCELLED:
                 $template = 'Notification/User/RegistrationCancelled.html';
@@ -236,22 +244,22 @@ class NotificationService
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
             foreach ($adminEmailArr as $adminEmail) {
                 $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                        $settings['notification']['senderEmail'],
-                        $adminEmail,
-                        $subject,
-                        $body,
-                        $settings['notification']['senderName']
-                    );
-            }
-        }
-        if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
-            $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
                     $settings['notification']['senderEmail'],
-                    $event->getOrganisator()->getEmail(),
+                    $adminEmail,
                     $subject,
                     $body,
                     $settings['notification']['senderName']
                 );
+            }
+        }
+        if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
+            $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
+                $settings['notification']['senderEmail'],
+                $event->getOrganisator()->getEmail(),
+                $subject,
+                $body,
+                $settings['notification']['senderName']
+            );
         }
         return $allEmailsSent;
     }
@@ -268,9 +276,17 @@ class NotificationService
         $template = 'Notification/Admin/RegistrationNew.html';
         $subject = $settings['notification']['registrationNew']['adminSubject'];
         switch ($type) {
+            case MessageType::REGISTRATION_WAITLIST_NEW:
+                $template = 'Notification/Admin/RegistrationWaitlistNew.html';
+                $subject = $settings['notification']['registrationWaitlistNew']['adminSubject'];
+                break;
             case MessageType::REGISTRATION_CONFIRMED:
                 $template = 'Notification/Admin/RegistrationConfirmed.html';
                 $subject = $settings['notification']['registrationConfirmed']['adminSubject'];
+                break;
+            case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
+                $template = 'Notification/Admin/RegistrationWaitlistConfirmed.html';
+                $subject = $settings['notification']['registrationWaitlistConfirmed']['adminSubject'];
                 break;
             case MessageType::REGISTRATION_CANCELLED:
                 $template = 'Notification/Admin/RegistrationCancelled.html';

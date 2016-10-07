@@ -132,14 +132,26 @@
 			<trans-unit id="flexforms_notification.registration_new_user_subject">
 				<source>Subject of e-mail sent to user when a new registration is created</source>
 			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_waitlist_new_user_subject">
+				<source>Subject of e-mail sent to user when a new registration on the waitlist is created</source>
+			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_new_admin_subject">
 				<source>Subject of e-mail sent to admin when a new registration is created</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_waitlist_new_admin_subject">
+				<source>Subject of e-mail sent to admin when a new registration on the waitlist is created</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_confirmed_user_subject">
 				<source>Subject of e-mail sent to user when a registration has been confirmed</source>
 			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_waitlist_confirmed_user_subject">
+				<source>Subject of e-mail sent to user when a registration on the waitlist has been confirmed</source>
+			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_confirmed_admin_subject">
 				<source>Subject of e-mail sent to admin when a registration has been confirmed</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_waitlist_confirmed_admin_subject">
+				<source>Subject of e-mail sent to admin when a registration on the waitlist has been confirmed</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_cancelled_user_subject">
 				<source>Subject of e-mail sent to user when a registration has been cancelled</source>

@@ -61,6 +61,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 5,
                 1,
                 1,
+                false,
                 [
                     1 => 1
                 ]
@@ -69,6 +70,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 5,
                 1,
                 2,
+                false,
                 [
                     1 => 1
                 ]
@@ -77,6 +79,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 5,
                 10,
                 1,
+                false,
                 [
                     1 => 1
                 ]
@@ -85,6 +88,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 5,
                 10,
                 5,
+                false,
                 [
                     1 => 1,
                     2 => 2,
@@ -97,6 +101,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 5,
                 0,
                 1,
+                false,
                 [
                     0 => 0
                 ]
@@ -105,6 +110,7 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 5,
                 0,
                 0,
+                false,
                 [
                     0 => 0
                 ]
@@ -113,12 +119,23 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
                 0,
                 0,
                 3,
+                false,
                 [
                     1 => 1,
                     2 => 2,
                     3 => 3
                 ]
             ],
+            'SimultaneousAllowedWithWaitlistAndNotEnoughFreePlaces' => [
+                5,
+                1,
+                2,
+                true,
+                [
+                    1 => 1,
+                    2 => 2
+                ]
+            ]
         ];
     }
 
@@ -127,11 +144,12 @@ class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\Unit
      * @dataProvider simultaneousRegistrationsDataProvider
      * @return void
      */
-    public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $expected)
+    public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $waitlist, $expected)
     {
         $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', []);
         $mockEvent->expects($this->any())->method('getFreePlaces')->will($this->returnValue($freePlaces));
         $mockEvent->expects($this->any())->method('getMaxParticipants')->will($this->returnValue($maxParticipants));
+        $mockEvent->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue($waitlist));
         $mockEvent->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue($maxRegistrations));
         $actual = $this->viewhelper->render($mockEvent);
         $this->assertEquals($expected, $actual);

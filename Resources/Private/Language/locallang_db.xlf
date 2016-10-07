@@ -93,6 +93,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Registrations</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_waitlist">
+				<source>Registrations on the waitlist</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
 				<source>Registration deadline</source>
 			</trans-unit>
@@ -167,6 +170,9 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc">
 				<source>Accepted terms and conditions</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.waitlist">
+				<source>Waitlist registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed">
 				<source>Confirmed</source>

@@ -21,7 +21,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  */
 class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Firstname
      *
@@ -213,7 +212,14 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $paymentReference = '';
-    
+
+    /**
+     * Flags if this is a registration on the waitlist
+     *
+     * @var bool
+     */
+    protected $waitlist = false;
+
     /**
      * Returns the firstname
      *
@@ -833,4 +839,24 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->paymentReference = $paymentReference;
     }
 
+    /**
+     * Returns waitlist
+     *
+     * @return boolean
+     */
+    public function getWaitlist()
+    {
+        return $this->waitlist;
+    }
+
+    /**
+     * Sets waitlist
+     *
+     * @param boolean $waitlist
+     * @return void
+     */
+    public function setWaitlist($waitlist)
+    {
+        $this->waitlist = $waitlist;
+    }
 }

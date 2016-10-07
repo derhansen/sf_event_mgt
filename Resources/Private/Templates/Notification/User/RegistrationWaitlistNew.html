@@ -1,0 +1,20 @@
+<p>Hello {registration.firstname} {registration.lastname},</p>
+<p>we have received your registration on the waitlist for the following event:</p>
+<ul>
+    <li>{event.title} - ({f:format.date(date: '{event.startdate}', format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: '{event.enddate}', format: '%d.%m.%Y - %H:%M')})</li>
+</ul>
+<strong>Note, that the event is currently fully booked and your registration will be on the waitlist.</strong>
+<p>Please confirm your registration by opening the following confirmation link:</p>
+<p>
+    <f:uri.action action="confirmRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
+</p>
+<f:if condition="{event.enableCancel}">
+    <p>If you wish to cancel your registration, please open the following link:</p>
+    <p>
+        <f:uri.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
+    </p>
+</f:if>
+<p>Note, that your registration will be cancelled, if you do not open the confirmation link until {f:format.date(date: '{registration.confirmationUntil}', format: '%d.%m.%Y - %H:%M:%S')}</p>
+<p>Best regards,</p>
+<p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
+

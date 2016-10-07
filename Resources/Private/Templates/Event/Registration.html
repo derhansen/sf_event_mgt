@@ -77,6 +77,14 @@
 
             <h2><f:translate key="registration.form.header" /></h2>
 
+            <f:if condition="{event.enableWaitlist}">
+                <f:if condition="{event.registration->f:count()} >= {event.maxParticipants}">
+                    <p>
+                        <strong><f:translate key="registration.form.waitlist" /></strong>
+                    </p>
+                </f:if>
+            </f:if>
+
             <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration">
                 <fieldset>
                     <div class="event-registration-row">

@@ -403,6 +403,63 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     /**
      * @test
      */
+    public function getRegistrationWaitlistReturnsInitialValueForRegistrationWaitlist()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getRegistrationWaitlist()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setRegistrationWaitlistForObjectStorageContainingRegistrationSetsRegistrationWaitlist()
+    {
+        $registration = new Registration();
+        $objectStorageHoldingExactlyOneRegistration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneRegistration->attach($registration);
+        $this->subject->setRegistrationWaitlist($objectStorageHoldingExactlyOneRegistration);
+
+        $this->assertAttributeEquals(
+            $objectStorageHoldingExactlyOneRegistration,
+            'registrationWaitlist',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function addRegistrationWaitlistToObjectStorageHoldingRegistrationWaitlist()
+    {
+        $registration = new Registration();
+        $registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+            ['attach'], [], '', false);
+        $registrationObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($registration));
+        $this->inject($this->subject, 'registrationWaitlist', $registrationObjectStorageMock);
+
+        $this->subject->addRegistrationWaitlist($registration);
+    }
+
+    /**
+     * @test
+     */
+    public function removeRegistrationWaitlistFromObjectStorageHoldingRegistrationWaitlist()
+    {
+        $registration = new Registration();
+        $registrationObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+            ['detach'], [], '', false);
+        $registrationObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($registration));
+        $this->inject($this->subject, 'registrationWaitlist', $registrationObjectStorageMock);
+
+        $this->subject->removeRegistrationWaitlist($registration);
+    }
+
+    /**
+     * @test
+     */
     public function getImageReturnsInitialValueForImage()
     {
         $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -665,6 +722,46 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(0);
         $this->subject->setEnableRegistration(true);
+
+        $this->assertTrue($this->subject->getRegistrationPossible());
+    }
+
+
+    /**
+     * @test
+     */
+    public function getRegistrationPossibleReturnsFalseIfMaxParticipantsSetAndEventFull()
+    {
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $this->subject->setStartdate($startdate);
+        $this->subject->setMaxParticipants(1);
+        $this->subject->setEnableRegistration(true);
+
+        $registration = new Registration();
+        $objectStorageHoldingExactlyOneRegistration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneRegistration->attach($registration);
+        $this->subject->setRegistration($objectStorageHoldingExactlyOneRegistration);
+
+        $this->assertFalse($this->subject->getRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationPossibleReturnsTrueIfMaxParticipantsSetAndWaitlistEnabled()
+    {
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $this->subject->setStartdate($startdate);
+        $this->subject->setMaxParticipants(1);
+        $this->subject->setEnableRegistration(true);
+        $this->subject->setEnableWaitlist(true);
+
+        $registration = new Registration();
+        $objectStorageHoldingExactlyOneRegistration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageHoldingExactlyOneRegistration->attach($registration);
+        $this->subject->setRegistration($objectStorageHoldingExactlyOneRegistration);
 
         $this->assertTrue($this->subject->getRegistrationPossible());
     }

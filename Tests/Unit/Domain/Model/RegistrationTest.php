@@ -375,6 +375,33 @@ class RegistrationTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
      * @test
      * @return void
      */
+    public function getWaitlistReturnsInitialValueForBoolean()
+    {
+        $this->assertSame(
+            false,
+            $this->subject->getAccepttc()
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setWaitlistForBooleanSetsWaitlist()
+    {
+        $this->subject->setWaitlist(true);
+
+        $this->assertAttributeEquals(
+            true,
+            'waitlist',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
     public function getConfirmedReturnsInitialValueForBoolean()
     {
         $this->assertSame(

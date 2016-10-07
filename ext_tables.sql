@@ -21,6 +21,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	selected_payment_methods text,
 	category int(11) unsigned DEFAULT '0' NOT NULL,
 	registration int(11) unsigned DEFAULT '0' NOT NULL,
+	registration_waitlist int(11) unsigned DEFAULT '0' NOT NULL,
 	price_options int(11) unsigned DEFAULT '0' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
 	files int(11) DEFAULT '0' NOT NULL,
@@ -227,6 +228,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	paid tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	paymentmethod varchar(255) DEFAULT '' NOT NULL,
 	payment_reference varchar(255) DEFAULT '' NOT NULL,
+	waitlist tinyint(1) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

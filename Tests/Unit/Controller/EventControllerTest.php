@@ -611,6 +611,69 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
     /**
      * Checks, if a saveRegistration action with no autoConfirmation saves the
+     * registration if maxParticipants is reached and waitlist is enabled
+     *
+     * @test
+     * @return void
+     */
+    public function saveRegistrationActionWithoutAutoConfirmationAndWaitlistRedirectsWithMessageIfRegistrationSuccessful()
+    {
+        $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue(true));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+
+        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['add'], [], '', false);
+        $registrationRepository->expects($this->once())->method('add');
+        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['update'], [], '', false);
+        $eventRepository->expects($this->once())->method('update');
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $notificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+            [], [], '', false);
+        $notificationService->expects($this->once())->method('sendUserMessage');
+        $notificationService->expects($this->once())->method('sendAdminMessage');
+        $this->inject($this->subject, 'notificationService', $notificationService);
+
+        $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
+            ['persistAll'], [], '', false);
+        $persistenceManager->expects($this->once())->method('persistAll');
+
+        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+            ['get'], [], '', false);
+        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $this->inject($this->subject, 'objectManager', $objectManager);
+
+        $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
+            ['clearCacheForConfiguredUids'], [], '', false);
+        $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
+        $this->inject($this->subject, 'utilityService', $utilityService);
+
+        $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST]);
+
+        $this->subject->saveRegistrationAction($registration, $event);
+    }
+
+    /**
+     * Checks, if a saveRegistration action with no autoConfirmation saves the
      * registration and redirects to the saveRegistrationResult action.
      *
      * @test
@@ -697,7 +760,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
-        $event->expects($this->once())->method('getMaxParticipants')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
             ['add'], [], '', false);
@@ -1014,6 +1077,55 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             $mockRegistration,
             'event.message.confirmation_successful',
             'confirmRegistration.title.successful'
+        ];
+
+        $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+            ['checkConfirmRegistration', 'confirmDependingRegistrations', 'redirectPaymentEnabled'], [], '', false);
+        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
+        $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')->with($mockRegistration);
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
+
+        $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
+            [], [], '', false);
+        $mockNotificationService->expects($this->once())->method('sendUserMessage');
+        $mockNotificationService->expects($this->once())->method('sendAdminMessage');
+        $this->inject($this->subject, 'notificationService', $mockNotificationService);
+
+        $mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['update'], [], '', false);
+        $mockRegistrationRepository->expects($this->once())->method('update');
+        $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+        $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
+    }
+
+    /**
+     * Test if expected message is shown if checkConfirmRegistration succeeds for waitist registrations
+     * Also checks, if messages are sent and if registration gets confirmed.
+     *
+     * @test
+     * @return void
+     */
+    public function confirmRegistrationWaitlistActionShowsMessageIfCheckCancelRegistrationSucceeds()
+    {
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->at(0))->method('assign')->with('messageKey',
+            'event.message.confirmation_waitlist_successful');
+        $view->expects($this->at(1))->method('assign')->with('titleKey',
+            'confirmRegistrationWaitlist.title.successful');
+        $this->inject($this->subject, 'view', $view);
+
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
+            false);
+        $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
+        $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
+        $mockRegistration->expects($this->any())->method('getWaitlist')->will($this->returnValue(true));
+
+        $returnedArray = [
+            false,
+            $mockRegistration,
+            'event.message.confirmation_waitlist_successful',
+            'confirmRegistrationWaitlist.title.successful'
         ];
 
         $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',

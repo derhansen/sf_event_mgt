@@ -21,12 +21,12 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'requestUpdate' => 'enable_registration, enable_cancel, enable_payment, restrict_payment_methods',
+        'requestUpdate' => 'enable_registration, enable_waitlist, enable_cancel, enable_payment, restrict_payment_methods',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, enable_waitlist, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment,price_options',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, enable_waitlist, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment,price_options,registration_waitlist',
     ],
     'types' => [
         '1' => [
@@ -50,7 +50,7 @@ return [
 				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation, max_participants, max_registrations_per_user, enable_waitlist, unique_email_check, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
-				registration,
+				registration,registration_waitlist,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                  enable_payment, restrict_payment_methods, selected_payment_methods,
@@ -499,6 +499,31 @@ return [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_registration',
                 'foreign_field' => 'event',
+                'foreign_match_fields' => [
+                    'waitlist' => '0',
+                ],
+                'maxitems' => 9999,
+                'appearance' => [
+                    'collapseAll' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'useSortable' => 1,
+                    'showAllLocalizationLink' => 1
+                ],
+            ],
+        ],
+        'registration_waitlist' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_waitlist',
+            'displayCond' => 'FIELD:enable_waitlist:REQ:TRUE',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_registration',
+                'foreign_field' => 'event',
+                'foreign_match_fields' => [
+                    'waitlist' => '1',
+                ],
                 'maxitems' => 9999,
                 'appearance' => [
                     'collapseAll' => 1,

@@ -57,9 +57,17 @@ plugin.tx_sfeventmgt {
 				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.userSubject}
 				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.adminSubject}
 			}
+			registrationWaitlistNew {
+				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew.userSubject}
+				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew.adminSubject}
+			}
 			registrationConfirmed {
 				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.userSubject}
 				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.adminSubject}
+			}
+			registrationWaitlistConfirmed {
+				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed.userSubject}
+				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed.adminSubject}
 			}
 			registrationCancelled {
 				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.userSubject}

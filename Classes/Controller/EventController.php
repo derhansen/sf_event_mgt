@@ -304,6 +304,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         // Save registration if no errors
         if ($success) {
+            $isWaitlistRegistration = $this->registrationService->isWaitlistRegistration(
+                $event,
+                $registration->getAmountOfRegistrations()
+            );
             $linkValidity = (int)$this->settings['confirmation']['linkValidity'];
             if ($linkValidity === 0) {
                 // Use 3600 seconds as default value if not set
@@ -317,14 +321,21 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $registration->setConfirmationUntil($confirmationUntil);
             $registration->setLanguage($GLOBALS['TSFE']->config['config']['language']);
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
+            $registration->setWaitlist($isWaitlistRegistration);
             $registration->_setProperty('_languageUid', $GLOBALS['TSFE']->sys_language_uid);
             $this->registrationRepository->add($registration);
 
             // Persist registration, so we have an UID
             $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
 
-            // Add new registration to event
-            $event->addRegistration($registration);
+            // Add new registration (or waitlist registration) to event
+            if ($isWaitlistRegistration) {
+                $event->addRegistrationWaitlist($registration);
+                $messageType = MessageType::REGISTRATION_WAITLIST_NEW;
+            } else {
+                $event->addRegistration($registration);
+                $messageType = MessageType::REGISTRATION_NEW;
+            }
             $this->eventRepository->update($event);
 
             // Send notifications to user and admin if confirmation link should be sent
@@ -333,13 +344,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                     $event,
                     $registration,
                     $this->settings,
-                    MessageType::REGISTRATION_NEW
+                    $messageType
                 );
                 $this->notificationService->sendAdminMessage(
                     $event,
                     $registration,
                     $this->settings,
-                    MessageType::REGISTRATION_NEW
+                    $messageType
                 );
             }
 
@@ -385,6 +396,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             case RegistrationResult::REGISTRATION_SUCCESSFUL:
                 $messageKey = 'event.message.registrationsuccessful';
                 $titleKey = 'registrationResult.title.successful';
+                break;
+            case RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST:
+                $messageKey = 'event.message.registrationwaitlistsuccessful';
+                $titleKey = 'registrationWaitlistResult.title.successful';
                 break;
             case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
                 $messageKey = 'event.message.registrationfailedeventexpired';
@@ -440,18 +455,23 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $registration->setConfirmed(true);
             $this->registrationRepository->update($registration);
 
+            $messageType = MessageType::REGISTRATION_CONFIRMED;
+            if ($registration->getWaitlist()) {
+                $messageType = MessageType::REGISTRATION_WAITLIST_CONFIRMED;
+            }
+
             // Send notifications to user and admin
             $this->notificationService->sendUserMessage(
                 $registration->getEvent(),
                 $registration,
                 $this->settings,
-                MessageType::REGISTRATION_CONFIRMED
+                $messageType
             );
             $this->notificationService->sendAdminMessage(
                 $registration->getEvent(),
                 $registration,
                 $this->settings,
-                MessageType::REGISTRATION_CONFIRMED
+                $messageType
             );
 
             // Confirm registrations depending on main registration if necessary

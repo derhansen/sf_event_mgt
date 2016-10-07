@@ -734,4 +734,56 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
 
         $this->assertTrue($this->subject->redirectPaymentEnabled($mockRegistration));
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function isWaitlistRegistrationReturnsFalseIfEventNotFullyBookedAndEnoughFreePlaces()
+    {
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(5));
+
+        $event = new Event();
+        $event->setEnableWaitlist(true);
+        $event->setMaxParticipants(10);
+        $event->setRegistration($registrations);
+
+        $this->assertFalse($this->subject->isWaitlistRegistration($event, 3));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function isWaitlistRegistrationReturnsTrueIfEventNotFullyBookedAndNotEnoughFreePlaces()
+    {
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+
+        $event = new Event();
+        $event->setEnableWaitlist(true);
+        $event->setMaxParticipants(10);
+        $event->setRegistration($registrations);
+
+        $this->assertTrue($this->subject->isWaitlistRegistration($event, 2));
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function isWaitlistRegistrationReturnsTrueIfEventFullyBookedAndNotEnoughFreePlaces()
+    {
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(11));
+
+        $event = new Event();
+        $event->setEnableWaitlist(true);
+        $event->setMaxParticipants(10);
+        $event->setRegistration($registrations);
+
+        $this->assertTrue($this->subject->isWaitlistRegistration($event, 1));
+    }
+
 }

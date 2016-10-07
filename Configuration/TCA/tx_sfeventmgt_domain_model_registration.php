@@ -26,18 +26,18 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,paymentmethod,payment_reference,notes,fe_user,',
+        'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,paymentmethod,payment_reference,notes,fe_user,waitlist,',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paymentmethod, payment_reference, paid, notes, confirmation_until, amount_of_registrations, main_registration',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paymentmethod, payment_reference, paid, notes, confirmation_until, amount_of_registrations, main_registration, waitlist',
     ],
     'types' => [
         '1' => [
             'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, 
             firstname, lastname, title, company, address, zip, city, country, phone, email,
             ignore_notifications, gender, date_of_birth, fe_user, confirmation_until, confirmed,
-            accepttc, notes, amount_of_registrations, main_registration, 
+            accepttc, notes, amount_of_registrations, waitlist, main_registration, 
             
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                 paid, paymentmethod, payment_reference, 
@@ -294,6 +294,14 @@ return [
         'accepttc' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.accepttc',
+            'config' => [
+                'type' => 'check',
+                'default' => 0
+            ]
+        ],
+        'waitlist' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.waitlist',
             'config' => [
                 'type' => 'check',
                 'default' => 0

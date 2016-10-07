@@ -140,6 +140,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $registration = null;
 
     /**
+     * Registration waitlist
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
+     * @lazy
+     */
+    protected $registrationWaitlist;
+
+    /**
      * Registration deadline date
      *
      * @var \DateTime
@@ -271,6 +279,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->related = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->registrationWaitlist = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -802,7 +811,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new \DateTime()) {
             $deadlineNotReached = false;
         }
-        return ($this->getStartdate() > new \DateTime()) && $maxParticipantsNotReached &&
+        return ($this->getStartdate() > new \DateTime()) &&
+        ($maxParticipantsNotReached || !$maxParticipantsNotReached && $this->enableWaitlist) &&
         $this->getEnableRegistration() && $deadlineNotReached;
     }
 
@@ -1279,5 +1289,51 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             // Just return the price field
             return $this->price;
         }
+    }
+
+    /**
+     * Returns registrationWaitlist
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getRegistrationWaitlist()
+    {
+        return $this->registrationWaitlist;
+    }
+
+    /**
+     * Sets registrationWaitlist
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
+     *
+     * @return void
+     */
+    public function setRegistrationWaitlist(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
+    {
+        $this->registrationWaitlist = $registration;
+    }
+
+    /**
+     * Adds a Registration to the waitlist
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     *
+     * @return void
+     */
+    public function addRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
+    {
+        $this->registrationWaitlist->attach($registration);
+    }
+
+    /**
+     * Removes a Registration from the waitlist
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
+     *
+     * @return void
+     */
+    public function removeRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
+    {
+        $this->registrationWaitlist->detach($registrationToRemove);
     }
 }

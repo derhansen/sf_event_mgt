@@ -175,6 +175,11 @@ class RegistrationService
             $titleKey = 'confirmRegistration.title.failed';
         }
 
+        if (!$failed && $registration->getWaitlist()) {
+            $messageKey = 'event.message.confirmation_waitlist_successful';
+            $titleKey = 'confirmRegistrationWaitlist.title.successful';
+        }
+
         return [
             $failed,
             $registration,
@@ -287,12 +292,12 @@ class RegistrationService
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
         } elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
-            && $event->getMaxParticipants() > 0
+            && $event->getMaxParticipants() > 0 && !$event->getEnableWaitlist()
         ) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS;
         } elseif ($event->getFreePlaces() < $registration->getAmountOfRegistrations()
-            && $event->getMaxParticipants() > 0
+            && $event->getMaxParticipants() > 0 && !$event->getEnableWaitlist()
         ) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES;
@@ -304,6 +309,10 @@ class RegistrationService
         ) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE;
+        } elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
+            && $event->getMaxParticipants() > 0 && $event->getEnableWaitlist()
+        ) {
+            $result = RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST;
         }
         return $success;
     }
@@ -342,4 +351,26 @@ class RegistrationService
         }
     }
 
+    /**
+     * Returns if the given amount of registrations for the event will be registrations for the waitlist
+     * (depending on the total amount of registrations and free places)
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param int $amountOfRegistrations
+     * @return bool
+     */
+    public function isWaitlistRegistration($event, $amountOfRegistrations)
+    {
+        if ($event->getMaxParticipants() === 0 || !$event->getEnableWaitlist()) {
+            return false;
+        }
+
+        $result = false;
+        if ($event->getFreePlaces() > 0 && $event->getFreePlaces() < $amountOfRegistrations) {
+            $result = true;
+        } elseif ($event->getFreePlaces() <= 0) {
+            $result = true;
+        }
+        return $result;
+    }
 }

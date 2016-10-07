@@ -38,7 +38,10 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
     public function render($event)
     {
         $minPossibleRegistrations = 1;
-        if ($event->getMaxParticipants() > 0 && $event->getMaxRegistrationsPerUser() >= $event->getFreePlaces()) {
+        if ($event->getMaxParticipants() > 0 &&
+            $event->getMaxRegistrationsPerUser() >= $event->getFreePlaces() &&
+            !$event->getEnableWaitlist()
+        ) {
             $maxPossibleRegistrations = $event->getFreePlaces();
         } else {
             $maxPossibleRegistrations = $event->getMaxRegistrationsPerUser();

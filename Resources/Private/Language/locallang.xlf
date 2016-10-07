@@ -162,6 +162,9 @@
 			<trans-unit id="registration.form.header">
 				<source>Registration form</source>
 			</trans-unit>
+			<trans-unit id="registration.form.waitlist">
+				<source>Please note, that the event is fully booked and you are registering to the waitlist</source>
+			</trans-unit>
 			<trans-unit id="event.backtext">
 				<source>Back to listview</source>
 			</trans-unit>
@@ -201,8 +204,14 @@
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 			</trans-unit>
+			<trans-unit id="event.message.registrationwaitlistsuccessful">
+				<source>Your registration on the waitlist was successful.</source>
+			</trans-unit>
 			<trans-unit id="event.message.confirmation_successful">
 				<source>Your registration has been successfully confirmed.</source>
+			</trans-unit>
+			<trans-unit id="event.message.confirmation_waitlist_successful">
+				<source>Your registration on the waitlist has been successfully confirmed.</source>
 			</trans-unit>
 			<trans-unit id="event.message.confirmation_failed_wrong_hmac">
 				<source>Confirmation failed, wrong HMAC.</source>
@@ -276,6 +285,9 @@
 			<trans-unit id="confirmRegistration.title.successful">
 				<source>Registration confirmed</source>
 			</trans-unit>
+			<trans-unit id="confirmRegistrationWaitlist.title.successful">
+				<source>Registration on the waitlist confirmed</source>
+			</trans-unit>
 			<trans-unit id="confirmRegistration.title.failed">
 				<source>Registration confirmation failed</source>
 			</trans-unit>
@@ -287,6 +299,9 @@
 			</trans-unit>
 			<trans-unit id="registrationResult.title.successful">
 				<source>Registration successful</source>
+			</trans-unit>
+			<trans-unit id="registrationWaitlistResult.title.successful">
+				<source>Registration on the waitlist successful</source>
 			</trans-unit>
 			<trans-unit id="registrationResult.title.failed">
 				<source>Registration failed</source>

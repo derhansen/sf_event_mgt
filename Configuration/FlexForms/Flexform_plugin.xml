@@ -550,6 +550,16 @@
                         </TCEforms>
                     </settings.notification.registrationNew.userSubject>
 
+                    <!-- New waitlist registration - subject of user e-mail -->
+                    <settings.notification.registrationWaitlistNew.userSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_new_user_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationWaitlistNew.userSubject>
+
                     <!-- New registration - subject of admin e-mail -->
                     <settings.notification.registrationNew.adminSubject>
                         <TCEforms>
@@ -559,6 +569,16 @@
                             </config>
                         </TCEforms>
                     </settings.notification.registrationNew.adminSubject>
+
+                    <!-- New waitlist registration - subject of admin e-mail -->
+                    <settings.notification.registrationWaitlistNew.adminSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_new_admin_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationWaitlistNew.adminSubject>
 
                     <!-- Registration confirmed - subject of user e-mail -->
                     <settings.notification.registrationConfirmed.userSubject>
@@ -570,6 +590,16 @@
                         </TCEforms>
                     </settings.notification.registrationConfirmed.userSubject>
 
+                    <!-- Registration waitlist confirmed - subject of user e-mail -->
+                    <settings.notification.registrationWaitlistConfirmed.userSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_confirmed_user_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationWaitlistConfirmed.userSubject>
+
                     <!-- Registration confirmed - subject of admin e-mail -->
                     <settings.notification.registrationConfirmed.adminSubject>
                         <TCEforms>
@@ -579,6 +609,16 @@
                             </config>
                         </TCEforms>
                     </settings.notification.registrationConfirmed.adminSubject>
+
+                    <!-- Registration waitlist confirmed - subject of admin e-mail -->
+                    <settings.notification.registrationWaitlistConfirmed.adminSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_confirmed_admin_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationWaitlistConfirmed.adminSubject>
 
                     <!-- Registration cancelled - subject of user e-mail -->
                     <settings.notification.registrationCancelled.userSubject>
