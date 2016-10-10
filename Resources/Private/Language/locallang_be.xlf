@@ -7,6 +7,9 @@
 			<trans-unit id="plugin.title">
 				<source>Events and event-registration</source>
 			</trans-unit>
+			<trans-unit id="plugin_userreg.title">
+				<source>Events and event-registration - FE user registrations</source>
+			</trans-unit>
 			<trans-unit id="plugin_payment.title">
 				<source>Events and event-registration - Payment</source>
 			</trans-unit>
@@ -76,6 +79,15 @@
 			<trans-unit id="flexforms_general.orderField.enddate">
 				<source>Enddate</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.event.title">
+				<source>Event title</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.event.startdate">
+				<source>Event startdate</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.event.enddate">
+				<source>Event enddate</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.orderDirection">
 				<source>Sorting direction</source>
 			</trans-unit>
@@ -108,6 +120,15 @@
 			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode.past">
 				<source>Show only past events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.userRegistration.displayMode.all">
+				<source>Show registrations for all events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.userRegistration.displayMode.future">
+				<source>Show registrations for future events</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.userRegistration.displayMode.past">
+				<source>Show registrations for past events</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.requiredFields">
 				<source>Comma seperated list of fieldnames, which are required. The fields firstname, lastname and email

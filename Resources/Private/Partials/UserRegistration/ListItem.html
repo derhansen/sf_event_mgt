@@ -1,0 +1,57 @@
+{namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
+
+<div class="userregistration-list-item">
+
+    <div class="userregistration-list-row">
+        <div class="userregistration-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+        </div>
+        <div class="userregistration-list-value event-title">
+            {registration.event.title}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="userregistration-list-row">
+        <div class="userregistration-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.teaser"/>
+        </div>
+        <div class="userregistration-list-value event-teaser">
+            {registration.event.teaser}
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="userregistration-list-row">
+        <div class="userregistration-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+        </div>
+        <div class="userregistration-list-value event-startdate">
+            <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.startdate}</f:format.date>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="userregistration-list-row">
+        <div class="userregistration-list-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+        </div>
+        <div class="userregistration-list-value event-startdate">
+            <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.enddate}</f:format.date>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <f:if condition="{registration.event.cancellationPossible}">
+        <div class="userregistration-list-row">
+            <div class="userregistration-list-label">
+            </div>
+            <div class="userregistration-list-value userregistration-cancel">
+                <f:link.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{e:registration.hmac(registration: \'{registration}\')}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" pageUid="{settings.registrationPid}">
+                    <f:translate key="userRegistration.cancel" />
+                </f:link.action>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </f:if>
+</div>

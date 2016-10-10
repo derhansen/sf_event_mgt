@@ -73,7 +73,12 @@ class DataHandlerHooks
                     'settings.category',
                     'settings.restrictForeignRecordsToStoragePage',
                     'settings.storagePage',
-                    'settings.registration.requiredFields'
+                    'settings.registration.requiredFields',
+                    'settings.userRegistration.displayMode',
+                    'settings.userRegistration.orderField',
+                    'settings.userRegistration.orderDirection',
+                    'settings.userRegistration.storagePage',
+                    'settings.userRegistration.recursive'
                 ]
             ];
 

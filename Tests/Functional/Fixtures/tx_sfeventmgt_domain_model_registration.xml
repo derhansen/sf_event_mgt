@@ -100,4 +100,103 @@
         <confirmed>1</confirmed>
     </tx_sfeventmgt_domain_model_registration>
 
+    <!-- findRegistrationsByUserRegistrationDemand -->
+    <!-- Registration for past event (UID 16 / PID 7) of fe_user (UID 1) -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>30</uid>
+        <pid>7</pid>
+        <event>16</event>
+        <confirmed>1</confirmed>
+        <fe_user>1</fe_user>
+    </tx_sfeventmgt_domain_model_registration>
+    <!-- Registration for past event (UID 17 / PID 7) of fe_user (UID 1) -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>31</uid>
+        <pid>7</pid>
+        <event>17</event>
+        <confirmed>1</confirmed>
+        <fe_user>1</fe_user>
+    </tx_sfeventmgt_domain_model_registration>
+    <!-- Registration for past event (UID 18 / PID 7) of fe_user (UID 1) -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>32</uid>
+        <pid>7</pid>
+        <event>18</event>
+        <confirmed>1</confirmed>
+        <fe_user>1</fe_user>
+    </tx_sfeventmgt_domain_model_registration>
+    <!-- Registration for past event (UID 17 / PID 7) of fe_user (UID 2) -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>33</uid>
+        <pid>7</pid>
+        <event>17</event>
+        <confirmed>1</confirmed>
+        <fe_user>2</fe_user>
+    </tx_sfeventmgt_domain_model_registration>
+    <!-- Registration for past event (UID 16 / PID 7) no fe_user -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>34</uid>
+        <pid>7</pid>
+        <event>16</event>
+        <confirmed>1</confirmed>
+    </tx_sfeventmgt_domain_model_registration>
+    <!-- Registration for past event (UID 13 / PID 6) of fe_user (UID 1) -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>35</uid>
+        <pid>6</pid>
+        <event>13</event>
+        <confirmed>1</confirmed>
+        <fe_user>1</fe_user>
+    </tx_sfeventmgt_domain_model_registration>
+    <!-- Frontenduser with UID 1 -->
+    <fe_users>
+        <uid>1</uid>
+        <pid>1</pid>
+        <username>testuser1</username>
+        <password>123456</password>
+    </fe_users>
+    <!-- Frontenduser with UID 2 -->
+    <fe_users>
+        <uid>2</uid>
+        <pid>1</pid>
+        <username>testuser2</username>
+        <password>123456</password>
+    </fe_users>
+    <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>13</uid>
+        <pid>6</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401444000</startdate>
+        <enddate>1401451200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>16</uid>
+        <pid>7</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401444000</startdate>
+        <enddate>1401451200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 01.06.2014 10:00 - 01.06.2014 12:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>17</uid>
+        <pid>7</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1401616800</startdate>
+        <enddate>1401624000</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- 01.07.2014 10:00 - 02.07.2014 10:00 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>18</uid>
+        <pid>7</pid>
+        <description>test</description>
+        <link>link</link>
+        <startdate>1404208800</startdate>
+        <enddate>1404295200</enddate>
+    </tx_sfeventmgt_domain_model_event>
+
 </dataset>

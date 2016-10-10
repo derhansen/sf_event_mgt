@@ -63,7 +63,7 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
     public function findAll()
     {
         $registrations = $this->registrationRepository->findAll();
-        $this->assertEquals(11, $registrations->count());
+        $this->assertEquals(17, $registrations->count());
     }
 
     /**
@@ -228,4 +228,118 @@ class RegistrationRepositoryTest extends \TYPO3\CMS\Core\Tests\FunctionalTestCas
         $this->assertEquals(1, $registrations->count());
     }
 
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand returns an empty array if no user given
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandReturnsEmptyArrayIfNoUser()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand->setDisplayMode('all');
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        $this->assertEquals([], $registrations);
+    }
+
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand respects storagePage constraint
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandRespectsStoragePage()
+    {
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        $feUserRepository = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository');
+        $feUser = $feUserRepository->findByUid(1);
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand->setDisplayMode('all');
+        $demand->setStoragePage(7);
+        $demand->setUser($feUser);
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        $this->assertEquals(3, $registrations->count());
+    }
+
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand respects displayMode constraint
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymode()
+    {
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        $feUserRepository = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository');
+        $feUser = $feUserRepository->findByUid(1);
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand->setDisplayMode('future');
+        $demand->setStoragePage(7);
+        $demand->setUser($feUser);
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        $this->assertEquals(0, $registrations->count());
+    }
+
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand respects user constraint
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandRespectsUser()
+    {
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        $feUserRepository = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository');
+        $feUser = $feUserRepository->findByUid(2);
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand->setDisplayMode('all');
+        $demand->setStoragePage(7);
+        $demand->setUser($feUser);
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        $this->assertEquals(1, $registrations->count());
+    }
+
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand respects order constraint
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandRespectsOrder()
+    {
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        $feUserRepository = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository');
+        $feUser = $feUserRepository->findByUid(1);
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand->setDisplayMode('all');
+        $demand->setStoragePage(7);
+        $demand->setUser($feUser);
+        $demand->setOrderField('event.startdate');
+        $demand->setOrderDirection('asc');
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        $this->assertEquals(30, $registrations->getFirst()->getUid());
+    }
+
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand respects order direction constraint
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandRespectsOrderDirection()
+    {
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        $feUserRepository = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository');
+        $feUser = $feUserRepository->findByUid(1);
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand->setDisplayMode('all');
+        $demand->setStoragePage(7);
+        $demand->setUser($feUser);
+        $demand->setOrderField('event.startdate');
+        $demand->setOrderDirection('desc');
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        $this->assertEquals(32, $registrations->getFirst()->getUid());
+    }
+
 }
+

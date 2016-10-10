@@ -350,6 +350,7 @@ return [
         'event' => [
             'config' => [
                 'type' => 'passthrough',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_event',
             ],
         ],
         'amount_of_registrations' => [

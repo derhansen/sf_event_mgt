@@ -1169,7 +1169,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the cancel deadline
      *
-     * @param \DateTime $cancelDeadline RegistrationDeadline
+     * @param \DateTime $cancelDeadline CancelDeadline
      *
      * @return void
      */
@@ -1335,5 +1335,15 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function removeRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
     {
         $this->registrationWaitlist->detach($registrationToRemove);
+    }
+
+    /**
+     * Returns, if cancellation for registrations of the event is possible
+     *
+     * @return bool
+     */
+    public function getCancellationPossible()
+    {
+        return $this->getEnableCancel() && $this->getCancelDeadline() > new \DateTime();
     }
 }

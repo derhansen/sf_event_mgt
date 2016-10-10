@@ -366,6 +366,12 @@
 			<trans-unit id="payment.messages.paymentMethodNotAvailable">
 				<source>Error: The payment method is not configured for the event.</source>
 			</trans-unit>
+			<trans-unit id="userRegistrations.title">
+				<source>My event registrations</source>
+			</trans-unit>
+			<trans-unit id="userRegistration.cancel">
+				<source>Cancel registration</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

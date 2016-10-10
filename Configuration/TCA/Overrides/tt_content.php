@@ -12,6 +12,12 @@ defined('TYPO3_MODE') or die();
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'sf_event_mgt',
+    'Piuserreg',
+    'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin_userreg.title'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'sf_event_mgt',
     'Pipayment',
     'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin_payment.title'
 );
@@ -20,6 +26,7 @@ defined('TYPO3_MODE') or die();
  * Remove unused fields
  */
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sfeventmgt_pievent'] = 'layout,recursive,select_key,pages';
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sfeventmgt_piuserreg'] = 'layout,recursive,select_key,pages';
 $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_excludelist']['sfeventmgt_pipayment'] = 'layout,recursive,select_key,pages';
 
 /**
@@ -32,6 +39,15 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_p
 );
 
 /**
+ * Add Flexform for user registration plugin
+ */
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_piuserreg'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'sfeventmgt_piuserreg',
+    'FILE:EXT:sf_event_mgt/Configuration/FlexForms/Flexform_userreg.xml'
+);
+
+/**
  * Default TypoScript
  */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
@@ -39,4 +55,3 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_p
     'Configuration/TypoScript',
     'Event management and registration'
 );
-

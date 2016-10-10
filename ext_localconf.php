@@ -17,6 +17,18 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
     'DERHANSEN.' . $_EXTKEY,
+    'Piuserreg',
+    [
+        'UserRegistration' => 'list',
+    ],
+    // non-cacheable actions
+    [
+        'UserRegistration' => 'list',
+    ]
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    'DERHANSEN.' . $_EXTKEY,
     'Pipayment',
     [
         'Payment' => 'redirect, success, failure, cancel, notify',

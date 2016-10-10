@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * The repository for registrations
  *
@@ -112,5 +114,99 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('email', $email);
         return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
+     * Returns registrations for the given UserRegistrationDemand demand
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findRegistrationsByUserRegistrationDemand($demand)
+    {
+        if (!$demand->getUser()) {
+            return [];
+        }
+        $constraints = [];
+        $query = $this->createQuery();
+        $this->setStoragePageConstraint($query, $demand, $constraints);
+        $this->setDisplayModeConstraint($query, $demand, $constraints);
+        $this->setUserConstraint($query, $demand, $constraints);
+        $this->setOrderingsFromDemand($query, $demand);
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
+     * Sets the displayMode constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setDisplayModeConstraint($query, $demand, &$constraints)
+    {
+        switch ($demand->getDisplayMode()) {
+            case 'future':
+                $constraints[] = $query->greaterThan('event.startdate', $demand->getCurrentDateTime());
+                break;
+            case 'past':
+                $constraints[] = $query->lessThanOrEqual('event.enddate', $demand->getCurrentDateTime());
+                break;
+            default:
+        }
+    }
+
+    /**
+     * Sets the storagePage constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setStoragePageConstraint($query, $demand, &$constraints)
+    {
+        if ($demand->getStoragePage() != '') {
+            $pidList = GeneralUtility::intExplode(',', $demand->getStoragePage(), true);
+            $constraints[] = $query->in('pid', $pidList);
+        }
+    }
+
+    /**
+     * Sets the user constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setUserConstraint($query, $demand, &$constraints)
+    {
+        if ($demand->getUser()) {
+            $constraints[] = $query->equals('feUser', $demand->getUser());
+        }
+    }
+
+    /**
+     * Sets the ordering to the given query for the given demand
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
+     *
+     * @return void
+     */
+    protected function setOrderingsFromDemand($query, $demand)
+    {
+        $orderings = [];
+        if ($demand->getOrderField() != '' && $demand->getOrderDirection() != '') {
+            $orderings[$demand->getOrderField()] = ((strtolower($demand->getOrderDirection()) == 'desc') ?
+                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
+                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+            $query->setOrderings($orderings);
+        }
     }
 }

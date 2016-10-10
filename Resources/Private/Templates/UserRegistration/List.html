@@ -1,0 +1,11 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+    <h1><f:translate key="userRegistrations.title" /></h1>
+
+    <f:for each="{registrations}" as="registration">
+        <f:render partial="UserRegistration/ListItem" arguments="{_all}"/>
+    </f:for>
+
+</f:section>

@@ -1466,4 +1466,41 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->subject->removeRelated($event);
     }
 
+    /**
+     * DataProvider for cancellationPossible tests
+     *
+     * @return array
+     */
+    public function cancellationPossibleDataProvider()
+    {
+        return [
+            'cancellationNotEnabled' => [
+                false,
+                new \DateTime('today'),
+                false
+            ],
+            'cancellationEnabledButDeadlineReached' => [
+                true,
+                new \DateTime('yesterday'),
+                false
+            ],
+            'cancellationEnabledDeadlineNotReached' => [
+                true,
+                new \DateTime('tomorrow'),
+                true
+            ]
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider cancellationPossibleDataProvider
+     */
+    public function getCancellationPossibleReturnsExpectedValues($enabled, $deadline, $expected)
+    {
+        $this->subject->setEnableCancel($enabled);
+        $this->subject->setCancelDeadline($deadline);
+        $this->assertEquals($expected, $this->subject->getCancellationPossible());
+    }
+
 }
