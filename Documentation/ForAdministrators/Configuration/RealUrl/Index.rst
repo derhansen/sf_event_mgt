@@ -77,7 +77,7 @@ RealURL Configuration::
                             array(
                                     'GETvar' => 'tx_sfeventmgt_pievent[overwriteDemand][category]',
                                     'lookUpTable' => array(
-                                            'table' => 'tx_sfeventmgt_domain_model_category',
+                                            'table' => 'sys_category',
                                             'id_field' => 'uid',
                                             'alias_field' => 'title',
                                             'addWhereClause' => ' AND NOT deleted',
