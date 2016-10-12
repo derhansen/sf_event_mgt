@@ -21,9 +21,11 @@ The installation and initial configuration of the extension is as following:
 
 #. Depending on your needs, create a TYPO3 page for event listing, event details and event registration.
 
-#. Include the plugin “Event management” the newly created pages and configure the plugin settings.
+#. Add the plugin :ref:`eventplugin-settings` to the newly created pages and configure the plugin settings.
 
 #. Configure extension TypoScript settings depending on your needs.
+
+#. Optionally add the plugin :ref:`userregistrationplugin-settings` to a page, to show registered frontend users their event registrations
 
 Important
 ~~~~~~~~~

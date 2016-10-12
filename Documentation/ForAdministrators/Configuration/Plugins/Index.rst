@@ -3,20 +3,19 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: ../../../Includes.txt
 
 
-.. _configuration:
+.. _plugins:
 
-Configuration
-=============
+Plugins
+=======
 
 .. toctree::
    :maxdepth: 5
    :titlesonly:
    :glob:
 
-   Plugins/Index
-   TsReference/Index
-   PageTSConfig/Index
-   RealUrl/Index
+   EventPlugin/Index
+   UserRegistrationPlugin/Index
+   PaymentPlugin/Index

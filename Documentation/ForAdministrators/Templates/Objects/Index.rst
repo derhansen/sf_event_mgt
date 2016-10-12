@@ -40,7 +40,7 @@ List view
          {categories}
 
    :Description:
-         All configured categories for the category menu (see ``plugin.tx_sfeventmgt.settings.categoryMenu`` in the :ref:`plugin-settings`)
+         All configured categories for the category menu (see ``plugin.tx_sfeventmgt.settings.categoryMenu`` in the :ref:`eventplugin-settings`)
 
  - :Object:
          {locations}

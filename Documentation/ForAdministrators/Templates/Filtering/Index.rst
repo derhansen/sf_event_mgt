@@ -10,7 +10,7 @@
 Filtering the listview
 ======================
 
-In the :ref:`plugin-settings` you can define criterias for the listview, so it e.g. only
+In the :ref:`eventplugin-settings` you can define criterias for the listview, so it e.g. only
 shows the events of a special category or for a special location. Nearly all settings
 affecting the demand of the shown events can be overwritten by a URL parameter called
 ``overwriteDemand``.

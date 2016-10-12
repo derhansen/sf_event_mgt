@@ -103,3 +103,10 @@ Format.ICalendarDescriptionViewHelper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Formats the given string according to rfc5545, so it can be used in the iCalendar view
+
+Registration.Hmac
+~~~~~~~~~~~~~~~~~
+
+Must be used, when the plugin :ref:`userregistrationplugin-settings` is used and it should be possible
+for users to cancel registrations (if configured in event). See usage in UserRegistration templates.
+
