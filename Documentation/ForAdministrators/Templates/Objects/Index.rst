@@ -18,6 +18,9 @@ of the given objects and how to use them.
 
 Tip: You can use <f:debug>{object}</f:debug> in your template to see available properties of each object.
 
+Plugin: Events and event-registration
+-------------------------------------
+
 List view
 ~~~~~~~~~
 
@@ -196,3 +199,24 @@ new fields are compliant with RFC 5545 https://tools.ietf.org/html/rfc5545
 
    :Description:
          An object holding the given event
+
+Plugin: Events and event-registration - FE user registrations
+-------------------------------------------------------------
+
+List view
+~~~~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+         Description:
+
+ - :Object:
+         {registrations}
+
+   :Description:
+         An object holding all registrations that matched the configured demand in the plugin settings
