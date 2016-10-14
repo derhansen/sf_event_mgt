@@ -68,8 +68,8 @@ For each event, the attribute registrationPossible returns TRUE or FALSE, if reg
 the event is possible. TRUE is returned, when all conditions below are
 
 * Registration option is activated for the event
-* Max participants is not reached (if max. participants > 0)
-* Date set at registration deadline ist not reached
+* Max participants is not reached (if max. participants > 0) or max participants is not reached and waitlist is enabled
+* Date set at registration deadline is not reached
 * Startdate of event is not reached
 
 How can I disable double opt in for event registration?

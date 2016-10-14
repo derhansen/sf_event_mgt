@@ -40,9 +40,9 @@ plugin.tx_sfeventmgt {
 			}
 			registrationWaitlistNew {
 				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration on the waitlist
-				userSubject = Your event registration on waitlist
+				userSubject = Your event registration on the waitlist
 				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration on the waitlist
-				adminSubject = New unconfirmed event registration on waitlist
+				adminSubject = New unconfirmed event registration on the waitlist
 			}
 			registrationConfirmed {
 				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration
@@ -52,9 +52,9 @@ plugin.tx_sfeventmgt {
 			}
 			registrationWaitlistConfirmed {
 				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration on the waitlist
-				userSubject = Event registration on waitlist successful
+				userSubject = Event registration on the waitlist successful
 				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration on the waitlist
-				adminSubject = Event registration on waitlist confirmed
+				adminSubject = Event registration on the waitlist confirmed
 			}
 			registrationCancelled {
 				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on cancelled registration

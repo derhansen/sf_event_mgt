@@ -375,6 +375,18 @@ Tab notification
          notification.registrationNew.userSubject
 
  - :Property:
+         Subject of e-mail sent to user when a new registration on the waitlist is created
+
+   :View:
+         Registration
+
+   :Description:
+         Subject of e-mail sent to user when a new registration on the waitlist is created
+
+   :Key:
+         notification.registrationWaitlistNew.userSubject
+
+ - :Property:
          Subject of e-mail sent to admin when a new registration is created
 
    :View:
@@ -385,6 +397,18 @@ Tab notification
 
    :Key:
          notification.registrationNew.adminSubject
+
+ - :Property:
+         Subject of e-mail sent to admin when a new registration on the waitlist is created
+
+   :View:
+         Registration
+
+   :Description:
+         Subject of e-mail sent to admin when a new registration on the waitlist is created
+
+   :Key:
+         notification.registrationWaitlistNew.adminSubject
 
  - :Property:
          Subject of e-mail sent to user when a registration has been confirmed
@@ -399,6 +423,18 @@ Tab notification
          notification.registrationConfirmed.userSubject
 
  - :Property:
+         Subject of e-mail sent to user when a registration on the waitlist has been confirmed
+
+   :View:
+         Registration
+
+   :Description:
+         Subject of e-mail sent to user when a registration on the waitlist has been confirmed
+
+   :Key:
+         notification.registrationWaitlistConfirmed.userSubject
+
+ - :Property:
          Subject of e-mail sent to admin when a registration has been confirmed
 
    :View:
@@ -409,6 +445,18 @@ Tab notification
 
    :Key:
          notification.registrationConfirmed.adminSubject
+
+ - :Property:
+         Subject of e-mail sent to admin when a registration on the waitlist has been confirmed
+
+   :View:
+         Registration
+
+   :Description:
+         Subject of e-mail sent to admin when a registration on the waitlist has been confirmed
+
+   :Key:
+         notification.registrationWaitlistConfirmed.adminSubject
 
  - :Property:
          Subject of e-mail sent to user when a registration has been cancelled

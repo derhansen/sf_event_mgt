@@ -350,6 +350,12 @@ Contains all registrations for the event. Only visible, when registration is ena
    :Description:
          A list of participants registered to the event.
 
+ - :Field:
+         Registrations on the waitlist
+
+   :Description:
+         A list of participants registered to the waitlist of the event. This option is only visible, when the
+
 Payment
 ~~~~~~~
 
