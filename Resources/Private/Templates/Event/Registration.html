@@ -1,4 +1,5 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
+{namespace event=W52\SfEventMgtCustom\ViewHelpers}
 <f:layout name="Default" />
 <f:section name="main">
     <f:if condition="{event.registrationPossible}">
@@ -85,7 +86,7 @@
                 </f:if>
             </f:if>
 
-            <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration">
+            <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration" enctype="multipart/form-data">
                 <fieldset>
                     <div class="event-registration-row">
                         <label for="gender"><f:translate key="tx_sfeventmgt_domain_model_registration.gender" /></label>
@@ -190,7 +191,11 @@
                         </label>
                     </div>
                     <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
-
+                    <event:form.upload property="lebenslauf">
+                        <f:if condition="{resource}">
+                            {resource.originalResource.originalFile.name}
+                        </f:if>
+                    </event:form.upload>
                     <f:if condition="{settings.reCaptcha.siteKey}">
                         <div class="event-registration-row recaptcha">
                             <script src="{settings.reCaptcha.apiUrl}" async defer></script>

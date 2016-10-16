@@ -63,8 +63,14 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'messageTypeRegistrationNew' => [
                 MessageType::REGISTRATION_NEW
             ],
+            'messageTypeRegistrationWaitlistNew' => [
+                MessageType::REGISTRATION_WAITLIST_NEW
+            ],
             'messageTypeRegistrationConfirmed' => [
                 MessageType::REGISTRATION_CONFIRMED
+            ],
+            'messageTypeRegistrationWaitlistConfirmed' => [
+                MessageType::REGISTRATION_WAITLIST_CONFIRMED
             ]
         ];
     }
@@ -113,6 +119,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
+        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
+            ['getAttachments'], [], '', false);
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
+
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -149,6 +160,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
+
+        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
+            ['getAttachments'], [], '', false);
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
@@ -190,6 +206,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
+
+        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
+            ['getAttachments'], [], '', false);
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
@@ -241,6 +262,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
+
+        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
+            ['getAttachments'], [], '', false);
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
@@ -314,6 +340,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
+        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
+            ['getAttachments'], [], '', false);
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
+
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);
@@ -357,6 +388,11 @@ class NotificationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->exactly(3))->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
+
+        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
+            ['getAttachments'], [], '', false);
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',

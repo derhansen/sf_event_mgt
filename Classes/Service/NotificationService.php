@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -72,6 +73,14 @@ class NotificationService
      * @inject
      */
     protected $customNotificationLogRepository = null;
+
+    /**
+     * AttachmentService
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
+     * @inject
+     */
+    protected $attachmentService;
 
     /**
      * Sends a custom notification defined by the given customNotification key
@@ -164,12 +173,19 @@ class NotificationService
 
         if (!$registration->isIgnoreNotifications()) {
             $body = $this->getNotificationBody($event, $registration, $template, $settings);
+            $attachments = $this->attachmentService->getAttachments(
+                $settings,
+                $registration,
+                $type,
+                MessageRecipient::USER
+            );
             return $this->emailService->sendEmailMessage(
                 $settings['notification']['senderEmail'],
                 $registration->getEmail(),
                 $subject,
                 $body,
-                $settings['notification']['senderName']
+                $settings['notification']['senderName'],
+                $attachments
             );
         }
         return false;
@@ -240,6 +256,12 @@ class NotificationService
 
         $allEmailsSent = true;
         $body = $this->getNotificationBody($event, $registration, $template, $settings);
+        $attachments = $this->attachmentService->getAttachments(
+            $settings,
+            $registration,
+            $type,
+            MessageRecipient::ADMIN
+        );
         if ($event->getNotifyAdmin()) {
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
             foreach ($adminEmailArr as $adminEmail) {
@@ -248,7 +270,8 @@ class NotificationService
                     $adminEmail,
                     $subject,
                     $body,
-                    $settings['notification']['senderName']
+                    $settings['notification']['senderName'],
+                    $attachments
                 );
             }
         }
@@ -258,7 +281,8 @@ class NotificationService
                 $event->getOrganisator()->getEmail(),
                 $subject,
                 $body,
-                $settings['notification']['senderName']
+                $settings['notification']['senderName'],
+                $attachments
             );
         }
         return $allEmailsSent;
