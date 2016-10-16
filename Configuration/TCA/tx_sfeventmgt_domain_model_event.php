@@ -290,6 +290,7 @@ return [
         'enable_waitlist' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
                 'type' => 'check',
             ],
