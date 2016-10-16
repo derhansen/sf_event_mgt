@@ -18,6 +18,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Registration can be activated for each event individually
 * Optional registration waitlist
 * Double opt in (optional) for event registration
+* Attachments in registration e-mails to participant and/or admin
 * Configurable validity of double opt in links
 * Cancellation configurable for each event
 * Prefill of registration fields for logged in frontend users

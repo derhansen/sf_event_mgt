@@ -291,18 +291,6 @@ plugin.tx_sfeventmgt
          Your event registration
 
  - :Property:
-         settings.notification.registrationWaitlistNew.userSubject
-
-   :Date type:
-         String
-
-   :Description:
-         User-Subject for new registration on the waitlist
-
-   :Default:
-         Your event registration on the waitlist
-
- - :Property:
          settings.notification.registrationNew.adminSubject
 
    :Date type:
@@ -313,6 +301,30 @@ plugin.tx_sfeventmgt
 
    :Default:
          New unconfirmed event registration
+
+ - :Property:
+         settings.notification.registrationNew.attachments
+
+   :Date type:
+         String
+
+   :Description:
+         Attachment configuration for new unconfirmed event registrations. See :ref:`email-attachments`
+
+   :Default:
+         empty
+
+ - :Property:
+         settings.notification.registrationWaitlistNew.userSubject
+
+   :Date type:
+         String
+
+   :Description:
+         User-Subject for new registration on the waitlist
+
+   :Default:
+         Your event registration on the waitlist
 
  - :Property:
          settings.notification.registrationWaitlistNew.adminSubject
@@ -327,6 +339,18 @@ plugin.tx_sfeventmgt
          New unconfirmed event registration on the waitlist
 
  - :Property:
+         settings.notification.registrationWaitlistNew.attachments
+
+   :Date type:
+         String
+
+   :Description:
+         Attachment configuration for new unconfirmed event registrations on the waitlist. See :ref:`email-attachments`
+
+   :Default:
+         empty
+
+ - :Property:
          settings.notification.registrationConfirmed.userSubject
 
    :Date type:
@@ -337,18 +361,6 @@ plugin.tx_sfeventmgt
 
    :Default:
          Event registration successful
-
- - :Property:
-         settings.notification.registrationWaitlistConfirmed.userSubject
-
-   :Date type:
-         String
-
-   :Description:
-         User-Subject for confirmed registration on the waitlist
-
-   :Default:
-         Event registration on the waitlist successful
 
  - :Property:
          settings.notification.registrationConfirmed.adminSubject
@@ -363,6 +375,30 @@ plugin.tx_sfeventmgt
          Event registration confirmed
 
  - :Property:
+         settings.notification.registrationConfirmed.attachments
+
+   :Date type:
+         String
+
+   :Description:
+         Attachment configuration for confirmed event registrations. See :ref:`email-attachments`
+
+   :Default:
+         empty
+
+ - :Property:
+         settings.notification.registrationWaitlistConfirmed.userSubject
+
+   :Date type:
+         String
+
+   :Description:
+         User-Subject for confirmed registration on the waitlist
+
+   :Default:
+         Event registration on the waitlist successful
+
+ - :Property:
          settings.notification.registrationWaitlistConfirmed.adminSubject
 
    :Date type:
@@ -375,7 +411,19 @@ plugin.tx_sfeventmgt
          Event registration on the waitlist confirmed
 
  - :Property:
-         settings.notification.registrationCancelled.userSubject
+         settings.notification.registrationWaitlistConfirmed.attachments
+
+   :Date type:
+         String
+
+   :Description:
+         Attachment configuration for confirmed event registrations on the waitlist. See :ref:`email-attachments`
+
+   :Default:
+         empty
+
+ - :Property:
+     settings.notification.registrationCancelled.userSubject
 
    :Date type:
          String

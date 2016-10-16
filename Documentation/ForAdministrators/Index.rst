@@ -22,3 +22,4 @@ For Administrators
    ClearCacheUids/Index
    Cronjob/Index
    CustomNotifications/Index
+   EmailAttachments/Index
