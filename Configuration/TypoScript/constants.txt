@@ -75,6 +75,15 @@ plugin.tx_sfeventmgt {
 			adjustTime = 1
 		}
 	}
+	rss.channel {
+		title = Feed title
+		description =
+		link = http://domain.tld/
+		language = en-gb
+		copyright = TYPO3 Event management and registration
+		category =
+		generator = TYPO3 EXT:sf_event_mgt
+	}
 }
 
 #==============================================

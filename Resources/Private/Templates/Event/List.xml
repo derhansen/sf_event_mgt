@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+	 xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	 xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers">
+	<channel>
+		<title>{settings.list.rss.channel.title}</title>
+		<link>{settings.list.rss.channel.link}</link>
+		<description>{settings.list.rss.channel.description}</description>
+		<language>{settings.list.rss.channel.language}</language>
+		<f:if condition="{settings.list.rss.channel.copyright}">
+			<copyright>{settings.list.rss.channel.copyright}</copyright>
+		</f:if>
+		<pubDate><f:format.date format="r" date="now" /></pubDate>
+		<lastBuildDate><f:format.date format="r" date="now" /></lastBuildDate>
+		<f:if condition="{settings.list.rss.channel.category}">
+			<category>{settings.list.rss.channel.category}</category>
+		</f:if>
+		<atom:link href="{f:uri.page(pageType: 9918) -> f:format.htmlentities()}" rel="self" type="application/rss+xml" />
+		<generator>{settings.list.rss.channel.generator}</generator>
+		<f:if condition="{events}">
+			<f:for each="{events}" as="event">
+				<item>
+					<guid isPermaLink="false">event-{event.uid}</guid>
+					<pubDate><f:format.date format="r">{event.startdate}</f:format.date></pubDate>
+					<title>{event.title -> f:format.htmlspecialchars()}</title>
+					<link><f:format.htmlentities><f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action></f:format.htmlentities></link>
+					<description>{event.teaser -> f:format.stripTags() -> f:format.htmlspecialchars()}</description>
+					<f:if condition="{event.image.0}"><enclosure url="{f:uri.image(image:'{event.image.0}',absolute:1) -> f:format.htmlentities()}" length="{event.image.0.originalResource.size}" type="{event.image.0.originalResource.mimeType}" /></f:if>
+					<content:encoded><f:format.cdata><f:format.html>{event.description}</f:format.html></f:format.cdata></content:encoded>
+					<f:if condition="{event.category}">
+						<f:for each="{event.category}" as="eventCategory">
+							<category>{eventCategory.title -> f:format.htmlspecialchars()}</category>
+						</f:for>
+					</f:if>
+				</item>
+			</f:for>
+		</f:if>
+	</channel>
+</rss>

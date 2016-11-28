@@ -23,6 +23,19 @@ plugin.tx_sfeventmgt {
 		# *MUST* be defined at template root level to work correct in scheduler task
 		clearCacheUids =
 
+		list {
+			format = html
+			rss {
+				channel {
+					title = {$plugin.tx_sfeventmgt.rss.channel.title}
+					description = {$plugin.tx_sfeventmgt.rss.channel.description}
+					language = {$plugin.tx_sfeventmgt.rss.channel.language}
+					copyright = {$plugin.tx_sfeventmgt.rss.channel.copyright}
+					generator = {$plugin.tx_sfeventmgt.rss.channel.generator}
+					link = {$plugin.tx_sfeventmgt.rss.channel.link}
+				}
+			}
+		}
 		eventDetails {
 			imageWidth = 200
 			imageHeight =

@@ -205,6 +205,18 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
+     * Initialize list action and set format
+     *
+     * @return void
+     */
+    public function initializeListAction()
+    {
+        if (isset($this->settings['list']['format'])) {
+            $this->request->setFormat($this->settings['list']['format']);
+        }
+    }
+
+    /**
      * List view
      *
      * @param array $overwriteDemand OverwriteDemand
