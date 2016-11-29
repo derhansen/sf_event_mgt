@@ -59,8 +59,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_sfeventmgt_domain_model_location',
-                'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_location.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_location.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_priceoption',
+                'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_priceoption.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_priceoption.sys_language_uid IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
