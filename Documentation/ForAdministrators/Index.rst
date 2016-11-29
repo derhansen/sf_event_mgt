@@ -23,3 +23,4 @@ For Administrators
    Cronjob/Index
    CustomNotifications/Index
    EmailAttachments/Index
+   RssFeed/Index

@@ -24,3 +24,4 @@ Thanks from me to:
 * Jean-François Sillen from Wikafi S.P.R.L for sponsoring the sys_category refactoring
 * Jean-François Sillen from Wikafi S.P.R.L for sponsoring the price option feature
 * W52 MarketingKommunikation GmbH for sponsoring the waitlist, user registrations frontend plugin and e-mail attachments
+* New Communication GmbH & Co. KG for sponsoring and ideas
