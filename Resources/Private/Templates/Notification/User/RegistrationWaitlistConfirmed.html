@@ -3,7 +3,7 @@
 <ul>
     <li>{event.title} - ({f:format.date(date: '{event.startdate}', format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: '{event.enddate}', format: '%d.%m.%Y - %H:%M')})</li>
 </ul>
-<f:if condition="{event.enableCancel}">
+<f:if condition="{event.cancellationPossible}">
     <p>If you wish to cancel your registration, please open the following link:</p>
     <p>
         <f:uri.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
