@@ -24,7 +24,7 @@
 					<guid isPermaLink="false">event-{event.uid}</guid>
 					<pubDate><f:format.date format="r">{event.startdate}</f:format.date></pubDate>
 					<title>{event.title -> f:format.htmlspecialchars()}</title>
-					<link><f:format.htmlentities><f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action></f:format.htmlentities></link>
+					<link><f:format.htmlentities><f:uri.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}" absolute="true">{event.title}</f:uri.action></f:format.htmlentities></link>
 					<description>{event.teaser -> f:format.stripTags() -> f:format.htmlspecialchars()}</description>
 					<f:if condition="{event.image.0}"><enclosure url="{f:uri.image(image:'{event.image.0}',absolute:1) -> f:format.htmlentities()}" length="{event.image.0.originalResource.size}" type="{event.image.0.originalResource.mimeType}" /></f:if>
 					<content:encoded><f:format.cdata><f:format.html>{event.description}</f:format.html></f:format.cdata></content:encoded>
