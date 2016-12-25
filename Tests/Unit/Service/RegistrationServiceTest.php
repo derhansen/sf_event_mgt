@@ -443,6 +443,46 @@ class RegistrationServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     }
 
     /**
+     * Test if expected array is returned if event startdate passed
+     *
+     * @test
+     * @return void
+     */
+    public function checkCancelRegistrationIfEventStartdatePassedTest()
+    {
+        $reguid = 1;
+        $hmac = 'valid-hmac';
+
+        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(true));
+        $mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('tomorrow')));
+        $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(new \DateTime('yesterday')));
+
+        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
+            false);
+        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
+
+        $mockRegistrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['findByUid'], [], '', false);
+        $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
+        $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+        $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['validateHmac'], [], '', false);
+        $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
+        $this->inject($this->subject, 'hashService', $mockHashService);
+
+        $result = $this->subject->checkCancelRegistration($reguid, $hmac);
+        $expected = [
+            true,
+            $mockRegistration,
+            'event.message.cancel_failed_event_started',
+            'cancelRegistration.title.failed'
+        ];
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
      * Test if expected value is returned if no frontend user logged in
      *
      * @test

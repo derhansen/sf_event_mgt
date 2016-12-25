@@ -247,6 +247,12 @@ class RegistrationService
             $titleKey = 'cancelRegistration.title.failed';
         }
 
+        if (!$failed && $registration->getEvent()->getStartdate() < new \DateTime()) {
+            $failed = true;
+            $messageKey = 'event.message.cancel_failed_event_started';
+            $titleKey = 'cancelRegistration.title.failed';
+        }
+
         return [
             $failed,
             $registration,

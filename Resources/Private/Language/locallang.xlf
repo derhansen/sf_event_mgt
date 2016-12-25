@@ -240,6 +240,9 @@
 			<trans-unit id="event.message.cancel_failed_deadline_expired">
 				<source>Cancellation failed, cancellation date has expired.</source>
 			</trans-unit>
+			<trans-unit id="event.message.cancel_failed_event_started">
+				<source>Cancellation failed, because the event startdate passed.</source>
+			</trans-unit>
 			<trans-unit id="event.icalDownload">
 				<source>Download iCal file</source>
 			</trans-unit>
