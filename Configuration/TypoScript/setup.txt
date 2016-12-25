@@ -104,6 +104,7 @@ plugin.tx_sfeventmgt {
 # BE-module configuration for EXT:sf_event_mgt
 #==============================================
 module.tx_sfeventmgt {
+	view < plugin.tx_sfeventmgt.view
 	settings {
 		csvExport {
 			fields = {$module.tx_sfeventmgt.settings.csvExport.fields}
