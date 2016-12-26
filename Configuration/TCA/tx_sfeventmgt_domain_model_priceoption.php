@@ -12,6 +12,7 @@ return [
         'versioningWS' => 2,
         'versioning_followPages' => true,
         'hideTable' => true,
+        'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
         'transOrigDiffSourceField' => 'l10n_diffsource',
