@@ -20,13 +20,14 @@ return [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
+            'fe_group' => 'fe_group',
         ],
         'requestUpdate' => 'enable_registration, enable_waitlist, enable_cancel, enable_payment, restrict_payment_methods',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, enable_registration, enable_waitlist, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment,price_options,registration_waitlist',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment,price_options,registration_waitlist',
     ],
     'types' => [
         '1' => [
@@ -55,7 +56,7 @@ return [
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                  enable_payment, restrict_payment_methods, selected_payment_methods,
 
-			--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
+			--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group'
         ],
     ],
     'palettes' => [
@@ -162,6 +163,32 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
+            ],
+        ],
+        'fe_group' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.fe_group',
+            'config' => [
+                'type' => 'select',
+                'size' => 5,
+                'maxitems' => 20,
+                'items' => [
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.hide_at_login',
+                        -1,
+                    ],
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.any_login',
+                        -2,
+                    ],
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.usergroups',
+                        '--div--',
+                    ],
+                ],
+                'exclusiveKeys' => '-1,-2',
+                'foreign_table' => 'fe_groups',
+                'foreign_table_where' => 'ORDER BY fe_groups.title',
             ],
         ],
         'title' => [

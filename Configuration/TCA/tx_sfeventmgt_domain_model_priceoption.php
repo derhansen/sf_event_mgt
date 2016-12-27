@@ -21,6 +21,7 @@ return [
             'disabled' => 'hidden',
             'starttime' => 'starttime',
             'endtime' => 'endtime',
+            'fe_group' => 'fe_group',
         ],
         'searchFields' => 'price,',
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_priceoption.png'
@@ -29,7 +30,7 @@ return [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, price, valid_until',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, price, valid_until, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, hidden;;1, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, price, valid_until, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, hidden;;1, starttime, endtime, fe_group'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -116,6 +117,32 @@ return [
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
+            ],
+        ],
+        'fe_group' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.fe_group',
+            'config' => [
+                'type' => 'select',
+                'size' => 5,
+                'maxitems' => 20,
+                'items' => [
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.hide_at_login',
+                        -1,
+                    ],
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.any_login',
+                        -2,
+                    ],
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.usergroups',
+                        '--div--',
+                    ],
+                ],
+                'exclusiveKeys' => '-1,-2',
+                'foreign_table' => 'fe_groups',
+                'foreign_table_where' => 'ORDER BY fe_groups.title',
             ],
         ],
 
