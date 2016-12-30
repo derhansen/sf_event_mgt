@@ -156,6 +156,7 @@ RealURL Configuration::
                     '125' => 'eventRegistrationConfiguration',
 
             ),
+        )
     );
 
 The above example includes a section for the detailview "eventDetailConfiguration". You must assign the **page ID** of
