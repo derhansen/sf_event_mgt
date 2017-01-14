@@ -310,7 +310,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function saveRegistrationAction(Registration $registration, Event $event)
     {
-        $autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'];
+        $autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'] || $event->getEnableAutoconfirm();
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
         $success = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
 

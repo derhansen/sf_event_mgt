@@ -256,6 +256,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $cancelDeadline = null;
 
     /**
+     * Enable auto confirmation
+     *
+     * @var bool
+     */
+    protected $enableAutoconfirm = false;
+
+    /**
      * Unique e-mail check
      *
      * @var bool
@@ -1186,6 +1193,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getCancelDeadline()
     {
         return $this->cancelDeadline;
+    }
+
+    /**
+     * Returns if autoconfirmation is enabled
+     *
+     * @return bool
+     */
+    public function getEnableAutoconfirm()
+    {
+        return $this->enableAutoconfirm;
+    }
+
+    /**
+     * Sets enable autoconfirm
+     *
+     * @param bool $enableAutoconfirm
+     * @return void
+     */
+    public function setEnableAutoconfirm($enableAutoconfirm)
+    {
+        $this->enableAutoconfirm = $enableAutoconfirm;
     }
 
     /**

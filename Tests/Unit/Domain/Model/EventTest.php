@@ -1503,4 +1503,22 @@ class EventTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $this->assertEquals($expected, $this->subject->getCancellationPossible());
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function enableAutoconfirmReturnsDefaultValue()
+    {
+        $this->assertFalse($this->subject->getEnableAutoconfirm());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setEnableAutoconfirmSetsAutoconfirmForBoolean()
+    {
+        $this->subject->setEnableAutoconfirm(true);
+        $this->assertTrue($this->subject->getEnableAutoconfirm());
+    }
 }

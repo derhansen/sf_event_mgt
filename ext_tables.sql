@@ -39,6 +39,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	notify_organisator tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	enable_cancel tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	cancel_deadline int(11) DEFAULT '0' NOT NULL,
+	enable_autoconfirm tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	unique_email_check tinyint(4) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

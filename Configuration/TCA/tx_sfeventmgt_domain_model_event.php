@@ -27,7 +27,11 @@ return [
         'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check, enable_payment,price_options,registration_waitlist',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description,
+        program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants,
+        max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube,
+        additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
+        enable_payment,price_options,registration_waitlist, enable_autoconfirm',
     ],
     'types' => [
         '1' => [
@@ -48,7 +52,9 @@ return [
 				category,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
-				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation, max_participants, max_registrations_per_user, enable_waitlist, unique_email_check, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
+				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
+				max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
+				--palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
 				registration,registration_waitlist,
@@ -350,6 +356,14 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1
+            ],
+        ],
+        'enable_autoconfirm' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_autoconfirm',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'config' => [
+                'type' => 'check',
             ],
         ],
         'max_participants' => [

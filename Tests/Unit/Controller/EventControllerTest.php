@@ -735,13 +735,13 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
     }
 
     /**
-     * Checks, if a saveRegistration action with autoConfirmation saves the
+     * Checks, if a saveRegistration action with autoConfirmation (settings) saves the
      * registration and redirects to the confirmationRegistration action.
      *
      * @test
      * @return void
      */
-    public function saveRegistrationWithAutoConfirmationActionRedirectsToConfirmationWithMessageIfRegistrationSuccessful(
+    public function saveRegistrationWithSettingAutoConfirmationActionRedirectsToConfirmationWithMessage(
     )
     {
         $regUid = 1;
@@ -803,6 +803,75 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             ]
         ];
         $this->inject($this->subject, 'settings', $settings);
+
+        $this->subject->expects($this->once())->method('redirect')->with('confirmRegistration', null, null,
+            ['reguid' => $regUid, 'hmac' => $regHmac]);
+
+        $this->subject->saveRegistrationAction($registration, $event);
+    }
+
+    /**
+     * Checks, if a saveRegistration action with autoConfirmation (in event) saves the
+     * registration and redirects to the confirmationRegistration action.
+     *
+     * @test
+     * @return void
+     */
+    public function saveRegistrationWithEventAutoConfirmationActionRedirectsToConfirmationWithMessage(
+    )
+    {
+        $regUid = 1;
+        $regHmac = 'someRandomHMAC';
+
+        $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
+            [], '', false);
+        $registration->expects($this->any())->method('getUid')->will($this->returnValue($regUid));
+
+        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+
+        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
+        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getEnableAutoconfirm')->will($this->returnValue(true));
+
+        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['add'], [], '', false);
+        $registrationRepository->expects($this->once())->method('add');
+        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['update'], [], '', false);
+        $eventRepository->expects($this->once())->method('update');
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
+        $persistenceManager = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager',
+            ['persistAll'], [], '', false);
+        $persistenceManager->expects($this->once())->method('persistAll');
+
+        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+            ['get'], [], '', false);
+        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $this->inject($this->subject, 'objectManager', $objectManager);
+
+        $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
+            ['clearCacheForConfiguredUids'], [], '', false);
+        $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
+        $this->inject($this->subject, 'utilityService', $utilityService);
+
+        $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
+            ['getCurrentFeUserObject'], [], '', false);
+        $registrationService->expects($this->once())->method('getCurrentFeUserObject');
+        $this->inject($this->subject, 'registrationService', $registrationService);
+
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
+        $this->inject($this->subject, 'hashService', $hashService);
 
         $this->subject->expects($this->once())->method('redirect')->with('confirmRegistration', null, null,
             ['reguid' => $regUid, 'hmac' => $regHmac]);

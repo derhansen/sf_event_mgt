@@ -48,6 +48,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.unique_email_check">
 				<source>Enable unique e-mail check for registration</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_autoconfirm">
+				<source>Enable automatic confirmation of event registrations</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price">
 				<source>Price</source>
 			</trans-unit>
