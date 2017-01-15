@@ -286,6 +286,13 @@ registrations per user" is set to a value greater than 1.
          If set, cancellation is only possible until the given date.
 
  - :Field:
+         Enable automatic confirmation of event registrations
+
+   :Description:
+         If set, new registrations for the event will automatically be confirmed regardless of the global
+         setting ``settings.registration.autoConfirmation``
+
+ - :Field:
          Max. participants
 
    :Description:
