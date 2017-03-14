@@ -89,9 +89,10 @@
                 <fieldset>
                     <div class="event-registration-row">
                         <label for="gender"><f:translate key="tx_sfeventmgt_domain_model_registration.gender" /></label>
+
                         <f:form.radio name="gender" property="gender" value=""/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" />
-                        <f:form.radio name="gender" property="gender" value="f" /> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" />
-                        <f:form.radio name="gender" property="gender" value="m" /> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" />
+                        <f:form.radio name="gender" property="gender" value="f" checked="{f:if(condition: '{e:prefill(fieldname: \'gender\', prefillSettings: \'{settings.registration.prefillFields}\')} == 1', then: 'checked')}"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" />
+                        <f:form.radio name="gender" property="gender" value="m" checked="{f:if(condition: '{e:prefill(fieldname: \'gender\', prefillSettings: \'{settings.registration.prefillFields}\')} == 0', then: 'checked')}" /> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" />
                     </div>
 
                     <div class="event-registration-row">
