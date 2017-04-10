@@ -107,7 +107,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setOrderingsFromDemand($query, EventDemand $eventDemand)
     {
         $orderings = [];
-        if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '') {
+        $orderFieldAllowed = GeneralUtility::trimExplode(',', $eventDemand->getOrderFieldAllowed(), true);
+        if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '' &&
+            !empty($orderFieldAllowed) && in_array($eventDemand->getOrderField(), $orderFieldAllowed, true)) {
             $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
                 \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
                 \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);

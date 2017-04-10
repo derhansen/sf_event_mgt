@@ -23,6 +23,7 @@ plugin.tx_sfeventmgt {
 		# *MUST* be defined at template root level to work correct in scheduler task
 		clearCacheUids =
 
+		orderFieldAllowed = uid,title,teaser,startdate,enddate,price,tstamp,crdate,category.title,location.title,location.city,location.country
 		list {
 			format = html
 			rss {
