@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -23,7 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class AttachmentServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class AttachmentServiceTest extends UnitTestCase
 {
 
     /**

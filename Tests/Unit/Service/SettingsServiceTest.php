@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\SettingsService.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class SettingsServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class SettingsServiceTest extends UnitTestCase
 {
 
     /**

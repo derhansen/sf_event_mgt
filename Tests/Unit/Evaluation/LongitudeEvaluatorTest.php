@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class LongitudeEvaluatorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class LongitudeEvaluatorTest extends UnitTestCase
 {
 
     /**

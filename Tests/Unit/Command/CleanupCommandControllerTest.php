@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Command;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class DERHANSEN\SfEventMgt\Command\CleanupCommandController.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CleanupCommandControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class CleanupCommandControllerTest extends UnitTestCase
 {
 
     /**

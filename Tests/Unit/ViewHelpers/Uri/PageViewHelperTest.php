@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for uri.page viewhelper
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PageViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class PageViewHelperTest extends UnitTestCase
 {
 
     /**

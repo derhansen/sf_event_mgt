@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test cases for SimultaneousRegistrationsViewHelper
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class SimultaneousRegistrationsViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 {
 
     /**

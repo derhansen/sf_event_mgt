@@ -15,12 +15,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\PriceOption.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PriceOptionTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class PriceOptionTest extends UnitTestCase
 {
     /**
      * Location object

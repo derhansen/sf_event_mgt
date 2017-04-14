@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 
@@ -22,7 +23,7 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PaymentServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class PaymentServiceTest extends UnitTestCase
 {
 
     /**

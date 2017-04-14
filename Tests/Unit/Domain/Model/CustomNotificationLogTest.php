@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 
 /**
@@ -21,7 +22,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CustomNotificationLogTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class CustomNotificationLogTest extends UnitTestCase
 {
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog

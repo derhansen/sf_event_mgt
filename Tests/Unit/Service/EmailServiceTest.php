@@ -13,6 +13,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -20,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EmailServiceTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class EmailServiceTest extends UnitTestCase
 {
 
     /**

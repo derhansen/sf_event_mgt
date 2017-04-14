@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 
 /**
@@ -21,7 +22,7 @@ use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class EventControllerTest extends UnitTestCase
 {
 
     /**
@@ -79,6 +80,7 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
             'includeSubcategories' => true,
             'topEventRestriction' => 2,
             'orderField' => 'title',
+            'orderFieldAllowed' => 'title',
             'orderDirection' => 'asc',
             'queryLimit' => 10,
             'location' => 1
@@ -92,9 +94,10 @@ class EventControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
         $mockDemand->expects($this->at(3))->method('setIncludeSubcategories')->with(true);
         $mockDemand->expects($this->at(4))->method('setTopEventRestriction')->with(2);
         $mockDemand->expects($this->at(5))->method('setOrderField')->with('title');
-        $mockDemand->expects($this->at(6))->method('setOrderDirection')->with('asc');
-        $mockDemand->expects($this->at(7))->method('setQueryLimit')->with(10);
-        $mockDemand->expects($this->at(8))->method('setLocation')->with(1);
+        $mockDemand->expects($this->at(6))->method('setOrderFieldAllowed')->with('title');
+        $mockDemand->expects($this->at(7))->method('setOrderDirection')->with('asc');
+        $mockDemand->expects($this->at(8))->method('setQueryLimit')->with(10);
+        $mockDemand->expects($this->at(9))->method('setLocation')->with(1);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);

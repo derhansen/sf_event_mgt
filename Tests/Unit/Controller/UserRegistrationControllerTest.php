@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\UserRegistrationController
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UserRegistrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class UserRegistrationControllerTest extends UnitTestCase
 {
 
     /**

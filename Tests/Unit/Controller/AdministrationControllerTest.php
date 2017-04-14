@@ -14,12 +14,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\AdministrationController.
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class AdministrationControllerTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class AdministrationControllerTest extends UnitTestCase
 {
 
     /**

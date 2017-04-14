@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 
 /**
@@ -21,7 +22,7 @@ use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PrefillViewHelperTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class PrefillViewHelperTest extends UnitTestCase
 {
 
     /**

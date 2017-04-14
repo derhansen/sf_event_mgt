@@ -15,12 +15,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UserRegistrationDemandTest extends \TYPO3\CMS\Core\Tests\UnitTestCase
+class UserRegistrationDemandTest extends UnitTestCase
 {
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
