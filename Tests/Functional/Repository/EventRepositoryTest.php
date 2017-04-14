@@ -471,6 +471,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(4);
         $demand->setDisplayMode('all');
         $demand->setOrderField($orderField);
+        $demand->setOrderFieldAllowed($orderField);
         $demand->setOrderDirection($orderDirection);
         $events = $this->eventRepository->findDemanded($demand);
 
