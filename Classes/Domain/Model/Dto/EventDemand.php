@@ -72,6 +72,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $orderField = '';
 
     /**
+     * Allowed order fields
+     *
+     * @var string
+     */
+    protected $orderFieldAllowed = '';
+
+    /**
      * Order direction
      *
      * @var string
@@ -289,6 +296,27 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOrderField($orderField)
     {
         $this->orderField = $orderField;
+    }
+
+    /**
+     * Returns orderFieldAllowed
+     *
+     * @return string
+     */
+    public function getOrderFieldAllowed()
+    {
+        return $this->orderFieldAllowed;
+    }
+
+    /**
+     * Sets orderFieldAllowed
+     *
+     * @param string $orderFieldAllowed
+     * @return void
+     */
+    public function setOrderFieldAllowed($orderFieldAllowed)
+    {
+        $this->orderFieldAllowed = $orderFieldAllowed;
     }
 
     /**

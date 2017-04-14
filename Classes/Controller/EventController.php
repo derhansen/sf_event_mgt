@@ -125,7 +125,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @var array
      */
-    protected $ignoredSettingsForOverwriteDemand = ['storagePage'];
+    protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
 
     /**
      * Creates an event demand object with the given settings
@@ -144,6 +144,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $demand->setIncludeSubcategories($settings['includeSubcategories']);
         $demand->setTopEventRestriction((int)$settings['topEventRestriction']);
         $demand->setOrderField($settings['orderField']);
+        $demand->setOrderFieldAllowed($settings['orderFieldAllowed']);
         $demand->setOrderDirection($settings['orderDirection']);
         $demand->setQueryLimit($settings['queryLimit']);
         $demand->setLocation($settings['location']);
@@ -199,6 +200,9 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         foreach ($overwriteDemand as $propertyName => $propertyValue) {
+            if (in_array(strtolower($propertyName), $this->ignoredSettingsForOverwriteDemand, true)) {
+                continue;
+            }
             \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
         }
         return $demand;
