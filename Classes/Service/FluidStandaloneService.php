@@ -18,7 +18,7 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
- * FluidStandaloneService - Fallbacks for templatePaths for TYPO3 6.2 LTS
+ * FluidStandaloneService
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */

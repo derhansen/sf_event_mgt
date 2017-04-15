@@ -17,6 +17,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * NotificationService
@@ -338,7 +339,7 @@ class NotificationService
     protected function getNotificationBody($event, $registration, $template, $settings)
     {
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
-        $emailView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        $emailView = $this->objectManager->get(StandaloneView::class);
         $emailView->setFormat('html');
         $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');
         $partialRootPaths = $this->fluidStandaloneService->getTemplateFolders('partial');

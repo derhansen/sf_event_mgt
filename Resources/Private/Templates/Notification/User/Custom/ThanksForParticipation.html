@@ -1,7 +1,7 @@
 <p>Hello {registration.firstname} {registration.lastname},</p>
 <p>thank you for participating to the following event:</p>
 <ul>
-    <li>{event.title} - ({f:format.date(date: '{event.startdate}', format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: '{event.enddate}', format: '%d.%m.%Y - %H:%M')})</li>
+    <li>{event.title} - ({f:format.date(date: event.startdate, format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: event.enddate, format: '%d.%m.%Y - %H:%M')})</li>
 </ul>
 <p>If you have any suggestions or feedback, please send an email to email@domain.tld</p>
 <p>Best regards,</p>
