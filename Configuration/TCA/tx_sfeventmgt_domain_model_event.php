@@ -9,8 +9,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
         'sortby' => 'sorting',
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -24,7 +23,7 @@ return [
         ],
         'requestUpdate' => 'enable_registration, enable_waitlist, enable_cancel, enable_payment, restrict_payment_methods',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
+        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description,
@@ -35,12 +34,20 @@ return [
     ],
     'types' => [
         '1' => [
+            'columnsOverrides' => [
+                'description' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+                'program' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+            ],
             'showitem' => 'l10n_parent, l10n_diffsource,
 			--palette--;;paletteCore, title,--palette--;;paletteDates, teaser,
-			description;;;richtext:rte_transform[mode=ts_links],
+			description,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
-				--palette--;;palettePrice, price_options, link, program;;;richtext:rte_transform[mode=ts_links],
+				--palette--;;palettePrice, price_options, link, program,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
 				location, organisator, related,
@@ -92,18 +99,21 @@ return [
     ],
     'columns' => [
         'sys_language_uid' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'special' => 'languages',
                 'items' => [
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0]
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ],
                 ],
-            ],
+                'default' => 0,
+            ]
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -174,6 +184,7 @@ return [
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.fe_group',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'size' => 5,
                 'maxitems' => 20,
                 'items' => [
@@ -223,7 +234,7 @@ return [
                 'eval' => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'actions-wizard-rte',
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
                         'module' => [
@@ -245,7 +256,7 @@ return [
                 'eval' => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'actions-wizard-rte',
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
                         'module' => [
@@ -266,16 +277,12 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'wizards' => [
-                    '_PADDING' => 2,
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'link_popup.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
-                            'name' => 'wizard_element_browser',
-                            'urlParameters' => [
-                                'mode' => 'wizard'
-                            ]
+                            'name' => 'wizard_link',
                         ],
                         'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1'
                     ]

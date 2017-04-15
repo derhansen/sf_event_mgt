@@ -8,8 +8,7 @@ return [
         'cruser_id' => 'cruser_id',
         'dividers2tabs' => true,
         'sortby' => 'sorting',
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -21,32 +20,46 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,',
-        'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_location.gif'
+        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_location.gif'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, link, longitude, latitude',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, address, zip, city, country, description, link;;;richtext:rte_transform[mode=ts_links], longitude, latitude, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => [
+            'columnsOverrides' => [
+                'description' => [
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                ],
+            ],
+            'showitem' => 'l10n_parent, l10n_diffsource, --palette--;;paletteCore, title, address, zip,
+            city, country, description, link, longitude, latitude,
+            --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
+        ],
     ],
     'palettes' => [
-        '1' => ['showitem' => ''],
+        'paletteCore' => [
+            'showitem' => 'sys_language_uid, hidden,',
+        ],
     ],
     'columns' => [
 
         'sys_language_uid' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'special' => 'languages',
                 'items' => [
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages', -1],
-                    ['LLL:EXT:lang/locallang_general.xlf:LGL.default_value', 0]
+                    [
+                        'LLL:EXT:lang/locallang_general.xlf:LGL.allLanguages',
+                        -1,
+                        'flags-multiple'
+                    ],
                 ],
-            ],
+                'default' => 0,
+            ]
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -170,7 +183,7 @@ return [
                 'eval' => 'trim',
                 'wizards' => [
                     'RTE' => [
-                        'icon' => 'wizard_rte2.gif',
+                        'icon' => 'actions-wizard-rte',
                         'notNewRecords' => 1,
                         'RTEonly' => 1,
                         'module' => [
@@ -191,16 +204,12 @@ return [
                 'size' => 30,
                 'eval' => 'trim',
                 'wizards' => [
-                    '_PADDING' => 2,
                     'link' => [
                         'type' => 'popup',
                         'title' => 'Link',
-                        'icon' => 'link_popup.gif',
+                        'icon' => 'actions-wizard-link',
                         'module' => [
-                            'name' => 'wizard_element_browser',
-                            'urlParameters' => [
-                                'mode' => 'wizard'
-                            ]
+                            'name' => 'wizard_link',
                         ],
                         'JSopenParams' => 'height=600,width=800,status=0,menubar=0,scrollbars=1'
                     ]
