@@ -54,17 +54,11 @@ if (!defined('TYPO3_MODE')) {
 );
 
 if (TYPO3_MODE === 'BE') {
-    /* Add Backend folder icon */
-    \TYPO3\CMS\Backend\Sprite\SpriteManager::addTcaTypeIcon(
-        'pages',
-        'contains-events',
-        '../typo3conf/ext/sf_event_mgt/Resources/Public/Icons/events-folder.png'
+    /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
+    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
+    $iconRegistry->registerIcon(
+        'apps-pagetree-folder-contains-events',
+        \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+        ['source' => 'EXT:sf_event_mgt/Resources/Public/Icons/events-folder.png']
     );
-
-    /* Add Backend folder icon to contains plugin select box */
-    $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
-        0 => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:events-folder',
-        1 => 'events',
-        2 => '../typo3conf/ext/sf_event_mgt/Resources/Public/Icons/events.gif'
-    ];
 }
