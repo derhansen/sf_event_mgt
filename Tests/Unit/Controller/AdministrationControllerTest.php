@@ -134,7 +134,7 @@ class AdministrationControllerTest extends UnitTestCase
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
         $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            ['setSearchDemand'], [], '', false);
+            ['setSearchDemand', 'setStoragePage'], [], '', false);
         $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
         $demand->expects($this->any())->method('setStoragePage')->with(1);
 

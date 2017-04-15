@@ -332,7 +332,7 @@ class EventControllerTest extends UnitTestCase
             ->with($settings)->will($this->returnValue($eventDemand));
 
         // Ensure overwriteDemand is not called
-        $this->subject->expects($this->never())->method('overwriteDemandObject');
+        $this->subject->expects($this->never())->method('overwriteEventDemandObject');
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             ['findDemanded'], [], '', false);
