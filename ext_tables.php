@@ -54,11 +54,18 @@ if (!defined('TYPO3_MODE')) {
 );
 
 if (TYPO3_MODE === 'BE') {
+    $icons = [
+        'apps-pagetree-folder-contains-events' => 'events-folder.png',
+        'ext-sfeventmgt-registration-unconfirmed' => 'tx_sfeventmgt_domain_model_registration_unconfirmed.gif',
+        'ext-sfeventmgt-registration-confirmed' => 'tx_sfeventmgt_domain_model_registration_confirmed.gif',
+    ];
     /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
-    $iconRegistry->registerIcon(
-        'apps-pagetree-folder-contains-events',
-        \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-        ['source' => 'EXT:sf_event_mgt/Resources/Public/Icons/events-folder.png']
-    );
+    foreach ($icons as $identifier => $path) {
+        $iconRegistry->registerIcon(
+            $identifier,
+            \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
+            ['source' => 'EXT:sf_event_mgt/Resources/Public/Icons/' . $path]
+        );
+    }
 }

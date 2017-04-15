@@ -12,9 +12,9 @@ return [
         'sortby' => 'sorting',
         'versioningWS' => true,
         'typeicon_column' => 'confirmed',
-        'typeicons' => [
-            '0' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.gif',
-            '1' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_confirmed.gif',
+        'typeicon_classes' => [
+            '0' => 'ext-sfeventmgt-registration-unconfirmed',
+            '1' => 'ext-sfeventmgt-registration-confirmed',
         ],
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
