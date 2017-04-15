@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * ICalenderService
@@ -89,11 +90,10 @@ class ICalendarService
     public function getiCalendarContent(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
-        $icalView = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+        $icalView = $this->objectManager->get(StandaloneView::class);
         $icalView->setFormat('txt');
         $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');
         $partialRootPaths = $this->fluidStandaloneService->getTemplateFolders('partial');
-
         $icalView->setLayoutRootPaths($layoutRootPaths);
         $icalView->setPartialRootPaths($partialRootPaths);
         $icalView->setTemplatePathAndFilename($this->fluidStandaloneService->getTemplatePath('Event/ICalendar.txt'));

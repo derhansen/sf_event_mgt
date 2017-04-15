@@ -1,6 +1,9 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
-<f:layout name="ICalendar" />
-<f:section name="main">
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:https://github.com/derhansen/sf_event_mgt
+METHOD:PUBLISH
+BEGIN:VEVENT
 UID:{event.uid}-{event.pid}@{typo3Host}
 CLASS: PUBLIC
 SUMMARY:{event.title}
@@ -10,4 +13,5 @@ LOCATION:{event.location.title}
 </f:if>
 DTSTART:<e:format.ICalendarDate>{event.startdate}</e:format.ICalendarDate>
 DTEND:<e:format.ICalendarDate>{event.enddate}</e:format.ICalendarDate>
-</f:section>
+END:VEVENT
+END:VCALENDAR
