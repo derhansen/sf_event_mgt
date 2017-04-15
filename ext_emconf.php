@@ -13,7 +13,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Event management and registration',
     'description' => 'Configurable event management and registration extension based on ExtBase and Fluid',
-    'category' => 'plugin',
+    'category' => 'fe',
     'author' => 'Torben Hansen',
     'author_email' => 'derhansen@gmail.com',
     'state' => 'stable',
@@ -21,13 +21,11 @@ $EM_CONF[$_EXTKEY] = [
     'uploadfolder' => '0',
     'createDirs' => '',
     'clearCacheOnLoad' => 1,
-    'version' => '1.8.1',
+    'version' => '2.0.0-dev',
     'constraints' => [
         'depends' => [
-            'extbase' => '6.2.0',
-            'fluid' => '6.2.0',
-            'typo3' => '6.2.0-7.6.99',
-            'php' => '5.4.0-7.0.99',
+            'typo3' => '7.6.0-8.7.99',
+            'php' => '5.4.0-7.1.99',
         ],
         'conflicts' => [],
         'suggests' => [],
