@@ -22,6 +22,12 @@
 			<trans-unit id="flexforms_tab.categoryMenu">
 				<source>Category menu</source>
 			</trans-unit>
+			<trans-unit id="flexforms_tab.template">
+				<source>Template</source>
+			</trans-unit>
+			<trans-unit id="flexforms_tab.additional">
+				<source>Additional</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.mode">
 				<source>What to display</source>
 			</trans-unit>

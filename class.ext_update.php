@@ -71,6 +71,7 @@ class ext_update
     protected function processUpdates()
     {
         $this->migrateEventCategoriesToSysCategories();
+        $this->migrateFlexformFields();
     }
 
     /**
@@ -85,6 +86,50 @@ class ext_update
             $output .= $this->getFlashMessage($messageItem[2], $messageItem[1], $messageItem[0]);
         }
         return $output;
+    }
+
+    /**
+     * Renames flexform fields
+     *
+     * @return void
+     */
+    protected function migrateFlexformFields()
+    {
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.templateLayout'],
+            ['template', 'settings.templateLayout']
+        );
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.detailPid'],
+            ['additional', 'settings.detailPid']
+        );
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.listPid'],
+            ['additional', 'settings.listPid']
+        );
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.registrationPid'],
+            ['additional', 'settings.registrationPid']
+        );
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.paymentPid'],
+            ['additional', 'settings.paymentPid']
+        );
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.disableOverrideDemand'],
+            ['additional', 'settings.disableOverrideDemand']
+        );
+        $this->renameFlexformField(
+            'sfeventmgt_pievent',
+            ['sDEF', 'settings.restrictForeignRecordsToStoragePage'],
+            ['additional', 'settings.restrictForeignRecordsToStoragePage']
+        );
     }
 
     /**
@@ -409,6 +454,57 @@ class ext_update
         $this->messageArray[] = [$status, $title, $message];
     }
 
+    /**
+     * Renames a flex form field
+     *
+     * @param  string $pluginName The pluginName used in list_type
+     * @param  array $oldFieldPointer Pointer array the old field. E.g. array('sheetName', 'fieldName');
+     * @param  array $newFieldPointer  Pointer array the new field. E.g. array('sheetName', 'fieldName');
+     * @return void
+     */
+    protected function renameFlexformField($pluginName, array $oldFieldPointer, array $newFieldPointer)
+    {
+        $title = 'Renaming flexform field for "' . $pluginName . '" - ' .
+            ' sheet: ' . $oldFieldPointer[0] . ', field: ' . $oldFieldPointer[1] . ' to ' .
+            ' sheet: ' . $newFieldPointer[0] . ', field: ' . $newFieldPointer[1];
+        $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pi_flexform',
+            'tt_content',
+            'CType=\'list\' AND list_type=\'' . $pluginName . '\'');
+        $flexformTools = GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class);
+        while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
+            $xmlArray = GeneralUtility::xml2array($row['pi_flexform']);
+            if (!is_array($xmlArray) || !isset($xmlArray['data'])) {
+                $status = FlashMessage::ERROR;
+                $message = 'Flexform data of plugin "' . $pluginName . '" not found or invalid. (tt_content UID: ' . $row['uid'] . ')';
+            } elseif (!$xmlArray['data'][$oldFieldPointer[0]]) {
+                $status = FlashMessage::WARNING;
+                $message = 'Flexform data of record tt_content:' . $row['uid'] . ' did not contain ' .
+                    'sheet: ' . $oldFieldPointer[0];
+            } else {
+                $updated = false;
+                foreach ($xmlArray['data'][$oldFieldPointer[0]] as $language => $fields) {
+                    if ($fields[$oldFieldPointer[1]]) {
+                        $xmlArray['data'][$newFieldPointer[0]][$language][$newFieldPointer[1]] = $fields[$oldFieldPointer[1]];
+                        unset($xmlArray['data'][$oldFieldPointer[0]][$language][$oldFieldPointer[1]]);
+                        $updated = true;
+                    }
+                }
+                if ($updated === true) {
+                    $GLOBALS['TYPO3_DB']->exec_UPDATEquery('tt_content', 'uid=' . $row['uid'], [
+                        'pi_flexform' => $flexformTools->flexArray2Xml($xmlArray)
+                    ]);
+                    $message = 'OK!';
+                    $status = FlashMessage::OK;
+                } else {
+                    $status = FlashMessage::NOTICE;
+                    $message = 'Flexform data of record tt_content:' . $row['uid'] . ' did not contain ' .
+                        'sheet: ' . $oldFieldPointer[0] . ', field: ' . $oldFieldPointer[1] . '. This can
+                        also be because field has been updated already...';
+                }
+            }
+            $this->messageArray[] = [$status, $title, $message];
+        }
+    }
 
     /**
      * Gets the message severity class name
