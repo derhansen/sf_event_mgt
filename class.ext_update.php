@@ -52,6 +52,7 @@ class ext_update
         $this->processUpdates();
         return $this->generateOutput();
     }
+
     /**
      * Returns if the update menu entry in EM should be shown.
      *
@@ -59,14 +60,7 @@ class ext_update
      */
     public function access()
     {
-        $res = $this->databaseConnection->admin_query("SHOW TABLES LIKE 'tx_sfeventmgt_domain_model_category'");
-        if ($res && property_exists($res, 'num_rows')) {
-            return (bool)$res->num_rows > 0;
-        } elseif ($res) {
-            return true;
-        } else {
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -88,14 +82,7 @@ class ext_update
     {
         $output = '';
         foreach ($this->messageArray as $messageItem) {
-            /** @var \TYPO3\CMS\Core\Messaging\FlashMessage $flashMessage */
-            $flashMessage = GeneralUtility::makeInstance(
-                'TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
-                $messageItem[2],
-                $messageItem[1],
-                $messageItem[0]
-            );
-            $output .= $flashMessage->render();
+            $output .= $this->getFlashMessage($messageItem[2], $messageItem[1], $messageItem[0]);
         }
         return $output;
     }
@@ -422,4 +409,73 @@ class ext_update
         $this->messageArray[] = [$status, $title, $message];
     }
 
+
+    /**
+     * Gets the message severity class name
+     *
+     * @param int $severity
+     * @return string The message severity class name
+     */
+    public function getClass($severity)
+    {
+        $classes = [
+            FlashMessage::NOTICE => 'notice',
+            FlashMessage::INFO => 'info',
+            FlashMessage::OK => 'success',
+            FlashMessage::WARNING => 'warning',
+            FlashMessage::ERROR => 'danger'
+        ];
+        return 'alert-' . $classes[$severity];
+    }
+
+    /**
+     * Gets the message severity icon name
+     *
+     * @param int $severity
+     * @return string The message severity icon name
+     */
+    public function getIconName($severity)
+    {
+        $icons = [
+            FlashMessage::NOTICE => 'lightbulb-o',
+            FlashMessage::INFO => 'info',
+            FlashMessage::OK => 'check',
+            FlashMessage::WARNING => 'exclamation',
+            FlashMessage::ERROR => 'times'
+        ];
+        return $icons[$severity];
+    }
+
+    /**
+     * Returns the HTML for the given message. Due to removal of the render() method of a FlashMessage in TYPO3 8
+     * the functionality is directly implemented in this class, so both TYPO3 7.6 and 8.7 will show the messages
+     * in the expected output.
+     *
+     * @param string $message
+     * @param string $title
+     * @param int $severity
+     * @return string
+     */
+    protected function getFlashMessage($message, $title, $severity)
+    {
+        if (!empty($title)) {
+            $title = '<h4 class="alert-title">' . $title . '</h4>';
+        }
+        $message = '
+			<div class="alert ' . $this->getClass($severity) . '">
+				<div class="media">
+					<div class="media-left">
+						<span class="fa-stack fa-lg">
+							<i class="fa fa-circle fa-stack-2x"></i>
+							<i class="fa fa-' . $this->getIconName($severity) . ' fa-stack-1x"></i>
+						</span>
+					</div>
+					<div class="media-body">
+						' . $title . '
+						<div class="alert-message">' . $message . '</div>
+					</div>
+				</div>
+			</div>';
+        return $message;
+    }
 }
