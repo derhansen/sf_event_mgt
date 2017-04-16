@@ -13,6 +13,7 @@ return [
         'versioningWS' => true,
         'typeicon_column' => 'confirmed',
         'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-registration-unconfirmed',
             '0' => 'ext-sfeventmgt-registration-unconfirmed',
             '1' => 'ext-sfeventmgt-registration-confirmed',
         ],
