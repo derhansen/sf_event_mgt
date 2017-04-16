@@ -28,19 +28,13 @@ class TemplateLayouts
     /**
      * Itemsproc function to extend the selection of templateLayouts in the plugin
      *
-     * @todo: Remove condition when TYPO3 6.2 is deprecated
-     *
      * @param array $config Configuration array
      *
      * @return void
      */
     public function user_templateLayout(array &$config)
     {
-        if (GeneralUtility::compat_version('7.6')) {
-            $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['flexParentDatabaseRow']['pid']);
-        } else {
-            $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['row']['pid']);
-        }
+        $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['flexParentDatabaseRow']['pid']);
         foreach ($templateLayouts as $index => $layout) {
             $additionalLayout = [
                 $GLOBALS['LANG']->sL($layout, true),
