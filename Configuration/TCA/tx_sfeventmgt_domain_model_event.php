@@ -554,7 +554,7 @@ return [
                 'maxitems' => 9999,
                 'appearance' => [
                     'collapseAll' => 1,
-                    'levelLinksPosition' => 'top',
+                    'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
@@ -619,7 +619,7 @@ return [
                 'maxitems' => 100,
                 'appearance' => [
                     'collapseAll' => 1,
-                    'levelLinksPosition' => 'top',
+                    'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 0,
