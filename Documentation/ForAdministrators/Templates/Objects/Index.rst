@@ -177,6 +177,26 @@ Notification views
    :Description:
          Appended HMAC for the registration UID
 
+Registration message views
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Registration message views are ``cancelRegistration``, ``confirmRegistration`` and ``saveRegistrationResult``
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+         Description:
+
+ - :Object:
+         {event}
+
+   :Description:
+         An object holding the given event
+
 iCalendar view
 ~~~~~~~~~~~~~~
 

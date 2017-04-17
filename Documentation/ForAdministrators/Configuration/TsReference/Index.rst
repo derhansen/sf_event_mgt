@@ -80,7 +80,25 @@ plugin.tx_sfeventmgt
          Empty
 
  - :Property:
-         settings.eventDetails.imageWidth
+         settings.detail.errorHandling
+
+   :Date type:
+         string
+
+   :Description:
+         If an event is not found (e.g. is hidden or deleted), you can configure, if the plugin should redirect
+         to the list view, show a 404 error or render the view (default) without the event data.
+
+         Possible values:
+
+         * redirectToListView
+         * pageNotFoundHandler
+
+   :Default:
+         empty
+
+ - :Property:
+         settings.detail.imageWidth
 
    :Date type:
          Integer
@@ -92,7 +110,7 @@ plugin.tx_sfeventmgt
          200
 
  - :Property:
-         settings.eventDetails.imageHeight
+         settings.detail.imageHeight
 
    :Date type:
          Integer

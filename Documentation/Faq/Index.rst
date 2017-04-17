@@ -181,3 +181,13 @@ Configured price options do not show up in frontend
 
 Make sure that the date for the price option is valid also make sure, that you use ``{event.currentPrice}`` in your
 Fluid template to output the current price.
+
+How can I use the iCalDownload action in the Listview
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The switchableControllerAction for the ListView does not allow to call the iCalDownload action. With the following
+Fluid snippet, you can also use the iCalDownload in the listview::
+
+ <f:link.action action="icalDownload" arguments="{event : event}" pageUid="{settings.detailPid}"><f:translate key="event.icalDownload" /></f:link.action>
+
+Note, that you have to set the pageUid to a page with the detail view plugin.

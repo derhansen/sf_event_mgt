@@ -11,6 +11,48 @@
 Breaking Changes
 ================
 
+2.0.0
+~~~~~
+
+Flexform restructuring
+""""""""""""""""""""""
+Due to restructuring of the Flexform settings of the event plugin, it is required to run the update
+script of the extension, so existing Flexform settings (e.g. listPid, detailPid, ...) will be migrated
+to the new structure. Please use the update script in the extension manager to process the
+migration as shown below.
+
+.. figure:: ../Images/ext-update-category.png
+   :align: left
+   :width: 147px
+   :alt: Extension Update Icon
+
+Please click on the update-icon to start the category migration.
+
+Detail-page image-width and height
+""""""""""""""""""""""""""""""""""
+The following TypoScript needs to be migrated manually.
+
+Old::
+
+ plugin.tx_sfeventmgt.settings {
+   eventDetails {
+     imageWidth = 200
+     imageHeight =
+   }
+ }
+
+
+New::
+
+ plugin.tx_sfeventmgt.settings {
+   details {
+     imageWidth = 200
+     imageHeight =
+   }
+ }
+
+Please also update your Fluid templates, if you use the variables that changed.
+
 1.5.0
 ~~~~~
 

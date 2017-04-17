@@ -52,55 +52,6 @@ Tab settings
    :Key:
 
  - :Property:
-         Detail pid
-
-   :View:
-         List, Registration
-
-   :Description:
-         Page, where plugin is configured to show event details
-
-   :Key:
-         detailPid
-
- - :Property:
-         List pid
-
-   :View:
-         List, Details, Registration
-
-   :Description:
-         Page, where the listview for events is shown. Only available,
-         when the plugin is configured to show event details.
-
-   :Key:
-         listPid
-
- - :Property:
-         Registration pid
-
-   :View:
-         List, Details
-
-   :Description:
-         Page, where plugin is configured to show event registration
-
-   :Key:
-         registrationPid
-
- - :Property:
-         Payment pid
-
-   :View:
-         Registration
-
-   :Description:
-         Page, where plugin is configured to handle payments for registration
-
-   :Key:
-         paymentPid
-
- - :Property:
          Display mode
 
    :View:
@@ -150,26 +101,6 @@ Tab settings
 
    :Key:
          orderDirection
-
- - :Property:
-         Template layout
-
-   :View:
-         List
-
-   :Description:
-         With this setting the plugin can be configured to show different template layouts.
-         Template layouts can be configured with Page TSConfig like shown below.::
-
-           tx_sfeventmgt.templateLayouts {
-             1 = 2 column layout
-             2 = Event-Slider
-           }
-
-         Template layout can be used/set by TypoScript (settings.templateLayout)
-
-   :Key:
-         templateLayout
 
  - :Property:
          Top event restriction
@@ -239,18 +170,6 @@ Tab settings
          location
 
  - :Property:
-         Restrict foreign records to storage page
-
-   :View:
-         List
-
-   :Description:
-         Categories and locations will only be loaded from the configured storage page (recursive)
-
-   :Key:
-         restrictForeignRecordsToStoragePage
-
- - :Property:
          Record storage page
 
    :View:
@@ -261,18 +180,6 @@ Tab settings
 
    :Key:
          storagePage
-
- - :Property:
-         Disable Override demand
-
-   :View:
-         List
-
-   :Description:
-         If set, the settings of the plugin can't be overridden by arguments in the URL.
-
-   :Key:
-         disableOverrideDemand
 
  - :Property:
          Comma seperated list of fieldnames, which are required.
@@ -303,6 +210,113 @@ Tab settings
 
    :Key:
          registration.requiredFields
+
+Tab additional
+~~~~~~~~~~~~~~
+
+Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to display".
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Property:
+         Detail pid
+
+   :View:
+         List, Registration
+
+   :Description:
+         Page, where plugin is configured to show event details
+
+   :Key:
+         detailPid
+
+ - :Property:
+         List pid
+
+   :View:
+         List, Details, Registration
+
+   :Description:
+         Page, where the listview for events is shown. Only available,
+         when the plugin is configured to show event details.
+
+   :Key:
+         listPid
+
+ - :Property:
+         Registration pid
+
+   :View:
+         List, Details
+
+   :Description:
+         Page, where plugin is configured to show event registration
+
+   :Key:
+         registrationPid
+
+ - :Property:
+         Payment pid
+
+   :View:
+         Registration
+
+   :Description:
+         Page, where plugin is configured to handle payments for registration
+
+   :Key:
+         paymentPid
+
+ - :Property:
+         Restrict foreign records to storage page
+
+   :View:
+         List
+
+   :Description:
+         Categories and locations will only be loaded from the configured storage page (recursive)
+
+   :Key:
+         restrictForeignRecordsToStoragePage
+
+ - :Property:
+         Disable Override demand
+
+   :View:
+         List
+
+   :Description:
+         If set, the settings of the plugin can't be overridden by arguments in the URL.
+
+   :Key:
+         disableOverrideDemand
+
+Tab template
+~~~~~~~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Property:
+         Template layout
+
+   :View:
+         List
+
+   :Description:
+         With this setting the plugin can be configured to show different template layouts.
+         Template layouts can be configured with Page TSConfig like shown below.::
+
+       tx_sfeventmgt.templateLayouts {
+         1 = 2 column layout
+         2 = Event-Slider
+       }
+
+     Template layout can be used/set by TypoScript (settings.templateLayout)
+
+    :Key:
+         templateLayout
 
 Tab notification
 ~~~~~~~~~~~~~~~~
