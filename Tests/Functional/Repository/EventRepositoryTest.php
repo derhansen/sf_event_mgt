@@ -479,6 +479,26 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
+     * Test if ordering for findDemanded works but ignores unknown order by fields
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByOrderingIgnoresUnknownOrderField()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(4);
+        $demand->setDisplayMode('all');
+        $demand->setOrderField('unknown_field');
+        $demand->setOrderFieldAllowed('title');
+        $demand->setOrderDirection('asc');
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertEquals('Test2', $events->getFirst()->getTitle());
+    }
+
+    /**
      * Test if limit restriction works
      *
      * @test
