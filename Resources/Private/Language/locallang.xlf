@@ -204,6 +204,9 @@
 			<trans-unit id="event.message.registrationsuccessful">
 				<source>Your registration was successful.</source>
 			</trans-unit>
+			<trans-unit id="event.message.registrationsuccessfulwrongeventhmac">
+				<source>Your registration was successful, but the given event or HMAC is wrong!</source>
+			</trans-unit>
 			<trans-unit id="event.message.registrationwaitlistsuccessful">
 				<source>Your registration on the waitlist was successful.</source>
 			</trans-unit>

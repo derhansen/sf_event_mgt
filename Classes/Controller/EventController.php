@@ -394,7 +394,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 'saveRegistrationResult',
                 null,
                 null,
-                ['result' => $result]
+                [
+                    'result' => $result,
+                    'eventuid' => $event->getUid(),
+                    'hmac' => $this->hashService->generateHmac('event-' . $event->getUid())
+                ]
             );
         }
     }
@@ -403,11 +407,15 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Shows the result of the saveRegistrationAction
      *
      * @param int $result Result
+     * @param int $eventuid
+     * @param string $hmac
      *
      * @return void
      */
-    public function saveRegistrationResultAction($result)
+    public function saveRegistrationResultAction($result, $eventuid, $hmac)
     {
+        $event = null;
+
         switch ($result) {
             case RegistrationResult::REGISTRATION_SUCCESSFUL:
                 $messageKey = 'event.message.registrationsuccessful';
@@ -450,8 +458,16 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $titleKey = '';
         }
 
+        if (!$this->hashService->validateHmac('event-' . $eventuid, $hmac)) {
+            $messageKey = 'event.message.registrationsuccessfulwrongeventhmac';
+            $titleKey = 'registrationResult.title.failed';
+        } else {
+            $event = $this->eventRepository->findByUid((int)$eventuid);
+        }
+
         $this->view->assign('messageKey', $messageKey);
         $this->view->assign('titleKey', $titleKey);
+        $this->view->assign('event', $event);
     }
 
     /**
@@ -464,11 +480,17 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function confirmRegistrationAction($reguid, $hmac)
     {
+        $event = null;
+
         /* @var $registration Registration */
-        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkConfirmRegistration($reguid, $hmac);
+        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkConfirmRegistration(
+            $reguid,
+            $hmac
+        );
 
         if ($failed === false) {
             $registration->setConfirmed(true);
+            $event = $registration->getEvent();
             $this->registrationRepository->update($registration);
 
             $messageType = MessageType::REGISTRATION_CONFIRMED;
@@ -517,6 +539,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $this->view->assign('messageKey', $messageKey);
         $this->view->assign('titleKey', $titleKey);
+        $this->view->assign('event', $event);
     }
 
     /**
@@ -529,10 +552,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function cancelRegistrationAction($reguid, $hmac)
     {
+        $event = null;
+
         /* @var $registration Registration */
         list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkCancelRegistration($reguid, $hmac);
 
         if ($failed === false) {
+            $event = $registration->getEvent();
+
             // Send notifications (must run before cancelling the registration)
             $this->notificationService->sendUserMessage(
                 $registration->getEvent(),
@@ -560,6 +587,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         $this->view->assign('messageKey', $messageKey);
         $this->view->assign('titleKey', $titleKey);
+        $this->view->assign('event', $event);
     }
 
     /**

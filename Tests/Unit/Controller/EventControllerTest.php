@@ -418,6 +418,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDisabled()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -426,9 +431,10 @@ class EventControllerTest extends UnitTestCase
 
         $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(false));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_NOT_ENABLED]);
+            ['result' => RegistrationResult::REGISTRATION_NOT_ENABLED, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -439,6 +445,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDeadlineExpired()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -450,9 +461,10 @@ class EventControllerTest extends UnitTestCase
         $deadline->add(\DateInterval::createFromDateString('yesterday'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->any())->method('getRegistrationDeadline')->will($this->returnValue($deadline));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED]);
+            ['result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -463,6 +475,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionRedirectsWithMessageIfEventExpired()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -474,9 +491,10 @@ class EventControllerTest extends UnitTestCase
         $startdate->add(\DateInterval::createFromDateString('yesterday'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED]);
+            ['result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -487,6 +505,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfMaxParticipantsReached()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -503,9 +526,10 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
         $event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS]);
+            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -516,6 +540,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsGreaterThanRemainingPlaces()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -534,9 +563,10 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES]);
+            ['result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -547,6 +577,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -566,9 +601,10 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
         $event->expects($this->once())->method('getMaxRegistrationsPerUser')->will($this->returnValue(5));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED]);
+            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -579,6 +615,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationRedirectsWithMessageIfUniqueEmailCheckEnabledAndEmailAlreadyRegistered()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -605,9 +646,10 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getUniqueEmailCheck')->will($this->returnValue(true));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE]);
+            ['result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -621,6 +663,10 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationAndWaitlistRedirectsWithMessageIfRegistrationSuccessful()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -638,6 +684,7 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue(true));
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
             ['add'], [], '', false);
@@ -670,7 +717,7 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'utilityService', $utilityService);
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST]);
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -684,6 +731,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationRedirectsToWithMessageIfRegistrationSuccessful()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
@@ -700,6 +752,7 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
             ['add'], [], '', false);
@@ -732,7 +785,7 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'utilityService', $utilityService);
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL]);
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -891,6 +944,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreatherThanOne()
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['generateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
         $registration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [],
             [], '', false);
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
@@ -907,6 +965,7 @@ class EventControllerTest extends UnitTestCase
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
         $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
         $event->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue(2));
+        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
             ['add'], [], '', false);
@@ -944,7 +1003,7 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $this->subject->expects($this->once())->method('redirect')->with('saveRegistrationResult', null, null,
-            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL]);
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -953,144 +1012,130 @@ class EventControllerTest extends UnitTestCase
      * @test
      * @return void
      */
-    public function saveRegistrationResultActionShowsExpectedMessageIfEventExpired()
+    public function saveRegistrationResultActionShowsExpectedMessageIfWrongHmacGiven()
     {
+        $eventUid = 1;
+        $hmac = 'wrongmac';
+
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['validateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(false));
+        $this->inject($this->subject, 'hashService', $hashService);
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['findByUid'], [], '', false);
+        $eventRepository->expects($this->never())->method('findByUid')->with(1);
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfailedeventexpired');
+            'event.message.registrationsuccessfulwrongeventhmac');
         $view->expects($this->at(1))->method('assign')->with('titleKey',
             'registrationResult.title.failed');
         $this->inject($this->subject, 'view', $view);
 
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
+        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, $eventUid, $hmac);
     }
 
     /**
-     * @test
-     * @return void
+     * Data provider for invalid emails
+     *
+     * @return array
      */
-    public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationDeadlineExpired()
+    public function invalidEmailsDataProvider()
     {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfaileddeadlineexpired');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED);
+        return [
+            'EventExpired' => [
+                RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED,
+                1,
+                'somehmac',
+                'event.message.registrationfailedeventexpired',
+                'registrationResult.title.failed'
+            ],
+            'RegistrationDeadlineExpired' => [
+                RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED,
+                1,
+                'somehmac',
+                'event.message.registrationfaileddeadlineexpired',
+                'registrationResult.title.failed'
+            ],
+            'EventFull' => [
+                RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS,
+                1,
+                'somehmac',
+                'event.message.registrationfailedmaxparticipants',
+                'registrationResult.title.failed'
+            ],
+            'RegistrationSuccessful' => [
+                RegistrationResult::REGISTRATION_SUCCESSFUL,
+                1,
+                'somehmac',
+                'event.message.registrationsuccessful',
+                'registrationResult.title.successful'
+            ],
+            'RegistrationNotEnabled' => [
+                RegistrationResult::REGISTRATION_NOT_ENABLED,
+                1,
+                'somehmac',
+                'event.message.registrationfailednotenabled',
+                'registrationResult.title.failed'
+            ],
+            'NotEnoughFreePlaces' => [
+                RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES,
+                1,
+                'somehmac',
+                'event.message.registrationfailednotenoughfreeplaces',
+                'registrationResult.title.failed'
+            ],
+            'MaxAmountRegistrationsExceeded' => [
+                RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED,
+                1,
+                'somehmac',
+                'event.message.registrationfailedmaxamountregistrationsexceeded',
+                'registrationResult.title.failed'
+            ],
+            'EmailNotUnique' => [
+                RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE,
+                1,
+                'somehmac',
+                'event.message.registrationfailedemailnotunique',
+                'registrationResult.title.failed'
+            ],
+            'UnknownResult' => [
+                -1,
+                1,
+                'somehmac',
+                '',
+                ''
+            ],
+        ];
     }
 
     /**
+     * Test if expected messsage is returned for saveRegistrationResult
+     *
+     * @dataProvider invalidEmailsDataProvider
      * @test
      * @return void
      */
-    public function saveRegistrationResultActionShowsExpectedMessageIfEventFull()
+    public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $hmac, $message, $title)
     {
+        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
+            ['validateHmac'], [], '', false);
+        $hashService->expects($this->once())->method('validateHmac')->with('event-' . $eventUid, $hmac)->will($this->returnValue(true));
+        $this->inject($this->subject, 'hashService', $hashService);
+
+        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            ['findByUid'], [], '', false);
+        $eventRepository->expects($this->any())->method('findByUid')->with($eventUid);
+        $this->inject($this->subject, 'eventRepository', $eventRepository);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfailedmaxparticipants');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
+        $view->expects($this->at(0))->method('assign')->with('messageKey', $message);
+        $view->expects($this->at(1))->method('assign')->with('titleKey', $title);
         $this->inject($this->subject, 'view', $view);
 
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationSuccessful()
-    {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationsuccessful');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.successful');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_SUCCESSFUL);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function saveRegistrationResultActionShowsExpectedMessageIfRegistrationNotEnabled()
-    {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfailednotenabled');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_NOT_ENABLED);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function saveRegistrationResultActionShowsExpectedMessageIfNotEnoughFreePlaces()
-    {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfailednotenoughfreeplaces');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function saveRegistrationResultActionShowsExpectedMessageIfMaxAmountRegistrationsExceeded()
-    {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfailedmaxamountregistrationsexceeded');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function saveRegistrationResultActionShowsExpectedMessageIfEmailNotUnique()
-    {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationfailedemailnotunique');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function saveRegistrationResultActionShowsNoMessageIfUnknownResultGiven()
-    {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            '');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            '');
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->saveRegistrationResultAction(-1);
+        $this->subject->saveRegistrationResultAction($result, $eventUid, $hmac);
     }
 
     /**
@@ -1142,6 +1187,7 @@ class EventControllerTest extends UnitTestCase
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
             false);
         $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
+        $mockRegistration->expects($this->any())->method('getEvent');
         $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
         $returnedArray = [
@@ -1192,6 +1238,7 @@ class EventControllerTest extends UnitTestCase
         $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
         $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
         $mockRegistration->expects($this->any())->method('getWaitlist')->will($this->returnValue(true));
+        $mockRegistration->expects($this->any())->method('getEvent');
 
         $returnedArray = [
             false,
@@ -1259,13 +1306,6 @@ class EventControllerTest extends UnitTestCase
      */
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.cancel_successful');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'cancelRegistration.title.successful');
-        $this->inject($this->subject, 'view', $view);
-
         $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
         $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(true));
         $mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('yesterday')));
@@ -1274,6 +1314,7 @@ class EventControllerTest extends UnitTestCase
             false);
         $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
         $mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
+        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
 
         $returnedArray = [
             false,
@@ -1303,6 +1344,15 @@ class EventControllerTest extends UnitTestCase
             ['clearCacheForConfiguredUids'], [], '', false);
         $mockUtilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $mockUtilityService);
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->at(0))->method('assign')->with('messageKey',
+            'event.message.cancel_successful');
+        $view->expects($this->at(1))->method('assign')->with('titleKey',
+            'cancelRegistration.title.successful');
+        $view->expects($this->at(2))->method('assign')->with('event',
+            $mockEvent);
+        $this->inject($this->subject, 'view', $view);
 
         $this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
     }
