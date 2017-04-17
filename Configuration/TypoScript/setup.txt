@@ -39,8 +39,6 @@ plugin.tx_sfeventmgt {
 		}
 		detail {
 			errorHandling =
-		}
-		eventDetails {
 			imageWidth = 200
 			imageHeight =
 		}

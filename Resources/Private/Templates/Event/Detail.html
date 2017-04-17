@@ -213,7 +213,7 @@
 				</div>
 				<div class="event-detail-value event-image">
 					<f:for each="{event.image}" as="image">
-						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.eventDetails.imageWidth}" height="{settings.eventDetails.imageHeight}" />
+						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.detail.imageWidth}" height="{settings.detail.imageHeight}" />
 					</f:for>
 				</div>
 				<div class="clear"></div>
@@ -227,9 +227,7 @@
 				</div>
 				<div class="event-detail-value event-additional-image">
 					<f:for each="{event.additionalImage}" as="image">
-						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE"
-								 width="{settings.eventDetails.imageWidth}"
-								 height="{settings.eventDetails.imageHeight}"/>
+						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.detail.imageWidth}" height="{settings.detail.imageHeight}"/>
 					</f:for>
 				</div>
 				<div class="clear"></div>
