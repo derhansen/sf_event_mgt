@@ -16,6 +16,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\EventController.
@@ -1690,4 +1691,108 @@ class EventControllerTest extends UnitTestCase
 
         $this->subject->searchAction($searchDemand, $overrideDemand);
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function detailActionShowsEventIfEventGiven()
+    {
+        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('event', $mockEvent);
+        $this->inject($this->subject, 'view', $view);
+        $this->subject->detailAction($mockEvent);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function detailActionAssignsNullVariableIfErrorHandlingNotConfigured()
+    {
+        $settings = [
+            'detail' => [
+                'errorHandling' => ''
+            ]
+        ];
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('event', null);
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->_set('settings', $settings);
+        $this->subject->detailAction(null);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function detailActionShows404PageIfEventNotFound()
+    {
+        $tsfe = $this->getAccessibleMock(TypoScriptFrontendController::class, ['pageNotFoundAndExit'], [], '', false);
+        $tsfe->expects($this->once())->method('pageNotFoundAndExit');
+        $GLOBALS['TSFE'] = $tsfe;
+
+        $settings = [
+            'detail' => [
+                'errorHandling' => 'pageNotFoundHandler'
+            ]
+        ];
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('event', null);
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->_set('settings', $settings);
+        $this->subject->detailAction(null);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function detailActionRedirectsToListViewIfEventNotFound()
+    {
+        $settings = [
+            'listPid' => 100,
+            'detail' => [
+                'errorHandling' => 'redirectToListView'
+            ]
+        ];
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('event', null);
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->expects($this->once())->method('redirect')->with('list', null, null, null, 100);
+
+        $this->subject->_set('settings', $settings);
+        $this->subject->detailAction(null);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function detailActionRedirectsToPageUid1IfEventNotFoundAndListPidNotConfigured()
+    {
+        $settings = [
+            'listPid' => '',
+            'detail' => [
+                'errorHandling' => 'redirectToListView'
+            ]
+        ];
+
+        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view->expects($this->once())->method('assign')->with('event', null);
+        $this->inject($this->subject, 'view', $view);
+
+        $this->subject->expects($this->once())->method('redirect')->with('list', null, null, null, 1);
+
+        $this->subject->_set('settings', $settings);
+        $this->subject->detailAction(null);
+    }
+
 }

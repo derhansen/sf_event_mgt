@@ -248,12 +248,37 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Detail view for an event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     *
-     * @return void
      */
     public function detailAction(Event $event = null)
     {
+        if (is_null($event) && isset($this->settings['detail']['errorHandling'])) {
+            $this->handleEventNotFoundError($this->settings);
+        }
         $this->view->assign('event', $event);
+    }
+
+    /**
+     * Error handling if event is not found
+     *
+     * @param array $settings
+     * @return string
+     */
+    protected function handleEventNotFoundError($settings)
+    {
+        if (empty($settings['detail']['errorHandling'])) {
+            return;
+        }
+
+        switch ($settings['detail']['errorHandling']) {
+            case 'redirectToListView':
+                $listPid = (int)$settings['listPid'] > 0 ? (int)$settings['listPid'] : 1;
+                $this->redirect('list', null, null, null, $listPid);
+                break;
+            case 'pageNotFoundHandler':
+                $GLOBALS['TSFE']->pageNotFoundAndExit('Event not found.');
+                break;
+            default:
+        }
     }
 
     /**
