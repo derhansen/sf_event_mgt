@@ -92,7 +92,6 @@
                     <settings.registrationPid>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.registrationPid</label>
-                            <displayCond>FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>

@@ -1,0 +1,21 @@
+.sfeventmgt-table {
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+}
+
+.sfeventmgt-table th {
+    width: 40%;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.sfeventmgt-table > tbody > tr > td {
+    padding:3px 6px;
+}
+
+.sfeventmgt-table > thead > tr > th,
+.sfeventmgt-table > tbody > tr > th,
+.sfeventmgt-table > tfoot > tr > th {
+    vertical-align: top;
+}

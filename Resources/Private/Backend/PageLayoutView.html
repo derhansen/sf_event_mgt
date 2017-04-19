@@ -1,0 +1,22 @@
+<f:if condition="{data}">
+    <f:then>
+        <table class="table table-condensed table-hover sfeventmgt-table">
+            <thead>
+            <tr>
+                <th colspan="2">{header -> f:format.raw()}<br/>{action -> f:format.raw()}</th>
+            </tr>
+            </thead>
+            <tbody>
+                <f:for each="{data}" as="item">
+                    <tr>
+                        <th>{item.title}</th>
+                        <td>{item.value -> f:format.raw()}</td>
+                    </tr>
+                </f:for>
+            </tbody>
+        </table>
+    </f:then>
+    <f:else>
+        {header -> f:format.raw()}
+    </f:else>
+</f:if>
