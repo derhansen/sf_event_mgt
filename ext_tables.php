@@ -34,7 +34,7 @@ if (!defined('TYPO3_MODE')) {
     ],
     [
         'access' => 'user,group',
-        'icon' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.gif',
+        'icon' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.svg',
         'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
     ]
 );
