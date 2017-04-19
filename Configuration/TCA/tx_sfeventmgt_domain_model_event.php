@@ -448,6 +448,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
+                'default' => 0,
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
@@ -466,6 +467,7 @@ return [
                 'size' => 1,
                 'minitems' => 0,
                 'maxitems' => 1,
+                'default' => 0,
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
