@@ -21,8 +21,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
@@ -206,6 +207,40 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
         }
         return $demand;
+    }
+
+    /**
+     * Hook into request processing and catch exceptions
+     *
+     * @param RequestInterface $request
+     * @param ResponseInterface $response
+     * @throws \Exception
+     */
+    public function processRequest(RequestInterface $request, ResponseInterface $response)
+    {
+        try {
+            parent::processRequest($request, $response);
+        } catch (\Exception $exception) {
+            $this->handleKnownExceptionsElseThrowAgain($exception);
+        }
+    }
+
+    /**
+     * Handle known exceptions
+     *
+     * @param \Exception $exception
+     * @throws \Exception
+     */
+    private function handleKnownExceptionsElseThrowAgain(\Exception $exception)
+    {
+        $previousException = $exception->getPrevious();
+        if ($this->actionMethodName === 'detailAction'
+            && $previousException instanceof \TYPO3\CMS\Extbase\Property\Exception
+        ) {
+            $this->handleEventNotFoundError($this->settings);
+        } else {
+            throw $exception;
+        }
     }
 
     /**
