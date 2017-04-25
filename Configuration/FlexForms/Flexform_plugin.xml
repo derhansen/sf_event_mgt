@@ -616,6 +616,7 @@
                             </displayCond>
                             <config>
                                 <type>check</type>
+                                <default>1</default>
                             </config>
                         </TCEforms>
                     </settings.disableOverrideDemand>
