@@ -60,18 +60,12 @@ class DataHandlerHooks
                     'settings.notification.registrationCancelled.adminSubject',
                 ],
                 'sDEF' => [
-                    'settings.templateLayout',
-                    'settings.detailPid',
-                    'settings.listPid',
-                    'settings.registrationPid',
-                    'settings.paymentPid',
                     'settings.displayMode',
                     'settings.orderField',
                     'settings.orderDirection',
                     'settings.topEventRestriction',
                     'settings.queryLimit',
                     'settings.category',
-                    'settings.restrictForeignRecordsToStoragePage',
                     'settings.storagePage',
                     'settings.registration.requiredFields',
                     'settings.userRegistration.displayMode',
@@ -79,6 +73,17 @@ class DataHandlerHooks
                     'settings.userRegistration.orderDirection',
                     'settings.userRegistration.storagePage',
                     'settings.userRegistration.recursive'
+                ],
+                'additional' => [
+                    'settings.detailPid',
+                    'settings.listPid',
+                    'settings.registrationPid',
+                    'settings.paymentPid',
+                    'settings.restrictForeignRecordsToStoragePage',
+                    'settings.disableOverrideDemand'
+                ],
+                'template' => [
+                    'settings.templateLayout'
                 ]
             ];
 
