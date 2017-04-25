@@ -86,6 +86,7 @@ class PageLayoutView
         $this->getPluginPidConfig('paymentPid', 'additional');
         $this->getStoragePage('settings.storagePage');
         $this->getOrderSettings('settings.orderField', 'settings.orderDirection');
+        $this->getOverrideDemandSettings();
 
         $result = $this->renderSettingsAsTable($header, $action, $this->data);
         return $result;
@@ -259,6 +260,21 @@ class PageLayoutView
         }
 
         return $text;
+    }
+
+    /**
+     * Get information if override demand setting is disabled or not
+     */
+    public function getOverrideDemandSettings()
+    {
+        $field = $this->getFieldFromFlexform('settings.disableOverrideDemand', 'additional');
+
+        if ($field == 1) {
+            $this->data[] = [
+                'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.disableOverrideDemand'),
+                'value' => '<i class="fa fa-check"></i>'
+            ];
+        }
     }
 
     /**
