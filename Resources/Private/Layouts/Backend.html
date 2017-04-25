@@ -1,45 +1,42 @@
 {namespace e=DERHANSEN\SfEventMgt\ViewHelpers}
 <f:be.container includeCssFiles="{0: '{f:uri.resource(path:\'Css/administration.css\')}'}">
-    <div class="typo3-fullDoc">
-        <div id="typo3-docheader">
+    <div class="module">
+        <div class="module-docheader">
             <div class="typo3-docheader-functions">
-                <div class="left">
-                    <f:be.buttons.csh />
-                </div>
-
-                <div class="right">
-                    <f:be.pagePath />
-                    <f:be.pageInfo />
-                </div>
-            </div>
-
-            <div class="typo3-docheader-buttons typo3-docheader-buttons-events-be">
-                <div class="left">
-                    <div class="x-btn btn btn-default btn-sm x-btn-noicon btn-events-be" style="width: auto;">
-                        <span class="t3js-icon icon icon-size-small icon-state-default">
+                <div class="module-docheader-bar module-docheader-bar-navigation">
+                    <div class="module-docheader-bar-column-left">
+                        <div class="x-btn btn btn-default btn-sm x-btn-noicon btn-events-be" style="width: auto;">
+                            <span class="t3js-icon icon icon-size-small icon-state-default">
                                 <a href="{e:Be.NewRecord()}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.newEvent')}">
                                     <f:image src="{f:uri.resource(path:'Icons/tx_sfeventmgt_domain_model_event_add.gif')}" />
                                 </a>
-                        </span>
-                    </div>
-                    <div class="x-btn btn btn-default btn-sm x-btn-noicon btn-events-be" style="width: auto;">
-                        <span class="t3js-icon icon icon-size-small icon-state-default">
+                            </span>
+                        </div>
+                        <div class="x-btn btn btn-default btn-sm x-btn-noicon btn-events-be" style="width: auto;">
+                            <span class="t3js-icon icon icon-size-small icon-state-default">
                                 <f:link.action action="handleExpiredRegistrations" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.handleExpiredRegistrations')}">
                                     <f:image src="{f:uri.resource(path:'Icons/tx_sfeventmgt_domain_model_event_handle_expired.gif')}" />
                                 </f:link.action>
-                        </span>
+                            </span>
+                        </div>
                     </div>
-                    <div class="clearfix"></div>
+                    <div class="module-docheader-bar-column-right">
+                        <f:be.pagePath />
+                    </div>
                 </div>
-                <div class="right">
+            </div>
+            <div class="module-docheader-bar module-docheader-bar-buttons">
+                <div class="module-docheader-bar-column-left">
+                    &nbsp;
+                </div>
+                <div class="module-docheader-bar-column-right">
                     <f:be.buttons.shortcut />
                 </div>
             </div>
         </div>
-        <div id="typo3-docbody" class="typo3-docbody">
-            <div id="typo3-inner-docbody" class="event-administration">
-                <f:render section="main" />
-            </div>
+        <div class="module-body event-administration">
+            <f:flashMessages />
+            <f:render section="main" />
         </div>
     </div>
 </f:be.container>
