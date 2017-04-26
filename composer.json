@@ -22,8 +22,7 @@
     "typo3/cms-core": "^7.6 || ^8.5"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.8.0",
-    "nimut/testing-framework": "^1.1"
+    "nimut/testing-framework": "^1.1.5"
   },
   "replace": {
     "sf_event_mgt": "self.version",
