@@ -102,12 +102,9 @@ class UserRegistrationDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCurrentDateTimeReturnsCurrentDateTimeIfNoValueSet()
+    public function getCurrentDateTimeReturnsDateTimeObjectIfNoValueSet()
     {
-        $this->assertEquals(
-            new \DateTime,
-            $this->subject->getCurrentDateTime()
-        );
+        $this->assertInstanceOf('DateTime', $this->subject->getCurrentDateTime());
     }
 
     /**
