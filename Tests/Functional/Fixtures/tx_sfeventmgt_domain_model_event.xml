@@ -350,4 +350,60 @@
         <country>Denmark</country>
     </tx_sfeventmgt_domain_model_location>
 
+    <!-- Record for year/month/day restrcition -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>70</uid>
+        <pid>70</pid>
+        <startdate>1483261200</startdate>
+        <enddate>1483268400</enddate>
+        <title>Test1</title>
+        <description>Test 01.01.2017 10:00 - 01.01.2017 12:00</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>71</uid>
+        <pid>70</pid>
+        <startdate>1485939600</startdate>
+        <enddate>1485946800</enddate>
+        <title>Test2</title>
+        <description>Test 01.02.2017 10:00 - 01.02.2017 12:00</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>72</uid>
+        <pid>70</pid>
+        <startdate>1506844800</startdate>
+        <enddate>1506852000</enddate>
+        <title>Test3</title>
+        <description>Test 01.10.2017 10:00 - 01.10.2017 12:00</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>73</uid>
+        <pid>70</pid>
+        <startdate>1506844800</startdate>
+        <enddate>1507017600</enddate>
+        <title>Test4</title>
+        <description>Test 01.10.2017 10:00 - 03.10.2017 10:00</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>74</uid>
+        <pid>70</pid>
+        <startdate>1514797200</startdate>
+        <enddate>1514804400</enddate>
+        <title>Test5</title>
+        <description>Test 01.01.2018 10:00 - 01.01.2018 12:00</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>75</uid>
+        <pid>70</pid>
+        <startdate>1519722000</startdate>
+        <enddate>1519981200</enddate>
+        <title>Test5</title>
+        <description>Test 27.02.2018 10:00 - 02.03.2018 12:00</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+
 </dataset>

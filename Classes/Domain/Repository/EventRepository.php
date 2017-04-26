@@ -68,6 +68,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setStartEndDateConstraint($query, $eventDemand, $constraints);
         $this->setSearchConstraint($query, $eventDemand, $constraints);
         $this->setTopEventConstraint($query, $eventDemand, $constraints);
+        $this->setYearMonthDayRestriction($query, $eventDemand, $constraints);
         $this->setOrderingsFromDemand($query, $eventDemand);
 
         if (count($constraints) > 0) {
@@ -305,4 +306,38 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
     }
 
+    /**
+     * Sets the restriction for year, year/month or year/month/day to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+     * @param array $constraints
+     *
+     * @return void
+     */
+    protected function setYearMonthDayRestriction($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getYear() > 0) {
+            if ($eventDemand->getMonth() > 0) {
+                if ($eventDemand->getDay() > 0) {
+                    $begin = mktime(0, 0, 0, $eventDemand->getMonth(), $eventDemand->getDay(), $eventDemand->getYear());
+                    $end = mktime(23, 59, 59, $eventDemand->getMonth(), $eventDemand->getDay(), $eventDemand->getYear());
+                } else {
+                    $begin = mktime(0, 0, 0, $eventDemand->getMonth(), 1, $eventDemand->getYear());
+                    $end = mktime(23, 59, 59, ($eventDemand->getMonth() + 1), 0, $eventDemand->getYear());
+                }
+            } else {
+                $begin = mktime(0, 0, 0, 1, 1, $eventDemand->getYear());
+                $end = mktime(23, 59, 59, 12, 31, $eventDemand->getYear());
+            }
+            $constraints[] = $query->logicalOr(
+                $query->between('startdate', $begin, $end),
+                $query->between('enddate', $begin, $end),
+                $query->logicalAnd(
+                    $query->greaterThanOrEqual('enddate', $begin),
+                    $query->lessThanOrEqual('startdate', $begin)
+                )
+            );
+        }
+    }
 }

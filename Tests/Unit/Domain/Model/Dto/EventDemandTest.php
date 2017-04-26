@@ -303,4 +303,54 @@ class EventDemandTest extends UnitTestCase
         $this->assertSame('Germany', $this->subject->getLocationCountry());
     }
 
+    /**
+     * @test
+     */
+    public function getYearReturnsDefaultValue()
+    {
+        $this->assertNull($this->subject->getYear());
+    }
+
+    /**
+     * @test
+     */
+    public function setYearSetsYearForInteger()
+    {
+        $this->subject->setYear(2017);
+        $this->assertSame(2017, $this->subject->getYear());
+    }
+
+    /**
+     * @test
+     */
+    public function getMonthReturnsDefaultValue()
+    {
+        $this->assertNull($this->subject->getMonth());
+    }
+
+    /**
+     * @test
+     */
+    public function setMonthSetsMonthForInteger()
+    {
+        $this->subject->setMonth(12);
+        $this->assertSame(12, $this->subject->getMonth());
+    }
+
+    /**
+     * @test
+     */
+    public function getDayReturnsDefaultValue()
+    {
+        $this->assertNull($this->subject->getDay());
+    }
+
+    /**
+     * @test
+     */
+    public function setDaySetsDayForInteger()
+    {
+        $this->subject->setDay(1);
+        $this->assertSame(1, $this->subject->getDay());
+    }
 }

@@ -114,6 +114,27 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $locationCountry = '';
 
     /**
+     * Year
+     *
+     * @var int
+     */
+    protected $year;
+
+    /**
+     * Month
+     *
+     * @var int
+     */
+    protected $month;
+
+    /**
+     * Day
+     *
+     * @var int
+     */
+    protected $day;
+
+    /**
      * Search Demand
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
@@ -405,6 +426,67 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLocationCountry($locationCountry)
     {
         $this->locationCountry = $locationCountry;
+    }
+
+    /**
+     * Returns year
+     *
+     * @return int
+     */
+    public function getYear()
+    {
+        return $this->year;
+    }
+
+    /**
+     * Sets year
+     *
+     * @param int $year
+     * @return void
+     */
+    public function setYear($year)
+    {
+        $this->year = $year;
+    }
+
+    /**
+     * Returns month
+     *
+     * @return int
+     */
+    public function getMonth()
+    {
+        return $this->month;
+    }
+
+    /**
+     * Sets month
+     *
+     * @param int $month
+     * @return void
+     */
+    public function setMonth($month)
+    {
+        $this->month = $month;
+    }
+
+    /**
+     * Returns day
+     *
+     * @return int
+     */
+    public function getDay()
+    {
+        return $this->day;
+    }
+
+    /**
+     * @param int $day
+     * @return void
+     */
+    public function setDay($day)
+    {
+        $this->day = $day;
     }
 
     /**

@@ -63,7 +63,7 @@ class EventRepositoryTest extends FunctionalTestCase
     {
         $events = $this->eventRepository->findByUid(1);
 
-        $this->assertEquals($events->getTitle(), 'findRecordsByUid');
+        $this->assertSame($events->getTitle(), 'findRecordsByUid');
     }
 
     /**
@@ -79,7 +79,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(3);
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(3, $events->count());
+        $this->assertSame(3, $events->count());
     }
 
     /**
@@ -96,7 +96,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setDisplayMode('all');
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(4, $events->count());
+        $this->assertSame(4, $events->count());
     }
 
     /**
@@ -114,7 +114,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCurrentDateTime(new \DateTime('30.05.2014'));
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(1, $events->count());
+        $this->assertSame(1, $events->count());
     }
 
     /**
@@ -132,7 +132,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCurrentDateTime(new \DateTime('30.05.2014 14:00:00'));
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(2, $events->count());
+        $this->assertSame(2, $events->count());
     }
 
     /**
@@ -186,7 +186,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setIncludeSubcategories($includeSubcategory);
 
         $demand->setCategory($category);
-        $this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -227,7 +227,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $location = $this->locationRepository->findByUid($locationUid);
         $demand->setLocation($location);
-        $this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -263,7 +263,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(50);
 
         $demand->setLocationCity($locationCity);
-        $this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -299,7 +299,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(60);
 
         $demand->setLocationCountry($locationCountry);
-        $this->assertEquals($expected, $this->eventRepository->findDemanded($demand)->count());
+        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -321,7 +321,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(2, $events->count());
+        $this->assertSame(2, $events->count());
     }
 
     /**
@@ -343,7 +343,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(2, $events->count());
+        $this->assertSame(2, $events->count());
     }
 
     /**
@@ -366,7 +366,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(2, $events->count());
+        $this->assertSame(2, $events->count());
     }
 
     /**
@@ -408,7 +408,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setTopEventRestriction($topEventRestriction);
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals($expected, $events->count());
+        $this->assertSame($expected, $events->count());
     }
 
     /**
@@ -475,7 +475,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setOrderDirection($orderDirection);
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals($expected, $events->getFirst()->getTitle());
+        $this->assertSame($expected, $events->getFirst()->getTitle());
     }
 
     /**
@@ -495,7 +495,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setOrderDirection('asc');
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals('Test2', $events->getFirst()->getTitle());
+        $this->assertSame('Test2', $events->getFirst()->getTitle());
     }
 
     /**
@@ -514,6 +514,128 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertEquals(2, $events->count());
+        $this->assertSame(2, $events->count());
+    }
+
+    /**
+     * Test if year restriction works
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByYear()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(70);
+        $demand->setDisplayMode('all');
+        $demand->setYear(2018);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(2, $events->count());
+    }
+
+    /**
+     * Test if month restriction works
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByMonth()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(70);
+        $demand->setDisplayMode('all');
+        $demand->setYear(2017);
+        $demand->setMonth(10);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(2, $events->count());
+    }
+
+    /**
+     * Test if month restriction works, when start/enddate oi event span more than one month
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByMonthWithStartdateInGivenMonth()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(70);
+        $demand->setDisplayMode('all');
+        $demand->setYear(2018);
+        $demand->setMonth(2);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(75, $events->getFirst()->getUid());
+    }
+
+    /**
+     * Test if month restriction works, when start/enddate oi event span more than one month
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByMonthWithEnddateInGivenMonth()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(70);
+        $demand->setDisplayMode('all');
+        $demand->setYear(2018);
+        $demand->setMonth(3);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(75, $events->getFirst()->getUid());
+    }
+
+    /**
+     * Test if day restriction works
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByDay()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(70);
+        $demand->setDisplayMode('all');
+        $demand->setYear(2017);
+        $demand->setMonth(10);
+        $demand->setDay(1);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(2, $events->count());
+    }
+
+    /**
+     * Test if day restriction works, when event spans multiple days and restriction is limited to a
+     * day, which is between the event start- and enddate
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByDayForEventSpanningDateRange()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(70);
+        $demand->setDisplayMode('all');
+        $demand->setYear(2017);
+        $demand->setMonth(10);
+        $demand->setDay(2);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(1, $events->count());
     }
 }
