@@ -29,6 +29,7 @@ RealURL Configuration::
                                     'GETvar' => 'tx_sfeventmgt_pievent[action]',
                                     'valueMap' => array(
                                             'detail' => '',
+                                            'ical' => 'icalDownload',
                                     ),
                                     'noMatch' => 'bypass'
                             ),
