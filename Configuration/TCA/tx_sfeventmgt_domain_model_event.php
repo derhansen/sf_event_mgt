@@ -36,10 +36,10 @@ return [
         '1' => [
             'columnsOverrides' => [
                 'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
                 ],
                 'program' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_links]'
+                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
                 ],
             ],
             'showitem' => 'l10n_parent, l10n_diffsource,
@@ -245,6 +245,7 @@ return [
                     ]
                 ]
             ],
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
         ],
         'program' => [
             'exclude' => 1,
@@ -267,6 +268,7 @@ return [
                     ]
                 ]
             ],
+            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
         ],
         'link' => [
             'exclude' => 0,
