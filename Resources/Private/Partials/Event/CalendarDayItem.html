@@ -1,0 +1,34 @@
+<li class="event-calendar__day event-calendar__day{f:format.date(date: day.timestamp, format: 'N')} {f:if(condition: '{day.isCurrentMonth}', then: '', else: 'event-calendar__day-other-month')}{f:if(condition: '{day.events}', then: ' has-events')}{f:if(condition: '{day.isCurrentDay}', then: ' event-calendar__day-today')}">
+    <f:if condition="{day.events}">
+        <f:then>
+            <div class="event-calendar__day-date">{day.day}</div>
+
+            <f:for each="{day.events}" as="event">
+                <div class="event-calendar__day-event">
+
+                    <f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action>
+
+                    <div class="event-calendar__day-event-time">
+                        <f:if condition="{day.timestamp -> f:format.date(format: 'd.m.Y')} == {event.startdate -> f:format.date(format: 'd.m.Y')}">
+                            <f:then>
+                                <f:format.date format="H:i">{event.startdate}</f:format.date>
+                            </f:then>
+                        </f:if>
+                        <f:if condition="{event.enddate}">
+                            <f:then>
+                                <f:if condition="{event.startdate -> f:format.date(format: 'd.m.Y')} == {event.enddate -> f:format.date(format: 'd.m.Y')}">
+                                    <f:then>
+                                        - <f:format.date format="H:i">{event.enddate}</f:format.date>
+                                    </f:then>
+                                </f:if>
+                            </f:then>
+                        </f:if>
+                    </div>
+                </div>
+            </f:for>
+        </f:then>
+        <f:else>
+            <div class="event-calendar__day-date">{day.day}</div>
+        </f:else>
+    </f:if>
+</li>

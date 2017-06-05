@@ -35,6 +35,10 @@
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.search</numIndex>
                                         <numIndex index="1">Event->search</numIndex>
                                     </numIndex>
+                                    <numIndex index="5">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.calendar</numIndex>
+                                        <numIndex index="1">Event->calendar</numIndex>
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>

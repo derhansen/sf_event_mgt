@@ -1,3 +1,6 @@
+/*
+ * Default CSS for list, detail and registration view
+ */
 .userregistration-list-item,
 .event-list-item {
 	margin-bottom: 15px;
@@ -61,4 +64,124 @@
 
 .tx-sf-event-mgt form.registration .submit {
 	margin-left: 150px;
+}
+
+/*
+ * Default CSS for calendar view
+ */
+.event-calendar {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.event-calendar li {
+	list-style: none;
+}
+
+.event-calendar a {
+	color: #000000;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	word-break: break-word;
+}
+
+.event-calendar__weeknumber {
+	width: 20px;
+	text-align: center;
+	margin-left: -1px;
+	margin-bottom: -1px;
+	padding: 6px;
+	background: #fff;
+	color: #CCC;
+	font-weight: bold;
+}
+
+.event-calendar__weekdays {
+	display: flex;
+	background: #CCCCCC;
+	margin: 0;
+	padding: 0;
+}
+
+.event-calendar__weekdays-weekday {
+	flex: 1;
+	text-align: center;
+	text-transform: uppercase;
+	color: #fff;
+	margin-right: -1px;
+	margin-bottom: -1px;
+	padding: 6px 0;
+	background: #CCCCCC;
+}
+
+.event-calendar__days {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+.event-calendar__day {
+	min-height: 120px;
+	flex: 1;
+	padding: 5px;
+	box-sizing: border-box;
+	border: 1px solid #CCCCCC;
+	margin-right: -1px;
+	margin-bottom: -1px;
+}
+
+.event-calendar__day-today {
+	background: #e6e6e6;
+}
+
+.event-calendar__day-other-month {
+	background: #f3f3f3;
+}
+
+.event-calendar__day-date {
+	font-weight: 700;
+	color: #000000;
+}
+
+.event-calendar__day-event {
+	clear: both;
+	display: block;
+	padding: 5px;
+	margin-top: 6px;
+	margin-bottom: 5px;
+	background: #f4f7f7;
+	border: 1px solid #CCCCCC;
+	border-radius: 2px;
+}
+
+.event-calendar__day-event-time {
+	font-size: 10px;
+	margin-top: 5px;
+}
+
+.event-calendar__browser {
+	display: flex;
+}
+
+.event-calendar__browser {
+	display: flex;
+	-webkit-padding-start: 0;
+}
+
+.event-calendar__browser-prev,
+.event-calendar__browser-next,
+.event-calendar__browser-current {
+	flex: 1;
+	text-align: center;
+}
+
+.event-calendar__browser-prev {
+	text-align: left;
+	padding-top: 8px;
+}
+
+.event-calendar__browser-next {
+	text-align: right;
+	padding-top: 8px;
 }

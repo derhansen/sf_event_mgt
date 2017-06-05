@@ -43,6 +43,9 @@
 			<trans-unit id="flexforms_general.mode.search">
 				<source>Searchform</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.mode.calendar">
+				<source>Calendar</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.detailPid">
 				<source>Detail Pid</source>
 			</trans-unit>

@@ -282,6 +282,9 @@
 			<trans-unit id="detail.title">
 				<source>Event details</source>
 			</trans-unit>
+			<trans-unit id="calendar.title">
+				<source>Event calendar</source>
+			</trans-unit>
 			<trans-unit id="detail.download">
 				<source>Download</source>
 			</trans-unit>

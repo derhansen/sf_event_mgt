@@ -37,6 +37,11 @@ plugin.tx_sfeventmgt {
 				}
 			}
 		}
+		calendar {
+			firstDayOfWeek = 1
+			includeEventsForEveryDayOfAllCalendarWeeks = 1
+			showWeekNumber = 1
+		}
 		detail {
 			errorHandling =
 			imageWidth = 200

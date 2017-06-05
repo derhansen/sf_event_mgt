@@ -1,0 +1,44 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+
+	<h1><f:translate key="calendar.title" /></h1>
+
+	<div class="event-calendar">
+
+		<ul class="event-calendar__browser">
+			<li class="event-calendar__browser-prev">
+				<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_sfeventmgt_pievent: {overwriteDemand: {month: previousMonthConfig.month, year: previousMonthConfig.year}}}">
+					&larr; {f:format.date(date: previousMonthConfig.date, format: '%B %Y')}
+				</f:link.page>
+			</li>
+			<li class="event-calendar__browser-current"><h3>{firstDayOfMonth -> f:format.date(format: '%B')}</h3></li>
+			<li class="event-calendar__browser-next">
+				<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_sfeventmgt_pievent: {overwriteDemand: {month: nextMonthConfig.month, year: nextMonthConfig.year}}}">
+					{f:format.date(date: nextMonthConfig.date, format: '%B %Y')} &rarr;
+				</f:link.page>
+			</li>
+		</ul>
+
+		<ul class="event-calendar__weekdays">
+			<f:if condition="{settings.calendar.showWeekNumber}">
+				<li class="event-calendar__weeknumber"></li>
+			</f:if>
+			<f:for each="{weeks.0}" as="weekday">
+				<li class="event-calendar__weekdays-weekday">{f:format.date(date: weekday.timestamp, format: '%a')}</li>
+			</f:for>
+		</ul>
+
+		<f:for each="{weeks}" as="week">
+			<ul class="event-calendar__days">
+				<f:if condition="{settings.calendar.showWeekNumber}">
+					<li class="event-calendar__weeknumber">{week.0.weekNumber}</li>
+				</f:if>
+				<f:for each="{week}" as="day">
+					<f:render partial="Event/CalendarDayItem" arguments="{day: day, settings: settings}"/>
+				</f:for>
+			</ul>
+		</f:for>
+
+	</div>
+</f:section>

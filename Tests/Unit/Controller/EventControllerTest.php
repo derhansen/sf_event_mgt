@@ -1795,4 +1795,36 @@ class EventControllerTest extends UnitTestCase
         $this->subject->detailAction(null);
     }
 
+    /**
+     * @test
+     * @return void
+     */
+    public function changeEventDemandToFullMonthDateRangeAppliesExpectedDatesAndUnsetsMonthAndYear()
+    {
+        $calendarDateRangeResult = [
+            'firstDayOfMonth' => strtotime('01.01.2017'),
+            'lastDayOfMonth' => strtotime('31.01.2017'),
+            'firstDayOfCalendar' => strtotime('26.12.2016'),
+            'lastDayOfCalendar' => strtotime('05.02.2017')
+        ];
+
+        $eventDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+        $eventDemand->setYear(2017);
+        $eventDemand->setMonth(1);
+
+        $mockController = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
+            ['redirect', 'forward', 'addFlashMessage'], [], '', false);
+
+        $calendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\CalendarService',
+            ['getCalendarDateRange'], [], '', false);
+        $calendarService->expects($this->once())->method('getCalendarDateRange')->will($this->returnValue($calendarDateRangeResult));
+        $this->inject($mockController, 'calendarService', $calendarService);
+
+        $resultDemand = $mockController->_call('changeEventDemandToFullMonthDateRange', $eventDemand);
+        $this->assertEquals(0, $resultDemand->getMonth());
+        $this->assertEquals(0, $resultDemand->getYear());
+        $this->assertSame('26.12.2016', $resultDemand->getSearchDemand()->getStartDate()->format('d.m.Y'));
+        $this->assertSame('05.02.2017', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y'));
+    }
+
 }

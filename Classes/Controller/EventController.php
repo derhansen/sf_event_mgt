@@ -106,6 +106,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $registrationService = null;
 
     /**
+     * CalendarService
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\CalendarService
+     * @inject
+     */
+    protected $calendarService = null;
+
+    /**
      * UtilityService
      *
      * @var \DERHANSEN\SfEventMgt\Service\UtilityService
@@ -277,6 +285,95 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->view->assign('categories', $categories);
         $this->view->assign('locations', $locations);
         $this->view->assign('overwriteDemand', $overwriteDemand);
+    }
+
+    /**
+     * Calendar view
+     *
+     * @param array $overwriteDemand OverwriteDemand
+     *
+     * @return void
+     */
+    public function calendarAction(array $overwriteDemand = [])
+    {
+        $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
+        $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
+        $categoryDemand = $this->createCategoryDemandObjectFromSettings($this->settings);
+        if ($this->isOverwriteDemand($overwriteDemand)) {
+            $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
+        }
+
+        // Set month/year to demand if not given
+        if (!$eventDemand->getMonth()) {
+            $currentMonth = date('n');
+            $eventDemand->setMonth($currentMonth);
+        } else {
+            $currentMonth = $eventDemand->getMonth();
+        }
+        if (!$eventDemand->getYear()) {
+            $currentYear = date('Y');
+            $eventDemand->setYear($currentYear);
+        } else {
+            $currentYear = $eventDemand->getYear();
+        }
+
+        // Set demand from calendar date range instead of month / year
+        if ((bool)$this->settings['calendar']['includeEventsForEveryDayOfAllCalendarWeeks']) {
+            $eventDemand = $this->changeEventDemandToFullMonthDateRange($eventDemand);
+        }
+
+        $events = $this->eventRepository->findDemanded($eventDemand);
+        $weeks = $this->calendarService->getCalendarArray(
+            $currentMonth,
+            $currentYear,
+            strtotime('today midnight'),
+            (int)$this->settings['calendar']['firstDayOfWeek'],
+            $events
+        );
+
+        $values = [
+            'weeks' => $weeks,
+            'categories' => $this->categoryRepository->findDemanded($categoryDemand),
+            'locations' => $this->locationRepository->findDemanded($foreignRecordDemand),
+            'eventDemand' => $eventDemand,
+            'overwriteDemand' => $overwriteDemand,
+            'currentPageId' => $GLOBALS['TSFE']->id,
+            'firstDayOfMonth' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $currentMonth, $currentMonth)),
+            'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
+            'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
+        ];
+
+        $this->view->assignMultiple($values);
+    }
+
+    /**
+     * Changes the given event demand object to select a date range for a calendar month including days of the previous
+     * month for the first week and they days for the next month for the last week
+     *
+     * @param EventDemand $eventDemand
+     * @return EventDemand
+     */
+    protected function changeEventDemandToFullMonthDateRange(EventDemand $eventDemand)
+    {
+        $calendarDateRange = $this->calendarService->getCalendarDateRange(
+            $eventDemand->getMonth(),
+            $eventDemand->getYear(),
+            $this->settings['calendar']['firstDayOfWeek']
+        );
+
+        $eventDemand->setMonth(0);
+        $eventDemand->setYear(0);
+
+        $startDate = new \DateTime();
+        $startDate->setTimestamp($calendarDateRange['firstDayOfCalendar']);
+        $endDate = new \DateTime();
+        $endDate->setTimestamp($calendarDateRange['lastDayOfCalendar']);
+
+        $searchDemand = new SearchDemand();
+        $searchDemand->setStartDate($startDate);
+        $searchDemand->setEndDate($endDate);
+        $eventDemand->setSearchDemand($searchDemand);
+        return $eventDemand;
     }
 
     /**
