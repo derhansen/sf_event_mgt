@@ -1823,8 +1823,8 @@ class EventControllerTest extends UnitTestCase
         $resultDemand = $mockController->_call('changeEventDemandToFullMonthDateRange', $eventDemand);
         $this->assertEquals(0, $resultDemand->getMonth());
         $this->assertEquals(0, $resultDemand->getYear());
-        $this->assertSame('26.12.2016', $resultDemand->getSearchDemand()->getStartDate()->format('d.m.Y'));
-        $this->assertSame('05.02.2017', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y'));
+        $this->assertSame('26.12.2016 00:00:00', $resultDemand->getSearchDemand()->getStartDate()->format('d.m.Y H:i:s'));
+        $this->assertSame('05.02.2017 23:59:59', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y H:i:s'));
     }
 
 }

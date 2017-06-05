@@ -368,6 +368,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $startDate->setTimestamp($calendarDateRange['firstDayOfCalendar']);
         $endDate = new \DateTime();
         $endDate->setTimestamp($calendarDateRange['lastDayOfCalendar']);
+        $endDate->setTime(23, 59, 59);
 
         $searchDemand = new SearchDemand();
         $searchDemand->setStartDate($startDate);
