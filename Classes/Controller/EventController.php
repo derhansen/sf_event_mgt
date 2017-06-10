@@ -281,10 +281,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $events = $this->eventRepository->findDemanded($eventDemand);
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
-        $this->view->assign('events', $events);
-        $this->view->assign('categories', $categories);
-        $this->view->assign('locations', $locations);
-        $this->view->assign('overwriteDemand', $overwriteDemand);
+        $this->view->assignMultiple([
+            'events' => $events,
+            'categories' => $categories,
+            'locations' => $locations,
+            'overwriteDemand' => $overwriteDemand,
+            'eventDemand' => $eventDemand
+        ]);
     }
 
     /**

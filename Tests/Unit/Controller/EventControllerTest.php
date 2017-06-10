@@ -258,10 +258,13 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', []);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'categories' => $allCategories,
+            'locations' => $allLocations,
+            'overwriteDemand' => [],
+            'eventDemand' => $demand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
@@ -305,10 +308,13 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', $overrideDemand);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'categories' => $allCategories,
+            'locations' => $allLocations,
+            'overwriteDemand' => $overrideDemand,
+            'eventDemand' => $eventDemand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction($overrideDemand);
@@ -351,10 +357,13 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('overwriteDemand', $overrideDemand);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'categories' => $allCategories,
+            'locations' => $allLocations,
+            'overwriteDemand' => $overrideDemand,
+            'eventDemand' => $eventDemand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction($overrideDemand);

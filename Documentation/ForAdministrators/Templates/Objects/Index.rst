@@ -52,6 +52,12 @@ List view
          All available locations
 
  - :Object:
+         {eventDemand}
+
+   :Description:
+         The eventDemand object
+
+ - :Object:
          {overwriteDemand}
 
    :Description:
