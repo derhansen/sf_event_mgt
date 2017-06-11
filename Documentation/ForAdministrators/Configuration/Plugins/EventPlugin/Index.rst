@@ -65,6 +65,7 @@ Tab settings
 
          * all
          * future
+         * current_future
          * past
 
    :Key:

@@ -51,6 +51,7 @@ settings made with TypoScript. All plugin settings can also be configured with T
 
          * all
          * future
+         * current_future
          * past
 
    :Key:

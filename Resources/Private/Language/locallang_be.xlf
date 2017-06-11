@@ -130,6 +130,9 @@
 			<trans-unit id="flexforms_general.displayMode.past">
 				<source>Show only past events</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.current_future">
+				<source>Show only current and future events</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.userRegistration.displayMode.all">
 				<source>Show registrations for all events</source>
 			</trans-unit>

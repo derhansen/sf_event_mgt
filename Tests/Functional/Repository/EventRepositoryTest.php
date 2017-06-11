@@ -136,6 +136,24 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
+     * Test if displayMode 'current_future' restriction in demand works
+     *
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByDisplayModeCurrentFuture()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(4);
+        $demand->setDisplayMode('current_future');
+        $demand->setCurrentDateTime(new \DateTime('02.06.2014 08:00:00'));
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(1, $events->count());
+    }
+
+    /**
      * DataProvider for findDemandedRecordsByCategory
      *
      * @return array

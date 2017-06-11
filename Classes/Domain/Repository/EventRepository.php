@@ -150,6 +150,15 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             case 'future':
                 $constraints[] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
                 break;
+            case 'current_future':
+                $constraints[] = $query->logicalOr([
+                    $query->greaterThan('startdate', $eventDemand->getCurrentDateTime()),
+                    $query->logicalAnd([
+                        $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
+                        $query->lessThanOrEqual('startdate', $eventDemand->getCurrentDateTime())
+                    ])
+                ]);
+                break;
             case 'past':
                 $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
                 break;

@@ -28,6 +28,10 @@
                                         <numIndex index="1">future</numIndex>
                                     </numIndex>
                                     <numIndex index="2">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.displayMode.current_future</numIndex>
+                                        <numIndex index="1">current_future</numIndex>
+                                    </numIndex>
+                                    <numIndex index="3">
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.userRegistration.displayMode.past</numIndex>
                                         <numIndex index="1">past</numIndex>
                                     </numIndex>
