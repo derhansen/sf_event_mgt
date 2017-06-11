@@ -339,14 +339,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $begin = mktime(0, 0, 0, 1, 1, $eventDemand->getYear());
                 $end = mktime(23, 59, 59, 12, 31, $eventDemand->getYear());
             }
-            $constraints[] = $query->logicalOr(
+            $constraints[] = $query->logicalOr([
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
-                $query->logicalAnd(
+                $query->logicalAnd([
                     $query->greaterThanOrEqual('enddate', $begin),
                     $query->lessThanOrEqual('startdate', $begin)
-                )
-            );
+                ])
+            ]);
         }
     }
 }
