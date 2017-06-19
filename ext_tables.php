@@ -23,37 +23,24 @@ if (!defined('TYPO3_MODE')) {
     'EXT:sf_event_mgt/Resources/Private/Language/locallang_csh_tx_sfeventmgt_domain_model_priceoption.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sfeventmgt_domain_model_priceoption');
 
-// Register Administration Module
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'DERHANSEN.' . $_EXTKEY,
-    'web',
-    'tx_sfeventmgt_m1',
-    '',
-    [
-        'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
-    ],
-    [
-        'access' => 'user,group',
-        'icon' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.svg',
-        'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
-    ]
-);
-
-// Add an extra categories selection field to the events table
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-    'DERHANSEN.' . $_EXTKEY,
-    'tx_sfeventmgt_domain_model_event',
-    'category',
-    [
-        'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:tx_sfeventmgt_domain_model_event.category',
-        'exclude' => false,
-        'fieldConfiguration' => [
-            'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1, 0) ORDER BY sys_category.title ASC',
-        ]
-    ]
-);
-
 if (TYPO3_MODE === 'BE') {
+    // Register Administration Module
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'DERHANSEN.sf_event_mgt',
+        'web',
+        'tx_sfeventmgt_m1',
+        '',
+        [
+            'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
+        ],
+        [
+            'access' => 'user,group',
+            'icon' => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/events.svg',
+            'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_modadministration.xlf',
+        ]
+    );
+
+
     $icons = [
         'apps-pagetree-folder-contains-events' => 'events-folder.png',
         'ext-sfeventmgt-registration-unconfirmed' => 'tx_sfeventmgt_domain_model_registration_unconfirmed.gif',
