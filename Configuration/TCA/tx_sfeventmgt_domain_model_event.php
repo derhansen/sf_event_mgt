@@ -480,13 +480,38 @@ return [
         'image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.image',
-            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('image', [
-                'appearance' => [
-                    'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                'image',
+                [
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+                    ],
+                    'foreign_match_fields' => [
+                        'fieldname' => 'image',
+                        'tablenames' => 'tx_sfeventmgt_domain_model_event',
+                        'table_local' => 'sys_file',
+                    ],
+                    'foreign_types' => [
+                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            'showitem' => '--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette,
+                                      --palette--;;imageoverlayPalette,
+                                      --palette--;;filePalette'
+                        ],
+                    ],
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                        --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                        --palette--;;filePalette'
+                            ],
+                        ],
+                    ],
+                    'minitems' => 0,
+                    'maxitems' => 999,
                 ],
-                'minitems' => 0,
-                'maxitems' => 999,
-            ], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
+                $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+            ),
         ],
         'files' => [
             'exclude' => 1,
@@ -537,6 +562,27 @@ return [
                 [
                     'appearance' => [
                         'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+                    ],
+                    'foreign_match_fields' => [
+                        'fieldname' => 'additional_image',
+                        'tablenames' => 'tx_sfeventmgt_domain_model_event',
+                        'table_local' => 'sys_file',
+                    ],
+                    'foreign_types' => [
+                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            'showitem' => '--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette,
+                                  --palette--;;imageoverlayPalette,
+                                  --palette--;;filePalette'
+                        ],
+                    ],
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                    --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                    --palette--;;filePalette'
+                            ],
+                        ],
                     ],
                     'minitems' => 0,
                     'maxitems' => 999,
