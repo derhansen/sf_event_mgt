@@ -125,20 +125,15 @@ class NotificationServiceTest extends UnitTestCase
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [], [], '', false);
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
-        $this->inject($this->subject, 'objectManager', $objectManager);
-
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            [], [], '', false);
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+            ['getTemplatePath', 'renderTemplate'], [], '', false);
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -167,11 +162,6 @@ class NotificationServiceTest extends UnitTestCase
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [], [], '', false);
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
-        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
@@ -179,8 +169,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            [], [], '', false);
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+            ['getTemplatePath', 'renderTemplate'], [], '', false);
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -213,20 +204,15 @@ class NotificationServiceTest extends UnitTestCase
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [], [], '', false);
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
-        $this->inject($this->subject, 'objectManager', $objectManager);
-
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            [], [], '', false);
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+            ['getTemplatePath', 'renderTemplate'], [], '', false);
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -269,20 +255,15 @@ class NotificationServiceTest extends UnitTestCase
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [], [], '', false);
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
-        $this->inject($this->subject, 'objectManager', $objectManager);
-
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            [], [], '', false);
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+            ['getTemplatePath', 'renderTemplate'], [], '', false);
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -346,20 +327,15 @@ class NotificationServiceTest extends UnitTestCase
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [], [], '', false);
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
-        $this->inject($this->subject, 'objectManager', $objectManager);
-
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            [], [], '', false);
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+            ['getTemplatePath', 'renderTemplate'], [], '', false);
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -394,12 +370,6 @@ class NotificationServiceTest extends UnitTestCase
             ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
-
-        $emailView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [], [], '', false);
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($emailView));
-        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));

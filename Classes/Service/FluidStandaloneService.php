@@ -16,6 +16,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * FluidStandaloneService
@@ -24,6 +25,13 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class FluidStandaloneService
 {
+    /**
+     * The object manager
+     *
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @inject
+     */
+    protected $objectManager;
 
     /**
      * The configuration manager
@@ -43,7 +51,8 @@ class FluidStandaloneService
     public function getTemplateFolders($part = 'template')
     {
         $extbaseConfig = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
+            'SfEventMgt'
         );
 
         if (!empty($extbaseConfig['view'][$part . 'RootPaths'])) {
@@ -53,7 +62,8 @@ class FluidStandaloneService
         if (empty($templatePaths)) {
             $path = $extbaseConfig['view'][$part . 'RootPath'];
             if (!empty($path)) {
-                $templatePaths = $path;
+                $templatePaths = [];
+                $templatePaths[] = $path;
             }
         }
         if (empty($templatePaths)) {
@@ -63,9 +73,20 @@ class FluidStandaloneService
 
         $absolutePaths = [];
         foreach ($templatePaths as $templatePath) {
-            $absolutePaths[] = GeneralUtility::getFileAbsFileName($templatePath);
+            $absolutePaths[] = GeneralUtility::getFileAbsFileName($this->ensureSuffixedPath($templatePath));
         }
         return $absolutePaths;
+    }
+
+    /**
+     * Makes sure the path ends with a slash
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function ensureSuffixedPath($path)
+    {
+        return rtrim($path, '/') . '/';
     }
 
     /**
@@ -102,5 +123,29 @@ class FluidStandaloneService
             }
         }
         return $matches;
+    }
+
+    /**
+     * Renders a fluid standlone view for the given template
+     *
+     * @param string $template
+     * @param array $variables
+     * @param string $extensionName
+     * @param string $pluginName
+     * @return string
+     */
+    public function renderTemplate($template, $variables, $extensionName = 'SfEventMgt', $pluginName = 'Pievent')
+    {
+        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
+        $emailView = $this->objectManager->get(StandaloneView::class);
+        $emailView->getRequest()->setControllerExtensionName($extensionName);
+        $emailView->getRequest()->setPluginName($pluginName);
+        $emailView->setFormat('html');
+        $emailView->setLayoutRootPaths($this->getTemplateFolders('layout'));
+        $emailView->setPartialRootPaths($this->getTemplateFolders('partial'));
+        $emailView->setTemplatePathAndFilename($template);
+        $emailView->assignMultiple($variables);
+        $emailBody = $emailView->render();
+        return $emailBody;
     }
 }

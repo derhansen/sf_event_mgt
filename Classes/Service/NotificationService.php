@@ -17,7 +17,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * NotificationService
@@ -26,7 +25,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class NotificationService
 {
-
     /**
      * The object manager
      *
@@ -338,29 +336,18 @@ class NotificationService
      */
     protected function getNotificationBody($event, $registration, $template, $settings)
     {
-        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
-        $emailView = $this->objectManager->get(StandaloneView::class);
-        $emailView->setFormat('html');
-        $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');
-        $partialRootPaths = $this->fluidStandaloneService->getTemplateFolders('partial');
-
+        $templatePathAndFilename = $this->fluidStandaloneService->getTemplatePath($template);
         if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
             $GLOBALS['BE_USER']->uc['lang'] = $registration->getLanguage();
-            $emailView->getRequest()->setControllerExtensionName('SfEventMgt');
         }
-
-        $emailView->setLayoutRootPaths($layoutRootPaths);
-        $emailView->setPartialRootPaths($partialRootPaths);
-        $emailView->setTemplatePathAndFilename($this->fluidStandaloneService->getTemplatePath($template));
-        $emailView->assignMultiple([
+        $variables = [
             'event' => $event,
             'registration' => $registration,
             'settings' => $settings,
             'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
             'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
-        ]);
-        $emailBody = $emailView->render();
-        return $emailBody;
+        ];
+        return $this->fluidStandaloneService->renderTemplate($templatePathAndFilename, $variables);
     }
 }
