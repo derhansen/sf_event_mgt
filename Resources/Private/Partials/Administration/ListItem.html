@@ -14,7 +14,7 @@
     <td class="registrationenabled">
         <f:if condition="{event.enableRegistration} == 1">
             <f:then>
-                <span class="t3-icon t3-icon-status t3-icon-status-status t3-icon-status-permission-granted">&nbsp;</span>
+                <span class="t3-icon sf-event-mgt-admin-reg-enabled">&nbsp;</span>
             </f:then>
         </f:if>
     </td>
@@ -41,7 +41,7 @@
     <td>
         <f:if condition="{event.enableRegistration}">
             <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
-                <span class="t3-icon t3-icon-mimetypes t3-icon-mimetypes-text t3-icon-text-csv">&nbsp;</span>
+                <span class="t3-icon sf-event-mgt-admin-csv">&nbsp;</span>
             </f:link.action>
         </f:if>
     </td>
