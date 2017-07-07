@@ -43,7 +43,7 @@ return [
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                 paid, paymentmethod, payment_reference, 
                 
-            --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
+            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'
         ],
     ],
     'palettes' => [
