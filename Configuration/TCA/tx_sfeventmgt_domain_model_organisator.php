@@ -120,7 +120,7 @@ return [
                 'image',
                 [
                     'appearance' => [
-                        'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
                     ],
                     'foreign_match_fields' => [
                         'fieldname' => 'image',

@@ -31,7 +31,7 @@ return [
     'types' => [
         '1' => [
             'showitem' => 'l10n_parent, l10n_diffsource, --palette--;;paletteCore, 
-            price, valid_until, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group'
+            price, valid_until, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group'
         ],
     ],
     'palettes' => [
