@@ -16,5 +16,6 @@ For Developers
    :titlesonly:
    :glob:
 
+   Extending/Index
    Signals/Index
    Payment/Index

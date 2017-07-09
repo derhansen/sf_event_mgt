@@ -18,7 +18,7 @@ Thanks from me to:
 ~~~~~~~~~~~~~~~~~~
 
 * Georg Ringer for his extension "news", from where I adapted some techniques I use in this extension
-* Thies Kracht from Skyfillers GmbH who developed the CSV export
+* Thies Kracht who developed the CSV export
 * Phat Hoang and Oleksandr Bachynskyi from Pixelant AB for their ideas and contributions
 * Phat Hoang from Pixelant AB for the reCAPTCHA implementation
 * Jean-François Sillen from Wikafi S.P.R.L for sponsoring the sys_category refactoring
