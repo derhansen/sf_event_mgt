@@ -281,7 +281,7 @@ class RegistrationService
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     * @param RegistrationResult $result Result
+     * @param int $result Result
      *
      * @return bool
      */
