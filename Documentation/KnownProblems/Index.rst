@@ -11,6 +11,7 @@
 Known Problems
 ==============
 
+* The extension does not (and will never) support recurring events. See :ref:`faq` for more information.
 * It is not possible to translate e-mails sent by the extension
 * iCal download does not work, if ``$TYPO3_CONF_VARS['FE']['compressionLevel']`` is set to a value > 0 - https://forge.typo3.org/issues/69223
 

@@ -41,7 +41,7 @@ Please use the CSV export action as described in :ref:`backend-module` section.
 How do I create a custom e-mail notification?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A detailled description can be found in the :ref:`custom-notifications` section.
+A detailed description can be found in the :ref:`custom-notifications` section.
 
 Can I add the HMAC or an appended HMAC of the registration UID to e-mails?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -71,6 +71,15 @@ the event is possible. TRUE is returned, when all conditions below are
 * Max participants is not reached (if max. participants > 0) or max participants is not reached and waitlist is enabled
 * Date set at registration deadline is not reached
 * Startdate of event is not reached
+
+Why does the extenion not support recurring events?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The user registration is one of the main features of the extension and it requires, that every event is unique in order
+to save registrations for a particular event. This makes it impossible to only have one event record, that has multiple
+recurrences.
+
+Since there is no smart way to add recurring events to the extension without making it more complex and harder to
+maintain, this feature will not make it into the extension.
 
 How can I disable double opt in for event registration?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,8 +191,8 @@ Configured price options do not show up in frontend
 Make sure that the date for the price option is valid also make sure, that you use ``{event.currentPrice}`` in your
 Fluid template to output the current price.
 
-How can I use the iCalDownload action in the Listview
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+How can I use the iCalDownload action in the Listview?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The switchableControllerAction for the ListView does not allow to call the iCalDownload action. With the following
 Fluid snippet, you can also use the iCalDownload in the listview::
