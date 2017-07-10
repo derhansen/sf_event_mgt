@@ -110,7 +110,7 @@ class CalendarService
         foreach ($events as $event) {
             $eventBeginDate = $event->getStartdate()->format('Y-m-d');
             $day = date('Y-m-d', $currentDay->getTimestamp());
-            if ($event->getEnddate() === 0) {
+            if ($event->getEnddate() === null) {
                 if ($eventBeginDate === $day) {
                     $foundEvents[] = $event;
                 }
