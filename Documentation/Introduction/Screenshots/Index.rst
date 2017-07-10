@@ -30,3 +30,10 @@ Backend administration module
    :alt: Individual e-mail notifications
 
 Send configurable e-mail notifications to event participants
+
+.. figure:: ../../Images/event-calendar.jpg
+   :align: left
+   :width: 500px
+   :alt: Event calendar view
+
+Show all events for a month in a calendarview

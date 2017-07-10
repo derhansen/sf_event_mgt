@@ -11,7 +11,8 @@
 TypoScript reference
 ====================
 
-More TypoScript settings are available on the :ref:`eventplugin-settings` page.
+More TypoScript settings are available on the :ref:`eventplugin-settings` page. Also make sure to check the included
+``setup.txt`` file for available/default TypoScript settings.
 
 plugin.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~
@@ -80,10 +81,47 @@ plugin.tx_sfeventmgt
          Empty
 
  - :Property:
+         settings.calendar.firstDayOfWeek
+
+   :Date type:
+         Integer
+
+   :Description:
+         First day of week 0 (sunday) bis 6 (saturday). The default value "1" is set to monday.
+
+   :Default:
+         1
+
+ - :Property:
+         settings.calendar.includeEventsForEveryDayOfAllCalendarWeeks
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set, the calendar will show events for all days of all shown weeks of the calendar and not only
+         events for the current month.
+
+   :Default:
+         1 (true)
+
+ - :Property:
+         settings.calendar.showWeekNumber
+
+   :Date type:
+         Boolean
+
+   :Description:
+         Definies, if the calendar should show week numbers or not.
+
+   :Default:
+         1 (true)
+
+ - :Property:
          settings.detail.errorHandling
 
    :Date type:
-         string
+         String
 
    :Description:
          If an event is not found (e.g. is hidden or deleted), you can configure, if the plugin should redirect

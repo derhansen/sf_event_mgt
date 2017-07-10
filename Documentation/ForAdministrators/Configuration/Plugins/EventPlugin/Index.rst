@@ -48,6 +48,7 @@ Tab settings
          * List
          * Details
          * Registration
+         * Calendar
 
    :Key:
 

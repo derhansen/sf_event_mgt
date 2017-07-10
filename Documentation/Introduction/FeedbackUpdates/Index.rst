@@ -13,7 +13,7 @@ Updates and support
 The source code of this extension is hosted on GitHub. Please report bugs and changerequests
 directly at https://github.com/derhansen/sf_event_mgt
 
-Updates will be published directly on TER.
+Updates will be published directly on TER and Packagist.
 
 Support
 ~~~~~~~

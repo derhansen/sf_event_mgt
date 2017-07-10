@@ -99,6 +99,72 @@ Registration view
    :Description:
          An object holding the given event
 
+Calendar view
+~~~~~~~~~~~~~
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+         Description:
+
+ - :Object:
+         {weeks}
+
+   :Description:
+         An array holding all events grouped by week and day
+
+ - :Object:
+         {categories}
+
+   :Description:
+         All configured categories for the category menu (see ``plugin.tx_sfeventmgt.settings.categoryMenu`` in the :ref:`eventplugin-settings`)
+
+ - :Object:
+         {locations}
+
+   :Description:
+         All available locations
+
+ - :Object:
+         {eventDemand}
+
+   :Description:
+         The eventDemand object
+
+ - :Object:
+         {overwriteDemand}
+
+   :Description:
+         The overwriteDemand object
+
+ - :Object:
+         {currentPageId}
+
+   :Description:
+         The PID of the current page
+
+ - :Object:
+         {firstDayOfMonth}
+
+   :Description:
+         DateTime object with the first day of the current month
+
+ - :Object:
+         {previousMonthConfig}
+
+   :Description:
+         Array with date, month and year of the previous month
+
+ - :Object:
+         {nextMonthConfig}
+
+   :Description:
+         Array with date, month and year of the next month
+
 Search view
 ~~~~~~~~~~~
 

@@ -200,3 +200,9 @@ Fluid snippet, you can also use the iCalDownload in the listview::
  <f:link.action action="icalDownload" arguments="{event : event}" pageUid="{settings.detailPid}"><f:translate key="event.icalDownload" /></f:link.action>
 
 Note, that you have to set the pageUid to a page with the detail view plugin.
+
+Why does the next/previous month links not work for the calendar view ?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The next/presious links use the ``overrideDemand`` feature, which by default is disabled. Make sure you have
+unchecked the **Disable override demand** setting in the plugin.
