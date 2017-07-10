@@ -1,4 +1,4 @@
-<li class="event-calendar__day event-calendar__day{f:format.date(date: day.timestamp, format: 'N')} {f:if(condition: '{day.isCurrentMonth}', then: '', else: 'event-calendar__day-other-month')}{f:if(condition: '{day.events}', then: ' has-events')}{f:if(condition: '{day.isCurrentDay}', then: ' event-calendar__day-today')}">
+<li class="event-calendar__day event-calendar__day{f:format.date(date: day.timestamp, format: 'N')} {f:if(condition: day.isCurrentMonth, then: '', else: 'event-calendar__day-other-month')}{f:if(condition: day.events, then: ' has-events')}{f:if(condition: day.isCurrentDay, then: ' event-calendar__day-today')}">
     <f:if condition="{day.events}">
         <f:then>
             <div class="event-calendar__day-date">{day.day}</div>
