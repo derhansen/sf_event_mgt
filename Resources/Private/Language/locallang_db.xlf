@@ -297,6 +297,22 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until">
 				<source>Date until the price is valid (includes selected date)</source>
 			</trans-unit>
+
+			<trans-unit id="tx_sfeventmgt_domain_model_speaker">
+				<source>Event speaker</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_speaker.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_speaker.job_title">
+				<source>Job title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_speaker.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_speaker.image">
+				<source>Image</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
