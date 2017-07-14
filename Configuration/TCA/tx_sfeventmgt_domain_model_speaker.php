@@ -33,8 +33,8 @@ return [
                     'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
                 ],
             ],
-            'showitem' => 'l10n_parent, l10n_diffsource, name, job_title, description, image,
-            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, --palette--;;paletteCore, starttime, endtime,'
+            'showitem' => 'l10n_parent, l10n_diffsource,  --palette--;;paletteCore, name, job_title, description, image,
+            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime,'
         ],
     ],
     'palettes' => [
@@ -172,6 +172,30 @@ return [
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'image',
                 [
+                    'appearance' => [
+                        'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference'
+                    ],
+                    'foreign_match_fields' => [
+                        'fieldname' => 'image',
+                        'tablenames' => 'tx_sfeventmgt_domain_model_speaker',
+                        'table_local' => 'sys_file',
+                    ],
+                    'foreign_types' => [
+                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                            'showitem' => '--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette,
+                                      --palette--;;imageoverlayPalette,
+                                      --palette--;;filePalette'
+                        ],
+                    ],
+                    'overrideChildTca' => [
+                        'types' => [
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                        --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                        --palette--;;filePalette'
+                            ],
+                        ],
+                    ],
                     'minitems' => 0,
                     'maxitems' => 1,
                 ],

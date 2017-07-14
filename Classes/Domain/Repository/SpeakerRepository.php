@@ -16,9 +16,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /**
  * The repository for conference speakers
- *
  */
-class SpeakerRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class SpeakerRepository extends AbstractForeignRecordRepository
 {
 
 }

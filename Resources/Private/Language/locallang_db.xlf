@@ -299,7 +299,7 @@
 			</trans-unit>
 
 			<trans-unit id="tx_sfeventmgt_domain_model_speaker">
-				<source>Event speaker</source>
+				<source>Event - Speaker</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_speaker.name">
 				<source>Name</source>

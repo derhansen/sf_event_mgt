@@ -16,11 +16,9 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * Conference speaker model
- *
  */
 class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Name
      *
@@ -45,18 +43,9 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * The image
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $image = null;
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-    }
 
     /**
      * Returns the speaker name
@@ -125,33 +114,9 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Adds an image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
-     *
-     * @return void
-     */
-    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
-    {
-        $this->image->attach($image);
-    }
-
-    /**
-     * Removes an image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove Image
-     *
-     * @return void
-     */
-    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
-    {
-        $this->image->detach($imageToRemove);
-    }
-
-    /**
      * Returns the image
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      */
     public function getImage()
     {
@@ -161,11 +126,11 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the image
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image Image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
      *
      * @return void
      */
-    public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
+    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
     {
         $this->image = $image;
     }
