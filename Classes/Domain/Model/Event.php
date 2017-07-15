@@ -279,6 +279,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $priceOptions = null;
 
     /**
+     * Speaker
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Speaker>
+     * @lazy
+     */
+    protected $speaker = null;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -291,6 +299,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->priceOptions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->speaker = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -1373,5 +1382,50 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getCancellationPossible()
     {
         return $this->getEnableCancel() && $this->getCancelDeadline() > new \DateTime();
+    }
+
+    /**
+     * Returns speaker
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getSpeaker()
+    {
+        return $this->speaker;
+    }
+
+    /**
+     * Sets speaker
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $speaker
+     * @return void
+     */
+    public function setSpeaker($speaker)
+    {
+        $this->speaker = $speaker;
+    }
+
+    /**
+     * Adds a speaker
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
+     *
+     * @return void
+     */
+    public function addSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
+    {
+        $this->speaker->attach($speaker);
+    }
+
+    /**
+     * Removes a speaker
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
+     *
+     * @return void
+     */
+    public function removeSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
+    {
+        $this->speaker->detach($speaker);
     }
 }

@@ -20,5 +20,6 @@ For Editors
    Categories/Index
    Locations/Index
    Organisator/Index
+   Speaker/Index
    Registrations/Index
    BackendModule/Index

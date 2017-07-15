@@ -164,6 +164,12 @@ The relations tab contains fields which holds relations locations, organisators 
          The organisator of the event choosen from the organisator records created.
 
  - :Field:
+         Speaker
+
+   :Description:
+         One or multiple speaker of the event.
+
+ - :Field:
          Related events
 
    :Description:

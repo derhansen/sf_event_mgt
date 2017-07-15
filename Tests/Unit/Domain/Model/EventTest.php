@@ -1522,4 +1522,60 @@ class EventTest extends UnitTestCase
         $this->subject->setEnableAutoconfirm(true);
         $this->assertTrue($this->subject->getEnableAutoconfirm());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getSpeakerReturnsInitialValueforObjectStorage()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getSpeaker()
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setSpeakerSetsSpeaker()
+    {
+        $speaker = new \DERHANSEN\SfEventMgt\Domain\Model\Speaker();
+        $objectStorageWithSpeaker = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageWithSpeaker->attach($speaker);
+        $this->subject->setSpeaker($objectStorageWithSpeaker);
+        $this->assertEquals($objectStorageWithSpeaker, $this->subject->getSpeaker());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function addSpeakerAddsSpeaker()
+    {
+        $speaker = new \DERHANSEN\SfEventMgt\Domain\Model\Speaker();
+        $speakerObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
+        $speakerObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($speaker));
+        $this->inject($this->subject, 'speaker', $speakerObjectStorageMock);
+
+        $this->subject->addSpeaker($speaker);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function removeSpeakerRemovesSpeaker()
+    {
+        $speaker = new \DERHANSEN\SfEventMgt\Domain\Model\Speaker();
+        $speakerObjectStorageMock = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
+        $speakerObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($speaker));
+        $this->inject($this->subject, 'speaker', $speakerObjectStorageMock);
+
+        $this->subject->removeSpeaker($speaker);
+    }
 }

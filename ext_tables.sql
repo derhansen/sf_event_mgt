@@ -35,6 +35,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	link tinytext,
 	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	organisator int(11) unsigned DEFAULT '0' NOT NULL,
+	speaker int(11) unsigned DEFAULT '0' NOT NULL,
 	notify_admin tinyint(4) unsigned DEFAULT '1' NOT NULL,
 	notify_organisator tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	enable_cancel tinyint(4) unsigned DEFAULT '0' NOT NULL,
@@ -349,5 +350,17 @@ CREATE TABLE tx_sfeventmgt_domain_model_speaker (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
 	KEY language (l10n_parent,sys_language_uid)
+);
 
+#
+# Table structure for table 'tx_sfeventmgt_event_speaker_mm'
+#
+CREATE TABLE tx_sfeventmgt_event_speaker_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
 );

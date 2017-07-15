@@ -22,7 +22,7 @@ return [
             'fe_group' => 'fe_group',
         ],
         'requestUpdate' => 'enable_registration, enable_waitlist, enable_cancel, enable_payment, restrict_payment_methods',
-        'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist',
+        'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker',
         'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
     ],
     'interface' => [
@@ -30,7 +30,7 @@ return [
         program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants,
         max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube,
         additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
-        enable_payment,price_options,registration_waitlist, enable_autoconfirm',
+        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker',
     ],
     'types' => [
         '1' => [
@@ -50,7 +50,7 @@ return [
 				--palette--;;palettePrice, price_options, link, program,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
-				location, organisator, related,
+				location, organisator, speaker, related,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
 				image, files, youtube,additional_image,
@@ -473,6 +473,28 @@ return [
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
+                    ],
+                ],
+            ],
+        ],
+        'speaker' => [
+            'exclude' => 0,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.speaker',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'db',
+                'allowed' => 'tx_sfeventmgt_domain_model_speaker',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_speaker',
+                'size' => 5,
+                'minitems' => 0,
+                'maxitems' => 100,
+                'MM' => 'tx_sfeventmgt_event_speaker_mm',
+                'wizards' => [
+                    'suggest' => [
+                        'type' => 'suggest',
+                        'default' => [
+                            'searchWholePhrase' => true
+                        ]
                     ],
                 ],
             ],
