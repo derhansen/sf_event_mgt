@@ -289,7 +289,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             $searchSubject = $eventDemand->getSearchDemand()->getSearch();
             foreach ($searchFields as $field) {
                 if (!empty($searchSubject)) {
-                    $searchConstraints[] = $query->like($field, '%' . $searchSubject . '%', false);
+                    $searchConstraints[] = $query->like($field, '%' . addcslashes($searchSubject, '_%') . '%', false);
                 }
             }
 
