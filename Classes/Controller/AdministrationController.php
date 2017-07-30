@@ -142,14 +142,19 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         }
 
         if ($messageId !== null && is_numeric($messageId)) {
-            $this->view->assign('showMessage', true);
-            $this->view->assign('messageTitleKey', 'administration.message-' . $messageId . '.title');
-            $this->view->assign('messageContentKey', 'administration.message-' . $messageId . '.content');
+            $this->view->assignMultiple([
+                'showMessage' => true,
+                'messageTitleKey' => 'administration.message-' . $messageId . '.title',
+                'messageContentKey' => 'administration.message-' . $messageId . '.content',
+            ]);
         }
 
         $events = $this->eventRepository->findDemanded($demand);
-        $this->view->assign('events', $events);
-        $this->view->assign('searchDemand', $searchDemand);
+
+        $this->view->assignMultiple([
+            'events' => $events,
+            'searchDemand' => $searchDemand,
+        ]);
     }
 
     /**
