@@ -84,8 +84,10 @@ class AdministrationControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('searchDemand', $searchDemand);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'searchDemand' => $searchDemand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();
@@ -115,8 +117,10 @@ class AdministrationControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('searchDemand', $searchDemand);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'searchDemand' => $searchDemand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction($searchDemand);
@@ -149,8 +153,10 @@ class AdministrationControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('searchDemand', $searchDemand);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'searchDemand' => $searchDemand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction($searchDemand);
@@ -184,11 +190,13 @@ class AdministrationControllerTest extends UnitTestCase
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
 
-        $view->expects($this->at(0))->method('assign')->with('showMessage', true);
-        $view->expects($this->at(1))->method('assign')->with('messageTitleKey', 'administration.message-123.title');
-        $view->expects($this->at(2))->method('assign')->with('messageContentKey', 'administration.message-123.content');
-        $view->expects($this->at(3))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(4))->method('assign')->with('searchDemand', $searchDemand);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'showMessage' => true,
+            'messageTitleKey' => 'administration.message-123.title',
+            'messageContentKey' => 'administration.message-123.content',
+            'events' => $allEvents,
+            'searchDemand' => $searchDemand
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction($searchDemand, 123);

@@ -141,20 +141,16 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
             $demand->setStoragePage($this->pid);
         }
 
+        $variables = [];
         if ($messageId !== null && is_numeric($messageId)) {
-            $this->view->assignMultiple([
-                'showMessage' => true,
-                'messageTitleKey' => 'administration.message-' . $messageId . '.title',
-                'messageContentKey' => 'administration.message-' . $messageId . '.content',
-            ]);
+            $variables['showMessage'] = true;
+            $variables['messageTitleKey'] = 'administration.message-' . $messageId . '.title';
+            $variables['messageContentKey'] = 'administration.message-' . $messageId . '.content';
         }
 
-        $events = $this->eventRepository->findDemanded($demand);
-
-        $this->view->assignMultiple([
-            'events' => $events,
-            'searchDemand' => $searchDemand,
-        ]);
+        $variables['events'] = $this->eventRepository->findDemanded($demand);
+        $variables['searchDemand'] = $searchDemand;
+        $this->view->assignMultiple($variables);
     }
 
     /**

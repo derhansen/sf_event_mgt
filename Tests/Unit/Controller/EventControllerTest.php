@@ -415,8 +415,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'paymentService', $mockPaymentService);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('event', $event);
-        $view->expects($this->at(1))->method('assign')->with('paymentMethods', ['invoice']);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'event' => $event,
+            'paymentMethods' => ['invoice']
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->registrationAction($event);
@@ -1038,10 +1040,11 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.registrationsuccessfulwrongeventhmac');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'registrationResult.title.failed');
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.registrationsuccessfulwrongeventhmac',
+            'titleKey' => 'registrationResult.title.failed',
+            'event' => null
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, $eventUid, $hmac);
@@ -1141,8 +1144,11 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey', $message);
-        $view->expects($this->at(1))->method('assign')->with('titleKey', $title);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => $message,
+            'titleKey' => $title,
+            'event' => null
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->saveRegistrationResultAction($result, $eventUid, $hmac);
@@ -1157,10 +1163,11 @@ class EventControllerTest extends UnitTestCase
     public function confirmRegistrationActionShowsExpectedMessageIfCheckConfirmRegistrationFailed()
     {
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.confirmation_failed_wrong_hmac');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'confirmRegistration.title.failed');
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.confirmation_failed_wrong_hmac',
+            'titleKey' => 'confirmRegistration.title.failed',
+            'event' => null
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1188,10 +1195,11 @@ class EventControllerTest extends UnitTestCase
     public function confirmRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.confirmation_successful');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'confirmRegistration.title.successful');
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.confirmation_successful',
+            'titleKey' => 'confirmRegistration.title.successful',
+            'event' => null
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
@@ -1237,10 +1245,11 @@ class EventControllerTest extends UnitTestCase
     public function confirmRegistrationWaitlistActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.confirmation_waitlist_successful');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'confirmRegistrationWaitlist.title.successful');
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.confirmation_waitlist_successful',
+            'titleKey' => 'confirmRegistrationWaitlist.title.successful',
+            'event' => null
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '',
@@ -1286,10 +1295,11 @@ class EventControllerTest extends UnitTestCase
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationFailed()
     {
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.cancel_failed_wrong_hmac');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'cancelRegistration.title.failed');
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.cancel_failed_wrong_hmac',
+            'titleKey' => 'cancelRegistration.title.failed',
+            'event' => null
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1356,12 +1366,11 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'utilityService', $mockUtilityService);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('messageKey',
-            'event.message.cancel_successful');
-        $view->expects($this->at(1))->method('assign')->with('titleKey',
-            'cancelRegistration.title.successful');
-        $view->expects($this->at(2))->method('assign')->with('event',
-            $mockEvent);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.cancel_successful',
+            'titleKey' => 'cancelRegistration.title.successful',
+            'event' => $mockEvent
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
@@ -1465,11 +1474,13 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('searchDemand', null);
-        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', []);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'categories' => $allCategories,
+            'locations' => $allLocations,
+            'searchDemand' => null,
+            'overwriteDemand' => [],
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->searchAction();
@@ -1517,11 +1528,13 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->at(0))->method('assign')->with('events', $allEvents);
-        $view->expects($this->at(1))->method('assign')->with('categories', $allCategories);
-        $view->expects($this->at(2))->method('assign')->with('locations', $allLocations);
-        $view->expects($this->at(3))->method('assign')->with('searchDemand', $searchDemand);
-        $view->expects($this->at(4))->method('assign')->with('overwriteDemand', []);
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'events' => $allEvents,
+            'categories' => $allCategories,
+            'locations' => $allLocations,
+            'searchDemand' => $searchDemand,
+            'overwriteDemand' => [],
+        ]);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->searchAction($searchDemand);
