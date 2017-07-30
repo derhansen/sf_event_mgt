@@ -444,8 +444,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         } else {
             $paymentMethods = $this->paymentService->getPaymentMethods();
         }
-        $this->view->assign('event', $event);
-        $this->view->assign('paymentMethods', $paymentMethods);
+
+        $this->view->assignMultiple([
+            'event' => $event,
+            'paymentMethods' => $paymentMethods,
+        ]);
     }
 
     /**
@@ -626,9 +629,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $event = $this->eventRepository->findByUid((int)$eventuid);
         }
 
-        $this->view->assign('messageKey', $messageKey);
-        $this->view->assign('titleKey', $titleKey);
-        $this->view->assign('event', $event);
+        $this->view->assignMultiple([
+            'messageKey' => $messageKey,
+            'titleKey' => $titleKey,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -698,9 +703,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->redirectToUri($uri);
         }
 
-        $this->view->assign('messageKey', $messageKey);
-        $this->view->assign('titleKey', $titleKey);
-        $this->view->assign('event', $event);
+        $this->view->assignMultiple([
+            'messageKey' => $messageKey,
+            'titleKey' => $titleKey,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -746,9 +753,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             // Clear cache for configured pages
             $this->utilityService->clearCacheForConfiguredUids($this->settings);
         }
-        $this->view->assign('messageKey', $messageKey);
-        $this->view->assign('titleKey', $titleKey);
-        $this->view->assign('event', $event);
+
+        $this->view->assignMultiple([
+            'messageKey' => $messageKey,
+            'titleKey' => $titleKey,
+            'event' => $event,
+        ]);
     }
 
     /**
@@ -812,11 +822,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $events = $this->eventRepository->findDemanded($eventDemand);
 
-        $this->view->assign('events', $events);
-        $this->view->assign('categories', $categories);
-        $this->view->assign('locations', $locations);
-        $this->view->assign('searchDemand', $searchDemand);
-        $this->view->assign('overwriteDemand', $overwriteDemand);
+        $this->view->assignMultiple([
+            'events' => $events,
+            'categories' => $categories,
+            'locations' => $locations,
+            'searchDemand' => $searchDemand,
+            'overwriteDemand' => $overwriteDemand,
+        ]);
     }
 
     /**
