@@ -1,3 +1,5 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
 <p>A user has successfully confirmed the registration to the following event</p>
 
 <p>{event.title} - ({f:format.date(date: event.startdate, format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: event.enddate, format: '%d.%m.%Y - %H:%M')})</p>
@@ -17,3 +19,5 @@
     <li>{f:format.date(date: registration.dateOfBirth, format: '%d.%m.%Y')}</li>
     <li>{registration.notes}</li>
 </ul>
+
+</html>
