@@ -826,8 +826,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $categories = ($categories !== null) ? $categories->toArray() : [];
         $categoriesArray = [0 => "All"];
         
-        foreach ($categories as $category) {
-        	$categoriesArray[$category->getUid()] = $category->getTitle();
+        if (is_array($categories) || is_object($categories)) {
+            foreach ($categories as $category) {
+                $categoriesArray[$category->getUid()] = $category->getTitle();
+            }
         }
         
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
