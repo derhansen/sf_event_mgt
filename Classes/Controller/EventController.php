@@ -818,13 +818,25 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
 
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
+        
+        if ($categories->count() === 0) {
+        	$categories = $this->categoryRepository->findAll();
+        }
+        
+        $categories = $categories->toArray();
+        $categoriesArray = [0 => "All"];
+        
+        foreach ($categories as $category) {
+        	$categoriesArray[$category->getUid()] = $category->getTitle();
+        }
+        
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
 
         $events = $this->eventRepository->findDemanded($eventDemand);
 
         $this->view->assignMultiple([
             'events' => $events,
-            'categories' => $categories,
+            'categories' => $categoriesArray,
             'locations' => $locations,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => $overwriteDemand,

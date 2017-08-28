@@ -41,7 +41,7 @@ class CategoryService
      * @param int $counter
      * @return string comma separated list of category ids
      */
-    private function getChildrenCategoriesRecursive($categoryList, $counter = 0)
+    private static function getChildrenCategoriesRecursive($categoryList, $counter = 0)
     {
         $result = [];
 

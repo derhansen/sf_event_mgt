@@ -37,6 +37,12 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $fields;
 
     /**
+     * Category Id
+	 * @var int
+	 */
+	protected $categoryId = 0;
+    
+    /**
      * StartDate
      *
      * @var \DateTime
@@ -50,6 +56,27 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $endDate = null;
 
+    /**
+     * Returns Category
+	 *
+	 * @return int
+	 */
+	public function getCategoryId()
+	{
+		return $this->categoryId;
+	}
+	
+    /**
+	 * Sets Category
+	 *
+	 * @param string $categoryId
+	 * @return void
+	 */
+	public function setCategoryId($categoryId)
+	{
+		$this->categoryId = $categoryId;
+	}
+    
     /**
      * Set the start date
      *
