@@ -819,11 +819,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         
-        if ($categories->count() === 0) {
+        if ($categories !== null && $categories->count() === 0) {
         	$categories = $this->categoryRepository->findAll();
         }
         
-        $categories = $categories->toArray();
+        $categories = ($categories !== null) ? $categories->toArray() : [];
         $categoriesArray = [0 => "All"];
         
         foreach ($categories as $category) {
