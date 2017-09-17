@@ -118,24 +118,6 @@ plugin.tx_sfeventmgt
          1 (true)
 
  - :Property:
-         settings.detail.errorHandling
-
-   :Date type:
-         String
-
-   :Description:
-         If an event is not found (e.g. is hidden or deleted), you can configure, if the plugin should redirect
-         to the list view, show a 404 error or render the view (default) without the event data.
-
-         Possible values:
-
-         * redirectToListView
-         * pageNotFoundHandler
-
-   :Default:
-         empty
-
- - :Property:
          settings.detail.imageWidth
 
    :Date type:
@@ -539,6 +521,25 @@ plugin.tx_sfeventmgt
 
    :Default:
          true
+
+ - :Property:
+         settings.event.errorHandling
+
+   :Date type:
+         String
+
+   :Description:
+         If an event for the detail and registration view is not found (e.g. is hidden or deleted), you can configure,
+         if the plugin should redirect to the list view, show a 404 error or render the view (default) without the
+         event data.
+
+         Possible values:
+
+         * redirectToListView
+         * pageNotFoundHandler
+
+   :Default:
+         empty
 
 module.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~

@@ -43,7 +43,6 @@ plugin.tx_sfeventmgt {
 			showWeekNumber = 1
 		}
 		detail {
-			errorHandling =
 			imageWidth = 200
 			imageHeight =
 		}
@@ -68,6 +67,9 @@ plugin.tx_sfeventmgt {
 		}
 		confirmation {
 			linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
+		}
+		event {
+			errorHandling =
 		}
 		notification {
 			senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}

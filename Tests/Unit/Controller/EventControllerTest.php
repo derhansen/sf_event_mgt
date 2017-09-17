@@ -1783,93 +1783,96 @@ class EventControllerTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @return void
+     * @return array
      */
-    public function detailActionAssignsNullVariableIfErrorHandlingNotConfigured()
+    public function errorHandlingDataProvider()
     {
-        $settings = [
-            'detail' => [
-                'errorHandling' => ''
+        return [
+            'detailAction' => [
+                'detailAction'
+            ],
+            'registrationAction' => [
+                'registrationAction'
             ]
         ];
-
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('event', null);
-        $this->inject($this->subject, 'view', $view);
-
-        $this->subject->_set('settings', $settings);
-        $this->subject->detailAction(null);
     }
 
     /**
      * @test
+     * @dataProvider errorHandlingDataProvider
      * @return void
      */
-    public function detailActionShows404PageIfEventNotFound()
+    public function detailOrRegistrationActionAssignsNullVariableIfErrorHandlingNotConfigured($action)
+    {
+        $settings = [
+            'event' => [
+                'errorHandling' => ''
+            ]
+        ];
+
+        $this->subject->_set('settings', $settings);
+        $this->subject->_call($action, null);
+    }
+
+    /**
+     * @test
+     * @dataProvider errorHandlingDataProvider
+     * @return void
+     */
+    public function detailOrRegistrationActionShows404PageIfEventNotFound($action)
     {
         $tsfe = $this->getAccessibleMock(TypoScriptFrontendController::class, ['pageNotFoundAndExit'], [], '', false);
         $tsfe->expects($this->once())->method('pageNotFoundAndExit');
         $GLOBALS['TSFE'] = $tsfe;
 
         $settings = [
-            'detail' => [
+            'event' => [
                 'errorHandling' => 'pageNotFoundHandler'
             ]
         ];
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('event', null);
-        $this->inject($this->subject, 'view', $view);
-
         $this->subject->_set('settings', $settings);
-        $this->subject->detailAction(null);
+        $this->subject->_call($action, null);
     }
 
     /**
      * @test
+     * @dataProvider errorHandlingDataProvider
      * @return void
      */
-    public function detailActionRedirectsToListViewIfEventNotFound()
+    public function detailOrRegistrationActionRedirectsToListViewIfEventNotFound($action)
     {
         $settings = [
             'listPid' => 100,
-            'detail' => [
+            'event' => [
                 'errorHandling' => 'redirectToListView'
             ]
         ];
-
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('event', null);
-        $this->inject($this->subject, 'view', $view);
 
         $this->subject->expects($this->once())->method('redirect')->with('list', null, null, null, 100);
 
         $this->subject->_set('settings', $settings);
-        $this->subject->detailAction(null);
+        $this->subject->_call($action, null);
     }
 
     /**
      * @test
+     * @dataProvider errorHandlingDataProvider
      * @return void
      */
-    public function detailActionRedirectsToPageUid1IfEventNotFoundAndListPidNotConfigured()
+    public function detailOrRegistrationActionRedirectsToPageUid1IfEventNotFoundAndListPidNotConfigured($action)
     {
         $settings = [
             'listPid' => '',
-            'detail' => [
+            'event' => [
                 'errorHandling' => 'redirectToListView'
             ]
         ];
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
-        $view->expects($this->once())->method('assign')->with('event', null);
-        $this->inject($this->subject, 'view', $view);
-
         $this->subject->expects($this->once())->method('redirect')->with('list', null, null, null, 1);
 
         $this->subject->_set('settings', $settings);
-        $this->subject->detailAction(null);
+        $this->subject->_call($action, null);
     }
 
     /**

@@ -250,7 +250,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     private function handleKnownExceptionsElseThrowAgain(\Exception $exception)
     {
         $previousException = $exception->getPrevious();
-        if ($this->actionMethodName === 'detailAction'
+        if (($this->actionMethodName === 'detailAction' || $this->actionMethodName === 'registrationAction')
             && $previousException instanceof \TYPO3\CMS\Extbase\Property\Exception
         ) {
             $this->handleEventNotFoundError($this->settings);
@@ -395,11 +395,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Detail view for an event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @return void
      */
     public function detailAction(Event $event = null)
     {
-        if (is_null($event) && isset($this->settings['detail']['errorHandling'])) {
+        if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             $this->handleEventNotFoundError($this->settings);
+            return;
         }
         $this->view->assign('event', $event);
     }
@@ -412,11 +414,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected function handleEventNotFoundError($settings)
     {
-        if (empty($settings['detail']['errorHandling'])) {
+        if (empty($settings['event']['errorHandling'])) {
             return;
         }
 
-        switch ($settings['detail']['errorHandling']) {
+        switch ($settings['event']['errorHandling']) {
             case 'redirectToListView':
                 $listPid = (int)$settings['listPid'] > 0 ? (int)$settings['listPid'] : 1;
                 $this->redirect('list', null, null, null, $listPid);
@@ -448,8 +450,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @return void
      */
-    public function registrationAction(Event $event)
+    public function registrationAction(Event $event = null)
     {
+        if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
+            $this->handleEventNotFoundError($this->settings);
+            return;
+        }
         if ($event->getRestrictPaymentMethods()) {
             $paymentMethods = $this->paymentService->getRestrictedPaymentMethods($event);
         } else {
