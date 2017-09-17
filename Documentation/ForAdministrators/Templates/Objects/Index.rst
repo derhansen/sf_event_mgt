@@ -136,6 +136,12 @@ Calendar view
          All available locations
 
  - :Object:
+         {organisators}
+
+   :Description:
+         All available organisators
+
+ - :Object:
          {eventDemand}
 
    :Description:
@@ -200,6 +206,12 @@ Search view
 
    :Description:
          All available locations
+
+ - :Object:
+         {organisators}
+
+   :Description:
+         All available organisators
 
  - :Object:
          {searchDemand}
