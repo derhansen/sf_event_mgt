@@ -54,7 +54,7 @@ Yes, you can use the following objects in you e-mail templates
 Is it possible to filter by categories in the listview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Yes, filtering of events by a category is possible if you pass the category to the overrideDemand setting of the listview.::
+Yes, filtering of events by a category is possible if you pass the category to the overwriteDemand setting of the listview.::
 
  <f:link.action action="list" controller="Event" arguments="{overwriteDemand:{category: category}}">{category.title}</f:link.action>
 
@@ -204,8 +204,8 @@ Note, that you have to set the pageUid to a page with the detail view plugin.
 Why does the next/previous month links not work for the calendar view ?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The next/presious links use the ``overrideDemand`` feature, which by default is disabled. Make sure you have
-unchecked the **Disable override demand** setting in the plugin.
+The next/presious links use the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
+unchecked the **Disable overwrite demand** setting in the plugin.
 
 How do I show the event title as page title on the detail page?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

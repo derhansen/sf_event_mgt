@@ -151,7 +151,7 @@
 				<source>Template layout</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.disableOverrideDemand">
-				<source>Disable override demand</source>
+				<source>Disable overwrite demand</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>E-Mail address of e-mails sent to the user</source>
