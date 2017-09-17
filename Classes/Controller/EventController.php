@@ -348,6 +348,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'weeks' => $weeks,
             'categories' => $this->categoryRepository->findDemanded($categoryDemand),
             'locations' => $this->locationRepository->findDemanded($foreignRecordDemand),
+            'organisators' => $this->organisatorRepository->findDemanded($foreignRecordDemand),
             'eventDemand' => $eventDemand,
             'overwriteDemand' => $overwriteDemand,
             'currentPageId' => $GLOBALS['TSFE']->id,
@@ -829,6 +830,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
+        $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
 
         $events = $this->eventRepository->findDemanded($eventDemand);
 
@@ -836,6 +838,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'events' => $events,
             'categories' => $categories,
             'locations' => $locations,
+            'organisators' => $organisators,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => $overwriteDemand,
         ]);

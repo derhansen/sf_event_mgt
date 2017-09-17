@@ -1469,6 +1469,7 @@ class EventControllerTest extends UnitTestCase
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allOrganisators = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
@@ -1494,11 +1495,17 @@ class EventControllerTest extends UnitTestCase
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
+        $organisatorRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository',
+            ['findDemanded'], [], '', false);
+        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
+            'organisators' => $allOrganisators,
             'searchDemand' => null,
             'overwriteDemand' => [],
         ]);
@@ -1523,6 +1530,7 @@ class EventControllerTest extends UnitTestCase
         $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $allCategories = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
         $allLocations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allOrganisators = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
 
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
@@ -1548,11 +1556,17 @@ class EventControllerTest extends UnitTestCase
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
+        $organisatorRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository',
+            ['findDemanded'], [], '', false);
+        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
+            'organisators' => $allOrganisators,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => [],
         ]);
@@ -1593,6 +1607,11 @@ class EventControllerTest extends UnitTestCase
             ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $organisatorRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository',
+            ['findDemanded'], [], '', false);
+        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);
@@ -1645,6 +1664,11 @@ class EventControllerTest extends UnitTestCase
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
+        $organisatorRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository',
+            ['findDemanded'], [], '', false);
+        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);
 
@@ -1687,6 +1711,11 @@ class EventControllerTest extends UnitTestCase
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
+        $organisatorRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository',
+            ['findDemanded'], [], '', false);
+        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);
 
@@ -1728,6 +1757,11 @@ class EventControllerTest extends UnitTestCase
             ['findDemanded'], [], '', false);
         $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
         $this->inject($this->subject, 'locationRepository', $locationRepository);
+
+        $organisatorRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository',
+            ['findDemanded'], [], '', false);
+        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
         $this->inject($this->subject, 'view', $view);
