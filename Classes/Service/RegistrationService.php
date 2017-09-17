@@ -372,9 +372,8 @@ class RegistrationService
         }
 
         $result = false;
-        if ($event->getFreePlaces() > 0 && $event->getFreePlaces() < $amountOfRegistrations) {
-            $result = true;
-        } elseif ($event->getFreePlaces() <= 0) {
+        if (($event->getFreePlaces() > 0 && $event->getFreePlaces() < $amountOfRegistrations)
+            || $event->getFreePlaces() <= 0) {
             $result = true;
         }
         return $result;
