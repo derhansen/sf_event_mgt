@@ -74,6 +74,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected $locationRepository = null;
 
     /**
+     * Organisator repository
+     *
+     * @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
+     * @inject
+     */
+    protected $organisatorRepository = null;
+
+    /**
      * Notification Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\NotificationService
@@ -281,10 +289,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $events = $this->eventRepository->findDemanded($eventDemand);
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
+        $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
         $this->view->assignMultiple([
             'events' => $events,
             'categories' => $categories,
             'locations' => $locations,
+            'organisators' => $organisators,
             'overwriteDemand' => $overwriteDemand,
             'eventDemand' => $eventDemand
         ]);

@@ -37,7 +37,7 @@ abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persis
     }
 
     /**
-     * Returns all categories depending on the settings in the demand object
+     * Returns all records depending on the settings in the demand object
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand ForeignRecordDemand
      *

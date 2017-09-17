@@ -277,7 +277,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          List
 
    :Description:
-         Categories and locations will only be loaded from the configured storage page (recursive)
+         Categories, locations and organisators will only be loaded from the configured storage page (recursive)
 
    :Key:
          restrictForeignRecordsToStoragePage

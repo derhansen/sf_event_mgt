@@ -52,6 +52,12 @@ List view
          All available locations
 
  - :Object:
+         {organisators}
+
+   :Description:
+         All available organisators
+
+ - :Object:
          {eventDemand}
 
    :Description:
