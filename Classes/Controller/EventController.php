@@ -21,10 +21,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * EventController
@@ -395,13 +398,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Detail view for an event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @return void
+     * @return string
      */
     public function detailAction(Event $event = null)
     {
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
-            $this->handleEventNotFoundError($this->settings);
-            return;
+            return $this->handleEventNotFoundError($this->settings);
         }
         $this->view->assign('event', $event);
     }
@@ -415,16 +417,27 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     protected function handleEventNotFoundError($settings)
     {
         if (empty($settings['event']['errorHandling'])) {
-            return;
+            return null;
         }
 
-        switch ($settings['event']['errorHandling']) {
+        $configuration = GeneralUtility::trimExplode(',', $settings['event']['errorHandling'], true);
+
+        switch ($configuration[0]) {
             case 'redirectToListView':
                 $listPid = (int)$settings['listPid'] > 0 ? (int)$settings['listPid'] : 1;
                 $this->redirect('list', null, null, null, $listPid);
                 break;
             case 'pageNotFoundHandler':
                 $GLOBALS['TSFE']->pageNotFoundAndExit('Event not found.');
+                break;
+            case 'showStandaloneTemplate':
+                if (isset($configuration[2])) {
+                    $statusCode = constant(HttpUtility::class . '::HTTP_STATUS_' . $configuration[2]);
+                    HttpUtility::setResponseCode($statusCode);
+                }
+                $standaloneTemplate = $this->objectManager->get(StandaloneView::class);
+                $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
+                return $standaloneTemplate->render();
                 break;
             default:
         }
@@ -448,13 +461,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      *
-     * @return void
+     * @return string
      */
     public function registrationAction(Event $event = null)
     {
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
-            $this->handleEventNotFoundError($this->settings);
-            return;
+            return $this->handleEventNotFoundError($this->settings);
         }
         if ($event->getRestrictPaymentMethods()) {
             $paymentMethods = $this->paymentService->getRestrictedPaymentMethods($event);

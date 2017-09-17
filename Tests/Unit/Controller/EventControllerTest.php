@@ -14,8 +14,11 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Controller\EventController;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -32,13 +35,19 @@ class EventControllerTest extends UnitTestCase
     protected $subject = null;
 
     /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|TypoScriptFrontendController
+     */
+    protected $tsfe = null;
+
+    /**
      * Setup
      *
      * @return void
      */
     protected function setUp()
     {
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\EventController',
+        $this->subject = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\Controller\\EventController',
             [
                 'redirect',
                 'forward',
@@ -47,7 +56,19 @@ class EventControllerTest extends UnitTestCase
                 'createCategoryDemandObjectFromSettings',
                 'createForeignRecordDemandObjectFromSettings',
                 'overwriteEventDemandObject'
-            ], [], '', false);
+            ],
+            [],
+            '',
+            false
+        );
+        $this->tsfe = $this->getAccessibleMock(
+            TypoScriptFrontendController::class,
+            ['pageNotFoundAndExit'],
+            [],
+            '',
+            false
+        );
+        $GLOBALS['TSFE'] = $this->tsfe;
     }
 
     /**
@@ -1783,26 +1804,9 @@ class EventControllerTest extends UnitTestCase
     }
 
     /**
-     * @return array
-     */
-    public function errorHandlingDataProvider()
-    {
-        return [
-            'detailAction' => [
-                'detailAction'
-            ],
-            'registrationAction' => [
-                'registrationAction'
-            ]
-        ];
-    }
-
-    /**
      * @test
-     * @dataProvider errorHandlingDataProvider
-     * @return void
      */
-    public function detailOrRegistrationActionAssignsNullVariableIfErrorHandlingNotConfigured($action)
+    public function handleEventNotFoundIsSkippedWhenNoSetting()
     {
         $settings = [
             'event' => [
@@ -1810,37 +1814,30 @@ class EventControllerTest extends UnitTestCase
             ]
         ];
 
-        $this->subject->_set('settings', $settings);
-        $this->subject->_call($action, null);
+        $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
+        $this->assertNull($mock->_call('handleEventNotFoundError', $settings));
     }
 
     /**
      * @test
-     * @dataProvider errorHandlingDataProvider
-     * @return void
      */
-    public function detailOrRegistrationActionShows404PageIfEventNotFound($action)
+    public function handleEventNotFoundShows404Page()
     {
-        $tsfe = $this->getAccessibleMock(TypoScriptFrontendController::class, ['pageNotFoundAndExit'], [], '', false);
-        $tsfe->expects($this->once())->method('pageNotFoundAndExit');
-        $GLOBALS['TSFE'] = $tsfe;
-
         $settings = [
             'event' => [
                 'errorHandling' => 'pageNotFoundHandler'
             ]
         ];
 
-        $this->subject->_set('settings', $settings);
-        $this->subject->_call($action, null);
+        $mock = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $this->tsfe->expects($this->once())->method('pageNotFoundAndExit');
+        $mock->_call('handleEventNotFoundError', $settings);
     }
 
     /**
      * @test
-     * @dataProvider errorHandlingDataProvider
-     * @return void
      */
-    public function detailOrRegistrationActionRedirectsToListViewIfEventNotFound($action)
+    public function handleEventNotFoundRedirectsToListView()
     {
         $settings = [
             'listPid' => 100,
@@ -1849,30 +1846,49 @@ class EventControllerTest extends UnitTestCase
             ]
         ];
 
-        $this->subject->expects($this->once())->method('redirect')->with('list', null, null, null, 100);
-
-        $this->subject->_set('settings', $settings);
-        $this->subject->_call($action, null);
+        $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
+        $mock->expects($this->once())->method('redirect')->with('list', null, null, null, 100);
+        $mock->_call('handleEventNotFoundError', $settings);
     }
 
     /**
      * @test
-     * @dataProvider errorHandlingDataProvider
-     * @return void
      */
-    public function detailOrRegistrationActionRedirectsToPageUid1IfEventNotFoundAndListPidNotConfigured($action)
+    public function handleEventNotFoundRedirectsToPid1IfNoListPidDefinied()
     {
         $settings = [
-            'listPid' => '',
             'event' => [
                 'errorHandling' => 'redirectToListView'
             ]
         ];
 
-        $this->subject->expects($this->once())->method('redirect')->with('list', null, null, null, 1);
+        $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
+        $mock->expects($this->once())->method('redirect')->with('list', null, null, null, 1);
+        $mock->_call('handleEventNotFoundError', $settings);
+    }
 
-        $this->subject->_set('settings', $settings);
-        $this->subject->_call($action, null);
+    /**
+     * @test
+     */
+    public function handleEventNotFoundRendersStandaloneView()
+    {
+        $settings = [
+            'event' => [
+                'errorHandling' => 'showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html'
+            ]
+        ];
+
+        $mockEventController = $this->getAccessibleMock(EventController::class, ['redirect']);
+
+        $mockStandaloneView = $this->getMock(StandaloneView::class, [], [], '', false);
+        $mockStandaloneView->expects($this->once())->method('setTemplatePathAndFilename');
+        $mockStandaloneView->expects($this->once())->method('render');
+
+        $mockObjectManager = $this->getMock(ObjectManager::class, [], [], '', false);
+        $mockObjectManager->expects($this->any())->method('get')->will($this->returnValue($mockStandaloneView));
+        $this->inject($mockEventController, 'objectManager', $mockObjectManager);
+
+        $mockEventController->_call('handleEventNotFoundError', $settings);
     }
 
     /**

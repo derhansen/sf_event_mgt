@@ -537,9 +537,14 @@ plugin.tx_sfeventmgt
 
          * redirectToListView
          * pageNotFoundHandler
+         * showStandaloneTemplate
+
+         The "showStandaloneTemplate" option requires a Template and optional an HTTP status code.
+
+         Example: showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
 
    :Default:
-         empty
+         showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
 
 module.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~

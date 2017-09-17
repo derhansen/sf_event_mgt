@@ -384,6 +384,9 @@
 			<trans-unit id="userRegistration.cancel">
 				<source>Cancel registration</source>
 			</trans-unit>
+			<trans-unit id="eventNotFound">
+				<source>The event record is not available anymore.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
