@@ -15,7 +15,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \RuntimeException;
+use \DERHANSEN\SfEventMgt\Exception;
 
 /**
  * Class ExportService
@@ -46,15 +46,14 @@ class ExportService
      *
      * @param int $eventUid EventUid
      * @param array $settings Settings
-     *
-     * @throws \RuntimeException RuntimeException
+     * @throws Exception RuntimeException
      * @return void
      */
     public function downloadRegistrationsCsv($eventUid, $settings = [])
     {
         $storage = $this->resourceFactory->getDefaultStorage();
         if ($storage === null) {
-            throw new RuntimeException('Could not get the default storage', 1475590001);
+            throw new Exception('Could not get the default storage', 1475590001);
         }
         $registrations = $this->exportRegistrationsCsv($eventUid, $settings);
         $tempFolder = $storage->getFolder('_temp_');
@@ -69,8 +68,7 @@ class ExportService
      *
      * @param int $eventUid EventUid
      * @param array $settings Settings
-     *
-     * @throws \RuntimeException RuntimeException
+     * @throws Exception RuntimeException
      * @return string
      */
     public function exportRegistrationsCsv($eventUid, $settings = [])
@@ -85,7 +83,7 @@ class ExportService
                 if ($registration->_hasProperty($field)) {
                     $exportedRegistration[] = $this->getFieldValue($registration, $field);
                 } else {
-                    throw new RuntimeException('Field ' . $field .
+                    throw new Exception('Field ' . $field .
                         ' is not a Property of Model Registration, please check your TS configuration', 1475590002);
                 }
             }

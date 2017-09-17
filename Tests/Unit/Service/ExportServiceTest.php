@@ -15,7 +15,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  */
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use RuntimeException;
+use \DERHANSEN\SfEventMgt\Exception;
 use \DERHANSEN\SfEventMgt\Service\ExportService;
 
 /**
@@ -118,7 +118,7 @@ class ExportServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectedException Exception
      * @return void
      */
     public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel()
@@ -184,7 +184,7 @@ class ExportServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException RuntimeException
+     * @expectedException Exception
      * @return void
      */
     public function downloadRegistrationsCsvThrowsExceptionIfDefaultStorageNotFound()

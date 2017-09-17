@@ -16,6 +16,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use \DERHANSEN\SfEventMgt\Exception;
 
 /**
  * ICalenderService
@@ -61,16 +62,14 @@ class ICalendarService
      * Initiates the ICS download for the given event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
-     *
-     * @throws \RuntimeException Exception
-     *
+     * @throws Exception Exception
      * @return void
      */
     public function downloadiCalendarFile(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
         $storage = $this->resourceFactory->getDefaultStorage();
         if ($storage === null) {
-            throw new \RuntimeException('Could not get the default storage', 1475590001);
+            throw new Exception('Could not get the default storage', 1475590001);
         }
         $icalContent = $this->getICalendarContent($event);
         $tempFolder = $storage->getFolder('_temp_');

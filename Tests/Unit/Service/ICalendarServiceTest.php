@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Exception;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -51,7 +52,7 @@ class ICalendarServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \RuntimeException
+     * @expectedException Exception
      * @return void
      */
     public function downloadiCalendarFileThrowsExceptionIfNoDefaultStorageFound()
