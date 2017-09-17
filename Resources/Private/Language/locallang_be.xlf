@@ -115,6 +115,9 @@
 			<trans-unit id="flexforms_general.location">
 				<source>Location</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.organisator">
+				<source>Organisator</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.storagePage">
 				<source>Record storage page</source>
 			</trans-unit>

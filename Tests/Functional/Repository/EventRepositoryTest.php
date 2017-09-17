@@ -15,8 +15,12 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
@@ -34,6 +38,9 @@ class EventRepositoryTest extends FunctionalTestCase
     /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
     protected $locationRepository;
 
+    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
+    protected $organisatorRepository;
+
     /** @var array */
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
@@ -46,9 +53,10 @@ class EventRepositoryTest extends FunctionalTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->eventRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository');
-        $this->locationRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\LocationRepository');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->eventRepository = $this->objectManager->get(EventRepository::class);
+        $this->locationRepository = $this->objectManager->get(LocationRepository::class);
+        $this->organisatorRepository = $this->objectManager->get(OrganisatorRepository::class);
 
         $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_event.xml');
     }

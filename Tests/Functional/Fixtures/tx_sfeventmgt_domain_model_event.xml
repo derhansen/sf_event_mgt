@@ -406,4 +406,39 @@
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
+    <!-- findRecordsByOrganisator -->
+    <!-- has organisator 1 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>76</uid>
+        <pid>80</pid>
+        <description>test</description>
+        <link>link</link>
+        <organisator>1</organisator>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has organisator 2-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>77</uid>
+        <pid>80</pid>
+        <description>test</description>
+        <link>link</link>
+        <organisator>2</organisator>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has no organisator -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>78</uid>
+        <pid>80</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_sfeventmgt_domain_model_organisator>
+        <uid>1</uid>
+    </tx_sfeventmgt_domain_model_organisator>
+    <tx_sfeventmgt_domain_model_organisator>
+        <uid>2</uid>
+    </tx_sfeventmgt_domain_model_organisator>
+    <tx_sfeventmgt_domain_model_organisator>
+        <uid>3</uid>
+    </tx_sfeventmgt_domain_model_organisator>
+
 </dataset>

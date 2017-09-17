@@ -142,6 +142,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $searchDemand = null;
 
     /**
+     * Organisator
+     *
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
+     */
+    protected $organisator = null;
+
+    /**
      * Sets the displayMode
      *
      * @param string $displayMode Displaymode
@@ -510,4 +517,24 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->searchDemand = $searchDemand;
     }
 
+    /**
+     * Returns organisator
+     *
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Organisator
+     */
+    public function getOrganisator()
+    {
+        return $this->organisator;
+    }
+
+    /**
+     * Sets organisator
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Organisator $organisator
+     * @return void
+     */
+    public function setOrganisator($organisator)
+    {
+        $this->organisator = $organisator;
+    }
 }

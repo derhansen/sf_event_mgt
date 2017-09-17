@@ -105,7 +105,8 @@ class EventControllerTest extends UnitTestCase
             'orderFieldAllowed' => 'title',
             'orderDirection' => 'asc',
             'queryLimit' => 10,
-            'location' => 1
+            'location' => 1,
+            'organisator' => 1
         ];
 
         $mockDemand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
@@ -120,6 +121,7 @@ class EventControllerTest extends UnitTestCase
         $mockDemand->expects($this->at(7))->method('setOrderDirection')->with('asc');
         $mockDemand->expects($this->at(8))->method('setQueryLimit')->with(10);
         $mockDemand->expects($this->at(9))->method('setLocation')->with(1);
+        $mockDemand->expects($this->at(10))->method('setOrganisator')->with(1);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);

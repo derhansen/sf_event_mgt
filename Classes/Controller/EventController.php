@@ -168,6 +168,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $demand->setOrderDirection($settings['orderDirection']);
         $demand->setQueryLimit($settings['queryLimit']);
         $demand->setLocation($settings['location']);
+        $demand->setOrganisator($settings['organisator']);
         return $demand;
     }
 
