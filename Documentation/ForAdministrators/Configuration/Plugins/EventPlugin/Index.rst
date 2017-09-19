@@ -172,6 +172,18 @@ Tab settings
          location
 
  - :Property:
+         Organisator
+
+   :View:
+         List
+
+   :Description:
+         Restrict events to be shown by one organisator
+
+   :Key:
+         organisator
+
+ - :Property:
          Record storage page
 
    :View:

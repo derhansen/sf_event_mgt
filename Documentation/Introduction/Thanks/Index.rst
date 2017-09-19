@@ -26,3 +26,4 @@ Thanks from me to:
 * W52 MarketingKommunikation GmbH for sponsoring the waitlist, user registrations frontend plugin and e-mail attachments
 * New Communication GmbH & Co. KG for sponsoring and ideas
 * Tymoteusz Motylewski for implementing event speakers and other contributions
+* Gerd Müller from Vogt-Schild Druck AG for sponsoring organisator filtering
