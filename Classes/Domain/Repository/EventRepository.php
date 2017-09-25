@@ -178,19 +178,31 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setCategoryConstraint($query, $eventDemand, &$constraints)
     {
-        if ($eventDemand->getCategory() != '') {
-            $categoryConstraints = [];
-            if ($eventDemand->getIncludeSubcategories()) {
-                $categoryList = CategoryService::getCategoryListWithChilds($eventDemand->getCategory());
-                $categories = GeneralUtility::intExplode(',', $categoryList, true);
-            } else {
-                $categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), true);
-            }
-            foreach ($categories as $category) {
-                $categoryConstraints[] = $query->contains('category', $category);
-            }
-            if (count($categoryConstraints) > 0) {
-                $constraints[] = $query->logicalOr($categoryConstraints);
+        if ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getCategoryId() !== 0) {
+		    $categoryConstraints = [];
+	    	$categoryList = CategoryService::getCategoryListWithChilds($eventDemand->getSearchDemand()->getCategoryId());
+		    $categories = GeneralUtility::intExplode(',', $categoryList, true);
+		    foreach ($categories as $category) {
+			    $categoryConstraints[] = $query->contains('category', $category);
+		    }
+		    if (count($categoryConstraints) > 0) {
+			    $constraints[] = $query->logicalOr($categoryConstraints);
+		    }
+	    } else {
+            if ($eventDemand->getCategory() != '') {
+                $categoryConstraints = [];
+                if ($eventDemand->getIncludeSubcategories()) {
+                    $categoryList = CategoryService::getCategoryListWithChilds($eventDemand->getCategory());
+                    $categories = GeneralUtility::intExplode(',', $categoryList, true);
+                } else {
+                    $categories = GeneralUtility::intExplode(',', $eventDemand->getCategory(), true);
+                }
+                foreach ($categories as $category) {
+                    $categoryConstraints[] = $query->contains('category', $category);
+                }
+                if (count($categoryConstraints) > 0) {
+                    $constraints[] = $query->logicalOr($categoryConstraints);
+                }
             }
         }
     }
