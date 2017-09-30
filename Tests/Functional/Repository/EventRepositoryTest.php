@@ -162,59 +162,6 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * DataProvider for findDemandedRecordsByCategoryWithoutConjunction
-     *
-     * @return array
-     */
-    public function findDemandedRecordsByCategoryWithoutConjunctionDataProvider()
-    {
-        return [
-            'category 1' => [
-                '1',
-                false,
-                1
-            ],
-            'category 2' => [
-                '2',
-                false,
-                2
-            ],
-            'category 3' => [
-                '3',
-                false,
-                1
-            ],
-            'category 1,2,3,4' => [
-                '1,2,3,4',
-                false,
-                3
-            ],
-            'category 3 including subcategories' => [
-                '3',
-                true,
-                2
-            ]
-        ];
-    }
-
-    /**
-     * Test if category restiction without conjunction works
-     *
-     * @dataProvider findDemandedRecordsByCategoryWithoutConjunctionDataProvider
-     * @test
-     * @return void
-     */
-    public function findDemandedRecordsByCategoryWithoutConjunction($category, $includeSubcategory, $expected)
-    {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
-        $demand->setStoragePage(5);
-        $demand->setIncludeSubcategories($includeSubcategory);
-        $demand->setCategory($category);
-        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
-    }
-
-    /**
      * DataProvider for findDemandedRecordsByCategoryWithConjunction
      *
      * @return array
@@ -225,46 +172,61 @@ class EventRepositoryTest extends FunctionalTestCase
             'no conjuction' => [
                 '5',
                 '',
-                4
+                false,
+                5
             ],
-            'category 5 with AND' => [
+            'category 5 with AND - no subcategories' => [
                 '5',
                 'and',
+                false,
                 4
             ],
-            'category 5,6 with AND' => [
+            'category 5,6 with AND - no subcategories' => [
                 '5,6',
                 'and',
+                false,
                 3
             ],
-            'category 5,6,7 with AND' => [
+            'category 5,6,7 with AND - no subcategories' => [
                 '5,6,7',
                 'and',
+                false,
                 2
             ],
-            'category 5,6,7,8 with AND' => [
+            'category 5,6,7,8 with AND - no subcategories' => [
                 '5,6,7,8',
                 'and',
+                false,
                 1
             ],
-            'category 5,6 with OR' => [
+            'category 5,6 with OR - no subcategories' => [
                 '5,6',
                 'or',
+                false,
                 4
             ],
-            'category 7,8 with OR' => [
+            'category 7,8 with OR - no subcategories' => [
                 '7,8',
                 'or',
+                false,
                 2
             ],
-            'category 7,8 with NOTAND' => [
+            'category 7,8 with NOTAND - no subcategories' => [
                 '7,8',
                 'notand',
-                3
+                false,
+                4
             ],
-            'category 7,8 with NOTOR' => [
+            'category 7,8 with NOTOR - no subcategories' => [
                 '7,8',
                 'notor',
+                false,
+                3
+            ],
+            'category 8 with AND - with subcategories' => [
+                '8',
+                'or',
+                true,
                 2
             ],
         ];
@@ -277,13 +239,14 @@ class EventRepositoryTest extends FunctionalTestCase
      * @test
      * @return void
      */
-    public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $expected)
+    public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $includeSub, $expected)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setStoragePage(90);
         $demand->setCategoryConjunction($conjunction);
         $demand->setCategory($category);
+        $demand->setIncludeSubcategories($includeSub);
         $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 

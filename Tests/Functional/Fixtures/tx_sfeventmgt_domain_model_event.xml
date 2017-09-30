@@ -64,86 +64,6 @@
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
-    <!-- findRecordsByCategory -->
-    <!-- has 2 categories (1,2) -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>10</uid>
-        <pid>5</pid>
-        <description>test</description>
-        <link>link</link>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- has 1 categories (4)-->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>11</uid>
-        <pid>5</pid>
-        <description>test</description>
-        <link>link</link>
-    </tx_sfeventmgt_domain_model_event>
-    <!-- has 2 categories (2,3) -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>12</uid>
-        <pid>5</pid>
-        <description>test</description>
-        <link>link</link>
-    </tx_sfeventmgt_domain_model_event>
-
-    <sys_category>
-        <uid>1</uid>
-        <l10n_diffsource></l10n_diffsource>
-        <title>Category 1</title>
-        <description></description>
-    </sys_category>
-    <sys_category>
-        <uid>2</uid>
-        <l10n_diffsource></l10n_diffsource>
-        <title>Category 2</title>
-        <description></description>
-    </sys_category>
-    <sys_category>
-        <uid>3</uid>
-        <l10n_diffsource></l10n_diffsource>
-        <title>Category 3</title>
-        <description></description>
-    </sys_category>
-    <sys_category>
-        <uid>4</uid>
-        <parent>3</parent>
-        <l10n_diffsource></l10n_diffsource>
-        <title>Subcategory 3.1</title>
-        <description></description>
-    </sys_category>
-
-    <sys_category_record_mm>
-        <uid_local>1</uid_local>
-        <uid_foreign>10</uid_foreign>
-        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
-        <fieldname>category</fieldname>
-    </sys_category_record_mm>
-    <sys_category_record_mm>
-        <uid_local>2</uid_local>
-        <uid_foreign>10</uid_foreign>
-        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
-        <fieldname>category</fieldname>
-    </sys_category_record_mm>
-    <sys_category_record_mm>
-        <uid_local>4</uid_local>
-        <uid_foreign>11</uid_foreign>
-        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
-        <fieldname>category</fieldname>
-    </sys_category_record_mm>
-    <sys_category_record_mm>
-        <uid_local>2</uid_local>
-        <uid_foreign>12</uid_foreign>
-        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
-        <fieldname>category</fieldname>
-    </sys_category_record_mm>
-    <sys_category_record_mm>
-        <uid_local>3</uid_local>
-        <uid_foreign>12</uid_foreign>
-        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
-        <fieldname>category</fieldname>
-    </sys_category_record_mm>
-
     <!-- findRecordsByStartDate -->
     <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->
     <tx_sfeventmgt_domain_model_event>
@@ -470,6 +390,13 @@
         <description>test</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
+    <!-- has 9 (subcategory to 8) -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>94</uid>
+        <pid>90</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
 
     <sys_category>
         <uid>5</uid>
@@ -493,6 +420,13 @@
         <uid>8</uid>
         <l10n_diffsource></l10n_diffsource>
         <title>category 8</title>
+        <description></description>
+    </sys_category>
+    <sys_category>
+        <uid>9</uid>
+        <parent>8</parent>
+        <l10n_diffsource></l10n_diffsource>
+        <title>Subcategory 1 to category 8</title>
         <description></description>
     </sys_category>
 
@@ -556,6 +490,13 @@
     <sys_category_record_mm>
         <uid_local>8</uid_local>
         <uid_foreign>93</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+
+    <sys_category_record_mm>
+        <uid_local>9</uid_local>
+        <uid_foreign>94</uid_foreign>
         <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
         <fieldname>category</fieldname>
     </sys_category_record_mm>

@@ -196,22 +196,36 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $categoryConstraints[] = $query->contains('category', $category);
             }
             if (count($categoryConstraints) > 0) {
-                switch (strtolower($eventDemand->getCategoryConjunction())) {
-                    case 'and':
-                        $constraints[] = $query->logicalAnd($categoryConstraints);
-                        break;
-                    case 'notor':
-                        $constraints[] = $query->logicalNot($query->logicalOr($categoryConstraints));
-                        break;
-                    case 'notand':
-                        $constraints[] = $query->logicalNot($query->logicalAnd($categoryConstraints));
-                        break;
-                    case 'or':
-                    default:
-                        $constraints[] = $query->logicalOr($categoryConstraints);
-                }
+                $constraints[] = $this->getCategoryConstraint($query, $eventDemand, $categoryConstraints);
             }
         }
+    }
+
+    /**
+     * Returns the category constraint depending on the category conjunction configured in eventDemand
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+     * @param array $categoryConstraints
+     * @return mixed
+     */
+    public function getCategoryConstraint($query, $eventDemand, $categoryConstraints)
+    {
+        switch (strtolower($eventDemand->getCategoryConjunction())) {
+            case 'and':
+                $constraint = $query->logicalAnd($categoryConstraints);
+                break;
+            case 'notor':
+                $constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+                break;
+            case 'notand':
+                $constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+                break;
+            case 'or':
+            default:
+                $constraint = $query->logicalOr($categoryConstraints);
+        }
+        return $constraint;
     }
 
     /**
