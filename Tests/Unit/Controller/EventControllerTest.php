@@ -98,6 +98,7 @@ class EventControllerTest extends UnitTestCase
         $settings = [
             'displayMode' => 'all',
             'storagePage' => 1,
+            'categoryConjunction' => 'AND',
             'category' => 10,
             'includeSubcategories' => true,
             'topEventRestriction' => 2,
@@ -113,15 +114,16 @@ class EventControllerTest extends UnitTestCase
             [], [], '', false);
         $mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
         $mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
-        $mockDemand->expects($this->at(2))->method('setCategory')->with(10);
-        $mockDemand->expects($this->at(3))->method('setIncludeSubcategories')->with(true);
-        $mockDemand->expects($this->at(4))->method('setTopEventRestriction')->with(2);
-        $mockDemand->expects($this->at(5))->method('setOrderField')->with('title');
-        $mockDemand->expects($this->at(6))->method('setOrderFieldAllowed')->with('title');
-        $mockDemand->expects($this->at(7))->method('setOrderDirection')->with('asc');
-        $mockDemand->expects($this->at(8))->method('setQueryLimit')->with(10);
-        $mockDemand->expects($this->at(9))->method('setLocation')->with(1);
-        $mockDemand->expects($this->at(10))->method('setOrganisator')->with(1);
+        $mockDemand->expects($this->at(2))->method('setCategoryConjunction')->with('AND');
+        $mockDemand->expects($this->at(3))->method('setCategory')->with(10);
+        $mockDemand->expects($this->at(4))->method('setIncludeSubcategories')->with(true);
+        $mockDemand->expects($this->at(5))->method('setTopEventRestriction')->with(2);
+        $mockDemand->expects($this->at(6))->method('setOrderField')->with('title');
+        $mockDemand->expects($this->at(7))->method('setOrderFieldAllowed')->with('title');
+        $mockDemand->expects($this->at(8))->method('setOrderDirection')->with('asc');
+        $mockDemand->expects($this->at(9))->method('setQueryLimit')->with(10);
+        $mockDemand->expects($this->at(10))->method('setLocation')->with(1);
+        $mockDemand->expects($this->at(11))->method('setOrganisator')->with(1);
 
         $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
             [], [], '', false);

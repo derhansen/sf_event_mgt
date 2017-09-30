@@ -58,6 +58,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $includeSubcategories = false;
 
     /**
+     * Category Conjunction
+     *
+     * @var string
+     */
+    protected $categoryConjunction = '';
+
+    /**
      * Top event
      *
      * @var int
@@ -536,5 +543,26 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOrganisator($organisator)
     {
         $this->organisator = $organisator;
+    }
+
+    /**
+     * Returns categoryConjuction
+     *
+     * @return string
+     */
+    public function getCategoryConjunction()
+    {
+        return $this->categoryConjunction;
+    }
+
+    /**
+     * Sets categoryConjuction
+     *
+     * @param string $categoryConjunction
+     * @return void
+     */
+    public function setCategoryConjunction($categoryConjunction)
+    {
+        $this->categoryConjunction = $categoryConjunction;
     }
 }

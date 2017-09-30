@@ -162,11 +162,11 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * DataProvider for findDemandedRecordsByCategory
+     * DataProvider for findDemandedRecordsByCategoryWithoutConjunction
      *
      * @return array
      */
-    public function findDemandedRecordsByCategoryDataProvider()
+    public function findDemandedRecordsByCategoryWithoutConjunctionDataProvider()
     {
         return [
             'category 1' => [
@@ -198,19 +198,91 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * Test if category restiction works
+     * Test if category restiction without conjunction works
      *
-     * @dataProvider findDemandedRecordsByCategoryDataProvider
+     * @dataProvider findDemandedRecordsByCategoryWithoutConjunctionDataProvider
      * @test
      * @return void
      */
-    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
+    public function findDemandedRecordsByCategoryWithoutConjunction($category, $includeSubcategory, $expected)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setStoragePage(5);
         $demand->setIncludeSubcategories($includeSubcategory);
+        $demand->setCategory($category);
+        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+    }
 
+    /**
+     * DataProvider for findDemandedRecordsByCategoryWithConjunction
+     *
+     * @return array
+     */
+    public function findDemandedRecordsByCategoryWithConjunctionDataProvider()
+    {
+        return [
+            'no conjuction' => [
+                '5',
+                '',
+                4
+            ],
+            'category 5 with AND' => [
+                '5',
+                'and',
+                4
+            ],
+            'category 5,6 with AND' => [
+                '5,6',
+                'and',
+                3
+            ],
+            'category 5,6,7 with AND' => [
+                '5,6,7',
+                'and',
+                2
+            ],
+            'category 5,6,7,8 with AND' => [
+                '5,6,7,8',
+                'and',
+                1
+            ],
+            'category 5,6 with OR' => [
+                '5,6',
+                'or',
+                4
+            ],
+            'category 7,8 with OR' => [
+                '7,8',
+                'or',
+                2
+            ],
+            'category 7,8 with NOTAND' => [
+                '7,8',
+                'notand',
+                3
+            ],
+            'category 7,8 with NOTOR' => [
+                '7,8',
+                'notor',
+                2
+            ],
+        ];
+    }
+
+    /**
+     * Test if category restiction with conjunction works
+     *
+     * @dataProvider findDemandedRecordsByCategoryWithConjunctionDataProvider
+     * @test
+     * @return void
+     */
+    public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $expected)
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(90);
+        $demand->setCategoryConjunction($conjunction);
         $demand->setCategory($category);
         $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }

@@ -18,6 +18,7 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  * The repository for Events
@@ -44,7 +45,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function initializeObject()
     {
-        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
     }
 
@@ -178,6 +179,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setCategoryConstraint($query, $eventDemand, &$constraints)
     {
+        // If no category constraint is set, categories should not be respected in the query
+        if ($eventDemand->getCategoryConjunction() === '') {
+            return;
+        }
+
         if ($eventDemand->getCategory() != '') {
             $categoryConstraints = [];
             if ($eventDemand->getIncludeSubcategories()) {
@@ -190,7 +196,20 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $categoryConstraints[] = $query->contains('category', $category);
             }
             if (count($categoryConstraints) > 0) {
-                $constraints[] = $query->logicalOr($categoryConstraints);
+                switch (strtolower($eventDemand->getCategoryConjunction())) {
+                    case 'and':
+                        $constraints[] = $query->logicalAnd($categoryConstraints);
+                        break;
+                    case 'notor':
+                        $constraints[] = $query->logicalNot($query->logicalOr($categoryConstraints));
+                        break;
+                    case 'notand':
+                        $constraints[] = $query->logicalNot($query->logicalAnd($categoryConstraints));
+                        break;
+                    case 'or':
+                    default:
+                        $constraints[] = $query->logicalOr($categoryConstraints);
+                }
             }
         }
     }

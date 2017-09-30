@@ -441,4 +441,122 @@
         <uid>3</uid>
     </tx_sfeventmgt_domain_model_organisator>
 
+    <!-- findRecordsByCategoryWithConjunction -->
+    <!-- has category 5 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>90</uid>
+        <pid>90</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has category 5,6 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>91</uid>
+        <pid>90</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has category 5,6,7 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>92</uid>
+        <pid>90</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has category 5,6,7,8 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>93</uid>
+        <pid>90</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+
+    <sys_category>
+        <uid>5</uid>
+        <l10n_diffsource></l10n_diffsource>
+        <title>Category 5</title>
+        <description></description>
+    </sys_category>
+    <sys_category>
+        <uid>6</uid>
+        <l10n_diffsource></l10n_diffsource>
+        <title>Category 6</title>
+        <description></description>
+    </sys_category>
+    <sys_category>
+        <uid>7</uid>
+        <l10n_diffsource></l10n_diffsource>
+        <title>Category 7</title>
+        <description></description>
+    </sys_category>
+    <sys_category>
+        <uid>8</uid>
+        <l10n_diffsource></l10n_diffsource>
+        <title>category 8</title>
+        <description></description>
+    </sys_category>
+
+    <sys_category_record_mm>
+        <uid_local>5</uid_local>
+        <uid_foreign>90</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>5</uid_local>
+        <uid_foreign>91</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>5</uid_local>
+        <uid_foreign>92</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>5</uid_local>
+        <uid_foreign>93</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+
+    <sys_category_record_mm>
+        <uid_local>6</uid_local>
+        <uid_foreign>91</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>6</uid_local>
+        <uid_foreign>92</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>6</uid_local>
+        <uid_foreign>93</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+
+    <sys_category_record_mm>
+        <uid_local>7</uid_local>
+        <uid_foreign>92</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+    <sys_category_record_mm>
+        <uid_local>7</uid_local>
+        <uid_foreign>93</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
+
+    <sys_category_record_mm>
+        <uid_local>8</uid_local>
+        <uid_foreign>93</uid_foreign>
+        <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
+        <fieldname>category</fieldname>
+    </sys_category_record_mm>
 </dataset>

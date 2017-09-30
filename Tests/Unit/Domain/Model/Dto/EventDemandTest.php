@@ -353,4 +353,21 @@ class EventDemandTest extends UnitTestCase
         $this->subject->setDay(1);
         $this->assertSame(1, $this->subject->getDay());
     }
+
+    /**
+     * @test
+     */
+    public function getCategoryConjuctionReturnsInitialValue()
+    {
+        $this->assertSame('', $this->subject->getCategoryConjunction());
+    }
+
+    /**
+     * @test
+     */
+    public function getCategoryConjuctionSetsCategoryConjunctionForString()
+    {
+        $this->subject->setCategoryConjunction('AND');
+        $this->assertSame('AND', $this->subject->getCategoryConjunction());
+    }
 }

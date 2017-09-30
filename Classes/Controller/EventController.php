@@ -160,6 +160,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
         $demand->setDisplayMode($settings['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+        $demand->setCategoryConjunction($settings['categoryConjunction']);
         $demand->setCategory($settings['category']);
         $demand->setIncludeSubcategories($settings['includeSubcategories']);
         $demand->setTopEventRestriction((int)$settings['topEventRestriction']);
