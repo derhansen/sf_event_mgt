@@ -234,7 +234,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
  :header-rows: 1
 
  - :Property:
-         Detail pid
+         Detail Page
 
    :View:
          List, Registration
@@ -246,7 +246,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          detailPid
 
  - :Property:
-         List pid
+         List Page
 
    :View:
          List, Details, Registration
@@ -259,7 +259,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          listPid
 
  - :Property:
-         Registration pid
+         Registration Page
 
    :View:
          List, Details
@@ -271,7 +271,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          registrationPid
 
  - :Property:
-         Payment pid
+         Payment Page
 
    :View:
          Registration
