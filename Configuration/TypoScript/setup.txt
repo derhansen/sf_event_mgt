@@ -2,147 +2,147 @@
 # FE-Plugin configuration
 #==============================================
 plugin.tx_sfeventmgt {
-	mvc.callDefaultActionIfActionCantBeResolved = 1
-	persistence.updateReferenceIndex = 1
-	view {
-		templateRootPaths {
-			0 = EXT:sf_event_mgt/Resources/Private/Templates/
-			1 = {$plugin.tx_sfeventmgt.view.templateRootPath}
-		}
-		partialRootPaths {
-			0 = EXT:sf_event_mgt/Resources/Private/Partials/
-			1 = {$plugin.tx_sfeventmgt.view.partialRootPath}
-		}
-		layoutRootPaths {
-			0 = EXT:sf_event_mgt/Resources/Private/Layouts/
-			1 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
-		}
-	}
-	settings {
-		# List of uids, for which the cache should be cleared after registration data changed
-		# *MUST* be defined at template root level to work correct in scheduler task
-		clearCacheUids =
+    mvc.callDefaultActionIfActionCantBeResolved = 1
+    persistence.updateReferenceIndex = 1
+    view {
+        templateRootPaths {
+            0 = EXT:sf_event_mgt/Resources/Private/Templates/
+            1 = {$plugin.tx_sfeventmgt.view.templateRootPath}
+        }
+        partialRootPaths {
+            0 = EXT:sf_event_mgt/Resources/Private/Partials/
+            1 = {$plugin.tx_sfeventmgt.view.partialRootPath}
+        }
+        layoutRootPaths {
+            0 = EXT:sf_event_mgt/Resources/Private/Layouts/
+            1 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
+        }
+    }
+    settings {
+        # List of uids, for which the cache should be cleared after registration data changed
+        # *MUST* be defined at template root level to work correct in scheduler task
+        clearCacheUids =
 
-		orderFieldAllowed = uid,title,teaser,startdate,enddate,price,tstamp,crdate,category.title,location.title,location.city,location.country
-		list {
-			format = html
-			rss {
-				channel {
-					title = {$plugin.tx_sfeventmgt.rss.channel.title}
-					description = {$plugin.tx_sfeventmgt.rss.channel.description}
-					language = {$plugin.tx_sfeventmgt.rss.channel.language}
-					copyright = {$plugin.tx_sfeventmgt.rss.channel.copyright}
-					generator = {$plugin.tx_sfeventmgt.rss.channel.generator}
-					link = {$plugin.tx_sfeventmgt.rss.channel.link}
-				}
-			}
-		}
-		calendar {
-			firstDayOfWeek = 1
-			includeEventsForEveryDayOfAllCalendarWeeks = 1
-			showWeekNumber = 1
-		}
-		detail {
-			imageWidth = 200
-			imageHeight =
-		}
-		registration {
-			autoConfirmation = {$plugin.tx_sfeventmgt.settings.registration.autoConfirmation}
-			deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
-			formatDateOfBirth = {$plugin.tx_sfeventmgt.settings.registration.formatDateOfBirth}
-			# The fields firstname, lastname and email are always required and cannot be overridden
-			requiredFields =
-			# Prefill fields - registration field = fe_user field
-			prefillFields {
-				firstname = first_name
-				lastname = last_name
-				address = address
-				zip = zip
-				city = city
-				country = country
-				email = email
-				phone = telephone
-				gender = gender
-			}
-		}
-		confirmation {
-			linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
-		}
-		event {
-			errorHandling = showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
-		}
-		notification {
-			senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
-			senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
-			senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
-			adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
-			registrationNew {
-				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.userSubject}
-				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.adminSubject}
-			}
-			registrationWaitlistNew {
-				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew.userSubject}
-				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew.adminSubject}
-			}
-			registrationConfirmed {
-				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.userSubject}
-				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.adminSubject}
-			}
-			registrationWaitlistConfirmed {
-				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed.userSubject}
-				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed.adminSubject}
-			}
-			registrationCancelled {
-				userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.userSubject}
-				adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.adminSubject}
-			}
-		}
-		reCaptcha {
-			apiUrl = https://www.google.com/recaptcha/api.js
-		  	siteKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.siteKey}
-			secretKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.secretKey}
-		}
-		search {
-			fields = {$plugin.tx_sfeventmgt.settings.search.fields}
-			dateFormat = {$plugin.tx_sfeventmgt.settings.search.dateFormat}
-			adjustTime = {$plugin.tx_sfeventmgt.settings.search.adjustTime}
-		}
-	}
+        orderFieldAllowed = uid,title,teaser,startdate,enddate,price,tstamp,crdate,category.title,location.title,location.city,location.country
+        list {
+            format = html
+            rss {
+                channel {
+                    title = {$plugin.tx_sfeventmgt.rss.channel.title}
+                    description = {$plugin.tx_sfeventmgt.rss.channel.description}
+                    language = {$plugin.tx_sfeventmgt.rss.channel.language}
+                    copyright = {$plugin.tx_sfeventmgt.rss.channel.copyright}
+                    generator = {$plugin.tx_sfeventmgt.rss.channel.generator}
+                    link = {$plugin.tx_sfeventmgt.rss.channel.link}
+                }
+            }
+        }
+        calendar {
+            firstDayOfWeek = 1
+            includeEventsForEveryDayOfAllCalendarWeeks = 1
+            showWeekNumber = 1
+        }
+        detail {
+            imageWidth = 200
+            imageHeight =
+        }
+        registration {
+            autoConfirmation = {$plugin.tx_sfeventmgt.settings.registration.autoConfirmation}
+            deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
+            formatDateOfBirth = {$plugin.tx_sfeventmgt.settings.registration.formatDateOfBirth}
+            # The fields firstname, lastname and email are always required and cannot be overridden
+            requiredFields =
+            # Prefill fields - registration field = fe_user field
+            prefillFields {
+                firstname = first_name
+                lastname = last_name
+                address = address
+                zip = zip
+                city = city
+                country = country
+                email = email
+                phone = telephone
+                gender = gender
+            }
+        }
+        confirmation {
+            linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
+        }
+        event {
+            errorHandling = showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
+        }
+        notification {
+            senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
+            senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
+            senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
+            adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
+            registrationNew {
+                userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.userSubject}
+                adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.adminSubject}
+            }
+            registrationWaitlistNew {
+                userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew.userSubject}
+                adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew.adminSubject}
+            }
+            registrationConfirmed {
+                userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.userSubject}
+                adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationConfirmed.adminSubject}
+            }
+            registrationWaitlistConfirmed {
+                userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed.userSubject}
+                adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed.adminSubject}
+            }
+            registrationCancelled {
+                userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.userSubject}
+                adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.adminSubject}
+            }
+        }
+        reCaptcha {
+            apiUrl = https://www.google.com/recaptcha/api.js
+              siteKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.siteKey}
+            secretKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.secretKey}
+        }
+        search {
+            fields = {$plugin.tx_sfeventmgt.settings.search.fields}
+            dateFormat = {$plugin.tx_sfeventmgt.settings.search.dateFormat}
+            adjustTime = {$plugin.tx_sfeventmgt.settings.search.adjustTime}
+        }
+    }
 }
 
 #==============================================
 # BE-module configuration for EXT:sf_event_mgt
 #==============================================
 module.tx_sfeventmgt {
-	view < plugin.tx_sfeventmgt.view
-	settings {
-		csvExport {
-			fields = {$module.tx_sfeventmgt.settings.csvExport.fields}
-			fieldDelimiter = {$module.tx_sfeventmgt.settings.csvExport.fieldDelimiter}
-			fieldQuoteCharacter = {$module.tx_sfeventmgt.settings.csvExport.fieldQuoteCharacter}
+    view < plugin.tx_sfeventmgt.view
+    settings {
+        csvExport {
+            fields = {$module.tx_sfeventmgt.settings.csvExport.fields}
+            fieldDelimiter = {$module.tx_sfeventmgt.settings.csvExport.fieldDelimiter}
+            fieldQuoteCharacter = {$module.tx_sfeventmgt.settings.csvExport.fieldQuoteCharacter}
 
-		}
-		list {
-			itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}
-		}
-		search {
-			dateFormat = {$module.tx_sfeventmgt.settings.search.dateFormat}
-			fields = {$module.tx_sfeventmgt.settings.search.fields}
-		}
-		registration {
-			deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
-		}
-		notification {
-			senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
-			senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
-			senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
-			customNotifications {
-				thanksForParticipation {
-					title = Thank you message
-					template = ThanksForParticipation.html
-					subject = Thank you for participation
-				}
-			}
-		}
-	}
+        }
+        list {
+            itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}
+        }
+        search {
+            dateFormat = {$module.tx_sfeventmgt.settings.search.dateFormat}
+            fields = {$module.tx_sfeventmgt.settings.search.fields}
+        }
+        registration {
+            deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
+        }
+        notification {
+            senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
+            senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
+            senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
+            customNotifications {
+                thanksForParticipation {
+                    title = Thank you message
+                    template = ThanksForParticipation.html
+                    subject = Thank you for participation
+                }
+            }
+        }
+    }
 }

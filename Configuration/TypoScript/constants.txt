@@ -2,118 +2,117 @@
 # FE-Plugin configuration
 #==============================================
 plugin.tx_sfeventmgt {
-	view {
-		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:sf_event_mgt/Resources/Private/Templates/
-		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:sf_event_mgt/Resources/Private/Partials/
-		# cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:sf_event_mgt/Resources/Private/Layouts/
-	}
-	settings {
-		registration {
-			# cat=plugin.tx_sfeventmgt/a; type=boolean; label=New registrations are automatically confirmed
-			autoConfirmation = 0
-			# cat=plugin.tx_sfeventmgt/a; type=boolean; label=Delete expired registrations
-			deleteExpiredRegistrations = 0
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validation format for date of birth
-			formatDateOfBirth = d.m.Y
-		}
-		confirmation {
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Validity of confirmation link in seconds
-			linkValidity = 3600
-		}
-		notification {
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
-			senderEmail =
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
-			senderName =
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
-			senderSignature =
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
-			adminEmail =
-			registrationNew {
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration
-				userSubject = Your event registration
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration
-				adminSubject = New unconfirmed event registration
-			}
-			registrationWaitlistNew {
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration on the waitlist
-				userSubject = Your event registration on the waitlist
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration on the waitlist
-				adminSubject = New unconfirmed event registration on the waitlist
-			}
-			registrationConfirmed {
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration
-				userSubject = Event registration successful
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration
-				adminSubject = Event registration confirmed
-			}
-			registrationWaitlistConfirmed {
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration on the waitlist
-				userSubject = Event registration on the waitlist successful
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration on the waitlist
-				adminSubject = Event registration on the waitlist confirmed
-			}
-			registrationCancelled {
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on cancelled registration
-				userSubject = Event registration cancelled successful
-				# cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on cancelled registration
-				adminSubject = Event registration cancelled
-			}
-		}
-		reCaptcha {
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
-		  	siteKey =
-		  	# cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
-			secretKey =
-		}
-		search {
-			fields = title, teaser
-			dateFormat = Y-m-d
-			adjustTime = 1
-		}
-	}
-	rss.channel {
-		title = Feed title
-		description =
-		link = http://domain.tld/
-		language = en-gb
-		copyright = TYPO3 Event management and registration
-		category =
-		generator = TYPO3 EXT:sf_event_mgt
-	}
+    view {
+        # cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:sf_event_mgt/Resources/Private/Templates/
+        # cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:sf_event_mgt/Resources/Private/Partials/
+        # cat=plugin.tx_sfeventmgt/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:sf_event_mgt/Resources/Private/Layouts/
+    }
+    settings {
+        registration {
+            # cat=plugin.tx_sfeventmgt/a; type=boolean; label=New registrations are automatically confirmed
+            autoConfirmation = 0
+            # cat=plugin.tx_sfeventmgt/a; type=boolean; label=Delete expired registrations
+            deleteExpiredRegistrations = 0
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Validation format for date of birth
+            formatDateOfBirth = d.m.Y
+        }
+        confirmation {
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Validity of confirmation link in seconds
+            linkValidity = 3600
+        }
+        notification {
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
+            senderEmail =
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
+            senderName =
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
+            senderSignature =
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
+            adminEmail =
+            registrationNew {
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration
+                userSubject = Your event registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration
+                adminSubject = New unconfirmed event registration
+            }
+            registrationWaitlistNew {
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration on the waitlist
+                userSubject = Your event registration on the waitlist
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration on the waitlist
+                adminSubject = New unconfirmed event registration on the waitlist
+            }
+            registrationConfirmed {
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration
+                userSubject = Event registration successful
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration
+                adminSubject = Event registration confirmed
+            }
+            registrationWaitlistConfirmed {
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration on the waitlist
+                userSubject = Event registration on the waitlist successful
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration on the waitlist
+                adminSubject = Event registration on the waitlist confirmed
+            }
+            registrationCancelled {
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on cancelled registration
+                userSubject = Event registration cancelled successful
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on cancelled registration
+                adminSubject = Event registration cancelled
+            }
+        }
+        reCaptcha {
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
+              siteKey =
+              # cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
+            secretKey =
+        }
+        search {
+            fields = title, teaser
+            dateFormat = Y-m-d
+            adjustTime = 1
+        }
+    }
+    rss.channel {
+        title = Feed title
+        description =
+        link = http://domain.tld/
+        language = en-gb
+        copyright = TYPO3 Event management and registration
+        category =
+        generator = TYPO3 EXT:sf_event_mgt
+    }
 }
 
 #==============================================
 # BE-module configuration for EXT:sf_event_mgt
 #==============================================
 module.tx_sfeventmgt {
-	settings {
-		csvExport {
-			# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
-			fields = uid, gender, firstname, lastname, title, company, email, address, zip, city, country
-			# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list delimiter
-			fieldDelimiter = ,
-			# cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list quote character
-			fieldQuoteCharacter = "
-
-		}
-		list {
-			itemsPerPage = 10
-		}
-		search {
-			dateFormat = d.m.Y H:i
-			fields = title, teaser
-		}
-		notification {
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
-			senderEmail =
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
-			senderName =
-			# cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
-			senderSignature =
-		}
-	}
+    settings {
+        csvExport {
+            # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
+            fields = uid, gender, firstname, lastname, title, company, email, address, zip, city, country
+            # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list delimiter
+            fieldDelimiter = ,
+            # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list quote character
+            fieldQuoteCharacter = "
+        }
+        list {
+            itemsPerPage = 10
+        }
+        search {
+            dateFormat = d.m.Y H:i
+            fields = title, teaser
+        }
+        notification {
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
+            senderEmail =
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
+            senderName =
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
+            senderSignature =
+        }
+    }
 }
