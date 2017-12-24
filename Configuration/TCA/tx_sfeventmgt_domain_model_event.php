@@ -630,7 +630,7 @@ return [
                 ],
                 'maxitems' => 9999,
                 'appearance' => [
-                    'collapseAll' => 1,
+                    'expandSingle' => 1,
                     'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
@@ -652,7 +652,7 @@ return [
                 ],
                 'maxitems' => 9999,
                 'appearance' => [
-                    'collapseAll' => 1,
+                    'expandSingle' => 1,
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
@@ -695,7 +695,7 @@ return [
                 'foreign_default_sortby' => 'valid_until DESC',
                 'maxitems' => 100,
                 'appearance' => [
-                    'collapseAll' => 1,
+                    'expandSingle' => 1,
                     'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
