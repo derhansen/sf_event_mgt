@@ -8,7 +8,9 @@ return [
         'cruser_id' => 'cruser_id',
         'searchFields' => 'title,',
         'hideTable' => true,
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/logfile.png'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-logfile'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => '',

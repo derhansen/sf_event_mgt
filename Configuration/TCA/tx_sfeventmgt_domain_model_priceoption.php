@@ -23,7 +23,9 @@ return [
             'fe_group' => 'fe_group',
         ],
         'searchFields' => 'price,',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_priceoption.png'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-priceoption'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, price, valid_until',

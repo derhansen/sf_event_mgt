@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96px" height="96px" viewBox="0 0 96 96" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Location</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Location" fill="#666666" fill-rule="nonzero">
+            <g id="map-marker-alt" transform="translate(13.000000, 0.000000)">
+                <path d="M31.8516354,93.0832781 C4.98664062,53.9998794 0,49.988728 0,35.6249913 C0,15.949791 15.8938307,0 35.5,0 C55.1061693,0 71,15.949791 71,35.6249913 C71,49.988728 66.0133594,53.9998794 39.1483646,93.0832781 C37.3853828,95.6390001 33.6144323,95.6388145 31.8516354,93.0832781 Z M36.1339286,50.6666667 C44.1864776,50.6666667 50.7142857,44.1449879 50.7142857,36.1 C50.7142857,28.0550121 44.1864776,21.5333333 36.1339286,21.5333333 C28.0813796,21.5333333 21.5535714,28.0550121 21.5535714,36.1 C21.5535714,44.1449879 28.0813796,50.6666667 36.1339286,50.6666667 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
