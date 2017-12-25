@@ -140,7 +140,7 @@ module.tx_sfeventmgt {
                 thanksForParticipation {
                     title = Thank you message
                     template = ThanksForParticipation.html
-                    subject = Thank you for participation
+                    subject = Thank you for participation in event "{event.title}"
                 }
             }
         }

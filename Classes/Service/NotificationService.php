@@ -172,6 +172,13 @@ class NotificationService
 
         if (!$registration->isIgnoreNotifications()) {
             $body = $this->getNotificationBody($event, $registration, $template, $settings);
+            $subject = $this->fluidStandaloneService->fluidParseString(
+                $subject,
+                [
+                    'event' => $event,
+                    'registration' => $registration
+                ]
+            );
             $attachments = $this->attachmentService->getAttachments(
                 $settings,
                 $registration,
@@ -255,6 +262,13 @@ class NotificationService
 
         $allEmailsSent = true;
         $body = $this->getNotificationBody($event, $registration, $template, $settings);
+        $subject = $this->fluidStandaloneService->fluidParseString(
+            $subject,
+            [
+                'event' => $event,
+                'registration' => $registration
+            ]
+        );
         $attachments = $this->attachmentService->getAttachments(
             $settings,
             $registration,

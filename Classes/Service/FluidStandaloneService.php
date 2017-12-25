@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Database\DatabaseConnection;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -147,5 +148,32 @@ class FluidStandaloneService
         $emailView->assignMultiple($variables);
         $emailBody = $emailView->render();
         return $emailBody;
+    }
+
+    /**
+     * Parses the given string with Fluid View
+     *
+     * @param string $string Any string
+     * @param array $variables Variables
+     * @return string Parsed string
+     */
+    public function fluidParseString($string, $variables = [])
+    {
+        if (empty($string) || empty(self::getDatabaseConnection())) {
+            return $string;
+        }
+        /** @var StandaloneView $standaloneView */
+        $standaloneView = $this->objectManager->get(StandaloneView::class);
+        $standaloneView->setTemplateSource($string);
+        $standaloneView->assignMultiple($variables);
+        return $standaloneView->render();
+    }
+
+    /**
+     * @return DatabaseConnection
+     */
+    protected static function getDatabaseConnection()
+    {
+        return $GLOBALS['TYPO3_DB'];
     }
 }

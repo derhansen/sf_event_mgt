@@ -228,6 +228,8 @@ Search view
 Notification views
 ~~~~~~~~~~~~~~~~~~
 
+The following objects can be used in notification views
+
 .. t3-field-list-table::
  :header-rows: 1
 
@@ -266,6 +268,32 @@ Notification views
 
    :Description:
          Appended HMAC for the registration UID
+
+E-Mail subjects
+~~~~~~~~~~~~~~~
+
+The following objects can be used in e-mail subjects for event registration and custom notifications
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+         Description:
+
+ - :Object:
+         {event}
+
+   :Description:
+         An object holding the event for a registration
+
+ - :Object:
+         {registration}
+
+   :Description:
+         An object holding the registration
 
 Registration message views
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
