@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \DERHANSEN\SfEventMgt\Exception;
 
@@ -29,7 +31,6 @@ class ExportService
      * Repository with registrations for the events
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
      */
     protected $registrationRepository;
 
@@ -37,9 +38,20 @@ class ExportService
      * ResourceFactory
      *
      * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-     * @inject
      */
     protected $resourceFactory = null;
+
+    /**
+     * ExportService constructor.
+     *
+     * @param RegistrationRepository $registrationRepository
+     * @param ResourceFactory $resourceFactory
+     */
+    public function __construct(RegistrationRepository $registrationRepository, ResourceFactory $resourceFactory)
+    {
+        $this->registrationRepository = $registrationRepository;
+        $this->resourceFactory = $resourceFactory;
+    }
 
     /**
      * Initiates the CSV downloads for registrations of the given event uid
@@ -75,8 +87,11 @@ class ExportService
     {
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
         $registrations = $this->registrationRepository->findByEvent($eventUid);
-        $exportedRegistrations = GeneralUtility::csvValues($fieldsArray,
-                $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
+        $exportedRegistrations = GeneralUtility::csvValues(
+            $fieldsArray,
+            $settings['fieldDelimiter'],
+            $settings['fieldQuoteCharacter']
+        ) . chr(10);
         foreach ($registrations as $registration) {
             $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
@@ -87,12 +102,30 @@ class ExportService
                         ' is not a Property of Model Registration, please check your TS configuration', 1475590002);
                 }
             }
-            $exportedRegistrations .= GeneralUtility::csvValues($exportedRegistration,
-                    $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
+            $exportedRegistrations .= GeneralUtility::csvValues(
+                $exportedRegistration,
+                $settings['fieldDelimiter'],
+                $settings['fieldQuoteCharacter']
+            ) . chr(10);
+        }
+        return $this->prependByteOrderMark($exportedRegistrations, $settings);
+    }
+
+    /**
+     * Prepends Byte Order Mark to exported registrations
+     *
+     * @param string $exportedRegistrations
+     * @param array $settings
+     * @return string
+     */
+    protected function prependByteOrderMark($exportedRegistrations, $settings)
+    {
+        if ((bool)$settings['prependBOM']) {
+            $exportedRegistrations = chr(239) . chr(187) . chr(191) . $exportedRegistrations;
         }
         return $exportedRegistrations;
     }
-
+    
     /**
      * Returns the requested field from the given registration. If the field is a DateTime object,
      * a formatted date string is returned

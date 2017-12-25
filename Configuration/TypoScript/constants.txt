@@ -98,6 +98,8 @@ module.tx_sfeventmgt {
             fieldDelimiter = ,
             # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list quote character
             fieldQuoteCharacter = "
+            # cat=module.tx_sfeventmgt//a; type=boolean; label=Prepend UTF-8 BOM to export
+            prependBOM = 0
         }
         list {
             itemsPerPage = 10

@@ -120,7 +120,7 @@ module.tx_sfeventmgt {
             fields = {$module.tx_sfeventmgt.settings.csvExport.fields}
             fieldDelimiter = {$module.tx_sfeventmgt.settings.csvExport.fieldDelimiter}
             fieldQuoteCharacter = {$module.tx_sfeventmgt.settings.csvExport.fieldQuoteCharacter}
-
+            prependBOM = {$module.tx_sfeventmgt.settings.csvExport.prependBOM}
         }
         list {
             itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}

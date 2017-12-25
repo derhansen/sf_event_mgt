@@ -602,6 +602,19 @@ module.tx_sfeventmgt
          "
 
  - :Property:
+         settings.csvExport.prependBOM
+
+   :Date type:
+         Boolean
+
+   :Description:
+         Prepend UTF-8 BOM to export. Switch this setting on, of you have problems when opening the exported CSV file
+         with Microsoft Excel
+
+   :Default:
+         false
+
+ - :Property:
          settings.list.itemsPerPage
 
    :Date type:

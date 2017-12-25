@@ -14,9 +14,13 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use \DERHANSEN\SfEventMgt\Exception;
 use \DERHANSEN\SfEventMgt\Service\ExportService;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Resource\StorageRepository;
 
 /**
  * Class ExportServiceTest
@@ -31,9 +35,6 @@ class ExportServiceTest extends UnitTestCase
      */
     protected $subject = null;
 
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository */
-    protected $registrationRepository;
-
     /**
      * Setup
      *
@@ -41,7 +42,9 @@ class ExportServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new ExportService();
+        $registrationRepository = $this->getMock(RegistrationRepository::class, [], [], '', false);
+        $resourceFactory = $this->getMock(ResourceFactory::class, [], [], '', false);
+        $this->subject = new ExportService($registrationRepository, $resourceFactory);
     }
 
     /**
@@ -82,7 +85,8 @@ class ExportServiceTest extends UnitTestCase
                 [
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ',',
-                    'fieldQuoteCharacter' => '"'
+                    'fieldQuoteCharacter' => '"',
+                    'prependBOM' => 0
                 ],
                 '"uid","firstname","lastname"' . chr(10) . '"1","Max","Mustermann"' . chr(10)
             ],
@@ -91,7 +95,8 @@ class ExportServiceTest extends UnitTestCase
                 [
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ',',
-                    'fieldQuoteCharacter' => '"'
+                    'fieldQuoteCharacter' => '"',
+                    'prependBOM' => 0
                 ],
                 '"uid","firstname","lastname"' . chr(10) . '"1","Max","Mustermann"' . chr(10)
             ],
@@ -100,7 +105,8 @@ class ExportServiceTest extends UnitTestCase
                 [
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ';',
-                    'fieldQuoteCharacter' => '"'
+                    'fieldQuoteCharacter' => '"',
+                    'prependBOM' => 0
                 ],
                 '"uid";"firstname";"lastname"' . chr(10) . '"1";"Max";"Mustermann"' . chr(10)
             ],
@@ -109,9 +115,20 @@ class ExportServiceTest extends UnitTestCase
                 [
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ',',
-                    'fieldQuoteCharacter' => '\''
+                    'fieldQuoteCharacter' => '\'',
+                    'prependBOM' => 0
                 ],
                 '\'uid\',\'firstname\',\'lastname\'' . chr(10) . '\'1\',\'Max\',\'Mustermann\'' . chr(10)
+            ],
+            'fieldValuesWithBomSetting' => [
+                1,
+                [
+                    'fields' => 'uid, firstname, lastname',
+                    'fieldDelimiter' => ';',
+                    'fieldQuoteCharacter' => '"',
+                    'prependBOM' => 1
+                ],
+                chr(239) . chr(187) . chr(191) . '"uid";"firstname";"lastname"' . chr(10) . '"1";"Max";"Mustermann"' . chr(10)
             ],
         ];
     }
@@ -123,8 +140,7 @@ class ExportServiceTest extends UnitTestCase
      */
     public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel()
     {
-        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            ['_hasProperty'], [], '', false);
+        $mockRegistration = $this->getMock(Registration::class, ['_hasProperty'], [], '', false);
         $mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
             $this->equalTo('uid'))->will($this->returnValue(true));
         $mockRegistration->expects($this->at(1))->method('_hasProperty')->with(
@@ -137,10 +153,14 @@ class ExportServiceTest extends UnitTestCase
 
         $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\Registration',
             ['findByEvent'], [], '', false);
-        $registrationRepository->expects($this->once())->method('findByEvent')->will($this->returnValue($allRegistrations));
+        $registrationRepository->expects($this->once())->method('findByEvent')->will(
+            $this->returnValue($allRegistrations)
+        );
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $this->subject->exportRegistrationsCsv(1, [
+        $this->subject->exportRegistrationsCsv(
+            1,
+            [
                 'fields' => 'uid, firstname, wrongfield',
                 'fieldDelimiter' => ',',
                 'fieldQuoteCharacter' => '"'
@@ -154,8 +174,7 @@ class ExportServiceTest extends UnitTestCase
      */
     public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected)
     {
-        $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            ['_hasProperty', '_getCleanProperty'], [], '', false);
+        $mockRegistration = $this->getMock(Registration::class, ['_hasProperty', '_getCleanProperty'], [], '', false);
         $mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
             $this->equalTo('uid'))->will($this->returnValue(true));
         $mockRegistration->expects($this->at(2))->method('_hasProperty')->with(
@@ -172,8 +191,7 @@ class ExportServiceTest extends UnitTestCase
         $allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $allRegistrations->attach($mockRegistration);
 
-        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\Registration',
-            ['findByEvent'], [], '', false);
+        $registrationRepository = $this->getMock(RegistrationRepository::class, ['findByEvent'], [], '', false);
         $registrationRepository->expects($this->once())->method('findByEvent')->will(
             $this->returnValue($allRegistrations));
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
@@ -189,8 +207,7 @@ class ExportServiceTest extends UnitTestCase
      */
     public function downloadRegistrationsCsvThrowsExceptionIfDefaultStorageNotFound()
     {
-        $mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
-            [], [], '', false);
+        $mockResourceFactory = $this->getMock(ResourceFactory::class, [], [], '', false);
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(null));
         $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
         $this->subject->downloadRegistrationsCsv(1, ['settings']);
@@ -202,22 +219,21 @@ class ExportServiceTest extends UnitTestCase
      */
     public function downloadRegistrationsCsvDumpsRegistrationsContent()
     {
-        $mockExportService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ExportService',
-            ['exportRegistrationsCsv'], [], '', false);
+        $mockExportService = $this->getMock(ExportService::class, ['exportRegistrationsCsv'], [], '', false);
         $mockExportService->expects($this->once())->method('exportRegistrationsCsv')->will(
-            $this->returnValue('CSV-DATA'));
+            $this->returnValue('CSV-DATA')
+        );
 
         $mockFile = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', [], [], '', false);
         $mockFile->expects($this->once())->method('setContents')->with('CSV-DATA');
 
-        $mockStorageRepository = $this->getMock('TYPO3\CMS\Core\Resource\StorageRepository',
+        $mockStorageRepository = $this->getMock(StorageRepository::class,
             ['getFolder', 'createFile', 'dumpFileContents'], [], '', false);
         $mockStorageRepository->expects($this->at(0))->method('getFolder')->with('_temp_');
         $mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
         $mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
 
-        $mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
-            ['getDefaultStorage'], [], '', false);
+        $mockResourceFactory = $this->getMock(ResourceFactory::class, ['getDefaultStorage'], [], '', false);
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
             $this->returnValue($mockStorageRepository));
         $this->inject($mockExportService, 'resourceFactory', $mockResourceFactory);
