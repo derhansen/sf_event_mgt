@@ -131,9 +131,10 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            ['getTemplatePath', 'renderTemplate'], [], '', false);
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -169,9 +170,10 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            ['getTemplatePath', 'renderTemplate'], [], '', false);
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -210,9 +212,10 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            ['getTemplatePath', 'renderTemplate'], [], '', false);
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
@@ -261,10 +264,12 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            ['getTemplatePath', 'renderTemplate'], [], '', false);
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
+
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -333,10 +338,12 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            ['getTemplatePath', 'renderTemplate'], [], '', false);
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
+
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -377,8 +384,10 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
-            [], [], '', false);
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);

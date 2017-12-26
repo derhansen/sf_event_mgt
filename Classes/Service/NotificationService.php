@@ -172,7 +172,7 @@ class NotificationService
 
         if (!$registration->isIgnoreNotifications()) {
             $body = $this->getNotificationBody($event, $registration, $template, $settings);
-            $subject = $this->fluidStandaloneService->fluidParseString(
+            $subject = $this->fluidStandaloneService->parseStringFluid(
                 $subject,
                 [
                     'event' => $event,
@@ -262,7 +262,7 @@ class NotificationService
 
         $allEmailsSent = true;
         $body = $this->getNotificationBody($event, $registration, $template, $settings);
-        $subject = $this->fluidStandaloneService->fluidParseString(
+        $subject = $this->fluidStandaloneService->parseStringFluid(
             $subject,
             [
                 'event' => $event,

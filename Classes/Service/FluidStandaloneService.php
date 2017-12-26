@@ -157,7 +157,7 @@ class FluidStandaloneService
      * @param array $variables Variables
      * @return string Parsed string
      */
-    public function fluidParseString($string, $variables = [])
+    public function parseStringFluid($string, $variables = [])
     {
         if (empty($string) || empty(self::getDatabaseConnection())) {
             return $string;
