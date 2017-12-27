@@ -14,8 +14,11 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Exception;
+use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\ICalendarService.
@@ -57,16 +60,13 @@ class ICalendarServiceTest extends UnitTestCase
      */
     public function downloadiCalendarFileThrowsExceptionIfNoDefaultStorageFound()
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
-            [], [], '', false);
+        $mockEvent = $this->getMock(Event::class, [], [], '', false);
 
-        $mockIcalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
-            ['getiCalendarContent'], [], '', false);
+        /** @var ICalendarService $mockIcalendarService */
+        $mockIcalendarService = $this->getMock(ICalendarService::class, ['getiCalendarContent'], [], '', false);
 
-        $mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
-            ['getDefaultStorage'], [], '', false);
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
-            $this->returnValue(null));
+        $mockResourceFactory = $this->getMock(ResourceFactory::class, ['getDefaultStorage'], [], '', false);
+        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(null));
         $this->inject($mockIcalendarService, 'resourceFactory', $mockResourceFactory);
 
         $mockIcalendarService->downloadiCalendarFile($mockEvent);
@@ -78,10 +78,10 @@ class ICalendarServiceTest extends UnitTestCase
      */
     public function downloadiCalendarFileDumpsCsvFile()
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
+        $mockEvent = $this->getMock(Event::class,
             [], [], '', false);
 
-        $mockICalendarService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ICalendarService',
+        $mockICalendarService = $this->getMock(ICalendarService::class,
             ['getiCalendarContent'], [], '', false);
         $mockICalendarService->expects($this->once())->method('getiCalendarContent')->with($mockEvent)->will(
             $this->returnValue('iCalendar Data'));
@@ -95,7 +95,7 @@ class ICalendarServiceTest extends UnitTestCase
         $mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
         $mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
 
-        $mockResourceFactory = $this->getMock('TYPO3\\CMS\\Core\\Resource\\ResourceFactory',
+        $mockResourceFactory = $this->getMock(ResourceFactory::class,
             ['getDefaultStorage'], [], '', false);
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
             $this->returnValue($mockStorageRepository));
@@ -112,7 +112,7 @@ class ICalendarServiceTest extends UnitTestCase
     {
         $_SERVER['HTTP_HOST'] = 'myhostname.tld';
 
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event',
+        $mockEvent = $this->getMock(Event::class,
             [], [], '', false);
 
         $iCalendarView = $this->getMock('TYPO3\\CMS\\Fluid\\View\\StandaloneView', [], [], '', false);

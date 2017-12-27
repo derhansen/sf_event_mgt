@@ -25,12 +25,10 @@ use \DERHANSEN\SfEventMgt\Exception;
  */
 class ICalendarService
 {
-
     /**
      * The object manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
      */
     protected $objectManager;
 
@@ -38,7 +36,6 @@ class ICalendarService
      * The configuration manager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-     * @inject
      */
     protected $configurationManager;
 
@@ -46,7 +43,6 @@ class ICalendarService
      * ResourceFactory
      *
      * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-     * @inject
      */
     protected $resourceFactory = null;
 
@@ -54,9 +50,50 @@ class ICalendarService
      * FluidStandaloneService
      *
      * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
-     * @inject
      */
     protected $fluidStandaloneService;
+
+    /**
+     * DI for $configurationManager
+     *
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+     */
+    public function injectConfigurationManager(
+        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+    ) {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * DI for $fluidStandaloneService
+     *
+     * @param FluidStandaloneService $fluidStandaloneService
+     */
+    public function injectFluidStandaloneService(
+        \DERHANSEN\SfEventMgt\Service\FluidStandaloneService $fluidStandaloneService
+    ) {
+        $this->fluidStandaloneService = $fluidStandaloneService;
+    }
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
+    /**
+     * DI for $resourceFactory
+     *
+     * @param \TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory
+     */
+    public function injectResourceFactory(\TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory)
+    {
+        $this->resourceFactory = $resourceFactory;
+    }
 
     /**
      * Initiates the ICS download for the given event
