@@ -1,5 +1,5 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
+namespace DERHANSEN\SfEventMgt\Utility;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -14,23 +14,16 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * EmailService
+ * MailUtility
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EmailService
+class MailUtility
 {
-
-    /**
-     * Mailmessage
-     *
-     * @var \TYPO3\CMS\Core\Mail\MailMessage
-     */
-    protected $mailer = null;
-
     /**
      * Sends an e-mail, if sender and recipient is an valid e-mail address
      *
@@ -43,44 +36,35 @@ class EmailService
      *
      * @return bool TRUE/FALSE if message is sent
      */
-    public function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [])
+    public static function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [])
     {
         if (GeneralUtility::validEmail($sender) && GeneralUtility::validEmail($recipient)) {
-            $this->initialize();
-            $this->mailer->setFrom($sender, $name);
-            $this->mailer->setSubject($subject);
-            $this->mailer->setBody($body, 'text/html');
-            $this->mailer->setTo($recipient);
-            $this->addAttachments($attachments);
-            $this->mailer->send();
-            return $this->mailer->isSent();
+            $message = GeneralUtility::makeInstance(MailMessage::class);
+            $message->setFrom($sender, $name);
+            $message->setSubject($subject);
+            $message->setBody($body, 'text/html');
+            $message->setTo($recipient);
+            self::addAttachments($message, $attachments);
+            $message->send();
+            return $message->isSent();
         } else {
             return false;
         }
     }
 
     /**
-     * Creates a new mail message
+     * Adds given attachments to the given message
      *
-     * @return void
-     */
-    protected function initialize()
-    {
-        $this->mailer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
-    }
-
-    /**
-     * Attaches the given array of files to the email message
-     *
+     * @param MailMessage $message
      * @param array $attachments
-     * @return void
+     * return void
      */
-    protected function addAttachments($attachments)
+    protected static function addAttachments(&$message, $attachments)
     {
         if (count($attachments) > 0) {
             foreach ($attachments as $attachment) {
                 if (file_exists($attachment)) {
-                    $this->mailer->attach(\Swift_Attachment::fromPath($attachment));
+                    $message->attach(\Swift_Attachment::fromPath($attachment));
                 }
             }
         }
