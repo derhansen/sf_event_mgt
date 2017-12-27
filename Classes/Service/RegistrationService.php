@@ -26,46 +26,92 @@ use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
  */
 class RegistrationService
 {
-
     /**
      * The object manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
-     */
+     * */
     protected $objectManager;
 
     /**
      * RegistrationRepository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
-     */
+     * */
     protected $registrationRepository;
 
     /**
      * FrontendUserRepository
      *
      * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
-     * @inject
-     */
+     * */
     protected $frontendUserRepository;
 
     /**
      * Hash Service
      *
      * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     * @inject
-     */
+     * */
     protected $hashService;
 
     /**
      * Payment Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\PaymentService
-     * @inject
-     */
+     * */
     protected $paymentService;
+
+    /**
+     * DI for $frontendUserRepository
+     *
+     * @param \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
+     */
+    public function injectFrontendUserRepository(
+        \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
+    ) {
+        $this->frontendUserRepository = $frontendUserRepository;
+    }
+
+    /**
+     * DI for $hashService
+     *
+     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
+     */
+    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    {
+        $this->hashService = $hashService;
+    }
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
+    /**
+     * DI for $paymentService
+     *
+     * @param \DERHANSEN\SfEventMgt\Service\PaymentService $paymentService
+     */
+    public function injectPaymentService(\DERHANSEN\SfEventMgt\Service\PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+
+    /**
+     * DI for $registrationRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+     */
+    public function injectRegistrationRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+    ) {
+        $this->registrationRepository = $registrationRepository;
+    }
 
     /**
      * Handles expired registrations. If the $delete parameter is set, then
@@ -104,7 +150,7 @@ class RegistrationService
         $registrations = $registration->getAmountOfRegistrations();
         for ($i = 1; $i <= $registrations - 1; $i++) {
             /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $newReg */
-            $newReg = $this->objectManager->get('DERHANSEN\SfEventMgt\Domain\Model\Registration');
+            $newReg = $this->objectManager->get(Registration::class);
             $properties = ObjectAccess::getGettableProperties($registration);
             foreach ($properties as $propertyName => $propertyValue) {
                 ObjectAccess::setProperty($newReg, $propertyName, $propertyValue);

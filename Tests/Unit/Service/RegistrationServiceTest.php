@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Service\PaymentService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
@@ -765,7 +766,7 @@ class RegistrationServiceTest extends UnitTestCase
         $mockInvoice->expects($this->once())->method('isRedirectEnabled')->will($this->returnValue(true));
 
         $mockPaymentService = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Service\\PaymentService',
+            PaymentService::class,
             ['getPaymentInstance'],
             [],
             '',
