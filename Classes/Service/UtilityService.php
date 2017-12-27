@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Service\CacheService;
+
 /**
  * UtilityService
  *
@@ -26,7 +28,6 @@ class UtilityService
      * CacheService
      *
      * @var \TYPO3\CMS\Extbase\Service\CacheService
-     * @inject
      */
     protected $cacheService;
 
@@ -34,9 +35,19 @@ class UtilityService
      * Settings Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-     * @inject
      */
     protected $settingsService;
+
+    /**
+     * UtilityService constructor.
+     * @param CacheService $cacheService
+     * @param SettingsService $settingsService
+     */
+    public function __construct(CacheService $cacheService, SettingsService $settingsService)
+    {
+        $this->cacheService = $cacheService;
+        $this->settingsService = $settingsService;
+    }
 
     /**
      * Clears the cache of configured pages in TypoScript
