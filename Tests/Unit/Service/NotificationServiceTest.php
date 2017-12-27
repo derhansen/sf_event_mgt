@@ -14,8 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Service\EmailService;
+use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
+use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
+use DERHANSEN\SfEventMgt\Service\NotificationService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\NotificationService.
@@ -115,22 +122,20 @@ class NotificationServiceTest extends UnitTestCase
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
-            ['getAttachments'], [], '', false);
+        $attachmentService = $this->getMock(AttachmentService::class, ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+        $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
             ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
@@ -153,23 +158,21 @@ class NotificationServiceTest extends UnitTestCase
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
-            ['getAttachments'], [], '', false);
+        $attachmentService = $this->getMock(AttachmentService::class, ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
 
-        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+        $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
             ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
@@ -196,22 +199,20 @@ class NotificationServiceTest extends UnitTestCase
             ]
         ];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
-            ['getAttachments'], [], '', false);
+        $attachmentService = $this->getMock(AttachmentService::class, ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+        $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
             ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
@@ -248,28 +249,25 @@ class NotificationServiceTest extends UnitTestCase
             ]
         ];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
-            ['getAttachments'], [], '', false);
+        $attachmentService = $this->getMock(AttachmentService::class, ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+        $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
             ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
-
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -293,8 +291,7 @@ class NotificationServiceTest extends UnitTestCase
             ]
         ];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->never())->method('sendEmailMessage');
         $this->inject($this->subject, 'emailService', $emailService);
 
@@ -322,28 +319,25 @@ class NotificationServiceTest extends UnitTestCase
             ]
         ];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
-            ['getAttachments'], [], '', false);
+        $attachmentService = $this->getMock(AttachmentService::class, ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+        $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
             ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
-
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
@@ -368,22 +362,20 @@ class NotificationServiceTest extends UnitTestCase
             ]
         ];
 
-        $emailService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\EmailService',
-            ['sendEmailMessage'], [], '', false);
+        $emailService = $this->getMock(EmailService::class, ['sendEmailMessage'], [], '', false);
         $emailService->expects($this->exactly(3))->method('sendEmailMessage')->will($this->returnValue(true));
         $this->inject($this->subject, 'emailService', $emailService);
 
-        $attachmentService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\Notification\\AttachmentService',
-            ['getAttachments'], [], '', false);
+        $attachmentService = $this->getMock(AttachmentService::class, ['getAttachments'], [], '', false);
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-        $hashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\HashService');
+        $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService',
+        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
             ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
@@ -405,8 +397,7 @@ class NotificationServiceTest extends UnitTestCase
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
-        $result = $this->subject->sendUserMessage($event, $registration, $settings, MessageType::CUSTOM_NOTIFICATION,
-            '');
+        $result = $this->subject->sendUserMessage($event, $registration, $settings, MessageType::CUSTOM_NOTIFICATION, '');
         $this->assertFalse($result);
     }
 
@@ -458,11 +449,10 @@ class NotificationServiceTest extends UnitTestCase
         $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $registrations->attach($registration);
 
-        $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            ['sendUserMessage']);
+        $mockNotificationService = $this->getMock(NotificationService::class, ['sendUserMessage']);
         $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
 
-        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+        $registrationRepository = $this->getMock(RegistrationRepository::class,
             ['findNotificationRegistrations'], [], '', false);
         $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
             $this->returnValue($registrations));
@@ -500,11 +490,10 @@ class NotificationServiceTest extends UnitTestCase
         $registrations->attach($registration3);
         $registrations->attach($registration4);
 
-        $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            ['sendUserMessage']);
+        $mockNotificationService = $this->getMock(NotificationService::class, ['sendUserMessage']);
         $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
 
-        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+        $registrationRepository = $this->getMock(RegistrationRepository::class,
             ['findNotificationRegistrations'], [], '', false);
         $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
             $this->returnValue($registrations));
@@ -520,8 +509,7 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function createCustomNotificationLogentryCreatesLog()
     {
-        $mockLogRepo = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CustomNotificationRepository',
-            ['add'], [], '', false);
+        $mockLogRepo = $this->getMock(CustomNotificationLogRepository::class, ['add'], [], '', false);
         $mockLogRepo->expects($this->once())->method('add');
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 

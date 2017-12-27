@@ -29,7 +29,6 @@ class NotificationService
      * The object manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
      */
     protected $objectManager;
 
@@ -37,7 +36,6 @@ class NotificationService
      * Registration repository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
      */
     protected $registrationRepository = null;
 
@@ -45,7 +43,6 @@ class NotificationService
      * Email Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\EmailService
-     * @inject
      */
     protected $emailService;
 
@@ -53,7 +50,6 @@ class NotificationService
      * Hash Service
      *
      * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     * @inject
      */
     protected $hashService;
 
@@ -61,7 +57,6 @@ class NotificationService
      * FluidStandaloneService
      *
      * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
-     * @inject
      */
     protected $fluidStandaloneService;
 
@@ -69,7 +64,6 @@ class NotificationService
      * CustomNotificationLogRepository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
-     * @inject
      */
     protected $customNotificationLogRepository = null;
 
@@ -77,9 +71,82 @@ class NotificationService
      * AttachmentService
      *
      * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
-     * @inject
      */
     protected $attachmentService;
+
+    /**
+     * DI for $attachmentService
+     *
+     * @param Notification\AttachmentService $attachmentService
+     */
+    public function injectAttachmentService(
+        \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService $attachmentService
+    ) {
+        $this->attachmentService = $attachmentService;
+    }
+
+    /**
+     * DI for $customNotificationLogRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+     */
+    public function injectCustomNotificationLogRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+    ) {
+        $this->customNotificationLogRepository = $customNotificationLogRepository;
+    }
+
+    /**
+     * DI for $emailService
+     *
+     * @param EmailService $emailService
+     */
+    public function injectEmailService(\DERHANSEN\SfEventMgt\Service\EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
+    /**
+     * DI for $fluidStandaloneService
+     *
+     * @param FluidStandaloneService $fluidStandaloneService
+     */
+    public function injectFluidStandaloneService(
+        \DERHANSEN\SfEventMgt\Service\FluidStandaloneService $fluidStandaloneService
+    ) {
+        $this->fluidStandaloneService = $fluidStandaloneService;
+    }
+
+    /**
+     * DI for $hashService
+     *
+     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
+     */
+    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    {
+        $this->hashService = $hashService;
+    }
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
+
+    /**
+     * DI for $registrationRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+     */
+    public function injectRegistrationRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+    ) {
+        $this->registrationRepository = $registrationRepository;
+    }
 
     /**
      * Sends a custom notification defined by the given customNotification key
