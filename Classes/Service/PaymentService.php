@@ -16,7 +16,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -26,7 +25,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PaymentService
 {
-
     /**
      * Returns an array of configured payment methods available for all events
      *
@@ -45,9 +43,9 @@ class PaymentService
     /**
      * Translates the given key (required, so translations can be mocked)
      *
-     * @param $key
-     * @param $extension
-     * @param null $arguments
+     * @param string $key
+     * @param string $extension
+     * @param array $arguments
      * @return NULL|string
      */
     protected function translate($key, $extension, $arguments = null)
@@ -105,6 +103,7 @@ class PaymentService
         $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
         if (isset($configuredPaymentMethods[$paymentMethod]) &&
             class_exists($configuredPaymentMethods[$paymentMethod]['class'])) {
+            /** @var AbstractPayment $paymentInstance */
             $paymentInstance = GeneralUtility::makeInstance($configuredPaymentMethods[$paymentMethod]['class']);
         }
         return $paymentInstance;
@@ -140,5 +139,4 @@ class PaymentService
         }
         return $result;
     }
-
 }

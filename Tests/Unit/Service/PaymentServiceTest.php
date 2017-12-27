@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Payment\Transfer;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
@@ -25,7 +26,6 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
  */
 class PaymentServiceTest extends UnitTestCase
 {
-
     /**
      * @var PaymentService
      */
@@ -92,7 +92,7 @@ class PaymentServiceTest extends UnitTestCase
      */
     public function getPaymentMethodsReturnsDefaultPaymentMethods($extConf, $expected)
     {
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\PaymentService', ['translate'], [], '', false);
+        $this->subject = $this->getAccessibleMock(PaymentService::class, ['translate'], [], '', false);
         $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sf_event_mgt'] = serialize($extConf);
         $this->assertEquals($expected, $this->subject->getPaymentMethods());
     }
@@ -104,7 +104,7 @@ class PaymentServiceTest extends UnitTestCase
     public function getPaymentInstanceReturnsInvoicePaymentInsance()
     {
         $this->subject = new PaymentService();
-        $this->assertInstanceOf('DERHANSEN\SfEventMgt\Payment\Invoice', $this->subject->getPaymentInstance('invoice'));
+        $this->assertInstanceOf(Invoice::class, $this->subject->getPaymentInstance('invoice'));
     }
 
     /**
@@ -114,7 +114,7 @@ class PaymentServiceTest extends UnitTestCase
     public function getPaymentInstanceReturnsTransferPaymentInsance()
     {
         $this->subject = new PaymentService();
-        $this->assertInstanceOf('DERHANSEN\SfEventMgt\Payment\Transfer', $this->subject->getPaymentInstance('transfer'));
+        $this->assertInstanceOf(Transfer::class, $this->subject->getPaymentInstance('transfer'));
     }
 
     /**
@@ -155,7 +155,7 @@ class PaymentServiceTest extends UnitTestCase
      */
     public function paymentActionEnabledForDefaultPaymentMethodReturnsExpectedResult($action, $expected)
     {
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\PaymentService', ['getPaymentInstance'], [], '', false);
+        $this->subject = $this->getAccessibleMock(PaymentService::class, ['getPaymentInstance'], [], '', false);
         $this->subject->expects($this->once())->method('getPaymentInstance')->will($this->returnValue(new Invoice()));
 
         $this->assertEquals($expected, $this->subject->paymentActionEnabled('invoice', $action));
@@ -219,12 +219,11 @@ class PaymentServiceTest extends UnitTestCase
         $mockPaymentInstance->expects($this->any())->method('isCancelLinkEnabled')->will($this->returnValue(true));
         $mockPaymentInstance->expects($this->any())->method('isNotifyLinkEnabled')->will($this->returnValue(true));
 
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\PaymentService', ['getPaymentInstance'], [], '', false);
+        $this->subject = $this->getAccessibleMock(PaymentService::class, ['getPaymentInstance'], [], '', false);
         $this->subject->expects($this->once())->method('getPaymentInstance')->will(
             $this->returnValue($mockPaymentInstance)
         );
 
         $this->assertEquals($expected, $this->subject->paymentActionEnabled('invoice', $action));
     }
-
 }
