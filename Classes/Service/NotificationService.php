@@ -14,7 +14,6 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
-use DERHANSEN\SfEventMgt\Utility\MailUtility;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -41,6 +40,14 @@ class NotificationService
      * @inject
      */
     protected $registrationRepository = null;
+
+    /**
+     * Email Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\EmailService
+     * @inject
+     */
+    protected $emailService;
 
     /**
      * Hash Service
@@ -178,7 +185,7 @@ class NotificationService
                 $type,
                 MessageRecipient::USER
             );
-            return MailUtility::sendEmailMessage(
+            return $this->emailService->sendEmailMessage(
                 $settings['notification']['senderEmail'],
                 $registration->getEmail(),
                 $subject,
@@ -271,7 +278,7 @@ class NotificationService
         if ($event->getNotifyAdmin()) {
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
             foreach ($adminEmailArr as $adminEmail) {
-                $allEmailsSent = $allEmailsSent && MailUtility::sendEmailMessage(
+                $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
                     $settings['notification']['senderEmail'],
                     $adminEmail,
                     $subject,
@@ -282,7 +289,7 @@ class NotificationService
             }
         }
         if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
-            $allEmailsSent = $allEmailsSent && MailUtility::sendEmailMessage(
+            $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
                 $settings['notification']['senderEmail'],
                 $event->getOrganisator()->getEmail(),
                 $subject,
