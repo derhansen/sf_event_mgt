@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -129,7 +130,7 @@ class UserRegistrationControllerTest extends UnitTestCase
             ->with($settings)->will($this->returnValue($demand));
 
         $registrationServiceMock = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+            RegistrationService::class,
             ['getCurrentFeUserObject'],
             [],
             '',

@@ -16,6 +16,8 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
+use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -31,7 +33,6 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      * Configuration Manager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-     * @inject
      */
     protected $configurationManager;
 
@@ -39,9 +40,29 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      * Object Manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     * @inject
      */
     protected $objectManager;
+
+    /**
+     * DI for $configurationManager
+     *
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+     */
+    public function injectConfigurationManager(
+        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+    ) {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
 
     /**
      * Validates the given registration according to required fields set in plugin
@@ -101,17 +122,17 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
             case 'boolean':
                 /** @var \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator $validator */
                 $validator = $this->objectManager->get(
-                    'TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
+                    BooleanValidator::class,
                     ['is' => true]
                 );
                 break;
             default:
                 if ($field == 'recaptcha') {
                     /** @var \DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator $validator */
-                    $validator = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator');
+                    $validator = $this->objectManager->get(RecaptchaValidator::class);
                 } else {
                     /** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
-                    $validator = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator');
+                    $validator = $this->objectManager->get(NotEmptyValidator::class);
                 }
         }
         return $validator;

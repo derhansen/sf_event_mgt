@@ -27,16 +27,25 @@ class HmacViewHelper extends AbstractViewHelper
      * Hash Service
      *
      * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     * @inject
-     */
+     * */
     protected $hashService;
+
+    /**
+     * DI for $hashService
+     *
+     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
+     */
+    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    {
+        $this->hashService = $hashService;
+    }
 
     /**
      * Returns the hmac for the given registration in order to cancel the registration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      *
-     * @return array
+     * @return string
      */
     public function render($registration)
     {

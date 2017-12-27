@@ -27,15 +27,36 @@ class UserRegistrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
      * RegistrationService
      *
      * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     * @inject
      */
     protected $registrationService;
 
     /**
+     * RegistrationRespository
+     *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
      */
     protected $registrationRepository;
+
+    /**
+     * DI for $registrationRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+     */
+    public function injectRegistrationRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+    ) {
+        $this->registrationRepository = $registrationRepository;
+    }
+
+    /**
+     * DI for $registrationService
+     *
+     * @param \DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService
+     */
+    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
+    {
+        $this->registrationService = $registrationService;
+    }
 
     /**
      * Creates an user registration demand object with the given settings

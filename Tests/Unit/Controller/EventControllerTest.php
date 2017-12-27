@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  */
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -749,7 +750,7 @@ class EventControllerTest extends UnitTestCase
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+        $eventRepository = $this->getMock(EventRepository::class,
             ['update'], [], '', false);
         $eventRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -817,7 +818,7 @@ class EventControllerTest extends UnitTestCase
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+        $eventRepository = $this->getMock(EventRepository::class,
             ['update'], [], '', false);
         $eventRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -881,7 +882,7 @@ class EventControllerTest extends UnitTestCase
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+        $eventRepository = $this->getMock(EventRepository::class,
             ['update'], [], '', false);
         $eventRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'eventRepository', $eventRepository);
@@ -958,8 +959,7 @@ class EventControllerTest extends UnitTestCase
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['update'], [], '', false);
+        $eventRepository = $this->getMock(EventRepository::class, ['update'], [], '', false);
         $eventRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
@@ -1030,8 +1030,7 @@ class EventControllerTest extends UnitTestCase
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['update'], [], '', false);
+        $eventRepository = $this->getMock(EventRepository::class, ['update'], [], '', false);
         $eventRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
@@ -1080,8 +1079,7 @@ class EventControllerTest extends UnitTestCase
         $hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(false));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'], [], '', false);
+        $eventRepository = $this->getMock(EventRepository::class, ['findByUid'], [], '', false);
         $eventRepository->expects($this->never())->method('findByUid')->with(1);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
@@ -1184,7 +1182,7 @@ class EventControllerTest extends UnitTestCase
         $hashService->expects($this->once())->method('validateHmac')->with('event-' . $eventUid, $hmac)->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
+        $eventRepository = $this->getMock(EventRepository::class,
             ['findByUid'], [], '', false);
         $eventRepository->expects($this->any())->method('findByUid')->with($eventUid);
         $this->inject($this->subject, 'eventRepository', $eventRepository);

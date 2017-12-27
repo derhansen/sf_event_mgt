@@ -36,9 +36,18 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
      * Object Manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
-     */
+     * */
     protected $objectManager;
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
 
     /**
      * Checks if the given value is a valid recaptcha.

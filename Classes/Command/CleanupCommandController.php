@@ -23,12 +23,10 @@ use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
  */
 class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\CommandController
 {
-
     /**
      * Configurationmanager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
      */
     protected $configurationManager;
 
@@ -36,7 +34,6 @@ class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
      * UtilityService
      *
      * @var \DERHANSEN\SfEventMgt\Service\UtilityService
-     * @inject
      */
     protected $utilityService = null;
 
@@ -44,9 +41,39 @@ class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
      * Registrationservice
      *
      * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     * @inject
      */
     protected $registrationService;
+
+    /**
+     * DI for $configurationManager
+     *
+     * @param ConfigurationManagerInterface $configurationManager
+     */
+    public function injectConfigurationManager(
+        \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager
+    ) {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * DI for $registrationService
+     *
+     * @param \DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService
+     */
+    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
+    {
+        $this->registrationService = $registrationService;
+    }
+
+    /**
+     * DI for $utilityService
+     *
+     * @param \DERHANSEN\SfEventMgt\Service\UtilityService $utilityService
+     */
+    public function injectUtilityService(\DERHANSEN\SfEventMgt\Service\UtilityService $utilityService)
+    {
+        $this->utilityService = $utilityService;
+    }
 
     /**
      * The cleanup command
@@ -63,7 +90,8 @@ class CleanupCommandController extends \TYPO3\CMS\Extbase\Mvc\Controller\Command
 
         $settings = $fullSettings['plugin.']['tx_sfeventmgt.']['settings.'];
         $this->registrationService->handleExpiredRegistrations(
-            $settings['registration.']['deleteExpiredRegistrations']);
+            $settings['registration.']['deleteExpiredRegistrations']
+        );
 
         // Clear cache for configured pages
         $this->utilityService->clearCacheForConfiguredUids($settings);

@@ -32,15 +32,13 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * EventRepository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
-     * @inject
-     */
+     * */
     protected $eventRepository = null;
 
     /**
      * CustomNotificationLogRepository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
-     * @inject
      */
     protected $customNotificationLogRepository = null;
 
@@ -48,7 +46,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * ExportService
      *
      * @var \DERHANSEN\SfEventMgt\Service\ExportService
-     * @inject
      */
     protected $exportService = null;
 
@@ -56,7 +53,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * RegistrationService
      *
      * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     * @inject
      */
     protected $registrationService = null;
 
@@ -64,7 +60,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * NotificationService
      *
      * @var \DERHANSEN\SfEventMgt\Service\NotificationService
-     * @inject
      */
     protected $notificationService = null;
 
@@ -72,7 +67,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * SettingsService
      *
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-     * @inject
      */
     protected $settingsService = null;
 
@@ -82,6 +76,67 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * @var int
      */
     protected $pid = 0;
+
+    /**
+     * DI for $customNotificationLogRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+     */
+    public function injectCustomNotificationLogRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+    ) {
+        $this->customNotificationLogRepository = $customNotificationLogRepository;
+    }
+
+    /**
+     * DI for $eventRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
+     */
+    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
+
+    /**
+     * DI for $exportService
+     *
+     * @param Service\ExportService $exportService
+     */
+    public function injectExportService(\DERHANSEN\SfEventMgt\Service\ExportService $exportService)
+    {
+        $this->exportService = $exportService;
+    }
+
+    /**
+     * DI for $notificationService
+     *
+     * @param Service\NotificationService $notificationService
+     */
+    public function injectNotificationService(\DERHANSEN\SfEventMgt\Service\NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
+    /**
+     * DI for $registrationService
+     *
+     * @param Service\RegistrationService $registrationService
+     */
+    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
+    {
+        $this->registrationService = $registrationService;
+    }
+
+    /**
+     * DI for $settingsService
+     *
+     * @param Service\SettingsService $settingsService
+     */
+    public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService)
+    {
+        $this->settingsService = $settingsService;
+    }
 
     /**
      * Initialize action

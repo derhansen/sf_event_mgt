@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -321,8 +322,7 @@ class AdministrationControllerTest extends UnitTestCase
         $logEntries = ['SomeResult'];
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockLogRepo = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CustomNotificationRepository',
-            ['findByEvent'], [], '', false);
+        $mockLogRepo = $this->getMock(CustomNotificationLogRepository::class, ['findByEvent'], [], '', false);
         $mockLogRepo->expects($this->once())->method('findByEvent')->will(
             $this->returnValue($logEntries));
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
