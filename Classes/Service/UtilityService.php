@@ -23,29 +23,37 @@ use TYPO3\CMS\Extbase\Service\CacheService;
  */
 class UtilityService
 {
-
     /**
      * CacheService
      *
      * @var \TYPO3\CMS\Extbase\Service\CacheService
-     */
+     * */
     protected $cacheService;
 
     /**
      * Settings Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-     */
+     * */
     protected $settingsService;
 
     /**
-     * UtilityService constructor.
+     * DI for $cacheService
+     *
      * @param CacheService $cacheService
-     * @param SettingsService $settingsService
      */
-    public function __construct(CacheService $cacheService, SettingsService $settingsService)
+    public function injectCacheService(\TYPO3\CMS\Extbase\Service\CacheService $cacheService)
     {
         $this->cacheService = $cacheService;
+    }
+
+    /**
+     * DI for $settingsService
+     *
+     * @param SettingsService $settingsService
+     */
+    public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService)
+    {
         $this->settingsService = $settingsService;
     }
 

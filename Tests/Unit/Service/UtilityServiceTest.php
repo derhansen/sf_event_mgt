@@ -37,12 +37,7 @@ class UtilityServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $mockCacheService = $this->getMock(CacheService::class, [], [], '', false);
-        $mockSettingsService = $this->getMock(SettingsService::class, [], [], '', false);
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\UtilityService(
-            $mockCacheService,
-            $mockSettingsService
-        );
+        $this->subject = new \DERHANSEN\SfEventMgt\Service\UtilityService();
     }
 
     /**
