@@ -26,7 +26,6 @@ use \DERHANSEN\SfEventMgt\Exception;
  */
 class ExportService
 {
-
     /**
      * Repository with registrations for the events
      *
@@ -42,14 +41,23 @@ class ExportService
     protected $resourceFactory = null;
 
     /**
-     * ExportService constructor.
+     * DI for $registrationRepository
      *
      * @param RegistrationRepository $registrationRepository
+     */
+    public function injectRegistrationRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+    ) {
+        $this->registrationRepository = $registrationRepository;
+    }
+
+    /**
+     * DI for $resourceFactory
+     *
      * @param ResourceFactory $resourceFactory
      */
-    public function __construct(RegistrationRepository $registrationRepository, ResourceFactory $resourceFactory)
+    public function injectResourceFactory(\TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory)
     {
-        $this->registrationRepository = $registrationRepository;
         $this->resourceFactory = $resourceFactory;
     }
 
@@ -88,10 +96,10 @@ class ExportService
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
         $registrations = $this->registrationRepository->findByEvent($eventUid);
         $exportedRegistrations = GeneralUtility::csvValues(
-            $fieldsArray,
-            $settings['fieldDelimiter'],
-            $settings['fieldQuoteCharacter']
-        ) . chr(10);
+                $fieldsArray,
+                $settings['fieldDelimiter'],
+                $settings['fieldQuoteCharacter']
+            ) . chr(10);
         foreach ($registrations as $registration) {
             $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
@@ -103,10 +111,10 @@ class ExportService
                 }
             }
             $exportedRegistrations .= GeneralUtility::csvValues(
-                $exportedRegistration,
-                $settings['fieldDelimiter'],
-                $settings['fieldQuoteCharacter']
-            ) . chr(10);
+                    $exportedRegistration,
+                    $settings['fieldDelimiter'],
+                    $settings['fieldQuoteCharacter']
+                ) . chr(10);
         }
         return $this->prependByteOrderMark($exportedRegistrations, $settings);
     }
@@ -125,7 +133,7 @@ class ExportService
         }
         return $exportedRegistrations;
     }
-    
+
     /**
      * Returns the requested field from the given registration. If the field is a DateTime object,
      * a formatted date string is returned

@@ -16,7 +16,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use \DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
-use TYPO3\CMS\Core\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;

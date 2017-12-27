@@ -19,6 +19,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use \DERHANSEN\SfEventMgt\Exception;
 use \DERHANSEN\SfEventMgt\Service\ExportService;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 
@@ -29,7 +30,6 @@ use TYPO3\CMS\Core\Resource\StorageRepository;
  */
 class ExportServiceTest extends UnitTestCase
 {
-
     /**
      * @var ExportService
      */
@@ -42,9 +42,7 @@ class ExportServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $registrationRepository = $this->getMock(RegistrationRepository::class, [], [], '', false);
-        $resourceFactory = $this->getMock(ResourceFactory::class, [], [], '', false);
-        $this->subject = new ExportService($registrationRepository, $resourceFactory);
+        $this->subject = new ExportService();
     }
 
     /**
@@ -151,8 +149,7 @@ class ExportServiceTest extends UnitTestCase
         $allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $allRegistrations->attach($mockRegistration);
 
-        $registrationRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\Registration',
-            ['findByEvent'], [], '', false);
+        $registrationRepository = $this->getMock(RegistrationRepository::class, ['findByEvent'], [], '', false);
         $registrationRepository->expects($this->once())->method('findByEvent')->will(
             $this->returnValue($allRegistrations)
         );
@@ -224,7 +221,7 @@ class ExportServiceTest extends UnitTestCase
             $this->returnValue('CSV-DATA')
         );
 
-        $mockFile = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', [], [], '', false);
+        $mockFile = $this->getMock(File::class, [], [], '', false);
         $mockFile->expects($this->once())->method('setContents')->with('CSV-DATA');
 
         $mockStorageRepository = $this->getMock(StorageRepository::class,

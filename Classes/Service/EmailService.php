@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Mail\MailMessage;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -23,7 +24,6 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailService
 {
-
     /**
      * Mailmessage
      *
@@ -66,7 +66,7 @@ class EmailService
      */
     protected function initialize()
     {
-        $this->mailer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $this->mailer = GeneralUtility::makeInstance(MailMessage::class);
     }
 
     /**

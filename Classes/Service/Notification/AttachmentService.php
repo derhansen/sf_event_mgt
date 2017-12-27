@@ -26,7 +26,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class AttachmentService
 {
-
     /**
      * Returns an array of filenames to attach to notifications
      *

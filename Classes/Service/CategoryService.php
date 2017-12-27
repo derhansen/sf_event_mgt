@@ -22,7 +22,6 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 class CategoryService
 {
-
     /**
      * Returns the given categories including their subcategories
      *

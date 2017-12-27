@@ -17,6 +17,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -26,7 +27,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class AttachmentServiceTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
      */
@@ -155,12 +155,12 @@ class AttachmentServiceTest extends UnitTestCase
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockFile1 = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', ['getForLocalProcessing'], [], '', false);
+        $mockFile1 = $this->getMock(File::class, ['getForLocalProcessing'], [], '', false);
         $mockFile1->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
         $mockFileRef1 = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', ['getOriginalResource'], [], '', false);
         $mockFileRef1->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile1));
 
-        $mockFile2 = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', ['getForLocalProcessing'], [], '', false);
+        $mockFile2 = $this->getMock(File::class, ['getForLocalProcessing'], [], '', false);
         $mockFile2->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/anotherfile.pdf'));
         $mockFileRef2 = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', ['getOriginalResource'], [], '', false);
         $mockFileRef2->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile2));
@@ -203,7 +203,7 @@ class AttachmentServiceTest extends UnitTestCase
     {
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockFile = $this->getMock('TYPO3\\CMS\\Core\\Resource\\File', ['getForLocalProcessing'], [], '', false);
+        $mockFile = $this->getMock(File::class, ['getForLocalProcessing'], [], '', false);
         $mockFile->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
         $mockFileRef = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', ['getOriginalResource'], [], '', false);
         $mockFileRef->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile));

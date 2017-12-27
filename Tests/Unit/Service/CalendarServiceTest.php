@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -88,7 +89,7 @@ class CalendarServiceTest extends UnitTestCase
      */
     public function getCalendarArrayReturnsArrayWithEventForOneDay()
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $mockEvent = $this->getMock(Event::class, [], [], '', false);
         $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         ));
@@ -110,7 +111,7 @@ class CalendarServiceTest extends UnitTestCase
      */
     public function getCalendarArrayReturnsArrayWithEventForMultipleDays()
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $mockEvent = $this->getMock(Event::class, [], [], '', false);
         $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         ));

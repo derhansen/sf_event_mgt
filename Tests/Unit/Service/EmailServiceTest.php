@@ -14,7 +14,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Service\EmailService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -37,7 +39,7 @@ class EmailServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Service\\EmailService', ['initialize']);
+        $this->subject = $this->getAccessibleMock(EmailService::class, ['initialize']);
     }
 
     /**
@@ -99,7 +101,7 @@ class EmailServiceTest extends UnitTestCase
         $body = 'A body';
         $senderName = 'Sender name';
 
-        $mailer = $this->getMock('TYPO3\\CMS\\Core\\Mail\\MailMessage', [], [], '', false);
+        $mailer = $this->getMock(MailMessage::class, [], [], '', false);
         $mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
         $mailer->expects($this->once())->method('setSubject')->with($subject);
         $mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));
@@ -129,7 +131,7 @@ class EmailServiceTest extends UnitTestCase
             GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Tests/Unit/Fixtures/Attachment.txt')
         ];
 
-        $mailer = $this->getMock('TYPO3\\CMS\\Core\\Mail\\MailMessage', [], [], '', false);
+        $mailer = $this->getMock(MailMessage::class, [], [], '', false);
         $mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
         $mailer->expects($this->once())->method('setSubject')->with($subject);
         $mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));

@@ -30,7 +30,6 @@ class FluidStandaloneService
      * The object manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
      */
     protected $objectManager;
 
@@ -38,9 +37,29 @@ class FluidStandaloneService
      * The configuration manager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-     * @inject
      */
     protected $configurationManager;
+
+    /**
+     * DI for $configurationManager
+     *
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+     */
+    public function injectConfigurationManager(
+        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+    ) {
+        $this->configurationManager = $configurationManager;
+    }
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
 
     /**
      * Returns the template folders for the given part
