@@ -11,10 +11,14 @@ matrix:
       env: TYPO3_VERSION=^7.6 COVERAGE=0 PHPUNIT=^4.8
     - php: 7.1
       env: TYPO3_VERSION=^7.6 COVERAGE=0 PHPUNIT=^4.8
-    - php: 7.1
-      env: TYPO3_VERSION=^8 COVERAGE=0 PHPUNIT=5.7.5
+    - php: 7.2
+      env: TYPO3_VERSION=^7.6 COVERAGE=0 PHPUNIT=^4.8
     - php: 7.0
       env: TYPO3_VERSION=^8 COVERAGE=1 PHPUNIT=5.7.5
+    - php: 7.1
+      env: TYPO3_VERSION=^8 COVERAGE=0 PHPUNIT=5.7.5
+    - php: 7.2
+      env: TYPO3_VERSION=^8 COVERAGE=0 PHPUNIT=5.7.5
 
 sudo: false
 
