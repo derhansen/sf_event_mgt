@@ -22,7 +22,8 @@
     "typo3/cms-core": "^7.6 || ^8.5"
   },
   "require-dev": {
-    "nimut/testing-framework": "^1.1.5"
+    "nimut/testing-framework": "^2.0.0",
+    "phpstan/phpstan": "^0.9.1"
   },
   "replace": {
     "sf_event_mgt": "self.version",
