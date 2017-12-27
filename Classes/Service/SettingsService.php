@@ -21,7 +21,6 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 class SettingsService
 {
-
     /**
      * Returns an array (key-value pair) of custom notifications that can be used in
      * select boxes
