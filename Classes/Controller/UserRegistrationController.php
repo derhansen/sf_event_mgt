@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Utility\Page;
 
 /**
@@ -21,43 +22,8 @@ use DERHANSEN\SfEventMgt\Utility\Page;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UserRegistrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class UserRegistrationController extends AbstractController
 {
-    /**
-     * RegistrationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     */
-    protected $registrationService;
-
-    /**
-     * RegistrationRespository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     */
-    protected $registrationRepository;
-
-    /**
-     * DI for $registrationRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-     */
-    public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-    ) {
-        $this->registrationRepository = $registrationRepository;
-    }
-
-    /**
-     * DI for $registrationService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService
-     */
-    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
-    {
-        $this->registrationService = $registrationService;
-    }
-
     /**
      * Creates an user registration demand object with the given settings
      *
@@ -68,7 +34,7 @@ class UserRegistrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     public function createUserRegistrationDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand = $this->objectManager->get(UserRegistrationDemand::class);
         $demand->setDisplayMode($settings['userRegistration']['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren(
             $settings['userRegistration']['storagePage'],

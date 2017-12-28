@@ -14,7 +14,9 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -23,9 +25,9 @@ use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
@@ -34,230 +36,14 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class EventController extends AbstractController
 {
-
-    /**
-     * Configuration Manager
-     *
-     * @var ConfigurationManagerInterface
-     */
-    protected $configurationManager;
-
-    /**
-     * EventRepository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
-     */
-    protected $eventRepository = null;
-
-    /**
-     * Registration repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     */
-    protected $registrationRepository = null;
-
-    /**
-     * Category repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
-     */
-    protected $categoryRepository = null;
-
-    /**
-     * Location repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
-     */
-    protected $locationRepository = null;
-
-    /**
-     * Organisator repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
-     */
-    protected $organisatorRepository = null;
-
-    /**
-     * Notification Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
-     */
-    protected $notificationService = null;
-
-    /**
-     * ICalendar Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
-     */
-    protected $icalendarService = null;
-
-    /**
-     * Hash Service
-     *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     */
-    protected $hashService;
-
-    /**
-     * RegistrationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     */
-    protected $registrationService = null;
-
-    /**
-     * CalendarService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\CalendarService
-     */
-    protected $calendarService = null;
-
-    /**
-     * UtilityService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\UtilityService
-     */
-    protected $utilityService = null;
-
-    /**
-     * PaymentMethodService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\PaymentService
-     */
-    protected $paymentService = null;
-    
     /**
      * Properties in this array will be ignored by overwriteDemandObject()
      *
      * @var array
      */
     protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
-
-    /**
-     * DI for $calendarService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\CalendarService $calendarService
-     */
-    public function injectCalendarService(\DERHANSEN\SfEventMgt\Service\CalendarService $calendarService)
-    {
-        $this->calendarService = $calendarService;
-    }
-
-    /**
-     * DI for $categoryRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository $categoryRepository
-     */
-    public function injectCategoryRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository $categoryRepository
-    ) {
-        $this->categoryRepository = $categoryRepository;
-    }
-
-    /**
-     * DI for $eventRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
-     */
-    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
-    {
-        $this->eventRepository = $eventRepository;
-    }
-
-    /**
-     * DI for $hashService
-     *
-     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
-     */
-    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
-    {
-        $this->hashService = $hashService;
-    }
-
-    /**
-     * DI for $icalendarService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\ICalendarService $icalendarService
-     */
-    public function injectIcalendarService(\DERHANSEN\SfEventMgt\Service\ICalendarService $icalendarService)
-    {
-        $this->icalendarService = $icalendarService;
-    }
-
-    /**
-     * DI for $locationRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository $locationRepository
-     */
-    public function injectLocationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository $locationRepository
-    ) {
-        $this->locationRepository = $locationRepository;
-    }
-
-    /**
-     * DI for $notificationService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\NotificationService $notificationService
-     */
-    public function injectNotificationService(\DERHANSEN\SfEventMgt\Service\NotificationService $notificationService)
-    {
-        $this->notificationService = $notificationService;
-    }
-
-    /**
-     * DI for $organisatorRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository $organisatorRepository
-     */
-    public function injectOrganisatorRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository $organisatorRepository
-    ) {
-        $this->organisatorRepository = $organisatorRepository;
-    }
-
-    /**
-     * DI for $paymentService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\PaymentService $paymentService
-     */
-    public function injectPaymentService(\DERHANSEN\SfEventMgt\Service\PaymentService $paymentService)
-    {
-        $this->paymentService = $paymentService;
-    }
-
-    /**
-     * DI for $registrationRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-     */
-    public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-    ) {
-        $this->registrationRepository = $registrationRepository;
-    }
-
-    /**
-     * DI for $registrationService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService
-     */
-    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
-    {
-        $this->registrationService = $registrationService;
-    }
-
-    /**
-     * DI for $utilityService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\UtilityService $utilityService
-     */
-    public function injectUtilityService(\DERHANSEN\SfEventMgt\Service\UtilityService $utilityService)
-    {
-        $this->utilityService = $utilityService;
-    }
 
     /**
      * Creates an event demand object with the given settings
@@ -269,7 +55,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createEventDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand = $this->objectManager->get(EventDemand::class);
         $demand->setDisplayMode($settings['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setCategoryConjunction($settings['categoryConjunction']);
@@ -295,7 +81,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createForeignRecordDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\ForeignRecordDemand');
+        $demand = $this->objectManager->get(ForeignRecordDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictForeignRecordsToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         return $demand;
@@ -311,7 +97,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createCategoryDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\CategoryDemand');
+        $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         $demand->setCategories($settings['categoryMenu']['categories']);
@@ -604,7 +390,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->arguments->getArgument('registration')
             ->getPropertyMappingConfiguration()->forProperty('dateOfBirth')
             ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['registration']['formatDateOfBirth']
             );
@@ -649,7 +435,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->registrationRepository->add($registration);
 
             // Persist registration, so we have an UID
-            $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+            $this->objectManager->get(PersistenceManager::class)->persistAll();
 
             // Add new registration (or waitlist registration) to event
             if ($isWaitlistRegistration) {
@@ -915,14 +701,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('startDate')
                 ->setTypeConverterOption(
-                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    DateTimeConverter::class,
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     $this->settings['search']['dateFormat']
                 );
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('endDate')
                 ->setTypeConverterOption(
-                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    DateTimeConverter::class,
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     $this->settings['search']['dateFormat']
                 );
@@ -986,5 +772,4 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== [];
     }
-
 }

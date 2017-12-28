@@ -25,16 +25,8 @@ use DERHANSEN\SfEventMgt\Service;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class AdministrationController extends AbstractController
 {
-
-    /**
-     * EventRepository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
-     * */
-    protected $eventRepository = null;
-
     /**
      * CustomNotificationLogRepository
      *
@@ -48,20 +40,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * @var \DERHANSEN\SfEventMgt\Service\ExportService
      */
     protected $exportService = null;
-
-    /**
-     * RegistrationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     */
-    protected $registrationService = null;
-
-    /**
-     * NotificationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
-     */
-    protected $notificationService = null;
 
     /**
      * SettingsService
@@ -89,16 +67,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     }
 
     /**
-     * DI for $eventRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
-     */
-    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
-    {
-        $this->eventRepository = $eventRepository;
-    }
-
-    /**
      * DI for $exportService
      *
      * @param Service\ExportService $exportService
@@ -106,26 +74,6 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     public function injectExportService(\DERHANSEN\SfEventMgt\Service\ExportService $exportService)
     {
         $this->exportService = $exportService;
-    }
-
-    /**
-     * DI for $notificationService
-     *
-     * @param Service\NotificationService $notificationService
-     */
-    public function injectNotificationService(\DERHANSEN\SfEventMgt\Service\NotificationService $notificationService)
-    {
-        $this->notificationService = $notificationService;
-    }
-
-    /**
-     * DI for $registrationService
-     *
-     * @param Service\RegistrationService $registrationService
-     */
-    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
-    {
-        $this->registrationService = $registrationService;
     }
 
     /**
@@ -161,14 +109,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('startDate')
             ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['search']['dateFormat']
             );
         $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('endDate')
             ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['search']['dateFormat']
             );
@@ -185,7 +133,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     public function listAction(SearchDemand $searchDemand = null, $messageId = null)
     {
         /** @var EventDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand = $this->objectManager->get(EventDemand::class);
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
