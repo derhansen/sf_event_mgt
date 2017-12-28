@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
@@ -60,8 +61,10 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
         $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
         if ($response !== null) {
             // Only check if a response is set
-            $configurationManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
-            $fullTs = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+            $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+            $fullTs = $configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            );
             $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCaptcha.'];
 
             if (isset($reCaptchaSettings) &&

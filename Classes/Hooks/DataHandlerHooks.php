@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -104,7 +105,7 @@ class DataHandlerHooks
             }
 
             /** @var \TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools $flexFormTools */
-            $flexFormTools = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Configuration\\FlexForm\\FlexFormTools');
+            $flexFormTools = GeneralUtility::makeInstance(FlexFormTools::class);
             $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData, true);
         }
     }
