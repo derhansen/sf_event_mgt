@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -47,6 +48,13 @@ class AdministrationController extends AbstractController
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
      */
     protected $settingsService = null;
+
+    /**
+     * Backend User Session Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
+     */
+    protected $beUserSessionService = null;
 
     /**
      * The current page uid
@@ -84,6 +92,16 @@ class AdministrationController extends AbstractController
     public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService)
     {
         $this->settingsService = $settingsService;
+    }
+
+    /**
+     * DI for $beUserSessionService
+     *
+     * @param Service\BeUserSessionService $beUserSessionService
+     */
+    public function injectBeUserSessionService(\DERHANSEN\SfEventMgt\Service\BeUserSessionService $beUserSessionService)
+    {
+        $this->beUserSessionService = $beUserSessionService;
     }
 
     /**
@@ -137,7 +155,15 @@ class AdministrationController extends AbstractController
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
+
+            $sessionData = [];
+            $sessionData['searchDemand'] = $searchDemand;
+            $this->beUserSessionService->saveSessionData($sessionData);
+        } else {
+            // Try to restore search demand from Session
+            $searchDemand = $this->beUserSessionService->getSessionDataByKey('searchDemand');
         }
+
         $demand->setSearchDemand($searchDemand);
 
         if ($this->pid > 0) {

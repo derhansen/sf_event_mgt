@@ -15,6 +15,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -79,6 +80,10 @@ class AdministrationControllerTest extends UnitTestCase
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
+        $beUserSessionService = $this->getMock(BeUserSessionService::class, [], [], '', false);
+        $beUserSessionService->expects($this->once())->method('getSessionDataByKey');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
@@ -111,6 +116,10 @@ class AdministrationControllerTest extends UnitTestCase
             ['get'], [], '', false);
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
+
+        $beUserSessionService = $this->getMock(BeUserSessionService::class, [], [], '', false);
+        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             ['findDemanded'], [], '', false);
@@ -148,6 +157,10 @@ class AdministrationControllerTest extends UnitTestCase
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
+        $beUserSessionService = $this->getMock(BeUserSessionService::class, [], [], '', false);
+        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             ['findDemanded'], [], '', false);
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
@@ -183,6 +196,10 @@ class AdministrationControllerTest extends UnitTestCase
             ['get'], [], '', false);
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
+
+        $beUserSessionService = $this->getMock(BeUserSessionService::class, [], [], '', false);
+        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
             ['findDemanded'], [], '', false);
