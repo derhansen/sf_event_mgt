@@ -376,7 +376,7 @@ return [
             'exclude' => 0,
             'config' => [
                 'type' => 'input',
-                'size' => '30',
+                'size' => 30,
             ],
         ],
         'fe_user' => [
