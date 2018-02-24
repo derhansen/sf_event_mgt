@@ -251,7 +251,7 @@ class EventController extends AbstractController
             'eventDemand' => $eventDemand,
             'overwriteDemand' => $overwriteDemand,
             'currentPageId' => $GLOBALS['TSFE']->id,
-            'firstDayOfMonth' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $currentMonth, $currentMonth)),
+            'firstDayOfMonth' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $currentMonth, $currentYear)),
             'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
             'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
         ];
