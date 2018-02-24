@@ -31,7 +31,7 @@ return [
         'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.svg'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paymentmethod, payment_reference, paid, notes, confirmation_until, amount_of_registrations, main_registration, waitlist',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, firstname, lastname, title, company, address, zip, city, country, phone, email, ignore_notifications, gender, date_of_birth, fe_user, accepttc, confirmed, paymentmethod, payment_reference, paid, notes, confirmation_until, amount_of_registrations, main_registration, waitlist, field_values',
     ],
     'types' => [
         '1' => [
@@ -39,6 +39,9 @@ return [
             firstname, lastname, title, company, address, zip, city, country, phone, email,
             ignore_notifications, gender, date_of_birth, fe_user, confirmation_until, confirmed,
             accepttc, notes, amount_of_registrations, waitlist, main_registration, 
+
+            --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
+                field_values, 
             
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                 paid, paymentmethod, payment_reference, 
@@ -377,6 +380,24 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
+            ],
+        ],
+        'field_values' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.fieldvalues',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_registration_fieldvalue',
+                'foreign_field' => 'registration',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'expandSingle' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 0,
+                    'showPossibleLocalizationRecords' => 0,
+                    'useSortable' => 0,
+                    'showAllLocalizationLink' => 0
+                ],
             ],
         ],
         'fe_user' => [

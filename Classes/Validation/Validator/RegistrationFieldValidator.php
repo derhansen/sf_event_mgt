@@ -1,0 +1,109 @@
+<?php
+namespace DERHANSEN\SfEventMgt\Validation\Validator;
+
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
+
+/**
+ * RegistrationFieldValidator
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
+ */
+class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+{
+    /**
+     * Validates the additional fields of the given registration
+     *
+     * @param Registration $registration
+     * @return bool
+     */
+    protected function isValid($registration)
+    {
+        $result = true;
+        if ($registration->getFieldValues()->count() === 0 &&
+            $registration->getEvent()->getRegistrationFields()->count() === 0) {
+            return $result;
+        }
+
+        /** @var Registration\Field $registrationField */
+        foreach ($registration->getEvent()->getRegistrationFields() as $registrationField) {
+            $validationResult = $this->validateField($registrationField, $registration->getFieldValues());
+            if ($validationResult === false && $result === true) {
+                $result = false;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Validates the given registrationField
+     *
+     * @param Registration\Field $registrationField
+     * @param ObjectStorage $fieldValues
+     * @return bool
+     */
+    protected function validateField($registrationField, $fieldValues)
+    {
+        $result = true;
+        if (!$registrationField->getRequired()) {
+            return $result;
+        }
+
+        /** @var NotEmptyValidator $validator */
+        $validator = $this->getNotEmptyValidator();
+
+        $fieldValue = $this->getFieldValue($registrationField, $fieldValues);
+        $validationResult = $validator->validate($fieldValue);
+        if ($validationResult->hasErrors()) {
+            $result = false;
+            foreach ($validationResult->getErrors() as $error) {
+                $this->result->forProperty('fields.' . $registrationField->getUid())->addError($error);
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Returns a notEmptyValidator
+     *
+     * @return NotEmptyValidator
+     */
+    protected function getNotEmptyValidator()
+    {
+        return GeneralUtility::makeInstance(NotEmptyValidator::class);
+    }
+
+    /**
+     * Returns the value for the given registrationField from the given fieldValues
+     *
+     * @param Registration\Field $registrationField
+     * @param ObjectStorage $fieldValues
+     * @return string
+     */
+    protected function getFieldValue($registrationField, $fieldValues)
+    {
+        $result = '';
+        /** @var Registration\FieldValue $fieldValue */
+        foreach ($fieldValues as $fieldValue) {
+            if ($fieldValue->getField()->getUid() === $registrationField->getUid()) {
+                $result = $fieldValue->getValue();
+            }
+        }
+        return $result;
+    }
+}

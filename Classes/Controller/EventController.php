@@ -23,12 +23,14 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -381,6 +383,78 @@ class EventController extends AbstractController
     }
 
     /**
+     * Processes incoming registrations fields and adds field values to arguments
+     *
+     * @return void
+     */
+    protected function setRegistrationFieldValuesToArguments()
+    {
+        $arguments = $this->request->getArguments();
+        if (!isset($arguments['registration']['fields']) || !isset($arguments['event'])) {
+            return;
+        }
+
+        $registrationMvcArgument = $this->arguments->getArgument('registration');
+        $propertyMapping = $registrationMvcArgument->getPropertyMappingConfiguration();
+        $propertyMapping->allowProperties('fieldValues');
+        $propertyMapping->allowCreationForSubProperty('fieldValues');
+        $propertyMapping->allowModificationForSubProperty('fieldValues');
+
+        // allow creation of new objects (for validation)
+        $propertyMapping->setTypeConverterOptions(
+            PersistentObjectConverter::class,
+            [
+                PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => true,
+                PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => true
+            ]
+        );
+
+        // Set event to registration (required for validation)
+        $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
+        $propertyMapping->allowProperties('event');
+        $propertyMapping->allowCreationForSubProperty('event');
+        $propertyMapping->allowModificationForSubProperty('event');
+        $arguments['registration']['event'] = (int)$this->request->getArgument('event');
+
+        $index = 0;
+        foreach ((array)$arguments['registration']['fields'] as $fieldUid => $value) {
+            // Only accept registration fields of the current event
+            if (!in_array((int)$fieldUid, $event->getRegistrationFieldsUids(), true)) {
+                continue;
+            }
+
+            // allow subvalues in new property mapper
+            $propertyMapping->forProperty('fieldValues')->allowProperties($index);
+            $propertyMapping->forProperty('fieldValues.' . $index)->allowAllProperties();
+            $propertyMapping->allowCreationForSubProperty('fieldValues.' . $index);
+            $propertyMapping->allowModificationForSubProperty('fieldValues.' . $index);
+
+            if (is_array($value)) {
+                if (empty($value)) {
+                    $value = '';
+                } else {
+                    $value = json_encode($value);
+                }
+            }
+
+            /** @var Registration\Field $field */
+            $field = $this->fieldRepository->findByUid((int)$fieldUid);
+
+            $arguments['registration']['fieldValues'][$index] = [
+                'value' => $value,
+                'field' => strval($fieldUid),
+                'valueType' => $field->getValueType()
+            ];
+
+            $index++;
+        }
+
+        // Remove temporary "fields" field
+        $arguments = ArrayUtility::removeByPath($arguments, 'registration/fields');
+        $this->request->setArguments($arguments);
+    }
+
+    /**
      * Set date format for field dateOfBirth
      *
      * @return void
@@ -394,6 +468,7 @@ class EventController extends AbstractController
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['registration']['formatDateOfBirth']
             );
+        $this->setRegistrationFieldValuesToArguments();
     }
 
     /**
@@ -401,6 +476,7 @@ class EventController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator
      * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator
      *
      * @return void

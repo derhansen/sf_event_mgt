@@ -1578,4 +1578,60 @@ class EventTest extends UnitTestCase
 
         $this->subject->removeSpeaker($speaker);
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getRegistrationFieldsReturnsInitialValueforObjectStorage()
+    {
+        $newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->assertEquals(
+            $newObjectStorage,
+            $this->subject->getRegistrationFields()
+        );
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function setRegistrationFieldsSetsRegistrationFields()
+    {
+        $registrationField = new \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field();
+        $objectStorageWithRegistrationField = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $objectStorageWithRegistrationField->attach($registrationField);
+        $this->subject->setRegistrationFields($objectStorageWithRegistrationField);
+        $this->assertEquals($objectStorageWithRegistrationField, $this->subject->getRegistrationFields());
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function addRegistrationFieldsAddsRegistrationField()
+    {
+        $registrationField = new \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field();
+        $registrationFieldStorage = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['attach'],
+            [], '', false);
+        $registrationFieldStorage->expects($this->once())->method('attach')->with($this->equalTo($registrationField));
+        $this->inject($this->subject, 'registrationFields', $registrationFieldStorage);
+
+        $this->subject->addRegistrationFields($registrationField);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function removeRegistrationFieldsRemovesRegistrationField()
+    {
+        $registrationField = new \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field();
+        $registrationFieldStorage = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', ['detach'],
+            [], '', false);
+        $registrationFieldStorage->expects($this->once())->method('detach')->with($this->equalTo($registrationField));
+        $this->inject($this->subject, 'registrationFields', $registrationFieldStorage);
+
+        $this->subject->removeRegistrationFields($registrationField);
+    }
 }

@@ -221,6 +221,23 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $waitlist = false;
 
     /**
+     * Registration fields
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
+     * @cascade remove
+     * @lazy
+     */
+    protected $fieldValues;
+
+    /**
+     * Registration constructor.
+     */
+    public function __construct()
+    {
+        $this->fieldValues = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
      * Returns the firstname
      *
      * @return string $firstname
@@ -858,5 +875,21 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setWaitlist($waitlist)
     {
         $this->waitlist = $waitlist;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getFieldValues()
+    {
+        return $this->fieldValues;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $fieldValues
+     */
+    public function setFieldValues($fieldValues)
+    {
+        $this->fieldValues = $fieldValues;
     }
 }

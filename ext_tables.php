@@ -54,6 +54,7 @@ if (TYPO3_MODE === 'BE') {
         'ext-sfeventmgt-organisator' => 'tx_sfeventmgt_domain_model_organisator.svg',
         'ext-sfeventmgt-location' => 'tx_sfeventmgt_domain_model_location.svg',
         'ext-sfeventmgt-speaker' => 'tx_sfeventmgt_domain_model_speaker.svg',
+        'ext-sfeventmgt-registration-field' => 'tx_sfeventmgt_domain_model_registration_field.svg',
         'ext-sfeventmgt-logfile' => 'logfile.svg',
     ];
     /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */

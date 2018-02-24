@@ -18,8 +18,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * RegistrationValidator

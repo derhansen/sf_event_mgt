@@ -10,7 +10,7 @@
     {
       "name": "Torben Hansen",
       "email": "derhansen@gmail.com",
-      "homepage": "http://www.derhansen.com",
+      "homepage": "https://www.derhansen.com",
       "role": "Developer"
     }
   ],
@@ -19,7 +19,9 @@
     "GPL-2.0+"
   ],
   "require": {
-    "typo3/cms-core": "^7.6 || ^8.5"
+    "typo3/cms-core": "^7.6 || ^8.5",
+    "typo3/cms": "^8",
+    "phpunit/phpunit": "5.7.5"
   },
   "require-dev": {
     "nimut/testing-framework": "^2.0.0"

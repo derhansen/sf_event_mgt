@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
+
 /**
  * Event
  *
@@ -146,6 +148,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $registrationWaitlist;
+
+    /**
+     * Registration fields
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\Field>
+     * @lazy
+     */
+    protected $registrationFields;
 
     /**
      * Registration deadline date
@@ -295,6 +305,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->related = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registrationWaitlist = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->registrationFields = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -1427,5 +1438,61 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function removeSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
     {
         $this->speaker->detach($speaker);
+    }
+
+    /**
+     * Returns registrationFields
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getRegistrationFields()
+    {
+        return $this->registrationFields;
+    }
+
+    /**
+     * Sets registrationWaitlist
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields
+     *
+     * @return void
+     */
+    public function setRegistrationFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields)
+    {
+        $this->registrationFields = $registrationFields;
+    }
+
+    /**
+     * Adds a registrationField
+     *
+     * @param Field $registrationField
+     */
+    public function addRegistrationFields(Field $registrationField)
+    {
+        $this->registrationFields->attach($registrationField);
+    }
+
+    /**
+     * Removed a registrationField
+     *
+     * @param Field $registrationField
+     */
+    public function removeRegistrationFields(Field $registrationField)
+    {
+        $this->registrationFields->detach($registrationField);
+    }
+
+    /**
+     * Returns an array with registration fields
+     *
+     * @return array
+     */
+    public function getRegistrationFieldsUids()
+    {
+        $result = [];
+        foreach ($this->registrationFields as $registrationField) {
+            $result[] = $registrationField->getUid();
+        }
+        return $result;
     }
 }

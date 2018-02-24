@@ -33,7 +33,7 @@ return [
         program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants,
         max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube,
         additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
-        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker',
+        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields',
     ],
     'types' => [
         '1' => [
@@ -65,6 +65,9 @@ return [
 				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
 				max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
 				--palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
+
+			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
+				registration_fields,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
 				registration,registration_waitlist,
@@ -652,6 +655,26 @@ return [
                 'foreign_match_fields' => [
                     'waitlist' => '1',
                 ],
+                'maxitems' => 9999,
+                'appearance' => [
+                    'expandSingle' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'useSortable' => 1,
+                    'showAllLocalizationLink' => 1
+                ],
+            ],
+        ],
+        'registration_fields' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_fields',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_registration_field',
+                'foreign_field' => 'event',
+                'foreign_sortby' => 'sorting',
                 'maxitems' => 9999,
                 'appearance' => [
                     'expandSingle' => 1,

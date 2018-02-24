@@ -102,6 +102,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_waitlist">
 				<source>Registrations on the waitlist</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_fields">
+				<source>Additional registration fields (e.g. "Hotel room needed?")</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
 				<source>Registration deadline</source>
 			</trans-unit>
@@ -198,6 +201,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.fieldvalues">
+				<source>Registration field values</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
 				<source>Amount of registrations (if user created multiple registrations at the same time)</source>
 			</trans-unit>
@@ -215,6 +221,9 @@
 			</trans-unit>
 			<trans-unit id="event.tabs.registration_options">
 				<source>Registration options</source>
+			</trans-unit>
+			<trans-unit id="event.tabs.registration_fields">
+				<source>Registration fields</source>
 			</trans-unit>
 			<trans-unit id="event.tabs.registrations">
 				<source>Registrations</source>
@@ -315,6 +324,59 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_speaker.image">
 				<source>Image</source>
+			</trans-unit>
+
+			<trans-unit id="registration_field.tabs.settings">
+				<source>Settings</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field">
+				<source>Event - Registrationfield</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.settings">
+				<source>Options</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.0">
+				<source>Textfield (input)</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.1">
+				<source>Radiobutton</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.2">
+				<source>Checkbox</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.required">
+				<source>Required (field must be filled out)</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.placeholder">
+				<source>Placeholder</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.default_value">
+				<source>Default value</source>
+			</trans-unit>
+
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue">
+				<source>Event - Registrationfield value</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.value">
+				<source>Value</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.field">
+				<source>Field</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType">
+				<source>Value Datatype</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0">
+				<source>Text</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1">
+				<source>Array</source>
 			</trans-unit>
 		</body>
 	</file>

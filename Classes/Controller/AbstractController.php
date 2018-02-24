@@ -104,7 +104,14 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
      * @var \DERHANSEN\SfEventMgt\Service\PaymentService
      */
     protected $paymentService = null;
-    
+
+    /**
+     * FieldRepository
+     *
+     * @var \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository
+     */
+    protected $fieldRepository = null;
+
     /**
      * DI for $calendarService
      *
@@ -227,5 +234,16 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     public function injectUtilityService(\DERHANSEN\SfEventMgt\Service\UtilityService $utilityService)
     {
         $this->utilityService = $utilityService;
+    }
+
+    /**
+     * DI for $fieldRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository $fieldRepository
+     */
+    public function injectFieldRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository $fieldRepository
+    ) {
+        $this->fieldRepository = $fieldRepository;
     }
 }

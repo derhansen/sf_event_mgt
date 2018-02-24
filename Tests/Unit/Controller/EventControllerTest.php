@@ -18,6 +18,9 @@ use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
+use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -217,21 +220,18 @@ class EventControllerTest extends UnitTestCase
             ]
         ];
 
-        $mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            [], [], '', false);
+        $mockPropertyMapperConfig = $this->getMock(MvcPropertyMappingConfiguration::class, [], [], '', false);
         $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
             $this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
             $this->equalTo('dateFormat'),
             $this->equalTo('d.m.Y')
         );
 
-        $mockDateOfBirthPmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            [], [], '', false);
+        $mockDateOfBirthPmConfig = $this->getMock(MvcPropertyMappingConfiguration::class, [], [], '', false);
         $mockDateOfBirthPmConfig->expects($this->once())->method('forProperty')->with('dateOfBirth')->will(
             $this->returnValue($mockPropertyMapperConfig));
 
-        $mockRegistrationArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
-            [], [], '', false);
+        $mockRegistrationArgument = $this->getMock(Argument::class, [], [], '', false);
         $mockRegistrationArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
             $this->returnValue($mockDateOfBirthPmConfig));
 
@@ -240,6 +240,10 @@ class EventControllerTest extends UnitTestCase
         $mockArguments->expects($this->at(0))->method('getArgument')->with('registration')->will(
             $this->returnValue($mockRegistrationArgument));
 
+        $mockRequest = $this->getMock(Request::class, [], [], '', false);
+        $mockRequest->expects($this->once())->method('getArguments')->will($this->returnValue([]));
+
+        $this->subject->_set('request', $mockRequest);
         $this->subject->_set('arguments', $mockArguments);
         $this->subject->_set('settings', $settings);
         $this->subject->initializeSaveRegistrationAction();
