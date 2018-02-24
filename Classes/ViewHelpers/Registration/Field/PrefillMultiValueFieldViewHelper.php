@@ -101,7 +101,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
 
     /**
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $registrationField
-     * @param $currentValue
+     * @param string $currentValue
      * @return bool
      */
     protected function getFieldValueFromDefaultProperty($registrationField, $currentValue)
