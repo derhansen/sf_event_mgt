@@ -1,6 +1,9 @@
+[![Latest Stable Version](https://poser.pugx.org/derhansen/sf_event_mgt/v/stable)](https://packagist.org/packages/derhansen/sf_event_mgt)
 [![Build Status](https://travis-ci.org/derhansen/sf_event_mgt.svg?branch=master)](https://travis-ci.org/derhansen/sf_event_mgt)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
+[![Monthly Downloads](https://poser.pugx.org/derhansen/sf_event_mgt/d/monthly)](https://packagist.org/packages/derhansen/sf_event_mgt)
+[![License](https://poser.pugx.org/derhansen/sf_event_mgt/license)](https://packagist.org/packages/derhansen/sf_event_mgt)
 
 Event management and registration
 =================================
