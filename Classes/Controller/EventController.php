@@ -35,6 +35,20 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 class EventController extends AbstractController
 {
     /**
+     * Assign contentObjectData and pageData to earch view
+     *
+     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     */
+    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
+    {
+        $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
+        if (is_object($GLOBALS['TSFE'])) {
+            $view->assign('pageData', $GLOBALS['TSFE']->page);
+        }
+        parent::initializeView($view);
+    }
+
+    /**
      * Properties in this array will be ignored by overwriteDemandObject()
      *
      * @var array

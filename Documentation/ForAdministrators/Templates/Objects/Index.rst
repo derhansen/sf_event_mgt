@@ -69,6 +69,18 @@ List view
    :Description:
          The overwriteDemand object
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Detail view
 ~~~~~~~~~~~
 
@@ -87,6 +99,18 @@ Detail view
    :Description:
          An object holding the given event
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Registration view
 ~~~~~~~~~~~~~~~~~
 
@@ -104,6 +128,18 @@ Registration view
 
    :Description:
          An object holding the given event
+
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
 
 Calendar view
 ~~~~~~~~~~~~~
@@ -177,6 +213,18 @@ Calendar view
    :Description:
          Array with date, month and year of the next month
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Search view
 ~~~~~~~~~~~
 
@@ -224,6 +272,18 @@ Search view
 
    :Description:
          The overwriteDemand object
+
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object data
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
 
 Notification views
 ~~~~~~~~~~~~~~~~~~
