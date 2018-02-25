@@ -201,6 +201,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.fe_user">
+				<source>Frontend User</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.fieldvalues">
 				<source>Registration field values</source>
 			</trans-unit>
