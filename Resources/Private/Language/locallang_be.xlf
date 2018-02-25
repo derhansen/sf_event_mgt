@@ -122,7 +122,7 @@
 				<source>Do NOT show events with selected categories (AND)</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.categoryConjunction.notor">
-				<source>Do NOT show items with selected categories (OR)</source>
+				<source>Do NOT show events with selected categories (OR)</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.category">
 				<source>Category</source>

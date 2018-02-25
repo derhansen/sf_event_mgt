@@ -136,6 +136,26 @@ Tab settings
         queryLimit
 
  - :Property:
+         Category mode
+
+   :View:
+         List
+
+   :Description:
+         This setting defines, how categories are taken into account when selecting events.
+
+         The following options are available:
+
+         * Ignore category selection
+         * Show events with selected categories (OR)
+         * Show events with selected categories (AND)
+         * Do NOT show events with selected categories (OR)
+         * Do NOT show events with selected categories (AND)
+
+   :Key:
+         categoryConjunction
+
+ - :Property:
          Category
 
    :View:
@@ -227,8 +247,6 @@ Tab settings
 
 Tab additional
 ~~~~~~~~~~~~~~
-
-Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to display".
 
 .. t3-field-list-table::
  :header-rows: 1

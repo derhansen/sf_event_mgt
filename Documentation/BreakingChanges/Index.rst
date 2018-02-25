@@ -11,6 +11,17 @@
 Breaking Changes
 ================
 
+3.0.0
+~~~~~
+
+Category mode
+"""""""""""""
+
+If you have restricted the events in the plugin by category, you need to define the "category mode" by opening the
+plugin settings and configuring the category mode. The default value of the "category mode" is to ignore the
+category selection, so a category selection from a previous version of the extension would be ignored now!
+
+
 2.0.0
 ~~~~~
 
