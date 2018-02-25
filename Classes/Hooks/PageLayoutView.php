@@ -82,6 +82,10 @@ class PageLayoutView
         $this->getOrderSettings('settings.orderField', 'settings.orderDirection');
         $this->getOverrideDemandSettings();
 
+        if ($this->showFieldsForListViewOnly()) {
+            $this->getCategoryConjuction();
+        }
+
         $result = $this->renderSettingsAsTable($header, $action, $this->data);
         return $result;
     }
@@ -129,9 +133,32 @@ class PageLayoutView
             case 'Event->search':
                 $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.search');
                 break;
+            case 'Event->calendar':
+                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.calendar');
+                break;
             default:
         }
         return $title;
+    }
+
+    /**
+     * Returns, if fields, that are only visible for list view, should be shown
+     *
+     * @return bool
+     */
+    protected function showFieldsForListViewOnly()
+    {
+        $actions = $this->getFieldFromFlexform('switchableControllerActions');
+        switch ($actions) {
+            case 'Event->list':
+            case 'Event->search':
+            case 'Event->calendar':
+                $result = true;
+                break;
+            default:
+                $result = false;
+        }
+        return $result;
     }
 
     /**
@@ -254,6 +281,36 @@ class PageLayoutView
         }
 
         return $text;
+    }
+
+
+    /**
+     * Get category conjunction if a category is selected
+     * @return void
+     */
+    public function getCategoryConjuction()
+    {
+        // If not category is selected, we do not need to display the category mode
+        if ($this->getFieldFromFlexform('settings.category') === null) {
+            return;
+        }
+
+        $categoryConjunction = $this->getFieldFromFlexform('settings.categoryConjunction');
+        switch ($categoryConjunction) {
+            case 'or':
+            case 'and':
+            case 'notor':
+            case 'notand':
+                $mode = $categoryConjunction;
+                break;
+            default:
+                $mode = 'ignore';
+        }
+
+        $this->data[] = [
+            'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.categoryConjunction'),
+            'value' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.categoryConjunction.' . $mode)
+        ];
     }
 
     /**
