@@ -245,4 +245,14 @@ class AdministrationController extends AbstractController
     public function settingsErrorAction()
     {
     }
+
+    /**
+     * Suppress default validation messages
+     *
+     * @return bool
+     */
+    protected function getErrorFlashMessage()
+    {
+        return false;
+    }
 }
