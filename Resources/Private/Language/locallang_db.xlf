@@ -90,9 +90,6 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.files">
 				<source>Files</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_event.youtube">
-				<source>YouTube embed code</source>
-			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
 				<source>Additional images (e.g. images from the event)</source>
 			</trans-unit>

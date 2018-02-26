@@ -17,7 +17,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
  */
 class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Title
      *
@@ -173,13 +172,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $files = null;
-
-    /**
-     * YouTube Embed code
-     *
-     * @var string
-     */
-    protected $youtube = '';
 
     /**
      * The Location
@@ -793,28 +785,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files)
     {
         $this->files = $files;
-    }
-
-    /**
-     * Returns YouTube embed code
-     *
-     * @return string
-     */
-    public function getYoutube()
-    {
-        return $this->youtube;
-    }
-
-    /**
-     * Sets YouTube embed code
-     *
-     * @param string $youtube Youtube
-     *
-     * @return void
-     */
-    public function setYoutube($youtube)
-    {
-        $this->youtube = $youtube;
     }
 
     /**
