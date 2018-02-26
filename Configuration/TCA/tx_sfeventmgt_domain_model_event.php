@@ -454,6 +454,11 @@ return [
                         'type' => 'suggest',
                     ],
                 ],
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                ],
             ],
         ],
         'organisator' => [
@@ -471,6 +476,11 @@ return [
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
+                    ],
+                ],
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
                     ],
                 ],
             ],
@@ -493,6 +503,11 @@ return [
                         'default' => [
                             'searchWholePhrase' => true
                         ]
+                    ],
+                ],
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
                     ],
                 ],
             ],
