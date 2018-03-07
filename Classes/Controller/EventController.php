@@ -163,7 +163,8 @@ class EventController extends AbstractController
     private function handleKnownExceptionsElseThrowAgain(\Exception $exception)
     {
         $previousException = $exception->getPrevious();
-        if (($this->actionMethodName === 'detailAction' || $this->actionMethodName === 'registrationAction')
+        $actions = ['detailAction', 'registrationAction', 'icalDownloadAction'];
+        if (in_array($this->actionMethodName, $actions, true)
             && $previousException instanceof \TYPO3\CMS\Extbase\Property\Exception
         ) {
             $this->handleEventNotFoundError($this->settings);
@@ -360,8 +361,11 @@ class EventController extends AbstractController
      *
      * @return bool
      */
-    public function icalDownloadAction(Event $event)
+    public function icalDownloadAction(Event $event = null)
     {
+        if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
+            return $this->handleEventNotFoundError($this->settings);
+        }
         $this->icalendarService->downloadiCalendarFile($event);
         return false;
     }
