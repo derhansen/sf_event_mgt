@@ -304,7 +304,7 @@ class RegistrationService
     /**
      * Returns the current frontend user object if available
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser|null
+     * @return mixed \TYPO3\CMS\Extbase\Domain\Model\FrontendUser|null
      */
     public function getCurrentFeUserObject()
     {

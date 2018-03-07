@@ -309,7 +309,7 @@ class EventController extends AbstractController
      * Detail view for an event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @return string
+     * @return mixed string|void
      */
     public function detailAction(Event $event = null)
     {
@@ -359,7 +359,7 @@ class EventController extends AbstractController
      *
      * @param Event $event The event
      *
-     * @return bool
+     * @return string|false
      */
     public function icalDownloadAction(Event $event = null)
     {
@@ -375,7 +375,7 @@ class EventController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      *
-     * @return string
+     * @return mixed string|void
      */
     public function registrationAction(Event $event = null)
     {
