@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog

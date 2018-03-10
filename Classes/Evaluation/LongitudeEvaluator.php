@@ -17,12 +17,11 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  */
 class LongitudeEvaluator
 {
-
     /**
      * Validates the given longitude value (between -180 and 180 degrees)
      * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
      *
-     * @param mixed $value The value that has to be checked.
+     * @param mixed $value the value that has to be checked
      * @param string $is_in Is-In String
      * @param int $set Determines if the field can be set (value correct) or not
      *
@@ -37,6 +36,7 @@ class LongitudeEvaluator
         ) {
             $newValue = number_format((float)$value, 6);
         }
+
         return $newValue;
     }
 }

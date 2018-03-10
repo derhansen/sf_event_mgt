@@ -45,7 +45,6 @@ return [
         ],
     ],
     'columns' => [
-
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
@@ -233,6 +232,5 @@ return [
                 'eval' => 'trim,DERHANSEN\\SfEventMgt\\Evaluation\\LatitudeEvaluator'
             ],
         ],
-
     ],
 ];

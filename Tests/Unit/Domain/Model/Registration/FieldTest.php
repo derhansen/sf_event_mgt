@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
 /*
@@ -270,6 +269,9 @@ class FieldTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getSettingsForOptionDataProvider
+     * @param mixed $settings
+     * @param mixed $defaultValue
+     * @param mixed $expected
      */
     public function getSettingsForOptionReturnsExpectedValues($settings, $defaultValue, $expected)
     {
@@ -310,6 +312,8 @@ class FieldTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getValueTypeReturnsExpectedFieldValuesDataProvider
+     * @param mixed $fieldType
+     * @param mixed $expected
      */
     public function getValueTypeReturnsExpectedFieldValues($fieldType, $expected)
     {

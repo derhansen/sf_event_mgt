@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 /*
@@ -20,7 +19,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class HeaderDataViewHelper extends AbstractViewHelper
 {
-
     /**
      * Renders HeaderData
      *

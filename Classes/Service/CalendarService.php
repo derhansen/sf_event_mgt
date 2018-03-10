@@ -52,6 +52,7 @@ class CalendarService
             }
             $weeks[] = $week;
         }
+
         return $weeks;
     }
 
@@ -80,7 +81,7 @@ class CalendarService
         if ($dayOfWeekOfLastDay === 0 && $firstDayOfWeek === 1) {
             $lastDayOfCalendarOffset = 0;
         }
-        $lastDayOfCalendar = strtotime('+' . $lastDayOfCalendarOffset .' days', $lastDayOfMonth);
+        $lastDayOfCalendar = strtotime('+' . $lastDayOfCalendarOffset . ' days', $lastDayOfMonth);
 
         return [
             'firstDayOfMonth' => $firstDayOfMonth,
@@ -119,6 +120,7 @@ class CalendarService
                 }
             }
         }
+
         return $foundEvents;
     }
 
@@ -137,6 +139,7 @@ class CalendarService
         if (!empty($modifier)) {
             $date->modify($modifier);
         }
+
         return [
             'date' => $date,
             'month' => (int)$date->format('n'),

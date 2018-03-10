@@ -53,6 +53,7 @@ class CategoryService
             $counter++;
             if ($counter > 10000) {
                 $GLOBALS['TT']->setTSlogMessage('EXT:sf_event_mgt: one or more recursive categories where found');
+
                 return implode(',', $result);
             }
             $subcategories = self::getChildrenCategoriesRecursive($row['uid'], $counter);
@@ -61,6 +62,7 @@ class CategoryService
         $GLOBALS['TYPO3_DB']->sql_free_result($res);
 
         $result = implode(',', $result);
+
         return $result;
     }
 }

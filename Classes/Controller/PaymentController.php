@@ -282,14 +282,15 @@ class PaymentController extends AbstractController
      *
      * @param string $action
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-     * @return string
      * @throws \TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException
+     * @return string
      */
     protected function getPaymentUriForAction($action, $registration)
     {
         $this->uriBuilder
             ->setCreateAbsoluteUri(true)
             ->setUseCacheHash(false);
+
         return $this->uriBuilder->uriFor(
             $action,
             [

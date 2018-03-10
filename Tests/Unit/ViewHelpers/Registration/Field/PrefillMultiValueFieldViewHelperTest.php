@@ -85,6 +85,11 @@ class PrefillMultiValueFieldTest extends UnitTestCase
     /**
      * @test
      * @dataProvider viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider
+     * @param mixed $submittedRegistrationFieldUid
+     * @param mixed $registrationFieldUid
+     * @param mixed $currentValue
+     * @param mixed $fieldValue
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist(
@@ -115,7 +120,7 @@ class PrefillMultiValueFieldTest extends UnitTestCase
         $mockFieldValue->expects($this->any())->method('getField')->will($this->returnValue($mockField));
         $mockFieldValue->expects($this->any())->method('getValue')->will($this->returnValue($fieldValue));
 
-        $mockPropertyMapper =  $this->getMockBuilder(PropertyMapper::class)
+        $mockPropertyMapper = $this->getMockBuilder(PropertyMapper::class)
             ->setMethods(['convert'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -142,4 +147,3 @@ class PrefillMultiValueFieldTest extends UnitTestCase
         $this->assertSame($expected, $actual);
     }
 }
-

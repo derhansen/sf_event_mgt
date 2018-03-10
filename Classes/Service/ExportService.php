@@ -9,9 +9,9 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Exception;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \DERHANSEN\SfEventMgt\Exception;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class ExportService
@@ -110,6 +110,7 @@ class ExportService
                     $settings['fieldQuoteCharacter']
                 ) . chr(10);
         }
+
         return $this->prependByteOrderMark($exportedRegistrations, $settings);
     }
 
@@ -125,6 +126,7 @@ class ExportService
         if ((bool)$settings['prependBOM']) {
             $exportedRegistrations = chr(239) . chr(187) . chr(191) . $exportedRegistrations;
         }
+
         return $exportedRegistrations;
     }
 
@@ -142,6 +144,7 @@ class ExportService
         if ($value instanceof \DateTime) {
             $value = $value->format('d.m.Y');
         }
+
         return $value;
     }
 }

@@ -56,6 +56,7 @@ class BeUserSessionService
         if (is_array($data) && isset($data[$key])) {
             $result = $data[$key];
         }
+
         return $result;
     }
 

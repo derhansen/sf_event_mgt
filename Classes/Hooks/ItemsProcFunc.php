@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hooks for ItemsProcFunc
@@ -18,7 +18,6 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
  */
 class ItemsProcFunc
 {
-
     /**
      * @var PaymentService
      */
@@ -44,5 +43,4 @@ class ItemsProcFunc
             array_push($config['items'], [$label, $value]);
         }
     }
-
 }

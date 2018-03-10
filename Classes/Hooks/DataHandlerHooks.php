@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DataHandlerHooks
 {
-
     /**
      * Checks if the fields defined in $checkFields are set in the data-array of pi_flexform.
      * If a field is present and contains an empty value, the field is unset.
@@ -103,5 +102,4 @@ class DataHandlerHooks
             $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData, true);
         }
     }
-
 }

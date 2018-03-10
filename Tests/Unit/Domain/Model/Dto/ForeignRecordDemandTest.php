@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 /*
@@ -68,5 +67,4 @@ class ForeignRecordDemandTest extends UnitTestCase
         $this->subject->setRestrictForeignRecordsToStoragePage(true);
         $this->assertTrue($this->subject->getRestrictForeignRecordsToStoragePage());
     }
-
 }

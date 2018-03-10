@@ -202,6 +202,10 @@ class CalendarServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider calendarDateRangeDataProvider
+     * @param mixed $month
+     * @param mixed $year
+     * @param mixed $firstDayOfWeek
+     * @param mixed $expected
      */
     public function getCalendarDateRangeReturnsExpectedValues($month, $year, $firstDayOfWeek, $expected)
     {
@@ -253,6 +257,10 @@ class CalendarServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider dateConfigDataProvider
+     * @param mixed $month
+     * @param mixed $year
+     * @param mixed $modifier
+     * @param mixed $expected
      */
     public function getDateConfigReturnsExpectedValues($month, $year, $modifier, $expected)
     {

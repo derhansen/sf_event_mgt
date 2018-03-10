@@ -43,7 +43,6 @@ if (!defined('TYPO3_MODE')) {
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['DERHANSEN.' . $_EXTKEY] =
     'DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks';
 
-
 // Page layout hooks to show preview of plugins
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['cms/layout/class.tx_cms_layout.php']['list_type_Info']['sfeventmgt_pievent']['event'] =
     \DERHANSEN\SfEventMgt\Hooks\PageLayoutView::class . '->getEventPluginSummary';

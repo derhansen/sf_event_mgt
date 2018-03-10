@@ -15,5 +15,4 @@ namespace DERHANSEN\SfEventMgt\Payment;
  */
 class Transfer extends AbstractPayment
 {
-
 }

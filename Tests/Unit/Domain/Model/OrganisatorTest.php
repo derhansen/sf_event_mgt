@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /*
@@ -18,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class OrganisatorTest extends UnitTestCase
 {
-
     /**
      * Organisator object
      *
@@ -167,5 +165,4 @@ class OrganisatorTest extends UnitTestCase
             $this->subject
         );
     }
-
 }

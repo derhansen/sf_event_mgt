@@ -58,6 +58,7 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->getField()->getValueType() === FieldValueType::TYPE_ARRAY && ArrayUtility::isJsonArray($value)) {
             $value = json_decode($value, true);
         }
+
         return $value;
     }
 

@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
@@ -10,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  */
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
@@ -106,6 +105,9 @@ class CategoryRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByCategoryDataProvider
      * @test
+     * @param mixed $category
+     * @param mixed $includeSubcategory
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)

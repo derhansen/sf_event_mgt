@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Utility\MathUtility;
  */
 class LatitudeEvaluator
 {
-
     /**
      * Validates the given latitude value (between -90 and 90 degrees)
      * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
@@ -37,6 +36,7 @@ class LatitudeEvaluator
         ) {
             $newValue = number_format((float)$value, 6);
         }
+
         return $newValue;
     }
 }

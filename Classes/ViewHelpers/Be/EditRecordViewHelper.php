@@ -31,6 +31,7 @@ class EditRecordViewHelper extends AbstractRecordViewHelper
             'edit[tx_sfeventmgt_domain_model_event][' . (int)$uid . ']' => 'edit',
         ];
         $parameters['returnUrl'] = 'index.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $pid . $this->getModuleToken();
+
         return BackendUtility::getModuleUrl('record_edit', $parameters);
     }
 }

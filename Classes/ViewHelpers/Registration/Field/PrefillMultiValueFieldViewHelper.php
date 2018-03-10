@@ -52,9 +52,9 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
                 $registrationField->getUid(),
                 $currentValue
             );
-        } else {
-            return $this->getFieldValueFromDefaultProperty($registrationField, $currentValue);
         }
+
+        return $this->getFieldValueFromDefaultProperty($registrationField, $currentValue);
     }
 
     /**
@@ -75,6 +75,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
                 $result = $this->isGivenValueSelected($fieldValue, $currentValue);
             }
         }
+
         return $result;
     }
 
@@ -88,9 +89,9 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
         $fieldValue = $fieldValue->getValue();
         if (is_array($fieldValue)) {
             return in_array($currentValue, $fieldValue);
-        } else {
-            return $currentValue === $fieldValue;
         }
+
+        return $currentValue === $fieldValue;
     }
 
     /**
@@ -101,6 +102,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     protected function getFieldValueFromDefaultProperty($registrationField, $currentValue)
     {
         $defaultValues = GeneralUtility::trimExplode(',', $registrationField->getDefaultValue());
+
         return in_array($currentValue, $defaultValues);
     }
 }

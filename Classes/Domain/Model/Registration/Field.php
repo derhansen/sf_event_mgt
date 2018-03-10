@@ -212,6 +212,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
                 'selected' => $this->defaultValue === $value ? 1 : 0
             ];
         }
+
         return $options;
     }
 
@@ -250,8 +251,8 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         ];
         if (isset($valueTypes[$this->type])) {
             return $valueTypes[$this->type];
-        } else {
-            return FieldValueType::TYPE_TEXT;
         }
+
+        return FieldValueType::TYPE_TEXT;
     }
 }

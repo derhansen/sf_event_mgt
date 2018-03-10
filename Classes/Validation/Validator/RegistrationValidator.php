@@ -20,7 +20,6 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
  */
 class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {
-
     /**
      * Configuration Manager
      *
@@ -127,6 +126,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                     $validator = $this->objectManager->get(NotEmptyValidator::class);
                 }
         }
+
         return $validator;
     }
 }

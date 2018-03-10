@@ -36,6 +36,7 @@ class UserRegistrationController extends AbstractController
         ));
         $demand->setOrderField($settings['userRegistration']['orderField']);
         $demand->setOrderDirection($settings['userRegistration']['orderDirection']);
+
         return $demand;
     }
 

@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  */
 class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Event
      *

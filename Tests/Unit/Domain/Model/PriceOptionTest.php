@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /*

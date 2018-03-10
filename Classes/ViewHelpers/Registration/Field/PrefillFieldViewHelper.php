@@ -30,9 +30,9 @@ class PrefillFieldViewHelper extends AbstractViewHelper
         $originalRequest = $this->controllerContext->getRequest()->getOriginalRequest();
         if ($originalRequest) {
             return $this->getFieldValueFromArguments($originalRequest->getArguments(), $registrationField->getUid());
-        } else {
-            return $registrationField->getDefaultValue();
         }
+
+        return $registrationField->getDefaultValue();
     }
 
     /**
@@ -50,6 +50,7 @@ class PrefillFieldViewHelper extends AbstractViewHelper
                 $result = $fieldValue['value'];
             }
         }
+
         return $result;
     }
 }

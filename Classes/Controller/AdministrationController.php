@@ -8,11 +8,11 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
  * AdministrationController
@@ -185,6 +185,7 @@ class AdministrationController extends AbstractController
     public function exportAction($eventUid)
     {
         $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
+
         return false;
     }
 

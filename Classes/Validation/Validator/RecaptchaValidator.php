@@ -10,20 +10,19 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 
 /**
  * Validator for recaptcha.
  */
 class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {
-
     /**
      * This validator always needs to be executed even if the given value is empty.
      * See AbstractValidator::validate()
      *
-     * @var boolean
+     * @var bool
      */
     protected $acceptsEmptyValues = false;
 

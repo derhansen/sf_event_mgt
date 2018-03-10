@@ -8,10 +8,10 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
-use \TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * RegistrationService
@@ -310,9 +310,9 @@ class RegistrationService
     {
         if (isset($GLOBALS['TSFE']->fe_user->user['uid'])) {
             return $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
-        } else {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -360,6 +360,7 @@ class RegistrationService
         ) {
             $result = RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST;
         }
+
         return $success;
     }
 
@@ -373,6 +374,7 @@ class RegistrationService
     protected function emailNotUnique($event, $email)
     {
         $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, $email);
+
         return $registrations->count() >= 1;
     }
 
@@ -392,9 +394,9 @@ class RegistrationService
         $paymentInstance = $this->paymentService->getPaymentInstance($registration->getPaymentmethod());
         if ($paymentInstance !== null && $paymentInstance->isRedirectEnabled()) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -416,6 +418,7 @@ class RegistrationService
             || $event->getFreePlaces() <= 0) {
             $result = true;
         }
+
         return $result;
     }
 }

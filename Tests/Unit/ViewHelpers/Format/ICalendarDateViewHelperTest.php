@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDateViewHelper;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for iCalendar Date viewhelper
@@ -18,7 +18,6 @@ use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDateViewHelper;
  */
 class ICalendarDateViewHelperTest extends UnitTestCase
 {
-
     /**
      * Data Provider for unit tests
      *
@@ -45,6 +44,8 @@ class ICalendarDateViewHelperTest extends UnitTestCase
      *
      * @dataProvider iCalendarDateDataProvider
      *
+     * @param mixed $value
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValues($value, $expected)
@@ -63,11 +64,12 @@ class ICalendarDateViewHelperTest extends UnitTestCase
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
-        $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper',
-            ['renderChildren']);
+        $viewHelper = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper',
+            ['renderChildren']
+        );
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue(new \DateTime('@1425234250')));
         $actual = $viewHelper->render();
         $this->assertSame('20150301T182410Z', $actual);
     }
-
 }

@@ -9,7 +9,6 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  */
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hook for Template Layouts
@@ -18,7 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class TemplateLayouts
 {
-
     /**
      * Itemsproc function to extend the selection of templateLayouts in the plugin
      *
@@ -54,7 +52,7 @@ class TemplateLayouts
         ) {
             $templateLayouts = $pagesTsConfig['tx_sfeventmgt.']['templateLayouts.'];
         }
+
         return $templateLayouts;
     }
-
 }

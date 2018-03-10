@@ -17,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class PaymentControllerTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\PaymentController
      */
@@ -64,7 +63,7 @@ class PaymentControllerTest extends UnitTestCase
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash', 'uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
         $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
@@ -107,7 +106,7 @@ class PaymentControllerTest extends UnitTestCase
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash', 'uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
         $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
@@ -144,7 +143,7 @@ class PaymentControllerTest extends UnitTestCase
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash', 'uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
         $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
@@ -182,7 +181,7 @@ class PaymentControllerTest extends UnitTestCase
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash', 'uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
         $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
@@ -220,7 +219,7 @@ class PaymentControllerTest extends UnitTestCase
         $mockRegistration = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration', [], [], '', [], false);
         $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
 
-        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash','uriFor'], [], '', [], false);
+        $mockUriBuilder = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder', ['setUseCacheHash', 'uriFor'], [], '', [], false);
         $this->inject($this->subject, 'uriBuilder', $mockUriBuilder);
 
         $mockHashService = $this->getMock('TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService', [], [], '', [], false);
@@ -245,5 +244,4 @@ class PaymentControllerTest extends UnitTestCase
 
         $this->subject->notifyAction($mockRegistration, 'a-hmac');
     }
-
 }

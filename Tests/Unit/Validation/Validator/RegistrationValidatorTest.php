@@ -17,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class RegistrationValidatorTest extends UnitTestCase
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator
      */
@@ -35,9 +34,13 @@ class RegistrationValidatorTest extends UnitTestCase
      */
     public function setup()
     {
-        $this->validator = $this->getAccessibleMock($this->validatorClassName,
+        $this->validator = $this->getAccessibleMock(
+            $this->validatorClassName,
             ['translateErrorMessage', 'getValidator'],
-            [], '', false);
+            [],
+            '',
+            false
+        );
     }
 
     /**
@@ -66,6 +69,9 @@ class RegistrationValidatorTest extends UnitTestCase
      *
      * @test
      * @dataProvider missingSettingsDataProvider
+     * @param mixed $settings
+     * @param mixed $fields
+     * @param mixed $expected
      */
     public function validatorReturnsTrueWhenArgumentsMissing($settings, $fields, $expected)
     {
@@ -79,10 +85,16 @@ class RegistrationValidatorTest extends UnitTestCase
         }
 
         // Inject configuration and configurationManager
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
+        $configurationManager = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+            ['getConfiguration'],
+            [],
+            '',
+            false
+        );
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($settings));
+            $this->returnValue($settings)
+        );
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
         $this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
@@ -147,6 +159,10 @@ class RegistrationValidatorTest extends UnitTestCase
      *
      * @test
      * @dataProvider settingsDataProvider
+     * @param mixed $settings
+     * @param mixed $fields
+     * @param mixed $hasErrors
+     * @param mixed $expected
      */
     public function validatorReturnsExpectedResults($settings, $fields, $hasErrors, $expected)
     {
@@ -160,10 +176,16 @@ class RegistrationValidatorTest extends UnitTestCase
         }
 
         // Inject configuration and configurationManager
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
+        $configurationManager = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
+            ['getConfiguration'],
+            [],
+            '',
+            false
+        );
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($settings));
+            $this->returnValue($settings)
+        );
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
         // Inject the object manager
@@ -172,23 +194,41 @@ class RegistrationValidatorTest extends UnitTestCase
         $validationResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', [], [], '', false);
         $validationResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
         $validationResult->expects($this->any())->method('getErrors')->will(
-            $this->returnValue([$validationError]));
+            $this->returnValue([$validationError])
+        );
 
-        $notEmptyValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator',
-            [], [], '', false);
+        $notEmptyValidator = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator',
+            [],
+            [],
+            '',
+            false
+        );
         $notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
-            $validationResult));
+            $validationResult
+        ));
 
-        $booleanValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
-            [], [], '', false);
+        $booleanValidator = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
+            [],
+            [],
+            '',
+            false
+        );
         $booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
-            $validationResult));
+            $validationResult
+        ));
 
-        $recaptchaValidator = $this->getMock('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator',
-            [], [], '', false);
+        $recaptchaValidator = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator',
+            [],
+            [],
+            '',
+            false
+        );
         $recaptchaValidator->expects($this->any())->method('validate')->will($this->returnValue(
-            $validationResult));
-
+            $validationResult
+        ));
 
         // Create a map of arguments to return values
         $map = [
@@ -227,13 +267,21 @@ class RegistrationValidatorTest extends UnitTestCase
     /**
      * @test
      * @@dataProvider getValidatorDataProvider
+     * @param mixed $type
+     * @param mixed $returnedObject
+     * @param mixed $expectedClass
      */
     public function getValidatorReturnsValidatorTest($type, $returnedObject, $expectedClass)
     {
         $validator = $this->getAccessibleMock($this->validatorClassName, ['dummy'], [], '', false);
 
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            ['get'], [], '', false);
+        $objectManager = $this->getMock(
+            'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+            ['get'],
+            [],
+            '',
+            false
+        );
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($returnedObject));
         $this->inject($validator, 'objectManager', $objectManager);
 

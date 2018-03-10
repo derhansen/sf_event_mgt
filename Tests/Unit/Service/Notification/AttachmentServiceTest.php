@@ -8,9 +8,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -114,6 +114,10 @@ class AttachmentServiceTest extends UnitTestCase
      *
      * @test
      * @dataProvider typoScriptConfigTestDataProvider
+     * @param mixed $messageType
+     * @param mixed $messageRecipient
+     * @param mixed $settingsPath
+     * @param mixed $expected
      */
     public function getAttachmentsRespectsTypoScriptSettingsForGivenMessageType(
         $messageType,

@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  */
 class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Search string
      *

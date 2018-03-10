@@ -500,7 +500,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns if payment is enabled
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnablePayment()
     {
@@ -510,7 +510,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets enablePayment
      *
-     * @param boolean $enablePayment
+     * @param bool $enablePayment
      * @return void
      */
     public function setEnablePayment($enablePayment)
@@ -521,7 +521,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns if payment methods should be restricted
      *
-     * @return boolean
+     * @return bool
      */
     public function getRestrictPaymentMethods()
     {
@@ -531,7 +531,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets if payment methods should be restricted
      *
-     * @param boolean $restrictPaymentMethods
+     * @param bool $restrictPaymentMethods
      * @return void
      */
     public function setRestrictPaymentMethods($restrictPaymentMethods)
@@ -802,6 +802,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new \DateTime()) {
             $deadlineNotReached = false;
         }
+
         return ($this->getStartdate() > new \DateTime()) &&
         ($maxParticipantsNotReached || !$maxParticipantsNotReached && $this->enableWaitlist) &&
         $this->getEnableRegistration() && $deadlineNotReached;
@@ -864,7 +865,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns enableWaitlist
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnableWaitlist()
     {
@@ -874,7 +875,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets enableWaitlist
      *
-     * @param boolean $enableWaitlist
+     * @param bool $enableWaitlist
      * @return void
      */
     public function setEnableWaitlist($enableWaitlist)
@@ -975,6 +976,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($ret === '-') {
             $ret = '';
         }
+
         return $ret;
     }
 
@@ -1021,7 +1023,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->maxRegistrationsPerUser = $maxRegistrationsPerUser;
     }
-
 
     /**
      * Adds an additionalImage
@@ -1203,7 +1204,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns uniqueEmailCheck
      *
-     * @return boolean
+     * @return bool
      */
     public function getUniqueEmailCheck()
     {
@@ -1213,7 +1214,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets UniqueEmailCheck
      *
-     * @param boolean $uniqueEmailCheck
+     * @param bool $uniqueEmailCheck
      * @return void
      */
     public function setUniqueEmailCheck($uniqueEmailCheck)
@@ -1283,6 +1284,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             }
         }
         ksort($activePriceOptions);
+
         return $activePriceOptions;
     }
 
@@ -1297,10 +1299,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if (count($activePriceOptions) >= 1) {
             // Sort active price options and return first element
             return reset($activePriceOptions)->getPrice();
-        } else {
-            // Just return the price field
-            return $this->price;
         }
+        // Just return the price field
+        return $this->price;
     }
 
     /**
@@ -1457,6 +1458,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         foreach ($this->registrationFields as $registrationField) {
             $result[] = $registrationField->getUid();
         }
+
         return $result;
     }
 }

@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  */
 class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Set default sorting
      *
@@ -24,5 +23,4 @@ class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Rep
     protected $defaultOrderings = [
         'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
     ];
-
 }

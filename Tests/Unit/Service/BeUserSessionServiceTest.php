@@ -9,11 +9,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  */
 
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
-use DERHANSEN\SfEventMgt\Service\EmailService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\BeUserSessionService.
@@ -22,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class BeUserSessionServiceTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
      */
@@ -102,6 +98,9 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getSessionDataByKeyDataProvider
+     * @param mixed $sessionData
+     * @param mixed $key
+     * @param mixed $expected
      */
     public function getSessionDataByKeyReturnsExpectedValue($sessionData, $key, $expected)
     {

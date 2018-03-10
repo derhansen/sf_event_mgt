@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  */
 class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Display mode
      *
@@ -215,7 +214,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->currentDateTime != null) {
             return $this->currentDateTime;
         }
-        return new \DateTime;
+
+        return new \DateTime();
     }
 
     /**
@@ -243,7 +243,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns includeSubcategories
      *
-     * @return boolean
+     * @return bool
      */
     public function getIncludeSubcategories()
     {
@@ -253,7 +253,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets includeSubcategories
      *
-     * @param boolean $includeSubcategories
+     * @param bool $includeSubcategories
      * @return void
      */
     public function setIncludeSubcategories($includeSubcategories)

@@ -8,10 +8,10 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
@@ -21,7 +21,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Set default sorting
      *
@@ -72,6 +71,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         $this->setQueryLimitFromDemand($query, $eventDemand);
+
         return $query->execute();
     }
 
@@ -219,6 +219,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             default:
                 $constraint = $query->logicalOr($categoryConstraints);
         }
+
         return $constraint;
     }
 

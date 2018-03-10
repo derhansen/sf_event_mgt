@@ -18,7 +18,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class UserRegistrationControllerTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\UserRegistrationController
      */

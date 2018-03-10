@@ -24,6 +24,7 @@ class ArrayUtility
         if (!is_string($string)) {
             return false;
         }
+
         return is_array(json_decode($string, true));
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 /*
@@ -94,5 +93,4 @@ class CategoryDemandTest extends UnitTestCase
         $this->subject->setIncludeSubcategories(true);
         $this->assertTrue($this->subject->getIncludeSubcategories());
     }
-
 }

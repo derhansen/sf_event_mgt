@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
@@ -10,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  */
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
@@ -19,7 +18,6 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class OrganisatorRepositoryTest extends FunctionalTestCase
 {
-
     /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
     protected $objectManager;
 
@@ -55,5 +53,4 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
         $locations = $this->organisatorRepository->findAll();
         $this->assertEquals(2, $locations->count());
     }
-
 }

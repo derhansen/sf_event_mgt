@@ -140,6 +140,7 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     {
         $this->orderDirection = $orderDirection;
     }
+
     /**
      * Sets the current DateTime
      *
@@ -162,7 +163,8 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
         if ($this->currentDateTime != null) {
             return $this->currentDateTime;
         }
-        return new \DateTime;
+
+        return new \DateTime();
     }
 
     /**

@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * The repository for Categories
@@ -18,7 +18,6 @@ use DERHANSEN\SfEventMgt\Service\CategoryService;
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {
-
     /**
      * Returns all categories depending on the settings in the demand object
      *
@@ -52,5 +51,4 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 
         return $query->execute();
     }
-
 }

@@ -13,5 +13,4 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  */
 class SpeakerRepository extends AbstractForeignRecordRepository
 {
-
 }

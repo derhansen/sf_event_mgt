@@ -8,7 +8,7 @@ namespace DERHANSEN\SfEventMgt\Command;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class CleanupCommandController

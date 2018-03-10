@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
@@ -10,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  */
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
@@ -87,6 +86,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @dataProvider findExpiredRegistrationsDataProvider
      * @test
+     * @param mixed $dateNow
+     * @param mixed $expected
      */
     public function findExpiredRegistrations($dateNow, $expected)
     {
@@ -175,6 +176,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findNotificationRegistrationsDataProvider
      * @test
+     * @param mixed $constraints
+     * @param mixed $expected
      */
     public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected)
     {
@@ -335,6 +338,4 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         $this->assertEquals(32, $registrations->getFirst()->getUid());
     }
-
 }
-

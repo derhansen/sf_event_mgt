@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  */
 class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Storage page
      *
@@ -73,5 +72,4 @@ class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->restrictForeignRecordsToStoragePage = $restrictForeignRecordsToStoragePage;
     }
-
 }

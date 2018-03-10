@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Payment;
  */
 abstract class AbstractPayment
 {
-
     /**
      * Enable redirect for payment method
      *
@@ -100,5 +99,4 @@ abstract class AbstractPayment
     {
         return $this->enableNotifyLink;
     }
-
 }

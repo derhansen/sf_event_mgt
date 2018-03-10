@@ -17,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 {
-
     /**
      * Viewhelper
      *
@@ -138,6 +137,11 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider simultaneousRegistrationsDataProvider
+     * @param mixed $maxParticipants
+     * @param mixed $freePlaces
+     * @param mixed $maxRegistrations
+     * @param mixed $waitlist
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $waitlist, $expected)
@@ -150,5 +154,4 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         $actual = $this->viewhelper->render($mockEvent);
         $this->assertEquals($expected, $actual);
     }
-
 }

@@ -17,7 +17,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class ICalendarDateViewHelper extends AbstractViewHelper
 {
-
     /**
      * Formats the given date according to rfc5545
      *
@@ -33,9 +32,8 @@ class ICalendarDateViewHelper extends AbstractViewHelper
         }
         if ($date instanceof \DateTime) {
             return gmdate('Ymd\THis\Z', $date->getTimestamp());
-        } else {
-            return '';
         }
-    }
 
+        return '';
+    }
 }

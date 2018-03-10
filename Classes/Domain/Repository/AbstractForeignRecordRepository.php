@@ -18,7 +18,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  */
 abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Disable the use of storage records, because the StoragePage can be set
      * in the plugin
@@ -54,5 +53,4 @@ abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persis
 
         return $query->execute();
     }
-
 }

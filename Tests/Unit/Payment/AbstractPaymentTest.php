@@ -17,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class AbstractPaymentTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Payment\AbstractPayment
      */
@@ -87,5 +86,4 @@ class AbstractPaymentTest extends UnitTestCase
     {
         $this->assertFalse($this->subject->isFailureLinkEnabled());
     }
-
 }

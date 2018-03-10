@@ -17,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class LatitudeEvaluatorTest extends UnitTestCase
 {
-
     /**
      * LatitudeEvaluator
      *
@@ -90,6 +89,8 @@ class LatitudeEvaluatorTest extends UnitTestCase
      * @test
      * @dataProvider latitudeEvaluatorDataProvider
      *
+     * @param mixed $value
+     * @param mixed $expected
      * @return void
      */
     public function latitudeEvaluatorTest($value, $expected)
@@ -98,5 +99,4 @@ class LatitudeEvaluatorTest extends UnitTestCase
         $actual = $this->subject->evaluateFieldValue($value, null, $set);
         $this->assertSame($actual, $expected);
     }
-
 }

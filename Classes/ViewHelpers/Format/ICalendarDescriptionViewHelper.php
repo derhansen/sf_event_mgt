@@ -17,7 +17,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class ICalendarDescriptionViewHelper extends AbstractViewHelper
 {
-
     /**
      * Formats the given description according to RFC 2445
      *
@@ -49,7 +48,7 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
         } else {
             $newDescription = $tmpDescription;
         }
+
         return $newDescription;
     }
-
 }

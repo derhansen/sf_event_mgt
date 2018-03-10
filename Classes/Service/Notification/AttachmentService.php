@@ -10,7 +10,7 @@ namespace DERHANSEN\SfEventMgt\Service\Notification;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -87,6 +87,7 @@ class AttachmentService
             $registrationAttachments = $this->getObjectAttachments($config['fromRegistrationProperty'], $registration);
             $attachments = array_merge($attachments, $registrationAttachments);
         }
+
         return $attachments;
     }
 
@@ -104,6 +105,7 @@ class AttachmentService
                 $attachments[] = GeneralUtility::getFileAbsFileName($file);
             }
         }
+
         return $attachments;
     }
 
@@ -124,6 +126,7 @@ class AttachmentService
                 }
             }
         }
+
         return $attachments;
     }
 
@@ -152,6 +155,7 @@ class AttachmentService
             /** @var $property \TYPO3\CMS\Extbase\Domain\Model\FileReference */
             $attachments[] = $property->getOriginalResource()->getForLocalProcessing(false);
         }
+
         return $attachments;
     }
 }

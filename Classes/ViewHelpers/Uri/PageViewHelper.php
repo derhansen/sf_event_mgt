@@ -75,15 +75,15 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
     }
 
     /**
-     * @param integer|NULL $pageUid target PID
+     * @param int|null $pageUid target PID
      * @param array $additionalParams query parameters to be attached to the resulting URI
-     * @param integer $pageType type of the target page. See typolink.parameter
-     * @param boolean $noCache set this to disable caching for the target page. You should not need this.
-     * @param boolean $noCacheHash set this to supress the cHash query parameter created by TypoLink. You should not need this.
+     * @param int $pageType type of the target page. See typolink.parameter
+     * @param bool $noCache set this to disable caching for the target page. You should not need this.
+     * @param bool $noCacheHash set this to supress the cHash query parameter created by TypoLink. You should not need this.
      * @param string $section the anchor to be added to the URI
-     * @param boolean $linkAccessRestrictedPages If set, links pointing to access restricted pages will still link to the page even though the page cannot be accessed.
-     * @param boolean $absolute If set, the URI of the rendered link is absolute
-     * @param boolean $addQueryString If set, the current query parameters will be kept in the URI
+     * @param bool $linkAccessRestrictedPages if set, links pointing to access restricted pages will still link to the page even though the page cannot be accessed
+     * @param bool $absolute If set, the URI of the rendered link is absolute
+     * @param bool $addQueryString If set, the current query parameters will be kept in the URI
      * @param array $argumentsToBeExcludedFromQueryString arguments to be removed from the URI. Only active if $addQueryString = TRUE
      * @param string $addQueryStringMethod Set which parameters will be kept. Only active if $addQueryString = TRUE
      * @return string Rendered page URI
@@ -104,6 +104,7 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         $this->buildTsfe();
         $uriBuilder = $this->controllerContext->getUriBuilder();
         $uri = $uriBuilder->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->setAddQueryStringMethod($addQueryStringMethod)->buildFrontendUri();
+
         return $uri;
     }
 }

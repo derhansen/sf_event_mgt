@@ -17,7 +17,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class PrefillViewHelper extends AbstractViewHelper
 {
-
     /**
      * Returns a property from fe_user (if logged in and if the given field is
      * configured to be prefilled)
@@ -42,9 +41,10 @@ class PrefillViewHelper extends AbstractViewHelper
         $originalRequest = $this->controllerContext->getRequest()->getOriginalRequest();
         if ($originalRequest) {
             $submittedValues = $originalRequest->getArguments();
+
             return $submittedValues['registration'][$fieldname];
         }
+
         return strval($GLOBALS['TSFE']->fe_user->user[$prefillSettings[$fieldname]]);
     }
-
 }

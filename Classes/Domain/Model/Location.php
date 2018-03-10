@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  */
 class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Title
      *

@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
@@ -13,7 +12,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
@@ -231,6 +230,10 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByCategoryWithConjunctionDataProvider
      * @test
+     * @param mixed $category
+     * @param mixed $conjunction
+     * @param mixed $includeSub
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $includeSub, $expected)
@@ -272,6 +275,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationDataProvider
      * @test
+     * @param mixed $locationUid
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByLocation($locationUid, $expected)
@@ -309,6 +314,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationCityDataProvider
      * @test
+     * @param mixed $locationCity
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByLocationCity($locationCity, $expected)
@@ -345,6 +352,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationCountryDataProvider
      * @test
+     * @param mixed $locationCountry
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByLocationCountry($locationCountry, $expected)
@@ -452,6 +461,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByTopEventDataProvider
      * @test
+     * @param mixed $topEventRestriction
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByTopEvent($topEventRestriction, $expected)
@@ -517,6 +528,9 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByOrderingDataProvider
      * @test
+     * @param mixed $orderField
+     * @param mixed $orderDirection
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByOrdering($orderField, $orderDirection, $expected)

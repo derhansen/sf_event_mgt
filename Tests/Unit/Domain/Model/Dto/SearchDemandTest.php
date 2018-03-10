@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 /*
@@ -175,5 +174,4 @@ class SearchDemandTest extends UnitTestCase
         $this->subject->setEndDate(new \DateTime());
         $this->assertEquals(true, $this->subject->getHasQuery());
     }
-
 }

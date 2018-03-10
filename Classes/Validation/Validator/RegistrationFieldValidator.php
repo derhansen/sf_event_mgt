@@ -41,6 +41,7 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
                 $result = false;
             }
         }
+
         return $result;
     }
 
@@ -69,6 +70,7 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
                 $this->result->forProperty('fields.' . $registrationField->getUid())->addError($error);
             }
         }
+
         return $result;
     }
 
@@ -98,6 +100,7 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
                 $result = $fieldValue->getValue();
             }
         }
+
         return $result;
     }
 }

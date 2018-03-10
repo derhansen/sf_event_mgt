@@ -15,5 +15,4 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository\Registration;
  */
 class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
 }

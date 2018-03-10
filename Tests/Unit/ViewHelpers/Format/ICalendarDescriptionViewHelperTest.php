@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for iCalendar Description viewhelper
@@ -18,7 +18,6 @@ use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
  */
 class ICalendarDescriptionViewHelperTest extends UnitTestCase
 {
-
     /**
      * Data Provider for unit tests
      *
@@ -61,6 +60,8 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      *
      * @dataProvider iCalendarDescriptionDataProvider
      *
+     * @param mixed $value
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValues($value, $expected)
@@ -79,11 +80,12 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
-        $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper',
-            ['renderChildren']);
+        $viewHelper = $this->getMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper',
+            ['renderChildren']
+        );
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));
         $actual = $viewHelper->render();
         $this->assertSame('Just some text', $actual);
     }
-
 }

@@ -18,7 +18,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
  */
 class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Disable the use of storage records, because the StoragePage can be set
      * in the plugin
@@ -46,6 +45,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $constraints[] = $query->lessThanOrEqual('confirmationUntil', $dateNow);
         $constraints[] = $query->equals('confirmed', false);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -108,6 +108,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('email', $email);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -128,6 +129,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setDisplayModeConstraint($query, $demand, $constraints);
         $this->setUserConstraint($query, $demand, $constraints);
         $this->setOrderingsFromDemand($query, $demand);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 

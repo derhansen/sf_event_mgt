@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /*
@@ -728,5 +727,4 @@ class RegistrationTest extends UnitTestCase
         $this->subject->setPaymentReference('paid-1234567890');
         $this->assertEquals('paid-1234567890', $this->subject->getPaymentReference());
     }
-
 }

@@ -17,7 +17,6 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
 {
-
     /**
      * Returns an array with the amount of possible simultaneous registrations
      * respecting the maxRegistrationsPerUser setting and also respects the amount
@@ -45,7 +44,7 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
             $arrayWithZeroAsIndex = range($minPossibleRegistrations, $maxPossibleRegistrations);
             $result = array_combine(range(1, count($arrayWithZeroAsIndex)), $arrayWithZeroAsIndex);
         }
+
         return $result;
     }
-
 }

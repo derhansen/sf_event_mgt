@@ -27,7 +27,6 @@ class RegistrationFieldValidatorTest extends UnitTestCase
      */
     protected $validator;
 
-
     /**
      * Setup
      *

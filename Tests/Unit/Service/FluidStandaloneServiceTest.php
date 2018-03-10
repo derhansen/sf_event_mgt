@@ -8,10 +8,10 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use \DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -23,12 +23,10 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class FluidStandaloneServiceTest extends UnitTestCase
 {
-
     /**
      * @var FluidStandaloneService
      */
     protected $subject = null;
-
 
     /**
      * Setup
@@ -116,6 +114,8 @@ class FluidStandaloneServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider templateFoldersDataProvider
+     * @param mixed $settings
+     * @param mixed $expected
      */
     public function getTemplateFoldersReturnsExpectedResult($settings, $expected)
     {
@@ -131,8 +131,13 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function getTemplatePathReturnsLastItemOfPossibleTemplatePaths()
     {
-        $mockFluidStandaloneService = $this->getMock(FluidStandaloneService::class, ['getTemplatePaths'], [],
-            '', false);
+        $mockFluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePaths'],
+            [],
+            '',
+            false
+        );
         $mockFluidStandaloneService->expects($this->once())->method('getTemplatePaths')
             ->will($this->returnValue([
                 GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/test.html'),
@@ -152,8 +157,13 @@ class FluidStandaloneServiceTest extends UnitTestCase
         $mockConfigurationManager->expects($this->any())->method('getConfiguration')->will($this->returnValue([]));
         $this->inject($this->subject, 'configurationManager', $mockConfigurationManager);
 
-        $mockRequest = $this->getMock(RenderingContext::class, ['setControllerExtensionName', 'setPluginName'], [],
-            '', false);
+        $mockRequest = $this->getMock(
+            RenderingContext::class,
+            ['setControllerExtensionName', 'setPluginName'],
+            [],
+            '',
+            false
+        );
         $mockRequest->expects($this->once())->method('setControllerExtensionName')->with('SfEventMgt');
         $mockRequest->expects($this->once())->method('setPluginName')->with('Pievent');
 

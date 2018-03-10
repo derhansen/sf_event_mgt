@@ -14,9 +14,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
+use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -78,6 +78,7 @@ class EventController extends AbstractController
         $demand->setQueryLimit($settings['queryLimit']);
         $demand->setLocation($settings['location']);
         $demand->setOrganisator($settings['organisator']);
+
         return $demand;
     }
 
@@ -94,6 +95,7 @@ class EventController extends AbstractController
         $demand = $this->objectManager->get(ForeignRecordDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictForeignRecordsToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
+
         return $demand;
     }
 
@@ -112,6 +114,7 @@ class EventController extends AbstractController
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         $demand->setCategories($settings['categoryMenu']['categories']);
         $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
+
         return $demand;
     }
 
@@ -135,6 +138,7 @@ class EventController extends AbstractController
             }
             \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
         }
+
         return $demand;
     }
 
@@ -302,6 +306,7 @@ class EventController extends AbstractController
         $searchDemand->setStartDate($startDate);
         $searchDemand->setEndDate($endDate);
         $eventDemand->setSearchDemand($searchDemand);
+
         return $eventDemand;
     }
 
@@ -348,6 +353,7 @@ class EventController extends AbstractController
                 }
                 $standaloneTemplate = $this->objectManager->get(StandaloneView::class);
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
+
                 return $standaloneTemplate->render();
                 break;
             default:
@@ -367,6 +373,7 @@ class EventController extends AbstractController
             return $this->handleEventNotFoundError($this->settings);
         }
         $this->icalendarService->downloadiCalendarFile($event);
+
         return false;
     }
 
@@ -707,7 +714,7 @@ class EventController extends AbstractController
             $this->uriBuilder->reset()
                 ->setTargetPageUid($paymentPid)
                 ->setUseCacheHash(false);
-            $uri =  $this->uriBuilder->uriFor(
+            $uri = $this->uriBuilder->uriFor(
                 'redirect',
                 [
                     'registration' => $registration,

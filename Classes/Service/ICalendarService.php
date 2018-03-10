@@ -8,9 +8,9 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use DERHANSEN\SfEventMgt\Exception;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
-use \DERHANSEN\SfEventMgt\Exception;
 
 /**
  * ICalenderService
@@ -135,6 +135,7 @@ class ICalendarService
         $icalContent = preg_replace('/^\h*\v+/m', '', $icalView->render());
         // Finally replace new lines with CRLF
         $icalContent = str_replace(chr(10), chr(13) . chr(10), $icalContent);
+
         return $icalContent;
     }
 }

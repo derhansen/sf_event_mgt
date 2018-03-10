@@ -8,9 +8,9 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use DERHANSEN\SfEventMgt\Utility\MessageType;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * NotificationService
@@ -176,6 +176,7 @@ class NotificationService
                 }
             }
         }
+
         return $count;
     }
 
@@ -246,6 +247,7 @@ class NotificationService
                 $type,
                 MessageRecipient::USER
             );
+
             return $this->emailService->sendEmailMessage(
                 $settings['notification']['senderEmail'],
                 $registration->getEmail(),
@@ -255,6 +257,7 @@ class NotificationService
                 $attachments
             );
         }
+
         return false;
     }
 
@@ -294,6 +297,7 @@ class NotificationService
             case MessageType::REGISTRATION_NEW:
             default:
         }
+
         return [
             $template,
             $subject
@@ -313,7 +317,6 @@ class NotificationService
     public function sendAdminMessage($event, $registration, $settings, $type)
     {
         list($template, $subject) = $this->getAdminMessageTemplateSubject($settings, $type);
-
 
         if (is_null($event) || is_null($registration || !is_array($settings)) ||
             ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false)
@@ -359,6 +362,7 @@ class NotificationService
                 $attachments
             );
         }
+
         return $allEmailsSent;
     }
 
@@ -393,6 +397,7 @@ class NotificationService
             case MessageType::REGISTRATION_NEW:
             default:
         }
+
         return [
             $template,
             $subject
@@ -423,6 +428,7 @@ class NotificationService
             'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
             'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
         ];
+
         return $this->fluidStandaloneService->renderTemplate($templatePathAndFilename, $variables);
     }
 }

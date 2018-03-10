@@ -32,6 +32,7 @@ class SettingsService
         foreach ($settings['notification']['customNotifications'] as $notificationKey => $notificationValue) {
             $notifications[$notificationKey] = $notificationValue['title'];
         }
+
         return $notifications;
     }
 
@@ -58,6 +59,7 @@ class SettingsService
             return [];
         }
         $return = preg_split('/,/', $clearCacheUids, null, PREG_SPLIT_NO_EMPTY);
+
         return $return;
     }
 }

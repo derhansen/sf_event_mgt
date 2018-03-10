@@ -14,8 +14,8 @@ use DERHANSEN\SfEventMgt\Service\EmailService;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
@@ -25,7 +25,6 @@ use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
  */
 class NotificationServiceTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Service\NotificationService
      */
@@ -80,6 +79,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet($messageType)
     {
@@ -107,6 +107,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendUserMessageReturnsFalseIfSendFailed($messageType)
     {
@@ -129,8 +130,13 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
-            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'],
+            [],
+            '',
+            false
+        );
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
@@ -143,6 +149,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendUserMessageReturnsTrueIfSendSuccessful($messageType)
     {
@@ -160,14 +167,18 @@ class NotificationServiceTest extends UnitTestCase
         $attachmentService->expects($this->once())->method('getAttachments');
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
-
         $hashService = $this->getMock(HashService::class);
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
-            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'],
+            [],
+            '',
+            false
+        );
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
@@ -180,6 +191,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed($messageType)
     {
@@ -206,8 +218,13 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
-            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'],
+            [],
+            '',
+            false
+        );
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
@@ -230,6 +247,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
     {
@@ -256,8 +274,13 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
-            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'],
+            [],
+            '',
+            false
+        );
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
@@ -270,6 +293,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendAdminMessageDoesNotSendEmailIfNotifyAdminAndNotifyOrganiserIsFalse($messageType)
     {
@@ -296,6 +320,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      */
     public function sendAdminMessageSendsEmailToOrganisatorIfConfigured($messageType)
     {
@@ -326,8 +351,13 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
-            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'],
+            [],
+            '',
+            false
+        );
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
@@ -342,6 +372,7 @@ class NotificationServiceTest extends UnitTestCase
      *
      * @test
      * @dataProvider messageTypeDataProvider
+     * @param mixed $messageType
      * @return void
      */
     public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
@@ -369,8 +400,13 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $fluidStandaloneService = $this->getMock(FluidStandaloneService::class,
-            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'], [], '', false);
+        $fluidStandaloneService = $this->getMock(
+            FluidStandaloneService::class,
+            ['getTemplatePath', 'renderTemplate', 'parseStringFluid'],
+            [],
+            '',
+            false
+        );
         $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
@@ -427,6 +463,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider customNotificationDataProvider
+     * @param mixed $confirmed
+     * @param mixed $ignoreNotifications
      * @return void
      */
     public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable(
@@ -446,10 +484,16 @@ class NotificationServiceTest extends UnitTestCase
         $mockNotificationService = $this->getMock(NotificationService::class, ['sendUserMessage']);
         $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
 
-        $registrationRepository = $this->getMock(RegistrationRepository::class,
-            ['findNotificationRegistrations'], [], '', false);
+        $registrationRepository = $this->getMock(
+            RegistrationRepository::class,
+            ['findNotificationRegistrations'],
+            [],
+            '',
+            false
+        );
         $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
-            $this->returnValue($registrations));
+            $this->returnValue($registrations)
+        );
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
         $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
@@ -487,10 +531,16 @@ class NotificationServiceTest extends UnitTestCase
         $mockNotificationService = $this->getMock(NotificationService::class, ['sendUserMessage']);
         $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
 
-        $registrationRepository = $this->getMock(RegistrationRepository::class,
-            ['findNotificationRegistrations'], [], '', false);
+        $registrationRepository = $this->getMock(
+            RegistrationRepository::class,
+            ['findNotificationRegistrations'],
+            [],
+            '',
+            false
+        );
         $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
-            $this->returnValue($registrations));
+            $this->returnValue($registrations)
+        );
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
         $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);

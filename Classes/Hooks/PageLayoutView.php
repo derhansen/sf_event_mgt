@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Hooks;
 
 /*
@@ -87,6 +86,7 @@ class PageLayoutView
         }
 
         $result = $this->renderSettingsAsTable($header, $action, $this->data);
+
         return $result;
     }
 
@@ -108,6 +108,7 @@ class PageLayoutView
         $this->getOrderSettings('settings.userRegistration.orderField', 'settings.userRegistration.orderDirection');
 
         $result = $this->renderSettingsAsTable($header, null, $this->data);
+
         return $result;
     }
 
@@ -138,6 +139,7 @@ class PageLayoutView
                 break;
             default:
         }
+
         return $title;
     }
 
@@ -158,6 +160,7 @@ class PageLayoutView
             default:
                 $result = false;
         }
+
         return $result;
     }
 
@@ -179,8 +182,6 @@ class PageLayoutView
     }
 
     /**
-     *
-     *
      * @param int $id
      * @param string $table
      * @return string
@@ -283,7 +284,6 @@ class PageLayoutView
         return $text;
     }
 
-
     /**
      * Get category conjunction if a category is selected
      * @return void
@@ -364,7 +364,7 @@ class PageLayoutView
      *
      * @param string $key name of the key
      * @param string $sheet name of the sheet
-     * @return string|NULL if nothing found, value if found
+     * @return string|null if nothing found, value if found
      */
     public function getFieldFromFlexform($key, $sheet = 'sDEF')
     {

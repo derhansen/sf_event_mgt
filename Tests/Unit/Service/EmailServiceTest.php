@@ -20,7 +20,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailServiceTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Service\EmailService
      */
@@ -70,6 +69,8 @@ class EmailServiceTest extends UnitTestCase
      *
      * @dataProvider invalidEmailsDataProvider
      * @test
+     * @param mixed $sender
+     * @param mixed $recipient
      * @return void
      */
     public function sendEmailMessageWithInvalidEmailsTest($sender, $recipient)

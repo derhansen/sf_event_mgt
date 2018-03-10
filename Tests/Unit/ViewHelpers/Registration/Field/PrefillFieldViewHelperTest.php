@@ -70,6 +70,9 @@ class PrefillFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider
+     * @param mixed $fieldUid
+     * @param mixed $fieldValues
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist($fieldUid, $fieldValues, $expected)

@@ -853,7 +853,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns waitlist
      *
-     * @return boolean
+     * @return bool
      */
     public function getWaitlist()
     {
@@ -863,7 +863,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets waitlist
      *
-     * @param boolean $waitlist
+     * @param bool $waitlist
      * @return void
      */
     public function setWaitlist($waitlist)

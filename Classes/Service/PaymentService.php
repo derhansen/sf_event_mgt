@@ -31,6 +31,7 @@ class PaymentService
         foreach ($configuredPaymentMethods as $key => $value) {
             $paymentMethods[$key] = $this->translate('payment.title.' . $key, $value['extkey']);
         }
+
         return $paymentMethods;
     }
 
@@ -40,7 +41,7 @@ class PaymentService
      * @param string $key
      * @param string $extension
      * @param array $arguments
-     * @return NULL|string
+     * @return null|string
      */
     protected function translate($key, $extension, $arguments = null)
     {
@@ -63,6 +64,7 @@ class PaymentService
                 $restrictedPaymentMethods[$selectedPaymentMethod] = $allPaymentMethods[$selectedPaymentMethod];
             }
         }
+
         return $restrictedPaymentMethods;
     }
 
@@ -82,6 +84,7 @@ class PaymentService
         if ((bool)$extensionConfiguration['enableTransfer'] === false) {
             unset($allPaymentMethods['transfer']);
         }
+
         return $allPaymentMethods;
     }
 
@@ -100,6 +103,7 @@ class PaymentService
             /** @var AbstractPayment $paymentInstance */
             $paymentInstance = GeneralUtility::makeInstance($configuredPaymentMethods[$paymentMethod]['class']);
         }
+
         return $paymentInstance;
     }
 
@@ -131,6 +135,7 @@ class PaymentService
                 $result = $paymentInstance->isNotifyLinkEnabled();
                 break;
         }
+
         return $result;
     }
 }

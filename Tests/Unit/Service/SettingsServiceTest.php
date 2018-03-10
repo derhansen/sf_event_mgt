@@ -17,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class SettingsServiceTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
      */
@@ -114,6 +113,8 @@ class SettingsServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider clearCacheSettingsDataProvider
+     * @param mixed $settings
+     * @param mixed $expected
      */
     public function getClearCacheUids($settings, $expected)
     {
@@ -160,7 +161,6 @@ class SettingsServiceTest extends UnitTestCase
                                 'template' => 'Second template',
                                 'subject' => 'Second subject'
                             ]
-
                         ]
                     ]
                 ],
@@ -172,6 +172,8 @@ class SettingsServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider customNotificationsSettingsDataProvider
+     * @param mixed $settings
+     * @param mixed $expected
      */
     public function getCustomNotificationsTest($settings, $expected)
     {

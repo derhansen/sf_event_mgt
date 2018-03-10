@@ -15,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  */
 class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Name of Organisator
      *

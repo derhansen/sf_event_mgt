@@ -9,8 +9,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use TYPO3\CMS\Core\Database\DatabaseConnection;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -59,8 +59,8 @@ class FluidStandaloneService
      * Returns the template folders for the given part
      *
      * @param string $part
-     * @return array
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @return array
      */
     public function getTemplateFolders($part = 'template')
     {
@@ -89,6 +89,7 @@ class FluidStandaloneService
         foreach ($templatePaths as $templatePath) {
             $absolutePaths[] = GeneralUtility::getFileAbsFileName($this->ensureSuffixedPath($templatePath));
         }
+
         return $absolutePaths;
     }
 
@@ -115,6 +116,7 @@ class FluidStandaloneService
     public function getTemplatePath($pathAndFilename, $part = 'template')
     {
         $matches = $this->getTemplatePaths($pathAndFilename, $part);
+
         return !empty($matches) ? end($matches) : '';
     }
 
@@ -136,6 +138,7 @@ class FluidStandaloneService
                 $matches[] = $absolutePath . $pathAndFilename;
             }
         }
+
         return $matches;
     }
 
@@ -160,6 +163,7 @@ class FluidStandaloneService
         $emailView->setTemplatePathAndFilename($template);
         $emailView->assignMultiple($variables);
         $emailBody = $emailView->render();
+
         return $emailBody;
     }
 
@@ -179,6 +183,7 @@ class FluidStandaloneService
         $standaloneView = $this->objectManager->get(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
+
         return $standaloneView->render();
     }
 

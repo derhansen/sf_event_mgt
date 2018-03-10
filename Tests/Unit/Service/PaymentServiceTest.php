@@ -8,10 +8,10 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use DERHANSEN\SfEventMgt\Payment\Transfer;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\Payment\Invoice;
+use DERHANSEN\SfEventMgt\Payment\Transfer;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class PaymentServiceTest
@@ -82,6 +82,8 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getPaymentMethodsDataProvider
+     * @param mixed $extConf
+     * @param mixed $expected
      * @return void
      */
     public function getPaymentMethodsReturnsDefaultPaymentMethods($extConf, $expected)
@@ -145,6 +147,8 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider paymentActionEnabledForDefaultPaymentMethodDataProvider
+     * @param mixed $action
+     * @param mixed $expected
      * @return void
      */
     public function paymentActionEnabledForDefaultPaymentMethodReturnsExpectedResult($action, $expected)
@@ -189,6 +193,8 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider paymentActionEnabledForCustomPaymentMethodDataProvider
+     * @param mixed $action
+     * @param mixed $expected
      * @return void
      */
     public function paymentActionEnabledForCustomPaymentMethodReturnsExpectedResult($action, $expected)

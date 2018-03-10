@@ -9,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use TYPO3\CMS\Core\Mail\MailMessage;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * EmailService
@@ -47,10 +47,11 @@ class EmailService
             $this->mailer->setTo($recipient);
             $this->addAttachments($attachments);
             $this->mailer->send();
+
             return $this->mailer->isSent();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
