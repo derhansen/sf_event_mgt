@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\Property\PropertyMapper;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PrefillMultiValueFieldTest extends UnitTestCase
+class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {
     /**
      * @test
