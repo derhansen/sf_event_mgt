@@ -19,12 +19,11 @@
     "GPL-2.0+"
   ],
   "require": {
-    "typo3/cms-core": "^7.6 || ^8.5",
-    "typo3/cms": "^8",
-    "phpunit/phpunit": "5.7.5"
+    "typo3/cms-core": "^7.6 || ^8.7",
+    "nimut/typo3-complete": "^8.7"
   },
   "require-dev": {
-    "nimut/testing-framework": "^2.0.0"
+    "nimut/testing-framework": "2.x-dev || 3.x-dev"
   },
   "replace": {
     "sf_event_mgt": "self.version",
