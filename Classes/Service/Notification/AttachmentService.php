@@ -119,7 +119,7 @@ class AttachmentService
     protected function getObjectAttachments($propertyNames, $object)
     {
         $attachments = [];
-        if ($object && $propertyNames !== '' && count($propertyNames) > 0) {
+        if ($object && $propertyNames !== '' && is_array($propertyNames) && count($propertyNames) > 0) {
             foreach ($propertyNames as $propertyName) {
                 if ($object->_hasProperty($propertyName)) {
                     $attachments = array_merge($attachments, $this->getAttachmentsFromProperty($object, $propertyName));
