@@ -62,7 +62,6 @@ class CleanupCommandControllerTest extends UnitTestCase
             ]
         ];
 
-
         $configurationManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager')
             ->setMethods(['getConfiguration'])
             ->getMock();
