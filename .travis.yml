@@ -16,8 +16,7 @@ notifications:
     - derhansen@gmail.com
 
 before_install:
-  - composer self-update
-  - composer --version
+  - if php -i | grep -q xdebug; then phpenv config-rm xdebug.ini; fi
 
 before_script:
   - composer require nimut/typo3-complete="$TYPO3_VERSION"
