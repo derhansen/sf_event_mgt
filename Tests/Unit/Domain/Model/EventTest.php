@@ -314,13 +314,10 @@ class EventTest extends UnitTestCase
     public function addCategoryToObjectStorageHoldingCategory()
     {
         $category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
-        $categoryObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $categoryObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $categoryObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($category));
         $this->inject($this->subject, 'category', $categoryObjectStorageMock);
 
@@ -333,13 +330,10 @@ class EventTest extends UnitTestCase
     public function removeCategoryFromObjectStorageHoldingCategory()
     {
         $category = new \DERHANSEN\SfEventMgt\Domain\Model\Category();
-        $categoryObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $categoryObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $categoryObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($category));
         $this->inject($this->subject, 'category', $categoryObjectStorageMock);
 
@@ -381,13 +375,11 @@ class EventTest extends UnitTestCase
     public function addRegistrationToObjectStorageHoldingRegistration()
     {
         $registration = new Registration();
-        $registrationObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $registrationObjectStorageMock = $this->getMockBuilder(
+            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage'
+        )->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($registration));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
@@ -400,13 +392,10 @@ class EventTest extends UnitTestCase
     public function removeRegistrationFromObjectStorageHoldingRegistration()
     {
         $registration = new Registration();
-        $registrationObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $registrationObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($registration));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
@@ -448,13 +437,10 @@ class EventTest extends UnitTestCase
     public function addRegistrationWaitlistToObjectStorageHoldingRegistrationWaitlist()
     {
         $registration = new Registration();
-        $registrationObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $registrationObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($registration));
         $this->inject($this->subject, 'registrationWaitlist', $registrationObjectStorageMock);
 
@@ -467,13 +453,10 @@ class EventTest extends UnitTestCase
     public function removeRegistrationWaitlistFromObjectStorageHoldingRegistrationWaitlist()
     {
         $registration = new Registration();
-        $registrationObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $registrationObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($registration));
         $this->inject($this->subject, 'registrationWaitlist', $registrationObjectStorageMock);
 
@@ -515,13 +498,10 @@ class EventTest extends UnitTestCase
     public function addImageToObjectStorageHoldingImage()
     {
         $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $imageObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($image));
         $this->inject($this->subject, 'image', $imageObjectStorageMock);
 
@@ -534,13 +514,10 @@ class EventTest extends UnitTestCase
     public function removeImageFromObjectStorageHoldingImage()
     {
         $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $imageObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($image));
         $this->inject($this->subject, 'image', $imageObjectStorageMock);
 
@@ -582,13 +559,10 @@ class EventTest extends UnitTestCase
     public function addFilesToObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $imageObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
         $this->inject($this->subject, 'files', $imageObjectStorageMock);
 
@@ -601,13 +575,10 @@ class EventTest extends UnitTestCase
     public function removeFilesFromObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $imageObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
         $this->inject($this->subject, 'files', $imageObjectStorageMock);
 
@@ -649,13 +620,10 @@ class EventTest extends UnitTestCase
     public function addAdditionalImageToObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $imageObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($files));
         $this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
 
@@ -668,13 +636,10 @@ class EventTest extends UnitTestCase
     public function removeAdditionalImageFromObjectStorageHoldingFiles()
     {
         $files = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-        $imageObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $imageObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $imageObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($files));
         $this->inject($this->subject, 'additionalImage', $imageObjectStorageMock);
 
@@ -1067,13 +1032,10 @@ class EventTest extends UnitTestCase
     {
         $this->subject->setMaxParticipants(10);
 
-        $registrationObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['count'],
-            [],
-            '',
-            false
-        );
+        $registrationObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationObjectStorageMock->expects($this->once())->method('count')->will($this->returnValue(5));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
 
@@ -1363,13 +1325,10 @@ class EventTest extends UnitTestCase
     public function addPriceOptionAddsPriceOptionForPriceOption()
     {
         $priceOption = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
-        $priceOptionObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $priceOptionObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $priceOptionObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($priceOption));
         $this->inject($this->subject, 'priceOptions', $priceOptionObjectStorageMock);
 
@@ -1383,13 +1342,10 @@ class EventTest extends UnitTestCase
     public function removePriceOptionRemovesPriceOptionForPriceOption()
     {
         $priceOption = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
-        $priceOptionObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $priceOptionObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $priceOptionObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($priceOption));
         $this->inject($this->subject, 'priceOptions', $priceOptionObjectStorageMock);
 
@@ -1492,13 +1448,10 @@ class EventTest extends UnitTestCase
     public function addRelatedAddsRelatedForRelated()
     {
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $relatedObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $relatedObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $relatedObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($event));
         $this->inject($this->subject, 'related', $relatedObjectStorageMock);
 
@@ -1512,13 +1465,10 @@ class EventTest extends UnitTestCase
     public function removeRelatedRemovesRelatedForRelated()
     {
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $relatedObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $relatedObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $relatedObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($event));
         $this->inject($this->subject, 'related', $relatedObjectStorageMock);
 
@@ -1617,13 +1567,10 @@ class EventTest extends UnitTestCase
     public function addSpeakerAddsSpeaker()
     {
         $speaker = new \DERHANSEN\SfEventMgt\Domain\Model\Speaker();
-        $speakerObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $speakerObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $speakerObjectStorageMock->expects($this->once())->method('attach')->with($this->equalTo($speaker));
         $this->inject($this->subject, 'speaker', $speakerObjectStorageMock);
 
@@ -1637,13 +1584,10 @@ class EventTest extends UnitTestCase
     public function removeSpeakerRemovesSpeaker()
     {
         $speaker = new \DERHANSEN\SfEventMgt\Domain\Model\Speaker();
-        $speakerObjectStorageMock = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $speakerObjectStorageMock = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $speakerObjectStorageMock->expects($this->once())->method('detach')->with($this->equalTo($speaker));
         $this->inject($this->subject, 'speaker', $speakerObjectStorageMock);
 
@@ -1683,13 +1627,10 @@ class EventTest extends UnitTestCase
     public function addRegistrationFieldsAddsRegistrationField()
     {
         $registrationField = new \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field();
-        $registrationFieldStorage = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['attach'],
-            [],
-            '',
-            false
-        );
+        $registrationFieldStorage = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['attach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationFieldStorage->expects($this->once())->method('attach')->with($this->equalTo($registrationField));
         $this->inject($this->subject, 'registrationFields', $registrationFieldStorage);
 
@@ -1703,13 +1644,10 @@ class EventTest extends UnitTestCase
     public function removeRegistrationFieldsRemovesRegistrationField()
     {
         $registrationField = new \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field();
-        $registrationFieldStorage = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
-            ['detach'],
-            [],
-            '',
-            false
-        );
+        $registrationFieldStorage = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+            ->setMethods(['detach'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationFieldStorage->expects($this->once())->method('detach')->with($this->equalTo($registrationField));
         $this->inject($this->subject, 'registrationFields', $registrationFieldStorage);
 

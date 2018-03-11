@@ -52,7 +52,7 @@ class FieldValueTest extends UnitTestCase
      */
     public function getValueReturnsInitialValueForString()
     {
-        $mockField = $this->getMock(Field::class, ['getValueType'], [], '', false);
+        $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
         $mockField->expects($this->once())->method('getValueType')->will($this->returnValue(FieldValueType::TYPE_TEXT));
         $this->subject->setField($mockField);
         $this->assertEquals('', $this->subject->getValue());
@@ -77,7 +77,7 @@ class FieldValueTest extends UnitTestCase
     public function getValueReturnsArrayForFieldTypeArray()
     {
         $expectedArray = ['value1', 'value2'];
-        $mockField = $this->getMock(Field::class, ['getValueType'], [], '', false);
+        $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
         $mockField->expects($this->once())->method('getValueType')
             ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
         $this->subject->setField($mockField);

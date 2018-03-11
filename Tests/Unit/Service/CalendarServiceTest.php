@@ -83,7 +83,7 @@ class CalendarServiceTest extends UnitTestCase
      */
     public function getCalendarArrayReturnsArrayWithEventForOneDay()
     {
-        $mockEvent = $this->getMock(Event::class, [], [], '', false);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         ));
@@ -105,7 +105,7 @@ class CalendarServiceTest extends UnitTestCase
      */
     public function getCalendarArrayReturnsArrayWithEventForMultipleDays()
     {
-        $mockEvent = $this->getMock(Event::class, [], [], '', false);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         ));

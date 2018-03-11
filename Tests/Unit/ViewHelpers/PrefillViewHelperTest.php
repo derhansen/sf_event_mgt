@@ -99,22 +99,16 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John'
         ];
 
-        $mockRequest = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getOriginalRequest'],
-            [],
-            '',
-            false
-        );
+        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getRequest'],
-            [],
-            '',
-            false
-        );
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
             $this->returnValue($mockRequest)
         );
@@ -144,22 +138,16 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John',
             'last_name' => 'Doe'
         ];
-        $mockRequest = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getOriginalRequest'],
-            [],
-            '',
-            false
-        );
+        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getRequest'],
-            [],
-            '',
-            false
-        );
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
             $this->returnValue($mockRequest)
         );
@@ -196,31 +184,22 @@ class PrefillViewHelperTest extends UnitTestCase
             ]
         ];
 
-        $mockOriginalRequest = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getArguments'],
-            [],
-            '',
-            false
-        );
+        $mockOriginalRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getArguments'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
 
-        $mockRequest = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getOriginalRequest'],
-            [],
-            '',
-            false
-        );
+        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getRequest'],
-            [],
-            '',
-            false
-        );
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
             $this->returnValue($mockRequest)
         );

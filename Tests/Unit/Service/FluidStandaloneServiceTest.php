@@ -53,7 +53,10 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function getTemplateFoldersReturnsDefaultPathForNoConfiguration()
     {
-        $mockConfigurationManager = $this->getMock(ConfigurationManager::class, ['getConfiguration'], [], '', false);
+        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getConfiguration'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockConfigurationManager->expects($this->once())->method('getConfiguration')->will($this->returnValue([]));
         $this->inject($this->subject, 'configurationManager', $mockConfigurationManager);
 
@@ -119,7 +122,10 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function getTemplateFoldersReturnsExpectedResult($settings, $expected)
     {
-        $mockConfigurationManager = $this->getMock(ConfigurationManager::class, ['getConfiguration'], [], '', false);
+        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getConfiguration'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockConfigurationManager->expects($this->once())->method('getConfiguration')
             ->will($this->returnValue($settings));
         $this->inject($this->subject, 'configurationManager', $mockConfigurationManager);
@@ -131,13 +137,10 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function getTemplatePathReturnsLastItemOfPossibleTemplatePaths()
     {
-        $mockFluidStandaloneService = $this->getMock(
-            FluidStandaloneService::class,
-            ['getTemplatePaths'],
-            [],
-            '',
-            false
-        );
+        $mockFluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+            ->setMethods(['getTemplatePaths'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFluidStandaloneService->expects($this->once())->method('getTemplatePaths')
             ->will($this->returnValue([
                 GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/test.html'),
@@ -153,27 +156,27 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function renderTemplateReturnsExpectedResult()
     {
-        $mockConfigurationManager = $this->getMock(ConfigurationManager::class, ['getConfiguration'], [], '', false);
+        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getConfiguration'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockConfigurationManager->expects($this->any())->method('getConfiguration')->will($this->returnValue([]));
         $this->inject($this->subject, 'configurationManager', $mockConfigurationManager);
 
-        $mockRequest = $this->getMock(
-            RenderingContext::class,
-            ['setControllerExtensionName', 'setPluginName'],
-            [],
-            '',
-            false
-        );
+        $mockRequest = $this->getMockBuilder(RenderingContext::class)
+            ->setMethods(['setControllerExtensionName', 'setPluginName'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('setControllerExtensionName')->with('SfEventMgt');
         $mockRequest->expects($this->once())->method('setPluginName')->with('Pievent');
 
-        $mockEmailView = $this->getMock(StandaloneView::class, [], [], '', false);
+        $mockEmailView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
         $mockEmailView->expects($this->any())->method('getRequest')->will($this->returnValue($mockRequest));
         $mockEmailView->expects($this->once())->method('setTemplatePathAndFilename')->with('test.html');
         $mockEmailView->expects($this->once())->method('assignMultiple')->with(['key' => 'value']);
         $mockEmailView->expects($this->once())->method('render')->will($this->returnValue('<p>dummy content</p>'));
 
-        $mockObjectManager = $this->getMock(ObjectManager::class, [], [], '', false);
+        $mockObjectManager = $this->getMockBuilder(ObjectManager::class)->disableOriginalConstructor()->getMock();
         $mockObjectManager->expects($this->once())->method('get')->will($this->returnValue($mockEmailView));
         $this->inject($this->subject, 'objectManager', $mockObjectManager);
 

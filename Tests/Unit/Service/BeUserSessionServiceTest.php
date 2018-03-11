@@ -51,7 +51,10 @@ class BeUserSessionServiceTest extends UnitTestCase
     {
         $data = ['key' => 'value'];
 
-        $mockBackendUser = $this->getMock(BackendUserAuthentication::class, ['setAndSaveSessionData'], [], '', false);
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['setAndSaveSessionData'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockBackendUser->expects($this->once())->method('setAndSaveSessionData');
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
@@ -63,7 +66,10 @@ class BeUserSessionServiceTest extends UnitTestCase
      */
     public function getSessionDataReturnsSessionData()
     {
-        $mockBackendUser = $this->getMock(BackendUserAuthentication::class, ['getSessionData'], [], '', false);
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getSessionData'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockBackendUser->expects($this->once())->method('getSessionData');
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
@@ -104,7 +110,10 @@ class BeUserSessionServiceTest extends UnitTestCase
      */
     public function getSessionDataByKeyReturnsExpectedValue($sessionData, $key, $expected)
     {
-        $mockBackendUser = $this->getMock(BackendUserAuthentication::class, ['getSessionData'], [], '', false);
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getSessionData'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockBackendUser->expects($this->once())->method('getSessionData')->will($this->returnValue($sessionData));
         $GLOBALS['BE_USER'] = $mockBackendUser;
 

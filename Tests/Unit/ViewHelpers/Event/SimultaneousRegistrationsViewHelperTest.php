@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -146,7 +147,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
      */
     public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $waitlist, $expected)
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', []);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getFreePlaces')->will($this->returnValue($freePlaces));
         $mockEvent->expects($this->any())->method('getMaxParticipants')->will($this->returnValue($maxParticipants));
         $mockEvent->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue($waitlist));

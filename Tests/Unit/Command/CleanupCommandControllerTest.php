@@ -62,37 +62,26 @@ class CleanupCommandControllerTest extends UnitTestCase
             ]
         ];
 
-        $configurationManager = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'],
-            [],
-            '',
-            false
-        );
+
+        $configurationManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager')
+            ->setMethods(['getConfiguration'])
+            ->getMock();
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
             $this->returnValue($configuration)
         );
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $registrationService = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            ['handleExpiredRegistrations'],
-            [],
-            '',
-            false
-        );
+        $registrationService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\RegistrationService')
+            ->setMethods(['handleExpiredRegistrations'])
+            ->getMock();
         $registrationService->expects($this->once())->method('handleExpiredRegistrations')->with(0)->will(
             $this->returnValue($configuration)
         );
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $utilityService = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            ['clearCacheForConfiguredUids'],
-            [],
-            '',
-            false
-        );
+        $utilityService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\UtilityService')
+            ->setMethods(['clearCacheForConfiguredUids'])
+            ->getMock();
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids')->
         with($configuration['plugin.']['tx_sfeventmgt.']['settings.']);
         $this->inject($this->subject, 'utilityService', $utilityService);

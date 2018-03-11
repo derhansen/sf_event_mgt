@@ -64,10 +64,9 @@ class ICalendarDateViewHelperTest extends UnitTestCase
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
-        $viewHelper = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper',
-            ['renderChildren']
-        );
+        $viewHelper = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDateViewHelper')
+            ->setMethods(['renderChildren'])
+            ->getMock();
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue(new \DateTime('@1425234250')));
         $actual = $viewHelper->render();
         $this->assertSame('20150301T182410Z', $actual);

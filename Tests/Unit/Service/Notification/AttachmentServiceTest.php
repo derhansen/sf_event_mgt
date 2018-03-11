@@ -153,14 +153,26 @@ class AttachmentServiceTest extends UnitTestCase
         $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockFile1 = $this->getMock(File::class, ['getForLocalProcessing'], [], '', false);
+        $mockFile1 = $this->getMockBuilder(File::class)
+            ->setMethods(['getForLocalProcessing'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFile1->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
-        $mockFileRef1 = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', ['getOriginalResource'], [], '', false);
+        $mockFileRef1 = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+            ->setMethods(['getOriginalResource'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFileRef1->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile1));
 
-        $mockFile2 = $this->getMock(File::class, ['getForLocalProcessing'], [], '', false);
+        $mockFile2 = $this->getMockBuilder(File::class)
+            ->setMethods(['getForLocalProcessing'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFile2->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/anotherfile.pdf'));
-        $mockFileRef2 = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', ['getOriginalResource'], [], '', false);
+        $mockFileRef2 =  $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+            ->setMethods(['getOriginalResource'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFileRef2->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile2));
 
         $event->addFiles($mockFileRef1);
@@ -201,18 +213,21 @@ class AttachmentServiceTest extends UnitTestCase
     {
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockFile = $this->getMock(File::class, ['getForLocalProcessing'], [], '', false);
+        $mockFile = $this->getMockBuilder(File::class)
+            ->setMethods(['getForLocalProcessing'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFile->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
-        $mockFileRef = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference', ['getOriginalResource'], [], '', false);
+        $mockFileRef =  $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+            ->setMethods(['getOriginalResource'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFileRef->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile));
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            ['getEvent', '_hasProperty', '_getProperty'],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')
+            ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($event));
         $mockRegistration->expects($this->once())->method('_hasProperty')->will($this->returnValue(true));
         $mockRegistration->expects($this->once())->method('_getProperty')->will($this->returnValue($mockFileRef));

@@ -9,9 +9,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
@@ -50,26 +55,20 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function handleExpiredRegistrationsWithoutDeleteOption()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            ['setHidden'],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)
+            ->setMethods(['setHidden'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registration->expects($this->once())->method('setHidden')->with(true);
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
         $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $registrations->attach($registration);
 
-        $registrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findExpiredRegistrations', 'update'],
-            [],
-            '',
-            false
-        );
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findExpiredRegistrations', 'update'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findExpiredRegistrations')->will(
             $this->returnValue($registrations)
         );
@@ -84,25 +83,16 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function handleExpiredRegistrationsWithDeleteOption()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
         $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $registrations->attach($registration);
 
-        $registrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findExpiredRegistrations', 'remove'],
-            [],
-            '',
-            false
-        );
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findExpiredRegistrations', 'remove'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findExpiredRegistrations')->will(
             $this->returnValue($registrations)
         );
@@ -117,43 +107,24 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(5));
 
-        $newRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $newRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $newRegistration->expects($this->any())->method('setMainRegistration');
         $newRegistration->expects($this->any())->method('setAmountOfRegistrations');
         $newRegistration->expects($this->any())->method('setIgnoreNotifications');
 
-        $objectManager = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            [],
-            [],
-            '',
-            false
-        );
+        $objectManager = $this->getMockBuilder(ObjectManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($newRegistration));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
-        $registrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['add'],
-            [],
-            '',
-            false
-        );
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['add'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->exactly(4))->method('add')->with($newRegistration);
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
@@ -165,30 +136,12 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function confirmDependingRegistrationsConfirmsDependingRegistrations()
     {
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
-        $foundRegistration1 = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $foundRegistration1 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration1->expects($this->any())->method('setConfirmed');
 
-        $foundRegistration2 = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2->expects($this->any())->method('setConfirmed');
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
@@ -196,13 +149,10 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
 
-        $registrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByMainRegistration', 'update'],
-            [],
-            '',
-            false
-        );
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByMainRegistration', 'update'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findByMainRegistration')->will($this->returnValue($registrations));
         $registrationRepository->expects($this->exactly(2))->method('update');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
@@ -215,42 +165,20 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function cancelDependingRegistrationsRemovesDependingRegistrations()
     {
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
-        $foundRegistration1 = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
-
-        $foundRegistration2 = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $foundRegistration1 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
+        $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
         $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
 
-        $registrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByMainRegistration', 'remove'],
-            [],
-            '',
-            false
-        );
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByMainRegistration', 'remove'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findByMainRegistration')->will($this->returnValue($registrations));
         $registrationRepository->expects($this->exactly(2))->method('remove');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
@@ -269,13 +197,10 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'invalid-hmac';
 
-        $hashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $hashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(false));
         $this->inject($this->subject, 'hashService', $hashService);
 
@@ -300,23 +225,17 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1);
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -341,32 +260,20 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects($this->any())->method('getConfirmationUntil')->will($this->returnValue(new \DateTime('yesterday')));
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -391,33 +298,21 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects($this->any())->method('getConfirmationUntil')->will($this->returnValue(new \DateTime('tomorrow')));
         $mockRegistration->expects($this->any())->method('getConfirmed')->will($this->returnValue(true));
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -442,13 +337,10 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'invalid-hmac';
 
-        $hashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $hashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(false));
         $this->inject($this->subject, 'hashService', $hashService);
 
@@ -473,23 +365,17 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1);
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -514,35 +400,23 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(false));
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -567,36 +441,24 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(true));
         $mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('yesterday')));
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -621,37 +483,25 @@ class RegistrationServiceTest extends UnitTestCase
         $reguid = 1;
         $hmac = 'valid-hmac';
 
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(true));
         $mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('tomorrow')));
         $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(new \DateTime('yesterday')));
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
 
-        $mockRegistrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findByUid'],
-            [],
-            '',
-            false
-        );
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRegistrationRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($mockRegistration));
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockHashService = $this->getMock(
-            'TYPO3\\CMS\\Extbase\\Security\\Cryptography\\HashService',
-            ['validateHmac'],
-            [],
-            '',
-            false
-        );
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->setMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockHashService->expects($this->once())->method('validateHmac')->will($this->returnValue(true));
         $this->inject($this->subject, 'hashService', $mockHashService);
 
@@ -694,7 +544,10 @@ class RegistrationServiceTest extends UnitTestCase
 
         $feUser = new \TYPO3\CMS\Extbase\Domain\Model\FrontendUser();
 
-        $mockFeUserRepository = $this->getMock('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository', [], [], '', false);
+        $mockFeUserRepository = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository')
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockFeUserRepository->expects($this->once())->method('findByUid')->with(1)->will($this->returnValue($feUser));
         $this->inject($this->subject, 'frontendUserRepository', $mockFeUserRepository);
 
@@ -707,15 +560,9 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfRegistrationNotEnabled()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(false));
 
         $success = $this->subject->checkRegistrationSuccess($event, $registration, $result);
@@ -729,15 +576,9 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfRegistrationDeadlineExpired()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $deadline = new \DateTime();
         $deadline->add(\DateInterval::createFromDateString('yesterday'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -754,15 +595,9 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfEventExpired()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('yesterday'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -779,18 +614,15 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfMaxParticipantsReached()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->once())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -809,19 +641,18 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfAmountOfRegistrationsGreaterThanRemainingPlaces()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)
+            ->setMethods(['getAmountOfRegistrations'])
+            ->getMock();
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -841,34 +672,31 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfUniqueEmailCheckEnabledAndEmailRegisteredToEvent()
     {
-        $repoRegistrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $repoRegistrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
-        $registrationRepository = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository',
-            ['findEventRegistrationsByEmail'],
-            [],
-            '',
-            false
-        );
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findEventRegistrationsByEmail'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findEventRegistrationsByEmail')->will(
             $this->returnValue($repoRegistrations)
         );
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects($this->any())->method('getEmail')->will($this->returnValue('email@domain.tld'));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(1));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -887,19 +715,16 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessFailsIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(6));
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -920,18 +745,15 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function checkRegistrationSuccessSucceedsWhenAllConditionsMet()
     {
-        $registration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            [],
-            [],
-            '',
-            false
-        );
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
 
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
 
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
@@ -953,13 +775,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event = new Event();
         $event->setEnablePayment(false);
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            ['getEvent'],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)->setMethods(['getEvent'])->getMock();
         $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($event));
 
         $this->assertFalse($this->subject->redirectPaymentEnabled($mockRegistration));
@@ -974,27 +790,22 @@ class RegistrationServiceTest extends UnitTestCase
         $event = new Event();
         $event->setEnablePayment(true);
 
-        $mockRegistration = $this->getMock(
-            'DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration',
-            ['getEvent', 'getPaymentMethod'],
-            [],
-            '',
-            false
-        );
+        $mockRegistration = $this->getMockBuilder(Registration::class)
+            ->setMethods(['getEvent', 'getPaymentMethod'])
+            ->getMock();
         $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($event));
         $mockRegistration->expects($this->once())->method('getPaymentMethod');
 
         // Payment mock object with redirect enabled
-        $mockInvoice = $this->getMock('DERHANSEN\\SfEventMgt\\Payment\\Invoice', ['isRedirectEnabled'], [], '', false);
+        $mockInvoice = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Payment\\Invoice')
+            ->setMethods(['isRedirectEnabled'])
+            ->getMock();
         $mockInvoice->expects($this->once())->method('isRedirectEnabled')->will($this->returnValue(true));
 
-        $mockPaymentService = $this->getMock(
-            PaymentService::class,
-            ['getPaymentInstance'],
-            [],
-            '',
-            false
-        );
+        $mockPaymentService = $this->getMockBuilder(PaymentService::class)
+            ->setMethods(['getPaymentInstance'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockPaymentService->expects($this->once())->method('getPaymentInstance')->will($this->returnValue($mockInvoice));
         $this->inject($this->subject, 'paymentService', $mockPaymentService);
 
@@ -1007,7 +818,10 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function isWaitlistRegistrationReturnsFalseIfEventNotFullyBookedAndEnoughFreePlaces()
     {
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(5));
 
         $event = new Event();
@@ -1024,7 +838,10 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function isWaitlistRegistrationReturnsTrueIfEventNotFullyBookedAndNotEnoughFreePlaces()
     {
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
 
         $event = new Event();
@@ -1041,7 +858,10 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function isWaitlistRegistrationReturnsTrueIfEventFullyBookedAndNotEnoughFreePlaces()
     {
-        $registrations = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(11));
 
         $event = new Event();

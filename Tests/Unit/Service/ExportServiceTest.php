@@ -132,7 +132,7 @@ class ExportServiceTest extends UnitTestCase
      */
     public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel()
     {
-        $mockRegistration = $this->getMock(Registration::class, ['_hasProperty'], [], '', false);
+        $mockRegistration = $this->getMockBuilder(Registration::class)->setMethods(['_hasProperty'])->getMock();
         $mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
             $this->equalTo('uid')
         )->will($this->returnValue(true));
@@ -146,7 +146,10 @@ class ExportServiceTest extends UnitTestCase
         $allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $allRegistrations->attach($mockRegistration);
 
-        $registrationRepository = $this->getMock(RegistrationRepository::class, ['findByEvent'], [], '', false);
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByEvent'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findByEvent')->will(
             $this->returnValue($allRegistrations)
         );
@@ -171,7 +174,7 @@ class ExportServiceTest extends UnitTestCase
      */
     public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected)
     {
-        $mockRegistration = $this->getMock(Registration::class, ['_hasProperty', '_getCleanProperty'], [], '', false);
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
             $this->equalTo('uid')
         )->will($this->returnValue(true));
@@ -194,7 +197,10 @@ class ExportServiceTest extends UnitTestCase
         $allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $allRegistrations->attach($mockRegistration);
 
-        $registrationRepository = $this->getMock(RegistrationRepository::class, ['findByEvent'], [], '', false);
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findByEvent'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $registrationRepository->expects($this->once())->method('findByEvent')->will(
             $this->returnValue($allRegistrations)
         );
@@ -211,7 +217,7 @@ class ExportServiceTest extends UnitTestCase
      */
     public function downloadRegistrationsCsvThrowsExceptionIfDefaultStorageNotFound()
     {
-        $mockResourceFactory = $this->getMock(ResourceFactory::class, [], [], '', false);
+        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(null));
         $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
         $this->subject->downloadRegistrationsCsv(1, ['settings']);
@@ -223,26 +229,28 @@ class ExportServiceTest extends UnitTestCase
      */
     public function downloadRegistrationsCsvDumpsRegistrationsContent()
     {
-        $mockExportService = $this->getMock(ExportService::class, ['exportRegistrationsCsv'], [], '', false);
+        $mockExportService = $this->getMockBuilder(ExportService::class)
+            ->setMethods(['exportRegistrationsCsv'])
+            ->getMock();
         $mockExportService->expects($this->once())->method('exportRegistrationsCsv')->will(
             $this->returnValue('CSV-DATA')
         );
 
-        $mockFile = $this->getMock(File::class, [], [], '', false);
+        $mockFile = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
         $mockFile->expects($this->once())->method('setContents')->with('CSV-DATA');
 
-        $mockStorageRepository = $this->getMock(
-            StorageRepository::class,
-            ['getFolder', 'createFile', 'dumpFileContents'],
-            [],
-            '',
-            false
-        );
+        $mockStorageRepository = $this->getMockBuilder(StorageRepository::class)
+            ->setMethods(['getFolder', 'createFile', 'dumpFileContents'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockStorageRepository->expects($this->at(0))->method('getFolder')->with('_temp_');
         $mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
         $mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
 
-        $mockResourceFactory = $this->getMock(ResourceFactory::class, ['getDefaultStorage'], [], '', false);
+        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)
+            ->setMethods(['getDefaultStorage'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
             $this->returnValue($mockStorageRepository)
         );

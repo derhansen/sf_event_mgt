@@ -27,10 +27,16 @@ class PrefillFieldViewHelperTest extends UnitTestCase
      */
     public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
     {
-        $mockRequest = $this->getMock(Request::class, ['getOriginalRequest'], [], '', false);
+        $mockRequest = $this->getMockBuilder(Request::class)
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMock(ControllerContext::class, ['getRequest'], [], '', false);
+        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
 
         $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['dummy'], [], '', false);
@@ -83,20 +89,29 @@ class PrefillFieldViewHelperTest extends UnitTestCase
             ]
         ];
 
-        $mockOriginalRequest = $this->getMock(Request::class, ['getArguments'], [], '', false);
+        $mockOriginalRequest = $this->getMockBuilder(Request::class)
+            ->setMethods(['getArguments'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
 
-        $mockRequest = $this->getMock(Request::class, ['getOriginalRequest'], [], '', false);
+        $mockRequest = $this->getMockBuilder(Request::class)
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')
             ->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMock(ControllerContext::class, ['getRequest'], [], '', false);
+        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
 
         $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['dummy'], [], '', false);
         $viewHelper->_set('controllerContext', $mockControllerContext);
 
-        $mockField = $this->getMock(Field::class, [], [], '', false);
+        $mockField = $this->getMockBuilder(Field::class)->getMock();
         $mockField->expects($this->once())->method('getUid')->will($this->returnValue($fieldUid));
 
         $actual = $viewHelper->render($mockField);

@@ -96,7 +96,7 @@ class EmailServiceTest extends UnitTestCase
         $body = 'A body';
         $senderName = 'Sender name';
 
-        $mailer = $this->getMock(MailMessage::class, [], [], '', false);
+        $mailer = $this->getMockBuilder(MailMessage::class)->disableOriginalConstructor()->getMock();
         $mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
         $mailer->expects($this->once())->method('setSubject')->with($subject);
         $mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));
@@ -126,7 +126,7 @@ class EmailServiceTest extends UnitTestCase
             GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Tests/Unit/Fixtures/Attachment.txt')
         ];
 
-        $mailer = $this->getMock(MailMessage::class, [], [], '', false);
+        $mailer = $this->getMockBuilder(MailMessage::class)->disableOriginalConstructor()->getMock();
         $mailer->expects($this->once())->method('setFrom')->with($this->equalTo($sender), $this->equalTo($senderName));
         $mailer->expects($this->once())->method('setSubject')->with($subject);
         $mailer->expects($this->once())->method('setBody')->with($this->equalTo($body), $this->equalTo('text/html'));
