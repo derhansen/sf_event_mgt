@@ -602,7 +602,7 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $registration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')->getMock();
-        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();;
+        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
         $registrations->expects($this->once())->method('count')->will($this->returnValue(10));
 
         $event = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event')->getMock();
@@ -640,7 +640,7 @@ class EventControllerTest extends UnitTestCase
         $registration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')->getMock();
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
 
-        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();;
+        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
         $event = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event')->getMock();
@@ -679,7 +679,7 @@ class EventControllerTest extends UnitTestCase
         $registration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')->getMock();
         $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(6));
 
-        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();;
+        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
         $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
         $event = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event')->getMock();
@@ -716,7 +716,7 @@ class EventControllerTest extends UnitTestCase
         $registrationService = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $repoRegistrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();;
+        $repoRegistrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
         $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
 
         // Inject mock of registrationRepository to registrationService
