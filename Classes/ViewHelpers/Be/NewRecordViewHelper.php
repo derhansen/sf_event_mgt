@@ -26,7 +26,7 @@ class NewRecordViewHelper extends AbstractRecordViewHelper
     public function render()
     {
         $pid = (int)GeneralUtility::_GET('id');
-        
+
         if ($pid === 0) {
             $tsConfig = BackendUtility::getPagesTSconfig(0);
             if (isset($tsConfig['tx_sfeventmgt.']['module.']) && is_array($tsConfig['tx_sfeventmgt.']['module.'])) {
