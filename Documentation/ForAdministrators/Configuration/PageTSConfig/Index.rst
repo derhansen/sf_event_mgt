@@ -42,3 +42,15 @@ The following Page TSConfig can be used with the extension.
 
          Template layout can be used/set by TypoScript (settings.templateLayout)
 
+ - :Property:
+         module.defaultPid.tx_sfeventmgt_domain_model_event
+
+   :Data type:
+         int
+
+   :Description:
+         This setting allows to set the default storage pid of new events generated over the backend module.
+         To set the default storage pid for new event records to e.g. a sysfolder with the pid 20 use::
+
+           tx_sfeventmgt.module.defaultPid.tx_sfeventmgt_domain_model_event = 20
+
