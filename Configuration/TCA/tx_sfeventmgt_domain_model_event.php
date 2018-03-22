@@ -630,6 +630,7 @@ return [
         ],
         'registration' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registrations',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -643,10 +644,7 @@ return [
                 'appearance' => [
                     'expandSingle' => 1,
                     'levelLinksPosition' => 'bottom',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
-                    'showAllLocalizationLink' => 1
                 ],
             ],
         ],
