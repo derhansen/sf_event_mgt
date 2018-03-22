@@ -28,3 +28,4 @@ Thanks from me to:
 * New Communication GmbH & Co. KG for sponsoring and ideas
 * Tymoteusz Motylewski for implementing event speakers and other contributions
 * Gerd Müller from Vogt-Schild Druck AG for sponsoring organisator filtering
+* Alexander Grein from Mediaessenz for implementing the default storage Pid feature
