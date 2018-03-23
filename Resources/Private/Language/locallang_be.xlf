@@ -47,16 +47,16 @@
 				<source>Calendar</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.detailPid">
-				<source>Detail Pid</source>
+				<source>Detail Page</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.listPid">
-				<source>List Pid</source>
+				<source>List Page</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.registrationPid">
-				<source>Registration Pid</source>
+				<source>Registration Page</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.paymentPid">
-				<source>Payment Pid</source>
+				<source>Payment Page</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.queryLimit">
 				<source>Max records displayed</source>
@@ -105,6 +105,24 @@
 			</trans-unit>
 			<trans-unit id="flexforms_general.orderDirection.descending">
 				<source>Descending</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.categoryConjunction">
+				<source>Category mode</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.categoryConjunction.ignore">
+				<source>Ignore category selection</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.categoryConjunction.or">
+				<source>Show events with selected categories (OR)</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.categoryConjunction.and">
+				<source>Show events with selected categories (AND)</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.categoryConjunction.notand">
+				<source>Do NOT show events with selected categories (AND)</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.categoryConjunction.notor">
+				<source>Do NOT show events with selected categories (OR)</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.category">
 				<source>Category</source>

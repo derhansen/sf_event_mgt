@@ -2,31 +2,29 @@
 namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
+use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -34,112 +32,22 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class EventController extends AbstractController
 {
-
     /**
-     * Configuration Manager
+     * Assign contentObjectData and pageData to earch view
      *
-     * @var ConfigurationManagerInterface
+     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      */
-    protected $configurationManager;
+    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
+    {
+        $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
+        if (is_object($GLOBALS['TSFE'])) {
+            $view->assign('pageData', $GLOBALS['TSFE']->page);
+        }
+        parent::initializeView($view);
+    }
 
-    /**
-     * EventRepository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
-     * @inject
-     */
-    protected $eventRepository = null;
-
-    /**
-     * Registration repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
-     */
-    protected $registrationRepository = null;
-
-    /**
-     * Category repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
-     * @inject
-     */
-    protected $categoryRepository = null;
-
-    /**
-     * Location repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
-     * @inject
-     */
-    protected $locationRepository = null;
-
-    /**
-     * Organisator repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
-     * @inject
-     */
-    protected $organisatorRepository = null;
-
-    /**
-     * Notification Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
-     * @inject
-     */
-    protected $notificationService = null;
-
-    /**
-     * ICalendar Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
-     * @inject
-     */
-    protected $icalendarService = null;
-
-    /**
-     * Hash Service
-     *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     * @inject
-     */
-    protected $hashService;
-
-    /**
-     * RegistrationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     * @inject
-     */
-    protected $registrationService = null;
-
-    /**
-     * CalendarService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\CalendarService
-     * @inject
-     */
-    protected $calendarService = null;
-
-    /**
-     * UtilityService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\UtilityService
-     * @inject
-     */
-    protected $utilityService = null;
-
-    /**
-     * PaymentMethodService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\PaymentService
-     * @inject
-     */
-    protected $paymentService = null;
-    
     /**
      * Properties in this array will be ignored by overwriteDemandObject()
      *
@@ -157,9 +65,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createEventDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand = $this->objectManager->get(EventDemand::class);
         $demand->setDisplayMode($settings['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+        $demand->setCategoryConjunction($settings['categoryConjunction']);
         $demand->setCategory($settings['category']);
         $demand->setIncludeSubcategories($settings['includeSubcategories']);
         $demand->setTopEventRestriction((int)$settings['topEventRestriction']);
@@ -169,6 +78,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $demand->setQueryLimit($settings['queryLimit']);
         $demand->setLocation($settings['location']);
         $demand->setOrganisator($settings['organisator']);
+
         return $demand;
     }
 
@@ -182,9 +92,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createForeignRecordDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\ForeignRecordDemand');
+        $demand = $this->objectManager->get(ForeignRecordDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictForeignRecordsToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
+
         return $demand;
     }
 
@@ -198,11 +109,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function createCategoryDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\CategoryDemand');
+        $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         $demand->setCategories($settings['categoryMenu']['categories']);
         $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
+
         return $demand;
     }
 
@@ -226,6 +138,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             }
             \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
         }
+
         return $demand;
     }
 
@@ -254,7 +167,8 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     private function handleKnownExceptionsElseThrowAgain(\Exception $exception)
     {
         $previousException = $exception->getPrevious();
-        if (($this->actionMethodName === 'detailAction' || $this->actionMethodName === 'registrationAction')
+        $actions = ['detailAction', 'registrationAction', 'icalDownloadAction'];
+        if (in_array($this->actionMethodName, $actions, true)
             && $previousException instanceof \TYPO3\CMS\Extbase\Property\Exception
         ) {
             $this->handleEventNotFoundError($this->settings);
@@ -356,7 +270,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'eventDemand' => $eventDemand,
             'overwriteDemand' => $overwriteDemand,
             'currentPageId' => $GLOBALS['TSFE']->id,
-            'firstDayOfMonth' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $currentMonth, $currentMonth)),
+            'firstDayOfMonth' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $currentMonth, $currentYear)),
             'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
             'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
         ];
@@ -392,6 +306,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $searchDemand->setStartDate($startDate);
         $searchDemand->setEndDate($endDate);
         $eventDemand->setSearchDemand($searchDemand);
+
         return $eventDemand;
     }
 
@@ -399,7 +314,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * Detail view for an event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @return string
+     * @return mixed string|void
      */
     public function detailAction(Event $event = null)
     {
@@ -438,6 +353,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 }
                 $standaloneTemplate = $this->objectManager->get(StandaloneView::class);
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
+
                 return $standaloneTemplate->render();
                 break;
             default:
@@ -449,11 +365,15 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @param Event $event The event
      *
-     * @return bool
+     * @return string|false
      */
-    public function icalDownloadAction(Event $event)
+    public function icalDownloadAction(Event $event = null)
     {
+        if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
+            return $this->handleEventNotFoundError($this->settings);
+        }
         $this->icalendarService->downloadiCalendarFile($event);
+
         return false;
     }
 
@@ -462,7 +382,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      *
-     * @return string
+     * @return mixed string|void
      */
     public function registrationAction(Event $event = null)
     {
@@ -482,6 +402,78 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
+     * Processes incoming registrations fields and adds field values to arguments
+     *
+     * @return void
+     */
+    protected function setRegistrationFieldValuesToArguments()
+    {
+        $arguments = $this->request->getArguments();
+        if (!isset($arguments['registration']['fields']) || !isset($arguments['event'])) {
+            return;
+        }
+
+        $registrationMvcArgument = $this->arguments->getArgument('registration');
+        $propertyMapping = $registrationMvcArgument->getPropertyMappingConfiguration();
+        $propertyMapping->allowProperties('fieldValues');
+        $propertyMapping->allowCreationForSubProperty('fieldValues');
+        $propertyMapping->allowModificationForSubProperty('fieldValues');
+
+        // allow creation of new objects (for validation)
+        $propertyMapping->setTypeConverterOptions(
+            PersistentObjectConverter::class,
+            [
+                PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => true,
+                PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => true
+            ]
+        );
+
+        // Set event to registration (required for validation)
+        $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
+        $propertyMapping->allowProperties('event');
+        $propertyMapping->allowCreationForSubProperty('event');
+        $propertyMapping->allowModificationForSubProperty('event');
+        $arguments['registration']['event'] = (int)$this->request->getArgument('event');
+
+        $index = 0;
+        foreach ((array)$arguments['registration']['fields'] as $fieldUid => $value) {
+            // Only accept registration fields of the current event
+            if (!in_array((int)$fieldUid, $event->getRegistrationFieldsUids(), true)) {
+                continue;
+            }
+
+            // allow subvalues in new property mapper
+            $propertyMapping->forProperty('fieldValues')->allowProperties($index);
+            $propertyMapping->forProperty('fieldValues.' . $index)->allowAllProperties();
+            $propertyMapping->allowCreationForSubProperty('fieldValues.' . $index);
+            $propertyMapping->allowModificationForSubProperty('fieldValues.' . $index);
+
+            if (is_array($value)) {
+                if (empty($value)) {
+                    $value = '';
+                } else {
+                    $value = json_encode($value);
+                }
+            }
+
+            /** @var Registration\Field $field */
+            $field = $this->fieldRepository->findByUid((int)$fieldUid);
+
+            $arguments['registration']['fieldValues'][$index] = [
+                'value' => $value,
+                'field' => strval($fieldUid),
+                'valueType' => $field->getValueType()
+            ];
+
+            $index++;
+        }
+
+        // Remove temporary "fields" field
+        $arguments = ArrayUtility::removeByPath($arguments, 'registration/fields');
+        $this->request->setArguments($arguments);
+    }
+
+    /**
      * Set date format for field dateOfBirth
      *
      * @return void
@@ -491,10 +483,11 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->arguments->getArgument('registration')
             ->getPropertyMappingConfiguration()->forProperty('dateOfBirth')
             ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['registration']['formatDateOfBirth']
             );
+        $this->setRegistrationFieldValuesToArguments();
     }
 
     /**
@@ -502,6 +495,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator
      * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator
      *
      * @return void
@@ -536,7 +530,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->registrationRepository->add($registration);
 
             // Persist registration, so we have an UID
-            $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+            $this->objectManager->get(PersistenceManager::class)->persistAll();
 
             // Add new registration (or waitlist registration) to event
             if ($isWaitlistRegistration) {
@@ -720,7 +714,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->uriBuilder->reset()
                 ->setTargetPageUid($paymentPid)
                 ->setUseCacheHash(false);
-            $uri =  $this->uriBuilder->uriFor(
+            $uri = $this->uriBuilder->uriFor(
                 'redirect',
                 [
                     'registration' => $registration,
@@ -802,14 +796,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('startDate')
                 ->setTypeConverterOption(
-                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    DateTimeConverter::class,
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     $this->settings['search']['dateFormat']
                 );
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('endDate')
                 ->setTypeConverterOption(
-                    'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                    DateTimeConverter::class,
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     $this->settings['search']['dateFormat']
                 );
@@ -873,5 +867,4 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== [];
     }
-
 }

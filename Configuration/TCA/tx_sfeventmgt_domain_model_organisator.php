@@ -18,7 +18,9 @@ return [
             'disabled' => 'hidden',
         ],
         'searchFields' => 'name, email, phone,',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_organisator.png'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-organisator'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, phone, image',
@@ -32,7 +34,6 @@ return [
         ],
     ],
     'columns' => [
-
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',

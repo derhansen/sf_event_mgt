@@ -1,0 +1,3 @@
+parameters:
+	ignoreErrors:
+		- '#Constant PATH_site not found.#'

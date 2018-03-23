@@ -24,14 +24,16 @@ return [
         ],
         'requestUpdate' => 'enable_registration, enable_waitlist, enable_cancel, enable_payment, restrict_payment_methods',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_event.gif'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-event'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description,
         program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants,
-        max_registrations_per_user, registration_deadline, price, currency, category, related, image, files, youtube,
+        max_registrations_per_user, registration_deadline, price, currency, category, related, image, files,
         additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
-        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker',
+        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields',
     ],
     'types' => [
         '1' => [
@@ -54,7 +56,7 @@ return [
 				location, organisator, speaker, related,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
-				image, files, youtube,additional_image,
+				image, files, additional_image,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.category,
 				category,
@@ -63,6 +65,9 @@ return [
 				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
 				max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
 				--palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
+
+			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
+				registration_fields,
 
 			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
 				registration,registration_waitlist,
@@ -158,11 +163,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'endtime' => [
@@ -173,11 +174,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'fe_group' => [
@@ -457,6 +454,11 @@ return [
                         'type' => 'suggest',
                     ],
                 ],
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
+                    ],
+                ],
             ],
         ],
         'organisator' => [
@@ -474,6 +476,11 @@ return [
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
+                    ],
+                ],
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
                     ],
                 ],
             ],
@@ -496,6 +503,11 @@ return [
                         'default' => [
                             'searchWholePhrase' => true
                         ]
+                    ],
+                ],
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
                     ],
                 ],
             ],
@@ -576,15 +588,6 @@ return [
                 ],
             ]
         ],
-        'youtube' => [
-            'exclude' => 1,
-            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.youtube',
-            'config' => [
-                'type' => 'text',
-                'cols' => 60,
-                'rows' => 3,
-            ]
-        ],
         'additional_image' => [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.additional_image',
@@ -627,6 +630,7 @@ return [
         ],
         'registration' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registrations',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -638,12 +642,9 @@ return [
                 ],
                 'maxitems' => 9999,
                 'appearance' => [
-                    'collapseAll' => 1,
+                    'expandSingle' => 1,
                     'levelLinksPosition' => 'bottom',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
-                    'showAllLocalizationLink' => 1
                 ],
             ],
         ],
@@ -660,7 +661,27 @@ return [
                 ],
                 'maxitems' => 9999,
                 'appearance' => [
-                    'collapseAll' => 1,
+                    'expandSingle' => 1,
+                    'levelLinksPosition' => 'top',
+                    'showSynchronizationLink' => 1,
+                    'showPossibleLocalizationRecords' => 1,
+                    'useSortable' => 1,
+                    'showAllLocalizationLink' => 1
+                ],
+            ],
+        ],
+        'registration_fields' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_fields',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'config' => [
+                'type' => 'inline',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_registration_field',
+                'foreign_field' => 'event',
+                'foreign_sortby' => 'sorting',
+                'maxitems' => 9999,
+                'appearance' => [
+                    'expandSingle' => 1,
                     'levelLinksPosition' => 'top',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
@@ -703,7 +724,7 @@ return [
                 'foreign_default_sortby' => 'valid_until DESC',
                 'maxitems' => 100,
                 'appearance' => [
-                    'collapseAll' => 1,
+                    'expandSingle' => 1,
                     'levelLinksPosition' => 'bottom',
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
@@ -712,6 +733,5 @@ return [
                 ],
             ],
         ],
-
     ],
 ];

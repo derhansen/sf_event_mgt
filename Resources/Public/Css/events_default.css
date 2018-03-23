@@ -52,6 +52,16 @@
     margin-left: 150px;
 }
 
+.tx-sf-event-mgt form.registration .radio-field-radiofields,
+.tx-sf-event-mgt form.registration .checkbox-field-checkfields {
+	float: left;
+}
+
+.tx-sf-event-mgt form.registration .radio-field-radiofields label,
+.tx-sf-event-mgt form.registration .checkbox-field-checkfields label {
+    float: left;
+}
+
 .tx-sf-event-mgt form.registration .checkbox label {
     float: none;
     width: auto;

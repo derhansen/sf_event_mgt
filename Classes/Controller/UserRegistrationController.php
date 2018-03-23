@@ -2,18 +2,13 @@
 namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Utility\Page;
 
 /**
@@ -21,22 +16,8 @@ use DERHANSEN\SfEventMgt\Utility\Page;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UserRegistrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class UserRegistrationController extends AbstractController
 {
-    /**
-     * RegistrationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     * @inject
-     */
-    protected $registrationService;
-
-    /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
-     */
-    protected $registrationRepository;
-
     /**
      * Creates an user registration demand object with the given settings
      *
@@ -47,7 +28,7 @@ class UserRegistrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
     public function createUserRegistrationDemandObjectFromSettings(array $settings)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand');
+        $demand = $this->objectManager->get(UserRegistrationDemand::class);
         $demand->setDisplayMode($settings['userRegistration']['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren(
             $settings['userRegistration']['storagePage'],
@@ -55,6 +36,7 @@ class UserRegistrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\Actio
         ));
         $demand->setOrderField($settings['userRegistration']['orderField']);
         $demand->setOrderDirection($settings['userRegistration']['orderDirection']);
+
         return $demand;
     }
 

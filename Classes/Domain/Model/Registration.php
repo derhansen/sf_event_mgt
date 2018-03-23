@@ -2,16 +2,10 @@
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 /**
@@ -219,6 +213,23 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var bool
      */
     protected $waitlist = false;
+
+    /**
+     * Registration fields
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
+     * @cascade remove
+     * @lazy
+     */
+    protected $fieldValues;
+
+    /**
+     * Registration constructor.
+     */
+    public function __construct()
+    {
+        $this->fieldValues = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
 
     /**
      * Returns the firstname
@@ -842,7 +853,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns waitlist
      *
-     * @return boolean
+     * @return bool
      */
     public function getWaitlist()
     {
@@ -852,11 +863,27 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets waitlist
      *
-     * @param boolean $waitlist
+     * @param bool $waitlist
      * @return void
      */
     public function setWaitlist($waitlist)
     {
         $this->waitlist = $waitlist;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getFieldValues()
+    {
+        return $this->fieldValues;
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $fieldValues
+     */
+    public function setFieldValues($fieldValues)
+    {
+        $this->fieldValues = $fieldValues;
     }
 }

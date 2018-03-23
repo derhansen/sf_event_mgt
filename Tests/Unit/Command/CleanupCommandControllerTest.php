@@ -2,16 +2,10 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Command;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -23,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class CleanupCommandControllerTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Command\CleanupCommandController
      */
@@ -55,7 +48,6 @@ class CleanupCommandControllerTest extends UnitTestCase
      */
     public function cleanupCommandHandlesExpiredRegistrationsAndCleansCacheTest()
     {
-
         // Inject configuration and configurationManager
         $configuration = [
             'plugin.' => [
@@ -70,20 +62,25 @@ class CleanupCommandControllerTest extends UnitTestCase
             ]
         ];
 
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
+        $configurationManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager')
+            ->setMethods(['getConfiguration'])
+            ->getMock();
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($configuration));
+            $this->returnValue($configuration)
+        );
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $registrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            ['handleExpiredRegistrations'], [], '', false);
+        $registrationService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\RegistrationService')
+            ->setMethods(['handleExpiredRegistrations'])
+            ->getMock();
         $registrationService->expects($this->once())->method('handleExpiredRegistrations')->with(0)->will(
-            $this->returnValue($configuration));
+            $this->returnValue($configuration)
+        );
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $utilityService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\UtilityService',
-            ['clearCacheForConfiguredUids'], [], '', false);
+        $utilityService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\UtilityService')
+            ->setMethods(['clearCacheForConfiguredUids'])
+            ->getMock();
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids')->
         with($configuration['plugin.']['tx_sfeventmgt.']['settings.']);
         $this->inject($this->subject, 'utilityService', $utilityService);

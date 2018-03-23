@@ -2,16 +2,10 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -23,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class SettingsServiceTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
      */
@@ -120,6 +113,8 @@ class SettingsServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider clearCacheSettingsDataProvider
+     * @param mixed $settings
+     * @param mixed $expected
      */
     public function getClearCacheUids($settings, $expected)
     {
@@ -166,7 +161,6 @@ class SettingsServiceTest extends UnitTestCase
                                 'template' => 'Second template',
                                 'subject' => 'Second subject'
                             ]
-
                         ]
                     ]
                 ],
@@ -178,6 +172,8 @@ class SettingsServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider customNotificationsSettingsDataProvider
+     * @param mixed $settings
+     * @param mixed $expected
      */
     public function getCustomNotificationsTest($settings, $expected)
     {

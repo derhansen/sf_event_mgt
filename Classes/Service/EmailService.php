@@ -2,19 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Service;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Mail\MailMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * EmailService
@@ -23,7 +18,6 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EmailService
 {
-
     /**
      * Mailmessage
      *
@@ -53,10 +47,11 @@ class EmailService
             $this->mailer->setTo($recipient);
             $this->addAttachments($attachments);
             $this->mailer->send();
+
             return $this->mailer->isSent();
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -66,7 +61,7 @@ class EmailService
      */
     protected function initialize()
     {
-        $this->mailer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Mail\\MailMessage');
+        $this->mailer = GeneralUtility::makeInstance(MailMessage::class);
     }
 
     /**

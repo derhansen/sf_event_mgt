@@ -2,26 +2,16 @@
 namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
-use DERHANSEN\SfEventMgt\Service\RegistrationService;
-use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
-use DERHANSEN\SfEventMgt\Service\PaymentService;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -30,77 +20,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class PaymentController extends AbstractController
 {
-
-    /**
-     * PaymentService
-     *
-     * @var PaymentService
-     */
-    protected $paymentService;
-
-    /**
-     * Hash Service
-     *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     */
-    protected $hashService;
-
-    /**
-     * Registration repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     */
-    protected $registrationRepository = null;
-
-    /**
-     * Registration Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     */
-    protected $registrationService;
-
-    /**
-     * DI for paymentService
-     *
-     * @param PaymentService $paymentService
-     */
-    public function injectPaymentService(PaymentService $paymentService)
-    {
-        $this->paymentService = $paymentService;
-    }
-
-    /**
-     * DI for hashService
-     *
-     * @param HashService $hashService
-     */
-    public function injectHashService(HashService $hashService)
-    {
-        $this->hashService = $hashService;
-    }
-
-    /**
-     * DI for registrationRepository
-     *
-     * @param RegistrationRepository $registrationRepository
-     */
-    public function injectRegistrationRepository(RegistrationRepository $registrationRepository)
-    {
-        $this->registrationRepository = $registrationRepository;
-    }
-
-    /**
-     * DI for registrationService
-     *
-     * @param RegistrationService $registrationService
-     */
-    public function injectRegistrationService(RegistrationService $registrationService)
-    {
-        $this->registrationService = $registrationService;
-    }
-
     /**
      * Catches all PaymentExceptions and sets the Exception message to the response content
      *
@@ -361,14 +282,15 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      *
      * @param string $action
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-     * @return string
      * @throws \TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException
+     * @return string
      */
     protected function getPaymentUriForAction($action, $registration)
     {
         $this->uriBuilder
             ->setCreateAbsoluteUri(true)
             ->setUseCacheHash(false);
+
         return $this->uriBuilder->uriFor(
             $action,
             [
@@ -380,5 +302,4 @@ class PaymentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
             'Pipayment'
         );
     }
-
 }

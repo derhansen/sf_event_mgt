@@ -2,19 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  * The repository for registrations
@@ -23,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Disable the use of storage records, because the StoragePage can be set
      * in the plugin
@@ -32,7 +26,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function initializeObject()
     {
-        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
         $this->defaultQuerySettings->setRespectSysLanguage(false);
     }
@@ -51,6 +45,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $constraints[] = $query->lessThanOrEqual('confirmationUntil', $dateNow);
         $constraints[] = $query->equals('confirmed', false);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -113,6 +108,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query = $this->createQuery();
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('email', $email);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
@@ -133,6 +129,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setDisplayModeConstraint($query, $demand, $constraints);
         $this->setUserConstraint($query, $demand, $constraints);
         $this->setOrderingsFromDemand($query, $demand);
+
         return $query->matching($query->logicalAnd($constraints))->execute();
     }
 

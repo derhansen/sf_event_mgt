@@ -2,19 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Database\QueryGenerator;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Page
@@ -23,12 +18,11 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class Page
 {
-
     /**
      * Find all ids from given ids and level
      *
      * @param string $pidList comma separated list of ids
-     * @param integer $recursive recursive levels
+     * @param int $recursive recursive levels
      * @return string comma separated list of ids
      */
     public static function extendPidListByChildren($pidList = '', $recursive = 0)
@@ -39,7 +33,7 @@ class Page
             return $pidList;
         }
 
-        $queryGenerator = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Database\\QueryGenerator');
+        $queryGenerator = GeneralUtility::makeInstance(QueryGenerator::class);
         $recursiveStoragePids = $pidList;
         $storagePids = GeneralUtility::intExplode(',', $pidList);
         foreach ($storagePids as $startPid) {
@@ -48,6 +42,7 @@ class Page
                 $recursiveStoragePids .= ',' . $pids;
             }
         }
+
         return $recursiveStoragePids;
     }
 }

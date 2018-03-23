@@ -1,25 +1,18 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
@@ -162,56 +155,95 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * DataProvider for findDemandedRecordsByCategory
+     * DataProvider for findDemandedRecordsByCategoryWithConjunction
      *
      * @return array
      */
-    public function findDemandedRecordsByCategoryDataProvider()
+    public function findDemandedRecordsByCategoryWithConjunctionDataProvider()
     {
         return [
-            'category 1' => [
-                '1',
+            'no conjuction' => [
+                '5',
+                '',
                 false,
-                1
+                5
             ],
-            'category 2' => [
-                '2',
+            'category 5 with AND - no subcategories' => [
+                '5',
+                'and',
                 false,
-                2
+                4
             ],
-            'category 3' => [
-                '3',
-                false,
-                1
-            ],
-            'category 1,2,3,4' => [
-                '1,2,3,4',
+            'category 5,6 with AND - no subcategories' => [
+                '5,6',
+                'and',
                 false,
                 3
             ],
-            'category 3 including subcategories' => [
-                '3',
+            'category 5,6,7 with AND - no subcategories' => [
+                '5,6,7',
+                'and',
+                false,
+                2
+            ],
+            'category 5,6,7,8 with AND - no subcategories' => [
+                '5,6,7,8',
+                'and',
+                false,
+                1
+            ],
+            'category 5,6 with OR - no subcategories' => [
+                '5,6',
+                'or',
+                false,
+                4
+            ],
+            'category 7,8 with OR - no subcategories' => [
+                '7,8',
+                'or',
+                false,
+                2
+            ],
+            'category 7,8 with NOTAND - no subcategories' => [
+                '7,8',
+                'notand',
+                false,
+                4
+            ],
+            'category 7,8 with NOTOR - no subcategories' => [
+                '7,8',
+                'notor',
+                false,
+                3
+            ],
+            'category 8 with AND - with subcategories' => [
+                '8',
+                'or',
                 true,
                 2
-            ]
+            ],
         ];
     }
 
     /**
-     * Test if category restiction works
+     * Test if category restiction with conjunction works
      *
-     * @dataProvider findDemandedRecordsByCategoryDataProvider
+     * @dataProvider findDemandedRecordsByCategoryWithConjunctionDataProvider
      * @test
+     * @param mixed $category
+     * @param mixed $conjunction
+     * @param mixed $includeSub
+     * @param mixed $expected
      * @return void
      */
-    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
+    public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $includeSub, $expected)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
-        $demand->setStoragePage(5);
-        $demand->setIncludeSubcategories($includeSubcategory);
-
+        $demand->setStoragePage(90);
+        $demand->setCategoryConjunction($conjunction);
         $demand->setCategory($category);
+        $demand->setIncludeSubcategories($includeSub);
         $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
@@ -243,6 +275,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationDataProvider
      * @test
+     * @param mixed $locationUid
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByLocation($locationUid, $expected)
@@ -280,6 +314,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationCityDataProvider
      * @test
+     * @param mixed $locationCity
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByLocationCity($locationCity, $expected)
@@ -316,6 +352,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationCountryDataProvider
      * @test
+     * @param mixed $locationCountry
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByLocationCountry($locationCountry, $expected)
@@ -423,6 +461,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByTopEventDataProvider
      * @test
+     * @param mixed $topEventRestriction
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByTopEvent($topEventRestriction, $expected)
@@ -488,6 +528,9 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByOrderingDataProvider
      * @test
+     * @param mixed $orderField
+     * @param mixed $orderDirection
+     * @param mixed $expected
      * @return void
      */
     public function findDemandedRecordsByOrdering($orderField, $orderDirection, $expected)

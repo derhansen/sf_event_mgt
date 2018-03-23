@@ -2,16 +2,10 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -23,7 +17,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class PageViewHelperTest extends UnitTestCase
 {
-
     /**
      * Test if all methods from UriBuilder are called and that UriBuilder creates a frontend uri
      *
@@ -32,73 +25,118 @@ class PageViewHelperTest extends UnitTestCase
      */
     public function viewHelperCallsBuildFrontendUri()
     {
-        $mockUriBuilderFrontendUri = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['buildFrontendUri'], [], '', false);
+        $mockUriBuilderFrontendUri = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['buildFrontendUri'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderFrontendUri->expects($this->once())->method('buildFrontendUri')->will(
-            $this->returnValue('The Uri'));
+            $this->returnValue('The Uri')
+        );
 
-        $mockUriBuilderQueryStringMethod = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setAddQueryStringMethod'], [], '', false);
+        $mockUriBuilderQueryStringMethod = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setAddQueryStringMethod'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderQueryStringMethod->expects($this->once())->method('setAddQueryStringMethod')->will(
-            $this->returnValue($mockUriBuilderFrontendUri));
+            $this->returnValue($mockUriBuilderFrontendUri)
+        );
 
-        $mockUriBuilderExcludedFromQueryString = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setArgumentsToBeExcludedFromQueryString'], [], '', false);
+        $mockUriBuilderExcludedFromQueryString = $this->getMockBuilder(
+            'TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder'
+        )->setMethods(['setArgumentsToBeExcludedFromQueryString'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderExcludedFromQueryString->expects($this->once())->method('setArgumentsToBeExcludedFromQueryString')->will(
-            $this->returnValue($mockUriBuilderQueryStringMethod));
+            $this->returnValue($mockUriBuilderQueryStringMethod)
+        );
 
-        $mockUriBuilderQueryString = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setAddQueryString'], [], '', false);
+        $mockUriBuilderQueryString = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setAddQueryString'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderQueryString->expects($this->once())->method('setAddQueryString')->will(
-            $this->returnValue($mockUriBuilderExcludedFromQueryString));
+            $this->returnValue($mockUriBuilderExcludedFromQueryString)
+        );
 
-        $mockUriBuilderAbsoluteUri = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setCreateAbsoluteUri'], [], '', false);
+        $mockUriBuilderAbsoluteUri = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setCreateAbsoluteUri'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderAbsoluteUri->expects($this->once())->method('setCreateAbsoluteUri')->will(
-            $this->returnValue($mockUriBuilderQueryString));
+            $this->returnValue($mockUriBuilderQueryString)
+        );
 
-        $mockUriBuilderArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setArguments'], [], '', false);
+        $mockUriBuilderArguments = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setArguments'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderArguments->expects($this->once())->method('setArguments')->will(
-            $this->returnValue($mockUriBuilderAbsoluteUri));
+            $this->returnValue($mockUriBuilderAbsoluteUri)
+        );
 
-        $mockUriBuilderRestrictedPages = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setLinkAccessRestrictedPages'], [], '', false);
+        $mockUriBuilderRestrictedPages = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setLinkAccessRestrictedPages'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderRestrictedPages->expects($this->once())->method('setLinkAccessRestrictedPages')->will(
-            $this->returnValue($mockUriBuilderArguments));
+            $this->returnValue($mockUriBuilderArguments)
+        );
 
-        $mockUriBuilderSection = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setSection'], [], '', false);
+        $mockUriBuilderSection = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setSection'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderSection->expects($this->once())->method('setSection')->will(
-            $this->returnValue($mockUriBuilderRestrictedPages));
+            $this->returnValue($mockUriBuilderRestrictedPages)
+        );
 
-        $mockUriBuilderCacheHash = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setUseCacheHash'], [], '', false);
+        $mockUriBuilderCacheHash = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setUseCacheHash'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderCacheHash->expects($this->once())->method('setUseCacheHash')->will(
-            $this->returnValue($mockUriBuilderSection));
+            $this->returnValue($mockUriBuilderSection)
+        );
 
-        $mockUriBuilderNoCache = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setNoCache'], [], '', false);
+        $mockUriBuilderNoCache = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setNoCache'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderNoCache->expects($this->once())->method('setNoCache')->will(
-            $this->returnValue($mockUriBuilderCacheHash));
+            $this->returnValue($mockUriBuilderCacheHash)
+        );
 
-        $mockUriBuilderPageType = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setTargetPageType'], [], '', false);
+        $mockUriBuilderPageType = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setTargetPageType'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderPageType->expects($this->once())->method('setTargetPageType')->will(
-            $this->returnValue($mockUriBuilderNoCache));
+            $this->returnValue($mockUriBuilderNoCache)
+        );
 
-        $mockUriBuilderPageUid = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder',
-            ['setTargetPageUid'], [], '', false);
+        $mockUriBuilderPageUid = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Web\\Routing\\UriBuilder')
+            ->setMethods(['setTargetPageUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockUriBuilderPageUid->expects($this->once())->method('setTargetPageUid')->will(
-            $this->returnValue($mockUriBuilderPageType));
+            $this->returnValue($mockUriBuilderPageType)
+        );
 
-        $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getUriBuilder'], [], '', false);
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getUriBuilder'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getUriBuilder')->will(
-            $this->returnValue($mockUriBuilderPageUid));
+            $this->returnValue($mockUriBuilderPageUid)
+        );
 
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-            ['buildTsfe'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+            ['buildTsfe'],
+            [],
+            '',
+            false
+        );
         $viewHelper->_set('controllerContext', $mockControllerContext);
         $viewHelper->expects($this->once())->method('buildTSFE');
 
@@ -114,28 +152,39 @@ class PageViewHelperTest extends UnitTestCase
      */
     public function buildTsfeWithoutTtSet()
     {
-        $mockTimeTracker = $this->getMock('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker',
-            ['start'], [], '', false);
+        $mockTimeTracker = $this->getMockBuilder('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker')
+            ->setMethods(['start'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockTimeTracker->expects($this->once())->method('start');
 
-        $mockTsfe = $this->getMock(
-            'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', [
-            'initFEuser',
-            'fetch_the_id',
-            'getPageAndRootline',
-            'initTemplate',
-            'getConfigArray'
-        ], [], '', false);
+        $mockTsfe = $this->getMockBuilder('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController')
+            ->setMethods(
+                [
+                    'initFEuser',
+                    'fetch_the_id',
+                    'getPageAndRootline',
+                    'initTemplate',
+                    'getConfigArray'
+                ]
+            )->disableOriginalConstructor()
+            ->getMock();
         $mockTsfe->expects($this->once())->method('initFEuser');
         $mockTsfe->expects($this->once())->method('fetch_the_id');
         $mockTsfe->expects($this->once())->method('getPageAndRootline');
         $mockTsfe->expects($this->once())->method('initTemplate');
         $mockTsfe->expects($this->once())->method('getConfigArray');
 
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-            ['getTsfeInstance', 'getTimeTrackerInstance'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+            ['getTsfeInstance', 'getTimeTrackerInstance'],
+            [],
+            '',
+            false
+        );
         $viewHelper->expects($this->once())->method('getTimeTrackerInstance')->will(
-            $this->returnValue($mockTimeTracker));
+            $this->returnValue($mockTimeTracker)
+        );
         $viewHelper->expects($this->once())->method('getTsfeInstance')->will($this->returnValue($mockTsfe));
         $viewHelper->_call('buildTsfe');
     }
@@ -147,22 +196,30 @@ class PageViewHelperTest extends UnitTestCase
     public function buildTsfeWithTtSet()
     {
         $GLOBALS['TT'] = new \stdClass();
-        $mockTsfe = $this->getMock(
-            'TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', [
-            'initFEuser',
-            'fetch_the_id',
-            'getPageAndRootline',
-            'initTemplate',
-            'getConfigArray'
-        ], [], '', false);
+        $mockTsfe = $this->getMockBuilder('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController')
+            ->setMethods(
+                [
+                    'initFEuser',
+                    'fetch_the_id',
+                    'getPageAndRootline',
+                    'initTemplate',
+                    'getConfigArray'
+                ]
+            )->disableOriginalConstructor()
+            ->getMock();
         $mockTsfe->expects($this->once())->method('initFEuser');
         $mockTsfe->expects($this->once())->method('fetch_the_id');
         $mockTsfe->expects($this->once())->method('getPageAndRootline');
         $mockTsfe->expects($this->once())->method('initTemplate');
         $mockTsfe->expects($this->once())->method('getConfigArray');
 
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-            ['getTsfeInstance', 'getTimeTrackerInstance'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+            ['getTsfeInstance', 'getTimeTrackerInstance'],
+            [],
+            '',
+            false
+        );
         $viewHelper->expects($this->once())->method('getTsfeInstance')->will($this->returnValue($mockTsfe));
         $viewHelper->_call('buildTsfe');
     }
@@ -173,8 +230,13 @@ class PageViewHelperTest extends UnitTestCase
      */
     public function getTsfeInstanceReturnsInstanceOfTsfeController()
     {
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-            ['dummy'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+            ['dummy'],
+            [],
+            '',
+            false
+        );
         $result = $viewHelper->_call('getTsfeInstance');
         $this->assertInstanceOf('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $result);
     }
@@ -185,10 +247,14 @@ class PageViewHelperTest extends UnitTestCase
      */
     public function getTimeTrackerInstanceReturnsInstanceOfTsfeController()
     {
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
-            ['dummy'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\Uri\\PageViewHelper',
+            ['dummy'],
+            [],
+            '',
+            false
+        );
         $result = $viewHelper->_call('getTimeTrackerInstance');
         $this->assertInstanceOf('TYPO3\\CMS\\Core\\TimeTracker\\TimeTracker', $result);
     }
-
 }

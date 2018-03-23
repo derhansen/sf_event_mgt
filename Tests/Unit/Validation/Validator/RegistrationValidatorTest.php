@@ -2,19 +2,15 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
@@ -23,7 +19,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class RegistrationValidatorTest extends UnitTestCase
 {
-
     /**
      * @var \TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator
      */
@@ -41,9 +36,13 @@ class RegistrationValidatorTest extends UnitTestCase
      */
     public function setup()
     {
-        $this->validator = $this->getAccessibleMock($this->validatorClassName,
+        $this->validator = $this->getAccessibleMock(
+            $this->validatorClassName,
             ['translateErrorMessage', 'getValidator'],
-            [], '', false);
+            [],
+            '',
+            false
+        );
     }
 
     /**
@@ -72,6 +71,9 @@ class RegistrationValidatorTest extends UnitTestCase
      *
      * @test
      * @dataProvider missingSettingsDataProvider
+     * @param mixed $settings
+     * @param mixed $fields
+     * @param mixed $expected
      */
     public function validatorReturnsTrueWhenArgumentsMissing($settings, $fields, $expected)
     {
@@ -85,10 +87,13 @@ class RegistrationValidatorTest extends UnitTestCase
         }
 
         // Inject configuration and configurationManager
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
+        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getConfiguration'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($settings));
+            $this->returnValue($settings)
+        );
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
         $this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
@@ -153,6 +158,10 @@ class RegistrationValidatorTest extends UnitTestCase
      *
      * @test
      * @dataProvider settingsDataProvider
+     * @param mixed $settings
+     * @param mixed $fields
+     * @param mixed $hasErrors
+     * @param mixed $expected
      */
     public function validatorReturnsExpectedResults($settings, $fields, $hasErrors, $expected)
     {
@@ -166,35 +175,46 @@ class RegistrationValidatorTest extends UnitTestCase
         }
 
         // Inject configuration and configurationManager
-        $configurationManager = $this->getMock('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager',
-            ['getConfiguration'], [], '', false);
+        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getConfiguration'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($settings));
+            $this->returnValue($settings)
+        );
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
         // Inject the object manager
-        $validationError = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Error', [], [], '', false);
+        $validationError = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Error\\Error')
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        $validationResult = $this->getMock('TYPO3\\CMS\\Extbase\\Error\\Result', [], [], '', false);
+        $validationResult = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Error\\Result')->getMock();
         $validationResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
         $validationResult->expects($this->any())->method('getErrors')->will(
-            $this->returnValue([$validationError]));
+            $this->returnValue([$validationError])
+        );
 
-        $notEmptyValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator',
-            [], [], '', false);
+        $notEmptyValidator = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator')
+            ->disableOriginalConstructor()
+            ->getMock();
         $notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
-            $validationResult));
+            $validationResult
+        ));
 
-        $booleanValidator = $this->getMock('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator',
-            [], [], '', false);
+        $booleanValidator = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator')
+            ->disableOriginalConstructor()
+            ->getMock();
         $booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
-            $validationResult));
+            $validationResult
+        ));
 
-        $recaptchaValidator = $this->getMock('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator',
-            [], [], '', false);
+        $recaptchaValidator = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator')
+            ->disableOriginalConstructor()
+            ->getMock();
         $recaptchaValidator->expects($this->any())->method('validate')->will($this->returnValue(
-            $validationResult));
-
+            $validationResult
+        ));
 
         // Create a map of arguments to return values
         $map = [
@@ -233,13 +253,18 @@ class RegistrationValidatorTest extends UnitTestCase
     /**
      * @test
      * @@dataProvider getValidatorDataProvider
+     * @param mixed $type
+     * @param mixed $returnedObject
+     * @param mixed $expectedClass
      */
     public function getValidatorReturnsValidatorTest($type, $returnedObject, $expectedClass)
     {
         $validator = $this->getAccessibleMock($this->validatorClassName, ['dummy'], [], '', false);
 
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            ['get'], [], '', false);
+        $objectManager = $this->getMockBuilder(ObjectManager::class)
+            ->setMethods(['get'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($returnedObject));
         $this->inject($validator, 'objectManager', $objectManager);
 

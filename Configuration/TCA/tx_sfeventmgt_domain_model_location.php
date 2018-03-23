@@ -20,7 +20,9 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'title,',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_location.gif'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-location'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, link, longitude, latitude',
@@ -43,7 +45,6 @@ return [
         ],
     ],
     'columns' => [
-
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
@@ -105,11 +106,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'endtime' => [
@@ -120,11 +117,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
 
@@ -239,6 +232,5 @@ return [
                 'eval' => 'trim,DERHANSEN\\SfEventMgt\\Evaluation\\LatitudeEvaluator'
             ],
         ],
-
     ],
 ];

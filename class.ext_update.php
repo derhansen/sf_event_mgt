@@ -12,7 +12,6 @@
  *
  * The TYPO3 project - inspiring people to share!
  */
-
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -21,7 +20,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ext_update
 {
-
     /**
      * Array of flash messages (params) array[][status,title,message]
      *
@@ -50,6 +48,7 @@ class ext_update
     public function main()
     {
         $this->processUpdates();
+
         return $this->generateOutput();
     }
 
@@ -85,6 +84,7 @@ class ext_update
         foreach ($this->messageArray as $messageItem) {
             $output .= $this->getFlashMessage($messageItem[2], $messageItem[1], $messageItem[0]);
         }
+
         return $output;
     }
 
@@ -146,6 +146,7 @@ class ext_update
             $title = '';
             $message = 'Old category table does not exist anymore so no update needed';
             $this->messageArray[] = [$status, $title, $message];
+
             return;
         }
         // check if there are categories present else no update is needed
@@ -159,13 +160,14 @@ class ext_update
             $title = '';
             $message = 'No categories found in old table, no update needed';
             $this->messageArray[] = [$status, $title, $message];
+
             return;
-        } else {
-            $status = FlashMessage::NOTICE;
-            $title = '';
-            $message = 'Must migrate ' .$oldCategoryCount . ' categories.';
-            $this->messageArray[] = [$status, $title, $message];
         }
+        $status = FlashMessage::NOTICE;
+        $title = '';
+        $message = 'Must migrate ' . $oldCategoryCount . ' categories.';
+        $this->messageArray[] = [$status, $title, $message];
+
         // A temporary migration column is needed in old category table. Add this when not already present
         if (!array_key_exists('migrate_sys_category_uid', $oldCategoryTableFields)) {
             $this->databaseConnection->admin_query(
@@ -300,6 +302,7 @@ class ext_update
         foreach ($rows as $row) {
             $oldNewCategoryUidMapping[$row['uid']] = $row['migrate_sys_category_uid'];
         }
+
         return $oldNewCategoryUidMapping;
     }
 
@@ -467,9 +470,11 @@ class ext_update
         $title = 'Renaming flexform field for "' . $pluginName . '" - ' .
             ' sheet: ' . $oldFieldPointer[0] . ', field: ' . $oldFieldPointer[1] . ' to ' .
             ' sheet: ' . $newFieldPointer[0] . ', field: ' . $newFieldPointer[1];
-        $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery('uid, pi_flexform',
+        $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
+            'uid, pi_flexform',
             'tt_content',
-            'CType=\'list\' AND list_type=\'' . $pluginName . '\'');
+            'CType=\'list\' AND list_type=\'' . $pluginName . '\''
+        );
         $flexformTools = GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools::class);
         while ($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res)) {
             $xmlArray = GeneralUtility::xml2array($row['pi_flexform']);
@@ -521,6 +526,7 @@ class ext_update
             FlashMessage::WARNING => 'warning',
             FlashMessage::ERROR => 'danger'
         ];
+
         return 'alert-' . $classes[$severity];
     }
 
@@ -539,6 +545,7 @@ class ext_update
             FlashMessage::WARNING => 'exclamation',
             FlashMessage::ERROR => 'times'
         ];
+
         return $icons[$severity];
     }
 
@@ -572,6 +579,7 @@ class ext_update
 					</div>
 				</div>
 			</div>';
+
         return $message;
     }
 }

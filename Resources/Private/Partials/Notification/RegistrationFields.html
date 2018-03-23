@@ -1,0 +1,18 @@
+<f:if condition="{registration.fieldValues}">
+    <ul>
+        <f:for each="{registration.fieldValues}" as="fieldValue">
+            <f:switch expression="{fieldValue.valueType}">
+                <f:case value="0">
+                    <li>{fieldValue.value}</li>
+                </f:case>
+                <f:case value="1">
+                    <li>
+                        <f:for each="{fieldValue.value}" as="value">
+                            {value}<br/>
+                        </f:for>
+                    </li>
+                </f:case>
+            </f:switch>
+        </f:for>
+    </ul>
+</f:if>

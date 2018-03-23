@@ -211,33 +211,9 @@ How do I show the event title as page title on the detail page?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can either use a SEO extension (e.g. ext:cs_seo), which has a custom and configurable page title rendering
-function or you can use the following TypoScript snippet::
+function or you can use the title-ViewHelper of this extension.
 
- [globalVar = GP:tx_sfeventmgt_pievent|event > 0]
- temp.eventTitle = RECORDS
- temp.eventTitle {
-   dontCheckPid = 1
-   source.data = GP:tx_sfeventmgt_pievent|event
-   source.intval = 1
-   tables = tx_sfeventmgt_domain_model_event
-   conf {
-     tx_sfeventmgt_domain_model_event >
-     tx_sfeventmgt_domain_model_event = TEXT
-     tx_sfeventmgt_domain_model_event {
-       field = title
-       htmlSpecialChars = 1
-       noTrimWrap = |||
-   }
-  }
- }
+How do I set the indexed search title for an event?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- config.noPageTitle = 2
-
- page.headerData {
-   10 = COA
-   10 < temp.eventTitle
-   10.wrap = <title>|</title>
- }
- [end]
-
-Plese note, that you mey need to adapt ``page.headerData.10``, if you already use this key in your TypoScript.
+Use the title-ViewHelper of this extension.

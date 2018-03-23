@@ -2,21 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Service;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -26,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class PaymentService
 {
-
     /**
      * Returns an array of configured payment methods available for all events
      *
@@ -39,16 +31,17 @@ class PaymentService
         foreach ($configuredPaymentMethods as $key => $value) {
             $paymentMethods[$key] = $this->translate('payment.title.' . $key, $value['extkey']);
         }
+
         return $paymentMethods;
     }
 
     /**
      * Translates the given key (required, so translations can be mocked)
      *
-     * @param $key
-     * @param $extension
-     * @param null $arguments
-     * @return NULL|string
+     * @param string $key
+     * @param string $extension
+     * @param array $arguments
+     * @return null|string
      */
     protected function translate($key, $extension, $arguments = null)
     {
@@ -71,6 +64,7 @@ class PaymentService
                 $restrictedPaymentMethods[$selectedPaymentMethod] = $allPaymentMethods[$selectedPaymentMethod];
             }
         }
+
         return $restrictedPaymentMethods;
     }
 
@@ -90,6 +84,7 @@ class PaymentService
         if ((bool)$extensionConfiguration['enableTransfer'] === false) {
             unset($allPaymentMethods['transfer']);
         }
+
         return $allPaymentMethods;
     }
 
@@ -105,8 +100,10 @@ class PaymentService
         $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
         if (isset($configuredPaymentMethods[$paymentMethod]) &&
             class_exists($configuredPaymentMethods[$paymentMethod]['class'])) {
+            /** @var AbstractPayment $paymentInstance */
             $paymentInstance = GeneralUtility::makeInstance($configuredPaymentMethods[$paymentMethod]['class']);
         }
+
         return $paymentInstance;
     }
 
@@ -138,7 +135,7 @@ class PaymentService
                 $result = $paymentInstance->isNotifyLinkEnabled();
                 break;
         }
+
         return $result;
     }
-
 }

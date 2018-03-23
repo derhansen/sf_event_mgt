@@ -2,16 +2,10 @@
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -33,10 +27,24 @@ class NewRecordViewHelper extends AbstractRecordViewHelper
     {
         $pid = (int)GeneralUtility::_GET('id');
 
+        if ($pid === 0) {
+            $tsConfig = BackendUtility::getPagesTSconfig(0);
+            if (isset($tsConfig['tx_sfeventmgt.']['module.']) && is_array($tsConfig['tx_sfeventmgt.']['module.'])) {
+                $tsConfiguration = $tsConfig['tx_sfeventmgt.']['module.'];
+                if (isset($tsConfiguration['defaultPid.'])
+                    && is_array($tsConfiguration['defaultPid.'])
+                    && isset($tsConfiguration['defaultPid.']['tx_sfeventmgt_domain_model_event'])
+                ) {
+                    $pid = (int)$tsConfiguration['defaultPid.']['tx_sfeventmgt_domain_model_event'];
+                }
+            }
+        }
+
         $parameters = [
             'edit[tx_sfeventmgt_domain_model_event][' . $pid . ']' => 'new',
         ];
         $parameters['returnUrl'] = 'index.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $pid . $this->getModuleToken();
+
         return BackendUtility::getModuleUrl('record_edit', $parameters);
     }
 }

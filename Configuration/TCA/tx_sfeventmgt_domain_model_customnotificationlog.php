@@ -8,7 +8,9 @@ return [
         'cruser_id' => 'cruser_id',
         'searchFields' => 'title,',
         'hideTable' => true,
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/logfile.png'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-logfile'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => '',
@@ -20,7 +22,6 @@ return [
         '1' => ['showitem' => ''],
     ],
     'columns' => [
-
         'cruser_id' => [
             'exclude' => 0,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.cruser',
@@ -65,6 +66,5 @@ return [
                 'type' => 'input',
             ],
         ],
-
     ],
 ];

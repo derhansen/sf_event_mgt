@@ -1,22 +1,16 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
@@ -93,6 +87,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @dataProvider findExpiredRegistrationsDataProvider
      * @test
+     * @param mixed $dateNow
+     * @param mixed $expected
      */
     public function findExpiredRegistrations($dateNow, $expected)
     {
@@ -118,7 +114,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findNotificationRegistrationsForEventUid2()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getUid')->will($this->returnValue(2));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
         $this->assertEquals(1, $registrations->count());
@@ -181,10 +177,12 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findNotificationRegistrationsDataProvider
      * @test
+     * @param mixed $constraints
+     * @param mixed $expected
      */
     public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected)
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getUid')->will($this->returnValue(1));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
         $this->assertEquals($expected, $registrations->count());
@@ -199,7 +197,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition()
     {
         $constraints = ['confirmationUntil' => ['wrongcondition' => '0']];
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $this->registrationRepository->findNotificationRegistrations($event, $constraints);
     }
 
@@ -210,7 +208,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getUid')->will($this->returnValue(3));
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
         $this->assertEquals(1, $registrations->count());
@@ -223,7 +221,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findEventRegistrationsByEmailReturnsExpectedAmountOfRegistrations()
     {
-        $event = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', [], [], '', false);
+        $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getUid')->will($this->returnValue(10));
         $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, 'email@domain.tld');
         $this->assertEquals(1, $registrations->count());
@@ -341,6 +339,4 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         $this->assertEquals(32, $registrations->getFirst()->getUid());
     }
-
 }
-

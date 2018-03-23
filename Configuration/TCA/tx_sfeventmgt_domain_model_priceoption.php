@@ -23,7 +23,9 @@ return [
             'fe_group' => 'fe_group',
         ],
         'searchFields' => 'price,',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_priceoption.png'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-priceoption'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, price, valid_until',
@@ -40,7 +42,6 @@ return [
         ],
     ],
     'columns' => [
-
         'sys_language_uid' => [
             'exclude' => true,
             'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.language',
@@ -102,11 +103,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'endtime' => [
@@ -117,11 +114,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'fe_group' => [
@@ -177,6 +170,5 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-
     ],
 ];

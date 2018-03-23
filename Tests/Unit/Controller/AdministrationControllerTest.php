@@ -2,18 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -23,7 +19,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class AdministrationControllerTest extends UnitTestCase
 {
-
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\AdministrationController | \PHPUnit_Framework_MockObject_MockObject
      */
@@ -36,8 +31,13 @@ class AdministrationControllerTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\Controller\\AdministrationController',
-            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri'], [], '', false);
+        $this->subject = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\Controller\\AdministrationController',
+            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri'],
+            [],
+            '',
+            false
+        );
     }
 
     /**
@@ -67,23 +67,34 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesEventsFromRepositoryForNoStoragePageAndAssignsThemToView()
     {
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allEvents = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            ['setSearchDemand'], [], '', false);
+        $demand = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand')
+            ->setMethods(['setSearchDemand'])
+            ->getMock();
         $demand->expects($this->once())->method('setSearchDemand')->with(null);
 
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            ['get'], [], '', false);
+        $objectManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
+            ->setMethods(['get'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            ['findDemanded'], [], '', false);
+        $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
+        $beUserSessionService->expects($this->once())->method('getSessionDataByKey');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
+        $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
+            ->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'searchDemand' => $searchDemand
@@ -100,23 +111,32 @@ class AdministrationControllerTest extends UnitTestCase
     public function listActionFetchesEventsFromRepositoryForNoStoragePageAndGivenDemandAndAssignsThemToView()
     {
         $searchDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allEvents = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            ['setSearchDemand'], [], '', false);
+        $demand = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand')
+            ->setMethods(['setSearchDemand'])
+            ->getMock();
         $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
 
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            ['get'], [], '', false);
+        $objectManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
+            ->setMethods(['get'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            ['findDemanded'], [], '', false);
+        $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
+        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
+        $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
+            ->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'searchDemand' => $searchDemand
@@ -135,24 +155,32 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('pid', 1);
 
         $searchDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allEvents = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            ['setSearchDemand', 'setStoragePage'], [], '', false);
+        $demand = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand')
+            ->setMethods(['setSearchDemand', 'setStoragePage'])
+            ->getMock();
         $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
         $demand->expects($this->any())->method('setStoragePage')->with(1);
 
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            ['get'], [], '', false);
+        $objectManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
+            ->setMethods(['get'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            ['findDemanded'], [], '', false);
+        $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
+        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
+        $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'searchDemand' => $searchDemand
@@ -171,24 +199,29 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('pid', 1);
 
         $searchDemand = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
-        $allEvents = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage', [], [], '', false);
+        $allEvents = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')->getMock();
 
-        $demand = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand',
-            [], [], '', false);
+        $demand = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand')->getMock();
         $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
         $demand->expects($this->any())->method('setStoragePage')->with(1);
 
-        $objectManager = $this->getMock('TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-            ['get'], [], '', false);
+        $objectManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
+            ->disableOriginalConstructor()
+            ->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
-        $eventRepository = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository',
-            ['findDemanded'], [], '', false);
+        $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
+        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
+        $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
+            ->disableOriginalConstructor()
+            ->getMock();
         $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
 
         $view->expects($this->once())->method('assignMultiple')->with([
             'showMessage' => true,
@@ -211,38 +244,49 @@ class AdministrationControllerTest extends UnitTestCase
      */
     protected function getInitializeListActionArgumentMock($settingsSearchDateFormat = null)
     {
-        $mockPropertyMapperConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            [], [], '', false);
+        $mockPropertyMapperConfig = $this->getMockBuilder(
+            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration'
+        )->getMock();
         $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
             $this->equalTo('TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter'),
             $this->equalTo('dateFormat'),
             $this->equalTo($settingsSearchDateFormat)
         );
 
-        $mockStartDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            [], [], '', false);
+        $mockStartDatePmConfig = $this->getMockBuilder(
+            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration'
+        )->getMock();
         $mockStartDatePmConfig->expects($this->once())->method('forProperty')->with('startDate')->will(
-            $this->returnValue($mockPropertyMapperConfig));
-        $mockEndDatePmConfig = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration',
-            [], [], '', false);
+            $this->returnValue($mockPropertyMapperConfig)
+        );
+        $mockEndDatePmConfig = $this->getMockBuilder(
+            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration'
+        )->getMock();
         $mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
-            $this->returnValue($mockPropertyMapperConfig));
+            $this->returnValue($mockPropertyMapperConfig)
+        );
 
-        $mockStartDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
-            [], [], '', false);
+        $mockStartDateArgument = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument')
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockStartDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockStartDatePmConfig));
-        $mockEndDateArgument = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument',
-            [], [], '', false);
+            $this->returnValue($mockStartDatePmConfig)
+        );
+        $mockEndDateArgument = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument')
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockEndDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockEndDatePmConfig));
+            $this->returnValue($mockEndDatePmConfig)
+        );
 
-        $mockArguments = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments',
-            [], [], '', false);
+        $mockArguments = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Arguments')->getMock();
         $mockArguments->expects($this->at(0))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockStartDateArgument));
+            $this->returnValue($mockStartDateArgument)
+        );
         $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockEndDateArgument));
+            $this->returnValue($mockEndDateArgument)
+        );
+
         return $mockArguments;
     }
 
@@ -256,7 +300,6 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->expects($this->once())->method('redirect')->with('settingsError');
         $this->subject->initializeListAction();
     }
-
 
     /**
      * @test
@@ -282,11 +325,9 @@ class AdministrationControllerTest extends UnitTestCase
     public function exportActionCallsExportServiceDownloadRegistrationsCsv()
     {
         $settings = [
-            'csvExport' =>
-                ['some settings']
+            'csvExport' => ['some settings']
         ];
-        $exportService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\ExportService',
-            [], [], '', false);
+        $exportService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\ExportService')->getMock();
         $exportService->expects($this->once())->method('downloadRegistrationsCsv')->with(
             $this->equalTo(1),
             $this->equalTo(['some settings'])
@@ -302,8 +343,8 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView()
     {
-        $mockRegistrationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\RegistrationService',
-            ['handleExpiredRegistrations'], [], '', false);
+        $mockRegistrationService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\RegistrationService')
+            ->getMock();
         $mockRegistrationService->expects($this->once())->method('handleExpiredRegistrations');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
@@ -321,21 +362,25 @@ class AdministrationControllerTest extends UnitTestCase
         $logEntries = ['SomeResult'];
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockLogRepo = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CustomNotificationRepository',
-            ['findByEvent'], [], '', false);
+        $mockLogRepo = $this->getMockBuilder(CustomNotificationLogRepository::class)
+            ->setMethods(['findByEvent'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockLogRepo->expects($this->once())->method('findByEvent')->will(
-            $this->returnValue($logEntries));
+            $this->returnValue($logEntries)
+        );
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 
-        $mockSettingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService',
-            ['getCustomNotifications'], [], '', false);
+        $mockSettingsService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\SettingsService')->getMock();
         $mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
-            $this->returnValue($customNotifications));
+            $this->returnValue($customNotifications)
+        );
         $this->inject($this->subject, 'settingsService', $mockSettingsService);
 
-        $view = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface');
+        $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with($this->equalTo(
-            ['event' => $event, 'customNotifications' => $customNotifications, 'logEntries' => $logEntries]));
+            ['event' => $event, 'customNotifications' => $customNotifications, 'logEntries' => $logEntries]
+        ));
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->indexNotifyAction($event);
@@ -350,16 +395,17 @@ class AdministrationControllerTest extends UnitTestCase
         $customNotifications = ['key' => 'value'];
         $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
 
-        $mockSettingsService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\SettingsService',
-            ['getCustomNotifications'], [], '', false);
+        $mockSettingsService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\SettingsService')->getMock();
         $mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
-            $this->returnValue($customNotifications));
+            $this->returnValue($customNotifications)
+        );
         $this->inject($this->subject, 'settingsService', $mockSettingsService);
 
-        $mockNotificationService = $this->getMock('DERHANSEN\\SfEventMgt\\Service\\NotificationService',
-            ['sendCustomNotification', 'createCustomNotificationLogentry'], [], '', false);
+        $mockNotificationService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\NotificationService')
+            ->getMock();
         $mockNotificationService->expects($this->once())->method('sendCustomNotification')->will(
-            $this->returnValue(1));
+            $this->returnValue(1)
+        );
         $mockNotificationService->expects($this->once())->method('createCustomNotificationLogentry');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 

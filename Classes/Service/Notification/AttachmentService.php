@@ -2,21 +2,15 @@
 namespace DERHANSEN\SfEventMgt\Service\Notification;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
@@ -26,7 +20,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 class AttachmentService
 {
-
     /**
      * Returns an array of filenames to attach to notifications
      *
@@ -94,6 +87,7 @@ class AttachmentService
             $registrationAttachments = $this->getObjectAttachments($config['fromRegistrationProperty'], $registration);
             $attachments = array_merge($attachments, $registrationAttachments);
         }
+
         return $attachments;
     }
 
@@ -111,6 +105,7 @@ class AttachmentService
                 $attachments[] = GeneralUtility::getFileAbsFileName($file);
             }
         }
+
         return $attachments;
     }
 
@@ -124,13 +119,14 @@ class AttachmentService
     protected function getObjectAttachments($propertyNames, $object)
     {
         $attachments = [];
-        if ($object && $propertyNames !== '' && count($propertyNames) > 0) {
+        if ($object && $propertyNames !== '' && is_array($propertyNames) && count($propertyNames) > 0) {
             foreach ($propertyNames as $propertyName) {
                 if ($object->_hasProperty($propertyName)) {
                     $attachments = array_merge($attachments, $this->getAttachmentsFromProperty($object, $propertyName));
                 }
             }
         }
+
         return $attachments;
     }
 
@@ -159,6 +155,7 @@ class AttachmentService
             /** @var $property \TYPO3\CMS\Extbase\Domain\Model\FileReference */
             $attachments[] = $property->getOriginalResource()->getForLocalProcessing(false);
         }
+
         return $attachments;
     }
 }

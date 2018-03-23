@@ -136,6 +136,26 @@ Tab settings
         queryLimit
 
  - :Property:
+         Category mode
+
+   :View:
+         List
+
+   :Description:
+         This setting defines, how categories are taken into account when selecting events.
+
+         The following options are available:
+
+         * Ignore category selection
+         * Show events with selected categories (OR)
+         * Show events with selected categories (AND)
+         * Do NOT show events with selected categories (OR)
+         * Do NOT show events with selected categories (AND)
+
+   :Key:
+         categoryConjunction
+
+ - :Property:
          Category
 
    :View:
@@ -228,13 +248,11 @@ Tab settings
 Tab additional
 ~~~~~~~~~~~~~~
 
-Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to display".
-
 .. t3-field-list-table::
  :header-rows: 1
 
  - :Property:
-         Detail pid
+         Detail Page
 
    :View:
          List, Registration
@@ -246,7 +264,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          detailPid
 
  - :Property:
-         List pid
+         List Page
 
    :View:
          List, Details, Registration
@@ -259,7 +277,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          listPid
 
  - :Property:
-         Registration pid
+         Registration Page
 
    :View:
          List, Details
@@ -271,7 +289,7 @@ Note: On TYPO3 7.6, all fields will show up regardless of the setting "What to d
          registrationPid
 
  - :Property:
-         Payment pid
+         Payment Page
 
    :View:
          Registration

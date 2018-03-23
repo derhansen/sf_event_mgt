@@ -2,16 +2,10 @@
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 /**
@@ -21,7 +15,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  */
 class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Display mode
      *
@@ -56,6 +49,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var bool
      */
     protected $includeSubcategories = false;
+
+    /**
+     * Category Conjunction
+     *
+     * @var string
+     */
+    protected $categoryConjunction = '';
 
     /**
      * Top event
@@ -214,7 +214,8 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->currentDateTime != null) {
             return $this->currentDateTime;
         }
-        return new \DateTime;
+
+        return new \DateTime();
     }
 
     /**
@@ -242,7 +243,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns includeSubcategories
      *
-     * @return boolean
+     * @return bool
      */
     public function getIncludeSubcategories()
     {
@@ -252,7 +253,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets includeSubcategories
      *
-     * @param boolean $includeSubcategories
+     * @param bool $includeSubcategories
      * @return void
      */
     public function setIncludeSubcategories($includeSubcategories)
@@ -536,5 +537,26 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOrganisator($organisator)
     {
         $this->organisator = $organisator;
+    }
+
+    /**
+     * Returns categoryConjuction
+     *
+     * @return string
+     */
+    public function getCategoryConjunction()
+    {
+        return $this->categoryConjunction;
+    }
+
+    /**
+     * Sets categoryConjuction
+     *
+     * @param string $categoryConjunction
+     * @return void
+     */
+    public function setCategoryConjunction($categoryConjunction)
+    {
+        $this->categoryConjunction = $categoryConjunction;
     }
 }

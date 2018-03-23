@@ -2,18 +2,13 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -23,7 +18,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 {
-
     /**
      * Viewhelper
      *
@@ -144,11 +138,16 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider simultaneousRegistrationsDataProvider
+     * @param mixed $maxParticipants
+     * @param mixed $freePlaces
+     * @param mixed $maxRegistrations
+     * @param mixed $waitlist
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $waitlist, $expected)
     {
-        $mockEvent = $this->getMock('DERHANSEN\\SfEventMgt\\Domain\\Model\\Event', []);
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects($this->any())->method('getFreePlaces')->will($this->returnValue($freePlaces));
         $mockEvent->expects($this->any())->method('getMaxParticipants')->will($this->returnValue($maxParticipants));
         $mockEvent->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue($waitlist));
@@ -156,5 +155,4 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         $actual = $this->viewhelper->render($mockEvent);
         $this->assertEquals($expected, $actual);
     }
-
 }

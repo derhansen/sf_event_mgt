@@ -17,7 +17,8 @@ events, code sprints or by becoming a TYPO3 association member.
 Thanks from me to:
 ~~~~~~~~~~~~~~~~~~
 
-* Georg Ringer for his extension "news", from where I adapted some techniques I use in this extension
+* Georg Ringer for his extension "news", from where I adapted some concepts and code I use in this extension
+* Alexander Kellner for his extension "powermail", from where I adapted some concepts and code I use in this extension
 * Thies Kracht who developed the CSV export
 * Phat Hoang and Oleksandr Bachynskyi from Pixelant AB for their ideas and contributions
 * Phat Hoang from Pixelant AB for the reCAPTCHA implementation
@@ -27,3 +28,4 @@ Thanks from me to:
 * New Communication GmbH & Co. KG for sponsoring and ideas
 * Tymoteusz Motylewski for implementing event speakers and other contributions
 * Gerd Müller from Vogt-Schild Druck AG for sponsoring organisator filtering
+* Alexander Grein from Mediaessenz for implementing the default storage Pid feature

@@ -1,34 +1,28 @@
 <?php
 namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
-/**
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+/*
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 
 /**
  * Validator for recaptcha.
  */
 class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {
-
     /**
      * This validator always needs to be executed even if the given value is empty.
      * See AbstractValidator::validate()
      *
-     * @var boolean
+     * @var bool
      */
     protected $acceptsEmptyValues = false;
 
@@ -36,9 +30,18 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
      * Object Manager
      *
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     * @inject
-     */
+     * */
     protected $objectManager;
+
+    /**
+     * DI for $objectManager
+     *
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     */
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    {
+        $this->objectManager = $objectManager;
+    }
 
     /**
      * Checks if the given value is a valid recaptcha.
@@ -51,8 +54,10 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
         $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
         if ($response !== null) {
             // Only check if a response is set
-            $configurationManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
-            $fullTs = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+            $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+            $fullTs = $configurationManager->getConfiguration(
+                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+            );
             $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCaptcha.'];
 
             if (isset($reCaptchaSettings) &&

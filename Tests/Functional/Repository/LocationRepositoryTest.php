@@ -1,22 +1,15 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
@@ -25,7 +18,6 @@ use \TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class LocationRepositoryTest extends FunctionalTestCase
 {
-
     /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
     protected $objectManager;
 
@@ -62,5 +54,4 @@ class LocationRepositoryTest extends FunctionalTestCase
 
         $this->assertEquals(2, $locations->count());
     }
-
 }

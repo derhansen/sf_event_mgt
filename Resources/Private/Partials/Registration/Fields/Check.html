@@ -1,0 +1,21 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="event-registration-row checkbox-field">
+    <label>{field.title}</label>
+    <div class="checkbox-field-checkfields">
+        <f:for each="{field.settingsForOption}" as="option">
+            <label>
+                <f:form.checkbox id="{field.uid}" property="fields.{field.uid}." value="{option.value}" checked="{e:registration.field.prefillMultiValueField(registrationField: field, currentValue: option.value)}"/>
+                {option.label}
+            </label>
+            <div class="clear"></div>
+        </f:for>
+    </div>
+    <div class="clear"></div>
+    <f:render partial="FormErrors" arguments="{field: 'registration.fields.{field.uid}'}"/>
+</div>
+<br/>
+
+</html>

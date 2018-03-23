@@ -2,20 +2,16 @@
 namespace DERHANSEN\SfEventMgt\Service;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use \TYPO3\CMS\Core\Utility\GeneralUtility;
-use \DERHANSEN\SfEventMgt\Exception;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Exception;
+use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class ExportService
@@ -24,12 +20,10 @@ use \DERHANSEN\SfEventMgt\Exception;
  */
 class ExportService
 {
-
     /**
      * Repository with registrations for the events
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     * @inject
      */
     protected $registrationRepository;
 
@@ -37,9 +31,29 @@ class ExportService
      * ResourceFactory
      *
      * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-     * @inject
      */
     protected $resourceFactory = null;
+
+    /**
+     * DI for $registrationRepository
+     *
+     * @param RegistrationRepository $registrationRepository
+     */
+    public function injectRegistrationRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+    ) {
+        $this->registrationRepository = $registrationRepository;
+    }
+
+    /**
+     * DI for $resourceFactory
+     *
+     * @param ResourceFactory $resourceFactory
+     */
+    public function injectResourceFactory(\TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory)
+    {
+        $this->resourceFactory = $resourceFactory;
+    }
 
     /**
      * Initiates the CSV downloads for registrations of the given event uid
@@ -75,8 +89,11 @@ class ExportService
     {
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
         $registrations = $this->registrationRepository->findByEvent($eventUid);
-        $exportedRegistrations = GeneralUtility::csvValues($fieldsArray,
-                $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
+        $exportedRegistrations = GeneralUtility::csvValues(
+                $fieldsArray,
+                $settings['fieldDelimiter'],
+                $settings['fieldQuoteCharacter']
+            ) . chr(10);
         foreach ($registrations as $registration) {
             $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
@@ -87,9 +104,29 @@ class ExportService
                         ' is not a Property of Model Registration, please check your TS configuration', 1475590002);
                 }
             }
-            $exportedRegistrations .= GeneralUtility::csvValues($exportedRegistration,
-                    $settings['fieldDelimiter'], $settings['fieldQuoteCharacter']) . chr(10);
+            $exportedRegistrations .= GeneralUtility::csvValues(
+                    $exportedRegistration,
+                    $settings['fieldDelimiter'],
+                    $settings['fieldQuoteCharacter']
+                ) . chr(10);
         }
+
+        return $this->prependByteOrderMark($exportedRegistrations, $settings);
+    }
+
+    /**
+     * Prepends Byte Order Mark to exported registrations
+     *
+     * @param string $exportedRegistrations
+     * @param array $settings
+     * @return string
+     */
+    protected function prependByteOrderMark($exportedRegistrations, $settings)
+    {
+        if ((bool)$settings['prependBOM']) {
+            $exportedRegistrations = chr(239) . chr(187) . chr(191) . $exportedRegistrations;
+        }
+
         return $exportedRegistrations;
     }
 
@@ -107,6 +144,7 @@ class ExportService
         if ($value instanceof \DateTime) {
             $value = $value->format('d.m.Y');
         }
+
         return $value;
     }
 }

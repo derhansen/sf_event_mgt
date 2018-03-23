@@ -21,7 +21,9 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'name,job_title,description',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_speaker.svg'
+        'typeicon_classes' => [
+            'default' => 'ext-sfeventmgt-speaker'
+        ],
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, job_title, description, image',
@@ -102,11 +104,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'endtime' => [
@@ -117,11 +115,7 @@ return [
                 'type' => 'input',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 0,
                 'default' => 0,
-                'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-                ],
             ],
         ],
         'name' => [

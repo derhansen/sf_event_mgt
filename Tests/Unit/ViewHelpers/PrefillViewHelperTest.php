@@ -2,20 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for prefill viewhelper
@@ -24,7 +18,6 @@ use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
  */
 class PrefillViewHelperTest extends UnitTestCase
 {
-
     /**
      * @test
      * @return void
@@ -42,7 +35,8 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsCurrentFieldValueIfValueInGPAvailable()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::_GETset([
+        \TYPO3\CMS\Core\Utility\GeneralUtility::_GETset(
+            [
                 'tx_sfeventmgt_pievent' => [
                     'registration' => ['fieldname' => 'Existing Value']
                 ]
@@ -105,17 +99,27 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John'
         ];
 
-        $mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getOriginalRequest'], [], '', false);
+        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getRequest'], [], '', false);
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
-            $this->returnValue($mockRequest));
+            $this->returnValue($mockRequest)
+        );
 
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
-            ['dummy'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+            ['dummy'],
+            [],
+            '',
+            false
+        );
         $viewHelper->_set('controllerContext', $mockControllerContext);
         $actual = $viewHelper->render('firstname', ['firstname' => 'unknown_field']);
         $this->assertSame('', $actual);
@@ -134,17 +138,27 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John',
             'last_name' => 'Doe'
         ];
-        $mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getOriginalRequest'], [], '', false);
+        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getRequest'], [], '', false);
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
-            $this->returnValue($mockRequest));
+            $this->returnValue($mockRequest)
+        );
 
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
-            ['dummy'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+            ['dummy'],
+            [],
+            '',
+            false
+        );
         $viewHelper->_set('controllerContext', $mockControllerContext);
         $actual = $viewHelper->render('lastname', ['lastname' => 'last_name']);
         $this->assertSame('Doe', $actual);
@@ -170,21 +184,33 @@ class PrefillViewHelperTest extends UnitTestCase
             ]
         ];
 
-        $mockOriginalRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getArguments'], [], '', false);
+        $mockOriginalRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getArguments'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
 
-        $mockRequest = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Request',
-            ['getOriginalRequest'], [], '', false);
+        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMock('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext',
-            ['getRequest'], [], '', false);
+        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+            ->setMethods(['getRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
         $mockControllerContext->expects($this->once())->method('getRequest')->will(
-            $this->returnValue($mockRequest));
+            $this->returnValue($mockRequest)
+        );
 
-        $viewHelper = $this->getAccessibleMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
-            ['dummy'], [], '', false);
+        $viewHelper = $this->getAccessibleMock(
+            'DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+            ['dummy'],
+            [],
+            '',
+            false
+        );
         $viewHelper->_set('controllerContext', $mockControllerContext);
         $actual = $viewHelper->render('lastname', ['lastname' => 'last_name']);
         $this->assertSame('Submitted Lastname', $actual);

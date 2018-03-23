@@ -2,22 +2,17 @@
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\MathUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  * The repository for Events
@@ -26,7 +21,6 @@ use DERHANSEN\SfEventMgt\Service\CategoryService;
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
     /**
      * Set default sorting
      *
@@ -44,7 +38,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     public function initializeObject()
     {
-        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
     }
 
@@ -77,6 +71,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         $this->setQueryLimitFromDemand($query, $eventDemand);
+
         return $query->execute();
     }
 
@@ -178,6 +173,11 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setCategoryConstraint($query, $eventDemand, &$constraints)
     {
+        // If no category constraint is set, categories should not be respected in the query
+        if ($eventDemand->getCategoryConjunction() === '') {
+            return;
+        }
+
         if ($eventDemand->getCategory() != '') {
             $categoryConstraints = [];
             if ($eventDemand->getIncludeSubcategories()) {
@@ -190,9 +190,37 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $categoryConstraints[] = $query->contains('category', $category);
             }
             if (count($categoryConstraints) > 0) {
-                $constraints[] = $query->logicalOr($categoryConstraints);
+                $constraints[] = $this->getCategoryConstraint($query, $eventDemand, $categoryConstraints);
             }
         }
+    }
+
+    /**
+     * Returns the category constraint depending on the category conjunction configured in eventDemand
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand
+     * @param array $categoryConstraints
+     * @return mixed
+     */
+    public function getCategoryConstraint($query, $eventDemand, $categoryConstraints)
+    {
+        switch (strtolower($eventDemand->getCategoryConjunction())) {
+            case 'and':
+                $constraint = $query->logicalAnd($categoryConstraints);
+                break;
+            case 'notor':
+                $constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+                break;
+            case 'notand':
+                $constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+                break;
+            case 'or':
+            default:
+                $constraint = $query->logicalOr($categoryConstraints);
+        }
+
+        return $constraint;
     }
 
     /**

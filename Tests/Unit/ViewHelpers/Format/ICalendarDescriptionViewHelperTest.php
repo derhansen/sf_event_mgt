@@ -2,20 +2,14 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for iCalendar Description viewhelper
@@ -24,7 +18,6 @@ use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
  */
 class ICalendarDescriptionViewHelperTest extends UnitTestCase
 {
-
     /**
      * Data Provider for unit tests
      *
@@ -67,6 +60,8 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      *
      * @dataProvider iCalendarDescriptionDataProvider
      *
+     * @param mixed $value
+     * @param mixed $expected
      * @return void
      */
     public function viewHelperReturnsExpectedValues($value, $expected)
@@ -85,11 +80,11 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
-        $viewHelper = $this->getMock('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper',
-            ['renderChildren']);
+        $viewHelper = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper')
+            ->setMethods(['renderChildren'])
+            ->getMock();
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));
         $actual = $viewHelper->render();
         $this->assertSame('Just some text', $actual);
     }
-
 }

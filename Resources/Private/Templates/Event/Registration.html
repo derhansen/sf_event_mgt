@@ -6,6 +6,7 @@
 <f:section name="main">
     <f:if condition="{event.registrationPossible}">
         <f:then>
+            <e:title pageTitle="{event.title}" />
 
             <h1><f:translate key="registration.title" /></h1>
 
@@ -158,7 +159,6 @@
                         <f:render partial="FormErrors" arguments="{field: 'registration.phone'}"/>
                     </div>
 
-
                     <div class="event-registration-row">
                         <label for="dateOfBirth"><f:translate key="tx_sfeventmgt_domain_model_registration.date_of_birth" /></label>
                         <f:form.textfield id="dateOfBirth" property="dateOfBirth" /><br>
@@ -186,6 +186,12 @@
                         <f:form.textarea id="notes" property="notes"/><br>
                         <f:render partial="FormErrors" arguments="{field: 'registration.notes'}"/>
                     </div>
+
+                    <f:if condition="{event.registrationFields}">
+                        <f:for each="{event.registrationFields}" as="field">
+                            <f:render partial="Registration/Fields/{field.type}" arguments="{field: field}" />
+                        </f:for>
+                    </f:if>
 
                     <div class="event-registration-row checkbox">
                         <label for="accepttc">

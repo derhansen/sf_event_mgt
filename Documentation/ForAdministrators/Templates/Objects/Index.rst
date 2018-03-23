@@ -69,6 +69,18 @@ List view
    :Description:
          The overwriteDemand object
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Detail view
 ~~~~~~~~~~~
 
@@ -87,6 +99,18 @@ Detail view
    :Description:
          An object holding the given event
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Registration view
 ~~~~~~~~~~~~~~~~~
 
@@ -104,6 +128,18 @@ Registration view
 
    :Description:
          An object holding the given event
+
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
 
 Calendar view
 ~~~~~~~~~~~~~
@@ -177,6 +213,18 @@ Calendar view
    :Description:
          Array with date, month and year of the next month
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object of the plugin
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Search view
 ~~~~~~~~~~~
 
@@ -225,8 +273,22 @@ Search view
    :Description:
          The overwriteDemand object
 
+ - :Object:
+         {contentObjectData}
+
+   :Description:
+         The current content object data
+
+ - :Object:
+         {pageData}
+
+   :Description:
+         The current page data
+
 Notification views
 ~~~~~~~~~~~~~~~~~~
+
+The following objects can be used in notification views
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -266,6 +328,32 @@ Notification views
 
    :Description:
          Appended HMAC for the registration UID
+
+E-Mail subjects
+~~~~~~~~~~~~~~~
+
+The following objects can be used in e-mail subjects for event registration and custom notifications
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Object:
+         Object:
+
+   :Description:
+         Description:
+
+ - :Object:
+         {event}
+
+   :Description:
+         An object holding the event for a registration
+
+ - :Object:
+         {registration}
+
+   :Description:
+         An object holding the registration
 
 Registration message views
 ~~~~~~~~~~~~~~~~~~~~~~~~~~

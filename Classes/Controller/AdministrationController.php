@@ -2,45 +2,29 @@
 namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
  * AdministrationController
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class AdministrationController extends AbstractController
 {
-
-    /**
-     * EventRepository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
-     * @inject
-     */
-    protected $eventRepository = null;
-
     /**
      * CustomNotificationLogRepository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
-     * @inject
      */
     protected $customNotificationLogRepository = null;
 
@@ -48,33 +32,22 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * ExportService
      *
      * @var \DERHANSEN\SfEventMgt\Service\ExportService
-     * @inject
      */
     protected $exportService = null;
-
-    /**
-     * RegistrationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
-     * @inject
-     */
-    protected $registrationService = null;
-
-    /**
-     * NotificationService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
-     * @inject
-     */
-    protected $notificationService = null;
 
     /**
      * SettingsService
      *
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-     * @inject
      */
     protected $settingsService = null;
+
+    /**
+     * Backend User Session Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
+     */
+    protected $beUserSessionService = null;
 
     /**
      * The current page uid
@@ -82,6 +55,47 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      * @var int
      */
     protected $pid = 0;
+
+    /**
+     * DI for $customNotificationLogRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+     */
+    public function injectCustomNotificationLogRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+    ) {
+        $this->customNotificationLogRepository = $customNotificationLogRepository;
+    }
+
+    /**
+     * DI for $exportService
+     *
+     * @param Service\ExportService $exportService
+     */
+    public function injectExportService(\DERHANSEN\SfEventMgt\Service\ExportService $exportService)
+    {
+        $this->exportService = $exportService;
+    }
+
+    /**
+     * DI for $settingsService
+     *
+     * @param Service\SettingsService $settingsService
+     */
+    public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService)
+    {
+        $this->settingsService = $settingsService;
+    }
+
+    /**
+     * DI for $beUserSessionService
+     *
+     * @param Service\BeUserSessionService $beUserSessionService
+     */
+    public function injectBeUserSessionService(\DERHANSEN\SfEventMgt\Service\BeUserSessionService $beUserSessionService)
+    {
+        $this->beUserSessionService = $beUserSessionService;
+    }
 
     /**
      * Initialize action
@@ -106,14 +120,14 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
         $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('startDate')
             ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['search']['dateFormat']
             );
         $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('endDate')
             ->setTypeConverterOption(
-                'TYPO3\\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter',
+                DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['search']['dateFormat']
             );
@@ -130,11 +144,19 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     public function listAction(SearchDemand $searchDemand = null, $messageId = null)
     {
         /** @var EventDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand = $this->objectManager->get(EventDemand::class);
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
+
+            $sessionData = [];
+            $sessionData['searchDemand'] = $searchDemand;
+            $this->beUserSessionService->saveSessionData($sessionData);
+        } else {
+            // Try to restore search demand from Session
+            $searchDemand = $this->beUserSessionService->getSessionDataByKey('searchDemand');
         }
+
         $demand->setSearchDemand($searchDemand);
 
         if ($this->pid > 0) {
@@ -163,6 +185,7 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     public function exportAction($eventUid)
     {
         $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
+
         return false;
     }
 
@@ -222,5 +245,15 @@ class AdministrationController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
      */
     public function settingsErrorAction()
     {
+    }
+
+    /**
+     * Suppress default validation messages
+     *
+     * @return bool
+     */
+    protected function getErrorFlashMessage()
+    {
+        return false;
     }
 }

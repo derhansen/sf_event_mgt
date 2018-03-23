@@ -2,17 +2,13 @@
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
- * This file is part of the TYPO3 CMS project.
- *
- * It is free software; you can redistribute it and/or modify it under
- * the terms of the GNU General Public License, either version 2
- * of the License, or any later version.
+ * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
- *
- * The TYPO3 project - inspiring people to share!
  */
+
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 
 /**
  * Event
@@ -21,7 +17,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  */
 class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-
     /**
      * Title
      *
@@ -117,7 +112,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Category
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\Category>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
      * @lazy
      */
     protected $category = null;
@@ -148,6 +143,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $registrationWaitlist;
 
     /**
+     * Registration fields
+     *
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\Field>
+     * @lazy
+     */
+    protected $registrationFields;
+
+    /**
      * Registration deadline date
      *
      * @var \DateTime
@@ -169,13 +172,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @lazy
      */
     protected $files = null;
-
-    /**
-     * YouTube Embed code
-     *
-     * @var string
-     */
-    protected $youtube = '';
 
     /**
      * The Location
@@ -295,6 +291,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->related = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->registrationWaitlist = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->registrationFields = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
@@ -503,7 +500,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns if payment is enabled
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnablePayment()
     {
@@ -513,7 +510,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets enablePayment
      *
-     * @param boolean $enablePayment
+     * @param bool $enablePayment
      * @return void
      */
     public function setEnablePayment($enablePayment)
@@ -524,7 +521,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns if payment methods should be restricted
      *
-     * @return boolean
+     * @return bool
      */
     public function getRestrictPaymentMethods()
     {
@@ -534,7 +531,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets if payment methods should be restricted
      *
-     * @param boolean $restrictPaymentMethods
+     * @param bool $restrictPaymentMethods
      * @return void
      */
     public function setRestrictPaymentMethods($restrictPaymentMethods)
@@ -566,11 +563,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Adds a Category
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category Category
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $category Category
      *
      * @return void
      */
-    public function addCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $category)
+    public function addCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $category)
     {
         $this->category->attach($category);
     }
@@ -578,11 +575,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Removes a Category
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove The Category to be removed
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
      *
      * @return void
      */
-    public function removeCategory(\TYPO3\CMS\Extbase\Domain\Model\Category $categoryToRemove)
+    public function removeCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove)
     {
         $this->category->detach($categoryToRemove);
     }
@@ -791,28 +788,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns YouTube embed code
-     *
-     * @return string
-     */
-    public function getYoutube()
-    {
-        return $this->youtube;
-    }
-
-    /**
-     * Sets YouTube embed code
-     *
-     * @param string $youtube Youtube
-     *
-     * @return void
-     */
-    public function setYoutube($youtube)
-    {
-        $this->youtube = $youtube;
-    }
-
-    /**
      * Returns if the registration for this event is logically possible
      *
      * @return bool
@@ -827,6 +802,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new \DateTime()) {
             $deadlineNotReached = false;
         }
+
         return ($this->getStartdate() > new \DateTime()) &&
         ($maxParticipantsNotReached || !$maxParticipantsNotReached && $this->enableWaitlist) &&
         $this->getEnableRegistration() && $deadlineNotReached;
@@ -889,7 +865,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns enableWaitlist
      *
-     * @return boolean
+     * @return bool
      */
     public function getEnableWaitlist()
     {
@@ -899,7 +875,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets enableWaitlist
      *
-     * @param boolean $enableWaitlist
+     * @param bool $enableWaitlist
      * @return void
      */
     public function setEnableWaitlist($enableWaitlist)
@@ -1000,6 +976,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($ret === '-') {
             $ret = '';
         }
+
         return $ret;
     }
 
@@ -1046,7 +1023,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->maxRegistrationsPerUser = $maxRegistrationsPerUser;
     }
-
 
     /**
      * Adds an additionalImage
@@ -1228,7 +1204,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns uniqueEmailCheck
      *
-     * @return boolean
+     * @return bool
      */
     public function getUniqueEmailCheck()
     {
@@ -1238,7 +1214,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets UniqueEmailCheck
      *
-     * @param boolean $uniqueEmailCheck
+     * @param bool $uniqueEmailCheck
      * @return void
      */
     public function setUniqueEmailCheck($uniqueEmailCheck)
@@ -1308,6 +1284,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             }
         }
         ksort($activePriceOptions);
+
         return $activePriceOptions;
     }
 
@@ -1322,10 +1299,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if (count($activePriceOptions) >= 1) {
             // Sort active price options and return first element
             return reset($activePriceOptions)->getPrice();
-        } else {
-            // Just return the price field
-            return $this->price;
         }
+        // Just return the price field
+        return $this->price;
     }
 
     /**
@@ -1427,5 +1403,62 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function removeSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
     {
         $this->speaker->detach($speaker);
+    }
+
+    /**
+     * Returns registrationFields
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getRegistrationFields()
+    {
+        return $this->registrationFields;
+    }
+
+    /**
+     * Sets registrationWaitlist
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields
+     *
+     * @return void
+     */
+    public function setRegistrationFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields)
+    {
+        $this->registrationFields = $registrationFields;
+    }
+
+    /**
+     * Adds a registrationField
+     *
+     * @param Field $registrationField
+     */
+    public function addRegistrationFields(Field $registrationField)
+    {
+        $this->registrationFields->attach($registrationField);
+    }
+
+    /**
+     * Removed a registrationField
+     *
+     * @param Field $registrationField
+     */
+    public function removeRegistrationFields(Field $registrationField)
+    {
+        $this->registrationFields->detach($registrationField);
+    }
+
+    /**
+     * Returns an array with registration fields
+     *
+     * @return array
+     */
+    public function getRegistrationFieldsUids()
+    {
+        $result = [];
+        foreach ($this->registrationFields as $registrationField) {
+            $result[] = $registrationField->getUid();
+        }
+
+        return $result;
     }
 }
