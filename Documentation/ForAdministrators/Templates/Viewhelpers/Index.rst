@@ -115,3 +115,11 @@ Registration.Hmac
 Must be used, when the plugin :ref:`userregistrationplugin-settings` is used and it should be possible
 for users to cancel registrations (if configured in event). See usage in UserRegistration templates.
 
+Title
+~~~~~
+
+Use this viewhelper to set the page title and indexed search title on event-detail and -registration pages.
+
+**Example**::
+
+  <e:title pageTitle="{event.title}" indexedDocTitle="A custom title for indexed search"/>
