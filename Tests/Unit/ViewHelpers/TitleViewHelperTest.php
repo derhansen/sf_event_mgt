@@ -19,7 +19,6 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class TitleViewHelperTest extends UnitTestCase
 {
-
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController|AccessibleMockObjectInterface
      */
