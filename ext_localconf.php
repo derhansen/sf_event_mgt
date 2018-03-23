@@ -70,3 +70,6 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
         'extkey' => 'sf_event_mgt'
     ]
 ];
+
+// RealURL autoconfiguration
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/realurl/class.tx_realurl_autoconfgen.php']['extensionConfiguration']['Pievent_Event'] = 'EXT:sf_event_mgt/Classes/tx_sf_event_mgt_realurl.php:tx_Pievent_Event_realurl->addSfEventConfig';
