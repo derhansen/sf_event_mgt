@@ -36,9 +36,16 @@ return [
     'types' => [
         '1' => [
             'showitem' => 'l10n_parent, l10n_diffsource, --palette--;;paletteCore, 
-            firstname, lastname, title, company, address, zip, city, country, phone, email,
-            ignore_notifications, gender, date_of_birth, fe_user, confirmation_until, confirmed,
-            accepttc, notes, amount_of_registrations, waitlist, main_registration, 
+            
+            --palette--;;paletteGenderTitle,
+            --palette--;;paletteName,
+            company, 
+            --palette--;;paletteAddress,
+            country, phone, email, date_of_birth, accepttc, notes, 
+
+            --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
+                fe_user, confirmation_until, confirmed, ignore_notifications, amount_of_registrations,
+                waitlist, main_registration,
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
                 field_values, 
@@ -52,6 +59,15 @@ return [
     'palettes' => [
         'paletteCore' => [
             'showitem' => 'sys_language_uid, hidden,',
+        ],
+        'paletteName' => [
+            'showitem' => 'firstname, lastname,',
+        ],
+        'paletteAddress' => [
+            'showitem' => 'address, zip, city,',
+        ],
+        'paletteGenderTitle' => [
+            'showitem' => 'gender, title,',
         ],
     ],
     'columns' => [
@@ -239,8 +255,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
+                'type' => 'radio',
                 'items' => [
                     [
                         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender.notset',
