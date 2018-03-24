@@ -169,7 +169,7 @@ class AttachmentServiceTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile2->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/anotherfile.pdf'));
-        $mockFileRef2 =  $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+        $mockFileRef2 = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -218,7 +218,7 @@ class AttachmentServiceTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
-        $mockFileRef =  $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+        $mockFileRef = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
