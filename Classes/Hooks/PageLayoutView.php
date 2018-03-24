@@ -83,6 +83,7 @@ class PageLayoutView
 
         if ($this->showFieldsForListViewOnly()) {
             $this->getCategoryConjuction();
+            $this->getCategorySettings();
         }
 
         $result = $this->renderSettingsAsTable($header, $action, $this->data);
@@ -301,15 +302,22 @@ class PageLayoutView
             case 'and':
             case 'notor':
             case 'notand':
-                $mode = $categoryConjunction;
+                $text = htmlspecialchars($this->getLanguageService()->sL(
+                    self::LLPATH . 'flexforms_general.categoryConjunction.' . $categoryConjunction
+                ));
                 break;
             default:
-                $mode = 'ignore';
+                $text = htmlspecialchars($this->getLanguageService()->sL(
+                    self::LLPATH . 'flexforms_general.categoryConjunction.ignore'
+                ));
+                $text .= ' <span class="label label-warning">' . htmlspecialchars($this->getLanguageService()->sL(
+                    self::LLPATH . 'flexforms_general.possibleMisconfiguration'
+                )) . '</span>';
         }
 
         $this->data[] = [
             'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.categoryConjunction'),
-            'value' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.categoryConjunction.' . $mode)
+            'value' => $text
         ];
     }
 
@@ -325,6 +333,33 @@ class PageLayoutView
                 'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.disableOverrideDemand'),
                 'value' => '<i class="fa fa-check"></i>'
             ];
+        }
+    }
+
+    /**
+     * Get category settings
+     */
+    public function getCategorySettings()
+    {
+        $categories = GeneralUtility::intExplode(',', $this->getFieldFromFlexform('settings.category'), true);
+        if (count($categories) > 0) {
+            $categoriesOut = [];
+            foreach ($categories as $id) {
+                $categoriesOut[] = $this->getRecordData($id, 'sys_category');
+            }
+
+            $this->data[] = [
+                'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.category'),
+                'value' => implode(', ', $categoriesOut)
+            ];
+
+            $includeSubcategories = $this->getFieldFromFlexform('settings.includeSubcategories');
+            if ($includeSubcategories) {
+                $this->data[] = [
+                    'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.includeSubcategories'),
+                    'value' => '<i class="fa fa-check"></i>'
+                ];
+            }
         }
     }
 

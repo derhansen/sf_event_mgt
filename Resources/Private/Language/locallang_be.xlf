@@ -124,6 +124,9 @@
 			<trans-unit id="flexforms_general.categoryConjunction.notor">
 				<source>Do NOT show events with selected categories (OR)</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.possibleMisconfiguration">
+				<source>Possible misconfiguration!</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.category">
 				<source>Category</source>
 			</trans-unit>
