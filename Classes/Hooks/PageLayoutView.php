@@ -354,7 +354,7 @@ class PageLayoutView
             ];
 
             $includeSubcategories = $this->getFieldFromFlexform('settings.includeSubcategories');
-            if ($includeSubcategories) {
+            if ((int)$includeSubcategories === 1) {
                 $this->data[] = [
                     'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.includeSubcategories'),
                     'value' => '<i class="fa fa-check"></i>'
