@@ -22,4 +22,6 @@ For Editors
    Organisator/Index
    Speaker/Index
    Registrations/Index
+   Registrationfield/Index
+   Registrationfieldvalue/Index
    BackendModule/Index
