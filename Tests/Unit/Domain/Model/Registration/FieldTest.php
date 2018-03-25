@@ -305,6 +305,10 @@ class FieldTest extends UnitTestCase
             'Type Radio' => [
                 FieldType::RADIO,
                 FieldValueType::TYPE_TEXT
+            ],
+            'Type Textarea' => [
+                FieldType::TEXTAREA,
+                FieldValueType::TYPE_TEXT
             ]
         ];
     }

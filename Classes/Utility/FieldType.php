@@ -18,4 +18,5 @@ class FieldType
     const INPUT = 'input';
     const CHECK = 'check';
     const RADIO = 'radio';
+    const TEXTAREA = 'textarea';
 }

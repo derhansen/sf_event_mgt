@@ -30,7 +30,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Type - possible values
      *
-     *  "input", "radio", "check"
+     *  "input", "radio", "check", "textarea"
      *
      * @var string
      */
@@ -247,7 +247,8 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $valueTypes = [
             FieldType::INPUT => FieldValueType::TYPE_TEXT,
             FieldType::CHECK => FieldValueType::TYPE_ARRAY,
-            FieldType::RADIO => FieldValueType::TYPE_TEXT
+            FieldType::RADIO => FieldValueType::TYPE_TEXT,
+            FieldType::TEXTAREA => FieldValueType::TYPE_TEXT
         ];
         if (isset($valueTypes[$this->type])) {
             return $valueTypes[$this->type];

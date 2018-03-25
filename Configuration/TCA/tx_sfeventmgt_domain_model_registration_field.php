@@ -56,6 +56,9 @@ return [
         'check' => [
             'showitem' => $showItemRadioCheck
         ],
+        'textarea' => [
+            'showitem' => $showItemDefault
+        ],
     ],
     'palettes' => [
         'paletteCore' => [
@@ -192,6 +195,10 @@ return [
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.2',
                         \DERHANSEN\SfEventMgt\Utility\FieldType::CHECK
+                    ],
+                    [
+                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.3',
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXTAREA
                     ],
                 ],
                 'size' => 1,
