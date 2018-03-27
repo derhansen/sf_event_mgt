@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
@@ -90,10 +91,11 @@ class ExportService
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
         $registrations = $this->registrationRepository->findByEvent($eventUid);
         $exportedRegistrations = GeneralUtility::csvValues(
-                $fieldsArray,
-                $settings['fieldDelimiter'],
-                $settings['fieldQuoteCharacter']
-            ) . chr(10);
+            $fieldsArray,
+            $settings['fieldDelimiter'],
+            $settings['fieldQuoteCharacter']
+        ) . chr(10);
+        /** @var Registration $registration */
         foreach ($registrations as $registration) {
             $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
@@ -105,10 +107,10 @@ class ExportService
                 }
             }
             $exportedRegistrations .= GeneralUtility::csvValues(
-                    $exportedRegistration,
-                    $settings['fieldDelimiter'],
-                    $settings['fieldQuoteCharacter']
-                ) . chr(10);
+                $exportedRegistration,
+                $settings['fieldDelimiter'],
+                $settings['fieldQuoteCharacter']
+            ) . chr(10);
         }
 
         return $this->prependByteOrderMark($exportedRegistrations, $settings);
