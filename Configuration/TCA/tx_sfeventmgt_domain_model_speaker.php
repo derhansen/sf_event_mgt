@@ -105,6 +105,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -116,6 +119,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'name' => [
@@ -126,6 +132,9 @@ return [
                 'size' => 30,
                 'eval' => 'trim,required',
                 'max' => 255,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'job_title' => [
@@ -134,7 +143,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'description' => [
@@ -145,6 +157,9 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'RTE' => [
                         'icon' => 'actions-wizard-rte',
@@ -193,6 +208,9 @@ return [
                                         --palette--;;filePalette'
                             ],
                         ],
+                    ],
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true,
                     ],
                     'minitems' => 0,
                     'maxitems' => 1,

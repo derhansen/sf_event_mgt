@@ -107,6 +107,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -118,11 +121,15 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
 
         'title' => [
             'exclude' => 1,
+            'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.title',
             'config' => [
                 'type' => 'input',
@@ -137,11 +144,16 @@ return [
                 'type' => 'text',
                 'cols' => 30,
                 'rows' => 3,
-                'eval' => 'trim'
+                'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'zip' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.zip',
             'config' => [
                 'type' => 'input',
@@ -154,7 +166,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'country' => [
@@ -163,7 +178,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'description' => [
@@ -174,6 +192,9 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'RTE' => [
                         'icon' => 'actions-wizard-rte',
@@ -191,12 +212,14 @@ return [
         ],
         'link' => [
             'exclude' => 0,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.link',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'link' => [
                         'type' => 'popup',
@@ -212,6 +235,8 @@ return [
         ],
         'longitude' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.longitude',
             'config' => [
                 'type' => 'input',
@@ -223,6 +248,8 @@ return [
         ],
         'latitude' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.latitude',
             'config' => [
                 'type' => 'input',

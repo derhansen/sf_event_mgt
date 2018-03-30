@@ -104,6 +104,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -115,6 +118,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'fe_group' => [
@@ -142,6 +148,9 @@ return [
                 'exclusiveKeys' => '-1,-2',
                 'foreign_table' => 'fe_groups',
                 'foreign_table_where' => 'ORDER BY fe_groups.title',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
 
@@ -151,7 +160,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 5,
-                'eval' => 'double2'
+                'eval' => 'double2',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ]
         ],
         'valid_until' => [
@@ -162,7 +174,10 @@ return [
                 'size' => 13,
                 'eval' => 'date',
                 'checkbox' => 1,
-                'default' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                'default' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'event' => [

@@ -126,6 +126,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -137,6 +140,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'fe_group' => [
@@ -164,10 +170,14 @@ return [
                 'exclusiveKeys' => '-1,-2',
                 'foreign_table' => 'fe_groups',
                 'foreign_table_where' => 'ORDER BY fe_groups.title',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'title' => [
             'exclude' => 1,
+            'l10n_mode' => 'prefixLangTitle',
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.title',
             'config' => [
                 'type' => 'input',
@@ -178,6 +188,7 @@ return [
         ],
         'type' => [
             'exclude' => 0,
+            'l10n_display' => 'defaultAsReadonly',
             'l10n_mode' => 'exclude',
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type',
             'config' => [
@@ -214,10 +225,14 @@ return [
                 'cols' => 60,
                 'rows' => 5,
                 'eval' => 'required',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'required' => [
             'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'exclude' => 1,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.required',
             'config' => [
@@ -231,6 +246,9 @@ return [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 2,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'default_value' => [
@@ -240,6 +258,9 @@ return [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 2,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'event' => [

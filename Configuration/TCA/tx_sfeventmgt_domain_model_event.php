@@ -164,6 +164,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'endtime' => [
@@ -175,6 +178,9 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'fe_group' => [
@@ -202,10 +208,14 @@ return [
                 'exclusiveKeys' => '-1,-2',
                 'foreign_table' => 'fe_groups',
                 'foreign_table_where' => 'ORDER BY fe_groups.title',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'title' => [
             'exclude' => 1,
+            'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.title',
             'config' => [
                 'type' => 'input',
@@ -215,6 +225,7 @@ return [
         ],
         'teaser' => [
             'exclude' => 1,
+            'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.teaser',
             'config' => [
                 'type' => 'text',
@@ -224,6 +235,7 @@ return [
         ],
         'description' => [
             'exclude' => 1,
+            'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.description',
             'config' => [
                 'type' => 'text',
@@ -247,6 +259,7 @@ return [
         ],
         'program' => [
             'exclude' => 1,
+            'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.program',
             'config' => [
                 'type' => 'text',
@@ -270,12 +283,14 @@ return [
         ],
         'link' => [
             'exclude' => 0,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.link',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'link' => [
                         'type' => 'popup',
@@ -291,6 +306,8 @@ return [
         ],
         'top_event' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.top_event',
             'config' => [
                 'type' => 'check',
@@ -298,6 +315,8 @@ return [
         ],
         'startdate' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
             'config' => [
                 'type' => 'input',
@@ -309,6 +328,8 @@ return [
         ],
         'enddate' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enddate',
             'config' => [
                 'type' => 'input',
@@ -320,6 +341,8 @@ return [
         ],
         'enable_registration' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_registration',
             'config' => [
                 'type' => 'check',
@@ -327,6 +350,8 @@ return [
         ],
         'enable_waitlist' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -335,6 +360,8 @@ return [
         ],
         'registration_deadline' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_deadline',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -346,6 +373,8 @@ return [
         ],
         'enable_cancel' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_cancel',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -354,6 +383,8 @@ return [
         ],
         'cancel_deadline' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.cancel_deadline',
             'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
             'config' => [
@@ -365,6 +396,8 @@ return [
         ],
         'enable_autoconfirm' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_autoconfirm',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -373,6 +406,8 @@ return [
         ],
         'max_participants' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxParticipants',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -383,6 +418,8 @@ return [
         ],
         'max_registrations_per_user' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -397,7 +434,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 5,
-                'eval' => 'double2'
+                'eval' => 'double2',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ]
         ],
         'currency' => [
@@ -406,7 +446,10 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 5,
-                'eval' => 'trim'
+                'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'enable_payment' => [
@@ -415,6 +458,9 @@ return [
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
                 'type' => 'check',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'restrict_payment_methods' => [
@@ -423,6 +469,9 @@ return [
             'displayCond' => 'FIELD:enable_payment:REQ:TRUE',
             'config' => [
                 'type' => 'check',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'selected_payment_methods' => [
@@ -435,6 +484,9 @@ return [
                 'size' => 5,
                 'maxitems' => 99,
                 'itemsProcFunc' => 'DERHANSEN\SfEventMgt\Hooks\ItemsProcFunc->getPaymentMethods',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ]
         ],
         'location' => [
@@ -449,6 +501,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
@@ -473,6 +528,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
@@ -497,6 +555,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 100,
                 'MM' => 'tx_sfeventmgt_event_speaker_mm',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
@@ -546,6 +607,9 @@ return [
                             ],
                         ],
                     ],
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true,
+                    ],
                     'minitems' => 0,
                     'maxitems' => 999,
                 ],
@@ -562,6 +626,9 @@ return [
                     'showRemovedLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
                     'showSynchronizationLink' => true
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
                 ],
             ]),
         ],
@@ -585,6 +652,9 @@ return [
                             'searchWholePhrase' => true
                         ]
                     ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
                 ],
             ]
         ],
@@ -622,6 +692,9 @@ return [
                             ],
                         ],
                     ],
+                    'behaviour' => [
+                        'allowLanguageSynchronization' => true,
+                    ],
                     'minitems' => 0,
                     'maxitems' => 999,
                 ],
@@ -650,6 +723,7 @@ return [
         ],
         'registration_waitlist' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_waitlist',
             'displayCond' => 'FIELD:enable_waitlist:REQ:TRUE',
             'config' => [
@@ -688,10 +762,15 @@ return [
                     'useSortable' => 1,
                     'showAllLocalizationLink' => 1
                 ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'notify_admin' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_admin',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -700,6 +779,8 @@ return [
         ],
         'notify_organisator' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_organisator',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -708,6 +789,8 @@ return [
         ],
         'unique_email_check' => [
             'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.unique_email_check',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -730,6 +813,9 @@ return [
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 0,
                     'showAllLocalizationLink' => 1
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
                 ],
             ],
         ],

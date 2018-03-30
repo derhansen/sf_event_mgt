@@ -67,6 +67,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -123,6 +124,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_organisator (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -191,6 +193,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -260,6 +263,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -303,6 +307,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_priceoption (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -346,6 +351,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_speaker (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -406,6 +412,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_field (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
@@ -449,6 +456,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_fieldvalue (
 	sys_language_uid int(11) DEFAULT '0' NOT NULL,
 	l10n_parent int(11) DEFAULT '0' NOT NULL,
 	l10n_diffsource mediumblob,
+	l10n_state TEXT DEFAULT NULL,
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
