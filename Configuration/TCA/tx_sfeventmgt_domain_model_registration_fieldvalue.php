@@ -32,11 +32,7 @@ return [
             'showitem' => 'l10n_parent, l10n_diffsource,  value, value_type, field',
             ]
     ],
-    'palettes' => [
-        'paletteCore' => [
-            'showitem' => 'sys_language_uid, hidden,',
-        ],
-    ],
+    'palettes' => [],
     'columns' => [
         'sys_language_uid' => [
             'exclude' => true,

@@ -33,6 +33,7 @@ Default fields in the registration form are:
 * Accept terms and conditions
 
 If you need additional field in the registration form, you can add individual fields on event basis.
+For more information, see :ref:`registrationfield`
 
 
 .. figure:: ../../Images/registration.png

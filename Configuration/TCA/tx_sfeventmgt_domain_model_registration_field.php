@@ -2,15 +2,21 @@
 
 $lll = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:';
 
-$showItemDefault = 'l10n_parent, l10n_diffsource,  --palette--;;paletteCore, title, type,
+$showItemDefault = 'title, type,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
         required, placeholder, default_value,
-    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group,';
+    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+        --palette--;;language,
+    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+        hidden, --palette--;;timeRestriction, fe_group';
 
-$showItemRadioCheck = 'l10n_parent, l10n_diffsource,  --palette--;;paletteCore, title, type, settings,
+$showItemRadioCheck = 'title, type, settings,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
         required, placeholder, default_value,
-    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group,';
+    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+        --palette--;;language,
+    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+        hidden, --palette--;;timeRestriction, fe_group';
 
 return [
     'ctrl' => [
@@ -61,9 +67,8 @@ return [
         ],
     ],
     'palettes' => [
-        'paletteCore' => [
-            'showitem' => 'sys_language_uid, hidden,',
-        ],
+        'timeRestriction' => ['showitem' => 'starttime, endtime'],
+        'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
     ],
     'columns' => [
         'sys_language_uid' => [

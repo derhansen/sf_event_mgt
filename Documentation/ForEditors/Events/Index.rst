@@ -35,10 +35,10 @@ and a description.
          Description:
 
  - :Field:
-         Hide
+         Title
 
    :Description:
-         If checked, the event is hidden
+         Title of the event.
 
  - :Field:
          Top event
@@ -46,11 +46,6 @@ and a description.
    :Description:
          If checked, the event is considered as a top event
 
- - :Field:
-         Title
-
-   :Description:
-         Title of the event.
 
  - :Field:
          Startdate
@@ -407,29 +402,3 @@ Custom payment methods can be added. For documentation, please refer to the :ref
 
    :Description:
          Selected payment methods, if "Restrict available payment methods" is checked
-
-
-Access
-~~~~~~
-
-.. t3-field-list-table::
- :header-rows: 1
-
- - :Field:
-         Field:
-
-   :Description:
-         Description:
-
- - :Field:
-         Start
-
-   :Description:
-         Date/time when event should be shown automatically (by TYPO3)
-
- - :Field:
-         Stop
-
-   :Description:
-         Date/time when event should be hidden automatically (by TYPO3)
-

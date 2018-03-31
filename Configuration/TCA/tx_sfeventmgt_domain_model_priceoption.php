@@ -32,14 +32,16 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'l10n_parent, l10n_diffsource, --palette--;;paletteCore, 
-            price, valid_until, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group'
+            'showitem' => 'price, valid_until,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                    --palette--;;language,
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
+                    hidden, --palette--;;timeRestriction, fe_group'
         ],
     ],
     'palettes' => [
-        'paletteCore' => [
-            'showitem' => 'sys_language_uid, hidden,',
-        ],
+        'timeRestriction' => ['showitem' => 'starttime, endtime'],
+        'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
     ],
     'columns' => [
         'sys_language_uid' => [

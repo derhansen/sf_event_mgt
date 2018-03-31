@@ -26,7 +26,6 @@ Locations can be assigned to an event.
    :Description:
          Description:
 
-
  - :Field:
          Title
 

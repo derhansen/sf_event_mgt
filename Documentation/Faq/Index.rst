@@ -26,8 +26,10 @@ shown below::
 Is it possible to extend events/registrations with own fields?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-I have created a demo extension, which shows how to add new fields to the event and registration
-domain model.
+Yes, since version 3.0 of the extension, you can add additional :ref:`registrationfield` on event basis.
+
+You can also extend sf_event_mgt with own fields (e.g. new fields for Event). I have created a demo extension,
+which shows how to add new fields to the event and registration domain model.
 
 Demo Extension: https://github.com/derhansen/sf_event_mgt_extend_demo
 

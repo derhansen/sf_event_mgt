@@ -35,8 +35,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'l10n_parent, l10n_diffsource, --palette--;;paletteCore, 
-            
+            'showitem' => '
             --palette--;;paletteGenderTitle,
             --palette--;;paletteName,
             company, 
@@ -53,22 +52,18 @@ return [
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                 paid, paymentmethod, payment_reference, 
                 
-            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'
+            --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                --palette--;;language,
+            --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+                hidden,--palette--;;timeRestriction'
         ],
     ],
     'palettes' => [
-        'paletteCore' => [
-            'showitem' => 'sys_language_uid, hidden,',
-        ],
-        'paletteName' => [
-            'showitem' => 'firstname, lastname,',
-        ],
-        'paletteAddress' => [
-            'showitem' => 'address, zip, city,',
-        ],
-        'paletteGenderTitle' => [
-            'showitem' => 'gender, title,',
-        ],
+        'paletteName' => ['showitem' => 'firstname, lastname,'],
+        'paletteAddress' => ['showitem' => 'address, zip, city,'],
+        'paletteGenderTitle' => ['showitem' => 'gender, title,'],
+        'timeRestriction' => ['showitem' => 'starttime, endtime'],
+        'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
     ],
     'columns' => [
         'sys_language_uid' => [

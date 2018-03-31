@@ -45,47 +45,48 @@ return [
                     'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
                 ],
             ],
-            'showitem' => 'l10n_parent, l10n_diffsource,
-			--palette--;;paletteCore, title,--palette--;;paletteDates, teaser,
-			description,
+            'showitem' => '--palette--;;titleTopEvent, --palette--;;paletteDates, teaser, description,
 
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
-				--palette--;;palettePrice, price_options, link, program,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
+                    --palette--;;palettePrice, price_options, link, program,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
+                    location, organisator, speaker, related,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
+                    image, files, additional_image,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.category,
+                    category,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
+                    enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
+                    max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
+                    registration_fields,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
+                    registration,registration_waitlist,
+    
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
+                     enable_payment, restrict_payment_methods, selected_payment_methods,
 
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
-				location, organisator, speaker, related,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                    --palette--;;language,
 
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
-				image, files, additional_image,
-
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.category,
-				category,
-
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
-				enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
-				max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
-				--palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
-
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
-				registration_fields,
-
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
-				registration,registration_waitlist,
-
-			--div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
-                 enable_payment, restrict_payment_methods, selected_payment_methods,
-
-			--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime, fe_group'
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
+                    hidden, --palette--;;timeRestriction, fe_group'
         ],
     ],
     'palettes' => [
         '1' => [
             'showitem' => '',
         ],
-        'paletteCore' => [
-            'showitem' => 'sys_language_uid, top_event, hidden,',
-            'canNotCollapse' => true
-        ],
+        'timeRestriction' => ['showitem' => 'starttime, endtime'],
+        'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
+        'titleTopEvent' => ['showitem' => 'title, top_event'],
         'paletteDates' => [
             'showitem' => 'startdate, enddate,',
             'canNotCollapse' => true
