@@ -240,4 +240,17 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     ) {
         $this->fieldRepository = $fieldRepository;
     }
+
+    /**
+     * Dispatches the signal with the given name
+     *
+     * @param string $signalClassName
+     * @param string $signalName
+     * @param array $arguments
+     * @return mixed
+     */
+    protected function signalDispatch($signalClassName, $signalName, array $arguments)
+    {
+        return $this->signalSlotDispatcher->dispatch($signalClassName, $signalName, $arguments);
+    }
 }

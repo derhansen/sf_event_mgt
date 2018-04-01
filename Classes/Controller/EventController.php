@@ -208,14 +208,18 @@ class EventController extends AbstractController
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
         $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
-        $this->view->assignMultiple([
+
+        $values = [
             'events' => $events,
             'categories' => $categories,
             'locations' => $locations,
             'organisators' => $organisators,
             'overwriteDemand' => $overwriteDemand,
             'eventDemand' => $eventDemand
-        ]);
+        ];
+
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
+        $this->view->assignMultiple($values);
     }
 
     /**
@@ -275,6 +279,7 @@ class EventController extends AbstractController
             'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
         ];
 
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
         $this->view->assignMultiple($values);
     }
 
@@ -321,7 +326,9 @@ class EventController extends AbstractController
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
-        $this->view->assign('event', $event);
+        $values = ['event' => $event];
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
+        $this->view->assignMultiple($values);
     }
 
     /**
@@ -395,10 +402,13 @@ class EventController extends AbstractController
             $paymentMethods = $this->paymentService->getPaymentMethods();
         }
 
-        $this->view->assignMultiple([
+        $values = [
             'event' => $event,
             'paymentMethods' => $paymentMethods,
-        ]);
+        ];
+
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
+        $this->view->assignMultiple($values);
     }
 
     /**
@@ -541,6 +551,8 @@ class EventController extends AbstractController
                 $messageType = MessageType::REGISTRATION_NEW;
             }
             $this->eventRepository->update($event);
+
+            $this->signalDispatch(__CLASS__, __FUNCTION__ . 'AfterRegistrationSaved', [$registration, $this]);
 
             // Send notifications to user and admin if confirmation link should be sent
             if (!$autoConfirmation) {
@@ -727,11 +739,14 @@ class EventController extends AbstractController
             $this->redirectToUri($uri);
         }
 
-        $this->view->assignMultiple([
+        $values = [
             'messageKey' => $messageKey,
             'titleKey' => $titleKey,
             'event' => $event,
-        ]);
+        ];
+
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
+        $this->view->assignMultiple($values);
     }
 
     /**
@@ -778,11 +793,14 @@ class EventController extends AbstractController
             $this->utilityService->clearCacheForConfiguredUids($this->settings);
         }
 
-        $this->view->assignMultiple([
+        $values = [
             'messageKey' => $messageKey,
             'titleKey' => $titleKey,
             'event' => $event,
-        ]);
+        ];
+
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
+        $this->view->assignMultiple($values);
     }
 
     /**
@@ -844,17 +862,19 @@ class EventController extends AbstractController
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
         $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
-
         $events = $this->eventRepository->findDemanded($eventDemand);
 
-        $this->view->assignMultiple([
+        $values = [
             'events' => $events,
             'categories' => $categories,
             'locations' => $locations,
             'organisators' => $organisators,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => $overwriteDemand,
-        ]);
+        ];
+
+        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
+        $this->view->assignMultiple($values);
     }
 
     /**

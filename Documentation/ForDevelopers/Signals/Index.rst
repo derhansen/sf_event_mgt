@@ -32,6 +32,102 @@ and the processing of the payment of a registration.
          Description:
 
  - :Controller:
+         Event
+
+   :Action:
+         list
+
+   :Signal:
+         'listActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the list view. An array with all view values is passed by reference.
+
+ - :Controller:
+         Event
+
+   :Action:
+         calendar
+
+   :Signal:
+         'calendarActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the calendar view. An array with all view values is passed by reference.
+
+ - :Controller:
+         Event
+
+   :Action:
+         detail
+
+   :Signal:
+         'detailActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the detail view. An array with all view values is passed by reference.
+
+ - :Controller:
+         Event
+
+   :Action:
+         registration
+
+   :Signal:
+         'registrationActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the registration view. An array with all view values is passed by reference.
+
+ - :Controller:
+         Event
+
+   :Action:
+         saveRegistration
+
+   :Signal:
+         'saveRegistrationActionAfterRegistrationSaved'
+
+   :Description:
+         Signal is called after a registration is saved. The registration is passed to the signal.
+
+ - :Controller:
+         Event
+
+   :Action:
+         confirmRegistration
+
+   :Signal:
+         'confirmRegistrationActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the confirmRegistration view. An array with all view values is passed by reference.
+
+ - :Controller:
+         Event
+
+   :Action:
+         cancelRegistration
+
+   :Signal:
+         'cancelRegistrationActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the cancelRegistration view. An array with all view values is passed by reference.
+
+ - :Controller:
+         Event
+
+   :Action:
+         search
+
+   :Signal:
+         'searchActionBeforeRenderView'
+
+   :Description:
+         Signal is called before rendering the search view. An array with all view values is passed by reference.
+
+ - :Controller:
          Payment
 
    :Action:
