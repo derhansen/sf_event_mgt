@@ -65,7 +65,7 @@ Download and install the extension with the TYPO3 extension manager module.
 
 ## Contributing
 
-Please refer to the [cuntribution](CONTRIBUTING.md) document included in this repository.  
+Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.  
 
 ## Screenshot
 
