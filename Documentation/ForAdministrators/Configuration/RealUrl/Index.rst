@@ -11,6 +11,16 @@
 RealURL
 =======
 
+Automatic configuration
+~~~~~~~~~~~~~~~~~~~~~~~
+Since version 3.0 of the extension, an automatic configuration for RealURL is provided by sf_event_mgt.
+The automatic configuration includes only speaking URLs for all detail pages. If you need speaking URLs
+for e.g. catgory links or the event registration, I suggest to add a manual RealURL config as shown
+below.
+
+Manual configuration
+~~~~~~~~~~~~~~~~~~~~
+
 Below follows an example configuration for RealURL.
 
 RealURL Configuration::
