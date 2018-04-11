@@ -17,6 +17,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -1617,6 +1618,16 @@ class EventControllerTest extends UnitTestCase
             $this->equalTo($settingsSearchDateFormat)
         );
 
+        $mockSearchDemandPmConfig = $this->getMockBuilder(
+            'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration'
+        )->getMock();
+        $mockSearchDemandPmConfig->expects($this->once())->method('allowAllProperties');
+        $mockSearchDemandPmConfig->expects($this->once())->method('setTypeConverterOption')->with(
+            $this->equalTo(PersistentObjectConverter::class),
+            $this->equalTo(PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED),
+            $this->equalTo(true)
+        );
+
         $mockStartDatePmConfig = $this->getMockBuilder(
             'TYPO3\\CMS\\Extbase\\Mvc\\Controller\\MvcPropertyMappingConfiguration'
         )->getMock();
@@ -1628,6 +1639,13 @@ class EventControllerTest extends UnitTestCase
         )->getMock();
         $mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
             $this->returnValue($mockPropertyMapperConfig)
+        );
+
+        $mockSearchDemandArgument = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockSearchDemandArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
+            $this->returnValue($mockSearchDemandPmConfig)
         );
 
         $mockStartDateArgument = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\Argument')
@@ -1651,6 +1669,12 @@ class EventControllerTest extends UnitTestCase
         );
         $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
             $this->returnValue($mockEndDateArgument)
+        );
+        $mockArguments->expects($this->at(2))->method('hasArgument')->with('searchDemand')->will(
+            $this->returnValue(true)
+        );
+        $mockArguments->expects($this->at(3))->method('getArgument')->with('searchDemand')->will(
+            $this->returnValue($mockSearchDemandArgument)
         );
 
         return $mockArguments;

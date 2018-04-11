@@ -810,16 +810,6 @@ class EventController extends AbstractController
      */
     public function initializeSearchAction()
     {
-        if ($this->arguments->hasArgument('searchDemand')) {
-            $propertyMappingConfiguration = $this->arguments->getArgument('searchDemand')
-                ->getPropertyMappingConfiguration();
-            $propertyMappingConfiguration->allowAllProperties();
-            $propertyMappingConfiguration->setTypeConverterOption(
-                PersistentObjectConverter::class,
-                PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
-                true
-            );
-        }
         if ($this->settings !== null && $this->settings['search']['dateFormat']) {
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('startDate')
@@ -835,6 +825,16 @@ class EventController extends AbstractController
                     DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                     $this->settings['search']['dateFormat']
                 );
+        }
+        if ($this->arguments->hasArgument('searchDemand')) {
+            $propertyMappingConfiguration = $this->arguments->getArgument('searchDemand')
+                ->getPropertyMappingConfiguration();
+            $propertyMappingConfiguration->allowAllProperties();
+            $propertyMappingConfiguration->setTypeConverterOption(
+                PersistentObjectConverter::class,
+                PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED,
+                true
+            );
         }
     }
 
