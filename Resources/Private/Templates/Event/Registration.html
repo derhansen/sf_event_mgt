@@ -189,7 +189,7 @@
 
                     <f:if condition="{event.registrationFields}">
                         <f:for each="{event.registrationFields}" as="field">
-                            <f:render partial="Registration/Fields/{field.type}" arguments="{field: field}" />
+                            <f:render partial="Registration/Fields/{field.partialName}" arguments="{field: field}" />
                         </f:for>
                     </f:if>
 

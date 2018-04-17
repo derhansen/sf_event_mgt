@@ -256,4 +256,14 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return FieldValueType::TYPE_TEXT;
     }
+
+    /**
+     * Returns the name of the partial for the field
+     *
+     * @return string
+     */
+    public function getPartialName()
+    {
+        return ucfirst($this->type);
+    }
 }

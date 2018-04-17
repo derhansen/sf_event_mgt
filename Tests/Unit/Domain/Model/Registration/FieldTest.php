@@ -324,4 +324,13 @@ class FieldTest extends UnitTestCase
         $this->subject->setType($fieldType);
         $this->assertEquals($expected, $this->subject->getValueType());
     }
+
+    /**
+     * @test
+     */
+    public function getPartialNameReturnsFieldTypeInUppercase()
+    {
+        $this->subject->setType('input');
+        $this->assertEquals('Input', $this->subject->getPartialName());
+    }
 }
