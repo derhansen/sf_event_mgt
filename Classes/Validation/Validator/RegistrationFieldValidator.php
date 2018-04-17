@@ -21,7 +21,9 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {
     /**
-     * Validates the additional fields of the given registration
+     * Validates the additional fields of the given registration.
+     *
+     * If $registration->getEvent() is null, the registration does not contain any registration fields
      *
      * @param Registration $registration
      * @return bool
@@ -29,8 +31,8 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
     protected function isValid($registration)
     {
         $result = true;
-        if ($registration->getFieldValues()->count() === 0 &&
-            $registration->getEvent()->getRegistrationFields()->count() === 0) {
+        if ($registration->getEvent() === null || ($registration->getFieldValues()->count() === 0 &&
+            $registration->getEvent()->getRegistrationFields()->count() === 0)) {
             return $result;
         }
 

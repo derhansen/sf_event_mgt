@@ -46,6 +46,16 @@ class RegistrationFieldValidatorTest extends UnitTestCase
     /**
      * @test
      */
+    public function validatorHasNoErrorsWhenRegistrationHasNoEvent()
+    {
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
+        $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue(null));
+        $this->assertFalse($this->validator->validate($mockRegistration)->hasErrors());
+    }
+
+    /**
+     * @test
+     */
     public function validatorHasNoErrorsWhenRegistrationHasNoFieldValues()
     {
         $mockEvent = $this->getMockBuilder(Event::class)
@@ -55,7 +65,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
             ->will($this->returnValue(new ObjectStorage()));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($mockEvent));
+        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
         $mockRegistration->expects($this->once())->method('getFieldValues')
             ->will($this->returnValue(new ObjectStorage()));
 
