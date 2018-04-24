@@ -704,7 +704,6 @@ return [
         ],
         'registration' => [
             'exclude' => 1,
-            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registrations',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -724,7 +723,6 @@ return [
         ],
         'registration_waitlist' => [
             'exclude' => 1,
-            'l10n_mode' => 'exclude',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_waitlist',
             'displayCond' => 'FIELD:enable_waitlist:REQ:TRUE',
             'config' => [
