@@ -399,7 +399,6 @@ class NotificationServiceTest extends UnitTestCase
         $this->assertTrue($result);
     }
 
-
     /**
      * Test if the adminEmail settings get exploded and only 2 e-mails get sent
      *
