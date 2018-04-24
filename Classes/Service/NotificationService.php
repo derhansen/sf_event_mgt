@@ -339,26 +339,35 @@ class NotificationService
             $type,
             MessageRecipient::ADMIN
         );
+
+        $senderName = $settings['notification']['senderName'];
+        $senderEmail = $settings['notification']['senderEmail'];
+        if ((bool)$settings['notification']['registrationDataAsSenderForAdminEmails']) {
+            $senderName = $registration->getFullname();
+            $senderEmail = $registration->getEmail();
+        }
+
         if ($event->getNotifyAdmin()) {
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
             foreach ($adminEmailArr as $adminEmail) {
                 $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                    $settings['notification']['senderEmail'],
+                    $senderEmail,
                     $adminEmail,
                     $subject,
                     $body,
-                    $settings['notification']['senderName'],
+                    $senderName,
                     $attachments
                 );
             }
         }
+
         if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
             $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                $settings['notification']['senderEmail'],
+                $senderEmail,
                 $event->getOrganisator()->getEmail(),
                 $subject,
                 $body,
-                $settings['notification']['senderName'],
+                $senderName,
                 $attachments
             );
         }

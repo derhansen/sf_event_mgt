@@ -76,6 +76,7 @@ plugin.tx_sfeventmgt {
             senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
             senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
             adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
+            registrationDataAsSenderForAdminEmails = {$plugin.tx_sfeventmgt.settings.notification.registrationDataAsSenderForAdminEmails}
             registrationNew {
                 userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.userSubject}
                 adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.adminSubject}

@@ -32,6 +32,8 @@ plugin.tx_sfeventmgt {
             senderSignature =
             # cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
             adminEmail =
+            # cat=plugin.tx_sfeventmgt//a; type=boolean; label=Override the sender for admin emails with email/name of the registration
+            registrationDataAsSenderForAdminEmails = 0
             registrationNew {
                 # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration
                 userSubject = Your registration for event "{event.title}"

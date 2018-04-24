@@ -727,4 +727,15 @@ class RegistrationTest extends UnitTestCase
         $this->subject->setPaymentReference('paid-1234567890');
         $this->assertEquals('paid-1234567890', $this->subject->getPaymentReference());
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getFullnameReturnsExpectedFullname()
+    {
+        $this->subject->setFirstname('Torben');
+        $this->subject->setLastname('Hansen');
+        $this->assertEquals('Torben Hansen', $this->subject->getFullname());
+    }
 }

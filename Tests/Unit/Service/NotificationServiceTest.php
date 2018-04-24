@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\EmailService;
@@ -350,6 +351,54 @@ class NotificationServiceTest extends UnitTestCase
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
         $this->assertTrue($result);
     }
+
+    /**
+     * @test
+     */
+    public function sendAdminMessageUsesRegistrationDataAsSenderIfConfigured()
+    {
+        $organisator = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
+        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event->setNotifyAdmin(false);
+        $event->setNotifyOrganisator(true);
+        $event->setOrganisator($organisator);
+
+        $settings = [
+            'notification' => [
+                'registrationDataAsSenderForAdminEmails' => 1,
+            ]
+        ];
+
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
+        $mockRegistration->expects($this->once())->method('getFullname');
+        $mockRegistration->expects($this->once())->method('getEmail');
+
+        $emailService = $this->getMockBuilder(EmailService::class)->getMock();
+        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
+        $this->inject($this->subject, 'emailService', $emailService);
+
+        $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
+        $attachmentService->expects($this->once())->method('getAttachments');
+        $this->inject($this->subject, 'attachmentService', $attachmentService);
+
+        $hashService = $this->getMockBuilder(HashService::class)->getMock();
+        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $this->inject($this->subject, 'hashService', $hashService);
+
+        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
+        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
+
+        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, $messageType);
+        $this->assertTrue($result);
+    }
+
 
     /**
      * Test if the adminEmail settings get exploded and only 2 e-mails get sent

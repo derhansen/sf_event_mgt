@@ -886,4 +886,12 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->fieldValues = $fieldValues;
     }
+
+    /**
+     * @return string
+     */
+    public function getFullname()
+    {
+        return $this->getFirstname() . ' ' . $this->lastname;
+    }
 }

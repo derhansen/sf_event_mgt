@@ -317,6 +317,19 @@ plugin.tx_sfeventmgt
          empty
 
  - :Property:
+         settings.notification.registrationDataAsSenderForAdminEmails
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set, admin emails will be sent by the email-address and sender name (firstname and lastname)
+         set in the registration
+
+   :Default:
+         false
+
+ - :Property:
          settings.notification.registrationNew.userSubject
 
    :Date type:
