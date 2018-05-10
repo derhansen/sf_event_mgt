@@ -142,7 +142,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_customnotificationlog (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	event int(11) unsigned DEFAULT '0' NOT NULL,
-	details text NOT NULL,
+	details text,
 	emails_sent int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -383,9 +383,9 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_field (
 	title varchar(255) DEFAULT '' NOT NULL,
 	type varchar(255) DEFAULT '' NOT NULL,
 	required tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	placeholder text NOT NULL,
-	default_value text NOT NULL,
-	settings text NOT NULL,
+	placeholder text,
+	default_value text,
+	settings text,
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
@@ -428,7 +428,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_fieldvalue (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	value text NOT NULL,
+	value text,
 	value_type int(11) unsigned DEFAULT '0' NOT NULL,
 	field int(11) unsigned DEFAULT '0' NOT NULL,
 	registration int(11) unsigned DEFAULT '0' NOT NULL,
