@@ -75,4 +75,9 @@ call_user_func(function () {
             'extkey' => 'sf_event_mgt'
         ]
     ];
+
+    // Add page TSConfig
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+        <INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.txt">
+    ');
 });

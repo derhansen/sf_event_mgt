@@ -7,6 +7,9 @@
 			<trans-unit id="plugin.title">
 				<source>Events and event-registration</source>
 			</trans-unit>
+			<trans-unit id="plugin.description">
+				<source>Configurable event management and registration system</source>
+			</trans-unit>
 			<trans-unit id="plugin_userreg.title">
 				<source>Events and event-registration - FE user registrations</source>
 			</trans-unit>
