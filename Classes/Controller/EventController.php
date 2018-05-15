@@ -470,6 +470,7 @@ class EventController extends AbstractController
             $field = $this->fieldRepository->findByUid((int)$fieldUid);
 
             $arguments['registration']['fieldValues'][$index] = [
+                'pid' => $field->getPid(),
                 'value' => $value,
                 'field' => strval($fieldUid),
                 'valueType' => $field->getValueType()
