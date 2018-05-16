@@ -101,6 +101,7 @@ class ExportService
         } catch (\Exception $e) {
             $result = false;
         }
+
         return $result;
     }
 

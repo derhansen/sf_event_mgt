@@ -192,6 +192,7 @@ class AdministrationController extends AbstractController
                 \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
             );
         }
+
         return $hasAccess;
     }
 
