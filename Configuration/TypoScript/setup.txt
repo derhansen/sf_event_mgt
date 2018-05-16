@@ -118,6 +118,7 @@ module.tx_sfeventmgt {
     view < plugin.tx_sfeventmgt.view
     settings {
         csvExport {
+            showFlashMessageForInsufficientAccessRights = 1
             fields = {$module.tx_sfeventmgt.settings.csvExport.fields}
             fieldDelimiter = {$module.tx_sfeventmgt.settings.csvExport.fieldDelimiter}
             fieldQuoteCharacter = {$module.tx_sfeventmgt.settings.csvExport.fieldQuoteCharacter}

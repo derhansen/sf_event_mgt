@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * AdministrationController
@@ -172,7 +173,26 @@ class AdministrationController extends AbstractController
 
         $variables['events'] = $this->eventRepository->findDemanded($demand);
         $variables['searchDemand'] = $searchDemand;
+        $variables['csvExportPossible'] = $this->hasWriteAccessToTempFolder();
         $this->view->assignMultiple($variables);
+    }
+
+    /**
+     * Returns, if the user has write access to temp folder and if not, adds a flash message if configured
+     *
+     * @return bool
+     */
+    protected function hasWriteAccessToTempFolder()
+    {
+        $hasAccess = $this->exportService->hasWriteAccessToTempFolder();
+        if (!$hasAccess && (bool)$this->settings['csvExport']['showFlashMessageForInsufficientAccessRights']) {
+            $this->addFlashMessage(
+                LocalizationUtility::translate('insufficientAccessToTemp', $this->extensionName),
+                LocalizationUtility::translate('csvExportDisabled', $this->extensionName),
+                \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
+            );
+        }
+        return $hasAccess;
     }
 
     /**

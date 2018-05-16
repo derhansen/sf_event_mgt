@@ -591,6 +591,19 @@ module.tx_sfeventmgt
          uid, gender, firstname, lastname, title, company, email, address, zip, city, country
 
  - :Property:
+         settings.csvExport.showFlashMessageForInsufficientAccessRights
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If switched on, a warning message is shown in the backend module, when a backend user does not have
+         read/write access rights to the temp-folder of the default storage.
+
+   :Default:
+         true
+
+ - :Property:
          settings.csvExport.fieldDelimiter
 
    :Date type:

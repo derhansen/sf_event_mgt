@@ -90,7 +90,7 @@
                     </thead>
                     <tbody>
                     <f:for each="{paginatedEvents}" as="event">
-                        <f:render partial="Administration/ListItem" arguments="{event: event}"/>
+                        <f:render partial="Administration/ListItem" arguments="{event: event, csvExportPossible: csvExportPossible}"/>
                     </f:for>
                     </tbody>
                 </table>

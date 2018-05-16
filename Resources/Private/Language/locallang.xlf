@@ -384,6 +384,12 @@
 			<trans-unit id="eventNotFound">
 				<source>The event record is not available anymore.</source>
 			</trans-unit>
+			<trans-unit id="csvExportDisabled">
+				<source>CSV export disabled</source>
+			</trans-unit>
+			<trans-unit id="insufficientAccessToTemp">
+				<source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

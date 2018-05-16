@@ -10,6 +10,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
+use DERHANSEN\SfEventMgt\Service\ExportService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -86,6 +87,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService->expects($this->once())->method('getSessionDataByKey');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
+        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
+        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
+        $this->inject($this->subject, 'exportService', $exportService);
+
         $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -97,7 +102,8 @@ class AdministrationControllerTest extends UnitTestCase
         $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
-            'searchDemand' => $searchDemand
+            'searchDemand' => $searchDemand,
+            'csvExportPossible' => true
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -129,6 +135,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService->expects($this->once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
+        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
+        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
+        $this->inject($this->subject, 'exportService', $exportService);
+
         $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -139,7 +149,8 @@ class AdministrationControllerTest extends UnitTestCase
         $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
-            'searchDemand' => $searchDemand
+            'searchDemand' => $searchDemand,
+            'csvExportPossible' => true
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -174,6 +185,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService->expects($this->once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
+        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
+        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
+        $this->inject($this->subject, 'exportService', $exportService);
+
         $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
             ->disableOriginalConstructor()
             ->getMock();
@@ -183,7 +198,8 @@ class AdministrationControllerTest extends UnitTestCase
         $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
-            'searchDemand' => $searchDemand
+            'searchDemand' => $searchDemand,
+            'csvExportPossible' => true
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -215,6 +231,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService->expects($this->once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
+        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
+        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
+        $this->inject($this->subject, 'exportService', $exportService);
+
         $eventRepository = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Repository\\EventRepository')
             ->disableOriginalConstructor()
             ->getMock();
@@ -228,7 +248,8 @@ class AdministrationControllerTest extends UnitTestCase
             'messageTitleKey' => 'administration.message-123.title',
             'messageContentKey' => 'administration.message-123.content',
             'events' => $allEvents,
-            'searchDemand' => $searchDemand
+            'searchDemand' => $searchDemand,
+            'csvExportPossible' => true
         ]);
         $this->inject($this->subject, 'view', $view);
 

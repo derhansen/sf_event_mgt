@@ -11,6 +11,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
+use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -76,6 +77,31 @@ class ExportService
         $tempFile->setContents($registrations);
         $storage->dumpFileContents($tempFile, true, 'registrations_' . date('dmY_His') . '.csv');
         $tempFile->delete();
+    }
+
+    /**
+     * Returns, if the user has read/write access permissions to the __temp__ folder
+     *
+     * @return bool
+     */
+    public function hasWriteAccessToTempFolder()
+    {
+        $result = true;
+        $storage = $this->resourceFactory->getDefaultStorage();
+        if ($storage === null) {
+            return false;
+        }
+
+        try {
+            /** @var Folder $folder */
+            $folder = $storage->getFolder('_temp_');
+            if (!$folder->checkActionPermission('write')) {
+                $result = false;
+            }
+        } catch (\Exception $e) {
+            $result = false;
+        }
+        return $result;
     }
 
     /**
