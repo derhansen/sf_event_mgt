@@ -25,7 +25,7 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, link, longitude, latitude',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, link, latitude, longitude',
     ],
     'types' => [
         '1' => [
@@ -34,7 +34,7 @@ return [
                     'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
                 ],
             ],
-            'showitem' => 'title, address, zip, city, country, description, link, longitude, latitude,
+            'showitem' => 'title, address, zip, city, country, description, link, latitude, longitude,
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
