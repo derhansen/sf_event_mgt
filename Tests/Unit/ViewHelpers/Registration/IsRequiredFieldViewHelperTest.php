@@ -10,7 +10,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\IsRequiredFieldViewHelper;
-use DERHANSEN\SfEventMgt\ViewHelpers\Registration\RequiredFieldViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -191,4 +190,3 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
         $viewHelper->render();
     }
 }
-

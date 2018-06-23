@@ -1,5 +1,4 @@
 <?php
-
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
 
 /*
@@ -43,6 +42,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper implements C
         if (isset($arguments['registrationField'])) {
             $result = $arguments['registrationField']->getRequired();
         }
+
         return $result;
     }
 }
