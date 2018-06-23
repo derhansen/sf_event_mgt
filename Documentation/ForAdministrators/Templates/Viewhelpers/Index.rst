@@ -115,6 +115,12 @@ Registration.Hmac
 Must be used, when the plugin :ref:`userregistrationplugin-settings` is used and it should be possible
 for users to cancel registrations (if configured in event). See usage in UserRegistration templates.
 
+Registration.IsRequiredField
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Can be used to show content, if a field or registration field is configured as required.
+See usage in Registration template.
+
 Title
 ~~~~~
 

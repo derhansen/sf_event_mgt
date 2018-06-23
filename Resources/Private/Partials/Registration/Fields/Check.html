@@ -3,7 +3,12 @@
       data-namespace-typo3-fluid="true">
 
 <div class="event-registration-row checkbox-field">
-    <label>{field.title}</label>
+    <label>
+        {field.title}
+        <e:registration.isRequiredField settings="{settings}" registrationField="{field}">
+            <span class="event-required">*</span>
+        </e:registration.isRequiredField>
+    </label>
     <div class="checkbox-field-checkfields">
         <f:for each="{field.settingsForOption}" as="option">
             <label>

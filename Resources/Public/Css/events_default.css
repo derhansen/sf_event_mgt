@@ -195,3 +195,7 @@
 	text-align: right;
 	padding-top: 8px;
 }
+
+.event-required {
+	color: #000000;
+}
