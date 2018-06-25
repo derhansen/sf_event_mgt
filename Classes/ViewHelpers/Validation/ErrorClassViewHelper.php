@@ -50,6 +50,7 @@ class ErrorClassViewHelper extends AbstractViewHelper
                 break;
             }
         }
+
         return $result;
     }
 
@@ -60,6 +61,7 @@ class ErrorClassViewHelper extends AbstractViewHelper
     {
         $validationResults = $this->renderingContext->getControllerContext()
             ->getRequest()->getOriginalRequestMappingResults();
+
         return $validationResults->getFlattenedErrors();
     }
 }
