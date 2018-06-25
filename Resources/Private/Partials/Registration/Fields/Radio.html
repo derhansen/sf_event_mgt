@@ -2,7 +2,7 @@
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<div class="event-registration-row radio-field">
+<div class="event-registration-row radio-field {e:validation.errorClass(registrationField: field)}">
     <label>
         {field.title}
         <e:registration.isRequiredField settings="{settings}" registrationField="{field}">

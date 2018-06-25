@@ -199,3 +199,8 @@
 .event-required {
 	color: #000000;
 }
+
+.error-class label,
+.error-class .event-required {
+	color:#ff0000;
+}
