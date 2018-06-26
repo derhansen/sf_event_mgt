@@ -284,7 +284,7 @@ return [
             'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
         ],
         'link' => [
-            'exclude' => 0,
+            'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.link',
             'config' => [
                 'type' => 'input',
@@ -492,7 +492,7 @@ return [
             ]
         ],
         'location' => [
-            'exclude' => 0,
+            'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.location',
             'config' => [
                 'type' => 'group',
@@ -519,7 +519,7 @@ return [
             ],
         ],
         'organisator' => [
-            'exclude' => 0,
+            'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.organisator',
             'config' => [
                 'type' => 'group',
@@ -546,7 +546,7 @@ return [
             ],
         ],
         'speaker' => [
-            'exclude' => 0,
+            'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.speaker',
             'config' => [
                 'type' => 'group',
