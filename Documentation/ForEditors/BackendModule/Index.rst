@@ -21,7 +21,6 @@ Available actions
 The backend module contains 2 actions in the upper left.
 
 .. figure:: ../../Images/be-module-actions.png
-   :align: left
    :alt: Actions of the backend module
 
 * The first action creates a new event
@@ -45,7 +44,6 @@ e-mail notification to the participants of the event. Press the "+" icon to get 
 the view, where you can select the custom notification template.
 
 .. figure:: ../../Images/event-custom-notification.png
-   :align: left
    :alt: Actions of the backend module
 
 If you want to create a custom notification, you just need to add some TypoScript

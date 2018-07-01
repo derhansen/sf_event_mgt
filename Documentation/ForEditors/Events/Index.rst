@@ -21,8 +21,6 @@ The general tab is used to add general information about the event like a title,
 and a description.
 
 .. figure:: ../../Images/event-event.png
-   :align: left
-   :width: 700px
    :alt: Event general tab
 
 .. t3-field-list-table::
@@ -78,7 +76,6 @@ The additional tab contains additional fields for the event like price, location
 program/schedule.
 
 .. figure:: ../../Images/event-additional.png
-   :align: left
    :width: 700px
    :alt: Event additional tab
 
@@ -133,7 +130,6 @@ Relations
 The relations tab contains fields which holds relations locations, organisators and related events.
 
 .. figure:: ../../Images/event-related.png
-   :align: left
    :width: 700px
    :alt: Event related tab
 
@@ -176,7 +172,6 @@ Media
 The media tab contains fields which holds media-data for the event.
 
 .. figure:: ../../Images/event-media.png
-   :align: left
    :width: 700px
    :alt: Event media tab
 
@@ -219,7 +214,6 @@ Category
 You can assign one or multiple categories to an event.
 
 .. figure:: ../../Images/event-category.png
-   :align: left
    :width: 700px
    :alt: Event category tab
 
@@ -247,7 +241,6 @@ possible to allow the user to create multiple registrations at once, if the fiel
 registrations per user" is set to a value greater than 1.
 
 .. figure:: ../../Images/event-registration-options.png
-   :align: left
    :width: 700px
    :alt: Event record (Tab: registration options)
 
@@ -339,7 +332,6 @@ Registrations
 Contains all registrations for the event. Only visible, when registration is enabled.
 
 .. figure:: ../../Images/event-registrations.png
-   :align: left
    :width: 700px
    :alt: Event record (Tab: registrations)
 
@@ -372,7 +364,6 @@ Contains payment options for the event. Only visible, when registration is enabl
 Custom payment methods can be added. For documentation, please refer to the :ref:`developer_payment` section in the developers manual.
 
 .. figure:: ../../Images/event-payment.png
-   :align: left
    :width: 700px
    :alt: Event record (Tab: payment)
 

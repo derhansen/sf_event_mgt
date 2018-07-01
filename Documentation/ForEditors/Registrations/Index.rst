@@ -37,7 +37,6 @@ For more information, see :ref:`registrationfield`
 
 
 .. figure:: ../../Images/registration.png
-   :align: left
    :alt: Registration record
 
 General
