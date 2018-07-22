@@ -145,4 +145,18 @@ class FieldValueTest extends UnitTestCase
         $this->subject->setValueType(FieldValueType::TYPE_ARRAY);
         $this->assertEquals(FieldValueType::TYPE_ARRAY, $this->subject->getValueType());
     }
+
+    /**
+     * @test
+     */
+    public function getValueForCsvExportReturnsArrayAsCommaSeparatedStringForArrayValues()
+    {
+        $expectedArray = 'value1,value2';
+        $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
+        $mockField->expects($this->once())->method('getValueType')
+            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $this->subject->setField($mockField);
+        $this->subject->setValue(json_encode(['value1', 'value2']));
+        $this->assertSame($expectedArray, $this->subject->getValueForCsvExport());
+    }
 }

@@ -1448,7 +1448,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns an array with registration fields
+     * Returns an array with registration field uids
      *
      * @return array
      */
@@ -1457,6 +1457,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $result = [];
         foreach ($this->registrationFields as $registrationField) {
             $result[] = $registrationField->getUid();
+        }
+
+        return $result;
+    }
+
+    /**
+     * Returns an array with registration field uids and titles
+     * [uid => title]
+     *
+     * @return array
+     */
+    public function getRegistrationFieldUidsWithTitle()
+    {
+        $result = [];
+        foreach ($this->registrationFields as $registrationField) {
+            $result[$registrationField->getUid()] = $registrationField->getTitle();
         }
 
         return $result;

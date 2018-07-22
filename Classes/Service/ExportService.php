@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
@@ -23,11 +24,14 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class ExportService
 {
     /**
-     * Repository with registrations for the events
-     *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
      */
-    protected $registrationRepository;
+    protected $registrationRepository = null;
+
+    /**
+     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
+     */
+    protected $eventRepository = null;
 
     /**
      * ResourceFactory
@@ -37,8 +41,6 @@ class ExportService
     protected $resourceFactory = null;
 
     /**
-     * DI for $registrationRepository
-     *
      * @param RegistrationRepository $registrationRepository
      */
     public function injectRegistrationRepository(
@@ -48,8 +50,14 @@ class ExportService
     }
 
     /**
-     * DI for $resourceFactory
-     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
+     */
+    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
+    {
+        $this->eventRepository = $eventRepository;
+    }
+
+    /**
      * @param ResourceFactory $resourceFactory
      */
     public function injectResourceFactory(\TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory)
@@ -115,10 +123,18 @@ class ExportService
      */
     public function exportRegistrationsCsv($eventUid, $settings = [])
     {
+        $hasRegistrationFields = false;
+        $registrationFieldData = [];
         $fieldsArray = array_map('trim', explode(',', $settings['fields']));
+
+        if (in_array('registration_fields', $fieldsArray)) {
+            $hasRegistrationFields = true;
+            $registrationFieldData = $this->getRegistrationFieldData($eventUid);
+            $fieldsArray = array_diff($fieldsArray, ['registration_fields']);
+        }
         $registrations = $this->registrationRepository->findByEvent($eventUid);
         $exportedRegistrations = GeneralUtility::csvValues(
-            $fieldsArray,
+            array_merge($fieldsArray, $registrationFieldData),
             $settings['fieldDelimiter'],
             $settings['fieldQuoteCharacter']
         ) . chr(10);
@@ -133,6 +149,12 @@ class ExportService
                         ' is not a Property of Model Registration, please check your TS configuration', 1475590002);
                 }
             }
+            if ($hasRegistrationFields) {
+                $exportedRegistration = array_merge(
+                    $exportedRegistration,
+                    $this->getRegistrationFieldValues($registration, $registrationFieldData)
+                );
+            }
             $exportedRegistrations .= GeneralUtility::csvValues(
                 $exportedRegistration,
                 $settings['fieldDelimiter'],
@@ -141,6 +163,48 @@ class ExportService
         }
 
         return $this->prependByteOrderMark($exportedRegistrations, $settings);
+    }
+
+    /**
+     * Returns an array with fieldvalues for the given registration
+     *
+     * @param Registration $registration
+     * @param array $registrationFieldData
+     * @return array
+     */
+    protected function getRegistrationFieldValues($registration, $registrationFieldData)
+    {
+        $result = [];
+        $registrationFieldValues = [];
+        /** @var Registration\FieldValue $fieldValue */
+        foreach ($registration->getFieldValues() as $fieldValue) {
+            $registrationFieldValues[$fieldValue->getField()->getUid()] = $fieldValue->getValueForCsvExport();
+        }
+        foreach ($registrationFieldData as $fieldUid => $fieldTitle) {
+            if (isset($registrationFieldValues[$fieldUid])) {
+                $result[] = $registrationFieldValues[$fieldUid];
+            } else {
+                $result[] = '';
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Returns an array of registration field uids and title
+     *
+     * @param int $eventUid
+     * @return array
+     */
+    protected function getRegistrationFieldData($eventUid)
+    {
+        $result = [];
+        /** @var Event $event */
+        $event = $this->eventRepository->findByUid($eventUid);
+        if ($event) {
+            $result = $event->getRegistrationFieldUidsWithTitle();
+        }
+        return $result;
     }
 
     /**

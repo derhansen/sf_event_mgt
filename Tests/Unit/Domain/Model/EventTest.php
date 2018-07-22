@@ -1653,4 +1653,53 @@ class EventTest extends UnitTestCase
 
         $this->subject->removeRegistrationFields($registrationField);
     }
+
+    /**
+     * @test
+     */
+    public function getRegistrationFieldsUidsReturnsEmptyArrayIfNotRegistrationFields()
+    {
+        $this->assertEquals([], $this->subject->getRegistrationFieldsUids());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationFieldsUidsReturnsExpectedArrayForEventWithRegistrationFields()
+    {
+        $mockRegField = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegField->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $this->subject->addRegistrationFields($mockRegField);
+
+        $this->assertEquals([0 => 1], $this->subject->getRegistrationFieldsUids());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationFieldUidsWithTitleReturnsEmptyArrayIfNotRegistrationFields()
+    {
+        $this->assertEquals([], $this->subject->getRegistrationFieldUidsWithTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationFieldUidsWithTitleReturnsExpectedArrayForEventWithRegistrationFields()
+    {
+        $mockRegField1 = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegField1->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $mockRegField1->expects($this->any())->method('getTitle')->will($this->returnValue('A Title'));
+        $mockRegField2 = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegField2->expects($this->any())->method('getUid')->will($this->returnValue(2));
+        $mockRegField2->expects($this->any())->method('getTitle')->will($this->returnValue('Another Title'));
+        $this->subject->addRegistrationFields($mockRegField1);
+        $this->subject->addRegistrationFields($mockRegField2);
+
+        $expected = [
+            1 => 'A Title',
+            2 => 'Another Title'
+        ];
+        $this->assertEquals($expected, $this->subject->getRegistrationFieldUidsWithTitle());
+    }
 }

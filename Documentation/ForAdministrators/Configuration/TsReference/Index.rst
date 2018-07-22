@@ -587,8 +587,11 @@ module.tx_sfeventmgt
          Comma seperated list of fields to include in CSV export. Please note, that you must write the **property
          names** of the fields to export (e.g. firstname, lastname, dateOfBirth)
 
+         In order to export the values of registration fields, use "registration_fields" as fieldname. Note, that
+         it is only possible to export all registrations fields at once.
+
    :Default:
-         uid, gender, firstname, lastname, title, company, email, address, zip, city, country
+         uid, gender, firstname, lastname, title, company, email, address, zip, city, country, registration_fields
 
  - :Property:
          settings.csvExport.showFlashMessageForInsufficientAccessRights
