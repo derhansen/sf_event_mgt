@@ -187,6 +187,7 @@ class ExportService
                 $result[] = '';
             }
         }
+
         return $result;
     }
 
@@ -204,6 +205,7 @@ class ExportService
         if ($event) {
             $result = $event->getRegistrationFieldUidsWithTitle();
         }
+
         return $result;
     }
 
