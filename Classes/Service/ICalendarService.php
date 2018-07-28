@@ -122,11 +122,13 @@ class ICalendarService
         /** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
         $icalView = $this->objectManager->get(StandaloneView::class);
         $icalView->setFormat('txt');
+        $templateRootPaths = $this->fluidStandaloneService->getTemplateFolders('template');
         $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');
         $partialRootPaths = $this->fluidStandaloneService->getTemplateFolders('partial');
+        $icalView->setTemplateRootPaths($templateRootPaths);
         $icalView->setLayoutRootPaths($layoutRootPaths);
         $icalView->setPartialRootPaths($partialRootPaths);
-        $icalView->setTemplatePathAndFilename($this->fluidStandaloneService->getTemplatePath('Event/ICalendar.txt'));
+        $icalView->setTemplate('Event/ICalendar.txt');
         $icalView->assignMultiple([
             'event' => $event,
             'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')

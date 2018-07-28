@@ -132,9 +132,8 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
@@ -170,10 +169,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
@@ -213,10 +211,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
@@ -266,10 +263,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
@@ -340,10 +336,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
@@ -387,10 +382,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
@@ -433,10 +427,9 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePath', 'renderTemplate', 'parseStringFluid'])
+            ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('getTemplatePath')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
         $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);

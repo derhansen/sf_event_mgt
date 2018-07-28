@@ -105,44 +105,6 @@ class FluidStandaloneService
     }
 
     /**
-     * Return path and filename for a file or path.
-     *        Only the first existing file/path will be returned.
-     *        respect *RootPaths and *RootPath
-     *
-     * @param string $pathAndFilename e.g. Email/Name.html
-     * @param string $part "template", "partial", "layout"
-     * @return string Filename/path
-     */
-    public function getTemplatePath($pathAndFilename, $part = 'template')
-    {
-        $matches = $this->getTemplatePaths($pathAndFilename, $part);
-
-        return !empty($matches) ? end($matches) : '';
-    }
-
-    /**
-     * Return path and filename for one or many files/paths.
-     *        Only existing files/paths will be returned.
-     *        respect *RootPaths and *RootPath
-     *
-     * @param string $pathAndFilename Path/filename (Email/Name.html) or path
-     * @param string $part "template", "partial", "layout"
-     * @return array All existing matches found
-     */
-    protected function getTemplatePaths($pathAndFilename, $part = 'template')
-    {
-        $matches = [];
-        $absolutePaths = $this->getTemplateFolders($part);
-        foreach ($absolutePaths as $absolutePath) {
-            if (file_exists($absolutePath . $pathAndFilename)) {
-                $matches[] = $absolutePath . $pathAndFilename;
-            }
-        }
-
-        return $matches;
-    }
-
-    /**
      * Renders a fluid standlone view for the given template
      *
      * @param string $template
@@ -158,9 +120,10 @@ class FluidStandaloneService
         $emailView->getRequest()->setControllerExtensionName($extensionName);
         $emailView->getRequest()->setPluginName($pluginName);
         $emailView->setFormat('html');
+        $emailView->setTemplateRootPaths($this->getTemplateFolders('template'));
         $emailView->setLayoutRootPaths($this->getTemplateFolders('layout'));
         $emailView->setPartialRootPaths($this->getTemplateFolders('partial'));
-        $emailView->setTemplatePathAndFilename($template);
+        $emailView->setTemplate($template);
         $emailView->assignMultiple($variables);
         $emailBody = $emailView->render();
 

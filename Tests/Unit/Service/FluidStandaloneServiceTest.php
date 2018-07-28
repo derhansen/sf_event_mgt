@@ -68,90 +68,6 @@ class FluidStandaloneServiceTest extends UnitTestCase
     }
 
     /**
-     * @return array
-     */
-    public function templateFoldersDataProvider()
-    {
-        return [
-            'returnsConfiguredTemplatePaths' => [
-                [
-                    'view' => [
-                        'templateRootPaths' => [
-                            'EXT:sf_event_mgt/Resources/Private/Templates/',
-                            'fileadmin/templates/events/Templates/'
-                        ]
-                    ]
-                ],
-                [
-                    GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/templates/events/Templates/')
-                ]
-            ],
-            'ensureSuffixPathIsAdded' => [
-                [
-                    'view' => [
-                        'templateRootPaths' => [
-                            'EXT:sf_event_mgt/Resources/Private/Templates',
-                            'fileadmin/templates/events/Templates'
-                        ]
-                    ]
-                ],
-                [
-                    GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/templates/events/Templates/')
-                ]
-            ],
-            'fallbackForOldTemplatePathSetting' => [
-                [
-                    'view' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/'
-                    ]
-                ],
-                [
-                    GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
-                ]
-            ]
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider templateFoldersDataProvider
-     * @param mixed $settings
-     * @param mixed $expected
-     */
-    public function getTemplateFoldersReturnsExpectedResult($settings, $expected)
-    {
-        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
-            ->setMethods(['getConfiguration'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockConfigurationManager->expects($this->once())->method('getConfiguration')
-            ->will($this->returnValue($settings));
-        $this->inject($this->subject, 'configurationManager', $mockConfigurationManager);
-        $this->assertSame($expected, $this->subject->getTemplateFolders());
-    }
-
-    /**
-     * @test
-     */
-    public function getTemplatePathReturnsLastItemOfPossibleTemplatePaths()
-    {
-        $mockFluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->setMethods(['getTemplatePaths'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFluidStandaloneService->expects($this->once())->method('getTemplatePaths')
-            ->will($this->returnValue([
-                GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/test.html'),
-                GeneralUtility::getFileAbsFileName('fileadmin/templates/events/Templates/test.html')
-            ]));
-
-        $expected = GeneralUtility::getFileAbsFileName('fileadmin/templates/events/Templates/') . 'test.html';
-        $this->assertEquals($expected, $mockFluidStandaloneService->getTemplatePath('test.html'));
-    }
-
-    /**
      * @test
      */
     public function renderTemplateReturnsExpectedResult()
@@ -172,7 +88,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
 
         $mockEmailView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
         $mockEmailView->expects($this->any())->method('getRequest')->will($this->returnValue($mockRequest));
-        $mockEmailView->expects($this->once())->method('setTemplatePathAndFilename')->with('test.html');
+        $mockEmailView->expects($this->once())->method('setTemplate')->with('test.html');
         $mockEmailView->expects($this->once())->method('assignMultiple')->with(['key' => 'value']);
         $mockEmailView->expects($this->once())->method('render')->will($this->returnValue('<p>dummy content</p>'));
 

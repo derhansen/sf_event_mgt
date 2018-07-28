@@ -1,4 +1,5 @@
-.idea
-.Build
+.idea/
+.DS_Store
+.Build/
 composer.lock
 .php_cs.cache

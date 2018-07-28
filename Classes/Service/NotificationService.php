@@ -425,7 +425,6 @@ class NotificationService
      */
     protected function getNotificationBody($event, $registration, $template, $settings)
     {
-        $templatePathAndFilename = $this->fluidStandaloneService->getTemplatePath($template);
         if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
             $GLOBALS['BE_USER']->uc['lang'] = $registration->getLanguage();
@@ -438,6 +437,6 @@ class NotificationService
             'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
         ];
 
-        return $this->fluidStandaloneService->renderTemplate($templatePathAndFilename, $variables);
+        return $this->fluidStandaloneService->renderTemplate($template, $variables);
     }
 }
