@@ -105,23 +105,23 @@ Example for new event registrations:
       notification {
         registrationNew {
           attachments {
-              user {
-                  fromFiles {
-                      1 = fileadmin/terms-and-conditions.pdf
-                  }
-                  fromEventProperty {
-                      1 = files
-                      2 = image
-                  }
-                  fromRegistrationProperty {
-                      1 = registrationFiles
-                  }
+            user {
+              fromFiles {
+                1 = fileadmin/terms-and-conditions.pdf
               }
-              admin {
-                  fromFiles =
-                  fromEventProperty =
-                  fromRegistrationProperty =
+              fromEventProperty {
+                1 = files
+                2 = image
               }
+              fromRegistrationProperty {
+                1 = registrationFiles
+              }
+            }
+            admin {
+              fromFiles =
+              fromEventProperty =
+              fromRegistrationProperty =
+            }
           }
         }
       }
@@ -141,3 +141,60 @@ possible to use properties of the type ``\TYPO3\CMS\Extbase\Domain\Model\FileRef
 The configuration ot the ``fromRegistrationProperty`` setting is similar to the ``fromEventProperty`` setting. In the
 example above, the property ``registrationFiles`` will be used. Note, that the registration model of the extension does
 not contain any default fields that can be used as attachments, so you have to add your own if you need them.
+
+iCal attachment
+===============
+
+Configuration of an iCal attachment is similar to the configuration of attachments (see above). The only difference is,
+that the iCal attachment is only supported for the recipient group ``user``
+
+Properties for attachment configuration
+---------------------------------------
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Property:
+         Property:
+
+   :Date type:
+         Data type:
+
+   :Description:
+         Description:
+
+   :Default:
+         Default:
+
+ - :Property:
+         iCalFile
+
+   :Date type:
+         boolean
+
+   :Description:
+         If set, a iCal file for the event will be attached to the user e-mail
+
+   :Default:
+         empty
+
+Example for new event registrations:
+------------------------------------
+
+::
+
+  plugin.tx_sfeventmgt {
+    settings {
+      notification {
+        registrationNew {
+          attachments {
+            user {
+              iCalFile = 1
+            }
+          }
+        }
+      }
+    }
+  }
+
+In the example above, e-mails for new user registrations will include an iCal file for the event.

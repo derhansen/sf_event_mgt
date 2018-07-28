@@ -21,6 +21,21 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class AttachmentService
 {
     /**
+     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
+     */
+    protected $iCalendarService = null;
+
+    /**
+     * DI for iCalService
+     *
+     * @param \DERHANSEN\SfEventMgt\Service\ICalendarService $iCalService
+     */
+    public function injectICalService(\DERHANSEN\SfEventMgt\Service\ICalendarService $iCalService)
+    {
+        $this->iCalendarService = $iCalService;
+    }
+
+    /**
      * Returns an array of filenames to attach to notifications
      *
      * Attachments must be configured as following (example for "registrationNew"):
@@ -57,22 +72,7 @@ class AttachmentService
     public function getAttachments($settings, $registration, $messageType, $messageRecipient)
     {
         $attachments = [];
-        $settingPath = '';
-
-        switch ($messageType) {
-            case MessageType::REGISTRATION_NEW:
-                $settingPath = 'registrationNew';
-                break;
-            case MessageType::REGISTRATION_WAITLIST_NEW:
-                $settingPath = 'registrationWaitlistNew';
-                break;
-            case MessageType::REGISTRATION_CONFIRMED:
-                $settingPath = 'registrationConfirmed';
-                break;
-            case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
-                $settingPath = 'registrationWaitlistConfirmed';
-                break;
-        }
+        $settingPath = $this->getSettingsPath($messageType);
 
         if (isset($settings['notification'][$settingPath]['attachments'][$messageRecipient])) {
             // Attachments globally from TypoScript
@@ -89,6 +89,70 @@ class AttachmentService
         }
 
         return $attachments;
+    }
+
+    /**
+     * Returns the absolute filename for to an iCal File of the event, if the iCalFile setting is set for
+     * the given messageType
+     *
+     * Example:
+     *
+     *  registrationNew {
+     *    attachments {
+     *      user {
+     *        iCalFile = 1
+     *      }
+     *   }
+     * }
+     *
+     *
+     * @param array $settings
+     * @param Registration $registration
+     * @param int $messageType
+     * @param string $messageRecipient
+     * @return string
+     */
+    public function getICalAttachment($settings, $registration, $messageType, $messageRecipient)
+    {
+        $file = '';
+        $settingPath = $this->getSettingsPath($messageType);
+
+        if (isset($settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) &&
+            (bool)$settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) {
+            $file = \TYPO3\CMS\Core\Utility\GeneralUtility::tempnam(
+                'event-' . $registration->getEvent()->getUid() . '-',
+                '.ics'
+            );
+            $content = $this->iCalendarService->getiCalendarContent($registration->getEvent());
+            \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($file, $content);
+        }
+        return $file;
+    }
+
+    /**
+     * Returns the settingspath for the given messagetype
+     *
+     * @param string $messageType
+     * @return string
+     */
+    protected function getSettingsPath($messageType)
+    {
+        $settingPath = '';
+        switch ($messageType) {
+            case MessageType::REGISTRATION_NEW:
+                $settingPath = 'registrationNew';
+                break;
+            case MessageType::REGISTRATION_WAITLIST_NEW:
+                $settingPath = 'registrationWaitlistNew';
+                break;
+            case MessageType::REGISTRATION_CONFIRMED:
+                $settingPath = 'registrationConfirmed';
+                break;
+            case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
+                $settingPath = 'registrationWaitlistConfirmed';
+                break;
+        }
+        return $settingPath;
     }
 
     /**

@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -255,5 +256,43 @@ class AttachmentServiceTest extends UnitTestCase
             MessageRecipient::USER
         );
         $this->assertEquals($expected, $attachments);
+    }
+
+    /**
+     * @test
+     */
+    public function getICalAttachmentReturnsAFilenameIfICalFileEnabled()
+    {
+        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+
+        $settings = ['notification' => [
+            'registrationNew' => [
+                'attachments' => [
+                    'user' => [
+                        'iCalFile' => 1
+                    ]
+                ]
+            ]
+        ]];
+
+        $mockRegistration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')
+            ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($event));
+
+        $mockICalendarService = $this->getMockBuilder(ICalendarService::class)
+            ->setMethods(['getiCalendarContent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->inject($this->subject, 'iCalendarService', $mockICalendarService);
+
+        $attachment = $this->subject->getICalAttachment(
+            $settings,
+            $mockRegistration,
+            MessageType::REGISTRATION_NEW,
+            MessageRecipient::USER
+        );
+        $this->assertNotEmpty($attachment);
     }
 }

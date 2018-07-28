@@ -248,7 +248,19 @@ class NotificationService
                 MessageRecipient::USER
             );
 
-            return $this->emailService->sendEmailMessage(
+            // Get iCal attachment if configured
+            $iCalAttachment = $this->attachmentService->getICalAttachment(
+                $settings,
+                $registration,
+                $type,
+                MessageRecipient::USER
+            );
+
+            if ($iCalAttachment !== '') {
+                $attachments[] = $iCalAttachment;
+            }
+
+            $result = $this->emailService->sendEmailMessage(
                 $settings['notification']['senderEmail'],
                 $registration->getEmail(),
                 $subject,
@@ -256,6 +268,12 @@ class NotificationService
                 $settings['notification']['senderName'],
                 $attachments
             );
+
+            // Cleanup iCal attachment if available
+            if ($iCalAttachment !== '') {
+                \TYPO3\CMS\Core\Utility\GeneralUtility::unlink_tempfile($iCalAttachment);
+            }
+            return $result;
         }
 
         return false;
