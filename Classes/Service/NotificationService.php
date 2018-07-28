@@ -273,6 +273,7 @@ class NotificationService
             if ($iCalAttachment !== '') {
                 \TYPO3\CMS\Core\Utility\GeneralUtility::unlink_tempfile($iCalAttachment);
             }
+
             return $result;
         }
 

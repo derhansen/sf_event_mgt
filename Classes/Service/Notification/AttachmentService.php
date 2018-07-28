@@ -126,6 +126,7 @@ class AttachmentService
             $content = $this->iCalendarService->getiCalendarContent($registration->getEvent());
             \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($file, $content);
         }
+
         return $file;
     }
 
@@ -152,6 +153,7 @@ class AttachmentService
                 $settingPath = 'registrationWaitlistConfirmed';
                 break;
         }
+
         return $settingPath;
     }
 
