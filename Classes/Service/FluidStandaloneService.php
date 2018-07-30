@@ -71,7 +71,7 @@ class FluidStandaloneService
 
         if (!empty($extbaseConfig['view'][$part . 'RootPaths'])) {
             $templatePaths = $extbaseConfig['view'][$part . 'RootPaths'];
-            $templatePaths = array_values($templatePaths);
+            ksort($templatePaths);
         }
         if (empty($templatePaths)) {
             $path = $extbaseConfig['view'][$part . 'RootPath'];

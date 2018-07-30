@@ -99,4 +99,85 @@ class FluidStandaloneServiceTest extends UnitTestCase
         $expected = '<p>dummy content</p>';
         $this->assertEquals($expected, $this->subject->renderTemplate('test.html', ['key' => 'value']));
     }
+
+    /**
+     * @return array
+     */
+    public function templateFoldersDataProvider()
+    {
+        return [
+            'returnsConfiguredTemplatePaths' => [
+                [
+                    'view' => [
+                        'templateRootPaths' => [
+                            0 => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+                            1 => 'fileadmin/user_upload/'
+                        ]
+                    ]
+                ],
+                [
+                    GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
+                    GeneralUtility::getFileAbsFileName('fileadmin/user_upload/')
+                ]
+            ],
+            'ensureSuffixPathIsAdded' => [
+                [
+                    'view' => [
+                        'templateRootPaths' => [
+                            0 => 'EXT:sf_event_mgt/Resources/Private/Templates',
+                            1 => 'fileadmin/user_upload'
+                        ]
+                    ]
+                ],
+                [
+                    GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
+                    GeneralUtility::getFileAbsFileName('fileadmin/user_upload/')
+                ]
+            ],
+            'fallbackForOldTemplatePathSetting' => [
+                [
+                    'view' => [
+                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/'
+                    ]
+                ],
+                [
+                    GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
+                ]
+            ],
+            'ensureArrayKeysAreSorted' => [
+                [
+                    'view' => [
+                        'templateRootPaths' => [
+                            2 => 'fileadmin/__temp__/',
+                            0 => 'EXT:sf_event_mgt/Resources/Private/Templates',
+                            1 => 'fileadmin/user_upload/'
+                        ]
+                    ]
+                ],
+                [
+                    0 => GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
+                    1 => GeneralUtility::getFileAbsFileName('fileadmin/user_upload/'),
+                    2 => GeneralUtility::getFileAbsFileName('fileadmin/__temp__/'),
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider templateFoldersDataProvider
+     * @param mixed $settings
+     * @param mixed $expected
+     */
+    public function getTemplateFoldersReturnsExpectedResult($settings, $expected)
+    {
+        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getConfiguration'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockConfigurationManager->expects($this->once())->method('getConfiguration')
+            ->will($this->returnValue($settings));
+        $this->inject($this->subject, 'configurationManager', $mockConfigurationManager);
+        $this->assertSame($expected, $this->subject->getTemplateFolders());
+    }
 }
