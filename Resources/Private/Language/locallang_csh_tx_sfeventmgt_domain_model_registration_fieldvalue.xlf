@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-08-22T18:47:00Z" product-name="sf_event_mgt">
+		<header/>
+		<body>
+			<trans-unit id="value_text.description">
+				<source>Value text</source>
+			</trans-unit>
+			<trans-unit id="value_type.description">
+				<source>Value type</source>
+			</trans-unit>
+			<trans-unit id="field.description">
+				<source>Field</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-08-22T18:47:00Z" product-name="sf_event_mgt">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="type.description">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="required.description">
+				<source>Required</source>
+			</trans-unit>
+			<trans-unit id="placeholder.description">
+				<source>Placeholder</source>
+			</trans-unit>
+			<trans-unit id="default_value.description">
+				<source>Default value</source>
+			</trans-unit>
+			<trans-unit id="settings.description">
+				<source>Settings</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
