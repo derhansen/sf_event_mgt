@@ -19,178 +19,192 @@ and the processing of the payment of a registration.
 .. t3-field-list-table::
  :header-rows: 1
 
- - :Controller:
-         Controller:
+ - :Class:
+         Class:
 
-   :Action:
-         Action:
+   :Name:
+         Name:
 
-   :Signal:
-         Signal:
+   :Arguments:
+         Arguments:
 
    :Description:
          Description:
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         list
+   :Name:
+         listActionBeforeRenderView
 
-   :Signal:
-         'listActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the list view. An array with all view values is passed by reference.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         calendar
+   :Name:
+         calendarActionBeforeRenderView
 
-   :Signal:
-         'calendarActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the calendar view. An array with all view values is passed by reference.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         detail
+   :Name:
+         detailActionBeforeRenderView
 
-   :Signal:
-         'detailActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the detail view. An array with all view values is passed by reference.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         registration
+   :Name:
+         registrationActionBeforeRenderView
 
-   :Signal:
-         'registrationActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the registration view. An array with all view values is passed by reference.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         saveRegistration
+   :Name:
+         saveRegistrationActionAfterRegistrationSaved
 
-   :Signal:
-         'saveRegistrationActionAfterRegistrationSaved'
+   :Arguments:
+         $registration, $this
 
    :Description:
          Signal is called after a registration is saved. The registration is passed to the signal.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         confirmRegistration
+   :Name:
+         confirmRegistrationActionBeforeRenderView
 
-   :Signal:
-         'confirmRegistrationActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the confirmRegistration view. An array with all view values is passed by reference.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         cancelRegistration
+   :Name:
+         cancelRegistrationActionBeforeRenderView
 
-   :Signal:
-         'cancelRegistrationActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the cancelRegistration view. An array with all view values is passed by reference.
 
- - :Controller:
-         Event
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
 
-   :Action:
-         search
+   :Name:
+         searchActionBeforeRenderView
 
-   :Signal:
-         'searchActionBeforeRenderView'
+   :Arguments:
+         &$values, $this
 
    :Description:
          Signal is called before rendering the search view. An array with all view values is passed by reference.
 
- - :Controller:
-         Payment
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Payment
 
-   :Action:
-         redirect
-
-   :Signal:
+   :Name:
          'redirectActionBeforeRedirect' + ucfirst($paymentMethod)
+
+   :Arguments:
+         &$values, &$updateRegistration, $registration, $this
 
    :Description:
          Signal is called before rendering the redirect view. Use this signal to create the views HTML content,
          that redirects the user to the payment providers payment page.
 
- - :Controller:
-         Payment
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Payment
 
-   :Action:
-         success
-
-   :Signal:
+   :Name:
          'successActionProcessSuccess' + ucfirst($paymentMethod)
+
+   :Arguments:
+         &$values, &$updateRegistration, $registration, GeneralUtility::_GET(), $this
 
    :Description:
          Signal is called before rendering the success view. Use this signal to create the views HTML content
          and also use this signal to modify the payment status of the registration after a successful payment.
 
- - :Controller:
-         Payment
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Payment
 
-   :Action:
-         failure
-
-   :Signal:
+   :Name:
          'failureActionProcessFailure' + ucfirst($paymentMethod)
+
+   :Arguments:
+         &$values, &$updateRegistration, &$removeRegistration, $registration, GeneralUtility::_GET(), $this
 
    :Description:
          Signal is called before rendering the failure view. Use this signal to create the views HTML content
          and also use this signal to modify/delete the registration after a failed payment.
 
- - :Controller:
-         Payment
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Payment
 
-   :Action:
-         failure
-
-   :Signal:
+   :Name:
          'cancelActionProcessCancel' + ucfirst($paymentMethod)
+
+   :Arguments:
+         &$values, &$updateRegistration, &$removeRegistration, $registration, GeneralUtility::_GET(), $this
 
    :Description:
          Signal is called before rendering the cancel view. Use this signal to create the views HTML content
          and also use this signal to modify/delete the registration after a cancelled payment.
 
- - :Controller:
-         Payment
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Payment
 
-   :Action:
-         notify
-
-   :Signal:
+   :Name:
          'notifyActionProcessNotify' + ucfirst($paymentMethod)
+
+   :Arguments:
+         &$values, &$updateRegistration, $registration, GeneralUtility::_GET(), $this
 
    :Description:
          Signal is called before rendering the notify view. Use this signal to create the views HTML content
          and also use this signal to modify the registration when the payment provider supports a server to server
          nofitication URL.
+
+ - :Class:
+         DERHANSEN\SfEventMgt\Domain\Model\Repository\EventRepository
+
+   :Name:
+         findDemandedModifyQueryConstraints
+
+   :Arguments:
+         &$constraints, $query, $this
+
+   :Description:
+         Signal is called after all query constraints are collected. The signal enables the possibility to add/modify
+         the query constraints for the findDemanded function. Very usefull, when you extend the eventDemand with custom
+         properties.
 
 
