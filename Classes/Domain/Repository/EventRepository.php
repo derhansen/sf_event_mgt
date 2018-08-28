@@ -72,7 +72,6 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             __CLASS__,
             __FUNCTION__ . 'ModifyQueryConstraints',
             [&$constraints, $query, $this]
-
         );
 
         $this->setOrderingsFromDemand($query, $eventDemand);
