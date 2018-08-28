@@ -731,7 +731,12 @@
             <ROOT>
                 <TCEforms>
                     <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_tab.categoryMenu</sheetTitle>
-                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->list</displayCond>
+                    <displayCond>
+                        <OR>
+                            <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Event->list</numIndex>
+                            <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Event->search</numIndex>
+                        </OR>
+                    </displayCond>
                 </TCEforms>
                 <type>array</type>
                 <el>
