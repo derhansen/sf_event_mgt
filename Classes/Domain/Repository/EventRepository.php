@@ -71,7 +71,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $signalSlotDispatcher->dispatch(
             __CLASS__,
             __FUNCTION__ . 'ModifyQueryConstraints',
-            [&$constraints, $query, $this]
+            [&$constraints, $query, $eventDemand, $this]
         );
 
         $this->setOrderingsFromDemand($query, $eventDemand);

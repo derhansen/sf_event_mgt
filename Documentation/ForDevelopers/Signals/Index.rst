@@ -200,7 +200,7 @@ and the processing of the payment of a registration.
          findDemandedModifyQueryConstraints
 
    :Arguments:
-         &$constraints, $query, $this
+         &$constraints, $query, $eventDemand, $this
 
    :Description:
          Signal is called after all query constraints are collected. The signal enables the possibility to add/modify
