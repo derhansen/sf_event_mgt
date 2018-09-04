@@ -500,4 +500,39 @@
         <tablenames>tx_sfeventmgt_domain_model_event</tablenames>
         <fieldname>category</fieldname>
     </sys_category_record_mm>
+
+    <!-- findRecordsBySpeaker -->
+    <!-- has speaker 1 -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>100</uid>
+        <pid>100</pid>
+        <description>test</description>
+        <link>link</link>
+        <speaker>1</speaker>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has speaker 2-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>101</uid>
+        <pid>100</pid>
+        <description>test</description>
+        <link>link</link>
+        <speaker>2</speaker>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has no location -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>102</uid>
+        <pid>100</pid>
+        <description>test</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_sfeventmgt_domain_model_speaker>
+        <uid>1</uid>
+    </tx_sfeventmgt_domain_model_speaker>
+    <tx_sfeventmgt_domain_model_speaker>
+        <uid>2</uid>
+    </tx_sfeventmgt_domain_model_speaker>
+    <tx_sfeventmgt_domain_model_speaker>
+        <uid>3</uid>
+    </tx_sfeventmgt_domain_model_speaker>
 </dataset>

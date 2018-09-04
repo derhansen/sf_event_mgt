@@ -100,6 +100,13 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $location = null;
 
     /**
+     * Speaker
+     *
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
+     */
+    protected $speaker = null;
+
+    /**
      * City for location
      *
      * @var string
@@ -558,5 +565,26 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setCategoryConjunction($categoryConjunction)
     {
         $this->categoryConjunction = $categoryConjunction;
+    }
+
+    /**
+     * Returns speaker
+     *
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Speaker
+     */
+    public function getSpeaker()
+    {
+        return $this->speaker;
+    }
+
+    /**
+     * Sets speaker
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
+     * @return void
+     */
+    public function setSpeaker($speaker)
+    {
+        $this->speaker = $speaker;
     }
 }

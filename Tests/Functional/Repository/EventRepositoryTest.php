@@ -11,6 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -31,6 +32,9 @@ class EventRepositoryTest extends FunctionalTestCase
     /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
     protected $locationRepository;
 
+    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository */
+    protected $speakerRepository;
+
     /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
     protected $organisatorRepository;
 
@@ -50,6 +54,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $this->eventRepository = $this->objectManager->get(EventRepository::class);
         $this->locationRepository = $this->objectManager->get(LocationRepository::class);
         $this->organisatorRepository = $this->objectManager->get(OrganisatorRepository::class);
+        $this->speakerRepository = $this->objectManager->get(SpeakerRepository::class);
 
         $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_event.xml');
     }
@@ -706,5 +711,48 @@ class EventRepositoryTest extends FunctionalTestCase
         $events = $this->eventRepository->findDemanded($demand);
 
         $this->assertSame(1, $events->count());
+    }
+
+    /**
+     * DataProvider for findDemandedRecordsBySpeaker
+     *
+     * @return array
+     */
+    public function findDemandedRecordsBySpeakerDataProvider()
+    {
+        return [
+            'speaker 1' => [
+                1,
+                1
+            ],
+            'speaker 2' => [
+                2,
+                1
+            ],
+            'speaker 3' => [
+                3,
+                0
+            ]
+        ];
+    }
+
+    /**
+     * Test if speaker restriction works
+     *
+     * @dataProvider findDemandedRecordsByLocationDataProvider
+     * @test
+     * @param mixed $speakerUid
+     * @param mixed $expected
+     * @return void
+     */
+    public function findDemandedRecordsBySpeaker($speakerUid, $expected)
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand');
+        $demand->setStoragePage(100);
+
+        $speaker = $this->speakerRepository->findByUid($speakerUid);
+        $demand->setSpeaker($speaker);
+        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 }

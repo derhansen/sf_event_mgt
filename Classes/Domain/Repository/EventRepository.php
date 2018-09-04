@@ -60,6 +60,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setLocationConstraint($query, $eventDemand, $constraints);
         $this->setLocationCityConstraint($query, $eventDemand, $constraints);
         $this->setLocationCountryConstraint($query, $eventDemand, $constraints);
+        $this->setSpeakerConstraint($query, $eventDemand, $constraints);
         $this->setOrganisatorConstraint($query, $eventDemand, $constraints);
         $this->setStartEndDateConstraint($query, $eventDemand, $constraints);
         $this->setSearchConstraint($query, $eventDemand, $constraints);
@@ -278,6 +279,22 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() != '') {
             $constraints[] = $query->equals('location.country', $eventDemand->getLocationCountry());
+        }
+    }
+
+    /**
+     * Sets the speaker constraint to the given constraints array
+     *
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $eventDemand EventDemand
+     * @param array $constraints Constraints
+     *
+     * @return void
+     */
+    protected function setSpeakerConstraint($query, $eventDemand, &$constraints)
+    {
+        if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() != '') {
+            $constraints[] = $query->equals('speaker', $eventDemand->getSpeaker());
         }
     }
 
