@@ -323,6 +323,10 @@ class EventController extends AbstractController
      */
     public function detailAction(Event $event = null)
     {
+        if ($event === null && (int)$this->settings['singleEvent'] > 0) {
+            $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
+        }
+
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }

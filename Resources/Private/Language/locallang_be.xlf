@@ -34,6 +34,9 @@
 			<trans-unit id="flexforms_general.mode">
 				<source>What to display</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.singleEvent">
+				<source>Show a single event record</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.mode.list">
 				<source>List</source>
 			</trans-unit>

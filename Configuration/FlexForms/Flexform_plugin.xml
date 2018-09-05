@@ -190,6 +190,31 @@
                         </TCEforms>
                     </settings.queryLimit>
 
+                    <!-- single news -->
+                    <settings.singleEvent>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.singleEvent</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Event->detail;Event->icalDownload</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_sfeventmgt_domain_model_event</allowed>
+                                <size>1</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>1</show_thumbs>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                        <default>
+                                            <searchWholePhrase>1</searchWholePhrase>
+                                        </default>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.singleEvent>
+
                     <!-- Category conjunction -->
                     <settings.categoryConjunction>
                         <TCEforms>
