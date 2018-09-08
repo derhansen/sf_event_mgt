@@ -265,7 +265,7 @@
                             </displayCond>
                             <config>
                                 <type>select</type>
-                                <renderMode>tree</renderMode>
+                                <renderType>selectTree</renderType>
                                 <treeConfig>
                                     <parentField>parent</parentField>
                                     <appearance>
@@ -772,7 +772,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_categorymenu.categories</label>
                             <config>
                                 <type>select</type>
-                                <renderMode>tree</renderMode>
+                                <renderType>selectTree</renderType>
                                 <treeConfig>
                                     <parentField>parent</parentField>
                                     <appearance>
