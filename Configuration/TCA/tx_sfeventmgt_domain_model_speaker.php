@@ -170,7 +170,7 @@ return [
                         'module' => [
                             'name' => 'wizard_rte',
                         ],
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:bodytext.W.RTE',
+                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
                         'type' => 'script'
                     ]
                 ]
