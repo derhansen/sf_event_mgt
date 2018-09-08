@@ -224,3 +224,16 @@ How do I set the indexed search title for an event?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use the title-ViewHelper of this extension.
+
+The Payment Plugin throws exception about missing default controller
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The page with the Payment Plugin shows the following error::
+
+ The default controller for extension "SfEventMgt" and plugin "Pipayment" can not be determined. Please check for TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin() in your ext_localconf.php
+
+Please delete the content element with the Payment Plugin and create a blank content element of type "Plugin" and
+next directly select the Payment Plugin from the plugins select box.
+
+If the plugin originally was a plugin with Flexform settings and switchableControllerActions, those settings
+will remain in the database field pi_flexform and lead to the described error.
