@@ -6,7 +6,7 @@
         <div class="event-title">
             <f:if condition="{settings.detailPid} == ''">
                 <f:then>
-                    <f:link.action action="detail" arguments="{event : event}">{event.title}</f:link.action>
+                    <f:link.action action="detail" controller="Event" extensionName="SfEventMgt" arguments="{event : event}" pageUid="4711">{event.title}</f:link.action>
                 </f:then>
                 <f:else>
                     <f:link.action action="detail" arguments="{event : event}" pageUid="{settings.detailPid}">{event.title}</f:link.action>
