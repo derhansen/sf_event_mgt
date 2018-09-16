@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DataHandlerHooks
 {
-
     /**
      * Flushes the cache if a event record was edited.
      * This happens on two levels: by UID and by PID.

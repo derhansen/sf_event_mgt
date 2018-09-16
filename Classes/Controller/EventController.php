@@ -55,10 +55,8 @@ class EventController extends AbstractController
      */
     protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
 
-
     /**
      * Initializes the current action
-     *
      */
     public function initializeAction()
     {
