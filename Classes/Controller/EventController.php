@@ -55,6 +55,24 @@ class EventController extends AbstractController
      */
     protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
 
+
+    /**
+     * Initializes the current action
+     *
+     */
+    public function initializeAction()
+    {
+        $typoScriptFrontendController = $this->getTypoScriptFrontendController();
+        if ($typoScriptFrontendController !== null) {
+            static $cacheTagsSet = false;
+
+            if (!$cacheTagsSet) {
+                $typoScriptFrontendController->addCacheTags(['tx_sfeventmgt']);
+                $cacheTagsSet = true;
+            }
+        }
+    }
+
     /**
      * Creates an event demand object with the given settings
      *
@@ -220,6 +238,8 @@ class EventController extends AbstractController
 
         $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
         $this->view->assignMultiple($values);
+
+        $this->addPageCacheTagsByEventDemandObject($eventDemand);
     }
 
     /**
@@ -333,6 +353,9 @@ class EventController extends AbstractController
         $values = ['event' => $event];
         $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
         $this->view->assignMultiple($values);
+        if ($event !== null) {
+            $this->addCacheTagsByEventRecords([$event]);
+        }
     }
 
     /**
@@ -901,5 +924,45 @@ class EventController extends AbstractController
     protected function isOverwriteDemand($overwriteDemand)
     {
         return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== [];
+    }
+
+    /**
+     * Adds cache tags to page cache by event records.
+     *
+     * Following cache tags will be added to tsfe:
+     * "tx_sfeventmgt_uid_[event:uid]"
+     *
+     * @param array $eventRecords array with event records
+     */
+    public function addCacheTagsByEventRecords(array $eventRecords)
+    {
+        $cacheTags = [];
+        foreach ($eventRecords as $event) {
+            // cache tag for each news record
+            $cacheTags[] = 'tx_sfeventmgt_uid_' . $event->getUid();
+        }
+        if (count($cacheTags) > 0) {
+            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+        }
+    }
+
+    /**
+     * Adds page cache tags by used storagePages.
+     * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+     */
+    public function addPageCacheTagsByEventDemandObject(\DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand)
+    {
+        $cacheTags = [];
+        if ($demand->getStoragePage()) {
+            // Add cache tags for each storage page
+            foreach (GeneralUtility::trimExplode(',', $demand->getStoragePage()) as $pageId) {
+                $cacheTags[] = 'tx_sfeventmgt_pid_' . $pageId;
+            }
+        }
+        if (count($cacheTags) > 0) {
+            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+        }
     }
 }

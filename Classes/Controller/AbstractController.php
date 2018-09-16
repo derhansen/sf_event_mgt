@@ -253,4 +253,12 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     {
         return $this->signalSlotDispatcher->dispatch($signalClassName, $signalName, $arguments);
     }
+
+    /**
+     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'] ?: null;
+    }
 }

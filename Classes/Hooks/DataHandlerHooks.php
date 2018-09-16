@@ -9,6 +9,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  */
 
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -18,6 +19,31 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DataHandlerHooks
 {
+
+    /**
+     * Flushes the cache if a event record was edited.
+     * This happens on two levels: by UID and by PID.
+     *
+     * @param array $params
+     */
+    public function clearCachePostProc(array $params)
+    {
+        if (isset($params['table']) && $params['table'] === 'tx_sfeventmgt_domain_model_event') {
+            $cacheTagsToFlush = [];
+            if (isset($params['uid'])) {
+                $cacheTagsToFlush[] = 'tx_sfeventmgt_uid_' . $params['uid'];
+            }
+            if (isset($params['uid_page'])) {
+                $cacheTagsToFlush[] = 'tx_sfeventmgt_pid_' . $params['uid_page'];
+            }
+
+            $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
+            foreach ($cacheTagsToFlush as $cacheTag) {
+                $cacheManager->flushCachesInGroupByTag('pages', $cacheTag);
+            }
+        }
+    }
+
     /**
      * Checks if the fields defined in $checkFields are set in the data-array of pi_flexform.
      * If a field is present and contains an empty value, the field is unset.
