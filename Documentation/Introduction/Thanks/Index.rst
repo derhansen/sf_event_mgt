@@ -30,3 +30,4 @@ Thanks from me to:
 * Gerd Müller from Vogt-Schild Druck AG for sponsoring organisator filtering
 * Alexander Grein from Mediaessenz for implementing the default storage Pid feature
 * Bernhard Sirlinger for adding the automativ RealURL config
+* Marc Bastian Heinrichs for adding Cache Tags in list and detail view
