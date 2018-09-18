@@ -43,6 +43,7 @@ plugin.tx_sfeventmgt {
             showWeekNumber = 1
         }
         detail {
+            checkPidOfEventRecord = 0
             imageWidth = 200
             imageHeight =
         }
@@ -52,6 +53,7 @@ plugin.tx_sfeventmgt {
             formatDateOfBirth = {$plugin.tx_sfeventmgt.settings.registration.formatDateOfBirth}
             # The fields firstname, lastname and email are always required and cannot be overridden
             requiredFields =
+            checkPidOfEventRecord = 0
             # Prefill fields - registration field = fe_user field
             prefillFields {
                 firstname = first_name
