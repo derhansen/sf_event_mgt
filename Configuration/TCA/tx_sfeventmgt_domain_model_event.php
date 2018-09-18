@@ -4,6 +4,7 @@ return [
     'ctrl' => [
         'title' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event',
         'label' => 'title',
+        'descriptionColumn' => 'rowDescription',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -29,10 +30,10 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, teaser, description,
-        program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, max_participants,
-        max_registrations_per_user, registration_deadline, price, currency, category, related, image, files,
-        additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, rowDescription, teaser, 
+        description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, 
+        max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, 
+        files, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
         enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields',
     ],
     'types' => [
@@ -77,7 +78,10 @@ return [
                     --palette--;;language,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
-                    hidden, --palette--;;timeRestriction, fe_group'
+                    hidden, --palette--;;timeRestriction, fe_group,
+                    
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
+                    rowDescription'
         ],
     ],
     'palettes' => [
@@ -818,6 +822,15 @@ return [
                     'allowLanguageSynchronization' => true,
                 ],
             ],
+        ],
+        'rowDescription' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:LGL.description',
+            'config' => [
+                'type' => 'text',
+                'rows' => 5,
+                'cols' => 30
+            ]
         ],
     ],
 ];
