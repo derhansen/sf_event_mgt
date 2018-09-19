@@ -10,6 +10,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	teaser text,
 	description text,
 	program text,
+	rowDescription text,
 	startdate int(11) DEFAULT '0' NOT NULL,
 	enddate int(11) DEFAULT '0' NOT NULL,
 	max_participants int(11) DEFAULT '0' NOT NULL,
