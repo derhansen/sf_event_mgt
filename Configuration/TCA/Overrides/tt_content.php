@@ -46,12 +46,3 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_p
     'sfeventmgt_piuserreg',
     'FILE:EXT:sf_event_mgt/Configuration/FlexForms/Flexform_userreg.xml'
 );
-
-/**
- * Default TypoScript
- */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
-    'sf_event_mgt',
-    'Configuration/TypoScript',
-    'Event management and registration'
-);
