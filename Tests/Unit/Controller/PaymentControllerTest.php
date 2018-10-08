@@ -8,8 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;

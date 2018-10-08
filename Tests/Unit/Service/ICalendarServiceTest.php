@@ -16,8 +16,8 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\StorageRepository;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Fluid\View\StandaloneView;
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\ICalendarService.
  *

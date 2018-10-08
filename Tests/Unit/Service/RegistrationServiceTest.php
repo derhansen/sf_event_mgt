@@ -21,6 +21,7 @@ use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
+
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
  *

@@ -9,9 +9,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  */
 
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
-use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
