@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -31,7 +32,7 @@ class LongitudeEvaluatorTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator();
+        $this->subject = new LongitudeEvaluator();
     }
 
     /**

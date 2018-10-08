@@ -9,6 +9,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -32,7 +33,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->viewhelper = new \DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper();
+        $this->viewhelper = new SimultaneousRegistrationsViewHelper();
     }
 
     /**

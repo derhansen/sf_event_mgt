@@ -8,7 +8,11 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Command;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Command\CleanupCommandController;
+use DERHANSEN\SfEventMgt\Service\RegistrationService;
+use DERHANSEN\SfEventMgt\Service\UtilityService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Command\CleanupCommandController.
@@ -29,7 +33,7 @@ class CleanupCommandControllerTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Command\CleanupCommandController();
+        $this->subject = new CleanupCommandController();
     }
 
     /**
@@ -62,7 +66,7 @@ class CleanupCommandControllerTest extends UnitTestCase
             ]
         ];
 
-        $configurationManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager')
+        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->setMethods(['getConfiguration'])
             ->getMock();
         $configurationManager->expects($this->once())->method('getConfiguration')->will(
@@ -70,7 +74,7 @@ class CleanupCommandControllerTest extends UnitTestCase
         );
         $this->inject($this->subject, 'configurationManager', $configurationManager);
 
-        $registrationService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\RegistrationService')
+        $registrationService = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['handleExpiredRegistrations'])
             ->getMock();
         $registrationService->expects($this->once())->method('handleExpiredRegistrations')->with(0)->will(
@@ -78,7 +82,7 @@ class CleanupCommandControllerTest extends UnitTestCase
         );
         $this->inject($this->subject, 'registrationService', $registrationService);
 
-        $utilityService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\UtilityService')
+        $utilityService = $this->getMockBuilder(UtilityService::class)
             ->setMethods(['clearCacheForConfiguredUids'])
             ->getMock();
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids')->

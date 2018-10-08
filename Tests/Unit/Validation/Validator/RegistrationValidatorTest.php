@@ -8,9 +8,17 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator;
+use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Error\Error;
+use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
+use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
+
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
@@ -27,7 +35,7 @@ class RegistrationValidatorTest extends UnitTestCase
     /**
      * @var string
      */
-    protected $validatorClassName = 'DERHANSEN\\SfEventMgt\\Validation\\Validator\\RegistrationValidator';
+    protected $validatorClassName = RegistrationValidator::class;
 
     /**
      * Setup
@@ -77,7 +85,7 @@ class RegistrationValidatorTest extends UnitTestCase
      */
     public function validatorReturnsTrueWhenArgumentsMissing($settings, $fields, $expected)
     {
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
         $registration->setFirstname('John');
         $registration->setLastname('Doe');
         $registration->setEmail('email@domain.tld');
@@ -165,7 +173,7 @@ class RegistrationValidatorTest extends UnitTestCase
      */
     public function validatorReturnsExpectedResults($settings, $fields, $hasErrors, $expected)
     {
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
         $registration->setFirstname('John');
         $registration->setLastname('Doe');
         $registration->setEmail('email@domain.tld');
@@ -185,31 +193,31 @@ class RegistrationValidatorTest extends UnitTestCase
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
         // Inject the object manager
-        $validationError = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Error\\Error')
+        $validationError = $this->getMockBuilder(Error::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $validationResult = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Error\\Result')->getMock();
+        $validationResult = $this->getMockBuilder(Result::class)->getMock();
         $validationResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
         $validationResult->expects($this->any())->method('getErrors')->will(
             $this->returnValue([$validationError])
         );
 
-        $notEmptyValidator = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Validation\\Validator\\NotEmptyValidator')
+        $notEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
         $notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
             $validationResult
         ));
 
-        $booleanValidator = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Validation\\Validator\\BooleanValidator')
+        $booleanValidator = $this->getMockBuilder(BooleanValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
         $booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
             $validationResult
         ));
 
-        $recaptchaValidator = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Validation\\Validator\\RecaptchaValidator')
+        $recaptchaValidator = $this->getMockBuilder(RecaptchaValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
         $recaptchaValidator->expects($this->any())->method('validate')->will($this->returnValue(
@@ -239,13 +247,13 @@ class RegistrationValidatorTest extends UnitTestCase
         return [
             'string' => [
                 'string',
-                new \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator(),
-                '\TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator'
+                new NotEmptyValidator(),
+                NotEmptyValidator::class
             ],
             'boolean' => [
                 'boolean',
-                new \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator(),
-                '\TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator'
+                new BooleanValidator(),
+                BooleanValidator::class
             ]
         ];
     }

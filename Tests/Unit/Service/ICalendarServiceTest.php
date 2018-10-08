@@ -10,10 +10,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Exception;
+use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-
+use TYPO3\CMS\Core\Resource\StorageRepository;
+use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\ICalendarService.
  *
@@ -33,7 +37,7 @@ class ICalendarServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\ICalendarService();
+        $this->subject = new ICalendarService();
     }
 
     /**
@@ -84,10 +88,10 @@ class ICalendarServiceTest extends UnitTestCase
             $this->returnValue('iCalendar Data')
         );
 
-        $mockFile = $this->getMockBuilder('TYPO3\\CMS\\Core\\Resource\\File')->disableOriginalConstructor()->getMock();
+        $mockFile = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
         $mockFile->expects($this->once())->method('setContents')->with('iCalendar Data');
 
-        $mockStorageRepository = $this->getMockBuilder('TYPO3\CMS\Core\Resource\StorageRepository')
+        $mockStorageRepository = $this->getMockBuilder(StorageRepository::class)
             ->setMethods(['getFolder', 'createFile', 'dumpFileContents'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -117,7 +121,7 @@ class ICalendarServiceTest extends UnitTestCase
 
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
 
-        $iCalendarView = $this->getMockBuilder('TYPO3\\CMS\\Fluid\\View\\StandaloneView')
+        $iCalendarView = $this->getMockBuilder(StandaloneView::class)
             ->disableOriginalConstructor()
             ->getMock();
         $iCalendarView->expects($this->once())->method('setFormat')->with('txt');
@@ -126,13 +130,13 @@ class ICalendarServiceTest extends UnitTestCase
             'typo3Host' => 'myhostname.tld'
         ]);
 
-        $objectManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
+        $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
         $objectManager->expects($this->once())->method('get')->will($this->returnValue($iCalendarView));
         $this->inject($this->subject, 'objectManager', $objectManager);
 
-        $fluidStandaloneService = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Service\\FluidStandaloneService')
+        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->getMock();
         $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);

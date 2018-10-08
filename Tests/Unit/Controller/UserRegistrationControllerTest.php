@@ -8,8 +8,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\UserRegistrationController
@@ -31,7 +37,7 @@ class UserRegistrationControllerTest extends UnitTestCase
     protected function setUp()
     {
         $this->subject = $this->getAccessibleMock(
-            'DERHANSEN\\SfEventMgt\\Controller\\UserRegistrationController',
+            UserRegistrationController::class,
             ['createUserRegistrationDemandObjectFromSettings'],
             [],
             '',
@@ -57,7 +63,7 @@ class UserRegistrationControllerTest extends UnitTestCase
      */
     public function createUserRegistrationDemandObjectFromSettingsTest()
     {
-        $mockController = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Controller\\UserRegistrationController')
+        $mockController = $this->getMockBuilder(UserRegistrationController::class)
             ->setMethods(['redirect', 'forward', 'addFlashMessage'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -70,14 +76,14 @@ class UserRegistrationControllerTest extends UnitTestCase
             'orderDirection' => 'asc',
         ];
 
-        $mockDemand = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand')
+        $mockDemand = $this->getMockBuilder(UserRegistrationDemand::class)
             ->getMock();
         $mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
         $mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
         $mockDemand->expects($this->at(2))->method('setOrderField')->with('event.title');
         $mockDemand->expects($this->at(3))->method('setOrderDirection')->with('asc');
 
-        $objectManager = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Object\\ObjectManager')
+        $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
@@ -94,12 +100,12 @@ class UserRegistrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView()
     {
-        $demand = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\UserRegistrationDemand')
+        $demand = $this->getMockBuilder(UserRegistrationDemand::class)
             ->setMethods(['setUser'])
             ->disableOriginalConstructor()
             ->getMock();
         $demand->expects($this->once())->method('setUser');
-        $registrations = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage')
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -117,7 +123,7 @@ class UserRegistrationControllerTest extends UnitTestCase
         $this->inject($this->subject, 'registrationService', $registrationServiceMock);
 
         $registrationRepository = $this->getMockBuilder(
-            'DERHANSEN\\SfEventMgt\\Domain\\Repository\\RegistrationRepository'
+            RegistrationRepository::class
         )->setMethods(['findRegistrationsByUserRegistrationDemand'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -125,7 +131,7 @@ class UserRegistrationControllerTest extends UnitTestCase
             ->will($this->returnValue($registrations));
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $view = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\View\\ViewInterface')->getMock();
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->at(0))->method('assign')->with('registrations', $registrations);
         $this->inject($this->subject, 'view', $view);
 
