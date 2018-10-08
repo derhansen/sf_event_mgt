@@ -19,7 +19,6 @@ use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
-
 /**
  * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
  *
