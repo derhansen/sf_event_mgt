@@ -40,25 +40,25 @@ class AttachmentService
      *
      * Attachments must be configured as following (example for "registrationNew"):
      *
-     *  registrationNew {
-     *    attachments {
-     *      user {
-     *        fromFiles {
-     *          1 = fileadmin/path-to-attachment.pdf
-     *        }
-     *        fromEventProperty {
-     *          1 = files
-     *          2 = image
-     *        }
-     *        fromRegistrationProperty {
-     *          1 = propertyOfRegistration
-     *        }
-     *      }
-     *      admin {
-     *        fromFiles =
-     *        fromEventProperty =
-     *        fromRegistrationProperty =
-     *      }
+     * registrationNew {
+     *   attachments {
+     *     user {
+     *       fromFiles {
+     *         1 = fileadmin/path-to-attachment.pdf
+     *       }
+     *       fromEventProperty {
+     *         1 = files
+     *         2 = image
+     *       }
+     *       fromRegistrationProperty {
+     *         1 = propertyOfRegistration
+     *       }
+     *     }
+     *     admin {
+     *       fromFiles =
+     *       fromEventProperty =
+     *       fromRegistrationProperty =
+     *     }
      *   }
      * }
      *

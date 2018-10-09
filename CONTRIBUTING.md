@@ -1,7 +1,7 @@
 How to contribute
 =================
 
-Hey, great you want to contribute to ``sf_event_mgt`. 
+Hey, great you want to contribute to ``sf_event_mgt``.
 
 Submitting feedback
 ===================
