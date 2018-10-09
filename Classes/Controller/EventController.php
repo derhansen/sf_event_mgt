@@ -933,6 +933,7 @@ class EventController extends AbstractController
         if ($event === null && (int)$this->settings['singleEvent'] > 0) {
             $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
         }
+
         return $event;
     }
 
