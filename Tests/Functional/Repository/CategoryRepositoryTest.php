@@ -9,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
-use DERHANSEN\SfEventMgt\Domain\RepositoryCategoryRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
