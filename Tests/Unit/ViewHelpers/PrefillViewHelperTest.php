@@ -10,6 +10,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
+use TYPO3\CMS\Extbase\Mvc\Request;
 
 /**
  * Test case for prefill viewhelper
@@ -35,7 +38,7 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsCurrentFieldValueIfValueInGPAvailable()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::_GETset(
+        GeneralUtility::_GETset(
             [
                 'tx_sfeventmgt_pievent' => [
                     'registration' => ['fieldname' => 'Existing Value']
@@ -99,13 +102,13 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John'
         ];
 
-        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+        $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
             ->setMethods(['getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -114,7 +117,7 @@ class PrefillViewHelperTest extends UnitTestCase
         );
 
         $viewHelper = $this->getAccessibleMock(
-            'DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+            PrefillViewHelper::class,
             ['dummy'],
             [],
             '',
@@ -138,13 +141,13 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John',
             'last_name' => 'Doe'
         ];
-        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+        $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
             ->setMethods(['getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -153,7 +156,7 @@ class PrefillViewHelperTest extends UnitTestCase
         );
 
         $viewHelper = $this->getAccessibleMock(
-            'DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+            PrefillViewHelper::class,
             ['dummy'],
             [],
             '',
@@ -184,19 +187,19 @@ class PrefillViewHelperTest extends UnitTestCase
             ]
         ];
 
-        $mockOriginalRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+        $mockOriginalRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
 
-        $mockRequest = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Request')
+        $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Mvc\\Controller\\ControllerContext')
+        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
             ->setMethods(['getRequest'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -205,7 +208,7 @@ class PrefillViewHelperTest extends UnitTestCase
         );
 
         $viewHelper = $this->getAccessibleMock(
-            'DERHANSEN\\SfEventMgt\\ViewHelpers\\PrefillViewHelper',
+            PrefillViewHelper::class,
             ['dummy'],
             [],
             '',

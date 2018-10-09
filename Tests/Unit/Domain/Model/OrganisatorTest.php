@@ -8,7 +8,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Organisator.
@@ -31,7 +33,7 @@ class OrganisatorTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
+        $this->subject = new Organisator();
     }
 
     /**
@@ -156,7 +158,7 @@ class OrganisatorTest extends UnitTestCase
      */
     public function setImageForObjectStorageContainingImageSetsImage()
     {
-        $file = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $file = new FileReference();
         $this->subject->setImage($file);
 
         $this->assertAttributeEquals(

@@ -8,6 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -31,7 +33,7 @@ class PriceOptionTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\PriceOption();
+        $this->subject = new PriceOption();
     }
 
     /**
@@ -116,7 +118,7 @@ class PriceOptionTest extends UnitTestCase
      */
     public function setEventForEventSetsEvent()
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
         $this->subject->setEvent($event);
         $this->assertEquals($event, $this->subject->getEvent());
     }

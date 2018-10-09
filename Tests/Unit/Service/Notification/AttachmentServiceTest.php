@@ -8,12 +8,16 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
+use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\Notification\AttachmentService.
@@ -34,7 +38,7 @@ class AttachmentServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService();
+        $this->subject = new AttachmentService();
     }
 
     /**
@@ -126,7 +130,7 @@ class AttachmentServiceTest extends UnitTestCase
         $settingsPath,
         $expected
     ) {
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
 
         $settings = ['notification' => [
             $settingsPath => [
@@ -151,15 +155,15 @@ class AttachmentServiceTest extends UnitTestCase
      */
     public function getAttachmentsReturnsAttachmentsFromEventPropertyWithObjectStorage()
     {
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $registration = new Registration();
+        $event = new Event();
 
         $mockFile1 = $this->getMockBuilder(File::class)
             ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile1->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
-        $mockFileRef1 = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+        $mockFileRef1 = $this->getMockBuilder(FileReference::class)
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -170,7 +174,7 @@ class AttachmentServiceTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile2->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/anotherfile.pdf'));
-        $mockFileRef2 = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+        $mockFileRef2 = $this->getMockBuilder(FileReference::class)
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -212,20 +216,20 @@ class AttachmentServiceTest extends UnitTestCase
      */
     public function getAttachmentsReturnsAttachmentsFromEventPropertyWithFileReference()
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
 
         $mockFile = $this->getMockBuilder(File::class)
             ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
-        $mockFileRef = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Model\\FileReference')
+        $mockFileRef = $this->getMockBuilder(FileReference::class)
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFileRef->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile));
 
-        $mockRegistration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')
+        $mockRegistration = $this->getMockBuilder(Registration::class)
             ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -263,7 +267,7 @@ class AttachmentServiceTest extends UnitTestCase
      */
     public function getICalAttachmentReturnsAFilenameIfICalFileEnabled()
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
 
         $settings = ['notification' => [
             'registrationNew' => [
@@ -275,7 +279,7 @@ class AttachmentServiceTest extends UnitTestCase
             ]
         ]];
 
-        $mockRegistration = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Domain\\Model\\Registration')
+        $mockRegistration = $this->getMockBuilder(Registration::class)
             ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
             ->disableOriginalConstructor()
             ->getMock();

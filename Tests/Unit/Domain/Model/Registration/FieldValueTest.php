@@ -10,6 +10,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
@@ -34,7 +35,7 @@ class FieldValueTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue();
+        $this->subject = new FieldValue();
     }
 
     /**

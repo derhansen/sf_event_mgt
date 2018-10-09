@@ -8,7 +8,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
@@ -29,7 +31,7 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand();
+        $this->subject = new UserRegistrationDemand();
     }
 
     /**
@@ -177,7 +179,7 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     public function setUserSetsUser()
     {
-        $user = new \TYPO3\CMS\Extbase\Domain\Model\FrontendUser();
+        $user = new FrontendUser();
         $this->subject->setUser($user);
         $this->assertSame($this->subject->getUser(), $user);
     }

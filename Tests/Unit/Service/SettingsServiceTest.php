@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -29,7 +30,7 @@ class SettingsServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\SettingsService();
+        $this->subject = new SettingsService();
     }
 
     /**

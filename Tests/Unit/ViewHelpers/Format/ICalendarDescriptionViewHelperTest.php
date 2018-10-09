@@ -80,7 +80,7 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
-        $viewHelper = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\ViewHelpers\\Format\\ICalendarDescriptionViewHelper')
+        $viewHelper = $this->getMockBuilder(ICalendarDescriptionViewHelper::class)
             ->setMethods(['renderChildren'])
             ->getMock();
         $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));

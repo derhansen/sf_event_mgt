@@ -9,6 +9,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  */
 
 use DERHANSEN\SfEventMgt\Service\SettingsService;
+use DERHANSEN\SfEventMgt\Service\UtilityService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Service\CacheService;
 
@@ -31,7 +32,7 @@ class UtilityServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\UtilityService();
+        $this->subject = new UtilityService();
     }
 
     /**

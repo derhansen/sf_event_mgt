@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -29,7 +30,7 @@ class AbstractPaymentTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = $this->getAccessibleMockForAbstractClass('DERHANSEN\\SfEventMgt\\Payment\\AbstractPayment');
+        $this->subject = $this->getAccessibleMockForAbstractClass(AbstractPayment::class);
     }
 
     /**

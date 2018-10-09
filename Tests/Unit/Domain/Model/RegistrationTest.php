@@ -8,7 +8,10 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration.
@@ -29,7 +32,7 @@ class RegistrationTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $this->subject = new Registration();
     }
 
     /**
@@ -497,7 +500,7 @@ class RegistrationTest extends UnitTestCase
      */
     public function setEventForEventSetsEvent()
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
         $this->subject->setEvent($event);
         $this->assertEquals($event, $this->subject->getEvent());
     }
@@ -517,7 +520,7 @@ class RegistrationTest extends UnitTestCase
      */
     public function setMainRegistrationForRegistrationSetsRegistration()
     {
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
         $this->subject->setMainRegistration($registration);
         $this->assertEquals($registration, $this->subject->getMainRegistration());
     }
@@ -685,7 +688,7 @@ class RegistrationTest extends UnitTestCase
      */
     public function setFeUserSetsFeUser()
     {
-        $user = new \TYPO3\CMS\Extbase\Domain\Model\FrontendUser();
+        $user = new FrontendUser();
         $this->subject->setFeUser($user);
         $this->assertSame($this->subject->getFeUser(), $user);
     }

@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -29,7 +30,7 @@ class SearchDemandTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand();
+        $this->subject = new SearchDemand();
     }
 
     /**

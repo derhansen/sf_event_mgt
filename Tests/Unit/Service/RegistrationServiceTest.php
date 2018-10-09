@@ -9,11 +9,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Invoice;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
+use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
@@ -37,7 +41,7 @@ class RegistrationServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\RegistrationService();
+        $this->subject = new RegistrationService();
     }
 
     /**
@@ -62,7 +66,7 @@ class RegistrationServiceTest extends UnitTestCase
         $registration->expects($this->once())->method('setHidden')->with(true);
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $registrations = new ObjectStorage();
         $registrations->attach($registration);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -86,7 +90,7 @@ class RegistrationServiceTest extends UnitTestCase
         $registration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $registrations = new ObjectStorage();
         $registrations->attach($registration);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -145,7 +149,7 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration2->expects($this->any())->method('setConfirmed');
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $registrations = new ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
 
@@ -171,7 +175,7 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $registrations = new ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
 
@@ -542,9 +546,9 @@ class RegistrationServiceTest extends UnitTestCase
         $GLOBALS['TSFE']->fe_user->user = [];
         $GLOBALS['TSFE']->fe_user->user['uid'] = 1;
 
-        $feUser = new \TYPO3\CMS\Extbase\Domain\Model\FrontendUser();
+        $feUser = new FrontendUser();
 
-        $mockFeUserRepository = $this->getMockBuilder('TYPO3\\CMS\\Extbase\\Domain\\Repository\\FrontendUserRepository')
+        $mockFeUserRepository = $this->getMockBuilder(FrontendUserRepository::class)
             ->setMethods(['findByUid'])
             ->disableOriginalConstructor()
             ->getMock();
@@ -797,7 +801,7 @@ class RegistrationServiceTest extends UnitTestCase
         $mockRegistration->expects($this->once())->method('getPaymentMethod');
 
         // Payment mock object with redirect enabled
-        $mockInvoice = $this->getMockBuilder('DERHANSEN\\SfEventMgt\\Payment\\Invoice')
+        $mockInvoice = $this->getMockBuilder(Invoice::class)
             ->setMethods(['isRedirectEnabled'])
             ->getMock();
         $mockInvoice->expects($this->once())->method('isRedirectEnabled')->will($this->returnValue(true));
