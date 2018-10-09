@@ -9,7 +9,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Service\CalendarService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\CalendarServiceTest.
@@ -30,7 +32,7 @@ class CalendarServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\CalendarService();
+        $this->subject = new CalendarService();
     }
 
     /**
@@ -91,7 +93,7 @@ class CalendarServiceTest extends UnitTestCase
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
         ));
 
-        $events = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $events = new ObjectStorage();
         $events->attach($mockEvent);
 
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
@@ -113,7 +115,7 @@ class CalendarServiceTest extends UnitTestCase
             \DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
         ));
 
-        $events = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $events = new ObjectStorage();
         $events->attach($mockEvent);
 
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);

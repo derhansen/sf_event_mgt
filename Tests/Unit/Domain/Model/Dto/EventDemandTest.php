@@ -8,6 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -29,7 +31,7 @@ class EventDemandTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand();
+        $this->subject = new EventDemand();
     }
 
     /**
@@ -242,7 +244,7 @@ class EventDemandTest extends UnitTestCase
      */
     public function getLocationReturnsExpectedLocation()
     {
-        $location = new \DERHANSEN\SfEventMgt\Domain\Model\Location();
+        $location = new Location();
         $this->subject->setLocation($location);
         $this->assertSame(
             $location,

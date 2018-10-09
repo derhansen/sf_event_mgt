@@ -8,7 +8,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Speaker.
@@ -31,7 +33,7 @@ class SpeakerTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Speaker();
+        $this->subject = new Speaker();
     }
 
     /**
@@ -144,7 +146,7 @@ class SpeakerTest extends UnitTestCase
      */
     public function setImageForFileReferenceSetsImage()
     {
-        $image = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+        $image = new FileReference();
         $this->subject->setImage($image);
 
         $this->assertAttributeEquals(

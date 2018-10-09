@@ -8,8 +8,10 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Domain\Model\BackendUser;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog
@@ -30,7 +32,7 @@ class CustomNotificationLogTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
+        $this->subject = new CustomNotificationLog();
     }
 
     /**
@@ -115,7 +117,7 @@ class CustomNotificationLogTest extends UnitTestCase
      */
     public function setCruserIdForBackendUserSetsBackendUser()
     {
-        $beuser = new \TYPO3\CMS\Beuser\Domain\Model\BackendUser();
+        $beuser = new BackendUser();
         $this->subject->setCruserId($beuser);
         $this->assertEquals($beuser, $this->subject->getCruserId());
     }

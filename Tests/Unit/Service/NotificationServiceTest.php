@@ -8,6 +8,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
@@ -17,6 +19,7 @@ use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
@@ -38,7 +41,7 @@ class NotificationServiceTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Service\NotificationService();
+        $this->subject = new NotificationService();
     }
 
     /**
@@ -84,8 +87,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
         $registration->setEmail('valid@email.tld');
         $registration->setIgnoreNotifications(true);
 
@@ -112,8 +115,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendUserMessageReturnsFalseIfSendFailed($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
         $registration->setEmail('valid@email.tld');
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
@@ -149,8 +152,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendUserMessageReturnsTrueIfSendSuccessful($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
         $registration->setEmail('valid@email.tld');
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
@@ -187,8 +190,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
 
         $settings = [
             'notification' => [
@@ -239,8 +242,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
 
         $settings = [
             'notification' => [
@@ -281,10 +284,10 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendAdminMessageDoesNotSendEmailIfNotifyAdminAndNotifyOrganiserIsFalse($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
         $event->setNotifyAdmin(false);
         $event->setNotifyOrganisator(false);
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
 
         $settings = [
             'notification' => [
@@ -308,12 +311,12 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendAdminMessageSendsEmailToOrganisatorIfConfigured($messageType)
     {
-        $organisator = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $organisator = new Organisator();
+        $event = new Event();
         $event->setNotifyAdmin(false);
         $event->setNotifyOrganisator(true);
         $event->setOrganisator($organisator);
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
 
         $settings = [
             'notification' => [
@@ -352,8 +355,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendAdminMessageUsesRegistrationDataAsSenderIfConfigured()
     {
-        $organisator = new \DERHANSEN\SfEventMgt\Domain\Model\Organisator();
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $organisator = new Organisator();
+        $event = new Event();
         $event->setNotifyAdmin(false);
         $event->setNotifyOrganisator(true);
         $event->setOrganisator($organisator);
@@ -403,8 +406,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
 
         $settings = [
             'notification' => [
@@ -443,8 +446,8 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendUserMessageReturnsFalseIfNoCustomMessageGiven()
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $event = new Event();
+        $registration = new Registration();
         $registration->setEmail('valid@email.tld');
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
@@ -493,14 +496,14 @@ class NotificationServiceTest extends UnitTestCase
         $confirmed,
         $ignoreNotifications
     ) {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
 
-        $registration = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration = new Registration();
         $registration->setConfirmed($confirmed);
         $registration->setIgnoreNotifications($ignoreNotifications);
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $registrations = new ObjectStorage();
         $registrations->attach($registration);
 
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
@@ -530,20 +533,20 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent()
     {
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
 
-        $registration1 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration1 = new Registration();
         $registration1->setConfirmed(false);
-        $registration2 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration2 = new Registration();
         $registration2->setConfirmed(true);
-        $registration3 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration3 = new Registration();
         $registration3->setConfirmed(true);
-        $registration4 = new \DERHANSEN\SfEventMgt\Domain\Model\Registration();
+        $registration4 = new Registration();
         $registration4->setConfirmed(true);
         $registration4->setIgnoreNotifications(true);
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $registrations = new ObjectStorage();
         $registrations->attach($registration1);
         $registrations->attach($registration2);
         $registrations->attach($registration3);
@@ -580,7 +583,7 @@ class NotificationServiceTest extends UnitTestCase
         $mockLogRepo->expects($this->once())->method('add');
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 
-        $event = new \DERHANSEN\SfEventMgt\Domain\Model\Event();
+        $event = new Event();
         $this->subject->createCustomNotificationLogentry($event, 'A description', 1);
     }
 }

@@ -13,11 +13,13 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Resource\Exception\InsufficientFileAccessPermissionsException;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class ExportServiceTest
@@ -145,7 +147,7 @@ class ExportServiceTest extends UnitTestCase
             $this->equalTo('wrongfield')
         )->will($this->returnValue(false));
 
-        $allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $allRegistrations = new ObjectStorage();
         $allRegistrations->attach($mockRegistration);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -196,7 +198,7 @@ class ExportServiceTest extends UnitTestCase
             $this->equalTo('lastname')
         )->will($this->returnValue('Mustermann'));
 
-        $allRegistrations = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $allRegistrations = new ObjectStorage();
         $allRegistrations->attach($mockRegistration);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -281,7 +283,7 @@ class ExportServiceTest extends UnitTestCase
     {
         $mockStorage = $this->getMockBuilder(ResourceStorage::class)->disableOriginalConstructor()->getMock();
         $mockStorage->expects($this->once())->method('getFolder')->will($this->throwException(
-            new \TYPO3\CMS\Core\Resource\Exception\InsufficientFileAccessPermissionsException()
+            new InsufficientFileAccessPermissionsException()
         ));
 
         $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();

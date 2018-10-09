@@ -34,11 +34,11 @@ class PaymentServiceTest extends UnitTestCase
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
             'invoice' => [
-                'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Invoice',
+                'class' => Invoice::class,
                 'extkey' => 'sf_event_mgt'
             ],
             'transfer' => [
-                'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Transfer',
+                'class' => Transfer::class,
                 'extkey' => 'sf_event_mgt'
             ]
         ];
@@ -200,7 +200,7 @@ class PaymentServiceTest extends UnitTestCase
     public function paymentActionEnabledForCustomPaymentMethodReturnsExpectedResult($action, $expected)
     {
         $mockPaymentInstance = $this->getAccessibleMock(
-            'DERHANSEN\\SfEventMgt\\Payment\\Invoice',
+            Invoice::class,
             [
                 'isRedirectEnabled',
                 'isSuccessLinkEnabled',

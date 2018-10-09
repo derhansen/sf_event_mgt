@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -31,7 +32,7 @@ class LocationTest extends UnitTestCase
      */
     protected function setUp()
     {
-        $this->subject = new \DERHANSEN\SfEventMgt\Domain\Model\Location();
+        $this->subject = new Location();
     }
 
     /**
