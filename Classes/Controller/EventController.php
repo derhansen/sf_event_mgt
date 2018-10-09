@@ -341,10 +341,7 @@ class EventController extends AbstractController
      */
     public function detailAction(Event $event = null)
     {
-        if ($event === null && (int)$this->settings['singleEvent'] > 0) {
-            $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
-        }
-
+        $event = $this->evaluateSingleEventSetting($event);
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -418,6 +415,7 @@ class EventController extends AbstractController
      */
     public function registrationAction(Event $event = null)
     {
+        $event = $this->evaluateSingleEventSetting($event);
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -922,6 +920,20 @@ class EventController extends AbstractController
     protected function isOverwriteDemand($overwriteDemand)
     {
         return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== [];
+    }
+
+    /**
+     * If no event is given and the singleEvent setting is set, the configured single event is returned
+     *
+     * @param Event|null $event
+     * @return Event|null
+     */
+    protected function evaluateSingleEventSetting($event)
+    {
+        if ($event === null && (int)$this->settings['singleEvent'] > 0) {
+            $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
+        }
+        return $event;
     }
 
     /**

@@ -76,12 +76,12 @@ Tab settings
          Show a single event record
 
    :View:
-         Detail
+         Detail, Registration
 
    :Description:
-         The detail view will show the configured event record if not event is passed to the detail action by
-         parameter. Can be used to display a single event on a page without the need to link to the detail
-         page from a list view.
+         The detail view will show the configured event record if not event is passed to the detail or  registration
+         action by parameter. Can be used to display a single event on a page without the need to link to the detail
+         or registration page from a list view.
 
    :Key:
          singleEvent

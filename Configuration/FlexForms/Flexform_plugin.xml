@@ -194,7 +194,12 @@
                     <settings.singleEvent>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.singleEvent</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->detail;Event->icalDownload</displayCond>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:switchableControllerActions:=:Event->detail;Event->icalDownload</numIndex>
+                                    <numIndex index="1">FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
+                                </OR>
+                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
