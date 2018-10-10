@@ -8,8 +8,11 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
+use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
@@ -36,8 +39,8 @@ class CategoryRepositoryTest extends FunctionalTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->categoryRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\CategoryRepository');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->categoryRepository = $this->objectManager->get(CategoryRepository::class);
         $this->importDataSet(__DIR__ . '/../Fixtures/sys_category.xml');
     }
 
@@ -62,7 +65,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByStoragePageRestriction()
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\CategoryDemand');
+        $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setStoragePage(1);
         $demand->setRestrictToStoragePage(true);
         $events = $this->categoryRepository->findDemanded($demand);
@@ -113,7 +116,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\CategoryDemand');
+        $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setIncludeSubcategories($includeSubcategory);
 
         $demand->setCategories($category);
