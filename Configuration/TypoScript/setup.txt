@@ -112,6 +112,11 @@ plugin.tx_sfeventmgt {
 }
 
 #==============================================
+# Disable cHash for payment plugin
+#==============================================
+plugin.tx_sfeventmgt_pipayment.features.requireCHashArgumentForActionArguments = 0
+
+#==============================================
 # BE-module configuration for EXT:sf_event_mgt
 #==============================================
 module.tx_sfeventmgt {

@@ -8,8 +8,10 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
@@ -36,8 +38,8 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
     public function setUp()
     {
         parent::setUp();
-        $this->objectManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-        $this->organisatorRepository = $this->objectManager->get('DERHANSEN\\SfEventMgt\\Domain\\Repository\\OrganisatorRepository');
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->organisatorRepository = $this->objectManager->get(OrganisatorRepository::class);
 
         $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_organisator.xml');
     }
