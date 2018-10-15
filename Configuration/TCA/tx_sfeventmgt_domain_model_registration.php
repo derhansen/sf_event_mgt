@@ -430,6 +430,10 @@ return [
                 'wizards' => [
                     'suggest' => [
                         'type' => 'suggest',
+                        'default' => [
+                            'searchWholePhrase' => 1,
+                            'additionalSearchFields' => 'name, first_name, last_name',
+                        ],
                     ],
                 ],
             ],
