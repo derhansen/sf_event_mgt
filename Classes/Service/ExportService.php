@@ -75,45 +75,20 @@ class ExportService
      */
     public function downloadRegistrationsCsv($eventUid, $settings = [])
     {
+        $tempFolder = $this->getBackendUser()->getDefaultUploadTemporaryFolder();
         $storage = $this->resourceFactory->getDefaultStorage();
-        if ($storage === null) {
-            throw new Exception('Could not get the default storage', 1475590001);
+        if ($storage === null || $tempFolder === null) {
+            throw new Exception('Could not get the default storage or default upload temp folder', 1475590001);
         }
         $registrations = $this->exportRegistrationsCsv($eventUid, $settings);
-        $tempFolder = $storage->getFolder('_temp_');
-        $tempFile = $storage->createFile('sf_events_export.csv', $tempFolder);
+        $tempFilename = md5($eventUid . '_sf_events_export_' . time()) . '.csv';
+        $tempFile = $storage->createFile($tempFilename, $tempFolder);
         $tempFile->setContents($registrations);
         $storage->dumpFileContents($tempFile, true, 'registrations_' . date('dmY_His') . '.csv');
         $tempFile->delete();
     }
 
-    /**
-     * Returns, if the user has read/write access permissions to the __temp__ folder
-     *
-     * @return bool
-     */
-    public function hasWriteAccessToTempFolder()
-    {
-        $result = true;
-        $storage = $this->resourceFactory->getDefaultStorage();
-        if ($storage === null) {
-            return false;
-        }
-
-        try {
-            /** @var Folder $folder */
-            $folder = $storage->getFolder('_temp_');
-            if (!$folder->checkActionPermission('write')) {
-                $result = false;
-            }
-        } catch (\Exception $e) {
-            $result = false;
-        }
-
-        return $result;
-    }
-
-    /**
+   /**
      * Returns all Registrations for the given eventUid as a CSV string
      *
      * @param int $eventUid EventUid
@@ -241,5 +216,13 @@ class ExportService
         }
 
         return $value;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     */
+    protected function getBackendUser()
+    {
+        return $GLOBALS['BE_USER'];
     }
 }

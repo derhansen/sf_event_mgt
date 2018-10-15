@@ -20,6 +20,7 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -83,6 +84,13 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesEventsFromRepositoryForNoStoragePageAndAssignsThemToView()
     {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(true));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
         $demand = $this->getMockBuilder(EventDemand::class)
@@ -101,10 +109,6 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects($this->once())->method('getSessionDataByKey');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
-
-        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
-        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
-        $this->inject($this->subject, 'exportService', $exportService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
@@ -131,6 +135,13 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesEventsFromRepositoryForNoStoragePageAndGivenDemandAndAssignsThemToView()
     {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(true));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
         $searchDemand = new SearchDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
@@ -149,10 +160,6 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects($this->once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
-
-        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
-        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
-        $this->inject($this->subject, 'exportService', $exportService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
@@ -178,6 +185,13 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesAllEventsForGivenStoragePidAndAssignsThemToView()
     {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(true));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
@@ -199,10 +213,6 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects($this->once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
-
-        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
-        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
-        $this->inject($this->subject, 'exportService', $exportService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -227,6 +237,13 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionAssignsMessageIfMessageIdGivenToView()
     {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(true));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
@@ -245,10 +262,6 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects($this->once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
-
-        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
-        $exportService->expects($this->once())->method('hasWriteAccessToTempFolder')->will($this->returnValue(true));
-        $this->inject($this->subject, 'exportService', $exportService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()

@@ -31,3 +31,5 @@ Thanks from me to:
 * Alexander Grein from Mediaessenz for implementing the default storage Pid feature
 * Bernhard Sirlinger for adding the automatic RealURL config
 * Marc Bastian Heinrichs for adding Cache Tags in list and detail view
+* Rune Piper for several code cleanups and Pull Requests
+* Haisam Zehrawi from SeminarPool GmbH for sponsoring refactoring in the CSV export

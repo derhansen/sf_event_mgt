@@ -13,11 +13,9 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use TYPO3\CMS\Core\Resource\Exception\InsufficientFileAccessPermissionsException;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Resource\File;
-use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -221,8 +219,35 @@ class ExportServiceTest extends UnitTestCase
      */
     public function downloadRegistrationsCsvThrowsExceptionIfDefaultStorageNotFound()
     {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(true));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
         $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
         $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(null));
+        $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
+        $this->subject->downloadRegistrationsCsv(1, ['settings']);
+    }
+
+    /**
+     * @test
+     * @expectedException Exception
+     * @return void
+     */
+    public function downloadRegistrationsCsvThrowsExceptionIfNoDefaultUploadTempFolder()
+    {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(null));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
+        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
+        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue('storage'));
         $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
         $this->subject->downloadRegistrationsCsv(1, ['settings']);
     }
@@ -233,6 +258,13 @@ class ExportServiceTest extends UnitTestCase
      */
     public function downloadRegistrationsCsvDumpsRegistrationsContent()
     {
+        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->setMethods(['getDefaultUploadTemporaryFolder'])
+            ->getMock();
+        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
+            ->will($this->returnValue(true));
+        $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
         $mockExportService = $this->getMockBuilder(ExportService::class)
             ->setMethods(['exportRegistrationsCsv'])
             ->getMock();
@@ -247,9 +279,8 @@ class ExportServiceTest extends UnitTestCase
             ->setMethods(['getFolder', 'createFile', 'dumpFileContents'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockStorageRepository->expects($this->at(0))->method('getFolder')->with('_temp_');
-        $mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
-        $mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
+        $mockStorageRepository->expects($this->at(0))->method('createFile')->will($this->returnValue($mockFile));
+        $mockStorageRepository->expects($this->at(1))->method('dumpFileContents');
 
         $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)
             ->setMethods(['getDefaultStorage'])
@@ -261,78 +292,5 @@ class ExportServiceTest extends UnitTestCase
         $this->inject($mockExportService, 'resourceFactory', $mockResourceFactory);
 
         $mockExportService->downloadRegistrationsCsv(1, ['settings']);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function hasWriteAccessToTempFolderReturnsFalseIfNoDefaultStorage()
-    {
-        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(null));
-        $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
-        $this->assertFalse($this->subject->hasWriteAccessToTempFolder());
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function hasWriteAccessToTempFolderReturnsFalseIfNoReadAccessToFolder()
-    {
-        $mockStorage = $this->getMockBuilder(ResourceStorage::class)->disableOriginalConstructor()->getMock();
-        $mockStorage->expects($this->once())->method('getFolder')->will($this->throwException(
-            new InsufficientFileAccessPermissionsException()
-        ));
-
-        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
-            $this->returnValue($mockStorage)
-        );
-        $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
-        $this->assertFalse($this->subject->hasWriteAccessToTempFolder());
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function hasWriteAccessToTempFolderReturnsFalseIfNoWriteAccessToFolder()
-    {
-        $mockFolder = $this->getMockBuilder(Folder::class)->disableOriginalConstructor()->getMock();
-        $mockFolder->expects($this->once())->method('checkActionPermission')->with('write')
-            ->will($this->returnValue(false));
-
-        $mockStorage = $this->getMockBuilder(ResourceStorage::class)->disableOriginalConstructor()->getMock();
-        $mockStorage->expects($this->once())->method('getFolder')->will($this->returnValue($mockFolder));
-
-        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
-            $this->returnValue($mockStorage)
-        );
-        $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
-        $this->assertFalse($this->subject->hasWriteAccessToTempFolder());
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function hasWriteAccessToTempFolderReturnsTrueIfReadAndWriteAccess()
-    {
-        $mockFolder = $this->getMockBuilder(Folder::class)->disableOriginalConstructor()->getMock();
-        $mockFolder->expects($this->once())->method('checkActionPermission')->with('write')
-            ->will($this->returnValue(true));
-
-        $mockStorage = $this->getMockBuilder(ResourceStorage::class)->disableOriginalConstructor()->getMock();
-        $mockStorage->expects($this->once())->method('getFolder')->will($this->returnValue($mockFolder));
-
-        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)->disableOriginalConstructor()->getMock();
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
-            $this->returnValue($mockStorage)
-        );
-        $this->inject($this->subject, 'resourceFactory', $mockResourceFactory);
-        $this->assertTrue($this->subject->hasWriteAccessToTempFolder());
     }
 }

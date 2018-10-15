@@ -43,7 +43,7 @@ Please use the CSV export action as described in :ref:`backend-module` section.
 Why is the CSV export button not shown in the backend module
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Make sure, that the backend user has access to the temp folder of the default storage.
+Make sure, that the backend user has read/write access to the a default upload folder (or ``options.defaultUploadFolder`` in User TSconfig).
 
 How do I create a custom e-mail notification?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -34,7 +34,11 @@ enabled with the registration option. If the list of fields exported does'nt fit
 needs, you can adjust the fields in the module TypoScript settings as described in the
 configuration section of this extension.
 
-Make sure the **user** (or user group) has **read and write access** to the folder ``fileadmin/_temp_/``
+Make sure the **user** (or user group) has **read and write access** to the default upload folder
+(or ``options.defaultUploadFolder`` in User TSconfig)
+
+**Note:** If you have a TYPO3 website with multiple backend users or groups who should be completely separated
+from each other, it is highly recommended to configure a **different upload folders** for each backend user or group.
 
 Sending custom notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

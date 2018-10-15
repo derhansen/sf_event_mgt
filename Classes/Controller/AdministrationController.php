@@ -173,27 +173,8 @@ class AdministrationController extends AbstractController
 
         $variables['events'] = $this->eventRepository->findDemanded($demand);
         $variables['searchDemand'] = $searchDemand;
-        $variables['csvExportPossible'] = $this->hasWriteAccessToTempFolder();
+        $variables['csvExportPossible'] = $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null;
         $this->view->assignMultiple($variables);
-    }
-
-    /**
-     * Returns, if the user has write access to temp folder and if not, adds a flash message if configured
-     *
-     * @return bool
-     */
-    protected function hasWriteAccessToTempFolder()
-    {
-        $hasAccess = $this->exportService->hasWriteAccessToTempFolder();
-        if (!$hasAccess && (bool)$this->settings['csvExport']['showFlashMessageForInsufficientAccessRights']) {
-            $this->addFlashMessage(
-                LocalizationUtility::translate('insufficientAccessToTemp', $this->extensionName),
-                LocalizationUtility::translate('csvExportDisabled', $this->extensionName),
-                \TYPO3\CMS\Core\Messaging\FlashMessage::WARNING
-            );
-        }
-
-        return $hasAccess;
     }
 
     /**
@@ -276,5 +257,13 @@ class AdministrationController extends AbstractController
     protected function getErrorFlashMessage()
     {
         return false;
+    }
+
+    /**
+     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     */
+    protected function getBackendUser()
+    {
+        return $GLOBALS['BE_USER'];
     }
 }

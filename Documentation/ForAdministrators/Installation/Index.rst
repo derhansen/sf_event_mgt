@@ -32,6 +32,6 @@ Important
 
 #. If you use **registrations for events**, you must follow the instructions regarding :ref:`clearcacheuids` and :ref:`cronjob`
 
-#. If you want TYPO3 editors (not admins) to be able to export registrations as a **CSV file**, you must enable read/write access to the folder ``fileadmin/_temp_/``
+#. If you want TYPO3 editors (not admins) to be able to export registrations as a **CSV file**, those users must have a read/write access to the default upload folder (or ``options.defaultUploadFolder`` in User TSconfig)
 
 #. For the **calendar view**, make sure to uncheck the **Disable overwrite demand** setting in the plugin
