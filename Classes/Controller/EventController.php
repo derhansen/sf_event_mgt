@@ -767,6 +767,7 @@ class EventController extends AbstractController
             'messageKey' => $messageKey,
             'titleKey' => $titleKey,
             'event' => $event,
+            'registration' => $registration,
         ];
 
         $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);

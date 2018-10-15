@@ -1372,7 +1372,8 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.confirmation_failed_wrong_hmac',
             'titleKey' => 'confirmRegistration.title.failed',
-            'event' => null
+            'event' => null,
+            'registration' => null,
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -1406,19 +1407,19 @@ class EventControllerTest extends UnitTestCase
      */
     public function confirmRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
+        $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
+        $mockRegistration->expects($this->any())->method('getEvent');
+        $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.confirmation_successful',
             'titleKey' => 'confirmRegistration.title.successful',
-            'event' => null
+            'event' => null,
+            'registration' => $mockRegistration
         ]);
         $this->inject($this->subject, 'view', $view);
-
-        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-
-        $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
-        $mockRegistration->expects($this->any())->method('getEvent');
-        $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
         $returnedArray = [
             false,
@@ -1466,19 +1467,20 @@ class EventControllerTest extends UnitTestCase
      */
     public function confirmRegistrationWaitlistActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
-            'messageKey' => 'event.message.confirmation_waitlist_successful',
-            'titleKey' => 'confirmRegistrationWaitlist.title.successful',
-            'event' => null
-        ]);
-        $this->inject($this->subject, 'view', $view);
-
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
         $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
         $mockRegistration->expects($this->any())->method('getWaitlist')->will($this->returnValue(true));
         $mockRegistration->expects($this->any())->method('getEvent');
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with([
+            'messageKey' => 'event.message.confirmation_waitlist_successful',
+            'titleKey' => 'confirmRegistrationWaitlist.title.successful',
+            'event' => null,
+            'registration' => $mockRegistration
+        ]);
+        $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
             false,
