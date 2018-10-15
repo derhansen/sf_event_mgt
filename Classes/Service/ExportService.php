@@ -88,7 +88,7 @@ class ExportService
         $tempFile->delete();
     }
 
-   /**
+    /**
      * Returns all Registrations for the given eventUid as a CSV string
      *
      * @param int $eventUid EventUid
