@@ -814,6 +814,9 @@ class EventController extends AbstractController
             // Finally cancel registration
             $this->registrationRepository->remove($registration);
 
+            // Dispatch signal, so waitlist registrations can be moved up
+            $this->signalDispatch(__CLASS__, __FUNCTION__ . 'WaitlistMoveUp', [$event, $this]);
+
             // Clear cache for configured pages
             $this->utilityService->clearCacheForConfiguredUids($this->settings);
         }

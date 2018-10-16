@@ -237,3 +237,8 @@ next directly select the Payment Plugin from the plugins select box.
 
 If the plugin originally was a plugin with Flexform settings and switchableControllerActions, those settings
 will remain in the database field pi_flexform and lead to the described error.
+
+How do can I move registrations on the waitlist automativally up, if a registered user cancels a registration?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You should use the signal ``cancelRegistrationActionWaitlistMoveUp``.

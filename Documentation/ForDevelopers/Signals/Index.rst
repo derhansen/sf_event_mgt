@@ -107,6 +107,19 @@ and the processing of the payment of a registration.
          DERHANSEN\SfEventMgt\Controller\Event
 
    :Name:
+         cancelRegistrationActionWaitlistMoveUp
+
+   :Arguments:
+         $event, $this
+
+   :Description:
+         Signal is after a registration is cancelled. Use this signal to move registrations from the waitlist up to
+         the confirmed registrations.
+
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
+
+   :Name:
          cancelRegistrationActionBeforeRenderView
 
    :Arguments:
