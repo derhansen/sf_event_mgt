@@ -1525,6 +1525,15 @@ class EventTest extends UnitTestCase
 
     /**
      * @test
+     */
+    public function getCancellationPossibleReturnsTrueIfNoDeadlineSet()
+    {
+        $this->subject->setEnableCancel(true);
+        $this->assertEquals(true, $this->subject->getCancellationPossible());
+    }
+
+    /**
+     * @test
      * @return void
      */
     public function enableAutoconfirmReturnsDefaultValue()

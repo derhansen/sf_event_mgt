@@ -1357,7 +1357,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getCancellationPossible()
     {
-        return $this->getEnableCancel() && $this->getCancelDeadline() > new \DateTime();
+        return ($this->getEnableCancel() && $this->getCancelDeadline() > new \DateTime()) ||
+            ($this->getEnableCancel() && $this->getCancelDeadline() === null);
     }
 
     /**
