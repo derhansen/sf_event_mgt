@@ -1617,7 +1617,16 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'view', $view);
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')->with(
+            EventController::class,
+            'cancelRegistrationActionWaitlistMoveUp',
+            $this->anything()
+        );
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')->with(
+            EventController::class,
+            'cancelRegistrationActionBeforeRenderView',
+            $this->anything()
+        );
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
