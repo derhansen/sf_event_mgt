@@ -35,7 +35,7 @@ return [
                 ],
             ],
             'showitem' => 'title, address, zip, city, country, description, link, latitude, longitude,
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
                     hidden, --palette--;;timeRestriction'

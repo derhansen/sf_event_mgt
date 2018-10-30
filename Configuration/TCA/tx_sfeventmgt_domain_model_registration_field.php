@@ -5,7 +5,7 @@ $lll = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:';
 $showItemDefault = 'title, type,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
         required, placeholder, default_value,
-    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
@@ -13,7 +13,7 @@ $showItemDefault = 'title, type,
 $showItemRadioCheck = 'title, type, settings,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
         required, placeholder, default_value,
-    --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';

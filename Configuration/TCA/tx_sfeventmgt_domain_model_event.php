@@ -74,7 +74,7 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                      enable_payment, restrict_payment_methods, selected_payment_methods,
 
-                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
 
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 

@@ -303,6 +303,9 @@
 			<trans-unit id="extmng.enableTransfer">
 				<source>Enable payment method 'transfer'</source>
 			</trans-unit>
+			<trans-unit id="tabs.language">
+				<source>Language</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
