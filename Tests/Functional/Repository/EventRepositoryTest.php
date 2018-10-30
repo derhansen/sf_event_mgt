@@ -723,17 +723,17 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsBySpeakerDataProvider()
     {
         return [
-            'speaker 1' => [
+            'events with speaker 1' => [
                 1,
                 1
             ],
-            'speaker 2' => [
+            'events with speaker 2' => [
                 2,
-                1
+                2
             ],
-            'speaker 3' => [
+            'events with speaker 3' => [
                 3,
-                0
+                1
             ]
         ];
     }
@@ -741,7 +741,7 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if speaker restriction works
      *
-     * @dataProvider findDemandedRecordsByLocationDataProvider
+     * @dataProvider findDemandedRecordsBySpeakerDataProvider
      * @test
      * @param mixed $speakerUid
      * @param mixed $expected

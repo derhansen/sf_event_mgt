@@ -516,14 +516,22 @@
         <pid>100</pid>
         <description>test</description>
         <link>link</link>
-        <speaker>2</speaker>
+        <speaker>1</speaker>
     </tx_sfeventmgt_domain_model_event>
-    <!-- has no location -->
+    <!-- has no speaker -->
     <tx_sfeventmgt_domain_model_event>
         <uid>102</uid>
         <pid>100</pid>
         <description>test</description>
         <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+    <!-- has speaker 2 and 3-->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>103</uid>
+        <pid>100</pid>
+        <description>test</description>
+        <link>link</link>
+        <speaker>2</speaker>
     </tx_sfeventmgt_domain_model_event>
 
     <tx_sfeventmgt_domain_model_speaker>
@@ -535,4 +543,21 @@
     <tx_sfeventmgt_domain_model_speaker>
         <uid>3</uid>
     </tx_sfeventmgt_domain_model_speaker>
+
+    <tx_sfeventmgt_event_speaker_mm>
+        <uid_local>100</uid_local>
+        <uid_foreign>1</uid_foreign>
+    </tx_sfeventmgt_event_speaker_mm>
+    <tx_sfeventmgt_event_speaker_mm>
+        <uid_local>101</uid_local>
+        <uid_foreign>2</uid_foreign>
+    </tx_sfeventmgt_event_speaker_mm>
+    <tx_sfeventmgt_event_speaker_mm>
+        <uid_local>103</uid_local>
+        <uid_foreign>2</uid_foreign>
+    </tx_sfeventmgt_event_speaker_mm>
+    <tx_sfeventmgt_event_speaker_mm>
+        <uid_local>103</uid_local>
+        <uid_foreign>3</uid_foreign>
+    </tx_sfeventmgt_event_speaker_mm>
 </dataset>

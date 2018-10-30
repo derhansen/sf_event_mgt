@@ -294,7 +294,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setSpeakerConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() != '') {
-            $constraints[] = $query->equals('speaker', $eventDemand->getSpeaker());
+            $constraints[] = $query->contains('speaker', $eventDemand->getSpeaker());
         }
     }
 
