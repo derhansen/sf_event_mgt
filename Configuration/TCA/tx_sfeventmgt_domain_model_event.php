@@ -138,6 +138,7 @@ return [
                 ],
                 'foreign_table' => 'tx_sfeventmgt_domain_model_event',
                 'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_event.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_event.sys_language_uid IN (-1,0)',
+                'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
