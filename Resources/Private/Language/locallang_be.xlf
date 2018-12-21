@@ -89,10 +89,10 @@
 				<source>Title</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.orderField.startdate">
-				<source>Startdate</source>
+				<source>Start date</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.orderField.enddate">
-				<source>Enddate</source>
+				<source>End date</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.orderField.event.title">
 				<source>Event title</source>

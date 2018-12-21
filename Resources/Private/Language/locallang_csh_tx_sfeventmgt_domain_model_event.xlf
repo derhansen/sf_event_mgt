@@ -10,10 +10,10 @@
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="startdate.description">
-				<source>Startdate and time</source>
+				<source>Start date and time</source>
 			</trans-unit>
 			<trans-unit id="enddate.description">
-				<source>Enddate and time</source>
+				<source>End date and time</source>
 			</trans-unit>
 			<trans-unit id="maxParticipants.description">
 				<source>Max participants</source>
