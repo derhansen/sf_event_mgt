@@ -89,6 +89,20 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
+    public function getValueReturnsArrayForFieldTypeArrayAndValueString()
+    {
+        $expectedArray = ['value1'];
+        $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
+        $mockField->expects($this->once())->method('getValueType')
+            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $this->subject->setField($mockField);
+        $this->subject->setValue('value1');
+        $this->assertSame($expectedArray, $this->subject->getValue());
+    }
+
+    /**
+     * @test
+     */
     public function getFieldReturnsInitialValueForField()
     {
         $this->assertNull($this->subject->getField());
