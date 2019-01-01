@@ -14,6 +14,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use TYPO3\CMS\Core\Resource\Folder;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
+use TYPO3\CMS\Core\Utility\CsvUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -108,7 +109,7 @@ class ExportService
             $fieldsArray = array_diff($fieldsArray, ['registration_fields']);
         }
         $registrations = $this->registrationRepository->findByEvent($eventUid);
-        $exportedRegistrations = GeneralUtility::csvValues(
+        $exportedRegistrations = CsvUtility::csvValues(
             array_merge($fieldsArray, $registrationFieldData),
             $settings['fieldDelimiter'],
             $settings['fieldQuoteCharacter']
@@ -130,7 +131,7 @@ class ExportService
                     $this->getRegistrationFieldValues($registration, $registrationFieldData)
                 );
             }
-            $exportedRegistrations .= GeneralUtility::csvValues(
+            $exportedRegistrations .= CsvUtility::csvValues(
                 $exportedRegistration,
                 $settings['fieldDelimiter'],
                 $settings['fieldQuoteCharacter']
