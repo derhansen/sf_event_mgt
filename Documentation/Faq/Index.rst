@@ -242,3 +242,15 @@ How do can I move registrations on the waitlist automativally up, if a registere
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You should use the signal ``cancelRegistrationActionWaitlistMoveUp``.
+
+Images and/or image attributes do not get translated
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Translation of FAL object in Extbase is broken in TYPO3 up to version 8.7. Please refer to the following forge issue
+and use ext:repair_translation.
+
+Forge issue: https://forge.typo3.org/issues/57272
+Extension - Repair Translation: https://github.com/froemken/repair_translation
+
+
+
