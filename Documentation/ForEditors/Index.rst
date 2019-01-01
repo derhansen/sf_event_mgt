@@ -25,3 +25,4 @@ For Editors
    Registrationfield/Index
    Registrationfieldvalue/Index
    BackendModule/Index
+   LiveSearch/Index

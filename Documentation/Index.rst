@@ -29,7 +29,7 @@ Event management and registration
 		events, registration
 
 	:Copyright:
-		2014 - 2018
+		2014 - 2019
 
 	:Author:
 		Torben Hansen
