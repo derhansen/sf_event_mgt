@@ -2278,4 +2278,34 @@ class EventControllerTest extends UnitTestCase
         $this->assertSame('26.12.2016 00:00:00', $resultDemand->getSearchDemand()->getStartDate()->format('d.m.Y H:i:s'));
         $this->assertSame('05.02.2017 23:59:59', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y H:i:s'));
     }
+
+    /**
+     * @test
+     */
+    public function checkPidOfEventRecordWorks()
+    {
+        $mockedSignalDispatcher = $this->getAccessibleMock('\TYPO3\CMS\Extbase\SignalSlot\Dispatcher', ['dummy']);
+        $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
+
+        $news = new Event();
+
+        // No startingpoint
+        $mockedController->_set('settings', ['storagePage' => '']);
+        $news->setPid(12);
+
+        $this->assertEquals($news, $mockedController->_call('checkPidOfEventRecord', $news));
+
+        // startingpoint defined
+        $mockedController->_set('settings', ['storagePage' => '1,2,123,456']);
+        $news->setPid(123);
+
+        $this->assertEquals($news, $mockedController->_call('checkPidOfEventRecord', $news));
+
+        // startingpoint is different
+        $mockedController->_set('settings', ['storagePage' => '123,456']);
+        $news->setPid(12);
+
+        $this->assertEquals(null, $mockedController->_call('checkPidOfEventRecord', $news));
+    }
 }

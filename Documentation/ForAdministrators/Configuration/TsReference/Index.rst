@@ -118,6 +118,19 @@ plugin.tx_sfeventmgt
          1 (true)
 
  - :Property:
+         settings.detail.checkPidOfEventRecord
+
+   :Date type:
+         Boolen
+
+   :Description:
+         If set, the detail view checks the incoming event record against the defined starting point(s).
+         If those don’t match, the event record won’t be displayed.
+
+   :Default:
+         0 (False)
+
+ - :Property:
          settings.detail.imageWidth
 
    :Date type:
@@ -140,6 +153,19 @@ plugin.tx_sfeventmgt
 
    :Default:
          Empty
+
+ - :Property:
+         settings.registration.checkPidOfEventRecord
+
+   :Date type:
+         Boolen
+
+   :Description:
+         If set, the registration view checks the incoming event record against the defined starting point(s).
+         If those don’t match, the registration to the event is not possible.
+
+   :Default:
+         0 (False)
 
  - :Property:
          settings.registration.autoConfirmation

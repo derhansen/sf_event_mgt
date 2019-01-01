@@ -365,12 +365,6 @@
                         <TCEforms>
                             <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.storagePage</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -392,12 +386,6 @@
                     <settings.recursive>
                         <TCEforms>
                             <label>LLL:EXT:lang/locallang_general.xlf:LGL.recursive</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <items type="array">

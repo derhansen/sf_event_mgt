@@ -43,10 +43,12 @@ plugin.tx_sfeventmgt {
             showWeekNumber = 1
         }
         detail {
+            checkPidOfEventRecord = 0
             imageWidth = 200
             imageHeight =
         }
         registration {
+            checkPidOfEventRecord = 0
             autoConfirmation = {$plugin.tx_sfeventmgt.settings.registration.autoConfirmation}
             deleteExpiredRegistrations = {$plugin.tx_sfeventmgt.settings.registration.deleteExpiredRegistrations}
             formatDateOfBirth = {$plugin.tx_sfeventmgt.settings.registration.formatDateOfBirth}

@@ -342,6 +342,10 @@ class EventController extends AbstractController
     public function detailAction(Event $event = null)
     {
         $event = $this->evaluateSingleEventSetting($event);
+        if (is_a($event, Event::class) && $this->settings['detail']['checkPidOfEventRecord']) {
+            $event = $this->checkPidOfEventRecord($event);
+        }
+
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -398,6 +402,9 @@ class EventController extends AbstractController
      */
     public function icalDownloadAction(Event $event = null)
     {
+        if (is_a($event, Event::class) && $this->settings['detail']['checkPidOfEventRecord']) {
+            $event = $this->checkPidOfEventRecord($event);
+        }
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -416,6 +423,9 @@ class EventController extends AbstractController
     public function registrationAction(Event $event = null)
     {
         $event = $this->evaluateSingleEventSetting($event);
+        if (is_a($event, Event::class) && $this->settings['registration']['checkPidOfEventRecord']) {
+            $event = $this->checkPidOfEventRecord($event);
+        }
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -532,10 +542,16 @@ class EventController extends AbstractController
      * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator
      * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator
      *
-     * @return void
+     * @return mixed string|void
      */
     public function saveRegistrationAction(Registration $registration, Event $event)
     {
+        if (is_a($event, Event::class) && $this->settings['registration']['checkPidOfEventRecord']) {
+            $event = $this->checkPidOfEventRecord($event);
+        }
+        if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
+            return $this->handleEventNotFoundError($this->settings);
+        }
         $autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'] || $event->getEnableAutoconfirm();
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
         $success = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
@@ -953,7 +969,7 @@ class EventController extends AbstractController
     {
         $cacheTags = [];
         foreach ($eventRecords as $event) {
-            // cache tag for each news record
+            // cache tag for each event record
             $cacheTags[] = 'tx_sfeventmgt_uid_' . $event->getUid();
         }
         if (count($cacheTags) > 0) {
@@ -979,5 +995,37 @@ class EventController extends AbstractController
         if (count($cacheTags) > 0) {
             $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
         }
+    }
+
+    /**
+     * Checks if the event pid could be found in the storagePage settings of the detail plugin and
+     * if the pid could not be found it return null instead of the event object.
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @return null|\DERHANSEN\SfEventMgt\Domain\Model\Event
+     */
+    protected function checkPidOfEventRecord(Event $event)
+    {
+        $allowedStoragePages = GeneralUtility::trimExplode(
+            ',',
+            Page::extendPidListByChildren(
+                $this->settings['storagePage'],
+                $this->settings['recursive']
+            ),
+            true
+        );
+        if (count($allowedStoragePages) > 0 && !in_array($event->getPid(), $allowedStoragePages)) {
+            $this->signalSlotDispatcher->dispatch(
+                __CLASS__,
+                'checkPidOfEventRecordFailedInDetailAction',
+                [
+                    'event' => $event,
+                    'eventController' => $this
+                ]
+            );
+            $event = null;
+        }
+
+        return $event;
     }
 }
