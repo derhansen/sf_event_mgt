@@ -14,13 +14,3 @@ defined('TYPO3_MODE') or die();
 
 // Enable language synchronisation for the category field
 $GLOBALS['TCA']['tx_sfeventmgt_domain_model_event']['columns']['category']['config']['behaviour']['allowLanguageSynchronization'] = true;
-
-// Make several fields editable for TYPO3 7.6 - translation records have problems with
-// 'l10n_display' => 'defaultAsReadonly' in combination with 'l10n_mode' => 'exclude'
-if (version_compare(TYPO3_branch, '7.6', '<=')) {
-    $fields = ['startdate', 'enddate'];
-    foreach ($fields as $field) {
-        $GLOBALS['TCA']['tx_sfeventmgt_domain_model_event']['columns'][$field]['l10n_mode'] = 'mergeIfNotBlank';
-        unset($GLOBALS['TCA']['tx_sfeventmgt_domain_model_event']['columns'][$field]['l10n_display']);
-    }
-}
