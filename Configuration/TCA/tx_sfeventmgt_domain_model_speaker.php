@@ -156,18 +156,6 @@ return [
                 'eval' => 'trim',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
-                ],
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'actions-wizard-rte',
-                        'notNewRecords' => 1,
-                        'RTEonly' => 1,
-                        'module' => [
-                            'name' => 'wizard_rte',
-                        ],
-                        'title' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:bodytext.W.RTE',
-                        'type' => 'script'
-                    ]
                 ]
             ]
         ],
