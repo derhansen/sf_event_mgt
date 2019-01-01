@@ -38,14 +38,6 @@ return [
     ],
     'types' => [
         '1' => [
-            'columnsOverrides' => [
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-                ],
-                'program' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-                ],
-            ],
             'showitem' => '--palette--;;titleTopEvent, --palette--;;paletteDates, teaser, description,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
@@ -244,6 +236,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.description',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
@@ -259,8 +252,7 @@ return [
                         'type' => 'script'
                     ]
                 ]
-            ],
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
+            ]
         ],
         'program' => [
             'exclude' => 1,
@@ -268,6 +260,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.program',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
@@ -283,8 +276,7 @@ return [
                         'type' => 'script'
                     ]
                 ]
-            ],
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
+            ]
         ],
         'link' => [
             'exclude' => 1,

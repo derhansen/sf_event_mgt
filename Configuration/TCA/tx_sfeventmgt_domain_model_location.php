@@ -29,11 +29,6 @@ return [
     ],
     'types' => [
         '1' => [
-            'columnsOverrides' => [
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-                ],
-            ],
             'showitem' => 'title, address, zip, city, country, description, link, latitude, longitude,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
@@ -189,6 +184,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.description',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
@@ -207,8 +203,7 @@ return [
                         'type' => 'script'
                     ]
                 ]
-            ],
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
+            ]
         ],
         'link' => [
             'exclude' => 1,

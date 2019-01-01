@@ -30,11 +30,6 @@ return [
     ],
     'types' => [
         '0' => [
-            'columnsOverrides' => [
-                'description' => [
-                    'defaultExtras' => 'richtext:rte_transform[mode=ts_css]'
-                ],
-            ],
             'showitem' => 'name, job_title, description, image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
@@ -155,6 +150,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_speaker.description',
             'config' => [
                 'type' => 'text',
+                'enableRichtext' => true,
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
@@ -173,8 +169,7 @@ return [
                         'type' => 'script'
                     ]
                 ]
-            ],
-            'defaultExtras' => 'richtext:rte_transform[mode=ts_css]',
+            ]
         ],
         'image' => [
             'exclude' => 1,
