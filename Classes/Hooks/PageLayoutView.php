@@ -377,7 +377,7 @@ class PageLayoutView
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/News/PageLayout');
         $pageRenderer->addCssFile(
-            ExtensionManagementUtility::extRelPath('sf_event_mgt') . 'Resources/Public/Css/Backend/PageLayoutView.css'
+            GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Public/Css/Backend/PageLayoutView.css')
         );
 
         $view = GeneralUtility::makeInstance(StandaloneView::class);
