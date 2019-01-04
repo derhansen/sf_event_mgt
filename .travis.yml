@@ -27,13 +27,13 @@ script:
     if [[ "$COVERAGE" == "0" ]]; then
       echo;
       echo "Running unit tests";
-      .Build/bin/phpunit --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
+      .Build/bin/phpunit --colors -c Tests/Build/UnitTests.xml
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
       echo;
       echo "Running unit tests";
-      .Build/bin/phpunit --coverage-clover=unittest-coverage.clover --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/UnitTests.xml Tests/Unit/
+      .Build/bin/phpunit --coverage-clover=unittest-coverage.clover --colors -c Tests/Build/UnitTests.xml
     fi
   - >
     echo;
@@ -47,7 +47,7 @@ script:
       export typo3DatabaseHost="localhost";
       export typo3DatabaseUsername="root";
       export typo3DatabasePassword="";
-      find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --coverage-clover={}functionaltest-coverage.clover --colors -c .Build/vendor/nimut/testing-framework/res/Configuration/FunctionalTests.xml {}'
+      find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --coverage-clover={}functionaltest-coverage.clover --colors -c Tests/Build/FunctionalTests.xml {}'
     fi
   - >
     if [[ "$COVERAGE" == "1" ]]; then
@@ -64,25 +64,16 @@ jobs:
   include:
     - stage: test
       php: 7.2
-      env: TYPO3_VERSION=^8.7 COVERAGE=1
+      env: TYPO3_VERSION=^9.5 COVERAGE=1
     - stage: test
       php: 7.2
-      env: TYPO3_VERSION=^7.6 COVERAGE=0
+      env: TYPO3_VERSION=^9.5 COVERAGE=0
+    - stage: test
+      php: 7.2
+      env: TYPO3_VERSION=^8.7 COVERAGE=0
     - stage: test
       php: 7.1
       env: TYPO3_VERSION=^8.7 COVERAGE=0
     - stage: test
-      php: 7.1
-      env: TYPO3_VERSION=^7.6 COVERAGE=0
-    - stage: test
       php: 7.0
       env: TYPO3_VERSION=^8.7 COVERAGE=0
-    - stage: test
-      php: 7.0
-      env: TYPO3_VERSION=^7.6 COVERAGE=0
-    - stage: test
-      php: 5.6
-      env: TYPO3_VERSION=^7.6 COVERAGE=0
-    - stage: test
-      php: 5.5
-      env: TYPO3_VERSION=^7.6 COVERAGE=0

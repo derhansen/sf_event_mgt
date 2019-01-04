@@ -3,3 +3,4 @@
 .Build/
 composer.lock
 .php_cs.cache
+/var/

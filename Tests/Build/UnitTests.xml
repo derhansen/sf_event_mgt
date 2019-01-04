@@ -1,0 +1,28 @@
+<phpunit
+    backupGlobals="true"
+    backupStaticAttributes="false"
+    bootstrap="../../.Build/vendor/nimut/testing-framework/res/Configuration/UnitTestsBootstrap.php"
+    colors="true"
+    convertErrorsToExceptions="true"
+    convertWarningsToExceptions="true"
+    convertDeprecationsToExceptions="false"
+    forceCoversAnnotation="false"
+    processIsolation="false"
+    stopOnError="false"
+    stopOnFailure="false"
+    stopOnIncomplete="false"
+    stopOnSkipped="false"
+    verbose="false"
+>
+    <testsuites>
+        <testsuite name="Unit Tests">
+            <directory>../Unit/</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <!-- suppress deprecation warnings - set error reporting to: E_ALL & ~E_NOTICE & ~E_USER_ERROR & ~E_USER_WARNING & ~E_USER_NOTICE & ~E_STRICT & ~E_USER_DEPRECATED -->
+        <ini name="error_reporting" value="12535"/>
+    </php>
+
+</phpunit>

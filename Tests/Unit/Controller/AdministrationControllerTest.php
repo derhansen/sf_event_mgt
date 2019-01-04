@@ -121,7 +121,7 @@ class AdministrationControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
-            'searchDemand' => $searchDemand,
+            'searchDemand' => null,
             'csvExportPossible' => true
         ]);
         $this->inject($this->subject, 'view', $view);
