@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -36,9 +37,10 @@ class PrefillFieldViewHelper extends AbstractViewHelper
      */
     public function render()
     {
+        /** @var Field $registrationField */
         $registrationField = $this->arguments['registrationField'];
         // If mapping errors occured for form, return value that has been submitted
-        $originalRequest = $this->controllerContext->getRequest()->getOriginalRequest();
+        $originalRequest = $this->getRequest()->getOriginalRequest();
         if ($originalRequest) {
             return $this->getFieldValueFromArguments($originalRequest->getArguments(), $registrationField->getUid());
         }
@@ -61,7 +63,16 @@ class PrefillFieldViewHelper extends AbstractViewHelper
                 $result = $fieldValue['value'];
             }
         }
-
         return $result;
+    }
+
+    /**
+     * Shortcut for retrieving the request from the controller context
+     *
+     * @return \TYPO3\CMS\Extbase\Mvc\Request
+     */
+    protected function getRequest()
+    {
+        return $this->renderingContext->getControllerContext()->getRequest();
     }
 }

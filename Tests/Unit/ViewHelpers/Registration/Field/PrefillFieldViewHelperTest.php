@@ -33,14 +33,8 @@ class PrefillFieldViewHelperTest extends UnitTestCase
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
-
-        $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['dummy'], [], '', false);
-        $viewHelper->_set('controllerContext', $mockControllerContext);
+        $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['getRequest'], [], '', false);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
 
         $field = new Field();
         $field->setDefaultValue('Default');
@@ -104,14 +98,8 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         $mockRequest->expects($this->once())->method('getOriginalRequest')
             ->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
-
-        $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['dummy'], [], '', false);
-        $viewHelper->_set('controllerContext', $mockControllerContext);
+        $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['getRequest'], [], '', false);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
 
         $mockField = $this->getMockBuilder(Field::class)->getMock();
         $mockField->expects($this->once())->method('getUid')->will($this->returnValue($fieldUid));
