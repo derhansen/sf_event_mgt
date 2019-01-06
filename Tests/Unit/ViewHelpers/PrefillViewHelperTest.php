@@ -11,7 +11,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
 /**
@@ -28,7 +27,10 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsEmptyStringIfTsfeNotAvailabe()
     {
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('a field', []);
+        $viewHelper->setArguments([
+            'fieldname' => 'a field'
+        ]);
+        $actual = $viewHelper->render();
         $this->assertSame('', $actual);
     }
 
@@ -47,7 +49,10 @@ class PrefillViewHelperTest extends UnitTestCase
         );
         $GLOBALS['TSFE'] = new \stdClass();
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('fieldname', []);
+        $viewHelper->setArguments([
+            'fieldname' => 'fieldname'
+        ]);
+        $actual = $viewHelper->render();
         $this->assertSame('Existing Value', $actual);
     }
 
@@ -59,7 +64,10 @@ class PrefillViewHelperTest extends UnitTestCase
     {
         $GLOBALS['TSFE'] = new \stdClass();
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('a field', []);
+        $viewHelper->setArguments([
+            'fieldname' => 'a field'
+        ]);
+        $actual = $viewHelper->render();
         $this->assertSame('', $actual);
     }
 
@@ -70,9 +78,11 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsEmptyStringIfPrefillSettingsEmpty()
     {
         $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->loginUser = 1;
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('a field', []);
+        $viewHelper->setArguments([
+            'fieldname' => 'a field'
+        ]);
+        $actual = $viewHelper->render();
         $this->assertSame('', $actual);
     }
 
@@ -83,9 +93,12 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsEmptyStringIfFieldNotFoundInPrefillSettings()
     {
         $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->loginUser = 1;
         $viewHelper = new PrefillViewHelper();
-        $actual = $viewHelper->render('lastname', ['firstname' => 'first_name']);
+        $viewHelper->setArguments([
+            'fieldname' => 'lastname',
+            'prefillSettings' => ['firstname' => 'first_name']
+        ]);
+        $actual = $viewHelper->render();
         $this->assertSame('', $actual);
     }
 
@@ -96,10 +109,14 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsEmptyStringIfFieldNotFoundInFeUser()
     {
         $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->loginUser = 1;
         $GLOBALS['TSFE']->fe_user = new \stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John'
+        ];
+
+        $arguments = [
+            'fieldname' => 'lastname',
+            'prefillSettings' => ['lastname' => 'last_name']
         ];
 
         $mockRequest = $this->getMockBuilder(Request::class)
@@ -108,23 +125,10 @@ class PrefillViewHelperTest extends UnitTestCase
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will(
-            $this->returnValue($mockRequest)
-        );
-
-        $viewHelper = $this->getAccessibleMock(
-            PrefillViewHelper::class,
-            ['dummy'],
-            [],
-            '',
-            false
-        );
-        $viewHelper->_set('controllerContext', $mockControllerContext);
-        $actual = $viewHelper->render('firstname', ['firstname' => 'unknown_field']);
+        $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
+        $viewHelper->_set('arguments', $arguments);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $actual = $viewHelper->_call('render');
         $this->assertSame('', $actual);
     }
 
@@ -135,35 +139,27 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsFieldvalueIfFound()
     {
         $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->loginUser = 1;
         $GLOBALS['TSFE']->fe_user = new \stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
             'last_name' => 'Doe'
         ];
+
+        $arguments = [
+            'fieldname' => 'lastname',
+            'prefillSettings' => ['lastname' => 'last_name']
+        ];
+
         $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will(
-            $this->returnValue($mockRequest)
-        );
-
-        $viewHelper = $this->getAccessibleMock(
-            PrefillViewHelper::class,
-            ['dummy'],
-            [],
-            '',
-            false
-        );
-        $viewHelper->_set('controllerContext', $mockControllerContext);
-        $actual = $viewHelper->render('lastname', ['lastname' => 'last_name']);
+        $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
+        $viewHelper->_set('arguments', $arguments);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $actual = $viewHelper->_call('render');
         $this->assertSame('Doe', $actual);
     }
 
@@ -174,7 +170,6 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsSubmittedValueIfValidationError()
     {
         $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->loginUser = 1;
         $GLOBALS['TSFE']->fe_user = new \stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
@@ -182,6 +177,11 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
 
         $arguments = [
+            'fieldname' => 'lastname',
+            'prefillSettings' => ['lastname' => 'last_name']
+        ];
+
+        $requestArguments = [
             'registration' => [
                 'lastname' => 'Submitted Lastname'
             ]
@@ -191,31 +191,20 @@ class PrefillViewHelperTest extends UnitTestCase
             ->setMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
+        $mockOriginalRequest->expects($this->once())->method('getArguments')
+            ->will($this->returnValue($requestArguments));
 
         $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue($mockOriginalRequest));
+        $mockRequest->expects($this->once())->method('getOriginalRequest')
+            ->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will(
-            $this->returnValue($mockRequest)
-        );
-
-        $viewHelper = $this->getAccessibleMock(
-            PrefillViewHelper::class,
-            ['dummy'],
-            [],
-            '',
-            false
-        );
-        $viewHelper->_set('controllerContext', $mockControllerContext);
-        $actual = $viewHelper->render('lastname', ['lastname' => 'last_name']);
+        $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
+        $viewHelper->_set('arguments', $arguments);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $actual = $viewHelper->_call('render');
         $this->assertSame('Submitted Lastname', $actual);
     }
 }
