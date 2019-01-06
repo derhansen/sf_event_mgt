@@ -67,7 +67,8 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
     public function viewHelperReturnsExpectedValues($value, $expected)
     {
         $viewHelper = new ICalendarDescriptionViewHelper();
-        $actual = $viewHelper->render($value);
+        $viewHelper->setArguments(['description' => $value]);
+        $actual = $viewHelper->render();
         $this->assertEquals($expected, $actual);
     }
 

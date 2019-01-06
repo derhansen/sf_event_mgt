@@ -18,14 +18,24 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class ICalendarDescriptionViewHelper extends AbstractViewHelper
 {
     /**
-     * Formats the given description according to RFC 2445
+     * Initialize arguments
      *
-     * @param string $description The description
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('description', 'string', 'The description', false);
+    }
+
+    /**
+     * Formats the given description according to RFC 2445
      *
      * @return string
      */
-    public function render($description = null)
+    public function render()
     {
+        $description = $this->arguments['description'];
         if ($description === null) {
             $description = $this->renderChildren();
         }
