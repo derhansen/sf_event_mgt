@@ -153,7 +153,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         $mockEvent->expects($this->any())->method('getMaxParticipants')->will($this->returnValue($maxParticipants));
         $mockEvent->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue($waitlist));
         $mockEvent->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue($maxRegistrations));
-        $actual = $this->viewhelper->render($mockEvent);
+        $this->viewhelper->setArguments(['event' => $mockEvent]);
+        $actual = $this->viewhelper->render();
         $this->assertEquals($expected, $actual);
     }
 }
