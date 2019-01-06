@@ -9,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Hmac ViewHelper for registrations

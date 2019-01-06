@@ -9,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Event;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * SimultaneousRegistrations ViewHelper

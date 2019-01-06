@@ -8,7 +8,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * PrefillField ViewHelper for registration fields

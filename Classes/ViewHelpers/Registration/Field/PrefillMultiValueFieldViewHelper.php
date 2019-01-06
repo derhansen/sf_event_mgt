@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * PrefillMultiValueField ViewHelper for registration fields
