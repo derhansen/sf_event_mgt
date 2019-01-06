@@ -18,14 +18,25 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class PrefillFieldViewHelper extends AbstractViewHelper
 {
     /**
+     * Initialize arguments
+     *
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('registrationField', 'object', 'The registrationField object', true);
+    }
+
+    /**
      * Returns a string to be used as prefill value for the given registration field (type=input). If the form
      * has already been submitted, the submitted value for the field is returned.
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $registrationField
      * @return string
      */
-    public function render($registrationField)
+    public function render()
     {
+        $registrationField = $this->arguments['registrationField'];
         // If mapping errors occured for form, return value that has been submitted
         $originalRequest = $this->controllerContext->getRequest()->getOriginalRequest();
         if ($originalRequest) {

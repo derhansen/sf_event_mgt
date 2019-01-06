@@ -44,7 +44,9 @@ class PrefillFieldViewHelperTest extends UnitTestCase
 
         $field = new Field();
         $field->setDefaultValue('Default');
-        $actual = $viewHelper->render($field);
+
+        $viewHelper->_set('arguments', ['registrationField' => $field]);
+        $actual = $viewHelper->_callRef('render');
         $this->assertSame('Default', $actual);
     }
 
@@ -114,7 +116,8 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         $mockField = $this->getMockBuilder(Field::class)->getMock();
         $mockField->expects($this->once())->method('getUid')->will($this->returnValue($fieldUid));
 
-        $actual = $viewHelper->render($mockField);
+        $viewHelper->_set('arguments', ['registrationField' => $mockField]);
+        $actual = $viewHelper->_callRef('render');
         $this->assertSame($expected, $actual);
     }
 }
