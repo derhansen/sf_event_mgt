@@ -51,7 +51,8 @@ class ICalendarDateViewHelperTest extends UnitTestCase
     public function viewHelperReturnsExpectedValues($value, $expected)
     {
         $viewHelper = new ICalendarDateViewHelper();
-        $actual = $viewHelper->render($value);
+        $viewHelper->setArguments(['date' => $value]);
+        $actual = $viewHelper->render();
         $this->assertSame($expected, $actual);
     }
 
@@ -67,7 +68,8 @@ class ICalendarDateViewHelperTest extends UnitTestCase
         $viewHelper = $this->getMockBuilder(ICalendarDateViewHelper::class)
             ->setMethods(['renderChildren'])
             ->getMock();
-        $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue(new \DateTime('@1425234250')));
+        $viewHelper->expects($this->once())->method('renderChildren')
+            ->will($this->returnValue(new \DateTime('@1425234250')));
         $actual = $viewHelper->render();
         $this->assertSame('20150301T182410Z', $actual);
     }

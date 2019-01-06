@@ -18,15 +18,25 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class ICalendarDateViewHelper extends AbstractViewHelper
 {
     /**
-     * Formats the given date according to rfc5545
+     * Initialize arguments
      *
-     * @param \DateTime $date The DateTime object
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('date', 'datetime', 'The DateTime object', false);
+    }
+
+    /**
+     * Formats the given date according to rfc5545
      *
      * @see http://tools.ietf.org/html/rfc5545#section-3.3.5
      * @return string
      */
-    public function render($date = null)
+    public function render()
     {
+        $date = $this->arguments['date'];
         if ($date === null) {
             $date = $this->renderChildren();
         }

@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Event;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -18,18 +19,29 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
 {
     /**
+     * Initialize arguments
+     *
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('event', 'object', 'The event', true);
+    }
+
+    /**
      * Returns an array with the amount of possible simultaneous registrations
      * respecting the maxRegistrationsPerUser setting and also respects the amount
      * of remaining free places.
      *
      * The returned array index starts at 1 if at least one registration is possible
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     *
      * @return array
      */
-    public function render($event)
+    public function render()
     {
+        /** @var Event $event */
+        $event = $this->arguments['event'];
         $minPossibleRegistrations = 1;
         if ($event->getMaxParticipants() > 0 &&
             $event->getMaxRegistrationsPerUser() >= $event->getFreePlaces() &&
