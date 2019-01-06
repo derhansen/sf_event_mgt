@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -35,16 +36,27 @@ class HmacViewHelper extends AbstractViewHelper
     }
 
     /**
-     * Returns the hmac for the given registration in order to cancel the registration
+     * Initialize arguments
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @api
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('registration', 'object', 'Registration', false);
+    }
+
+    /**
+     * Returns the hmac for the given registration in order to cancel the registration
      *
      * @return string
      */
-    public function render($registration)
+    public function render()
     {
+        /** @var Registration $registration */
+        $registration = $this->arguments['registration'];
         $result = '';
-        if ($registration) {
+        if ($registration && is_a(Registration::class, $registration)) {
             $result = $this->hashService->generateHmac('reg-' . $registration->getUid());
         }
 
