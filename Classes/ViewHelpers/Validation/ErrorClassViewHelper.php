@@ -9,7 +9,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Validation;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to render a given class when a field has validation errors
