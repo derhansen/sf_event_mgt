@@ -35,19 +35,15 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
             ->getMock();
         $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
-
-        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['dummy'], [], '', false);
-        $viewHelper->_set('controllerContext', $mockControllerContext);
+        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
 
         $field = new Field();
         $field->setDefaultValue('Default');
         $currentValue = 'Default';
-        $actual = $viewHelper->render($field, $currentValue);
+
+        $viewHelper->_set('arguments', ['registrationField' => $field, 'currentValue' => $currentValue]);
+        $actual = $viewHelper->_callRef('render');
         $this->assertTrue($actual);
     }
 
@@ -145,20 +141,15 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $mockRequest->expects($this->once())->method('getOriginalRequest')
             ->will($this->returnValue($mockOriginalRequest));
 
-        $mockControllerContext = $this->getMockBuilder(ControllerContext::class)
-            ->setMethods(['getRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockControllerContext->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
-
-        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['dummy'], [], '', false);
-        $viewHelper->_set('controllerContext', $mockControllerContext);
+        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
         $viewHelper->_set('propertyMapper', $mockPropertyMapper);
 
         $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
         $mockSubmittedField->expects($this->once())->method('getUid')->will($this->returnValue($registrationFieldUid));
 
-        $actual = $viewHelper->render($mockSubmittedField, $currentValue);
+        $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => $currentValue]);
+        $actual = $viewHelper->_callRef('render');
         $this->assertSame($expected, $actual);
     }
 }

@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
@@ -34,18 +35,30 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     }
 
     /**
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('registrationField', 'object', 'RegistrationField', true);
+        $this->registerArgument('currentValue', 'strong', 'Current value', true);
+    }
+
+    /**
      * Returns, if the given $currentValue is selected/checked for the given registration field
      * If no originalRequest exist (form is not submitted), true is returned if the given $currentValue
      * matches the default value of the field
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $registrationField
-     * @param string $currentValue
      * @return bool
      */
-    public function render($registrationField, $currentValue)
+    public function render()
     {
+        /** @var Field $registrationField */
+        $registrationField = $this->arguments['registrationField'];
+        $currentValue = $this->arguments['currentValue'];
+
         // If mapping errors occured for form, return value that has been submitted
-        $originalRequest = $this->controllerContext->getRequest()->getOriginalRequest();
+        $originalRequest = $this->getRequest()->getOriginalRequest();
         if ($originalRequest) {
             return $this->getFieldValueFromArguments(
                 $originalRequest->getArguments(),
@@ -104,5 +117,15 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
         $defaultValues = GeneralUtility::trimExplode(',', $registrationField->getDefaultValue());
 
         return in_array($currentValue, $defaultValues);
+    }
+
+    /**
+     * Shortcut for retrieving the request from the controller context
+     *
+     * @return \TYPO3\CMS\Extbase\Mvc\Request
+     */
+    protected function getRequest()
+    {
+        return $this->renderingContext->getControllerContext()->getRequest();
     }
 }
