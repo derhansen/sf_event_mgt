@@ -19,13 +19,22 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EditRecordViewHelper extends AbstractRecordViewHelper
 {
     /**
+     * Initialize arguments
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('uid', 'integer', 'Record UID', true);
+    }
+
+    /**
      * Renders a edit link for the given Event UID
      *
-     * @param int $uid
      * @return string
      */
-    public function render($uid)
+    public function render()
     {
+        $uid = $this->arguments['uid'];
         $pid = (int)GeneralUtility::_GET('id');
         $parameters = [
             'edit[tx_sfeventmgt_domain_model_event][' . (int)$uid . ']' => 'edit',
