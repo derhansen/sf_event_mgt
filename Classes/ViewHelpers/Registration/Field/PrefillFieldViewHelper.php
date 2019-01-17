@@ -61,6 +61,7 @@ class PrefillFieldViewHelper extends AbstractViewHelper
                 $result = $fieldValue['value'];
             }
         }
+
         return $result;
     }
 

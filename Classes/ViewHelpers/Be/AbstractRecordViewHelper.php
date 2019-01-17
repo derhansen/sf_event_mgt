@@ -30,8 +30,8 @@ abstract class AbstractRecordViewHelper extends AbstractViewHelper
      * Returns the full module URL for the given parameters depending on the current TYPO3 version
      *
      * @param array $parameters
-     * @return string
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @return string
      */
     public function getModuleUrl($parameters)
     {
@@ -41,6 +41,7 @@ abstract class AbstractRecordViewHelper extends AbstractViewHelper
         } else {
             $uri = BackendUtility::getModuleUrl('record_edit', $parameters);
         }
+
         return $uri;
     }
 

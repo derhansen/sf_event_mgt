@@ -50,6 +50,7 @@ class PrefillViewHelper extends AbstractViewHelper
         $originalRequest = $this->getRequest()->getOriginalRequest();
         if ($originalRequest) {
             $submittedValues = $originalRequest->getArguments();
+
             return $submittedValues['registration'][$fieldname];
         }
 
