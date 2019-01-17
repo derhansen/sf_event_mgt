@@ -8,9 +8,6 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /**
  * ViewHelper for a backend link that should edit the given event UID
  *
@@ -35,12 +32,11 @@ class EditRecordViewHelper extends AbstractRecordViewHelper
     public function render()
     {
         $uid = $this->arguments['uid'];
-        $pid = (int)GeneralUtility::_GET('id');
         $parameters = [
             'edit[tx_sfeventmgt_domain_model_event][' . (int)$uid . ']' => 'edit',
+            'returnUrl' => $this->getReturnUrl(),
         ];
-        $parameters['returnUrl'] = 'index.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $pid . $this->getModuleToken();
 
-        return BackendUtility::getModuleUrl('record_edit', $parameters);
+        return $this->getModuleUrl($parameters);
     }
 }

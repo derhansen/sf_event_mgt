@@ -42,9 +42,9 @@ class NewRecordViewHelper extends AbstractRecordViewHelper
 
         $parameters = [
             'edit[tx_sfeventmgt_domain_model_event][' . $pid . ']' => 'new',
+            'returnUrl' => $this->getReturnUrl(),
         ];
-        $parameters['returnUrl'] = 'index.php?M=web_SfEventMgtTxSfeventmgtM1&id=' . $pid . $this->getModuleToken();
 
-        return BackendUtility::getModuleUrl('record_edit', $parameters);
+        return $this->getModuleUrl($parameters);
     }
 }
