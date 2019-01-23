@@ -409,8 +409,7 @@ class EventController extends AbstractController
             return $this->handleEventNotFoundError($this->settings);
         }
         $this->icalendarService->downloadiCalendarFile($event);
-
-        return false;
+        exit();
     }
 
     /**

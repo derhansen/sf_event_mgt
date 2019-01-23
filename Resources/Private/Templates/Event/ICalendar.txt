@@ -11,7 +11,10 @@ DESCRIPTION:<e:format.ICalendarDescription>{event.description}</e:format.ICalend
 <f:if condition="{event.location}">
 LOCATION:{event.location.title}
 </f:if>
+DTSTAMP:<e:format.ICalendarDate>{event.tstamp}</e:format.ICalendarDate>
 DTSTART:<e:format.ICalendarDate>{event.startdate}</e:format.ICalendarDate>
+<f:if condition="{event.enddate}">
 DTEND:<e:format.ICalendarDate>{event.enddate}</e:format.ICalendarDate>
+</f:if>
 END:VEVENT
 END:VCALENDAR
