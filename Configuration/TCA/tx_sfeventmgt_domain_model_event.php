@@ -308,7 +308,7 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'checkbox' => 1,
-                'default' => time()
+                'default' => time() + 3600
             ],
         ],
         'enable_registration' => [
