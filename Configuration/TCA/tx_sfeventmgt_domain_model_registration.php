@@ -430,13 +430,9 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                        'default' => [
-                            'searchWholePhrase' => 1,
-                            'additionalSearchFields' => 'name, first_name, last_name',
-                        ],
+                'suggestOptions' => [
+                    'default' => [
+                        'additionalSearchFields' => 'name, first_name, last_name',
                     ],
                 ],
             ],
