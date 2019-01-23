@@ -18,6 +18,11 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
+     * @var \DateTime
+     */
+    protected $tstamp;
+
+    /**
      * Title
      *
      * @var string
@@ -297,6 +302,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->priceOptions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $this->speaker = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+    }
+
+    /**
+     * Get timestamp
+     *
+     * @return \DateTime
+     */
+    public function getTstamp()
+    {
+        return $this->tstamp;
+    }
+
+    /**
+     * Set time stamp
+     *
+     * @param \DateTime $tstamp time stamp
+     */
+    public function setTstamp($tstamp)
+    {
+        $this->tstamp = $tstamp;
     }
 
     /**

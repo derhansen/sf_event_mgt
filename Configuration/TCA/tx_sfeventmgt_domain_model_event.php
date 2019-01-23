@@ -212,6 +212,12 @@ return [
                 ],
             ],
         ],
+        'tstamp' => [
+            'label' => 'tstamp',
+            'config' => [
+                'type' => 'passthrough',
+            ]
+        ],
         'title' => [
             'exclude' => 1,
             'l10n_mode' => 'prefixLangTitle',
