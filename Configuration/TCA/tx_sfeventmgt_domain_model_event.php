@@ -565,13 +565,6 @@ return [
                         'tablenames' => 'tx_sfeventmgt_domain_model_event',
                         'table_local' => 'sys_file',
                     ],
-                    'foreign_types' => [
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                            'showitem' => '--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette,
-                                      --palette--;;imageoverlayPalette,
-                                      --palette--;;filePalette'
-                        ],
-                    ],
                     'overrideChildTca' => [
                         'types' => [
                             \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
@@ -648,13 +641,6 @@ return [
                         'fieldname' => 'additional_image',
                         'tablenames' => 'tx_sfeventmgt_domain_model_event',
                         'table_local' => 'sys_file',
-                    ],
-                    'foreign_types' => [
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                            'showitem' => '--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette,
-                                  --palette--;;imageoverlayPalette,
-                                  --palette--;;filePalette'
-                        ],
                     ],
                     'overrideChildTca' => [
                         'types' => [
