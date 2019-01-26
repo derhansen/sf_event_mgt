@@ -1,0 +1,37 @@
+<script type="application/ld+json">
+    <f:format.raw>{</f:format.raw>
+      "@context": "https://schema.org/",
+      "@type": "Event",
+      "name": "{event.title}",
+      "startDate": "<f:format.date format="Y-m-d">{event.startdate}</f:format.date>",
+      "location": <f:format.raw>{</f:format.raw>
+        "@type": "Place",
+        "name": "{event.location.title}",
+        "address": <f:format.raw>{</f:format.raw>
+          "@type": "PostalAddress",
+          "streetAddress": "{event.location.address}",
+          "addressLocality": "{event.location.city}",
+          "postalCode": "{event.location.zip}",
+          "addressCountry": "{event.location.country}"
+          <f:format.raw>}</f:format.raw>
+          <f:format.raw>}</f:format.raw>,
+      "image": [
+        <f:if condition="{event.image}">
+        "<f:uri.image image="{event.image.0}" absolute="true"/>"
+        </f:if>
+       ],
+      "description": "<f:format.raw>{event.description}</f:format.raw>",
+      "endDate": "<f:format.date format="Y-m-d">{event.enddate}</f:format.date>",
+      "offers": <f:format.raw>{</f:format.raw>
+        "@type": "Offer",
+        "url": "<f:uri.action action="registration" absolute="true" arguments="{event : event}" pageUid="{settings.registrationPid}"></f:uri.action>",
+        "price": "{event.currentPrice}",
+        "priceCurrency": "{event.currency}",
+        "availability": "https://schema.org/InStock",
+      <f:format.raw>}</f:format.raw>,
+      "performer": <f:format.raw>{</f:format.raw>
+        "@type": "PerformingGroup",
+        "name": "{event.organisator.name}"
+    <f:format.raw>}</f:format.raw>
+<f:format.raw>}</f:format.raw>
+</script>
