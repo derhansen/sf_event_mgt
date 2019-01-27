@@ -2,6 +2,12 @@
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
+<div class="event-administration">
+    <f:render section="headline" />
+    <f:render section="content" />
+</div>
+
+<f:comment>
 <f:be.container includeCssFiles="{0: '{f:uri.resource(path:\'Css/administration.css\')}'}">
     <div class="module">
         <div class="module-docheader">
@@ -43,5 +49,6 @@
         </div>
     </div>
 </f:be.container>
+</f:comment>
 
 </html>

@@ -12,6 +12,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
+use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Core\Utility\DebugUtility;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
@@ -21,6 +24,13 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
  */
 class AdministrationController extends AbstractController
 {
+    /**
+     * Backend Template Container
+     *
+     * @var string
+     */
+    protected $defaultViewObjectName = \TYPO3\CMS\Backend\View\BackendTemplateView::class;
+
     /**
      * CustomNotificationLogRepository
      *
@@ -55,6 +65,13 @@ class AdministrationController extends AbstractController
      * @var int
      */
     protected $pid = 0;
+
+    /**
+     * BackendTemplateContainer
+     *
+     * @var BackendTemplateView
+     */
+    protected $view;
 
     /**
      * DI for $customNotificationLogRepository
@@ -96,6 +113,41 @@ class AdministrationController extends AbstractController
     {
         $this->beUserSessionService = $beUserSessionService;
     }
+
+    /**
+     * Set up the doc header properly here
+     *
+     * @param ViewInterface $view
+     */
+    protected function initializeView(ViewInterface $view)
+    {
+        /** @var BackendTemplateView $view */
+        parent::initializeView($view);
+        if ($this->actionMethodName === 'listAction'
+            || $this->actionMethodName === 'indexNotifyAction'
+            || $this->actionMethodName === 'settingsErrorAction') {
+            //$this->generateMenu();
+            //$this->registerDocheaderButtons();
+
+            $pageRenderer = $this->view->getModuleTemplate()->getPageRenderer();
+            $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
+
+            $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ?
+                ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY']:
+                ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
+            $pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
+
+            $this->view->getModuleTemplate()->setFlashMessageQueue($this->controllerContext->getFlashMessageQueue());
+            if ($view instanceof BackendTemplateView) {
+                $view->getModuleTemplate()->getPageRenderer()->addCssFile(
+                    'EXT:sf_event_mgt/Resources/Public/Css/administration.css'
+                );
+            }
+
+        }
+    }
+
+
 
     /**
      * Initialize action
@@ -181,13 +233,12 @@ class AdministrationController extends AbstractController
      *
      * @param int $eventUid Event UID
      *
-     * @return bool Always FALSE, since no view should be rendered
+     * @return void
      */
     public function exportAction($eventUid)
     {
         $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
-
-        return false;
+        exit();
     }
 
     /**

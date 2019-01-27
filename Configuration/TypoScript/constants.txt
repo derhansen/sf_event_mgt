@@ -107,7 +107,7 @@ module.tx_sfeventmgt {
             itemsPerPage = 10
         }
         search {
-            dateFormat = d.m.Y H:i
+            dateFormat = H:i d-m-Y
             fields = title, teaser
         }
         notification {

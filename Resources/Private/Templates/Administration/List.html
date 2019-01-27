@@ -4,22 +4,13 @@
 
 <f:layout name="Backend" />
 
-<f:section name="main">
-    <f:if condition="{showMessage}">
-        <script>
-            TYPO3.Flashmessage.display(
-                    TYPO3.Severity.ok,
-                    '<f:translate key="{messageTitleKey}" />',
-                    '<f:translate key="{messageContentKey}" />',
-                    5
-            );
-        </script>
-    </f:if>
-
+<f:section name="headline">
     <h1>
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.title" />
     </h1>
+</f:section>
 
+<f:section name="content">
     <f:form name="searchDemand" object="{searchDemand}">
         <h2>
             <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settings"/>
@@ -33,15 +24,23 @@
                 <div class="clear"></div>
             </div>
 
-            <div class="field">
-                <label for="tceforms-datetimefield-startDate">
+            <div class="form-group">
+                <label for="startDate" class="col-xs-4 control-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
                 </label>
-                <f:form.textfield property="startDate" id="tceforms-datetimefield-startDate"
-                                  value="{searchDemand.startDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
-                <f:render partial="FormErrors" arguments="{field: 'searchDemand.startDate'}"/>
-                <div class="clear"></div>
+
+                <div class="col-xs-8">
+                    <div class="input-group">
+                        <f:form.textfield type="datetime" property="startDate" id="startDate" class="form-control t3js-datetimepicker t3js-clearable" data="{date-type: 'datetime', date-offset: '0'}" value="{searchDemand.startDate -> f:format.date(format: settings.search.dateFormat)}"/>
+                        <span class="input-group-btn">
+                            <label class="btn btn-default" for="startDate">
+                                <span class="fa fa-calendar"></span>
+                            </label>
+                        </span>
+                    </div>
+                </div>
             </div>
+
 
             <div class="field">
                 <label for="tceforms-datetimefield-endDate">

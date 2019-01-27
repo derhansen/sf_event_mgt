@@ -4,11 +4,13 @@
 
 <f:layout name="Backend" />
 
-<f:section name="main">
+<f:section name="headline">
     <h1>
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify" />
     </h1>
+</f:section>
 
+<f:section name="content">
     <h2>
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.event" />
         {event.title} (<f:count subject="{event.registration}"/> <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.recipients" />)
