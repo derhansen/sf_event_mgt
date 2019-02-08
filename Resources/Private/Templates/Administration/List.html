@@ -11,48 +11,73 @@
 </f:section>
 
 <f:section name="content">
-    <f:form name="searchDemand" object="{searchDemand}">
-        <h2>
-            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settings"/>
-        </h2>
-        <div class="settings">
-            <div class="field">
-                <label for="search">
-                    <f:translate key="LLL:EXT:lang/Resources/Private/Language/locallang_common.xlf:search" />
-                </label>
-                <f:form.textfield property="search" id="search"/>
-                <div class="clear"></div>
-            </div>
+    <h2>
+        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settings"/>
+    </h2>
+    <f:form name="searchDemand" object="{searchDemand}" class="form-horizontal settings">
+        <div class="form-group">
+            <label for="search" class="col-xs-2 control-label">
+                <f:translate key="LLL:EXT:lang/Resources/Private/Language/locallang_common.xlf:search" />
+            </label>
 
-            <div class="form-group">
-                <label for="startDate" class="col-xs-4 control-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
-                </label>
-
-                <div class="col-xs-8">
-                    <div class="input-group">
-                        <f:form.textfield type="datetime" property="startDate" id="startDate" class="form-control t3js-datetimepicker t3js-clearable" data="{date-type: 'datetime', date-offset: '0'}" value="{searchDemand.startDate -> f:format.date(format: settings.search.dateFormat)}"/>
-                        <span class="input-group-btn">
-                            <label class="btn btn-default" for="startDate">
-                                <span class="fa fa-calendar"></span>
-                            </label>
-                        </span>
-                    </div>
+            <div class="col-xs-10">
+                <div class="form-control-clearable">
+                    <f:form.textfield property="search" id="search" class="form-control t3js-clearable"/>
+                    <button type="button" class="close" tabindex="-1" aria-hidden="true" style="display: none;">
+                <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-close" data-identifier="actions-close">
+                    <span class="icon-markup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+                        <path d="M11.9 5.5L9.4 8l2.5 2.5c.2.2.2.5 0 .7l-.7.7c-.2.2-.5.2-.7 0L8 9.4l-2.5 2.5c-.2.2-.5.2-.7 0l-.7-.7c-.2-.2-.2-.5 0-.7L6.6 8 4.1 5.5c-.2-.2-.2-.5 0-.7l.7-.7c.2-.2.5-.2.7 0L8 6.6l2.5-2.5c.2-.2.5-.2.7 0l.7.7c.2.2.2.5 0 .7z" class="icon-color"></path></svg>
+                    </span>
+                </span>
+                    </button>
                 </div>
             </div>
+        </div>
 
+        <div class="form-group">
+            <label for="startDate" class="col-xs-2 control-label">
+                <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+            </label>
 
-            <div class="field">
-                <label for="tceforms-datetimefield-endDate">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
-                </label>
-                <f:form.textfield property="endDate" id="tceforms-datetimefield-endDate"
-                                  value="{searchDemand.endDate->f:format.date( format: '{settings.search.dateFormat}' )}"/>
-                <f:render partial="FormErrors" arguments="{field: 'searchDemand.endDate'}"/>
-                <div class="clear"></div>
+            <div class="col-xs-10">
+                <div class="input-group">
+                    <f:form.textfield type="datetime" property="startDate" id="startDate" class="form-control t3js-datetimepicker t3js-clearable" data="{date-type: 'datetime', date-offset: '0'}" value="{searchDemand.startDate -> f:format.date(format: settings.search.dateFormat)}"/>
+                    <span class="input-group-btn">
+                        <label class="btn btn-default" for="startDate">
+                            <span class="fa fa-calendar"></span>
+                        </label>
+                    </span>
+                </div>
             </div>
+        </div>
 
-            <f:form.submit value="{f:translate(key:'LLL:EXT:lang/Resources/Private/Language/locallang_common.xlf:search')}" class="submit"/>
+        <div class="form-group">
+            <label for="endDate" class="col-xs-2 control-label">
+                <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+            </label>
+
+            <div class="col-xs-10">
+                <div class="input-group">
+                    <f:form.textfield type="datetime" property="endDate" id="endDate" class="form-control t3js-datetimepicker t3js-clearable" data="{date-type: 'datetime', date-offset: '0'}" value="{searchDemand.endDate -> f:format.date(format: settings.search.dateFormat)}"/>
+                    <span class="input-group-btn">
+                        <label class="btn btn-default" for="endDate">
+                            <span class="fa fa-calendar"></span>
+                        </label>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-xs-offset-2 col-xs-10">
+                <button type="submit" class="btn btn-default" name="search" title="Search">
+                    <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-search" data-identifier="actions-search">
+                        <span class="icon-markup">
+                            <img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-search.svg" width="16" height="16">
+                        </span>
+                    </span> {f:translate(key:'LLL:EXT:lang/Resources/Private/Language/locallang_common.xlf:search')}
+                </button>
+            </div>
         </div>
     </f:form>
 
@@ -62,29 +87,29 @@
                                   configuration="{itemsPerPage: settings.list.itemsPerPage}">
                 <table cellpadding="0" cellmargin="0" cellspacing="0" class="table table-striped table-hover">
                     <thead>
-                    <tr class="t3-row-header">
-                        <td class="title">
+                    <tr>
+                        <th class="title">
                             <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
-                        </td>
-                        <td class="startdate">
+                        </th>
+                        <th class="startdate">
                             <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
-                        </td>
-                        <td class="enddate">
+                        </th>
+                        <th class="enddate">
                             <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
-                        </td>
-                        <td class="registrationenabled">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.enable_registration"/>
-                        </td>
-                        <td class="maxparticipants">
+                        </th>
+                        <th class="registrationenabled">
+                            <f:translate key="tx_sfeventmgt_domain_model_registration"/>
+                        </th>
+                        <th class="maxparticipants">
                             <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
-                        </td>
-                        <td class="registrations">
+                        </th>
+                        <th class="registrations">
                             <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
-                        </td>
-                        <td class="notify">
-                        </td>
-                        <td class="export">
-                        </td>
+                        </th>
+                        <th class="notify">
+                        </th>
+                        <th class="export">
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -96,9 +121,16 @@
             </f:be.widget.paginate>
         </f:then>
         <f:else>
-            <div class="typo3-message message-notice">
-                <div class="message-body">
-                    <f:translate key="admin.no_events_available"/>
+            <div class="callout callout-info">
+                <div class="media">
+                    <div class="media-left">
+                        <span class="fa-stack fa-lg callout-icon"> <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-info fa-stack-1x"></i> </span>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="callout-title"><f:translate key="admin.no_events_available"/></h4>
+                        <div class="callout-body"></div>
+                    </div>
                 </div>
             </div>
         </f:else>

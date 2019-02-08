@@ -15,23 +15,6 @@
     color: #ff0000;
 }
 
-.event-administration .backendForm .field,
-.event-administration .settings .field {
-    padding: 2px 0;
-}
-
-.event-administration .backendForm label,
-.event-administration .settings .field label {
-    display: block;
-    float: left;
-    width: 100px;
-}
-
-.event-administration .backendForm .submit,
-.event-administration .settings .submit {
-    margin: 5px 0 3px 100px;
-}
-
 .event-administration  .sf-event-mgt-admin-notify {
     background: url(../Icons/notify-icon.png) no-repeat;
     width: 16px;
@@ -65,11 +48,6 @@ tr.db_list_normal td.logdate {
 /**
  * Action Buttons
  */
-
-.btn-default {
-    float: left;
-}
-
 .btn-events-be {
     margin-right: 5px;
 }

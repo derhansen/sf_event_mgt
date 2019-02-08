@@ -2,17 +2,17 @@
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<tr class="db_list_normal">
+<tr>
     <td class="title">
         <a href="{e:Be.EditRecord(uid:event.uid)}" title="UID: {event.uid}">
             {event.title}
         </a>
     </td>
     <td class="startdate">
-        <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
+        <f:format.date format="%d.%m.%Y %H:%M">{event.startdate}</f:format.date>
     </td>
     <td class="enddate">
-        <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
+        <f:format.date format="%d.%m.%Y %H:%M">{event.enddate}</f:format.date>
     </td>
     <td class="registrationenabled">
         <f:if condition="{event.enableRegistration} == 1">
