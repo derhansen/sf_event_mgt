@@ -206,10 +206,7 @@ class AdministrationController extends AbstractController
         }
 
         $demand->setSearchDemand($searchDemand);
-
-        if ($this->pid > 0) {
-            $demand->setStoragePage($this->pid);
-        }
+        $demand->setStoragePage($this->pid);
 
         $variables = [];
         if ($messageId !== null && is_numeric($messageId)) {
