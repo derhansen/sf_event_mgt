@@ -721,12 +721,6 @@
                     <settings.templateLayout>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.templateLayout</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <itemsProcFunc>DERHANSEN\SfEventMgt\Hooks\TemplateLayouts->user_templateLayout</itemsProcFunc>
