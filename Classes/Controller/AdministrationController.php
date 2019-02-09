@@ -218,6 +218,7 @@ class AdministrationController extends AbstractController
             $variables['messageContentKey'] = 'administration.message-' . $messageId . '.content';
         }
 
+        $variables['pid'] = $this->pid;
         $variables['events'] = $this->eventRepository->findDemanded($demand);
         $variables['searchDemand'] = $searchDemand;
         $variables['csvExportPossible'] = $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null;

@@ -11,9 +11,6 @@
 </f:section>
 
 <f:section name="content">
-    <h2>
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settings"/>
-    </h2>
     <f:form name="searchDemand" object="{searchDemand}" class="form-horizontal settings">
         <div class="form-group">
             <label for="search" class="col-xs-2 control-label">
@@ -81,11 +78,19 @@
         </div>
     </f:form>
 
+    <f:if condition="{pid} == 0">
+        <div class="alert alert-info">
+            <div class="message-body">
+                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.nopageselected" />
+            </div>
+        </div>
+    </f:if>
+
     <f:if condition="{events}">
         <f:then>
             <f:be.widget.paginate objects="{events}" as="paginatedEvents"
                                   configuration="{itemsPerPage: settings.list.itemsPerPage}">
-                <table cellpadding="0" cellmargin="0" cellspacing="0" class="table table-striped table-hover">
+                <table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
                     <thead>
                     <tr>
                         <th class="title">

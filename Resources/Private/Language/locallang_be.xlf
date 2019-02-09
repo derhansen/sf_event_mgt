@@ -249,9 +249,6 @@
 			<trans-unit id="administration.notificationHistory">
 				<source>Notification history</source>
 			</trans-unit>
-			<trans-unit id="administration.settings">
-				<source>Settings</source>
-			</trans-unit>
 			<trans-unit id="administration.settingsError.title">
 				<source>TypoScript settings missing</source>
 			</trans-unit>
@@ -293,6 +290,9 @@
 			</trans-unit>
 			<trans-unit id="administration.notify.sentBy">
 				<source>Sent by</source>
+			</trans-unit>
+			<trans-unit id="administration.nopageselected">
+				<source>Please click the page title in the page tree to the left to show the records on that page.</source>
 			</trans-unit>
 			<trans-unit id="events-folder">
 				<source>Events</source>
