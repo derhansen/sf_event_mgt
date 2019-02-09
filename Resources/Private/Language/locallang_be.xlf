@@ -327,6 +327,21 @@
 			<trans-unit id="administration.message-2.content">
 				<source>The selected e-mail has been sent to all participants of the event.</source>
 			</trans-unit>
+			<trans-unit id="administration.sortOrder.asc">
+				<source>Ascending</source>
+			</trans-unit>
+			<trans-unit id="administration.sortOrder.desc">
+				<source>Descending</source>
+			</trans-unit>
+			<trans-unit id="administration.orderBy.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="administration.orderBy.startdate">
+				<source>Startdate</source>
+			</trans-unit>
+			<trans-unit id="administration.orderBy.enddate">
+				<source>Enddate</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

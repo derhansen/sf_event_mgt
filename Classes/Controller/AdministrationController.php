@@ -312,33 +312,41 @@ class AdministrationController extends AbstractController
      * List action for backend module
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
+     * @param array $overwriteDemand OverwriteDemand
      *
      * @return void
      */
-    public function listAction(SearchDemand $searchDemand = null)
+    public function listAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
-        /** @var EventDemand $demand */
-        $demand = $this->objectManager->get(EventDemand::class);
+        /** @var EventDemand $eventDemand */
+        $eventDemand = $this->objectManager->get(EventDemand::class);
+        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
+        $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed']);
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
 
             $sessionData = [];
             $sessionData['searchDemand'] = $searchDemand;
+            $sessionData['overwriteDemand'] = $overwriteDemand;
             $this->beUserSessionService->saveSessionData($sessionData);
         } else {
             // Try to restore search demand from Session
             $searchDemand = $this->beUserSessionService->getSessionDataByKey('searchDemand');
+            $overwriteDemand = $this->beUserSessionService->getSessionDataByKey('overwriteDemand');
         }
 
-        $demand->setSearchDemand($searchDemand);
-        $demand->setStoragePage($this->pid);
+        $eventDemand->setSearchDemand($searchDemand);
+        $eventDemand->setStoragePage($this->pid);
 
         $this->view->assignMultiple([
             'pid' => $this->pid,
-            'events' => $this->eventRepository->findDemanded($demand),
+            'events' => $this->eventRepository->findDemanded($eventDemand),
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null
+            'csvExportPossible' => $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null,
+            'orderByFields' => $this->getOrderByFields(),
+            'orderDirections' => $this->getOrderDirections(),
+            'overwriteDemand' => $overwriteDemand,
         ]);
     }
 
@@ -520,5 +528,32 @@ class AdministrationController extends AbstractController
     protected function getBackendUser()
     {
         return $GLOBALS['BE_USER'];
+    }
+
+    /**
+     * Returns an array with possible order directions
+     *
+     * @return array
+     */
+    private function getOrderDirections()
+    {
+        return [
+            'asc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.asc'),
+            'desc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.desc')
+        ];
+    }
+
+    /**
+     * Returns an array with possible orderBy fields
+     *
+     * @return array
+     */
+    private function getOrderByFields()
+    {
+        return [
+            'title' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.title'),
+            'startdate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.startdate'),
+            'enddate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.enddate')
+        ];
     }
 }

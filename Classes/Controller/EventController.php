@@ -49,13 +49,6 @@ class EventController extends AbstractController
     }
 
     /**
-     * Properties in this array will be ignored by overwriteDemandObject()
-     *
-     * @var array
-     */
-    protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
-
-    /**
      * Initializes the current action
      */
     public function initializeAction()
@@ -130,30 +123,6 @@ class EventController extends AbstractController
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         $demand->setCategories($settings['categoryMenu']['categories']);
         $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
-
-        return $demand;
-    }
-
-    /**
-     * Overwrites a given demand object by an propertyName =>  $propertyValue array
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
-     * @param array $overwriteDemand OwerwriteDemand
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
-     */
-    protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand)
-    {
-        foreach ($this->ignoredSettingsForOverwriteDemand as $property) {
-            unset($overwriteDemand[$property]);
-        }
-
-        foreach ($overwriteDemand as $propertyName => $propertyValue) {
-            if (in_array(strtolower($propertyName), $this->ignoredSettingsForOverwriteDemand, true)) {
-                continue;
-            }
-            \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
-        }
 
         return $demand;
     }

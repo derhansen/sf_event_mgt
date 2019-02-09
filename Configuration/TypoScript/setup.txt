@@ -124,6 +124,7 @@ plugin.tx_sfeventmgt_pipayment.features.requireCHashArgumentForActionArguments =
 module.tx_sfeventmgt {
     view < plugin.tx_sfeventmgt.view
     settings {
+        orderFieldAllowed < plugin.tx_sfeventmgt.settings.orderFieldAllowed
         csvExport {
             showFlashMessageForInsufficientAccessRights = 1
             fields = {$module.tx_sfeventmgt.settings.csvExport.fields}

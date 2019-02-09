@@ -261,6 +261,9 @@
 			<trans-unit id="admin.no_events_available">
 				<source>No events available</source>
 			</trans-unit>
+			<trans-unit id="admin.sorting">
+				<source>Sorting</source>
+			</trans-unit>
 			<trans-unit id="search.title">
 				<source>Search</source>
 			</trans-unit>

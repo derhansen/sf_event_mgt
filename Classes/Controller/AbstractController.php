@@ -8,6 +8,8 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+
 /**
  * EventController
  *
@@ -15,6 +17,14 @@ namespace DERHANSEN\SfEventMgt\Controller;
  */
 abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+
+    /**
+     * Properties in this array will be ignored by overwriteDemandObject()
+     *
+     * @var array
+     */
+    protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
+
     /**
      * EventRepository
      *
@@ -260,5 +270,29 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected function getTypoScriptFrontendController()
     {
         return $GLOBALS['TSFE'] ?: null;
+    }
+
+    /**
+     * Overwrites a given demand object by an propertyName =>  $propertyValue array
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
+     * @param array $overwriteDemand OwerwriteDemand
+     *
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
+     */
+    protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand)
+    {
+        foreach ($this->ignoredSettingsForOverwriteDemand as $property) {
+            unset($overwriteDemand[$property]);
+        }
+
+        foreach ($overwriteDemand as $propertyName => $propertyValue) {
+            if (in_array(strtolower($propertyName), $this->ignoredSettingsForOverwriteDemand, true)) {
+                continue;
+            }
+            \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
+        }
+
+        return $demand;
     }
 }
