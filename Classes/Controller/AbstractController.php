@@ -17,7 +17,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
  */
 abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * Properties in this array will be ignored by overwriteDemandObject()
      *
