@@ -13,7 +13,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
-use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
@@ -133,7 +132,7 @@ class AdministrationController extends AbstractController
             $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
 
             $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ?
-                ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY']:
+                ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY'] :
                 ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
             $pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
 
@@ -143,11 +142,8 @@ class AdministrationController extends AbstractController
                     'EXT:sf_event_mgt/Resources/Public/Css/administration.css'
                 );
             }
-
         }
     }
-
-
 
     /**
      * Initialize action
