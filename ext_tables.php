@@ -34,7 +34,8 @@ call_user_func(function () {
             'tx_sfeventmgt_m1',
             '',
             [
-                'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
+                'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError, 
+                    newEvent, newLocation, newOrganisator, newSpeaker',
             ],
             [
                 'access' => 'user,group',
@@ -58,6 +59,7 @@ call_user_func(function () {
             'ext-sfeventmgt-speaker' => 'tx_sfeventmgt_domain_model_speaker.svg',
             'ext-sfeventmgt-registration-field' => 'tx_sfeventmgt_domain_model_registration_field.svg',
             'ext-sfeventmgt-logfile' => 'logfile.svg',
+            'ext-sfeventmgt-action-handle-expired' => 'hande-expired-registrations.svg'
         ];
         /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
         $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(

@@ -237,6 +237,15 @@
 			<trans-unit id="administration.newEvent">
 				<source>Create new event</source>
 			</trans-unit>
+			<trans-unit id="administration.newLocation">
+				<source>Create new location</source>
+			</trans-unit>
+			<trans-unit id="administration.newOrganisator">
+				<source>Create new organisator</source>
+			</trans-unit>
+			<trans-unit id="administration.newSpeaker">
+				<source>Create new speaker</source>
+			</trans-unit>
 			<trans-unit id="administration.handleExpiredRegistrations">
 				<source>Hide/delete expired registrations</source>
 			</trans-unit>
@@ -305,6 +314,18 @@
 			</trans-unit>
 			<trans-unit id="tabs.language">
 				<source>Language</source>
+			</trans-unit>
+			<trans-unit id="administration.message-1.title">
+				<source>Information</source>
+			</trans-unit>
+			<trans-unit id="administration.message-1.content">
+				<source>All expired registrations have been marked as hidden/deleted.</source>
+			</trans-unit>
+			<trans-unit id="administration.message-2.title">
+				<source>Information</source>
+			</trans-unit>
+			<trans-unit id="administration.message-2.content">
+				<source>The selected e-mail has been sent to all participants of the event.</source>
 			</trans-unit>
 		</body>
 	</file>

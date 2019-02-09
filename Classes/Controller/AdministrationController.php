@@ -12,17 +12,31 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
+use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
+use TYPO3\CMS\Core\Imaging\Icon;
+use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\HttpUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * AdministrationController
+ *
+ * Several parts are heavily inspired by ext:news from Georg Ringer
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
 class AdministrationController extends AbstractController
 {
+    const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
+
     /**
      * Backend Template Container
      *
@@ -73,6 +87,11 @@ class AdministrationController extends AbstractController
     protected $view;
 
     /**
+     * @var IconFactory
+     */
+    protected $iconFactory = null;
+
+    /**
      * DI for $customNotificationLogRepository
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
@@ -114,9 +133,21 @@ class AdministrationController extends AbstractController
     }
 
     /**
+     * DI for $iconFactory
+     *
+     * @param IconFactory $iconFactory
+     */
+    public function injectIconFactory(IconFactory $iconFactory)
+    {
+        $this->iconFactory = $iconFactory;
+    }
+
+    /**
      * Set up the doc header properly here
      *
      * @param ViewInterface $view
+     *
+     * @return void
      */
     protected function initializeView(ViewInterface $view)
     {
@@ -124,9 +155,9 @@ class AdministrationController extends AbstractController
         parent::initializeView($view);
         if ($this->actionMethodName === 'listAction'
             || $this->actionMethodName === 'indexNotifyAction'
-            || $this->actionMethodName === 'settingsErrorAction') {
-            //$this->generateMenu();
-            //$this->registerDocheaderButtons();
+            || $this->actionMethodName === 'settingsErrorAction'
+        ) {
+            $this->registerDocHeaderButtons();
 
             $pageRenderer = $this->view->getModuleTemplate()->getPageRenderer();
             $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
@@ -146,6 +177,102 @@ class AdministrationController extends AbstractController
     }
 
     /**
+     * Register docHeaderButtons
+     *
+     * @return void
+     */
+    protected function registerDocHeaderButtons()
+    {
+        $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
+
+        $uriBuilder = $this->objectManager->get(UriBuilder::class);
+        $uriBuilder->setRequest($this->request);
+
+        if ($this->request->getControllerActionName() === 'list') {
+            $buttons = [
+                [
+                    'label' => 'administration.newEvent',
+                    'action' => 'newEvent',
+                    'icon' => 'ext-sfeventmgt-event',
+                    'group' => 1
+                ],
+                [
+                    'label' => 'administration.newLocation',
+                    'action' => 'newLocation',
+                    'icon' => 'ext-sfeventmgt-location',
+                    'group' => 1
+                ],
+                [
+                    'label' => 'administration.newOrganisator',
+                    'action' => 'newOrganisator',
+                    'icon' => 'ext-sfeventmgt-organisator',
+                    'group' => 1
+                ],
+                [
+                    'label' => 'administration.newSpeaker',
+                    'action' => 'newSpeaker',
+                    'icon' => 'ext-sfeventmgt-speaker',
+                    'group' => 1
+                ],
+                [
+                    'label' => 'administration.handleExpiredRegistrations',
+                    'action' => 'handleExpiredRegistrations',
+                    'icon' => 'ext-sfeventmgt-action-handle-expired',
+                    'group' => 2
+                ]
+            ];
+            foreach ($buttons as $key => $tableConfiguration) {
+                $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
+                $link = $uriBuilder->reset()->setRequest($this->request)
+                    ->uriFor($tableConfiguration['action'], [], 'Administration');
+                $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], Icon::SIZE_SMALL);
+                $viewButton = $buttonBar->makeLinkButton()
+                    ->setHref($link)
+                    ->setDataAttributes([
+                        'toggle' => 'tooltip',
+                        'placement' => 'bottom',
+                        'title' => $title
+                        ])
+                    ->setTitle($title)
+                    ->setIcon($icon);
+                $buttonBar->addButton($viewButton, ButtonBar::BUTTON_POSITION_LEFT, $tableConfiguration['group']);
+            }
+        }
+    }
+
+    /**
+     * Redirect to tceform creating a new record
+     *
+     * @param string $table table name
+     * @return void
+     */
+    private function redirectToCreateNewRecord($table)
+    {
+        $pid = $this->pid;
+        $tsConfig = BackendUtility::getPagesTSconfig(0);
+        if ($pid === 0 && isset($tsConfig['defaultPid.'])
+            && is_array($tsConfig['defaultPid.'])
+            && isset($tsConfig['defaultPid.'][$table])
+        ) {
+            $pid = (int)$tsConfig['defaultPid.'][$table];
+        }
+
+        if (self::isV9up()) {
+            $returnUrl = 'index.php?route=/web/SfEventMgtTxSfeventmgtM1/';
+        } else {
+            $returnUrl = 'index.php?M=web_SfEventMgtTxSfeventmgtM1';
+        }
+
+        $returnUrl .= '&id=' . $this->pid . $this->getToken();
+        $url = BackendUtility::getModuleUrl('record_edit', [
+            'edit[' . $table . '][' . $pid . ']' => 'new',
+            'returnUrl' => $returnUrl
+        ]);
+
+        HttpUtility::redirect($url);
+    }
+
+    /**
      * Initialize action
      *
      * @return void
@@ -162,7 +289,7 @@ class AdministrationController extends AbstractController
      */
     public function initializeListAction()
     {
-        if ($this->settings === null) {
+        if ($this->settings === null || empty($this->settings)) {
             $this->redirect('settingsError');
         }
         $this->arguments->getArgument('searchDemand')
@@ -185,11 +312,10 @@ class AdministrationController extends AbstractController
      * List action for backend module
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
-     * @param int $messageId MessageID
      *
      * @return void
      */
-    public function listAction(SearchDemand $searchDemand = null, $messageId = null)
+    public function listAction(SearchDemand $searchDemand = null)
     {
         /** @var EventDemand $demand */
         $demand = $this->objectManager->get(EventDemand::class);
@@ -208,18 +334,12 @@ class AdministrationController extends AbstractController
         $demand->setSearchDemand($searchDemand);
         $demand->setStoragePage($this->pid);
 
-        $variables = [];
-        if ($messageId !== null && is_numeric($messageId)) {
-            $variables['showMessage'] = true;
-            $variables['messageTitleKey'] = 'administration.message-' . $messageId . '.title';
-            $variables['messageContentKey'] = 'administration.message-' . $messageId . '.content';
-        }
-
-        $variables['pid'] = $this->pid;
-        $variables['events'] = $this->eventRepository->findDemanded($demand);
-        $variables['searchDemand'] = $searchDemand;
-        $variables['csvExportPossible'] = $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null;
-        $this->view->assignMultiple($variables);
+        $this->view->assignMultiple([
+            'pid' => $this->pid,
+            'events' => $this->eventRepository->findDemanded($demand),
+            'searchDemand' => $searchDemand,
+            'csvExportPossible' => $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null
+        ]);
     }
 
     /**
@@ -242,8 +362,17 @@ class AdministrationController extends AbstractController
      */
     public function handleExpiredRegistrationsAction()
     {
-        $this->registrationService->handleExpiredRegistrations($this->settings['registration']['deleteExpiredRegistrations']);
-        $this->redirect('list', 'Administration', 'SfEventMgt', ['demand' => null, 'messageId' => 1]);
+        $this->registrationService->handleExpiredRegistrations(
+            $this->settings['registration']['deleteExpiredRegistrations']
+        );
+
+        $this->addFlashMessage(
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.content'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.title'),
+            FlashMessage::OK
+        );
+
+        $this->redirect('list');
     }
 
     /**
@@ -265,6 +394,38 @@ class AdministrationController extends AbstractController
     }
 
     /**
+     * Create new event action
+     */
+    public function newEventAction()
+    {
+        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_event');
+    }
+
+    /**
+     * Create new location action
+     */
+    public function newLocationAction()
+    {
+        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_location');
+    }
+
+    /**
+     * Create new organisator action
+     */
+    public function newOrganisatorAction()
+    {
+        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_organisator');
+    }
+
+    /**
+     * Create new speaker action
+     */
+    public function newSpeakerAction()
+    {
+        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_speaker');
+    }
+
+    /**
      * Notify action
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
@@ -281,7 +442,12 @@ class AdministrationController extends AbstractController
             $customNotifications[$customNotification],
             $result
         );
-        $this->redirect('list', 'Administration', 'SfEventMgt', ['demand' => null, 'messageId' => 2]);
+        $this->addFlashMessage(
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.content'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.title'),
+            FlashMessage::OK
+        );
+        $this->redirect('list');
     }
 
     /**
@@ -304,6 +470,51 @@ class AdministrationController extends AbstractController
     }
 
     /**
+     * Get a CSRF token
+     *
+     * @param bool $tokenOnly Set it to TRUE to get only the token, otherwise including the &moduleToken= as prefix
+     * @return string
+     */
+    protected function getToken(bool $tokenOnly = false): string
+    {
+        if (self::isV9up()) {
+            $tokenParameterName = 'token';
+            $token = FormProtectionFactory::get('backend')->generateToken('route', 'web_SfEventMgtTxSfeventmgtM1');
+        } else {
+            $tokenParameterName = 'moduleToken';
+            $token = FormProtectionFactory::get()->generateToken('moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
+        }
+
+        if ($tokenOnly) {
+            return $token;
+        }
+
+        return '&' . $tokenParameterName . '=' . $token;
+    }
+
+    /**
+     * Returns if the current TYPO3 version is v9 or greater
+     *
+     * @return bool
+     */
+    private function isV9up(): bool
+    {
+        return VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 9000000;
+    }
+
+    /**
+     * Returns the LanguageService
+     *
+     * @return LanguageService
+     */
+    protected function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
+
+    /**
+     * Returns current backendUser object
+     *
      * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
      */
     protected function getBackendUser()

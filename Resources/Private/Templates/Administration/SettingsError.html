@@ -3,15 +3,24 @@
 <f:layout name="Backend" />
 
 <f:section name="headline">
-    <h1>
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settingsError.title" />
-    </h1>
+
 </f:section>
 
 <f:section name="content">
-    <div class="typo3-message message-error">
-        <div class="message-body">
-            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settingsError.description" />
+    <div class="callout callout-danger">
+        <div class="media">
+            <div class="media-left">
+                        <span class="fa-stack fa-lg callout-icon"> <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-info fa-stack-1x"></i> </span>
+            </div>
+            <div class="media-body">
+                <h4 class="callout-title">
+                    <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settingsError.title" />
+                </h4>
+                <div class="callout-body">
+                    <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.settingsError.description" />
+                </div>
+            </div>
         </div>
     </div>
 </f:section>

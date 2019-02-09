@@ -63,7 +63,7 @@ call_user_func(function () {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'DERHANSEN\\SfEventMgt\\Command\\CleanupCommandController';
 
         // Enable live search for events using "#event:"
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['event'] ='tx_sfeventmgt_domain_model_event';
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['event'] = 'tx_sfeventmgt_domain_model_event';
     }
 
     // Register longitude- and latitude-evaluator for TCA
