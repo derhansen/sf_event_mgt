@@ -168,7 +168,6 @@ class PageViewHelperTest extends UnitTestCase
                 [
                     'initFEuser',
                     'fetch_the_id',
-                    'getPageAndRootline',
                     'initTemplate',
                     'getConfigArray'
                 ]
@@ -176,7 +175,6 @@ class PageViewHelperTest extends UnitTestCase
             ->getMock();
         $mockTsfe->expects($this->once())->method('initFEuser');
         $mockTsfe->expects($this->once())->method('fetch_the_id');
-        $mockTsfe->expects($this->once())->method('getPageAndRootline');
         $mockTsfe->expects($this->once())->method('initTemplate');
         $mockTsfe->expects($this->once())->method('getConfigArray');
 
@@ -206,7 +204,6 @@ class PageViewHelperTest extends UnitTestCase
                 [
                     'initFEuser',
                     'fetch_the_id',
-                    'getPageAndRootline',
                     'initTemplate',
                     'getConfigArray'
                 ]
@@ -214,7 +211,6 @@ class PageViewHelperTest extends UnitTestCase
             ->getMock();
         $mockTsfe->expects($this->once())->method('initFEuser');
         $mockTsfe->expects($this->once())->method('fetch_the_id');
-        $mockTsfe->expects($this->once())->method('getPageAndRootline');
         $mockTsfe->expects($this->once())->method('initTemplate');
         $mockTsfe->expects($this->once())->method('getConfigArray');
 

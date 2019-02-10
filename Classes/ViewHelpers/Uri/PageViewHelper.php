@@ -39,7 +39,6 @@ class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         $GLOBALS['TSFE'] = $this->getTsfeInstance();
         $GLOBALS['TSFE']->initFEuser();
         $GLOBALS['TSFE']->fetch_the_id();
-        $GLOBALS['TSFE']->getPageAndRootline();
         $GLOBALS['TSFE']->initTemplate();
         $GLOBALS['TSFE']->getConfigArray();
     }
