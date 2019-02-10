@@ -535,7 +535,7 @@ class AdministrationController extends AbstractController
      *
      * @return array
      */
-    private function getOrderDirections()
+    public function getOrderDirections()
     {
         return [
             'asc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.asc'),
@@ -548,7 +548,7 @@ class AdministrationController extends AbstractController
      *
      * @return array
      */
-    private function getOrderByFields()
+    public function getOrderByFields()
     {
         return [
             'title' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.title'),

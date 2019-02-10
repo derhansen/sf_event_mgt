@@ -500,22 +500,6 @@ class EventControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if ICalendarService is called when downloading a iCal file
-     *
-     * @test
-     *
-     * @return void
-     */
-    public function icalDownloadActionCallsICalendarServiceDownloadiCalendarFile()
-    {
-        $event = $this->getMockBuilder(Event::class)->getMock();
-        $icalendarService = $this->getMockBuilder(ICalendarService::class)->getMock();
-        $icalendarService->expects($this->once())->method('downloadiCalendarFile')->with($this->equalTo($event));
-        $this->inject($this->subject, 'icalendarService', $icalendarService);
-        $this->subject->icalDownloadAction($event);
-    }
-
-    /**
      * @test
      * @return void
      */

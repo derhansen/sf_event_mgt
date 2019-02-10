@@ -50,7 +50,7 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $this->subject = $this->getAccessibleMock(
             AdministrationController::class,
-            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri'],
+            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getLanguageService'],
             [],
             '',
             false
@@ -82,7 +82,7 @@ class AdministrationControllerTest extends UnitTestCase
      * @test
      * @return void
      */
-    public function listActionFetchesEventsFromRepositoryForNoStoragePageAndAssignsThemToView()
+    public function listActionDoesNotFetchEventsForStoragePidZero()
     {
         $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
             ->setMethods(['getDefaultUploadTemporaryFolder'])
@@ -90,6 +90,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
             ->will($this->returnValue(true));
         $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
+        $this->subject->_set('pid', 0);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
@@ -107,7 +109,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
-        $beUserSessionService->expects($this->once())->method('getSessionDataByKey');
+        $beUserSessionService->expects($this->any())->method('getSessionDataByKey');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
@@ -120,9 +122,13 @@ class AdministrationControllerTest extends UnitTestCase
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
+            'pid' => 0,
             'events' => $allEvents,
             'searchDemand' => null,
-            'csvExportPossible' => true
+            'csvExportPossible' => true,
+            'orderByFields' => $this->subject->getOrderByFields(),
+            'orderDirections' => $this->subject->getOrderDirections(),
+            'overwriteDemand' => null
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -133,7 +139,7 @@ class AdministrationControllerTest extends UnitTestCase
      * @test
      * @return void
      */
-    public function listActionFetchesEventsFromRepositoryForNoStoragePageAndGivenDemandAndAssignsThemToView()
+    public function listActionDoesNotFetchEventsForStoragePidZeroAndDemand()
     {
         $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
             ->setMethods(['getDefaultUploadTemporaryFolder'])
@@ -141,6 +147,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
             ->will($this->returnValue(true));
         $GLOBALS['BE_USER'] = $mockBeUserAuth;
+
+        $this->subject->_set('pid', 0);
 
         $searchDemand = new SearchDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -170,9 +178,13 @@ class AdministrationControllerTest extends UnitTestCase
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
+            'pid' => 0,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => true
+            'csvExportPossible' => true,
+            'orderByFields' => $this->subject->getOrderByFields(),
+            'orderDirections' => $this->subject->getOrderDirections(),
+            'overwriteDemand' => []
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -222,9 +234,13 @@ class AdministrationControllerTest extends UnitTestCase
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
+            'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => true
+            'csvExportPossible' => true,
+            'orderByFields' => $this->subject->getOrderByFields(),
+            'orderDirections' => $this->subject->getOrderDirections(),
+            'overwriteDemand' => []
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -235,7 +251,7 @@ class AdministrationControllerTest extends UnitTestCase
      * @test
      * @return void
      */
-    public function listActionAssignsMessageIfMessageIdGivenToView()
+    public function listActionUsesOverwriteDemandArrayAndAssignsItToView()
     {
         $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
             ->setMethods(['getDefaultUploadTemporaryFolder'])
@@ -272,16 +288,17 @@ class AdministrationControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
 
         $view->expects($this->once())->method('assignMultiple')->with([
-            'showMessage' => true,
-            'messageTitleKey' => 'administration.message-123.title',
-            'messageContentKey' => 'administration.message-123.content',
+            'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => true
+            'csvExportPossible' => true,
+            'orderByFields' => $this->subject->getOrderByFields(),
+            'orderDirections' => $this->subject->getOrderDirections(),
+            'overwriteDemand' => ['orderDirection' => 'desc']
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $this->subject->listAction($searchDemand, 123);
+        $this->subject->listAction($searchDemand, ['orderDirection' => 'desc']);
     }
 
     /**
@@ -365,25 +382,6 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('arguments', $this->getInitializeListActionArgumentMock('d.m.Y'));
         $this->subject->_set('settings', $settings);
         $this->subject->initializeListAction();
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function exportActionCallsExportServiceDownloadRegistrationsCsv()
-    {
-        $settings = [
-            'csvExport' => ['some settings']
-        ];
-        $exportService = $this->getMockBuilder(ExportService::class)->getMock();
-        $exportService->expects($this->once())->method('downloadRegistrationsCsv')->with(
-            $this->equalTo(1),
-            $this->equalTo(['some settings'])
-        );
-        $this->inject($this->subject, 'exportService', $exportService);
-        $this->subject->_set('settings', $settings);
-        $this->subject->exportAction(1);
     }
 
     /**
