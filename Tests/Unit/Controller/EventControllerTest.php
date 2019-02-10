@@ -76,7 +76,8 @@ class EventControllerTest extends UnitTestCase
                 'createEventDemandObjectFromSettings',
                 'createCategoryDemandObjectFromSettings',
                 'createForeignRecordDemandObjectFromSettings',
-                'overwriteEventDemandObject'
+                'overwriteEventDemandObject',
+                'getSysLanguageUid'
             ],
             [],
             '',

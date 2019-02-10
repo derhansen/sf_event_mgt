@@ -544,7 +544,7 @@ class EventController extends AbstractController
             $registration->setLanguage($GLOBALS['TSFE']->config['config']['language']);
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
             $registration->setWaitlist($isWaitlistRegistration);
-            $registration->_setProperty('_languageUid', $GLOBALS['TSFE']->sys_language_uid);
+            $registration->_setProperty('_languageUid', $this->getSysLanguageUid());
             $this->registrationRepository->add($registration);
 
             // Persist registration, so we have an UID
@@ -995,5 +995,15 @@ class EventController extends AbstractController
         }
 
         return $event;
+    }
+
+    /**
+     * Returns the current sys_language_uid
+     *
+     * @return int
+     */
+    protected function getSysLanguageUid()
+    {
+        return $GLOBALS['TSFE']->sys_language_uid;
     }
 }
