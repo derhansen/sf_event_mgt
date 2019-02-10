@@ -9,9 +9,11 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
  */
 
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Facets\CompilableInterface;
 
-class IsRequiredFieldViewHelper extends AbstractConditionViewHelper implements CompilableInterface
+/**
+ * Class IsRequiredFieldViewHelper
+ */
+class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
 {
     /**
      * InitializeArguments
@@ -44,5 +46,16 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper implements C
         }
 
         return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function render()
+    {
+        if (static::evaluateCondition($this->arguments)) {
+            return $this->renderThenChild();
+        }
+        return $this->renderElseChild();
     }
 }
