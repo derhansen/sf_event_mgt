@@ -2018,7 +2018,6 @@ class EventControllerTest extends UnitTestCase
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
-
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
