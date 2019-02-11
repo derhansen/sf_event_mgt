@@ -8,6 +8,11 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\TimeTracker\TimeTracker;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * CategoryService
  *
@@ -30,39 +35,60 @@ class CategoryService
     /**
      * Get child categories
      *
-     * @param string $categoryList list of category ids to start
+     * @param string $idList list of category ids to start
      * @param int $counter
      * @return string comma separated list of category ids
      */
-    private static function getChildrenCategoriesRecursive($categoryList, $counter = 0)
+    private static function getChildrenCategoriesRecursive($idList, $counter = 0): string
     {
         $result = [];
 
         // add idlist to the output too
         if ($counter === 0) {
-            $result[] = $GLOBALS['TYPO3_DB']->cleanIntList($categoryList);
+            $result[] = self::cleanIntList($idList);
         }
 
-        $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-            'uid',
-            'sys_category',
-            'sys_category.parent IN (' . $GLOBALS['TYPO3_DB']->cleanIntList($categoryList) . ') AND deleted=0'
-        );
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('sys_category');
+        $res = $queryBuilder
+            ->select('uid')
+            ->from('sys_category')
+            ->where(
+                $queryBuilder->expr()->in(
+                    'parent',
+                    $queryBuilder->createNamedParameter(
+                        array_map('intval', explode(',', $idList)),
+                        Connection::PARAM_INT_ARRAY
+                    )
+                )
+            )
+            ->execute();
 
-        while (($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))) {
+        while (($row = $res->fetch())) {
             $counter++;
             if ($counter > 10000) {
-                $GLOBALS['TT']->setTSlogMessage('EXT:sf_event_mgt: one or more recursive categories where found');
+                GeneralUtility::makeInstance(TimeTracker::class)
+                    ->setTSlogMessage('EXT:sf_event_mgt: one or more recursive categories where found');
 
                 return implode(',', $result);
             }
             $subcategories = self::getChildrenCategoriesRecursive($row['uid'], $counter);
             $result[] = $row['uid'] . ($subcategories ? ',' . $subcategories : '');
         }
-        $GLOBALS['TYPO3_DB']->sql_free_result($res);
 
         $result = implode(',', $result);
 
         return $result;
+    }
+
+    /**
+     * Clean list of integers
+     *
+     * @param string $list
+     * @return string
+     */
+    private static function cleanIntList($list): string
+    {
+        return implode(',', GeneralUtility::intExplode(',', $list));
     }
 }
