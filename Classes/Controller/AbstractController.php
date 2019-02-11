@@ -60,6 +60,13 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected $organisatorRepository = null;
 
     /**
+     * Speaker repository
+     *
+     * @var \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository
+     */
+    protected $speakerRepository = null;
+
+    /**
      * Notification Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\NotificationService
@@ -196,6 +203,17 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository $organisatorRepository
     ) {
         $this->organisatorRepository = $organisatorRepository;
+    }
+
+    /**
+     * DI for $speakerRepository
+     *
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository $speakerRepository
+     */
+    public function injectSpeakerRepository(
+        \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository $speakerRepository
+    ) {
+        $this->speakerRepository = $speakerRepository;
     }
 
     /**

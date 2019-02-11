@@ -56,7 +56,7 @@ Tab settings
          Display mode
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          With this setting the plugin can be configured to show **all** events, only
@@ -90,7 +90,7 @@ Tab settings
          Sort by
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          Defines which field should be used for sorting events in the frontend. The default sorting field is
@@ -103,7 +103,7 @@ Tab settings
          Sorting direction
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          Defines the sorting direction for orderField. The default sorting direction is
@@ -122,7 +122,7 @@ Tab settings
          Top event restriction
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          With this setting the plugin can be configured to show **only top event** events, to
@@ -141,7 +141,7 @@ Tab settings
          Max records displayed
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
         The maximum number of records shown
@@ -153,7 +153,7 @@ Tab settings
          Category mode
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          This setting defines, how categories are taken into account when selecting events.
@@ -173,7 +173,7 @@ Tab settings
          Category
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          Restrict events to be shown by one or more category
@@ -185,7 +185,7 @@ Tab settings
          Include subcategory
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          Includes subcategories of the selected category
@@ -197,7 +197,7 @@ Tab settings
          Location
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          Restrict events to be shown by one location
@@ -209,7 +209,7 @@ Tab settings
          Organisator
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          Restrict events to be shown by one organisator
@@ -218,10 +218,22 @@ Tab settings
          organisator
 
  - :Property:
+         Speaker
+
+   :View:
+         List, Search, Calendar
+
+   :Description:
+         Restrict events to be shown by one speaker
+
+   :Key:
+         speaker
+
+ - :Property:
          Record storage page
 
    :View:
-         List
+         List, Search, Calendar
 
    :Description:
          One or more sysfolders, where events are stored

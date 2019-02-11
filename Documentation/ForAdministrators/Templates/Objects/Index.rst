@@ -58,6 +58,12 @@ List view
          All available organisators
 
  - :Object:
+         {speakers}
+
+   :Description:
+         All available speakers
+
+ - :Object:
          {eventDemand}
 
    :Description:
@@ -178,6 +184,12 @@ Calendar view
          All available organisators
 
  - :Object:
+         {speakers}
+
+   :Description:
+         All available speakers
+
+ - :Object:
          {eventDemand}
 
    :Description:
@@ -260,6 +272,12 @@ Search view
 
    :Description:
          All available organisators
+
+ - :Object:
+         {speakers}
+
+   :Description:
+         All available speakers
 
  - :Object:
          {searchDemand}

@@ -20,6 +20,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
@@ -284,6 +285,7 @@ class EventControllerTest extends UnitTestCase
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
@@ -323,12 +325,21 @@ class EventControllerTest extends UnitTestCase
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
             'organisators' => $allOrganisators,
+            'speakers' => $allSpeakers,
             'overwriteDemand' => [],
             'eventDemand' => $demand
         ]);
@@ -353,6 +364,7 @@ class EventControllerTest extends UnitTestCase
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $overrideDemand = ['category' => 10];
 
         $settings = ['settings'];
@@ -393,12 +405,21 @@ class EventControllerTest extends UnitTestCase
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
             'organisators' => $allOrganisators,
+            'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand
         ]);
@@ -422,6 +443,7 @@ class EventControllerTest extends UnitTestCase
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $overrideDemand = ['category' => 10];
 
         $settings = ['disableOverrideDemand' => 1];
@@ -462,12 +484,21 @@ class EventControllerTest extends UnitTestCase
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
             'organisators' => $allOrganisators,
+            'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand
         ]);
@@ -1725,6 +1756,7 @@ class EventControllerTest extends UnitTestCase
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
@@ -1764,12 +1796,21 @@ class EventControllerTest extends UnitTestCase
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
             'organisators' => $allOrganisators,
+            'speakers' => $allSpeakers,
             'searchDemand' => null,
             'overwriteDemand' => [],
         ]);
@@ -1801,6 +1842,7 @@ class EventControllerTest extends UnitTestCase
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
@@ -1840,12 +1882,21 @@ class EventControllerTest extends UnitTestCase
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects($this->once())->method('assignMultiple')->with([
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
             'organisators' => $allOrganisators,
+            'speakers' => $allSpeakers,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => [],
         ]);
@@ -1882,6 +1933,7 @@ class EventControllerTest extends UnitTestCase
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
@@ -1911,6 +1963,14 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -1952,6 +2012,13 @@ class EventControllerTest extends UnitTestCase
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
+        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -1981,6 +2048,14 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -2013,6 +2088,12 @@ class EventControllerTest extends UnitTestCase
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
+        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -2041,6 +2122,14 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -2073,6 +2162,12 @@ class EventControllerTest extends UnitTestCase
         $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->will($this->returnValue($demand));
 
+        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -2101,6 +2196,14 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
+
+        $speakerRepository = $this->getMockBuilder(
+            SpeakerRepository::class
+        )->setMethods(['findDemanded'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);

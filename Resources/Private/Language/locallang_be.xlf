@@ -145,11 +145,14 @@
 			<trans-unit id="flexforms_general.organisator">
 				<source>Organisator</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.speaker">
+				<source>Speaker</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.storagePage">
 				<source>Record storage page</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage">
-				<source>Restrict categories, locations and organisators to storagePage setting (including recursive option)</source>
+				<source>Restrict categories, locations, organisators and speakers to storagePage setting (including recursive option)</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode.all">
 				<source>Show all events</source>

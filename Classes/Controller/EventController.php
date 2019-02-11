@@ -87,6 +87,7 @@ class EventController extends AbstractController
         $demand->setQueryLimit($settings['queryLimit']);
         $demand->setLocation($settings['location']);
         $demand->setOrganisator($settings['organisator']);
+        $demand->setSpeaker($settings['speaker']);
 
         return $demand;
     }
@@ -193,12 +194,14 @@ class EventController extends AbstractController
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
         $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
+        $speakers = $this->speakerRepository->findDemanded($foreignRecordDemand);
 
         $values = [
             'events' => $events,
             'categories' => $categories,
             'locations' => $locations,
             'organisators' => $organisators,
+            'speakers' => $speakers,
             'overwriteDemand' => $overwriteDemand,
             'eventDemand' => $eventDemand
         ];
@@ -884,6 +887,7 @@ class EventController extends AbstractController
         $categories = $this->categoryRepository->findDemanded($categoryDemand);
         $locations = $this->locationRepository->findDemanded($foreignRecordDemand);
         $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
+        $speakers = $this->speakerRepository->findDemanded($foreignRecordDemand);
         $events = $this->eventRepository->findDemanded($eventDemand);
 
         $values = [
@@ -891,6 +895,7 @@ class EventController extends AbstractController
             'categories' => $categories,
             'locations' => $locations,
             'organisators' => $organisators,
+            'speakers' => $speakers,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => $overwriteDemand,
         ];
