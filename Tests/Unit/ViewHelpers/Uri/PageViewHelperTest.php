@@ -240,6 +240,7 @@ class PageViewHelperTest extends UnitTestCase
         );
         $result = $viewHelper->_call('getTsfeInstance');
         $this->assertInstanceOf(TypoScriptFrontendController::class, $result);
+        $this->markTestIncomplete('ViewHelper must be refactored');
     }
 
     /**
@@ -257,5 +258,6 @@ class PageViewHelperTest extends UnitTestCase
         );
         $result = $viewHelper->_call('getTimeTrackerInstance');
         $this->assertInstanceOf(TimeTracker::class, $result);
+        $this->markTestIncomplete('ViewHelper must be refactored');
     }
 }
