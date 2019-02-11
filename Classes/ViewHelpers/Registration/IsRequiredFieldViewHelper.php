@@ -56,6 +56,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
         if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();
         }
+
         return $this->renderElseChild();
     }
 }
