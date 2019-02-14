@@ -139,7 +139,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim',
+                'eval' => 'email',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
