@@ -267,6 +267,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.link',
             'config' => [
                 'type' => 'input',
+                'renderType' => 'inputLink',
                 'size' => 30,
                 'eval' => 'trim',
                 'behaviour' => [
