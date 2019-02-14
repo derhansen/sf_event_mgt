@@ -57,58 +57,6 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleExpiredRegistrationsWithoutDeleteOption()
-    {
-        $registration = $this->getMockBuilder(Registration::class)
-            ->setMethods(['setHidden'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registration->expects($this->once())->method('setHidden')->with(true);
-
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new ObjectStorage();
-        $registrations->attach($registration);
-
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->setMethods(['findExpiredRegistrations', 'update'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects($this->once())->method('findExpiredRegistrations')->will(
-            $this->returnValue($registrations)
-        );
-        $registrationRepository->expects($this->once())->method('update');
-        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $this->subject->handleExpiredRegistrations();
-    }
-
-    /**
-     * @test
-     */
-    public function handleExpiredRegistrationsWithDeleteOption()
-    {
-        $registration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new ObjectStorage();
-        $registrations->attach($registration);
-
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->setMethods(['findExpiredRegistrations', 'remove'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects($this->once())->method('findExpiredRegistrations')->will(
-            $this->returnValue($registrations)
-        );
-        $registrationRepository->expects($this->once())->method('remove');
-        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $this->subject->handleExpiredRegistrations(true);
-    }
-
-    /**
-     * @test
-     */
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();

@@ -15,8 +15,8 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
+use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
-use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -389,10 +389,10 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView()
     {
-        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
+        $mockMaintenanceService = $this->getMockBuilder(MaintenanceService::class)
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('handleExpiredRegistrations');
-        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
+        $mockMaintenanceService->expects($this->once())->method('handleExpiredRegistrations');
+        $this->inject($this->subject, 'maintenanceService', $mockMaintenanceService);
 
         $this->subject->expects($this->once())->method('redirect');
         $this->subject->handleExpiredRegistrationsAction();

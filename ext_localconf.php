@@ -58,10 +58,7 @@ call_user_func(function () {
             \DERHANSEN\SfEventMgt\Hooks\RealUrlAutoConfiguration::class . '->addSfEventConfig';
     }
 
-    // Register cleanup command
     if (TYPO3_MODE === 'BE') {
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'DERHANSEN\\SfEventMgt\\Command\\CleanupCommandController';
-
         // Enable live search for events using "#event:"
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['event'] = 'tx_sfeventmgt_domain_model_event';
     }

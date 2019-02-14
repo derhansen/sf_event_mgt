@@ -73,6 +73,11 @@ class AdministrationController extends AbstractController
     protected $beUserSessionService = null;
 
     /**
+     * @var \DERHANSEN\SfEventMgt\Service\MaintenanceService
+     */
+    protected $maintenanceService = null;
+
+    /**
      * The current page uid
      *
      * @var int
@@ -140,6 +145,14 @@ class AdministrationController extends AbstractController
     public function injectIconFactory(IconFactory $iconFactory)
     {
         $this->iconFactory = $iconFactory;
+    }
+
+    /**
+     * @param Service\MaintenanceService $maintenanceService
+     */
+    public function injectMaintenanceService(\DERHANSEN\SfEventMgt\Service\MaintenanceService $maintenanceService)
+    {
+        $this->maintenanceService = $maintenanceService;
     }
 
     /**
@@ -364,15 +377,14 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * Calls the handleExpiredRegistrations Service
+     * Handles expired registrations
      *
      * @return void
      */
     public function handleExpiredRegistrationsAction()
     {
-        $this->registrationService->handleExpiredRegistrations(
-            $this->settings['registration']['deleteExpiredRegistrations']
-        );
+        $delete = (bool)$this->settings['registration']['deleteExpiredRegistrations'];
+        $this->maintenanceService->handleExpiredRegistrations($delete);
 
         $this->addFlashMessage(
             $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.content'),

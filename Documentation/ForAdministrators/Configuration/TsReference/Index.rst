@@ -187,8 +187,10 @@ plugin.tx_sfeventmgt
          Boolean
 
    :Description:
-         If set to true, expired registrations will be deleted. If this setting is set to false,
-         expired registrations will just be set to **hidden**
+         If set to true, expired registrations will be deleted by the action in the backend module. If this
+         setting is set to false, expired registrations will just be set to **hidden**
+
+         Note, this setting has no effect for the `cleanup` CLI command.
 
    :Default:
          0 (false)

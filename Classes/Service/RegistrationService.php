@@ -108,30 +108,6 @@ class RegistrationService
     }
 
     /**
-     * Handles expired registrations. If the $delete parameter is set, then
-     * registrations are deleted, else just hidden
-     *
-     * @param bool $delete Delete
-     *
-     * @return void
-     */
-    public function handleExpiredRegistrations($delete = false)
-    {
-        $registrations = $this->registrationRepository->findExpiredRegistrations(new \DateTime());
-        if ($registrations->count() > 0) {
-            foreach ($registrations as $registration) {
-                /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
-                if ($delete) {
-                    $this->registrationRepository->remove($registration);
-                } else {
-                    $registration->setHidden(true);
-                    $this->registrationRepository->update($registration);
-                }
-            }
-        }
-    }
-
-    /**
      * Duplicates (all public accessable properties) the given registration the
      * amount of times configured in amountOfRegistrations
      *

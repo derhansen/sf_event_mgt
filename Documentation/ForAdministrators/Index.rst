@@ -20,7 +20,7 @@ For Administrators
    Configuration/Index
    Templates/Index
    ClearCacheUids/Index
-   Cronjob/Index
+   CliCommands/Index
    CustomNotifications/Index
    EmailAttachments/Index
    RssFeed/Index
