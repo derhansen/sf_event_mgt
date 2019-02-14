@@ -139,7 +139,7 @@ class FluidStandaloneService
      */
     public function parseStringFluid($string, $variables = [])
     {
-        if (empty($string) || empty(self::getDatabaseConnection())) {
+        if (empty($string)) {
             return $string;
         }
         /** @var StandaloneView $standaloneView */
@@ -148,13 +148,5 @@ class FluidStandaloneService
         $standaloneView->assignMultiple($variables);
 
         return $standaloneView->render();
-    }
-
-    /**
-     * @return DatabaseConnection
-     */
-    protected static function getDatabaseConnection()
-    {
-        return $GLOBALS['TYPO3_DB'];
     }
 }
