@@ -168,6 +168,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male">
 				<source>Male</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various">
+				<source>Various</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth">
 				<source>Date of birth</source>
 			</trans-unit>
