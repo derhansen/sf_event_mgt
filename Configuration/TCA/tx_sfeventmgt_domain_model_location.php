@@ -225,7 +225,7 @@ return [
                 'size' => 11,
                 'max' => 11,
                 'default' => '0.00',
-                'eval' => 'trim,DERHANSEN\\SfEventMgt\\Evaluation\\LongitudeEvaluator'
+                'eval' => 'trim,DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator'
             ],
         ],
         'latitude' => [
@@ -236,7 +236,7 @@ return [
                 'size' => 11,
                 'max' => 11,
                 'default' => '0.00',
-                'eval' => 'trim,DERHANSEN\\SfEventMgt\\Evaluation\\LatitudeEvaluator'
+                'eval' => 'trim,DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator'
             ],
         ],
     ],
