@@ -133,6 +133,9 @@
 			<trans-unit id="flexforms_general.possibleMisconfiguration">
 				<source>Possible misconfiguration!</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.pluginCalendarMisonfiguration">
+				<source>Plugin misconfigured: This setting must be disabled for "Calendar" to work properly!</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.category">
 				<source>Category</source>
 			</trans-unit>

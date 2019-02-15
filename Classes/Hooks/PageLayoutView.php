@@ -328,9 +328,18 @@ class PageLayoutView
         $field = $this->getFieldFromFlexform('settings.disableOverrideDemand', 'additional');
 
         if ($field == 1) {
+            $text = '<i class="fa fa-check"></i>';
+
+            // Check if plugin action is "calendar" and if so, show warning that calendar action will not work
+            $action = $this->getFieldFromFlexform('switchableControllerActions');
+            if ($action === 'Event->calendar') {
+                $text .= ' <span class="label label-danger">' .
+                    htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.pluginCalendarMisonfiguration')) . '</span>';
+            }
+
             $this->data[] = [
                 'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.disableOverrideDemand'),
-                'value' => '<i class="fa fa-check"></i>'
+                'value' => $text
             ];
         }
     }
