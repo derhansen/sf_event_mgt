@@ -2,108 +2,73 @@
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 
 /*
- * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
  *
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\TimeTracker\TimeTracker;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
- * A viewhelper with the same functionality as the f:uri.page viewhelper,
- * but this viewhelper builds frontend links with buildFrontendUri, so links
- * to FE pages can get generated in the TYPO3 backend
- *
- * @author Torben Hansen <derhansen@gmail.com>
+ * Modified version of TYPO3 f:uri.page viewHelper, which always generates frontend URLs, so views created in
+ * backend context can render links in frontend context
  */
 class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-    /**
-     * @var int
-     */
-    protected $pid = 0;
+    use CompileWithRenderStatic;
 
     /**
-     * Creates a TSFE object which can be used in Backend
-     *
-     * @return void
+     * Initialize arguments
      */
-    protected function buildTsfe()
+    public function initializeArguments()
     {
-        if (!is_object($GLOBALS['TT'])) {
-            $GLOBALS['TT'] = $this->getTimeTrackerInstance();
-            $GLOBALS['TT']->start();
-        }
-        $GLOBALS['TSFE'] = $this->getTsfeInstance();
-        $GLOBALS['TSFE']->initFEuser();
-        $GLOBALS['TSFE']->fetch_the_id();
-        $GLOBALS['TSFE']->initTemplate();
-        $GLOBALS['TSFE']->getConfigArray();
+        parent::initializeArguments();
+        $this->registerArgument('pageUid', 'int', 'target PID');
+        $this->registerArgument('additionalParams', 'array', 'query parameters to be attached to the resulting URI', false, []);
+        $this->registerArgument('pageType', 'int', 'type of the target page. See typolink.parameter', false, 0);
+        $this->registerArgument('noCache', 'bool', 'set this to disable caching for the target page. You should not need this.', false, false);
+        $this->registerArgument('noCacheHash', 'bool', 'set this to suppress the cHash query parameter created by TypoLink. You should not need this.', false, false);
+        $this->registerArgument('section', 'string', 'the anchor to be added to the URI', false, '');
+        $this->registerArgument('linkAccessRestrictedPages', 'bool', 'If set, links pointing to access restricted pages will still link to the page even though the page cannot be accessed.', false, false);
+        $this->registerArgument('absolute', 'bool', 'If set, the URI of the rendered link is absolute', false, false);
+        $this->registerArgument('addQueryString', 'bool', 'If set, the current query parameters will be kept in the URI', false, false);
+        $this->registerArgument('argumentsToBeExcludedFromQueryString', 'array', 'arguments to be removed from the URI. Only active if $addQueryString = TRUE', false, []);
+        $this->registerArgument('addQueryStringMethod', 'string', 'Set which parameters will be kept. Only active if $addQueryString = TRUE');
     }
 
     /**
-     * Returns a new instance of the TypoScriptFrontendController
-     *
-     * @return object
-     */
-    protected function getTsfeInstance()
-    {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            TypoScriptFrontendController::class,
-            $GLOBALS['TYPO3_CONF_VARS'],
-            $this->pid,
-            '0',
-            1,
-            '',
-            '',
-            '',
-            ''
-        );
-    }
-
-    /**
-     * Returns a new instance of TimeTracker
-     *
-     * @return object
-     */
-    protected function getTimeTrackerInstance()
-    {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TimeTracker::class);
-    }
-
-    /**
-     * @param int|null $pageUid target PID
-     * @param array $additionalParams query parameters to be attached to the resulting URI
-     * @param int $pageType type of the target page. See typolink.parameter
-     * @param bool $noCache set this to disable caching for the target page. You should not need this.
-     * @param bool $noCacheHash set this to supress the cHash query parameter created by TypoLink. You should not need this.
-     * @param string $section the anchor to be added to the URI
-     * @param bool $linkAccessRestrictedPages if set, links pointing to access restricted pages will still link to the page even though the page cannot be accessed
-     * @param bool $absolute If set, the URI of the rendered link is absolute
-     * @param bool $addQueryString If set, the current query parameters will be kept in the URI
-     * @param array $argumentsToBeExcludedFromQueryString arguments to be removed from the URI. Only active if $addQueryString = TRUE
-     * @param string $addQueryStringMethod Set which parameters will be kept. Only active if $addQueryString = TRUE
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param RenderingContextInterface $renderingContext
      * @return string Rendered page URI
      */
-    public function render(
-        $pageUid = null,
-        array $additionalParams = [],
-        $pageType = 0,
-        $noCache = false,
-        $noCacheHash = false,
-        $section = '',
-        $linkAccessRestrictedPages = false,
-        $absolute = false,
-        $addQueryString = false,
-        array $argumentsToBeExcludedFromQueryString = [],
-        $addQueryStringMethod = null
-    ) {
-        $this->buildTsfe();
-        $uriBuilder = $this->controllerContext->getUriBuilder();
-        $uri = $uriBuilder->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->setAddQueryStringMethod($addQueryStringMethod)->buildFrontendUri();
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
+    {
+        $pageUid = $arguments['pageUid'];
+        $additionalParams = $arguments['additionalParams'];
+        $pageType = $arguments['pageType'];
+        $noCache = $arguments['noCache'];
+        $noCacheHash = $arguments['noCacheHash'];
+        $section = $arguments['section'];
+        $linkAccessRestrictedPages = $arguments['linkAccessRestrictedPages'];
+        $absolute = $arguments['absolute'];
+        $addQueryString = $arguments['addQueryString'];
+        $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'];
+        $addQueryStringMethod = $arguments['addQueryStringMethod'];
 
+        /** @var UriBuilder $uriBuilder */
+        $uriBuilder = $renderingContext->getControllerContext()->getUriBuilder();
+        $uri = $uriBuilder->setTargetPageUid($pageUid)->setTargetPageType($pageType)->setNoCache($noCache)->setUseCacheHash(!$noCacheHash)->setSection($section)->setLinkAccessRestrictedPages($linkAccessRestrictedPages)->setArguments($additionalParams)->setCreateAbsoluteUri($absolute)->setAddQueryString($addQueryString)->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)->setAddQueryStringMethod($addQueryStringMethod)->buildFrontendUri();
         return $uri;
     }
 }
+
