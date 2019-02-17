@@ -20,3 +20,4 @@ Configuration
    TsReference/Index
    PageTSConfig/Index
    RealUrl/Index
+   RouteEnhancers/Index
