@@ -43,6 +43,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	cancel_deadline int(11) DEFAULT '0' NOT NULL,
 	enable_autoconfirm tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	unique_email_check tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	slug varchar(2048),
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -101,6 +102,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_organisator (
 	email varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
+	slug varchar(2048),
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -170,6 +172,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	link tinytext,
 	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
+	slug varchar(2048),
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -328,6 +331,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_speaker (
 	job_title varchar(255) DEFAULT '' NOT NULL,
 	description text,
 	image int(11) unsigned DEFAULT '0' NOT NULL,
+	slug varchar(2048),
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

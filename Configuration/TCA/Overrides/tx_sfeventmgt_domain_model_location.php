@@ -1,25 +1,11 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-$tableName = 'tx_sfeventmgt_domain_model_event';
-
-// Add an extra categories selection field to the events table
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-    'sf_event_mgt',
-    $tableName,
-    'category',
-    [
-        'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:tx_sfeventmgt_domain_model_event.category',
-        'exclude' => false
-    ]
-);
-
-// Enable language synchronisation for the category field
-$GLOBALS['TCA'][$tableName]['columns']['category']['config']['behaviour']['allowLanguageSynchronization'] = true;
+$tableName = 'tx_sfeventmgt_domain_model_location';
 
 // Register slug field for TYPO3 9.5
 if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
-    $eventColumns['slug'] = [
+    $locationColumns['slug'] = [
         'exclude' => true,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
         'config' => [
@@ -39,7 +25,7 @@ if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
         $tableName,
-        $eventColumns
+        $locationColumns
     );
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
         $tableName,
