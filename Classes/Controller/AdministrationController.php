@@ -12,6 +12,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
+use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
@@ -20,7 +21,6 @@ use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\HttpUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
@@ -270,7 +270,7 @@ class AdministrationController extends AbstractController
             $pid = (int)$tsConfig['defaultPid.'][$table];
         }
 
-        if (self::isV9up()) {
+        if (MiscUtility::isV9Lts()) {
             $returnUrl = 'index.php?route=/web/SfEventMgtTxSfeventmgtM1/';
         } else {
             $returnUrl = 'index.php?M=web_SfEventMgtTxSfeventmgtM1';
@@ -497,7 +497,7 @@ class AdministrationController extends AbstractController
      */
     protected function getToken(bool $tokenOnly = false): string
     {
-        if (self::isV9up()) {
+        if (MiscUtility::isV9Lts()) {
             $tokenParameterName = 'token';
             $token = FormProtectionFactory::get('backend')->generateToken('route', 'web_SfEventMgtTxSfeventmgtM1');
         } else {
@@ -510,16 +510,6 @@ class AdministrationController extends AbstractController
         }
 
         return '&' . $tokenParameterName . '=' . $token;
-    }
-
-    /**
-     * Returns if the current TYPO3 version is v9 or greater
-     *
-     * @return bool
-     */
-    private function isV9up(): bool
-    {
-        return VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 9000000;
     }
 
     /**
