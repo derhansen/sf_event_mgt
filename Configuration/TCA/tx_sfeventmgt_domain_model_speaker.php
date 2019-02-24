@@ -7,7 +7,6 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
         'sortby' => 'sorting',
         'versioningWS' => true,
         'origUid' => 't3_origuid',
