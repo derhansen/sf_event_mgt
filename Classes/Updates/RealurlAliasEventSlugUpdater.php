@@ -16,7 +16,7 @@ use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
 /**
- * Class ExportService
+ * Class RealurlAliasEventSlugUpdater
  */
 class RealurlAliasEventSlugUpdater implements UpgradeWizardInterface, ConfirmableInterface
 {
