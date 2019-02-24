@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>1</uid>
+        <pid>1</pid>
+        <sys_language_uid>0</sys_language_uid>
+        <title>Event 1 - default language</title>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>2</uid>
+        <pid>1</pid>
+        <sys_language_uid>0</sys_language_uid>
+        <title>Event 2 - default language</title>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>3</uid>
+        <pid>1</pid>
+        <sys_language_uid>1</sys_language_uid>
+        <title>Event 3 - other language</title>
+    </tx_sfeventmgt_domain_model_event>
+
+    <tx_realurl_uniqalias>
+        <uid>1</uid>
+        <tablename>tx_sfeventmgt_domain_model_event</tablename>
+        <field_alias>title</field_alias>
+        <field_id>uid</field_id>
+        <value_alias>event-1-slug-from-realurl</value_alias>
+        <value_id>1</value_id>
+        <lang>0</lang>
+    </tx_realurl_uniqalias>
+    <tx_realurl_uniqalias>
+        <uid>2</uid>
+        <tablename>tx_sfeventmgt_domain_model_event</tablename>
+        <field_alias>title</field_alias>
+        <field_id>uid</field_id>
+        <value_alias>event-2-slug-from-realurl</value_alias>
+        <value_id>2</value_id>
+        <lang>0</lang>
+        <expire>1514764800</expire>
+    </tx_realurl_uniqalias>
+    <tx_realurl_uniqalias>
+        <uid>3</uid>
+        <tablename>tx_sfeventmgt_domain_model_event</tablename>
+        <field_alias>title</field_alias>
+        <field_id>uid</field_id>
+        <value_alias>event-3-slug-from-realurl</value_alias>
+        <value_id>3</value_id>
+        <lang>1</lang>
+    </tx_realurl_uniqalias>
+</dataset>

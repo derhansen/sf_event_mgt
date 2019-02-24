@@ -79,6 +79,12 @@ call_user_func(function () {
         ]
     ];
 
+    // Register install tool updaters
+    if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['realurlAliasEventSlugUpdater']
+            = \DERHANSEN\SfEventMgt\Updates\RealurlAliasEventSlugUpdater::class;
+    }
+
     // Add page TSConfig
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
         <INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.txt">
