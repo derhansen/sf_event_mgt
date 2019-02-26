@@ -1467,7 +1467,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(EventController::class, 'confirmRegistrationActionAfterRegistrationConfirmed');
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(EventController::class, 'confirmRegistrationActionBeforeRenderView');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
@@ -1527,7 +1530,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(EventController::class, 'confirmRegistrationActionAfterRegistrationConfirmed');
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(EventController::class, 'confirmRegistrationActionBeforeRenderView');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');

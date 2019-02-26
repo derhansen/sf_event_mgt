@@ -706,6 +706,8 @@ class EventController extends AbstractController
             $event = $registration->getEvent();
             $this->registrationRepository->update($registration);
 
+            $this->signalDispatch(__CLASS__, __FUNCTION__ . 'AfterRegistrationConfirmed', [$registration, $this]);
+
             $messageType = MessageType::REGISTRATION_CONFIRMED;
             if ($registration->getWaitlist()) {
                 $messageType = MessageType::REGISTRATION_WAITLIST_CONFIRMED;

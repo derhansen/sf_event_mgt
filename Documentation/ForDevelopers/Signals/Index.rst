@@ -95,6 +95,18 @@ and the processing of the payment of a registration.
          DERHANSEN\SfEventMgt\Controller\Event
 
    :Name:
+         confirmRegistrationActionAfterRegistrationConfirmed
+
+   :Arguments:
+         $registration, $this
+
+   :Description:
+         Signal is called after a registration has been confirmed. The registration is passed to the signal.
+
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
+
+   :Name:
          confirmRegistrationActionBeforeRenderView
 
    :Arguments:
