@@ -83,6 +83,8 @@ call_user_func(function () {
     if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['realurlAliasEventSlugUpdater']
             = \DERHANSEN\SfEventMgt\Updates\RealurlAliasEventSlugUpdater::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['populateSfEventMgtSlugUpdater']
+            = \DERHANSEN\SfEventMgt\Updates\PopulateSfEventMgtSlugUpdater::class;
     }
 
     // Add page TSConfig
