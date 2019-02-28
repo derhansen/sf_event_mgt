@@ -252,5 +252,16 @@ and use ext:repair_translation.
 Forge issue: https://forge.typo3.org/issues/57272
 Extension - Repair Translation: https://github.com/froemken/repair_translation
 
+Event registrations get confirmed by search engines
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Under certain conditions with extensions, that create sitemaps, it may happen, that a confirmation link of a
+registration email gets added to the sitemap. This behavior has at least been seen when the extension ``metaseo``
+has been used to create a sitemap.
+
+In order to avoid the registration link from being added to the sitemap, you must ensure, that the page with then
+registration plugin will be be included in the XML sitemap.
+
+Use https://github.com/derhansen/sf_event_mgt/issues/597 for further details/discussion.
+
 
 
