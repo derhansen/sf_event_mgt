@@ -49,7 +49,8 @@
             <div class="userregistration-list-label">
             </div>
             <div class="userregistration-list-value userregistration-cancel">
-                <f:link.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{e:registration.hmac(registration: \'{registration}\')}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" pageUid="{settings.registrationPid}">
+                <f:variable name="hmac" value="{e:registration.hmac(registration: registration)}"/>
+                <f:link.action action="cancelRegistration" arguments="{reguid: registration.uid, hmac: hmac}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" pageUid="{settings.registrationPid}">
                     <f:translate key="userRegistration.cancel" />
                 </f:link.action>
             </div>
