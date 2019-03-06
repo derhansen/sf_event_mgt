@@ -1481,6 +1481,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         foreach ($registrations as $registration) {
             $result->attach($registration);
         }
+
         return $result;
     }
 }

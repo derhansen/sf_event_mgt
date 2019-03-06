@@ -512,6 +512,7 @@ class RegistrationService
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
         $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
+
         return $queryBuilder->count('uid')
             ->from('tx_sfeventmgt_domain_model_registration')
             ->where(
