@@ -9,6 +9,10 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Event
@@ -705,6 +709,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRegistration()
     {
+        // Since TYPO3 9.5 (#82363)
+        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
+            return $this->getRegistrations(false);
+        }
+
         return $this->registration;
     }
 
@@ -1283,6 +1292,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRegistrationWaitlist()
     {
+        // Since TYPO3 9.5 (#82363)
+        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
+            return $this->getRegistrations(true);
+        }
+
         return $this->registrationWaitlist;
     }
 
@@ -1448,6 +1462,25 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             $result[$registrationField->getUid()] = $registrationField->getTitle();
         }
 
+        return $result;
+    }
+
+    /**
+     * Returns an objectStorage object holding all registrations in the default language.
+     * Ensures expected behavior of getRegistration() and getRegistrationWaitlist() since TYPO3 issue #82363
+     *
+     * @param bool $waitlist
+     * @return ObjectStorage
+     */
+    protected function getRegistrations(bool $waitlist = false)
+    {
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $result = $objectManager->get(ObjectStorage::class);
+        $registrationRepository = $objectManager->get(RegistrationRepository::class);
+        $registrations = $registrationRepository->findByEventAndWaitlist($this, $waitlist);
+        foreach ($registrations as $registration) {
+            $result->attach($registration);
+        }
         return $result;
     }
 }

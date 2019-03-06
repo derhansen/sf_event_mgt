@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
@@ -29,6 +30,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
         $this->defaultQuerySettings->setRespectSysLanguage(false);
+        $this->defaultQuerySettings->setLanguageOverlayMode(false);
     }
 
     /**
@@ -96,23 +98,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
-     * Returns all registrations for the given event matching the given e-mail address
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param string $email E-Mail
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-     */
-    public function findEventRegistrationsByEmail($event, $email)
-    {
-        $constraints = [];
-        $query = $this->createQuery();
-        $constraints[] = $query->equals('event', $event);
-        $constraints[] = $query->equals('email', $email);
-
-        return $query->matching($query->logicalAnd($constraints))->execute();
-    }
-
-    /**
      * Returns registrations for the given UserRegistrationDemand demand
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
@@ -129,6 +114,28 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setDisplayModeConstraint($query, $demand, $constraints);
         $this->setUserConstraint($query, $demand, $constraints);
         $this->setOrderingsFromDemand($query, $demand);
+
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
+     * Returns all registrations for the given event and where the waitlist flag is as given
+     *
+     * @param Event $event
+     * @param bool $waitlist
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findByEventAndWaitlist($event, $waitlist = false)
+    {
+        $constraints = [];
+        $query = $this->createQuery();
+        $query->getQuerySettings()
+            ->setLanguageOverlayMode(false)
+            ->setRespectStoragePage(false)
+            ->setLanguageOverlayMode(false)
+            ->setLanguageUid(0);
+        $constraints[] = $query->equals('event', $event->getUid());
+        $constraints[] = $query->equals('waitlist', $waitlist);
 
         return $query->matching($query->logicalAnd($constraints))->execute();
     }

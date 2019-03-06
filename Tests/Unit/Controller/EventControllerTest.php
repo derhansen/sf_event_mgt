@@ -771,8 +771,9 @@ class EventControllerTest extends UnitTestCase
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $registrationService = new RegistrationService();
-        $this->inject($this->subject, 'registrationService', $registrationService);
+        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)->setMethods(['emailNotUnique'])->getMock();
+        $mockRegistrationService->expects($this->once())->method('emailNotUnique')->will($this->returnValue(true));
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $repoRegistrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
@@ -784,7 +785,7 @@ class EventControllerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
         $registrationRepository->expects($this->any())->method('findEventRegistrationsByEmail')->will($this->returnValue($repoRegistrations));
-        $this->inject($registrationService, 'registrationRepository', $registrationRepository);
+        $this->inject($mockRegistrationService, 'registrationRepository', $registrationRepository);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects($this->any())->method('getEmail')->will($this->returnValue('email@domain.tld'));
@@ -823,8 +824,15 @@ class EventControllerTest extends UnitTestCase
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
         $this->inject($this->subject, 'hashService', $hashService);
-        $registrationService = new RegistrationService();
-        $this->inject($this->subject, 'registrationService', $registrationService);
+
+        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
+            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
+            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST]));
+        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -833,11 +841,6 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue(true));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
         $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -846,13 +849,6 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->setMethods(['update'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $eventRepository->expects($this->once())->method('update');
-        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $notificationService = $this->getMockBuilder(NotificationService::class)->getMock();
         $notificationService->expects($this->once())->method('sendUserMessage');
@@ -896,14 +892,11 @@ class EventControllerTest extends UnitTestCase
      * @test
      * @return void
      */
-    public function saveRegistrationActionWithoutAutoConfirmationRedirectsToWithMessageIfRegistrationSuccessful()
+    public function saveRegistrationActionWithoutAutoConfirmationRedirectsWithMessageIfRegistrationSuccessful()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
         $this->inject($this->subject, 'hashService', $hashService);
-
-        $registrationService = new RegistrationService();
-        $this->inject($this->subject, 'registrationService', $registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -912,10 +905,6 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
         $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -924,13 +913,6 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->setMethods(['update'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $eventRepository->expects($this->once())->method('update');
-        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $notificationService = $this->getMockBuilder(NotificationService::class)->getMock();
         $notificationService->expects($this->once())->method('sendUserMessage');
@@ -953,6 +935,14 @@ class EventControllerTest extends UnitTestCase
         $utilityService = $this->getMockBuilder(UtilityService::class)->getMock();
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
+
+        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
+            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
+            ->getMock();
+        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
+            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
+        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $this->subject->expects($this->once())->method('redirect')->with(
             'saveRegistrationResult',
@@ -989,10 +979,6 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['add'])
@@ -1000,13 +986,6 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->setMethods(['update'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $eventRepository->expects($this->once())->method('update');
-        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
@@ -1025,11 +1004,13 @@ class EventControllerTest extends UnitTestCase
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
-        $registrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['getCurrentFeUserObject'])
+        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
+            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
             ->getMock();
-        $registrationService->expects($this->once())->method('getCurrentFeUserObject');
-        $this->inject($this->subject, 'registrationService', $registrationService);
+        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
+            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
+        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
@@ -1078,8 +1059,6 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
         $event->expects($this->any())->method('getEnableAutoconfirm')->will($this->returnValue(true));
@@ -1090,13 +1069,6 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->setMethods(['update'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $eventRepository->expects($this->once())->method('update');
-        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
@@ -1118,12 +1090,13 @@ class EventControllerTest extends UnitTestCase
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
-        $registrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['getCurrentFeUserObject'])
-            ->disableOriginalConstructor()
+        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
+            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
             ->getMock();
-        $registrationService->expects($this->once())->method('getCurrentFeUserObject');
-        $this->inject($this->subject, 'registrationService', $registrationService);
+        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
+            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
+        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
@@ -1165,8 +1138,6 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
         $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
         $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
@@ -1179,13 +1150,6 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $registrationRepository->expects($this->once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->setMethods(['update'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $eventRepository->expects($this->once())->method('update');
-        $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $notificationService = $this->getMockBuilder(NotificationService::class)->getMock();
         $notificationService->expects($this->once())->method('sendUserMessage');
@@ -1212,12 +1176,14 @@ class EventControllerTest extends UnitTestCase
         $utilityService->expects($this->once())->method('clearCacheForConfiguredUids');
         $this->inject($this->subject, 'utilityService', $utilityService);
 
-        $registrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['createDependingRegistrations'])
-            ->disableOriginalConstructor()
+        $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
+            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent', 'createDependingRegistrations'])
             ->getMock();
-        $registrationService->expects($this->once())->method('createDependingRegistrations')->with($registration);
-        $this->inject($this->subject, 'registrationService', $registrationService);
+        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
+            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
+        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $mockRegistrationService->expects($this->once())->method('createDependingRegistrations');
+        $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $this->subject->expects($this->once())->method('redirect')->with(
             'saveRegistrationResult',

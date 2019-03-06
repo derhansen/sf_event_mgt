@@ -46,7 +46,6 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Setup
      *
-     * @throws \TYPO3\CMS\Core\Tests\Exception
      * @return void
      */
     public function setUp()

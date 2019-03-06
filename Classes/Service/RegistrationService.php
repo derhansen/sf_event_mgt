@@ -8,9 +8,14 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Core\Database\Connection;
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
@@ -299,9 +304,9 @@ class RegistrationService
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param int $result Result
      *
-     * @return bool
+     * @return array
      */
-    public function checkRegistrationSuccess($event, $registration, &$result)
+    public function checkRegistrationSuccess($event, $registration, $result)
     {
         $success = true;
         if ($event->getEnableRegistration() === false) {
@@ -337,7 +342,7 @@ class RegistrationService
             $result = RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST;
         }
 
-        return $success;
+        return [$success, $result];
     }
 
     /**
@@ -349,9 +354,25 @@ class RegistrationService
      */
     protected function emailNotUnique($event, $email)
     {
-        $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, $email);
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
+        $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
+        $registrations = $queryBuilder->count('email')
+            ->from('tx_sfeventmgt_domain_model_registration')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'event',
+                    $queryBuilder->createNamedParameter($event->getUid(), Connection::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq(
+                    'email',
+                    $queryBuilder->createNamedParameter($email, Connection::PARAM_STR)
+                )
+            )
+            ->execute()
+            ->fetchColumn();
 
-        return $registrations->count() >= 1;
+        return $registrations >= 1;
     }
 
     /**
@@ -396,5 +417,114 @@ class RegistrationService
         }
 
         return $result;
+    }
+
+    /**
+     * Fixes the event uid of a registration if the event has been saved as a child of a translated event.
+     *
+     * Since TYPO3 9.5 (#82363), registrations for events are saved to the translated event record
+     *
+     * Example:
+     *
+     * When a registration is saved for a translated event, the registration $registration->setEvent($event) will
+     * now save the UID of the translated event instead of the uid of the event in default language.
+     *
+     * This behavior breaks limitations on events (e.g. max participants). Therefore, the registration must always
+     * be related to the default event language (Extbase behavior before TYPO3 9.5)
+     *
+     * @param Registration $registration
+     * @param Event $event
+     * @return void
+     */
+    public function fixRegistrationEvent(Registration $registration, Event $event)
+    {
+        // Early return when event is in default language
+        if ((int)$event->_getProperty('_languageUid') === 0) {
+            return;
+        }
+        $this->updateRegistrationEventUid($registration, $event);
+        $this->updateEventRegistrationCounters($event);
+    }
+
+    /**
+     * Sets the "event" field of the given registration to the uid of the given event
+     *
+     * @param Registration $registration
+     * @param Event $event
+     * @return void
+     */
+    protected function updateRegistrationEventUid(Registration $registration, Event $event)
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
+        $queryBuilder->update('tx_sfeventmgt_domain_model_registration')
+            ->set('event', $event->getUid())
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($registration->getUid(), Connection::PARAM_INT)
+                )
+            )
+            ->execute();
+    }
+
+    /**
+     * Updates registration/waitlist registration counters for the given event
+     *
+     * @param Event $event
+     * @return void
+     */
+    protected function updateEventRegistrationCounters(Event $event)
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
+
+        $countRegistrations = $this->getEventRegistrationCount($event, 0);
+        $countRegistrationsWaitlist = $this->getEventRegistrationCount($event, 1);
+
+        $queryBuilder->update('tx_sfeventmgt_domain_model_event')
+            ->set('registration', $countRegistrations)
+            ->set('registration_waitlist', $countRegistrationsWaitlist)
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'uid',
+                    $queryBuilder->createNamedParameter($event->getUid(), Connection::PARAM_INT)
+                )
+            )
+            ->orWhere(
+                $queryBuilder->expr()->eq(
+                    'l10n_parent',
+                    $queryBuilder->createNamedParameter($event->getUid(), Connection::PARAM_INT)
+                )
+            )
+            ->execute();
+    }
+
+    /**
+     * Returns the total amount of registrations/waitlist registrations for an event
+     *
+     * @param Event $event
+     * @param int $waitlist
+     * @return mixed
+     */
+    protected function getEventRegistrationCount(Event $event, int $waitlist = 0)
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
+        $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
+        return $queryBuilder->count('uid')
+            ->from('tx_sfeventmgt_domain_model_registration')
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'event',
+                    $queryBuilder->createNamedParameter($event->getUid(), Connection::PARAM_INT)
+                ),
+                $queryBuilder->expr()->eq(
+                    'waitlist',
+                    $queryBuilder->createNamedParameter($waitlist, Connection::PARAM_INT)
+                )
+            )
+            ->execute()
+            ->fetchColumn();
     }
 }

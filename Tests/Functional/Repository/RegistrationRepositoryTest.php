@@ -10,6 +10,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -41,7 +42,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * Setup
      *
-     * @throws \TYPO3\CMS\Core\Tests\Exception
      * @return void
      */
     public function setUp()
@@ -51,18 +51,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $this->registrationRepository = $this->objectManager->get(RegistrationRepository::class);
 
         $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_registration.xml');
-    }
-
-    /**
-     * Test if findAll returns all records (expect hidden)
-     *
-     * @test
-     * @return void
-     */
-    public function findAll()
-    {
-        $registrations = $this->registrationRepository->findAll();
-        $this->assertEquals(17, $registrations->count());
     }
 
     /**
@@ -219,19 +207,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * Test if findEventRegistrationsByEmail finds expected amount of registrations
-     *
-     * @test
-     */
-    public function findEventRegistrationsByEmailReturnsExpectedAmountOfRegistrations()
-    {
-        $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getUid')->will($this->returnValue(10));
-        $registrations = $this->registrationRepository->findEventRegistrationsByEmail($event, 'email@domain.tld');
-        $this->assertEquals(1, $registrations->count());
-    }
-
-    /**
      * Test if findRegistrationsByUserRegistrationDemand returns an empty array if no user given
      *
      * @test
@@ -342,5 +317,27 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setOrderDirection('desc');
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         $this->assertEquals(32, $registrations->getFirst()->getUid());
+    }
+
+    /**
+     * @test
+     */
+    public function findByEventAndWaitlistReturnsExpectedResult()
+    {
+        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE']->sys_language_uid = 1;
+
+        $eventRepository = $this->objectManager->get(EventRepository::class);
+        $query = $eventRepository->createQuery();
+        $querySettings = $query->getQuerySettings();
+        $querySettings->setStoragePageIds([8]);
+        $querySettings->setRespectSysLanguage(true);
+        $querySettings->setLanguageUid(1);
+        $querySettings->setLanguageMode('strict');
+
+        $event = $eventRepository->findByUid(21);
+        $this->assertEquals('Englisch', $event->getTitle());
+
+        $this->assertEquals(2, $event->getRegistration()->count());
     }
 }

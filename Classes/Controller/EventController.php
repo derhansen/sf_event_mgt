@@ -525,7 +525,7 @@ class EventController extends AbstractController
         }
         $autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'] || $event->getEnableAutoconfirm();
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        $success = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
+        list($success, $result) = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
 
         // Save registration if no errors
         if ($success) {
@@ -553,15 +553,14 @@ class EventController extends AbstractController
             // Persist registration, so we have an UID
             $this->objectManager->get(PersistenceManager::class)->persistAll();
 
-            // Add new registration (or waitlist registration) to event
             if ($isWaitlistRegistration) {
-                $event->addRegistrationWaitlist($registration);
                 $messageType = MessageType::REGISTRATION_WAITLIST_NEW;
             } else {
-                $event->addRegistration($registration);
                 $messageType = MessageType::REGISTRATION_NEW;
             }
-            $this->eventRepository->update($event);
+
+            // Fix event in registration for language other than default language
+            $this->registrationService->fixRegistrationEvent($registration, $event);
 
             $this->signalDispatch(__CLASS__, __FUNCTION__ . 'AfterRegistrationSaved', [$registration, $this]);
 

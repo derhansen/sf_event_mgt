@@ -694,10 +694,7 @@ return [
                 'appearance' => [
                     'expandSingle' => 1,
                     'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
-                    'showAllLocalizationLink' => 1
                 ],
             ],
         ],
