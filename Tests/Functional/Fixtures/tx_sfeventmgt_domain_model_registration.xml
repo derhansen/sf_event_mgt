@@ -199,37 +199,4 @@
         <enddate>1404295200</enddate>
     </tx_sfeventmgt_domain_model_event>
 
-    <!-- findByEventAndWaitlistReturnsExpectedResult -->
-    <tx_sfeventmgt_domain_model_event>
-        <uid>20</uid>
-        <pid>8</pid>
-        <title>Deutsch</title>
-        <description>Deutsch</description>
-        <link>link</link>
-        <sys_language_uid>0</sys_language_uid>
-    </tx_sfeventmgt_domain_model_event>
-    <tx_sfeventmgt_domain_model_event>
-        <uid>21</uid>
-        <pid>8</pid>
-        <title>Englisch</title>
-        <description>Englisch</description>
-        <link>link</link>
-        <sys_language_uid>1</sys_language_uid>
-        <l10n_parent>20</l10n_parent>
-    </tx_sfeventmgt_domain_model_event>
-    <tx_sfeventmgt_domain_model_registration>
-        <uid>40</uid>
-        <pid>8</pid>
-        <event>20</event>
-        <confirmed>1</confirmed>
-        <sys_language_uid>0</sys_language_uid>
-    </tx_sfeventmgt_domain_model_registration>
-    <tx_sfeventmgt_domain_model_registration>
-        <uid>41</uid>
-        <pid>8</pid>
-        <event>20</event>
-        <confirmed>1</confirmed>
-        <sys_language_uid>0</sys_language_uid>
-    </tx_sfeventmgt_domain_model_registration>
-
 </dataset>

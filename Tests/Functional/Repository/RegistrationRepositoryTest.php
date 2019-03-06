@@ -318,26 +318,4 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         $this->assertEquals(32, $registrations->getFirst()->getUid());
     }
-
-    /**
-     * @test
-     */
-    public function findByEventAndWaitlistReturnsExpectedResult()
-    {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->sys_language_uid = 1;
-
-        $eventRepository = $this->objectManager->get(EventRepository::class);
-        $query = $eventRepository->createQuery();
-        $querySettings = $query->getQuerySettings();
-        $querySettings->setStoragePageIds([8]);
-        $querySettings->setRespectSysLanguage(true);
-        $querySettings->setLanguageUid(1);
-        $querySettings->setLanguageMode('strict');
-
-        $event = $eventRepository->findByUid(21);
-        $this->assertEquals('Englisch', $event->getTitle());
-
-        $this->assertEquals(2, $event->getRegistration()->count());
-    }
 }
