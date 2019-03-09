@@ -33,3 +33,4 @@ Thanks from me to:
 * Marc Bastian Heinrichs for adding Cache Tags in list and detail view and for implementing the checkPidOfEventRecord setting
 * Rune Piper for several code cleanups and Pull Requests
 * Haisam Zehrawi from SeminarPool GmbH for sponsoring refactoring in the CSV export
+* Stefano Kowalke for several Pull Requests
