@@ -478,11 +478,6 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
                 'fieldControl' => [
                     'addRecord' => [
                         'disabled' => false,
@@ -505,11 +500,6 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
-                ],
                 'fieldControl' => [
                     'addRecord' => [
                         'disabled' => false,
@@ -531,14 +521,6 @@ return [
                 'MM' => 'tx_sfeventmgt_event_speaker_mm',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
-                ],
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                        'default' => [
-                            'searchWholePhrase' => true
-                        ]
-                    ],
                 ],
                 'fieldControl' => [
                     'addRecord' => [
@@ -611,14 +593,6 @@ return [
                 'minitems' => 0,
                 'maxitems' => 100,
                 'MM' => 'tx_sfeventmgt_domain_model_event_related_mm',
-                'wizards' => [
-                    'suggest' => [
-                        'type' => 'suggest',
-                        'default' => [
-                            'searchWholePhrase' => true
-                        ]
-                    ],
-                ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
