@@ -60,6 +60,13 @@ class EventCacheService
         }
     }
 
+    /**
+     * Flushes the page cache by event tags for the given event uid and pid
+     *
+     * @param int $eventUid
+     * @param int $eventPid
+     * @return void
+     */
     public function flushEventCache(int $eventUid = 0, int $eventPid = 0)
     {
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
