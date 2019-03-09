@@ -8,7 +8,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  * LICENSE.txt file that was distributed with this source code.
  */
 
-use TYPO3\CMS\Core\Cache\CacheManager;
+use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -28,17 +28,11 @@ class DataHandlerHooks
     public function clearCachePostProc(array $params)
     {
         if (isset($params['table']) && $params['table'] === 'tx_sfeventmgt_domain_model_event') {
-            $cacheTagsToFlush = [];
-            if (isset($params['uid'])) {
-                $cacheTagsToFlush[] = 'tx_sfeventmgt_uid_' . $params['uid'];
-            }
-            if (isset($params['uid_page'])) {
-                $cacheTagsToFlush[] = 'tx_sfeventmgt_pid_' . $params['uid_page'];
-            }
-
-            $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-            foreach ($cacheTagsToFlush as $cacheTag) {
-                $cacheManager->flushCachesInGroupByTag('pages', $cacheTag);
+            $eventUid = $params['uid'] ?? 0;
+            $pageUid = $params['uid_page'] ?? 0;
+            if ($eventUid > 0 || $pageUid > 0) {
+                $eventCacheService = GeneralUtility::makeInstance(EventCacheService::class);
+                $eventCacheService->flushEventCache($eventUid, $pageUid);
             }
         }
     }

@@ -69,18 +69,6 @@ plugin.tx_sfeventmgt
          **Extbase default**
 
  - :Property:
-         settings.clearCacheUids
-
-   :Date type:
-         String
-
-   :Description:
-         List of pids, for which the cache should be cleared after registration data changed
-
-   :Default:
-         Empty
-
- - :Property:
          settings.calendar.firstDayOfWeek
 
    :Date type:

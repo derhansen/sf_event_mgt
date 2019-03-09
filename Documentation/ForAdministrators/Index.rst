@@ -19,7 +19,6 @@ For Administrators
    Installation/Index
    Configuration/Index
    Templates/Index
-   ClearCacheUids/Index
    CliCommands/Index
    CustomNotifications/Index
    EmailAttachments/Index

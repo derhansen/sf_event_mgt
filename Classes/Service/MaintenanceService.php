@@ -26,9 +26,11 @@ class MaintenanceService
      */
     public function handleExpiredRegistrations(bool $delete = false)
     {
+        $eventCacheService = GeneralUtility::makeInstance(EventCacheService::class);
         $registrationUids = $this->getExpiredRegistrations();
         foreach ($registrationUids as $registration) {
             $this->updateRegistration((int)$registration['uid'], $delete);
+            $eventCacheService->flushEventCache((int)$registration['event'], (int)$registration['pid']);
         }
     }
 

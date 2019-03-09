@@ -102,13 +102,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     protected $calendarService = null;
 
     /**
-     * UtilityService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\UtilityService
-     */
-    protected $utilityService = null;
-
-    /**
      * PaymentMethodService
      *
      * @var \DERHANSEN\SfEventMgt\Service\PaymentService
@@ -245,16 +238,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
     public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
     {
         $this->registrationService = $registrationService;
-    }
-
-    /**
-     * DI for $utilityService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\UtilityService $utilityService
-     */
-    public function injectUtilityService(\DERHANSEN\SfEventMgt\Service\UtilityService $utilityService)
-    {
-        $this->utilityService = $utilityService;
     }
 
     /**

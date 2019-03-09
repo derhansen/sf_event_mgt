@@ -35,31 +35,4 @@ class SettingsService
 
         return $notifications;
     }
-
-    /**
-     * Returns an array of page uids for which the cache should be cleared
-     *
-     * @param array $settings Settings
-     *
-     * @return array
-     */
-    public function getClearCacheUids($settings)
-    {
-        $clearCacheUids = $settings['clearCacheUids'];
-
-        if (is_int($settings['detailPid'])) {
-            $clearCacheUids .= ',' . $settings['detailPid'];
-        }
-
-        if (is_int($settings['listPid'])) {
-            $clearCacheUids .= ',' . $settings['listPid'];
-        }
-
-        if ($clearCacheUids == null) {
-            return [];
-        }
-        $return = preg_split('/,/', $clearCacheUids, null, PREG_SPLIT_NO_EMPTY);
-
-        return $return;
-    }
 }

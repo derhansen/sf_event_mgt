@@ -14,6 +14,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
@@ -34,6 +35,19 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class EventController extends AbstractController
 {
+    /**
+     * @var EventCacheService
+     */
+    protected $eventCacheService = null;
+
+    /**
+     * @param EventCacheService $cacheService
+     */
+    public function injectEventCacheService(EventCacheService $cacheService)
+    {
+        $this->eventCacheService = $cacheService;
+    }
+
     /**
      * Assign contentObjectData and pageData to earch view
      *
@@ -209,7 +223,7 @@ class EventController extends AbstractController
         $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
         $this->view->assignMultiple($values);
 
-        $this->addPageCacheTagsByEventDemandObject($eventDemand);
+        $this->eventCacheService->addPageCacheTagsByEventDemandObject($eventDemand);
     }
 
     /**
@@ -325,7 +339,7 @@ class EventController extends AbstractController
         $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
         $this->view->assignMultiple($values);
         if ($event !== null) {
-            $this->addCacheTagsByEventRecords([$event]);
+            $this->eventCacheService->addCacheTagsByEventRecords([$event]);
         }
     }
 
@@ -585,8 +599,8 @@ class EventController extends AbstractController
                 $this->registrationService->createDependingRegistrations($registration);
             }
 
-            // Clear cache for configured pages
-            $this->utilityService->clearCacheForConfiguredUids($this->settings);
+            // Flush page cache for event, since new registration has been added
+            $this->eventCacheService->flushEventCache($event->getUid(), $event->getPid());
         }
 
         if ($autoConfirmation && $success) {
@@ -805,8 +819,8 @@ class EventController extends AbstractController
             // Dispatch signal, so waitlist registrations can be moved up
             $this->signalDispatch(__CLASS__, __FUNCTION__ . 'WaitlistMoveUp', [$event, $this]);
 
-            // Clear cache for configured pages
-            $this->utilityService->clearCacheForConfiguredUids($this->settings);
+            // Flush page cache for event, since new registration has been added
+            $this->eventCacheService->flushEventCache($event->getUid(), $event->getPid());
         }
 
         $values = [
@@ -929,46 +943,6 @@ class EventController extends AbstractController
         }
 
         return $event;
-    }
-
-    /**
-     * Adds cache tags to page cache by event records.
-     *
-     * Following cache tags will be added to tsfe:
-     * "tx_sfeventmgt_uid_[event:uid]"
-     *
-     * @param array $eventRecords array with event records
-     */
-    public function addCacheTagsByEventRecords(array $eventRecords)
-    {
-        $cacheTags = [];
-        foreach ($eventRecords as $event) {
-            // cache tag for each event record
-            $cacheTags[] = 'tx_sfeventmgt_uid_' . $event->getUid();
-        }
-        if (count($cacheTags) > 0) {
-            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
-        }
-    }
-
-    /**
-     * Adds page cache tags by used storagePages.
-     * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
-     */
-    public function addPageCacheTagsByEventDemandObject(\DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand)
-    {
-        $cacheTags = [];
-        if ($demand->getStoragePage()) {
-            // Add cache tags for each storage page
-            foreach (GeneralUtility::trimExplode(',', $demand->getStoragePage()) as $pageId) {
-                $cacheTags[] = 'tx_sfeventmgt_pid_' . $pageId;
-            }
-        }
-        if (count($cacheTags) > 0) {
-            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
-        }
     }
 
     /**
