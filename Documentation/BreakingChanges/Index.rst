@@ -11,6 +11,12 @@
 Breaking Changes
 ================
 
+4.0.0
+~~~~~
+
+This version contains several braking changes. Make sure, you read the release notes with instructions
+at https://github.com/derhansen/sf_event_mgt/releases/tag/4.0.0
+
 3.0.0
 ~~~~~
 

@@ -4,10 +4,10 @@
 
 ---
 conf.py:
-  copyright: 2018
+  copyright: 2019
   project: Event management and registration
-  version: 2.0.0
-  release: 2.0.0
+  version: 4.0.0
+  release: 4.0.0
   intersphinx_mapping:
     t3tsref:
     - http://docs.typo3.org/typo3cms/TyposcriptReference/
