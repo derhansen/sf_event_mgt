@@ -291,7 +291,8 @@ class PageLayoutView
     public function getCategoryConjuction()
     {
         // If not category is selected, we do not need to display the category mode
-        if ($this->getFieldFromFlexform('settings.category') === null) {
+        $categories = $this->getFieldFromFlexform('settings.category');
+        if ($categories === null || $categories === '') {
             return;
         }
 
