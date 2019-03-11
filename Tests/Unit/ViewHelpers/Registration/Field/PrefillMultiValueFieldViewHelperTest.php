@@ -151,4 +151,33 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $actual = $viewHelper->_callRef('render');
         $this->assertSame($expected, $actual);
     }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationfieldValues()
+    {
+        $mockOriginalRequest = $this->getMockBuilder(Request::class)
+            ->setMethods(['getArguments'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue(null));
+
+        $mockRequest = $this->getMockBuilder(Request::class)
+            ->setMethods(['getOriginalRequest'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockRequest->expects($this->once())->method('getOriginalRequest')
+            ->will($this->returnValue($mockOriginalRequest));
+
+        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
+        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+
+        $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
+
+        $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => null]);
+        $actual = $viewHelper->_callRef('render');
+        $this->assertFalse($actual);
+    }
 }

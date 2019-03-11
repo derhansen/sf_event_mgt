@@ -71,7 +71,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     }
 
     /**
-     * Returns the submitted value for the given field uid
+     * Returns if the submitted field value is selected
      *
      * @param array $submittedValues
      * @param int $fieldUid
@@ -81,6 +81,11 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     protected function getFieldValueFromArguments($submittedValues, $fieldUid, $currentValue)
     {
         $result = false;
+
+        if (!isset($submittedValues['registration']['fieldValues'])) {
+            return $result;
+        }
+
         foreach ($submittedValues['registration']['fieldValues'] as $fieldValueArray) {
             /** @var FieldValue $fieldValue */
             $fieldValue = $this->propertyMapper->convert($fieldValueArray, FieldValue::class);
