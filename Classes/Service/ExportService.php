@@ -152,7 +152,8 @@ class ExportService
         $registrationFieldValues = [];
         /** @var Registration\FieldValue $fieldValue */
         foreach ($registration->getFieldValues() as $fieldValue) {
-            $registrationFieldValues[$fieldValue->getField()->getUid()] = $fieldValue->getValueForCsvExport();
+            $registrationFieldValues[$fieldValue->getField()->getUid()] =
+                $this->replaceLineBreaks($fieldValue->getValueForCsvExport());
         }
         foreach ($registrationFieldData as $fieldUid => $fieldTitle) {
             if (isset($registrationFieldValues[$fieldUid])) {
@@ -213,8 +214,18 @@ class ExportService
         if ($value instanceof \DateTime) {
             $value = $value->format('d.m.Y');
         }
+        return $this->replaceLineBreaks($value);
+    }
 
-        return $value;
+    /**
+     * Replaces all line breaks with a space
+     *
+     * @param mixed $value
+     * @return mixed
+     */
+    protected function replaceLineBreaks($value)
+    {
+        return str_replace(["\r\n", "\r", "\n"], ' ', $value);
     }
 
     /**
