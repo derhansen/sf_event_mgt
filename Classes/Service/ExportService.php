@@ -214,6 +214,7 @@ class ExportService
         if ($value instanceof \DateTime) {
             $value = $value->format('d.m.Y');
         }
+
         return $this->replaceLineBreaks($value);
     }
 
