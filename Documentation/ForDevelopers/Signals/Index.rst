@@ -95,6 +95,18 @@ and the processing of the payment of a registration.
          DERHANSEN\SfEventMgt\Controller\Event
 
    :Name:
+         saveRegistrationActionBeforeCreateDependingRegistrations
+
+   :Arguments:
+         $registration, &$createDependingRegistrations, $this
+
+   :Description:
+         Signal is called before depending registrations are created. $createDependingRegistrations is passed by reference.
+
+ - :Class:
+         DERHANSEN\SfEventMgt\Controller\Event
+
+   :Name:
          confirmRegistrationActionAfterRegistrationConfirmed
 
    :Arguments:

@@ -595,7 +595,13 @@ class EventController extends AbstractController
             }
 
             // Create given amount of registrations if necessary
-            if ($registration->getAmountOfRegistrations() > 1) {
+            $createDependingRegistrations = $registration->getAmountOfRegistrations() > 1;
+            $this->signalDispatch(
+                __CLASS__,
+                __FUNCTION__ . 'BeforeCreateDependingRegistrations',
+                [$registration, &$createDependingRegistrations, $this]
+            );
+            if ($createDependingRegistrations) {
                 $this->registrationService->createDependingRegistrations($registration);
             }
 
