@@ -437,7 +437,13 @@ class EventController extends AbstractController
     protected function setRegistrationFieldValuesToArguments()
     {
         $arguments = $this->request->getArguments();
-        if (!isset($arguments['registration']['fields']) || !isset($arguments['event'])) {
+        if (!isset($arguments['event'])) {
+            return;
+        }
+
+        /** @var Event $event */
+        $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
+        if (!$event || $event->getRegistrationFields()->count() === 0) {
             return;
         }
 
@@ -457,7 +463,6 @@ class EventController extends AbstractController
         );
 
         // Set event to registration (required for validation)
-        $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
         $propertyMapping->allowProperties('event');
         $propertyMapping->allowCreationForSubProperty('event');
         $propertyMapping->allowModificationForSubProperty('event');
@@ -498,7 +503,9 @@ class EventController extends AbstractController
         }
 
         // Remove temporary "fields" field
-        $arguments = ArrayUtility::removeByPath($arguments, 'registration/fields');
+        if (isset($arguments['registration']['fields'])) {
+            $arguments = ArrayUtility::removeByPath($arguments, 'registration/fields');
+        }
         $this->request->setArguments($arguments);
     }
 
