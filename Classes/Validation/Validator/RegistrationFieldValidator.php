@@ -103,6 +103,11 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
             }
         }
 
+        // If field value is an array, then treat one single element with an empty string as an empty value
+        if (is_array($result) && $result === [0 => '']) {
+            $result = '';
+        }
+
         return $result;
     }
 }

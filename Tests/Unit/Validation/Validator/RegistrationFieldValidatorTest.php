@@ -10,6 +10,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -95,6 +96,47 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $mockFieldValue->expects($this->any())->method('getField')->will($this->returnValue($mockRegistrationField));
         $fieldValueObjectStorage = new ObjectStorage();
         $fieldValueObjectStorage->attach($mockFieldValue);
+
+        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
+        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
+        $mockRegistration->expects($this->any())->method('getFieldValues')
+            ->will($this->returnValue($fieldValueObjectStorage));
+
+        $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
+            ->setMethods(['translateErrorMessage'])
+            ->getMock();
+        $this->validator->expects($this->any())->method('getNotEmptyValidator')
+            ->will($this->returnValue($mockNotEmptyValidator));
+
+        $this->assertTrue($this->validator->validate($mockRegistration)->hasErrors());
+    }
+
+    /**
+     * @test
+     */
+    public function validatorHasErrorsWhenRequiredRegistrationCheckboxFieldIsEmpty()
+    {
+        $fieldUid = 1;
+
+        $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegistrationField->expects($this->once())->method('getRequired')->will($this->returnValue(true));
+        $mockRegistrationField->expects($this->any())->method('getUid')->will($this->returnValue($fieldUid));
+        $mockRegistrationField->expects($this->any())->method('getValueType')
+            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $registrationFieldObjectStorage = new ObjectStorage();
+        $registrationFieldObjectStorage->attach($mockRegistrationField);
+
+        $mockEvent = $this->getMockBuilder(Event::class)
+            ->setMethods(['getRegistrationFields'])
+            ->getMock();
+        $mockEvent->expects($this->any())->method('getRegistrationFields')
+            ->will($this->returnValue($registrationFieldObjectStorage));
+
+        $fieldValue = new Registration\FieldValue();
+        $fieldValue->setField($mockRegistrationField);
+        $fieldValue->setValueType(FieldValueType::TYPE_ARRAY);
+        $fieldValueObjectStorage = new ObjectStorage();
+        $fieldValueObjectStorage->attach($fieldValue);
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
