@@ -911,7 +911,18 @@ class EventControllerTest extends UnitTestCase
         );
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionAfterRegistrationSaved',
+                [$registration, $this->subject]
+            );
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionBeforeCreateDependingRegistrations',
+                [$registration, false, $this->subject]
+            );
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -988,7 +999,18 @@ class EventControllerTest extends UnitTestCase
         );
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionAfterRegistrationSaved',
+                [$registration, $this->subject]
+            );
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionBeforeCreateDependingRegistrations',
+                [$registration, false, $this->subject]
+            );
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -1073,7 +1095,18 @@ class EventControllerTest extends UnitTestCase
         );
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionAfterRegistrationSaved',
+                [$registration, $this->subject]
+            );
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionBeforeCreateDependingRegistrations',
+                [$registration, false, $this->subject]
+            );
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -1153,7 +1186,18 @@ class EventControllerTest extends UnitTestCase
         );
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionAfterRegistrationSaved',
+                [$registration, $this->subject]
+            );
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionBeforeCreateDependingRegistrations',
+                [$registration, false, $this->subject]
+            );
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -1237,7 +1281,18 @@ class EventControllerTest extends UnitTestCase
         );
 
         $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionAfterRegistrationSaved',
+                [$registration, $this->subject]
+            );
+        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
+            ->with(
+                EventController::class,
+                'saveRegistrationActionBeforeCreateDependingRegistrations',
+                [$registration, true, $this->subject]
+            );
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
