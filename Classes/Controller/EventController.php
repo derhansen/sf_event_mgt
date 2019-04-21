@@ -271,6 +271,7 @@ class EventController extends AbstractController
         );
 
         $values = [
+            'events' => $events,
             'weeks' => $weeks,
             'categories' => $this->categoryRepository->findDemanded($categoryDemand),
             'locations' => $this->locationRepository->findDemanded($foreignRecordDemand),

@@ -160,6 +160,12 @@ Calendar view
          Description:
 
  - :Object:
+         {events}
+
+   :Description:
+         An array holding all events for the current calendar month
+
+ - :Object:
          {weeks}
 
    :Description:
