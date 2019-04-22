@@ -22,7 +22,6 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group',
         ],
-        'requestUpdate' => 'enable_registration, enable_waitlist, enable_cancel, enable_payment, restrict_payment_methods',
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-event'
@@ -316,6 +315,7 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_registration',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
             ],
@@ -326,6 +326,7 @@ return [
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
             ],
@@ -350,6 +351,7 @@ return [
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_cancel',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
             ],
@@ -430,6 +432,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_payment',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
                 'behaviour' => [
@@ -441,6 +444,7 @@ return [
             'exclude' => 1,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.restrict_payment_methods',
             'displayCond' => 'FIELD:enable_payment:REQ:TRUE',
+            'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
                 'behaviour' => [
