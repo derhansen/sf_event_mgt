@@ -3,10 +3,11 @@
         <f:for each="{registration.fieldValues}" as="fieldValue">
             <f:switch expression="{fieldValue.valueType}">
                 <f:case value="0">
-                    <li>{fieldValue.value}</li>
+                    <li>{fieldValue.field.title}: {fieldValue.value}</li>
                 </f:case>
                 <f:case value="1">
                     <li>
+                        {fieldValue.field.title}:<br/>
                         <f:for each="{fieldValue.value}" as="value">
                             {value}<br/>
                         </f:for>
