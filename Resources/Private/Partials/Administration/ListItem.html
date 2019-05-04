@@ -16,9 +16,7 @@
     </td>
     <td class="registrationenabled">
         <f:if condition="{event.enableRegistration} == 1">
-            <f:then>
-                <span class="t3-icon sf-event-mgt-admin-reg-enabled">&nbsp;</span>
-            </f:then>
+            <f:image src="EXT:sf_event_mgt/Resources/Public/Icons/icon-check.svg" width="16" height="16" />
         </f:if>
     </td>
     <td class="maxparticipants">
@@ -37,7 +35,7 @@
     <td>
         <f:if condition="{event.enableRegistration}">
             <f:link.action action="indexNotify" arguments="{event: '{event}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify')}">
-                <span class="t3-icon sf-event-mgt-admin-notify">&nbsp;</span>
+                <f:image src="EXT:sf_event_mgt/Resources/Public/Icons/icon-notify.svg" width="16" height="16" />
             </f:link.action>
         </f:if>
     </td>
@@ -45,7 +43,7 @@
         <f:if condition="{event.enableRegistration}">
             <f:if condition="{csvExportPossible}">
                 <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
-                    <span class="t3-icon sf-event-mgt-admin-csv">&nbsp;</span>
+                    <f:image src="EXT:sf_event_mgt/Resources/Public/Icons/icon-csv.svg" width="16" height="16" />
                 </f:link.action>
             </f:if>
         </f:if>

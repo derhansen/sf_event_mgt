@@ -15,25 +15,7 @@
     color: #ff0000;
 }
 
-.event-administration  .sf-event-mgt-admin-notify {
-    background: url(../Icons/notify-icon.png) no-repeat;
-    width: 16px;
-    height: 16px
-}
-
-.event-administration  .sf-event-mgt-admin-reg-enabled {
-    background: url(../Icons/check-icon.png) no-repeat;
-    width: 16px;
-    height: 16px
-}
-
-.event-administration  .sf-event-mgt-admin-csv {
-    background: url(../Icons/csv-icon.png) no-repeat;
-    width: 16px;
-    height: 16px
-}
-
-table.t3-table td.registrationenabled {
+table.table .registrationenabled {
     text-align: center;
 }
 
