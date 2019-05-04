@@ -15,7 +15,23 @@ directly at https://github.com/derhansen/sf_event_mgt
 
 Updates will be published directly on TER and Packagist.
 
-Support
-~~~~~~~
+Free public support
+~~~~~~~~~~~~~~~~~~~
 
-If you need commercial support or want to sponsor new features, please contact me directly by e-mail.
+Free public support is available on the #ext-sf_event_mgt TYPO3 Slack Channel.
+
+Please also check the :ref:`faq` section of this documentation. New articles are added on a regular basis.
+
+
+Paid Services and Support
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+I also offer the following paid services:
+
+* Personal support by e-mail, phone, remote session or on site
+* Installation and configuration for the extension
+* Integrating new feature to the main extension (sponsors can be named - see :ref:`thanks`)
+* Priority Bug fixes
+* Developing extensions, that extend sf_event_mgt with unique features/requirements
+
+Please contact me by e-mail and ask for prices.
