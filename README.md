@@ -43,6 +43,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Configurable payment methods
 * Calendar view with possibility to navigate to next/previous month
 * Automatic cache clearing when event has been changed in backend
+* Lots of signal slots to extend the extension with own funcionality  
 
 **Background**
 
