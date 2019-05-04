@@ -11,6 +11,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * NotificationService
@@ -67,6 +68,11 @@ class NotificationService
      * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
      */
     protected $attachmentService;
+
+    /**
+     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+     */
+    protected $signalSlotDispatcher = null;
 
     /**
      * DI for $attachmentService
@@ -140,6 +146,16 @@ class NotificationService
         \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
     ) {
         $this->registrationRepository = $registrationRepository;
+    }
+
+    /**
+     * DI for $signalSlotDispatcher
+     *
+     * @param Dispatcher $signalSlotDispatcher
+     */
+    public function injectSignalSlotDispatcher(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher)
+    {
+        $this->signalSlotDispatcher = $signalSlotDispatcher;
     }
 
     /**
@@ -390,6 +406,12 @@ class NotificationService
                 $attachments
             );
         }
+
+        $this->signalSlotDispatcher->dispatch(
+            __CLASS__,
+            __FUNCTION__ . 'AfterNotificationsSent',
+            [$registration, $body, $subject, $attachments, $senderName, $senderEmail, $this]
+        );
 
         return $allEmailsSent;
     }

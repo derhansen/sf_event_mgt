@@ -244,4 +244,17 @@ and the processing of the payment of a registration.
          the query constraints for the findDemanded function. Very usefull, when you extend the eventDemand with custom
          properties.
 
+- :Class:
+         DERHANSEN\SfEventMgt\Service\NotificationService
+
+   :Name:
+         sendAdminMessageAfterNotificationsSent
+
+   :Arguments:
+         $registration, $body, $subject, $attachments, $senderName, $senderEmail, $this
+
+   :Description:
+         Signal is called after all admin messages have been sent. Use this signal, if you want to send additional
+         admin notifications (e.g. to speakers). Note, that the signal only gets called, when either "Notify Admin" or
+         "Notify Organisator" is checked.
 
