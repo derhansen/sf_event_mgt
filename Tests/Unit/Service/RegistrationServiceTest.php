@@ -582,7 +582,7 @@ class RegistrationServiceTest extends UnitTestCase
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->once())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->once())->method('getRegistrations')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
@@ -613,7 +613,7 @@ class RegistrationServiceTest extends UnitTestCase
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
 
@@ -643,7 +643,7 @@ class RegistrationServiceTest extends UnitTestCase
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getUniqueEmailCheck')->will($this->returnValue(true));
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
@@ -677,7 +677,7 @@ class RegistrationServiceTest extends UnitTestCase
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
         $event->expects($this->once())->method('getMaxRegistrationsPerUser')->will($this->returnValue(5));
@@ -707,7 +707,7 @@ class RegistrationServiceTest extends UnitTestCase
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
         $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
+        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
         $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;

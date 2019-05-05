@@ -52,7 +52,7 @@
                     <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
                 </div>
                 <div class="event-list-value event-registrations">
-                    {event.registration->f:count()}
+                    {event.registrations->f:count()}
                 </div>
                 <div class="clear"></div>
             </div>
@@ -82,7 +82,7 @@
             <h2><f:translate key="registration.form.header" /></h2>
 
             <f:if condition="{event.enableWaitlist}">
-                <f:if condition="{event.registration->f:count()} >= {event.maxParticipants}">
+                <f:if condition="{event.registrations->f:count()} >= {event.maxParticipants}">
                     <p>
                         <strong><f:translate key="registration.form.waitlist" /></strong>
                     </p>

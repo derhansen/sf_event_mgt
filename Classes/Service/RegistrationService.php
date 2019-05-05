@@ -318,7 +318,7 @@ class RegistrationService
         } elseif ($event->getStartdate() < new \DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
-        } elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
+        } elseif ($event->getRegistrations()->count() >= $event->getMaxParticipants()
             && $event->getMaxParticipants() > 0 && !$event->getEnableWaitlist()
         ) {
             $success = false;
@@ -336,7 +336,7 @@ class RegistrationService
         ) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE;
-        } elseif ($event->getRegistration()->count() >= $event->getMaxParticipants()
+        } elseif ($event->getRegistrations()->count() >= $event->getMaxParticipants()
             && $event->getMaxParticipants() > 0 && $event->getEnableWaitlist()
         ) {
             $result = RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST;
