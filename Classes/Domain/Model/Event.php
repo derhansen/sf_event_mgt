@@ -709,11 +709,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRegistration()
     {
-        // Since TYPO3 9.5 (#82363)
-        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
-            return $this->getRegistrations(false);
-        }
-
         return $this->registration;
     }
 
@@ -829,7 +824,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getRegistrationPossible()
     {
         $maxParticipantsNotReached = true;
-        if ($this->getMaxParticipants() > 0 && $this->getRegistration()->count() >= $this->maxParticipants) {
+        if ($this->getMaxParticipants() > 0 && $this->getRegistrations()->count() >= $this->maxParticipants) {
             $maxParticipantsNotReached = false;
         }
         $deadlineNotReached = true;
@@ -849,7 +844,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getFreePlaces()
     {
-        return $this->maxParticipants - $this->getRegistration()->count();
+        return $this->maxParticipants - $this->getRegistrations()->count();
     }
 
     /**
@@ -1292,11 +1287,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRegistrationWaitlist()
     {
-        // Since TYPO3 9.5 (#82363)
-        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
-            return $this->getRegistrations(true);
-        }
-
         return $this->registrationWaitlist;
     }
 
@@ -1466,13 +1456,44 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Special getter to return the amount of registrations that are saved to default language
+     * Required since TYPO3 9.5 (#82363)
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getRegistrations()
+    {
+        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
+            return $this->getRegistrationsDefaultLanguage(false);
+        }
+
+        return $this->registration;
+    }
+
+    /**
+     * Special getter to return the amount of wairlist registrations that are saved to default language
+     * Required since TYPO3 9.5 (#82363)
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getRegistrationsWaitlist()
+    {
+        // Since TYPO3 9.5 (#82363)
+        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
+            return $this->getRegistrationsDefaultLanguage(true);
+        }
+
+        return $this->registrationWaitlist;
+    }
+
+    /**
      * Returns an objectStorage object holding all registrations in the default language.
      * Ensures expected behavior of getRegistration() and getRegistrationWaitlist() since TYPO3 issue #82363
      *
      * @param bool $waitlist
      * @return ObjectStorage
      */
-    protected function getRegistrations(bool $waitlist = false)
+    protected function getRegistrationsDefaultLanguage(bool $waitlist = false)
     {
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         $result = $objectManager->get(ObjectStorage::class);
