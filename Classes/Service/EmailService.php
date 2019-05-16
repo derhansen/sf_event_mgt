@@ -37,13 +37,14 @@ class EmailService
      *
      * @return bool TRUE/FALSE if message is sent
      */
-    public function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [])
+    public function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [] ,$replyto = null)
     {
         if (GeneralUtility::validEmail($sender) && GeneralUtility::validEmail($recipient)) {
             $this->initialize();
             $this->mailer->setFrom($sender, $name);
             $this->mailer->setSubject($subject);
             $this->mailer->setBody($body, 'text/html');
+            if($replyto!=null) $this->mailer->setReplyTo($replyto);
             $this->mailer->setTo($recipient);
             $this->addAttachments($attachments);
             $this->mailer->send();
