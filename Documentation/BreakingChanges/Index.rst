@@ -11,6 +11,15 @@
 Breaking Changes
 ================
 
+4.1.0
+~~~~~
+
+This version contains a breaking change which requires adoption in Fluid Templates, which is important for
+TYPO3 websites using multiple languages.
+
+Make sure, you read the release notes with instructions at https://github.com/derhansen/sf_event_mgt/releases/tag/4.1.0
+
+
 4.0.0
 ~~~~~
 
