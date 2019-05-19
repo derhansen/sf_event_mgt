@@ -1505,4 +1505,18 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         return $result;
     }
+
+    /**
+     * Returns if the event ends on the same day
+     *
+     * @return bool
+     */
+    public function getEndsSameDay(): bool
+    {
+        if ($this->enddate !== null) {
+            return $this->startdate->format('d.m.Y') === $this->enddate->format('d.m.Y');
+        } else {
+            return true;
+        }
+    }
 }

@@ -1612,4 +1612,50 @@ class EventTest extends UnitTestCase
         ];
         $this->assertEquals($expected, $this->subject->getRegistrationFieldUidsWithTitle());
     }
+
+    /**
+     * DataProvider for cancellationPossible tests
+     *
+     * @return array
+     */
+    public function eventEndsSameDayDataProvider()
+    {
+        return [
+            'no start- and enddate' => [
+                null,
+                null,
+                true
+            ],
+            'no enddate' => [
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
+                null,
+                true
+            ],
+            'start- and enddate same day' => [
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 18:00:00'),
+                true
+            ],
+            'start- and enddate on different day' => [
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '02.01.2019 10:00:00'),
+                false
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider eventEndsSameDayDataProvider
+     */
+    public function eventEndsSameDayReturnsExpectedValue($startdate, $enddate, $expected)
+    {
+        if ($startdate) {
+            $this->subject->setStartdate($startdate);
+        }
+        if ($enddate) {
+            $this->subject->setEnddate($enddate);
+        }
+        $this->assertEquals($expected, $this->subject->getEndsSameDay());
+    }
 }
