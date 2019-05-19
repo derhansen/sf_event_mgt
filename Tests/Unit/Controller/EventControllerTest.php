@@ -201,7 +201,7 @@ class EventControllerTest extends UnitTestCase
             false
         );
         $resultDemand = $mockController->_call('overwriteEventDemandObject', $demand, $overwriteDemand);
-        $this->assertNull($resultDemand->getStoragePage());
+        $this->assertEmpty($resultDemand->getStoragePage());
     }
 
     /**

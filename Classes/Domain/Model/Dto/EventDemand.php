@@ -27,7 +27,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $storagePage;
+    protected $storagePage = '';
 
     /**
      * Current DateTime

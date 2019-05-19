@@ -98,7 +98,7 @@ class EventDemandTest extends UnitTestCase
     public function getStoragePageReturnsInitialValue()
     {
         $this->assertSame(
-            null,
+            '',
             $this->subject->getStoragePage()
         );
     }
