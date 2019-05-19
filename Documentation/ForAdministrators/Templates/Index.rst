@@ -19,5 +19,6 @@ Templates
    Changing/Index
    Layouts/Index
    Objects/Index
+   Getters/Index
    Viewhelpers/Index
    Filtering/Index
