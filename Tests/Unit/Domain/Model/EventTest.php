@@ -1647,6 +1647,9 @@ class EventTest extends UnitTestCase
     /**
      * @test
      * @dataProvider eventEndsSameDayDataProvider
+     * @param mixed $startdate
+     * @param mixed $enddate
+     * @param mixed $expected
      */
     public function eventEndsSameDayReturnsExpectedValue($startdate, $enddate, $expected)
     {

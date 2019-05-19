@@ -1515,8 +1515,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         if ($this->enddate !== null) {
             return $this->startdate->format('d.m.Y') === $this->enddate->format('d.m.Y');
-        } else {
-            return true;
         }
+
+        return true;
     }
 }
