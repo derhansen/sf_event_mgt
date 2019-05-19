@@ -1471,7 +1471,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Special getter to return the amount of wairlist registrations that are saved to default language
+     * Special getter to return the amount of waitlist registrations that are saved to default language
      * Required since TYPO3 9.5 (#82363)
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
