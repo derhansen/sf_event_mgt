@@ -329,6 +329,7 @@ class EventController extends AbstractController
     public function detailAction(Event $event = null)
     {
         $event = $this->evaluateSingleEventSetting($event);
+        $event = $this->evaluateIsShortcutSetting($event);
         if (is_a($event, Event::class) && $this->settings['detail']['checkPidOfEventRecord']) {
             $event = $this->checkPidOfEventRecord($event);
         }
@@ -954,6 +955,23 @@ class EventController extends AbstractController
     {
         if ($event === null && (int)$this->settings['singleEvent'] > 0) {
             $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
+        }
+
+        return $event;
+    }
+
+    /**
+     * If no event is given and the isShortcut setting is set, the event is displayed using the "Insert Record"
+     * content element and should be loaded from contect object data
+     *
+     * @param Event|null $event
+     * @return Event|null
+     */
+    protected function evaluateIsShortcutSetting($event)
+    {
+        if ($event === null && (bool)$this->settings['detail']['isShortcut']) {
+            $eventRawData = $this->configurationManager->getContentObject()->data;
+            $event = $this->eventRepository->findByUid($eventRawData['uid']);
         }
 
         return $event;

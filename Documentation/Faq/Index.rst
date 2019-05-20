@@ -263,5 +263,11 @@ registration plugin will be be included in the XML sitemap.
 
 Use https://github.com/derhansen/sf_event_mgt/issues/597 for further details/discussion.
 
+Displaying events using the "Insert Record" content element
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you display events using the "Insert Record" content element, you may want to use a different layout to display
+the event detail view. For this purpose, you can use ``{settings.detail.isShortcut}`` in the Detail.html Fluid
+Template to render a different layout.
 
 

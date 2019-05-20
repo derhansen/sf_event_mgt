@@ -28,6 +28,7 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -41,6 +42,7 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
@@ -2473,5 +2475,41 @@ class EventControllerTest extends UnitTestCase
         $news->setPid(12);
 
         $this->assertEquals(null, $mockedController->_call('checkPidOfEventRecord', $news));
+    }
+
+    /**
+     * @test
+     */
+    public function evaluateIsShortcutSettingIsWorking()
+    {
+        $mockedSignalDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dummy']);
+        $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
+
+        // isShortcut not configured
+        $mockedController->_set('settings', ['detail' => ['isShortcut' => 0]]);
+        $this->assertNull($mockedController->_call('evaluateIsShortcutSetting', null));
+
+        // isShortcut is configured
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
+
+        $mockContentObjectRenderer = $this->getAccessibleMock(ContentObjectRenderer::class, ['dummy']);
+        $mockContentObjectRenderer->_set('data', ['uid' => 123]);
+
+        $mockConfigurationManager = $this->getAccessibleMock(ConfigurationManager::class, ['getContentObject']);
+        $mockConfigurationManager->expects($this->once())->method('getContentObject')
+            ->will($this->returnValue($mockContentObjectRenderer));
+        $mockedController->_set('configurationManager', $mockConfigurationManager);
+
+        $mockEventRepository = $this->getMockBuilder(EventRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockEventRepository->expects($this->once())->method('findByUid')->with(123)
+            ->will($this->returnValue($mockEvent));
+        $mockedController->_set('eventRepository', $mockEventRepository);
+
+        $mockedController->_set('settings', ['detail' => ['isShortcut' => 1]]);
+        $this->assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
     }
 }

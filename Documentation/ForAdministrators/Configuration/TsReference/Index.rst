@@ -143,6 +143,19 @@ plugin.tx_sfeventmgt
          Empty
 
  - :Property:
+         settings.detail.isShortcut
+
+   :Date type:
+         Boolean
+
+   :Description:
+         This setting should be set to "1" if the event should be fetched from the Content Object data.
+         This option should only be set to "1", if events are displayed using the "Insert Record" content element
+
+   :Default:
+         0 (false)
+
+ - :Property:
          settings.registration.checkPidOfEventRecord
 
    :Date type:

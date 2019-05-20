@@ -24,6 +24,11 @@ call_user_func(function () {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages($table);
     }
 
+    /**
+     * Register event as "Insert Record"
+     */
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_sfeventmgt_domain_model_event');
+
     if (TYPO3_MODE === 'BE') {
         /**
          * Register Administration Module
