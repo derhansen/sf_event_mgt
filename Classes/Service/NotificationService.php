@@ -266,7 +266,8 @@ class NotificationService
                 $subject,
                 $body,
                 $settings['notification']['senderName'],
-                $attachments
+                $attachments,
+                $settings['notification']['replytoEmail']
             );
 
             // Cleanup iCal attachment if available

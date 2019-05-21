@@ -73,6 +73,7 @@ plugin.tx_sfeventmgt {
             senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
             senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
             senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
+            replytoEmail = {$plugin.tx_sfeventmgt.settings.notification.replytoEmail}
             adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
             registrationDataAsSenderForAdminEmails = {$plugin.tx_sfeventmgt.settings.notification.registrationDataAsSenderForAdminEmails}
             registrationNew {

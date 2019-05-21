@@ -30,6 +30,8 @@ plugin.tx_sfeventmgt {
             senderName =
             # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
             senderSignature =
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for reply-to in e-mails sent to user
+            replytoEmail =
             # cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
             adminEmail =
             # cat=plugin.tx_sfeventmgt//a; type=boolean; label=Override the sender for admin emails with email/name of the registration
