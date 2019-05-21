@@ -491,6 +491,16 @@
                         </TCEforms>
                     </settings.notification.senderName>
 
+                    <!-- Reply to e-mail address -->
+                    <settings.notification.replyToEmail>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.replyto_email</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.replyToEmail>
+
                     <!-- Admin e-mail address -->
                     <settings.notification.adminEmail>
                         <TCEforms>

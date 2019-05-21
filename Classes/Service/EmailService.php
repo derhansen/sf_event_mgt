@@ -34,19 +34,19 @@ class EmailService
      * @param string $body E-Mail body
      * @param string $name Optional sendername
      * @param array $attachments Array of files (e.g. ['/absolute/path/doc.pdf'])
-     * @param string $replyto The reply-to mail
+     * @param string $replyTo The reply-to mail
      *
      * @return bool TRUE/FALSE if message is sent
      */
-    public function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [], $replyto = null)
+    public function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [], $replyTo = null)
     {
         if (GeneralUtility::validEmail($sender) && GeneralUtility::validEmail($recipient)) {
             $this->initialize();
             $this->mailer->setFrom($sender, $name);
             $this->mailer->setSubject($subject);
             $this->mailer->setBody($body, 'text/html');
-            if ($replyto != null) {
-                $this->mailer->setReplyTo($replyto);
+            if ($replyTo !== null) {
+                $this->mailer->setReplyTo($replyTo);
             }
             $this->mailer->setTo($recipient);
             $this->addAttachments($attachments);

@@ -322,6 +322,18 @@ plugin.tx_sfeventmgt
          empty
 
  - :Property:
+         settings.notification.replyToEmail
+
+   :Date type:
+         String
+
+   :Description:
+         Reply-to e-mail address of e-mails sent to the user
+
+   :Default:
+         empty
+
+ - :Property:
          settings.notification.senderSignature
 
    :Date type:
