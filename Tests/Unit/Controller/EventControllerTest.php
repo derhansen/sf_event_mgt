@@ -2480,6 +2480,34 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
+    public function evaluateSingleEventSettingIsWorking()
+    {
+        $mockedSignalDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dummy']);
+        $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
+
+        // singleEvent setting not configured not configured
+        $mockedController->_set('settings', ['singleEvent' => null]);
+        $this->assertNull($mockedController->_call('evaluateSingleEventSetting', null));
+
+        // isShortcut is configured
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
+
+        $mockEventRepository = $this->getMockBuilder(EventRepository::class)
+            ->setMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockEventRepository->expects($this->once())->method('findByUid')->with(123)
+            ->will($this->returnValue($mockEvent));
+        $mockedController->_set('eventRepository', $mockEventRepository);
+
+        $mockedController->_set('settings', ['singleEvent' => 123]);
+        $this->assertEquals($mockEvent, $mockedController->_call('evaluateSingleEventSetting', null));
+    }
+
+    /**
+     * @test
+     */
     public function evaluateIsShortcutSettingIsWorking()
     {
         $mockedSignalDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dummy']);
