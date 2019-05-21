@@ -254,12 +254,13 @@ Extension - Repair Translation: https://github.com/froemken/repair_translation
 
 Event registrations get confirmed by search engines
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Under certain conditions with extensions, that create sitemaps, it may happen, that a confirmation link of a
-registration email gets added to the sitemap. This behavior has at least been seen when the extension ``metaseo``
-has been used to create a sitemap.
+Under certain conditions with extensions that create sitemaps it may happen, that a confirmation link of a
+registration email gets added to the sitemap and afterwards visited by a search engine crawler.
+This behavior has at least been seen when the extension ``metaseo`` has been used to create a sitemap.
 
-In order to avoid the registration link from being added to the sitemap, you must ensure, that the page with then
-registration plugin will be be included in the XML sitemap.
+In order to avoid the registration link from being added to the sitemap, the page with the
+registration plugin needs to be excluded from the sitemap, i.e. use "Exclude from sitemap" in the page
+settings or by other means (e.g. blacklist in EXT:metaseo).
 
 Use https://github.com/derhansen/sf_event_mgt/issues/597 for further details/discussion.
 
