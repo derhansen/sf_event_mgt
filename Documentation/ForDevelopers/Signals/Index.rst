@@ -248,7 +248,7 @@ and the processing of the payment of a registration.
          DERHANSEN\SfEventMgt\Service\NotificationService
 
    :Name:
-         sendAdminMessageAfterNotificationsSent
+         sendAdminMessageAfterNotificationSent
 
    :Arguments:
          $registration, $body, $subject, $attachments, $senderName, $senderEmail, $this

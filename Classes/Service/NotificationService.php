@@ -419,7 +419,7 @@ class NotificationService
 
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
-            __FUNCTION__ . 'AfterNotificationsSent',
+            __FUNCTION__ . 'AfterNotificationSent',
             [$registration, $body, $subject, $attachments, $senderName, $senderEmail, $this]
         );
 
