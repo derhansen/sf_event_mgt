@@ -15,6 +15,9 @@ notifications:
   email:
     - derhansen@gmail.com
 
+before_install:
+  - if php -i | grep -q xdebug; then phpenv config-rm xdebug.ini; fi
+
 before_script:
   - composer require nimut/typo3-complete="$TYPO3_VERSION"
   - export TYPO3_PATH_WEB=$PWD/.Build/Web
