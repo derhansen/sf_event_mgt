@@ -88,7 +88,7 @@ class ICalendarService
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: no-cache');
-        echo($content);
+        echo $content;
     }
 
     /**
