@@ -34,13 +34,6 @@ class ICalendarService
     protected $configurationManager;
 
     /**
-     * ResourceFactory
-     *
-     * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-     */
-    protected $resourceFactory = null;
-
-    /**
      * FluidStandaloneService
      *
      * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
@@ -80,16 +73,6 @@ class ICalendarService
     }
 
     /**
-     * DI for $resourceFactory
-     *
-     * @param \TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory
-     */
-    public function injectResourceFactory(\TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory)
-    {
-        $this->resourceFactory = $resourceFactory;
-    }
-
-    /**
      * Initiates the ICS download for the given event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
@@ -98,15 +81,14 @@ class ICalendarService
      */
     public function downloadiCalendarFile(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
-        $storage = $this->resourceFactory->getDefaultStorage();
-        if ($storage === null) {
-            throw new Exception('Could not get the default storage', 1475590001);
-        }
-        $icalContent = $this->getICalendarContent($event);
-        $tempFolder = $storage->getFolder('_temp_');
-        $tempFile = $storage->createFile('event.ics', $tempFolder);
-        $tempFile->setContents($icalContent);
-        $storage->dumpFileContents($tempFile, true, 'event_' . $event->getUid() . '.ics');
+        $content = $this->getICalendarContent($event);
+        header('Content-Disposition: attachment; filename="event' . $event->getUid() . '.ics"');
+        header('Content-Type: text/calendar');
+        header('Content-Length: ' . strlen($content));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: no-cache');
+        echo($content);
     }
 
     /**

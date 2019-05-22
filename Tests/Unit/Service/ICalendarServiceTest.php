@@ -53,63 +53,24 @@ class ICalendarServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException Exception
+     * @runInSeparateProcess
      * @return void
      */
-    public function downloadiCalendarFileThrowsExceptionIfNoDefaultStorageFound()
+    public function downloadiCalendarFileReturnsExpectedHeaders()
     {
+        $mockedICalendarService = $this->getAccessibleMock(ICalendarService::class, ['getiCalendarContent']);
+        $mockedICalendarService->expects($this->once())->method('getiCalendarContent')
+            ->will($this->returnValue('ICAL-CONTENT')); // 12 Chars - must match in Content-Length header
+
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
+        $mockEvent->expects($this->once())->method('getUid')
+            ->will($this->returnValue(1)); // UID 1 - must be in event ics filename
 
-        /** @var ICalendarService $mockIcalendarService */
-        $mockIcalendarService = $this->getMockBuilder(ICalendarService::class)
-            ->setMethods(['getiCalendarContent'])
-            ->getMock();
+        $mockedICalendarService->downloadiCalendarFile($mockEvent);
 
-        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)
-            ->setMethods(['getDefaultStorage'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will($this->returnValue(null));
-        $this->inject($mockIcalendarService, 'resourceFactory', $mockResourceFactory);
-
-        $mockIcalendarService->downloadiCalendarFile($mockEvent);
-    }
-
-    /**
-     * @test
-     * @return void
-     */
-    public function downloadiCalendarFileDumpsCsvFile()
-    {
-        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
-        $mockICalendarService = $this->getMockBuilder(ICalendarService::class)
-            ->setMethods(['getiCalendarContent'])
-            ->getMock();
-        $mockICalendarService->expects($this->once())->method('getiCalendarContent')->with($mockEvent)->will(
-            $this->returnValue('iCalendar Data')
-        );
-
-        $mockFile = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
-        $mockFile->expects($this->once())->method('setContents')->with('iCalendar Data');
-
-        $mockStorageRepository = $this->getMockBuilder(StorageRepository::class)
-            ->setMethods(['getFolder', 'createFile', 'dumpFileContents'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockStorageRepository->expects($this->at(0))->method('getFolder')->with('_temp_');
-        $mockStorageRepository->expects($this->at(1))->method('createFile')->will($this->returnValue($mockFile));
-        $mockStorageRepository->expects($this->at(2))->method('dumpFileContents');
-
-        $mockResourceFactory = $this->getMockBuilder(ResourceFactory::class)
-            ->setMethods(['getDefaultStorage'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockResourceFactory->expects($this->once())->method('getDefaultStorage')->will(
-            $this->returnValue($mockStorageRepository)
-        );
-        $this->inject($mockICalendarService, 'resourceFactory', $mockResourceFactory);
-
-        $mockICalendarService->downloadiCalendarFile($mockEvent);
+        $headers = xdebug_get_headers();
+        $this->assertContains('Content-Disposition: attachment; filename="event1.ics"', $headers);
+        $this->assertContains('Content-Length: 12', $headers);
     }
 
     /**
