@@ -276,14 +276,23 @@ class NotificationService
                 $attachments[] = $iCalAttachment;
             }
 
+            $senderName = $settings['notification']['senderName'];
+            $senderEmail = $settings['notification']['senderEmail'];
+            $replyToEmail = $settings['notification']['replyToEmail'];
             $result = $this->emailService->sendEmailMessage(
-                $settings['notification']['senderEmail'],
+                $senderEmail,
                 $registration->getEmail(),
                 $subject,
                 $body,
-                $settings['notification']['senderName'],
+                $senderName,
                 $attachments,
-                $settings['notification']['replyToEmail']
+                $replyToEmail
+            );
+
+            $this->signalSlotDispatcher->dispatch(
+                __CLASS__,
+                __FUNCTION__ . 'AfterNotificationSent',
+                [$registration, $body, $subject, $attachments, $senderName, $senderEmail, $replyToEmail, $this]
             );
 
             // Cleanup iCal attachment if available

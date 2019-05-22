@@ -258,3 +258,16 @@ and the processing of the payment of a registration.
          admin notifications (e.g. to speakers). Note, that the signal only gets called, when either "Notify Admin" or
          "Notify Organisator" is checked.
 
+- :Class:
+         DERHANSEN\SfEventMgt\Service\NotificationService
+
+   :Name:
+         sendUserMessageAfterNotificationSent
+
+   :Arguments:
+         $registration, $body, $subject, $attachments, $senderName, $senderEmail, $replyToEmail, $this
+
+   :Description:
+         Signal is called after a user message has been sent. Use this signal, if you want to send additional
+         notifications (e.g. BCC of the user email to an additional e-mail address).
+
