@@ -146,7 +146,7 @@ class NotificationServiceTest extends UnitTestCase
             ->setMethods(['dispatch'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->atLeast(2))->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
@@ -191,7 +191,7 @@ class NotificationServiceTest extends UnitTestCase
             ->setMethods(['dispatch'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
+        $mockSignalSlotDispatcher->expects($this->atLeast(2))->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);

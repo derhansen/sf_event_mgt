@@ -279,6 +279,13 @@ class NotificationService
             $senderName = $settings['notification']['senderName'];
             $senderEmail = $settings['notification']['senderEmail'];
             $replyToEmail = $settings['notification']['replyToEmail'];
+
+            $this->signalSlotDispatcher->dispatch(
+                __CLASS__,
+                __FUNCTION__ . 'CustomSenderData',
+                [&$senderName, &$senderEmail, &$replyToEmail, $registration, $type, $this]
+            );
+
             $result = $this->emailService->sendEmailMessage(
                 $senderEmail,
                 $registration->getEmail(),

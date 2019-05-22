@@ -271,3 +271,17 @@ and the processing of the payment of a registration.
          Signal is called after a user message has been sent. Use this signal, if you want to send additional
          notifications (e.g. BCC of the user email to an additional e-mail address).
 
+- :Class:
+         DERHANSEN\SfEventMgt\Service\NotificationService
+
+   :Name:
+         sendUserMessageCustomSenderData
+
+   :Arguments:
+         &$senderName, &$senderEmail, &$replyToEmail, $registration, $type, $this
+
+   :Description:
+         Signal is called before a user message will be sent. Use this signal, if you want to modify the sender
+         data (e-mail address, name and reply-to) to a custom value (e.g. set sender e-mail address to e-mail address
+         of organisator)
+
