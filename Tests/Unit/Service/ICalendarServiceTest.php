@@ -14,6 +14,7 @@ use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use function xdebug_get_headers;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\ICalendarService.
