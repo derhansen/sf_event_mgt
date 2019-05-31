@@ -310,6 +310,10 @@ class FieldTest extends UnitTestCase
             'Type Textarea' => [
                 FieldType::TEXTAREA,
                 FieldValueType::TYPE_TEXT
+            ],
+            'Type Text' => [
+                FieldType::TEXT,
+                FieldValueType::TEXT
             ]
         ];
     }

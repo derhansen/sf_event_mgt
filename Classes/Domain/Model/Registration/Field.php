@@ -70,6 +70,11 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $event = null;
 
     /**
+     * @var string
+     */
+    protected $text;
+
+    /**
      * Returns the title
      *
      * @return string
@@ -248,7 +253,8 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             FieldType::INPUT => FieldValueType::TYPE_TEXT,
             FieldType::CHECK => FieldValueType::TYPE_ARRAY,
             FieldType::RADIO => FieldValueType::TYPE_TEXT,
-            FieldType::TEXTAREA => FieldValueType::TYPE_TEXT
+            FieldType::TEXTAREA => FieldValueType::TYPE_TEXT,
+            FieldType::TEXT => FieldValueType::TYPE_TEXT
         ];
         if (isset($valueTypes[$this->type])) {
             return $valueTypes[$this->type];
@@ -265,5 +271,26 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getPartialName()
     {
         return ucfirst($this->type);
+    }
+
+    /**
+     * Returns the text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Sets the text
+     *
+     * @param string $text
+     * @return void
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
     }
 }

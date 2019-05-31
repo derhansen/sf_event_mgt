@@ -18,6 +18,13 @@ $showItemRadioCheck = 'title, type, settings,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
+$showItemText = 'title, text, type,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
+        --palette--;;language,
+    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+        hidden, --palette--;;timeRestriction, fe_group';
+
 return [
     'ctrl' => [
         'title' => $lll . 'tx_sfeventmgt_domain_model_registration_field',
@@ -63,6 +70,9 @@ return [
         ],
         'textarea' => [
             'showitem' => $showItemDefault
+        ],
+        'text' => [
+            'showitem' => $showItemText
         ],
     ],
     'palettes' => [
@@ -217,6 +227,10 @@ return [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.3',
                         \DERHANSEN\SfEventMgt\Utility\FieldType::TEXTAREA
                     ],
+                    [
+                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.4',
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXT
+                    ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
@@ -274,5 +288,15 @@ return [
                 'type' => 'passthrough',
             ],
         ],
+        'text'  => array(
+            'exclude' => 1,
+            'label' => 'Text',
+            'config' => array(
+                'type' => 'text',
+                'cols' => 40,
+                'rows' => 15,
+                'enableRichtext' => true,
+            )
+        ),
     ],
 ];
