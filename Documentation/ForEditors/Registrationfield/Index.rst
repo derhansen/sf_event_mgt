@@ -46,6 +46,7 @@ fields to the default registration form.
           * Radiobutton
           * Checkbox
           * Textarea
+          * Text
 
  - :Field:
          Options
@@ -71,7 +72,7 @@ fields to the default registration form.
          Placeholder for the field
 
  - :Field:
-         Default vaoue
+         Default value
 
    :Description:
          The default value of the field
