@@ -20,4 +20,5 @@ class FieldType
     const RADIO = 'radio';
     const TEXTAREA = 'textarea';
     const TEXT = 'text';
+    const DIVIDER = 'divider';
 }

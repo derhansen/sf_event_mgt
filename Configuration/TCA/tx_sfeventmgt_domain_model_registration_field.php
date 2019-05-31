@@ -25,6 +25,13 @@ $showItemText = 'title, text, type,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
+$showItemDivider = 'title, type,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
+        --palette--;;language,
+    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+        hidden, --palette--;;timeRestriction, fe_group';
+
 return [
     'ctrl' => [
         'title' => $lll . 'tx_sfeventmgt_domain_model_registration_field',
@@ -73,6 +80,9 @@ return [
         ],
         'text' => [
             'showitem' => $showItemText
+        ],
+        'divider' => [
+            'showitem' => $showItemDivider
         ],
     ],
     'palettes' => [
@@ -230,6 +240,10 @@ return [
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.4',
                         \DERHANSEN\SfEventMgt\Utility\FieldType::TEXT
+                    ],
+                    [
+                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.5',
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::DIVIDER
                     ],
                 ],
                 'size' => 1,

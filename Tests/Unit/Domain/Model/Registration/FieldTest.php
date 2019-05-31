@@ -314,6 +314,10 @@ class FieldTest extends UnitTestCase
             'Type Text' => [
                 FieldType::TEXT,
                 FieldValueType::TYPE_TEXT
+            ],
+            'Type Divider' => [
+                FieldType::DIVIDER,
+                FieldValueType::TYPE_TEXT
             ]
         ];
     }
