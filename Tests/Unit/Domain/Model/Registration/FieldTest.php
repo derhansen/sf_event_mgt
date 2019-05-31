@@ -313,7 +313,7 @@ class FieldTest extends UnitTestCase
             ],
             'Type Text' => [
                 FieldType::TEXT,
-                FieldValueType::TEXT
+                FieldValueType::TYPE_TEXT
             ]
         ];
     }
