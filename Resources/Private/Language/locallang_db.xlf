@@ -362,6 +362,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.5">
 				<source>Divider</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.6">
+				<source>Select</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.required">
 				<source>Required (field must be filled out)</source>
 			</trans-unit>

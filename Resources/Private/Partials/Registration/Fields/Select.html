@@ -1,0 +1,30 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="event-registration-row select-field {e:validation.errorClass(registrationField: field)}">
+    <label>
+        {field.title}
+        <e:registration.isRequiredField settings="{settings}" registrationField="{field}">
+            <span class="event-required">*</span>
+        </e:registration.isRequiredField>
+    </label>
+    <f:form.select id="{field.uid}" property="fields.{field.uid}">
+        <f:for each="{field.settingsForOption}" as="option">
+            <f:if condition="{e:registration.field.prefillMultiValueField(registrationField: field, currentValue: option.value)}">
+                <f:then>
+                    <option value="{option.value}" selected>{option.label}</option>
+                </f:then>
+                <f:else>
+                    <option value="{option.value}">{option.label}</option>
+                </f:else>
+            </f:if>
+
+        </f:for>
+    </f:form.select>
+    <div class="clear"></div>
+    <f:render partial="FormErrors" arguments="{field: 'registration.fields.{field.uid}'}"/>
+</div>
+<br/>
+
+</html>

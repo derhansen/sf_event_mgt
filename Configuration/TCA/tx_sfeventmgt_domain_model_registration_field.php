@@ -84,6 +84,9 @@ return [
         'divider' => [
             'showitem' => $showItemDivider
         ],
+        'select' => [
+            'showitem' => $showItemRadioCheck
+        ],
     ],
     'palettes' => [
         'timeRestriction' => ['showitem' => 'starttime, endtime'],
@@ -244,6 +247,10 @@ return [
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.5',
                         \DERHANSEN\SfEventMgt\Utility\FieldType::DIVIDER
+                    ],
+                    [
+                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.6',
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::SELECT
                     ],
                 ],
                 'size' => 1,

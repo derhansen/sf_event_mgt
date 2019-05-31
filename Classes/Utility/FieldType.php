@@ -21,4 +21,5 @@ class FieldType
     const TEXTAREA = 'textarea';
     const TEXT = 'text';
     const DIVIDER = 'divider';
+    const SELECT = 'select';
 }
