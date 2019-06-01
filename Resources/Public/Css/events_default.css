@@ -11,13 +11,16 @@
 .event-detail-row,
 .event-list-row {
 	margin-bottom: 5px;
+	display: flex;
+	flex: 1;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .userregistration-list-label,
 .event-registration-label,
 .event-detail-label,
 .event-list-label {
-	float: left;
 	display: block;
 	width: 150px;
 	min-height: 1px;
@@ -28,7 +31,8 @@
 .event-registration-value,
 .event-detail-value,
 .event-list-value {
-	float: left;
+	display: block;
+	flex: 1;
 }
 
 .tx-sf-event-mgt .clear {
@@ -42,24 +46,12 @@
 }
 
 .tx-sf-event-mgt form.registration label {
-	display: block;
-	width: 150px;
-	float: left;
-}
-
-.tx-sf-event-mgt form.registration .recaptcha,
-.tx-sf-event-mgt form.registration .checkbox {
-    margin-left: 150px;
+	width: 100%;
 }
 
 .tx-sf-event-mgt form.registration .radio-field-radiofields,
 .tx-sf-event-mgt form.registration .checkbox-field-checkfields {
-	float: left;
-}
-
-.tx-sf-event-mgt form.registration .radio-field-radiofields label,
-.tx-sf-event-mgt form.registration .checkbox-field-checkfields label {
-    float: left;
+	width: 100%;
 }
 
 .tx-sf-event-mgt form.registration .checkbox label {
@@ -68,12 +60,11 @@
 }
 
 .tx-sf-event-mgt form.registration .error {
-	margin-left: 150px;
 	color: #ff0000;
 }
 
-.tx-sf-event-mgt form.registration .submit {
-	margin-left: 150px;
+.button {
+	margin-right: 0.6em;
 }
 
 /*

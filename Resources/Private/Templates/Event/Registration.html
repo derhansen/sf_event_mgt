@@ -99,10 +99,18 @@
                             </e:registration.isRequiredField>
                         </label>
 
-                        <f:form.radio name="gender" property="gender" value=""/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" />
-                        <f:form.radio name="gender" property="gender" value="f"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" />
-                        <f:form.radio name="gender" property="gender" value="m"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" />
-                        <f:form.radio name="gender" property="gender" value="v"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.various" />
+                        <label>
+                            <f:form.radio name="gender" property="gender" value=""/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" />
+                        </label>
+                        <label>
+                            <f:form.radio name="gender" property="gender" value="f"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" />
+                        </label>
+                        <label>
+                            <f:form.radio name="gender" property="gender" value="m"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" />
+                        </label>
+                        <label>
+                            <f:form.radio name="gender" property="gender" value="v"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.various" />
+                        </label>
                     </div>
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'firstname')}">
@@ -282,10 +290,10 @@
             </f:form>
 
             <f:if condition="{settings.detailPid}">
-                <f:link.action action="detail" pageUid="{settings.detailPid}" arguments="{event: event}"><f:translate key="event.backDetailsText" /></f:link.action>
+                <f:link.action action="detail" pageUid="{settings.detailPid}" arguments="{event: event}" class="button"><f:translate key="event.backDetailsText" /></f:link.action>
             </f:if>
 
-            <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
+            <f:link.action action="list" pageUid="{settings.listPid}" class="button"><f:translate key="event.backtext" /></f:link.action>
 
         </f:then>
         <f:else>
