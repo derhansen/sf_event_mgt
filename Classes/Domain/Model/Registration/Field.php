@@ -80,17 +80,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $datepickermode;
 
     /**
-     * Sets the datepickermode
-     *
-     * @param string $datepickermode
-     * @return void
-     */
-    public function setDatepickermode($datepickermode)
-    {
-        $this->datepickermode = $datepickermode;
-    }
-
-    /**
      * Returns the title
      *
      * @return string
@@ -315,10 +304,21 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the datepickermode
      *
-     * @return string
+     * @return int
      */
     public function getDatepickermode()
     {
         return $this->datepickermode;
+    }
+
+    /**
+     * Sets the datepickermode
+     *
+     * @param int $datepickermode
+     * @return void
+     */
+    public function setDatepickermode($datepickermode)
+    {
+        $this->datepickermode = $datepickermode;
     }
 }
