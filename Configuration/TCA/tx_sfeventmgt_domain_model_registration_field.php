@@ -34,7 +34,7 @@ $showItemDivider = 'title, type,
 
 $showItemDateTime = 'title, datepickermode, type,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
-        required, placeholder, default_value,
+        required, default_value,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
