@@ -47,6 +47,8 @@ fields to the default registration form.
           * Checkbox
           * Textarea
           * Text
+          * Divider
+          * Date, Datetime or Time
 
  - :Field:
          Options
@@ -76,3 +78,14 @@ fields to the default registration form.
 
    :Description:
          The default value of the field
+
+ - :Field:
+         Date input mode
+
+   :Description:
+         Only visible when the selected field type is "Date/Time".
+
+         Selects the date input mode: either 'date' (default), 'datetime' or 'time'
+
+         **Please note**: The default template just uses HTML5 input types. You might want to extend that to use a
+         JavaScript datetimepicker instead.

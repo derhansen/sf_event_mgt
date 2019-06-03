@@ -32,6 +32,14 @@ $showItemDivider = 'title, type,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
+$showItemDateTime = 'title, datepickermode, type,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
+        required, placeholder, default_value,
+    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
+        --palette--;;language,
+    --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
+        hidden, --palette--;;timeRestriction, fe_group';
+
 return [
     'ctrl' => [
         'title' => $lll . 'tx_sfeventmgt_domain_model_registration_field',
@@ -86,6 +94,9 @@ return [
         ],
         'select' => [
             'showitem' => $showItemRadioCheck
+        ],
+        'datetime' => [
+            'showitem' => $showItemDateTime
         ],
     ],
     'palettes' => [
@@ -252,6 +263,10 @@ return [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.6',
                         \DERHANSEN\SfEventMgt\Utility\FieldType::SELECT
                     ],
+                    [
+                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.7',
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::DATETIME
+                    ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
@@ -311,12 +326,24 @@ return [
         ],
         'text'  => array(
             'exclude' => 1,
-            'label' => 'Text',
+            'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.text',
             'config' => array(
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'enableRichtext' => true,
+            )
+        ),
+        'datepickermode'  => array(
+            'exclude' => 1,
+            'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode',
+            'config' => array(
+                'type' => 'select',
+                'items' => [
+                    ['Datum', 0],
+                    ['Datum und Zeit', 1],
+                    ['Zeit', 2],
+                ]
             )
         ),
     ],

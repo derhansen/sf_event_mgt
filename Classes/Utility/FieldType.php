@@ -22,4 +22,5 @@ class FieldType
     const TEXT = 'text';
     const DIVIDER = 'divider';
     const SELECT = 'select';
+    const DATETIME = 'datetime';
 }
