@@ -324,27 +324,27 @@ return [
                 'type' => 'passthrough',
             ],
         ],
-        'text'  => array(
+        'text'  => [
             'exclude' => 1,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.text',
-            'config' => array(
+            'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
                 'enableRichtext' => true,
-            )
-        ),
-        'datepickermode'  => array(
+            ]
+        ],
+        'datepickermode'  => [
             'exclude' => 1,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode',
-            'config' => array(
+            'config' => [
                 'type' => 'select',
                 'items' => [
                     ['Datum', 0],
                     ['Datum und Zeit', 1],
                     ['Zeit', 2],
                 ]
-            )
-        ),
+            ]
+        ],
     ],
 ];

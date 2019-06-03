@@ -273,7 +273,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             FieldType::TEXT => FieldValueType::TYPE_TEXT,
             FieldType::DIVIDER => FieldValueType::TYPE_TEXT,
             FieldType::SELECT => FieldValueType::TYPE_ARRAY,
-
         ];
         if (isset($valueTypes[$this->type])) {
             return $valueTypes[$this->type];
