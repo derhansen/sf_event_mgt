@@ -340,9 +340,9 @@ return [
             'config' => [
                 'type' => 'select',
                 'items' => [
-                    ['Datum', 0],
-                    ['Datum und Zeit', 1],
-                    ['Zeit', 2],
+                    [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0', 0],
+                    [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1', 1],
+                    [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2', 2],
                 ]
             ]
         ],

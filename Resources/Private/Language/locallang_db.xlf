@@ -383,6 +383,15 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode">
 				<source>Date input mode</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1">
+				<source>Date and time</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2">
+				<source>Time</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue">
 				<source>Event - Registrationfield value</source>
 			</trans-unit>
