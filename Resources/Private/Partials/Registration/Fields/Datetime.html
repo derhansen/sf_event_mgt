@@ -2,12 +2,6 @@
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:switch expression="{field.datepickermode}">
-    <f:case value="1"><f:variable name="datepickermode">datetime-local</f:variable></f:case>
-    <f:case value="2"><f:variable name="datepickermode">time</f:variable></f:case>
-    <f:defaultCase><f:variable name="datepickermode">date</f:variable></f:defaultCase>
-</f:switch>
-
 <div class="event-registration-row {e:validation.errorClass(registrationField: field)}">
     <label for="{field.uid}">
         {field.title}
@@ -15,7 +9,7 @@
             <span class="event-required">*</span>
         </e:registration.isRequiredField>
     </label>
-    <f:form.textfield type="{datepickermode}" id="{field.uid}" property="fields.{field.uid}" value="{e:registration.field.prefillField(registrationField: field)}" placeholder="{field.placeholder}"/><br>
+    <f:form.textfield type="{field.datepickermodeType}" id="{field.uid}" property="fields.{field.uid}" value="{e:registration.field.prefillField(registrationField: field)}" placeholder="{field.placeholder}"/><br>
     <f:render partial="FormErrors" arguments="{field: 'registration.fields.{field.uid}'}"/>
 </div>
 

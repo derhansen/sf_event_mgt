@@ -80,6 +80,11 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $datepickermode;
 
     /**
+     * @var string
+     */
+    protected $datepickermodeType;
+
+    /**
      * Returns the title
      *
      * @return string
@@ -320,5 +325,22 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setDatepickermode($datepickermode)
     {
         $this->datepickermode = $datepickermode;
+    }
+
+    /**
+     * Returns the datepickermode type as string
+     *
+     * @return string
+     */
+    public function getDatepickermodeType()
+    {
+        switch ($this->datepickermode) {
+            case 1:
+                return 'datetime-local';
+            case 2:
+                return 'time';
+            default:
+                return 'date';
+        }
     }
 }
