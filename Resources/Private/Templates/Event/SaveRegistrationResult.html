@@ -8,7 +8,9 @@
         <f:translate key="{messageKey}" />
     </p>
 
-    <f:link.action action="list" pageUid="{settings.listPid}"><f:translate key="event.backtext" /></f:link.action>
+    <f:if condition="{settings.listPid}">
+        <f:link.action action="list" pageUid="{settings.listPid}" class="active button"><f:translate key="event.backtext" /></f:link.action>
+    </f:if>
 </f:section>
 
 </html>
