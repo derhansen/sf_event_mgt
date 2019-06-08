@@ -61,6 +61,7 @@ class DataHandlerHooks
                     'settings.notification.senderEmail',
                     'settings.notification.senderName',
                     'settings.notification.adminEmail',
+                    'settings.notification.replyToEmail',
                     'settings.notification.registrationNew.userSubject',
                     'settings.notification.registrationWaitlistNew.userSubject',
                     'settings.notification.registrationNew.adminSubject',
