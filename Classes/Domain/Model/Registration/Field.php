@@ -70,6 +70,21 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $event = null;
 
     /**
+     * @var string
+     */
+    protected $text;
+
+    /**
+     * @var int
+     */
+    protected $datepickermode;
+
+    /**
+     * @var string
+     */
+    protected $datepickermodeType;
+
+    /**
      * Returns the title
      *
      * @return string
@@ -248,7 +263,10 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             FieldType::INPUT => FieldValueType::TYPE_TEXT,
             FieldType::CHECK => FieldValueType::TYPE_ARRAY,
             FieldType::RADIO => FieldValueType::TYPE_TEXT,
-            FieldType::TEXTAREA => FieldValueType::TYPE_TEXT
+            FieldType::TEXTAREA => FieldValueType::TYPE_TEXT,
+            FieldType::TEXT => FieldValueType::TYPE_TEXT,
+            FieldType::DIVIDER => FieldValueType::TYPE_TEXT,
+            FieldType::SELECT => FieldValueType::TYPE_ARRAY,
         ];
         if (isset($valueTypes[$this->type])) {
             return $valueTypes[$this->type];
@@ -265,5 +283,64 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getPartialName()
     {
         return ucfirst($this->type);
+    }
+
+    /**
+     * Returns the text
+     *
+     * @return string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Sets the text
+     *
+     * @param string $text
+     * @return void
+     */
+    public function setText($text)
+    {
+        $this->text = $text;
+    }
+
+    /**
+     * Returns the datepickermode
+     *
+     * @return int
+     */
+    public function getDatepickermode()
+    {
+        return $this->datepickermode;
+    }
+
+    /**
+     * Sets the datepickermode
+     *
+     * @param int $datepickermode
+     * @return void
+     */
+    public function setDatepickermode($datepickermode)
+    {
+        $this->datepickermode = $datepickermode;
+    }
+
+    /**
+     * Returns the datepickermode type as string
+     *
+     * @return string
+     */
+    public function getDatepickermodeType()
+    {
+        switch ($this->datepickermode) {
+            case 1:
+                return 'datetime-local';
+            case 2:
+                return 'time';
+            default:
+                return 'date';
+        }
     }
 }

@@ -310,6 +310,18 @@ class FieldTest extends UnitTestCase
             'Type Textarea' => [
                 FieldType::TEXTAREA,
                 FieldValueType::TYPE_TEXT
+            ],
+            'Type Text' => [
+                FieldType::TEXT,
+                FieldValueType::TYPE_TEXT
+            ],
+            'Type Divider' => [
+                FieldType::DIVIDER,
+                FieldValueType::TYPE_TEXT
+            ],
+            'Type Select' => [
+                FieldType::SELECT,
+                FieldValueType::TYPE_ARRAY
             ]
         ];
     }

@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<div class="event-registration-row {e:validation.errorClass(registrationField: field)}">
+    <label for="{field.uid}">
+        {field.title}
+        <e:registration.isRequiredField settings="{settings}" registrationField="{field}">
+            <span class="event-required">*</span>
+        </e:registration.isRequiredField>
+    </label>
+    <f:form.textfield type="{field.datepickermodeType}" id="{field.uid}" property="fields.{field.uid}" value="{e:registration.field.prefillField(registrationField: field)}" placeholder="{field.placeholder}"/><br>
+    <f:render partial="FormErrors" arguments="{field: 'registration.fields.{field.uid}'}"/>
+</div>
+
+</html>
