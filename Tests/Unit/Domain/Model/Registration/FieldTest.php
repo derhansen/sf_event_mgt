@@ -295,33 +295,37 @@ class FieldTest extends UnitTestCase
     public function getValueTypeReturnsExpectedFieldValuesDataProvider()
     {
         return [
-            'Type Text' => [
+            'Input' => [
                 FieldType::INPUT,
                 FieldValueType::TYPE_TEXT
             ],
-            'Type Check' => [
+            'Checkbox' => [
                 FieldType::CHECK,
                 FieldValueType::TYPE_ARRAY
             ],
-            'Type Radio' => [
+            'Radio' => [
                 FieldType::RADIO,
                 FieldValueType::TYPE_TEXT
             ],
-            'Type Textarea' => [
+            'Textarea' => [
                 FieldType::TEXTAREA,
                 FieldValueType::TYPE_TEXT
             ],
-            'Type Text' => [
+            'Text' => [
                 FieldType::TEXT,
                 FieldValueType::TYPE_TEXT
             ],
-            'Type Divider' => [
+            'Divider' => [
                 FieldType::DIVIDER,
                 FieldValueType::TYPE_TEXT
             ],
-            'Type Select' => [
+            'Select' => [
                 FieldType::SELECT,
                 FieldValueType::TYPE_ARRAY
+            ],
+            'Datetime' => [
+                FieldType::DATETIME,
+                FieldValueType::TYPE_TEXT
             ]
         ];
     }
@@ -345,5 +349,72 @@ class FieldTest extends UnitTestCase
     {
         $this->subject->setType('input');
         $this->assertEquals('Input', $this->subject->getPartialName());
+    }
+
+    /**
+     * @return array
+     */
+    public function getDatepickermodeTypeDataProvider()
+    {
+        return [
+            'datetime-local' => [
+                1,
+                'datetime-local'
+            ],
+            'time' => [
+                2,
+                'time'
+            ],
+            'date' => [
+                0,
+                'date'
+            ]
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider getDatepickermodeTypeDataProvider
+     * @param $datepickerMode
+     * @param $expected
+     */
+    public function getDatepickermodeTypeReturnsExpectedValue($datepickerMode, $expected)
+    {
+        $this->subject->setDatepickermode($datepickerMode);
+        $this->assertEquals($expected, $this->subject->getDatepickermodeType());
+    }
+
+    /**
+     * @test
+     */
+    public function getTextReturnsInitialValue()
+    {
+        $this->assertEmpty($this->subject->getText());
+    }
+
+    /**
+     * @test
+     */
+    public function setTextSetsTextForString()
+    {
+        $this->subject->setText('TYPO3');
+        $this->assertEquals('TYPO3', $this->subject->getText());
+    }
+
+    /**
+     * @test
+     */
+    public function getDatepickermodeReturnsInitialValue()
+    {
+        $this->assertEquals(0, $this->subject->getDatepickermode());
+    }
+
+    /**
+     * @test
+     */
+    public function setDatepickermodeSetsValueForInt()
+    {
+        $this->subject->setDatepickermode(2);
+        $this->assertEquals(2, $this->subject->getDatepickermode());
     }
 }
