@@ -45,7 +45,7 @@ class EmailService
             $this->mailer->setFrom($sender, $name);
             $this->mailer->setSubject($subject);
             $this->mailer->setBody($body, 'text/html');
-            if ($replyTo !== null) {
+            if ($replyTo !== null && $replyTo !== '') {
                 $this->mailer->setReplyTo($replyTo);
             }
             $this->mailer->setTo($recipient);
