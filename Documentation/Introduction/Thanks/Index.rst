@@ -34,3 +34,4 @@ Thanks from me to:
 * Rune Piper for several code cleanups and Pull Requests
 * Haisam Zehrawi from SeminarPool GmbH for sponsoring refactoring in the CSV export
 * Stefano Kowalke for several Pull Requests
+* Manuel Munz for adding additional registration fields
