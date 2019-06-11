@@ -14,7 +14,6 @@ Locations
 Locations can be assigned to an event.
 
 .. figure:: ../../Images/location.png
-   :align: left
    :alt: Event location record
 
 .. t3-field-list-table::

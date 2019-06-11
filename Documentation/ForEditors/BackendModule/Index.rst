@@ -18,13 +18,13 @@ To filter in the list of events, use the 3 search-fields title, startdate and en
 Available actions
 ~~~~~~~~~~~~~~~~~
 
-The backend module contains 2 actions in the upper left.
+The backend module contains 5 actions in the upper left.
 
 .. figure:: ../../Images/be-module-actions.png
    :alt: Actions of the backend module
 
-* The first action creates a new event
-* The second action does the same as the cronjob, it hides/removes expired registrations
+* The first 4 actions creates new items (event, location, organisator, speaker)
+* The last action does the same as the cronjob, it hides/removes expired registrations
 
 CSV export
 ~~~~~~~~~~

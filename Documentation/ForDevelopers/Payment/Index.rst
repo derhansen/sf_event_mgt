@@ -32,7 +32,6 @@ General workflow
 ----------------
 
 .. figure:: ../../Images/payment-workflow.png
-   :align: left
    :alt: Payment workflow
    :width: 650px
 

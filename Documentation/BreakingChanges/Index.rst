@@ -54,7 +54,6 @@ to the new structure. Please use the update script in the extension manager to p
 migration as shown below.
 
 .. figure:: ../Images/ext-update-category.png
-   :align: left
    :width: 147px
    :alt: Extension Update Icon
 
@@ -93,7 +92,6 @@ categories will get migrated to sys_category entries. Please use the update scri
 manager to process the migration as shown below.
 
 .. figure:: ../Images/ext-update-category.png
-   :align: left
    :width: 147px
    :alt: Extension Update Icon
 

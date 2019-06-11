@@ -30,7 +30,7 @@ The installation and initial configuration of the extension is as following:
 Important
 ~~~~~~~~~
 
-#. If you use **registrations for events**, you must follow the instructions regarding :ref:`clearcacheuids` and :ref:`cronjob`
+#. If you use **registrations for events**, you must follow the instructions regarding the :ref:`cronjob`
 
 #. If you want TYPO3 editors (not admins) to be able to export registrations as a **CSV file**, those users must have a read/write access to the default upload folder (or ``options.defaultUploadFolder`` in User TSconfig)
 

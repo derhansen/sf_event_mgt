@@ -16,7 +16,6 @@ the field values of each registration field are saved as a registration field va
 
 
 .. figure:: ../../Images/event-registrationfieldvalues.png
-   :align: left
    :alt: Registration field values
 
 .. t3-field-list-table::

@@ -14,7 +14,6 @@ Organisator
 The organisator can be assigned to an event.
 
 .. figure:: ../../Images/organisator.png
-   :align: left
    :alt: Event organisator record
 
 .. t3-field-list-table::

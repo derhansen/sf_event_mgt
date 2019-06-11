@@ -16,7 +16,6 @@ fields to the default registration form.
 
 
 .. figure:: ../../Images/event-registrationfields.png
-   :align: left
    :alt: Registration fields
 
 .. t3-field-list-table::
@@ -58,8 +57,8 @@ fields to the default registration form.
 
          Example:
 
-         Option 1|value1
-         Option 2|value2
+         * Option 1|value1
+         * Option 2|value2
 
  - :Field:
          Required

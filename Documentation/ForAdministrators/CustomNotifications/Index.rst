@@ -16,7 +16,6 @@ custom notifications to all (confirmed) participants of the event. In order to
 do so, use the admin module to open the "Notify participants" view.
 
 .. figure:: ../../Images/event-custom-notification.png
-   :align: left
    :alt: Actions of the backend module
 
 Create an own notification

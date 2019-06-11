@@ -22,7 +22,6 @@ This TypoScript above defines 2 new template layouts, which will appear in the t
 layout selectbox in the plugin settings like shown below.
 
 .. figure:: ../../../Images/plugin-template-layout.png
-   :align: left
    :width: 253px
    :alt: Different template layouts
 

@@ -30,7 +30,6 @@ Example with `--delete` option::
 Output:
 
 .. figure:: ../../Images/command-cleanup.png
-   :align: left
    :alt: Cleanup command
 
 

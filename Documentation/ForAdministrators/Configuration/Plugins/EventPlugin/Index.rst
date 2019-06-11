@@ -357,6 +357,18 @@ Tab template
  :header-rows: 1
 
  - :Property:
+         Property:
+
+   :View:
+         View:
+
+   :Description:
+         Description:
+
+   :Key:
+         Key:
+
+ - :Property:
          Template layout
 
    :View:
@@ -364,16 +376,11 @@ Tab template
 
    :Description:
          With this setting the plugin can be configured to show different template layouts.
-         Template layouts can be configured with Page TSConfig like shown below.::
 
-       tx_sfeventmgt.templateLayouts {
-         1 = 2 column layout
-         2 = Event-Slider
-       }
+         * Template layouts can be configured with Page TSConfig.
+         * Template layout can be used/set by TypoScript (settings.templateLayout)
 
-     Template layout can be used/set by TypoScript (settings.templateLayout)
-
-    :Key:
+   :Key:
          templateLayout
 
 Tab notification
