@@ -18,7 +18,7 @@ $showItemRadioCheck = 'title, type, settings,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
-$showItemText = 'title, text, type,
+$showItemText = 'title, type, text,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
@@ -32,7 +32,7 @@ $showItemDivider = 'title, type,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
-$showItemDateTime = 'title, datepickermode, type,
+$showItemDateTime = 'title, type, datepickermode, 
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
         required, default_value,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
