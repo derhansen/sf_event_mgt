@@ -18,16 +18,16 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'name, email, phone,',
+        'searchFields' => 'name, email, phone, email_signature,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-organisator'
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, phone, image',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, email, email_signature, phone, image',
     ],
     'types' => [
-        '1' => ['showitem' => 'name, email, phone, image,
+        '1' => ['showitem' => 'name, email, email_signature, phone, image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
@@ -139,6 +139,20 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'email',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
+        'email_signature' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.email_signature',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'cols' => 40,
+                'rows' => 5,
+                'eval' => 'trim',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],

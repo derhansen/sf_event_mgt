@@ -297,6 +297,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
 				<source>E-Mail</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email_signature">
+				<source>E-Mail signature</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
 				<source>Phone number</source>
 			</trans-unit>
