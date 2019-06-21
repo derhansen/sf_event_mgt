@@ -31,7 +31,7 @@ return [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, rowDescription, teaser, 
         description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, 
         max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, 
-        files, additional_image, registration, location, organisator, notify_admin, notify_organisator, unique_email_check,
+        files, additional_image, registration, location, room, organisator, notify_admin, notify_organisator, unique_email_check,
         enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields',
     ],
     'types' => [
@@ -42,7 +42,7 @@ return [
                     --palette--;;palettePrice, price_options, link, program,
     
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
-                    location, organisator, speaker, related,
+                    --palette--;;location, organisator, speaker, related,
     
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
                     image, files, additional_image,
@@ -80,6 +80,10 @@ return [
         ],
         'timeRestriction' => ['showitem' => 'starttime, endtime'],
         'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
+        'location' => [
+            'showitem' => 'location, --linebreak--,room,',
+            'canNotCollapse' => true
+        ],
         'titleTopEvent' => ['showitem' => 'title, top_event'],
         'paletteDates' => [
             'showitem' => 'startdate, enddate,',
@@ -486,6 +490,18 @@ return [
                     'addRecord' => [
                         'disabled' => false,
                     ],
+                ],
+            ],
+        ],
+        'room' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.room',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
                 ],
             ],
         ],

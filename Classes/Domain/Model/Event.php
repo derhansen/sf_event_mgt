@@ -190,6 +190,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $location = null;
 
     /**
+     * Room
+     *
+     * @var string
+     */
+    protected $room;
+
+    /**
      * Enable registration
      *
      * @var bool
@@ -867,6 +874,26 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getLocation()
     {
         return $this->location;
+    }
+
+    /**
+     * Returns the room
+     *
+     * @return string
+     */
+    public function getRoom()
+    {
+        return $this->room;
+    }
+
+    /**
+     * Sets the room
+     *
+     * @param string $room
+     */
+    public function setRoom($room)
+    {
+        $this->room = $room;
     }
 
     /**

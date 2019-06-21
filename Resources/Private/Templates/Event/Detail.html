@@ -101,6 +101,18 @@
 			</div>
 		</f:if>
 
+		<f:if condition="{event.room}">
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.room" />
+				</div>
+				<div class="event-detail-value event-room">
+					{event.room}
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
+
 		<div class="event-detail-row">
 			<div class="event-detail-label">
 				<f:translate key="tx_sfeventmgt_domain_model_event.location" /> <f:translate key="tx_sfeventmgt_domain_model_event.location.city" />

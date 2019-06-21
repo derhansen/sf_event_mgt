@@ -78,6 +78,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.location">
 				<source>Location</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.room">
+				<source>Room</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.speaker">
 				<source>Speaker</source>
 			</trans-unit>

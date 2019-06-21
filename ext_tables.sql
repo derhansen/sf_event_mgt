@@ -30,6 +30,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	related int(11) DEFAULT '0' NOT NULL,
 	additional_image varchar(255) DEFAULT '' NOT NULL,
 	location int(11) unsigned DEFAULT '0' NOT NULL,
+	room varchar(255) DEFAULT '' NOT NULL,
 	enable_registration tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	enable_waitlist tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	registration_deadline int(11) DEFAULT '0' NOT NULL,
