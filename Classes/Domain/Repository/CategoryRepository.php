@@ -29,6 +29,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
     {
         $constraints = [];
         $query = $this->createQuery();
+        $query->getQuerySettings()->setRespectSysLanguage(false);
 
         if ($demand->getRestrictToStoragePage()) {
             $pidList = GeneralUtility::intExplode(',', $demand->getStoragePage(), true);
