@@ -6,11 +6,6 @@
     <li>{event.title} - ({f:format.date(date: event.startdate, format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: event.enddate, format: '%d.%m.%Y - %H:%M')})</li>
 </ul>
 <p>Best regards,</p>
-<f:if condition="{settings.notification.senderSignature}">
-    <p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
-</f:if>
-<f:if condition="{event.organisator.emailSignature}">
-    <f:format.html>{event.organisator.emailSignature}</f:format.html>
-</f:if>
+<p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
 
 </html>

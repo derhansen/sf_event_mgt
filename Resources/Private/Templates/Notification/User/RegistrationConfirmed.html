@@ -12,11 +12,6 @@
     </p>
 </f:if>
 <p>Best regards,</p>
-<f:if condition="{settings.notification.senderSignature}">
-    <p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
-</f:if>
-<f:if condition="{event.organisator.emailSignature}">
-    <f:format.html>{event.organisator.emailSignature}</f:format.html>
-</f:if>
+<p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
 
 </html>

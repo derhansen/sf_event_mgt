@@ -18,11 +18,6 @@
 </f:if>
 <p>Note, that your registration will be cancelled, if you do not open the confirmation link until {f:format.date(date: registration.confirmationUntil, format: '%d.%m.%Y - %H:%M:%S')}</p>
 <p>Best regards,</p>
-<f:if condition="{settings.notification.senderSignature}">
-    <p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
-</f:if>
-<f:if condition="{event.organisator.emailSignature}">
-    <f:format.html>{event.organisator.emailSignature}</f:format.html>
-</f:if>
+<p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>
 
 </html>
