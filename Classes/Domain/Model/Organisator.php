@@ -30,6 +30,13 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $email = '';
 
     /**
+     * E-Mail signature of Organisator
+     *
+     * @var string
+     */
+    protected $emailSignature = '';
+
+    /**
      * Phone number of Organisator
      *
      * @var string
@@ -85,6 +92,22 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmailSignature(): string
+    {
+        return $this->emailSignature;
+    }
+
+    /**
+     * @param string $emailSignature
+     */
+    public function setEmailSignature(string $emailSignature)
+    {
+        $this->emailSignature = $emailSignature;
     }
 
     /**
