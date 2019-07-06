@@ -38,6 +38,12 @@ The organisator can be assigned to an event.
          E-Mail of the organisator
 
  - :Field:
+         E-Mail signature
+
+   :Description:
+         E-Mail signature of the organisator (can e.g. be used in e-mail templates)
+
+ - :Field:
          Phone
 
    :Description:

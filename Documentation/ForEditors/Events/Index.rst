@@ -149,6 +149,12 @@ The relations tab contains fields which holds relations locations, organisators 
          The location of the event choosen from the location records created.
 
  - :Field:
+         Room
+
+   :Description:
+         Optional field for the room, where the event happens.
+
+ - :Field:
          Organisator
 
    :Description:
