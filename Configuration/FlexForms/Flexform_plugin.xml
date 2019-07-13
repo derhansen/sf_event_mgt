@@ -307,7 +307,6 @@
                     <!-- Location -->
                     <settings.location>
                         <TCEforms>
-                            <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.location</label>
                             <displayCond>
                                 <AND>
@@ -335,7 +334,6 @@
                     <!-- Organisator -->
                     <settings.organisator>
                         <TCEforms>
-                            <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.organisator</label>
                             <displayCond>
                                 <AND>
@@ -363,7 +361,6 @@
                     <!-- Speaker -->
                     <settings.speaker>
                         <TCEforms>
-                            <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.speaker</label>
                             <displayCond>
                                 <AND>
@@ -391,7 +388,6 @@
                     <!-- Storage page -->
                     <settings.storagePage>
                         <TCEforms>
-                            <exclude>1</exclude>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.storagePage</label>
                             <config>
                                 <type>group</type>
@@ -711,7 +707,6 @@
                     <!-- restrict Categories and Locations to storagePage -->
                     <settings.restrictForeignRecordsToStoragePage>
                         <TCEforms>
-                            <exclude>1</exclude>
                             <displayCond>
                                 <AND>
                                     <numIndex index="0">FIELD:sDEF.switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
