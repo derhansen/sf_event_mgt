@@ -756,4 +756,27 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setSpeaker($speaker);
         $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
+
+    /**
+     * Test if startDate and endDate restriction in combination work
+     *
+     * @test
+     * @return void
+     */
+    public function findSearchDemandedRecordsByStartAndEndDate()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get(EventDemand::class);
+        $demand->setStoragePage(110);
+
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand */
+        $searchDemand = $this->objectManager->get(SearchDemand::class);
+        $searchDemand->setStartDate(new \DateTime('01.07.2019 00:00:00'));
+        $searchDemand->setEndDate(new \DateTime('04.08.2019 23:59:59'));
+        $demand->setSearchDemand($searchDemand);
+
+        $events = $this->eventRepository->findDemanded($demand);
+
+        $this->assertSame(1, $events->count());
+    }
 }

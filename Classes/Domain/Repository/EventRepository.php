@@ -325,13 +325,25 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setStartEndDateConstraint($query, $eventDemand, &$constraints)
     {
-        /* StartDate */
-        if ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
+        if ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null &&
+            $eventDemand->getSearchDemand()->getEndDate() !== null
+        ) {
+            /* StartDate and EndDate  - Search for events between two given dates */
+            $begin = $eventDemand->getSearchDemand()->getStartDate();
+            $end = $eventDemand->getSearchDemand()->getEndDate();
+            $constraints[] = $query->logicalOr([
+                $query->between('startdate', $begin, $end),
+                $query->between('enddate', $begin, $end),
+                $query->logicalAnd([
+                    $query->greaterThanOrEqual('enddate', $begin),
+                    $query->lessThanOrEqual('startdate', $begin)
+                ])
+            ]);
+        } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
+            /* StartDate - Search for events beginning at a given date */
             $constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getSearchDemand()->getStartDate());
-        }
-
-        /* EndDate */
-        if ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getEndDate() !== null) {
+        } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getEndDate() !== null) {
+            /* EndDate - Search for events ending on a given date */
             $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getSearchDemand()->getEndDate());
         }
     }
