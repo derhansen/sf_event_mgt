@@ -59,7 +59,7 @@ class ExportService
     public function downloadRegistrationsCsv($eventUid, $settings = [])
     {
         $content = $this->exportRegistrationsCsv($eventUid, $settings);
-        header('Content-Disposition: attachment; filename="event_'  . $eventUid . '_reg_' . date('dmY_His') . '.csv"');
+        header('Content-Disposition: attachment; filename="event_' . $eventUid . '_reg_' . date('dmY_His') . '.csv"');
         header('Content-Type: text/csv');
         header('Content-Length: ' . strlen($content));
         header('Expires: 0');

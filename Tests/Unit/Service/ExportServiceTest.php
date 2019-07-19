@@ -13,10 +13,6 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Resource\File;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
-use TYPO3\CMS\Core\Resource\StorageRepository;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
