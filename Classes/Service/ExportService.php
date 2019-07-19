@@ -12,7 +12,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
-use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Utility\CsvUtility;
 
 /**
@@ -33,13 +32,6 @@ class ExportService
     protected $eventRepository = null;
 
     /**
-     * ResourceFactory
-     *
-     * @var \TYPO3\CMS\Core\Resource\ResourceFactory
-     */
-    protected $resourceFactory = null;
-
-    /**
      * @param RegistrationRepository $registrationRepository
      */
     public function injectRegistrationRepository(
@@ -57,14 +49,6 @@ class ExportService
     }
 
     /**
-     * @param ResourceFactory $resourceFactory
-     */
-    public function injectResourceFactory(\TYPO3\CMS\Core\Resource\ResourceFactory $resourceFactory)
-    {
-        $this->resourceFactory = $resourceFactory;
-    }
-
-    /**
      * Initiates the CSV downloads for registrations of the given event uid
      *
      * @param int $eventUid EventUid
@@ -74,17 +58,14 @@ class ExportService
      */
     public function downloadRegistrationsCsv($eventUid, $settings = [])
     {
-        $tempFolder = $this->getBackendUser()->getDefaultUploadTemporaryFolder();
-        $storage = $this->resourceFactory->getDefaultStorage();
-        if ($storage === null || $tempFolder === null) {
-            throw new Exception('Could not get the default storage or default upload temp folder', 1475590001);
-        }
-        $registrations = $this->exportRegistrationsCsv($eventUid, $settings);
-        $tempFilename = md5($eventUid . '_sf_events_export_' . time()) . '.csv';
-        $tempFile = $storage->createFile($tempFilename, $tempFolder);
-        $tempFile->setContents($registrations);
-        $storage->dumpFileContents($tempFile, true, 'registrations_' . date('dmY_His') . '.csv');
-        $tempFile->delete();
+        $content = $this->exportRegistrationsCsv($eventUid, $settings);
+        header('Content-Disposition: attachment; filename="event_'  . $eventUid . '_reg_' . date('dmY_His') . '.csv"');
+        header('Content-Type: text/csv');
+        header('Content-Length: ' . strlen($content));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: no-cache');
+        echo $content;
     }
 
     /**

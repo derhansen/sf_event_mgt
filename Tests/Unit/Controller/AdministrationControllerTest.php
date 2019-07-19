@@ -83,13 +83,6 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionDoesNotFetchEventsForStoragePidZero()
     {
-        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
-            ->setMethods(['getDefaultUploadTemporaryFolder'])
-            ->getMock();
-        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
-            ->will($this->returnValue(true));
-        $GLOBALS['BE_USER'] = $mockBeUserAuth;
-
         $this->subject->_set('pid', 0);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -124,7 +117,6 @@ class AdministrationControllerTest extends UnitTestCase
             'pid' => 0,
             'events' => $allEvents,
             'searchDemand' => null,
-            'csvExportPossible' => true,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => null
@@ -140,13 +132,6 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionDoesNotFetchEventsForStoragePidZeroAndDemand()
     {
-        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
-            ->setMethods(['getDefaultUploadTemporaryFolder'])
-            ->getMock();
-        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
-            ->will($this->returnValue(true));
-        $GLOBALS['BE_USER'] = $mockBeUserAuth;
-
         $this->subject->_set('pid', 0);
 
         $searchDemand = new SearchDemand();
@@ -180,7 +165,6 @@ class AdministrationControllerTest extends UnitTestCase
             'pid' => 0,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => true,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => []
@@ -196,13 +180,6 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesAllEventsForGivenStoragePidAndAssignsThemToView()
     {
-        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
-            ->setMethods(['getDefaultUploadTemporaryFolder'])
-            ->getMock();
-        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
-            ->will($this->returnValue(true));
-        $GLOBALS['BE_USER'] = $mockBeUserAuth;
-
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
@@ -236,7 +213,6 @@ class AdministrationControllerTest extends UnitTestCase
             'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => true,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => []
@@ -252,13 +228,6 @@ class AdministrationControllerTest extends UnitTestCase
      */
     public function listActionUsesOverwriteDemandArrayAndAssignsItToView()
     {
-        $mockBeUserAuth = $this->getMockBuilder(BackendUserAuthentication::class)
-            ->setMethods(['getDefaultUploadTemporaryFolder'])
-            ->getMock();
-        $mockBeUserAuth->expects($this->once())->method('getDefaultUploadTemporaryFolder')
-            ->will($this->returnValue(true));
-        $GLOBALS['BE_USER'] = $mockBeUserAuth;
-
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
@@ -290,7 +259,6 @@ class AdministrationControllerTest extends UnitTestCase
             'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => true,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => ['orderDirection' => 'desc']

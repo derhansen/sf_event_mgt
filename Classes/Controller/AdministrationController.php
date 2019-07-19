@@ -356,7 +356,6 @@ class AdministrationController extends AbstractController
             'pid' => $this->pid,
             'events' => $this->eventRepository->findDemanded($eventDemand),
             'searchDemand' => $searchDemand,
-            'csvExportPossible' => $this->getBackendUser()->getDefaultUploadTemporaryFolder() !== null,
             'orderByFields' => $this->getOrderByFields(),
             'orderDirections' => $this->getOrderDirections(),
             'overwriteDemand' => $overwriteDemand,
@@ -520,16 +519,6 @@ class AdministrationController extends AbstractController
     protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
-    }
-
-    /**
-     * Returns current backendUser object
-     *
-     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
-     */
-    protected function getBackendUser()
-    {
-        return $GLOBALS['BE_USER'];
     }
 
     /**
