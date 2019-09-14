@@ -198,3 +198,9 @@ Example for new event registrations:
   }
 
 In the example above, e-mails for new user registrations will include an iCal file for the event.
+
+Email attachments using signals
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the TypoScript configuration settings for email attachments do not fulfill your requirements, you can
+use the `sendUserMessageCustomAttachmentData` signal to add custom attachments using PHP (see :ref:`signals`)

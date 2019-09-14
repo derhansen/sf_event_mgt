@@ -285,3 +285,19 @@ and the processing of the payment of a registration.
          data (e-mail address, name and reply-to) to a custom value (e.g. set sender e-mail address to e-mail address
          of organisator)
 
+ - :Class:
+         DERHANSEN\SfEventMgt\Service\NotificationService
+
+   :Name:
+         sendUserMessageCustomAttachmentData
+
+   :Arguments:
+         &$attachments, $registration, $type, $this
+
+   :Description:
+         Signal is called before a user message will be sent. Use this signal, if you want to add custom attachments
+         that can not be added using the TypoScript attachment settings (see :ref:`email-attachments`).
+
+         As an example, you can use this signal to create a PDF invoice, which you add to the $attachments variable
+         in case a user registered for an event and selected "Invoice" as payment method.
+

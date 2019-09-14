@@ -286,6 +286,12 @@ class NotificationService
                 [&$senderName, &$senderEmail, &$replyToEmail, $registration, $type, $this]
             );
 
+            $this->signalSlotDispatcher->dispatch(
+                __CLASS__,
+                __FUNCTION__ . 'CustomAttachmentData',
+                [&$attachments, $registration, $type, $this]
+            );
+
             $result = $this->emailService->sendEmailMessage(
                 $senderEmail,
                 $registration->getEmail(),
