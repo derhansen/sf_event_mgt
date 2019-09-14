@@ -597,6 +597,9 @@ plugin.tx_sfeventmgt
 
          Example: showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
 
+         **Note:** For TYPO3 9.5, this setting has only effect when the event is not passed through GET parameters to the
+         action (e.g. event set in plugin). For all other scenarios, the TYPO3 "sites" errer handling steps in.
+
    :Default:
          showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
 
