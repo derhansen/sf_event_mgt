@@ -266,4 +266,52 @@ If you display events using the "Insert Record" content element, you may want to
 the event detail view. For this purpose, you can use ``{settings.detail.isShortcut}`` in the Detail.html Fluid
 Template to render a different layout.
 
+How can I display JSON-LD data for events?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+If you want to to display JSON-LD data for events in the event detail view, you can add an own partial including
+the JSON-LD data you need. Since requirements of data in JSON-LD may vary per project, sf_event_mgt does not ship
+with a partial or ViewHelper to create such data.
 
+Example Partial Code (will work until Fluid < 3.0)::
+
+ <script type="application/ld+json">
+    <f:format.raw>{</f:format.raw>
+      "@context": "https://schema.org/",
+      "@type": "Event",
+      "name": "{event.title}",
+      "startDate": "<f:format.date format="Y-m-d">{event.startdate}</f:format.date>",
+      "location": <f:format.raw>{</f:format.raw>
+        "@type": "Place",
+        "name": "{event.location.title}",
+        "address": <f:format.raw>{</f:format.raw>
+          "@type": "PostalAddress",
+          "streetAddress": "{event.location.address}",
+          "addressLocality": "{event.location.city}",
+          "postalCode": "{event.location.zip}",
+          "addressCountry": "{event.location.country}"
+          <f:format.raw>}</f:format.raw>
+          <f:format.raw>}</f:format.raw>,
+      "image": [
+        <f:if condition="{event.image}">
+        "<f:uri.image image="{event.image.0}" absolute="true"/>"
+        </f:if>
+       ],
+      "description": "<f:format.raw>{event.description}</f:format.raw>",
+      "endDate": "<f:format.date format="Y-m-d">{event.enddate}</f:format.date>",
+      "offers": <f:format.raw>{</f:format.raw>
+        "@type": "Offer",
+        "url": "<f:uri.action action="registration" absolute="true" arguments="{event : event}" pageUid="{settings.registrationPid}"></f:uri.action>",
+        "price": "{event.currentPrice}",
+        "priceCurrency": "{event.currency}",
+        "availability": "https://schema.org/InStock",
+      <f:format.raw>}</f:format.raw>,
+        "performer": <f:format.raw>{</f:format.raw>
+          "@type": "PerformingGroup",
+          "name": "{event.organisator.name}"
+      <f:format.raw>}</f:format.raw>
+   <f:format.raw>}</f:format.raw>
+ </script>
+
+**Note:** When using Fluid, always make sure to escape variables properly.
+
+As an alternative, you could create an own ViewHelper which generates the required JSON-LD data.
