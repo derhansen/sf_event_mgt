@@ -33,14 +33,14 @@
         {event.registration->f:count()}
     </td>
     <td>
-        <f:if condition="{event.enableRegistration}">
+        <f:if condition="{event.enableRegistration} && {e:be.isActionEnabled(action: 'notify', settings: settings)}">
             <f:link.action action="indexNotify" arguments="{event: '{event}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify')}">
                 <f:image src="EXT:sf_event_mgt/Resources/Public/Icons/icon-notify.svg" width="16" height="16" />
             </f:link.action>
         </f:if>
     </td>
     <td>
-        <f:if condition="{event.enableRegistration}">
+        <f:if condition="{event.enableRegistration} && {e:be.isActionEnabled(action: 'export', settings: settings)}">
             <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
                 <f:image src="EXT:sf_event_mgt/Resources/Public/Icons/icon-csv.svg" width="16" height="16" />
             </f:link.action>

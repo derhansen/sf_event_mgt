@@ -782,3 +782,26 @@ module.tx_sfeventmgt
    :Default:
          thanksForParticipation
 
+ - :Property:
+         settings.enabledActions.notify
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set to "1", the Notify-Action / Icon is shown for events with registration enabled.
+
+   :Default:
+         1 (true)
+
+ - :Property:
+         settings.enabledActions.export
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set to "1", the Export-Action / Icon is shown for events with registration enabled.
+
+   :Default:
+         1 (true)
