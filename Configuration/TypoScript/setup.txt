@@ -152,6 +152,10 @@ module.tx_sfeventmgt {
                 }
             }
         }
+        enabledActions {
+            notify = 1
+            export = 1
+        }
     }
 }
 
