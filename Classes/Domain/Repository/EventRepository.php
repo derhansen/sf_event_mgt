@@ -41,6 +41,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
+        $this->defaultQuerySettings->setLanguageOverlayMode(false);
     }
 
     /**
