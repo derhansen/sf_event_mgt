@@ -132,7 +132,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $query->getQuerySettings()
             ->setLanguageOverlayMode(false)
             ->setRespectStoragePage(false)
-            ->setLanguageOverlayMode(false)
             ->setLanguageUid(0);
         $constraints[] = $query->equals('event', $event->getUid());
         $constraints[] = $query->equals('waitlist', $waitlist);
