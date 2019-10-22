@@ -178,7 +178,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueWhenNoFieldAvailableField()
+    public function getValueWhenNoFieldAvailable()
     {
         $this->subject->setValue('Test');
         $this->assertSame('Test', $this->subject->getValue());
@@ -187,7 +187,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueForCsvExportNoFieldAvailableField()
+    public function getValueForCsvExportNoFieldAvailable()
     {
         $this->subject->setValue('Test');
         $this->assertSame('Test', $this->subject->getValueForCsvExport());
