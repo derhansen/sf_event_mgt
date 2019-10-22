@@ -55,7 +55,7 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getValue()
     {
         $value = $this->value;
-        if ($this->getField()->getValueType() === FieldValueType::TYPE_ARRAY) {
+        if ($this->getField() && $this->getField()->getValueType() === FieldValueType::TYPE_ARRAY) {
             if (ArrayUtility::isJsonArray($value)) {
                 $value = json_decode($value, true);
             } else {
@@ -66,10 +66,17 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $value;
     }
 
+    /**
+     * Returns the field value for CSV export
+     *
+     * @return string
+     */
     public function getValueForCsvExport()
     {
         $value = $this->value;
-        if ($this->getField()->getValueType() === FieldValueType::TYPE_ARRAY && ArrayUtility::isJsonArray($value)) {
+        if ($this->getField() && $this->getField()->getValueType() === FieldValueType::TYPE_ARRAY &&
+            ArrayUtility::isJsonArray($value)
+        ) {
             $value = implode(',', json_decode($value, true));
         }
 

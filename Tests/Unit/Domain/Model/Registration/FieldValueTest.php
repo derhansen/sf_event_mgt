@@ -174,4 +174,22 @@ class FieldValueTest extends UnitTestCase
         $this->subject->setValue(json_encode(['value1', 'value2']));
         $this->assertSame($expectedArray, $this->subject->getValueForCsvExport());
     }
+
+    /**
+     * @test
+     */
+    public function getValueWhenNoFieldAvailableField()
+    {
+        $this->subject->setValue('Test');
+        $this->assertSame('Test', $this->subject->getValue());
+    }
+
+    /**
+     * @test
+     */
+    public function getValueForCsvExportNoFieldAvailableField()
+    {
+        $this->subject->setValue('Test');
+        $this->assertSame('Test', $this->subject->getValueForCsvExport());
+    }
 }
