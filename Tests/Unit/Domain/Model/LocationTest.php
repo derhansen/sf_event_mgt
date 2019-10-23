@@ -277,7 +277,7 @@ class LocationTest extends UnitTestCase
      */
     public function getLatitudeReturnsInitialValueForFloat()
     {
-        $this->assertSame(0.0, $this->subject->getlatitude());
+        $this->assertSame(0.0, $this->subject->getLatitude());
     }
 
     /**
@@ -288,7 +288,7 @@ class LocationTest extends UnitTestCase
      */
     public function setLatitudeSetsLatitude()
     {
-        $this->subject->setlatitude(12.345678);
-        $this->assertSame(12.345678, $this->subject->getlatitude());
+        $this->subject->setLatitude(12.345678);
+        $this->assertSame(12.345678, $this->subject->getLatitude());
     }
 }

@@ -258,7 +258,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return float
      */
-    public function getlatitude()
+    public function getLatitude()
     {
         return $this->latitude;
     }
@@ -270,7 +270,7 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return void
      */
-    public function setlatitude($latitude)
+    public function setLatitude($latitude)
     {
         $this->latitude = $latitude;
     }
