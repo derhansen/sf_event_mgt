@@ -53,7 +53,7 @@ call_user_func(function () {
          * Register icons
          */
         $icons = [
-            'apps-pagetree-folder-contains-events' => 'events-folder.png',
+            'apps-pagetree-folder-contains-events' => 'apps-pagetree-folder-contains-events.svg',
             'ext-sfeventmgt-wizard' => 'events.svg',
             'ext-sfeventmgt-registration-unconfirmed' => 'tx_sfeventmgt_domain_model_registration_unconfirmed.svg',
             'ext-sfeventmgt-registration-confirmed' => 'tx_sfeventmgt_domain_model_registration_confirmed.svg',
