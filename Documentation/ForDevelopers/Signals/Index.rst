@@ -32,7 +32,7 @@ and the processing of the payment of a registration.
          Description:
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          listActionBeforeRenderView
@@ -44,7 +44,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the list view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          calendarActionBeforeRenderView
@@ -56,7 +56,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the calendar view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          detailActionBeforeRenderView
@@ -68,7 +68,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the detail view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          registrationActionBeforeRenderView
@@ -80,7 +80,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the registration view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          saveRegistrationActionAfterRegistrationSaved
@@ -92,7 +92,7 @@ and the processing of the payment of a registration.
          Signal is called after a registration is saved. The registration is passed to the signal.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          saveRegistrationActionBeforeCreateDependingRegistrations
@@ -104,7 +104,7 @@ and the processing of the payment of a registration.
          Signal is called before depending registrations are created. $createDependingRegistrations is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          confirmRegistrationActionAfterRegistrationConfirmed
@@ -116,7 +116,7 @@ and the processing of the payment of a registration.
          Signal is called after a registration has been confirmed. The registration is passed to the signal.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          confirmRegistrationActionBeforeRenderView
@@ -128,7 +128,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the confirmRegistration view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          cancelRegistrationActionWaitlistMoveUp
@@ -141,7 +141,7 @@ and the processing of the payment of a registration.
          the confirmed registrations.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          cancelRegistrationActionBeforeRenderView
@@ -153,7 +153,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the cancelRegistration view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Event
+         DERHANSEN\\SfEventMgt\\Controller\\Event
 
    :Name:
          searchActionBeforeRenderView
@@ -165,7 +165,7 @@ and the processing of the payment of a registration.
          Signal is called before rendering the search view. An array with all view values is passed by reference.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Payment
+         DERHANSEN\\SfEventMgt\\Controller\\Payment
 
    :Name:
          'redirectActionBeforeRedirect' + ucfirst($paymentMethod)
@@ -178,7 +178,7 @@ and the processing of the payment of a registration.
          that redirects the user to the payment providers payment page.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Payment
+         DERHANSEN\\SfEventMgt\\Controller\\Payment
 
    :Name:
          'successActionProcessSuccess' + ucfirst($paymentMethod)
@@ -191,7 +191,7 @@ and the processing of the payment of a registration.
          and also use this signal to modify the payment status of the registration after a successful payment.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Payment
+         DERHANSEN\\SfEventMgt\\Controller\\Payment
 
    :Name:
          'failureActionProcessFailure' + ucfirst($paymentMethod)
@@ -204,7 +204,7 @@ and the processing of the payment of a registration.
          and also use this signal to modify/delete the registration after a failed payment.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Payment
+         DERHANSEN\\SfEventMgt\\Controller\\Payment
 
    :Name:
          'cancelActionProcessCancel' + ucfirst($paymentMethod)
@@ -217,7 +217,7 @@ and the processing of the payment of a registration.
          and also use this signal to modify/delete the registration after a cancelled payment.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Controller\Payment
+         DERHANSEN\\SfEventMgt\\Controller\\Payment
 
    :Name:
          'notifyActionProcessNotify' + ucfirst($paymentMethod)
@@ -231,7 +231,7 @@ and the processing of the payment of a registration.
          nofitication URL.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Domain\Model\Repository\EventRepository
+         DERHANSEN\\SfEventMgt\\Domain\\Model\\Repository\\EventRepository
 
    :Name:
          findDemandedModifyQueryConstraints
@@ -245,7 +245,7 @@ and the processing of the payment of a registration.
          properties.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Service\NotificationService
+         DERHANSEN\\SfEventMgt\\Service\\NotificationService
 
    :Name:
          sendAdminMessageAfterNotificationSent
@@ -259,7 +259,7 @@ and the processing of the payment of a registration.
          "Notify Organisator" is checked.
 
  - :Class:
-         DERHANSEN\SfEventMgt\Service\NotificationService
+         DERHANSEN\\SfEventMgt\\Service\\NotificationService
 
    :Name:
          sendUserMessageAfterNotificationSent
@@ -272,7 +272,7 @@ and the processing of the payment of a registration.
          notifications (e.g. BCC of the user email to an additional e-mail address).
 
  - :Class:
-         DERHANSEN\SfEventMgt\Service\NotificationService
+         DERHANSEN\\SfEventMgt\\Service\\NotificationService
 
    :Name:
          sendUserMessageCustomSenderData
@@ -286,7 +286,7 @@ and the processing of the payment of a registration.
          of organisator)
 
  - :Class:
-         DERHANSEN\SfEventMgt\Service\NotificationService
+         DERHANSEN\\SfEventMgt\\Service\\NotificationService
 
    :Name:
          sendUserMessageCustomAttachmentData
