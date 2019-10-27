@@ -163,8 +163,8 @@ Tab settings
          * Ignore category selection
          * Show events with selected categories (OR)
          * Show events with selected categories (AND)
-         * Do NOT show events with selected categories (OR)
-         * Do NOT show events with selected categories (AND)
+         * Do NOT show events with selected categories (NOTOR)
+         * Do NOT show events with selected categories (NOTAND)
 
    :Key:
          categoryConjunction
