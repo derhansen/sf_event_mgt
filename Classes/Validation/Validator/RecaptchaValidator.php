@@ -51,20 +51,20 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
      */
     public function isValid($value)
     {
-        $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
-        if ($response !== null) {
-            // Only check if a response is set
-            $configurationManager = $this->objectManager->get(ConfigurationManager::class);
-            $fullTs = $configurationManager->getConfiguration(
-                ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
-            );
-            $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCaptcha.'];
+        // Only check if a response is set
+        $configurationManager = $this->objectManager->get(ConfigurationManager::class);
+        $fullTs = $configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
+        );
+        $reCaptchaSettings = $fullTs['plugin.']['tx_sfeventmgt.']['settings.']['reCaptcha.'];
 
-            if (isset($reCaptchaSettings) &&
-                is_array($reCaptchaSettings) &&
-                isset($reCaptchaSettings['secretKey']) &&
-                $reCaptchaSettings['secretKey']
-            ) {
+        if (isset($reCaptchaSettings) &&
+            is_array($reCaptchaSettings) &&
+            isset($reCaptchaSettings['secretKey']) &&
+            $reCaptchaSettings['secretKey']
+        ) {
+            $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
+            if ($response !== NULL) {
                 $ch = curl_init();
 
                 $fields = [
@@ -94,9 +94,9 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
                     );
                 }
             } else {
-                throw new InvalidVariableException(
-                    LocalizationUtility::translate('error.no_secretKey', 'sf_event_mgt'),
-                    1358349150
+                $this->addError(
+                    LocalizationUtility::translate('validation.missing_captcha', 'sf_event_mgt'),
+                    1231423389
                 );
             }
         }
