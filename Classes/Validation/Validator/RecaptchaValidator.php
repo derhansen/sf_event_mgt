@@ -64,7 +64,7 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
             $reCaptchaSettings['secretKey']
         ) {
             $response = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('g-recaptcha-response');
-            if ($response !== NULL) {
+            if ($response !== null) {
                 $ch = curl_init();
 
                 $fields = [
