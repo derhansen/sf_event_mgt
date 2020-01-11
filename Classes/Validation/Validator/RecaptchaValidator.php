@@ -95,7 +95,7 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
                 }
             } else {
                 $this->addError(
-                    LocalizationUtility::translate('validation.missing_captcha', 'sf_event_mgt'),
+                    LocalizationUtility::translate('validation.missing_recaptcha', 'sf_event_mgt'),
                     1231423389
                 );
             }
