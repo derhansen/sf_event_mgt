@@ -330,6 +330,9 @@
 			<trans-unit id="validation.possible_robot">
 				<source>Possible robot detected!</source>
 			</trans-unit>
+			<trans-unit id="validation.missing_recaptcha">
+				<source>reCAPTCHA field is missing!</source>
+			</trans-unit>
 			<trans-unit id="error.no_secretKey">
 				<source>No secretKey set in TypoScript!</source>
 			</trans-unit>
