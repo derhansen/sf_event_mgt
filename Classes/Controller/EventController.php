@@ -432,6 +432,32 @@ class EventController extends AbstractController
     }
 
     /**
+     * Removes all possible spamcheck fields (which do not belong to the domain model) from arguments.
+     *
+     * @return void
+     */
+    protected function removePossibleSpamCheckFieldsFromArguments()
+    {
+        $arguments = $this->request->getArguments();
+        if (!isset($arguments['event'])) {
+            return;
+        }
+
+        // Remove a possible honeypot field
+        $honeypotField = 'hp' . (int)$arguments['event'];
+        if (isset($arguments['registration'][$honeypotField])) {
+            unset($arguments['registration'][$honeypotField]);
+        }
+
+        // Remove a possible challenge/response field
+        if (isset($arguments['registration']['cr-response'])) {
+            unset($arguments['registration']['cr-response']);
+        }
+
+        $this->request->setArguments($arguments);
+    }
+
+    /**
      * Processes incoming registrations fields and adds field values to arguments
      *
      * @return void
@@ -525,6 +551,7 @@ class EventController extends AbstractController
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
                 $this->settings['registration']['formatDateOfBirth']
             );
+        $this->removePossibleSpamCheckFieldsFromArguments();
         $this->setRegistrationFieldValuesToArguments();
     }
 

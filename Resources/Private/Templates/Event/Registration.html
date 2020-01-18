@@ -91,6 +91,9 @@
 
             <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration" enctype="multipart/form-data">
                 <fieldset>
+
+                    <f:render partial="Registration/SpamCheck" arguments="{spamSettings: settings.registration.spamCheck, event: event}" />
+
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'gender')}">
                         <label for="gender">
                             <f:translate key="tx_sfeventmgt_domain_model_registration.gender" />

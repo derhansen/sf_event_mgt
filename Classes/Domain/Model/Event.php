@@ -10,6 +10,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -1545,5 +1546,15 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         }
 
         return true;
+    }
+
+    /**
+     * Returns the challenge for the challenge/response spam check
+     *
+     * @return string
+     */
+    public function getSpamCheckChallenge(): string
+    {
+        return MiscUtility::getSpamCheckChallenge($this->getUid());
     }
 }

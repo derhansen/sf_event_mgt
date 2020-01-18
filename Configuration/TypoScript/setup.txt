@@ -63,6 +63,40 @@ plugin.tx_sfeventmgt {
                 phone = telephone
                 gender = gender
             }
+            spamCheck {
+                enabled = 0
+                maxSpamScore = 10
+                checks {
+                    honeypot {
+                        enabled = 0
+                        name = Honeypot field check
+                        class = DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck
+                        increaseScore = 10
+                        configuration {
+                            renderAsHiddenField = 0
+                        }
+                    }
+                    link {
+                        enabled = 0
+                        name = Amount of links submitted registration
+                        class = DERHANSEN\SfEventMgt\SpamChecks\LinkSpamCheck
+                        increaseScore = 3
+                        configuration {
+                            maxAmountOfLinks = 2
+                        }
+                    }
+                    challengeResponse {
+                        enabled = 0
+                        name = Challenge/Response check (JavaScript required) using ROT13 encryption/obfuscation
+                        class = DERHANSEN\SfEventMgt\SpamChecks\ChallengeResponseSpamCheck
+                        increaseScore = 10
+                        configuration {
+                            prefix = SfEventMgt
+                            postfix = TYPO3
+                        }
+                    }
+                }
+            }
         }
         confirmation {
             linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}

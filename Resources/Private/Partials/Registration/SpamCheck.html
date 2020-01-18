@@ -1,0 +1,32 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{spamSettings.enabled} == 1">
+
+    <f:if condition="{spamSettings.checks.honeypot.enabled} == 1">
+        <div>
+            <f:if condition="{spamSettings.checks.honeypot.configuration.renderAsHiddenField} == 1">
+                <f:then>
+                    <f:form.hidden property="hp{event.uid}" additionalAttributes="{autocomplete: 'hp{event.uid}'}" />
+                </f:then>
+                <f:else>
+                    <f:form.textfield property="hp{event.uid}" additionalAttributes="{autocomplete: 'hp{event.uid}', aria-hidden: 'true'}" tabindex="-1" style="display:none !important" />
+                </f:else>
+            </f:if>
+        </div>
+    </f:if>
+
+    <f:if condition="{spamSettings.checks.challengeResponse.enabled} == 1">
+        <div>
+            <f:variable name="challenge" value="{spamSettings.checks.challengeResponse.configuration.prefix}{event.spamCheckChallenge}{spamSettings.checks.challengeResponse.configuration.postfix}" />
+            <f:form.hidden id="js-cr-challenge" property="cr-response" additionalAttributes="{autocomplete: 'js-cr-challenge', data-challenge: challenge}" />
+        </div>
+    </f:if>
+
+    <div>
+        <f:render partial="FormErrors" arguments="{field: 'registration.spamCheck'}"/>
+    </div>
+</f:if>
+
+</html>

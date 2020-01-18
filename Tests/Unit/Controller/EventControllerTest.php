@@ -267,7 +267,7 @@ class EventControllerTest extends UnitTestCase
         );
 
         $mockRequest = $this->getMockBuilder(Request::class)->getMock();
-        $mockRequest->expects($this->once())->method('getArguments')->will($this->returnValue([]));
+        $mockRequest->expects($this->any())->method('getArguments')->will($this->returnValue([]));
 
         $this->subject->_set('request', $mockRequest);
         $this->subject->_set('arguments', $mockArguments);

@@ -9,6 +9,11 @@ namespace DERHANSEN\SfEventMgt\Utility;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+/**
+ * Class MiscUtility
+ */
 class MiscUtility
 {
     /**
@@ -29,5 +34,20 @@ class MiscUtility
     public static function isV8Lts(): bool
     {
         return version_compare(TYPO3_branch, '8.7', '=');
+    }
+
+    /**
+     * Returns chars extracted from a hmac for the challenge/response spam check
+     *
+     * @param int $eventUid
+     * @return string
+     */
+    public static function getSpamCheckChallenge(int $eventUid): string
+    {
+        $hmac = GeneralUtility::hmac('event-' . $eventUid, 'sf_event_mgt');
+        $chars = preg_replace('/[0-9]+/', '', $hmac);
+        return preg_replace_callback('/\w.?/', function ($m) {
+            return ucfirst($m[0]);
+        }, $chars);
     }
 }

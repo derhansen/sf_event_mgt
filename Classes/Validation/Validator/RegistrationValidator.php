@@ -9,7 +9,10 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Service\SpamCheckService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
@@ -72,6 +75,14 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
             'Pievent'
         );
 
+        $spamSettings = $settings['registration']['spamCheck'] ?? [];
+        if ((bool)$spamSettings['enabled'] && $this->isSpamCheckFailed($value, $spamSettings)) {
+            $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
+            $error = new Error($message, 1578855253965);
+            $this->result->forProperty('spamCheck')->addError($error);
+            return false;
+        }
+
         // If no required fields are set, then the registration is valid
         if ($settings['registration']['requiredFields'] === '' ||
             !isset($settings['registration']['requiredFields'])
@@ -97,6 +108,25 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
         }
 
         return $result;
+    }
+
+    /**
+     * Processes the spam check and returns, if it failed or not
+     *
+     * @param Registration $registration
+     * @param array $settings
+     * @return bool
+     * @throws \DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException
+     */
+    protected function isSpamCheckFailed(Registration $registration, array $settings): bool
+    {
+        $spamCheckService = new SpamCheckService(
+            $registration,
+            $settings,
+            GeneralUtility::_GPmerged('tx_sfeventmgt_pievent')
+        );
+
+        return $spamCheckService->isSpamCheckFailed();
     }
 
     /**

@@ -171,6 +171,9 @@
 			<trans-unit id="registration.form.waitlist">
 				<source>Please note, that the event is fully booked and you are registering to the waitlist</source>
 			</trans-unit>
+			<trans-unit id="registration.spamCheckFailed">
+				<source>Your form submission has been classified as spam.</source>
+			</trans-unit>
 			<trans-unit id="event.backtext">
 				<source>Back to listview</source>
 			</trans-unit>
