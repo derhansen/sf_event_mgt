@@ -134,7 +134,7 @@ plugin.tx_sfeventmgt {
         }
         reCaptcha {
             apiUrl = https://www.google.com/recaptcha/api.js
-              siteKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.siteKey}
+            siteKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.siteKey}
             secretKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.secretKey}
         }
         search {

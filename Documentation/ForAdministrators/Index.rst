@@ -23,3 +23,4 @@ For Administrators
    CustomNotifications/Index
    EmailAttachments/Index
    RssFeed/Index
+   SpamPrevention/Index
