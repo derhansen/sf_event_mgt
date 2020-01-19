@@ -127,7 +127,7 @@ class SpamCheckServiceTest extends UnitTestCase
             'checks' => [
                 0 => [
                     'enabled' => 1,
-                    'class' => 'DERHANSEN\SfEventMgt\SpamChecks\HoneyPotSpamCheck',
+                    'class' => 'DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck',
                     'increaseScore' => 10,
                 ]
             ]
