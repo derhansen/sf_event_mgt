@@ -64,8 +64,12 @@ call_user_func(function () {
     }
 
     // Register longitude- and latitude-evaluator for TCA
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['DERHANSEN\\SfEventMgt\\Evaluation\\LongitudeEvaluator'] = 'EXT:sf_event_mgt/Classes/Evaluation/LongitudeEvaluator.php';
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals']['DERHANSEN\\SfEventMgt\\Evaluation\\LatitudeEvaluator'] = 'EXT:sf_event_mgt/Classes/Evaluation/LatitudeEvaluator.php';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
+        \DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator::class
+    ] = '';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
+        \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator::class
+    ] = '';
 
     // Register default payment methods
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
