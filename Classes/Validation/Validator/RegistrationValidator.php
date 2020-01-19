@@ -80,6 +80,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
             $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
             $error = new Error($message, 1578855253965);
             $this->result->forProperty('spamCheck')->addError($error);
+
             return false;
         }
 
@@ -115,8 +116,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      *
      * @param Registration $registration
      * @param array $settings
-     * @return bool
      * @throws \DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException
+     * @return bool
      */
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
     {

@@ -57,8 +57,8 @@ class LinkSpamCheck extends AbstractSpamCheck
         $amount = preg_match_all($pattern, $value, $out);
         if ($amount !== false) {
             return $amount;
-        } else {
-            return 0;
         }
+
+        return 0;
     }
 }

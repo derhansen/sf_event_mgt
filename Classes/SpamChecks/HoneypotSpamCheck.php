@@ -23,6 +23,7 @@ class HoneypotSpamCheck extends AbstractSpamCheck
     public function isFailed(): bool
     {
         $honeypotField = 'hp' . $this->arguments['event'];
+
         return !isset($this->arguments['registration'][$honeypotField]) ||
             $this->arguments['registration'][$honeypotField] !== '';
     }

@@ -9,8 +9,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use DERHANSEN\SfEventMgt\SpamChecks\AbstractSpamCheck;
+use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 
 /**
  * Service to process spam checks configured in TypoScript
@@ -67,14 +67,15 @@ class SpamCheckService
     /**
      * Returns, if the spam check failed
      *
-     * @return bool
      * @throws SpamCheckNotFoundException
+     * @return bool
      */
     public function isSpamCheckFailed(): bool
     {
         if ((bool)$this->settings['enabled']) {
             $this->processSpamChecks();
         }
+
         return $this->checkScore >= $this->maxSpamScore;
     }
 

@@ -46,6 +46,7 @@ class MiscUtility
     {
         $hmac = GeneralUtility::hmac('event-' . $eventUid, 'sf_event_mgt');
         $chars = preg_replace('/[0-9]+/', '', $hmac);
+
         return preg_replace_callback('/\w.?/', function ($m) {
             return ucfirst($m[0]);
         }, $chars);
