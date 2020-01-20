@@ -10,7 +10,7 @@
 
 		<ul class="event-calendar__browser">
 			<li class="event-calendar__browser-prev">
-		                <f:link.action action="calendar" controller="Event" arguments="{overwriteDemand:{month: previousMonthConfig.month, year: previousMonthConfig.year}}">
+		                <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{month: previousMonthConfig.month, year: previousMonthConfig.year}}">
 					&larr; {f:format.date(date: previousMonthConfig.date, format: '%B %Y')}
 				</f:link.action>
 			</li>
