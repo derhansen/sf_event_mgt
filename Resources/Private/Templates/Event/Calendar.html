@@ -16,7 +16,7 @@
 			</li>
 			<li class="event-calendar__browser-current"><h3>{firstDayOfMonth -> f:format.date(format: '%B')}</h3></li>
 			<li class="event-calendar__browser-next">
-				<f:link.action action="calendar" controller="Event" arguments="{overwriteDemand:{month: nextMonthConfig.month, year: nextMonthConfig.year}}">
+				<f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{month: nextMonthConfig.month, year: nextMonthConfig.year}}">
 					{f:format.date(date: nextMonthConfig.date, format: '%B %Y')} &rarr;
 				</f:link.action>
 			</li>
