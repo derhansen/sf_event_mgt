@@ -10,15 +10,15 @@
 
 		<ul class="event-calendar__browser">
 			<li class="event-calendar__browser-prev">
-				<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_sfeventmgt_pievent: {overwriteDemand: {month: previousMonthConfig.month, year: previousMonthConfig.year}}}">
+		                <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{month: previousMonthConfig.month, year: previousMonthConfig.year}}">
 					&larr; {f:format.date(date: previousMonthConfig.date, format: '%B %Y')}
-				</f:link.page>
+				</f:link.action>
 			</li>
 			<li class="event-calendar__browser-current"><h3>{firstDayOfMonth -> f:format.date(format: '%B')}</h3></li>
 			<li class="event-calendar__browser-next">
-				<f:link.page rel="nofollow" pageUid="{currentPageId}" additionalParams="{tx_sfeventmgt_pievent: {overwriteDemand: {month: nextMonthConfig.month, year: nextMonthConfig.year}}}">
+				<f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{month: nextMonthConfig.month, year: nextMonthConfig.year}}">
 					{f:format.date(date: nextMonthConfig.date, format: '%B %Y')} &rarr;
-				</f:link.page>
+				</f:link.action>
 			</li>
 		</ul>
 
