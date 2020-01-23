@@ -808,6 +808,7 @@ class EventController extends AbstractController
         }
 
         $values = [
+            'failed' => $failed,
             'messageKey' => $messageKey,
             'titleKey' => $titleKey,
             'event' => $event,
@@ -866,6 +867,7 @@ class EventController extends AbstractController
         }
 
         $values = [
+            'failed' => $failed,
             'messageKey' => $messageKey,
             'titleKey' => $titleKey,
             'event' => $event,
