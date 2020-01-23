@@ -1456,6 +1456,7 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'confirmRegistration.title.failed',
             'event' => null,
             'registration' => null,
+            'failed' => true
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -1499,7 +1500,8 @@ class EventControllerTest extends UnitTestCase
             'messageKey' => 'event.message.confirmation_successful',
             'titleKey' => 'confirmRegistration.title.successful',
             'event' => null,
-            'registration' => $mockRegistration
+            'registration' => $mockRegistration,
+            'failed' => false
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -1563,7 +1565,8 @@ class EventControllerTest extends UnitTestCase
             'messageKey' => 'event.message.confirmation_waitlist_successful',
             'titleKey' => 'confirmRegistrationWaitlist.title.successful',
             'event' => null,
-            'registration' => $mockRegistration
+            'registration' => $mockRegistration,
+            'failed' => false
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -1618,7 +1621,8 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.cancel_failed_wrong_hmac',
             'titleKey' => 'cancelRegistration.title.failed',
-            'event' => null
+            'event' => null,
+            'failed' => true
         ]);
         $this->inject($this->subject, 'view', $view);
 
@@ -1702,7 +1706,8 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.cancel_successful',
             'titleKey' => 'cancelRegistration.title.successful',
-            'event' => $mockEvent
+            'event' => $mockEvent,
+            'failed' => false
         ]);
         $this->inject($this->subject, 'view', $view);
 

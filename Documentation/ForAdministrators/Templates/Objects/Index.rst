@@ -399,6 +399,30 @@ Registration message views are ``cancelRegistration``, ``confirmRegistration`` a
    :Description:
          An object holding the given event
 
+ - :Object:
+         {registration}
+
+   :Description:
+         An object holding the given registration
+
+ - :Object:
+         {failed}
+
+   :Description:
+         If the status is failed (not available in ``saveRegistrationResult``)
+
+ - :Object:
+         {titleKey}
+
+   :Description:
+         The key of the title to use in <f:translate> viewHelper
+
+ - :Object:
+         {messageKey}
+
+   :Description:
+         The key of the message to use in <f:translate> viewHelper
+
 iCalendar view
 ~~~~~~~~~~~~~~
 
