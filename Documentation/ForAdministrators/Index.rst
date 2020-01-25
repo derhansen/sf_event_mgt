@@ -24,3 +24,4 @@ For Administrators
    EmailAttachments/Index
    RssFeed/Index
    SpamPrevention/Index
+   Seo/Index
