@@ -172,6 +172,15 @@
 			</div>
 			<div class="clear"></div>
 		</div>
+		
+		<f:if condition='{event.enableWaitlist} && {event.freePlaces}'>			
+			<div class="event-detail-row">
+				<div class="event-detail-label">
+					<f:translate key="tx_sfeventmgt_domain_model_event.hasWaitlist" />
+				</div>
+				<div class="clear"></div>
+			</div>
+		</f:if>
 
 		<div class="event-detail-row">
 			<div class="event-detail-label">
