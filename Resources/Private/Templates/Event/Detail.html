@@ -173,7 +173,7 @@
 			<div class="clear"></div>
 		</div>
 		
-		<f:if condition='{event.enableWaitlist} && {event.freePlaces}'>			
+		<f:if condition='{event.enableWaitlist} && {event.freePlaces} == 0'>
 			<div class="event-detail-row">
 				<div class="event-detail-label">
 					<f:translate key="tx_sfeventmgt_domain_model_event.hasWaitlist" />
