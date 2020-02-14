@@ -123,16 +123,25 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                     3 => 3
                 ]
             ],
-            'SimultaneousAllowedWithWaitlistAndNotEnoughFreePlaces' => [
+            'SimultaneousAllowedWithWaitlistAndNotEnoughFreePlacesForFullRegistration' => [
                 5,
                 1,
                 2,
                 true,
                 [
-                    1 => 1,
-                    2 => 2
+                    1 => 1, // Must only show one possible registration (which will not be on the waitlist)
                 ]
-            ]
+            ],
+            'SimultaneousAllowedWithWaitlistAndNoFreePlacesforFullRegistration' => [
+                5,
+                0,
+                2,
+                true,
+                [
+                    1 => 1,
+                    2 => 2,
+                ]
+            ],
         ];
     }
 
