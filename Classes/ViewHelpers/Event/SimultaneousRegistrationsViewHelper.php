@@ -44,7 +44,7 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
         if ($event->getMaxParticipants() > 0 &&
             $event->getMaxRegistrationsPerUser() >= $event->getFreePlaces()
         ) {
-            if ($event->getEnableWaitlist() && $event->getFreePlaces() === 0) {
+            if ($event->getEnableWaitlist() && $event->getFreePlaces() <= 0) {
                 $maxPossibleRegistrations = $event->getMaxRegistrationsPerUser();
             } else {
                 $maxPossibleRegistrations = $event->getFreePlaces();
