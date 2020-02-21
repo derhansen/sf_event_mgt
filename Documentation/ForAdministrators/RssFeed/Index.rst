@@ -22,8 +22,8 @@ To configure sf_event_mgt to use this template, simply set the format of the out
 
    plugin.tx_sfeventmgt.settings.list.format = xml
 
-RSS feed by TypoScript
-^^^^^^^^^^^^^^^^^^^^^^
+RSS feed by TypoScript (recommended)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 One way to generate the RSS feed is to use TypoScript. Add to following TypoScript to your site and adopt it to your
 needs:
@@ -107,6 +107,12 @@ following:
 .. code-block:: typoscript
 
    page.10.select.where = colPos=1
+
+.. note::
+
+   When using Fluid Styled Content, you have to make sure, that you override layouts and templates of
+   Fluid Styled Content in order to remove the wrapper-div and also to ensure the RSS feed contains
+   no empty lines. To keep things simple, it is recommended to configure the RSS feed using TypoScript
 
 RSS feed configuration
 """"""""""""""""""""""
