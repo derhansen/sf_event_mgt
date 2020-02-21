@@ -30,7 +30,7 @@ Configuration::
           - { routePath: '/{event_title}/ical', _controller: 'Event::icalDownload', _arguments: {'event_title': 'event'} }
           - { routePath: '/{event_title}', _controller: 'Event::registration', _arguments: {'event_title': 'event'} }
           - { routePath: '/save-registration/{event_title}', _controller: 'Event::saveRegistration', _arguments: {'event_title': 'event'} }
-          - { routePath: '/save-registration-result/{eventuid}/{save_registration_result}/{hmac}', _controller: 'Event::saveRegistrationResult', _arguments: {'eventuid': 'eventuid', 'result': 'result', 'hmac': 'hmac'} }
+          - { routePath: '/save-registration-result/{eventuid}/{result}/{hmac}', _controller: 'Event::saveRegistrationResult', _arguments: {'eventuid': 'eventuid', 'result': 'result', 'hmac': 'hmac'} }
           - { routePath: '/confirm-registration/{reguid}/{hmac}', _controller: 'Event::confirmRegistration', _arguments: {'reguid': 'reguid', 'hmac': 'hmac'} }
           - { routePath: '/cancel-registration/{reguid}/{hmac}', _controller: 'Event::cancelRegistration', _arguments: {'reguid': 'reguid', 'hmac': 'hmac'} }
           - { routePath: '/location/{location_title}', _controller: 'Event::list', _arguments: {'location_title': 'overwriteDemand/location'}}
@@ -38,11 +38,19 @@ Configuration::
           - { routePath: '/organisator/{speaker_name}', _controller: 'Event::list', _arguments: {'organisator_name': 'overwriteDemand/organisator'}}
         defaultController: 'Event::list'
         requirements:
-          eventuid: '[0-9]{1..3}'
-          reguid: '[0-9]{1..3}'
+          eventuid: '\d+'
+          reguid: '\d+'
           result: '[0-8]'
           hmac: '^[a-zA-Z0-9]{40}$'
         aspects:
+          event_uid:
+            type: PersistedAliasMapper
+            tableName: tx_sfeventmgt_domain_model_event
+            routeFieldName: uid
+          reguid:
+            type: PersistedAliasMapper
+            tableName: tx_sfeventmgt_domain_model_registration
+            routeFieldName: uid
           event_title:
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_event'
