@@ -43,7 +43,7 @@ Configuration::
           result: '[0-8]'
           hmac: '^[a-zA-Z0-9]{40}$'
         aspects:
-          event_uid:
+          eventuid:
             type: PersistedAliasMapper
             tableName: tx_sfeventmgt_domain_model_event
             routeFieldName: uid
