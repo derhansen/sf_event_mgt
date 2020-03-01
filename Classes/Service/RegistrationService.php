@@ -133,6 +133,7 @@ class RegistrationService
             $newReg->setMainRegistration($registration);
             $newReg->setAmountOfRegistrations(1);
             $newReg->setIgnoreNotifications(true);
+            $newReg->_setProperty('_languageUid', $registration->_getProperty('_languageUid'));
             $this->registrationRepository->add($newReg);
         }
     }
