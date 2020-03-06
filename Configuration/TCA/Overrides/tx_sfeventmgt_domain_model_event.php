@@ -16,35 +16,3 @@ $tableName = 'tx_sfeventmgt_domain_model_event';
 
 // Enable language synchronisation for the category field
 $GLOBALS['TCA'][$tableName]['columns']['category']['config']['behaviour']['allowLanguageSynchronization'] = true;
-
-// Register slug field for TYPO3 9.5
-if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
-    $eventColumns['slug'] = [
-        'exclude' => true,
-        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
-        'config' => [
-            'type' => 'slug',
-            'size' => 50,
-            'generatorOptions' => [
-                'fields' => ['title'],
-                'replacements' => [
-                    '/' => '-'
-                ],
-            ],
-            'fallbackCharacter' => '-',
-            'eval' => 'uniqueInSite',
-            'default' => ''
-        ]
-    ];
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-        $tableName,
-        $eventColumns
-    );
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
-        $tableName,
-        'slug',
-        '',
-        'after:title'
-    );
-}

@@ -24,11 +24,12 @@ return [
         ],
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, address, zip, city, country, description, link, latitude, longitude',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slug, address, zip, 
+        city, country, description, link, latitude, longitude',
     ],
     'types' => [
         '1' => [
-            'showitem' => 'title, address, zip, city, country, description, link, latitude, longitude,
+            'showitem' => 'title, slug, address, zip, city, country, description, link, latitude, longitude,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
@@ -132,6 +133,23 @@ return [
                 'size' => 30,
                 'eval' => 'trim,required'
             ],
+        ],
+        'slug' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['title'],
+                    'replacements' => [
+                        '/' => '-'
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
         ],
         'address' => [
             'exclude' => 1,

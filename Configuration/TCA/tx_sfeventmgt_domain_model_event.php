@@ -32,11 +32,11 @@ return [
         description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, 
         max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, 
         files, additional_image, registration, location, room, organisator, notify_admin, notify_organisator, unique_email_check,
-        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields',
+        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields, slug',
     ],
     'types' => [
         '1' => [
-            'showitem' => '--palette--;;titleTopEvent, --palette--;;paletteDates, teaser, description,
+            'showitem' => '--palette--;;titleTopEvent, slug, --palette--;;paletteDates, teaser, description,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
                     --palette--;;palettePrice, price_options, link, program,
@@ -229,6 +229,23 @@ return [
                 'size' => 30,
                 'eval' => 'trim,required'
             ],
+        ],
+        'slug' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
+            'config' => [
+                'type' => 'slug',
+                'size' => 50,
+                'generatorOptions' => [
+                    'fields' => ['title'],
+                    'replacements' => [
+                        '/' => '-'
+                    ],
+                ],
+                'fallbackCharacter' => '-',
+                'eval' => 'uniqueInSite',
+                'default' => ''
+            ]
         ],
         'teaser' => [
             'exclude' => 1,
