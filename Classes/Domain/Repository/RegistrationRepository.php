@@ -50,6 +50,7 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function findByUid($uid)
     {
         $query = $this->createQuery();
+
         return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
     }
 
