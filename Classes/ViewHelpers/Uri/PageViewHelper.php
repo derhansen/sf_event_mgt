@@ -22,7 +22,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  * Modified version of TYPO3 f:uri.page viewHelper, which always generates frontend URLs, so views created in
  * backend context can render links in frontend context
  */
-class PageViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class PageViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
