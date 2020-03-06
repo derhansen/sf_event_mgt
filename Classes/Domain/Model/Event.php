@@ -14,6 +14,7 @@ use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Event
@@ -31,7 +32,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Title
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $title = '';
 
@@ -123,7 +124,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $category = null;
 
@@ -131,7 +132,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Related
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Event>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $related;
 
@@ -139,8 +140,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Cascade("remove")
+     * @Extbase\ORM\Lazy
      */
     protected $registration = null;
 
@@ -148,7 +149,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration waitlist
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $registrationWaitlist;
 
@@ -156,7 +157,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration fields
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\Field>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $registrationFields;
 
@@ -171,7 +172,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The image
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $image = null;
 
@@ -179,7 +180,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Additional files
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $files = null;
 
@@ -229,7 +230,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The additionalImage
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $additionalImage = null;
 
@@ -286,8 +287,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Price options
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Cascade("remove")
+     * @Extbase\ORM\Lazy
      */
     protected $priceOptions = null;
 
@@ -295,7 +296,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Speaker
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Speaker>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Lazy
      */
     protected $speaker = null;
 

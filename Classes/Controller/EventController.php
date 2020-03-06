@@ -27,6 +27,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * EventController
@@ -560,8 +561,8 @@ class EventController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator")
-     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator")
+     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
+     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
      *
      * @return mixed string|void
      */

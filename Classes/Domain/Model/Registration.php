@@ -8,6 +8,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 /**
  * Registration
  *
@@ -19,7 +21,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Firstname
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $firstname = '';
 
@@ -27,7 +29,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Lastname
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @Extbase\Validate("NotEmpty")
      */
     protected $lastname = '';
 
@@ -84,8 +86,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * E-Mail
      *
      * @var string
-     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
-     * @TYPO3\CMS\Extbase\Annotation\Validate("EmailAddress")
+     * @Extbase\Validate("NotEmpty")
+     * @Extbase\Validate("EmailAddress")
      */
     protected $email = '';
 
@@ -219,8 +221,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration fields
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
-     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
+     * @Extbase\ORM\Cascade("remove")
+     * @Extbase\ORM\Lazy
      */
     protected $fieldValues;
 
