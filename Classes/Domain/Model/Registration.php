@@ -19,7 +19,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Firstname
      *
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $firstname = '';
 
@@ -27,7 +27,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Lastname
      *
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $lastname = '';
 
@@ -84,7 +84,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * E-Mail
      *
      * @var string
-     * @validate NotEmpty, EmailAddress
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
+     * @TYPO3\CMS\Extbase\Annotation\Validate("EmailAddress")
      */
     protected $email = '';
 
@@ -218,8 +219,8 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration fields
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
-     * @cascade remove
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $fieldValues;
 

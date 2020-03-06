@@ -31,7 +31,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Title
      *
      * @var string
-     * @validate NotEmpty
+     * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
     protected $title = '';
 
@@ -123,7 +123,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Category
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $category = null;
 
@@ -131,7 +131,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Related
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Event>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $related;
 
@@ -139,8 +139,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
-     * @cascade remove
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $registration = null;
 
@@ -148,7 +148,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration waitlist
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $registrationWaitlist;
 
@@ -156,7 +156,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Registration fields
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\Field>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $registrationFields;
 
@@ -171,7 +171,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The image
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $image = null;
 
@@ -179,7 +179,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Additional files
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $files = null;
 
@@ -229,7 +229,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * The additionalImage
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $additionalImage = null;
 
@@ -286,8 +286,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Price options
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
-     * @cascade remove
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Cascade("remove")
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $priceOptions = null;
 
@@ -295,7 +295,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Speaker
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Speaker>
-     * @lazy
+     * @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
      */
     protected $speaker = null;
 

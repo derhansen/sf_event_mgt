@@ -560,8 +560,8 @@ class EventController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator
-     * @validate $registration \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator
+     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator")
+     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator")
      *
      * @return mixed string|void
      */
