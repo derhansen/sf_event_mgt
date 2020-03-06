@@ -76,23 +76,20 @@ jobs:
   fast_finish: true
   include:
     - stage: test
-      php: 7.3
-      env: TYPO3_VERSION=^9.5 COVERAGE=0 FUNCTIONAL=0
-    - stage: test
-      php: 7.3
-      env: TYPO3_VERSION=^8.7 COVERAGE=0 FUNCTIONAL=0
-    - stage: test
       php: 7.2
       env: TYPO3_VERSION=^9.5 COVERAGE=1 FUNCTIONAL=0
     - stage: test
-      php: 7.2
+      php: 7.3
+      env: TYPO3_VERSION=^9.5 COVERAGE=0 FUNCTIONAL=0
+    - stage: test
+      php: 7.4
       env: TYPO3_VERSION=^9.5 COVERAGE=0 FUNCTIONAL=0
     - stage: test
       php: 7.2
-      env: TYPO3_VERSION=^8.7 COVERAGE=0 FUNCTIONAL=1
+      env: TYPO3_VERSION=~10.3 COVERAGE=0
     - stage: test
-      php: 7.1
-      env: TYPO3_VERSION=^8.7 COVERAGE=0 FUNCTIONAL=0
+      php: 7.3
+      env: TYPO3_VERSION=~10.3 COVERAGE=0
     - stage: test
-      php: 7.0
-      env: TYPO3_VERSION=^8.7 COVERAGE=0 FUNCTIONAL=0
+      php: 7.4
+      env: TYPO3_VERSION=~10.3 COVERAGE=0

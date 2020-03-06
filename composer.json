@@ -19,10 +19,10 @@
     "GPL-2.0-or-later"
   ],
   "require": {
-    "typo3/cms-core": "^8.7 || ^9.5"
+    "typo3/cms-core": "^9.5.5 || ~10.3"
   },
   "require-dev": {
-    "nimut/testing-framework": "4.x-dev"
+    "nimut/testing-framework": "5.x-dev"
   },
   "replace": {
     "typo3-ter/sf-event-mgt": "self.version"
