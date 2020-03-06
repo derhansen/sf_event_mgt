@@ -28,7 +28,7 @@ return [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'l10n_parent, l10n_diffsource,  value, value_type, field',
+            'showitem' => 'value, value_type, field',
             ]
     ],
     'palettes' => [],

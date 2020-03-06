@@ -612,6 +612,9 @@ class EventController extends AbstractController
             // Fix event in registration for language other than default language
             $this->registrationService->fixRegistrationEvent($registration, $event);
 
+            // Fix language of registration fields if other than default language
+            $this->registrationService->fixRegistationFieldValueLanguage($registration, $event);
+
             $this->signalDispatch(__CLASS__, __FUNCTION__ . 'AfterRegistrationSaved', [$registration, $this]);
 
             // Send notifications to user and admin if confirmation link should be sent
