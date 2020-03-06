@@ -4,7 +4,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
 [![StyleCI](https://styleci.io/repos/19884798/shield?branch=master)](https://styleci.io/repos/19884798)
 [![Monthly Downloads](https://poser.pugx.org/derhansen/sf_event_mgt/d/monthly)](https://packagist.org/packages/derhansen/sf_event_mgt)
-[![License](https://poser.pugx.org/derhansen/sf_event_mgt/license)](https://packagist.org/packages/derhansen/sf_event_mgt)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 Event management and registration
 =================================
