@@ -29,7 +29,7 @@ class TemplateLayouts
         $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['flexParentDatabaseRow']['pid']);
         foreach ($templateLayouts as $index => $layout) {
             $additionalLayout = [
-                $GLOBALS['LANG']->sL($layout, true),
+                $GLOBALS['LANG']->sL($layout),
                 $index
             ];
             array_push($config['items'], $additionalLayout);
