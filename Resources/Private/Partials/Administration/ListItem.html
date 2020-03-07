@@ -1,10 +1,11 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <tr>
     <td class="title">
-        <a href="{e:Be.EditRecord(uid:event.uid)}" title="UID: {event.uid}">
+        <a href="{be:uri.editRecord(uid: event.uid, table: 'tx_sfeventmgt_domain_model_event')}" title="UID: {event.uid}">
             {event.title}
         </a>
     </td>
