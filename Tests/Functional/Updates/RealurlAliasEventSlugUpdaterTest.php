@@ -37,10 +37,6 @@ class RealurlAliasEventSlugUpdaterTest extends FunctionalTestCase
      */
     public function checkIfWizardIsRequiredReturnsTrue()
     {
-        if (MiscUtility::isV8Lts()) {
-            $this->markTestSkipped();
-        }
-
         $subject = GeneralUtility::makeInstance(RealurlAliasEventSlugUpdater::class);
         $this->assertTrue($subject->checkIfWizardIsRequired());
     }
@@ -50,10 +46,6 @@ class RealurlAliasEventSlugUpdaterTest extends FunctionalTestCase
      */
     public function updateWorks()
     {
-        if (MiscUtility::isV8Lts()) {
-            $this->markTestSkipped();
-        }
-
         /** @var RealurlAliasEventSlugUpdater $subject */
         $subject = GeneralUtility::makeInstance(RealurlAliasEventSlugUpdater::class);
 

@@ -27,13 +27,13 @@ class MiscUtility
     }
 
     /**
-     * Returns, if the current TYPO3 version it 8.7 LTS
+     * Returns, if the current TYPO3 version it 10.4 LTS
      *
      * @return bool
      */
-    public static function isV8Lts(): bool
+    public static function isV10Lts(): bool
     {
-        return version_compare(TYPO3_branch, '8.7', '=');
+        return version_compare(TYPO3_branch, '10.4', '=') || version_compare(TYPO3_branch, '10.3', '=');
     }
 
     /**

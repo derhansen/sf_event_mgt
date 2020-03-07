@@ -36,10 +36,6 @@ class PopulateSfEventMgtSlugUpdaterTest extends FunctionalTestCase
      */
     public function checkIfWizardIsRequiredReturnsTrue()
     {
-        if (MiscUtility::isV8Lts()) {
-            $this->markTestSkipped();
-        }
-
         $subject = GeneralUtility::makeInstance(PopulateSfEventMgtSlugUpdater::class);
         $this->assertTrue($subject->checkIfWizardIsRequired());
     }
@@ -49,10 +45,6 @@ class PopulateSfEventMgtSlugUpdaterTest extends FunctionalTestCase
      */
     public function slugsArePopulated()
     {
-        if (MiscUtility::isV8Lts()) {
-            $this->markTestSkipped();
-        }
-
         /** @var RealurlAliasEventSlugUpdater $subject */
         $subject = GeneralUtility::makeInstance(PopulateSfEventMgtSlugUpdater::class);
 
