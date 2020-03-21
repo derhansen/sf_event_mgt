@@ -9,7 +9,6 @@ namespace FriendsOfTYPO3\TtAddress\Tests\Functional\Service;
  */
 
 use DERHANSEN\SfEventMgt\Updates\RealurlAliasEventSlugUpdater;
-use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
