@@ -18,6 +18,7 @@ use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -28,6 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 /**
  * EventController
@@ -366,7 +368,11 @@ class EventController extends AbstractController
                 $this->redirect('list', null, null, null, $listPid);
                 break;
             case 'pageNotFoundHandler':
-                $GLOBALS['TSFE']->pageNotFoundAndExit('Event not found.');
+                $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
+                    $GLOBALS['TYPO3_REQUEST'],
+                    'Event not found.'
+                );
+                throw new ImmediateResponseException($response, 1549896549734);
                 break;
             case 'showStandaloneTemplate':
                 if (isset($configuration[2])) {
