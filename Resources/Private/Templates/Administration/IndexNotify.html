@@ -38,7 +38,7 @@
             <f:else>
                 <p><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.description" /></p>
 
-                <f:form name="notify" action="notify" arguments="{event: '{event}', template: 'test.html'}" class="form-horizontal">
+                <f:form name="notify" action="notify" arguments="{event: event}" class="form-horizontal">
                     <div class="form-group">
                         <label for="customNotification" class="col-xs-2 control-label">
                             <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.template"/>
