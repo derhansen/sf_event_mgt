@@ -68,6 +68,21 @@ The recommended way to install the extension is by using [Composer](https://getc
 
 Download and install the extension with the TYPO3 extension manager module.
 
+## Versions
+
+| Version             | TYPO3      | PHP       | Support/Development                     |
+| ------------------- | ---------- | ----------|---------------------------------------- |
+| 5.x                 | 10.x       | >= 7.2    | Features, Bugfixes, Security Updates    |
+| 4.x                 | 8.7 - 9.5  | 7.0 - 7.3 | Bugfixes, Security Updates              |
+| 3.x                 | 7.6 - 8.7  | 5.5 - 7.3 | Support dropped                         |
+| 2.x                 | 7.6 - 8.7  | 5.5 - 7.2 | Support dropped                         |
+| 1.x                 | 6.2 - 7.6  | 5.5 - 5.6 | Support dropped                         |
+
+## Support
+
+Free public support is available on the #ext-sf_event_mgt TYPO3 Slack Channel.
+You can claos ask questions at https://stackoverflow.com and tag your question with `TYPO3`.
+
 ## Contributing
 
 Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.  
