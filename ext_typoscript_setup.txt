@@ -1,9 +1,0 @@
-config.tx_extbase{
-    persistence.classes {
-        DERHANSEN\SfEventMgt\Domain\Model\Category {
-            mapping {
-                tableName = sys_category
-            }
-        }
-    }
-}
