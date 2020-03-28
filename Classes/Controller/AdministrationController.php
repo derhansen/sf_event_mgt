@@ -12,18 +12,17 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service;
-use DERHANSEN\SfEventMgt\Utility\MiscUtility;
+use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
-use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
-use TYPO3\CMS\Core\Utility\HttpUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
+use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder as ExtbaseUriBuilder;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
@@ -198,49 +197,48 @@ class AdministrationController extends AbstractController
     {
         $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
 
-        $uriBuilder = $this->objectManager->get(UriBuilder::class);
+        $uriBuilder = $this->objectManager->get(ExtbaseUriBuilder::class);
         $uriBuilder->setRequest($this->request);
 
         if ($this->request->getControllerActionName() === 'list') {
             $buttons = [
                 [
                     'label' => 'administration.newEvent',
-                    'action' => 'newEvent',
+                    'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_event'),
                     'icon' => 'ext-sfeventmgt-event',
                     'group' => 1
                 ],
                 [
                     'label' => 'administration.newLocation',
-                    'action' => 'newLocation',
+                    'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_location'),
                     'icon' => 'ext-sfeventmgt-location',
                     'group' => 1
                 ],
                 [
                     'label' => 'administration.newOrganisator',
-                    'action' => 'newOrganisator',
+                    'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_organisator'),
                     'icon' => 'ext-sfeventmgt-organisator',
                     'group' => 1
                 ],
                 [
                     'label' => 'administration.newSpeaker',
-                    'action' => 'newSpeaker',
+                    'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_speaker'),
                     'icon' => 'ext-sfeventmgt-speaker',
                     'group' => 1
                 ],
                 [
                     'label' => 'administration.handleExpiredRegistrations',
-                    'action' => 'handleExpiredRegistrations',
+                    'link' => $uriBuilder->reset()->setRequest($this->request)
+                        ->uriFor('handleExpiredRegistrations', [], 'Administration'),
                     'icon' => 'ext-sfeventmgt-action-handle-expired',
-                    'group' => 2
+                    'group' => 2,
                 ]
             ];
             foreach ($buttons as $key => $tableConfiguration) {
                 $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
-                $link = $uriBuilder->reset()->setRequest($this->request)
-                    ->uriFor($tableConfiguration['action'], [], 'Administration');
                 $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], Icon::SIZE_SMALL);
                 $viewButton = $buttonBar->makeLinkButton()
-                    ->setHref($link)
+                    ->setHref($tableConfiguration['link'])
                     ->setDataAttributes([
                         'toggle' => 'tooltip',
                         'placement' => 'bottom',
@@ -254,12 +252,13 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * Redirect to tceform creating a new record
+     * Returns the create new record URL for the given table
      *
-     * @param string $table table name
-     * @return void
+     * @param $table
+     * @return string
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      */
-    private function redirectToCreateNewRecord($table)
+    private function getCreateNewRecordUri($table): string
     {
         $pid = $this->pid;
         $tsConfig = BackendUtility::getPagesTSconfig(0);
@@ -270,19 +269,11 @@ class AdministrationController extends AbstractController
             $pid = (int)$tsConfig['defaultPid.'][$table];
         }
 
-        if (MiscUtility::isV9Lts()) {
-            $returnUrl = 'index.php?route=/web/SfEventMgtTxSfeventmgtM1/';
-        } else {
-            $returnUrl = 'index.php?M=web_SfEventMgtTxSfeventmgtM1';
-        }
-
-        $returnUrl .= '&id=' . $this->pid . $this->getToken();
-        $url = BackendUtility::getModuleUrl('record_edit', [
+        $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        return $uriBuilder->buildUriFromRoute('record_edit', [
             'edit[' . $table . '][' . $pid . ']' => 'new',
-            'returnUrl' => $returnUrl
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
         ]);
-
-        HttpUtility::redirect($url);
     }
 
     /**
@@ -413,38 +404,6 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * Create new event action
-     */
-    public function newEventAction()
-    {
-        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_event');
-    }
-
-    /**
-     * Create new location action
-     */
-    public function newLocationAction()
-    {
-        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_location');
-    }
-
-    /**
-     * Create new organisator action
-     */
-    public function newOrganisatorAction()
-    {
-        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_organisator');
-    }
-
-    /**
-     * Create new speaker action
-     */
-    public function newSpeakerAction()
-    {
-        $this->redirectToCreateNewRecord('tx_sfeventmgt_domain_model_speaker');
-    }
-
-    /**
      * Notify action
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
@@ -486,29 +445,6 @@ class AdministrationController extends AbstractController
     protected function getErrorFlashMessage()
     {
         return false;
-    }
-
-    /**
-     * Get a CSRF token
-     *
-     * @param bool $tokenOnly Set it to TRUE to get only the token, otherwise including the &moduleToken= as prefix
-     * @return string
-     */
-    protected function getToken(bool $tokenOnly = false): string
-    {
-        if (MiscUtility::isV9Lts()) {
-            $tokenParameterName = 'token';
-            $token = FormProtectionFactory::get('backend')->generateToken('route', 'web_SfEventMgtTxSfeventmgtM1');
-        } else {
-            $tokenParameterName = 'moduleToken';
-            $token = FormProtectionFactory::get()->generateToken('moduleCall', 'web_SfEventMgtTxSfeventmgtM1');
-        }
-
-        if ($tokenOnly) {
-            return $token;
-        }
-
-        return '&' . $tokenParameterName . '=' . $token;
     }
 
     /**
