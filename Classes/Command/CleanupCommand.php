@@ -30,7 +30,9 @@ class CleanupCommand extends Command
     public function configure()
     {
         $this
-            ->setDescription('Cleanup registrations which are not confirmed and where the confirmation date is expired.')
+            ->setDescription(
+                'Cleanup registrations which are not confirmed and where the confirmation date is expired.'
+            )
             ->addOption(
                 'delete',
                 'd',
@@ -54,5 +56,6 @@ class CleanupCommand extends Command
         $delete = $input->hasOption('delete') && $input->getOption('delete') ? true : false;
         $maintenanceService->handleExpiredRegistrations($delete);
         $io->success('All done!');
+        return 0;
     }
 }
