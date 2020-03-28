@@ -56,6 +56,7 @@ class CleanupCommand extends Command
         $delete = $input->hasOption('delete') && $input->getOption('delete') ? true : false;
         $maintenanceService->handleExpiredRegistrations($delete);
         $io->success('All done!');
+
         return 0;
     }
 }

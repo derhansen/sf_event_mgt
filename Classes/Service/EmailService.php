@@ -58,6 +58,7 @@ class EmailService
                 $email->attachFromPath($attachment);
             }
         }
+
         return $email->send();
     }
 }

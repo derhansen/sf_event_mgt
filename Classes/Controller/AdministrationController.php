@@ -255,8 +255,8 @@ class AdministrationController extends AbstractController
      * Returns the create new record URL for the given table
      *
      * @param $table
-     * @return string
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @return string
      */
     private function getCreateNewRecordUri($table): string
     {
@@ -270,6 +270,7 @@ class AdministrationController extends AbstractController
         }
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+
         return $uriBuilder->buildUriFromRoute('record_edit', [
             'edit[' . $table . '][' . $pid . ']' => 'new',
             'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
