@@ -130,7 +130,6 @@ return [
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectMultipleSideBySide',
-                'enableMultiSelectFilterTextfield' => true,
                 'size' => 5,
                 'maxitems' => 20,
                 'items' => [
