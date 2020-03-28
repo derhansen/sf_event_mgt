@@ -19,13 +19,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailService
 {
     /**
-     * Mailmessage
-     *
-     * @var \TYPO3\CMS\Core\Mail\MailMessage
-     */
-    protected $mailer = null;
-
-    /**
      * Sends an e-mail, if sender and recipient is an valid e-mail address
      *
      * @param string $sender The sender
@@ -36,52 +29,35 @@ class EmailService
      * @param array $attachments Array of files (e.g. ['/absolute/path/doc.pdf'])
      * @param string $replyTo The reply-to mail
      *
-     * @return bool TRUE/FALSE if message is sent
+     * @return bool true/false if message is sent
      */
-    public function sendEmailMessage($sender, $recipient, $subject, $body, $name = null, $attachments = [], $replyTo = null)
-    {
-        if (GeneralUtility::validEmail($sender) && GeneralUtility::validEmail($recipient)) {
-            $this->initialize();
-            $this->mailer->setFrom($sender, $name);
-            $this->mailer->setSubject($subject);
-            $this->mailer->setBody($body, 'text/html');
-            if ($replyTo !== null && $replyTo !== '') {
-                $this->mailer->setReplyTo($replyTo);
-            }
-            $this->mailer->setTo($recipient);
-            $this->addAttachments($attachments);
-            $this->mailer->send();
-
-            return $this->mailer->isSent();
+    public function sendEmailMessage(
+        $sender,
+        $recipient,
+        $subject,
+        $body,
+        $name = null,
+        $attachments = [],
+        $replyTo = null
+    ) {
+        if (!GeneralUtility::validEmail($sender) || !GeneralUtility::validEmail($recipient)) {
+            return false;
         }
 
-        return false;
-    }
-
-    /**
-     * Creates a new mail message
-     *
-     * @return void
-     */
-    protected function initialize()
-    {
-        $this->mailer = GeneralUtility::makeInstance(MailMessage::class);
-    }
-
-    /**
-     * Attaches the given array of files to the email message
-     *
-     * @param array $attachments
-     * @return void
-     */
-    protected function addAttachments($attachments)
-    {
-        if (count($attachments) > 0) {
-            foreach ($attachments as $attachment) {
-                if (file_exists($attachment)) {
-                    $this->mailer->attach(\Swift_Attachment::fromPath($attachment));
-                }
+        /** @var MailMessage $email */
+        $email = GeneralUtility::makeInstance(MailMessage::class);
+        $email->setFrom($sender, $name);
+        $email->setTo($recipient);
+        $email->setSubject($subject);
+        $email->html($body);
+        if ($replyTo !== null && $replyTo !== '') {
+            $email->setReplyTo($replyTo);
+        }
+        foreach ($attachments as $attachment) {
+            if (file_exists($attachment)) {
+                $email->attachFromPath($attachment);
             }
         }
+        return $email->send();
     }
 }
