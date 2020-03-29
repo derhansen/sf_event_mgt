@@ -90,7 +90,8 @@ class PaymentControllerTest extends UnitTestCase
         $updateRegistration = false;
         $arguments = [&$values, &$updateRegistration, $mockRegistration, $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
+            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
             PaymentController::class,
             'redirectActionBeforeRedirectPaypal',
@@ -130,7 +131,8 @@ class PaymentControllerTest extends UnitTestCase
         $updateRegistration = false;
         $arguments = [&$values, &$updateRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
+            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
             PaymentController::class,
             'successActionProcessSuccessPaypal',
@@ -171,7 +173,8 @@ class PaymentControllerTest extends UnitTestCase
         $removeRegistration = false;
         $arguments = [&$values, &$updateRegistration, &$removeRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
+            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
             PaymentController::class,
             'failureActionProcessFailurePaypal',
@@ -212,7 +215,8 @@ class PaymentControllerTest extends UnitTestCase
         $removeRegistration = false;
         $arguments = [&$values, &$updateRegistration, &$removeRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
+            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
             PaymentController::class,
             'cancelActionProcessCancelPaypal',
@@ -252,7 +256,8 @@ class PaymentControllerTest extends UnitTestCase
         $updateRegistration = false;
         $arguments = [&$values, &$updateRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dispatch']);
+        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
+            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
         $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
             PaymentController::class,
             'notifyActionProcessNotifyPaypal',

@@ -65,11 +65,7 @@ class FieldValueTest extends UnitTestCase
     public function setValueSetsValueField()
     {
         $this->subject->setValue('A field value');
-        $this->assertAttributeEquals(
-            'A field value',
-            'value',
-            $this->subject
-        );
+        $this->assertEquals('A field value', $this->subject->getValue());
     }
 
     /**
@@ -137,11 +133,7 @@ class FieldValueTest extends UnitTestCase
     {
         $registration = new Registration();
         $this->subject->setRegistration($registration);
-        $this->assertAttributeEquals(
-            $registration,
-            'registration',
-            $this->subject
-        );
+        $this->assertEquals($registration, $this->subject->getRegistration());
     }
 
     /**

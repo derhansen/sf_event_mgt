@@ -28,6 +28,8 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
@@ -144,7 +146,7 @@ class EventControllerTest extends UnitTestCase
         $mockDemand->expects($this->at(10))->method('setLocation')->with(1);
         $mockDemand->expects($this->at(11))->method('setOrganisator')->with(1);
 
-        $objectManager = $this->getMockBuilder(ObjectManager::class)->getMock();
+        $objectManager = $this->getMockBuilder(ObjectManager::class)->disableOriginalConstructor()->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
         $this->inject($mockController, 'objectManager', $objectManager);
 
@@ -177,7 +179,7 @@ class EventControllerTest extends UnitTestCase
         $mockDemand->expects($this->at(2))->method('setCategories')->with('1,2,3');
         $mockDemand->expects($this->at(3))->method('setIncludeSubcategories')->with(false);
 
-        $objectManager = $this->getMockBuilder(ObjectManager::class)->getMock();
+        $objectManager = $this->getMockBuilder(ObjectManager::class)->disableOriginalConstructor()->getMock();
         $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
         $this->inject($mockController, 'objectManager', $objectManager);
 
@@ -354,7 +356,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -441,7 +443,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -527,7 +529,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -546,7 +548,7 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with(['event' => $event]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -579,7 +581,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -912,7 +914,7 @@ class EventControllerTest extends UnitTestCase
             ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST, 'eventuid' => 1, 'hmac' => 'somehmac']
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(
                 EventController::class,
@@ -1000,7 +1002,7 @@ class EventControllerTest extends UnitTestCase
             ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(
                 EventController::class,
@@ -1096,7 +1098,7 @@ class EventControllerTest extends UnitTestCase
             ['reguid' => $regUid, 'hmac' => $regHmac]
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(
                 EventController::class,
@@ -1187,7 +1189,7 @@ class EventControllerTest extends UnitTestCase
             ['reguid' => $regUid, 'hmac' => $regHmac]
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(
                 EventController::class,
@@ -1282,7 +1284,7 @@ class EventControllerTest extends UnitTestCase
             ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(
                 EventController::class,
@@ -1474,7 +1476,7 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -1535,7 +1537,7 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(EventController::class, 'confirmRegistrationActionAfterRegistrationConfirmed');
         $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
@@ -1599,7 +1601,7 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
             ->with(EventController::class, 'confirmRegistrationActionAfterRegistrationConfirmed');
         $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
@@ -1640,7 +1642,7 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -1711,7 +1713,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')->with(
             EventController::class,
             'cancelRegistrationActionWaitlistMoveUp',
@@ -1896,7 +1898,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -1982,7 +1984,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -2055,7 +2057,7 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -2139,7 +2141,7 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -2213,7 +2215,7 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -2287,7 +2289,7 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -2305,7 +2307,7 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with(['event' => $mockEvent]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->getMock();
+        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
@@ -2345,8 +2347,10 @@ class EventControllerTest extends UnitTestCase
             ]
         ];
 
+        $GLOBALS['TYPO3_REQUEST'] = new ServerRequest();
+
+        $this->expectException(ImmediateResponseException::class);
         $mock = $this->getAccessibleMock(EventController::class, ['dummy']);
-        $this->tsfe->expects($this->once())->method('pageNotFoundAndExit');
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
@@ -2457,7 +2461,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function checkPidOfEventRecordWorks()
     {
-        $mockedSignalDispatcher = $this->getAccessibleMock('\TYPO3\CMS\Extbase\SignalSlot\Dispatcher', ['dummy']);
+        $mockedSignalDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
         $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
 
@@ -2487,7 +2491,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function evaluateSingleEventSettingIsWorking()
     {
-        $mockedSignalDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dummy']);
+        $mockedSignalDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
         $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
 
@@ -2515,7 +2519,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function evaluateIsShortcutSettingIsWorking()
     {
-        $mockedSignalDispatcher = $this->getAccessibleMock(Dispatcher::class, ['dummy']);
+        $mockedSignalDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
         $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
 
@@ -2529,7 +2533,8 @@ class EventControllerTest extends UnitTestCase
         $mockContentObjectRenderer = $this->getAccessibleMock(ContentObjectRenderer::class, ['dummy']);
         $mockContentObjectRenderer->_set('data', ['uid' => 123]);
 
-        $mockConfigurationManager = $this->getAccessibleMock(ConfigurationManager::class, ['getContentObject']);
+        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->setMethods(['getContentObject'])->disableOriginalConstructor()->getMock();
         $mockConfigurationManager->expects($this->once())->method('getContentObject')
             ->will($this->returnValue($mockContentObjectRenderer));
         $mockedController->_set('configurationManager', $mockConfigurationManager);

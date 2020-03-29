@@ -61,6 +61,7 @@ class RegistrationServiceTest extends UnitTestCase
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(5));
+        $mockRegistration->expects($this->any())->method('getPid')->will($this->returnValue(1));
 
         $newRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $newRegistration->expects($this->any())->method('setMainRegistration');
