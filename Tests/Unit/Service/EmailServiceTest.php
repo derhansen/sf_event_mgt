@@ -80,22 +80,4 @@ class EmailServiceTest extends UnitTestCase
         $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
         $this->assertFalse($result);
     }
-
-    /**
-     * Test if e-mail-service sends mails, if data is valid
-     *
-     * @test
-     * @return void
-     */
-    public function sendEmailMessageWithValidEmailTest()
-    {
-        $sender = 'sender@domain.tld';
-        $recipient = 'recipient@domain.tld';
-        $subject = 'A subject';
-        $body = 'A body';
-        $senderName = 'Sender name';
-
-        $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
-        $this->assertTrue($result);
-    }
 }

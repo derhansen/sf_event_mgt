@@ -80,7 +80,7 @@ jobs:
       env: TYPO3_VERSION=~10.3 COVERAGE=0
     - stage: test
       php: 7.3
-      env: TYPO3_VERSION=~10.3 COVERAGE=0
+      env: TYPO3_VERSION=~10.3 COVERAGE=1
     - stage: test
       php: 7.4
       env: TYPO3_VERSION=~10.3 COVERAGE=0
