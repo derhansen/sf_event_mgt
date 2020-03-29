@@ -11,6 +11,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -1492,7 +1493,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRegistrations()
     {
-        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        if ($languageAspect->getId() > 0) {
             return $this->getRegistrationsDefaultLanguage(false);
         }
 
@@ -1507,8 +1509,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getRegistrationsWaitlist()
     {
-        // Since TYPO3 9.5 (#82363)
-        if ($GLOBALS['TSFE']->sys_language_uid > 0) {
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        if ($languageAspect->getId() > 0) {
             return $this->getRegistrationsDefaultLanguage(true);
         }
 

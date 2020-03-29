@@ -18,6 +18,7 @@ use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -1062,6 +1063,7 @@ class EventController extends AbstractController
      */
     protected function getSysLanguageUid()
     {
-        return $GLOBALS['TSFE']->sys_language_uid;
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        return $languageAspect->getId();
     }
 }
