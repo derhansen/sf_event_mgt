@@ -23,10 +23,6 @@ return [
             'default' => 'ext-sfeventmgt-organisator'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, slug, email, 
-        email_signature, phone, image',
-    ],
     'types' => [
         '1' => ['showitem' => 'name, slug, email, email_signature, phone, image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,

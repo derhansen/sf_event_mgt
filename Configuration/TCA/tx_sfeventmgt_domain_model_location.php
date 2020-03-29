@@ -23,10 +23,6 @@ return [
             'default' => 'ext-sfeventmgt-location'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, slug, address, zip, 
-        city, country, description, link, latitude, longitude',
-    ],
     'types' => [
         '1' => [
             'showitem' => 'title, slug, address, zip, city, country, description, link, latitude, longitude,

@@ -27,13 +27,6 @@ return [
             'default' => 'ext-sfeventmgt-event'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, rowDescription, teaser, 
-        description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, 
-        max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, 
-        files, additional_image, registration, location, room, organisator, notify_admin, notify_organisator, unique_email_check,
-        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields, slug',
-    ],
     'types' => [
         '1' => [
             'showitem' => '--palette--;;titleTopEvent, slug, --palette--;;paletteDates, teaser, description,

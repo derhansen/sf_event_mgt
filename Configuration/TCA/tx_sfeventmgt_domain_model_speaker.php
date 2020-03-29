@@ -24,10 +24,6 @@ return [
             'default' => 'ext-sfeventmgt-speaker'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, slug, 
-        job_title, description, image',
-    ],
     'types' => [
         '0' => [
             'showitem' => 'name, job_title, slug, description, image,

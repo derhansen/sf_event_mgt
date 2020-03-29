@@ -12,9 +12,6 @@ return [
             'default' => 'ext-sfeventmgt-logfile'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => '',
-    ],
     'types' => [
         '1' => ['showitem' => ''],
     ],

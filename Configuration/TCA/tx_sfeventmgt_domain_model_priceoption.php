@@ -26,9 +26,6 @@ return [
             'default' => 'ext-sfeventmgt-priceoption'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, price, valid_until',
-    ],
     'types' => [
         '1' => [
             'showitem' => 'price, valid_until,

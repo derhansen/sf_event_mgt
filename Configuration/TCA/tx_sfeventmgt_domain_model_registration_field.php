@@ -67,9 +67,6 @@ return [
             'default' => 'ext-sfeventmgt-registration-field'
         ],
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, type, settings, required',
-    ],
     'types' => [
         '0' => [
             'showitem' => $showItemDefault
