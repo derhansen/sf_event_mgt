@@ -3,38 +3,40 @@ defined('TYPO3_MODE') or die();
 
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'DERHANSEN.sf_event_mgt',
+        'SfEventMgt',
         'Pievent',
         [
-            'Event' => 'list, detail, calendar, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+            \DERHANSEN\SfEventMgt\Controller\EventController::class =>
+                'list, detail, calendar, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
         ],
         // non-cacheable actions
         [
-            'Event' => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+            \DERHANSEN\SfEventMgt\Controller\EventController::class =>
+                'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
         ]
     );
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'DERHANSEN.sf_event_mgt',
+        'SfEventMgt',
         'Piuserreg',
         [
-            'UserRegistration' => 'list',
+            \DERHANSEN\SfEventMgt\Controller\UserRegistrationController::class => 'list',
         ],
         // non-cacheable actions
         [
-            'UserRegistration' => 'list',
+            \DERHANSEN\SfEventMgt\Controller\UserRegistrationController::class => 'list',
         ]
     );
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'DERHANSEN.sf_event_mgt',
+        'SfEventMgt',
         'Pipayment',
         [
-            'Payment' => 'redirect, success, failure, cancel, notify',
+            \DERHANSEN\SfEventMgt\Controller\PaymentController::class => 'redirect, success, failure, cancel, notify',
         ],
         // non-cacheable actions
         [
-            'Payment' => 'redirect, success, failure, cancel, notify',
+            \DERHANSEN\SfEventMgt\Controller\PaymentController::class => 'redirect, success, failure, cancel, notify',
         ]
     );
 

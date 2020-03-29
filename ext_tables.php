@@ -34,12 +34,13 @@ call_user_func(function () {
          * Register Administration Module
          */
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-            'DERHANSEN.sf_event_mgt',
+            'SfEventMgt',
             'web',
             'tx_sfeventmgt_m1',
             '',
             [
-                'Administration' => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
+                \DERHANSEN\SfEventMgt\Controller\AdministrationController::class =>
+                    'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
             ],
             [
                 'access' => 'user,group',
