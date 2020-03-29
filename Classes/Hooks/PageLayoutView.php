@@ -433,14 +433,4 @@ class PageLayoutView
     {
         return $GLOBALS['LANG'];
     }
-
-    /**
-     * Get the DocumentTemplate
-     *
-     * @return DocumentTemplate
-     */
-    protected function getDocumentTemplate()
-    {
-        return $GLOBALS['TBE_TEMPLATE'];
-    }
 }
