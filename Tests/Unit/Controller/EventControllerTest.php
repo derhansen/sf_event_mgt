@@ -89,7 +89,7 @@ class EventControllerTest extends UnitTestCase
         );
         $this->tsfe = $this->getAccessibleMock(
             TypoScriptFrontendController::class,
-            ['pageNotFoundAndExit'],
+            [],
             [],
             '',
             false
