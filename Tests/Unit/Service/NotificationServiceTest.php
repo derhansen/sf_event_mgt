@@ -17,6 +17,7 @@ use DERHANSEN\SfEventMgt\Service\EmailService;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
+use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -435,7 +436,7 @@ class NotificationServiceTest extends UnitTestCase
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
-        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, $messageType);
+        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, MessageRecipient::ADMIN);
         $this->assertTrue($result);
     }
 
