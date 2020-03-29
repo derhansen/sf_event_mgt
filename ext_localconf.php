@@ -6,13 +6,11 @@ call_user_func(function () {
         'SfEventMgt',
         'Pievent',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class =>
-                'list, detail, calendar, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'list, detail, calendar, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class =>
-                'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
         ]
     );
 

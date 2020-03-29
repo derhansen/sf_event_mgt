@@ -10,7 +10,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Request;
 
 /**
