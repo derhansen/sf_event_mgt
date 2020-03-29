@@ -44,6 +44,9 @@ class NotificationServiceTest extends UnitTestCase
     protected function setUp()
     {
         $this->subject = new NotificationService();
+
+        $GLOBALS['BE_USER'] = new \stdClass();
+        $GLOBALS['BE_USER']->uc['lang'] = '';
     }
 
     /**
