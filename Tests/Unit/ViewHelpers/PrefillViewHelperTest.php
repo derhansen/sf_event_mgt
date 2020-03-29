@@ -40,13 +40,11 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsCurrentFieldValueIfValueInGPAvailable()
     {
-        GeneralUtility::_GETset(
-            [
-                'tx_sfeventmgt_pievent' => [
-                    'registration' => ['fieldname' => 'Existing Value']
-                ]
+        $_GET = [
+            'tx_sfeventmgt_pievent' => [
+                'registration' => ['fieldname' => 'Existing Value']
             ]
-        );
+        ];
         $GLOBALS['TSFE'] = new \stdClass();
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setArguments([
