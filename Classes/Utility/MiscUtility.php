@@ -17,26 +17,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class MiscUtility
 {
     /**
-     * Returns, if the current TYPO3 version it 9.5 LTS
-     *
-     * @return bool
-     */
-    public static function isV9Lts(): bool
-    {
-        return version_compare(TYPO3_branch, '9.5', '=');
-    }
-
-    /**
-     * Returns, if the current TYPO3 version it 10.4 LTS
-     *
-     * @return bool
-     */
-    public static function isV10Lts(): bool
-    {
-        return version_compare(TYPO3_branch, '10.4', '=') || version_compare(TYPO3_branch, '10.3', '=');
-    }
-
-    /**
      * Returns chars extracted from a hmac for the challenge/response spam check
      *
      * @param int $eventUid
