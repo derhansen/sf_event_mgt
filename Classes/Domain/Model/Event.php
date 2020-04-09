@@ -33,7 +33,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Title
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
     protected $title = '';
 

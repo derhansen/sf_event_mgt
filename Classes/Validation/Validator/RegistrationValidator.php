@@ -13,7 +13,9 @@ use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Error;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
+use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /**
@@ -84,6 +86,8 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
             return false;
         }
 
+        $result = $this->validateDefaultFields($value);
+
         // If no required fields are set, then the registration is valid
         if ($settings['registration']['requiredFields'] === '' ||
             !isset($settings['registration']['requiredFields'])
@@ -92,7 +96,6 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
         }
 
         $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields']));
-        $result = true;
 
         foreach ($requiredFields as $requiredField) {
             if ($value->_hasProperty($requiredField)) {
@@ -105,6 +108,49 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
                         $this->result->forProperty($requiredField)->addError($error);
                     }
                 }
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Validates the default fields of a registration, that must be filled out. Since domain object validation
+     * did not work as expected with registration fields (domain object validation results completely ignored)
+     * this own validation is done
+     *
+     * Checks:
+     * - firstname: NotEmpty
+     * - lastname: NotEmpty
+     * - email: NotEmpty, EmailAddress
+     *
+     * @param Registration $value
+     * @return bool
+     */
+    protected function validateDefaultFields(Registration $value): bool
+    {
+        $result = true;
+
+        $defaultFields = ['firstname', 'lastname', 'email'];
+        foreach ($defaultFields as $defaultField) {
+            $validator = GeneralUtility::makeInstance(NotEmptyValidator::class);
+            /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
+            $validationResult = $validator->validate($value->_getProperty($defaultField));
+            if ($validationResult->hasErrors()) {
+                $result = false;
+                foreach ($validationResult->getErrors() as $error) {
+                    $this->result->forProperty($defaultField)->addError($error);
+                }
+            }
+        }
+
+        $validator = GeneralUtility::makeInstance(EmailAddressValidator::class);
+        /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
+        $validationResult = $validator->validate($value->_getProperty('email'));
+        if ($validationResult->hasErrors()) {
+            $result = false;
+            foreach ($validationResult->getErrors() as $error) {
+                $this->result->forProperty('email')->addError($error);
             }
         }
 
@@ -136,13 +182,13 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      * @param string $type Type
      * @param string $field The field
      *
-     * @return \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+     * @return AbstractValidator
      */
     protected function getValidator($type, $field)
     {
         switch ($type) {
             case 'boolean':
-                /** @var \TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator $validator */
+                /** @var BooleanValidator $validator */
                 $validator = $this->objectManager->get(
                     BooleanValidator::class,
                     ['is' => true]

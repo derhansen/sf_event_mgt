@@ -21,7 +21,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Firstname
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
     protected $firstname = '';
 
@@ -29,7 +28,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Lastname
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
      */
     protected $lastname = '';
 
@@ -86,8 +84,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * E-Mail
      *
      * @var string
-     * @Extbase\Validate("NotEmpty")
-     * @Extbase\Validate("EmailAddress")
      */
     protected $email = '';
 
