@@ -75,6 +75,7 @@ class PrefillFieldViewHelper extends AbstractViewHelper
     {
         /** @var ControllerContext $controllerContext */
         $controllerContext = $this->renderingContext->getControllerContext();
+
         return $controllerContext->getRequest();
     }
 }
