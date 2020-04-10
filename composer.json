@@ -22,7 +22,11 @@
     "typo3/cms-core": "^10.3"
   },
   "require-dev": {
-    "nimut/testing-framework": "5.x-dev"
+    "nimut/testing-framework": "5.x-dev",
+    "codeception/codeception": "^4.1",
+    "ericmartel/codeception-email-mailhog": "^1.0",
+    "codeception/module-webdriver": "^1.0",
+    "codeception/module-db": "^1.0"
   },
   "replace": {
     "typo3-ter/sf-event-mgt": "self.version"

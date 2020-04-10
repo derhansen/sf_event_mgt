@@ -1,0 +1,35 @@
+suites:
+  acceptance:
+    actor: AcceptanceTester
+    path: .
+    modules:
+      enabled:
+        - WebDriver
+        - MailHog
+        - Db
+        - \Helper\Acceptance
+      config:
+        WebDriver:
+          url: http://dummy.local/
+          browser: chrome
+        MailHog:
+          url: http://127.0.0.1
+          port: 8025
+          deleteEmailsAfterScenario: true
+    step_decorators:
+      - Codeception\Step\ConditionalAssertion
+      - Codeception\Step\TryTo
+      - Codeception\Step\Retry
+
+extensions:
+  enabled: [Codeception\Extension\RunFailed]
+
+params:
+  - env
+
+paths:
+  tests: ../../Tests/Acceptance/
+  output: ../../Tests/Acceptance/_output
+  data: ../../Tests/Acceptance/_data
+  support: ../../Tests/Acceptance/_support
+  envs: ../../Tests/Acceptance/_envs
