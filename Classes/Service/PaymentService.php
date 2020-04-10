@@ -10,6 +10,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -76,7 +77,7 @@ class PaymentService
      */
     protected function getConfiguredPaymentMethodConfig()
     {
-        $extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sf_event_mgt']);
+        $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sf_event_mgt');
         $allPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
         if ((bool)$extensionConfiguration['enableInvoice'] === false) {
             unset($allPaymentMethods['invoice']);

@@ -89,7 +89,7 @@ class PaymentServiceTest extends UnitTestCase
     public function getPaymentMethodsReturnsDefaultPaymentMethods($extConf, $expected)
     {
         $this->subject = $this->getAccessibleMock(PaymentService::class, ['translate'], [], '', false);
-        $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sf_event_mgt'] = serialize($extConf);
+        $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = $extConf;
         $this->assertEquals($expected, $this->subject->getPaymentMethods());
     }
 
