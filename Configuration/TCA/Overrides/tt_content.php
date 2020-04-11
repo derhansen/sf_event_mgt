@@ -5,19 +5,19 @@ defined('TYPO3_MODE') or die();
  * Plugins
  */
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'sf_event_mgt',
+    'SfEventMgt',
     'Pievent',
     'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.title'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'sf_event_mgt',
+    'SfEventMgt',
     'Piuserreg',
     'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin_userreg.title'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'sf_event_mgt',
+    'SfEventMgt',
     'Pipayment',
     'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin_payment.title'
 );
