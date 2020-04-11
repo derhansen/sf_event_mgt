@@ -14,7 +14,7 @@ class Acceptance extends \Codeception\Module
     public function deleteAllEventRegistrations()
     {
         $driver = $this->getModule('Db')->_getDriver();
-        $driver->executeQuery('DELETE FROM tx_sfeventmgt_domain_model_registration WHERE uid > 2;', []);
+        $driver->executeQuery('DELETE FROM tx_sfeventmgt_domain_model_registration WHERE uid NOT IN(1, 2, 203);', []);
         $driver->executeQuery('DELETE FROM tx_sfeventmgt_domain_model_registration_fieldvalue;', []);
         $driver->executeQuery('DELETE FROM cache_pages;', []);
     }

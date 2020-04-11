@@ -239,4 +239,15 @@ class AbstractEventsTests
         $I->click('Event (reg, cat3, autoconfirm) ' . $this->lang);
         $I->see('1', '//*[@id="c2"]/div/div[12]/div[2]');
     }
+
+    public function eventTitleTranslatedInUserRegistration(AcceptanceTester $I)
+    {
+        $I->amOnPage($this->basePath . 'login');
+        $I->fillField(['name' => 'user'], 'user1');
+        $I->fillField(['name' => 'pass'], '123456');
+        $I->click('Login');
+
+        $I->see('My event registrations');
+        $I->see('Expired Event (cat1, fe_user: user1) ' . $this->lang);
+    }
 }
