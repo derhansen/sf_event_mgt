@@ -1417,6 +1417,7 @@ class EventTest extends UnitTestCase
      * @param mixed $enabled
      * @param mixed $deadline
      * @param mixed $expected
+     * @param mixed $eventDate
      */
     public function getCancellationPossibleReturnsExpectedValues($enabled, $eventDate, $deadline, $expected)
     {
