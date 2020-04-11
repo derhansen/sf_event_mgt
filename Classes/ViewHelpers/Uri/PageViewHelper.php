@@ -74,8 +74,7 @@ class PageViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelpe
             ->setArguments($additionalParams)
             ->setCreateAbsoluteUri($absolute)
             ->setAddQueryString($addQueryString)
-            ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
-        ;
+            ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString);
 
         if (MathUtility::canBeInterpretedAsInteger($pageUid)) {
             $uriBuilder->setTargetPageUid((int)$pageUid);
