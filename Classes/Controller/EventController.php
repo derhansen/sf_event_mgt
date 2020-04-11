@@ -810,8 +810,7 @@ class EventController extends AbstractController
         $paymentPid = (int)$this->settings['paymentPid'];
         if (!$failed && $paymentPid > 0 && $this->registrationService->redirectPaymentEnabled($registration)) {
             $this->uriBuilder->reset()
-                ->setTargetPageUid($paymentPid)
-                ->setUseCacheHash(false);
+                ->setTargetPageUid($paymentPid);
             $uri = $this->uriBuilder->uriFor(
                 'redirect',
                 [

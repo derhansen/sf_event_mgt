@@ -288,8 +288,7 @@ class PaymentController extends AbstractController
     protected function getPaymentUriForAction($action, $registration)
     {
         $this->uriBuilder
-            ->setCreateAbsoluteUri(true)
-            ->setUseCacheHash(false);
+            ->setCreateAbsoluteUri(true);
 
         return $this->uriBuilder->uriFor(
             $action,
