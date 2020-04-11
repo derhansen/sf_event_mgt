@@ -8,6 +8,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -47,9 +49,10 @@ class TitleViewHelper extends AbstractViewHelper
         $pageTitle = isset($arguments['pageTitle']) ? $arguments['pageTitle'] : '';
         $indexedDocTitle = isset($arguments['indexedDocTitle']) ? $arguments['indexedDocTitle'] : $pageTitle;
         if ($pageTitle !== '') {
-            $GLOBALS['TSFE']->altPageTitle = $pageTitle;
+            GeneralUtility::makeInstance(EventPageTitleProvider::class)->setTitle($pageTitle);
         }
         if ($indexedDocTitle !== '') {
+            // Unsure if this is still required in TYPO3 10
             $GLOBALS['TSFE']->indexedDocTitle = $indexedDocTitle;
         }
     }

@@ -218,3 +218,13 @@ tt_content.shortcut.20.conf.tx_sfeventmgt_domain_model_event {
 # For fluid_styled_content
 tt_content.shortcut.variables.shortcuts.tables := addToList(tx_sfeventmgt_domain_model_event)
 tt_content.shortcut.variables.shortcuts.conf.tx_sfeventmgt_domain_model_event < tt_content.shortcut.20.conf.tx_sfeventmgt_domain_model_event
+
+#==============================================
+# Page Title provider
+#==============================================
+config.pageTitleProviders {
+    tx_sfeventmgt {
+        provider = DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider
+        before = record
+    }
+}

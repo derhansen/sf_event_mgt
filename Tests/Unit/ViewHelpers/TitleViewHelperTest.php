@@ -36,27 +36,6 @@ class TitleViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function pageTitleIsSet()
-    {
-        $pageTitle = 'The event title';
-        /** @var TitleViewHelper|\PHPUnit_Framework_MockObject_MockObject $viewHelper */
-        $viewHelper = $this->getAccessibleMock(TitleViewHelper::class, ['dummy']);
-        $viewHelper::renderStatic(
-            [
-                'pageTitle' => $pageTitle
-            ],
-            function () {
-                return '';
-            },
-            $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock()
-        );
-        $this->assertEquals($pageTitle, $GLOBALS['TSFE']->altPageTitle);
-        $this->assertEquals($pageTitle, $GLOBALS['TSFE']->indexedDocTitle);
-    }
-
-    /**
-     * @test
-     */
     public function indexedSearchTitleIsSet()
     {
         $pageTitle = 'The event title for the page title';
@@ -73,7 +52,6 @@ class TitleViewHelperTest extends UnitTestCase
             },
             $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock()
         );
-        $this->assertEquals($pageTitle, $GLOBALS['TSFE']->altPageTitle);
         $this->assertEquals($indexedSearchDocTitle, $GLOBALS['TSFE']->indexedDocTitle);
     }
 }

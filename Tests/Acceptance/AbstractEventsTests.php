@@ -50,6 +50,13 @@ class AbstractEventsTests
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Expired Event (reg, cat1) ' . $this->lang);
+        $I->seeInTitle('Expired Event (reg, cat1) ' . $this->lang);
+    }
+
+    public function eventTitleShownAsTitleTag(AcceptanceTester $I)
+    {
+        $I->amOnPage($this->basePath . 'event-list-all');
+        $I->click('Expired Event (reg, cat1) ' . $this->lang);
         $I->dontSee('Registration', 'a');
     }
 
