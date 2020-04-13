@@ -73,16 +73,16 @@ class PaymentController extends AbstractController
          */
         $updateRegistration = false;
 
-        $processPaymentRedirectEvent = new ProcessPaymentInitializeEvent(
+        $processPaymentInitializeEvent = new ProcessPaymentInitializeEvent(
             $variables,
             $paymentMethod,
             $updateRegistration,
             $registration,
             $this
         );
-        $this->eventDispatcher->dispatch($processPaymentRedirectEvent);
-        $variables = $processPaymentRedirectEvent->getVariables();
-        $updateRegistration = $processPaymentRedirectEvent->getUpdateRegistration();
+        $this->eventDispatcher->dispatch($processPaymentInitializeEvent);
+        $variables = $processPaymentInitializeEvent->getVariables();
+        $updateRegistration = $processPaymentInitializeEvent->getUpdateRegistration();
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
