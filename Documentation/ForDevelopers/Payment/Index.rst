@@ -12,11 +12,11 @@ Payment
 =======
 
 The extension supports custom payment methods, which can be added by creating an own extension that adds a new
-payment method and handles the signal slots emitted for the different payment actions. It is required, that the
-payment is processed by an external payment provider (e.g. Paypal payment page). Please refer to the General
-workflow image shown below.
+payment method and implement Event Listeners for the PSR-14 Events for the different payment actions. It is
+required, that the payment is processed by an external payment provider (e.g. Paypal payment page).
+Please refer to the General workflow image shown below.
 
-It is also required, that each connected signal uses a Fluid standalone view to render the output that will be
+It is also required, that each Event Listener uses a Fluid standalone view to render the output that will be
 shown in the desired payment action in sf_event_mgt
 
 Please note, that it is only possible to start the payment process **after** the registration has been
@@ -53,27 +53,40 @@ Add the following content to the file ``ext_localconf.php``::
      'extkey' => 'sf_event_mgt_mypaymentmethod'
  ];
 
-3. Connect to signals
----------------------
+3. Implement Event Listeners
+----------------------------
 
-Depending on the requirements of the payment method, you should connect to the available signal slots. You should
-at least implement handling of redirect, success, failure and cancel actions.
+Depending on the requirements of the payment method, you should implement an Event Listener for available PSR-14 Events.
+You should at least implement handling of redirect, success, failure and cancel actions.
 
-The code below shows how to connect your payment method to the redirectAction signal slot of sf_event_mgt::
+The code below shows how to implement your payment method to the redirectAction PSR-14 Event of sf_event_mgt::
 
- /** @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher */
- $signalSlotDispatcher = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\SignalSlot\\Dispatcher');
- $signalSlotDispatcher->connect(
-     'DERHANSEN\\SfEventMgt\\Controller\\PaymentController',
-     'redirectActionBeforeRedirectMypaymentmethod',
-     'DERHANSEN\\SfEventMgtMypaymentmethod\\Payment\\Mypaymentmethod',
-     'renderRedirectView',
-     false
- );
+ // Configuration/Services.yaml
+ services:
+   Vendor\Extension\EventListener\YourListener:
+     tags:
+       - name: event.listener
+         identifier: 'yourListener'
+         event: DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent
 
-Make sure you use the correct name and class (2. and 3. argument) ans also the name of you method (4. argument).
-Check the ``PaymentController`` for the other signal slots and make sure to connect to only connect to signal
-slots you really need.
+After you registered your event listener, you can add code for your Event Listener to initialize the payment::
+
+ <?php
+ namespace Vendor\Extension\EventListener;
+
+ use DERHANSEN\SfEventMgt\Event\ModifyDetailViewVariablesEvent;
+
+ class YourListener
+ {
+     public function __invoke(ModifyDetailViewVariablesEvent $modifyDetailViewVariablesEvent): void {
+        // Implement your code (e.g. add variables)
+        $variables = $modifyDetailViewVariablesEvent->getVariables();
+        $variables['newVariable'] = 'Just testing';
+        $modifyDetailViewVariablesEvent->setVariables($variables);
+     }
+ }
+
+The setters in all events allow you to control the behavior of the payment process in the main extension.
 
 4. Add payment class
 --------------------
@@ -82,8 +95,7 @@ Please refer to the class ``AbstractPayment`` in sf_event_mgt for possible setti
 must extend ``AbstractPayment`` and you should override/set the local ``$enable`` properties in order
 to enable the actions in sf_event_mgt
 
-Please also refer to the ``PaymentController`` in sf_event_mgt to see function signatures for the
-signal slots.
+Please also refer to the ``PaymentController`` in sf_event_mgt to see all available PSR-14 Events.
 
 In this example I create the class ``DERHANSEN\SfEventMgtMypaymentmethod\Payment\Mypaymentmethod`` and add
 the following method.::
@@ -131,11 +143,11 @@ view could include a JavaScript redirect to the payment providers payment page.
 Step 4 already showed how to implement one action. Feel free to implement other required
 actions (at least ``success``, ``failure`` and ``cancel`` to your need.
 
-Each signal enables you to update the given registration. Just set the properties of the
+Each PSR-14 Event enables you to update the given registration. Just set the properties of the
 ``$registration`` object and set ``$updateRegistration`` to ``true``.
 
 It is also possible to remove a registrations, if payment failed or was cancelled. Please
-see the corresponding signal slots for possible options.
+see the corresponding PSr-14 Events for possible options.
 
 6. Security conciderations
 --------------------------

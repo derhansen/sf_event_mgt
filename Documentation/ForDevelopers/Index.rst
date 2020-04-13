@@ -17,5 +17,5 @@ For Developers
    :glob:
 
    Extending/Index
-   Signals/Index
+   Events/Index
    Payment/Index

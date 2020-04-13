@@ -64,7 +64,7 @@ class PaymentControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if redirect signal gets emitted
+     * Test if ProcessPaymentInitializeEvent is dispatched
      *
      * @test
      * @return void
@@ -107,7 +107,7 @@ class PaymentControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if success signal gets emitted
+     * Test if ProcessPaymentSuccessEvent is dispatched
      *
      * @test
      * @return void
@@ -144,7 +144,7 @@ class PaymentControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if failure signal gets emitted
+     * Test if ProcessPaymentFailureEvent is dispatched
      *
      * @test
      * @return void
@@ -181,7 +181,7 @@ class PaymentControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if cancel signal gets emitted
+     * Test if ProcessPaymentCancelEvent is dispatched
      *
      * @test
      * @return void
@@ -218,7 +218,7 @@ class PaymentControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if notify signal gets emitted
+     * Test if ProcessPaymentNotifyEvent is dispatched
      *
      * @test
      * @return void
