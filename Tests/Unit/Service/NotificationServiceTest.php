@@ -23,7 +23,6 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\NotificationService.

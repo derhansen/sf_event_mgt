@@ -52,7 +52,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -1676,7 +1675,6 @@ class EventControllerTest extends UnitTestCase
             new ModifyCancelRegistrationViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
-
 
         $this->subject->cancelRegistrationAction(1, 'INVALID-HMAC');
     }

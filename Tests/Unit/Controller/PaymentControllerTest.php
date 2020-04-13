@@ -10,7 +10,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
@@ -21,7 +20,6 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\PaymentController.
