@@ -8,6 +8,11 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
@@ -51,7 +56,7 @@ class PaymentController extends AbstractController
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
 
-        $values = [
+        $variables = [
             'sfEventMgtSettings' => $this->settings,
             'successUrl' => $this->getPaymentUriForAction('success', $registration),
             'failureUrl' => $this->getPaymentUriForAction('failure', $registration),
@@ -68,17 +73,22 @@ class PaymentController extends AbstractController
          */
         $updateRegistration = false;
 
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'BeforeRedirect' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, $registration, $this]
+        $processPaymentRedirectEvent = new ProcessPaymentInitializeEvent(
+            $variables,
+            $paymentMethod,
+            $updateRegistration,
+            $registration,
+            $this
         );
+        $this->eventDispatcher->dispatch($processPaymentRedirectEvent);
+        $variables = $processPaymentRedirectEvent->getVariables();
+        $updateRegistration = $processPaymentRedirectEvent->getUpdateRegistration();
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
         }
 
-        $this->view->assign('result', $values);
+        $this->view->assign('result', $variables);
     }
 
     /**
@@ -90,7 +100,7 @@ class PaymentController extends AbstractController
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
 
-        $values = ['html' => ''];
+        $variables = ['html' => ''];
 
         $paymentMethod = $registration->getPaymentmethod();
 
@@ -99,17 +109,24 @@ class PaymentController extends AbstractController
          */
         $updateRegistration = false;
 
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'ProcessSuccess' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, $registration, GeneralUtility::_GET(), $this]
+        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
+        $processPaymentSuccessEvent = new ProcessPaymentSuccessEvent(
+            $variables,
+            $paymentMethod,
+            $updateRegistration,
+            $registration,
+            $getVariables,
+            $this
         );
+        $this->eventDispatcher->dispatch($processPaymentSuccessEvent);
+        $variables = $processPaymentSuccessEvent->getVariables();
+        $updateRegistration = $processPaymentSuccessEvent->getUpdateRegistration();
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
         }
 
-        $this->view->assign('result', $values);
+        $this->view->assign('result', $variables);
     }
 
     /**
@@ -121,7 +138,7 @@ class PaymentController extends AbstractController
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
 
-        $values = ['html' => ''];
+        $variables = ['html' => ''];
 
         $paymentMethod = $registration->getPaymentmethod();
 
@@ -131,11 +148,20 @@ class PaymentController extends AbstractController
         $updateRegistration = false;
         $removeRegistration = false;
 
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'ProcessFailure' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, &$removeRegistration, $registration, GeneralUtility::_GET(), $this]
+        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
+        $processPaymentFailureEvent = new ProcessPaymentFailureEvent(
+            $variables,
+            $paymentMethod,
+            $updateRegistration,
+            $removeRegistration,
+            $registration,
+            $getVariables,
+            $this
         );
+        $this->eventDispatcher->dispatch($processPaymentFailureEvent);
+        $variables = $processPaymentFailureEvent->getVariables();
+        $updateRegistration = $processPaymentFailureEvent->getUpdateRegistration();
+        $removeRegistration = $processPaymentFailureEvent->getRemoveRegistration();
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
@@ -149,7 +175,7 @@ class PaymentController extends AbstractController
             $this->registrationRepository->remove($registration);
         }
 
-        $this->view->assign('result', $values);
+        $this->view->assign('result', $variables);
     }
 
     /**
@@ -161,7 +187,7 @@ class PaymentController extends AbstractController
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
 
-        $values = ['html' => ''];
+        $variables = ['html' => ''];
 
         $paymentMethod = $registration->getPaymentmethod();
 
@@ -171,11 +197,20 @@ class PaymentController extends AbstractController
         $updateRegistration = false;
         $removeRegistration = false;
 
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'ProcessCancel' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, &$removeRegistration, $registration, GeneralUtility::_GET(), $this]
+        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
+        $processPaymentCancelEvent = new ProcessPaymentCancelEvent(
+            $variables,
+            $paymentMethod,
+            $updateRegistration,
+            $removeRegistration,
+            $registration,
+            $getVariables,
+            $this
         );
+        $this->eventDispatcher->dispatch($processPaymentCancelEvent);
+        $variables = $processPaymentCancelEvent->getVariables();
+        $updateRegistration = $processPaymentCancelEvent->getUpdateRegistration();
+        $removeRegistration = $processPaymentCancelEvent->getRemoveRegistration();
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
@@ -189,7 +224,7 @@ class PaymentController extends AbstractController
             $this->registrationRepository->remove($registration);
         }
 
-        $this->view->assign('result', $values);
+        $this->view->assign('result', $variables);
     }
 
     /**
@@ -201,7 +236,7 @@ class PaymentController extends AbstractController
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
 
-        $values = ['html' => ''];
+        $variables = ['html' => ''];
 
         $paymentMethod = $registration->getPaymentmethod();
 
@@ -212,17 +247,24 @@ class PaymentController extends AbstractController
          */
         $updateRegistration = false;
 
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'ProcessNotify' . ucfirst($paymentMethod),
-            [&$values, &$updateRegistration, $registration, GeneralUtility::_GET(), $this]
+        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
+        $processPaymentNotifyEvent = new ProcessPaymentNotifyEvent(
+            $variables,
+            $paymentMethod,
+            $updateRegistration,
+            $registration,
+            $getVariables,
+            $this
         );
+        $this->eventDispatcher->dispatch($processPaymentNotifyEvent);
+        $variables = $processPaymentNotifyEvent->getVariables();
+        $updateRegistration = $processPaymentNotifyEvent->getUpdateRegistration();
 
         if ($updateRegistration) {
             $this->registrationRepository->update($registration);
         }
 
-        $this->view->assign('result', $values);
+        $this->view->assign('result', $variables);
     }
 
     /**

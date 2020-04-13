@@ -9,11 +9,12 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Event\ModifyEventQueryConstraintsEvent;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * The repository for Events
@@ -30,6 +31,19 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected $defaultOrderings = [
         'startdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
     ];
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
+
+    /**
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * Disable the use of storage records, because the StoragePage can be set
@@ -67,13 +81,14 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setTopEventConstraint($query, $eventDemand, $constraints);
         $this->setYearMonthDayRestriction($query, $eventDemand, $constraints);
 
-        /** @var Dispatcher $signalSlotDispatcher */
-        $signalSlotDispatcher = $this->objectManager->get(Dispatcher::class);
-        $signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'ModifyQueryConstraints',
-            [&$constraints, $query, $eventDemand, $this]
+        $modifyEventQueryConstraintsEvent = new ModifyEventQueryConstraintsEvent(
+            $constraints,
+            $query,
+            $eventDemand,
+            $this
         );
+        $this->eventDispatcher->dispatch($modifyEventQueryConstraintsEvent);
+        $constraints = $modifyEventQueryConstraintsEvent->getConstraints();
 
         $this->setOrderingsFromDemand($query, $eventDemand);
 

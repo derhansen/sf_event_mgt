@@ -10,7 +10,14 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
@@ -87,17 +94,13 @@ class PaymentControllerTest extends UnitTestCase
             'registration' => $mockRegistration,
             'html' => ''
         ];
-        $updateRegistration = false;
-        $arguments = [&$values, &$updateRegistration, $mockRegistration, $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
-        $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
-            'redirectActionBeforeRedirectPaypal',
-            $arguments
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ProcessPaymentInitializeEvent($values, 'paypal', false, $mockRegistration, $this->subject)
         );
-        $this->subject->_set('signalSlotDispatcher', $mockedSignalSlotDispatcher);
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -128,17 +131,13 @@ class PaymentControllerTest extends UnitTestCase
         $values = [
             'html' => ''
         ];
-        $updateRegistration = false;
-        $arguments = [&$values, &$updateRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
-        $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
-            'successActionProcessSuccessPaypal',
-            $arguments
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ProcessPaymentSuccessEvent($values, 'paypal', false, $mockRegistration, [], $this->subject)
         );
-        $this->subject->_set('signalSlotDispatcher', $mockedSignalSlotDispatcher);
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -169,18 +168,13 @@ class PaymentControllerTest extends UnitTestCase
         $values = [
             'html' => ''
         ];
-        $updateRegistration = false;
-        $removeRegistration = false;
-        $arguments = [&$values, &$updateRegistration, &$removeRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
-        $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
-            'failureActionProcessFailurePaypal',
-            $arguments
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ProcessPaymentFailureEvent($values, 'paypal', false, false, $mockRegistration, [], $this->subject)
         );
-        $this->subject->_set('signalSlotDispatcher', $mockedSignalSlotDispatcher);
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -211,18 +205,13 @@ class PaymentControllerTest extends UnitTestCase
         $values = [
             'html' => ''
         ];
-        $updateRegistration = false;
-        $removeRegistration = false;
-        $arguments = [&$values, &$updateRegistration, &$removeRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
-        $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
-            'cancelActionProcessCancelPaypal',
-            $arguments
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ProcessPaymentCancelEvent($values, 'paypal', false, false, $mockRegistration, [], $this->subject)
         );
-        $this->subject->_set('signalSlotDispatcher', $mockedSignalSlotDispatcher);
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
@@ -253,17 +242,13 @@ class PaymentControllerTest extends UnitTestCase
         $values = [
             'html' => ''
         ];
-        $updateRegistration = false;
-        $arguments = [&$values, &$updateRegistration, $mockRegistration, [], $this->subject];
 
-        $mockedSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)
-            ->setMethods(['dispatch'])->disableOriginalConstructor()->getMock();
-        $mockedSignalSlotDispatcher->expects($this->once())->method('dispatch')->with(
-            PaymentController::class,
-            'notifyActionProcessNotifyPaypal',
-            $arguments
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ProcessPaymentNotifyEvent($values, 'paypal', false, $mockRegistration, [], $this->subject)
         );
-        $this->subject->_set('signalSlotDispatcher', $mockedSignalSlotDispatcher);
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);

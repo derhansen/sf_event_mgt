@@ -9,13 +9,14 @@ namespace DERHANSEN\SfEventMgt\Controller;
  */
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * EventController
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+abstract class AbstractController extends ActionController
 {
     /**
      * Properties in this array will be ignored by overwriteDemandObject()
@@ -249,19 +250,6 @@ abstract class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\Acti
         \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository $fieldRepository
     ) {
         $this->fieldRepository = $fieldRepository;
-    }
-
-    /**
-     * Dispatches the signal with the given name
-     *
-     * @param string $signalClassName
-     * @param string $signalName
-     * @param array $arguments
-     * @return mixed
-     */
-    protected function signalDispatch($signalClassName, $signalName, array $arguments)
-    {
-        return $this->signalSlotDispatcher->dispatch($signalClassName, $signalName, $arguments);
     }
 
     /**

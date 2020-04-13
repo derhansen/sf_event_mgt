@@ -14,6 +14,18 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationConfirmedEvent;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationSavedEvent;
+use DERHANSEN\SfEventMgt\Event\EventPidCheckFailedEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyCalendarViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyCancelRegistrationViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyConfirmRegistrationViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyCreateDependingRegistrationsEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyDetailViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyRegistrationViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
@@ -214,18 +226,21 @@ class EventController extends AbstractController
         $organisators = $this->organisatorRepository->findDemanded($foreignRecordDemand);
         $speakers = $this->speakerRepository->findDemanded($foreignRecordDemand);
 
-        $values = [
-            'events' => $events,
-            'categories' => $categories,
-            'locations' => $locations,
-            'organisators' => $organisators,
-            'speakers' => $speakers,
-            'overwriteDemand' => $overwriteDemand,
-            'eventDemand' => $eventDemand
-        ];
-
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+        $modifyListViewVariablesEvent = new ModifyListViewVariablesEvent(
+            [
+                'events' => $events,
+                'categories' => $categories,
+                'locations' => $locations,
+                'organisators' => $organisators,
+                'speakers' => $speakers,
+                'overwriteDemand' => $overwriteDemand,
+                'eventDemand' => $eventDemand
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyListViewVariablesEvent);
+        $variables = $modifyListViewVariablesEvent->getVariables();
+        $this->view->assignMultiple($variables);
 
         $this->eventCacheService->addPageCacheTagsByEventDemandObject($eventDemand);
     }
@@ -274,22 +289,29 @@ class EventController extends AbstractController
             $events
         );
 
-        $values = [
-            'events' => $events,
-            'weeks' => $weeks,
-            'categories' => $this->categoryRepository->findDemanded($categoryDemand),
-            'locations' => $this->locationRepository->findDemanded($foreignRecordDemand),
-            'organisators' => $this->organisatorRepository->findDemanded($foreignRecordDemand),
-            'eventDemand' => $eventDemand,
-            'overwriteDemand' => $overwriteDemand,
-            'currentPageId' => $GLOBALS['TSFE']->id,
-            'firstDayOfMonth' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $currentMonth, $currentYear)),
-            'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
-            'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
-        ];
+        $modifyCalendarViewVariablesEvent = new ModifyCalendarViewVariablesEvent(
+            [
+                'events' => $events,
+                'weeks' => $weeks,
+                'categories' => $this->categoryRepository->findDemanded($categoryDemand),
+                'locations' => $this->locationRepository->findDemanded($foreignRecordDemand),
+                'organisators' => $this->organisatorRepository->findDemanded($foreignRecordDemand),
+                'eventDemand' => $eventDemand,
+                'overwriteDemand' => $overwriteDemand,
+                'currentPageId' => $GLOBALS['TSFE']->id,
+                'firstDayOfMonth' => \DateTime::createFromFormat(
+                    'd.m.Y',
+                    sprintf('1.%s.%s', $currentMonth, $currentYear)
+                ),
+                'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
+                'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyCalendarViewVariablesEvent);
+        $variables = $modifyCalendarViewVariablesEvent->getVariables();
 
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+        $this->view->assignMultiple($variables);
     }
 
     /**
@@ -341,9 +363,12 @@ class EventController extends AbstractController
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
-        $values = ['event' => $event];
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+
+        $modifyDetailViewVariablesEvent = new ModifyDetailViewVariablesEvent(['event' => $event], $this);
+        $this->eventDispatcher->dispatch($modifyDetailViewVariablesEvent);
+        $variables = $modifyDetailViewVariablesEvent->getVariables();
+
+        $this->view->assignMultiple($variables);
         if ($event !== null) {
             $this->eventCacheService->addCacheTagsByEventRecords([$event]);
         }
@@ -437,13 +462,16 @@ class EventController extends AbstractController
             $paymentMethods = $this->paymentService->getPaymentMethods();
         }
 
-        $values = [
-            'event' => $event,
-            'paymentMethods' => $paymentMethods,
-        ];
-
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+        $modifyRegistrationViewVariablesEvent = new ModifyRegistrationViewVariablesEvent(
+            [
+                'event' => $event,
+                'paymentMethods' => $paymentMethods,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyRegistrationViewVariablesEvent);
+        $variables = $modifyRegistrationViewVariablesEvent->getVariables();
+        $this->view->assignMultiple($variables);
     }
 
     /**
@@ -630,7 +658,7 @@ class EventController extends AbstractController
             // Fix language of registration fields if other than default language
             $this->registrationService->fixRegistationFieldValueLanguage($registration, $event);
 
-            $this->signalDispatch(__CLASS__, __FUNCTION__ . 'AfterRegistrationSaved', [$registration, $this]);
+            $this->eventDispatcher->dispatch(new AfterRegistrationSavedEvent($registration, $this));
 
             // Send notifications to user and admin if confirmation link should be sent
             if (!$autoConfirmation) {
@@ -649,12 +677,13 @@ class EventController extends AbstractController
             }
 
             // Create given amount of registrations if necessary
-            $createDependingRegistrations = $registration->getAmountOfRegistrations() > 1;
-            $this->signalDispatch(
-                __CLASS__,
-                __FUNCTION__ . 'BeforeCreateDependingRegistrations',
-                [$registration, &$createDependingRegistrations, $this]
+            $modifyCreateDependingRegistrationsEvent = new ModifyCreateDependingRegistrationsEvent(
+                $registration,
+                ($registration->getAmountOfRegistrations() > 1),
+                $this
             );
+            $this->eventDispatcher->dispatch($modifyCreateDependingRegistrationsEvent);
+            $createDependingRegistrations = $modifyCreateDependingRegistrationsEvent->getCreateDependingRegistrations();
             if ($createDependingRegistrations) {
                 $this->registrationService->createDependingRegistrations($registration);
             }
@@ -779,7 +808,7 @@ class EventController extends AbstractController
             $event = $registration->getEvent();
             $this->registrationRepository->update($registration);
 
-            $this->signalDispatch(__CLASS__, __FUNCTION__ . 'AfterRegistrationConfirmed', [$registration, $this]);
+            $this->eventDispatcher->dispatch(new AfterRegistrationConfirmedEvent($registration, $this));
 
             $messageType = MessageType::REGISTRATION_CONFIRMED;
             if ($registration->getWaitlist()) {
@@ -824,16 +853,19 @@ class EventController extends AbstractController
             $this->redirectToUri($uri);
         }
 
-        $values = [
-            'failed' => $failed,
-            'messageKey' => $messageKey,
-            'titleKey' => $titleKey,
-            'event' => $event,
-            'registration' => $registration,
-        ];
-
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+        $modifyConfirmRegistrationViewVariablesEvent = new ModifyConfirmRegistrationViewVariablesEvent(
+            [
+                'failed' => $failed,
+                'messageKey' => $messageKey,
+                'titleKey' => $titleKey,
+                'event' => $event,
+                'registration' => $registration,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyConfirmRegistrationViewVariablesEvent);
+        $variables = $modifyConfirmRegistrationViewVariablesEvent->getVariables();
+        $this->view->assignMultiple($variables);
     }
 
     /**
@@ -849,7 +881,8 @@ class EventController extends AbstractController
         $event = null;
 
         /* @var $registration Registration */
-        list($failed, $registration, $messageKey, $titleKey) = $this->registrationService->checkCancelRegistration($reguid, $hmac);
+        list($failed, $registration, $messageKey, $titleKey) =
+            $this->registrationService->checkCancelRegistration($reguid, $hmac);
 
         if ($failed === false) {
             $event = $registration->getEvent();
@@ -876,22 +909,25 @@ class EventController extends AbstractController
             // Finally cancel registration
             $this->registrationRepository->remove($registration);
 
-            // Dispatch signal, so waitlist registrations can be moved up
-            $this->signalDispatch(__CLASS__, __FUNCTION__ . 'WaitlistMoveUp', [$event, $this]);
+            // Dispatch event, so waitlist registrations can be moved up
+            $this->eventDispatcher->dispatch(new WaitlistMoveUpEvent($event, $this));
 
             // Flush page cache for event, since new registration has been added
             $this->eventCacheService->flushEventCache($event->getUid(), $event->getPid());
         }
 
-        $values = [
-            'failed' => $failed,
-            'messageKey' => $messageKey,
-            'titleKey' => $titleKey,
-            'event' => $event,
-        ];
-
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+        $modifyCancelRegistrationViewVariablesEvent = new ModifyCancelRegistrationViewVariablesEvent(
+            [
+                'failed' => $failed,
+                'messageKey' => $messageKey,
+                'titleKey' => $titleKey,
+                'event' => $event,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyCancelRegistrationViewVariablesEvent);
+        $variables = $modifyCancelRegistrationViewVariablesEvent->getVariables();
+        $this->view->assignMultiple($variables);
     }
 
     /**
@@ -966,18 +1002,21 @@ class EventController extends AbstractController
         $speakers = $this->speakerRepository->findDemanded($foreignRecordDemand);
         $events = $this->eventRepository->findDemanded($eventDemand);
 
-        $values = [
-            'events' => $events,
-            'categories' => $categories,
-            'locations' => $locations,
-            'organisators' => $organisators,
-            'speakers' => $speakers,
-            'searchDemand' => $searchDemand,
-            'overwriteDemand' => $overwriteDemand,
-        ];
-
-        $this->signalDispatch(__CLASS__, __FUNCTION__ . 'BeforeRenderView', [&$values, $this]);
-        $this->view->assignMultiple($values);
+        $modifySearchViewVariablesEvent = new ModifySearchViewVariablesEvent(
+            [
+                'events' => $events,
+                'categories' => $categories,
+                'locations' => $locations,
+                'organisators' => $organisators,
+                'speakers' => $speakers,
+                'searchDemand' => $searchDemand,
+                'overwriteDemand' => $overwriteDemand,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifySearchViewVariablesEvent);
+        $variables = $modifySearchViewVariablesEvent->getVariables();
+        $this->view->assignMultiple($variables);
     }
 
     /**
@@ -1041,14 +1080,7 @@ class EventController extends AbstractController
             true
         );
         if (count($allowedStoragePages) > 0 && !in_array($event->getPid(), $allowedStoragePages)) {
-            $this->signalSlotDispatcher->dispatch(
-                __CLASS__,
-                'checkPidOfEventRecordFailedInDetailAction',
-                [
-                    'event' => $event,
-                    'eventController' => $this
-                ]
-            );
+            $this->eventDispatcher->dispatch(new EventPidCheckFailedEvent($event, $this));
             $event = null;
         }
 

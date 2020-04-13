@@ -21,6 +21,15 @@ use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationConfirmedEvent;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationSavedEvent;
+use DERHANSEN\SfEventMgt\Event\EventPidCheckFailedEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyCancelRegistrationViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyConfirmRegistrationViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyCreateDependingRegistrationsEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
@@ -28,6 +37,7 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -344,8 +354,7 @@ class EventControllerTest extends UnitTestCase
         $eventCacheService->expects($this->once())->method('addPageCacheTagsByEventDemandObject');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
@@ -353,12 +362,18 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'overwriteDemand' => [],
             'eventDemand' => $demand
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifyListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->listAction();
     }
@@ -431,8 +446,7 @@ class EventControllerTest extends UnitTestCase
         $eventCacheService->expects($this->once())->method('addPageCacheTagsByEventDemandObject');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
@@ -440,12 +454,18 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifyListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->listAction($overrideDemand);
     }
@@ -517,8 +537,7 @@ class EventControllerTest extends UnitTestCase
         $eventCacheService->expects($this->once())->method('addPageCacheTagsByEventDemandObject');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
@@ -526,12 +545,18 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifyListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->listAction($overrideDemand);
     }
@@ -548,9 +573,10 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with(['event' => $event]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addCacheTagsByEventRecords'])
@@ -581,9 +607,10 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->registrationAction($event);
     }
@@ -914,20 +941,15 @@ class EventControllerTest extends UnitTestCase
             ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST, 'eventuid' => 1, 'hmac' => 'somehmac']
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionAfterRegistrationSaved',
-                [$registration, $this->subject]
-            );
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionBeforeCreateDependingRegistrations',
-                [$registration, false, $this->subject]
-            );
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationSavedEvent($registration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -1002,20 +1024,15 @@ class EventControllerTest extends UnitTestCase
             ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionAfterRegistrationSaved',
-                [$registration, $this->subject]
-            );
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionBeforeCreateDependingRegistrations',
-                [$registration, false, $this->subject]
-            );
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationSavedEvent($registration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -1098,21 +1115,15 @@ class EventControllerTest extends UnitTestCase
             ['reguid' => $regUid, 'hmac' => $regHmac]
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionAfterRegistrationSaved',
-                [$registration, $this->subject]
-            );
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionBeforeCreateDependingRegistrations',
-                [$registration, false, $this->subject]
-            );
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
-
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationSavedEvent($registration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
@@ -1189,20 +1200,15 @@ class EventControllerTest extends UnitTestCase
             ['reguid' => $regUid, 'hmac' => $regHmac]
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionAfterRegistrationSaved',
-                [$registration, $this->subject]
-            );
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionBeforeCreateDependingRegistrations',
-                [$registration, false, $this->subject]
-            );
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationSavedEvent($registration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -1284,20 +1290,15 @@ class EventControllerTest extends UnitTestCase
             ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']
         );
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionAfterRegistrationSaved',
-                [$registration, $this->subject]
-            );
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(
-                EventController::class,
-                'saveRegistrationActionBeforeCreateDependingRegistrations',
-                [$registration, true, $this->subject]
-            );
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationSavedEvent($registration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyCreateDependingRegistrationsEvent($registration, true, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -1452,14 +1453,16 @@ class EventControllerTest extends UnitTestCase
      */
     public function confirmRegistrationActionShowsExpectedMessageIfCheckConfirmRegistrationFailed()
     {
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'messageKey' => 'event.message.confirmation_failed_wrong_hmac',
             'titleKey' => 'confirmRegistration.title.failed',
             'event' => null,
             'registration' => null,
             'failed' => true
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1473,12 +1476,16 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['checkConfirmRegistration'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
+        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')
+            ->will($this->returnValue($returnedArray));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifyConfirmRegistrationViewVariablesEvent($variables, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->confirmRegistrationAction(1, 'INVALID-HMAC');
     }
@@ -1497,14 +1504,16 @@ class EventControllerTest extends UnitTestCase
         $mockRegistration->expects($this->any())->method('getEvent');
         $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'messageKey' => 'event.message.confirmation_successful',
             'titleKey' => 'confirmRegistration.title.successful',
             'event' => null,
             'registration' => $mockRegistration,
             'failed' => false
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1519,8 +1528,10 @@ class EventControllerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
-        $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')->with($mockRegistration);
+        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')
+            ->will($this->returnValue($returnedArray));
+        $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')
+            ->with($mockRegistration);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
@@ -1537,12 +1548,15 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(EventController::class, 'confirmRegistrationActionAfterRegistrationConfirmed');
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(EventController::class, 'confirmRegistrationActionBeforeRenderView');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationConfirmedEvent($mockRegistration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyConfirmRegistrationViewVariablesEvent($variables, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
     }
@@ -1601,12 +1615,24 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationRepository->expects($this->once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')
-            ->with(EventController::class, 'confirmRegistrationActionAfterRegistrationConfirmed');
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')
-            ->with(EventController::class, 'confirmRegistrationActionBeforeRenderView');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new AfterRegistrationConfirmedEvent($mockRegistration, $this->subject)
+        );
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyConfirmRegistrationViewVariablesEvent(
+                [
+                    'failed' => false,
+                    'messageKey' => 'event.message.confirmation_waitlist_successful',
+                    'titleKey' => 'confirmRegistrationWaitlist.title.successful',
+                    'event' => null,
+                    'registration' => $mockRegistration,
+                ],
+                $this->subject
+            )
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
     }
@@ -1619,13 +1645,15 @@ class EventControllerTest extends UnitTestCase
      */
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationFailed()
     {
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'messageKey' => 'event.message.cancel_failed_wrong_hmac',
             'titleKey' => 'cancelRegistration.title.failed',
             'event' => null,
             'failed' => true
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1642,9 +1670,13 @@ class EventControllerTest extends UnitTestCase
         $mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifyCancelRegistrationViewVariablesEvent($variables, $this->subject)
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
+
 
         $this->subject->cancelRegistrationAction(1, 'INVALID-HMAC');
     }
@@ -1704,27 +1736,26 @@ class EventControllerTest extends UnitTestCase
         $eventCacheService->expects($this->once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'messageKey' => 'event.message.cancel_successful',
             'titleKey' => 'cancelRegistration.title.successful',
             'event' => $mockEvent,
             'failed' => false
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->at(0))->method('dispatch')->with(
-            EventController::class,
-            'cancelRegistrationActionWaitlistMoveUp',
-            $this->anything()
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+            new WaitlistMoveUpEvent($mockEvent, $this->subject)
         );
-        $mockSignalSlotDispatcher->expects($this->at(1))->method('dispatch')->with(
-            EventController::class,
-            'cancelRegistrationActionBeforeRenderView',
-            $this->anything()
+        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+            new ModifyCancelRegistrationViewVariablesEvent($variables, $this->subject)
         );
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
     }
@@ -1886,8 +1917,7 @@ class EventControllerTest extends UnitTestCase
         $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
@@ -1895,12 +1925,21 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'searchDemand' => null,
             'overwriteDemand' => [],
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifySearchViewVariablesEvent(
+                $variables,
+                $this->subject
+            )
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction();
     }
@@ -1972,8 +2011,7 @@ class EventControllerTest extends UnitTestCase
         $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $variables = [
             'events' => $allEvents,
             'categories' => $allCategories,
             'locations' => $allLocations,
@@ -1981,12 +2019,21 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => [],
-        ]);
+        ];
+
+        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view->expects($this->once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+            new ModifySearchViewVariablesEvent(
+                $variables,
+                $this->subject
+            )
+        );
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand);
     }
@@ -2057,9 +2104,10 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand);
     }
@@ -2141,9 +2189,10 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand);
     }
@@ -2215,9 +2264,10 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand, $overrideDemand);
     }
@@ -2289,9 +2339,10 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand, $overrideDemand);
     }
@@ -2307,9 +2358,10 @@ class EventControllerTest extends UnitTestCase
         $view->expects($this->once())->method('assignMultiple')->with(['event' => $mockEvent]);
         $this->inject($this->subject, 'view', $view);
 
-        $mockSignalSlotDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
-        $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch');
+        $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addCacheTagsByEventRecords'])
@@ -2461,29 +2513,33 @@ class EventControllerTest extends UnitTestCase
      */
     public function checkPidOfEventRecordWorks()
     {
-        $mockedSignalDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
-        $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
 
-        $news = new Event();
+        $event = new Event();
 
         // No startingpoint
         $mockedController->_set('settings', ['storagePage' => '']);
-        $news->setPid(12);
+        $event->setPid(12);
 
-        $this->assertEquals($news, $mockedController->_call('checkPidOfEventRecord', $news));
+        $this->assertEquals($event, $mockedController->_call('checkPidOfEventRecord', $event));
 
         // startingpoint defined
         $mockedController->_set('settings', ['storagePage' => '1,2,123,456']);
-        $news->setPid(123);
+        $event->setPid(123);
 
-        $this->assertEquals($news, $mockedController->_call('checkPidOfEventRecord', $news));
+        $this->assertEquals($event, $mockedController->_call('checkPidOfEventRecord', $event));
 
         // startingpoint is different
         $mockedController->_set('settings', ['storagePage' => '123,456']);
-        $news->setPid(12);
+        $event->setPid(12);
 
-        $this->assertEquals(null, $mockedController->_call('checkPidOfEventRecord', $news));
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects($this->once())->method('dispatch')
+            ->with(new EventPidCheckFailedEvent($event, $mockedController));
+        $mockedController->_set('eventDispatcher', $eventDispatcher);
+
+        $this->assertEquals(null, $mockedController->_call('checkPidOfEventRecord', $event));
     }
 
     /**
@@ -2491,10 +2547,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function evaluateSingleEventSettingIsWorking()
     {
-        $mockedSignalDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
-        $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
-
         // singleEvent setting not configured not configured
         $mockedController->_set('settings', ['singleEvent' => null]);
         $this->assertNull($mockedController->_call('evaluateSingleEventSetting', null));
@@ -2519,9 +2572,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function evaluateIsShortcutSettingIsWorking()
     {
-        $mockedSignalDispatcher = $this->getMockBuilder(Dispatcher::class)->disableOriginalConstructor()->getMock();
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
-        $mockedController->_set('signalSlotDispatcher', $mockedSignalDispatcher);
 
         // isShortcut not configured
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 0]]);

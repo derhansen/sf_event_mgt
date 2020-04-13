@@ -8,10 +8,14 @@ namespace DERHANSEN\SfEventMgt\Service;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
+use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * NotificationService
@@ -70,9 +74,9 @@ class NotificationService
     protected $attachmentService;
 
     /**
-     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+     * @var EventDispatcherInterface
      */
-    protected $signalSlotDispatcher = null;
+    protected $eventDispatcher;
 
     /**
      * DI for $attachmentService
@@ -149,13 +153,11 @@ class NotificationService
     }
 
     /**
-     * DI for $signalSlotDispatcher
-     *
-     * @param Dispatcher $signalSlotDispatcher
+     * @param EventDispatcherInterface $eventDispatcher
      */
-    public function injectSignalSlotDispatcher(\TYPO3\CMS\Extbase\SignalSlot\Dispatcher $signalSlotDispatcher)
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
     {
-        $this->signalSlotDispatcher = $signalSlotDispatcher;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -244,7 +246,9 @@ class NotificationService
     {
         list($template, $subject) = $this->getUserMessageTemplateSubject($settings, $type, $customNotification);
 
-        if (is_null($event) || is_null($registration) || !is_array($settings) || (substr($template, -5) != '.html')) {
+        if (is_null($event) || is_null($registration) || is_null($type) || !is_array($settings) ||
+            (substr($template, -5) != '.html')
+        ) {
             return false;
         }
 
@@ -276,21 +280,27 @@ class NotificationService
                 $attachments[] = $iCalAttachment;
             }
 
-            $senderName = $settings['notification']['senderName'];
-            $senderEmail = $settings['notification']['senderEmail'];
-            $replyToEmail = $settings['notification']['replyToEmail'];
-
-            $this->signalSlotDispatcher->dispatch(
-                __CLASS__,
-                __FUNCTION__ . 'CustomSenderData',
-                [&$senderName, &$senderEmail, &$replyToEmail, $registration, $type, $this]
+            $modifyUserMessageSenderEvent = new ModifyUserMessageSenderEvent(
+                $settings['notification']['senderName'] ?? '',
+                $settings['notification']['senderEmail'] ?? '',
+                $settings['notification']['replyToEmail'] ?? '',
+                $registration,
+                $type,
+                $this
             );
+            $this->eventDispatcher->dispatch($modifyUserMessageSenderEvent);
+            $senderName = $modifyUserMessageSenderEvent->getSenderName();
+            $senderEmail = $modifyUserMessageSenderEvent->getSenderEmail();
+            $replyToEmail = $modifyUserMessageSenderEvent->getReplyToEmail();
 
-            $this->signalSlotDispatcher->dispatch(
-                __CLASS__,
-                __FUNCTION__ . 'CustomAttachmentData',
-                [&$attachments, $registration, $type, $this]
+            $modifyUserAttachmentsEvent = new ModifyUserMessageAttachmentsEvent(
+                $attachments,
+                $registration,
+                $type,
+                $this
             );
+            $this->eventDispatcher->dispatch($modifyUserMessageSenderEvent);
+            $attachments = $modifyUserAttachmentsEvent->getAttachments();
 
             $result = $this->emailService->sendEmailMessage(
                 $senderEmail,
@@ -302,11 +312,17 @@ class NotificationService
                 $replyToEmail
             );
 
-            $this->signalSlotDispatcher->dispatch(
-                __CLASS__,
-                __FUNCTION__ . 'AfterNotificationSent',
-                [$registration, $body, $subject, $attachments, $senderName, $senderEmail, $replyToEmail, $this]
+            $afterUserMessageSentEvent = new AfterUserMessageSentEvent(
+                $registration,
+                $body,
+                $subject,
+                $attachments,
+                $senderName,
+                $senderEmail,
+                $replyToEmail,
+                $this
             );
+            $this->eventDispatcher->dispatch($afterUserMessageSentEvent);
 
             // Cleanup iCal attachment if available
             if ($iCalAttachment !== '') {
@@ -430,11 +446,16 @@ class NotificationService
             );
         }
 
-        $this->signalSlotDispatcher->dispatch(
-            __CLASS__,
-            __FUNCTION__ . 'AfterNotificationSent',
-            [$registration, $body, $subject, $attachments, $senderName, $senderEmail, $this]
+        $afterAdminMessageSentEvent = new AfterAdminMessageSentEvent(
+            $registration,
+            $body,
+            $subject,
+            $attachments,
+            $senderName,
+            $senderEmail,
+            $this
         );
+        $this->eventDispatcher->dispatch($afterAdminMessageSentEvent);
 
         return $allEmailsSent;
     }
