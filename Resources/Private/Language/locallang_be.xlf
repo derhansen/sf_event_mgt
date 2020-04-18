@@ -288,6 +288,9 @@
 			<trans-unit id="administration.notify.label.template">
 				<source>Template:</source>
 			</trans-unit>
+			<trans-unit id="administration.notify.senderEmailError.title">
+				<source>No sender e-mail address</source>
+			</trans-unit>
 			<trans-unit id="administration.notify.senderEmailError">
 				<source>The sender e-mail address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
 			</trans-unit>
