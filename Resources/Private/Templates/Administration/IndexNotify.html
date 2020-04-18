@@ -11,84 +11,80 @@
 </f:section>
 
 <f:section name="content">
-    <div class="callout callout-info">
-        <div class="media">
-            <div class="media-left">
-                        <span class="fa-stack fa-lg callout-icon"> <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-info fa-stack-1x"></i> </span>
+    <f:if condition="{settings.notification.disabled}">
+        <f:then>
+
+            <f:render partial="Administration/NotificationDisabledWarning" />
+
+        </f:then>
+        <f:else>
+
+            <f:render partial="Administration/EventRecipients" arguments="{event: event}" />
+
+            <div class="notifyhead">
+                <f:if condition="{settings.notification.senderEmail} == ''">
+                    <f:then>
+                        <p class="error">
+                            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.senderEmailError"/>
+                        </p>
+                    </f:then>
+                    <f:else>
+                        <p><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.description" /></p>
+
+                        <f:form name="notify" action="notify" arguments="{event: event}" class="form-horizontal">
+                            <div class="form-group">
+                                <label for="customNotification" class="col-xs-2 control-label">
+                                    <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.template"/>
+                                </label>
+
+                                <div class="col-xs-10">
+                                    <f:form.select id="customNotification" name="customNotification" options="{customNotifications}" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <button type="submit" class="btn btn-default" name="search" title="Search">
+                                        {f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sendNotifications')}
+                                    </button>
+                                </div>
+                            </div>
+                        </f:form>
+                    </f:else>
+                </f:if>
             </div>
-            <div class="media-body">
-                <h4 class="callout-title">
-                    <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.event" /> {event.title}
-                </h4>
-                <div class="callout-body">
-                     <f:count subject="{event.registration}"/> <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.recipients" />
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <div class="notifyhead">
-        <f:if condition="{settings.notification.senderEmail} == ''">
-            <f:then>
-                <p class="error">
-                    <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.senderEmailError"/>
-                </p>
-            </f:then>
-            <f:else>
-                <p><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.description" /></p>
+            <h3>
+                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notificationHistory" />
+            </h3>
 
-                <f:form name="notify" action="notify" arguments="{event: event}" class="form-horizontal">
-                    <div class="form-group">
-                        <label for="customNotification" class="col-xs-2 control-label">
-                            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.template"/>
-                        </label>
-
-                        <div class="col-xs-10">
-                            <f:form.select id="customNotification" name="customNotification" options="{customNotifications}" class="form-control" />
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-xs-offset-2 col-xs-10">
-                            <button type="submit" class="btn btn-default" name="search" title="Search">
-                                {f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sendNotifications')}
-                            </button>
-                        </div>
-                    </div>
-                </f:form>
-            </f:else>
-        </f:if>
-    </div>
-
-    <h3>
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notificationHistory" />
-    </h3>
-
-    <table cellpadding="0" cellmargin="0" cellspacing="0" class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.date"/></th>
-                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.details"/></th>
-                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.emailsSent"/></th>
-                <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sentBy"/></th>
-            </tr>
-        </thead>
-        <tbody>
-            <f:for each="{logEntries}" as="logEntry">
+            <table cellpadding="0" cellmargin="0" cellspacing="0" class="table table-striped table-hover">
+                <thead>
                 <tr>
-                    <td class="logdate"><f:format.date format="%d.%m.%Y - %H:%M:%S">{logEntry.tstamp}</f:format.date></td>
-                    <td>{logEntry.details}</td>
-                    <td>{logEntry.emailsSent}</td>
-                    <td>{logEntry.cruserId.username}</td>
+                    <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.date"/></th>
+                    <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.details"/></th>
+                    <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.emailsSent"/></th>
+                    <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sentBy"/></th>
                 </tr>
-            </f:for>
-        </tbody>
-    </table>
+                </thead>
+                <tbody>
+                <f:for each="{logEntries}" as="logEntry">
+                    <tr>
+                        <td class="logdate"><f:format.date format="%d.%m.%Y - %H:%M:%S">{logEntry.tstamp}</f:format.date></td>
+                        <td>{logEntry.details}</td>
+                        <td>{logEntry.emailsSent}</td>
+                        <td>{logEntry.cruserId.username}</td>
+                    </tr>
+                </f:for>
+                </tbody>
+            </table>
 
-    <f:link.action action="list" class="btn btn-default">
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.cancelSendNotifications" />
-    </f:link.action>
+            <f:link.action action="list" class="btn btn-default">
+                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.cancelSendNotifications" />
+            </f:link.action>
+
+        </f:else>
+    </f:if>
 
 </f:section>
 

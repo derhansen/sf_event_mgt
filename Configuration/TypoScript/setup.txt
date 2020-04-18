@@ -111,6 +111,7 @@ plugin.tx_sfeventmgt {
             replyToEmail = {$plugin.tx_sfeventmgt.settings.notification.replyToEmail}
             adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
             registrationDataAsSenderForAdminEmails = {$plugin.tx_sfeventmgt.settings.notification.registrationDataAsSenderForAdminEmails}
+            disabled = {$plugin.tx_sfeventmgt.settings.notification.disabled}
             registrationNew {
                 userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.userSubject}
                 adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationNew.adminSubject}
@@ -178,6 +179,7 @@ module.tx_sfeventmgt {
             senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
             senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
             senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
+            disabled = {$plugin.tx_sfeventmgt.settings.notification.disabled}
             customNotifications {
                 thanksForParticipation {
                     title = Thank you message

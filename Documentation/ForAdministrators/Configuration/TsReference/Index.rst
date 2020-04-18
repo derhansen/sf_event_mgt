@@ -371,6 +371,22 @@ plugin.tx_sfeventmgt
          false
 
  - :Property:
+         settings.notification.disabled
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set, the email notification feature is completely disabled. This includes user and admin emails as well
+         as user notifications from the backend.
+
+         Note, that the functionality of sending Notifications in the backend module is also disabled when this option
+         is set to "true"
+
+   :Default:
+         false
+
+ - :Property:
          settings.notification.registrationNew.userSubject
 
    :Date type:

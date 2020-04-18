@@ -247,7 +247,7 @@ class NotificationService
         list($template, $subject) = $this->getUserMessageTemplateSubject($settings, $type, $customNotification);
 
         if (is_null($event) || is_null($registration) || is_null($type) || !is_array($settings) ||
-            (substr($template, -5) != '.html')
+            (substr($template, -5) != '.html') || (bool)$settings['notification']['disabled']
         ) {
             return false;
         }
@@ -393,7 +393,8 @@ class NotificationService
         list($template, $subject) = $this->getAdminMessageTemplateSubject($settings, $type);
 
         if (is_null($event) || is_null($registration || !is_array($settings)) ||
-            ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false)
+            ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false) ||
+            (bool)$settings['notification']['disabled']
         ) {
             return false;
         }

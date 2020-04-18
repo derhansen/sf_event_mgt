@@ -312,6 +312,12 @@
 			<trans-unit id="administration.nopageselected">
 				<source>Please click the page title in the page tree to the left to show the records on that page.</source>
 			</trans-unit>
+			<trans-unit id="administration.notificationsDisabled.title">
+				<source>Notifications disabled</source>
+			</trans-unit>
+			<trans-unit id="administration.notificationsDisabled.description">
+				<source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
+			</trans-unit>
 			<trans-unit id="events-folder">
 				<source>Events</source>
 			</trans-unit>

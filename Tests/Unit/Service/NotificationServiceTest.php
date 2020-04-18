@@ -593,6 +593,7 @@ class NotificationServiceTest extends UnitTestCase
         $registrations->attach($registration3);
         $registrations->attach($registration4);
 
+        /** @var NotificationService $mockNotificationService */
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
             ->setMethods(['sendUserMessage'])
             ->getMock();
@@ -626,5 +627,47 @@ class NotificationServiceTest extends UnitTestCase
 
         $event = new Event();
         $this->subject->createCustomNotificationLogentry($event, 'A description', 1);
+    }
+
+    /**
+     * @test
+     */
+    public function userNotificationNotSentIfNotificationsDisabled()
+    {
+        $mockEvent = $this->prophesize(Event::class);
+        $mockRegistration = $this->prophesize(Registration::class);
+        $settings = [
+            'notification' => [
+                'disabled' => 1
+            ]
+        ];
+        $result = $this->subject->sendUserMessage(
+            $mockEvent,
+            $mockRegistration,
+            $settings,
+            MessageType::REGISTRATION_NEW
+        );
+        $this->assertFalse($result);
+    }
+
+    /**
+     * @test
+     */
+    public function adminNotificationNotSentIfNotificationsDisabled()
+    {
+        $mockEvent = $this->prophesize(Event::class);
+        $mockRegistration = $this->prophesize(Registration::class);
+        $settings = [
+            'notification' => [
+                'disabled' => 1
+            ]
+        ];
+        $result = $this->subject->sendAdminMessage(
+            $mockEvent,
+            $mockRegistration,
+            $settings,
+            MessageType::REGISTRATION_NEW
+        );
+        $this->assertFalse($result);
     }
 }

@@ -36,6 +36,8 @@ plugin.tx_sfeventmgt {
             adminEmail =
             # cat=plugin.tx_sfeventmgt//a; type=boolean; label=Override the sender for admin emails with email/name of the registration
             registrationDataAsSenderForAdminEmails = 0
+            # cat=plugin.tx_sfeventmgt//a; type=boolean; label=Disables all email notifications
+            disabled = 0
             registrationNew {
                 # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration
                 userSubject = Your registration for event "{event.title}"
