@@ -42,6 +42,9 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass']['DERHANSEN.sf_event_mgt'] =
         'DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks';
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processCmdmapClass']['DERHANSEN.sf_event_mgt'] =
+        'DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks';
+
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['event_clearcache'] =
         \DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks::class . '->clearCachePostProc';
 
