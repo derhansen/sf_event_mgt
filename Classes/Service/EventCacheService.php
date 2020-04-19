@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,7 +26,6 @@ class EventCacheService
      * "tx_sfeventmgt_uid_[event:uid]"
      *
      * @param array $eventRecords array with event records
-     * @return void
      */
     public function addCacheTagsByEventRecords(array $eventRecords)
     {
@@ -44,7 +44,6 @@ class EventCacheService
      * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
-     * @return void
      */
     public function addPageCacheTagsByEventDemandObject(\DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand)
     {
@@ -65,7 +64,6 @@ class EventCacheService
      *
      * @param int $eventUid
      * @param int $eventPid
-     * @return void
      */
     public function flushEventCache(int $eventUid = 0, int $eventPid = 0)
     {

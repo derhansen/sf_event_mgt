@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
@@ -27,12 +28,10 @@ class UserRegistrationControllerTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\UserRegistrationController
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -47,8 +46,6 @@ class UserRegistrationControllerTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -59,7 +56,6 @@ class UserRegistrationControllerTest extends UnitTestCase
      * Test if settings are used in UserRegistrationDemand object
      *
      * @test
-     * @return void
      */
     public function createUserRegistrationDemandObjectFromSettingsTest()
     {
@@ -78,15 +74,15 @@ class UserRegistrationControllerTest extends UnitTestCase
 
         $mockDemand = $this->getMockBuilder(UserRegistrationDemand::class)
             ->getMock();
-        $mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
-        $mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
-        $mockDemand->expects($this->at(2))->method('setOrderField')->with('event.title');
-        $mockDemand->expects($this->at(3))->method('setOrderDirection')->with('asc');
+        $mockDemand->expects(self::at(0))->method('setDisplayMode')->with('all');
+        $mockDemand->expects(self::at(1))->method('setStoragePage')->with(1);
+        $mockDemand->expects(self::at(2))->method('setOrderField')->with('event.title');
+        $mockDemand->expects(self::at(3))->method('setOrderDirection')->with('asc');
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
+        $objectManager->expects(self::any())->method('get')->willReturn($mockDemand);
         $this->inject($mockController, 'objectManager', $objectManager);
 
         $mockController->createUserRegistrationDemandObjectFromSettings($settings);
@@ -96,7 +92,6 @@ class UserRegistrationControllerTest extends UnitTestCase
      * Test if listAction assigns registrations to view
      *
      * @test
-     * @return void
      */
     public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView()
     {
@@ -104,7 +99,7 @@ class UserRegistrationControllerTest extends UnitTestCase
             ->setMethods(['setUser'])
             ->disableOriginalConstructor()
             ->getMock();
-        $demand->expects($this->once())->method('setUser');
+        $demand->expects(self::once())->method('setUser');
         $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -112,14 +107,14 @@ class UserRegistrationControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createUserRegistrationDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createUserRegistrationDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
         $registrationServiceMock = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['getCurrentFeUserObject'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationServiceMock->expects($this->once())->method('getCurrentFeUserObject');
+        $registrationServiceMock->expects(self::once())->method('getCurrentFeUserObject');
         $this->inject($this->subject, 'registrationService', $registrationServiceMock);
 
         $registrationRepository = $this->getMockBuilder(
@@ -127,12 +122,12 @@ class UserRegistrationControllerTest extends UnitTestCase
         )->setMethods(['findRegistrationsByUserRegistrationDemand'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('findRegistrationsByUserRegistrationDemand')
-            ->will($this->returnValue($registrations));
+        $registrationRepository->expects(self::once())->method('findRegistrationsByUserRegistrationDemand')
+            ->willReturn($registrations);
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->at(0))->method('assign')->with('registrations', $registrations);
+        $view->expects(self::at(0))->method('assign')->with('registrations', $registrations);
         $this->inject($this->subject, 'view', $view);
 
         $this->subject->listAction();

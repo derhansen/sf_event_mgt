@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -62,30 +63,27 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      *
      * @param mixed $value
      * @param mixed $expected
-     * @return void
      */
     public function viewHelperReturnsExpectedValues($value, $expected)
     {
         $viewHelper = new ICalendarDescriptionViewHelper();
         $viewHelper->setArguments(['description' => $value]);
         $actual = $viewHelper->render();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     /**
      * Check if the viewhelper calls renderChildren if no value given
      *
      * @test
-     *
-     * @return void
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
         $viewHelper = $this->getMockBuilder(ICalendarDescriptionViewHelper::class)
             ->setMethods(['renderChildren'])
             ->getMock();
-        $viewHelper->expects($this->once())->method('renderChildren')->will($this->returnValue('Just some text'));
+        $viewHelper->expects(self::once())->method('renderChildren')->willReturn('Just some text');
         $actual = $viewHelper->render();
-        $this->assertSame('Just some text', $actual);
+        self::assertSame('Just some text', $actual);
     }
 }

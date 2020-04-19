@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Utility\FieldType;
@@ -67,7 +68,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
-    protected $event = null;
+    protected $event;
 
     /**
      * @var string
@@ -98,7 +99,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the title
      *
      * @param string $title
-     * @return void
      */
     public function setTitle($title)
     {
@@ -119,7 +119,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the type
      *
      * @param string $type
-     * @return void
      */
     public function setType($type)
     {
@@ -160,7 +159,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets placeholder
      *
      * @param string $placeholder
-     * @return void
      */
     public function setPlaceholder($placeholder)
     {
@@ -245,7 +243,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the event
      *
      * @param Event $event
-     * @return void
      */
     public function setEvent($event)
     {
@@ -299,7 +296,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the text
      *
      * @param string $text
-     * @return void
      */
     public function setText($text)
     {
@@ -320,7 +316,6 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the datepickermode
      *
      * @param int $datepickermode
-     * @return void
      */
     public function setDatepickermode($datepickermode)
     {

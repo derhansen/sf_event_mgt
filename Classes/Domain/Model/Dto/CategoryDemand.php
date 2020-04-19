@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * Category demand
@@ -47,8 +48,6 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the storage page
      *
      * @param string $storagePage Storagepage
-     *
-     * @return void
      */
     public function setStoragePage($storagePage)
     {
@@ -79,8 +78,6 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets restrictToStoragePage
      *
      * @param bool $restrictToStoragePage
-     *
-     * @return void
      */
     public function setRestrictToStoragePage($restrictToStoragePage)
     {
@@ -101,7 +98,6 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the categories
      *
      * @param string $categories
-     * @return void
      */
     public function setCategories($categories)
     {
@@ -122,7 +118,6 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets includeSubcategories
      *
      * @param bool $includeSubcategories
-     * @return void
      */
     public function setIncludeSubcategories($includeSubcategories)
     {

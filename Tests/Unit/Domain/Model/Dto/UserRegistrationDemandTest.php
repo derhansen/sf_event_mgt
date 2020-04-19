@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -22,12 +23,10 @@ class UserRegistrationDemandTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -36,8 +35,6 @@ class UserRegistrationDemandTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -49,7 +46,7 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     public function getDisplayModeReturnsInitialValue()
     {
-        $this->assertSame(
+        self::assertSame(
             'all',
             $this->subject->getDisplayMode()
         );
@@ -62,7 +59,7 @@ class UserRegistrationDemandTest extends UnitTestCase
     {
         $this->subject->setDisplayMode('past');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'past',
             'displayMode',
             $this->subject
@@ -74,8 +71,7 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     public function getStoragePageReturnsInitialValue()
     {
-        $this->assertSame(
-            null,
+        self::assertNull(
             $this->subject->getStoragePage()
         );
     }
@@ -87,7 +83,7 @@ class UserRegistrationDemandTest extends UnitTestCase
     {
         $this->subject->setStoragePage('1,2,3');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             '1,2,3',
             'storagePage',
             $this->subject
@@ -99,7 +95,7 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     public function getCurrentDateTimeReturnsDateTimeObjectIfNoValueSet()
     {
-        $this->assertInstanceOf('DateTime', $this->subject->getCurrentDateTime());
+        self::assertInstanceOf('DateTime', $this->subject->getCurrentDateTime());
     }
 
     /**
@@ -108,7 +104,7 @@ class UserRegistrationDemandTest extends UnitTestCase
     public function getCurrentDateTimeReturnsGivenValueIfValueSet()
     {
         $this->subject->setCurrentDateTime(new \DateTime('01.01.2014'));
-        $this->assertEquals(
+        self::assertEquals(
             new \DateTime('01.01.2014'),
             $this->subject->getCurrentDateTime()
         );
@@ -116,11 +112,10 @@ class UserRegistrationDemandTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getOrderFieldReturnsEmptyStringIfNoValueSet()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getOrderField()
         );
@@ -128,12 +123,11 @@ class UserRegistrationDemandTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getOrderFieldReturnsGivenValueIfValueSet()
     {
         $this->subject->setOrderField('title');
-        $this->assertSame(
+        self::assertSame(
             'title',
             $this->subject->getOrderField()
         );
@@ -141,11 +135,10 @@ class UserRegistrationDemandTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getOrderDirectionReturnsEmptyStringIfNoValueSet()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getOrderDirection()
         );
@@ -153,12 +146,11 @@ class UserRegistrationDemandTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getOrderDirectionReturnsGivenValueIfValueSet()
     {
         $this->subject->setOrderDirection('asc');
-        $this->assertSame(
+        self::assertSame(
             'asc',
             $this->subject->getOrderDirection()
         );
@@ -166,21 +158,19 @@ class UserRegistrationDemandTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getUserReturnsInitialValue()
     {
-        $this->assertNull($this->subject->getUser());
+        self::assertNull($this->subject->getUser());
     }
 
     /**
      * @test
-     * @return void
      */
     public function setUserSetsUser()
     {
         $user = new FrontendUser();
         $this->subject->setUser($user);
-        $this->assertSame($this->subject->getUser(), $user);
+        self::assertSame($this->subject->getUser(), $user);
     }
 }

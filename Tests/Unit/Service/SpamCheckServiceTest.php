@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
@@ -26,7 +27,7 @@ class SpamCheckServiceTest extends UnitTestCase
         $settings = [];
         $arguments = [];
         $service = new SpamCheckService($registration, $settings, $arguments);
-        $this->assertFalse($service->isSpamCheckFailed());
+        self::assertFalse($service->isSpamCheckFailed());
     }
 
     /**
@@ -62,7 +63,7 @@ class SpamCheckServiceTest extends UnitTestCase
         $registration = new Registration();
         $arguments = [];
         $service = new SpamCheckService($registration, $settings, $arguments);
-        $this->assertFalse($service->isSpamCheckFailed());
+        self::assertFalse($service->isSpamCheckFailed());
     }
 
     /**
@@ -98,7 +99,7 @@ class SpamCheckServiceTest extends UnitTestCase
         $arguments = [];
 
         $service = $this->getAccessibleMock(SpamCheckService::class, ['dummy'], [$registration, $settings, $arguments]);
-        $this->assertEquals(20, $service->_get('maxSpamScore'));
+        self::assertEquals(20, $service->_get('maxSpamScore'));
     }
 
     /**
@@ -113,7 +114,7 @@ class SpamCheckServiceTest extends UnitTestCase
         $arguments = [];
 
         $service = $this->getAccessibleMock(SpamCheckService::class, ['dummy'], [$registration, $settings, $arguments]);
-        $this->assertEquals([], $service->_get('settings')['checks']);
+        self::assertEquals([], $service->_get('settings')['checks']);
     }
 
     /**
@@ -136,6 +137,6 @@ class SpamCheckServiceTest extends UnitTestCase
         $service = new SpamCheckService($registration, $settings, $arguments);
 
         // Spam check should fail, since arguments do not include the honeypot field
-        $this->assertTrue($service->isSpamCheckFailed());
+        self::assertTrue($service->isSpamCheckFailed());
     }
 }

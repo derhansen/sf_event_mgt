@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -45,8 +46,6 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Setup
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -64,20 +63,18 @@ class EventRepositoryTest extends FunctionalTestCase
      * Test if startingpoint is working
      *
      * @test
-     * @return void
      */
     public function findRecordsByUid()
     {
         $events = $this->eventRepository->findByUid(1);
 
-        $this->assertSame($events->getTitle(), 'findRecordsByUid');
+        self::assertSame($events->getTitle(), 'findRecordsByUid');
     }
 
     /**
      * Test if storagePage restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByStoragePage()
     {
@@ -86,14 +83,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(3);
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(3, $events->count());
+        self::assertSame(3, $events->count());
     }
 
     /**
      * Test if displayMode 'all' restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByDisplayModeAll()
     {
@@ -103,14 +99,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setDisplayMode('all');
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(4, $events->count());
+        self::assertSame(4, $events->count());
     }
 
     /**
      * Test if displayMode 'past' restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByDisplayModePast()
     {
@@ -121,14 +116,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCurrentDateTime(new \DateTime('30.05.2014'));
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(1, $events->count());
+        self::assertSame(1, $events->count());
     }
 
     /**
      * Test if displayMode 'future' restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByDisplayModeFuture()
     {
@@ -139,14 +133,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCurrentDateTime(new \DateTime('30.05.2014 14:00:00'));
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
      * Test if displayMode 'current_future' restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByDisplayModeCurrentFuture()
     {
@@ -157,7 +150,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCurrentDateTime(new \DateTime('02.06.2014 08:00:00'));
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(1, $events->count());
+        self::assertSame(1, $events->count());
     }
 
     /**
@@ -240,7 +233,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @param mixed $conjunction
      * @param mixed $includeSub
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $includeSub, $expected)
     {
@@ -250,7 +242,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCategoryConjunction($conjunction);
         $demand->setCategory($category);
         $demand->setIncludeSubcategories($includeSub);
-        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+        self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -283,7 +275,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @test
      * @param mixed $locationUid
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByLocation($locationUid, $expected)
     {
@@ -293,7 +284,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $location = $this->locationRepository->findByUid($locationUid);
         $demand->setLocation($location);
-        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+        self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -322,7 +313,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @test
      * @param mixed $locationCity
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByLocationCity($locationCity, $expected)
     {
@@ -331,7 +321,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(50);
 
         $demand->setLocationCity($locationCity);
-        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+        self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
@@ -360,7 +350,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @test
      * @param mixed $locationCountry
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByLocationCountry($locationCountry, $expected)
     {
@@ -369,14 +358,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(60);
 
         $demand->setLocationCountry($locationCountry);
-        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+        self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
      * Test if startDate restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findSearchDemandedRecordsByStartDate()
     {
@@ -391,14 +379,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
      * Test if endDate restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findSearchDemandedRecordsByEndDate()
     {
@@ -413,14 +400,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
      * Test if title restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findSearchDemandedRecordsByFieldTitle()
     {
@@ -436,7 +422,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
@@ -469,7 +455,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @test
      * @param mixed $topEventRestriction
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByTopEvent($topEventRestriction, $expected)
     {
@@ -480,7 +465,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setTopEventRestriction($topEventRestriction);
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame($expected, $events->count());
+        self::assertSame($expected, $events->count());
     }
 
     /**
@@ -537,7 +522,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @param mixed $orderField
      * @param mixed $orderDirection
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByOrdering($orderField, $orderDirection, $expected)
     {
@@ -550,14 +534,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setOrderDirection($orderDirection);
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame($expected, $events->getFirst()->getTitle());
+        self::assertSame($expected, $events->getFirst()->getTitle());
     }
 
     /**
      * Test if ordering for findDemanded works but ignores unknown order by fields
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByOrderingIgnoresUnknownOrderField()
     {
@@ -570,14 +553,13 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setOrderDirection('asc');
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame('Test2', $events->getFirst()->getTitle());
+        self::assertSame('Test2', $events->getFirst()->getTitle());
     }
 
     /**
      * Test if limit restriction works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsSetsLimit()
     {
@@ -589,14 +571,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
      * Test if year restriction works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByYear()
     {
@@ -608,14 +589,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
      * Test if month restriction works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByMonth()
     {
@@ -628,14 +608,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
      * Test if month restriction works, when start/enddate oi event span more than one month
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByMonthWithStartdateInGivenMonth()
     {
@@ -648,14 +627,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(75, $events->getFirst()->getUid());
+        self::assertSame(75, $events->getFirst()->getUid());
     }
 
     /**
      * Test if month restriction works, when start/enddate oi event span more than one month
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByMonthWithEnddateInGivenMonth()
     {
@@ -668,14 +646,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(75, $events->getFirst()->getUid());
+        self::assertSame(75, $events->getFirst()->getUid());
     }
 
     /**
      * Test if day restriction works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByDay()
     {
@@ -689,7 +666,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(2, $events->count());
+        self::assertSame(2, $events->count());
     }
 
     /**
@@ -697,7 +674,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * day, which is between the event start- and enddate
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByDayForEventSpanningDateRange()
     {
@@ -711,7 +687,7 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(1, $events->count());
+        self::assertSame(1, $events->count());
     }
 
     /**
@@ -744,7 +720,6 @@ class EventRepositoryTest extends FunctionalTestCase
      * @test
      * @param mixed $speakerUid
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsBySpeaker($speakerUid, $expected)
     {
@@ -754,14 +729,13 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $speaker = $this->speakerRepository->findByUid($speakerUid);
         $demand->setSpeaker($speaker);
-        $this->assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+        self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
     /**
      * Test if startDate and endDate restriction in combination work
      *
      * @test
-     * @return void
      */
     public function findSearchDemandedRecordsByStartAndEndDate()
     {
@@ -777,6 +751,6 @@ class EventRepositoryTest extends FunctionalTestCase
 
         $events = $this->eventRepository->findDemanded($demand);
 
-        $this->assertSame(1, $events->count());
+        self::assertSame(1, $events->count());
     }
 }

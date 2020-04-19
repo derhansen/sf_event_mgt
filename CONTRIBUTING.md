@@ -36,8 +36,8 @@ Submitting changes
 
 Coding Standards
 ================
-The sf_event_mgt codebase follows [PSR-1](http://www.php-fig.org/psr/psr-1/) and
-[PSR-2](http://www.php-fig.org/psr/psr-2/) standards for code formatting. 
+The sf_event_mgt codebase follows [PSR-1](https://www.php-fig.org/psr/psr-1/), 
+[PSR-2](https://www.php-fig.org/psr/psr-2/) and [PSR-12](https://www.php-fig.org/psr/psr-12/) standards for code formatting. 
 
 Testing
 =======

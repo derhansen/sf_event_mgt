@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -21,7 +22,6 @@ class PrefillViewHelperTest extends UnitTestCase
 {
     /**
      * @test
-     * @return void
      */
     public function viewReturnsEmptyStringIfTsfeNotAvailabe()
     {
@@ -30,12 +30,11 @@ class PrefillViewHelperTest extends UnitTestCase
             'fieldname' => 'a field'
         ]);
         $actual = $viewHelper->render();
-        $this->assertSame('', $actual);
+        self::assertSame('', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsCurrentFieldValueIfValueInGPAvailable()
     {
@@ -50,12 +49,11 @@ class PrefillViewHelperTest extends UnitTestCase
             'fieldname' => 'fieldname'
         ]);
         $actual = $viewHelper->render();
-        $this->assertSame('Existing Value', $actual);
+        self::assertSame('Existing Value', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsEmptyStringIfNoTsfeLoginuserNotAvailabe()
     {
@@ -65,12 +63,11 @@ class PrefillViewHelperTest extends UnitTestCase
             'fieldname' => 'a field'
         ]);
         $actual = $viewHelper->render();
-        $this->assertSame('', $actual);
+        self::assertSame('', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsEmptyStringIfPrefillSettingsEmpty()
     {
@@ -80,12 +77,11 @@ class PrefillViewHelperTest extends UnitTestCase
             'fieldname' => 'a field'
         ]);
         $actual = $viewHelper->render();
-        $this->assertSame('', $actual);
+        self::assertSame('', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsEmptyStringIfFieldNotFoundInPrefillSettings()
     {
@@ -96,12 +92,11 @@ class PrefillViewHelperTest extends UnitTestCase
             'prefillSettings' => ['firstname' => 'first_name']
         ]);
         $actual = $viewHelper->render();
-        $this->assertSame('', $actual);
+        self::assertSame('', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsEmptyStringIfFieldNotFoundInFeUser()
     {
@@ -120,18 +115,17 @@ class PrefillViewHelperTest extends UnitTestCase
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
 
         $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
         $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
         $actual = $viewHelper->_call('render');
-        $this->assertSame('', $actual);
+        self::assertSame('', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsFieldvalueIfFound()
     {
@@ -151,18 +145,17 @@ class PrefillViewHelperTest extends UnitTestCase
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
 
         $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
         $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
         $actual = $viewHelper->_call('render');
-        $this->assertSame('Doe', $actual);
+        self::assertSame('Doe', $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewReturnsSubmittedValueIfValidationError()
     {
@@ -188,20 +181,20 @@ class PrefillViewHelperTest extends UnitTestCase
             ->setMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockOriginalRequest->expects($this->once())->method('getArguments')
-            ->will($this->returnValue($requestArguments));
+        $mockOriginalRequest->expects(self::once())->method('getArguments')
+            ->willReturn($requestArguments);
 
         $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')
-            ->will($this->returnValue($mockOriginalRequest));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')
+            ->willReturn($mockOriginalRequest);
 
         $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
         $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
         $actual = $viewHelper->_call('render');
-        $this->assertSame('Submitted Lastname', $actual);
+        self::assertSame('Submitted Lastname', $actual);
     }
 }

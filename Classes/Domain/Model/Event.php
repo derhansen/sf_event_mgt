@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
@@ -62,14 +63,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $startdate = null;
+    protected $startdate;
 
     /**
      * Enddate and time
      *
      * @var \DateTime
      */
-    protected $enddate = null;
+    protected $enddate;
 
     /**
      * Max participants
@@ -126,7 +127,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
      * @Extbase\ORM\Lazy
      */
-    protected $category = null;
+    protected $category;
 
     /**
      * Related
@@ -143,7 +144,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected $registration = null;
+    protected $registration;
 
     /**
      * Registration waitlist
@@ -166,7 +167,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $registrationDeadline = null;
+    protected $registrationDeadline;
 
     /**
      * The image
@@ -174,7 +175,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $image = null;
+    protected $image;
 
     /**
      * Additional files
@@ -182,14 +183,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $files = null;
+    protected $files;
 
     /**
      * The Location
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
      */
-    protected $location = null;
+    protected $location;
 
     /**
      * Room
@@ -232,14 +233,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $additionalImage = null;
+    protected $additionalImage;
 
     /**
      * The organisator
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
      */
-    protected $organisator = null;
+    protected $organisator;
 
     /**
      * Notify admin
@@ -267,7 +268,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $cancelDeadline = null;
+    protected $cancelDeadline;
 
     /**
      * Enable auto confirmation
@@ -290,7 +291,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected $priceOptions = null;
+    protected $priceOptions;
 
     /**
      * Speaker
@@ -298,7 +299,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Speaker>
      * @Extbase\ORM\Lazy
      */
-    protected $speaker = null;
+    protected $speaker;
 
     /**
      * Constructor
@@ -351,8 +352,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the title
      *
      * @param string $title Title
-     *
-     * @return void
      */
     public function setTitle($title)
     {
@@ -373,8 +372,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the teaser
      *
      * @param string $teaser Teaser
-     *
-     * @return void
      */
     public function setTeaser($teaser)
     {
@@ -395,8 +392,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description Description
-     *
-     * @return void
      */
     public function setDescription($description)
     {
@@ -417,8 +412,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the program
      *
      * @param string $program The program
-     *
-     * @return void
      */
     public function setProgram($program)
     {
@@ -439,8 +432,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the startdate
      *
      * @param \DateTime $startdate Startdate
-     *
-     * @return void
      */
     public function setStartdate(\DateTime $startdate)
     {
@@ -461,8 +452,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the enddate
      *
      * @param \DateTime $enddate Enddate
-     *
-     * @return void
      */
     public function setEnddate(\DateTime $enddate)
     {
@@ -483,8 +472,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the participants
      *
      * @param int $participants Participants
-     *
-     * @return void
      */
     public function setMaxParticipants($participants)
     {
@@ -505,8 +492,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the price
      *
      * @param float $price Price
-     *
-     * @return void
      */
     public function setPrice($price)
     {
@@ -527,8 +512,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the currency
      *
      * @param string $currency Currency
-     *
-     * @return void
      */
     public function setCurrency($currency)
     {
@@ -549,7 +532,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets enablePayment
      *
      * @param bool $enablePayment
-     * @return void
      */
     public function setEnablePayment($enablePayment)
     {
@@ -570,7 +552,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets if payment methods should be restricted
      *
      * @param bool $restrictPaymentMethods
-     * @return void
      */
     public function setRestrictPaymentMethods($restrictPaymentMethods)
     {
@@ -591,7 +572,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets selected payment methods
      *
      * @param string $selectedPaymentMethods
-     * @return void
      */
     public function setSelectedPaymentMethods($selectedPaymentMethods)
     {
@@ -602,8 +582,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Category
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $category Category
-     *
-     * @return void
      */
     public function addCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $category)
     {
@@ -614,8 +592,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Category
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
-     *
-     * @return void
      */
     public function removeCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove)
     {
@@ -636,8 +612,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the category
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $category Category
-     *
-     * @return void
      */
     public function setCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $category)
     {
@@ -658,7 +632,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets related events
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $related
-     * @return void
      */
     public function setRelated($related)
     {
@@ -669,7 +642,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a related event
      *
      * @param Event $event
-     * @return void
      */
     public function addRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
@@ -680,7 +652,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a related event
      *
      * @param Event $event
-     * @return void
      */
     public function removeRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
@@ -691,8 +662,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Registration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     *
-     * @return void
      */
     public function addRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
     {
@@ -703,8 +672,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Registration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
-     *
-     * @return void
      */
     public function removeRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
     {
@@ -725,8 +692,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the Registration
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
-     *
-     * @return void
      */
     public function setRegistration(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
     {
@@ -737,8 +702,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds an image
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
-     *
-     * @return void
      */
     public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
     {
@@ -749,8 +712,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes an image
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove Image
-     *
-     * @return void
      */
     public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
     {
@@ -771,8 +732,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the image
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image Image
-     *
-     * @return void
      */
     public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
     {
@@ -783,8 +742,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a file
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file File
-     *
-     * @return void
      */
     public function addFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $file)
     {
@@ -795,8 +752,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a file
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove File
-     *
-     * @return void
      */
     public function removeFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove)
     {
@@ -817,8 +772,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the files
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files Files
-     *
-     * @return void
      */
     public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files)
     {
@@ -860,8 +813,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the location
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
-     *
-     * @return void
      */
     public function setLocation($location)
     {
@@ -902,8 +853,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets enableRegistration
      *
      * @param bool $enableRegistration EnableRegistration
-     *
-     * @return void
      */
     public function setEnableRegistration($enableRegistration)
     {
@@ -934,7 +883,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets enableWaitlist
      *
      * @param bool $enableWaitlist
-     * @return void
      */
     public function setEnableWaitlist($enableWaitlist)
     {
@@ -945,8 +893,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the registration deadline
      *
      * @param \DateTime $registrationDeadline RegistrationDeadline
-     *
-     * @return void
      */
     public function setRegistrationDeadline(\DateTime $registrationDeadline)
     {
@@ -967,8 +913,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the link
      *
      * @param string $link Link
-     *
-     * @return void
      */
     public function setLink($link)
     {
@@ -989,8 +933,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets topEvent
      *
      * @param bool $topEvent TopEvent
-     *
-     * @return void
      */
     public function setTopEvent($topEvent)
     {
@@ -1021,8 +963,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets max registrations per user
      *
      * @param int $maxRegistrationsPerUser MaxRegistrationsPerUser
-     *
-     * @return void
      */
     public function setMaxRegistrationsPerUser($maxRegistrationsPerUser)
     {
@@ -1033,8 +973,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds an additionalImage
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage The Image
-     *
-     * @return void
      */
     public function addAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage)
     {
@@ -1045,8 +983,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes an additionalImage
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove The Image
-     *
-     * @return void
      */
     public function removeAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove)
     {
@@ -1067,8 +1003,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the additionalImage
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage The Image
-     *
-     * @return void
      */
     public function setAdditionalImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage)
     {
@@ -1089,8 +1023,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the organisator
      *
      * @param Organisator $organisator The organisator
-     *
-     * @return void
      */
     public function setOrganisator($organisator)
     {
@@ -1111,8 +1043,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets notifyAdmin
      *
      * @param bool $notifyAdmin NotifyAdmin
-     *
-     * @return void
      */
     public function setNotifyAdmin($notifyAdmin)
     {
@@ -1133,8 +1063,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets notifyOrganisator
      *
      * @param bool $notifyOrganisator NotifyOrganisator
-     *
-     * @return void
      */
     public function setNotifyOrganisator($notifyOrganisator)
     {
@@ -1145,8 +1073,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets enableCancel
      *
      * @param bool $enableCancel EnableCancel
-     *
-     * @return void
      */
     public function setEnableCancel($enableCancel)
     {
@@ -1167,8 +1093,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the cancel deadline
      *
      * @param \DateTime $cancelDeadline CancelDeadline
-     *
-     * @return void
      */
     public function setCancelDeadline(\DateTime $cancelDeadline)
     {
@@ -1199,7 +1123,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets enable autoconfirm
      *
      * @param bool $enableAutoconfirm
-     * @return void
      */
     public function setEnableAutoconfirm($enableAutoconfirm)
     {
@@ -1220,7 +1143,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets UniqueEmailCheck
      *
      * @param bool $uniqueEmailCheck
-     * @return void
      */
     public function setUniqueEmailCheck($uniqueEmailCheck)
     {
@@ -1241,7 +1163,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets price options
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $priceOptions
-     * @return void
      */
     public function setPriceOptions($priceOptions)
     {
@@ -1252,8 +1173,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a price option
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
-     *
-     * @return void
      */
     public function addPriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
     {
@@ -1264,8 +1183,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Registration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
-     *
-     * @return void
      */
     public function removePriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
     {
@@ -1323,8 +1240,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets registrationWaitlist
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
-     *
-     * @return void
      */
     public function setRegistrationWaitlist(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
     {
@@ -1335,8 +1250,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a Registration to the waitlist
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     *
-     * @return void
      */
     public function addRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
     {
@@ -1347,8 +1260,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a Registration from the waitlist
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
-     *
-     * @return void
      */
     public function removeRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
     {
@@ -1382,7 +1293,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets speaker
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $speaker
-     * @return void
      */
     public function setSpeaker($speaker)
     {
@@ -1393,8 +1303,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Adds a speaker
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
-     *
-     * @return void
      */
     public function addSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
     {
@@ -1405,8 +1313,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Removes a speaker
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
-     *
-     * @return void
      */
     public function removeSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
     {
@@ -1427,8 +1333,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets registrationWaitlist
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields
-     *
-     * @return void
      */
     public function setRegistrationFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields)
     {

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -48,33 +49,33 @@ class AdministrationController extends AbstractController
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
      */
-    protected $customNotificationLogRepository = null;
+    protected $customNotificationLogRepository;
 
     /**
      * ExportService
      *
      * @var \DERHANSEN\SfEventMgt\Service\ExportService
      */
-    protected $exportService = null;
+    protected $exportService;
 
     /**
      * SettingsService
      *
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
      */
-    protected $settingsService = null;
+    protected $settingsService;
 
     /**
      * Backend User Session Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
      */
-    protected $beUserSessionService = null;
+    protected $beUserSessionService;
 
     /**
      * @var \DERHANSEN\SfEventMgt\Service\MaintenanceService
      */
-    protected $maintenanceService = null;
+    protected $maintenanceService;
 
     /**
      * The current page uid
@@ -93,7 +94,7 @@ class AdministrationController extends AbstractController
     /**
      * @var IconFactory
      */
-    protected $iconFactory = null;
+    protected $iconFactory;
 
     /**
      * DI for $customNotificationLogRepository
@@ -158,8 +159,6 @@ class AdministrationController extends AbstractController
      * Set up the doc header properly here
      *
      * @param ViewInterface $view
-     *
-     * @return void
      */
     protected function initializeView(ViewInterface $view)
     {
@@ -190,8 +189,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Register docHeaderButtons
-     *
-     * @return void
      */
     protected function registerDocHeaderButtons()
     {
@@ -279,8 +276,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Initialize action
-     *
-     * @return void
      */
     public function initializeAction()
     {
@@ -289,8 +284,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Set date format for fields startDate and endDate
-     *
-     * @return void
      */
     public function initializeListAction()
     {
@@ -318,8 +311,6 @@ class AdministrationController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
      * @param array $overwriteDemand OverwriteDemand
-     *
-     * @return void
      */
     public function listAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
@@ -358,8 +349,6 @@ class AdministrationController extends AbstractController
      * Export registrations for a given event
      *
      * @param int $eventUid Event UID
-     *
-     * @return void
      */
     public function exportAction($eventUid)
     {
@@ -369,8 +358,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Handles expired registrations
-     *
-     * @return void
      */
     public function handleExpiredRegistrationsAction()
     {
@@ -390,8 +377,6 @@ class AdministrationController extends AbstractController
      * The index notify action
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     *
-     * @return void
      */
     public function indexNotifyAction(Event $event)
     {
@@ -409,8 +394,6 @@ class AdministrationController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      * @param string $customNotification CustomNotification
-     *
-     * @return void
      */
     public function notifyAction(Event $event, $customNotification)
     {
@@ -431,8 +414,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Shows the settings error view
-     *
-     * @return void
      */
     public function settingsErrorAction()
     {

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -24,12 +25,10 @@ class SpeakerTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -38,8 +37,6 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -48,11 +45,10 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getNameReturnsInitialValueForString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -60,13 +56,12 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function setNameForStringSetsName()
     {
         $this->subject->setName('Firstname Lastname');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'Firstname Lastname',
             'name',
             $this->subject
@@ -75,11 +70,10 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getJobTitleReturnsInitialValueForString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getJobTitle()
         );
@@ -87,13 +81,12 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function setJobTitleForStringSetsJobTitle()
     {
         $this->subject->setJobTitle('Web-Developer');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'Web-Developer',
             'jobTitle',
             $this->subject
@@ -102,11 +95,10 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getDescriptionTitleReturnsInitialValueForString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getDescription()
         );
@@ -114,13 +106,12 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function setDescriptionTitleForStringSetsDescription()
     {
         $this->subject->setDescription('A description');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'A description',
             'description',
             $this->subject
@@ -131,25 +122,23 @@ class SpeakerTest extends UnitTestCase
      * Test if initial value for image is returned
      *
      * @test
-     * @return void
      */
     public function getImageReturnsInitialValueForImage()
     {
-        $this->assertNull($this->subject->getImage());
+        self::assertNull($this->subject->getImage());
     }
 
     /**
      * Test if image can be set
      *
      * @test
-     * @return void
      */
     public function setImageForFileReferenceSetsImage()
     {
         $image = new FileReference();
         $this->subject->setImage($image);
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             $image,
             'image',
             $this->subject

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\TitleViewHelper;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
@@ -22,7 +23,7 @@ class TitleViewHelperTest extends UnitTestCase
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController|AccessibleMockObjectInterface
      */
-    protected $tsfe = null;
+    protected $tsfe;
 
     /**
      * Set up
@@ -52,6 +53,6 @@ class TitleViewHelperTest extends UnitTestCase
             },
             $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock()
         );
-        $this->assertEquals($indexedSearchDocTitle, $GLOBALS['TSFE']->indexedDocTitle);
+        self::assertEquals($indexedSearchDocTitle, $GLOBALS['TSFE']->indexedDocTitle);
     }
 }

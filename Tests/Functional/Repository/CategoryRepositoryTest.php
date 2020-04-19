@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
@@ -34,7 +35,6 @@ class CategoryRepositoryTest extends FunctionalTestCase
      * Setup
      *
      * @throws \TYPO3\CMS\Core\Tests\Exception
-     * @return void
      */
     public function setUp()
     {
@@ -48,19 +48,17 @@ class CategoryRepositoryTest extends FunctionalTestCase
      * Test if startingpoint is working
      *
      * @test
-     * @return void
      */
     public function findRecordsByUid()
     {
         $events = $this->categoryRepository->findByUid(1);
-        $this->assertEquals($events->getTitle(), 'Category 1');
+        self::assertEquals($events->getTitle(), 'Category 1');
     }
 
     /**
      * Test if storagePage restriction in demand works
      *
      * @test
-     * @return void
      */
     public function findDemandedRecordsByStoragePageRestriction()
     {
@@ -69,7 +67,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(1);
         $demand->setRestrictToStoragePage(true);
         $events = $this->categoryRepository->findDemanded($demand);
-        $this->assertEquals(3, $events->count());
+        self::assertEquals(3, $events->count());
     }
 
     /**
@@ -111,7 +109,6 @@ class CategoryRepositoryTest extends FunctionalTestCase
      * @param mixed $category
      * @param mixed $includeSubcategory
      * @param mixed $expected
-     * @return void
      */
     public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
     {
@@ -120,6 +117,6 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $demand->setIncludeSubcategories($includeSubcategory);
 
         $demand->setCategories($category);
-        $this->assertEquals($expected, $this->categoryRepository->findDemanded($demand)->count());
+        self::assertEquals($expected, $this->categoryRepository->findDemanded($demand)->count());
     }
 }

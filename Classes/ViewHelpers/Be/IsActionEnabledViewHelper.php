@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 

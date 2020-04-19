@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -30,8 +31,6 @@ class RegistrationFieldValidatorTest extends UnitTestCase
 
     /**
      * Setup
-     *
-     * @return void
      */
     public function setup()
     {
@@ -50,8 +49,8 @@ class RegistrationFieldValidatorTest extends UnitTestCase
     public function validatorHasNoErrorsWhenRegistrationHasNoEvent()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue(null));
-        $this->assertFalse($this->validator->validate($mockRegistration)->hasErrors());
+        $mockRegistration->expects(self::once())->method('getEvent')->willReturn(null);
+        self::assertFalse($this->validator->validate($mockRegistration)->hasErrors());
     }
 
     /**
@@ -62,15 +61,15 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $mockEvent = $this->getMockBuilder(Event::class)
             ->setMethods(['getRegistrationFields'])
             ->getMock();
-        $mockEvent->expects($this->once())->method('getRegistrationFields')
-            ->will($this->returnValue(new ObjectStorage()));
+        $mockEvent->expects(self::once())->method('getRegistrationFields')
+            ->willReturn(new ObjectStorage());
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
-        $mockRegistration->expects($this->once())->method('getFieldValues')
-            ->will($this->returnValue(new ObjectStorage()));
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
+        $mockRegistration->expects(self::once())->method('getFieldValues')
+            ->willReturn(new ObjectStorage());
 
-        $this->assertFalse($this->validator->validate($mockRegistration)->hasErrors());
+        self::assertFalse($this->validator->validate($mockRegistration)->hasErrors());
     }
 
     /**
@@ -81,34 +80,34 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $fieldUid = 1;
 
         $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();
-        $mockRegistrationField->expects($this->once())->method('getRequired')->will($this->returnValue(true));
-        $mockRegistrationField->expects($this->any())->method('getUid')->will($this->returnValue($fieldUid));
+        $mockRegistrationField->expects(self::once())->method('getRequired')->willReturn(true);
+        $mockRegistrationField->expects(self::any())->method('getUid')->willReturn($fieldUid);
         $registrationFieldObjectStorage = new ObjectStorage();
         $registrationFieldObjectStorage->attach($mockRegistrationField);
 
         $mockEvent = $this->getMockBuilder(Event::class)
             ->setMethods(['getRegistrationFields'])
             ->getMock();
-        $mockEvent->expects($this->any())->method('getRegistrationFields')
-            ->will($this->returnValue($registrationFieldObjectStorage));
+        $mockEvent->expects(self::any())->method('getRegistrationFields')
+            ->willReturn($registrationFieldObjectStorage);
 
         $mockFieldValue = $this->getMockBuilder(Registration\FieldValue::class)->getMock();
-        $mockFieldValue->expects($this->any())->method('getField')->will($this->returnValue($mockRegistrationField));
+        $mockFieldValue->expects(self::any())->method('getField')->willReturn($mockRegistrationField);
         $fieldValueObjectStorage = new ObjectStorage();
         $fieldValueObjectStorage->attach($mockFieldValue);
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
-        $mockRegistration->expects($this->any())->method('getFieldValues')
-            ->will($this->returnValue($fieldValueObjectStorage));
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
+        $mockRegistration->expects(self::any())->method('getFieldValues')
+            ->willReturn($fieldValueObjectStorage);
 
         $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
             ->setMethods(['translateErrorMessage'])
             ->getMock();
-        $this->validator->expects($this->any())->method('getNotEmptyValidator')
-            ->will($this->returnValue($mockNotEmptyValidator));
+        $this->validator->expects(self::any())->method('getNotEmptyValidator')
+            ->willReturn($mockNotEmptyValidator);
 
-        $this->assertTrue($this->validator->validate($mockRegistration)->hasErrors());
+        self::assertTrue($this->validator->validate($mockRegistration)->hasErrors());
     }
 
     /**
@@ -119,18 +118,18 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $fieldUid = 1;
 
         $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();
-        $mockRegistrationField->expects($this->once())->method('getRequired')->will($this->returnValue(true));
-        $mockRegistrationField->expects($this->any())->method('getUid')->will($this->returnValue($fieldUid));
-        $mockRegistrationField->expects($this->any())->method('getValueType')
-            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $mockRegistrationField->expects(self::once())->method('getRequired')->willReturn(true);
+        $mockRegistrationField->expects(self::any())->method('getUid')->willReturn($fieldUid);
+        $mockRegistrationField->expects(self::any())->method('getValueType')
+            ->willReturn(FieldValueType::TYPE_ARRAY);
         $registrationFieldObjectStorage = new ObjectStorage();
         $registrationFieldObjectStorage->attach($mockRegistrationField);
 
         $mockEvent = $this->getMockBuilder(Event::class)
             ->setMethods(['getRegistrationFields'])
             ->getMock();
-        $mockEvent->expects($this->any())->method('getRegistrationFields')
-            ->will($this->returnValue($registrationFieldObjectStorage));
+        $mockEvent->expects(self::any())->method('getRegistrationFields')
+            ->willReturn($registrationFieldObjectStorage);
 
         $fieldValue = new Registration\FieldValue();
         $fieldValue->setField($mockRegistrationField);
@@ -139,17 +138,17 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $fieldValueObjectStorage->attach($fieldValue);
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
-        $mockRegistration->expects($this->any())->method('getFieldValues')
-            ->will($this->returnValue($fieldValueObjectStorage));
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
+        $mockRegistration->expects(self::any())->method('getFieldValues')
+            ->willReturn($fieldValueObjectStorage);
 
         $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
             ->setMethods(['translateErrorMessage'])
             ->getMock();
-        $this->validator->expects($this->any())->method('getNotEmptyValidator')
-            ->will($this->returnValue($mockNotEmptyValidator));
+        $this->validator->expects(self::any())->method('getNotEmptyValidator')
+            ->willReturn($mockNotEmptyValidator);
 
-        $this->assertTrue($this->validator->validate($mockRegistration)->hasErrors());
+        self::assertTrue($this->validator->validate($mockRegistration)->hasErrors());
     }
 
     /**
@@ -160,31 +159,31 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $fieldUid = 1;
 
         $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();
-        $mockRegistrationField->expects($this->once())->method('getRequired')->will($this->returnValue(false));
-        $mockRegistrationField->expects($this->any())->method('getUid')->will($this->returnValue($fieldUid));
+        $mockRegistrationField->expects(self::once())->method('getRequired')->willReturn(false);
+        $mockRegistrationField->expects(self::any())->method('getUid')->willReturn($fieldUid);
         $registrationFieldObjectStorage = new ObjectStorage();
         $registrationFieldObjectStorage->attach($mockRegistrationField);
 
         $mockEvent = $this->getMockBuilder(Event::class)->setMethods(['getRegistrationFields'])->getMock();
-        $mockEvent->expects($this->any())->method('getRegistrationFields')
-            ->will($this->returnValue($registrationFieldObjectStorage));
+        $mockEvent->expects(self::any())->method('getRegistrationFields')
+            ->willReturn($registrationFieldObjectStorage);
 
         $mockFieldValue = $this->getMockBuilder(Registration\FieldValue::class)->getMock();
-        $mockFieldValue->expects($this->any())->method('getField')->will($this->returnValue($mockRegistrationField));
+        $mockFieldValue->expects(self::any())->method('getField')->willReturn($mockRegistrationField);
         $fieldValueObjectStorage = new ObjectStorage();
         $fieldValueObjectStorage->attach($mockFieldValue);
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
-        $mockRegistration->expects($this->any())->method('getFieldValues')
-            ->will($this->returnValue($fieldValueObjectStorage));
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
+        $mockRegistration->expects(self::any())->method('getFieldValues')
+            ->willReturn($fieldValueObjectStorage);
 
         $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
             ->setMethods(['translateErrorMessage'])
             ->getMock();
-        $this->validator->expects($this->any())->method('getNotEmptyValidator')
-            ->will($this->returnValue($mockNotEmptyValidator));
+        $this->validator->expects(self::any())->method('getNotEmptyValidator')
+            ->willReturn($mockNotEmptyValidator);
 
-        $this->assertFalse($this->validator->validate($mockRegistration)->hasErrors());
+        self::assertFalse($this->validator->validate($mockRegistration)->hasErrors());
     }
 }

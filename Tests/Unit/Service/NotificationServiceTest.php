@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
@@ -34,12 +35,10 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\NotificationService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -51,8 +50,6 @@ class NotificationServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -97,17 +94,16 @@ class NotificationServiceTest extends UnitTestCase
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
      * @test
-     * @return void
      */
     public function sendUserMessageReturnsFalseIfInvalidArgumentsGiven()
     {
         $result = $this->subject->sendUserMessage(null, null, null, null);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
@@ -124,32 +120,32 @@ class NotificationServiceTest extends UnitTestCase
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $emailService = $this->getMockBuilder(EmailService::class)->setMethods(['sendEmailMessage'])->getMock();
-        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
+        $emailService->expects(self::once())->method('sendEmailMessage')->willReturn(false);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->setMethods(['getAttachments'])->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->atLeast(2))->method('dispatch');
+        $eventDispatcher->expects(self::atLeast(2))->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
@@ -166,33 +162,33 @@ class NotificationServiceTest extends UnitTestCase
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
+        $emailService->expects(self::once())->method('sendEmailMessage')->willReturn(true);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->atLeast(2))->method('dispatch');
+        $eventDispatcher->expects(self::atLeast(2))->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, $messageType);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     /**
@@ -214,43 +210,42 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(false));
+        $emailService->expects(self::once())->method('sendEmailMessage')->willReturn(false);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
      * @test
-     * @return void
      */
     public function sendAdminMessageReturnsFalseIfInvalidArgumentsGiven()
     {
         $result = $this->subject->sendAdminMessage(null, null, null, MessageType::REGISTRATION_NEW);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
@@ -272,33 +267,33 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
+        $emailService->expects(self::once())->method('sendEmailMessage')->willReturn(true);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     /**
@@ -321,11 +316,11 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->never())->method('sendEmailMessage');
+        $emailService->expects(self::never())->method('sendEmailMessage');
         $this->inject($this->subject, 'emailService', $emailService);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
@@ -351,33 +346,33 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
+        $emailService->expects(self::once())->method('sendEmailMessage')->willReturn(true);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     /**
@@ -398,37 +393,37 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getFullname')->will($this->returnValue('Sender'));
-        $mockRegistration->expects($this->once())->method('getEmail')->will($this->returnValue('email@domain.tld'));
+        $mockRegistration->expects(self::once())->method('getFullname')->willReturn('Sender');
+        $mockRegistration->expects(self::once())->method('getEmail')->willReturn('email@domain.tld');
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
+        $emailService->expects(self::once())->method('sendEmailMessage')->willReturn(true);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, MessageRecipient::ADMIN);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     /**
@@ -437,7 +432,6 @@ class NotificationServiceTest extends UnitTestCase
      * @test
      * @dataProvider messageTypeDataProvider
      * @param mixed $messageType
-     * @return void
      */
     public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
     {
@@ -453,33 +447,33 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
-        $emailService->expects($this->exactly(3))->method('sendEmailMessage')->will($this->returnValue(true));
+        $emailService->expects(self::exactly(3))->method('sendEmailMessage')->willReturn(true);
         $this->inject($this->subject, 'emailService', $emailService);
 
         $attachmentService = $this->getMockBuilder(AttachmentService::class)->getMock();
-        $attachmentService->expects($this->once())->method('getAttachments')->will($this->returnValue([]));
+        $attachmentService->expects(self::once())->method('getAttachments')->willReturn([]);
         $this->inject($this->subject, 'attachmentService', $attachmentService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('HMAC'));
-        $hashService->expects($this->once())->method('appendHmac')->will($this->returnValue('HMAC'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('HMAC');
+        $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->setMethods(['renderTemplate', 'parseStringFluid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $fluidStandaloneService->expects($this->once())->method('renderTemplate')->will($this->returnValue(''));
-        $fluidStandaloneService->expects($this->once())->method('parseStringFluid')->will($this->returnValue(''));
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     /**
@@ -494,17 +488,16 @@ class NotificationServiceTest extends UnitTestCase
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
         $result = $this->subject->sendUserMessage($event, $registration, $settings, MessageType::CUSTOM_NOTIFICATION, '');
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
      * @test
-     * @return void
      */
     public function sendCustomNotificationWithoutParameters()
     {
         $result = $this->subject->sendCustomNotification(null, '', []);
-        $this->assertEquals(0, $result);
+        self::assertEquals(0, $result);
     }
 
     /**
@@ -531,7 +524,6 @@ class NotificationServiceTest extends UnitTestCase
      * @dataProvider customNotificationDataProvider
      * @param mixed $confirmed
      * @param mixed $ignoreNotifications
-     * @return void
      */
     public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable(
         $confirmed,
@@ -550,19 +542,19 @@ class NotificationServiceTest extends UnitTestCase
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
             ->setMethods(['sendUserMessage'])
             ->getMock();
-        $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
+        $mockNotificationService->expects(self::any())->method('sendUserMessage')->willReturn(true);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['findNotificationRegistrations'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
-            $this->returnValue($registrations)
+        $registrationRepository->expects(self::once())->method('findNotificationRegistrations')->willReturn(
+            $registrations
         );
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
         $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
-        $this->assertEquals(0, $result);
+        self::assertEquals(0, $result);
     }
 
     /**
@@ -570,7 +562,6 @@ class NotificationServiceTest extends UnitTestCase
      * flag is evaluated
      *
      * @test
-     * @return void
      */
     public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent()
     {
@@ -597,24 +588,23 @@ class NotificationServiceTest extends UnitTestCase
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
             ->setMethods(['sendUserMessage'])
             ->getMock();
-        $mockNotificationService->expects($this->any())->method('sendUserMessage')->will($this->returnValue(true));
+        $mockNotificationService->expects(self::any())->method('sendUserMessage')->willReturn(true);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['findNotificationRegistrations'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('findNotificationRegistrations')->will(
-            $this->returnValue($registrations)
+        $registrationRepository->expects(self::once())->method('findNotificationRegistrations')->willReturn(
+            $registrations
         );
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
         $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
-        $this->assertEquals(2, $result);
+        self::assertEquals(2, $result);
     }
 
     /**
      * @test
-     * @return void
      */
     public function createCustomNotificationLogentryCreatesLog()
     {
@@ -622,7 +612,7 @@ class NotificationServiceTest extends UnitTestCase
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockLogRepo->expects($this->once())->method('add');
+        $mockLogRepo->expects(self::once())->method('add');
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 
         $event = new Event();
@@ -647,7 +637,7 @@ class NotificationServiceTest extends UnitTestCase
             $settings,
             MessageType::REGISTRATION_NEW
         );
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     /**
@@ -668,6 +658,6 @@ class NotificationServiceTest extends UnitTestCase
             $settings,
             MessageType::REGISTRATION_NEW
         );
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 }

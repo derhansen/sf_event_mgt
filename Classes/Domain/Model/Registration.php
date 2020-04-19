@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 
@@ -106,7 +107,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $dateOfBirth = null;
+    protected $dateOfBirth;
 
     /**
      * Accept terms and conditions
@@ -141,21 +142,21 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
-    protected $event = null;
+    protected $event;
 
     /**
      * Main registration (if available)
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
      */
-    protected $mainRegistration = null;
+    protected $mainRegistration;
 
     /**
      * DateTime until the registration must be confirmed
      *
      * @var \DateTime
      */
-    protected $confirmationUntil = null;
+    protected $confirmationUntil;
 
     /**
      * Indicates if record is hidden
@@ -190,7 +191,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
-    protected $feUser = null;
+    protected $feUser;
 
     /**
      * Payment method
@@ -244,8 +245,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the firstname
      *
      * @param string $firstname Firstname
-     *
-     * @return void
      */
     public function setFirstname($firstname)
     {
@@ -266,8 +265,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the lastname
      *
      * @param string $lastname Lastname
-     *
-     * @return void
      */
     public function setLastname($lastname)
     {
@@ -288,8 +285,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the title
      *
      * @param string $title Title
-     *
-     * @return void
      */
     public function setTitle($title)
     {
@@ -310,8 +305,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the company
      *
      * @param string $company Company
-     *
-     * @return void
      */
     public function setCompany($company)
     {
@@ -332,8 +325,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the address
      *
      * @param string $address Address
-     *
-     * @return void
      */
     public function setAddress($address)
     {
@@ -354,8 +345,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the zip
      *
      * @param string $zip Zip
-     *
-     * @return void
      */
     public function setZip($zip)
     {
@@ -376,8 +365,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the city
      *
      * @param string $city City
-     *
-     * @return void
      */
     public function setCity($city)
     {
@@ -398,8 +385,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the country
      *
      * @param string $country Country
-     *
-     * @return void
      */
     public function setCountry($country)
     {
@@ -420,8 +405,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the phone
      *
      * @param string $phone Phone
-     *
-     * @return void
      */
     public function setPhone($phone)
     {
@@ -442,8 +425,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the email
      *
      * @param string $email E-Mail
-     *
-     * @return void
      */
     public function setEmail($email)
     {
@@ -474,8 +455,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets ignoreNotifications
      *
      * @param bool $ignoreNotifications IgnoreNotifications
-     *
-     * @return void
      */
     public function setIgnoreNotifications($ignoreNotifications)
     {
@@ -496,8 +475,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the gender
      *
      * @param string $gender Gender
-     *
-     * @return void
      */
     public function setGender($gender)
     {
@@ -508,8 +485,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the date of birth
      *
      * @param \DateTime $dateOfBirth DateOfBirth
-     *
-     * @return void
      */
     public function setDateOfBirth($dateOfBirth)
     {
@@ -540,8 +515,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets accept terms and conditions
      *
      * @param bool $accepttc Accept terms and conditions
-     *
-     * @return void
      */
     public function setAccepttc($accepttc)
     {
@@ -562,8 +535,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the confirmed
      *
      * @param bool $confirmed Confirmed
-     *
-     * @return void
      */
     public function setConfirmed($confirmed)
     {
@@ -594,8 +565,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the paid
      *
      * @param bool $paid Paid
-     *
-     * @return void
      */
     public function setPaid($paid)
     {
@@ -616,8 +585,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     *
-     * @return void
      */
     public function setEvent($event)
     {
@@ -638,8 +605,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the mainRegistration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     *
-     * @return void
      */
     public function setMainRegistration($registration)
     {
@@ -660,8 +625,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Setter for notes
      *
      * @param string $notes Notes
-     *
-     * @return void
      */
     public function setNotes($notes)
     {
@@ -682,8 +645,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets confirmUntil
      *
      * @param \DateTime $confirmationUntil Confirmation Until
-     *
-     * @return void
      */
     public function setConfirmationUntil($confirmationUntil)
     {
@@ -704,8 +665,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets hidden
      *
      * @param bool $hidden Hidden
-     *
-     * @return void
      */
     public function setHidden($hidden)
     {
@@ -736,8 +695,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets amountOfRegistrations
      *
      * @param int $amountOfRegistrations AmountOfRegistrations
-     *
-     * @return void
      */
     public function setAmountOfRegistrations($amountOfRegistrations)
     {
@@ -758,7 +715,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the language
      *
      * @param string $language
-     * @return void
      */
     public function setLanguage($language)
     {
@@ -779,7 +735,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets recaptcha
      *
      * @param string $recaptcha
-     * @return void
      */
     public function setRecaptcha($recaptcha)
     {
@@ -800,7 +755,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the frontenduser
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feUser
-     * @return void
      */
     public function setFeUser($feUser)
     {
@@ -821,7 +775,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the payment method
      *
      * @param string $paymentmethod
-     * @return void
      */
     public function setPaymentmethod($paymentmethod)
     {
@@ -842,7 +795,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets paymentReference
      *
      * @param string $paymentReference
-     * @return void
      */
     public function setPaymentReference($paymentReference)
     {
@@ -863,7 +815,6 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets waitlist
      *
      * @param bool $waitlist
-     * @return void
      */
     public function setWaitlist($waitlist)
     {

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper;
@@ -24,12 +25,10 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper
      */
-    protected $viewhelper = null;
+    protected $viewhelper;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -38,8 +37,6 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -153,17 +150,16 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
      * @param mixed $maxRegistrations
      * @param mixed $waitlist
      * @param mixed $expected
-     * @return void
      */
     public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $waitlist, $expected)
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
-        $mockEvent->expects($this->any())->method('getFreePlaces')->will($this->returnValue($freePlaces));
-        $mockEvent->expects($this->any())->method('getMaxParticipants')->will($this->returnValue($maxParticipants));
-        $mockEvent->expects($this->any())->method('getEnableWaitlist')->will($this->returnValue($waitlist));
-        $mockEvent->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue($maxRegistrations));
+        $mockEvent->expects(self::any())->method('getFreePlaces')->willReturn($freePlaces);
+        $mockEvent->expects(self::any())->method('getMaxParticipants')->willReturn($maxParticipants);
+        $mockEvent->expects(self::any())->method('getEnableWaitlist')->willReturn($waitlist);
+        $mockEvent->expects(self::any())->method('getMaxRegistrationsPerUser')->willReturn($maxRegistrations);
         $this->viewhelper->setArguments(['event' => $mockEvent]);
         $actual = $this->viewhelper->render();
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

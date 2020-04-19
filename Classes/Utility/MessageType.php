@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Utility;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -8,6 +7,8 @@ namespace DERHANSEN\SfEventMgt\Utility;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+namespace DERHANSEN\SfEventMgt\Utility;
+
 /**
  * MessageType
  *
@@ -15,10 +16,10 @@ namespace DERHANSEN\SfEventMgt\Utility;
  */
 class MessageType
 {
-    const REGISTRATION_NEW = 0;
-    const REGISTRATION_CONFIRMED = 1;
-    const CUSTOM_NOTIFICATION = 2;
-    const REGISTRATION_CANCELLED = 3;
-    const REGISTRATION_WAITLIST_NEW = 4;
-    const REGISTRATION_WAITLIST_CONFIRMED = 5;
+    public const REGISTRATION_NEW = 0;
+    public const REGISTRATION_CONFIRMED = 1;
+    public const CUSTOM_NOTIFICATION = 2;
+    public const REGISTRATION_CANCELLED = 3;
+    public const REGISTRATION_WAITLIST_NEW = 4;
+    public const REGISTRATION_WAITLIST_CONFIRMED = 5;
 }

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\AbstractSpamCheck;
@@ -30,7 +31,7 @@ class SpamCheckService
     /**
      * @var Registration
      */
-    protected $registration = null;
+    protected $registration;
 
     /**
      * @var int
@@ -83,7 +84,6 @@ class SpamCheckService
      * Processes all configured spam checks
      *
      * @throws SpamCheckNotFoundException
-     * @return void
      */
     protected function processSpamChecks()
     {
@@ -99,7 +99,6 @@ class SpamCheckService
      * Prococesses the spam check in the given config
      *
      * @param array $checkConfig
-     * @return void
      */
     protected function processSpamCheck(array $checkConfig)
     {
@@ -108,8 +107,12 @@ class SpamCheckService
         }
         $configuration = $checkConfig['configuration'] ?? [];
         /** @var AbstractSpamCheck $spamCheck */
-        $spamCheck = new $checkConfig['class']($this->registration, $this->settings, $this->arguments,
-            $configuration);
+        $spamCheck = new $checkConfig['class'](
+            $this->registration,
+            $this->settings,
+            $this->arguments,
+            $configuration
+        );
         if ($spamCheck->isFailed()) {
             $this->checkScore += (int)$checkConfig['increaseScore'];
         }

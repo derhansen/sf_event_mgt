@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
@@ -37,12 +38,10 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\AdministrationController | \PHPUnit_Framework_MockObject_MockObject
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -57,8 +56,6 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -67,18 +64,16 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function initializeActionAssignsPid()
     {
         $this->subject->_set('pid', 1);
         $this->subject->initializeAction();
-        $this->assertSame(0, $this->subject->_get('pid'));
+        self::assertSame(0, $this->subject->_get('pid'));
     }
 
     /**
      * @test
-     * @return void
      */
     public function listActionDoesNotFetchEventsForStoragePidZero()
     {
@@ -89,18 +84,18 @@ class AdministrationControllerTest extends UnitTestCase
         $demand = $this->getMockBuilder(EventDemand::class)
             ->setMethods(['setSearchDemand'])
             ->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with(null);
+        $demand->expects(self::once())->method('setSearchDemand')->with(null);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
 
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $objectManager->expects(self::any())->method('get')->willReturn($demand);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
-        $beUserSessionService->expects($this->any())->method('getSessionDataByKey');
+        $beUserSessionService->expects(self::any())->method('getSessionDataByKey');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
@@ -108,11 +103,11 @@ class AdministrationControllerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
             'events' => $allEvents,
             'searchDemand' => null,
@@ -127,7 +122,6 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function listActionDoesNotFetchEventsForStoragePidZeroAndDemand()
     {
@@ -139,28 +133,28 @@ class AdministrationControllerTest extends UnitTestCase
         $demand = $this->getMockBuilder(EventDemand::class)
             ->setMethods(['setSearchDemand'])
             ->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $objectManager->expects(self::any())->method('get')->willReturn($demand);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
-        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
@@ -175,7 +169,6 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function listActionFetchesAllEventsForGivenStoragePidAndAssignsThemToView()
     {
@@ -187,28 +180,28 @@ class AdministrationControllerTest extends UnitTestCase
         $demand = $this->getMockBuilder(EventDemand::class)
             ->setMethods(['setSearchDemand', 'setStoragePage'])
             ->getMock();
-        $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
-        $demand->expects($this->any())->method('setStoragePage')->with(1);
+        $demand->expects(self::any())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::any())->method('setStoragePage')->with(1);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $objectManager->expects(self::any())->method('get')->willReturn($demand);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
-        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
@@ -223,7 +216,6 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function listActionUsesOverwriteDemandArrayAndAssignsItToView()
     {
@@ -233,28 +225,28 @@ class AdministrationControllerTest extends UnitTestCase
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
         $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects($this->any())->method('setSearchDemand')->with($searchDemand);
-        $demand->expects($this->any())->method('setStoragePage')->with(1);
+        $demand->expects(self::any())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::any())->method('setStoragePage')->with(1);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($demand));
+        $objectManager->expects(self::any())->method('get')->willReturn($demand);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
-        $beUserSessionService->expects($this->once())->method('saveSessionData');
+        $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
 
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
@@ -279,44 +271,44 @@ class AdministrationControllerTest extends UnitTestCase
         $mockPropertyMapperConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
-            $this->equalTo(DateTimeConverter::class),
-            $this->equalTo('dateFormat'),
-            $this->equalTo($settingsSearchDateFormat)
+        $mockPropertyMapperConfig->expects(self::any())->method('setTypeConverterOption')->with(
+            self::equalTo(DateTimeConverter::class),
+            self::equalTo('dateFormat'),
+            self::equalTo($settingsSearchDateFormat)
         );
 
         $mockStartDatePmConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockStartDatePmConfig->expects($this->once())->method('forProperty')->with('startDate')->will(
-            $this->returnValue($mockPropertyMapperConfig)
+        $mockStartDatePmConfig->expects(self::once())->method('forProperty')->with('startDate')->willReturn(
+            $mockPropertyMapperConfig
         );
         $mockEndDatePmConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
-            $this->returnValue($mockPropertyMapperConfig)
+        $mockEndDatePmConfig->expects(self::once())->method('forProperty')->with('endDate')->willReturn(
+            $mockPropertyMapperConfig
         );
 
         $mockStartDateArgument = $this->getMockBuilder(Argument::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockStartDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockStartDatePmConfig)
+        $mockStartDateArgument->expects(self::once())->method('getPropertyMappingConfiguration')->willReturn(
+            $mockStartDatePmConfig
         );
         $mockEndDateArgument = $this->getMockBuilder(Argument::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockEndDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockEndDatePmConfig)
+        $mockEndDateArgument->expects(self::once())->method('getPropertyMappingConfiguration')->willReturn(
+            $mockEndDatePmConfig
         );
 
         $mockArguments = $this->getMockBuilder(Arguments::class)->getMock();
-        $mockArguments->expects($this->at(0))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockStartDateArgument)
+        $mockArguments->expects(self::at(0))->method('getArgument')->with('searchDemand')->willReturn(
+            $mockStartDateArgument
         );
-        $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockEndDateArgument)
+        $mockArguments->expects(self::at(1))->method('getArgument')->with('searchDemand')->willReturn(
+            $mockEndDateArgument
         );
 
         return $mockArguments;
@@ -324,18 +316,16 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function initializeListActionRedirectsToErrorPageIfNoSettingsFound()
     {
         $this->subject->_set('arguments', $this->getInitializeListActionArgumentMock());
-        $this->subject->expects($this->once())->method('redirect')->with('settingsError');
+        $this->subject->expects(self::once())->method('redirect')->with('settingsError');
         $this->subject->initializeListAction();
     }
 
     /**
      * @test
-     * @return void
      */
     public function initializeListActionSetsDateFormat()
     {
@@ -352,22 +342,20 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView()
     {
         $mockMaintenanceService = $this->getMockBuilder(MaintenanceService::class)
             ->getMock();
-        $mockMaintenanceService->expects($this->once())->method('handleExpiredRegistrations');
+        $mockMaintenanceService->expects(self::once())->method('handleExpiredRegistrations');
         $this->inject($this->subject, 'maintenanceService', $mockMaintenanceService);
 
-        $this->subject->expects($this->once())->method('redirect');
+        $this->subject->expects(self::once())->method('redirect');
         $this->subject->handleExpiredRegistrationsAction();
     }
 
     /**
      * @test
-     * @return void
      */
     public function indexNotifyActionAssignsExpectedObjectsToView()
     {
@@ -379,19 +367,19 @@ class AdministrationControllerTest extends UnitTestCase
             ->setMethods(['findByEvent'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockLogRepo->expects($this->once())->method('findByEvent')->will(
-            $this->returnValue($logEntries)
+        $mockLogRepo->expects(self::once())->method('findByEvent')->willReturn(
+            $logEntries
         );
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 
         $mockSettingsService = $this->getMockBuilder(SettingsService::class)->getMock();
-        $mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
-            $this->returnValue($customNotifications)
+        $mockSettingsService->expects(self::once())->method('getCustomNotifications')->willReturn(
+            $customNotifications
         );
         $this->inject($this->subject, 'settingsService', $mockSettingsService);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($this->equalTo(
+        $view->expects(self::once())->method('assignMultiple')->with(self::equalTo(
             ['event' => $event, 'customNotifications' => $customNotifications, 'logEntries' => $logEntries]
         ));
         $this->inject($this->subject, 'view', $view);
@@ -401,7 +389,6 @@ class AdministrationControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function notifyActionSendsNotificationsLogsAndRedirects()
     {
@@ -409,20 +396,20 @@ class AdministrationControllerTest extends UnitTestCase
         $event = new Event();
 
         $mockSettingsService = $this->getMockBuilder(SettingsService::class)->getMock();
-        $mockSettingsService->expects($this->once())->method('getCustomNotifications')->will(
-            $this->returnValue($customNotifications)
+        $mockSettingsService->expects(self::once())->method('getCustomNotifications')->willReturn(
+            $customNotifications
         );
         $this->inject($this->subject, 'settingsService', $mockSettingsService);
 
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
             ->getMock();
-        $mockNotificationService->expects($this->once())->method('sendCustomNotification')->will(
-            $this->returnValue(1)
+        $mockNotificationService->expects(self::once())->method('sendCustomNotification')->willReturn(
+            1
         );
-        $mockNotificationService->expects($this->once())->method('createCustomNotificationLogentry');
+        $mockNotificationService->expects(self::once())->method('createCustomNotificationLogentry');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
-        $this->subject->expects($this->once())->method('redirect');
+        $this->subject->expects(self::once())->method('redirect');
         $this->subject->notifyAction($event, 'customNotification');
     }
 }

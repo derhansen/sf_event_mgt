@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillFieldViewHelper;
@@ -22,7 +23,6 @@ class PrefillFieldViewHelperTest extends UnitTestCase
 {
     /**
      * @test
-     * @return void
      */
     public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
     {
@@ -30,17 +30,17 @@ class PrefillFieldViewHelperTest extends UnitTestCase
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
 
         $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
 
         $field = new Field();
         $field->setDefaultValue('Default');
 
         $viewHelper->_set('arguments', ['registrationField' => $field]);
         $actual = $viewHelper->_callRef('render');
-        $this->assertSame('Default', $actual);
+        self::assertSame('Default', $actual);
     }
 
     /**
@@ -74,7 +74,6 @@ class PrefillFieldViewHelperTest extends UnitTestCase
      * @param mixed $fieldUid
      * @param mixed $fieldValues
      * @param mixed $expected
-     * @return void
      */
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist($fieldUid, $fieldValues, $expected)
     {
@@ -88,23 +87,23 @@ class PrefillFieldViewHelperTest extends UnitTestCase
             ->setMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
+        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn($arguments);
 
         $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')
-            ->will($this->returnValue($mockOriginalRequest));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')
+            ->willReturn($mockOriginalRequest);
 
         $viewHelper = $this->getAccessibleMock(PrefillFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
 
         $mockField = $this->getMockBuilder(Field::class)->getMock();
-        $mockField->expects($this->once())->method('getUid')->will($this->returnValue($fieldUid));
+        $mockField->expects(self::once())->method('getUid')->willReturn($fieldUid);
 
         $viewHelper->_set('arguments', ['registrationField' => $mockField]);
         $actual = $viewHelper->_callRef('render');
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
 }

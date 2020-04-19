@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -31,12 +32,10 @@ class PaymentControllerTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\PaymentController
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -55,8 +54,6 @@ class PaymentControllerTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -67,12 +64,11 @@ class PaymentControllerTest extends UnitTestCase
      * Test if ProcessPaymentInitializeEvent is dispatched
      *
      * @test
-     * @return void
      */
     public function redirectActionCallsBeforeRedirectSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
+        $mockRegistration->expects(self::once())->method('getPaymentmethod')->willReturn('paypal');
 
         $mockUriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->setMethods(['setUseCacheHash', 'uriFor'])
@@ -95,7 +91,7 @@ class PaymentControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ProcessPaymentInitializeEvent($values, 'paypal', false, $mockRegistration, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -110,12 +106,11 @@ class PaymentControllerTest extends UnitTestCase
      * Test if ProcessPaymentSuccessEvent is dispatched
      *
      * @test
-     * @return void
      */
     public function successActionCallsProcessSuccessSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
+        $mockRegistration->expects(self::once())->method('getPaymentmethod')->willReturn('paypal');
 
         $mockUriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->setMethods(['setUseCacheHash', 'uriFor'])
@@ -132,7 +127,7 @@ class PaymentControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ProcessPaymentSuccessEvent($values, 'paypal', false, $mockRegistration, [], $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -147,12 +142,11 @@ class PaymentControllerTest extends UnitTestCase
      * Test if ProcessPaymentFailureEvent is dispatched
      *
      * @test
-     * @return void
      */
     public function failureActionCallsProcessFailureSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
+        $mockRegistration->expects(self::once())->method('getPaymentmethod')->willReturn('paypal');
 
         $mockUriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->setMethods(['setUseCacheHash', 'uriFor'])
@@ -169,7 +163,7 @@ class PaymentControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ProcessPaymentFailureEvent($values, 'paypal', false, false, $mockRegistration, [], $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -184,12 +178,11 @@ class PaymentControllerTest extends UnitTestCase
      * Test if ProcessPaymentCancelEvent is dispatched
      *
      * @test
-     * @return void
      */
     public function cancelActionCallsProcessCancelSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
+        $mockRegistration->expects(self::once())->method('getPaymentmethod')->willReturn('paypal');
 
         $mockUriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->setMethods(['setUseCacheHash', 'uriFor'])
@@ -206,7 +199,7 @@ class PaymentControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ProcessPaymentCancelEvent($values, 'paypal', false, false, $mockRegistration, [], $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -221,12 +214,11 @@ class PaymentControllerTest extends UnitTestCase
      * Test if ProcessPaymentNotifyEvent is dispatched
      *
      * @test
-     * @return void
      */
     public function notifyActionCallsProcessNotifySignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getPaymentmethod')->will($this->returnValue('paypal'));
+        $mockRegistration->expects(self::once())->method('getPaymentmethod')->willReturn('paypal');
 
         $mockUriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->setMethods(['setUseCacheHash', 'uriFor'])
@@ -243,7 +235,7 @@ class PaymentControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ProcessPaymentNotifyEvent($values, 'paypal', false, $mockRegistration, [], $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -13,6 +12,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;

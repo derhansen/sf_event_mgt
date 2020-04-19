@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\EmailService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -22,12 +23,10 @@ class EmailServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\EmailService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -36,8 +35,6 @@ class EmailServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -70,7 +67,6 @@ class EmailServiceTest extends UnitTestCase
      * @test
      * @param mixed $sender
      * @param mixed $recipient
-     * @return void
      */
     public function sendEmailMessageWithInvalidEmailTest($sender, $recipient)
     {
@@ -78,6 +74,6 @@ class EmailServiceTest extends UnitTestCase
         $body = 'A body';
         $senderName = 'Sender name';
         $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 }

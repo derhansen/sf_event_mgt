@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * Location
@@ -92,8 +93,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the title
      *
      * @param string $title The title
-     *
-     * @return void
      */
     public function setTitle($title)
     {
@@ -114,8 +113,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the address
      *
      * @param string $address Address
-     *
-     * @return void
      */
     public function setAddress($address)
     {
@@ -136,8 +133,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the zip
      *
      * @param string $zip Zip
-     *
-     * @return void
      */
     public function setZip($zip)
     {
@@ -158,8 +153,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the city
      *
      * @param string $city City
-     *
-     * @return void
      */
     public function setCity($city)
     {
@@ -180,8 +173,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the country
      *
      * @param string $country Country
-     *
-     * @return void
      */
     public function setCountry($country)
     {
@@ -202,8 +193,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description The description
-     *
-     * @return void
      */
     public function setDescription($description)
     {
@@ -224,7 +213,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets link
      *
      * @param string $link
-     * @return void
      */
     public function setLink($link)
     {
@@ -245,8 +233,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the the longitude
      *
      * @param float $longitude The longitude
-     *
-     * @return void
      */
     public function setLongitude($longitude)
     {
@@ -267,8 +253,6 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the latitude
      *
      * @param float $latitude The latitude
-     *
-     * @return void
      */
     public function setLatitude($latitude)
     {

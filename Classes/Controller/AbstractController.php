@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -30,56 +31,56 @@ abstract class AbstractController extends ActionController
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
      */
-    protected $eventRepository = null;
+    protected $eventRepository;
 
     /**
      * Registration repository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
      */
-    protected $registrationRepository = null;
+    protected $registrationRepository;
 
     /**
      * Category repository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
      */
-    protected $categoryRepository = null;
+    protected $categoryRepository;
 
     /**
      * Location repository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
      */
-    protected $locationRepository = null;
+    protected $locationRepository;
 
     /**
      * Organisator repository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
      */
-    protected $organisatorRepository = null;
+    protected $organisatorRepository;
 
     /**
      * Speaker repository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository
      */
-    protected $speakerRepository = null;
+    protected $speakerRepository;
 
     /**
      * Notification Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\NotificationService
      */
-    protected $notificationService = null;
+    protected $notificationService;
 
     /**
      * ICalendar Service
      *
      * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
      */
-    protected $icalendarService = null;
+    protected $icalendarService;
 
     /**
      * Hash Service
@@ -93,28 +94,28 @@ abstract class AbstractController extends ActionController
      *
      * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
      */
-    protected $registrationService = null;
+    protected $registrationService;
 
     /**
      * CalendarService
      *
      * @var \DERHANSEN\SfEventMgt\Service\CalendarService
      */
-    protected $calendarService = null;
+    protected $calendarService;
 
     /**
      * PaymentMethodService
      *
      * @var \DERHANSEN\SfEventMgt\Service\PaymentService
      */
-    protected $paymentService = null;
+    protected $paymentService;
 
     /**
      * FieldRepository
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository
      */
-    protected $fieldRepository = null;
+    protected $fieldRepository;
 
     /**
      * DI for $calendarService

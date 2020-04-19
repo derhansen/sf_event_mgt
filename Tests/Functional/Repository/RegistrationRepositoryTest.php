@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -40,8 +41,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Setup
-     *
-     * @return void
      */
     public function setUp()
     {
@@ -84,7 +83,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findExpiredRegistrations($dateNow, $expected)
     {
         $registrations = $this->registrationRepository->findExpiredRegistrations($dateNow);
-        $this->assertEquals($expected, $registrations->count());
+        self::assertEquals($expected, $registrations->count());
     }
 
     /**
@@ -95,7 +94,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsWithNoParameters()
     {
         $registrations = $this->registrationRepository->findNotificationRegistrations(null, null);
-        $this->assertEquals(0, $registrations->count());
+        self::assertEquals(0, $registrations->count());
     }
 
     /**
@@ -106,9 +105,9 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsForEventUid2()
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getUid')->will($this->returnValue(2));
+        $event->expects(self::once())->method('getUid')->willReturn(2);
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
-        $this->assertEquals(1, $registrations->count());
+        self::assertEquals(1, $registrations->count());
     }
 
     /**
@@ -174,9 +173,9 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected)
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getUid')->willReturn(1);
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
-        $this->assertEquals($expected, $registrations->count());
+        self::assertEquals($expected, $registrations->count());
     }
 
     /**
@@ -200,9 +199,9 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3()
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getUid')->will($this->returnValue(3));
+        $event->expects(self::once())->method('getUid')->willReturn(3);
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
-        $this->assertEquals(1, $registrations->count());
+        self::assertEquals(1, $registrations->count());
     }
 
     /**
@@ -216,7 +215,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand = $this->objectManager->get(UserRegistrationDemand::class);
         $demand->setDisplayMode('all');
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        $this->assertEquals([], $registrations);
+        self::assertEquals([], $registrations);
     }
 
     /**
@@ -235,7 +234,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(7);
         $demand->setUser($feUser);
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        $this->assertEquals(3, $registrations->count());
+        self::assertEquals(3, $registrations->count());
     }
 
     /**
@@ -254,7 +253,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(7);
         $demand->setUser($feUser);
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        $this->assertEquals(0, $registrations->count());
+        self::assertEquals(0, $registrations->count());
     }
 
     /**
@@ -273,7 +272,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setStoragePage(7);
         $demand->setUser($feUser);
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        $this->assertEquals(1, $registrations->count());
+        self::assertEquals(1, $registrations->count());
     }
 
     /**
@@ -294,7 +293,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setOrderField('event.startdate');
         $demand->setOrderDirection('asc');
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        $this->assertEquals(30, $registrations->getFirst()->getUid());
+        self::assertEquals(30, $registrations->getFirst()->getUid());
     }
 
     /**
@@ -315,6 +314,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setOrderField('event.startdate');
         $demand->setOrderDirection('desc');
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        $this->assertEquals(32, $registrations->getFirst()->getUid());
+        self::assertEquals(32, $registrations->getFirst()->getUid());
     }
 }

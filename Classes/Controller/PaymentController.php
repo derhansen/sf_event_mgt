@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
@@ -274,7 +275,6 @@ class PaymentController extends AbstractController
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
      * @param string $actionName
      * @throws PaymentException
-     * @return void
      */
     protected function proceedWithAction($registration, $actionName)
     {

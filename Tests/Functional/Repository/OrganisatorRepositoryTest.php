@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
@@ -33,7 +34,6 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
      * Setup
      *
      * @throws \TYPO3\CMS\Core\Tests\Exception
-     * @return void
      */
     public function setUp()
     {
@@ -48,11 +48,10 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
      * Test if startingpoint is ignored
      *
      * @test
-     * @return void
      */
     public function findRecordsByUid()
     {
         $locations = $this->organisatorRepository->findAll();
-        $this->assertEquals(2, $locations->count());
+        self::assertEquals(2, $locations->count());
     }
 }

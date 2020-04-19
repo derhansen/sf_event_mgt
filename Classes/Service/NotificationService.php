@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
@@ -36,7 +37,7 @@ class NotificationService
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
      */
-    protected $registrationRepository = null;
+    protected $registrationRepository;
 
     /**
      * Email Service
@@ -64,7 +65,7 @@ class NotificationService
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
      */
-    protected $customNotificationLogRepository = null;
+    protected $customNotificationLogRepository;
 
     /**
      * AttachmentService
@@ -218,8 +219,6 @@ class NotificationService
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      * @param string $details Details
      * @param int $emailsSent E-Mails sent
-     *
-     * @return void
      */
     public function createCustomNotificationLogentry($event, $details, $emailsSent)
     {

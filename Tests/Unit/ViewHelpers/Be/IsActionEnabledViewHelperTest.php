@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Be\IsActionEnabledViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -82,9 +83,9 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
 
         $mockBeUser = $this->getMockBuilder(BackendUserAuthentication::class)
             ->setMethods(['check'])->disableOriginalConstructor()->getMock();
-        $mockBeUser->expects($this->any())->method('check')->will($this->returnValue($access));
+        $mockBeUser->expects(self::any())->method('check')->willReturn($access);
         $GLOBALS['BE_USER'] = $mockBeUser;
 
-        $this->assertEquals($expected, $viewHelper->render());
+        self::assertEquals($expected, $viewHelper->render());
     }
 }

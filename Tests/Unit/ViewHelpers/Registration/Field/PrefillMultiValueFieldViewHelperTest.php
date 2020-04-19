@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
@@ -24,7 +25,6 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {
     /**
      * @test
-     * @return void
      */
     public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
     {
@@ -32,10 +32,10 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')->will($this->returnValue(null));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
 
         $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
 
         $field = new Field();
         $field->setDefaultValue('Default');
@@ -43,7 +43,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 
         $viewHelper->_set('arguments', ['registrationField' => $field, 'currentValue' => $currentValue]);
         $actual = $viewHelper->_callRef('render');
-        $this->assertTrue($actual);
+        self::assertTrue($actual);
     }
 
     /**
@@ -91,7 +91,6 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
      * @param mixed $currentValue
      * @param mixed $fieldValue
      * @param mixed $expected
-     * @return void
      */
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist(
         $submittedRegistrationFieldUid,
@@ -112,49 +111,48 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
             ->setMethods(['getUid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockField->expects($this->any())->method('getUid')->will($this->returnValue($submittedRegistrationFieldUid));
+        $mockField->expects(self::any())->method('getUid')->willReturn($submittedRegistrationFieldUid);
 
         $mockFieldValue = $this->getMockBuilder(FieldValue::class)
             ->setMethods(['getField', 'getValue'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFieldValue->expects($this->any())->method('getField')->will($this->returnValue($mockField));
-        $mockFieldValue->expects($this->any())->method('getValue')->will($this->returnValue($fieldValue));
+        $mockFieldValue->expects(self::any())->method('getField')->willReturn($mockField);
+        $mockFieldValue->expects(self::any())->method('getValue')->willReturn($fieldValue);
 
         $mockPropertyMapper = $this->getMockBuilder(PropertyMapper::class)
             ->setMethods(['convert'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockPropertyMapper->expects($this->any())->method('convert')->will($this->returnValue($mockFieldValue));
+        $mockPropertyMapper->expects(self::any())->method('convert')->willReturn($mockFieldValue);
 
         $mockOriginalRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue($arguments));
+        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn($arguments);
 
         $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')
-            ->will($this->returnValue($mockOriginalRequest));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')
+            ->willReturn($mockOriginalRequest);
 
         $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
         $viewHelper->_set('propertyMapper', $mockPropertyMapper);
 
         $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
-        $mockSubmittedField->expects($this->once())->method('getUid')->will($this->returnValue($registrationFieldUid));
+        $mockSubmittedField->expects(self::once())->method('getUid')->willReturn($registrationFieldUid);
 
         $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => $currentValue]);
         $actual = $viewHelper->_callRef('render');
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
 
     /**
      * @test
-     * @return void
      */
     public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationfieldValues()
     {
@@ -162,22 +160,22 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
             ->setMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockOriginalRequest->expects($this->once())->method('getArguments')->will($this->returnValue(null));
+        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn(null);
 
         $mockRequest = $this->getMockBuilder(Request::class)
             ->setMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRequest->expects($this->once())->method('getOriginalRequest')
-            ->will($this->returnValue($mockOriginalRequest));
+        $mockRequest->expects(self::once())->method('getOriginalRequest')
+            ->willReturn($mockOriginalRequest);
 
         $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects($this->once())->method('getRequest')->will($this->returnValue($mockRequest));
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
 
         $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
 
         $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => null]);
         $actual = $viewHelper->_callRef('render');
-        $this->assertFalse($actual);
+        self::assertFalse($actual);
     }
 }

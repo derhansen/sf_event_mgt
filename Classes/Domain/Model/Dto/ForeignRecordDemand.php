@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * ForeignRecord demand
@@ -33,8 +34,6 @@ class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the storage page
      *
      * @param string $storagePage Storagepage
-     *
-     * @return void
      */
     public function setStoragePage($storagePage)
     {
@@ -65,8 +64,6 @@ class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets restrictForeignRecordsToStoragePage
      *
      * @param bool $restrictForeignRecordsToStoragePage
-     *
-     * @return void
      */
     public function setRestrictForeignRecordsToStoragePage($restrictForeignRecordsToStoragePage)
     {

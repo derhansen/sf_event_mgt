@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Utility;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -8,6 +7,8 @@ namespace DERHANSEN\SfEventMgt\Utility;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+namespace DERHANSEN\SfEventMgt\Utility;
+
 /**
  * FieldType
  *
@@ -15,12 +16,12 @@ namespace DERHANSEN\SfEventMgt\Utility;
  */
 class FieldType
 {
-    const INPUT = 'input';
-    const CHECK = 'check';
-    const RADIO = 'radio';
-    const TEXTAREA = 'textarea';
-    const TEXT = 'text';
-    const DIVIDER = 'divider';
-    const SELECT = 'select';
-    const DATETIME = 'datetime';
+    public const INPUT = 'input';
+    public const CHECK = 'check';
+    public const RADIO = 'radio';
+    public const TEXTAREA = 'textarea';
+    public const TEXT = 'text';
+    public const DIVIDER = 'divider';
+    public const SELECT = 'select';
+    public const DATETIME = 'datetime';
 }

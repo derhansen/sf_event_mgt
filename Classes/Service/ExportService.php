@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -24,12 +25,12 @@ class ExportService
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
      */
-    protected $registrationRepository = null;
+    protected $registrationRepository;
 
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
      */
-    protected $eventRepository = null;
+    protected $eventRepository;
 
     /**
      * @param RegistrationRepository $registrationRepository
@@ -54,7 +55,6 @@ class ExportService
      * @param int $eventUid EventUid
      * @param array $settings Settings
      * @throws Exception RuntimeException
-     * @return void
      */
     public function downloadRegistrationsCsv($eventUid, $settings = [])
     {

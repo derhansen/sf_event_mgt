@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
@@ -25,12 +26,10 @@ class ICalendarServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -39,8 +38,6 @@ class ICalendarServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -49,7 +46,6 @@ class ICalendarServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function getiCalendarContentAssignsVariablesToView()
     {
@@ -60,8 +56,8 @@ class ICalendarServiceTest extends UnitTestCase
         $iCalendarView = $this->getMockBuilder(StandaloneView::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $iCalendarView->expects($this->once())->method('setFormat')->with('txt');
-        $iCalendarView->expects($this->once())->method('assignMultiple')->with([
+        $iCalendarView->expects(self::once())->method('setFormat')->with('txt');
+        $iCalendarView->expects(self::once())->method('assignMultiple')->with([
             'event' => $mockEvent,
             'typo3Host' => 'myhostname.tld'
         ]);
@@ -69,12 +65,12 @@ class ICalendarServiceTest extends UnitTestCase
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($iCalendarView));
+        $objectManager->expects(self::once())->method('get')->willReturn($iCalendarView);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->getMock();
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->will($this->returnValue([]));
+        $fluidStandaloneService->expects(self::any())->method('getTemplateFolders')->willReturn([]);
         $this->inject($this->subject, 'fluidStandaloneService', $fluidStandaloneService);
 
         $this->subject->getiCalendarContent($mockEvent);

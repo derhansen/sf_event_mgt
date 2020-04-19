@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -21,12 +22,10 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -35,8 +34,6 @@ class CategoryDemandTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -49,7 +46,7 @@ class CategoryDemandTest extends UnitTestCase
     public function setStoragePageSetsStoragePageForString()
     {
         $this->subject->setStoragePage('1,2,3');
-        $this->assertEquals('1,2,3', $this->subject->getStoragePage());
+        self::assertEquals('1,2,3', $this->subject->getStoragePage());
     }
 
     /**
@@ -57,7 +54,7 @@ class CategoryDemandTest extends UnitTestCase
      */
     public function getRestrictStoragePageReturnsInitialValue()
     {
-        $this->assertFalse($this->subject->getRestrictToStoragePage());
+        self::assertFalse($this->subject->getRestrictToStoragePage());
     }
 
     /**
@@ -66,7 +63,7 @@ class CategoryDemandTest extends UnitTestCase
     public function setRestrictStoragePageSetsValueForBoolean()
     {
         $this->subject->setRestrictToStoragePage(true);
-        $this->assertTrue($this->subject->getRestrictToStoragePage());
+        self::assertTrue($this->subject->getRestrictToStoragePage());
     }
 
     /**
@@ -75,7 +72,7 @@ class CategoryDemandTest extends UnitTestCase
     public function setCategoriesSetsCategoriesForString()
     {
         $this->subject->setCategories('1,2,3');
-        $this->assertEquals('1,2,3', $this->subject->getCategories());
+        self::assertEquals('1,2,3', $this->subject->getCategories());
     }
 
     /**
@@ -83,7 +80,7 @@ class CategoryDemandTest extends UnitTestCase
      */
     public function getIncludeSubcategoriesReturnsInitialValue()
     {
-        $this->assertFalse($this->subject->getIncludeSubcategories());
+        self::assertFalse($this->subject->getIncludeSubcategories());
     }
 
     /**
@@ -92,6 +89,6 @@ class CategoryDemandTest extends UnitTestCase
     public function setIncludeSubcategoriesSetsValueForBoolean()
     {
         $this->subject->setIncludeSubcategories(true);
-        $this->assertTrue($this->subject->getIncludeSubcategories());
+        self::assertTrue($this->subject->getIncludeSubcategories());
     }
 }

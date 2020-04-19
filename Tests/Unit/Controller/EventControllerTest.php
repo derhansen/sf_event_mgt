@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
@@ -66,17 +67,15 @@ class EventControllerTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Controller\EventController
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|TypoScriptFrontendController
      */
-    protected $tsfe = null;
+    protected $tsfe;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -108,8 +107,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -118,7 +115,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function createEventDemandObjectFromSettingsWithoutCategory()
     {
@@ -142,21 +138,21 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $mockDemand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $mockDemand->expects($this->at(0))->method('setDisplayMode')->with('all');
-        $mockDemand->expects($this->at(1))->method('setStoragePage')->with(1);
-        $mockDemand->expects($this->at(2))->method('setCategoryConjunction')->with('AND');
-        $mockDemand->expects($this->at(3))->method('setCategory')->with(10);
-        $mockDemand->expects($this->at(4))->method('setIncludeSubcategories')->with(true);
-        $mockDemand->expects($this->at(5))->method('setTopEventRestriction')->with(2);
-        $mockDemand->expects($this->at(6))->method('setOrderField')->with('title');
-        $mockDemand->expects($this->at(7))->method('setOrderFieldAllowed')->with('title');
-        $mockDemand->expects($this->at(8))->method('setOrderDirection')->with('asc');
-        $mockDemand->expects($this->at(9))->method('setQueryLimit')->with(10);
-        $mockDemand->expects($this->at(10))->method('setLocation')->with(1);
-        $mockDemand->expects($this->at(11))->method('setOrganisator')->with(1);
+        $mockDemand->expects(self::at(0))->method('setDisplayMode')->with('all');
+        $mockDemand->expects(self::at(1))->method('setStoragePage')->with(1);
+        $mockDemand->expects(self::at(2))->method('setCategoryConjunction')->with('AND');
+        $mockDemand->expects(self::at(3))->method('setCategory')->with(10);
+        $mockDemand->expects(self::at(4))->method('setIncludeSubcategories')->with(true);
+        $mockDemand->expects(self::at(5))->method('setTopEventRestriction')->with(2);
+        $mockDemand->expects(self::at(6))->method('setOrderField')->with('title');
+        $mockDemand->expects(self::at(7))->method('setOrderFieldAllowed')->with('title');
+        $mockDemand->expects(self::at(8))->method('setOrderDirection')->with('asc');
+        $mockDemand->expects(self::at(9))->method('setQueryLimit')->with(10);
+        $mockDemand->expects(self::at(10))->method('setLocation')->with(1);
+        $mockDemand->expects(self::at(11))->method('setOrganisator')->with(1);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)->disableOriginalConstructor()->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
+        $objectManager->expects(self::any())->method('get')->willReturn($mockDemand);
         $this->inject($mockController, 'objectManager', $objectManager);
 
         $mockController->createEventDemandObjectFromSettings($settings);
@@ -164,7 +160,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function createCategoryDemandObjectFromSettingsTest()
     {
@@ -183,13 +178,13 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $mockDemand = $this->getMockBuilder(CategoryDemand::class)->getMock();
-        $mockDemand->expects($this->at(0))->method('setStoragePage')->with(1);
-        $mockDemand->expects($this->at(1))->method('setRestrictToStoragePage')->with(false);
-        $mockDemand->expects($this->at(2))->method('setCategories')->with('1,2,3');
-        $mockDemand->expects($this->at(3))->method('setIncludeSubcategories')->with(false);
+        $mockDemand->expects(self::at(0))->method('setStoragePage')->with(1);
+        $mockDemand->expects(self::at(1))->method('setRestrictToStoragePage')->with(false);
+        $mockDemand->expects(self::at(2))->method('setCategories')->with('1,2,3');
+        $mockDemand->expects(self::at(3))->method('setIncludeSubcategories')->with(false);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)->disableOriginalConstructor()->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($mockDemand));
+        $objectManager->expects(self::any())->method('get')->willReturn($mockDemand);
         $this->inject($mockController, 'objectManager', $objectManager);
 
         $mockController->createCategoryDemandObjectFromSettings($settings);
@@ -199,7 +194,6 @@ class EventControllerTest extends UnitTestCase
      * Test if overwriteDemand ignores properties in $ignoredSettingsForOverwriteDemand
      *
      * @test
-     * @return void
      */
     public function overwriteDemandObjectIgnoresIgnoredProperties()
     {
@@ -214,14 +208,13 @@ class EventControllerTest extends UnitTestCase
             false
         );
         $resultDemand = $mockController->_call('overwriteEventDemandObject', $demand, $overwriteDemand);
-        $this->assertEmpty($resultDemand->getStoragePage());
+        self::assertEmpty($resultDemand->getStoragePage());
     }
 
     /**
      * Test if overwriteDemand sets a property in the given demand
      *
      * @test
-     * @return void
      */
     public function overwriteDemandObjectSetsCategoryProperty()
     {
@@ -236,12 +229,11 @@ class EventControllerTest extends UnitTestCase
             false
         );
         $resultDemand = $mockController->_call('overwriteEventDemandObject', $demand, $overwriteDemand);
-        $this->assertSame(1, $resultDemand->getCategory());
+        self::assertSame(1, $resultDemand->getCategory());
     }
 
     /**
      * @test
-     * @return void
      */
     public function initializeSaveRegistrationActionSetsDateFormat()
     {
@@ -252,33 +244,33 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $mockPropertyMapperConfig = $this->getMockBuilder(MvcPropertyMappingConfiguration::class)->getMock();
-        $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
-            $this->equalTo(DateTimeConverter::class),
-            $this->equalTo('dateFormat'),
-            $this->equalTo('d.m.Y')
+        $mockPropertyMapperConfig->expects(self::any())->method('setTypeConverterOption')->with(
+            self::equalTo(DateTimeConverter::class),
+            self::equalTo('dateFormat'),
+            self::equalTo('d.m.Y')
         );
 
         $mockDateOfBirthPmConfig = $this->getMockBuilder(MvcPropertyMappingConfiguration::class)->getMock();
-        $mockDateOfBirthPmConfig->expects($this->once())->method('forProperty')->with('dateOfBirth')->will(
-            $this->returnValue($mockPropertyMapperConfig)
+        $mockDateOfBirthPmConfig->expects(self::once())->method('forProperty')->with('dateOfBirth')->willReturn(
+            $mockPropertyMapperConfig
         );
 
         $mockRegistrationArgument = $this->getMockBuilder(Argument::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockDateOfBirthPmConfig)
+        $mockRegistrationArgument->expects(self::once())->method('getPropertyMappingConfiguration')->willReturn(
+            $mockDateOfBirthPmConfig
         );
 
         $mockArguments = $this->getMockBuilder(Arguments::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockArguments->expects($this->at(0))->method('getArgument')->with('registration')->will(
-            $this->returnValue($mockRegistrationArgument)
+        $mockArguments->expects(self::at(0))->method('getArgument')->with('registration')->willReturn(
+            $mockRegistrationArgument
         );
 
         $mockRequest = $this->getMockBuilder(Request::class)->getMock();
-        $mockRequest->expects($this->any())->method('getArguments')->will($this->returnValue([]));
+        $mockRequest->expects(self::any())->method('getArguments')->willReturn([]);
 
         $this->subject->_set('request', $mockRequest);
         $this->subject->_set('arguments', $mockArguments);
@@ -288,7 +280,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
@@ -303,31 +294,31 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
-        $this->subject->expects($this->once())->method('createForeignRecordDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($foreignRecordDemand));
+        $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
+            ->with($settings)->willReturn($foreignRecordDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -335,7 +326,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -343,14 +334,14 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addPageCacheTagsByEventDemandObject'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('addPageCacheTagsByEventDemandObject');
+        $eventCacheService->expects(self::once())->method('addPageCacheTagsByEventDemandObject');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $variables = [
@@ -364,12 +355,12 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifyListViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -379,7 +370,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
@@ -395,31 +385,31 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createCategoryDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($categoryDemand));
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($eventDemand));
-        $this->subject->expects($this->once())->method('overwriteEventDemandObject')->will($this->returnValue($eventDemand));
+        $this->subject->expects(self::once())->method('createCategoryDemandObjectFromSettings')
+            ->with($settings)->willReturn($categoryDemand);
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($eventDemand);
+        $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn($eventDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -427,7 +417,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -435,14 +425,14 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addPageCacheTagsByEventDemandObject'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('addPageCacheTagsByEventDemandObject');
+        $eventCacheService->expects(self::once())->method('addPageCacheTagsByEventDemandObject');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $variables = [
@@ -456,12 +446,12 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifyListViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -471,7 +461,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
@@ -486,31 +475,31 @@ class EventControllerTest extends UnitTestCase
         $settings = ['disableOverrideDemand' => 1];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($eventDemand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($eventDemand);
 
         // Ensure overwriteDemand is not called
-        $this->subject->expects($this->never())->method('overwriteEventDemandObject');
+        $this->subject->expects(self::never())->method('overwriteEventDemandObject');
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -518,7 +507,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -526,14 +515,14 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addPageCacheTagsByEventDemandObject'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('addPageCacheTagsByEventDemandObject');
+        $eventCacheService->expects(self::once())->method('addPageCacheTagsByEventDemandObject');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $variables = [
@@ -547,12 +536,12 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifyListViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -562,26 +551,25 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function detailActionAssignsEventToView()
     {
         $event = new Event();
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with(['event' => $event]);
+        $view->expects(self::once())->method('assignMultiple')->with(['event' => $event]);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addCacheTagsByEventRecords'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('addCacheTagsByEventRecords');
+        $eventCacheService->expects(self::once())->method('addCacheTagsByEventRecords');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $this->subject->detailAction($event);
@@ -589,18 +577,17 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function registrationActionAssignsEventToView()
     {
         $event = new Event();
 
         $mockPaymentService = $this->getMockBuilder(PaymentService::class)->getMock();
-        $mockPaymentService->expects($this->once())->method('getPaymentMethods')->will($this->returnValue(['invoice']));
+        $mockPaymentService->expects(self::once())->method('getPaymentMethods')->willReturn(['invoice']);
         $this->inject($this->subject, 'paymentService', $mockPaymentService);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'event' => $event,
             'paymentMethods' => ['invoice']
         ]);
@@ -608,7 +595,7 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->registrationAction($event);
@@ -616,12 +603,11 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDisabled()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registrationService = new RegistrationService();
@@ -629,10 +615,10 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(false));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(false);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -644,12 +630,11 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDeadlineExpired()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registrationService = new RegistrationService();
@@ -659,11 +644,11 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $deadline = new \DateTime();
         $deadline->add(\DateInterval::createFromDateString('yesterday'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->any())->method('getRegistrationDeadline')->will($this->returnValue($deadline));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->expects(self::any())->method('getRegistrationDeadline')->willReturn($deadline);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -675,12 +660,11 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationActionRedirectsWithMessageIfEventExpired()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registrationService = new RegistrationService();
@@ -690,11 +674,11 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('yesterday'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -706,12 +690,11 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationRedirectsWithMessageIfMaxParticipantsReached()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registrationService = new RegistrationService();
@@ -719,18 +702,18 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->once())->method('count')->will($this->returnValue(10));
+        $registrations->expects(self::once())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->once())->method('getRegistrations')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
+        $event->expects(self::once())->method('getRegistrations')->willReturn($registrations);
+        $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -742,34 +725,33 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsGreaterThanRemainingPlaces()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registrationService = new RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(11));
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(11);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+        $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
+        $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
+        $event->expects(self::any())->method('getFreePlaces')->willReturn(10);
+        $event->expects(self::any())->method('getMaxParticipants')->willReturn(20);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -781,35 +763,34 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registrationService = new RegistrationService();
         $this->inject($this->subject, 'registrationService', $registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(6));
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(6);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+        $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(20));
-        $event->expects($this->once())->method('getMaxRegistrationsPerUser')->will($this->returnValue(5));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
+        $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
+        $event->expects(self::any())->method('getFreePlaces')->willReturn(10);
+        $event->expects(self::any())->method('getMaxParticipants')->willReturn(20);
+        $event->expects(self::once())->method('getMaxRegistrationsPerUser')->willReturn(5);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -821,20 +802,19 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationRedirectsWithMessageIfUniqueEmailCheckEnabledAndEmailAlreadyRegistered()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)->setMethods(['emailNotUnique'])->getMock();
-        $mockRegistrationService->expects($this->once())->method('emailNotUnique')->will($this->returnValue(true));
+        $mockRegistrationService->expects(self::once())->method('emailNotUnique')->willReturn(true);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $repoRegistrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $repoRegistrations->expects($this->any())->method('count')->will($this->returnValue(10));
+        $repoRegistrations->expects(self::any())->method('count')->willReturn(10);
 
         // Inject mock of registrationRepository to registrationService
         $registrationRepository = $this->getMockBuilder(
@@ -842,25 +822,25 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findEventRegistrationsByEmail'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->any())->method('findEventRegistrationsByEmail')->will($this->returnValue($repoRegistrations));
+        $registrationRepository->expects(self::any())->method('findEventRegistrationsByEmail')->willReturn($repoRegistrations);
         $this->inject($mockRegistrationService, 'registrationRepository', $registrationRepository);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getEmail')->will($this->returnValue('email@domain.tld'));
+        $registration->expects(self::any())->method('getEmail')->willReturn('email@domain.tld');
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+        $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->once())->method('getEnableRegistration')->will($this->returnValue(true));
-        $event->expects($this->once())->method('getStartdate')->will($this->returnValue($startdate));
-        $event->expects($this->any())->method('getRegistrations')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getUniqueEmailCheck')->will($this->returnValue(true));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
+        $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
+        $event->expects(self::any())->method('getUniqueEmailCheck')->willReturn(true);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -875,65 +855,64 @@ class EventControllerTest extends UnitTestCase
      * registration if maxParticipants is reached and waitlist is enabled
      *
      * @test
-     * @return void
      */
     public function saveRegistrationActionWithoutAutoConfirmationAndWaitlistRedirectsWithMessageIfRegistrationSuccessful()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
-            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST]));
-        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
+            ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST]);
+        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(10));
+        $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
-        $event->expects($this->any())->method('getPid')->will($this->returnValue(1));
+        $event->expects(self::any())->method('getUid')->willReturn(1);
+        $event->expects(self::any())->method('getPid')->willReturn(1);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('add');
+        $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $notificationService = $this->getMockBuilder(NotificationService::class)->getMock();
-        $notificationService->expects($this->once())->method('sendUserMessage');
-        $notificationService->expects($this->once())->method('sendAdminMessage');
+        $notificationService->expects(self::once())->method('sendUserMessage');
+        $notificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
             ->disableOriginalConstructor()
             ->getMock();
-        $persistenceManager->expects($this->once())->method('persistAll');
+        $persistenceManager->expects(self::once())->method('persistAll');
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('flushEventCache');
+        $eventCacheService->expects(self::once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -942,10 +921,10 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationSavedEvent($registration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -958,65 +937,64 @@ class EventControllerTest extends UnitTestCase
      * registration and redirects to the saveRegistrationResult action.
      *
      * @test
-     * @return void
      */
     public function saveRegistrationActionWithoutAutoConfirmationRedirectsWithMessageIfRegistrationSuccessful()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+        $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
-        $event->expects($this->any())->method('getPid')->will($this->returnValue(1));
+        $event->expects(self::any())->method('getUid')->willReturn(1);
+        $event->expects(self::any())->method('getPid')->willReturn(1);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('add');
+        $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $notificationService = $this->getMockBuilder(NotificationService::class)->getMock();
-        $notificationService->expects($this->once())->method('sendUserMessage');
-        $notificationService->expects($this->once())->method('sendAdminMessage');
+        $notificationService->expects(self::once())->method('sendUserMessage');
+        $notificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
             ->disableOriginalConstructor()
             ->getMock();
-        $persistenceManager->expects($this->once())->method('persistAll');
+        $persistenceManager->expects(self::once())->method('persistAll');
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('flushEventCache');
+        $eventCacheService->expects(self::once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
-            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
-        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
+            ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
+        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -1025,10 +1003,10 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationSavedEvent($registration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1041,7 +1019,6 @@ class EventControllerTest extends UnitTestCase
      * registration and redirects to the confirmationRegistration action.
      *
      * @test
-     * @return void
      */
     public function saveRegistrationWithSettingAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
@@ -1049,14 +1026,14 @@ class EventControllerTest extends UnitTestCase
         $regHmac = 'someRandomHMAC';
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getUid')->will($this->returnValue($regUid));
+        $registration->expects(self::any())->method('getUid')->willReturn($regUid);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+        $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getUid')->will($this->returnValue(1));
-        $event->expects($this->any())->method('getPid')->will($this->returnValue(1));
+        $event->expects(self::once())->method('getUid')->willReturn(1);
+        $event->expects(self::any())->method('getPid')->willReturn(1);
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
 
@@ -1064,39 +1041,39 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('add');
+        $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
             ->disableOriginalConstructor()
             ->getMock();
-        $persistenceManager->expects($this->once())->method('persistAll');
+        $persistenceManager->expects(self::once())->method('persistAll');
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('flushEventCache');
+        $eventCacheService->expects(self::once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
-            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
-        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
+            ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
+        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn($regHmac);
         $this->inject($this->subject, 'hashService', $hashService);
 
         // Inject settings so autoconfirmation is disabled
@@ -1107,7 +1084,7 @@ class EventControllerTest extends UnitTestCase
         ];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'confirmRegistration',
             null,
             null,
@@ -1116,10 +1093,10 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationSavedEvent($registration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1131,7 +1108,6 @@ class EventControllerTest extends UnitTestCase
      * registration and redirects to the confirmationRegistration action.
      *
      * @test
-     * @return void
      */
     public function saveRegistrationWithEventAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
@@ -1139,60 +1115,60 @@ class EventControllerTest extends UnitTestCase
         $regHmac = 'someRandomHMAC';
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getUid')->will($this->returnValue($regUid));
+        $registration->expects(self::any())->method('getUid')->willReturn($regUid);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+        $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
-        $event->expects($this->any())->method('getEnableAutoconfirm')->will($this->returnValue(true));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
-        $event->expects($this->any())->method('getPid')->will($this->returnValue(1));
+        $event->expects(self::any())->method('getRegistration')->willReturn($registrations);
+        $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
+        $event->expects(self::any())->method('getEnableAutoconfirm')->willReturn(true);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
+        $event->expects(self::any())->method('getPid')->willReturn(1);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('add');
+        $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
             ->disableOriginalConstructor()
             ->getMock();
-        $persistenceManager->expects($this->once())->method('persistAll');
+        $persistenceManager->expects(self::once())->method('persistAll');
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('flushEventCache');
+        $eventCacheService->expects(self::once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
-            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
-        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
+        $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
+            ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
+        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue($regHmac));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn($regHmac);
         $this->inject($this->subject, 'hashService', $hashService);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'confirmRegistration',
             null,
             null,
@@ -1201,10 +1177,10 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationSavedEvent($registration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyCreateDependingRegistrationsEvent($registration, false, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1217,72 +1193,71 @@ class EventControllerTest extends UnitTestCase
      * if getAmountOfRegistrations > 1
      *
      * @test
-     * @return void
      */
     public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreatherThanOne()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('generateHmac')->will($this->returnValue('somehmac'));
+        $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->inject($this->subject, 'hashService', $hashService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(2);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $registrations->expects($this->any())->method('count')->will($this->returnValue(9));
+        $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
-        $event->expects($this->any())->method('getRegistration')->will($this->returnValue($registrations));
-        $event->expects($this->any())->method('getMaxParticipants')->will($this->returnValue(10));
-        $event->expects($this->any())->method('getFreePlaces')->will($this->returnValue(10));
-        $event->expects($this->any())->method('getMaxRegistrationsPerUser')->will($this->returnValue(2));
-        $event->expects($this->any())->method('getUid')->will($this->returnValue(1));
-        $event->expects($this->any())->method('getPid')->will($this->returnValue(1));
+        $event->expects(self::any())->method('getRegistration')->willReturn($registrations);
+        $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
+        $event->expects(self::any())->method('getFreePlaces')->willReturn(10);
+        $event->expects(self::any())->method('getMaxRegistrationsPerUser')->willReturn(2);
+        $event->expects(self::any())->method('getUid')->willReturn(1);
+        $event->expects(self::any())->method('getPid')->willReturn(1);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects($this->once())->method('add');
+        $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
         $notificationService = $this->getMockBuilder(NotificationService::class)->getMock();
-        $notificationService->expects($this->once())->method('sendUserMessage');
-        $notificationService->expects($this->once())->method('sendAdminMessage');
+        $notificationService->expects(self::once())->method('sendUserMessage');
+        $notificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
 
         $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
             ->setMethods(['persistAll'])
             ->disableOriginalConstructor()
             ->getMock();
-        $persistenceManager->expects($this->once())->method('persistAll');
+        $persistenceManager->expects(self::once())->method('persistAll');
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->any())->method('get')->will($this->returnValue($persistenceManager));
+        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('flushEventCache');
+        $eventCacheService->expects(self::once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
             ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent', 'createDependingRegistrations'])
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkRegistrationSuccess')
-            ->will($this->returnValue([true, RegistrationResult::REGISTRATION_SUCCESSFUL]));
-        $mockRegistrationService->expects($this->once())->method('fixRegistrationEvent');
-        $mockRegistrationService->expects($this->once())->method('createDependingRegistrations');
+        $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
+            ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
+        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
+        $mockRegistrationService->expects(self::once())->method('createDependingRegistrations');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
-        $this->subject->expects($this->once())->method('redirect')->with(
+        $this->subject->expects(self::once())->method('redirect')->with(
             'saveRegistrationResult',
             null,
             null,
@@ -1291,10 +1266,10 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationSavedEvent($registration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyCreateDependingRegistrationsEvent($registration, true, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1304,7 +1279,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function saveRegistrationResultActionShowsExpectedMessageIfWrongHmacGiven()
     {
@@ -1312,18 +1286,18 @@ class EventControllerTest extends UnitTestCase
         $hmac = 'wrongmac';
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('validateHmac')->will($this->returnValue(false));
+        $hashService->expects(self::once())->method('validateHmac')->willReturn(false);
         $this->inject($this->subject, 'hashService', $hashService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findByUid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->never())->method('findByUid')->with(1);
+        $eventRepository->expects(self::never())->method('findByUid')->with(1);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.registrationsuccessfulwrongeventhmac',
             'titleKey' => 'registrationResult.title.failed',
             'event' => null
@@ -1417,24 +1391,23 @@ class EventControllerTest extends UnitTestCase
      * @param mixed $hmac
      * @param mixed $message
      * @param mixed $title
-     * @return void
      */
     public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $hmac, $message, $title)
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects($this->once())->method('validateHmac')->with('event-' . $eventUid, $hmac)
-            ->will($this->returnValue(true));
+        $hashService->expects(self::once())->method('validateHmac')->with('event-' . $eventUid, $hmac)
+            ->willReturn(true);
         $this->inject($this->subject, 'hashService', $hashService);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findByUid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->any())->method('findByUid')->with($eventUid);
+        $eventRepository->expects(self::any())->method('findByUid')->with($eventUid);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => $message,
             'titleKey' => $title,
             'event' => null
@@ -1448,7 +1421,6 @@ class EventControllerTest extends UnitTestCase
      * Test if expected message is shown if checkConfirmRegistration fails
      *
      * @test
-     * @return void
      */
     public function confirmRegistrationActionShowsExpectedMessageIfCheckConfirmRegistrationFailed()
     {
@@ -1461,7 +1433,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1475,13 +1447,13 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['checkConfirmRegistration'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')
-            ->will($this->returnValue($returnedArray));
+        $mockRegistrationService->expects(self::once())->method('checkConfirmRegistration')
+            ->willReturn($returnedArray);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifyConfirmRegistrationViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1494,14 +1466,13 @@ class EventControllerTest extends UnitTestCase
      * Also checks, if messages are sent and if registration gets confirmed.
      *
      * @test
-     * @return void
      */
     public function confirmRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
-        $mockRegistration->expects($this->any())->method('getEvent');
-        $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
+        $mockRegistration->expects(self::once())->method('setConfirmed')->with(true);
+        $mockRegistration->expects(self::any())->method('getEvent');
+        $mockRegistration->expects(self::once())->method('getAmountOfRegistrations')->willReturn(2);
 
         $variables = [
             'messageKey' => 'event.message.confirmation_successful',
@@ -1512,7 +1483,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1527,16 +1498,16 @@ class EventControllerTest extends UnitTestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')
-            ->will($this->returnValue($returnedArray));
-        $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')
+        $mockRegistrationService->expects(self::once())->method('checkConfirmRegistration')
+            ->willReturn($returnedArray);
+        $mockRegistrationService->expects(self::once())->method('confirmDependingRegistrations')
             ->with($mockRegistration);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
             ->getMock();
-        $mockNotificationService->expects($this->once())->method('sendUserMessage');
-        $mockNotificationService->expects($this->once())->method('sendAdminMessage');
+        $mockNotificationService->expects(self::once())->method('sendUserMessage');
+        $mockNotificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
         $mockRegistrationRepository = $this->getMockBuilder(
@@ -1544,15 +1515,15 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['update'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationRepository->expects($this->once())->method('update');
+        $mockRegistrationRepository->expects(self::once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationConfirmedEvent($mockRegistration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyConfirmRegistrationViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1565,18 +1536,17 @@ class EventControllerTest extends UnitTestCase
      * Also checks, if messages are sent and if registration gets confirmed.
      *
      * @test
-     * @return void
      */
     public function confirmRegistrationWaitlistActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('setConfirmed')->with(true);
-        $mockRegistration->expects($this->once())->method('getAmountOfRegistrations')->will($this->returnValue(2));
-        $mockRegistration->expects($this->any())->method('getWaitlist')->will($this->returnValue(true));
-        $mockRegistration->expects($this->any())->method('getEvent');
+        $mockRegistration->expects(self::once())->method('setConfirmed')->with(true);
+        $mockRegistration->expects(self::once())->method('getAmountOfRegistrations')->willReturn(2);
+        $mockRegistration->expects(self::any())->method('getWaitlist')->willReturn(true);
+        $mockRegistration->expects(self::any())->method('getEvent');
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with([
+        $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.confirmation_waitlist_successful',
             'titleKey' => 'confirmRegistrationWaitlist.title.successful',
             'event' => null,
@@ -1596,14 +1566,14 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['checkConfirmRegistration', 'confirmDependingRegistrations', 'redirectPaymentEnabled'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkConfirmRegistration')->will($this->returnValue($returnedArray));
-        $mockRegistrationService->expects($this->once())->method('confirmDependingRegistrations')->with($mockRegistration);
+        $mockRegistrationService->expects(self::once())->method('checkConfirmRegistration')->willReturn($returnedArray);
+        $mockRegistrationService->expects(self::once())->method('confirmDependingRegistrations')->with($mockRegistration);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
             ->getMock();
-        $mockNotificationService->expects($this->once())->method('sendUserMessage');
-        $mockNotificationService->expects($this->once())->method('sendAdminMessage');
+        $mockNotificationService->expects(self::once())->method('sendUserMessage');
+        $mockNotificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
         $mockRegistrationRepository = $this->getMockBuilder(
@@ -1611,15 +1581,15 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['update'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationRepository->expects($this->once())->method('update');
+        $mockRegistrationRepository->expects(self::once())->method('update');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new AfterRegistrationConfirmedEvent($mockRegistration, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyConfirmRegistrationViewVariablesEvent(
                 [
                     'failed' => false,
@@ -1640,7 +1610,6 @@ class EventControllerTest extends UnitTestCase
      * Test if expected message is shown if checkCancelRegistration fails
      *
      * @test
-     * @return void
      */
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationFailed()
     {
@@ -1652,7 +1621,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $returnedArray = [
@@ -1666,12 +1635,12 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['checkCancelRegistration'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
+        $mockRegistrationService->expects(self::once())->method('checkCancelRegistration')->willReturn($returnedArray);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifyCancelRegistrationViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1684,20 +1653,19 @@ class EventControllerTest extends UnitTestCase
      * Also checks, if messages are sent and if registration gets removed.
      *
      * @test
-     * @return void
      */
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
-        $mockEvent->expects($this->any())->method('getUid')->will($this->returnValue(1));
-        $mockEvent->expects($this->any())->method('getPid')->will($this->returnValue(1));
-        $mockEvent->expects($this->any())->method('getEnableCancel')->will($this->returnValue(true));
-        $mockEvent->expects($this->any())->method('getCancelDeadline')->will($this->returnValue(new \DateTime('yesterday')));
+        $mockEvent->expects(self::any())->method('getUid')->willReturn(1);
+        $mockEvent->expects(self::any())->method('getPid')->willReturn(1);
+        $mockEvent->expects(self::any())->method('getEnableCancel')->willReturn(true);
+        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new \DateTime('yesterday'));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
-        $mockRegistration->expects($this->any())->method('getAmountOfRegistrations')->will($this->returnValue(2));
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($mockEvent));
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
+        $mockRegistration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(2);
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
 
         $returnedArray = [
             false,
@@ -1710,13 +1678,13 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['checkCancelRegistration', 'cancelDependingRegistrations'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationService->expects($this->once())->method('checkCancelRegistration')->will($this->returnValue($returnedArray));
-        $mockRegistrationService->expects($this->once())->method('cancelDependingRegistrations')->with($mockRegistration);
+        $mockRegistrationService->expects(self::once())->method('checkCancelRegistration')->willReturn($returnedArray);
+        $mockRegistrationService->expects(self::once())->method('cancelDependingRegistrations')->with($mockRegistration);
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)->getMock();
-        $mockNotificationService->expects($this->once())->method('sendUserMessage');
-        $mockNotificationService->expects($this->once())->method('sendAdminMessage');
+        $mockNotificationService->expects(self::once())->method('sendUserMessage');
+        $mockNotificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
         $mockRegistrationRepository = $this->getMockBuilder(
@@ -1724,14 +1692,14 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['remove'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistrationRepository->expects($this->once())->method('remove');
+        $mockRegistrationRepository->expects(self::once())->method('remove');
         $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('flushEventCache');
+        $eventCacheService->expects(self::once())->method('flushEventCache');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $variables = [
@@ -1742,15 +1710,15 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->at(0))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
             new WaitlistMoveUpEvent($mockEvent, $this->subject)
         );
-        $eventDispatcher->expects($this->at(1))->method('dispatch')->with(
+        $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
             new ModifyCancelRegistrationViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
@@ -1770,69 +1738,69 @@ class EventControllerTest extends UnitTestCase
         $mockPropertyMapperConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockPropertyMapperConfig->expects($this->any())->method('setTypeConverterOption')->with(
-            $this->equalTo(DateTimeConverter::class),
-            $this->equalTo('dateFormat'),
-            $this->equalTo($settingsSearchDateFormat)
+        $mockPropertyMapperConfig->expects(self::any())->method('setTypeConverterOption')->with(
+            self::equalTo(DateTimeConverter::class),
+            self::equalTo('dateFormat'),
+            self::equalTo($settingsSearchDateFormat)
         );
 
         $mockSearchDemandPmConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockSearchDemandPmConfig->expects($this->once())->method('allowAllProperties');
-        $mockSearchDemandPmConfig->expects($this->once())->method('setTypeConverterOption')->with(
-            $this->equalTo(PersistentObjectConverter::class),
-            $this->equalTo(PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED),
-            $this->equalTo(true)
+        $mockSearchDemandPmConfig->expects(self::once())->method('allowAllProperties');
+        $mockSearchDemandPmConfig->expects(self::once())->method('setTypeConverterOption')->with(
+            self::equalTo(PersistentObjectConverter::class),
+            self::equalTo(PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED),
+            self::equalTo(true)
         );
 
         $mockStartDatePmConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockStartDatePmConfig->expects($this->once())->method('forProperty')->with('startDate')->will(
-            $this->returnValue($mockPropertyMapperConfig)
+        $mockStartDatePmConfig->expects(self::once())->method('forProperty')->with('startDate')->willReturn(
+            $mockPropertyMapperConfig
         );
         $mockEndDatePmConfig = $this->getMockBuilder(
             MvcPropertyMappingConfiguration::class
         )->getMock();
-        $mockEndDatePmConfig->expects($this->once())->method('forProperty')->with('endDate')->will(
-            $this->returnValue($mockPropertyMapperConfig)
+        $mockEndDatePmConfig->expects(self::once())->method('forProperty')->with('endDate')->willReturn(
+            $mockPropertyMapperConfig
         );
 
         $mockSearchDemandArgument = $this->getMockBuilder(Argument::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockSearchDemandArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockSearchDemandPmConfig)
+        $mockSearchDemandArgument->expects(self::once())->method('getPropertyMappingConfiguration')->willReturn(
+            $mockSearchDemandPmConfig
         );
 
         $mockStartDateArgument = $this->getMockBuilder(Argument::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockStartDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockStartDatePmConfig)
+        $mockStartDateArgument->expects(self::once())->method('getPropertyMappingConfiguration')->willReturn(
+            $mockStartDatePmConfig
         );
         $mockEndDateArgument = $this->getMockBuilder(Argument::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockEndDateArgument->expects($this->once())->method('getPropertyMappingConfiguration')->will(
-            $this->returnValue($mockEndDatePmConfig)
+        $mockEndDateArgument->expects(self::once())->method('getPropertyMappingConfiguration')->willReturn(
+            $mockEndDatePmConfig
         );
 
         $mockArguments = $this->getMockBuilder(Arguments::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $mockArguments->expects($this->at(0))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockStartDateArgument)
+        $mockArguments->expects(self::at(0))->method('getArgument')->with('searchDemand')->willReturn(
+            $mockStartDateArgument
         );
-        $mockArguments->expects($this->at(1))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockEndDateArgument)
+        $mockArguments->expects(self::at(1))->method('getArgument')->with('searchDemand')->willReturn(
+            $mockEndDateArgument
         );
-        $mockArguments->expects($this->at(2))->method('hasArgument')->with('searchDemand')->will(
-            $this->returnValue(true)
+        $mockArguments->expects(self::at(2))->method('hasArgument')->with('searchDemand')->willReturn(
+            true
         );
-        $mockArguments->expects($this->at(3))->method('getArgument')->with('searchDemand')->will(
-            $this->returnValue($mockSearchDemandArgument)
+        $mockArguments->expects(self::at(3))->method('getArgument')->with('searchDemand')->willReturn(
+            $mockSearchDemandArgument
         );
 
         return $mockArguments;
@@ -1840,7 +1808,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function initializeSearchActionSetsDateFormat()
     {
@@ -1857,7 +1824,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewForNoSearchDemand()
     {
@@ -1872,31 +1838,31 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
-        $this->subject->expects($this->once())->method('createForeignRecordDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($foreignRecordDemand));
+        $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
+            ->with($settings)->willReturn($foreignRecordDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -1904,7 +1870,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -1912,7 +1878,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $variables = [
@@ -1926,12 +1892,12 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifySearchViewVariablesEvent(
                 $variables,
                 $this->subject
@@ -1944,17 +1910,16 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewWithSearchDemand()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
-        $searchDemand->expects($this->once())->method('setFields');
+        $searchDemand->expects(self::once())->method('setFields');
 
         $demand = $this->getMockBuilder(EventDemand::class)
             ->setMethods(['setSearchDemand'])
             ->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
 
         $foreignRecordDemand = new ForeignRecordDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1966,31 +1931,31 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
-        $this->subject->expects($this->once())->method('createForeignRecordDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($foreignRecordDemand));
+        $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
+            ->with($settings)->willReturn($foreignRecordDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -1998,7 +1963,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -2006,7 +1971,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $variables = [
@@ -2020,12 +1985,12 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with($variables);
+        $view->expects(self::once())->method('assignMultiple')->with($variables);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')->with(
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
             new ModifySearchViewVariablesEvent(
                 $variables,
                 $this->subject
@@ -2038,23 +2003,22 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function searchActionSetsSearchDemandFieldsIfSearchDemandGiven()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
-        $searchDemand->expects($this->once())->method('setFields');
+        $searchDemand->expects(self::once())->method('setFields');
 
         $demand = $this->getMockBuilder(EventDemand::class)
             ->setMethods(['setSearchDemand'])
             ->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
 
         $settings = ['settings'];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -2066,21 +2030,21 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -2088,7 +2052,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -2096,7 +2060,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
@@ -2104,7 +2068,7 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand);
@@ -2112,23 +2076,22 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function searchActionSetsAdjustsDateFieldsIfAdjustDateSettingSetAndDateFieldsGiven()
     {
         $mockStartDate = $this->getMockBuilder('\DateTime')->getMock();
-        $mockStartDate->expects($this->once())->method('setTime')->with(0, 0, 0);
+        $mockStartDate->expects(self::once())->method('setTime')->with(0, 0, 0);
 
         $mockEndDate = $this->getMockBuilder('\DateTime')->getMock();
-        $mockEndDate->expects($this->once())->method('setTime')->with(23, 59, 59);
+        $mockEndDate->expects(self::once())->method('setTime')->with(23, 59, 59);
 
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
-        $searchDemand->expects($this->once())->method('setFields');
-        $searchDemand->expects($this->any())->method('getStartDate')->will($this->returnValue($mockStartDate));
-        $searchDemand->expects($this->any())->method('getEndDate')->will($this->returnValue($mockEndDate));
+        $searchDemand->expects(self::once())->method('setFields');
+        $searchDemand->expects(self::any())->method('getStartDate')->willReturn($mockStartDate);
+        $searchDemand->expects(self::any())->method('getEndDate')->willReturn($mockEndDate);
 
         $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
 
         $settings = [
             'search' => [
@@ -2137,8 +2100,8 @@ class EventControllerTest extends UnitTestCase
         ];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -2150,14 +2113,14 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(
@@ -2165,7 +2128,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -2173,7 +2136,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -2181,7 +2144,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
@@ -2189,7 +2152,7 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand);
@@ -2197,24 +2160,23 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function searchActionOverwritesDemandFieldsIfOverwriteDemandObjectGiven()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
-        $searchDemand->expects($this->once())->method('setFields');
+        $searchDemand->expects(self::once())->method('setFields');
 
         $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
 
         $overrideDemand = ['category' => 10];
-        $this->subject->expects($this->once())->method('overwriteEventDemandObject')->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn($demand);
 
         $settings = ['disableOverrideDemand' => 0];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -2226,21 +2188,21 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -2248,7 +2210,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -2256,7 +2218,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
@@ -2264,7 +2226,7 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand, $overrideDemand);
@@ -2272,24 +2234,23 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function searchActionDoesNotOverridesDemandIfOverwriteDemandDisabled()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
-        $searchDemand->expects($this->once())->method('setFields');
+        $searchDemand->expects(self::once())->method('setFields');
 
         $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects($this->once())->method('setSearchDemand')->with($searchDemand);
+        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
 
         $overrideDemand = ['category' => 10];
-        $this->subject->expects($this->never())->method('overwriteEventDemandObject');
+        $this->subject->expects(self::never())->method('overwriteEventDemandObject');
 
         $settings = ['disableOverrideDemand' => 1];
         $this->inject($this->subject, 'settings', $settings);
 
-        $this->subject->expects($this->once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->will($this->returnValue($demand));
+        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
+            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -2301,21 +2262,21 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allEvents));
+        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->inject($this->subject, 'eventRepository', $eventRepository);
 
         $categoryRepository = $this->getMockBuilder(CategoryRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $categoryRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allCategories));
+        $categoryRepository->expects(self::once())->method('findDemanded')->willReturn($allCategories);
         $this->inject($this->subject, 'categoryRepository', $categoryRepository);
 
         $locationRepository = $this->getMockBuilder(LocationRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $locationRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allLocations));
+        $locationRepository->expects(self::once())->method('findDemanded')->willReturn($allLocations);
         $this->inject($this->subject, 'locationRepository', $locationRepository);
 
         $organisatorRepository = $this->getMockBuilder(
@@ -2323,7 +2284,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $organisatorRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allOrganisators));
+        $organisatorRepository->expects(self::once())->method('findDemanded')->willReturn($allOrganisators);
         $this->inject($this->subject, 'organisatorRepository', $organisatorRepository);
 
         $speakerRepository = $this->getMockBuilder(
@@ -2331,7 +2292,7 @@ class EventControllerTest extends UnitTestCase
         )->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
             ->getMock();
-        $speakerRepository->expects($this->once())->method('findDemanded')->will($this->returnValue($allSpeakers));
+        $speakerRepository->expects(self::once())->method('findDemanded')->willReturn($allSpeakers);
         $this->inject($this->subject, 'speakerRepository', $speakerRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
@@ -2339,7 +2300,7 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $this->subject->searchAction($searchDemand, $overrideDemand);
@@ -2347,25 +2308,24 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function detailActionShowsEventIfEventGiven()
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects($this->once())->method('assignMultiple')->with(['event' => $mockEvent]);
+        $view->expects(self::once())->method('assignMultiple')->with(['event' => $mockEvent]);
         $this->inject($this->subject, 'view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch');
+        $eventDispatcher->expects(self::once())->method('dispatch');
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['addCacheTagsByEventRecords'])
             ->disableOriginalConstructor()
             ->getMock();
-        $eventCacheService->expects($this->once())->method('addCacheTagsByEventRecords');
+        $eventCacheService->expects(self::once())->method('addCacheTagsByEventRecords');
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $this->subject->detailAction($mockEvent);
@@ -2383,7 +2343,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
-        $this->assertNull($mock->_call('handleEventNotFoundError', $settings));
+        self::assertNull($mock->_call('handleEventNotFoundError', $settings));
     }
 
     /**
@@ -2417,7 +2377,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
-        $mock->expects($this->once())->method('redirect')->with('list', null, null, null, 100);
+        $mock->expects(self::once())->method('redirect')->with('list', null, null, null, 100);
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
@@ -2433,7 +2393,7 @@ class EventControllerTest extends UnitTestCase
         ];
 
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
-        $mock->expects($this->once())->method('redirect')->with('list', null, null, null, 1);
+        $mock->expects(self::once())->method('redirect')->with('list', null, null, null, 1);
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
@@ -2454,14 +2414,14 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['setTemplatePathAndFilename', 'render'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockStandaloneView->expects($this->once())->method('setTemplatePathAndFilename');
-        $mockStandaloneView->expects($this->once())->method('render');
+        $mockStandaloneView->expects(self::once())->method('setTemplatePathAndFilename');
+        $mockStandaloneView->expects(self::once())->method('render');
 
         $mockObjectManager = $this->getMockBuilder(ObjectManager::class)
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockObjectManager->expects($this->any())->method('get')->will($this->returnValue($mockStandaloneView));
+        $mockObjectManager->expects(self::any())->method('get')->willReturn($mockStandaloneView);
         $this->inject($mockEventController, 'objectManager', $mockObjectManager);
 
         $mockEventController->_call('handleEventNotFoundError', $settings);
@@ -2469,7 +2429,6 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function changeEventDemandToFullMonthDateRangeAppliesExpectedDatesAndUnsetsMonthAndYear()
     {
@@ -2496,14 +2455,14 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['getCalendarDateRange'])
             ->disableOriginalConstructor()
             ->getMock();
-        $calendarService->expects($this->once())->method('getCalendarDateRange')->will($this->returnValue($calendarDateRangeResult));
+        $calendarService->expects(self::once())->method('getCalendarDateRange')->willReturn($calendarDateRangeResult);
         $this->inject($mockController, 'calendarService', $calendarService);
 
         $resultDemand = $mockController->_call('changeEventDemandToFullMonthDateRange', $eventDemand);
-        $this->assertEquals(0, $resultDemand->getMonth());
-        $this->assertEquals(0, $resultDemand->getYear());
-        $this->assertSame('26.12.2016 00:00:00', $resultDemand->getSearchDemand()->getStartDate()->format('d.m.Y H:i:s'));
-        $this->assertSame('05.02.2017 23:59:59', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y H:i:s'));
+        self::assertEquals(0, $resultDemand->getMonth());
+        self::assertEquals(0, $resultDemand->getYear());
+        self::assertSame('26.12.2016 00:00:00', $resultDemand->getSearchDemand()->getStartDate()->format('d.m.Y H:i:s'));
+        self::assertSame('05.02.2017 23:59:59', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y H:i:s'));
     }
 
     /**
@@ -2519,13 +2478,13 @@ class EventControllerTest extends UnitTestCase
         $mockedController->_set('settings', ['storagePage' => '']);
         $event->setPid(12);
 
-        $this->assertEquals($event, $mockedController->_call('checkPidOfEventRecord', $event));
+        self::assertEquals($event, $mockedController->_call('checkPidOfEventRecord', $event));
 
         // startingpoint defined
         $mockedController->_set('settings', ['storagePage' => '1,2,123,456']);
         $event->setPid(123);
 
-        $this->assertEquals($event, $mockedController->_call('checkPidOfEventRecord', $event));
+        self::assertEquals($event, $mockedController->_call('checkPidOfEventRecord', $event));
 
         // startingpoint is different
         $mockedController->_set('settings', ['storagePage' => '123,456']);
@@ -2533,11 +2492,11 @@ class EventControllerTest extends UnitTestCase
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects($this->once())->method('dispatch')
+        $eventDispatcher->expects(self::once())->method('dispatch')
             ->with(new EventPidCheckFailedEvent($event, $mockedController));
         $mockedController->_set('eventDispatcher', $eventDispatcher);
 
-        $this->assertEquals(null, $mockedController->_call('checkPidOfEventRecord', $event));
+        self::assertNull($mockedController->_call('checkPidOfEventRecord', $event));
     }
 
     /**
@@ -2548,7 +2507,7 @@ class EventControllerTest extends UnitTestCase
         $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
         // singleEvent setting not configured not configured
         $mockedController->_set('settings', ['singleEvent' => null]);
-        $this->assertNull($mockedController->_call('evaluateSingleEventSetting', null));
+        self::assertNull($mockedController->_call('evaluateSingleEventSetting', null));
 
         // isShortcut is configured
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
@@ -2557,12 +2516,12 @@ class EventControllerTest extends UnitTestCase
             ->setMethods(['findByUid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockEventRepository->expects($this->once())->method('findByUid')->with(123)
-            ->will($this->returnValue($mockEvent));
+        $mockEventRepository->expects(self::once())->method('findByUid')->with(123)
+            ->willReturn($mockEvent);
         $mockedController->_set('eventRepository', $mockEventRepository);
 
         $mockedController->_set('settings', ['singleEvent' => 123]);
-        $this->assertEquals($mockEvent, $mockedController->_call('evaluateSingleEventSetting', null));
+        self::assertEquals($mockEvent, $mockedController->_call('evaluateSingleEventSetting', null));
     }
 
     /**
@@ -2574,7 +2533,7 @@ class EventControllerTest extends UnitTestCase
 
         // isShortcut not configured
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 0]]);
-        $this->assertNull($mockedController->_call('evaluateIsShortcutSetting', null));
+        self::assertNull($mockedController->_call('evaluateIsShortcutSetting', null));
 
         // isShortcut is configured
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
@@ -2584,19 +2543,19 @@ class EventControllerTest extends UnitTestCase
 
         $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->setMethods(['getContentObject'])->disableOriginalConstructor()->getMock();
-        $mockConfigurationManager->expects($this->once())->method('getContentObject')
-            ->will($this->returnValue($mockContentObjectRenderer));
+        $mockConfigurationManager->expects(self::once())->method('getContentObject')
+            ->willReturn($mockContentObjectRenderer);
         $mockedController->_set('configurationManager', $mockConfigurationManager);
 
         $mockEventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findByUid'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockEventRepository->expects($this->once())->method('findByUid')->with(123)
-            ->will($this->returnValue($mockEvent));
+        $mockEventRepository->expects(self::once())->method('findByUid')->with(123)
+            ->willReturn($mockEvent);
         $mockedController->_set('eventRepository', $mockEventRepository);
 
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 1]]);
-        $this->assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
+        self::assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
     }
 }

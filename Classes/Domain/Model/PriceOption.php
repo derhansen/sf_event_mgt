@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * Price option
@@ -27,14 +28,14 @@ class PriceOption extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $validUntil = null;
+    protected $validUntil;
 
     /**
      * Event
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
-    protected $event = null;
+    protected $event;
 
     /**
      * Returns the price
@@ -50,7 +51,6 @@ class PriceOption extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the price
      *
      * @param float $price
-     * @return void
      */
     public function setPrice($price)
     {
@@ -71,7 +71,6 @@ class PriceOption extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the date until the price is valil
      *
      * @param \DateTime $validUntil
-     * @return void
      */
     public function setValidUntil($validUntil)
     {

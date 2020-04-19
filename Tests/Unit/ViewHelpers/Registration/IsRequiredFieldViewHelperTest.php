@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\IsRequiredFieldViewHelper;
@@ -31,8 +32,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
                 'renderElseChild'
             ]
         );
-        $viewHelper->expects($this->never())->method('renderThenChild');
-        $viewHelper->expects($this->once())->method('renderElseChild');
+        $viewHelper->expects(self::never())->method('renderThenChild');
+        $viewHelper->expects(self::once())->method('renderElseChild');
         $viewHelper->setArguments([
             'fieldname' => '',
             'settings' => [
@@ -56,8 +57,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
                 'renderElseChild'
             ]
         );
-        $viewHelper->expects($this->never())->method('renderThenChild');
-        $viewHelper->expects($this->once())->method('renderElseChild');
+        $viewHelper->expects(self::never())->method('renderThenChild');
+        $viewHelper->expects(self::once())->method('renderElseChild');
         $viewHelper->setArguments([
             'fieldname' => 'zip',
             'settings' => [
@@ -81,8 +82,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
                 'renderElseChild'
             ]
         );
-        $viewHelper->expects($this->once())->method('renderThenChild');
-        $viewHelper->expects($this->never())->method('renderElseChild');
+        $viewHelper->expects(self::once())->method('renderThenChild');
+        $viewHelper->expects(self::never())->method('renderElseChild');
         $viewHelper->setArguments([
             'fieldname' => 'zip',
             'settings' => [
@@ -106,8 +107,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
                 'renderElseChild'
             ]
         );
-        $viewHelper->expects($this->once())->method('renderThenChild');
-        $viewHelper->expects($this->never())->method('renderElseChild');
+        $viewHelper->expects(self::once())->method('renderThenChild');
+        $viewHelper->expects(self::never())->method('renderElseChild');
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
             'settings' => [
@@ -131,8 +132,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
                 'renderElseChild'
             ]
         );
-        $viewHelper->expects($this->never())->method('renderThenChild');
-        $viewHelper->expects($this->once())->method('renderElseChild');
+        $viewHelper->expects(self::never())->method('renderThenChild');
+        $viewHelper->expects(self::once())->method('renderElseChild');
         $viewHelper->setArguments([
             'registrationField' => null,
             'settings' => []
@@ -156,8 +157,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
         $optionalRegistrationField = new Field();
         $optionalRegistrationField->setRequired(false);
 
-        $viewHelper->expects($this->never())->method('renderThenChild');
-        $viewHelper->expects($this->once())->method('renderElseChild');
+        $viewHelper->expects(self::never())->method('renderThenChild');
+        $viewHelper->expects(self::once())->method('renderElseChild');
         $viewHelper->setArguments([
             'registrationField' => $optionalRegistrationField,
             'settings' => []
@@ -181,8 +182,8 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
         $requiredRegistrationField = new Field();
         $requiredRegistrationField->setRequired(true);
 
-        $viewHelper->expects($this->once())->method('renderThenChild');
-        $viewHelper->expects($this->never())->method('renderElseChild');
+        $viewHelper->expects(self::once())->method('renderThenChild');
+        $viewHelper->expects(self::never())->method('renderElseChild');
         $viewHelper->setArguments([
             'registrationField' => $requiredRegistrationField,
             'settings' => []

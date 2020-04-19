@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
@@ -26,12 +27,10 @@ class FieldTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -40,8 +39,6 @@ class FieldTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -53,7 +50,7 @@ class FieldTest extends UnitTestCase
      */
     public function getTitleReturnsInitialValueForString()
     {
-        $this->assertEquals('', $this->subject->getTitle());
+        self::assertEquals('', $this->subject->getTitle());
     }
 
     /**
@@ -62,7 +59,7 @@ class FieldTest extends UnitTestCase
     public function setTitleSetsTitleField()
     {
         $this->subject->setTitle('A title');
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'A title',
             'title',
             $this->subject
@@ -74,7 +71,7 @@ class FieldTest extends UnitTestCase
      */
     public function getTypeReturnsInitialValueForString()
     {
-        $this->assertEquals('', $this->subject->getType());
+        self::assertEquals('', $this->subject->getType());
     }
 
     /**
@@ -83,7 +80,7 @@ class FieldTest extends UnitTestCase
     public function setTypeSetsTypefield()
     {
         $this->subject->setType('check');
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'check',
             'type',
             $this->subject
@@ -95,7 +92,7 @@ class FieldTest extends UnitTestCase
      */
     public function getRequiredReturnsInitialValueForBoolean()
     {
-        $this->assertFalse($this->subject->getRequired());
+        self::assertFalse($this->subject->getRequired());
     }
 
     /**
@@ -104,7 +101,7 @@ class FieldTest extends UnitTestCase
     public function setRequiredSetsRequiredField()
     {
         $this->subject->setRequired(true);
-        $this->assertTrue($this->subject->getRequired());
+        self::assertTrue($this->subject->getRequired());
     }
 
     /**
@@ -112,7 +109,7 @@ class FieldTest extends UnitTestCase
      */
     public function getPlaceholderReturnsInitialValueForString()
     {
-        $this->assertEquals('', $this->subject->getPlaceholder());
+        self::assertEquals('', $this->subject->getPlaceholder());
     }
 
     /**
@@ -121,7 +118,7 @@ class FieldTest extends UnitTestCase
     public function setPlaceholderSetsPlaceholderField()
     {
         $this->subject->setPlaceholder('placeholder');
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'placeholder',
             'placeholder',
             $this->subject
@@ -133,7 +130,7 @@ class FieldTest extends UnitTestCase
      */
     public function getDefaultValueReturnsInitialValueForString()
     {
-        $this->assertEquals('', $this->subject->getDefaultValue());
+        self::assertEquals('', $this->subject->getDefaultValue());
     }
 
     /**
@@ -142,7 +139,7 @@ class FieldTest extends UnitTestCase
     public function setDefaultValueSetsDefaultValueField()
     {
         $this->subject->setDefaultValue('default');
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'default',
             'defaultValue',
             $this->subject
@@ -154,7 +151,7 @@ class FieldTest extends UnitTestCase
      */
     public function getSettingsReturnsInitialValueForString()
     {
-        $this->assertEquals('', $this->subject->getSettings());
+        self::assertEquals('', $this->subject->getSettings());
     }
 
     /**
@@ -163,7 +160,7 @@ class FieldTest extends UnitTestCase
     public function setSettingsSetsSettingsField()
     {
         $this->subject->setSettings('settings');
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'settings',
             'settings',
             $this->subject
@@ -175,7 +172,7 @@ class FieldTest extends UnitTestCase
      */
     public function getEventReturnsInitialValueForEvent()
     {
-        $this->assertNull($this->subject->getEvent());
+        self::assertNull($this->subject->getEvent());
     }
 
     /**
@@ -185,7 +182,7 @@ class FieldTest extends UnitTestCase
     {
         $event = new Event();
         $this->subject->setEvent($event);
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             $event,
             'event',
             $this->subject
@@ -278,7 +275,7 @@ class FieldTest extends UnitTestCase
     {
         $this->subject->setSettings($settings);
         $this->subject->setDefaultValue($defaultValue);
-        $this->assertSame($expected, $this->subject->getSettingsForOption());
+        self::assertSame($expected, $this->subject->getSettingsForOption());
     }
 
     /**
@@ -286,7 +283,7 @@ class FieldTest extends UnitTestCase
      */
     public function getValueTypeReturnsInitialValue()
     {
-        $this->assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
+        self::assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
     }
 
     /**
@@ -339,7 +336,7 @@ class FieldTest extends UnitTestCase
     public function getValueTypeReturnsExpectedFieldValues($fieldType, $expected)
     {
         $this->subject->setType($fieldType);
-        $this->assertEquals($expected, $this->subject->getValueType());
+        self::assertEquals($expected, $this->subject->getValueType());
     }
 
     /**
@@ -348,7 +345,7 @@ class FieldTest extends UnitTestCase
     public function getPartialNameReturnsFieldTypeInUppercase()
     {
         $this->subject->setType('input');
-        $this->assertEquals('Input', $this->subject->getPartialName());
+        self::assertEquals('Input', $this->subject->getPartialName());
     }
 
     /**
@@ -381,7 +378,7 @@ class FieldTest extends UnitTestCase
     public function getDatepickermodeTypeReturnsExpectedValue($datepickerMode, $expected)
     {
         $this->subject->setDatepickermode($datepickerMode);
-        $this->assertEquals($expected, $this->subject->getDatepickermodeType());
+        self::assertEquals($expected, $this->subject->getDatepickermodeType());
     }
 
     /**
@@ -389,7 +386,7 @@ class FieldTest extends UnitTestCase
      */
     public function getTextReturnsInitialValue()
     {
-        $this->assertEmpty($this->subject->getText());
+        self::assertEmpty($this->subject->getText());
     }
 
     /**
@@ -398,7 +395,7 @@ class FieldTest extends UnitTestCase
     public function setTextSetsTextForString()
     {
         $this->subject->setText('TYPO3');
-        $this->assertEquals('TYPO3', $this->subject->getText());
+        self::assertEquals('TYPO3', $this->subject->getText());
     }
 
     /**
@@ -406,7 +403,7 @@ class FieldTest extends UnitTestCase
      */
     public function getDatepickermodeReturnsInitialValue()
     {
-        $this->assertEquals(0, $this->subject->getDatepickermode());
+        self::assertEquals(0, $this->subject->getDatepickermode());
     }
 
     /**
@@ -415,6 +412,6 @@ class FieldTest extends UnitTestCase
     public function setDatepickermodeSetsValueForInt()
     {
         $this->subject->setDatepickermode(2);
-        $this->assertEquals(2, $this->subject->getDatepickermode());
+        self::assertEquals(2, $this->subject->getDatepickermode());
     }
 }

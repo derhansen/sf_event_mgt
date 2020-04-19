@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * UserRegistrationDemand
@@ -48,14 +49,14 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      *
      * @var \DateTime
      */
-    protected $currentDateTime = null;
+    protected $currentDateTime;
 
     /**
      * Frontend user
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
-    protected $user = null;
+    protected $user;
 
     /**
      * Returns displayMode
@@ -71,7 +72,6 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Sets displaymode
      *
      * @param string $displayMode
-     * @return void
      */
     public function setDisplayMode($displayMode)
     {
@@ -92,7 +92,6 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Returns storagePage
      *
      * @param string $storagePage
-     * @return void
      */
     public function setStoragePage($storagePage)
     {
@@ -113,7 +112,6 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Sets orderField
      *
      * @param string $orderField
-     * @return void
      */
     public function setOrderField($orderField)
     {
@@ -134,7 +132,6 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Sets orderDirection
      *
      * @param string $orderDirection
-     * @return void
      */
     public function setOrderDirection($orderDirection)
     {
@@ -145,8 +142,6 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Sets the current DateTime
      *
      * @param \DateTime $currentDateTime CurrentDateTime
-     *
-     * @return void
      */
     public function setCurrentDateTime(\DateTime $currentDateTime)
     {
@@ -181,7 +176,6 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
      * Sets the frontend user
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
-     * @return void
      */
     public function setUser($user)
     {

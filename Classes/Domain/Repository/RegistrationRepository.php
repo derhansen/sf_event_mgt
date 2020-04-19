@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,8 +23,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * Disable the use of storage records, because the StoragePage can be set
      * in the plugin
-     *
-     * @return void
      */
     public function initializeObject()
     {
@@ -169,8 +168,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      * @param array $constraints Constraints
-     *
-     * @return void
      */
     protected function setDisplayModeConstraint($query, $demand, &$constraints)
     {
@@ -191,8 +188,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      * @param array $constraints Constraints
-     *
-     * @return void
      */
     protected function setStoragePageConstraint($query, $demand, &$constraints)
     {
@@ -208,8 +203,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      * @param array $constraints Constraints
-     *
-     * @return void
      */
     protected function setUserConstraint($query, $demand, &$constraints)
     {
@@ -223,8 +216,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      *
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
-     *
-     * @return void
      */
     protected function setOrderingsFromDemand($query, $demand)
     {

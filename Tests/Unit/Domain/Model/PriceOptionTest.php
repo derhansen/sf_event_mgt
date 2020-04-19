@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
@@ -24,12 +25,10 @@ class PriceOptionTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\PriceOption
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -38,8 +37,6 @@ class PriceOptionTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -50,11 +47,10 @@ class PriceOptionTest extends UnitTestCase
      * Test if initial value for price is returned
      *
      * @test
-     * @return void
      */
     public function getPriceReturnsInitialValueForFloat()
     {
-        $this->assertSame(
+        self::assertSame(
             0.0,
             $this->subject->getPrice()
         );
@@ -64,13 +60,12 @@ class PriceOptionTest extends UnitTestCase
      * Test if price can be set
      *
      * @test
-     * @return void
      */
     public function setPriceForFloatSetsPrice()
     {
         $this->subject->setPrice(12.99);
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             12.99,
             'price',
             $this->subject
@@ -81,45 +76,41 @@ class PriceOptionTest extends UnitTestCase
      * Test if validUntil date returns intitial value
      *
      * @test
-     * @return void
      */
     public function getValidUntilReturnsInitialValueForDate()
     {
-        $this->assertNull($this->subject->getValidUntil());
+        self::assertNull($this->subject->getValidUntil());
     }
 
     /**
      * Test if validUntil date can be set
      *
      * @test
-     * @return void
      */
     public function setValidUntilForDateSetsValidUntil()
     {
         $date = new \DateTime('01.01.2016');
         $this->subject->setValidUntil($date);
-        $this->assertEquals($date, $this->subject->getValidUntil());
+        self::assertEquals($date, $this->subject->getValidUntil());
     }
 
     /**
      * Test if event returns intitial value
      *
      * @test
-     * @return void
      */
     public function getEventReturnsInitialValue()
     {
-        $this->assertNull($this->subject->getEvent());
+        self::assertNull($this->subject->getEvent());
     }
 
     /**
      * @test
-     * @return void
      */
     public function setEventForEventSetsEvent()
     {
         $event = new Event();
         $this->subject->setEvent($event);
-        $this->assertEquals($event, $this->subject->getEvent());
+        self::assertEquals($event, $this->subject->getEvent());
     }
 }

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
 
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -21,12 +22,10 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Payment\AbstractPayment
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -35,8 +34,6 @@ class AbstractPaymentTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -45,46 +42,41 @@ class AbstractPaymentTest extends UnitTestCase
 
     /**
      * @test
-     * @return void
      */
     public function isEnableRedirectReturnsDefaultValue()
     {
-        $this->assertFalse($this->subject->isRedirectEnabled());
+        self::assertFalse($this->subject->isRedirectEnabled());
     }
 
     /**
      * @test
-     * @return void
      */
     public function isCancelLinkEnabledReturnsDefaultValue()
     {
-        $this->assertFalse($this->subject->isCancelLinkEnabled());
+        self::assertFalse($this->subject->isCancelLinkEnabled());
     }
 
     /**
      * @test
-     * @return void
      */
     public function isNotifyLinkEnabledReturnsDefaultValue()
     {
-        $this->assertFalse($this->subject->isNotifyLinkEnabled());
+        self::assertFalse($this->subject->isNotifyLinkEnabled());
     }
 
     /**
      * @test
-     * @return void
      */
     public function isSuccessLinkEnabledReturnsDefaultValue()
     {
-        $this->assertFalse($this->subject->isSuccessLinkEnabled());
+        self::assertFalse($this->subject->isSuccessLinkEnabled());
     }
 
     /**
      * @test
-     * @return void
      */
     public function isFailureLinkEnabledReturnsDefaultValue()
     {
-        $this->assertFalse($this->subject->isFailureLinkEnabled());
+        self::assertFalse($this->subject->isFailureLinkEnabled());
     }
 }

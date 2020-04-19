@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -22,12 +23,10 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -36,8 +35,6 @@ class BeUserSessionServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -55,7 +52,7 @@ class BeUserSessionServiceTest extends UnitTestCase
             ->setMethods(['setAndSaveSessionData'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockBackendUser->expects($this->once())->method('setAndSaveSessionData');
+        $mockBackendUser->expects(self::once())->method('setAndSaveSessionData');
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $this->subject->saveSessionData($data);
@@ -70,7 +67,7 @@ class BeUserSessionServiceTest extends UnitTestCase
             ->setMethods(['getSessionData'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockBackendUser->expects($this->once())->method('getSessionData');
+        $mockBackendUser->expects(self::once())->method('getSessionData');
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $this->subject->getSessionData();
@@ -114,9 +111,9 @@ class BeUserSessionServiceTest extends UnitTestCase
             ->setMethods(['getSessionData'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockBackendUser->expects($this->once())->method('getSessionData')->will($this->returnValue($sessionData));
+        $mockBackendUser->expects(self::once())->method('getSessionData')->willReturn($sessionData);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $this->assertEquals($expected, $this->subject->getSessionDataByKey($key));
+        self::assertEquals($expected, $this->subject->getSessionDataByKey($key));
     }
 }

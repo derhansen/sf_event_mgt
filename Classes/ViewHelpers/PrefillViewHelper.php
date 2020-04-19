@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -54,7 +55,7 @@ class PrefillViewHelper extends AbstractViewHelper
             return $submittedValues['registration'][$fieldname];
         }
 
-        return strval($GLOBALS['TSFE']->fe_user->user[$prefillSettings[$fieldname]]);
+        return (string)($GLOBALS['TSFE']->fe_user->user[$prefillSettings[$fieldname]]);
     }
 
     /**

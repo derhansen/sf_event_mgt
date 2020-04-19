@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -21,8 +22,6 @@ class HeaderDataViewHelper extends AbstractViewHelper
 {
     /**
      * Renders HeaderData
-     *
-     * @return void
      */
     public function render()
     {

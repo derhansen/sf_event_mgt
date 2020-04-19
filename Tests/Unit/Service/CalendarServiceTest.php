@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
@@ -23,12 +24,10 @@ class CalendarServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\CalendarService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -37,8 +36,6 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -53,7 +50,7 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarArrayReturnsExpectedAmountOfWeeksForGivenDate()
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1);
-        $this->assertEquals(6, count($calendarArray));
+        self::assertEquals(6, count($calendarArray));
     }
 
     /**
@@ -64,7 +61,7 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarArrayRespectsFirstDayOfWeekParameter()
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 0);
-        $this->assertEquals(date('w', $calendarArray[0][0]['timestamp']), 0);
+        self::assertEquals(date('w', $calendarArray[0][0]['timestamp']), 0);
     }
 
     /**
@@ -75,7 +72,7 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarArraySetsIsCurrentDay()
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 2, 2017), 1);
-        $this->assertTrue($calendarArray[1][0]['isCurrentDay']);
+        self::assertTrue($calendarArray[1][0]['isCurrentDay']);
     }
 
     /**
@@ -86,18 +83,18 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarArrayReturnsArrayWithEventForOneDay()
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
-        $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(
+        $mockEvent->expects(self::any())->method('getStartdate')->willReturn(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
-        ));
-        $mockEvent->expects($this->any())->method('getEnddate')->will($this->returnValue(
+        );
+        $mockEvent->expects(self::any())->method('getEnddate')->willReturn(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
-        ));
+        );
 
         $events = new ObjectStorage();
         $events->attach($mockEvent);
 
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
-        $this->assertEquals(1, count($calendarArray[1][0]['events']));
+        self::assertEquals(1, count($calendarArray[1][0]['events']));
     }
 
     /**
@@ -108,20 +105,20 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarArrayReturnsArrayWithEventForMultipleDays()
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
-        $mockEvent->expects($this->any())->method('getStartdate')->will($this->returnValue(
+        $mockEvent->expects(self::any())->method('getStartdate')->willReturn(
             \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
-        ));
-        $mockEvent->expects($this->any())->method('getEnddate')->will($this->returnValue(
+        );
+        $mockEvent->expects(self::any())->method('getEnddate')->willReturn(
             \DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
-        ));
+        );
 
         $events = new ObjectStorage();
         $events->attach($mockEvent);
 
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
-        $this->assertEquals(1, count($calendarArray[1][0]['events']));
-        $this->assertEquals(1, count($calendarArray[1][1]['events']));
-        $this->assertEquals(1, count($calendarArray[1][2]['events']));
+        self::assertEquals(1, count($calendarArray[1][0]['events']));
+        self::assertEquals(1, count($calendarArray[1][1]['events']));
+        self::assertEquals(1, count($calendarArray[1][2]['events']));
     }
 
     /**
@@ -212,7 +209,7 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarDateRangeReturnsExpectedValues($month, $year, $firstDayOfWeek, $expected)
     {
         $result = $this->subject->getCalendarDateRange($month, $year, $firstDayOfWeek);
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
     /**
@@ -267,6 +264,6 @@ class CalendarServiceTest extends UnitTestCase
     public function getDateConfigReturnsExpectedValues($month, $year, $modifier, $expected)
     {
         $result = $this->subject->getDateConfig($month, $year, $modifier);
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -117,8 +118,6 @@ class RegistrationService
      * amount of times configured in amountOfRegistrations
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     *
-     * @return void
      */
     public function createDependingRegistrations($registration)
     {
@@ -142,8 +141,6 @@ class RegistrationService
      * Confirms all depending registrations based on the given main registration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     *
-     * @return void
      */
     public function confirmDependingRegistrations($registration)
     {
@@ -214,8 +211,6 @@ class RegistrationService
      * Cancels all depending registrations based on the given main registration
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     *
-     * @return void
      */
     public function cancelDependingRegistrations($registration)
     {
@@ -435,7 +430,6 @@ class RegistrationService
      *
      * @param Registration $registration
      * @param Event $event
-     * @return void
      */
     public function fixRegistrationEvent(Registration $registration, Event $event)
     {
@@ -454,7 +448,6 @@ class RegistrationService
      *
      * @param Registration $registration
      * @param Event $event
-     * @return void
      */
     public function fixRegistationFieldValueLanguage(Registration $registration, Event $event)
     {
@@ -471,7 +464,6 @@ class RegistrationService
      *
      * @param Registration $registration
      * @param int $sysLanguageUid
-     * @return void
      */
     protected function updateRegistrationFieldValueLanguage(Registration $registration, int $sysLanguageUid)
     {
@@ -493,7 +485,6 @@ class RegistrationService
      *
      * @param Registration $registration
      * @param Event $event
-     * @return void
      */
     protected function updateRegistrationEventUid(Registration $registration, Event $event)
     {
@@ -514,7 +505,6 @@ class RegistrationService
      * Updates registration/waitlist registration counters for the given event
      *
      * @param Event $event
-     * @return void
      */
     protected function updateEventRegistrationCounters(Event $event)
     {

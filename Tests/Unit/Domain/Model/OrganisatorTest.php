@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -24,12 +25,10 @@ class OrganisatorTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -38,8 +37,6 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -50,11 +47,10 @@ class OrganisatorTest extends UnitTestCase
      * Test if initial value for name is returned
      *
      * @test
-     * @return void
      */
     public function getNameReturnsInitialValueForString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getName()
         );
@@ -64,13 +60,12 @@ class OrganisatorTest extends UnitTestCase
      * Test if name can be set
      *
      * @test
-     * @return void
      */
     public function setNameForStringSetsName()
     {
         $this->subject->setName('Conceived at T3CON10');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'Conceived at T3CON10',
             'name',
             $this->subject
@@ -81,11 +76,10 @@ class OrganisatorTest extends UnitTestCase
      * Test if initial value for email is returned
      *
      * @test
-     * @return void
      */
     public function getEmailReturnsInitialValueForString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getEmail()
         );
@@ -95,13 +89,12 @@ class OrganisatorTest extends UnitTestCase
      * Test if email can be set
      *
      * @test
-     * @return void
      */
     public function setEmailForStringSetsEmail()
     {
         $this->subject->setEmail('mail@domain.tld');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             'mail@domain.tld',
             'email',
             $this->subject
@@ -112,11 +105,10 @@ class OrganisatorTest extends UnitTestCase
      * Test if initial value for phone is returned
      *
      * @test
-     * @return void
      */
     public function getPhoneReturnsInitialValueForString()
     {
-        $this->assertSame(
+        self::assertSame(
             '',
             $this->subject->getPhone()
         );
@@ -126,13 +118,12 @@ class OrganisatorTest extends UnitTestCase
      * Test if email can be set
      *
      * @test
-     * @return void
      */
     public function setPhoneForStringSetsPhone()
     {
         $this->subject->setPhone('+49 123 4567890');
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             '+49 123 4567890',
             'phone',
             $this->subject
@@ -143,25 +134,23 @@ class OrganisatorTest extends UnitTestCase
      * Test if initial value for image is returned
      *
      * @test
-     * @return void
      */
     public function getImageReturnsInitialValueForfiles()
     {
-        $this->assertNull($this->subject->getImage());
+        self::assertNull($this->subject->getImage());
     }
 
     /**
      * Test if image can be set
      *
      * @test
-     * @return void
      */
     public function setImageForObjectStorageContainingImageSetsImage()
     {
         $file = new FileReference();
         $this->subject->setImage($file);
 
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             $file,
             'image',
             $this->subject

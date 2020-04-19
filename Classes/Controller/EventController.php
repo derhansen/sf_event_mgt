@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Controller;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
@@ -54,7 +55,7 @@ class EventController extends AbstractController
     /**
      * @var EventCacheService
      */
-    protected $eventCacheService = null;
+    protected $eventCacheService;
 
     /**
      * @param EventCacheService $cacheService
@@ -195,8 +196,6 @@ class EventController extends AbstractController
 
     /**
      * Initialize list action and set format
-     *
-     * @return void
      */
     public function initializeListAction()
     {
@@ -209,8 +208,6 @@ class EventController extends AbstractController
      * List view
      *
      * @param array $overwriteDemand OverwriteDemand
-     *
-     * @return void
      */
     public function listAction(array $overwriteDemand = [])
     {
@@ -249,8 +246,6 @@ class EventController extends AbstractController
      * Calendar view
      *
      * @param array $overwriteDemand OverwriteDemand
-     *
-     * @return void
      */
     public function calendarAction(array $overwriteDemand = [])
     {
@@ -476,8 +471,6 @@ class EventController extends AbstractController
 
     /**
      * Removes all possible spamcheck fields (which do not belong to the domain model) from arguments.
-     *
-     * @return void
      */
     protected function removePossibleSpamCheckFieldsFromArguments()
     {
@@ -502,8 +495,6 @@ class EventController extends AbstractController
 
     /**
      * Processes incoming registrations fields and adds field values to arguments
-     *
-     * @return void
      */
     protected function setRegistrationFieldValuesToArguments()
     {
@@ -566,7 +557,7 @@ class EventController extends AbstractController
             $arguments['registration']['fieldValues'][$index] = [
                 'pid' => $field->getPid(),
                 'value' => $value,
-                'field' => strval($fieldUid),
+                'field' => (string)$fieldUid,
                 'valueType' => $field->getValueType()
             ];
 
@@ -582,8 +573,6 @@ class EventController extends AbstractController
 
     /**
      * Set date format for field dateOfBirth
-     *
-     * @return void
      */
     public function initializeSaveRegistrationAction()
     {
@@ -722,8 +711,6 @@ class EventController extends AbstractController
      * @param int $result Result
      * @param int $eventuid
      * @param string $hmac
-     *
-     * @return void
      */
     public function saveRegistrationResultAction($result, $eventuid, $hmac)
     {
@@ -790,8 +777,6 @@ class EventController extends AbstractController
      *
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
-     *
-     * @return void
      */
     public function confirmRegistrationAction($reguid, $hmac)
     {
@@ -873,8 +858,6 @@ class EventController extends AbstractController
      *
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
-     *
-     * @return void
      */
     public function cancelRegistrationAction($reguid, $hmac)
     {
@@ -932,8 +915,6 @@ class EventController extends AbstractController
 
     /**
      * Set date format for field startDate and endDate
-     *
-     * @return void
      */
     public function initializeSearchAction()
     {
@@ -970,8 +951,6 @@ class EventController extends AbstractController
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
      * @param array $overwriteDemand OverwriteDemand
-     *
-     * @return void
      */
     public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
@@ -1067,7 +1046,7 @@ class EventController extends AbstractController
      * if the pid could not be found it return null instead of the event object.
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-     * @return null|\DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event|null
      */
     protected function checkPidOfEventRecord(Event $event)
     {

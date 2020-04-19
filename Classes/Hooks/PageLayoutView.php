@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Hooks;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility as BackendUtilityCore;
 use TYPO3\CMS\Core\Imaging\Icon;
@@ -286,7 +287,6 @@ class PageLayoutView
 
     /**
      * Get category conjunction if a category is selected
-     * @return void
      */
     public function getCategoryConjuction()
     {

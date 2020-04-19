@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -29,12 +30,10 @@ class AttachmentServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -43,8 +42,6 @@ class AttachmentServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -146,7 +143,7 @@ class AttachmentServiceTest extends UnitTestCase
         ]];
 
         $attachments = $this->subject->getAttachments($settings, $registration, $messageType, $messageRecipient);
-        $this->assertEquals($expected, $attachments);
+        self::assertEquals($expected, $attachments);
     }
 
     /**
@@ -162,23 +159,23 @@ class AttachmentServiceTest extends UnitTestCase
             ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFile1->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
+        $mockFile1->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/somefile.pdf');
         $mockFileRef1 = $this->getMockBuilder(FileReference::class)
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFileRef1->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile1));
+        $mockFileRef1->expects(self::any())->method('getOriginalResource')->willReturn($mockFile1);
 
         $mockFile2 = $this->getMockBuilder(File::class)
             ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFile2->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/anotherfile.pdf'));
+        $mockFile2->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/anotherfile.pdf');
         $mockFileRef2 = $this->getMockBuilder(FileReference::class)
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFileRef2->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile2));
+        $mockFileRef2->expects(self::any())->method('getOriginalResource')->willReturn($mockFile2);
 
         $event->addFiles($mockFileRef1);
         $event->addFiles($mockFileRef2);
@@ -207,7 +204,7 @@ class AttachmentServiceTest extends UnitTestCase
             MessageType::REGISTRATION_NEW,
             MessageRecipient::USER
         );
-        $this->assertEquals($expected, $attachments);
+        self::assertEquals($expected, $attachments);
     }
 
     /**
@@ -222,20 +219,20 @@ class AttachmentServiceTest extends UnitTestCase
             ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFile->expects($this->any())->method('getForLocalProcessing')->will($this->returnValue('/path/to/somefile.pdf'));
+        $mockFile->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/somefile.pdf');
         $mockFileRef = $this->getMockBuilder(FileReference::class)
             ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockFileRef->expects($this->any())->method('getOriginalResource')->will($this->returnValue($mockFile));
+        $mockFileRef->expects(self::any())->method('getOriginalResource')->willReturn($mockFile);
 
         $mockRegistration = $this->getMockBuilder(Registration::class)
             ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistration->expects($this->once())->method('getEvent')->will($this->returnValue($event));
-        $mockRegistration->expects($this->once())->method('_hasProperty')->will($this->returnValue(true));
-        $mockRegistration->expects($this->once())->method('_getProperty')->will($this->returnValue($mockFileRef));
+        $mockRegistration->expects(self::once())->method('getEvent')->willReturn($event);
+        $mockRegistration->expects(self::once())->method('_hasProperty')->willReturn(true);
+        $mockRegistration->expects(self::once())->method('_getProperty')->willReturn($mockFileRef);
 
         $settings = ['notification' => [
             'registrationNew' => [
@@ -259,7 +256,7 @@ class AttachmentServiceTest extends UnitTestCase
             MessageType::REGISTRATION_NEW,
             MessageRecipient::USER
         );
-        $this->assertEquals($expected, $attachments);
+        self::assertEquals($expected, $attachments);
     }
 
     /**
@@ -283,7 +280,7 @@ class AttachmentServiceTest extends UnitTestCase
             ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockRegistration->expects($this->any())->method('getEvent')->will($this->returnValue($event));
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($event);
 
         $mockICalendarService = $this->getMockBuilder(ICalendarService::class)
             ->setMethods(['getiCalendarContent'])
@@ -297,6 +294,6 @@ class AttachmentServiceTest extends UnitTestCase
             MessageType::REGISTRATION_NEW,
             MessageRecipient::USER
         );
-        $this->assertNotEmpty($attachment);
+        self::assertNotEmpty($attachment);
     }
 }

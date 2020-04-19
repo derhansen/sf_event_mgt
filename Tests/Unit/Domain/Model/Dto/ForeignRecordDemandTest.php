@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -21,12 +22,10 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -35,8 +34,6 @@ class ForeignRecordDemandTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -49,7 +46,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     public function setStoragePageSetsStoragePageForString()
     {
         $this->subject->setStoragePage('1,2,3');
-        $this->assertEquals('1,2,3', $this->subject->getStoragePage());
+        self::assertEquals('1,2,3', $this->subject->getStoragePage());
     }
 
     /**
@@ -57,7 +54,7 @@ class ForeignRecordDemandTest extends UnitTestCase
      */
     public function getrestrictForeignRecordsToStoragePageReturnsInitialValue()
     {
-        $this->assertFalse($this->subject->getRestrictForeignRecordsToStoragePage());
+        self::assertFalse($this->subject->getRestrictForeignRecordsToStoragePage());
     }
 
     /**
@@ -66,6 +63,6 @@ class ForeignRecordDemandTest extends UnitTestCase
     public function setRestrictForeignRecordsToStoragePageSetsValueForBoolean()
     {
         $this->subject->setRestrictForeignRecordsToStoragePage(true);
-        $this->assertTrue($this->subject->getRestrictForeignRecordsToStoragePage());
+        self::assertTrue($this->subject->getRestrictForeignRecordsToStoragePage());
     }
 }

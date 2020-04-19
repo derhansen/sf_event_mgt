@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -21,12 +22,10 @@ class SettingsServiceTest extends UnitTestCase
     /**
      * @var \DERHANSEN\SfEventMgt\Service\SettingsService
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -35,8 +34,6 @@ class SettingsServiceTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -100,6 +97,6 @@ class SettingsServiceTest extends UnitTestCase
     public function getCustomNotificationsTest($settings, $expected)
     {
         $result = $this->subject->getCustomNotifications($settings);
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

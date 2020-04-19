@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
@@ -24,7 +25,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     /**
      * @var \TYPO3\CMS\Extbase\Property\PropertyMapper
      */
-    protected $propertyMapper = null;
+    protected $propertyMapper;
 
     /**
      * @param PropertyMapper $propertyMapper

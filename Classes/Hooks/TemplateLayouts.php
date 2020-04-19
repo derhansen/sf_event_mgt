@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Hooks;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Hooks;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 
@@ -21,8 +22,6 @@ class TemplateLayouts
      * Itemsproc function to extend the selection of templateLayouts in the plugin
      *
      * @param array $config Configuration array
-     *
-     * @return void
      */
     public function user_templateLayout(array &$config)
     {

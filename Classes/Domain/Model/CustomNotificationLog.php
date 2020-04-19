@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * CustomNotificationLog
@@ -20,7 +21,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
-    protected $event = null;
+    protected $event;
 
     /**
      * Details
@@ -54,8 +55,6 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
      * Sets the details
      *
      * @param string $details Details
-     *
-     * @return void
      */
     public function setDetails($details)
     {
@@ -76,8 +75,6 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
      * Sets the event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     *
-     * @return void
      */
     public function setEvent(Event $event)
     {
@@ -98,8 +95,6 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
      * Sets emailsSent
      *
      * @param int $emailsSent E-Mails sent
-     *
-     * @return void
      */
     public function setEmailsSent($emailsSent)
     {
@@ -130,8 +125,6 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
      * Sets the timestamp
      *
      * @param \DateTime $tstamp Tstamp
-     *
-     * @return void
      */
     public function setTstamp(\DateTime $tstamp)
     {
@@ -152,8 +145,6 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
      * Sets the backend user
      *
      * @param \TYPO3\CMS\Beuser\Domain\Model\BackendUser $cruserId CruserId
-     *
-     * @return void
      */
     public function setCruserId($cruserId)
     {

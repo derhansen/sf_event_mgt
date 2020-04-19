@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
@@ -26,12 +27,10 @@ class FieldValueTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -40,8 +39,6 @@ class FieldValueTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -54,9 +51,9 @@ class FieldValueTest extends UnitTestCase
     public function getValueReturnsInitialValueForString()
     {
         $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
-        $mockField->expects($this->once())->method('getValueType')->will($this->returnValue(FieldValueType::TYPE_TEXT));
+        $mockField->expects(self::once())->method('getValueType')->willReturn(FieldValueType::TYPE_TEXT);
         $this->subject->setField($mockField);
-        $this->assertEquals('', $this->subject->getValue());
+        self::assertEquals('', $this->subject->getValue());
     }
 
     /**
@@ -65,7 +62,7 @@ class FieldValueTest extends UnitTestCase
     public function setValueSetsValueField()
     {
         $this->subject->setValue('A field value');
-        $this->assertEquals('A field value', $this->subject->getValue());
+        self::assertEquals('A field value', $this->subject->getValue());
     }
 
     /**
@@ -75,11 +72,11 @@ class FieldValueTest extends UnitTestCase
     {
         $expectedArray = ['value1', 'value2'];
         $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
-        $mockField->expects($this->once())->method('getValueType')
-            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $mockField->expects(self::once())->method('getValueType')
+            ->willReturn(FieldValueType::TYPE_ARRAY);
         $this->subject->setField($mockField);
         $this->subject->setValue(json_encode($expectedArray));
-        $this->assertSame($expectedArray, $this->subject->getValue());
+        self::assertSame($expectedArray, $this->subject->getValue());
     }
 
     /**
@@ -89,11 +86,11 @@ class FieldValueTest extends UnitTestCase
     {
         $expectedArray = ['value1'];
         $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
-        $mockField->expects($this->once())->method('getValueType')
-            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $mockField->expects(self::once())->method('getValueType')
+            ->willReturn(FieldValueType::TYPE_ARRAY);
         $this->subject->setField($mockField);
         $this->subject->setValue('value1');
-        $this->assertSame($expectedArray, $this->subject->getValue());
+        self::assertSame($expectedArray, $this->subject->getValue());
     }
 
     /**
@@ -101,7 +98,7 @@ class FieldValueTest extends UnitTestCase
      */
     public function getFieldReturnsInitialValueForField()
     {
-        $this->assertNull($this->subject->getField());
+        self::assertNull($this->subject->getField());
     }
 
     /**
@@ -111,7 +108,7 @@ class FieldValueTest extends UnitTestCase
     {
         $field = new Field();
         $this->subject->setField($field);
-        $this->assertAttributeEquals(
+        self::assertAttributeEquals(
             $field,
             'field',
             $this->subject
@@ -123,7 +120,7 @@ class FieldValueTest extends UnitTestCase
      */
     public function getRegistrationReturnsInitialValueForRegistration()
     {
-        $this->assertNull($this->subject->getRegistration());
+        self::assertNull($this->subject->getRegistration());
     }
 
     /**
@@ -133,7 +130,7 @@ class FieldValueTest extends UnitTestCase
     {
         $registration = new Registration();
         $this->subject->setRegistration($registration);
-        $this->assertEquals($registration, $this->subject->getRegistration());
+        self::assertEquals($registration, $this->subject->getRegistration());
     }
 
     /**
@@ -141,7 +138,7 @@ class FieldValueTest extends UnitTestCase
      */
     public function getValueTypeReturnsInitialValueForValueType()
     {
-        $this->assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
+        self::assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
     }
 
     /**
@@ -150,7 +147,7 @@ class FieldValueTest extends UnitTestCase
     public function setValueTypeSetsValueType()
     {
         $this->subject->setValueType(FieldValueType::TYPE_ARRAY);
-        $this->assertEquals(FieldValueType::TYPE_ARRAY, $this->subject->getValueType());
+        self::assertEquals(FieldValueType::TYPE_ARRAY, $this->subject->getValueType());
     }
 
     /**
@@ -160,11 +157,11 @@ class FieldValueTest extends UnitTestCase
     {
         $expectedArray = 'value1,value2';
         $mockField = $this->getMockBuilder(Field::class)->setMethods(['getValueType'])->getMock();
-        $mockField->expects($this->once())->method('getValueType')
-            ->will($this->returnValue(FieldValueType::TYPE_ARRAY));
+        $mockField->expects(self::once())->method('getValueType')
+            ->willReturn(FieldValueType::TYPE_ARRAY);
         $this->subject->setField($mockField);
         $this->subject->setValue(json_encode(['value1', 'value2']));
-        $this->assertSame($expectedArray, $this->subject->getValueForCsvExport());
+        self::assertSame($expectedArray, $this->subject->getValueForCsvExport());
     }
 
     /**
@@ -173,7 +170,7 @@ class FieldValueTest extends UnitTestCase
     public function getValueWhenNoFieldAvailable()
     {
         $this->subject->setValue('Test');
-        $this->assertSame('Test', $this->subject->getValue());
+        self::assertSame('Test', $this->subject->getValue());
     }
 
     /**
@@ -182,6 +179,6 @@ class FieldValueTest extends UnitTestCase
     public function getValueForCsvExportNoFieldAvailable()
     {
         $this->subject->setValue('Test');
-        $this->assertSame('Test', $this->subject->getValueForCsvExport());
+        self::assertSame('Test', $this->subject->getValueForCsvExport());
     }
 }

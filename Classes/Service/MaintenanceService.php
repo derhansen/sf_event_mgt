@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,7 +23,6 @@ class MaintenanceService
      * Handles expired registration
      *
      * @param bool $delete
-     * @return void
      */
     public function handleExpiredRegistrations(bool $delete = false)
     {
@@ -39,8 +39,6 @@ class MaintenanceService
      *
      * @param int $registrationUid
      * @param bool $delete
-     *
-     * @return void
      */
     protected function updateRegistration(int $registrationUid, bool $delete = false)
     {

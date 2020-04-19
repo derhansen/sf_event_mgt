@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator;
@@ -38,8 +39,6 @@ class RegistrationValidatorTest extends UnitTestCase
 
     /**
      * Setup
-     *
-     * @return void
      */
     public function setup()
     {
@@ -98,12 +97,12 @@ class RegistrationValidatorTest extends UnitTestCase
             ->setMethods(['getConfiguration'])
             ->disableOriginalConstructor()
             ->getMock();
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($settings)
+        $configurationManager->expects(self::once())->method('getConfiguration')->willReturn(
+            $settings
         );
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
-        $this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
+        self::assertEquals($expected, $this->validator->validate($registration)->hasErrors());
     }
 
     /**
@@ -186,8 +185,8 @@ class RegistrationValidatorTest extends UnitTestCase
             ->setMethods(['getConfiguration'])
             ->disableOriginalConstructor()
             ->getMock();
-        $configurationManager->expects($this->once())->method('getConfiguration')->will(
-            $this->returnValue($settings)
+        $configurationManager->expects(self::once())->method('getConfiguration')->willReturn(
+            $settings
         );
         $this->inject($this->validator, 'configurationManager', $configurationManager);
 
@@ -197,31 +196,31 @@ class RegistrationValidatorTest extends UnitTestCase
             ->getMock();
 
         $validationResult = $this->getMockBuilder(Result::class)->getMock();
-        $validationResult->expects($this->any())->method('hasErrors')->will($this->returnValue($hasErrors));
-        $validationResult->expects($this->any())->method('getErrors')->will(
-            $this->returnValue([$validationError])
+        $validationResult->expects(self::any())->method('hasErrors')->willReturn($hasErrors);
+        $validationResult->expects(self::any())->method('getErrors')->willReturn(
+            [$validationError]
         );
 
         $notEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $notEmptyValidator->expects($this->any())->method('validate')->will($this->returnValue(
+        $notEmptyValidator->expects(self::any())->method('validate')->willReturn(
             $validationResult
-        ));
+        );
 
         $booleanValidator = $this->getMockBuilder(BooleanValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $booleanValidator->expects($this->any())->method('validate')->will($this->returnValue(
+        $booleanValidator->expects(self::any())->method('validate')->willReturn(
             $validationResult
-        ));
+        );
 
         $recaptchaValidator = $this->getMockBuilder(RecaptchaValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $recaptchaValidator->expects($this->any())->method('validate')->will($this->returnValue(
+        $recaptchaValidator->expects(self::any())->method('validate')->willReturn(
             $validationResult
-        ));
+        );
 
         // Create a map of arguments to return values
         $map = [
@@ -231,9 +230,9 @@ class RegistrationValidatorTest extends UnitTestCase
             ['boolean', 'accepttc', $booleanValidator]
         ];
 
-        $this->validator->expects($this->any())->method('getValidator')->will($this->returnValueMap($map));
+        $this->validator->expects(self::any())->method('getValidator')->willReturnMap($map);
 
-        $this->assertEquals($expected, $this->validator->validate($registration)->hasErrors());
+        self::assertEquals($expected, $this->validator->validate($registration)->hasErrors());
     }
 
     /**
@@ -272,10 +271,10 @@ class RegistrationValidatorTest extends UnitTestCase
             ->setMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
-        $objectManager->expects($this->once())->method('get')->will($this->returnValue($returnedObject));
+        $objectManager->expects(self::once())->method('get')->willReturn($returnedObject);
         $this->inject($validator, 'objectManager', $objectManager);
 
         $result = $validator->_call('getValidator', $type, '');
-        $this->assertInstanceOf($expectedClass, $result);
+        self::assertInstanceOf($expectedClass, $result);
     }
 }

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDateViewHelper;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -46,31 +47,28 @@ class ICalendarDateViewHelperTest extends UnitTestCase
      *
      * @param mixed $value
      * @param mixed $expected
-     * @return void
      */
     public function viewHelperReturnsExpectedValues($value, $expected)
     {
         $viewHelper = new ICalendarDateViewHelper();
         $viewHelper->setArguments(['date' => $value]);
         $actual = $viewHelper->render();
-        $this->assertSame($expected, $actual);
+        self::assertSame($expected, $actual);
     }
 
     /**
      * Check if the viewhelper calls renderChildren if no value given
      *
      * @test
-     *
-     * @return void
      */
     public function viewHelperRendersChildrenIfNoValueGiven()
     {
         $viewHelper = $this->getMockBuilder(ICalendarDateViewHelper::class)
             ->setMethods(['renderChildren'])
             ->getMock();
-        $viewHelper->expects($this->once())->method('renderChildren')
-            ->will($this->returnValue(new \DateTime('@1425234250')));
+        $viewHelper->expects(self::once())->method('renderChildren')
+            ->willReturn(new \DateTime('@1425234250'));
         $actual = $viewHelper->render();
-        $this->assertSame('20150301T182410Z', $actual);
+        self::assertSame('20150301T182410Z', $actual);
     }
 }

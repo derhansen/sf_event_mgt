@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * Conference speaker model
@@ -39,7 +40,7 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
-    protected $image = null;
+    protected $image;
 
     /**
      * Returns the speaker name
@@ -55,8 +56,6 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the speaker name
      *
      * @param string $name
-     *
-     * @return void
      */
     public function setName($name)
     {
@@ -77,8 +76,6 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the job title
      *
      * @param string $title
-     *
-     * @return void
      */
     public function setJobTitle($title)
     {
@@ -99,8 +96,6 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the description
      *
      * @param string $description The description
-     *
-     * @return void
      */
     public function setDescription($description)
     {
@@ -121,8 +116,6 @@ class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the image
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
-     *
-     * @return void
      */
     public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
     {

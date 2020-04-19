@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Service;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Service;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
@@ -42,7 +43,7 @@ class PaymentService
      * @param string $key
      * @param string $extension
      * @param array $arguments
-     * @return null|string
+     * @return string|null
      */
     protected function translate($key, $extension, $arguments = null)
     {
@@ -93,7 +94,7 @@ class PaymentService
      * Returns an instance of the given payment method
      *
      * @param string $paymentMethod
-     * @return null|AbstractPayment
+     * @return AbstractPayment|null
      */
     public function getPaymentInstance($paymentMethod)
     {

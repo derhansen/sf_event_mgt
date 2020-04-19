@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Validation\ErrorClassViewHelper;
@@ -22,12 +23,10 @@ class ErrorClassViewHelperTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\ViewHelpers\Validation\ErrorClassViewHelper
      */
-    protected $viewhelper = null;
+    protected $viewhelper;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -37,8 +36,6 @@ class ErrorClassViewHelperTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -95,13 +92,13 @@ class ErrorClassViewHelperTest extends UnitTestCase
         $expected,
         $errorClass = 'error-class'
     ) {
-        $this->viewhelper->expects($this->once())->method('getValidationErrors')
-            ->will($this->returnValue($validationErrors));
+        $this->viewhelper->expects(self::once())->method('getValidationErrors')
+            ->willReturn($validationErrors);
         $this->viewhelper->setArguments([
             'fieldname' => $fieldname,
             'class' => $errorClass
         ]);
-        $this->assertEquals($expected, $this->viewhelper->render());
+        self::assertEquals($expected, $this->viewhelper->render());
     }
 
     /**
@@ -110,7 +107,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
     public function registrationFieldDataProvider()
     {
         $mockField = $this->getMockBuilder(Field::class)->setMethods(['getUid'])->getMock();
-        $mockField->expects($this->any())->method('getUid')->will($this->returnValue(2));
+        $mockField->expects(self::any())->method('getUid')->willReturn(2);
 
         return [
             'No registration field' => [
@@ -157,12 +154,12 @@ class ErrorClassViewHelperTest extends UnitTestCase
         $expected,
         $errorClass = 'error-class'
     ) {
-        $this->viewhelper->expects($this->once())->method('getValidationErrors')
-            ->will($this->returnValue($validationErrors));
+        $this->viewhelper->expects(self::once())->method('getValidationErrors')
+            ->willReturn($validationErrors);
         $this->viewhelper->setArguments([
             'registrationField' => $registrationField,
             'class' => $errorClass
         ]);
-        $this->assertEquals($expected, $this->viewhelper->render());
+        self::assertEquals($expected, $this->viewhelper->render());
     }
 }

@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck;
@@ -32,7 +33,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
         $configuration = [];
 
         $check = new HoneypotSpamCheck($mockRegistration, $settings, $arguments, $configuration);
-        $this->assertTrue($check->isFailed());
+        self::assertTrue($check->isFailed());
     }
 
     /**
@@ -52,7 +53,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
         $configuration = [];
 
         $check = new HoneypotSpamCheck($mockRegistration, $settings, $arguments, $configuration);
-        $this->assertTrue($check->isFailed());
+        self::assertTrue($check->isFailed());
     }
 
     /**
@@ -72,6 +73,6 @@ class HoneypotSpamCheckTest extends UnitTestCase
         $configuration = [];
 
         $check = new HoneypotSpamCheck($mockRegistration, $settings, $arguments, $configuration);
-        $this->assertFalse($check->isFailed());
+        self::assertFalse($check->isFailed());
     }
 }

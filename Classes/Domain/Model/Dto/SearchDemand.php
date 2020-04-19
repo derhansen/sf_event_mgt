@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * Search demand
@@ -34,21 +35,19 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $startDate = null;
+    protected $startDate;
 
     /**
      * EndDate
      *
      * @var \DateTime
      */
-    protected $endDate = null;
+    protected $endDate;
 
     /**
      * Set the start date
      *
      * @param \DateTime $startDate StartDate
-     *
-     * @return void
      */
     public function setStartDate($startDate)
     {
@@ -69,8 +68,6 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Set the end date
      *
      * @param \DateTime $endDate EndDate
-     *
-     * @return void
      */
     public function setEndDate($endDate)
     {
@@ -101,7 +98,6 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets search
      *
      * @param string $search
-     * @return void
      */
     public function setSearch($search)
     {

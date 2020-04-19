@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
@@ -38,14 +39,14 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
      */
-    protected $field = null;
+    protected $field;
 
     /**
      * Registration
      *
      * @var Registration
      */
-    protected $registration = null;
+    protected $registration;
 
     /**
      * Returns value depending on the valueType
@@ -87,7 +88,6 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets value
      *
      * @param string $value
-     * @return void
      */
     public function setValue($value)
     {
@@ -108,7 +108,6 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets field
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $field
-     * @return void
      */
     public function setField($field)
     {
@@ -129,7 +128,6 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets registration
      *
      * @param Registration $registration
-     * @return void
      */
     public function setRegistration($registration)
     {

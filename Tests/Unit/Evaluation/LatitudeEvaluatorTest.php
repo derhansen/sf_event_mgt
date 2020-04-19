@@ -1,5 +1,4 @@
 <?php
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
 
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
@@ -7,6 +6,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
  * For the full copyright and license information, please read the
  * LICENSE.txt file that was distributed with this source code.
  */
+
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
 
 use DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -23,12 +24,10 @@ class LatitudeEvaluatorTest extends UnitTestCase
      *
      * @var \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator
      */
-    protected $subject = null;
+    protected $subject;
 
     /**
      * Setup
-     *
-     * @return void
      */
     protected function setUp()
     {
@@ -37,8 +36,6 @@ class LatitudeEvaluatorTest extends UnitTestCase
 
     /**
      * Teardown
-     *
-     * @return void
      */
     protected function tearDown()
     {
@@ -92,12 +89,11 @@ class LatitudeEvaluatorTest extends UnitTestCase
      *
      * @param mixed $value
      * @param mixed $expected
-     * @return void
      */
     public function latitudeEvaluatorTest($value, $expected)
     {
         $set = null;
         $actual = $this->subject->evaluateFieldValue($value, null, $set);
-        $this->assertSame($actual, $expected);
+        self::assertSame($actual, $expected);
     }
 }
