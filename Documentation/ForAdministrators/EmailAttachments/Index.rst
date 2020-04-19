@@ -12,22 +12,22 @@ E-Mail attachments
 ==================
 
 If the registration option is enabled for an event, participants can register to the
-event. The extension allows you to send e-mails to the participant in order to notify
+event. The extension allows you to send emails to the participant in order to notify
 him, that he has registered or confirmed his registration.
 
-The extension supports to add attachments to the following type of e-mails:
+The extension supports to add attachments to the following type of emails:
 
 * New event registration
 * New event registration on the waitlist
 * Confirmed event registration
 * Confirmed event registration on the waitlist
 
-Configuring e-mail attachments
+Configuring email attachments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Attachments must be configured in TypoScript and it is possible to add attachments globally to all e-mails of a
+Attachments must be configured in TypoScript and it is possible to add attachments globally to all emails of a
 specific type or individual per event. Due to readability, the default TypoScript setup does not include an
-example configuration for e-mail attachments.
+example configuration for email attachments.
 
 Possible attachment configurations
 ----------------------------------
@@ -78,7 +78,7 @@ Properties for attachment configuration
          array
 
    :Description:
-         Array of property names of the event, which contains one or multiple files to be attached to the e-mail
+         Array of property names of the event, which contains one or multiple files to be attached to the email
 
    :Default:
          empty
@@ -90,7 +90,7 @@ Properties for attachment configuration
          array
 
    :Description:
-         Array of property names of the registration, which contains one or multiple files to be attached to the e-mail
+         Array of property names of the registration, which contains one or multiple files to be attached to the email
 
    :Default:
          empty
@@ -128,10 +128,10 @@ Example for new event registrations:
     }
   }
 
-The example above configures the attachments for e-mails to the user (the participant) when a new registration is
+The example above configures the attachments for emails to the user (the participant) when a new registration is
 created.
 
-The ``fromFiles`` setting configures the file ``fileadmin/terms-and-conditions.pdf`` to be added to the e-mail. If the
+The ``fromFiles`` setting configures the file ``fileadmin/terms-and-conditions.pdf`` to be added to the email. If the
 file does not exist, it will not be added.
 
 The ``fromEventProperty`` setting configures to add all files from the event properties ``files`` and ``image``. Those
@@ -173,7 +173,7 @@ Properties for attachment configuration
          boolean
 
    :Description:
-         If set, a iCal file for the event will be attached to the user e-mail
+         If set, a iCal file for the event will be attached to the user email
 
    :Default:
          empty
@@ -197,7 +197,7 @@ Example for new event registrations:
     }
   }
 
-In the example above, e-mails for new user registrations will include an iCal file for the event.
+In the example above, emails for new user registrations will include an iCal file for the event.
 
 Email attachments using PSR-14 Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -46,7 +46,7 @@
 				<source>Enable cancellation</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.unique_email_check">
-				<source>Enable unique e-mail check for registration</source>
+				<source>Enable unique email check for registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_autoconfirm">
 				<source>Enable automatic confirmation of event registrations</source>
@@ -154,7 +154,7 @@
 				<source>Email</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications">
-				<source>No e-mail notifications</source>
+				<source>No email notifications</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.mainRegistration">
 				<source>Parent registration</source>
@@ -238,7 +238,7 @@
 				<source>Payment</source>
 			</trans-unit>
 			<trans-unit id="event.sections.notification">
-				<source>When a registration is created,confirmed or cancelled, send a notification e-mail to:</source>
+				<source>When a registration is created,confirmed or cancelled, send a notification email to:</source>
 			</trans-unit>
 			<trans-unit id="event.sections.cancellation">
 				<source>Cancellation options:</source>

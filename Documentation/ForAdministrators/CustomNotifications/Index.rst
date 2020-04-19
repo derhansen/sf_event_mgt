@@ -47,7 +47,7 @@ in the TypoScript settings of the **admin module**.::
           myNotification {
             title = A title for the notification
             template = MyNotification.html
-            subject = A subject for the e-mail
+            subject = A subject for the email
           }
         }
       }
@@ -70,7 +70,7 @@ actually have paid for the event), you can use the "constraints" setting to limi
           myNotification {
             title = A title for the notification
             template = MyNotification.html
-            subject = A subject for the e-mail
+            subject = A subject for the email
             constraints {
               paid.equals = 1
             }
@@ -99,7 +99,7 @@ You may also combine the conditions like shown below:::
           myNotification {
             title = A title for the notification
             template = MyNotification.html
-            subject = A subject for the e-mail
+            subject = A subject for the email
             constraints {
               paid.equals = 1
               confirmed.equals = 1

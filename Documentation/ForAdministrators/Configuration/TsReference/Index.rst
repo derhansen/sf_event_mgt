@@ -304,7 +304,7 @@ plugin.tx_sfeventmgt
          String
 
    :Description:
-         E-mail address for e-mails sent to user
+         E-mail address for emails sent to user
 
    :Default:
          empty
@@ -316,7 +316,7 @@ plugin.tx_sfeventmgt
          String
 
    :Description:
-         Sender name for e-mails sent to user
+         Sender name for emails sent to user
 
    :Default:
          empty
@@ -328,7 +328,7 @@ plugin.tx_sfeventmgt
          String
 
    :Description:
-         Reply-to e-mail address of e-mails sent to the user
+         Reply-to email address of emails sent to the user
 
    :Default:
          empty
@@ -340,7 +340,7 @@ plugin.tx_sfeventmgt
          String
 
    :Description:
-         Signature shown in e-mails sent to user
+         Signature shown in emails sent to user
 
    :Default:
          empty
@@ -746,7 +746,7 @@ module.tx_sfeventmgt
          String
 
    :Description:
-         E-mail address for e-mails sent to user
+         E-mail address for emails sent to user
 
    :Default:
          Empty
@@ -758,7 +758,7 @@ module.tx_sfeventmgt
          String
 
    :Description:
-         Sender name for e-mails sent to user
+         Sender name for emails sent to user
 
    :Default:
          Empty
@@ -770,7 +770,7 @@ module.tx_sfeventmgt
          String
 
    :Description:
-         Signature shown in e-mails sent to user
+         Signature shown in emails sent to user
 
    :Default:
          Empty

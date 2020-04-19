@@ -278,7 +278,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $enableAutoconfirm = false;
 
     /**
-     * Unique e-mail check
+     * Unique email check
      *
      * @var bool
      */

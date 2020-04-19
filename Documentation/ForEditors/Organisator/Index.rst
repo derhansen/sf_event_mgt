@@ -41,7 +41,7 @@ The organisator can be assigned to an event.
          E-Mail signature
 
    :Description:
-         E-Mail signature of the organisator (can e.g. be used in e-mail templates)
+         E-Mail signature of the organisator (can e.g. be used in email templates)
 
  - :Field:
          Phone

@@ -356,7 +356,7 @@ The following objects can be used in notification views
 E-Mail subjects
 ~~~~~~~~~~~~~~~
 
-The following objects can be used in e-mail subjects for event registration and custom notifications
+The following objects can be used in email subjects for event registration and custom notifications
 
 .. t3-field-list-table::
  :header-rows: 1

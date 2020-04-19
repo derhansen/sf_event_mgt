@@ -342,7 +342,7 @@ class RegistrationService
     }
 
     /**
-     * Returns if the given e-mail is registered to the given event
+     * Returns if the given email is registered to the given event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @param string $email

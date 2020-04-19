@@ -24,13 +24,13 @@ plugin.tx_sfeventmgt {
             linkValidity = 3600
         }
         notification {
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for emails sent to user
             senderEmail =
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for emails sent to user
             senderName =
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in emails sent to user
             senderSignature =
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for reply-to in e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for reply-to in emails sent to user
             replyToEmail =
             # cat=plugin.tx_sfeventmgt//a; type=string; label=Admin E-mail address
             adminEmail =
@@ -39,33 +39,33 @@ plugin.tx_sfeventmgt {
             # cat=plugin.tx_sfeventmgt//a; type=boolean; label=Disables all email notifications
             disabled = 0
             registrationNew {
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to user on new registration
                 userSubject = Your registration for event "{event.title}"
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin on new registration
                 adminSubject = New unconfirmed registration for event "{event.title}"
             }
             registrationWaitlistNew {
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on new registration on the waitlist
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to user on new registration on the waitlist
                 userSubject = Your registration for event "{event.title}" on the waitlist
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on new registration on the waitlist
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin on new registration on the waitlist
                 adminSubject = New unconfirmed registration for event "{event.title}" on the waitlist
             }
             registrationConfirmed {
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to user on confirmed registration
                 userSubject = Registration for event "{event.title}" successful
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin on confirmed registration
                 adminSubject = Registration for "{event.title}" confirmed
             }
             registrationWaitlistConfirmed {
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on confirmed registration on the waitlist
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to user on confirmed registration on the waitlist
                 userSubject = Registration for event "{event.title}" on the waitlist successful
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on confirmed registration on the waitlist
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin on confirmed registration on the waitlist
                 adminSubject = Registration for event "{event.title}" on the waitlist confirmed
             }
             registrationCancelled {
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to user on cancelled registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to user on cancelled registration
                 userSubject = Registration for event "{event.title}" cancelled successful
-                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for e-mails sent to admin on cancelled registration
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin on cancelled registration
                 adminSubject = Registration for event "{event.title}" cancelled
             }
         }
@@ -115,11 +115,11 @@ module.tx_sfeventmgt {
             fields = title, teaser
         }
         notification {
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=E-mail address for emails sent to user
             senderEmail =
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Sender name for emails sent to user
             senderName =
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in e-mails sent to user
+            # cat=plugin.tx_sfeventmgt//a; type=string; label=Signature shown in emails sent to user
             senderSignature =
         }
     }

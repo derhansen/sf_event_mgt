@@ -773,7 +773,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * Confirms the registration if possible and sends e-mails to admin and user
+     * Confirms the registration if possible and sends emails to admin and user
      *
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
@@ -854,7 +854,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * Cancels the registration if possible and sends e-mails to admin and user
+     * Cancels the registration if possible and sends emails to admin and user
      *
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters

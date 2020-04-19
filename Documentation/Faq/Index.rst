@@ -40,15 +40,15 @@ How do I export registered participants to a CSV file?
 
 Please use the CSV export action as described in :ref:`backend-module` section.
 
-How do I create a custom e-mail notification?
+How do I create a custom email notification?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A detailed description can be found in the :ref:`custom-notifications` section.
 
-Can I add the HMAC or an appended HMAC of the registration UID to e-mails?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Can I add the HMAC or an appended HMAC of the registration UID to emails?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Yes, you can use the following objects in you e-mail templates
+Yes, you can use the following objects in you email templates
 
 * {hmac} = HMAC of uid
 * {reghmac} = appended uid+HMAC
@@ -88,7 +88,7 @@ How can I disable double opt in for event registration?
 
 You can enable autoConfirmation for new registrations as described in the :ref:`tsref` section.
 With autoConfirmation enabled, new registrations will automatically be confirmed and the user
-will not receive a confirmation e-mail.
+will not receive a confirmation email.
 
 How does the simultaneous registration process work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -100,11 +100,11 @@ in the backend for the user. All fields (e.g. firstname, lastname, email) will c
 
 The first registration saved is the "main registration", and all other registrations saved later will
 depend on the "main registration". All "dependent registrations" will automatically get the option
-"No e-mail notifications" set to true, so custom notifications are only sent to the e-mail address
+"No email notifications" set to true, so custom notifications are only sent to the email address
 of the "main registration".
 
 If automatic confirmation is turned off (default), the user has to confirm the registration by clicking
-a link in the confirmation e-mail. When the user confirms the registration, all "dependent registrations"
+a link in the confirmation email. When the user confirms the registration, all "dependent registrations"
 of the "main registration will automatically also be confirmed.
 
 How can I set a default currency?
@@ -331,7 +331,7 @@ fetch the translated event object when accessing the registration object.
 
 When the sys_language_uid is missing, wrong or -1, $registrationRepository->getByUid($uid)
 will return the expected registration object, but the getEvent() method returns the
-wrong (non translated) event, so e.g. translated e-mails will not show the translations
+wrong (non translated) event, so e.g. translated emails will not show the translations
 for the event.
 
 When fetching the event using a custom findBy method using the Extbase query builder

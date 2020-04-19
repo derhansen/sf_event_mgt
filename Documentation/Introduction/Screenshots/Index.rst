@@ -24,9 +24,9 @@ Backend administration module
 
 .. figure:: ../../Images/event-notification.png
    :width: 500px
-   :alt: Individual e-mail notifications
+   :alt: Individual email notifications
 
-Send configurable e-mail notifications to event participants
+Send configurable email notifications to event participants
 
 .. figure:: ../../Images/event-calendar.jpg
    :width: 500px

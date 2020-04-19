@@ -73,7 +73,7 @@ This viewhelper does exactly the same as f:uri.page, but this viewhelper
 builds frontend links with buildFrontendUri(), so links to FE pages can get
 generated in the TYPO3 backend.
 
-This viewhelper can be used in e-mail templates for custom notifications, when you want to link to a
+This viewhelper can be used in email templates for custom notifications, when you want to link to a
 given page in you TYPO3 website.
 
 **Example**::

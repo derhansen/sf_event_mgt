@@ -38,7 +38,7 @@ Sending custom notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For events which are enabled with the registration option, you can also send custom
-e-mail notification to the participants of the event. Press the "+" icon to get to
+email notification to the participants of the event. Press the "+" icon to get to
 the view, where you can select the custom notification template.
 
 .. figure:: ../../Images/event-custom-notification.png

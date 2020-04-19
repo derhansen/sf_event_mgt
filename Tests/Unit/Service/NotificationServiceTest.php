@@ -427,7 +427,7 @@ class NotificationServiceTest extends UnitTestCase
     }
 
     /**
-     * Test if the adminEmail settings get exploded and only 2 e-mails get sent
+     * Test if the adminEmail settings get exploded and only 2 emails get sent
      *
      * @test
      * @dataProvider messageTypeDataProvider

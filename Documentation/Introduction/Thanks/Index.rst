@@ -10,7 +10,7 @@
 Say thanks
 ----------
 
-If you like this extension and want to say thanks, feel free to drop me an e-mail or sponsor the
+If you like this extension and want to say thanks, feel free to drop me an email or sponsor the
 development of the extension. Please also consider to support the TYPO3 community by sponsoring
 events, code sprints or by becoming a TYPO3 association member.
 
@@ -24,7 +24,7 @@ Thanks from me to:
 * Phat Hoang from Pixelant AB for the reCAPTCHA implementation
 * Jean-François Sillen from Wikafi S.P.R.L for sponsoring the sys_category refactoring
 * Jean-François Sillen from Wikafi S.P.R.L for sponsoring the price option feature
-* W52 MarketingKommunikation GmbH for sponsoring the waitlist, user registrations frontend plugin and e-mail attachments
+* W52 MarketingKommunikation GmbH for sponsoring the waitlist, user registrations frontend plugin and email attachments
 * New Communication GmbH & Co. KG for sponsoring and ideas
 * Tymoteusz Motylewski for implementing event speakers and other contributions
 * Gerd Müller from Vogt-Schild Druck AG for sponsoring organisator filtering

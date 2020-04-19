@@ -403,15 +403,15 @@ Tab notification
 
 
  - :Property:
-         E-Mail address of e-mails sent to the user
+         E-Mail address of emails sent to the user
 
    :View:
          Registration
 
    :Description:
-         E-Mail address of e-mails sent to the user. This should
-         be the e-mail address of the site admin or a general information
-         e-mail address. The user will see this e-mail address as sender.
+         E-Mail address of emails sent to the user. This should
+         be the email address of the site admin or a general information
+         email address. The user will see this email address as sender.
 
    :Key:
          notification.senderEmail
@@ -442,121 +442,121 @@ Tab notification
          notification.adminEmail
 
  - :Property:
-         Subject of e-mail sent to user when a new registration is created
+         Subject of email sent to user when a new registration is created
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to user when a new registration is created
+         Subject of email sent to user when a new registration is created
 
    :Key:
          notification.registrationNew.userSubject
 
  - :Property:
-         Subject of e-mail sent to user when a new registration on the waitlist is created
+         Subject of email sent to user when a new registration on the waitlist is created
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to user when a new registration on the waitlist is created
+         Subject of email sent to user when a new registration on the waitlist is created
 
    :Key:
          notification.registrationWaitlistNew.userSubject
 
  - :Property:
-         Subject of e-mail sent to admin when a new registration is created
+         Subject of email sent to admin when a new registration is created
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to admin when a new registration is created
+         Subject of email sent to admin when a new registration is created
 
    :Key:
          notification.registrationNew.adminSubject
 
  - :Property:
-         Subject of e-mail sent to admin when a new registration on the waitlist is created
+         Subject of email sent to admin when a new registration on the waitlist is created
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to admin when a new registration on the waitlist is created
+         Subject of email sent to admin when a new registration on the waitlist is created
 
    :Key:
          notification.registrationWaitlistNew.adminSubject
 
  - :Property:
-         Subject of e-mail sent to user when a registration has been confirmed
+         Subject of email sent to user when a registration has been confirmed
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to user when a registration has been confirmed
+         Subject of email sent to user when a registration has been confirmed
 
    :Key:
          notification.registrationConfirmed.userSubject
 
  - :Property:
-         Subject of e-mail sent to user when a registration on the waitlist has been confirmed
+         Subject of email sent to user when a registration on the waitlist has been confirmed
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to user when a registration on the waitlist has been confirmed
+         Subject of email sent to user when a registration on the waitlist has been confirmed
 
    :Key:
          notification.registrationWaitlistConfirmed.userSubject
 
  - :Property:
-         Subject of e-mail sent to admin when a registration has been confirmed
+         Subject of email sent to admin when a registration has been confirmed
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to admin when a registration has been confirmed
+         Subject of email sent to admin when a registration has been confirmed
 
    :Key:
          notification.registrationConfirmed.adminSubject
 
  - :Property:
-         Subject of e-mail sent to admin when a registration on the waitlist has been confirmed
+         Subject of email sent to admin when a registration on the waitlist has been confirmed
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to admin when a registration on the waitlist has been confirmed
+         Subject of email sent to admin when a registration on the waitlist has been confirmed
 
    :Key:
          notification.registrationWaitlistConfirmed.adminSubject
 
  - :Property:
-         Subject of e-mail sent to user when a registration has been cancelled
+         Subject of email sent to user when a registration has been cancelled
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to user when a registration has been cancelled
+         Subject of email sent to user when a registration has been cancelled
 
    :Key:
          notification.registrationCancelled.userSubject
 
  - :Property:
-         Subject of e-mail sent to admin when a registration has been cancelled
+         Subject of email sent to admin when a registration has been cancelled
 
    :View:
          Registration
 
    :Description:
-         Subject of e-mail sent to admin when a registration has been cancelled
+         Subject of email sent to admin when a registration has been cancelled
 
    :Key:
          notification.registrationCancelled.adminSubject

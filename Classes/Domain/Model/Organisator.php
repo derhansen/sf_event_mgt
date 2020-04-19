@@ -72,7 +72,7 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the e-mail
+     * Returns the email
      *
      * @return string $email
      */
@@ -84,7 +84,7 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the email
      *
-     * @param string $email The e-mail
+     * @param string $email The email
      */
     public function setEmail($email)
     {

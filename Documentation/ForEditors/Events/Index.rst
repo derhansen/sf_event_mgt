@@ -313,10 +313,10 @@ registrations per user" is set to a value greater than 1.
          Option to enable a waitlist for the event, if the max. amount of registrations is reached.
 
  - :Field:
-         Enable unique e-mail check for registration
+         Enable unique email check for registration
 
    :Description:
-         If set, e-mail adresses of registrations are checked for uniqueness for the event.
+         If set, email adresses of registrations are checked for uniqueness for the event.
 
  - :Field:
          Notify admin
@@ -328,8 +328,8 @@ registrations per user" is set to a value greater than 1.
          Notify organisator
 
    :Description:
-         When enabled, the organisator will receive an email for new event registrations (create/confirm). The e-mail
-         sent will use the same template as the admin e-mail.
+         When enabled, the organisator will receive an email for new event registrations (create/confirm). The email
+         sent will use the same template as the admin email.
 
 
 Registrations

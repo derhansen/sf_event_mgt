@@ -61,7 +61,7 @@ class EmailServiceTest extends UnitTestCase
     }
 
     /**
-     * Test if e-mail-service returns false, if e-mails are invalid
+     * Test if email-service returns false, if emails are invalid
      *
      * @dataProvider invalidEmailsDataProvider
      * @test

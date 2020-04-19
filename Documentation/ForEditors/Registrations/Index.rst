@@ -171,7 +171,7 @@ The additional tab contains additional data about the registration
          Administration field. Will be set automatically, when the user confirms the registration.
 
  - :Field:
-         No e-mail notifications
+         No email notifications
 
    :Description:
          It this field is set to true, the participant will not receive notifications sent by the

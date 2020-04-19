@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailService
 {
     /**
-     * Sends an e-mail, if sender and recipient is an valid e-mail address
+     * Sends an email, if sender and recipient is an valid email address
      *
      * @param string $sender The sender
      * @param string $recipient The recipient

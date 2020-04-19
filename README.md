@@ -19,21 +19,21 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Configurable additional fields in the registration form
 * Optional registration waitlist
 * Double opt in (optional) for event registration
-* Attachments in registration e-mails to participant and/or admin
-* iCal attachment in e-mails to participant
+* Attachments in registration emails to participant and/or admin
+* iCal attachment in emails to participant
 * Configurable validity of double opt in links
 * Cancellation configurable for each event
 * Prefill of registration fields for logged in frontend users
 * Frontend plugin to show event registrations for logged in frontend users
 * Backend administration module to manage events and registrations
 * CSV export for all registrations of an event
-* Configurable e-mail templates to notify event participants
+* Configurable email templates to notify event participants
 * Extendable with own fields through own extension
 * Configurable template layouts for the listview
 * Configurable category menu 
 * Searchview for events
 * Create multiple registrations at once by a single user
-* Optionally check e-mail address of registrations for uniqueness per event
+* Optionally check email address of registrations for uniqueness per event
 * Configurable and extendable spam checks (included honeypot, amount of links, challenge/response)
 * Optional Spam-Protection with reCAPTCHA
 * Download of iCal file for events
@@ -80,7 +80,7 @@ Download and install the extension with the TYPO3 extension manager module.
 ## Support
 
 Free public support is available on the #ext-sf_event_mgt TYPO3 Slack Channel.
-You can claos ask questions at https://stackoverflow.com and tag your question with `TYPO3`.
+You can ask questions at https://stackoverflow.com and tag your question with `TYPO3`.
 
 ## Contributing
 

@@ -190,46 +190,46 @@
 				<source>Disable overwrite demand</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
-				<source>E-Mail address of e-mails sent to the user</source>
+				<source>E-Mail address of emails sent to the user</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_name">
 				<source>Name of the sender</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.replyto_email">
-				<source>Reply-to e-mail address of e-mails sent to the user</source>
+				<source>Reply-to email address of emails sent to the user</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.admin_email">
 				<source>E-Mail address(es) of website admin(s), who receives new/confirmed registrations. Multiple E-Mail addresses must be separated with a comma.</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_new_user_subject">
-				<source>Subject of e-mail sent to user when a new registration is created</source>
+				<source>Subject of email sent to user when a new registration is created</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_waitlist_new_user_subject">
-				<source>Subject of e-mail sent to user when a new registration on the waitlist is created</source>
+				<source>Subject of email sent to user when a new registration on the waitlist is created</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_new_admin_subject">
-				<source>Subject of e-mail sent to admin when a new registration is created</source>
+				<source>Subject of email sent to admin when a new registration is created</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_waitlist_new_admin_subject">
-				<source>Subject of e-mail sent to admin when a new registration on the waitlist is created</source>
+				<source>Subject of email sent to admin when a new registration on the waitlist is created</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_confirmed_user_subject">
-				<source>Subject of e-mail sent to user when a registration has been confirmed</source>
+				<source>Subject of email sent to user when a registration has been confirmed</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_waitlist_confirmed_user_subject">
-				<source>Subject of e-mail sent to user when a registration on the waitlist has been confirmed</source>
+				<source>Subject of email sent to user when a registration on the waitlist has been confirmed</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_confirmed_admin_subject">
-				<source>Subject of e-mail sent to admin when a registration has been confirmed</source>
+				<source>Subject of email sent to admin when a registration has been confirmed</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_waitlist_confirmed_admin_subject">
-				<source>Subject of e-mail sent to admin when a registration on the waitlist has been confirmed</source>
+				<source>Subject of email sent to admin when a registration on the waitlist has been confirmed</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_cancelled_user_subject">
-				<source>Subject of e-mail sent to user when a registration has been cancelled</source>
+				<source>Subject of email sent to user when a registration has been cancelled</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_cancelled_admin_subject">
-				<source>Subject of e-mail sent to admin when a registration has been cancelled</source>
+				<source>Subject of email sent to admin when a registration has been cancelled</source>
 			</trans-unit>
 			<trans-unit id="flexforms_categorymenu.categories">
 				<source>Categories (if empty, all categories will be shown in the category menu)</source>
@@ -274,10 +274,10 @@
 				<source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.description">
-				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
+				<source>Please select an email template that will be used to notify all participants of the event. To add your own email templates, please read the extension manual.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.description">
-				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
+				<source>Please select an email template that will be used to notify all participants of the event. To add your own email templates, please read the extension manual.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.event">
 				<source>Event:</source>
@@ -289,10 +289,10 @@
 				<source>Template:</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.senderEmailError.title">
-				<source>No sender e-mail address</source>
+				<source>No sender email address</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.senderEmailError">
-				<source>The sender e-mail address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+				<source>The sender email address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.sendNotifications">
 				<source>Send notifications</source>
@@ -343,7 +343,7 @@
 				<source>Information</source>
 			</trans-unit>
 			<trans-unit id="administration.message-2.content">
-				<source>The selected e-mail has been sent to all participants of the event.</source>
+				<source>The selected email has been sent to all participants of the event.</source>
 			</trans-unit>
 			<trans-unit id="administration.sortOrder.asc">
 				<source>Ascending</source>
