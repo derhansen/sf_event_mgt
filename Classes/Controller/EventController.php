@@ -437,13 +437,6 @@ class EventController extends AbstractController
      */
     public function registrationAction(Event $event = null)
     {
-        // Temporary workaround for https://forge.typo3.org/issues/89434
-        // @todo: Remove when issue has been fixed
-        if ($event === null && $this->request->getOriginalRequest()->hasArgument('event')) {
-            $uid = $this->request->getOriginalRequest()->getArgument('event');
-            $event = $this->eventRepository->findByUid($uid);
-        }
-
         $event = $this->evaluateSingleEventSetting($event);
         if (is_a($event, Event::class) && $this->settings['registration']['checkPidOfEventRecord']) {
             $event = $this->checkPidOfEventRecord($event);
