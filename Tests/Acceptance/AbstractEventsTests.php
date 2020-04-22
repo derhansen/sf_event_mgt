@@ -265,4 +265,30 @@ class AbstractEventsTests
         $I->see('My event registrations');
         $I->see('Expired Event (cat1, fe_user: user1) ' . $this->lang);
     }
+
+    public function registrationWorksForEventWithMultiReg(AcceptanceTester $I)
+    {
+        $I->deleteAllEmails();
+
+        $I->amOnPage($this->basePath . 'event-list-all');
+        $I->click('Event (reg, cat1, multireg) ' . $this->lang);
+
+        $I->see('0', '//*[@id="c2"]/div/div[12]/div[2]');
+        $I->see('Registration', 'a');
+        $I->click('Registration');
+
+        $I->fillField(['id' => 'firstname'], 'John');
+        $I->fillField(['id' => 'lastname'], 'Doe');
+        $I->fillField(['id' => 'company'], 'TYPO3');
+        $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
+        $I->selectOption(['id' => 'amountOfRegistrations'], '3');
+
+        $I->click('Send registration');
+
+        $I->see('Registration successful');
+
+        $I->amOnPage($this->basePath . 'event-list-all');
+        $I->click('Event (reg, cat1, multireg) ' . $this->lang);
+        $I->see('3', '//*[@id="c2"]/div/div[12]/div[2]');
+    }
 }
