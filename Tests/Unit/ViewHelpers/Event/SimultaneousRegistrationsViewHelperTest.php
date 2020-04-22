@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test cases for SimultaneousRegistrationsViewHelper
@@ -30,7 +30,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->viewhelper = new SimultaneousRegistrationsViewHelper();
     }
@@ -38,7 +38,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->viewhelper);
     }

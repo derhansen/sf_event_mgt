@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\BackendUser;
 
 /**
@@ -29,7 +29,7 @@ class CustomNotificationLogTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new CustomNotificationLog();
     }
@@ -37,7 +37,7 @@ class CustomNotificationLogTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }

@@ -16,7 +16,7 @@ use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
@@ -37,7 +37,7 @@ class PaymentControllerTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
             PaymentController::class,
@@ -55,7 +55,7 @@ class PaymentControllerTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }

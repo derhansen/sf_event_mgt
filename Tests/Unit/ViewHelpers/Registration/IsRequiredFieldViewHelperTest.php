@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\IsRequiredFieldViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for IsRequiredField viewhelper

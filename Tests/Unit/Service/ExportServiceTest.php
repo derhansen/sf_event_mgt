@@ -13,7 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\ExportService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -31,7 +31,7 @@ class ExportServiceTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new ExportService();
     }
@@ -39,7 +39,7 @@ class ExportServiceTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -122,10 +122,10 @@ class ExportServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException Exception
      */
     public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel()
     {
+        $this->expectException(Exception::class);
         $mockRegistration = $this->getMockBuilder(Registration::class)->setMethods(['_hasProperty'])->getMock();
         $mockRegistration->expects(self::at(0))->method('_hasProperty')->with(
             self::equalTo('uid')

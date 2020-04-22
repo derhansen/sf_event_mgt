@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
@@ -30,7 +30,7 @@ class OrganisatorTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Organisator();
     }
@@ -38,7 +38,7 @@ class OrganisatorTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -64,12 +64,7 @@ class OrganisatorTest extends UnitTestCase
     public function setNameForStringSetsName()
     {
         $this->subject->setName('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'name',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getName());
     }
 
     /**
@@ -93,12 +88,7 @@ class OrganisatorTest extends UnitTestCase
     public function setEmailForStringSetsEmail()
     {
         $this->subject->setEmail('mail@domain.tld');
-
-        self::assertAttributeEquals(
-            'mail@domain.tld',
-            'email',
-            $this->subject
-        );
+        $this->assertEquals('mail@domain.tld', $this->subject->getEmail());
     }
 
     /**
@@ -122,12 +112,7 @@ class OrganisatorTest extends UnitTestCase
     public function setPhoneForStringSetsPhone()
     {
         $this->subject->setPhone('+49 123 4567890');
-
-        self::assertAttributeEquals(
-            '+49 123 4567890',
-            'phone',
-            $this->subject
-        );
+        $this->assertEquals('+49 123 4567890', $this->subject->getPhone());
     }
 
     /**
@@ -149,11 +134,6 @@ class OrganisatorTest extends UnitTestCase
     {
         $file = new FileReference();
         $this->subject->setImage($file);
-
-        self::assertAttributeEquals(
-            $file,
-            'image',
-            $this->subject
-        );
+        $this->assertEquals($file, $this->subject->getImage());
     }
 }

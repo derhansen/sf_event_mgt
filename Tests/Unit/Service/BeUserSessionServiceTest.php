@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
@@ -28,7 +28,7 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new BeUserSessionService();
     }
@@ -36,7 +36,7 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }

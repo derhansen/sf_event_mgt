@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Location.
@@ -29,7 +29,7 @@ class LocationTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Location();
     }
@@ -37,7 +37,7 @@ class LocationTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -63,12 +63,7 @@ class LocationTest extends UnitTestCase
     public function setTitleForStringSetsTitle()
     {
         $this->subject->setTitle('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'title',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getTitle());
     }
 
     /**
@@ -88,12 +83,7 @@ class LocationTest extends UnitTestCase
     public function setAddressForStringSetsAddress()
     {
         $this->subject->setAddress('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'address',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getAddress());
     }
 
     /**
@@ -113,12 +103,7 @@ class LocationTest extends UnitTestCase
     public function setZipForIntegerSetsZip()
     {
         $this->subject->setZip('12');
-
-        self::assertAttributeSame(
-            '12',
-            'zip',
-            $this->subject
-        );
+        self::assertSame('12', $this->subject->getZip());
     }
 
     /**
@@ -149,12 +134,7 @@ class LocationTest extends UnitTestCase
     public function setCityForStringSetsCity()
     {
         $this->subject->setCity('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'city',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getCity());
     }
 
     /**
@@ -163,12 +143,7 @@ class LocationTest extends UnitTestCase
     public function setCountryForStringSetsCountry()
     {
         $this->subject->setCountry('A country');
-
-        self::assertAttributeEquals(
-            'A country',
-            'country',
-            $this->subject
-        );
+        $this->assertEquals('A country', $this->subject->getCountry());
     }
 
     /**
@@ -192,12 +167,7 @@ class LocationTest extends UnitTestCase
     public function setDescriptionForStringSetsDescription()
     {
         $this->subject->setDescription('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'description',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getDescription());
     }
 
     /**
@@ -221,12 +191,7 @@ class LocationTest extends UnitTestCase
     public function setLinkForStringSetsLink()
     {
         $this->subject->setLink('http://www.typo3.org');
-
-        self::assertAttributeEquals(
-            'http://www.typo3.org',
-            'link',
-            $this->subject
-        );
+        $this->assertEquals('http://www.typo3.org', $this->subject->getLink());
     }
 
     /**

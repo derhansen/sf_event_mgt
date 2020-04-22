@@ -11,13 +11,25 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\SpamCheckServiceTest.
  */
 class SpamCheckServiceTest extends UnitTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->resetSingletonInstances = true;
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+    }
+
     /**
      * @test
      */
@@ -68,10 +80,10 @@ class SpamCheckServiceTest extends UnitTestCase
 
     /**
      * @test
-     * @expectedException \DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException
      */
     public function spamCheckServiceThrowsExceptionWhenTestNotFound()
     {
+        $this->expectException(SpamCheckNotFoundException::class);
         $registration = new Registration();
         $settings = [
             'enabled' => 1,

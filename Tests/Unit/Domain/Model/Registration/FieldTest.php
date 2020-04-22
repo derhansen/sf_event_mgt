@@ -13,7 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Utility\FieldType;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field.
@@ -32,7 +32,7 @@ class FieldTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Field();
     }
@@ -40,7 +40,7 @@ class FieldTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -59,11 +59,7 @@ class FieldTest extends UnitTestCase
     public function setTitleSetsTitleField()
     {
         $this->subject->setTitle('A title');
-        self::assertAttributeEquals(
-            'A title',
-            'title',
-            $this->subject
-        );
+        self::assertEquals('A title', $this->subject->getTitle());
     }
 
     /**
@@ -80,11 +76,7 @@ class FieldTest extends UnitTestCase
     public function setTypeSetsTypefield()
     {
         $this->subject->setType('check');
-        self::assertAttributeEquals(
-            'check',
-            'type',
-            $this->subject
-        );
+        self::assertEquals('check', $this->subject->getType());
     }
 
     /**
@@ -118,11 +110,7 @@ class FieldTest extends UnitTestCase
     public function setPlaceholderSetsPlaceholderField()
     {
         $this->subject->setPlaceholder('placeholder');
-        self::assertAttributeEquals(
-            'placeholder',
-            'placeholder',
-            $this->subject
-        );
+        self::assertEquals('placeholder', $this->subject->getPlaceholder());
     }
 
     /**
@@ -139,11 +127,7 @@ class FieldTest extends UnitTestCase
     public function setDefaultValueSetsDefaultValueField()
     {
         $this->subject->setDefaultValue('default');
-        self::assertAttributeEquals(
-            'default',
-            'defaultValue',
-            $this->subject
-        );
+        self::assertEquals('default', $this->subject->getDefaultValue());
     }
 
     /**
@@ -160,11 +144,7 @@ class FieldTest extends UnitTestCase
     public function setSettingsSetsSettingsField()
     {
         $this->subject->setSettings('settings');
-        self::assertAttributeEquals(
-            'settings',
-            'settings',
-            $this->subject
-        );
+        self::assertEquals('settings', $this->subject->getSettings());
     }
 
     /**
@@ -182,11 +162,7 @@ class FieldTest extends UnitTestCase
     {
         $event = new Event();
         $this->subject->setEvent($event);
-        self::assertAttributeEquals(
-            $event,
-            'event',
-            $this->subject
-        );
+        self::assertEquals($event, $this->subject->getEvent());
     }
 
     /**

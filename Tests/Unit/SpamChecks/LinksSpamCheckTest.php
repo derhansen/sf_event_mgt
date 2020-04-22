@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\LinkSpamCheck;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**

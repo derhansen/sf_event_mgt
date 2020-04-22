@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand.
@@ -28,7 +28,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new EventDemand();
     }
@@ -36,7 +36,7 @@ class EventDemandTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -81,12 +81,7 @@ class EventDemandTest extends UnitTestCase
     public function setDisplayModeForStringSetsDisplayMode()
     {
         $this->subject->setDisplayMode('past');
-
-        self::assertAttributeEquals(
-            'past',
-            'displayMode',
-            $this->subject
-        );
+        $this->assertEquals('past', $this->subject->getDisplayMode());
     }
 
     /**
@@ -106,12 +101,7 @@ class EventDemandTest extends UnitTestCase
     public function setStoragePageForStringSetsStoragePage()
     {
         $this->subject->setStoragePage('1,2,3');
-
-        self::assertAttributeEquals(
-            '1,2,3',
-            'storagePage',
-            $this->subject
-        );
+        $this->assertEquals('1,2,3', $this->subject->getStoragePage());
     }
 
     /**

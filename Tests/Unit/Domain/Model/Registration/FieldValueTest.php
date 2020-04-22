@@ -13,7 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue.
@@ -32,7 +32,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new FieldValue();
     }
@@ -40,7 +40,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -108,11 +108,7 @@ class FieldValueTest extends UnitTestCase
     {
         $field = new Field();
         $this->subject->setField($field);
-        self::assertAttributeEquals(
-            $field,
-            'field',
-            $this->subject
-        );
+        self::assertEquals($field, $this->subject->getField());
     }
 
     /**

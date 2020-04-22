@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
@@ -35,7 +35,7 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
      *
      * @throws \TYPO3\CMS\Core\Tests\Exception
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);

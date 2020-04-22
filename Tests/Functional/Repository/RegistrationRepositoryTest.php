@@ -12,7 +12,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use InvalidArgumentException;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -42,7 +43,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * Setup
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
@@ -181,11 +182,11 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * Test for match on Event with unknown condition
      *
-     * @expectedException \InvalidArgumentException
      * @test
      */
     public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition()
     {
+        $this->expectException(InvalidArgumentException::class);
         $constraints = ['confirmationUntil' => ['wrongcondition' => '0']];
         $event = $this->getMockBuilder(Event::class)->getMock();
         $this->registrationRepository->findNotificationRegistrations($event, $constraints);

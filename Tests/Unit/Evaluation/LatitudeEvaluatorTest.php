@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
 
 use DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator
@@ -29,7 +29,7 @@ class LatitudeEvaluatorTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new LatitudeEvaluator();
     }
@@ -37,7 +37,7 @@ class LatitudeEvaluatorTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }

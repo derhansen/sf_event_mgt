@@ -12,7 +12,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Payment\Transfer;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class PaymentServiceTest
@@ -29,7 +29,7 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
             'invoice' => [
@@ -46,7 +46,7 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }

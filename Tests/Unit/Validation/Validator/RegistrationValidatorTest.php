@@ -12,7 +12,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
@@ -40,7 +40,7 @@ class RegistrationValidatorTest extends UnitTestCase
     /**
      * Setup
      */
-    public function setup()
+    protected function setup(): void
     {
         $this->validator = $this->getAccessibleMock(
             $this->validatorClassName,

@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\TitleViewHelper;
 use Nimut\TestingFramework\MockObject\AccessibleMockObjectInterface;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
@@ -21,17 +21,25 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 class TitleViewHelperTest extends UnitTestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController|AccessibleMockObjectInterface
+     * @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
      */
     protected $tsfe;
 
     /**
      * Set up
      */
-    public function setUp()
+    protected function setUp(): void
     {
         $this->tsfe = $this->getAccessibleMock(TypoScriptFrontendController::class, ['dummy'], [], '', false);
         $GLOBALS['TSFE'] = $this->tsfe;
+    }
+
+    /**
+     * Teardown
+     */
+    protected function tearDown(): void
+    {
+        unset($this->tsfe);
     }
 
     /**
@@ -41,7 +49,7 @@ class TitleViewHelperTest extends UnitTestCase
     {
         $pageTitle = 'The event title for the page title';
         $indexedSearchDocTitle = 'The event title for indexed search';
-        /** @var TitleViewHelper|\PHPUnit_Framework_MockObject_MockObject $viewHelper */
+        /** @var TitleViewHelper $viewHelper */
         $viewHelper = $this->getAccessibleMock(TitleViewHelper::class, ['dummy']);
         $viewHelper::renderStatic(
             [

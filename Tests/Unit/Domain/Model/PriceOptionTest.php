@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\PriceOption.
@@ -30,7 +30,7 @@ class PriceOptionTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new PriceOption();
     }
@@ -38,7 +38,7 @@ class PriceOptionTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -64,12 +64,7 @@ class PriceOptionTest extends UnitTestCase
     public function setPriceForFloatSetsPrice()
     {
         $this->subject->setPrice(12.99);
-
-        self::assertAttributeEquals(
-            12.99,
-            'price',
-            $this->subject
-        );
+        self::assertSame(12.99, $this->subject->getPrice());
     }
 
     /**

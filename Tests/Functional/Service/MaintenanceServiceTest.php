@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
-use Nimut\TestingFramework\TestCase\FunctionalTestCase;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -27,7 +27,7 @@ class MaintenanceServiceTest extends FunctionalTestCase
     /**
      * Setup
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $this->importDataSet(__DIR__ . '/../Fixtures/handle_expired_registrations.xml');

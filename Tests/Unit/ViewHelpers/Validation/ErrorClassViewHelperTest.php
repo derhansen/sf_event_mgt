@@ -11,7 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Validation\ErrorClassViewHelper;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test for ErrorClassViewHelperTest
@@ -28,7 +28,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->viewhelper = $this->getMockBuilder(ErrorClassViewHelper::class)
             ->setMethods(['getValidationErrors'])->getMock();
@@ -37,7 +37,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->viewhelper);
     }

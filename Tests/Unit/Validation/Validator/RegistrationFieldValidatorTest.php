@@ -13,7 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
@@ -32,7 +32,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
     /**
      * Setup
      */
-    public function setup()
+    protected function setup(): void
     {
         $this->validator = $this->getAccessibleMock(
             RegistrationFieldValidator::class,

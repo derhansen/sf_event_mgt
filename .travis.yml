@@ -22,7 +22,7 @@ before_install:
   - if php -i | grep -q xdebug; then phpenv config-rm xdebug.ini; fi
 
 before_script:
-  - composer require nimut/typo3-complete="$TYPO3_VERSION"
+  - composer require typo3/minimal="$TYPO3_VERSION"
   - export TYPO3_PATH_WEB=$PWD/.Build/Web
 
 script:
@@ -77,10 +77,10 @@ jobs:
   include:
     - stage: test
       php: 7.2
-      env: TYPO3_VERSION=~10.3 COVERAGE=0
+      env: TYPO3_VERSION=^10.4 COVERAGE=0
     - stage: test
       php: 7.3
-      env: TYPO3_VERSION=~10.3 COVERAGE=1
+      env: TYPO3_VERSION=^10.4 COVERAGE=1
     - stage: test
       php: 7.4
-      env: TYPO3_VERSION=~10.3 COVERAGE=0
+      env: TYPO3_VERSION=^10.4 COVERAGE=0

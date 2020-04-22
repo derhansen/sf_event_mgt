@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 
 /**
@@ -30,7 +30,7 @@ class SpeakerTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Speaker();
     }
@@ -38,7 +38,7 @@ class SpeakerTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -60,12 +60,7 @@ class SpeakerTest extends UnitTestCase
     public function setNameForStringSetsName()
     {
         $this->subject->setName('Firstname Lastname');
-
-        self::assertAttributeEquals(
-            'Firstname Lastname',
-            'name',
-            $this->subject
-        );
+        self::assertSame('Firstname Lastname', $this->subject->getName());
     }
 
     /**
@@ -85,12 +80,7 @@ class SpeakerTest extends UnitTestCase
     public function setJobTitleForStringSetsJobTitle()
     {
         $this->subject->setJobTitle('Web-Developer');
-
-        self::assertAttributeEquals(
-            'Web-Developer',
-            'jobTitle',
-            $this->subject
-        );
+        self::assertSame('Web-Developer', $this->subject->getJobTitle());
     }
 
     /**
@@ -110,12 +100,7 @@ class SpeakerTest extends UnitTestCase
     public function setDescriptionTitleForStringSetsDescription()
     {
         $this->subject->setDescription('A description');
-
-        self::assertAttributeEquals(
-            'A description',
-            'description',
-            $this->subject
-        );
+        self::assertSame('A description', $this->subject->getDescription());
     }
 
     /**
@@ -137,11 +122,6 @@ class SpeakerTest extends UnitTestCase
     {
         $image = new FileReference();
         $this->subject->setImage($image);
-
-        self::assertAttributeEquals(
-            $image,
-            'image',
-            $this->subject
-        );
+        self::assertSame($image, $this->subject->getImage());
     }
 }

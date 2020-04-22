@@ -17,7 +17,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -36,7 +36,7 @@ class EventTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = new Event();
     }
@@ -44,7 +44,7 @@ class EventTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
@@ -66,12 +66,7 @@ class EventTest extends UnitTestCase
     public function setTitleForStringSetsTitle()
     {
         $this->subject->setTitle('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'title',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getTitle());
     }
 
     /**
@@ -91,12 +86,7 @@ class EventTest extends UnitTestCase
     public function setDescriptionForStringSetsDescription()
     {
         $this->subject->setDescription('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'description',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getDescription());
     }
 
     /**
@@ -116,12 +106,7 @@ class EventTest extends UnitTestCase
     public function setProgramForStringSetsProgram()
     {
         $this->subject->setProgram('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'program',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getProgram());
     }
 
     /**
@@ -141,12 +126,7 @@ class EventTest extends UnitTestCase
     public function setTeaserForStringSetsTeaser()
     {
         $this->subject->setTeaser('This is a teaser');
-
-        self::assertAttributeEquals(
-            'This is a teaser',
-            'teaser',
-            $this->subject
-        );
+        $this->assertEquals('This is a teaser', $this->subject->getTeaser());
     }
 
     /**
@@ -166,12 +146,7 @@ class EventTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setStartdate($dateTimeFixture);
-
-        self::assertAttributeEquals(
-            $dateTimeFixture,
-            'startdate',
-            $this->subject
-        );
+        $this->assertEquals($dateTimeFixture, $this->subject->getStartdate());
     }
 
     /**
@@ -191,12 +166,7 @@ class EventTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setEnddate($dateTimeFixture);
-
-        self::assertAttributeEquals(
-            $dateTimeFixture,
-            'enddate',
-            $this->subject
-        );
+        $this->assertEquals($dateTimeFixture, $this->subject->getEnddate());
     }
 
     /**
@@ -226,12 +196,7 @@ class EventTest extends UnitTestCase
     public function setParticipantsForIntegerSetsParticipants()
     {
         $this->subject->setMaxParticipants(12);
-
-        self::assertAttributeEquals(
-            12,
-            'maxParticipants',
-            $this->subject
-        );
+        $this->assertEquals(12, $this->subject->getMaxParticipants());
     }
 
     /**
@@ -250,15 +215,8 @@ class EventTest extends UnitTestCase
      */
     public function setPriceForFloatSetsPrice()
     {
-        $this->subject->setPrice(3.14159265);
-
-        self::assertAttributeEquals(
-            3.14159265,
-            'price',
-            $this->subject,
-            '',
-            0.000000001
-        );
+        $this->subject->setPrice(3.99);
+        $this->assertEquals(3.99, $this->subject->getPrice());
     }
 
     /**
@@ -278,12 +236,7 @@ class EventTest extends UnitTestCase
     public function setCurrencyForStringSetsCurrency()
     {
         $this->subject->setCurrency('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'currency',
-            $this->subject
-        );
+        $this->assertEquals('Conceived at T3CON10', $this->subject->getCurrency());
     }
 
     /**
@@ -307,12 +260,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneCategory = new ObjectStorage();
         $objectStorageHoldingExactlyOneCategory->attach($category);
         $this->subject->setCategory($objectStorageHoldingExactlyOneCategory);
-
-        self::assertAttributeEquals(
-            $objectStorageHoldingExactlyOneCategory,
-            'category',
-            $this->subject
-        );
+        $this->assertEquals($objectStorageHoldingExactlyOneCategory, $this->subject->getCategory());
     }
 
     /**
@@ -338,7 +286,6 @@ class EventTest extends UnitTestCase
     {
         $category = new Category();
         $categoryObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $categoryObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($category));
@@ -368,12 +315,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneRegistration = new ObjectStorage();
         $objectStorageHoldingExactlyOneRegistration->attach($registration);
         $this->subject->setRegistration($objectStorageHoldingExactlyOneRegistration);
-
-        self::assertAttributeEquals(
-            $objectStorageHoldingExactlyOneRegistration,
-            'registration',
-            $this->subject
-        );
+        $this->assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistration());
     }
 
     /**
@@ -384,8 +326,7 @@ class EventTest extends UnitTestCase
         $registration = new Registration();
         $registrationObjectStorageMock = $this->getMockBuilder(
             ObjectStorage::class
-        )->setMethods(['attach'])
-            ->disableOriginalConstructor()
+        )->disableOriginalConstructor()
             ->getMock();
         $registrationObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($registration));
         $this->inject($this->subject, 'registration', $registrationObjectStorageMock);
@@ -400,7 +341,6 @@ class EventTest extends UnitTestCase
     {
         $registration = new Registration();
         $registrationObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($registration));
@@ -430,12 +370,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneRegistration = new ObjectStorage();
         $objectStorageHoldingExactlyOneRegistration->attach($registration);
         $this->subject->setRegistrationWaitlist($objectStorageHoldingExactlyOneRegistration);
-
-        self::assertAttributeEquals(
-            $objectStorageHoldingExactlyOneRegistration,
-            'registrationWaitlist',
-            $this->subject
-        );
+        $this->assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistrationWaitlist());
     }
 
     /**
@@ -445,7 +380,6 @@ class EventTest extends UnitTestCase
     {
         $registration = new Registration();
         $registrationObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($registration));
@@ -461,7 +395,6 @@ class EventTest extends UnitTestCase
     {
         $registration = new Registration();
         $registrationObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($registration));
@@ -491,12 +424,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneImage = new ObjectStorage();
         $objectStorageHoldingExactlyOneImage->attach($image);
         $this->subject->setImage($objectStorageHoldingExactlyOneImage);
-
-        self::assertAttributeEquals(
-            $objectStorageHoldingExactlyOneImage,
-            'image',
-            $this->subject
-        );
+        $this->assertEquals($objectStorageHoldingExactlyOneImage, $this->subject->getImage());
     }
 
     /**
@@ -506,7 +434,6 @@ class EventTest extends UnitTestCase
     {
         $image = new FileReference();
         $imageObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $imageObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($image));
@@ -522,7 +449,6 @@ class EventTest extends UnitTestCase
     {
         $image = new FileReference();
         $imageObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $imageObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($image));
@@ -552,12 +478,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneFile = new ObjectStorage();
         $objectStorageHoldingExactlyOneFile->attach($file);
         $this->subject->setFiles($objectStorageHoldingExactlyOneFile);
-
-        self::assertAttributeEquals(
-            $objectStorageHoldingExactlyOneFile,
-            'files',
-            $this->subject
-        );
+        $this->assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getFiles());
     }
 
     /**
@@ -567,7 +488,6 @@ class EventTest extends UnitTestCase
     {
         $files = new FileReference();
         $imageObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $imageObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($files));
@@ -583,7 +503,6 @@ class EventTest extends UnitTestCase
     {
         $files = new FileReference();
         $imageObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $imageObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($files));
@@ -613,12 +532,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneFile = new ObjectStorage();
         $objectStorageHoldingExactlyOneFile->attach($file);
         $this->subject->setAdditionalImage($objectStorageHoldingExactlyOneFile);
-
-        self::assertAttributeEquals(
-            $objectStorageHoldingExactlyOneFile,
-            'additionalImage',
-            $this->subject
-        );
+        $this->assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getAdditionalImage());
     }
 
     /**
@@ -628,7 +542,6 @@ class EventTest extends UnitTestCase
     {
         $files = new FileReference();
         $imageObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $imageObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($files));
@@ -644,7 +557,6 @@ class EventTest extends UnitTestCase
     {
         $files = new FileReference();
         $imageObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $imageObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($files));
@@ -828,12 +740,7 @@ class EventTest extends UnitTestCase
     {
         $location = new Location();
         $this->subject->setLocation($location);
-
-        self::assertAttributeEquals(
-            $location,
-            'location',
-            $this->subject
-        );
+        $this->assertEquals($location, $this->subject->getLocation());
     }
 
     /**
@@ -852,12 +759,7 @@ class EventTest extends UnitTestCase
     public function setEnableRegistrationForBooleanSetsEnableRegistration()
     {
         $this->subject->setEnableRegistration(true);
-
-        self::assertAttributeEquals(
-            true,
-            'enableRegistration',
-            $this->subject
-        );
+        $this->assertTrue($this->subject->getEnableRegistration());
     }
 
     /**
@@ -876,12 +778,7 @@ class EventTest extends UnitTestCase
     public function setEnableWaitlistForBooleanSetsEnableWaitlist()
     {
         $this->subject->setEnableWaitlist(true);
-
-        self::assertAttributeEquals(
-            true,
-            'enableWaitlist',
-            $this->subject
-        );
+        $this->assertTrue($this->subject->getEnableWaitlist());
     }
 
     /**
@@ -900,12 +797,7 @@ class EventTest extends UnitTestCase
     public function setLinkForStringSetsLink()
     {
         $this->subject->setLink('www.domain.tld');
-
-        self::assertAttributeEquals(
-            'www.domain.tld',
-            'link',
-            $this->subject
-        );
+        $this->assertEquals('www.domain.tld', $this->subject->getLink());
     }
 
     /**
@@ -958,12 +850,7 @@ class EventTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setRegistrationDeadline($dateTimeFixture);
-
-        self::assertAttributeEquals(
-            $dateTimeFixture,
-            'registrationDeadline',
-            $this->subject
-        );
+        $this->assertEquals($dateTimeFixture, $this->subject->getRegistrationDeadline());
     }
 
     /**
@@ -972,12 +859,7 @@ class EventTest extends UnitTestCase
     public function setTopEventForBooleanSetsTopEvent()
     {
         $this->subject->setTopEvent(true);
-
-        self::assertAttributeEquals(
-            true,
-            'topEvent',
-            $this->subject
-        );
+        $this->assertTrue($this->subject->getTopEvent());
     }
 
     /**
@@ -1016,12 +898,7 @@ class EventTest extends UnitTestCase
     {
         $organisator = new Organisator();
         $this->subject->setOrganisator($organisator);
-
-        self::assertAttributeEquals(
-            $organisator,
-            'organisator',
-            $this->subject
-        );
+        $this->assertEquals($organisator, $this->subject->getOrganisator());
     }
 
     /**
@@ -1198,7 +1075,6 @@ class EventTest extends UnitTestCase
     {
         $priceOption = new PriceOption();
         $priceOptionObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $priceOptionObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($priceOption));
@@ -1214,7 +1090,6 @@ class EventTest extends UnitTestCase
     {
         $priceOption = new PriceOption();
         $priceOptionObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $priceOptionObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($priceOption));
@@ -1314,7 +1189,6 @@ class EventTest extends UnitTestCase
     {
         $event = new Event();
         $relatedObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $relatedObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($event));
@@ -1330,7 +1204,6 @@ class EventTest extends UnitTestCase
     {
         $event = new Event();
         $relatedObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $relatedObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($event));
@@ -1458,7 +1331,6 @@ class EventTest extends UnitTestCase
     {
         $speaker = new Speaker();
         $speakerObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $speakerObjectStorageMock->expects(self::once())->method('attach')->with(self::equalTo($speaker));
@@ -1474,7 +1346,6 @@ class EventTest extends UnitTestCase
     {
         $speaker = new Speaker();
         $speakerObjectStorageMock = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['detach'])
             ->disableOriginalConstructor()
             ->getMock();
         $speakerObjectStorageMock->expects(self::once())->method('detach')->with(self::equalTo($speaker));
@@ -1514,7 +1385,6 @@ class EventTest extends UnitTestCase
     {
         $registrationField = new Field();
         $registrationFieldStorage = $this->getMockBuilder(ObjectStorage::class)
-            ->setMethods(['attach'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationFieldStorage->expects(self::once())->method('attach')->with(self::equalTo($registrationField));

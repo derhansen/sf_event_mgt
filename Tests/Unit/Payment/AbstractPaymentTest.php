@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
 
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
-use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Payment\AbstractPayment.
@@ -27,7 +27,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMockForAbstractClass(AbstractPayment::class);
     }
@@ -35,7 +35,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * Teardown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         unset($this->subject);
     }
