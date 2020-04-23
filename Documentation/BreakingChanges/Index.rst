@@ -11,6 +11,13 @@
 Breaking Changes
 ================
 
+5.0.0
+~~~~~
+
+This version contains several breaking changes. Make sure, you read the release notes with instructions
+at https://github.com/derhansen/sf_event_mgt/releases/tag/5.0.0
+
+
 4.1.0
 ~~~~~
 
@@ -23,7 +30,7 @@ Make sure, you read the release notes with instructions at https://github.com/de
 4.0.0
 ~~~~~
 
-This version contains several braking changes. Make sure, you read the release notes with instructions
+This version contains several breaking changes. Make sure, you read the release notes with instructions
 at https://github.com/derhansen/sf_event_mgt/releases/tag/4.0.0
 
 3.0.0
