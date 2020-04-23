@@ -76,17 +76,17 @@ class AbstractEventsTests
         $I->click('Registration');
         $I->click('Send registration');
         // Firstname (2), Lastname (3), Company (5) and Email (10)
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[2]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[3]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[5]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[10]/div/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.company"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.email"]/span');
 
         $I->fillField(['id' => 'firstname'], 'John');
         $I->fillField(['id' => 'lastname'], 'Doe');
         $I->fillField(['id' => 'company'], 'TYPO3');
         $I->fillField(['id' => 'email'], 'invalid-email');
         $I->click('Send registration');
-        $I->see('The given subject was not a valid email address.', '//*[@id="c3"]/div/form/fieldset/div[10]/div/span');
+        $I->see('The given subject was not a valid email address.', '//*[@id="field-errors-registration.email"]/span');
     }
 
     public function registrationWorksForSimpleEvent(AcceptanceTester $I)
@@ -125,12 +125,11 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
-        // Firstname (2), Lastname (3), Company (5), Email (10), Input field (req) [LANG] (15)
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[2]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[3]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[5]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[10]/div/span');
-        $I->see('The given subject was empty.', '//*[@id="c3"]/div/form/fieldset/div[15]/div/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.company"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.email"]/span');
+        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.fields.2"]/span');
     }
 
     public function registrationWorksForEventWithRegFields(AcceptanceTester $I)
@@ -290,5 +289,24 @@ class AbstractEventsTests
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event (reg, cat1, multireg) ' . $this->lang);
         $I->see('3', '//*[@id="c2"]/div/div[12]/div[2]');
+    }
+
+    public function honeypotSpamcheckActiveByDefaultAndWorking(AcceptanceTester $I)
+    {
+        $I->deleteAllEmails();
+
+        $I->amOnPage($this->basePath . 'event-list-all');
+        $I->click('Event (reg, cat1) ' . $this->lang);
+
+        $I->see('Registration', 'a');
+        $I->click('Registration');
+
+        $I->seeElementInDOM('input[name="tx_sfeventmgt_pievent[registration][hp2]"]');
+
+        $I->executeJS('document.getElementsByName("tx_sfeventmgt_pievent[registration][hp2]")[0].value = "spam";');
+
+        $I->click('Send registration');
+
+        $I->see('Your form submission has been classified as spam.');
     }
 }

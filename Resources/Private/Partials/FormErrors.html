@@ -1,6 +1,6 @@
 <f:form.validationResults for="{field}">
     <f:if condition="{validationResults.flattenedErrors}">
-        <div class="field-errors">
+        <div class="field-errors" id="field-errors-{field}">
             <f:for each="{validationResults.flattenedErrors}" key="propertyPath" as="errors">
                 <f:for each="{errors}" as="error">
                     <span class="error">{error}</span>

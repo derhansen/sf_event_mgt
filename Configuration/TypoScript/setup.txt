@@ -64,11 +64,11 @@ plugin.tx_sfeventmgt {
                 gender = gender
             }
             spamCheck {
-                enabled = 0
+                enabled = 1
                 maxSpamScore = 10
                 checks {
                     honeypot {
-                        enabled = 0
+                        enabled = 1
                         name = Honeypot field check
                         class = DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck
                         increaseScore = 10
