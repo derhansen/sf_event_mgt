@@ -5,4 +5,4 @@ services:
         public: false
 
     DERHANSEN\SfEventMgt\:
-        resource: '../Classes/'
+        resource: '../Classes/*'
