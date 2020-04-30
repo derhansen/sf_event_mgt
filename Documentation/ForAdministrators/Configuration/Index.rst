@@ -19,5 +19,4 @@ Configuration
    Plugins/Index
    TsReference/Index
    PageTSConfig/Index
-   RealUrl/Index
    RouteEnhancers/Index
