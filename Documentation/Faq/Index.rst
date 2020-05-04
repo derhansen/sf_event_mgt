@@ -149,7 +149,7 @@ How can I use the overwriteDemand feature for the search view
 
 It is also possible to use the overwriteDemand feature for the search view in order to limit the
 events that the search result includes. If you for example wish to limit the search to a special
-category, you must pass the category UID as shown below (teh value field contains the category UID).::
+category, you must pass the category UID as shown below (the value field contains the category UID).::
 
  <f:form.textfield name="overwriteDemand[category]" value="1"/>
 
