@@ -74,7 +74,7 @@ the event is possible. TRUE is returned, when all conditions below are
 * Date set at registration deadline is not reached
 * Startdate of event is not reached
 
-Why does the extenion not support recurring events?
+Why does the extension not support recurring events?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The user registration is one of the main features of the extension and it requires, that every event is unique in order
 to save registrations for a particular event. This makes it impossible to only have one event record, that has multiple
