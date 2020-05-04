@@ -65,7 +65,7 @@ needs:
    }
    [global]
 
-This example will show all events which are saved on the page with uid 4. The detail view page is the one with uid 4.
+This example will show all events which are saved on the page with uid 3. The detail view page is the one with uid 4.
 
 The RSS feed itself can be found with the link **/?type=9918**.
 
