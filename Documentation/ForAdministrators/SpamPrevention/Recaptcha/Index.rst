@@ -13,7 +13,7 @@ Configurable reCAPTCHA field
 
 It is possible to add a reCAPTCHA v2 field in the registration form. If configured, it is only possible to
 submit the form when the captcha is "solved". reCAPTCHA sometimes just works by checking a checkbox, but
-it does also often ask user to identify objects ob a larger image.
+it does also often ask user to identify objects of a larger image.
 
 Configuration
 -------------
