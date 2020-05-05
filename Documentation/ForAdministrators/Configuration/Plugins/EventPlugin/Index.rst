@@ -427,6 +427,18 @@ Tab notification
 
    :Key:
          notification.senderName
+         
+- :Property:
+         settings.notification.replyToEmail
+
+   :Date type:
+         String
+
+   :Description:
+         Reply-to email address of emails sent to the user
+
+   :Default:
+         empty
 
  - :Property:
          E-Mail address(es) of website admin

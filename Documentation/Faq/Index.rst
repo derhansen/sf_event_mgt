@@ -74,7 +74,7 @@ the event is possible. TRUE is returned, when all conditions below are
 * Date set at registration deadline is not reached
 * Startdate of event is not reached
 
-Why does the extenion not support recurring events?
+Why does the extension not support recurring events?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The user registration is one of the main features of the extension and it requires, that every event is unique in order
 to save registrations for a particular event. This makes it impossible to only have one event record, that has multiple
@@ -149,7 +149,7 @@ How can I use the overwriteDemand feature for the search view
 
 It is also possible to use the overwriteDemand feature for the search view in order to limit the
 events that the search result includes. If you for example wish to limit the search to a special
-category, you must pass the category UID as shown below (teh value field contains the category UID).::
+category, you must pass the category UID as shown below (the value field contains the category UID).::
 
  <f:form.textfield name="overwriteDemand[category]" value="1"/>
 
@@ -233,7 +233,7 @@ next directly select the Payment Plugin from the plugins select box.
 If the plugin originally was a plugin with Flexform settings and switchableControllerActions, those settings
 will remain in the database field pi_flexform and lead to the described error.
 
-How do can I move registrations on the waitlist automativally up, if a registered user cancels a registration?
+How can I move registrations on the waitlist automativally up, if a registered user cancels a registration?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You should use the PSR-14 Event ``WaitlistMoveUpEvent``.
