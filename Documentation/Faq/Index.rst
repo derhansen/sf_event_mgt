@@ -177,7 +177,7 @@ can select a payment method.
 The extension comes with 2 default payment methods "debit" and "transfer". Both payment methods do not include
 any further payment processing.
 
-It is possible to extend the extension with own payment methods that include furter payment processing (e.g. by
+It is possible to extend the extension with own payment methods that include further payment processing (e.g. by
 an external payment provider).
 
 For more information on how to add custom payment methods, see :ref:`developer_payment` section
@@ -190,7 +190,7 @@ Open the extension settings in the extension manager and press the "Save" button
 Configured price options do not show up in frontend
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Make sure that the date for the price option is valid also make sure, that you use ``{event.currentPrice}`` in your
+Make sure that the date for the price option is valid. Also make sure, that you use ``{event.currentPrice}`` in your
 Fluid template to output the current price.
 
 How can I use the iCalDownload action in the Listview?
@@ -203,10 +203,10 @@ Fluid snippet, you can also use the iCalDownload in the listview::
 
 Note, that you have to set the pageUid to a page with the detail view plugin.
 
-Why does the next/previous month links not work for the calendar view ?
+Why does the next/previous month links not work for the calendar view?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The next/presious links use the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
+The next/previous links use the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
 unchecked the **Disable overwrite demand** setting in the plugin.
 
 How do I show the event title as page title on the detail page?
@@ -225,7 +225,7 @@ The Payment Plugin throws exception about missing default controller
 
 The page with the Payment Plugin shows the following error::
 
- The default controller for extension "SfEventMgt" and plugin "Pipayment" can not be determined. Please check for TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin() in your ext_localconf.php
+The default controller for extension "SfEventMgt" and plugin "Pipayment" can not be determined. Please check for TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin() in your ext_localconf.php
 
 Please delete the content element with the Payment Plugin and create a blank content element of type "Plugin" and
 next directly select the Payment Plugin from the plugins select box.
