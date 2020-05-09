@@ -82,7 +82,7 @@ return [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -97,7 +97,7 @@ return [
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
@@ -111,7 +111,7 @@ return [
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
@@ -126,7 +126,7 @@ return [
         ],
 
         'name' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.name',
             'config' => [
                 'type' => 'input',
@@ -155,7 +155,7 @@ return [
             ]
         ],
         'email' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.email',
             'config' => [
                 'type' => 'input',
@@ -167,7 +167,7 @@ return [
             ]
         ],
         'email_signature' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.email_signature',
             'config' => [
                 'type' => 'text',
@@ -181,7 +181,7 @@ return [
             ]
         ],
         'phone' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.phone',
             'config' => [
                 'type' => 'input',
@@ -193,7 +193,7 @@ return [
             ]
         ],
         'image' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'image',

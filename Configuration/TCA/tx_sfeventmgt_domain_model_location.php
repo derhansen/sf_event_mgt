@@ -85,7 +85,7 @@ return [
         ],
 
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -100,7 +100,7 @@ return [
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
@@ -114,7 +114,7 @@ return [
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
@@ -129,7 +129,7 @@ return [
         ],
 
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.title',
             'config' => [
@@ -156,7 +156,7 @@ return [
             ]
         ],
         'address' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.address',
             'config' => [
                 'type' => 'text',
@@ -169,7 +169,7 @@ return [
             ],
         ],
         'zip' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.zip',
@@ -179,7 +179,7 @@ return [
             ]
         ],
         'city' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.city',
             'config' => [
                 'type' => 'input',
@@ -191,7 +191,7 @@ return [
             ],
         ],
         'country' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.country',
             'config' => [
                 'type' => 'input',
@@ -203,7 +203,7 @@ return [
             ],
         ],
         'description' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.description',
             'config' => [
                 'type' => 'text',
@@ -217,7 +217,7 @@ return [
             ]
         ],
         'link' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.link',
             'config' => [
                 'type' => 'input',
@@ -239,7 +239,7 @@ return [
             ]
         ],
         'longitude' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.longitude',
             'config' => [
                 'type' => 'input',
@@ -250,7 +250,7 @@ return [
             ],
         ],
         'latitude' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_location.latitude',
             'config' => [
                 'type' => 'input',

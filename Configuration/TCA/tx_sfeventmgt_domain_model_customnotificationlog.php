@@ -32,7 +32,7 @@ return [
             ]
         ],
         'event' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.event',
             'config' => [
                 'type' => 'group',
@@ -44,21 +44,21 @@ return [
             ],
         ],
         'details' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.details',
             'config' => [
                 'type' => 'input',
             ],
         ],
         'emails_sent' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.emailsSent',
             'config' => [
                 'type' => 'input',
             ],
         ],
         'tstamp' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.emailsSent',
             'config' => [
                 'type' => 'input',

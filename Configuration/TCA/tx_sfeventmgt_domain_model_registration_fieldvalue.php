@@ -75,7 +75,7 @@ return [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -90,7 +90,7 @@ return [
             ],
         ],
         'value' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.value',
             'config' => [
                 'type' => 'text',
@@ -99,7 +99,7 @@ return [
             ],
         ],
         'field' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.field',
             'config' => [
                 'type' => 'group',
@@ -112,7 +112,7 @@ return [
             ],
         ],
         'value_type' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType',
             'config' => [
                 'type' => 'select',

@@ -146,7 +146,7 @@ return [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -161,7 +161,7 @@ return [
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
@@ -175,7 +175,7 @@ return [
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
@@ -189,7 +189,7 @@ return [
             ],
         ],
         'fe_group' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.fe_group',
             'config' => [
                 'type' => 'select',
@@ -219,7 +219,7 @@ return [
             ],
         ],
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'prefixLangTitle',
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.title',
             'config' => [
@@ -277,7 +277,7 @@ return [
             ],
         ],
         'settings' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.settings',
             'config' => [
                 'type' => 'text',
@@ -292,14 +292,14 @@ return [
         'required' => [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.required',
             'config' => [
                 'type' => 'check'
             ],
         ],
         'placeholder' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.placeholder',
             'config' => [
                 'type' => 'text',
@@ -311,7 +311,7 @@ return [
             ],
         ],
         'default_value' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.default_value',
             'config' => [
                 'type' => 'text',
@@ -328,7 +328,7 @@ return [
             ],
         ],
         'text'  => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.text',
             'config' => [
                 'type' => 'text',
@@ -338,7 +338,7 @@ return [
             ]
         ],
         'datepickermode'  => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode',
             'config' => [
                 'type' => 'select',

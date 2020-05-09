@@ -135,7 +135,7 @@ return [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
             'config' => [
                 'type' => 'check',
@@ -150,7 +150,7 @@ return [
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
                 'type' => 'input',
@@ -164,7 +164,7 @@ return [
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
                 'type' => 'input',
@@ -178,7 +178,7 @@ return [
             ],
         ],
         'fe_group' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.fe_group',
             'config' => [
                 'type' => 'select',
@@ -214,7 +214,7 @@ return [
             ]
         ],
         'title' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.title',
             'config' => [
@@ -241,7 +241,7 @@ return [
             ]
         ],
         'teaser' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.teaser',
             'config' => [
@@ -251,7 +251,7 @@ return [
             ]
         ],
         'description' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.description',
             'config' => [
@@ -263,7 +263,7 @@ return [
             ]
         ],
         'program' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'prefixLangTitle',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.program',
             'config' => [
@@ -275,7 +275,7 @@ return [
             ]
         ],
         'link' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.link',
             'config' => [
                 'type' => 'input',
@@ -288,7 +288,7 @@ return [
             ]
         ],
         'top_event' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.top_event',
@@ -305,7 +305,7 @@ return [
             ],
         ],
         'startdate' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
@@ -319,7 +319,7 @@ return [
             ],
         ],
         'enddate' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enddate',
@@ -333,7 +333,7 @@ return [
             ],
         ],
         'enable_registration' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_registration',
@@ -351,7 +351,7 @@ return [
             ],
         ],
         'enable_waitlist' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist',
@@ -370,7 +370,7 @@ return [
             ],
         ],
         'registration_deadline' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_deadline',
@@ -384,7 +384,7 @@ return [
             ],
         ],
         'enable_cancel' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_cancel',
@@ -403,7 +403,7 @@ return [
             ],
         ],
         'cancel_deadline' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.cancel_deadline',
@@ -417,7 +417,7 @@ return [
             ],
         ],
         'enable_autoconfirm' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_autoconfirm',
@@ -435,7 +435,7 @@ return [
             ],
         ],
         'max_participants' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxParticipants',
@@ -447,7 +447,7 @@ return [
             ]
         ],
         'max_registrations_per_user' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser',
@@ -459,7 +459,7 @@ return [
             ]
         ],
         'price' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price',
             'config' => [
                 'type' => 'input',
@@ -471,7 +471,7 @@ return [
             ]
         ],
         'currency' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.currency',
             'config' => [
                 'type' => 'input',
@@ -483,7 +483,7 @@ return [
             ],
         ],
         'enable_payment' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_payment',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'onChange' => 'reload',
@@ -503,7 +503,7 @@ return [
             ],
         ],
         'restrict_payment_methods' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.restrict_payment_methods',
             'displayCond' => 'FIELD:enable_payment:REQ:TRUE',
             'onChange' => 'reload',
@@ -515,7 +515,7 @@ return [
             ],
         ],
         'selected_payment_methods' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.selected_payment_methods',
             'displayCond' => 'FIELD:restrict_payment_methods:REQ:TRUE',
             'config' => [
@@ -530,7 +530,7 @@ return [
             ]
         ],
         'location' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.location',
             'config' => [
                 'type' => 'group',
@@ -552,7 +552,7 @@ return [
             ],
         ],
         'room' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.room',
             'config' => [
                 'type' => 'input',
@@ -564,7 +564,7 @@ return [
             ],
         ],
         'organisator' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.organisator',
             'config' => [
                 'type' => 'group',
@@ -586,7 +586,7 @@ return [
             ],
         ],
         'speaker' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.speaker',
             'config' => [
                 'type' => 'group',
@@ -608,7 +608,7 @@ return [
             ],
         ],
         'image' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'image',
@@ -644,7 +644,7 @@ return [
             ),
         ],
         'files' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.files',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('files', [
                 'appearance' => [
@@ -660,7 +660,7 @@ return [
             ]),
         ],
         'related' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.related',
             'config' => [
                 'type' => 'group',
@@ -677,7 +677,7 @@ return [
             ]
         ],
         'additional_image' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.additional_image',
             'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
                 'additional_image',
@@ -713,7 +713,7 @@ return [
             ),
         ],
         'registration' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registrations',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -732,7 +732,7 @@ return [
             ],
         ],
         'registration_waitlist' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_waitlist',
             'displayCond' => 'FIELD:enable_waitlist:REQ:TRUE',
             'config' => [
@@ -751,7 +751,7 @@ return [
             ],
         ],
         'registration_fields' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_fields',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
@@ -774,7 +774,7 @@ return [
             ],
         ],
         'notify_admin' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_admin',
@@ -784,7 +784,7 @@ return [
             ],
         ],
         'notify_organisator' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.notify_organisator',
@@ -794,7 +794,7 @@ return [
             ],
         ],
         'unique_email_check' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.unique_email_check',
@@ -812,7 +812,7 @@ return [
             ],
         ],
         'price_options' => [
-            'exclude' => 1,
+            'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price_options',
             'config' => [
                 'type' => 'inline',
