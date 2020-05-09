@@ -74,24 +74,19 @@ return [
         'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
         'location' => [
             'showitem' => 'location, --linebreak--,room,',
-            'canNotCollapse' => true
         ],
         'titleTopEvent' => ['showitem' => 'title, top_event'],
         'paletteDates' => [
             'showitem' => 'startdate, enddate,',
-            'canNotCollapse' => true
         ],
         'palettePrice' => [
             'showitem' => 'price, currency,',
-            'canNotCollapse' => true
         ],
         'paletteNotification' => [
             'showitem' => 'notify_admin, notify_organisator,',
-            'canNotCollapse' => true
         ],
         'paletteCancellation' => [
             'showitem' => 'enable_cancel, cancel_deadline,',
-            'canNotCollapse' => true
         ],
     ],
     'columns' => [
