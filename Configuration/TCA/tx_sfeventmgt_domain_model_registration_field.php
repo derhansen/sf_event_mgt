@@ -342,6 +342,7 @@ return [
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0', 0],
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1', 1],
