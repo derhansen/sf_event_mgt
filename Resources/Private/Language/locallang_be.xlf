@@ -330,6 +330,9 @@
 			<trans-unit id="extmng.enableTransfer">
 				<source>Enable payment method 'transfer'</source>
 			</trans-unit>
+			<trans-unit id="extmng.slugBehaviour" xml:space="preserve">
+				<source>Slug behaviour: uniqueInSite: The same slug can be used for news in different sites. Use this setting *only* if no event records are shared between sites. "unique" means that same event title will lead to different slug names.</source>
+			</trans-unit>
 			<trans-unit id="tabs.language">
 				<source>Language</source>
 			</trans-unit>

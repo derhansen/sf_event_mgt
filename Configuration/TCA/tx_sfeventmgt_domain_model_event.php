@@ -1,5 +1,8 @@
 <?php
 
+$slugBehaviour = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+    ->get('sf_event_mgt', 'slugBehaviour');
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event',
@@ -236,7 +239,7 @@ return [
                     ],
                 ],
                 'fallbackCharacter' => '-',
-                'eval' => 'uniqueInSite',
+                'eval' => $slugBehaviour,
                 'default' => ''
             ]
         ],
