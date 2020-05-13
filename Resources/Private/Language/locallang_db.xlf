@@ -283,7 +283,7 @@
 				<source>Details</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent">
-				<source>E-Mails sent</source>
+				<source>Emails sent</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.cruser">
 				<source>User</source>
@@ -298,10 +298,10 @@
 				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
-				<source>E-Mail</source>
+				<source>Email</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email_signature">
-				<source>E-Mail signature</source>
+				<source>Email signature</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
 				<source>Phone number</source>

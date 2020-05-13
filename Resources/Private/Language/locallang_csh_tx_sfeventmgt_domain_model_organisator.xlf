@@ -7,7 +7,7 @@
 				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="email.description">
-				<source>E-Mail</source>
+				<source>Email</source>
 			</trans-unit>
 			<trans-unit id="phone.description">
 				<source>Phone</source>

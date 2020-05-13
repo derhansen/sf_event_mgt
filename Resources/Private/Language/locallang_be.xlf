@@ -190,7 +190,7 @@
 				<source>Disable overwrite demand</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
-				<source>E-Mail address of emails sent to the user</source>
+				<source>Email address of emails sent to the user</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_name">
 				<source>Name of the sender</source>
@@ -199,7 +199,7 @@
 				<source>Reply-to email address of emails sent to the user</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.admin_email">
-				<source>E-Mail address(es) of website admin(s), who receives new/confirmed registrations. Multiple E-Mail addresses must be separated with a comma.</source>
+				<source>Email address(es) of website admin(s), who receives new/confirmed registrations. Multiple email addresses must be separated with a comma.</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.registration_new_user_subject">
 				<source>Subject of email sent to user when a new registration is created</source>
@@ -307,7 +307,7 @@
 				<source>Details</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.emailsSent">
-				<source>E-Mails sent</source>
+				<source>Emails sent</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.sentBy">
 				<source>Sent by</source>

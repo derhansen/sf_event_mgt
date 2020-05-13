@@ -325,7 +325,7 @@
 				<source>Name</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
-				<source>E-Mail</source>
+				<source>Email</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
 				<source>Phone number</source>
