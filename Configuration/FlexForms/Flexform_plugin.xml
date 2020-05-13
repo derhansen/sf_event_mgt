@@ -480,6 +480,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.sender_email</label>
                             <config>
                                 <type>input</type>
+                                <eval>trim</eval>
                             </config>
                         </TCEforms>
                     </settings.notification.senderEmail>
@@ -500,6 +501,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.replyto_email</label>
                             <config>
                                 <type>input</type>
+                                <eval>trim</eval>
                             </config>
                         </TCEforms>
                     </settings.notification.replyToEmail>
@@ -510,6 +512,7 @@
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.admin_email</label>
                             <config>
                                 <type>input</type>
+                                <eval>trim</eval>
                             </config>
                         </TCEforms>
                     </settings.notification.adminEmail>
