@@ -1386,16 +1386,25 @@ class EventTest extends UnitTestCase
         return [
             'cancellationNotEnabled' => [
                 false,
+                new \DateTime('tomorrow'),
                 new \DateTime('today'),
                 false
             ],
             'cancellationEnabledButDeadlineReached' => [
                 true,
+                new \DateTime('tomorrow'),
                 new \DateTime('yesterday'),
                 false
             ],
             'cancellationEnabledDeadlineNotReached' => [
                 true,
+                (new \DateTime('tomorrow'))->modify('+1 day'),
+                new \DateTime('tomorrow'),
+                true
+            ],
+            'cancellationEnabledDeadlineNotReachedEventExpired' => [
+                true,
+                new \DateTime('yesterday'),
                 new \DateTime('tomorrow'),
                 true
             ]
@@ -1409,8 +1418,9 @@ class EventTest extends UnitTestCase
      * @param mixed $deadline
      * @param mixed $expected
      */
-    public function getCancellationPossibleReturnsExpectedValues($enabled, $deadline, $expected)
+    public function getCancellationPossibleReturnsExpectedValues($enabled, $eventDate, $deadline, $expected)
     {
+        $this->subject->setStartdate($eventDate);
         $this->subject->setEnableCancel($enabled);
         $this->subject->setCancelDeadline($deadline);
         $this->assertEquals($expected, $this->subject->getCancellationPossible());
@@ -1421,8 +1431,19 @@ class EventTest extends UnitTestCase
      */
     public function getCancellationPossibleReturnsTrueIfNoDeadlineSet()
     {
+        $this->subject->setStartdate(new \DateTime('tomorrow'));
         $this->subject->setEnableCancel(true);
         $this->assertEquals(true, $this->subject->getCancellationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function getCancellationPossibleReturnsFalseIfNoDeadlineSetButEventExpired()
+    {
+        $this->subject->setStartdate(new \DateTime('yesterday'));
+        $this->subject->setEnableCancel(true);
+        $this->assertEquals(false, $this->subject->getCancellationPossible());
     }
 
     /**
