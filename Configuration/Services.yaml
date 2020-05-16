@@ -6,3 +6,9 @@ services:
 
     DERHANSEN\SfEventMgt\:
         resource: '../Classes/*'
+
+    DERHANSEN\SfEventMgt\Command\CleanupCommand:
+        tags:
+            - name: 'console.command'
+              command: 'sf_event_mgt:cleanup'
+              schedulable: true
