@@ -11,6 +11,13 @@
 FAQ
 ===
 
+The event detail page shows a 404 error
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This problem can occur in TYPO3 versions greater than 9.5.17 or 10.4.2 when the TYPO3 website has multiple
+sites that use a shared folder for events. If this is the case, you must configure `unique` slug handling
+in the extension settings `slugBehaviour`.
+
 Why do you not include a nice CSS stylesheet?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

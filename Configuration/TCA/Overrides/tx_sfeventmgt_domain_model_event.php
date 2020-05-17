@@ -19,6 +19,9 @@ $GLOBALS['TCA'][$tableName]['columns']['category']['config']['behaviour']['allow
 
 // Register slug field for TYPO3 9.5
 if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
+    $slugBehaviour = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+        ->get('sf_event_mgt', 'slugBehaviour');
+
     $eventColumns['slug'] = [
         'exclude' => true,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
@@ -32,7 +35,7 @@ if (\DERHANSEN\SfEventMgt\Utility\MiscUtility::isV9Lts()) {
                 ],
             ],
             'fallbackCharacter' => '-',
-            'eval' => 'uniqueInSite',
+            'eval' => $slugBehaviour,
             'default' => ''
         ]
     ];

@@ -1,3 +1,8 @@
+# Records
+###########################
+# cat=records/enable/10; type=options[unique=unique,uniqueInSite=uniqueInSite]; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.slugBehaviour
+slugBehaviour = uniqueInSite
+
 # Payment
 ###########################
 	# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableInvoice
