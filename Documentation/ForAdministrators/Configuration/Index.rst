@@ -16,6 +16,7 @@ Configuration
    :titlesonly:
    :glob:
 
+   Extension/Index
    Plugins/Index
    TsReference/Index
    PageTSConfig/Index
