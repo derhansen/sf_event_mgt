@@ -234,8 +234,6 @@ return [
                     'linkPopup' => [
                         'options' => [
                             'blindLinkOptions' => 'folder',
-                            'blindLinkFields' => 'class, target',
-                            'allowedExtensions' => 'jpg',
                         ],
                     ],
                 ],
