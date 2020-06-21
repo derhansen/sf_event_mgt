@@ -1,0 +1,140 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    services:
+      mailhog:
+        image: mailhog/mailhog
+        ports:
+          - 1025:1025
+          - 8025:8025
+
+    strategy:
+      matrix:
+        env:
+          - { php: 7.4, coverage: 0 }
+          - { php: 7.3, coverage: 1 }
+          - { php: 7.2, coverage: 0 }
+
+    env: ${{ matrix.env }}
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up PHP Version
+        run: |
+          sudo update-alternatives --set php /usr/bin/php${php};
+          php -v
+
+      - name: Start MySQL
+        run: sudo /etc/init.d/mysql start
+
+      - name: Update Composer
+        run: |
+          sudo composer self-update
+          composer --version
+
+      # Directory permissions for .composer are wrong, so we remove the complete directory
+      # https://github.com/actions/virtual-environments/issues/824
+      - name: Delete .composer directory
+        run: |
+          sudo rm -rf ~/.composer
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Install composer dependencies
+        run: |
+          composer install --no-progress
+
+      - name: Unit tests
+        run: |
+          if [[ "$coverage" == "0" ]]; then
+            echo "Running unit tests";
+            .Build/bin/phpunit --colors -c Tests/Build/UnitTests.xml
+          else
+            echo "Running unit tests with coverage";
+            .Build/bin/phpunit --colors --coverage-clover=unittest-coverage.clover -c Tests/Build/UnitTests.xml
+          fi
+
+      - name: Functional tests
+        run: |
+          export typo3DatabaseName="typo3";
+          export typo3DatabaseHost="127.0.0.1";
+          export typo3DatabaseUsername="root";
+          export typo3DatabasePassword="root";
+          if [[ "$coverage" == "0" ]]; then
+            echo "Running functional tests";
+          find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit -c Tests/Build/FunctionalTests.xml {}'
+          else
+            echo "Running functional tests with coverage";
+          find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --coverage-clover={}functionaltest-coverage.clover -c Tests/Build/FunctionalTests.xml {}'
+          fi
+
+      - name: Initialize TYPO3 environment
+        run: |
+          cp -R Tests/Acceptance/_data/typo3conf .Build/public/
+          cp -R Tests/Acceptance/_data/config .Build/
+          .Build/bin/typo3cms install:generatepackagestates
+
+      - name: Run PHP webserver
+        run: |
+          export APP_IP=`ip addr show eth0 | grep -Po 'inet \K[\d.]+'`
+          sed -i -e "s/LOCAL_DOMAIN/$APP_IP:8888/" Tests/Acceptance/_envs/github-actions.yml
+          php -S 0.0.0.0:8888 -t .Build/public/ &> php.log.txt &
+          sleep 2;
+
+      - name: Test PHP webserver and initialize TYPO3 cache
+        run: |
+          export APP_IP=`ip addr show eth0 | grep -Po 'inet \K[\d.]+'`
+          curl "$APP_IP:8888"
+
+      - name: Start Selenium standalone
+        run: |
+          echo $SELENIUM_JAR_PATH
+          java -Djava.awt.headless=true -jar $SELENIUM_JAR_PATH &
+          sleep 5;
+
+      - name: Codeception Acceptance Tests
+        run: .Build/bin/codecept run acceptance --fail-fast --env=github-actions -c Tests/Build/AcceptanceTests.yml --html
+
+      - name: Upload Codeception output
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: codeception-results
+          path: Tests/Acceptance/_output/
+
+      - name: Upload PHP log
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: php-log
+          path: php.log.txt
+
+      - name: Upload TYPO3 log
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: typo3-log
+          path: .Build/var/log/
+
+      - name: Upload Code Coverage Data
+        if: ${{ env.coverage == '1' && success() }}
+        run: |
+          echo;
+          echo "Uploading code coverage results";
+          wget https://scrutinizer-ci.com/ocular.phar
+          php ocular.phar code-coverage:upload --format=php-clover unittest-coverage.clover
+          find 'Tests/Functional' -wholename '*Test.php' -exec php ocular.phar code-coverage:upload --format=php-clover {}functionaltest-coverage.clover \;

@@ -27,7 +27,12 @@
     "ericmartel/codeception-email-mailhog": "^1.0",
     "codeception/module-webdriver": "^1.0",
     "codeception/module-db": "^1.0",
-    "friendsofphp/php-cs-fixer": "^2.16.1"
+    "friendsofphp/php-cs-fixer": "^2.16.1",
+    "helhum/typo3-console": "^6.1",
+    "typo3/cms-fluid-styled-content": "^10.4",
+    "typo3/cms-frontend": "^10.4",
+    "typo3/cms-felogin": "^10.4",
+    "typo3/cms-tstemplate": "^10.4"
   },
   "replace": {
     "typo3-ter/sf-event-mgt": "self.version"
@@ -48,15 +53,16 @@
   },
   "scripts": {
     "post-autoload-dump": [
-      "mkdir -p .Build/Web/typo3conf/ext/",
-      "[ -L .Build/Web/typo3conf/ext/sf_event_mgt ] || ln -snvf ../../../../. .Build/Web/typo3conf/ext/sf_event_mgt"
+      "mkdir -p .Build/public/typo3conf/ext/",
+      "[ -L .Build/public/typo3conf/ext/sf_event_mgt ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/sf_event_mgt"
     ]
   },
   "extra": {
     "typo3/cms": {
       "extension-key": "sf_event_mgt",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
-      "web-dir": ".Build/Web"
+      "app-dir": ".Build",
+      "web-dir": ".Build/public"
     }
   }
 }

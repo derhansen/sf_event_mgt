@@ -20,6 +20,10 @@
         </testsuite>
     </testsuites>
 
+    <whitelist>
+        <directory suffix=".php">./Classes</directory>
+    </whitelist>
+
     <php>
         <!-- suppress deprecation warnings - set error reporting to: E_ALL & ~E_NOTICE & ~E_USER_ERROR & ~E_USER_WARNING & ~E_USER_NOTICE & ~E_STRICT & ~E_USER_DEPRECATED -->
         <ini name="error_reporting" value="12535"/>
