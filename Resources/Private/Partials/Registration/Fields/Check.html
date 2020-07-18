@@ -10,9 +10,9 @@
         </e:registration.isRequiredField>
     </label>
     <div class="checkbox-field-checkfields">
-        <f:for each="{field.settingsForOption}" as="option">
+        <f:for each="{field.settingsForOption}" as="option" iteration="i">
             <label>
-                <f:form.checkbox id="{field.uid}" property="fields.{field.uid}." value="{option.value}" checked="{e:registration.field.prefillMultiValueField(registrationField: field, currentValue: option.value)}"/>
+                <f:form.checkbox id="{field.uid}-{i.cycle}" property="fields.{field.uid}." value="{option.value}" checked="{e:registration.field.prefillMultiValueField(registrationField: field, currentValue: option.value)}"/>
                 {option.label}
             </label>
             <div class="clear"></div>
