@@ -216,6 +216,13 @@ Why does the next/previous month links not work for the calendar view?
 The next/previous links use the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
 unchecked the **Disable overwrite demand** setting in the plugin.
 
+The category filter for the list view does not work
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The filtering also uses the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
+unchecked the **Disable overwrite demand** setting in the plugin and also ensure that the category mode is not
+equal to ``Ignore category selection``.
+
 How do I show the event title as page title on the detail page?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
