@@ -428,7 +428,7 @@ Tab notification
    :Key:
          notification.senderName
          
-- :Property:
+ - :Property:
          settings.notification.replyToEmail
 
    :Date type:
