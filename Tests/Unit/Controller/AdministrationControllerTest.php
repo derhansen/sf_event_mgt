@@ -10,6 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -19,6 +20,7 @@ use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -378,9 +380,19 @@ class AdministrationControllerTest extends UnitTestCase
         );
         $this->inject($this->subject, 'settingsService', $mockSettingsService);
 
+        $mockCustomNotification = GeneralUtility::makeInstance(CustomNotification::class);
+
+        $recipients = $this->subject->getNotificationRecipients();
+
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects(self::once())->method('assignMultiple')->with(self::equalTo(
-            ['event' => $event, 'customNotifications' => $customNotifications, 'logEntries' => $logEntries]
+            [
+                'event' => $event,
+                'customNotification' => $mockCustomNotification,
+                'customNotifications' => $customNotifications,
+                'logEntries' => $logEntries,
+                'recipients' => $recipients
+            ]
         ));
         $this->inject($this->subject, 'view', $view);
 
@@ -409,7 +421,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockNotificationService->expects(self::once())->method('createCustomNotificationLogentry');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
+        $customNotification = new CustomNotification();
+
+        $this->subject->_set('settings', []);
         $this->subject->expects(self::once())->method('redirect');
-        $this->subject->notifyAction($event, 'customNotification');
+        $this->subject->notifyAction($event, $customNotification);
     }
 }

@@ -9,6 +9,8 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
@@ -165,34 +167,38 @@ class NotificationService
      * Sends a custom notification defined by the given customNotification key
      * to all confirmed users of the event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param string $customNotification CustomNotification
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param CustomNotification $customNotification
      * @param array $settings Settings
      *
      * @return int Number of notifications sent
      */
-    public function sendCustomNotification($event, $customNotification, $settings)
+    public function sendCustomNotification(Event $event, CustomNotification $customNotification, array $settings = [])
     {
         if ($this->cantSendCustomNotification($event, $settings, $customNotification)) {
             return 0;
         }
         $count = 0;
 
-        $constraints = $settings['notification']['customNotifications'][$customNotification]['constraints'];
-        $registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
+        $customNotificationSettings = $settings['notification']['customNotifications'];
+        $constraints = $customNotificationSettings[$customNotification->getTemplate()]['constraints'] ?? [];
+        $registrations = $this->registrationRepository->findNotificationRegistrations(
+            $event,
+            $customNotification,
+            $constraints
+        );
+
         foreach ($registrations as $registration) {
             /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
-            if ($registration->isConfirmed() && !$registration->isIgnoreNotifications()) {
-                $result = $this->sendUserMessage(
-                    $event,
-                    $registration,
-                    $settings,
-                    MessageType::CUSTOM_NOTIFICATION,
-                    $customNotification
-                );
-                if ($result) {
-                    $count += 1;
-                }
+            $result = $this->sendUserMessage(
+                $event,
+                $registration,
+                $settings,
+                MessageType::CUSTOM_NOTIFICATION,
+                $customNotification
+            );
+            if ($result) {
+                $count += 1;
             }
         }
 
@@ -204,13 +210,14 @@ class NotificationService
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @param array $settings
-     * @param string $customNotification
+     * @param CustomNotification $customNotification
      *
      * @return bool
      */
     protected function cantSendCustomNotification($event, $settings, $customNotification)
     {
-        return is_null($event) || $customNotification == '' || $settings == '' || !is_array($settings);
+        return is_null($event) || $customNotification === null || $customNotification->getTemplate() === '' ||
+            empty($settings);
     }
 
     /**
@@ -237,13 +244,17 @@ class NotificationService
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param array $settings Settings
      * @param int $type Type
-     * @param string $customNotification CustomNotification
+     * @param CustomNotification $customNotification
      *
      * @return bool TRUE if successful, else FALSE
      */
-    public function sendUserMessage($event, $registration, $settings, $type, $customNotification = '')
+    public function sendUserMessage($event, $registration, $settings, $type, $customNotification = null)
     {
-        list($template, $subject) = $this->getUserMessageTemplateSubject($settings, $type, $customNotification);
+        list($template, $subject) = $this->getUserMessageTemplateSubject(
+            $settings,
+            $type,
+            $customNotification
+        );
 
         if (is_null($event) || is_null($registration) || is_null($type) || !is_array($settings) ||
             (substr($template, -5) != '.html') || (bool)$settings['notification']['disabled']
@@ -251,8 +262,12 @@ class NotificationService
             return false;
         }
 
+        $additionalBodyVariables = [
+            'customNotification' => $customNotification
+        ];
+
         if (!$registration->isIgnoreNotifications()) {
-            $body = $this->getNotificationBody($event, $registration, $template, $settings);
+            $body = $this->getNotificationBody($event, $registration, $template, $settings, $additionalBodyVariables);
             $subject = $this->fluidStandaloneService->parseStringFluid(
                 $subject,
                 [
@@ -339,14 +354,16 @@ class NotificationService
      *
      * @param array $settings
      * @param int $type Type
-     * @param string $customNotification
+     * @param CustomNotification $customNotification
      * @return array
      */
-    protected function getUserMessageTemplateSubject($settings, $type, $customNotification)
+    protected function getUserMessageTemplateSubject($settings, $type, $customNotification = null)
     {
-        $template = 'Notification/User/RegistrationNew.html';
-        $subject = $settings['notification']['registrationNew']['userSubject'];
         switch ($type) {
+            case MessageType::REGISTRATION_NEW:
+                $template = 'Notification/User/RegistrationNew.html';
+                $subject = $settings['notification']['registrationNew']['userSubject'];
+                break;
             case MessageType::REGISTRATION_WAITLIST_NEW:
                 $template = 'Notification/User/RegistrationWaitlistNew.html';
                 $subject = $settings['notification']['registrationWaitlistNew']['userSubject'];
@@ -363,12 +380,18 @@ class NotificationService
                 $template = 'Notification/User/RegistrationCancelled.html';
                 $subject = $settings['notification']['registrationCancelled']['userSubject'];
                 break;
-            case MessageType::CUSTOM_NOTIFICATION:
-                $template = 'Notification/User/Custom/' . $settings['notification']['customNotifications'][$customNotification]['template'];
-                $subject = $settings['notification']['customNotifications'][$customNotification]['subject'];
+            case MessageType::CUSTOM_NOTIFICATION && $customNotification:
+                $customNotificationSettings = $settings['notification']['customNotifications'];
+                $templateKey = $customNotification->getTemplate();
+                $template = 'Notification/User/Custom/' . $customNotificationSettings[$templateKey]['template'];
+                $subject = $customNotificationSettings[$templateKey]['subject'];
+                if ($customNotification->getOverwriteSubject() !== '') {
+                    $subject = $customNotification->getOverwriteSubject();
+                }
                 break;
-            case MessageType::REGISTRATION_NEW:
             default:
+                $template = '';
+                $subject = '';
         }
 
         return [
@@ -505,22 +528,23 @@ class NotificationService
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param string $template Template
      * @param array $settings Settings
-     *
+     * @param array $additionalBodyVariables
      * @return string
      */
-    protected function getNotificationBody($event, $registration, $template, $settings)
+    protected function getNotificationBody($event, $registration, $template, $settings, $additionalBodyVariables = [])
     {
         if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
             $GLOBALS['BE_USER']->uc['lang'] = $registration->getLanguage();
         }
-        $variables = [
+        $defaultVariables = [
             'event' => $event,
             'registration' => $registration,
             'settings' => $settings,
             'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
             'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
         ];
+        $variables = array_merge($additionalBodyVariables, $defaultVariables);
 
         return $this->fluidStandaloneService->renderTemplate($template, $variables);
     }

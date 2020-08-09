@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Controller;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -380,28 +381,60 @@ class AdministrationController extends AbstractController
      */
     public function indexNotifyAction(Event $event)
     {
+        $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
         $this->view->assignMultiple([
             'event' => $event,
+            'recipients' => $this->getNotificationRecipients(),
+            'customNotification' => $customNotification,
             'customNotifications' => $customNotifications,
             'logEntries' => $logEntries,
         ]);
     }
 
     /**
+     * Returns an array of recipient option for the indexNotify action
+     *
+     * @return array|array[]
+     */
+    public function getNotificationRecipients(): array
+    {
+        return [
+            [
+                'value' => CustomNotification::RECIPIENTS_ALL,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_ALL
+                )
+            ],
+            [
+                'value' => CustomNotification::RECIPIENTS_CONFIRMED,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_CONFIRMED
+                )
+            ],
+            [
+                'value' => CustomNotification::RECIPIENTS_UNCONFIRMED,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_UNCONFIRMED
+                )
+            ],
+        ];
+    }
+
+    /**
      * Notify action
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param string $customNotification CustomNotification
+     * @param Event $event Event
+     * @param CustomNotification $customNotification
      */
-    public function notifyAction(Event $event, $customNotification)
+    public function notifyAction(Event $event, CustomNotification $customNotification)
     {
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
         $this->notificationService->createCustomNotificationLogentry(
             $event,
-            $customNotifications[$customNotification],
+            $customNotifications[$customNotification->getTemplate()],
             $result
         );
         $this->addFlashMessage(

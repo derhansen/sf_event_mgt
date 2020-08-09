@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -487,74 +488,14 @@ class NotificationServiceTest extends UnitTestCase
 
         $settings = ['notification' => ['senderEmail' => 'valid@email.tld']];
 
-        $result = $this->subject->sendUserMessage($event, $registration, $settings, MessageType::CUSTOM_NOTIFICATION, '');
-        self::assertFalse($result);
-    }
-
-    /**
-     * @test
-     */
-    public function sendCustomNotificationWithoutParameters()
-    {
-        $result = $this->subject->sendCustomNotification(null, '', []);
-        self::assertEquals(0, $result);
-    }
-
-    /**
-     * Data provider for customNotification
-     *
-     * @return array
-     */
-    public function customNotificationDataProvider()
-    {
-        return [
-            'noConfirmedRegistration' => [
-                false,
-                false,
-            ],
-            'ignoreNotificationsFlagSet' => [
-                true,
-                true
-            ]
-        ];
-    }
-
-    /**
-     * @test
-     * @dataProvider customNotificationDataProvider
-     * @param mixed $confirmed
-     * @param mixed $ignoreNotifications
-     */
-    public function sendCustomNotificationReturnsZeroIfNoConfirmedRegistrationAvailable(
-        $confirmed,
-        $ignoreNotifications
-    ) {
-        $event = new Event();
-
-        $registration = new Registration();
-        $registration->setConfirmed($confirmed);
-        $registration->setIgnoreNotifications($ignoreNotifications);
-
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new ObjectStorage();
-        $registrations->attach($registration);
-
-        $mockNotificationService = $this->getMockBuilder(NotificationService::class)
-            ->setMethods(['sendUserMessage'])
-            ->getMock();
-        $mockNotificationService->expects(self::any())->method('sendUserMessage')->willReturn(true);
-
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->setMethods(['findNotificationRegistrations'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects(self::once())->method('findNotificationRegistrations')->willReturn(
-            $registrations
+        $result = $this->subject->sendUserMessage(
+            $event,
+            $registration,
+            $settings,
+            MessageType::CUSTOM_NOTIFICATION,
+            null
         );
-        $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
-
-        $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
-        self::assertEquals(0, $result);
+        self::assertFalse($result);
     }
 
     /**
@@ -568,21 +509,14 @@ class NotificationServiceTest extends UnitTestCase
         $event = new Event();
 
         $registration1 = new Registration();
-        $registration1->setConfirmed(false);
+        $registration1->setConfirmed(true);
         $registration2 = new Registration();
         $registration2->setConfirmed(true);
-        $registration3 = new Registration();
-        $registration3->setConfirmed(true);
-        $registration4 = new Registration();
-        $registration4->setConfirmed(true);
-        $registration4->setIgnoreNotifications(true);
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
         $registrations = new ObjectStorage();
         $registrations->attach($registration1);
         $registrations->attach($registration2);
-        $registrations->attach($registration3);
-        $registrations->attach($registration4);
 
         /** @var NotificationService $mockNotificationService */
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
@@ -599,7 +533,10 @@ class NotificationServiceTest extends UnitTestCase
         );
         $this->inject($mockNotificationService, 'registrationRepository', $registrationRepository);
 
-        $result = $mockNotificationService->sendCustomNotification($event, 'aTemplate', ['someSettings']);
+        $customNotification = new CustomNotification();
+        $customNotification->setTemplate('aTemplate');
+
+        $result = $mockNotificationService->sendCustomNotification($event, $customNotification, ['someSettings']);
         self::assertEquals(2, $result);
     }
 
