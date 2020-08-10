@@ -17,6 +17,7 @@ use DERHANSEN\SfEventMgt\Service\EmailService;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
+use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -43,6 +44,9 @@ class NotificationServiceTest extends UnitTestCase
     protected function setUp()
     {
         $this->subject = new NotificationService();
+
+        $GLOBALS['BE_USER'] = new \stdClass();
+        $GLOBALS['BE_USER']->uc['lang'] = '';
     }
 
     /**
@@ -404,8 +408,8 @@ class NotificationServiceTest extends UnitTestCase
         ];
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects($this->once())->method('getFullname');
-        $mockRegistration->expects($this->once())->method('getEmail');
+        $mockRegistration->expects($this->once())->method('getFullname')->willReturn('Sender');
+        $mockRegistration->expects($this->once())->method('getEmail')->willReturn('email@domain.tld');
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
         $emailService->expects($this->once())->method('sendEmailMessage')->will($this->returnValue(true));
@@ -435,7 +439,7 @@ class NotificationServiceTest extends UnitTestCase
         $mockSignalSlotDispatcher->expects($this->once())->method('dispatch');
         $this->inject($this->subject, 'signalSlotDispatcher', $mockSignalSlotDispatcher);
 
-        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, $messageType);
+        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, MessageRecipient::ADMIN);
         $this->assertTrue($result);
     }
 
