@@ -12,8 +12,8 @@ Custom notifications
 ====================
 
 If you use the registration option for events, you have to possibility to send
-custom notifications to all (confirmed) participants of the event. In order to
-do so, use the admin module to open the "Notify participants" view.
+custom notifications to participants of the event. In order to do so, use the
+admin module to open the "Notify participants" view.
 
 .. figure:: ../../Images/event-custom-notification.png
    :alt: Actions of the backend module
@@ -36,6 +36,7 @@ You can use the following objects in your template:
 * {settings}
 * {hmac}
 * {reghmac}
+* {customNotification}
 
 After you created the notification template, you have to configure the new notification
 in the TypoScript settings of the **admin module**.::
