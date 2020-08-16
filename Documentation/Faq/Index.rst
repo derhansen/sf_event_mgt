@@ -355,3 +355,22 @@ has not been called before. So this is no option.
 In order to close to the TYPO3 core and not to implement more workarounds for translation
 issues, it is best to save registrations and registration fields with the current
 sys_language_uid set for frontend requests.
+
+Images for categories are not shown in the frontend?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Categories in TYPO3 backend do not have an image by default. It is ext:news that adds additional
+fields (e.g. an image-field) to the category domain model.
+
+If you want ext:sf_event_mgt to use the category domain model of ext:news, the category domain model
+of ext:sf_event_mgt needs to be overridden as shown below:
+
+Add this to an extension (e.g. your sitepackage) in ext_localconf.php::
+
+ GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+     ->registerImplementation(
+         \DERHANSEN\SfEventMgt\Domain\Model\Category::class,
+         \GeorgRinger\News\Domain\Model\Category::class
+     );
+
+After adding this snippet and clearing the cache, all categories in events do now use the category
+domain model of ext:news
