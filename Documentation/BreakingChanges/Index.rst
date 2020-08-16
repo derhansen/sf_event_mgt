@@ -11,6 +11,15 @@
 Breaking Changes
 ================
 
+5.1.0
+~~~~~
+
+This version contains a breaking change which might affect users who either extended the notification module with custom
+code (e.g. by xclass) or who use ``NotificationService::sendUserMessage()`` in own code.
+
+Make sure, you read the release notes with instructions at https://github.com/derhansen/sf_event_mgt/releases/tag/5.1.0
+
+
 5.0.0
 ~~~~~
 
