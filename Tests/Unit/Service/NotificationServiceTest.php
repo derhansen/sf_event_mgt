@@ -553,6 +553,7 @@ class NotificationServiceTest extends UnitTestCase
         $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
 
         $event = new Event();
+        $event->setPid(1);
         $this->subject->createCustomNotificationLogentry($event, 'A description', 1);
     }
 
