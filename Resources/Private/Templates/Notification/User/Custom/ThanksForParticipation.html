@@ -5,6 +5,9 @@
 <ul>
     <li>{event.title} - ({f:format.date(date: event.startdate, format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: event.enddate, format: '%d.%m.%Y - %H:%M')})</li>
 </ul>
+<f:if condition="{customNotification.additionalMessage}">
+    <p><f:format.nl2br>{customNotification.additionalMessage}</f:format.nl2br></p>
+</f:if>
 <p>If you have any suggestions or feedback, please send an email to email@domain.tld</p>
 <p>Best regards,</p>
 <p><f:format.html>{settings.notification.senderSignature}</f:format.html></p>

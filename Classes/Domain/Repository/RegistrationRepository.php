@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -77,16 +78,27 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * Constraints are combined with a logical AND
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param CustomNotification $customNotification
      * @param array $findConstraints FindConstraints
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findNotificationRegistrations($event, $findConstraints)
-    {
+    public function findNotificationRegistrations(
+        Event $event,
+        CustomNotification $customNotification,
+        array $findConstraints = []
+    ) {
         $constraints = [];
         $query = $this->createQuery();
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('ignoreNotifications', false);
+
+        if ($customNotification->getRecipients() === CustomNotification::RECIPIENTS_CONFIRMED) {
+            $constraints[] = $query->equals('confirmed', true);
+        } elseif ($customNotification->getRecipients() === CustomNotification::RECIPIENTS_UNCONFIRMED) {
+            $constraints[] = $query->equals('confirmed', false);
+        }
 
         if (!is_array($findConstraints) || count($findConstraints) == 0) {
             return $query->matching($query->logicalAnd($constraints))->execute();

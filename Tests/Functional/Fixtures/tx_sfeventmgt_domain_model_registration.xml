@@ -148,6 +148,27 @@
         <confirmed>1</confirmed>
         <fe_user>1</fe_user>
     </tx_sfeventmgt_domain_model_registration>
+
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>40</uid>
+        <event>20</event>
+        <confirmed>1</confirmed>
+        <ignore_notifications>0</ignore_notifications>
+    </tx_sfeventmgt_domain_model_registration>
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>41</uid>
+        <event>20</event>
+        <confirmed>1</confirmed>
+        <ignore_notifications>0</ignore_notifications>
+    </tx_sfeventmgt_domain_model_registration>
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>42</uid>
+        <event>20</event>
+        <confirmed>0</confirmed>
+        <confirmation_until>1402743600</confirmation_until>
+        <ignore_notifications>0</ignore_notifications>
+    </tx_sfeventmgt_domain_model_registration>
+
     <!-- Frontenduser with UID 1 -->
     <fe_users>
         <uid>1</uid>

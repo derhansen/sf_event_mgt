@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
@@ -62,7 +63,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         return [
             'allRegistrationsExpired' => [
                 1402826400, /* 15.06.2014 10:00 */
-                3
+                4
             ],
             'noRegistrationsExpired' => [
                 1402736400, /* 14.06.2014 09:00 */
@@ -88,17 +89,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * Test with no parameters
-     *
-     * @test
-     */
-    public function findNotificationRegistrationsWithNoParameters()
-    {
-        $registrations = $this->registrationRepository->findNotificationRegistrations(null, null);
-        $this->assertEquals(0, $registrations->count());
-    }
-
-    /**
      * Test for match on Event
      *
      * @test
@@ -107,8 +97,41 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getUid')->will($this->returnValue(2));
-        $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
+        $customNotification = $this->getMockBuilder(CustomNotification::class)->getMock();
+        $registrations = $this->registrationRepository->findNotificationRegistrations($event, $customNotification, []);
         $this->assertEquals(1, $registrations->count());
+    }
+
+    public function confirmedAndUnconfirmedDataProvider()
+    {
+        return [
+            'all registrations' => [
+                0,
+                3
+            ],
+            'confirmed' => [
+                1,
+                2
+            ],
+            'unconfirmed' => [
+                2,
+                1
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider confirmedAndUnconfirmedDataProvider
+     * @test
+     */
+    public function findNotificationRegistrationsReturnsConfirmedAndUnconfirmed($recipientSetting, $expected)
+    {
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $event->expects(self::once())->method('getUid')->willReturn(20);
+        $customNotification = $this->getMockBuilder(CustomNotification::class)->getMock();
+        $customNotification->expects(self::any())->method('getRecipients')->willReturn($recipientSetting);
+        $registrations = $this->registrationRepository->findNotificationRegistrations($event, $customNotification, []);
+        $this->assertSame($expected, $registrations->count());
     }
 
     /**
@@ -175,7 +198,13 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects($this->once())->method('getUid')->will($this->returnValue(1));
-        $registrations = $this->registrationRepository->findNotificationRegistrations($event, $constraints);
+        $customNotification = $this->getMockBuilder(CustomNotification::class)->getMock();
+
+        $registrations = $this->registrationRepository->findNotificationRegistrations(
+            $event,
+            $customNotification,
+            $constraints
+        );
         $this->assertEquals($expected, $registrations->count());
     }
 
@@ -189,7 +218,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     {
         $constraints = ['confirmationUntil' => ['wrongcondition' => '0']];
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $this->registrationRepository->findNotificationRegistrations($event, $constraints);
+        $customNotification = $this->getMockBuilder(CustomNotification::class)->getMock();
+        $this->registrationRepository->findNotificationRegistrations($event, $customNotification, $constraints);
     }
 
     /**
@@ -200,8 +230,13 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3()
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->once())->method('getUid')->will($this->returnValue(3));
-        $registrations = $this->registrationRepository->findNotificationRegistrations($event, null);
+        $event->expects(self::once())->method('getUid')->willReturn(3);
+        $customNotification = $this->getMockBuilder(CustomNotification::class)->getMock();
+        $registrations = $this->registrationRepository->findNotificationRegistrations(
+            $event,
+            $customNotification,
+            []
+        );
         $this->assertEquals(1, $registrations->count());
     }
 

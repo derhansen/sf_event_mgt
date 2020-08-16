@@ -8,6 +8,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
  * LICENSE.txt file that was distributed with this source code.
  */
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -20,6 +21,7 @@ use TYPO3\CMS\Core\FormProtection\FormProtectionFactory;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
@@ -403,13 +405,45 @@ class AdministrationController extends AbstractController
      */
     public function indexNotifyAction(Event $event)
     {
+        $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
         $this->view->assignMultiple([
             'event' => $event,
+            'recipients' => $this->getNotificationRecipients(),
+            'customNotification' => $customNotification,
             'customNotifications' => $customNotifications,
             'logEntries' => $logEntries,
         ]);
+    }
+
+    /**
+     * Returns an array of recipient option for the indexNotify action
+     *
+     * @return array|array[]
+     */
+    public function getNotificationRecipients(): array
+    {
+        return [
+            [
+                'value' => CustomNotification::RECIPIENTS_ALL,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_ALL
+                )
+            ],
+            [
+                'value' => CustomNotification::RECIPIENTS_CONFIRMED,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_CONFIRMED
+                )
+            ],
+            [
+                'value' => CustomNotification::RECIPIENTS_UNCONFIRMED,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_UNCONFIRMED
+                )
+            ],
+        ];
     }
 
     /**
@@ -448,17 +482,17 @@ class AdministrationController extends AbstractController
      * Notify action
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param string $customNotification CustomNotification
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification $customNotification
      *
      * @return void
      */
-    public function notifyAction(Event $event, $customNotification)
+    public function notifyAction(Event $event, CustomNotification $customNotification)
     {
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
         $this->notificationService->createCustomNotificationLogentry(
             $event,
-            $customNotifications[$customNotification],
+            $customNotifications[$customNotification->getTemplate()],
             $result
         );
         $this->addFlashMessage(

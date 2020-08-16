@@ -274,19 +274,37 @@
 				<source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.description">
-				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
-			</trans-unit>
-			<trans-unit id="administration.notify.description">
-				<source>Please select an e-mail template that will be used to notify all participants of the event. To add your own e-mail templates, please read the extension manual.</source>
+				<source>Please select an email template that will be used to notify participants of the event. To add own email templates, please refer to the documentation.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.event">
 				<source>Event:</source>
 			</trans-unit>
-			<trans-unit id="administration.notify.recipients">
-				<source>recipients</source>
+			<trans-unit id="administration.notify.label.recipients">
+				<source>Recipients:</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.recipients.0">
+				<source>All participants</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.recipients.1">
+				<source>Confirmed participants</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.recipients.2">
+				<source>Unconfirmed participants</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.label.template">
 				<source>Template:</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.label.overwriteSubject">
+				<source>Overwrite subject:</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.description.overwriteSubject">
+				<source>Overwrites the configured default email subject of the selected template</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.label.additionalMessage">
+				<source>Additional message:</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.description.additionalMessage">
+				<source>Optional additional message in notification</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.senderEmailError">
 				<source>The sender e-mail address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
