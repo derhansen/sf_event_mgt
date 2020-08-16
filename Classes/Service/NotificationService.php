@@ -231,6 +231,7 @@ class NotificationService
     public function createCustomNotificationLogentry($event, $details, $emailsSent)
     {
         $notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
+        $notificationlogEntry->setPid($event->getPid());
         $notificationlogEntry->setEvent($event);
         $notificationlogEntry->setDetails($details);
         $notificationlogEntry->setEmailsSent($emailsSent);
