@@ -372,6 +372,12 @@
 			<trans-unit id="administration.orderBy.enddate">
 				<source>Enddate</source>
 			</trans-unit>
+			<trans-unit id="administration.accessdenied.title">
+				<source>Access Denied</source>
+			</trans-unit>
+			<trans-unit id="administration.accessdenied.content">
+				<source>Access to the given event has been denied.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
