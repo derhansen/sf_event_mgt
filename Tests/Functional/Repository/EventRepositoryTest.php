@@ -72,18 +72,46 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * Test if storagePage restriction in demand works
-     *
-     * @test
+     * @return array
      */
-    public function findDemandedRecordsByStoragePage()
+    public function findDemandedRecordsByStoragePageDataProvider(): array
+    {
+        return [
+            'pid is numeric and valid' => [
+                3,
+                3
+            ],
+            'pid is string and valid' => [
+                '3',
+                3
+            ],
+            'pid is zero' => [
+                0,
+                0
+            ],
+            'pid not set' => [
+                null,
+                47
+            ]
+        ];
+    }
+
+    /**
+     * Test if storagePage restriction in demand works
+     * @dataProvider findDemandedRecordsByStoragePageDataProvider
+     * @test
+     * @param $pid
+     * @param $expected
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
+     */
+    public function findDemandedRecordsByStoragePage($pid, $expected)
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get(EventDemand::class);
-        $demand->setStoragePage(3);
+        $demand->setStoragePage($pid);
         $events = $this->eventRepository->findDemanded($demand);
 
-        self::assertSame(3, $events->count());
+        self::assertSame($expected, $events->count());
     }
 
     /**

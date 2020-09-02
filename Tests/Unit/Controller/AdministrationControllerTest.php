@@ -20,6 +20,7 @@ use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
@@ -100,6 +101,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService->expects(self::any())->method('getSessionDataByKey');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(1));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -147,6 +152,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(1));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->setMethods(['findDemanded'])
@@ -196,6 +205,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(1));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -239,6 +252,10 @@ class AdministrationControllerTest extends UnitTestCase
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
+
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(1));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -382,6 +399,10 @@ class AdministrationControllerTest extends UnitTestCase
 
         $mockCustomNotification = GeneralUtility::makeInstance(CustomNotification::class);
 
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(1));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
+
         $recipients = $this->subject->getNotificationRecipients();
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
@@ -421,10 +442,29 @@ class AdministrationControllerTest extends UnitTestCase
         $mockNotificationService->expects(self::once())->method('createCustomNotificationLogentry');
         $this->inject($this->subject, 'notificationService', $mockNotificationService);
 
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(1));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
+
         $customNotification = new CustomNotification();
 
         $this->subject->_set('settings', []);
         $this->subject->expects(self::once())->method('redirect');
         $this->subject->notifyAction($event, $customNotification);
+    }
+
+    /**
+     * @test
+     */
+    public function checkEventAccessRedirectsToListViewIfNoEventAccess()
+    {
+        $event = new Event();
+
+        $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
+        $mockBackendUser->expects($this->once())->method('isInWebMount')->will($this->returnValue(null));
+        $GLOBALS['BE_USER'] = $mockBackendUser;
+
+        $this->subject->expects(self::once())->method('redirect');
+        $this->subject->checkEventAccess($event);
     }
 }

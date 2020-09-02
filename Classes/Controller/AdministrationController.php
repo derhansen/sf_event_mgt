@@ -18,6 +18,7 @@ use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Backend\View\BackendTemplateView;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -336,9 +337,14 @@ class AdministrationController extends AbstractController
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage($this->pid);
 
+        $events = [];
+        if ($this->getBackendUser()->isInWebMount($this->pid)) {
+            $events = $this->eventRepository->findDemanded($eventDemand);
+        }
+
         $this->view->assignMultiple([
             'pid' => $this->pid,
-            'events' => $this->eventRepository->findDemanded($eventDemand),
+            'events' => $events,
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->getOrderByFields(),
             'orderDirections' => $this->getOrderDirections(),
@@ -353,7 +359,12 @@ class AdministrationController extends AbstractController
      */
     public function exportAction($eventUid)
     {
-        $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
+        /** @var Event $event */
+        $event = $this->eventRepository->findByUid($eventUid);
+        if ($event) {
+            $this->checkEventAccess($event);
+            $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
+        }
         exit();
     }
 
@@ -381,6 +392,7 @@ class AdministrationController extends AbstractController
      */
     public function indexNotifyAction(Event $event)
     {
+        $this->checkEventAccess($event);
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
@@ -430,6 +442,7 @@ class AdministrationController extends AbstractController
      */
     public function notifyAction(Event $event, CustomNotification $customNotification)
     {
+        $this->checkEventAccess($event);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
         $this->notificationService->createCustomNotificationLogentry(
@@ -443,6 +456,26 @@ class AdministrationController extends AbstractController
             FlashMessage::OK
         );
         $this->redirect('list');
+    }
+
+    /**
+     * Checks if the current backend user has access to the PID of the event and if not, enqueue an
+     * access denied flash message and redirect to list view
+     *
+     * @param Event $event
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     */
+    public function checkEventAccess(Event $event)
+    {
+        if ($this->getBackendUser()->isInWebMount($event->getPid()) === null) {
+            $this->addFlashMessage(
+                $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.content'),
+                $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.title'),
+                FlashMessage::ERROR
+            );
+
+            $this->redirect('list');
+        }
     }
 
     /**
@@ -497,5 +530,14 @@ class AdministrationController extends AbstractController
             'startdate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.startdate'),
             'enddate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.enddate')
         ];
+    }
+
+    /**
+     * Returns the Backend User
+     * @return BackendUserAuthentication
+     */
+    protected function getBackendUser(): BackendUserAuthentication
+    {
+        return $GLOBALS['BE_USER'];
     }
 }
