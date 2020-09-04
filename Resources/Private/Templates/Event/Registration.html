@@ -226,10 +226,10 @@
                         <f:render partial="FormErrors" arguments="{field: 'registration.phone'}"/>
                     </div>
 
-                    <div class="event-registration-row {e:validation.errorClass(fieldname: 'date_of_birth')}">
+                    <div class="event-registration-row {e:validation.errorClass(fieldname: 'dateOfBirth')}">
                         <label for="dateOfBirth">
                             <f:translate key="tx_sfeventmgt_domain_model_registration.date_of_birth" />
-                            <e:registration.isRequiredField settings="{settings}" fieldname="date_of_birth">
+                            <e:registration.isRequiredField settings="{settings}" fieldname="dateOfBirth">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
                         </label>
