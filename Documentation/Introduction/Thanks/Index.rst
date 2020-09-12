@@ -36,3 +36,4 @@ Thanks from me to:
 * Stefano Kowalke for several Pull Requests
 * Manuel Munz for adding additional registration fields
 * Christoph Lehmann for several Pull Requests
+* Christoph Lehmann from networkteam GmbH for sponsoring the backport of user generated content in custom notifications.
