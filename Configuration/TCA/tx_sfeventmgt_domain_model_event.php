@@ -30,9 +30,10 @@ return [
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, rowDescription, teaser, 
         description, program, link, top_event, startdate, enddate, fe_group, enable_registration, enable_waitlist, 
-        max_participants, max_registrations_per_user, registration_deadline, price, currency, category, related, image, 
-        files, additional_image, registration, location, room, organisator, notify_admin, notify_organisator, unique_email_check,
-        enable_payment,price_options,registration_waitlist, enable_autoconfirm, speaker, registration_fields',
+        max_participants, max_registrations_per_user, registration_startdate, registration_deadline, price, currency,
+        category, related, image, files, additional_image, registration, location, room, organisator, notify_admin,
+        notify_organisator, unique_email_check, enable_payment,price_options,registration_waitlist, enable_autoconfirm,
+        speaker, registration_fields',
     ],
     'types' => [
         '1' => [
@@ -51,7 +52,9 @@ return [
                     category,
     
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
-                    enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
+                    enable_registration, 
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.registrationPeriod;paletteRegistrationPeriod,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
                     max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
     
@@ -95,6 +98,10 @@ return [
         ],
         'paletteNotification' => [
             'showitem' => 'notify_admin, notify_organisator,',
+            'canNotCollapse' => true
+        ],
+        'paletteRegistrationPeriod' => [
+            'showitem' => 'registration_startdate, registration_deadline,',
             'canNotCollapse' => true
         ],
         'paletteCancellation' => [
@@ -333,6 +340,20 @@ return [
             'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
+            ],
+        ],
+        'registration_startdate' => [
+            'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'size' => 13,
+                'eval' => 'datetime',
+                'checkbox' => 1
             ],
         ],
         'registration_deadline' => [

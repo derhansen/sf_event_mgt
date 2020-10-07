@@ -161,6 +161,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $registrationFields;
 
     /**
+     * Registration start date
+     *
+     * @var \DateTime
+     */
+    protected $registrationStartdate = null;
+
+    /**
      * Registration deadline date
      *
      * @var \DateTime
@@ -839,10 +846,14 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new \DateTime()) {
             $deadlineNotReached = false;
         }
+        $registrationStartReached = true;
+        if ($this->getRegistrationStartdate() != null && $this->getRegistrationStartdate() > new \DateTime()) {
+            $registrationStartReached = false;
+        }
 
         return ($this->getStartdate() > new \DateTime()) &&
         ($maxParticipantsNotReached || !$maxParticipantsNotReached && $this->enableWaitlist) &&
-        $this->getEnableRegistration() && $deadlineNotReached;
+        $this->getEnableRegistration() && $deadlineNotReached && $registrationStartReached;
     }
 
     /**
@@ -938,6 +949,28 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEnableWaitlist($enableWaitlist)
     {
         $this->enableWaitlist = $enableWaitlist;
+    }
+
+    /**
+     * Sets the registration startdate
+     *
+     * @param \DateTime $registrationStartdate RegistrationStartdate
+     *
+     * @return void
+     */
+    public function setRegistrationStartdate(\DateTime $registrationStartdate)
+    {
+        $this->registrationStartdate = $registrationStartdate;
+    }
+
+    /**
+     * Returns the registration startdate
+     *
+     * @return \DateTime
+     */
+    public function getRegistrationStartdate()
+    {
+        return $this->registrationStartdate;
     }
 
     /**
