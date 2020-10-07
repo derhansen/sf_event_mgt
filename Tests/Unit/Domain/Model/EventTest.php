@@ -633,7 +633,7 @@ class EventTest extends UnitTestCase
         $startdate = new \DateTime();
         $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $registrationStartDate = new \DateTime();
-        $registrationStartDate->add(\DateInterval::createFromDateString('tommorrow'));
+        $registrationStartDate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setRegistrationStartdate($registrationStartDate);
