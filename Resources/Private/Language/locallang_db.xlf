@@ -240,6 +240,9 @@
 			<trans-unit id="event.sections.notification">
 				<source>When a registration is created,confirmed or cancelled, send a notification e-mail to:</source>
 			</trans-unit>
+			<trans-unit id="event.sections.registrationPeriod">
+				<source>Period</source>
+			</trans-unit>
 			<trans-unit id="event.sections.cancellation">
 				<source>Cancellation options:</source>
 			</trans-unit>
