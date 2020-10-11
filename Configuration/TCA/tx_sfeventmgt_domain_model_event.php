@@ -35,36 +35,38 @@ return [
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
                     --palette--;;palettePrice, price_options, link, program,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
                     --palette--;;location, organisator, speaker, related,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
                     image, files, additional_image,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.category,
                     category,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
-                    enable_registration, registration_deadline, --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
+                    enable_registration,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.registrationPeriod;paletteRegistrationPeriod,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
                     max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
                     registration_fields,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
                     registration,registration_waitlist,
-    
+
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
                      enable_payment, restrict_payment_methods, selected_payment_methods,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
 
-                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, 
+                --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                     hidden, --palette--;;timeRestriction, fe_group,
-                    
+
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
                     rowDescription'
         ],
@@ -87,6 +89,9 @@ return [
         ],
         'paletteNotification' => [
             'showitem' => 'notify_admin, notify_organisator,',
+        ],
+        'paletteRegistrationPeriod' => [
+            'showitem' => 'registration_startdate, registration_deadline,',
         ],
         'paletteCancellation' => [
             'showitem' => 'enable_cancel, cancel_deadline,',
@@ -370,6 +375,20 @@ return [
                         1 => '',
                     ]
                 ],
+            ],
+        ],
+        'registration_startdate' => [
+            'exclude' => 1,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'size' => 13,
+                'eval' => 'datetime',
+                'checkbox' => 1
             ],
         ],
         'registration_deadline' => [

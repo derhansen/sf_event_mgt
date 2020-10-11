@@ -611,6 +611,40 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getRegistrationPossibleReturnsTrueIfRegistrationStartdateReached()
+    {
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $registrationStartDate = new \DateTime();
+        $registrationStartDate->add(\DateInterval::createFromDateString('yesterday'));
+        $this->subject->setStartdate($startdate);
+        $this->subject->setMaxParticipants(1);
+        $this->subject->setRegistrationStartdate($registrationStartDate);
+        $this->subject->setEnableRegistration(true);
+
+        $this->assertTrue($this->subject->getRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationPossibleReturnsFalseIfRegistrationStartdateNotReached()
+    {
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $registrationStartDate = new \DateTime();
+        $registrationStartDate->add(\DateInterval::createFromDateString('tomorrow'));
+        $this->subject->setStartdate($startdate);
+        $this->subject->setMaxParticipants(1);
+        $this->subject->setRegistrationStartdate($registrationStartDate);
+        $this->subject->setEnableRegistration(true);
+
+        $this->assertFalse($this->subject->getRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
     public function getRegistrationPossibleReturnsFalseIfEventMaxParticipantsReached()
     {
         $registration = new Registration();
