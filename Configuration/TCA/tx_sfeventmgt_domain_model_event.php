@@ -381,7 +381,7 @@ return [
             'exclude' => 1,
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
-            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_startdate',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
                 'type' => 'input',

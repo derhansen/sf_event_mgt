@@ -105,6 +105,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_fields">
 				<source>Additional registration fields (e.g. "Hotel room needed?")</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_startdate">
+				<source>Registration start date</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
 				<source>Registration deadline</source>
 			</trans-unit>
