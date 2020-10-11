@@ -47,6 +47,9 @@
       "DERHANSEN\\SfEventMgt\\Tests\\": "Tests"
     }
   },
+  "conflict": {
+    "doctrine/dbal": ">=2.11.0 <2.11.2"
+  },
   "config": {
     "vendor-dir": ".Build/vendor",
     "bin-dir": ".Build/bin"
