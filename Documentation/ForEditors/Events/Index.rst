@@ -267,6 +267,12 @@ registrations per user" is set to a value greater than 1.
          participation to the event.
 
  - :Field:
+         Registration start date
+
+   :Description:
+         If set, registration is only possible after the given date.
+
+ - :Field:
          Registration deadline
 
    :Description:

@@ -80,6 +80,7 @@ the event is possible. TRUE is returned, when all conditions below are
 * Max participants is not reached (if max. participants > 0) or max participants is not reached and waitlist is enabled
 * Date set at registration deadline is not reached
 * Startdate of event is not reached
+* Startdate of registration is reached (if set)
 
 Why does the extension not support recurring events?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
