@@ -32,4 +32,6 @@ Important
 
 #. If you use **registrations for events**, you must follow the instructions regarding the :ref:`cronjob`
 
+#. If you use **registrations for events** with a **registration start date** or a **registration deadline**, you must follow the instructions regarding the :ref:`pagecache`
+
 #. For the **calendar view**, make sure to uncheck the **Disable overwrite demand** setting in the plugin

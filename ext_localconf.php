@@ -69,6 +69,10 @@ call_user_func(function () {
         \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator::class
     ] = '';
 
+    // Implement get_cache_timeout hook
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['get_cache_timeout'][] =
+        \DERHANSEN\SfEventMgt\Hooks\PageCache::class . '->getCacheTimeout';
+
     // Register default payment methods
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
         'invoice' => [

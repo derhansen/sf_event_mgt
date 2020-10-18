@@ -18,6 +18,7 @@ Configuration
 
    Extension/Index
    Plugins/Index
+   Cache/Index
    TsReference/Index
    PageTSConfig/Index
    RouteEnhancers/Index

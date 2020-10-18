@@ -375,3 +375,7 @@ Add this to an extension (e.g. your sitepackage) in ext_localconf.php::
 
 After adding this snippet and clearing the cache, all categories in events do now use the category
 domain model of ext:news
+
+Why is a registration link shown even if the registration dealine expired?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Make sure that you configured the page cache settings as described in :ref:`pagecache`
