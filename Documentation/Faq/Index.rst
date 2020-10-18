@@ -348,3 +348,7 @@ has not been called before. So this is no option.
 In order to close to the TYPO3 core and not to implement more workarounds for translation
 issues, it is best to save registrations and registration fields with the current
 sys_language_uid set for frontend requests.
+
+Why is a registration link shown even if the registration dealine expired?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Make sure that you configured the page cache settings as described in :ref:`pagecache`
