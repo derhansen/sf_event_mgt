@@ -109,7 +109,6 @@ class PageCache
      */
     protected function getFirstTimeValueForEvent(string $tableDef, int $now): int
     {
-        $now = (int)$now;
         $result = PHP_INT_MAX;
         [$tableName, $pid] = GeneralUtility::trimExplode(':', $tableDef);
 
