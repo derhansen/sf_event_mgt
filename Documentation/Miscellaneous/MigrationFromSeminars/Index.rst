@@ -70,7 +70,7 @@ We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 
     WHERE 
         deleted = 0;
 
-    /* Description of speakers
+    /* Description of speakers */
     UPDATE tx_sfeventmgt_domain_model_speaker 
     SET 
         description = (
