@@ -32,8 +32,8 @@ We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 
 .. code-block:: mysql
 
     /* Organizers */
-    INSERT INTO tx_sfeventmgt_domain_model_organisator (uid,pid,name,email,email_signature) 
-    SELECT 
+    INSERT INTO tx_sfeventmgt_domain_model_organisator (uid,pid,name,email,email_signature)
+    SELECT
         uid,
         pid,
         title,
@@ -46,44 +46,44 @@ We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 
 
     /* Locations */
     INSERT INTO tx_sfeventmgt_domain_model_location (uid,pid,title,address,city,description)
-    SELECT 
+    SELECT
         uid,
         pid,
         title,
         address,
         city,
-        directions 
+        directions
     FROM
         tx_seminars_sites
-    WHERE 
+    WHERE
         deleted = 0;
 
     /* Speakers */
-    INSERT INTO tx_sfeventmgt_domain_model_speaker (uid,pid,name,description) 
-    SELECT 
+    INSERT INTO tx_sfeventmgt_domain_model_speaker (uid,pid,name,description)
+    SELECT
         uid,
         pid,
         title,
-        description 
-    FROM 
-        tx_seminars_speakers 
-    WHERE 
+        description
+    FROM
+        tx_seminars_speakers
+    WHERE
         deleted = 0;
 
     /* Description of speakers */
-    UPDATE tx_sfeventmgt_domain_model_speaker 
-    SET 
+    UPDATE tx_sfeventmgt_domain_model_speaker
+    SET
         description = (
-            SELECT 
+            SELECT
                 CONCAT(
                     IF (organization!='', CONCAT(organization, '<br>'), ''),
                     IF (homepage!='', CONCAT('<a href="', homepage,'">', homepage, '</a><br>'), ''),
                     IF (email !='', CONCAT('<a href="mailto:', email, '">', email, '</a><br>'), ''),
                     description
                 )
-            FROM 
-                tx_seminars_speakers 
-            WHERE 
+            FROM
+                tx_seminars_speakers
+            WHERE
                 tx_sfeventmgt_domain_model_speaker.uid = tx_seminars_speakers.uid
         );
 
@@ -113,42 +113,42 @@ We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 
         notify_organisator
     )
     SELECT
-            uid,
-            pid,
-            hidden,
-            title,
-            teaser,
+        uid,
+        pid,
+        hidden,
+        title,
+        teaser,
         CONCAT(
             IF (
-                    subtitle!='', 
+                subtitle!='',
                 CONCAT(
-                    '<h2>', 
-                        subtitle,
+                    '<h2>',
+                    subtitle,
                     '</h2>'
                 ),
                 ''
             ),
-                description,
-                additional_information
+            description,
+            additional_information
         ),
-            begin_date,
-            end_date,
-            deadline_registration,
-            deadline_unregistration,
+        begin_date,
+        end_date,
+        deadline_registration,
+        deadline_unregistration,
         1, /* Enable cancellation */
-            place,
-            room,
-            speakers,
-            price_regular,
+        place,
+        room,
+        speakers,
+        price_regular,
         needs_registration,
         IF(
             allows_multiple_registrations = 1,
-            '0', 
+            '0',
             '1'
         ),
         attendees_max,
         registrations,
-        1, /* auto confirm registration */ 
+        1, /* auto confirm registration */
         queue_size,
         1 /* notify organisator on new registration */
     FROM tx_seminars_seminars
@@ -181,16 +181,16 @@ We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 
     /* Events <=> Organizers */
     UPDATE tx_sfeventmgt_domain_model_event
         SET organisator = (
-            SELECT 
-                uid 
+            SELECT
+                uid
             FROM tx_seminars_organizers
-            LEFT JOIN tx_seminars_seminars_organizers_mm 
-                ON 
+            LEFT JOIN tx_seminars_seminars_organizers_mm
+                ON
                     tx_seminars_seminars_organizers_mm.uid_foreign = tx_seminars_organizers.uid
-            WHERE 
-                tx_seminars_seminars_organizers_mm.uid_local = tx_sfeventmgt_domain_model_event.uid AND 
+            WHERE
+                tx_seminars_seminars_organizers_mm.uid_local = tx_sfeventmgt_domain_model_event.uid AND
                 tx_seminars_organizers.deleted = 0
-            ORDER BY 
+            ORDER BY
                 sorting ASC
             LIMIT 1 /* seminars has multiple organizers, this extension only a single organizer */
         );
@@ -213,9 +213,9 @@ We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 
         uid_foreign + 10000,
         uid_local,
         'tx_sfeventmgt_domain_model_event',
-        'category' 
-    FROM tx_seminars_seminars_categories_mm 
-    WHERE 
+        'category'
+    FROM tx_seminars_seminars_categories_mm
+    WHERE
         tx_seminars_seminars_categories_mm.uid_local IN (SELECT uid FROM tx_sfeventmgt_domain_model_event);
 
     /* Registrations */

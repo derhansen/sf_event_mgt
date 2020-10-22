@@ -62,3 +62,4 @@ Event management and registration
 	KnownProblems/Index
 	Changelog/Index
 	BreakingChanges/Index
+	Miscellaneous/Index
