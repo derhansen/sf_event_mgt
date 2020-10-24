@@ -888,7 +888,7 @@ class EventController extends AbstractController
             // Dispatch event, so waitlist registrations can be moved up
             $this->eventDispatcher->dispatch(new WaitlistMoveUpEvent($event, $this));
 
-            // Flush page cache for event, since new registration has been added
+            // Flush page cache for event, since amount of registrations has changed
             $this->eventCacheService->flushEventCache($event->getUid(), $event->getPid());
         }
 
