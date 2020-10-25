@@ -422,6 +422,24 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
+    public function getRegistrationDateReturnsInitialValueForDateTime()
+    {
+        self::assertNull($this->subject->getRegistrationDate());
+    }
+
+    /**
+     * @test
+     */
+    public function setRegistrationDateForDateTimeSetsRegistrationDate()
+    {
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setRegistrationDate($dateTimeFixture);
+        $this->assertEquals($dateTimeFixture, $this->subject->getRegistrationDate());
+    }
+
+    /**
+     * @test
+     */
     public function getDateOfBirthReturnsInitialValueForDateTime()
     {
         self::assertNull($this->subject->getDateOfBirth());

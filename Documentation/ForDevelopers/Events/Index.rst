@@ -58,3 +58,7 @@ Notification Service
 * ModifyUserMessageAttachmentsEvent
 * AfterUserMessageSentEvent
 * AfterAdminMessageSentEvent
+
+Registration Service
+--------------------
+* AfterRegistrationMovedFromWaitlist

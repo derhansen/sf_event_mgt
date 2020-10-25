@@ -353,4 +353,19 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         self::assertEquals(32, $registrations->getFirst()->getUid());
     }
+
+    /**
+     * @test
+     */
+    public function findWaitlistMoveUpRegistrationsReturnsExpectedAmountOfRegistrationsAndRespectsOrder()
+    {
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $event->expects(self::once())->method('getUid')->willReturn(30);
+
+        $registrations = $this->registrationRepository->findWaitlistMoveUpRegistrations($event);
+        self::assertSame(2, $registrations->count());
+
+        // Event with UID 50 should be first, since registration_date is ealier than registration UID 51
+        self::assertSame(50, $registrations->getFirst()->getUid());
+    }
 }

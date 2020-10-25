@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<p>Registration moved up from the waitlist or event: {event.title} </p>
+
+<ul>
+    <li>{registration.gender}</li>
+    <li>{registration.firstname}</li>
+    <li>{registration.lastname}</li>
+    <li>{registration.address}</li>
+    <li>{registration.zip}</li>
+    <li>{registration.city}</li>
+    <li>{registration.country}</li>
+    <li>{registration.email}</li>
+    <li>{registration.phone}</li>
+    <li>{f:format.date(date: registration.dateOfBirth, format: '%d.%m.%Y')}</li>
+    <li>{registration.notes}</li>
+</ul>
+
+<p>Registration fields:</p>
+
+<f:render partial="Notification/RegistrationFields" arguments="{registration: registration}"/>
+
+</html>

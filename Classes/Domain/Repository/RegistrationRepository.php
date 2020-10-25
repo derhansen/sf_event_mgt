@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * The repository for registrations
@@ -169,6 +170,29 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             ->setRespectStoragePage(false);
         $constraints[] = $query->equals('event', $event->getUid());
         $constraints[] = $query->equals('waitlist', $waitlist);
+
+        return $query->matching($query->logicalAnd($constraints))->execute();
+    }
+
+    /**
+     * Returns all potential move up registrations for the given event ordered by "registration_date"
+     *
+     * @param Event $event
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function findWaitlistMoveUpRegistrations(Event $event)
+    {
+        $constraints = [];
+        $query = $this->createQuery();
+        $query->getQuerySettings()
+            ->setLanguageOverlayMode(false)
+            ->setRespectSysLanguage(false)
+            ->setRespectStoragePage(false);
+        $constraints[] = $query->equals('event', $event->getUid());
+        $constraints[] = $query->equals('waitlist', true);
+        $constraints[] = $query->equals('confirmed', true);
+        $constraints[] = $query->greaterThan('registrationDate', 0);
+        $query->setOrderings(['registration_date' => QueryInterface::ORDER_ASCENDING]);
 
         return $query->matching($query->logicalAnd($constraints))->execute();
     }

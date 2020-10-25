@@ -11,11 +11,15 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationMovedFromWaitlist;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
+use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
+use TYPO3\CMS\Core\Utility\DebugUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
@@ -32,6 +36,11 @@ class RegistrationService
      * @var \TYPO3\CMS\Extbase\Object\ObjectManager
      * */
     protected $objectManager;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDispatcher;
 
     /**
      * RegistrationRepository
@@ -62,6 +71,13 @@ class RegistrationService
     protected $paymentService;
 
     /**
+     * Notification Service
+     *
+     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
+     */
+    protected $notificationService;
+
+    /**
      * DI for $frontendUserRepository
      *
      * @param \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
@@ -83,6 +99,14 @@ class RegistrationService
     }
 
     /**
+     * @param \DERHANSEN\SfEventMgt\Service\NotificationService $notificationService
+     */
+    public function injectNotificationService(\DERHANSEN\SfEventMgt\Service\NotificationService $notificationService)
+    {
+        $this->notificationService = $notificationService;
+    }
+
+    /**
      * DI for $objectManager
      *
      * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
@@ -90,6 +114,14 @@ class RegistrationService
     public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
+    }
+
+    /**
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    {
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -559,5 +591,51 @@ class RegistrationService
             )
             ->execute()
             ->fetchColumn();
+    }
+
+    /**
+     * Handles the process of moving registration up from the waitlist.
+     *
+     * @param Event $event
+     * @param array $settings
+     */
+    public function moveUpWaitlistRegistrations(Event $event, array $settings)
+    {
+        // Early return if move up not enabled, no registrations on waitlist or no free places left
+        if (!$event->getEnableWaitlistMoveup() || $event->getRegistrationsWaitlist()->count() === 0 ||
+            $event->getFreePlaces() === 0
+        ) {
+            return;
+        }
+
+        $freePlaces = $event->getFreePlaces();
+        $moveupRegistrations = $this->registrationRepository->findWaitlistMoveUpRegistrations($event);
+
+        /** @var Registration $registration */
+        foreach ($moveupRegistrations as $registration) {
+            $registration->setWaitlist(false);
+            $this->registrationRepository->update($registration);
+
+            // Send messages to user and admin
+            $this->notificationService->sendUserMessage(
+                $event,
+                $registration,
+                $settings,
+                MessageType::REGISTRATION_WAITLIST_MOVE_UP
+            );
+            $this->notificationService->sendAdminMessage(
+                $registration->getEvent(),
+                $registration,
+                $settings,
+                MessageType::REGISTRATION_WAITLIST_MOVE_UP
+            );
+
+            $this->eventDispatcher->dispatch(new AfterRegistrationMovedFromWaitlist($registration, $this));
+
+            $freePlaces--;
+            if ($freePlaces === 0) {
+                break;
+            }
+        }
     }
 }

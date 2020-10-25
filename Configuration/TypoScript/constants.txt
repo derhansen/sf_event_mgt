@@ -68,6 +68,12 @@ plugin.tx_sfeventmgt {
                 # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin on cancelled registration
                 adminSubject = Registration for event "{event.title}" cancelled
             }
+            registrationWaitlistMoveUp {
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to user when registration moved up from the waitlist
+                userSubject = Your registration moved up from the waitlist for event "{event.title}"
+                # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin when registration moved up from the waitlist
+                adminSubject = Registration on the waitlist moved up for event "{event.title}"
+            }
         }
         reCaptcha {
             # cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha

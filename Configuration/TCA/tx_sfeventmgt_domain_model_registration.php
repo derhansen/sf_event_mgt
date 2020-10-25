@@ -37,7 +37,7 @@ return [
             --palette--;;paletteName,
             company, 
             --palette--;;paletteAddress,
-            country, phone, email, date_of_birth, accepttc, notes, 
+            country, phone, email, date_of_birth, accepttc, notes, registration_date, 
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
                 fe_user, confirmation_until, confirmed, ignore_notifications, amount_of_registrations,
@@ -372,6 +372,16 @@ return [
                 'cols' => 60,
                 'rows' => 5,
             ]
+        ],
+        'registration_date' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.registration_date',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputDateTime',
+                'size' => 13,
+                'eval' => 'datetime',
+            ],
         ],
         'event' => [
             'config' => [

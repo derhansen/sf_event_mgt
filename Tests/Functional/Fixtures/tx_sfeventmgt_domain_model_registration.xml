@@ -220,4 +220,31 @@
         <enddate>1404295200</enddate>
     </tx_sfeventmgt_domain_model_event>
 
+    <!-- findWaitlistMoveUpRegistrations -->
+    <!-- Registration Date: 25.10.2020 08:00 pm / confirmed -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>50</uid>
+        <event>30</event>
+        <waitlist>1</waitlist>
+        <confirmed>1</confirmed>
+        <registration_date>1603656000</registration_date>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Registration Date: 25.10.2020 08:15 pm / confirmed -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>51</uid>
+        <event>30</event>
+        <waitlist>1</waitlist>
+        <confirmed>1</confirmed>
+        <registration_date>1603656900</registration_date>
+    </tx_sfeventmgt_domain_model_registration>
+
+    <!-- Registration Date: 25.10.2020 7:45 pm / not confirmed -->
+    <tx_sfeventmgt_domain_model_registration>
+        <uid>52</uid>
+        <event>30</event>
+        <waitlist>1</waitlist>
+        <confirmed>0</confirmed>
+        <registration_date>1603655100</registration_date>
+    </tx_sfeventmgt_domain_model_registration>
 </dataset>

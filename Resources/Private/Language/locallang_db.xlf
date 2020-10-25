@@ -42,6 +42,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist">
 				<source>Enable waitlist</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist_moveup">
+				<source>Automatic waitlist move up</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_cancel">
 				<source>Enable cancellation</source>
 			</trans-unit>
@@ -183,6 +186,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.confirmationUntil">
 				<source>Confirmation until</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.registration_date">
+				<source>Registration date</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc">
 				<source>Accepted terms and conditions</source>
 			</trans-unit>
@@ -241,13 +247,16 @@
 				<source>Payment</source>
 			</trans-unit>
 			<trans-unit id="event.sections.notification">
-				<source>When a registration is created,confirmed or cancelled, send a notification email to:</source>
+				<source>When a registration is created, confirmed, cancelled or moved from the waitlist, send a notification email to:</source>
 			</trans-unit>
 			<trans-unit id="event.sections.registrationPeriod">
 				<source>Period</source>
 			</trans-unit>
 			<trans-unit id="event.sections.cancellation">
 				<source>Cancellation options:</source>
+			</trans-unit>
+			<trans-unit id="event.sections.waitlist">
+				<source>Waitlist</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
 				<source>Event - Location</source>

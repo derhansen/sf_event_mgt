@@ -231,6 +231,12 @@
 			<trans-unit id="flexforms_notification.registration_cancelled_admin_subject">
 				<source>Subject of email sent to admin when a registration has been cancelled</source>
 			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_waitlist_move_up_user_subject">
+				<source>Subject of email sent to user when a registration moved up from the waitlist</source>
+			</trans-unit>
+			<trans-unit id="flexforms_notification.registration_waitlist_move_up_admin_subject">
+				<source>Subject of email sent to admin when a registration moved up from the waitlist</source>
+			</trans-unit>
 			<trans-unit id="flexforms_categorymenu.categories">
 				<source>Categories (if empty, all categories will be shown in the category menu)</source>
 			</trans-unit>

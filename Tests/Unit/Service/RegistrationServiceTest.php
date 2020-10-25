@@ -795,4 +795,61 @@ class RegistrationServiceTest extends UnitTestCase
 
         self::assertTrue($this->subject->isWaitlistRegistration($event, 1));
     }
+
+    /**
+     * @return array[]
+     */
+    public function moveUpWaitlistRegistrationsDataProvider()
+    {
+        return [
+            'move up not enabled' => [
+                false,
+                0,
+                0
+            ],
+            'move up enabled, but no waitlist registrations' => [
+                true,
+                0,
+                0
+            ],
+            'with waitlist registrations, but no free places' => [
+                true,
+                1,
+                0
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider moveUpWaitlistRegistrationsDataProvider
+     * @param $enableWaitlistMoveup
+     * @param $amountWaitlistRegistrations
+     * @param $freePlaces
+     */
+    public function moveUpWaitlistRegistrationDoesNotProceedIfCriteriaNotMatch(
+        $enableWaitlistMoveup,
+        $amountWaitlistRegistrations,
+        $freePlaces
+    ) {
+        $mockWaitlistRegistrations = $this->getMockBuilder(ObjectStorage::class)
+            ->setMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockWaitlistRegistrations->expects(self::any())->method('count')->willReturn($amountWaitlistRegistrations);
+
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
+        $mockEvent->expects(self::any())->method('getEnableWaitlistMoveup')->willReturn($enableWaitlistMoveup);
+        $mockEvent->expects(self::any())->method('getRegistrationsWaitlist')->willReturn($mockWaitlistRegistrations);
+        $mockEvent->expects(self::any())->method('getFreePlaces')->willReturn($freePlaces);
+
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->setMethods(['findWaitlistMoveUpRegistrations'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockRegistrationRepository->expects(self::never())->method('findWaitlistMoveUpRegistrations');
+        $this->inject($this->subject, 'registrationRepository', $mockRegistrationRepository);
+
+        $this->subject->moveUpWaitlistRegistrations($mockEvent, []);
+    }
 }

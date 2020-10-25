@@ -89,7 +89,8 @@ class EventControllerTest extends UnitTestCase
                 'createCategoryDemandObjectFromSettings',
                 'createForeignRecordDemandObjectFromSettings',
                 'overwriteEventDemandObject',
-                'getSysLanguageUid'
+                'getSysLanguageUid',
+                'persistAll'
             ],
             [],
             '',
@@ -893,18 +894,6 @@ class EventControllerTest extends UnitTestCase
         $notificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
 
-        $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
-            ->setMethods(['persistAll'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $persistenceManager->expects(self::once())->method('persistAll');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
-        $this->inject($this->subject, 'objectManager', $objectManager);
-
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
@@ -965,19 +954,6 @@ class EventControllerTest extends UnitTestCase
         $notificationService->expects(self::once())->method('sendUserMessage');
         $notificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
-
-        $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
-            ->setMethods(['persistAll'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $persistenceManager->expects(self::once())->method('persistAll');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->setMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
-        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
@@ -1043,19 +1019,6 @@ class EventControllerTest extends UnitTestCase
             ->getMock();
         $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
-            ->setMethods(['persistAll'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $persistenceManager->expects(self::once())->method('persistAll');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->setMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
-        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
@@ -1136,19 +1099,6 @@ class EventControllerTest extends UnitTestCase
         $registrationRepository->expects(self::once())->method('add');
         $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
-            ->setMethods(['persistAll'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $persistenceManager->expects(self::once())->method('persistAll');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->setMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
-        $this->inject($this->subject, 'objectManager', $objectManager);
-
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])
             ->disableOriginalConstructor()
@@ -1227,19 +1177,6 @@ class EventControllerTest extends UnitTestCase
         $notificationService->expects(self::once())->method('sendUserMessage');
         $notificationService->expects(self::once())->method('sendAdminMessage');
         $this->inject($this->subject, 'notificationService', $notificationService);
-
-        $persistenceManager = $this->getMockBuilder(PersistenceManager::class)
-            ->setMethods(['persistAll'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $persistenceManager->expects(self::once())->method('persistAll');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->setMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($persistenceManager);
-        $this->inject($this->subject, 'objectManager', $objectManager);
 
         $eventCacheService = $this->getMockBuilder(EventCacheService::class)
             ->setMethods(['flushEventCache'])

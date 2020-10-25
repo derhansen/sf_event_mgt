@@ -22,4 +22,5 @@ class MessageType
     public const REGISTRATION_CANCELLED = 3;
     public const REGISTRATION_WAITLIST_NEW = 4;
     public const REGISTRATION_WAITLIST_CONFIRMED = 5;
+    public const REGISTRATION_WAITLIST_MOVE_UP = 6;
 }

@@ -49,7 +49,9 @@ return [
                     enable_registration,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.registrationPeriod;paletteRegistrationPeriod,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
-                    max_participants, max_registrations_per_user, enable_autoconfirm, enable_waitlist, unique_email_check,
+                    max_participants, max_registrations_per_user,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.waitlist;paletteWaitlist,
+                    enable_autoconfirm, unique_email_check,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
@@ -95,6 +97,9 @@ return [
         ],
         'paletteCancellation' => [
             'showitem' => 'enable_cancel, cancel_deadline,',
+        ],
+        'paletteWaitlist' => [
+            'showitem' => 'enable_waitlist, enable_waitlist_moveup,',
         ],
     ],
     'columns' => [
@@ -365,6 +370,24 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'onChange' => 'reload',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'default' => 0,
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ]
+                ],
+            ],
+        ],
+        'enable_waitlist_moveup' => [
+            'exclude' => true,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist_moveup',
+            'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',

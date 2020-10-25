@@ -617,6 +617,26 @@
                         </TCEforms>
                     </settings.notification.registrationCancelled.adminSubject>
 
+                    <!-- Registration waitlist move up - subject of user email -->
+                    <settings.notification.registrationWaitlistMoveUp.userSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_move_up_user_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationWaitlistMoveUp.userSubject>
+
+                    <!-- Registration waitlist move up - subject of admin email -->
+                    <settings.notification.registrationWaitlistMoveUp.adminSubject>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_move_up_admin_subject</label>
+                            <config>
+                                <type>input</type>
+                            </config>
+                        </TCEforms>
+                    </settings.notification.registrationWaitlistMoveUp.adminSubject>
+
                 </el>
             </ROOT>
         </notification>

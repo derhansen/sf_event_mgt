@@ -132,6 +132,10 @@ plugin.tx_sfeventmgt {
                 userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.userSubject}
                 adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationCancelled.adminSubject}
             }
+            registrationWaitlistMoveUp {
+                userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistMoveUp.userSubject}
+                adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistMoveUp.adminSubject}
+            }
         }
         reCaptcha {
             apiUrl = https://www.google.com/recaptcha/api.js

@@ -1,0 +1,17 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+<p>Hello {registration.firstname} {registration.lastname},</p>
+<p>your registration moved up from the waitlist, so now you fully registered to the following event:</p>
+<ul>
+    <li>{event.title} - ({f:format.date(date: event.startdate, format: '%d.%m.%Y - %H:%M')}  - {f:format.date(date: event.enddate, format: '%d.%m.%Y - %H:%M')})</li>
+</ul>
+<f:if condition="{event.enableCancel}">
+    <p>If you wish to cancel your registration, please open the following link:</p>
+    <p>
+        <f:uri.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
+    </p>
+</f:if>
+<p>Best regards,</p>
+<f:format.html>{settings.notification.senderSignature}</f:format.html>
+
+</html>

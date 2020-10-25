@@ -221,6 +221,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $enableWaitlist = false;
 
     /**
+     * Enable waitlist
+     *
+     * @var bool
+     */
+    protected $enableWaitlistMoveup = false;
+
+    /**
      * Link
      *
      * @var string
@@ -898,6 +905,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setEnableWaitlist($enableWaitlist)
     {
         $this->enableWaitlist = $enableWaitlist;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getEnableWaitlistMoveup(): bool
+    {
+        return $this->enableWaitlistMoveup;
+    }
+
+    /**
+     * @param bool $enableWaitlistMoveup
+     */
+    public function setEnableWaitlistMoveup($enableWaitlistMoveup): void
+    {
+        $this->enableWaitlistMoveup = $enableWaitlistMoveup;
     }
 
     /**
