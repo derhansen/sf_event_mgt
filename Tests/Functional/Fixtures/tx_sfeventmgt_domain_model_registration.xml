@@ -239,12 +239,13 @@
         <registration_date>1603656900</registration_date>
     </tx_sfeventmgt_domain_model_registration>
 
-    <!-- Registration Date: 25.10.2020 7:45 pm / not confirmed -->
+    <!-- Registration Date: 25.10.2020 7:45 pm / not confirmed (confirmation until 01.01.2050) -->
     <tx_sfeventmgt_domain_model_registration>
         <uid>52</uid>
         <event>30</event>
         <waitlist>1</waitlist>
         <confirmed>0</confirmed>
         <registration_date>1603655100</registration_date>
+        <confirmation_until>2524608000</confirmation_until>
     </tx_sfeventmgt_domain_model_registration>
 </dataset>
