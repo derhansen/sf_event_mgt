@@ -1660,6 +1660,7 @@ class EventControllerTest extends UnitTestCase
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);
 
+        $this->subject->_set('settings', []);
         $this->subject->cancelRegistrationAction(1, 'VALID-HMAC');
     }
 
