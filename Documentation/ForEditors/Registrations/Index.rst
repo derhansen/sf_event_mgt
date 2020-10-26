@@ -136,6 +136,13 @@ The general tab contains personal data about the participant, who registered to 
    :Description:
          Notes from the participant
 
+ - :Field:
+         Registration date
+
+   :Description:
+         The date the registration was created. This field can be edited in the backend, so you can control which
+         registration will move up from the waitlist for the default waitlist move up process.
+
 
 Additional
 ~~~~~~~~~~

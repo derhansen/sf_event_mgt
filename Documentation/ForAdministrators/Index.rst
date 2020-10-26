@@ -25,3 +25,4 @@ For Administrators
    RssFeed/Index
    SpamPrevention/Index
    Seo/Index
+   Waitlist/Index

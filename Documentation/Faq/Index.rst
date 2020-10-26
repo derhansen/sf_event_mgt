@@ -251,7 +251,11 @@ will remain in the database field pi_flexform and lead to the described error.
 How can I move registrations on the waitlist automativally up, if a registered user cancels a registration?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You should use the PSR-14 Event ``WaitlistMoveUpEvent``.
+Yes, since version 5.2.0 there is a simple and default waitlist move up process. Please refer to the documentation
+section about the :ref:`waitlist_moveup` for further information.
+
+If the default move up process does not fulfill your needs, you can use the PSR-14 Event ``WaitlistMoveUpEvent``
+to implement your own move up logic.
 
 Images and/or image attributes do not get translated
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
