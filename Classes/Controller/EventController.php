@@ -889,11 +889,14 @@ class EventController extends AbstractController
             // Persist changes, so following functions can work with $event properties (e.g. amount of registrations)
             $this->persistAll();
 
-            // Dispatch event, so waitlist registrations can be moved up
-            $this->eventDispatcher->dispatch(new WaitlistMoveUpEvent($event, $this));
+            // Dispatch event, so waitlist registrations can be moved up and default move up process can be stopped
+            $waitlistMoveUpEvent = new WaitlistMoveUpEvent($event, $this, true);
+            $this->eventDispatcher->dispatch($waitlistMoveUpEvent);
 
-            // Move up waitlist registrations if configured on event basis
-            $this->registrationService->moveUpWaitlistRegistrations($event, $this->settings);
+            // Move up waitlist registrations if configured on event basis and if not disabled by $waitlistMoveUpEvent
+            if ($waitlistMoveUpEvent->getProcessDefaultMoveUp()) {
+                $this->registrationService->moveUpWaitlistRegistrations($event, $this->settings);
+            }
 
             // Flush page cache for event, since amount of registrations has changed
             $this->eventCacheService->flushEventCache($event->getUid(), $event->getPid());

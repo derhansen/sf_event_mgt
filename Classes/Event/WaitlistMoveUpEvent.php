@@ -29,10 +29,16 @@ final class WaitlistMoveUpEvent
      */
     private $eventController;
 
-    public function __construct(Event $event, EventController $eventController)
+    /**
+     * @var bool
+     */
+    private $processDefaultMoveUp;
+
+    public function __construct(Event $event, EventController $eventController, bool $processDefaultMoveUp = true)
     {
         $this->event = $event;
         $this->eventController = $eventController;
+        $this->processDefaultMoveUp = $processDefaultMoveUp;
     }
 
     /**
@@ -49,5 +55,21 @@ final class WaitlistMoveUpEvent
     public function getEventController(): EventController
     {
         return $this->eventController;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getProcessDefaultMoveUp(): bool
+    {
+        return $this->processDefaultMoveUp;
+    }
+
+    /**
+     * @param bool $processDefaultMoveUp
+     */
+    public function setProcessDefaultMoveUp(bool $processDefaultMoveUp): void
+    {
+        $this->processDefaultMoveUp = $processDefaultMoveUp;
     }
 }
