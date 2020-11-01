@@ -39,3 +39,10 @@ tools:
         enabled: true
 
     sensiolabs_security_checker: true
+
+build:
+    nodes:
+        analysis:
+            tests:
+                override:
+                    - php-scrutinizer-run
