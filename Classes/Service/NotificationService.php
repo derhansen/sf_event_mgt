@@ -314,7 +314,7 @@ class NotificationService
                 $type,
                 $this
             );
-            $this->eventDispatcher->dispatch($modifyUserMessageSenderEvent);
+            $this->eventDispatcher->dispatch($modifyUserAttachmentsEvent);
             $attachments = $modifyUserAttachmentsEvent->getAttachments();
 
             $result = $this->emailService->sendEmailMessage(
