@@ -31,6 +31,21 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $tstamp;
 
     /**
+     * @var bool
+     */
+    protected $hidden = false;
+
+    /**
+     * @var \DateTime
+     */
+    protected $starttime;
+
+    /**
+     * @var \DateTime
+     */
+    protected $endtime;
+
+    /**
      * Title
      *
      * @var string
@@ -350,6 +365,66 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTstamp($tstamp)
     {
         $this->tstamp = $tstamp;
+    }
+
+    /**
+     * Get hidden flag
+     *
+     * @return bool
+     */
+    public function getHidden()
+    {
+        return $this->hidden;
+    }
+
+    /**
+     * Set hidden flag
+     *
+     * @param bool $hidden hidden flag
+     */
+    public function setHidden($hidden)
+    {
+        $this->hidden = $hidden;
+    }
+
+    /**
+     * Get start time
+     *
+     * @return \DateTime
+     */
+    public function getStarttime()
+    {
+        return $this->starttime;
+    }
+
+    /**
+     * Set start time
+     *
+     * @param \DateTime $starttime start time
+     */
+    public function setStarttime($starttime)
+    {
+        $this->starttime = $starttime;
+    }
+
+    /**
+     * Get endtime
+     *
+     * @return \DateTime
+     */
+    public function getEndtime()
+    {
+        return $this->endtime;
+    }
+
+    /**
+     * Set end time
+     *
+     * @param \DateTime $endtime end time
+     */
+    public function setEndtime($endtime)
+    {
+        $this->endtime = $endtime;
     }
 
     /**
@@ -1520,5 +1595,23 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getSpamCheckChallenge(): string
     {
         return MiscUtility::getSpamCheckChallenge($this->getUid());
+    }
+
+    /**
+     * Returns a string to be used as overlay value for the <core:icon> ViewHelper in the Backend Modules
+     *
+     * @return string
+     */
+    public function getBackendIconOverlay(): string
+    {
+        $overlay = '';
+        if ($this->getHidden()) {
+            $overlay = 'overlay-hidden';
+        }
+        if (!$this->getHidden() && ($this->getStarttime() || $this->getEndtime())) {
+            $overlay = 'overlay-endtime';
+        }
+
+        return $overlay;
     }
 }

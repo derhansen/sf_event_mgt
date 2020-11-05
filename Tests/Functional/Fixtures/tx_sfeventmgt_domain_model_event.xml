@@ -571,4 +571,15 @@
         <startdate>1564300800</startdate>
         <enddate>1565013600</enddate>
     </tx_sfeventmgt_domain_model_event>
+
+    <!-- findDemandedRespectsIgnoreEnableFields -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>120</uid>
+        <pid>120</pid>
+        <hidden>1</hidden>
+        <title>A hidden event</title>
+        <description>Test for hidden event</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
+
 </dataset>

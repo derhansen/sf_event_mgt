@@ -335,6 +335,7 @@ class AdministrationController extends AbstractController
         $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed']);
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage($this->pid);
+        $eventDemand->setIgnoreEnableFields(true);
 
         $events = [];
         if ($this->getBackendUser()->isInWebMount($this->pid)) {

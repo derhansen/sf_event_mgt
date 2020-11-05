@@ -157,6 +157,11 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $organisator;
 
     /**
+     * @var bool
+     */
+    protected $ignoreEnableFields = false;
+
+    /**
      * Sets the displayMode
      *
      * @param string $displayMode Displaymode
@@ -556,5 +561,21 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setSpeaker($speaker)
     {
         $this->speaker = $speaker;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIgnoreEnableFields(): bool
+    {
+        return $this->ignoreEnableFields;
+    }
+
+    /**
+     * @param bool $ignoreEnableFields
+     */
+    public function setIgnoreEnableFields(bool $ignoreEnableFields): void
+    {
+        $this->ignoreEnableFields = $ignoreEnableFields;
     }
 }

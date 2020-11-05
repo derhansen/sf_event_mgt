@@ -67,6 +67,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $constraints = [];
         $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields($eventDemand->getIgnoreEnableFields());
+
         $this->setStoragePageConstraint($query, $eventDemand, $constraints);
         $this->setDisplayModeConstraint($query, $eventDemand, $constraints);
         $this->setCategoryConstraint($query, $eventDemand, $constraints);

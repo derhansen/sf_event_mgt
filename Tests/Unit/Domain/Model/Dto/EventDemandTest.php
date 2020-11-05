@@ -340,4 +340,21 @@ class EventDemandTest extends UnitTestCase
         $this->subject->setCategoryConjunction('AND');
         self::assertSame('AND', $this->subject->getCategoryConjunction());
     }
+
+    /**
+     * @test
+     */
+    public function getIgnoreEnableFieldsReturnsDefaultValue()
+    {
+        $this->assertFalse($this->subject->getIgnoreEnableFields());
+    }
+
+    /**
+     * @test
+     */
+    public function setIgnoreEnableFieldsSetsValueForBoolean()
+    {
+        $this->subject->setIgnoreEnableFields(true);
+        $this->assertTrue($this->subject->getIgnoreEnableFields());
+    }
 }

@@ -1559,4 +1559,104 @@ class EventTest extends UnitTestCase
         }
         self::assertEquals($expected, $this->subject->getEndsSameDay());
     }
+
+    /**
+     * @test
+     */
+    public function getHiddenReturnsInitialValue()
+    {
+        $this->assertFalse($this->subject->getHidden());
+    }
+
+    /**
+     * @test
+     */
+    public function setHiddenSetsValueForBoolean()
+    {
+        $this->subject->setHidden(true);
+        $this->assertTrue($this->subject->getHidden());
+    }
+
+    /**
+     * @test
+     */
+    public function getStarttimeReturnsInitialValue()
+    {
+        $this->assertNull($this->subject->getStarttime());
+    }
+
+    /**
+     * @test
+     */
+    public function setStarttimeSetsValueForDateTime()
+    {
+        $date = new \DateTime('01.01.2020 18:00:00');
+        $this->subject->setStarttime($date);
+
+        $this->assertEquals($date, $this->subject->getStarttime());
+    }
+
+    /**
+     * @test
+     */
+    public function getEndtimeReturnsInitialValue()
+    {
+        $this->assertNull($this->subject->getEndtime());
+    }
+
+    /**
+     * @test
+     */
+    public function setEndtimeSetsValueForDateTime()
+    {
+        $date = new \DateTime('01.01.2020 18:00:00');
+        $this->subject->setEndtime($date);
+
+        $this->assertEquals($date, $this->subject->getEndtime());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsEmptyStringIfNotHiddenAndNoStartEndTime()
+    {
+        $this->assertEquals('', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsExpectedValueForHiddenEvent()
+    {
+        $this->subject->setHidden(true);
+        $this->assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsExpectedValueForStarttimeEvent()
+    {
+        $this->subject->setStarttime(new \DateTime());
+        $this->assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsExpectedValueForEndtimeEvent()
+    {
+        $this->subject->setEndtime(new \DateTime());
+        $this->assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsExpectedValueForHiddenAndStarttimeEvent()
+    {
+        $this->subject->setHidden(true);
+        $this->subject->setEndtime(new \DateTime());
+        $this->assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
+    }
 }

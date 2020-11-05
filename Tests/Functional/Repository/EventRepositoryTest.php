@@ -781,4 +781,40 @@ class EventRepositoryTest extends FunctionalTestCase
 
         self::assertSame(1, $events->count());
     }
+
+    /**
+     * DataProvider for findDemandedRecordsBySpeaker
+     *
+     * @return array
+     */
+    public function findDemandedRespectsIgnoreEnableFieldsDataProvider()
+    {
+        return [
+            'ignoreEnableFields inactive' => [
+                false,
+                0
+            ],
+            'ignoreEnableFields active' => [
+                true,
+                1
+            ],
+        ];
+    }
+
+    /**
+     * Test if ignoreEnableFields setting is respected
+     *
+     * @dataProvider findDemandedRespectsIgnoreEnableFieldsDataProvider
+     * @test
+     * @param bool $ignoreEnableFields
+     * @param bool $expected
+     */
+    public function findDemandedRespectsIgnoreEnableFields($ignoreEnableFields, $expected)
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get(EventDemand::class);
+        $demand->setStoragePage(120);
+        $demand->setIgnoreEnableFields($ignoreEnableFields);
+        self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
+    }
 }
