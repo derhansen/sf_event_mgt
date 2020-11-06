@@ -102,6 +102,10 @@ class DataHandlerHooks
             ];
 
             $flexformData = GeneralUtility::xml2array($fieldArray['pi_flexform']);
+            if (!is_array($flexformData)) {
+                return;
+            }
+
             foreach ($checkFields as $sheet => $fields) {
                 foreach ($fields as $field) {
                     if (isset($flexformData['data'][$sheet]['lDEF'][$field]['vDEF']) &&
