@@ -103,7 +103,10 @@ class AdministrationControllerTest extends UnitTestCase
         $this->inject($this->subject, 'objectManager', $objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
-        $beUserSessionService->expects($this->any())->method('getSessionDataByKey');
+        $beUserSessionService->expects($this->at(0))->method('getSessionDataByKey')
+            ->will($this->returnValue(null));
+        $beUserSessionService->expects($this->at(1))->method('getSessionDataByKey')
+            ->will($this->returnValue([]));
         $this->inject($this->subject, 'beUserSessionService', $beUserSessionService);
 
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
@@ -125,7 +128,7 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => null,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => null
+            'overwriteDemand' => []
         ]);
         $this->inject($this->subject, 'view', $view);
 
