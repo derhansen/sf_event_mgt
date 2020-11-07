@@ -334,11 +334,6 @@ class AdministrationController extends AbstractController
      */
     public function listAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
-        /** @var EventDemand $eventDemand */
-        $eventDemand = $this->objectManager->get(EventDemand::class);
-        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
-        $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed']);
-
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);
 
@@ -352,6 +347,10 @@ class AdministrationController extends AbstractController
             $overwriteDemand = $this->beUserSessionService->getSessionDataByKey('overwriteDemand');
         }
 
+        /** @var EventDemand $eventDemand */
+        $eventDemand = $this->objectManager->get(EventDemand::class);
+        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
+        $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed']);
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage($this->pid);
 
