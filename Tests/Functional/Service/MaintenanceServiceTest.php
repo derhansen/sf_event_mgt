@@ -10,9 +10,9 @@
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
-use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Service\MaintenanceService

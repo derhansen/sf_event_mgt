@@ -182,7 +182,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \DateTime
      */
-    protected $registrationStartdate = null;
+    protected $registrationStartdate;
 
     /**
      * Registration deadline date
@@ -1002,8 +1002,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets the registration startdate
      *
      * @param \DateTime $registrationStartdate RegistrationStartdate
-     *
-     * @return void
      */
     public function setRegistrationStartdate(\DateTime $registrationStartdate)
     {

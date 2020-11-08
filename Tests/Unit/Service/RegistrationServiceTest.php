@@ -16,12 +16,12 @@ use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
@@ -56,7 +56,7 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
-        $this->markTestSkipped('Needs investigation');
+        self::markTestSkipped('Needs investigation');
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(5);
         $mockRegistration->expects(self::any())->method('getPid')->willReturn(1);

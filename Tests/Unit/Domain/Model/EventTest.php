@@ -17,9 +17,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Event.
@@ -66,7 +66,7 @@ class EventTest extends UnitTestCase
     public function setTitleForStringSetsTitle()
     {
         $this->subject->setTitle('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getTitle());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getTitle());
     }
 
     /**
@@ -86,7 +86,7 @@ class EventTest extends UnitTestCase
     public function setDescriptionForStringSetsDescription()
     {
         $this->subject->setDescription('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getDescription());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getDescription());
     }
 
     /**
@@ -106,7 +106,7 @@ class EventTest extends UnitTestCase
     public function setProgramForStringSetsProgram()
     {
         $this->subject->setProgram('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getProgram());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getProgram());
     }
 
     /**
@@ -126,7 +126,7 @@ class EventTest extends UnitTestCase
     public function setTeaserForStringSetsTeaser()
     {
         $this->subject->setTeaser('This is a teaser');
-        $this->assertEquals('This is a teaser', $this->subject->getTeaser());
+        self::assertEquals('This is a teaser', $this->subject->getTeaser());
     }
 
     /**
@@ -146,7 +146,7 @@ class EventTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setStartdate($dateTimeFixture);
-        $this->assertEquals($dateTimeFixture, $this->subject->getStartdate());
+        self::assertEquals($dateTimeFixture, $this->subject->getStartdate());
     }
 
     /**
@@ -166,7 +166,7 @@ class EventTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setEnddate($dateTimeFixture);
-        $this->assertEquals($dateTimeFixture, $this->subject->getEnddate());
+        self::assertEquals($dateTimeFixture, $this->subject->getEnddate());
     }
 
     /**
@@ -196,7 +196,7 @@ class EventTest extends UnitTestCase
     public function setParticipantsForIntegerSetsParticipants()
     {
         $this->subject->setMaxParticipants(12);
-        $this->assertEquals(12, $this->subject->getMaxParticipants());
+        self::assertEquals(12, $this->subject->getMaxParticipants());
     }
 
     /**
@@ -216,7 +216,7 @@ class EventTest extends UnitTestCase
     public function setPriceForFloatSetsPrice()
     {
         $this->subject->setPrice(3.99);
-        $this->assertEquals(3.99, $this->subject->getPrice());
+        self::assertEquals(3.99, $this->subject->getPrice());
     }
 
     /**
@@ -236,7 +236,7 @@ class EventTest extends UnitTestCase
     public function setCurrencyForStringSetsCurrency()
     {
         $this->subject->setCurrency('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getCurrency());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getCurrency());
     }
 
     /**
@@ -260,7 +260,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneCategory = new ObjectStorage();
         $objectStorageHoldingExactlyOneCategory->attach($category);
         $this->subject->setCategory($objectStorageHoldingExactlyOneCategory);
-        $this->assertEquals($objectStorageHoldingExactlyOneCategory, $this->subject->getCategory());
+        self::assertEquals($objectStorageHoldingExactlyOneCategory, $this->subject->getCategory());
     }
 
     /**
@@ -315,7 +315,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneRegistration = new ObjectStorage();
         $objectStorageHoldingExactlyOneRegistration->attach($registration);
         $this->subject->setRegistration($objectStorageHoldingExactlyOneRegistration);
-        $this->assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistration());
+        self::assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistration());
     }
 
     /**
@@ -370,7 +370,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneRegistration = new ObjectStorage();
         $objectStorageHoldingExactlyOneRegistration->attach($registration);
         $this->subject->setRegistrationWaitlist($objectStorageHoldingExactlyOneRegistration);
-        $this->assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistrationWaitlist());
+        self::assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistrationWaitlist());
     }
 
     /**
@@ -424,7 +424,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneImage = new ObjectStorage();
         $objectStorageHoldingExactlyOneImage->attach($image);
         $this->subject->setImage($objectStorageHoldingExactlyOneImage);
-        $this->assertEquals($objectStorageHoldingExactlyOneImage, $this->subject->getImage());
+        self::assertEquals($objectStorageHoldingExactlyOneImage, $this->subject->getImage());
     }
 
     /**
@@ -478,7 +478,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneFile = new ObjectStorage();
         $objectStorageHoldingExactlyOneFile->attach($file);
         $this->subject->setFiles($objectStorageHoldingExactlyOneFile);
-        $this->assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getFiles());
+        self::assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getFiles());
     }
 
     /**
@@ -532,7 +532,7 @@ class EventTest extends UnitTestCase
         $objectStorageHoldingExactlyOneFile = new ObjectStorage();
         $objectStorageHoldingExactlyOneFile->attach($file);
         $this->subject->setAdditionalImage($objectStorageHoldingExactlyOneFile);
-        $this->assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getAdditionalImage());
+        self::assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getAdditionalImage());
     }
 
     /**
@@ -622,7 +622,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistrationStartdate($registrationStartDate);
         $this->subject->setEnableRegistration(true);
 
-        $this->assertTrue($this->subject->getRegistrationPossible());
+        self::assertTrue($this->subject->getRegistrationPossible());
     }
 
     /**
@@ -639,7 +639,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistrationStartdate($registrationStartDate);
         $this->subject->setEnableRegistration(true);
 
-        $this->assertFalse($this->subject->getRegistrationPossible());
+        self::assertFalse($this->subject->getRegistrationPossible());
     }
 
     /**
@@ -774,7 +774,7 @@ class EventTest extends UnitTestCase
     {
         $location = new Location();
         $this->subject->setLocation($location);
-        $this->assertEquals($location, $this->subject->getLocation());
+        self::assertEquals($location, $this->subject->getLocation());
     }
 
     /**
@@ -793,7 +793,7 @@ class EventTest extends UnitTestCase
     public function setEnableRegistrationForBooleanSetsEnableRegistration()
     {
         $this->subject->setEnableRegistration(true);
-        $this->assertTrue($this->subject->getEnableRegistration());
+        self::assertTrue($this->subject->getEnableRegistration());
     }
 
     /**
@@ -812,7 +812,7 @@ class EventTest extends UnitTestCase
     public function setEnableWaitlistForBooleanSetsEnableWaitlist()
     {
         $this->subject->setEnableWaitlist(true);
-        $this->assertTrue($this->subject->getEnableWaitlist());
+        self::assertTrue($this->subject->getEnableWaitlist());
     }
 
     /**
@@ -831,7 +831,7 @@ class EventTest extends UnitTestCase
     public function setEnableWaitlistMoveupForBooleanSetsEnableWaitlistMoveup()
     {
         $this->subject->setEnableWaitlistMoveup(true);
-        $this->assertTrue($this->subject->getEnableWaitlistMoveup());
+        self::assertTrue($this->subject->getEnableWaitlistMoveup());
     }
 
     /**
@@ -850,7 +850,7 @@ class EventTest extends UnitTestCase
     public function setLinkForStringSetsLink()
     {
         $this->subject->setLink('www.domain.tld');
-        $this->assertEquals('www.domain.tld', $this->subject->getLink());
+        self::assertEquals('www.domain.tld', $this->subject->getLink());
     }
 
     /**
@@ -903,7 +903,7 @@ class EventTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setRegistrationDeadline($dateTimeFixture);
-        $this->assertEquals($dateTimeFixture, $this->subject->getRegistrationDeadline());
+        self::assertEquals($dateTimeFixture, $this->subject->getRegistrationDeadline());
     }
 
     /**
@@ -912,7 +912,7 @@ class EventTest extends UnitTestCase
     public function setTopEventForBooleanSetsTopEvent()
     {
         $this->subject->setTopEvent(true);
-        $this->assertTrue($this->subject->getTopEvent());
+        self::assertTrue($this->subject->getTopEvent());
     }
 
     /**
@@ -951,7 +951,7 @@ class EventTest extends UnitTestCase
     {
         $organisator = new Organisator();
         $this->subject->setOrganisator($organisator);
-        $this->assertEquals($organisator, $this->subject->getOrganisator());
+        self::assertEquals($organisator, $this->subject->getOrganisator());
     }
 
     /**
@@ -1565,7 +1565,7 @@ class EventTest extends UnitTestCase
      */
     public function getHiddenReturnsInitialValue()
     {
-        $this->assertFalse($this->subject->getHidden());
+        self::assertFalse($this->subject->getHidden());
     }
 
     /**
@@ -1574,7 +1574,7 @@ class EventTest extends UnitTestCase
     public function setHiddenSetsValueForBoolean()
     {
         $this->subject->setHidden(true);
-        $this->assertTrue($this->subject->getHidden());
+        self::assertTrue($this->subject->getHidden());
     }
 
     /**
@@ -1582,7 +1582,7 @@ class EventTest extends UnitTestCase
      */
     public function getStarttimeReturnsInitialValue()
     {
-        $this->assertNull($this->subject->getStarttime());
+        self::assertNull($this->subject->getStarttime());
     }
 
     /**
@@ -1593,7 +1593,7 @@ class EventTest extends UnitTestCase
         $date = new \DateTime('01.01.2020 18:00:00');
         $this->subject->setStarttime($date);
 
-        $this->assertEquals($date, $this->subject->getStarttime());
+        self::assertEquals($date, $this->subject->getStarttime());
     }
 
     /**
@@ -1601,7 +1601,7 @@ class EventTest extends UnitTestCase
      */
     public function getEndtimeReturnsInitialValue()
     {
-        $this->assertNull($this->subject->getEndtime());
+        self::assertNull($this->subject->getEndtime());
     }
 
     /**
@@ -1612,7 +1612,7 @@ class EventTest extends UnitTestCase
         $date = new \DateTime('01.01.2020 18:00:00');
         $this->subject->setEndtime($date);
 
-        $this->assertEquals($date, $this->subject->getEndtime());
+        self::assertEquals($date, $this->subject->getEndtime());
     }
 
     /**
@@ -1620,7 +1620,7 @@ class EventTest extends UnitTestCase
      */
     public function getBackendIconOverlayReturnsEmptyStringIfNotHiddenAndNoStartEndTime()
     {
-        $this->assertEquals('', $this->subject->getBackendIconOverlay());
+        self::assertEquals('', $this->subject->getBackendIconOverlay());
     }
 
     /**
@@ -1629,7 +1629,7 @@ class EventTest extends UnitTestCase
     public function getBackendIconOverlayReturnsExpectedValueForHiddenEvent()
     {
         $this->subject->setHidden(true);
-        $this->assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
+        self::assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
     }
 
     /**
@@ -1638,7 +1638,7 @@ class EventTest extends UnitTestCase
     public function getBackendIconOverlayReturnsExpectedValueForStarttimeEvent()
     {
         $this->subject->setStarttime(new \DateTime());
-        $this->assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
+        self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
     }
 
     /**
@@ -1647,7 +1647,7 @@ class EventTest extends UnitTestCase
     public function getBackendIconOverlayReturnsExpectedValueForEndtimeEvent()
     {
         $this->subject->setEndtime(new \DateTime());
-        $this->assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
+        self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
     }
 
     /**
@@ -1657,6 +1657,6 @@ class EventTest extends UnitTestCase
     {
         $this->subject->setHidden(true);
         $this->subject->setEndtime(new \DateTime());
-        $this->assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
+        self::assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
     }
 }

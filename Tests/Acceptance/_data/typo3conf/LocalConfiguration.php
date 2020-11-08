@@ -1,4 +1,5 @@
 <?php
+
 return [
     'BE' => [
         'debug' => true,

@@ -11,8 +11,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration.
@@ -59,7 +59,7 @@ class RegistrationTest extends UnitTestCase
     public function setFirstnameForStringSetsFirstname()
     {
         $this->subject->setFirstname('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getFirstname());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getFirstname());
     }
 
     /**
@@ -79,7 +79,7 @@ class RegistrationTest extends UnitTestCase
     public function setLastnameForStringSetsLastname()
     {
         $this->subject->setLastname('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getLastname());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getLastname());
     }
 
     /**
@@ -99,7 +99,7 @@ class RegistrationTest extends UnitTestCase
     public function setTitleForStringSetsTitle()
     {
         $this->subject->setTitle('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getTitle());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getTitle());
     }
 
     /**
@@ -119,7 +119,7 @@ class RegistrationTest extends UnitTestCase
     public function setCompanyForStringSetsCompany()
     {
         $this->subject->setCompany('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getCompany());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getCompany());
     }
 
     /**
@@ -139,7 +139,7 @@ class RegistrationTest extends UnitTestCase
     public function setAddressForStringSetsAddress()
     {
         $this->subject->setAddress('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getAddress());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getAddress());
     }
 
     /**
@@ -159,7 +159,7 @@ class RegistrationTest extends UnitTestCase
     public function setZipForIntegerSetsZip()
     {
         $this->subject->setZip('01234');
-        $this->assertEquals('01234', $this->subject->getZip());
+        self::assertEquals('01234', $this->subject->getZip());
     }
 
     /**
@@ -190,7 +190,7 @@ class RegistrationTest extends UnitTestCase
     public function setCityForStringSetsCity()
     {
         $this->subject->setCity('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getCity());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getCity());
     }
 
     /**
@@ -199,7 +199,7 @@ class RegistrationTest extends UnitTestCase
     public function setCountryForStringSetsCountry()
     {
         $this->subject->setCountry('A country');
-        $this->assertEquals('A country', $this->subject->getCountry());
+        self::assertEquals('A country', $this->subject->getCountry());
     }
 
     /**
@@ -219,7 +219,7 @@ class RegistrationTest extends UnitTestCase
     public function setPhoneForStringSetsPhone()
     {
         $this->subject->setPhone('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getPhone());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getPhone());
     }
 
     /**
@@ -239,7 +239,7 @@ class RegistrationTest extends UnitTestCase
     public function setEmailForStringSetsEmail()
     {
         $this->subject->setEmail('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getEmail());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getEmail());
     }
 
     /**
@@ -259,7 +259,7 @@ class RegistrationTest extends UnitTestCase
     public function setGenderForStringSetsGender()
     {
         $this->subject->setGender('m');
-        $this->assertEquals('m', $this->subject->getGender());
+        self::assertEquals('m', $this->subject->getGender());
     }
 
     /**
@@ -278,7 +278,7 @@ class RegistrationTest extends UnitTestCase
     public function setAccepttcForBooleanSetsConfirmed()
     {
         $this->subject->setAccepttc(true);
-        $this->assertTrue($this->subject->getAccepttc());
+        self::assertTrue($this->subject->getAccepttc());
     }
 
     /**
@@ -297,7 +297,7 @@ class RegistrationTest extends UnitTestCase
     public function setWaitlistForBooleanSetsWaitlist()
     {
         $this->subject->setWaitlist(true);
-        $this->assertTrue($this->subject->getWaitlist());
+        self::assertTrue($this->subject->getWaitlist());
     }
 
     /**
@@ -316,7 +316,7 @@ class RegistrationTest extends UnitTestCase
     public function setConfirmedForBooleanSetsConfirmed()
     {
         $this->subject->setConfirmed(true);
-        $this->assertTrue($this->subject->getConfirmed());
+        self::assertTrue($this->subject->getConfirmed());
     }
 
     /**
@@ -344,7 +344,7 @@ class RegistrationTest extends UnitTestCase
     public function setPaidForBooleanSetsPaid()
     {
         $this->subject->setPaid(true);
-        $this->assertTrue($this->subject->getPaid());
+        self::assertTrue($this->subject->getPaid());
     }
 
     /**
@@ -370,7 +370,7 @@ class RegistrationTest extends UnitTestCase
     public function setNotesForStringSetsNotes()
     {
         $this->subject->setNotes('This is a longer text');
-        $this->assertEquals('This is a longer text', $this->subject->getNotes());
+        self::assertEquals('This is a longer text', $this->subject->getNotes());
     }
 
     /**
@@ -416,7 +416,7 @@ class RegistrationTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setConfirmationUntil($dateTimeFixture);
-        $this->assertEquals($dateTimeFixture, $this->subject->getConfirmationUntil());
+        self::assertEquals($dateTimeFixture, $this->subject->getConfirmationUntil());
     }
 
     /**
@@ -434,7 +434,7 @@ class RegistrationTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setRegistrationDate($dateTimeFixture);
-        $this->assertEquals($dateTimeFixture, $this->subject->getRegistrationDate());
+        self::assertEquals($dateTimeFixture, $this->subject->getRegistrationDate());
     }
 
     /**
@@ -452,7 +452,7 @@ class RegistrationTest extends UnitTestCase
     {
         $dateTimeFixture = new \DateTime();
         $this->subject->setDateOfBirth($dateTimeFixture);
-        $this->assertEquals($dateTimeFixture, $this->subject->getDateOfBirth());
+        self::assertEquals($dateTimeFixture, $this->subject->getDateOfBirth());
     }
 
     /**

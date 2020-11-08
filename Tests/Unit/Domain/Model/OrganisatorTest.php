@@ -10,8 +10,8 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Organisator.
@@ -64,7 +64,7 @@ class OrganisatorTest extends UnitTestCase
     public function setNameForStringSetsName()
     {
         $this->subject->setName('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getName());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getName());
     }
 
     /**
@@ -88,7 +88,7 @@ class OrganisatorTest extends UnitTestCase
     public function setEmailForStringSetsEmail()
     {
         $this->subject->setEmail('mail@domain.tld');
-        $this->assertEquals('mail@domain.tld', $this->subject->getEmail());
+        self::assertEquals('mail@domain.tld', $this->subject->getEmail());
     }
 
     /**
@@ -112,7 +112,7 @@ class OrganisatorTest extends UnitTestCase
     public function setPhoneForStringSetsPhone()
     {
         $this->subject->setPhone('+49 123 4567890');
-        $this->assertEquals('+49 123 4567890', $this->subject->getPhone());
+        self::assertEquals('+49 123 4567890', $this->subject->getPhone());
     }
 
     /**
@@ -134,6 +134,6 @@ class OrganisatorTest extends UnitTestCase
     {
         $file = new FileReference();
         $this->subject->setImage($file);
-        $this->assertEquals($file, $this->subject->getImage());
+        self::assertEquals($file, $this->subject->getImage());
     }
 }

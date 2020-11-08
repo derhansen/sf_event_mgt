@@ -81,7 +81,7 @@ class EventDemandTest extends UnitTestCase
     public function setDisplayModeForStringSetsDisplayMode()
     {
         $this->subject->setDisplayMode('past');
-        $this->assertEquals('past', $this->subject->getDisplayMode());
+        self::assertEquals('past', $this->subject->getDisplayMode());
     }
 
     /**
@@ -101,7 +101,7 @@ class EventDemandTest extends UnitTestCase
     public function setStoragePageForStringSetsStoragePage()
     {
         $this->subject->setStoragePage('1,2,3');
-        $this->assertEquals('1,2,3', $this->subject->getStoragePage());
+        self::assertEquals('1,2,3', $this->subject->getStoragePage());
     }
 
     /**
@@ -346,7 +346,7 @@ class EventDemandTest extends UnitTestCase
      */
     public function getIgnoreEnableFieldsReturnsDefaultValue()
     {
-        $this->assertFalse($this->subject->getIgnoreEnableFields());
+        self::assertFalse($this->subject->getIgnoreEnableFields());
     }
 
     /**
@@ -355,6 +355,6 @@ class EventDemandTest extends UnitTestCase
     public function setIgnoreEnableFieldsSetsValueForBoolean()
     {
         $this->subject->setIgnoreEnableFields(true);
-        $this->assertTrue($this->subject->getIgnoreEnableFields());
+        self::assertTrue($this->subject->getIgnoreEnableFields());
     }
 }

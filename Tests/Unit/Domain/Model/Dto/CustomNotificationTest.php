@@ -45,7 +45,7 @@ class CustomNotificationTest extends UnitTestCase
      */
     public function getTemplateReturnsInitialValue()
     {
-        $this->assertEquals('', $this->subject->getTemplate());
+        self::assertEquals('', $this->subject->getTemplate());
     }
 
     /**
@@ -54,7 +54,7 @@ class CustomNotificationTest extends UnitTestCase
     public function setTemplateSetsValueForString()
     {
         $this->subject->setTemplate('a-template');
-        $this->assertEquals('a-template', $this->subject->getTemplate());
+        self::assertEquals('a-template', $this->subject->getTemplate());
     }
 
     /**
@@ -62,7 +62,7 @@ class CustomNotificationTest extends UnitTestCase
      */
     public function getRecipientsReturnsInitialValue()
     {
-        $this->assertEquals(CustomNotification::RECIPIENTS_CONFIRMED, $this->subject->getRecipients());
+        self::assertEquals(CustomNotification::RECIPIENTS_CONFIRMED, $this->subject->getRecipients());
     }
 
     /**
@@ -71,7 +71,7 @@ class CustomNotificationTest extends UnitTestCase
     public function setRecipientsSetsValueForInteger()
     {
         $this->subject->setRecipients(CustomNotification::RECIPIENTS_ALL);
-        $this->assertEquals(CustomNotification::RECIPIENTS_ALL, $this->subject->getRecipients());
+        self::assertEquals(CustomNotification::RECIPIENTS_ALL, $this->subject->getRecipients());
     }
 
     /**
@@ -79,7 +79,7 @@ class CustomNotificationTest extends UnitTestCase
      */
     public function getOverwriteSubjectReturnsInitialValue()
     {
-        $this->assertEquals('', $this->subject->getOverwriteSubject());
+        self::assertEquals('', $this->subject->getOverwriteSubject());
     }
 
     /**
@@ -88,7 +88,7 @@ class CustomNotificationTest extends UnitTestCase
     public function setOverwriteSubjectSetsValueForString()
     {
         $this->subject->setOverwriteSubject('subject');
-        $this->assertEquals('subject', $this->subject->getOverwriteSubject());
+        self::assertEquals('subject', $this->subject->getOverwriteSubject());
     }
 
     /**
@@ -96,7 +96,7 @@ class CustomNotificationTest extends UnitTestCase
      */
     public function getAdditionalMessageReturnsInitialValue()
     {
-        $this->assertEquals('', $this->subject->getAdditionalMessage());
+        self::assertEquals('', $this->subject->getAdditionalMessage());
     }
 
     /**
@@ -105,6 +105,6 @@ class CustomNotificationTest extends UnitTestCase
     public function setAdditionalMessageSetsValueForString()
     {
         $this->subject->setAdditionalMessage('message');
-        $this->assertEquals('message', $this->subject->getAdditionalMessage());
+        self::assertEquals('message', $this->subject->getAdditionalMessage());
     }
 }

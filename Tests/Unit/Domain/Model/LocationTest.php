@@ -63,7 +63,7 @@ class LocationTest extends UnitTestCase
     public function setTitleForStringSetsTitle()
     {
         $this->subject->setTitle('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getTitle());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getTitle());
     }
 
     /**
@@ -83,7 +83,7 @@ class LocationTest extends UnitTestCase
     public function setAddressForStringSetsAddress()
     {
         $this->subject->setAddress('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getAddress());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getAddress());
     }
 
     /**
@@ -134,7 +134,7 @@ class LocationTest extends UnitTestCase
     public function setCityForStringSetsCity()
     {
         $this->subject->setCity('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getCity());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getCity());
     }
 
     /**
@@ -143,7 +143,7 @@ class LocationTest extends UnitTestCase
     public function setCountryForStringSetsCountry()
     {
         $this->subject->setCountry('A country');
-        $this->assertEquals('A country', $this->subject->getCountry());
+        self::assertEquals('A country', $this->subject->getCountry());
     }
 
     /**
@@ -167,7 +167,7 @@ class LocationTest extends UnitTestCase
     public function setDescriptionForStringSetsDescription()
     {
         $this->subject->setDescription('Conceived at T3CON10');
-        $this->assertEquals('Conceived at T3CON10', $this->subject->getDescription());
+        self::assertEquals('Conceived at T3CON10', $this->subject->getDescription());
     }
 
     /**
@@ -191,7 +191,7 @@ class LocationTest extends UnitTestCase
     public function setLinkForStringSetsLink()
     {
         $this->subject->setLink('http://www.typo3.org');
-        $this->assertEquals('http://www.typo3.org', $this->subject->getLink());
+        self::assertEquals('http://www.typo3.org', $this->subject->getLink());
     }
 
     /**

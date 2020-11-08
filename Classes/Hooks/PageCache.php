@@ -39,9 +39,8 @@ class PageCache
         if ($eventBasedCacheTimeout === PHP_INT_MAX || $eventBasedCacheTimeout >= $params['cacheTimeout']) {
             // Return previous calculated timeout, since event based cache timeout is either not determined or larger
             return $params['cacheTimeout'];
-        } else {
-            return $eventBasedCacheTimeout;
         }
+        return $eventBasedCacheTimeout;
     }
 
     /**
