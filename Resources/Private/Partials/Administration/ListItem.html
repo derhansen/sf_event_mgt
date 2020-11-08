@@ -1,8 +1,12 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <tr>
+    <td class="event-icon">
+        <core:icon overlay="{event.backendIconOverlay}" identifier="ext-sfeventmgt-event" size="small" />
+    </td>
     <td class="title">
         <a href="{e:Be.EditRecord(uid:event.uid)}" title="UID: {event.uid}">
             {event.title}

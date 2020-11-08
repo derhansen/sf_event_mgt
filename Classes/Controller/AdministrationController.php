@@ -349,10 +349,11 @@ class AdministrationController extends AbstractController
 
         /** @var EventDemand $eventDemand */
         $eventDemand = $this->objectManager->get(EventDemand::class);
-        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
+        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand ?? []);
         $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed']);
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage($this->pid);
+        $eventDemand->setIgnoreEnableFields(true);
 
         $events = [];
         if ($this->getBackendUser()->isInWebMount($this->pid)) {
