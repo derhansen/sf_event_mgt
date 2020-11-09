@@ -596,7 +596,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @return bool
      */
-    public function getIgnoreEnableFields(): bool
+    public function getIgnoreEnableFields()
     {
         return $this->ignoreEnableFields;
     }
@@ -604,7 +604,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * @param bool $ignoreEnableFields
      */
-    public function setIgnoreEnableFields(bool $ignoreEnableFields): void
+    public function setIgnoreEnableFields(bool $ignoreEnableFields)
     {
         $this->ignoreEnableFields = $ignoreEnableFields;
     }
