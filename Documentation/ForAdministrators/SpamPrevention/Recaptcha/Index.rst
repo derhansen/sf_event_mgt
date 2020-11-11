@@ -20,7 +20,8 @@ Configuration
 
 reCAPTCHA does only work with valid Google API credentials. To obtain API credentials, you need a Google Account.
 Once you registered for the reCAPTCHA service, you will get 2 keys (site key and secret key) which must be added
-to the TypoScript settings (constants) of sf_event_mgt
+to the TypoScript settings (constants) of sf_event_mgt.
+To activate the validation for reCAPTCHA, you will also have to add 'recaptcha' to the list of required fields.
 
 TypoScript Constants::
 
@@ -30,6 +31,7 @@ TypoScript Constants::
         siteKey = <your-site-key>
         secretKey = <your-secret-key>
       }
+      registration.requiredFields = recaptcha
     }
   }
 
