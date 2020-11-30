@@ -1,5 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
       xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
 <f:layout name="Backend" />
@@ -82,7 +83,7 @@
                 <button type="submit" class="btn btn-default" name="search" title="Search">
                     <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-search" data-identifier="actions-search">
                         <span class="icon-markup">
-                            <img src="/typo3/sysext/core/Resources/Public/Icons/T3Icons/actions/actions-search.svg" width="16" height="16">
+                            <core:icon identifier="actions-search" size="small" />
                         </span>
                     </span> {f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search')}
                 </button>
