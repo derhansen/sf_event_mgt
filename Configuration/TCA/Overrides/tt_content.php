@@ -47,3 +47,8 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_p
     'sfeventmgt_piuserreg',
     'FILE:EXT:sf_event_mgt/Configuration/FlexForms/Flexform_userreg.xml'
 );
+
+/**
+ * Register event as "Insert Record"
+ */
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_sfeventmgt_domain_model_event');
