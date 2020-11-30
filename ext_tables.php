@@ -44,7 +44,7 @@ call_user_func(function () {
             ],
             [
                 'access' => 'user,group',
-                'icon' => 'EXT:sf_event_mgt/Resources/Public/Icons/events.svg',
+                'icon' => 'EXT:sf_event_mgt/Resources/Public/Icons/module.svg',
                 'labels' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_modadministration.xlf',
             ]
         );
