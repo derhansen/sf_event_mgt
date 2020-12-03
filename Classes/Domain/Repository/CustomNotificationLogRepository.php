@@ -22,6 +22,6 @@ class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Rep
      * @var array
      */
     protected $defaultOrderings = [
-        'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+        'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
     ];
 }
