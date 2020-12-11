@@ -14,21 +14,26 @@ Changing paths of the template
 Please do never change templates directly in the Ressources folder of the extensions,
 since your changes will get overwritten by extension updates.
 
-Configure your TypoScript setup like shown below (note the **plural** of the path-name)::
+The easiest way to override templates is to set the following constants:
+
+* plugin.tx_sfeventmgt.view.templateRootPath
+* plugin.tx_sfeventmgt.view.partialRootPath
+* plugin.tx_sfeventmgt.view.layoutRootPath
+
+Those values will automatically be added after the default paths configuration of the extension. If you prefer
+to configure the path-values using TypoScript setup, please refer to the example below
+(note the **plural** of the path-name)::
 
   plugin.tx_sfeventmgt {
     view {
       templateRootPaths {
-        0 = {$plugin.tx_sfeventmgt.view.templateRootPath}
-        1 = fileadmin/templates/events/Templates/
+        2 = fileadmin/templates/events/Templates/
       }
       partialRootPaths {
-        0 = {$plugin.tx_sfeventmgt.view.partialRootPath}
-        1 = fileadmin/templates/events/Partials/
+        2 = fileadmin/templates/events/Partials/
       }
       layoutRootPaths {
-        0 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
-        1 = fileadmin/templates/events/Layouts/
+        2 = fileadmin/templates/events/Layouts/
       }
     }
   }
