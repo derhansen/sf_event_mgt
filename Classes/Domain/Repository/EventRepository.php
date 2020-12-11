@@ -148,7 +148,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         if ($eventDemand->getStoragePage() !== null && $eventDemand->getStoragePage() !== '') {
             $pidList = GeneralUtility::intExplode(',', $eventDemand->getStoragePage(), true);
-            $constraints[] = $query->in('pid', $pidList);
+            $constraints['storagePage'] = $query->in('pid', $pidList);
         }
     }
 
@@ -163,10 +163,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         switch ($eventDemand->getDisplayMode()) {
             case 'future':
-                $constraints[] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
+                $constraints['displayMode'] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
                 break;
             case 'current_future':
-                $constraints[] = $query->logicalOr([
+                $constraints['displayMode'] = $query->logicalOr([
                     $query->greaterThan('startdate', $eventDemand->getCurrentDateTime()),
                     $query->logicalAnd([
                         $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
@@ -175,7 +175,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 ]);
                 break;
             case 'past':
-                $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
+                $constraints['displayMode'] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
                 break;
             default:
         }
@@ -207,7 +207,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $categoryConstraints[] = $query->contains('category', $category);
             }
             if (count($categoryConstraints) > 0) {
-                $constraints[] = $this->getCategoryConstraint($query, $eventDemand, $categoryConstraints);
+                $constraints['category'] = $this->getCategoryConstraint($query, $eventDemand, $categoryConstraints);
             }
         }
     }
@@ -250,7 +250,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setLocationConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() != '') {
-            $constraints[] = $query->equals('location', $eventDemand->getLocation());
+            $constraints['location'] = $query->equals('location', $eventDemand->getLocation());
         }
     }
 
@@ -264,7 +264,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setLocationCityConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() != '') {
-            $constraints[] = $query->equals('location.city', $eventDemand->getLocationCity());
+            $constraints['locationCity'] = $query->equals('location.city', $eventDemand->getLocationCity());
         }
     }
 
@@ -278,7 +278,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setLocationCountryConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() != '') {
-            $constraints[] = $query->equals('location.country', $eventDemand->getLocationCountry());
+            $constraints['locationCountry'] = $query->equals('location.country', $eventDemand->getLocationCountry());
         }
     }
 
@@ -292,7 +292,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setSpeakerConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() != '') {
-            $constraints[] = $query->contains('speaker', $eventDemand->getSpeaker());
+            $constraints['speaker'] = $query->contains('speaker', $eventDemand->getSpeaker());
         }
     }
 
@@ -306,7 +306,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setOrganisatorConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getOrganisator() !== null && $eventDemand->getOrganisator() != '') {
-            $constraints[] = $query->equals('organisator', $eventDemand->getOrganisator());
+            $constraints['organisator'] = $query->equals('organisator', $eventDemand->getOrganisator());
         }
     }
 
@@ -325,7 +325,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             /* StartDate and EndDate  - Search for events between two given dates */
             $begin = $eventDemand->getSearchDemand()->getStartDate();
             $end = $eventDemand->getSearchDemand()->getEndDate();
-            $constraints[] = $query->logicalOr([
+            $constraints['startEndDate'] = $query->logicalOr([
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
                 $query->logicalAnd([
@@ -335,10 +335,10 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             ]);
         } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
             /* StartDate - Search for events beginning at a given date */
-            $constraints[] = $query->greaterThanOrEqual('startdate', $eventDemand->getSearchDemand()->getStartDate());
+            $constraints['startDate'] = $query->greaterThanOrEqual('startdate', $eventDemand->getSearchDemand()->getStartDate());
         } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getEndDate() !== null) {
             /* EndDate - Search for events ending on a given date */
-            $constraints[] = $query->lessThanOrEqual('enddate', $eventDemand->getSearchDemand()->getEndDate());
+            $constraints['endDate'] = $query->lessThanOrEqual('enddate', $eventDemand->getSearchDemand()->getEndDate());
         }
     }
 
@@ -370,7 +370,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
 
             if (count($searchConstraints)) {
-                $constraints[] = $query->logicalOr($searchConstraints);
+                $constraints['search'] = $query->logicalOr($searchConstraints);
             }
         }
     }
@@ -385,7 +385,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     protected function setTopEventConstraint($query, $eventDemand, &$constraints)
     {
         if ($eventDemand->getTopEventRestriction() > 0) {
-            $constraints[] = $query->equals('topEvent', (bool)($eventDemand->getTopEventRestriction() - 1));
+            $constraints['topEvent'] = $query->equals('topEvent', (bool)($eventDemand->getTopEventRestriction() - 1));
         }
     }
 
@@ -411,7 +411,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                 $begin = mktime(0, 0, 0, 1, 1, $eventDemand->getYear());
                 $end = mktime(23, 59, 59, 12, 31, $eventDemand->getYear());
             }
-            $constraints[] = $query->logicalOr([
+            $constraints['yearMonthDay'] = $query->logicalOr([
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
                 $query->logicalAnd([
