@@ -17,7 +17,4 @@ Seo
    :glob:
 
    Sitemap/Index
-
-
-
-
+   LanguageMenu/Index
