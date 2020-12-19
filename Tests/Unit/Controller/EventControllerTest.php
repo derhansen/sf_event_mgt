@@ -40,6 +40,7 @@ use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
@@ -2348,19 +2349,10 @@ class EventControllerTest extends UnitTestCase
 
         $mockEventController = $this->getAccessibleMock(EventController::class, ['redirect']);
 
-        $mockStandaloneView = $this->getMockBuilder(StandaloneView::class)
-            ->setMethods(['setTemplatePathAndFilename', 'render'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockStandaloneView->expects(self::once())->method('setTemplatePathAndFilename');
-        $mockStandaloneView->expects(self::once())->method('render');
-
-        $mockObjectManager = $this->getMockBuilder(ObjectManager::class)
-            ->setMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockObjectManager->expects(self::any())->method('get')->willReturn($mockStandaloneView);
-        $this->inject($mockEventController, 'objectManager', $mockObjectManager);
+        $standAloneView = $this->prophesize(StandaloneView::class);
+        $standAloneView->setTemplatePathAndFilename(\Prophecy\Argument::any())->shouldBeCalled();
+        $standAloneView->render()->willReturn('foo');
+        GeneralUtility::addInstance(StandaloneView::class, $standAloneView->reveal());
 
         $mockEventController->_call('handleEventNotFoundError', $settings);
     }
