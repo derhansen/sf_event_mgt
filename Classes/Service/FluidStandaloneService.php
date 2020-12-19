@@ -21,13 +21,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 class FluidStandaloneService
 {
     /**
-     * The object manager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager;
-
-    /**
      * The configuration manager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
@@ -43,16 +36,6 @@ class FluidStandaloneService
         \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
     ) {
         $this->configurationManager = $configurationManager;
-    }
-
-    /**
-     * DI for $objectManager
-     *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
-     */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
-    {
-        $this->objectManager = $objectManager;
     }
 
     /**
@@ -115,8 +98,7 @@ class FluidStandaloneService
      */
     public function renderTemplate($template, $variables, $extensionName = 'SfEventMgt', $pluginName = 'Pievent')
     {
-        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $emailView */
-        $emailView = $this->objectManager->get(StandaloneView::class);
+        $emailView = GeneralUtility::makeInstance(StandaloneView::class);
         $emailView->getRequest()->setControllerExtensionName($extensionName);
         $emailView->getRequest()->setPluginName($pluginName);
         $emailView->setFormat('html');
@@ -142,8 +124,7 @@ class FluidStandaloneService
         if (empty($string)) {
             return $string;
         }
-        /** @var StandaloneView $standaloneView */
-        $standaloneView = $this->objectManager->get(StandaloneView::class);
+        $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
 

@@ -21,13 +21,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 class ICalendarService
 {
     /**
-     * The object manager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager;
-
-    /**
      * The configuration manager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
@@ -64,16 +57,6 @@ class ICalendarService
     }
 
     /**
-     * DI for $objectManager
-     *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
-     */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
-    {
-        $this->objectManager = $objectManager;
-    }
-
-    /**
      * Initiates the ICS download for the given event
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
@@ -101,8 +84,7 @@ class ICalendarService
      */
     public function getiCalendarContent(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
-        /** @var \TYPO3\CMS\Fluid\View\StandaloneView $icalView */
-        $icalView = $this->objectManager->get(StandaloneView::class);
+        $icalView = GeneralUtility::makeInstance(StandaloneView::class);
         $icalView->setFormat('txt');
         $templateRootPaths = $this->fluidStandaloneService->getTemplateFolders('template');
         $layoutRootPaths = $this->fluidStandaloneService->getTemplateFolders('layout');

@@ -400,7 +400,7 @@ class EventController extends AbstractController
                     $statusCode = constant(HttpUtility::class . '::HTTP_STATUS_' . $configuration[2]);
                     HttpUtility::setResponseCode($statusCode);
                 }
-                $standaloneTemplate = $this->objectManager->get(StandaloneView::class);
+                $standaloneTemplate = GeneralUtility::makeInstance(StandaloneView::class);
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
 
                 return $standaloneTemplate->render();
