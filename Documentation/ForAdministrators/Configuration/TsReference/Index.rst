@@ -286,6 +286,21 @@ plugin.tx_sfeventmgt
          * phone = telephone
 
  - :Property:
+         settings.waitlist.moveUp.keepMainRegistrationDependency
+
+   :Date type:
+         Boolean
+
+   :Description:
+         If set to true (1), a registration will keep the dependency to the main registration if the registration
+         has been submitted using the simultaneous registration process. Note, that it is recommended to set this
+         value to false (0), since cancellation of the main registration will also cancel moved up "child"
+         registrations.
+
+   :Default:
+         false,
+
+ - :Property:
          settings.confirmation.linkValidity
 
    :Date type:

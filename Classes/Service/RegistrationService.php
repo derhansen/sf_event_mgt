@@ -607,12 +607,19 @@ class RegistrationService
             return;
         }
 
+        $keepMainRegistrationDependency = $settings['waitlist']['moveUp']['keepMainRegistrationDependency'] ?? false;
         $freePlaces = $event->getFreePlaces();
         $moveupRegistrations = $this->registrationRepository->findWaitlistMoveUpRegistrations($event);
 
         /** @var Registration $registration */
         foreach ($moveupRegistrations as $registration) {
             $registration->setWaitlist(false);
+            $registration->setIgnoreNotifications(false);
+
+            if (!(bool)$keepMainRegistrationDependency) {
+                $registration->setMainRegistration(null);
+            }
+
             $this->registrationRepository->update($registration);
 
             // Send messages to user and admin

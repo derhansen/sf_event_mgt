@@ -8,12 +8,18 @@
 
 .. _waitlist_moveup:
 
-Waitlist move up process
-========================
+Default waitlist move up process
+================================
 
 The extension contains a built in waitlist feature to allow your users to register on a waitlist for events, where
 all places are taken. It is possible to automatically move up user from the waitlist either by the built in logic
 in the extension or by implementing a custom logic using the PSR-14 event ``WaitlistMoveUpEvent``
+
+.. note::
+
+   The default waitlist move up process is designed to meet the most common and simple requirements to a
+   waitlist move up process. If the move up process does not fulfill your needs, you have to implement an
+   own process.
 
 How does the waitlist move up process work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,12 +41,18 @@ Note, that the following conditions decide, if a registration will move up:
 
 As soon as a registration moved up from the waitlist, the user will recieve an email, that the registration moved up.
 
-Scenarios not covered by the default move up process
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Things to keep in mind when using the default move up process
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * The default move up process does not execute, when registrations are removed from the event because the confirmation dealine exceeded
 * When the simultaneous registration process is used, registrations are treated seperately by the default move up process.
   This can result in, that the main registration will be moved up, but additonal may not.
+* When the simultaneous registration process is used, the dependency to the main registration will automatically be
+  removed. This is recommended, since the cancellation of the main registration will result in the cancellation
+  of all "connected" registrations. The TypoScript setting `settings.waitlist.moveUp.keepMainRegistrationDependency`
+  can be used to keep the dependency to the main registration.
+* When the simultaneous registration process is used, moved up registrations will automatically be enabled for
+  notification.
 
 Customizing the move up process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

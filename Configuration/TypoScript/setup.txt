@@ -98,6 +98,11 @@ plugin.tx_sfeventmgt {
                 }
             }
         }
+        waitlist {
+            moveUp {
+                keepMainRegistrationDependency = 0
+            }
+        }
         confirmation {
             linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
         }
