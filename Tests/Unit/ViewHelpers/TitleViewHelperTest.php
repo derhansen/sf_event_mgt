@@ -10,14 +10,14 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\TitleViewHelper;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 /**
  * Test for TitleViewHelper
  */
-class TitleViewHelperTest extends UnitTestCase
+class TitleViewHelperTest extends ViewHelperBaseTestcase
 {
     /**
      * @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
@@ -25,12 +25,21 @@ class TitleViewHelperTest extends UnitTestCase
     protected $tsfe;
 
     /**
+     * @var TitleViewHelper
+     */
+    protected $viewHelper;
+
+    /**
      * Set up
      */
     protected function setUp(): void
     {
-        $this->tsfe = $this->getAccessibleMock(TypoScriptFrontendController::class, ['dummy'], [], '', false);
+        parent::setUp();
+        $this->tsfe = $this->prophesize(TypoScriptFrontendController::class)->reveal();
         $GLOBALS['TSFE'] = $this->tsfe;
+        $this->viewHelper = new TitleViewHelper();
+        $this->injectDependenciesIntoViewHelper($this->viewHelper);
+        $this->viewHelper->initializeArguments();
     }
 
     /**
@@ -39,6 +48,7 @@ class TitleViewHelperTest extends UnitTestCase
     protected function tearDown(): void
     {
         unset($this->tsfe);
+        unset($GLOBALS['TSFE']);
     }
 
     /**
@@ -48,17 +58,14 @@ class TitleViewHelperTest extends UnitTestCase
     {
         $pageTitle = 'The event title for the page title';
         $indexedSearchDocTitle = 'The event title for indexed search';
-        /** @var TitleViewHelper $viewHelper */
-        $viewHelper = $this->getAccessibleMock(TitleViewHelper::class, ['dummy']);
-        $viewHelper::renderStatic(
+        $this->viewHelper::renderStatic(
             [
                 'pageTitle' => $pageTitle,
                 'indexedDocTitle' => $indexedSearchDocTitle
             ],
             function () {
-                return '';
             },
-            $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock()
+            $this->prophesize(RenderingContextInterface::class)->reveal()
         );
         self::assertEquals($indexedSearchDocTitle, $GLOBALS['TSFE']->indexedDocTitle);
     }

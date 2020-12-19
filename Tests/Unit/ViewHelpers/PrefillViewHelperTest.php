@@ -111,15 +111,12 @@ class PrefillViewHelperTest extends UnitTestCase
             'prefillSettings' => ['lastname' => 'last_name']
         ];
 
-        $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
+        $request = $this->prophesize(Request::class);
+        $request->getOriginalRequest()->willReturn(null);
 
         $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
         $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($request->reveal());
         $actual = $viewHelper->_call('render');
         self::assertSame('', $actual);
     }
@@ -141,15 +138,12 @@ class PrefillViewHelperTest extends UnitTestCase
             'prefillSettings' => ['lastname' => 'last_name']
         ];
 
-        $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
+        $request = $this->prophesize(Request::class);
+        $request->getOriginalRequest()->willReturn(null);
 
         $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
         $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($request->reveal());
         $actual = $viewHelper->_call('render');
         self::assertSame('Doe', $actual);
     }
@@ -177,23 +171,15 @@ class PrefillViewHelperTest extends UnitTestCase
             ]
         ];
 
-        $mockOriginalRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getArguments'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockOriginalRequest->expects(self::once())->method('getArguments')
-            ->willReturn($requestArguments);
+        $originalRequest = $this->prophesize(Request::class);
+        $originalRequest->getArguments()->willReturn($requestArguments);
 
-        $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRequest->expects(self::once())->method('getOriginalRequest')
-            ->willReturn($mockOriginalRequest);
+        $request = $this->prophesize(Request::class);
+        $request->getOriginalRequest()->willReturn($originalRequest->reveal());
 
         $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
         $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
+        $viewHelper->expects(self::once())->method('getRequest')->willReturn($request->reveal());
         $actual = $viewHelper->_call('render');
         self::assertSame('Submitted Lastname', $actual);
     }

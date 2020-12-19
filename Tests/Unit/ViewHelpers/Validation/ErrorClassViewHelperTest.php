@@ -31,7 +31,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->viewhelper = $this->getMockBuilder(ErrorClassViewHelper::class)
-            ->setMethods(['getValidationErrors'])->getMock();
+            ->onlyMethods(['getValidationErrors'])->getMock();
     }
 
     /**
@@ -106,8 +106,8 @@ class ErrorClassViewHelperTest extends UnitTestCase
      */
     public function registrationFieldDataProvider()
     {
-        $mockField = $this->getMockBuilder(Field::class)->setMethods(['getUid'])->getMock();
-        $mockField->expects(self::any())->method('getUid')->willReturn(2);
+        $mockField = $this->prophesize(Field::class);
+        $mockField->getUid()->willReturn(2);
 
         return [
             'No registration field' => [
@@ -119,21 +119,21 @@ class ErrorClassViewHelperTest extends UnitTestCase
                 [
                     'registration.fields.1' => []
                 ],
-                $mockField,
+                $mockField->reveal(),
                 ''
             ],
             'Error for fieldname with default class name' => [
                 [
                     'registration.fields.2' => []
                 ],
-                $mockField,
+                $mockField->reveal(),
                 'error-class'
             ],
             'Error for fieldname with custom class name' => [
                 [
                     'registration.fields.2' => []
                 ],
-                $mockField,
+                $mockField->reveal(),
                 'custom-class',
                 'custom-class'
             ],
