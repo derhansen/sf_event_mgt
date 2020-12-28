@@ -8,8 +8,8 @@
 
 .. _languagemenu:
 
-Language menu on news detail pages
-==================================
+Language menu on event detail pages
+===================================
 
 If a language menu is rendered on a detail page and the languages are configured to use a strict mode, the following snippet
 helps you to setup a proper menu. If no translation exists, the property `available` is set to `false` - just as if the current
