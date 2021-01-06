@@ -263,6 +263,8 @@ class AbstractEventsTests
 
         $I->see('My event registrations');
         $I->see('Expired Event (cat1, fe_user: user1) ' . $this->lang);
+        $I->see('Expired Event (location: 1, fe_user: user1) ' . $this->lang);
+        $I->see('Event Location 1 ' . $this->lang);
     }
 
     public function registrationWorksForEventWithMultiReg(AcceptanceTester $I)

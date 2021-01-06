@@ -163,7 +163,6 @@ class RegistrationService
             $newReg->setMainRegistration($registration);
             $newReg->setAmountOfRegistrations(1);
             $newReg->setIgnoreNotifications(true);
-            $newReg->_setProperty('_languageUid', $registration->_getProperty('_languageUid'));
             $this->registrationRepository->add($newReg);
         }
     }
@@ -470,45 +469,6 @@ class RegistrationService
         }
         $this->updateRegistrationEventUid($registration, $event);
         $this->updateEventRegistrationCounters($event);
-    }
-
-    /**
-     * Ensures, that the field "sys_language_uid" for registration fields values has the same value as the
-     * language of the registration and event. This is required, so emails include registration field values
-     * and correct registration field labels in their translated state.
-     *
-     * @param Registration $registration
-     * @param Event $event
-     */
-    public function fixRegistationFieldValueLanguage(Registration $registration, Event $event)
-    {
-        // Early return when event is in default language or no registration fields
-        if ((int)$event->_getProperty('_languageUid') === 0 || $event->getRegistrationFields()->count() === 0) {
-            return;
-        }
-
-        $this->updateRegistrationFieldValueLanguage($registration, $event->_getProperty('_languageUid'));
-    }
-
-    /**
-     * Updates the field "sys_language_uid" for all registration field values of the given registration
-     *
-     * @param Registration $registration
-     * @param int $sysLanguageUid
-     */
-    protected function updateRegistrationFieldValueLanguage(Registration $registration, int $sysLanguageUid)
-    {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
-        $queryBuilder->update('tx_sfeventmgt_domain_model_registration_fieldvalue')
-            ->set('sys_language_uid', $sysLanguageUid)
-            ->where(
-                $queryBuilder->expr()->eq(
-                    'registration',
-                    $queryBuilder->createNamedParameter($registration->getUid(), Connection::PARAM_INT)
-                )
-            )
-            ->execute();
     }
 
     /**

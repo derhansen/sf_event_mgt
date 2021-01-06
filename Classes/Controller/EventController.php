@@ -623,7 +623,6 @@ class EventController extends AbstractController
             $registration->setLanguage($GLOBALS['TSFE']->config['config']['language']);
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
             $registration->setWaitlist($isWaitlistRegistration);
-            $registration->_setProperty('_languageUid', $this->getSysLanguageUid());
             $this->registrationRepository->add($registration);
 
             // Persist registration, so we have an UID
@@ -637,9 +636,6 @@ class EventController extends AbstractController
 
             // Fix event in registration for language other than default language
             $this->registrationService->fixRegistrationEvent($registration, $event);
-
-            // Fix language of registration fields if other than default language
-            $this->registrationService->fixRegistationFieldValueLanguage($registration, $event);
 
             $this->eventDispatcher->dispatch(new AfterRegistrationSavedEvent($registration, $this));
 

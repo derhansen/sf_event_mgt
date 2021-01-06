@@ -30,29 +30,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
-        $this->defaultQuerySettings->setRespectSysLanguage(false);
-        $this->defaultQuerySettings->setLanguageOverlayMode(false);
-    }
-
-    /**
-     * Override the default findByUid function
-     *
-     * Note: This is required in order to make Extbase return the registration object with the language
-     *       overlay of all sub-properties overlayed correctly. If this function is not used, findByUid will
-     *       return the registration object in the expected language, but the included event object will be
-     *       in the default language.
-     *
-     *       This is no bug in Extbase, but a special behavior in sf_event_mgt, since the UID of the event in
-     *       the default language is saved to the registration (to make event limitations work correctly)
-     *
-     * @param int $uid
-     * @return object
-     */
-    public function findByUid($uid)
-    {
-        $query = $this->createQuery();
-
-        return $query->matching($query->equals('uid', $uid))->execute()->getFirst();
     }
 
     /**
@@ -142,9 +119,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
         $constraints = [];
         $query = $this->createQuery();
-        $query->getQuerySettings()
-            ->setLanguageOverlayMode(true)
-            ->setRespectSysLanguage(true);
         $this->setStoragePageConstraint($query, $demand, $constraints);
         $this->setDisplayModeConstraint($query, $demand, $constraints);
         $this->setUserConstraint($query, $demand, $constraints);
@@ -164,10 +138,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $constraints = [];
         $query = $this->createQuery();
-        $query->getQuerySettings()
-            ->setLanguageOverlayMode(false)
-            ->setRespectSysLanguage(false)
-            ->setRespectStoragePage(false);
         $constraints[] = $query->equals('event', $event->getUid());
         $constraints[] = $query->equals('waitlist', $waitlist);
 
@@ -184,10 +154,6 @@ class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     {
         $constraints = [];
         $query = $this->createQuery();
-        $query->getQuerySettings()
-            ->setLanguageOverlayMode(false)
-            ->setRespectSysLanguage(false)
-            ->setRespectStoragePage(false);
         $constraints[] = $query->equals('event', $event->getUid());
         $constraints[] = $query->equals('waitlist', true);
         $constraints[] = $query->equals('confirmed', true);

@@ -44,6 +44,18 @@
         <div class="clear"></div>
     </div>
 
+    <f:if condition="{registration.event.location}">
+        <div class="userregistration-list-row">
+            <div class="userregistration-list-label">
+                <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+            </div>
+            <div class="userregistration-list-value event-location">
+                {registration.event.location.title}
+            </div>
+            <div class="clear"></div>
+        </div>
+    </f:if>
+
     <f:if condition="{registration.event.cancellationPossible}">
         <div class="userregistration-list-row">
             <div class="userregistration-list-label">

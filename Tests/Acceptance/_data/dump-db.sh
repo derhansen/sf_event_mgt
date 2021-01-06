@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Cleans up data from previous runs and dumps database for acceptance tests
-mysql -u$DB_USERNAME -p$DB_PASSWORD typo3_sfeventmgt_acceptance_v10 -e "DELETE FROM tx_sfeventmgt_domain_model_registration WHERE uid NOT IN(1, 2, 203); DELETE FROM tx_sfeventmgt_domain_model_registration_fieldvalue;"
+mysql -u$DB_USERNAME -p$DB_PASSWORD typo3_sfeventmgt_acceptance_v10 -e "DELETE FROM tx_sfeventmgt_domain_model_registration WHERE uid NOT IN(1, 2, 203, 220); DELETE FROM tx_sfeventmgt_domain_model_registration_fieldvalue;"
 mysqldump --no-data -u$DB_USERNAME -p$DB_PASSWORD typo3_sfeventmgt_acceptance_v10 > typo3.sql
 mysqldump --no-create-info \
           --ignore-table=typo3_sfeventmgt_acceptance_v10.sys_log \
