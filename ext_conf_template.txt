@@ -10,3 +10,11 @@ enableInvoice = 1
 
 	# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableTransfer
 enableTransfer = 1
+
+# Backend
+###########################
+# cat=backend/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.hideInlineRegistrations
+hideInlineRegistrations = 0
+
+# cat=backend/enable/21; type=integer; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.hideInlineRegistrationsLimit
+hideInlineRegistrationsLimit = 500

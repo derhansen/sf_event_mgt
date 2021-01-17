@@ -89,4 +89,16 @@ call_user_func(function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
         <INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.txt">
     ');
+
+    // Custom FormDataProvider to hide TCA inline fields for registrations on given conditions
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
+    \DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations::class
+    ] = [
+        'depends' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca::class,
+        ],
+        'before' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline::class,
+        ]
+    ];
 });

@@ -357,6 +357,18 @@
 			<trans-unit id="extmng.slugBehaviour" xml:space="preserve">
 				<source>Slug behaviour: uniqueInSite: The same slug can be used for events in different sites. Use this setting *only* if no event records are shared between sites. "unique" means that same event title will lead to different slug names.</source>
 			</trans-unit>
+			<trans-unit id="extmng.hideInlineRegistrations" xml:space="preserve">
+				<source>Hide registrations in event record by limit: Hides the event fields "Registration" and "Registration Waitlist" if the configured limit in "backend.hideInlineRegistrationsLimit" is reached. This option is usefull, when you have events with a huge amount of registrations where the TYPO3 backend gets slow due to performance issues of the TCA inline field.</source>
+			</trans-unit>
+			<trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve">
+				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
+			</trans-unit>
+			<trans-unit id="backend.hideInlineRegistrations.title">
+				<source>Event registrations hidden</source>
+			</trans-unit>
+			<trans-unit id="backend.hideInlineRegistrations.description">
+				<source>This event has %1$s registrations, but due to performance reasons all event registrations are not shown in this view.</source>
+			</trans-unit>
 			<trans-unit id="tabs.language">
 				<source>Language</source>
 			</trans-unit>

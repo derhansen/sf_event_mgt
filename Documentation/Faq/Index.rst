@@ -383,3 +383,16 @@ domain model of ext:news
 Why is a registration link shown even if the registration dealine expired?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Make sure that you configured the page cache settings as described in :ref:`pagecache`
+
+Editing events is very slow having a huge amount of registrations. Can this be fixed?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Short answer: No, not really. For TCA inline fields, TYPO3 will load all data before opening the records
+in the backend. So having an event with 1500 registrations will actually load all registrations before
+showing the edit form for the event in the TYPO3 backend. Note, that just disabling the field "registration"
+by TCA will not work, since TYPO3 will load the data anyway.
+
+In order to make it at least possible to edit the event data, the extension makes it possible to hide all
+registration inline fields and prevent TYPO3 from loading all data when a configurable limit of registrations
+is reached per event.
+
+Please refer to section :ref:`_extconf` for available options.

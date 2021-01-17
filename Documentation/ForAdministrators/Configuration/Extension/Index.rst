@@ -63,3 +63,27 @@ Extension settings
 
    :Default:
          true
+
+ - :Property:
+         hideInlineRegistrations
+
+   :Date type:
+         Boolen
+
+   :Description:
+         Enable feature to hide registrations when editing an event in the backend
+
+   :Default:
+         False
+
+- :Property:
+         hideInlineRegistrationsLimit
+
+   :Date type:
+         Integer
+
+   :Description:
+         Max amount of registrations to display before event registrations will be hidden when editing an event.
+
+   :Default:
+         500
