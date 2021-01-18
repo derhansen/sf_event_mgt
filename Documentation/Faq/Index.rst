@@ -335,32 +335,6 @@ Example Partial Code (will work until Fluid < 3.0)::
 
 As an alternative, you could create an own ViewHelper which generates the required JSON-LD data.
 
-Is it required to save the sys_language_uid for registrations?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Long story short: Yes, it is.
-
-In order to make limitations (e.g. max. participants) for events to work, the extension
-always saves events in the default language to registrations. This is a workaround, but
-as fas as I know the only way to have one central place to access total amount of
-registrations for an event.
-
-The correct sys_language_uid in the registration object is required to make Extbase
-fetch the translated event object when accessing the registration object.
-
-When the sys_language_uid is missing, wrong or -1, $registrationRepository->getByUid($uid)
-will return the expected registration object, but the getEvent() method returns the
-wrong (non translated) event, so e.g. translated emails will not show the translations
-for the event.
-
-When fetching the event using a custom findBy method using the Extbase query builder
-will return the translated event, but only if $registrationRepository->getByUid($uid)
-has not been called before. So this is no option.
-
-In order to close to the TYPO3 core and not to implement more workarounds for translation
-issues, it is best to save registrations and registration fields with the current
-sys_language_uid set for frontend requests.
-
 Images for categories are not shown in the frontend?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Categories in TYPO3 backend do not have an image by default. It is ext:news that adds additional
