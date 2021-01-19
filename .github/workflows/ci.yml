@@ -27,9 +27,9 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Set up PHP Version
-        run: |
-          sudo update-alternatives --set php /usr/bin/php${php};
-          php -v
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: {php}
 
       - name: Start MySQL
         run: sudo /etc/init.d/mysql start
