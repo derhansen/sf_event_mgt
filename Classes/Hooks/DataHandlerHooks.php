@@ -73,6 +73,8 @@ class DataHandlerHooks
                     'settings.notification.registrationWaitlistConfirmed.adminSubject',
                     'settings.notification.registrationCancelled.userSubject',
                     'settings.notification.registrationCancelled.adminSubject',
+                    'settings.notification.registrationWaitlistMoveUp.userSubject',
+                    'settings.notification.registrationWaitlistMoveUp.adminSubject',
                 ],
                 'sDEF' => [
                     'settings.displayMode',
