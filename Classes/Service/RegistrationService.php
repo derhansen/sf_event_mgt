@@ -528,15 +528,15 @@ class RegistrationService
      *
      * @param Event $event
      * @param int $waitlist
-     * @return mixed
+     * @return int
      */
-    protected function getEventRegistrationCount(Event $event, int $waitlist = 0)
+    protected function getEventRegistrationCount(Event $event, int $waitlist = 0): int
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
         $queryBuilder->getRestrictions()->removeByType(HiddenRestriction::class);
 
-        return $queryBuilder->count('uid')
+        return (int)$queryBuilder->count('uid')
             ->from('tx_sfeventmgt_domain_model_registration')
             ->where(
                 $queryBuilder->expr()->eq(
