@@ -90,13 +90,13 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
                 $resultCH = json_decode(curl_exec($ch));
                 if (!(bool)$resultCH->success) {
                     $this->addError(
-                        LocalizationUtility::translate('validation.possible_robot', 'sf_event_mgt'),
+                        LocalizationUtility::translate('validation.possible_robot', 'SfEventMgt'),
                         1231423345
                     );
                 }
             } else {
                 $this->addError(
-                    LocalizationUtility::translate('validation.missing_recaptcha', 'sf_event_mgt'),
+                    LocalizationUtility::translate('validation.missing_recaptcha', 'SfEventMgt'),
                     1231423389
                 );
             }
