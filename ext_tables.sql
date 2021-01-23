@@ -156,7 +156,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_customnotificationlog (
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
 	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 
-	PRIMARY KEY (uid)
+	PRIMARY KEY (uid),
+	KEY event (event)
 );
 
 #
@@ -261,8 +262,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	sorting int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
-	KEY parent (pid)
-
+	KEY parent (pid),
+    KEY event (event, waitlist)
 );
 
 #
@@ -304,6 +305,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_priceoption (
 
 	PRIMARY KEY (uid),
 	KEY parent (pid),
+	KEY event (event),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
 	KEY language (l10n_parent,sys_language_uid)
 );
@@ -441,5 +443,6 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_fieldvalue (
 	t3_origuid int(11) DEFAULT '0' NOT NULL,
 
 	PRIMARY KEY (uid),
+    KEY registration (registration),
 	KEY parent (pid)
 );
