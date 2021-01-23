@@ -31,8 +31,10 @@ use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\ImmediateResponseException;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -620,7 +622,7 @@ class EventController extends AbstractController
             $registration->setPid($event->getPid());
             $registration->setRegistrationDate(new \DateTime());
             $registration->setConfirmationUntil($confirmationUntil);
-            $registration->setLanguage($GLOBALS['TSFE']->config['config']['language']);
+            $registration->setLanguage($this->getCurrentLanguageTwoLetterIsoCode());
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
             $registration->setWaitlist($isWaitlistRegistration);
             $this->registrationRepository->add($registration);
@@ -1078,10 +1080,26 @@ class EventController extends AbstractController
      *
      * @return int
      */
-    protected function getSysLanguageUid()
+    protected function getSysLanguageUid(): int
     {
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
 
         return $languageAspect->getId();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCurrentLanguageTwoLetterIsoCode(): string
+    {
+        if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface &&
+            $GLOBALS['TYPO3_REQUEST']->getAttribute('language') instanceof SiteLanguage
+        ) {
+            /** @var SiteLanguage $siteLanguage */
+            $siteLanguage = $GLOBALS['TYPO3_REQUEST']->getAttribute('language');
+            return $siteLanguage->getTwoLetterIsoCode();
+        }
+
+        return '';
     }
 }
