@@ -22,6 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class DataHandlerHooks
 {
     const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
+    const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
 
     /**
      * Flushes the cache if a event record was edited.
@@ -172,13 +173,17 @@ class DataHandlerHooks
         }
     }
 
-    protected function deleteCustomNotificationsByEvent($eventUid)
+    /**
+     * Removes all custom notification log entried for the given event UID
+     *
+     * @param int $eventUid
+     */
+    protected function deleteCustomNotificationsByEvent(int $eventUid): void
     {
-        $customNotificationLogTable = 'tx_sfeventmgt_domain_model_customnotificationlog';
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
-            ->getQueryBuilderForTable($customNotificationLogTable);
+            ->getQueryBuilderForTable(self::CUSTOMNOTIFICATIONLOG_TABLE);
         $queryBuilder
-            ->delete($customNotificationLogTable)
+            ->delete(self::CUSTOMNOTIFICATIONLOG_TABLE)
             ->where(
                 $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT))
             )
