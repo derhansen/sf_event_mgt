@@ -12,7 +12,6 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException;
 
 /**
  * Validator for recaptcha.
@@ -48,7 +47,7 @@ class RecaptchaValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
      * Checks if the given value is a valid recaptcha.
      *
      * @param mixed $value The value that should be validated
-     * @throws InvalidVariableException
+     * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
     public function isValid($value)
     {
