@@ -446,3 +446,10 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_fieldvalue (
     KEY registration (registration),
 	KEY parent (pid)
 );
+
+#
+# Extend table structure of table 'sys_category'
+#
+CREATE TABLE sys_category (
+    slug varchar(2048)
+);

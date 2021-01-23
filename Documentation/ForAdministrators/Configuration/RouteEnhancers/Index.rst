@@ -36,6 +36,7 @@ Configuration::
           - { routePath: '/location/{location_title}', _controller: 'Event::list', _arguments: {'location_title': 'overwriteDemand/location'}}
           - { routePath: '/speaker/{speaker_name}', _controller: 'Event::list', _arguments: {'speaker_name': 'overwriteDemand/speaker'}}
           - { routePath: '/organisator/{speaker_name}', _controller: 'Event::list', _arguments: {'organisator_name': 'overwriteDemand/organisator'}}
+          - { routePath: '/category/{category_title}', _controller: 'Event::list', _arguments: {'category_title': 'overwriteDemand/category'}}
         defaultController: 'Event::list'
         requirements:
           eventuid: '\d+'
@@ -59,6 +60,10 @@ Configuration::
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_location'
             routeFieldName: 'slug'
+          category_title:
+            type: PersistedAliasMapper
+            tableName: sys_category
+            routeFieldName: slug
           speaker_name:
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_speaker'
@@ -71,7 +76,9 @@ Configuration::
 Note, that some requirements are too loose (e.g. eventuid, reguid) and can not be simplified, so therefore
 a `cHash` parameter will be added to the route automatically.
 
-Also note, that sf_event_mgt does not extend sys_category with a slug field, since ext:news already does so. So if you
-for example want to use the title of a sys_category record as overwriteDemand route parameter and do not use ext:news,
-you may have to extend sys_category with a slug field yourself.
+The extension also extends sys_category with a slug field the same way as ext:news does. Please note, that
+the overwriteDemand/category argument is a string, which can contain *multiple* category UIDs. When you
+use the overwriteDemand for categories with only *one* category, the example configuration above will work.
+If you pass multipl, comma separated category UIDs to the overwriteDemand/category argument, you have to
+implement you own routing aspect.
 
