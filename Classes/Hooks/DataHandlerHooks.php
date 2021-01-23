@@ -11,6 +11,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
 
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -30,7 +31,7 @@ class DataHandlerHooks
      */
     public function clearCachePostProc(array $params)
     {
-        if (isset($params['table']) && $params['table'] === 'tx_sfeventmgt_domain_model_event') {
+        if (isset($params['table']) && $params['table'] === self::EVENT_TABLE) {
             $eventUid = $params['uid'] ?? 0;
             $pageUid = $params['uid_page'] ?? 0;
             if ($eventUid > 0 || $pageUid > 0) {
@@ -150,7 +151,8 @@ class DataHandlerHooks
     }
 
     /**
-     * Sets the TCA type of certain fields back to their original state after a copy or move command
+     * (1) Sets the TCA type of certain fields back to their original state after a copy or move command
+     * (2) Handles deletion of custom notifications when deleting an event
      *
      * @param string $command
      * @param string $table
@@ -165,6 +167,21 @@ class DataHandlerHooks
         if (in_array($command, ['copy', 'localize']) && $table === self::EVENT_TABLE) {
             $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration']['config']['type'] = 'inline';
             $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration_waitlist']['config']['type'] = 'inline';
+        } elseif ($command === 'delete' && $table === self::EVENT_TABLE) {
+            $this->deleteCustomNotificationsByEvent($id);
         }
+    }
+
+    protected function deleteCustomNotificationsByEvent($eventUid)
+    {
+        $customNotificationLogTable = 'tx_sfeventmgt_domain_model_customnotificationlog';
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable($customNotificationLogTable);
+        $queryBuilder
+            ->delete($customNotificationLogTable)
+            ->where(
+                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT))
+            )
+            ->execute();
     }
 }
