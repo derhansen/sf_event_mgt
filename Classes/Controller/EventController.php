@@ -1088,6 +1088,8 @@ class EventController extends AbstractController
     }
 
     /**
+     * Returns the two letter ISO code for the current language
+     *
      * @return string
      */
     protected function getCurrentLanguageTwoLetterIsoCode(): string
