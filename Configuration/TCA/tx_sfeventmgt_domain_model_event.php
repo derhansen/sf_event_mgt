@@ -1,6 +1,6 @@
 <?php
 
-$slugBehaviour = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+$slugBehaviour = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
     ->get('sf_event_mgt', 'slugBehaviour');
 
 return [
