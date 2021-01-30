@@ -400,8 +400,8 @@ class NotificationService
         }
 
         return [
-            $template,
-            $subject
+            $template ?? '',
+            $subject ?? ''
         ];
     }
 
@@ -525,8 +525,8 @@ class NotificationService
         }
 
         return [
-            $template,
-            $subject
+            $template ?? '',
+            $subject ?? ''
         ];
     }
 

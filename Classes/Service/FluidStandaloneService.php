@@ -119,15 +119,15 @@ class FluidStandaloneService
      * @param array $variables Variables
      * @return string Parsed string
      */
-    public function parseStringFluid($string, $variables = [])
+    public function parseStringFluid(string $string, array $variables = []): string
     {
-        if (empty($string)) {
-            return $string;
+        if ($string === '') {
+            return '';
         }
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
 
-        return $standaloneView->render();
+        return $standaloneView->render() ?? '';
     }
 }
