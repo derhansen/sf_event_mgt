@@ -181,7 +181,6 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'date',
-                'checkbox' => 1,
                 'default' => time(),
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,

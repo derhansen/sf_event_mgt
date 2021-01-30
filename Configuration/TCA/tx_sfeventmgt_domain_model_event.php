@@ -327,7 +327,6 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 1,
                 'default' => time()
             ],
         ],
@@ -341,7 +340,6 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 1,
                 'default' => time() + 3600
             ],
         ],
@@ -412,7 +410,6 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
-                'checkbox' => 1
             ],
         ],
         'registration_deadline' => [
@@ -427,7 +424,6 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
-                'checkbox' => 1
             ],
         ],
         'enable_cancel' => [
@@ -461,7 +457,6 @@ return [
                 'size' => 13,
                 'eval' => 'datetime',
                 'default' => 0,
-                'checkbox' => 1
             ],
         ],
         'enable_autoconfirm' => [

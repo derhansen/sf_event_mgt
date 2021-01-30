@@ -242,7 +242,6 @@ return [
                 'size' => 10,
                 'eval' => 'date',
                 'default' => 0,
-                'checkbox' => 1
             ],
         ],
         'confirmation_until' => [
@@ -254,7 +253,6 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
-                'checkbox' => 1,
                 'default' => time()
             ],
         ],
