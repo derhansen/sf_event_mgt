@@ -411,6 +411,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
+                'default' => 0,
                 'checkbox' => 1
             ],
         ],
@@ -425,6 +426,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
+                'default' => 0,
                 'checkbox' => 1
             ],
         ],
@@ -458,6 +460,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
+                'default' => 0,
                 'checkbox' => 1
             ],
         ],
@@ -641,6 +644,7 @@ return [
                 'size' => 5,
                 'minitems' => 0,
                 'maxitems' => 100,
+                'default' => 0,
                 'MM' => 'tx_sfeventmgt_event_speaker_mm',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,

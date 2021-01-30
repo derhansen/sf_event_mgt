@@ -241,6 +241,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 10,
                 'eval' => 'date',
+                'default' => 0,
                 'checkbox' => 1
             ],
         ],
@@ -329,6 +330,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime',
+                'default' => 0,
             ],
         ],
         'event' => [
