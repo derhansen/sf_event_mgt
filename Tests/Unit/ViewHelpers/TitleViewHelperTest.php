@@ -10,8 +10,8 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\TitleViewHelper;
-use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 /**

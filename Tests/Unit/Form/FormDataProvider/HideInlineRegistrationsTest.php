@@ -9,12 +9,9 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Form\formDataProvider;
 
-use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
-use DERHANSEN\SfEventMgt\Service\CalendarService;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -91,8 +88,8 @@ class HideInlineRegistrationsTest extends UnitTestCase
         $mockHideInlineRegistrations = $this->getMockBuilder(HideInlineRegistrations::class)
             ->onlyMethods(['getRegistrationCount'])
             ->getMock();
-        $mockHideInlineRegistrations->expects($this->once())->method('getRegistrationCount')
-            ->will($this->returnValue(11));
+        $mockHideInlineRegistrations->expects(self::once())->method('getRegistrationCount')
+            ->willReturn(11);
 
         $languageServiceProphecy = $this->prophesize(LanguageService::class);
         $languageServiceProphecy->sL(self::LLL . 'description')->shouldBeCalled()->willReturn('desc');

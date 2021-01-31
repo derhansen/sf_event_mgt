@@ -23,7 +23,6 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
  *
  * 20 = DERHANSEN\SfEventMgt\DataProcessing\DisableLanguageMenuProcessor
  * 20.menus = languageMenu
- *
  */
 class DisableLanguageMenuProcessor implements DataProcessorInterface
 {
