@@ -169,7 +169,7 @@ class PageLayoutView
      * Returns the PID config for the given PID
      *
      * @param string $pidSetting
-     * @param $sheet
+     * @param string $sheet
      */
     public function getPluginPidConfig($pidSetting, $sheet = 'sDEF')
     {

@@ -253,7 +253,7 @@ class AdministrationController extends AbstractController
     /**
      * Returns the create new record URL for the given table
      *
-     * @param $table
+     * @param string $table
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      * @return string
      */

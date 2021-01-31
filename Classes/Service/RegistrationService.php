@@ -286,7 +286,7 @@ class RegistrationService
             $titleKey = 'cancelRegistration.title.failed';
         }
 
-        if (!$failed && $registration->getEvent()->getCancelDeadline() > 0
+        if (!$failed && $registration->getEvent()->getCancelDeadline()
             && $registration->getEvent()->getCancelDeadline() < new \DateTime()
         ) {
             $failed = true;

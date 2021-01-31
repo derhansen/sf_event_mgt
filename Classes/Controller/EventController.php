@@ -375,7 +375,6 @@ class EventController extends AbstractController
      * Error handling if event is not found
      *
      * @param array $settings
-     * @return string
      */
     protected function handleEventNotFoundError($settings)
     {

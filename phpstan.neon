@@ -6,9 +6,6 @@ parameters:
     paths:
         - Classes/
         - Configuration/
-        - Tests/
-    excludes_analyse:
-        - Tests/Acceptance
 
     bootstrapFiles:
         - %rootDir%/../../typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php

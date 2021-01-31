@@ -118,7 +118,7 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets fields
      *
      * @param string $fields
-     * @return string
+     * @return void
      */
     public function setFields($fields)
     {

@@ -47,7 +47,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Backend user
      *
-     * @var \TYPO3\CMS\Beuser\Domain\Model\BackendUser
+     * @var \TYPO3\CMS\Extbase\Domain\Model\BackendUser
      */
     protected $cruserId;
 
@@ -134,7 +134,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Returns the backend user
      *
-     * @return \TYPO3\CMS\Beuser\Domain\Model\BackendUser
+     * @return \TYPO3\CMS\Extbase\Domain\Model\BackendUser
      */
     public function getCruserId()
     {
@@ -144,7 +144,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Sets the backend user
      *
-     * @param \TYPO3\CMS\Beuser\Domain\Model\BackendUser $cruserId CruserId
+     * @param \TYPO3\CMS\Extbase\Domain\Model\BackendUser $cruserId CruserId
      */
     public function setCruserId($cruserId)
     {

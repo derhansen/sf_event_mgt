@@ -13,7 +13,7 @@ namespace DERHANSEN\SfEventMgt\Utility;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
-use TYPO3\CMS\Core\Site\Entity\SiteInterface;
+use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -29,7 +29,7 @@ class EventAvailability
      */
     public function check(int $languageId, int $eventId): bool
     {
-        /** @var SiteInterface $site */
+        /** @var Site $site */
         $site = $this->getRequest()->getAttribute('site');
         $allAvailableLanguagesOfSite = $site->getAllLanguages();
 

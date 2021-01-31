@@ -210,7 +210,6 @@ class AttachmentService
         $property = $object->_getProperty($propertyName);
 
         if ($property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
-            /** @var $property \TYPO3\CMS\Extbase\Persistence\ObjectStorage */
             foreach ($property as $object) {
                 if ($object instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
                     $attachments[] = $object->getOriginalResource()->getForLocalProcessing(false);
@@ -219,7 +218,6 @@ class AttachmentService
         }
 
         if ($property instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
-            /** @var $property \TYPO3\CMS\Extbase\Domain\Model\FileReference */
             $attachments[] = $property->getOriginalResource()->getForLocalProcessing(false);
         }
 
