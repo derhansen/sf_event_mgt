@@ -32,7 +32,10 @@
     "typo3/cms-fluid-styled-content": "^10.4",
     "typo3/cms-frontend": "^10.4",
     "typo3/cms-felogin": "^10.4",
-    "typo3/cms-tstemplate": "^10.4"
+    "typo3/cms-tstemplate": "^10.4",
+    "saschaegerer/phpstan-typo3": "^0.13.1",
+    "phpstan/extension-installer": "^1.1",
+    "jangregor/phpstan-prophecy": "^0.8.1"
   },
   "replace": {
     "typo3-ter/sf-event-mgt": "self.version"

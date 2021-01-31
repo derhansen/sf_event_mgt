@@ -1,0 +1,14 @@
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 2
+    paths:
+        - Classes/
+        - Configuration/
+        - Tests/
+    excludes_analyse:
+        - Tests/Acceptance
+
+    bootstrapFiles:
+        - %rootDir%/../../typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php

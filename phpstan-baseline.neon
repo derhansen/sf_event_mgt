@@ -1,0 +1,14 @@
+parameters:
+  ignoreErrors:
+    -
+      message: "#Call to an undefined method DERHANSEN\\\\SfEventMgt\\\\ViewHelpers\\\\Validation\\\\ErrorClassViewHelper\\:\\:expects\\(\\)\\.#"
+      count: 2
+      path: Tests/Unit/ViewHelpers/Validation/ErrorClassViewHelperTest.php
+
+    -
+      message: "#Call to an undefined method PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|TYPO3\\\\TestingFramework\\\\Core\\\\AccessibleObjectInterface\\:\\:setArguments\\(\\)\\.#"
+      path: Tests/Unit/ViewHelpers/Registration/IsRequiredFieldViewHelperTest.php
+
+    -
+      message: "#Call to an undefined method PHPUnit\\\\Framework\\\\MockObject\\\\MockObject\\|TYPO3\\\\TestingFramework\\\\Core\\\\AccessibleObjectInterface\\:\\:render\\(\\)\\.#"
+      path: Tests/Unit/ViewHelpers/Registration/IsRequiredFieldViewHelperTest.php
