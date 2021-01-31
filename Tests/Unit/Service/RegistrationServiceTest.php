@@ -823,9 +823,9 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider moveUpWaitlistRegistrationsDataProvider
-     * @param $enableWaitlistMoveup
-     * @param $amountWaitlistRegistrations
-     * @param $freePlaces
+     * @param bool $enableWaitlistMoveup
+     * @param int $amountWaitlistRegistrations
+     * @param int $freePlaces
      */
     public function moveUpWaitlistRegistrationDoesNotProceedIfCriteriaNotMatch(
         $enableWaitlistMoveup,

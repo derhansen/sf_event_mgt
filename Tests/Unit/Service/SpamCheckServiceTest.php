@@ -68,7 +68,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider
-     * @param $settings
+     * @param array $settings
      */
     public function isSpamCheckFailedReturnsFalseForExpectedConditions($settings)
     {

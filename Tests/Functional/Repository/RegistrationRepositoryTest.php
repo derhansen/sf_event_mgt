@@ -262,7 +262,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsStoragePage()
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = $this->objectManager->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
@@ -281,7 +281,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsDisplaymode()
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = $this->objectManager->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
@@ -300,7 +300,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsUser()
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = $this->objectManager->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(2);
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
@@ -319,7 +319,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsOrder()
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = $this->objectManager->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
@@ -340,7 +340,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsOrderDirection()
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\frontendUserRepository $feUserRepository */
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = $this->objectManager->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */

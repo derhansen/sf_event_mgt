@@ -81,9 +81,9 @@ class ErrorClassViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider fieldnameDataProvider
-     * @param $validationErrors
-     * @param $fieldname
-     * @param $expected
+     * @param array $validationErrors
+     * @param string $fieldname
+     * @param string $expected
      * @param string $errorClass
      */
     public function viewHelperReturnsExpectedStringForFieldname(
@@ -143,9 +143,9 @@ class ErrorClassViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider registrationFieldDataProvider
-     * @param $validationErrors
-     * @param $registrationField
-     * @param $expected
+     * @param array $validationErrors
+     * @param string $registrationField
+     * @param string $expected
      * @param string $errorClass
      */
     public function viewHelperReturnsExpectedStringForRegistrationField(

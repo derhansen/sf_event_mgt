@@ -100,8 +100,8 @@ class EventRepositoryTest extends FunctionalTestCase
      * Test if storagePage restriction in demand works
      * @dataProvider findDemandedRecordsByStoragePageDataProvider
      * @test
-     * @param $pid
-     * @param $expected
+     * @param mixed $pid
+     * @param int $expected
      * @throws \TYPO3\CMS\Extbase\Object\Exception
      */
     public function findDemandedRecordsByStoragePage($pid, $expected)

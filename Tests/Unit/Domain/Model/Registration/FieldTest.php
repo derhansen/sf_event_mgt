@@ -348,8 +348,8 @@ class FieldTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getDatepickermodeTypeDataProvider
-     * @param $datepickerMode
-     * @param $expected
+     * @param int $datepickerMode
+     * @param string $expected
      */
     public function getDatepickermodeTypeReturnsExpectedValue($datepickerMode, $expected)
     {

@@ -33,8 +33,6 @@ class CategoryRepositoryTest extends FunctionalTestCase
 
     /**
      * Setup
-     *
-     * @throws \TYPO3\CMS\Core\Tests\Exception
      */
     public function setUp(): void
     {
