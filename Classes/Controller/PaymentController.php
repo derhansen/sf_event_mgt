@@ -237,24 +237,24 @@ class PaymentController extends AbstractController
     protected function proceedWithAction($registration, $actionName)
     {
         if ($registration->getEvent()->getEnablePayment() === false) {
-            $message = LocalizationUtility::translate('payment.messages.paymentNotEnabled', 'sf_event_mgt');
+            $message = LocalizationUtility::translate('payment.messages.paymentNotEnabled', 'SfEventMgt');
             throw new PaymentException($message, 1899934881);
         }
 
         if ($this->paymentService->paymentActionEnabled($registration->getPaymentmethod(), $actionName) === false) {
-            $message = LocalizationUtility::translate('payment.messages.actionNotEnabled', 'sf_event_mgt');
+            $message = LocalizationUtility::translate('payment.messages.actionNotEnabled', 'SfEventMgt');
             throw new PaymentException($message, 1899934882);
         }
 
         if ($registration->getPaid()) {
-            $message = LocalizationUtility::translate('payment.messages.paymentAlreadyProcessed', 'sf_event_mgt');
+            $message = LocalizationUtility::translate('payment.messages.paymentAlreadyProcessed', 'SfEventMgt');
             throw new PaymentException($message, 1899934883);
         }
 
         if ($registration->getEvent()->getRestrictPaymentMethods()) {
             $selectedPaymentMethods = explode(',', $registration->getEvent()->getSelectedPaymentMethods());
             if (!in_array($registration->getPaymentmethod(), $selectedPaymentMethods)) {
-                $message = LocalizationUtility::translate('payment.messages.paymentMethodNotAvailable', 'sf_event_mgt');
+                $message = LocalizationUtility::translate('payment.messages.paymentMethodNotAvailable', 'SfEventMgt');
                 throw new PaymentException($message, 1899934884);
             }
         }
