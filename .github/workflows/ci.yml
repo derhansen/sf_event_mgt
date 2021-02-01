@@ -1,0 +1,65 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-18.04
+
+    strategy:
+      matrix:
+        typo3: ['^8.7', '^9.5']
+        php: ['7.0', '7.1', '7.2', '7.3', '7.4']
+        exclude:
+          - typo3: '^9.5'
+            php: '7.0'
+          - typo3: '^9.5'
+            php: '7.1'
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up PHP Version
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: composer:v2
+          extensions: mysql
+
+      - name: Start MySQL
+        run: sudo /etc/init.d/mysql start
+
+      # Directory permissions for .composer are wrong, so we remove the complete directory
+      # https://github.com/actions/virtual-environments/issues/824
+      - name: Delete .composer directory
+        run: |
+          sudo rm -rf ~/.composer
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache
+          key: dependencies-composer-${{ hashFiles('composer.json') }}
+
+      - name: Install composer dependencies
+        run: |
+          composer require nimut/typo3-complete=${{ matrix.typo3 }}
+          composer install --no-progress
+          export TYPO3_PATH_WEB=$PWD/.Build/Web
+
+      - name: Unit tests
+        run: |
+          echo "Running unit tests";
+          .Build/bin/phpunit --colors -c Tests/Build/UnitTests.xml
+
+      - name: Functional tests
+        run: |
+          export typo3DatabaseName="typo3";
+          export typo3DatabaseHost="127.0.0.1";
+          export typo3DatabaseUsername="root";
+          export typo3DatabasePassword="root";
+          echo "Running functional tests";
+          find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit -c Tests/Build/FunctionalTests.xml {}'
