@@ -272,7 +272,7 @@ class PaymentController extends AbstractController
     {
         $result = $this->hashService->validateHmac($action . '-' . $registration->getUid(), $hmac);
         if (!$result) {
-            $message = LocalizationUtility::translate('payment.messages.invalidHmac', 'sf_event_mgt');
+            $message = LocalizationUtility::translate('payment.messages.invalidHmac', 'SfEventMgt');
             throw new InvalidHashException($message, 1899934890);
         }
     }
