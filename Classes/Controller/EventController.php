@@ -157,6 +157,8 @@ class EventController extends AbstractController
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         $demand->setCategories($settings['categoryMenu']['categories']);
         $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
+        $demand->setOrderField($settings['categoryMenu']['orderField'] ?? 'uid');
+        $demand->setOrderDirection($settings['categoryMenu']['orderDirection'] ?? 'asc');
 
         return $demand;
     }

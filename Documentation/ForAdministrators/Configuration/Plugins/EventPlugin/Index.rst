@@ -427,7 +427,7 @@ Tab notification
 
    :Key:
          notification.senderName
-         
+
  - :Property:
          settings.notification.replyToEmail
 
@@ -616,3 +616,27 @@ Tab category menu
 
    :Key:
          categoryMenu.includeSubcategories
+
+ - :Property:
+         Order field
+
+   :View:
+         List
+
+   :Description:
+         Order field for the category menu (internally limited to "title", "uid" and "sorting")
+
+   :Key:
+         categoryMenu.orderField
+
+ - :Property:
+         Order direction
+
+   :View:
+         List
+
+   :Description:
+         Order direction for the category menu
+
+   :Key:
+         categoryMenu.orderDirection

@@ -9,8 +9,10 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * The repository for Categories
@@ -52,6 +54,15 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRe
 
         if (count($constraints) > 0) {
             $query->matching($query->logicalAnd($constraints));
+        }
+
+        if ($demand->getOrderField() !== '' && $demand->getOrderDirection() !== '' &&
+            in_array($demand->getOrderField(), CategoryDemand::ORDER_FIELD_ALLOWED, true)
+        ) {
+            $orderings[$demand->getOrderField()] = ((strtolower($demand->getOrderDirection()) == 'desc') ?
+                QueryInterface::ORDER_DESCENDING :
+                QueryInterface::ORDER_ASCENDING);
+            $query->setOrderings($orderings);
         }
 
         return $query->execute();

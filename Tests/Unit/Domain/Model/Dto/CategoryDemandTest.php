@@ -91,4 +91,38 @@ class CategoryDemandTest extends UnitTestCase
         $this->subject->setIncludeSubcategories(true);
         self::assertTrue($this->subject->getIncludeSubcategories());
     }
+
+    /**
+     * @test
+     */
+    public function orderFieldReturnsDefaultValue()
+    {
+        $this->assertSame('uid', $this->subject->getOrderField());
+    }
+
+    /**
+     * @test
+     */
+    public function orderFieldCanBeSet()
+    {
+        $this->subject->setOrderField('title');
+        $this->assertSame('title', $this->subject->getOrderField());
+    }
+
+    /**
+     * @test
+     */
+    public function orderDirectionReturnsDefaultValue()
+    {
+        $this->assertSame('asc', $this->subject->getOrderDirection());
+    }
+
+    /**
+     * @test
+     */
+    public function orderDirectionCanBeSet()
+    {
+        $this->subject->setOrderDirection('desc');
+        $this->assertSame('desc', $this->subject->getOrderDirection());
+    }
 }

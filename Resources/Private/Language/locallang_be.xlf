@@ -88,6 +88,12 @@
 			<trans-unit id="flexforms_general.orderField.title">
 				<source>Title</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.uid">
+				<source>Record ID</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.orderField.sorting">
+				<source>Sorting in TYPO3</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.orderField.startdate">
 				<source>Start date</source>
 			</trans-unit>

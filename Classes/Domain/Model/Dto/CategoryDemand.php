@@ -16,6 +16,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
  */
 class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
+    const ORDER_FIELD_ALLOWED = ['title', 'uid', 'sorting'];
+
     /**
      * Storage page
      *
@@ -43,6 +45,16 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var bool
      */
     protected $includeSubcategories = false;
+
+    /**
+     * @var string
+     */
+    protected $orderField = 'uid';
+
+    /**
+     * @var string
+     */
+    protected $orderDirection = 'asc';
 
     /**
      * Sets the storage page
@@ -122,5 +134,39 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setIncludeSubcategories($includeSubcategories)
     {
         $this->includeSubcategories = $includeSubcategories;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getOrderDirection(): string
+    {
+        return $this->orderDirection;
+    }
+
+    /**
+     * @param string $orderDirection
+     */
+    public function setOrderDirection(string $orderDirection): void
+    {
+        $this->orderDirection = $orderDirection;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderField(): string
+    {
+        return $this->orderField;
+    }
+
+    /**
+     * @param string $orderField
+     */
+    public function setOrderField(string $orderField): void
+    {
+        $this->orderField = $orderField;
     }
 }
