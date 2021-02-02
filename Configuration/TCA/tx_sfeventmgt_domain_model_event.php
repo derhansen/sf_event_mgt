@@ -775,6 +775,8 @@ return [
                     'useSortable' => 1,
                 ],
             ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly'
         ],
         'registration_waitlist' => [
             'exclude' => true,
@@ -794,6 +796,8 @@ return [
                     'useSortable' => 1,
                 ],
             ],
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly'
         ],
         'registration_fields' => [
             'exclude' => true,
