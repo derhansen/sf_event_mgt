@@ -13,6 +13,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * ForeignRecord demand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class ForeignRecordDemand extends AbstractEntity
 {

@@ -14,6 +14,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Abstract Record viewhelper for backend links
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class IsActionEnabledViewHelper extends AbstractViewHelper
 {

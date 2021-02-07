@@ -14,6 +14,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ICalendar Description viewhelper
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarDateViewHelper extends AbstractViewHelper
 {

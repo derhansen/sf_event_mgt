@@ -17,6 +17,8 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * FluidStandaloneService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class FluidStandaloneService
 {

@@ -14,6 +14,8 @@ use DERHANSEN\SfEventMgt\Utility\Page;
 
 /**
  * UserRegistrationController
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class UserRegistrationController extends AbstractController
 {

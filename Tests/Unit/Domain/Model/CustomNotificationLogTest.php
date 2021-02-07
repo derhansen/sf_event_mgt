@@ -17,6 +17,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CustomNotificationLogTest extends UnitTestCase
 {

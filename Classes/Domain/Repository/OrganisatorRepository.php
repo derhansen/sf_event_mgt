@@ -11,6 +11,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /**
  * The repository for Organisator
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class OrganisatorRepository extends AbstractForeignRecordRepository
 {

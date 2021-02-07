@@ -14,6 +14,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Search demand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class SearchDemand extends AbstractEntity
 {

@@ -29,6 +29,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * EventController
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 abstract class AbstractController extends ActionController
 {

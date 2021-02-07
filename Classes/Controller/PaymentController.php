@@ -27,6 +27,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * PaymentController
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PaymentController extends AbstractController
 {

@@ -16,6 +16,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * PrefillField ViewHelper for registration fields
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillFieldViewHelper extends AbstractViewHelper
 {

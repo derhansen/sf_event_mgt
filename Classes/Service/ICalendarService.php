@@ -17,6 +17,8 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * ICalenderService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarService
 {

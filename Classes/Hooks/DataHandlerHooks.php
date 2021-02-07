@@ -18,6 +18,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hooks for DataHandler
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class DataHandlerHooks
 {

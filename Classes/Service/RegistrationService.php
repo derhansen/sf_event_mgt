@@ -29,6 +29,8 @@ use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * RegistrationService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationService
 {

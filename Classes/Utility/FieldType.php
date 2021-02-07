@@ -11,6 +11,8 @@ namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
  * FieldType
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class FieldType
 {

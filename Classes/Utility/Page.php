@@ -14,6 +14,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Page
+ *
+ * @author Georg Ringer <typo3@ringerge.org>
  */
 class Page
 {

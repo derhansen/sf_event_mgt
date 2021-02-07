@@ -15,6 +15,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * UserRegistrationDemand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class UserRegistrationDemand extends AbstractEntity
 {

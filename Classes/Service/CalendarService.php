@@ -15,6 +15,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * CalendarService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CalendarService
 {

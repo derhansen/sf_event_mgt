@@ -14,6 +14,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Organisator
+ *
+ * @author AlexPixelant
  */
 class Organisator extends AbstractEntity
 {

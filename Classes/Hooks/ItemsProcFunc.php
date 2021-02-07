@@ -14,6 +14,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hooks for ItemsProcFunc
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class ItemsProcFunc
 {

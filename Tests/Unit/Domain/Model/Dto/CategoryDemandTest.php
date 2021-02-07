@@ -14,6 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryDemandTest extends UnitTestCase
 {

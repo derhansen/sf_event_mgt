@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
 /**
  * BeUserSessionService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class BeUserSessionService
 {

@@ -13,6 +13,8 @@ use TYPO3\CMS\Core\Utility\MathUtility;
 
 /**
  * LongitudeEvaluator
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class LongitudeEvaluator
 {

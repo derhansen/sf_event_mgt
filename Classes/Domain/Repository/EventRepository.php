@@ -23,6 +23,8 @@ use UnexpectedValueException;
 
 /**
  * The repository for Events
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventRepository extends Repository
 {

@@ -29,6 +29,8 @@ use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * NotificationService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationService
 {

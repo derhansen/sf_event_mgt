@@ -11,6 +11,8 @@ namespace DERHANSEN\SfEventMgt\Payment;
 
 /**
  * AbstractPayment
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 abstract class AbstractPayment
 {

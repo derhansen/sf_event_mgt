@@ -18,6 +18,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class ExportServiceTest
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class ExportServiceTest extends UnitTestCase
 {

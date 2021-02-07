@@ -18,6 +18,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Registration
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class Registration extends AbstractEntity
 {

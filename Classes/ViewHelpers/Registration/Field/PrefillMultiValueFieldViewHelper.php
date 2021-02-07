@@ -18,6 +18,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * PrefillMultiValueField ViewHelper for registration fields
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
 {

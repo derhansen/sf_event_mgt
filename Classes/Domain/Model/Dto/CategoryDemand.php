@@ -13,6 +13,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Category demand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryDemand extends AbstractEntity
 {

@@ -15,6 +15,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ViewHelper to render data in <head> section of website
+ *
+ * @author Georg Ringer <typo3@ringerge.org>
  */
 class HeaderDataViewHelper extends AbstractViewHelper
 {

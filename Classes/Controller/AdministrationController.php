@@ -39,6 +39,8 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
  * AdministrationController
  *
  * Several parts are heavily inspired by ext:news from Georg Ringer
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class AdministrationController extends AbstractController
 {

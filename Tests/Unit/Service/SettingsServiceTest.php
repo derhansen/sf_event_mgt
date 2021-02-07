@@ -14,6 +14,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\SettingsService.
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class SettingsServiceTest extends UnitTestCase
 {

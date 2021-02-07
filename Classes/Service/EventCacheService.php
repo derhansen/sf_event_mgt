@@ -16,6 +16,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class CacheService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventCacheService
 {

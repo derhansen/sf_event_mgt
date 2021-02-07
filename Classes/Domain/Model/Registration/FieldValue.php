@@ -16,6 +16,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Answer
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class FieldValue extends AbstractEntity
 {

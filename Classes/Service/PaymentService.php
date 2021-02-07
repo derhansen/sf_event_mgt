@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * PaymentService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PaymentService
 {

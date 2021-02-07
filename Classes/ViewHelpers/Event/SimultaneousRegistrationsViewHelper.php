@@ -14,6 +14,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * SimultaneousRegistrations ViewHelper
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
 {

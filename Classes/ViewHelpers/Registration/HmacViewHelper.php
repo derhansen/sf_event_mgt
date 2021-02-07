@@ -15,6 +15,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Hmac ViewHelper for registrations
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class HmacViewHelper extends AbstractViewHelper
 {

@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /**
  * RegistrationFieldValidator
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationFieldValidator extends AbstractValidator
 {

@@ -22,6 +22,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\Notification\AttachmentService.
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class AttachmentServiceTest extends UnitTestCase
 {

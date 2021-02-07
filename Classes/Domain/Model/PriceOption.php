@@ -14,6 +14,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Price option
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PriceOption extends AbstractEntity
 {

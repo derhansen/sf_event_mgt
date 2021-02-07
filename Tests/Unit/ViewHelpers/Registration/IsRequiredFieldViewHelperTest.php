@@ -15,6 +15,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for IsRequiredField viewhelper
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class IsRequiredFieldViewHelperTest extends UnitTestCase
 {

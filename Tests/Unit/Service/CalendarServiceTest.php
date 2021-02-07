@@ -17,6 +17,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\CalendarServiceTest.
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CalendarServiceTest extends UnitTestCase
 {

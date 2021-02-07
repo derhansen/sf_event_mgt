@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Field
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class Field extends AbstractEntity
 {

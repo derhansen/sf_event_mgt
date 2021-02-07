@@ -13,6 +13,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Location
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class Location extends AbstractEntity
 {

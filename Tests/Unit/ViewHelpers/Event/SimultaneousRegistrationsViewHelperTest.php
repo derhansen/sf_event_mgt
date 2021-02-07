@@ -15,6 +15,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test cases for SimultaneousRegistrationsViewHelper
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 {

@@ -24,6 +24,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\PaymentController.
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PaymentControllerTest extends UnitTestCase
 {

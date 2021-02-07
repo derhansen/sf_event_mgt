@@ -14,6 +14,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 /**
  * ICalendar Description viewhelper. Note, this ViewHelper does not escape output and should only be used
  * to process the iCal description field.
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarDescriptionViewHelper extends AbstractViewHelper
 {

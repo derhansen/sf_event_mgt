@@ -16,6 +16,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for prefill viewhelper
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillViewHelperTest extends UnitTestCase
 {

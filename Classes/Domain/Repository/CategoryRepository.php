@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * The repository for Categories
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {

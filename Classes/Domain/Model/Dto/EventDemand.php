@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Event demand
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventDemand extends AbstractEntity
 {

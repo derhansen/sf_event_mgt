@@ -15,6 +15,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * CustomNotificationLog
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class CustomNotificationLog extends AbstractEntity
 {

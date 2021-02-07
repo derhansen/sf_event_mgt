@@ -18,6 +18,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for prefillMultiValueField viewhelper
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {

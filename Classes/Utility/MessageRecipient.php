@@ -11,6 +11,8 @@ namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
  * MessageRecipient
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class MessageRecipient
 {

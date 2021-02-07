@@ -17,6 +17,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * ForeignRecordRepository which respects the ForeignRecordDemandObject
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 abstract class AbstractForeignRecordRepository extends Repository
 {

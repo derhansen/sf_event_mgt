@@ -13,6 +13,8 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * The repository for price options
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class PriceOptionRepository extends Repository
 {

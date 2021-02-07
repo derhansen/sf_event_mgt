@@ -19,6 +19,8 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * AttachmentService
+ *
+ * @author Torben Hansen <derhansen@gmail.com>
  */
 class AttachmentService
 {
