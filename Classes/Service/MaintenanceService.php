@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -14,8 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * MaintenanceService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class MaintenanceService
 {
@@ -29,8 +29,8 @@ class MaintenanceService
         $eventCacheService = GeneralUtility::makeInstance(EventCacheService::class);
         $registrationUids = $this->getExpiredRegistrations();
         foreach ($registrationUids as $registration) {
-            $this->updateRegistration((int)$registration['uid'], $delete);
-            $eventCacheService->flushEventCache((int)$registration['event'], (int)$registration['pid']);
+            $this->updateRegistration($registration['uid'], $delete);
+            $eventCacheService->flushEventCache($registration['event'], $registration['pid']);
         }
     }
 
@@ -61,13 +61,13 @@ class MaintenanceService
      *
      * @return array
      */
-    protected function getExpiredRegistrations()
+    protected function getExpiredRegistrations(): array
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
 
-        $result = $queryBuilder
-            ->select('uid')
+        return $queryBuilder
+            ->select('uid', 'pid', 'event')
             ->from('tx_sfeventmgt_domain_model_registration')
             ->where(
                 $queryBuilder->expr()->lte(
@@ -81,7 +81,5 @@ class MaintenanceService
             )
             ->execute()
             ->fetchAll();
-
-        return $result;
     }
 }

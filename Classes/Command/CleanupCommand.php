@@ -21,8 +21,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class CleanupCommand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CleanupCommand extends Command
 {
@@ -55,7 +53,7 @@ class CleanupCommand extends Command
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
         $io = new SymfonyStyle($input, $output);
         $io->title($this->getDescription());
-        $delete = $input->hasOption('delete') && $input->getOption('delete') ? true : false;
+        $delete = (bool)$input->getOption('delete');
         $maintenanceService->handleExpiredRegistrations($delete);
         $io->success('All done!');
 
