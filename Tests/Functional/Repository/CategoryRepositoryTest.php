@@ -13,19 +13,18 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryRepositoryTest extends FunctionalTestCase
 {
-    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
+    /** @var ObjectManagerInterface The object manager */
     protected $objectManager;
 
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository */
+    /** @var CategoryRepository */
     protected $categoryRepository;
 
     /** @var array */
@@ -60,7 +59,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      */
     public function findDemandedRecordsByStoragePageRestriction()
     {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
+        /** @var CategoryDemand $demand */
         $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setStoragePage(1);
         $demand->setRestrictToStoragePage(true);
@@ -110,7 +109,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      */
     public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
     {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
+        /** @var CategoryDemand $demand */
         $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setIncludeSubcategories($includeSubcategory);
 

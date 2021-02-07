@@ -15,15 +15,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test cases for SimultaneousRegistrationsViewHelper
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 {
     /**
      * Viewhelper
      *
-     * @var \DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper
+     * @var SimultaneousRegistrationsViewHelper
      */
     protected $viewhelper;
 

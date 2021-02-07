@@ -10,12 +10,25 @@
 namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
+use DERHANSEN\SfEventMgt\Service\CalendarService;
+use DERHANSEN\SfEventMgt\Service\ICalendarService;
+use DERHANSEN\SfEventMgt\Service\NotificationService;
+use DERHANSEN\SfEventMgt\Service\PaymentService;
+use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * EventController
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 abstract class AbstractController extends ActionController
 {
@@ -29,100 +42,100 @@ abstract class AbstractController extends ActionController
     /**
      * EventRepository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
+     * @var EventRepository
      */
     protected $eventRepository;
 
     /**
      * Registration repository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
+     * @var RegistrationRepository
      */
     protected $registrationRepository;
 
     /**
      * Category repository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
+     * @var CategoryRepository
      */
     protected $categoryRepository;
 
     /**
      * Location repository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
+     * @var LocationRepository
      */
     protected $locationRepository;
 
     /**
      * Organisator repository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
+     * @var OrganisatorRepository
      */
     protected $organisatorRepository;
 
     /**
      * Speaker repository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository
+     * @var SpeakerRepository
      */
     protected $speakerRepository;
 
     /**
      * Notification Service
      *
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
+     * @var NotificationService
      */
     protected $notificationService;
 
     /**
      * ICalendar Service
      *
-     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
+     * @var ICalendarService
      */
     protected $icalendarService;
 
     /**
      * Hash Service
      *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+     * @var HashService
      */
     protected $hashService;
 
     /**
      * RegistrationService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
+     * @var RegistrationService
      */
     protected $registrationService;
 
     /**
      * CalendarService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\CalendarService
+     * @var CalendarService
      */
     protected $calendarService;
 
     /**
      * PaymentMethodService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\PaymentService
+     * @var PaymentService
      */
     protected $paymentService;
 
     /**
      * FieldRepository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository
+     * @var FieldRepository
      */
     protected $fieldRepository;
 
     /**
      * DI for $calendarService
      *
-     * @param \DERHANSEN\SfEventMgt\Service\CalendarService $calendarService
+     * @param CalendarService $calendarService
      */
-    public function injectCalendarService(\DERHANSEN\SfEventMgt\Service\CalendarService $calendarService)
+    public function injectCalendarService(CalendarService $calendarService)
     {
         $this->calendarService = $calendarService;
     }
@@ -130,10 +143,10 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $categoryRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository $categoryRepository
+     * @param CategoryRepository $categoryRepository
      */
     public function injectCategoryRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository $categoryRepository
+        CategoryRepository $categoryRepository
     ) {
         $this->categoryRepository = $categoryRepository;
     }
@@ -141,9 +154,9 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $eventRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
+     * @param EventRepository $eventRepository
      */
-    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
+    public function injectEventRepository(EventRepository $eventRepository)
     {
         $this->eventRepository = $eventRepository;
     }
@@ -151,9 +164,9 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $hashService
      *
-     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
+     * @param HashService $hashService
      */
-    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    public function injectHashService(HashService $hashService)
     {
         $this->hashService = $hashService;
     }
@@ -161,9 +174,9 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $icalendarService
      *
-     * @param \DERHANSEN\SfEventMgt\Service\ICalendarService $icalendarService
+     * @param ICalendarService $icalendarService
      */
-    public function injectIcalendarService(\DERHANSEN\SfEventMgt\Service\ICalendarService $icalendarService)
+    public function injectIcalendarService(ICalendarService $icalendarService)
     {
         $this->icalendarService = $icalendarService;
     }
@@ -171,10 +184,10 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $locationRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository $locationRepository
+     * @param LocationRepository $locationRepository
      */
     public function injectLocationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository $locationRepository
+        LocationRepository $locationRepository
     ) {
         $this->locationRepository = $locationRepository;
     }
@@ -182,9 +195,9 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $notificationService
      *
-     * @param \DERHANSEN\SfEventMgt\Service\NotificationService $notificationService
+     * @param NotificationService $notificationService
      */
-    public function injectNotificationService(\DERHANSEN\SfEventMgt\Service\NotificationService $notificationService)
+    public function injectNotificationService(NotificationService $notificationService)
     {
         $this->notificationService = $notificationService;
     }
@@ -192,10 +205,10 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $organisatorRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository $organisatorRepository
+     * @param OrganisatorRepository $organisatorRepository
      */
     public function injectOrganisatorRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository $organisatorRepository
+        OrganisatorRepository $organisatorRepository
     ) {
         $this->organisatorRepository = $organisatorRepository;
     }
@@ -203,10 +216,10 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $speakerRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository $speakerRepository
+     * @param SpeakerRepository $speakerRepository
      */
     public function injectSpeakerRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository $speakerRepository
+        SpeakerRepository $speakerRepository
     ) {
         $this->speakerRepository = $speakerRepository;
     }
@@ -214,9 +227,9 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $paymentService
      *
-     * @param \DERHANSEN\SfEventMgt\Service\PaymentService $paymentService
+     * @param PaymentService $paymentService
      */
-    public function injectPaymentService(\DERHANSEN\SfEventMgt\Service\PaymentService $paymentService)
+    public function injectPaymentService(PaymentService $paymentService)
     {
         $this->paymentService = $paymentService;
     }
@@ -224,10 +237,10 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $registrationRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+     * @param RegistrationRepository $registrationRepository
      */
     public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+        RegistrationRepository $registrationRepository
     ) {
         $this->registrationRepository = $registrationRepository;
     }
@@ -235,9 +248,9 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $registrationService
      *
-     * @param \DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService
+     * @param RegistrationService $registrationService
      */
-    public function injectRegistrationService(\DERHANSEN\SfEventMgt\Service\RegistrationService $registrationService)
+    public function injectRegistrationService(RegistrationService $registrationService)
     {
         $this->registrationService = $registrationService;
     }
@@ -245,16 +258,16 @@ abstract class AbstractController extends ActionController
     /**
      * DI for $fieldRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository $fieldRepository
+     * @param FieldRepository $fieldRepository
      */
     public function injectFieldRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository $fieldRepository
+        FieldRepository $fieldRepository
     ) {
         $this->fieldRepository = $fieldRepository;
     }
 
     /**
-     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     * @return TypoScriptFrontendController
      */
     protected function getTypoScriptFrontendController()
     {
@@ -264,10 +277,10 @@ abstract class AbstractController extends ActionController
     /**
      * Overwrites a given demand object by an propertyName =>  $propertyValue array
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand Demand
+     * @param EventDemand $demand Demand
      * @param array $overwriteDemand OwerwriteDemand
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
+     * @return EventDemand
      */
     protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand)
     {
@@ -279,7 +292,7 @@ abstract class AbstractController extends ActionController
             if (in_array(strtolower($propertyName), $this->ignoredSettingsForOverwriteDemand, true)) {
                 continue;
             }
-            \TYPO3\CMS\Extbase\Reflection\ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
+            ObjectAccess::setProperty($demand, $propertyName, $propertyValue);
         }
 
         return $demand;

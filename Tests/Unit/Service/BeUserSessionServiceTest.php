@@ -15,13 +15,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\BeUserSessionService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class BeUserSessionServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
+     * @var BeUserSessionService
      */
     protected $subject;
 

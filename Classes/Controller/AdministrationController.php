@@ -13,7 +13,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Service;
+use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
+use DERHANSEN\SfEventMgt\Service\ExportService;
+use DERHANSEN\SfEventMgt\Service\MaintenanceService;
+use DERHANSEN\SfEventMgt\Service\SettingsService;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -24,6 +30,7 @@ use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder as ExtbaseUriBuilder;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
@@ -32,50 +39,48 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
  * AdministrationController
  *
  * Several parts are heavily inspired by ext:news from Georg Ringer
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class AdministrationController extends AbstractController
 {
-    const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
+    public const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
 
     /**
      * Backend Template Container
      *
      * @var string
      */
-    protected $defaultViewObjectName = \TYPO3\CMS\Backend\View\BackendTemplateView::class;
+    protected $defaultViewObjectName = BackendTemplateView::class;
 
     /**
      * CustomNotificationLogRepository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
+     * @var CustomNotificationLogRepository
      */
     protected $customNotificationLogRepository;
 
     /**
      * ExportService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\ExportService
+     * @var ExportService
      */
     protected $exportService;
 
     /**
      * SettingsService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\SettingsService
+     * @var SettingsService
      */
     protected $settingsService;
 
     /**
      * Backend User Session Service
      *
-     * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
+     * @var BeUserSessionService
      */
     protected $beUserSessionService;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\MaintenanceService
+     * @var MaintenanceService
      */
     protected $maintenanceService;
 
@@ -101,10 +106,10 @@ class AdministrationController extends AbstractController
     /**
      * DI for $customNotificationLogRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+     * @param CustomNotificationLogRepository $customNotificationLogRepository
      */
     public function injectCustomNotificationLogRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+        CustomNotificationLogRepository $customNotificationLogRepository
     ) {
         $this->customNotificationLogRepository = $customNotificationLogRepository;
     }
@@ -112,9 +117,9 @@ class AdministrationController extends AbstractController
     /**
      * DI for $exportService
      *
-     * @param Service\ExportService $exportService
+     * @param ExportService $exportService
      */
-    public function injectExportService(\DERHANSEN\SfEventMgt\Service\ExportService $exportService)
+    public function injectExportService(ExportService $exportService)
     {
         $this->exportService = $exportService;
     }
@@ -122,9 +127,9 @@ class AdministrationController extends AbstractController
     /**
      * DI for $settingsService
      *
-     * @param Service\SettingsService $settingsService
+     * @param SettingsService $settingsService
      */
-    public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService)
+    public function injectSettingsService(SettingsService $settingsService)
     {
         $this->settingsService = $settingsService;
     }
@@ -132,9 +137,9 @@ class AdministrationController extends AbstractController
     /**
      * DI for $beUserSessionService
      *
-     * @param Service\BeUserSessionService $beUserSessionService
+     * @param BeUserSessionService $beUserSessionService
      */
-    public function injectBeUserSessionService(\DERHANSEN\SfEventMgt\Service\BeUserSessionService $beUserSessionService)
+    public function injectBeUserSessionService(BeUserSessionService $beUserSessionService)
     {
         $this->beUserSessionService = $beUserSessionService;
     }
@@ -150,9 +155,9 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * @param Service\MaintenanceService $maintenanceService
+     * @param MaintenanceService $maintenanceService
      */
-    public function injectMaintenanceService(\DERHANSEN\SfEventMgt\Service\MaintenanceService $maintenanceService)
+    public function injectMaintenanceService(MaintenanceService $maintenanceService)
     {
         $this->maintenanceService = $maintenanceService;
     }
@@ -254,7 +259,7 @@ class AdministrationController extends AbstractController
      * Returns the create new record URL for the given table
      *
      * @param string $table
-     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @throws RouteNotFoundException
      * @return string
      */
     private function getCreateNewRecordUri($table): string
@@ -281,7 +286,7 @@ class AdministrationController extends AbstractController
      */
     public function initializeAction()
     {
-        $this->pid = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
+        $this->pid = (int)GeneralUtility::_GET('id');
     }
 
     /**
@@ -311,7 +316,7 @@ class AdministrationController extends AbstractController
     /**
      * List action for backend module
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
+     * @param SearchDemand $searchDemand SearchDemand
      * @param array $overwriteDemand OverwriteDemand
      */
     public function listAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
@@ -388,7 +393,7 @@ class AdministrationController extends AbstractController
     /**
      * The index notify action
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event $event Event
      */
     public function indexNotifyAction(Event $event)
     {
@@ -463,7 +468,7 @@ class AdministrationController extends AbstractController
      * access denied flash message and redirect to list view
      *
      * @param Event $event
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws StopActionException
      */
     public function checkEventAccess(Event $event)
     {

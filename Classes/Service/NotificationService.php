@@ -9,70 +9,75 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
+use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * NotificationService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationService
 {
     /**
      * The object manager
      *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+     * @var ObjectManager
      */
     protected $objectManager;
 
     /**
      * Registration repository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
+     * @var RegistrationRepository
      */
     protected $registrationRepository;
 
     /**
      * Email Service
      *
-     * @var \DERHANSEN\SfEventMgt\Service\EmailService
+     * @var EmailService
      */
     protected $emailService;
 
     /**
      * Hash Service
      *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+     * @var HashService
      */
     protected $hashService;
 
     /**
      * FluidStandaloneService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
+     * @var FluidStandaloneService
      */
     protected $fluidStandaloneService;
 
     /**
      * CustomNotificationLogRepository
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
+     * @var CustomNotificationLogRepository
      */
     protected $customNotificationLogRepository;
 
     /**
      * AttachmentService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
+     * @var AttachmentService
      */
     protected $attachmentService;
 
@@ -87,7 +92,7 @@ class NotificationService
      * @param Notification\AttachmentService $attachmentService
      */
     public function injectAttachmentService(
-        \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService $attachmentService
+        AttachmentService $attachmentService
     ) {
         $this->attachmentService = $attachmentService;
     }
@@ -95,10 +100,10 @@ class NotificationService
     /**
      * DI for $customNotificationLogRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+     * @param CustomNotificationLogRepository $customNotificationLogRepository
      */
     public function injectCustomNotificationLogRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+        CustomNotificationLogRepository $customNotificationLogRepository
     ) {
         $this->customNotificationLogRepository = $customNotificationLogRepository;
     }
@@ -108,7 +113,7 @@ class NotificationService
      *
      * @param EmailService $emailService
      */
-    public function injectEmailService(\DERHANSEN\SfEventMgt\Service\EmailService $emailService)
+    public function injectEmailService(EmailService $emailService)
     {
         $this->emailService = $emailService;
     }
@@ -119,7 +124,7 @@ class NotificationService
      * @param FluidStandaloneService $fluidStandaloneService
      */
     public function injectFluidStandaloneService(
-        \DERHANSEN\SfEventMgt\Service\FluidStandaloneService $fluidStandaloneService
+        FluidStandaloneService $fluidStandaloneService
     ) {
         $this->fluidStandaloneService = $fluidStandaloneService;
     }
@@ -127,9 +132,9 @@ class NotificationService
     /**
      * DI for $hashService
      *
-     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
+     * @param HashService $hashService
      */
-    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    public function injectHashService(HashService $hashService)
     {
         $this->hashService = $hashService;
     }
@@ -137,9 +142,9 @@ class NotificationService
     /**
      * DI for $objectManager
      *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
+     * @param ObjectManager $objectManager
      */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    public function injectObjectManager(ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -147,10 +152,10 @@ class NotificationService
     /**
      * DI for $registrationRepository
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+     * @param RegistrationRepository $registrationRepository
      */
     public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+        RegistrationRepository $registrationRepository
     ) {
         $this->registrationRepository = $registrationRepository;
     }
@@ -167,7 +172,7 @@ class NotificationService
      * Sends a custom notification defined by the given customNotification key
      * to all confirmed users of the event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param Event $event
      * @param CustomNotification $customNotification
      * @param array $settings Settings
      *
@@ -189,7 +194,7 @@ class NotificationService
         );
 
         foreach ($registrations as $registration) {
-            /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
+            /** @var Registration $registration */
             $result = $this->sendUserMessage(
                 $event,
                 $registration,
@@ -208,7 +213,7 @@ class NotificationService
     /**
      * Returns true if conditions are not met to send a custom notification
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param Event $event
      * @param array $settings
      * @param CustomNotification $customNotification
      *
@@ -223,13 +228,13 @@ class NotificationService
     /**
      * Adds a logentry to the custom notification log
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event $event Event
      * @param string $details Details
      * @param int $emailsSent E-Mails sent
      */
     public function createCustomNotificationLogentry($event, $details, $emailsSent)
     {
-        $notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
+        $notificationlogEntry = new CustomNotificationLog();
         $notificationlogEntry->setPid($event->getPid());
         $notificationlogEntry->setEvent($event);
         $notificationlogEntry->setDetails($details);
@@ -241,8 +246,8 @@ class NotificationService
     /**
      * Sends a message to the user based on the given type
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param Event $event Event
+     * @param Registration $registration Registration
      * @param array $settings Settings
      * @param int $type Type
      * @param CustomNotification $customNotification
@@ -341,7 +346,7 @@ class NotificationService
 
             // Cleanup iCal attachment if available
             if ($iCalAttachment !== '') {
-                \TYPO3\CMS\Core\Utility\GeneralUtility::unlink_tempfile($iCalAttachment);
+                GeneralUtility::unlink_tempfile($iCalAttachment);
             }
 
             return $result;
@@ -408,8 +413,8 @@ class NotificationService
     /**
      * Sends a message to the admin based on the given type
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param Event $event Event
+     * @param Registration $registration Registration
      * @param array $settings Settings
      * @param int $type Type
      *
@@ -533,8 +538,8 @@ class NotificationService
     /**
      * Returns the rendered HTML for the given template
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param Event $event Event
+     * @param Registration $registration Registration
      * @param string $template Template
      * @param array $settings Settings
      * @param array $additionalBodyVariables

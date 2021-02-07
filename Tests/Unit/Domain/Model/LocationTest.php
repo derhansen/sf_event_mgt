@@ -14,15 +14,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Location.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class LocationTest extends UnitTestCase
 {
     /**
      * Location object
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
+     * @var Location
      */
     protected $subject;
 

@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -16,13 +17,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\CalendarServiceTest.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CalendarServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\CalendarService
+     * @var CalendarService
      */
     protected $subject;
 
@@ -84,10 +83,10 @@ class CalendarServiceTest extends UnitTestCase
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getStartdate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         );
         $mockEvent->expects(self::any())->method('getEnddate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
         );
 
         $events = new ObjectStorage();
@@ -106,10 +105,10 @@ class CalendarServiceTest extends UnitTestCase
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getStartdate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         );
         $mockEvent->expects(self::any())->method('getEnddate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
         );
 
         $events = new ObjectStorage();
@@ -225,7 +224,7 @@ class CalendarServiceTest extends UnitTestCase
                 2017,
                 '',
                 [
-                    'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 1, 2017))->setTime(0, 0, 0),
+                    'date' => DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 1, 2017))->setTime(0, 0, 0),
                     'month' => 1,
                     'year' => 2017
                 ]
@@ -235,7 +234,7 @@ class CalendarServiceTest extends UnitTestCase
                 2017,
                 '+1 month',
                 [
-                    'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 2, 2017))->setTime(0, 0, 0),
+                    'date' => DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 2, 2017))->setTime(0, 0, 0),
                     'month' => 2,
                     'year' => 2017
                 ]
@@ -245,7 +244,7 @@ class CalendarServiceTest extends UnitTestCase
                 2017,
                 '-1 month',
                 [
-                    'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 12, 2016))->setTime(0, 0, 0),
+                    'date' => DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 12, 2016))->setTime(0, 0, 0),
                     'month' => 12,
                     'year' => 2016
                 ]

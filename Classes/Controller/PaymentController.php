@@ -9,22 +9,24 @@
 
 namespace DERHANSEN\SfEventMgt\Controller;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
+use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
+use TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * PaymentController
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PaymentController extends AbstractController
 {
@@ -33,15 +35,15 @@ class PaymentController extends AbstractController
      *
      * @param RequestInterface $request
      * @param ResponseInterface $response
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @throws UnsupportedRequestTypeException
      */
     public function processRequest(RequestInterface $request, ResponseInterface $response)
     {
         try {
             parent::processRequest($request, $response);
-        } catch (\DERHANSEN\SfEventMgt\Exception $e) {
+        } catch (Exception $e) {
             $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
-        } catch (\TYPO3\CMS\Extbase\Security\Exception\InvalidHashException $e) {
+        } catch (InvalidHashException $e) {
             $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
         }
     }
@@ -49,7 +51,7 @@ class PaymentController extends AbstractController
     /**
      * Redirect to payment provider
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      */
     public function redirectAction($registration, $hmac)
@@ -93,7 +95,7 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      */
     public function successAction($registration, $hmac)
@@ -131,7 +133,7 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      */
     public function failureAction($registration, $hmac)
@@ -180,7 +182,7 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      */
     public function cancelAction($registration, $hmac)
@@ -229,7 +231,7 @@ class PaymentController extends AbstractController
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      */
     public function notifyAction($registration, $hmac)
@@ -272,7 +274,7 @@ class PaymentController extends AbstractController
      * Checks if the given action can be called for the given registration / event and throws
      * an exception if action should not proceed
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $actionName
      * @throws PaymentException
      */
@@ -305,7 +307,7 @@ class PaymentController extends AbstractController
     /**
      * Checks the HMAC for the given action and registration
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      * @param string $action
      * @throws InvalidHashException
@@ -323,8 +325,8 @@ class PaymentController extends AbstractController
      * Returns the payment Uri for the given action and registration
      *
      * @param string $action
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-     * @throws \TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException
+     * @param Registration $registration
+     * @throws InvalidArgumentForHashGenerationException
      * @return string
      */
     protected function getPaymentUriForAction($action, $registration)

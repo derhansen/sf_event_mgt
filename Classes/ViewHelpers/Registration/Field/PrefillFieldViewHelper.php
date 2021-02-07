@@ -11,12 +11,11 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * PrefillField ViewHelper for registration fields
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillFieldViewHelper extends AbstractViewHelper
 {
@@ -70,7 +69,7 @@ class PrefillFieldViewHelper extends AbstractViewHelper
     /**
      * Shortcut for retrieving the request from the controller context
      *
-     * @return \TYPO3\CMS\Extbase\Mvc\Request
+     * @return Request
      */
     protected function getRequest()
     {

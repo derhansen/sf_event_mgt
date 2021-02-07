@@ -12,14 +12,13 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /**
  * RegistrationFieldValidator
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+class RegistrationFieldValidator extends AbstractValidator
 {
     /**
      * Validates the additional fields of the given registration.

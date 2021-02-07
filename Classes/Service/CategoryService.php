@@ -16,9 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * CategoryService
- *
- * @author Georg Ringer <typo3@ringerge.org>
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryService
 {

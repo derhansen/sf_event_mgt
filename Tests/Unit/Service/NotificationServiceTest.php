@@ -22,19 +22,18 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use stdClass;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\NotificationService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
+     * @var NotificationService
      */
     protected $subject;
 
@@ -45,7 +44,7 @@ class NotificationServiceTest extends UnitTestCase
     {
         $this->subject = new NotificationService();
 
-        $GLOBALS['BE_USER'] = new \stdClass();
+        $GLOBALS['BE_USER'] = new stdClass();
         $GLOBALS['BE_USER']->uc['lang'] = '';
     }
 
@@ -513,7 +512,7 @@ class NotificationServiceTest extends UnitTestCase
         $registration2 = new Registration();
         $registration2->setConfirmed(true);
 
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+        /** @var ObjectStorage $registrations */
         $registrations = new ObjectStorage();
         $registrations->attach($registration1);
         $registrations->attach($registration2);

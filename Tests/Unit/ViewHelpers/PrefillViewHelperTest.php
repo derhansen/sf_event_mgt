@@ -10,13 +10,12 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
+use stdClass;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for prefill viewhelper
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillViewHelperTest extends UnitTestCase
 {
@@ -43,7 +42,7 @@ class PrefillViewHelperTest extends UnitTestCase
                 'registration' => ['fieldname' => 'Existing Value']
             ]
         ];
-        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setArguments([
             'fieldname' => 'fieldname'
@@ -57,7 +56,7 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfNoTsfeLoginuserNotAvailabe()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setArguments([
             'fieldname' => 'a field'
@@ -71,7 +70,7 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfPrefillSettingsEmpty()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setArguments([
             'fieldname' => 'a field'
@@ -85,7 +84,7 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfFieldNotFoundInPrefillSettings()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
@@ -100,8 +99,8 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfFieldNotFoundInFeUser()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John'
         ];
@@ -126,8 +125,8 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsFieldvalueIfFound()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
             'last_name' => 'Doe'
@@ -153,8 +152,8 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsSubmittedValueIfValidationError()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
             'last_name' => 'Doe'

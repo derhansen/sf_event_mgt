@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /**
  * The repository for Locations
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class LocationRepository extends AbstractForeignRecordRepository
 {

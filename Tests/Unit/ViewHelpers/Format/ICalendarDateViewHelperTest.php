@@ -9,13 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDateViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for iCalendar Date viewhelper
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarDateViewHelperTest extends UnitTestCase
 {
@@ -32,7 +31,7 @@ class ICalendarDateViewHelperTest extends UnitTestCase
                 ''
             ],
             'dateTimeObject' => [
-                new \DateTime('@1425234250'),
+                new DateTime('@1425234250'),
                 '20150301T182410Z'
             ]
         ];
@@ -67,7 +66,7 @@ class ICalendarDateViewHelperTest extends UnitTestCase
             ->setMethods(['renderChildren'])
             ->getMock();
         $viewHelper->expects(self::once())->method('renderChildren')
-            ->willReturn(new \DateTime('@1425234250'));
+            ->willReturn(new DateTime('@1425234250'));
         $actual = $viewHelper->render();
         self::assertSame('20150301T182410Z', $actual);
     }

@@ -13,8 +13,6 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 
 /**
  * Hook for Template Layouts
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class TemplateLayouts
 {

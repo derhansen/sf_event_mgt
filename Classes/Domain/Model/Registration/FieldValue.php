@@ -12,13 +12,12 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Answer
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class FieldValue extends AbstractEntity
 {
     /**
      * Value
@@ -37,7 +36,7 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Field
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
+     * @var Field
      */
     protected $field;
 
@@ -97,7 +96,7 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns field
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
+     * @return Field
      */
     public function getField()
     {
@@ -107,7 +106,7 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets field
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $field
+     * @param Field $field
      */
     public function setField($field)
     {

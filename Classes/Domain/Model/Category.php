@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * Category
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
 {

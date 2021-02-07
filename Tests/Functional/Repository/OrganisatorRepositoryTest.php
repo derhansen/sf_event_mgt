@@ -12,19 +12,18 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class OrganisatorRepositoryTest extends FunctionalTestCase
 {
-    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
+    /** @var ObjectManagerInterface The object manager */
     protected $objectManager;
 
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
+    /** @var OrganisatorRepository */
     protected $organisatorRepository;
 
     /** @var array */

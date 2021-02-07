@@ -15,15 +15,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Speaker.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class SpeakerTest extends UnitTestCase
 {
     /**
      * Speaker object
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
+     * @var Speaker
      */
     protected $subject;
 

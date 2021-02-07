@@ -9,12 +9,13 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * The repository for custom notification log entries
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class CustomNotificationLogRepository extends Repository
 {
     /**
      * Set default sorting
@@ -22,6 +23,6 @@ class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Rep
      * @var array
      */
     protected $defaultOrderings = [
-        'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+        'tstamp' => QueryInterface::ORDER_DESCENDING
     ];
 }

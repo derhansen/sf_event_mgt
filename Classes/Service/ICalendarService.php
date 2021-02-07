@@ -9,38 +9,38 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
  * ICalenderService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarService
 {
     /**
      * The configuration manager
      *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     * @var ConfigurationManager
      */
     protected $configurationManager;
 
     /**
      * FluidStandaloneService
      *
-     * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
+     * @var FluidStandaloneService
      */
     protected $fluidStandaloneService;
 
     /**
      * DI for $configurationManager
      *
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+     * @param ConfigurationManager $configurationManager
      */
     public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
+        ConfigurationManager $configurationManager
     ) {
         $this->configurationManager = $configurationManager;
     }
@@ -51,7 +51,7 @@ class ICalendarService
      * @param FluidStandaloneService $fluidStandaloneService
      */
     public function injectFluidStandaloneService(
-        \DERHANSEN\SfEventMgt\Service\FluidStandaloneService $fluidStandaloneService
+        FluidStandaloneService $fluidStandaloneService
     ) {
         $this->fluidStandaloneService = $fluidStandaloneService;
     }
@@ -59,10 +59,10 @@ class ICalendarService
     /**
      * Initiates the ICS download for the given event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
+     * @param Event $event The event
      * @throws Exception Exception
      */
-    public function downloadiCalendarFile(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    public function downloadiCalendarFile(Event $event)
     {
         $content = $this->getICalendarContent($event);
         header('Content-Disposition: attachment; filename="event' . $event->getUid() . '.ics"');
@@ -78,11 +78,11 @@ class ICalendarService
      * Returns the rendered iCalendar entry for the given event
      * according to RFC 2445
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event The event
+     * @param Event $event The event
      *
      * @return string
      */
-    public function getiCalendarContent(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    public function getiCalendarContent(Event $event)
     {
         $icalView = GeneralUtility::makeInstance(StandaloneView::class);
         $icalView->setFormat('txt');

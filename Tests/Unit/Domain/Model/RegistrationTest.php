@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
@@ -16,13 +17,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
+     * @var Registration
      */
     protected $subject;
 
@@ -414,7 +413,7 @@ class RegistrationTest extends UnitTestCase
      */
     public function setConfirmationUntilForDateTimeSetsConfirmationUntil()
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setConfirmationUntil($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getConfirmationUntil());
     }
@@ -432,7 +431,7 @@ class RegistrationTest extends UnitTestCase
      */
     public function setRegistrationDateForDateTimeSetsRegistrationDate()
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setRegistrationDate($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getRegistrationDate());
     }
@@ -450,7 +449,7 @@ class RegistrationTest extends UnitTestCase
      */
     public function setDateOfBirthForDateTimeSetsDateOfBirth()
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setDateOfBirth($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getDateOfBirth());
     }

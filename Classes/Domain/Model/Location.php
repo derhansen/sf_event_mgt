@@ -9,12 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Location
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Location extends AbstractEntity
 {
     /**
      * Title

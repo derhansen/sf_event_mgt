@@ -9,10 +9,10 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+
 /**
  * BeUserSessionService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class BeUserSessionService
 {
@@ -21,7 +21,7 @@ class BeUserSessionService
      *
      * @var string
      */
-    const SESSION_KEY = 'sf_event_mgt';
+    public const SESSION_KEY = 'sf_event_mgt';
 
     /**
      * Saves the given data to the session
@@ -63,7 +63,7 @@ class BeUserSessionService
     /**
      * Returns the current Backend User
      *
-     * @return mixed|\TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     * @return mixed|BackendUserAuthentication
      */
     protected function getBackendUser()
     {

@@ -14,8 +14,6 @@ use DERHANSEN\SfEventMgt\Utility\Page;
 
 /**
  * UserRegistrationController
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class UserRegistrationController extends AbstractController
 {
@@ -24,11 +22,11 @@ class UserRegistrationController extends AbstractController
      *
      * @param array $settings The settings
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
+     * @return UserRegistrationDemand
      */
     public function createUserRegistrationDemandObjectFromSettings(array $settings)
     {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        /** @var UserRegistrationDemand $demand */
         $demand = $this->objectManager->get(UserRegistrationDemand::class);
         $demand->setDisplayMode($settings['userRegistration']['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren(

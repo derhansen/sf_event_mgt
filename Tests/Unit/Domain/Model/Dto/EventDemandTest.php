@@ -9,19 +9,18 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventDemandTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
+     * @var EventDemand
      */
     protected $subject;
 
@@ -117,9 +116,9 @@ class EventDemandTest extends UnitTestCase
      */
     public function getCurrentDateTimeReturnsGivenValueIfValueSet()
     {
-        $this->subject->setCurrentDateTime(new \DateTime('01.01.2014'));
+        $this->subject->setCurrentDateTime(new DateTime('01.01.2014'));
         self::assertEquals(
-            new \DateTime('01.01.2014'),
+            new DateTime('01.01.2014'),
             $this->subject->getCurrentDateTime()
         );
     }

@@ -9,18 +9,17 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class SearchDemandTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
+     * @var SearchDemand
      */
     protected $subject;
 
@@ -55,9 +54,9 @@ class SearchDemandTest extends UnitTestCase
      */
     public function getStartDateReturnsGivenValueIfValueSet()
     {
-        $this->subject->setStartDate(new \DateTime('01.01.2014 10:00:00'));
+        $this->subject->setStartDate(new DateTime('01.01.2014 10:00:00'));
         self::assertEquals(
-            new \DateTime('01.01.2014 10:00:00'),
+            new DateTime('01.01.2014 10:00:00'),
             $this->subject->getStartDate()
         );
     }
@@ -77,9 +76,9 @@ class SearchDemandTest extends UnitTestCase
      */
     public function getEndDateReturnsGivenValueIfValueSet()
     {
-        $this->subject->setEndDate(new \DateTime('01.01.2014 10:00:00'));
+        $this->subject->setEndDate(new DateTime('01.01.2014 10:00:00'));
         self::assertEquals(
-            new \DateTime('01.01.2014 10:00:00'),
+            new DateTime('01.01.2014 10:00:00'),
             $this->subject->getEndDate()
         );
     }
@@ -146,7 +145,7 @@ class SearchDemandTest extends UnitTestCase
      */
     public function getHasQueryReturnsTrueIfStartDateSet()
     {
-        $this->subject->setStartDate(new \DateTime());
+        $this->subject->setStartDate(new DateTime());
         self::assertTrue($this->subject->getHasQuery());
     }
 
@@ -155,7 +154,7 @@ class SearchDemandTest extends UnitTestCase
      */
     public function getHasQueryReturnsTrueIfEndDateSet()
     {
-        $this->subject->setEndDate(new \DateTime());
+        $this->subject->setEndDate(new DateTime());
         self::assertTrue($this->subject->getHasQuery());
     }
 }

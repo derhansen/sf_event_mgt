@@ -10,19 +10,19 @@
 namespace DERHANSEN\SfEventMgt\Hooks;
 
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
+use PDO;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Hooks for DataHandler
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class DataHandlerHooks
 {
-    const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
-    const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
+    public const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
+    public const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
 
     /**
      * Flushes the cache if a event record was edited.
@@ -54,7 +54,7 @@ class DataHandlerHooks
      * @param string $table
      * @param string $id
      * @param array $fieldArray
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $reference
+     * @param DataHandler $reference
      */
     public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$reference)
     {
@@ -126,7 +126,7 @@ class DataHandlerHooks
                 }
             }
 
-            /** @var \TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools $flexFormTools */
+            /** @var FlexFormTools $flexFormTools */
             $flexFormTools = GeneralUtility::makeInstance(FlexFormTools::class);
             $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData, true);
         }
@@ -140,7 +140,7 @@ class DataHandlerHooks
      * @param string $table
      * @param int $id
      * @param mixed $value
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
+     * @param DataHandler $pObj
      * @param bool $pasteUpdate
      */
     public function processCmdmap_preProcess($command, $table, $id, $value, $pObj, $pasteUpdate)
@@ -159,7 +159,7 @@ class DataHandlerHooks
      * @param string $table
      * @param int $id
      * @param string $value
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
+     * @param DataHandler $pObj
      * @param bool $pasteUpdate
      * @param array $pasteDatamap
      */
@@ -185,7 +185,7 @@ class DataHandlerHooks
         $queryBuilder
             ->delete(self::CUSTOMNOTIFICATIONLOG_TABLE)
             ->where(
-                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, PDO::PARAM_INT))
             )
             ->execute();
     }

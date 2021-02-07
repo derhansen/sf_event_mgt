@@ -9,12 +9,16 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use DateTime;
+use DERHANSEN\SfEventMgt\Domain\Model\Location;
+use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
+use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Event demand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class EventDemand extends AbstractEntity
 {
     /**
      * Display mode
@@ -33,7 +37,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Current DateTime
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $currentDateTime;
 
@@ -96,14 +100,14 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Location
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
+     * @var Location
      */
     protected $location;
 
     /**
      * Speaker
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
+     * @var Speaker
      */
     protected $speaker;
 
@@ -145,14 +149,14 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Search Demand
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
+     * @var SearchDemand
      */
     protected $searchDemand;
 
     /**
      * Organisator
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
+     * @var Organisator
      */
     protected $organisator;
 
@@ -204,9 +208,9 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the current DateTime
      *
-     * @param \DateTime $currentDateTime CurrentDateTime
+     * @param DateTime $currentDateTime CurrentDateTime
      */
-    public function setCurrentDateTime(\DateTime $currentDateTime)
+    public function setCurrentDateTime(DateTime $currentDateTime)
     {
         $this->currentDateTime = $currentDateTime;
     }
@@ -214,7 +218,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the current datetime
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCurrentDateTime()
     {
@@ -222,7 +226,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             return $this->currentDateTime;
         }
 
-        return new \DateTime();
+        return new DateTime();
     }
 
     /**
@@ -368,7 +372,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the location
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
+     * @return Location
      */
     public function getLocation()
     {
@@ -378,7 +382,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the location
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
+     * @param Location $location Location
      */
     public function setLocation($location)
     {
@@ -506,7 +510,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns organisator
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Organisator
+     * @return Organisator
      */
     public function getOrganisator()
     {
@@ -516,7 +520,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets organisator
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Organisator $organisator
+     * @param Organisator $organisator
      */
     public function setOrganisator($organisator)
     {
@@ -546,7 +550,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns speaker
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Speaker
+     * @return Speaker
      */
     public function getSpeaker()
     {
@@ -556,7 +560,7 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets speaker
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
+     * @param Speaker $speaker
      */
     public function setSpeaker($speaker)
     {

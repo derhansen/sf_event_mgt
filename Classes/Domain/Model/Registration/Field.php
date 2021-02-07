@@ -13,13 +13,12 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Utility\FieldType;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Field
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Field extends AbstractEntity
 {
     /**
      * The title
@@ -66,7 +65,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $settings = '';
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @var Event
      */
     protected $event;
 

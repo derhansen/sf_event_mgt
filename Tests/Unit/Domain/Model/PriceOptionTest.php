@@ -9,21 +9,20 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\PriceOption.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PriceOptionTest extends UnitTestCase
 {
     /**
      * Location object
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\PriceOption
+     * @var PriceOption
      */
     protected $subject;
 
@@ -84,7 +83,7 @@ class PriceOptionTest extends UnitTestCase
      */
     public function setValidUntilForDateSetsValidUntil()
     {
-        $date = new \DateTime('01.01.2016');
+        $date = new DateTime('01.01.2016');
         $this->subject->setValidUntil($date);
         self::assertEquals($date, $this->subject->getValidUntil());
     }

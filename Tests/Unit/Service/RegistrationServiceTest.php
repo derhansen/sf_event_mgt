@@ -9,6 +9,8 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DateInterval;
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
@@ -16,6 +18,7 @@ use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use stdClass;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -25,13 +28,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
+     * @var RegistrationService
      */
     protected $subject;
 
@@ -94,7 +95,7 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2->expects(self::any())->method('setConfirmed');
 
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+        /** @var ObjectStorage $registrations */
         $registrations = new ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
@@ -120,7 +121,7 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration1 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
+        /** @var ObjectStorage $registrations */
         $registrations = new ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
@@ -208,7 +209,7 @@ class RegistrationServiceTest extends UnitTestCase
         $hmac = 'valid-hmac';
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new \DateTime('yesterday'));
+        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new DateTime('yesterday'));
 
         $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['findByUid'])
@@ -245,7 +246,7 @@ class RegistrationServiceTest extends UnitTestCase
         $hmac = 'valid-hmac';
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new \DateTime('tomorrow'));
+        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new DateTime('tomorrow'));
         $mockRegistration->expects(self::any())->method('getConfirmed')->willReturn(true);
 
         $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -385,7 +386,7 @@ class RegistrationServiceTest extends UnitTestCase
 
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getEnableCancel')->willReturn(true);
-        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new \DateTime('yesterday'));
+        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new DateTime('yesterday'));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
@@ -426,8 +427,8 @@ class RegistrationServiceTest extends UnitTestCase
 
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getEnableCancel')->willReturn(true);
-        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new \DateTime('tomorrow'));
-        $mockEvent->expects(self::any())->method('getStartdate')->willReturn(new \DateTime('yesterday'));
+        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new DateTime('tomorrow'));
+        $mockEvent->expects(self::any())->method('getStartdate')->willReturn(new DateTime('yesterday'));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
@@ -463,8 +464,8 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function getCurrentFeUserObjectReturnsNullIfNoFeUser()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = null;
         self::assertNull($this->subject->getCurrentFeUserObject());
     }
@@ -476,8 +477,8 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function getCurrentFeUserObjectReturnsFeUser()
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [];
         $GLOBALS['TSFE']->fe_user->user['uid'] = 1;
 
@@ -517,8 +518,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $deadline = new \DateTime();
-        $deadline->add(\DateInterval::createFromDateString('yesterday'));
+        $deadline = new DateTime();
+        $deadline->add(DateInterval::createFromDateString('yesterday'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::any())->method('getRegistrationDeadline')->willReturn($deadline);
 
@@ -536,8 +537,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('yesterday'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('yesterday'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
 
@@ -561,8 +562,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::once())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::once())->method('getRegistrations')->willReturn($registrations);
@@ -591,8 +592,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -620,8 +621,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(1);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -653,8 +654,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -682,8 +683,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);

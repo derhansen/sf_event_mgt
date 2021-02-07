@@ -14,13 +14,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Payment\AbstractPayment.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class AbstractPaymentTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Payment\AbstractPayment
+     * @var AbstractPayment
      */
     protected $subject;
 

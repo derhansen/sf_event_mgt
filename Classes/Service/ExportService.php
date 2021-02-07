@@ -9,26 +9,27 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\CsvUtility;
 
 /**
  * Class ExportService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ExportService
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
+     * @var RegistrationRepository
      */
     protected $registrationRepository;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
+     * @var EventRepository
      */
     protected $eventRepository;
 
@@ -36,15 +37,15 @@ class ExportService
      * @param RegistrationRepository $registrationRepository
      */
     public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
+        RegistrationRepository $registrationRepository
     ) {
         $this->registrationRepository = $registrationRepository;
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
+     * @param EventRepository $eventRepository
      */
-    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
+    public function injectEventRepository(EventRepository $eventRepository)
     {
         $this->eventRepository = $eventRepository;
     }
@@ -188,14 +189,14 @@ class ExportService
      * Returns the requested field from the given registration. If the field is a DateTime object,
      * a formatted date string is returned
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $field
      * @return string
      */
     protected function getFieldValue($registration, $field)
     {
         $value = $registration->_getCleanProperty($field);
-        if ($value instanceof \DateTime) {
+        if ($value instanceof DateTime) {
             $value = $value->format('d.m.Y');
         }
 
@@ -214,7 +215,7 @@ class ExportService
     }
 
     /**
-     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     * @return BackendUserAuthentication
      */
     protected function getBackendUser()
     {

@@ -19,13 +19,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\ICalendarService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
+     * @var ICalendarService
      */
     protected $subject;
 

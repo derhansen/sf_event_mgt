@@ -18,17 +18,16 @@ use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
+use TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationValidatorTest extends UnitTestCase
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator
+     * @var StringLengthValidator
      */
     protected $validator;
 

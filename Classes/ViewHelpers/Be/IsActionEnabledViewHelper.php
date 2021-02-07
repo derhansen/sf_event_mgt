@@ -9,12 +9,11 @@
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Abstract Record viewhelper for backend links
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class IsActionEnabledViewHelper extends AbstractViewHelper
 {
@@ -77,7 +76,7 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @return mixed|\TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     * @return mixed|BackendUserAuthentication
      */
     private function getBackendUser()
     {

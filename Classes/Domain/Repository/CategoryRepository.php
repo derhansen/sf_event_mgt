@@ -13,20 +13,19 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * The repository for Categories
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryRepository extends \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
 {
     /**
      * Returns all categories depending on the settings in the demand object
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand CategoryDamand
+     * @param CategoryDemand $demand CategoryDamand
      *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return array|QueryResultInterface
      */
     public function findDemanded($demand)
     {

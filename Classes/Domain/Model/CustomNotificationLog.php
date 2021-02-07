@@ -9,17 +9,19 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use DateTime;
+use TYPO3\CMS\Extbase\Domain\Model\BackendUser;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * CustomNotificationLog
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class CustomNotificationLog extends AbstractEntity
 {
     /**
      * Event
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @var Event
      */
     protected $event;
 
@@ -40,14 +42,14 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Timestamp
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $tstamp;
 
     /**
      * Backend user
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\BackendUser
+     * @var BackendUser
      */
     protected $cruserId;
 
@@ -74,7 +76,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Sets the event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event $event Event
      */
     public function setEvent(Event $event)
     {
@@ -84,7 +86,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Returns the event
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @return Event
      */
     public function getEvent()
     {
@@ -114,7 +116,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Returns tstamp
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getTstamp()
     {
@@ -124,9 +126,9 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Sets the timestamp
      *
-     * @param \DateTime $tstamp Tstamp
+     * @param DateTime $tstamp Tstamp
      */
-    public function setTstamp(\DateTime $tstamp)
+    public function setTstamp(DateTime $tstamp)
     {
         $this->tstamp = $tstamp;
     }
@@ -134,7 +136,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Returns the backend user
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\BackendUser
+     * @return BackendUser
      */
     public function getCruserId()
     {
@@ -144,7 +146,7 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     /**
      * Sets the backend user
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\BackendUser $cruserId CruserId
+     * @param BackendUser $cruserId CruserId
      */
     public function setCruserId($cruserId)
     {

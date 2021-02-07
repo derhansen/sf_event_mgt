@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
  * RegistrationResult
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationResult
 {

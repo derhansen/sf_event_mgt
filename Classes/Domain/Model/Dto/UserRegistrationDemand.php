@@ -9,12 +9,14 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use DateTime;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * UserRegistrationDemand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class UserRegistrationDemand extends AbstractEntity
 {
     /**
      * Display mode
@@ -47,14 +49,14 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Current DateTime
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $currentDateTime;
 
     /**
      * Frontend user
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @var FrontendUser
      */
     protected $user;
 
@@ -141,9 +143,9 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Sets the current DateTime
      *
-     * @param \DateTime $currentDateTime CurrentDateTime
+     * @param DateTime $currentDateTime CurrentDateTime
      */
-    public function setCurrentDateTime(\DateTime $currentDateTime)
+    public function setCurrentDateTime(DateTime $currentDateTime)
     {
         $this->currentDateTime = $currentDateTime;
     }
@@ -151,7 +153,7 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Returns the current datetime
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getCurrentDateTime()
     {
@@ -159,13 +161,13 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
             return $this->currentDateTime;
         }
 
-        return new \DateTime();
+        return new DateTime();
     }
 
     /**
      * Returns the frontend user
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @return FrontendUser
      */
     public function getUser()
     {
@@ -175,7 +177,7 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
     /**
      * Sets the frontend user
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
+     * @param FrontendUser $user
      */
     public function setUser($user)
     {

@@ -22,13 +22,11 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\Notification\AttachmentService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class AttachmentServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
+     * @var AttachmentService
      */
     protected $subject;
 

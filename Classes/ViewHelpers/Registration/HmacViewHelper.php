@@ -10,28 +10,27 @@
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Hmac ViewHelper for registrations
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class HmacViewHelper extends AbstractViewHelper
 {
     /**
      * Hash Service
      *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
+     * @var HashService
      * */
     protected $hashService;
 
     /**
      * DI for $hashService
      *
-     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
+     * @param HashService $hashService
      */
-    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    public function injectHashService(HashService $hashService)
     {
         $this->hashService = $hashService;
     }

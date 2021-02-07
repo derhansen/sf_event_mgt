@@ -9,14 +9,17 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use DateTime;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Registration
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
-class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Registration extends AbstractEntity
 {
     /**
      * Firstname
@@ -105,7 +108,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Date of birth
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $dateOfBirth;
 
@@ -140,28 +143,28 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Event
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @var Event
      */
     protected $event;
 
     /**
      * Main registration (if available)
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
+     * @var Registration
      */
     protected $mainRegistration;
 
     /**
      * DateTime until the registration must be confirmed
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $confirmationUntil;
 
     /**
      * The registration date
      *
-     * @var \DateTime
+     * @var DateTime
      */
     protected $registrationDate;
 
@@ -196,7 +199,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * FrontendUser if available
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @var FrontendUser
      */
     protected $feUser;
 
@@ -224,7 +227,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Registration fields
      *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
+     * @var ObjectStorage<FieldValue>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
@@ -235,7 +238,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function __construct()
     {
-        $this->fieldValues = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->fieldValues = new ObjectStorage();
     }
 
     /**
@@ -491,7 +494,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the date of birth
      *
-     * @param \DateTime $dateOfBirth DateOfBirth
+     * @param DateTime $dateOfBirth DateOfBirth
      */
     public function setDateOfBirth($dateOfBirth)
     {
@@ -501,7 +504,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the date of birth
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getDateOfBirth()
     {
@@ -591,7 +594,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event $event Event
      */
     public function setEvent($event)
     {
@@ -601,7 +604,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the event
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @return Event
      */
     public function getEvent()
     {
@@ -611,7 +614,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the mainRegistration
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param Registration $registration Registration
      */
     public function setMainRegistration($registration)
     {
@@ -621,7 +624,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the event
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration
+     * @return Registration
      */
     public function getMainRegistration()
     {
@@ -651,7 +654,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets confirmUntil
      *
-     * @param \DateTime $confirmationUntil Confirmation Until
+     * @param DateTime $confirmationUntil Confirmation Until
      */
     public function setConfirmationUntil($confirmationUntil)
     {
@@ -661,7 +664,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns confirmationUntil
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getConfirmationUntil()
     {
@@ -671,7 +674,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns registrationDate
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getRegistrationDate()
     {
@@ -681,7 +684,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets registrationDate
      *
-     * @param \DateTime $registrationDate
+     * @param DateTime $registrationDate
      */
     public function setRegistrationDate($registrationDate)
     {
@@ -771,7 +774,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the frontenduser
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @return FrontendUser
      */
     public function getFeUser()
     {
@@ -781,7 +784,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the frontenduser
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feUser
+     * @param FrontendUser $feUser
      */
     public function setFeUser($feUser)
     {
@@ -849,7 +852,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
+     * @return ObjectStorage<FieldValue>
      */
     public function getFieldValues()
     {
@@ -857,7 +860,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $fieldValues
+     * @param ObjectStorage $fieldValues
      */
     public function setFieldValues($fieldValues)
     {
