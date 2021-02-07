@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -15,17 +17,17 @@ namespace DERHANSEN\SfEventMgt\Utility;
 class ArrayUtility
 {
     /**
-     * Check if String is JSON Array
+     * Check if the given value is JSON Array
      *
-     * @param string $string
+     * @param mixed $value
      * @return bool
      */
-    public static function isJsonArray($string)
+    public static function isJsonArray($value): bool
     {
-        if (!is_string($string)) {
+        if (!is_string($value)) {
             return false;
         }
 
-        return is_array(json_decode($string, true));
+        return is_array(json_decode($value, true));
     }
 }
