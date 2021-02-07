@@ -9,15 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
-use DateTime;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /**
  * Price option
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class PriceOption extends AbstractEntity
+class PriceOption extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * Price
@@ -29,14 +26,14 @@ class PriceOption extends AbstractEntity
     /**
      * Valid until
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $validUntil;
 
     /**
      * Event
      *
-     * @var Event
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
     protected $event;
 
@@ -63,7 +60,7 @@ class PriceOption extends AbstractEntity
     /**
      * Returns the date until the price is valid
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getValidUntil()
     {
@@ -73,7 +70,7 @@ class PriceOption extends AbstractEntity
     /**
      * Sets the date until the price is valil
      *
-     * @param DateTime $validUntil
+     * @param \DateTime $validUntil
      */
     public function setValidUntil($validUntil)
     {
@@ -83,7 +80,7 @@ class PriceOption extends AbstractEntity
     /**
      * Returns the event
      *
-     * @return Event
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
     public function getEvent()
     {
@@ -93,7 +90,7 @@ class PriceOption extends AbstractEntity
     /**
      * Sets the event
      *
-     * @param Event $event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      */
     public function setEvent($event)
     {

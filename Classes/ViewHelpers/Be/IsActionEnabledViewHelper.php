@@ -9,7 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -78,7 +77,7 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @return mixed|BackendUserAuthentication
+     * @return mixed|\TYPO3\CMS\Core\Authentication\BackendUserAuthentication
      */
     private function getBackendUser()
     {

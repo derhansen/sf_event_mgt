@@ -12,7 +12,6 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
@@ -24,14 +23,14 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
 {
     /**
-     * @var PropertyMapper
+     * @var \TYPO3\CMS\Extbase\Property\PropertyMapper
      */
     protected $propertyMapper;
 
     /**
      * @param PropertyMapper $propertyMapper
      */
-    public function injectPropertyMapper(PropertyMapper $propertyMapper)
+    public function injectPropertyMapper(\TYPO3\CMS\Extbase\Property\PropertyMapper $propertyMapper)
     {
         $this->propertyMapper = $propertyMapper;
     }
@@ -115,7 +114,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @param Field $registrationField
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $registrationField
      * @param string $currentValue
      * @return bool
      */
@@ -129,7 +128,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractViewHelper
     /**
      * Shortcut for retrieving the request from the controller context
      *
-     * @return Request
+     * @return \TYPO3\CMS\Extbase\Mvc\Request
      */
     protected function getRequest()
     {

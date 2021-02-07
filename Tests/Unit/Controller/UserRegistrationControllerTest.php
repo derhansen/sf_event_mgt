@@ -26,7 +26,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class UserRegistrationControllerTest extends UnitTestCase
 {
     /**
-     * @var UserRegistrationController
+     * @var \DERHANSEN\SfEventMgt\Controller\UserRegistrationController
      */
     protected $subject;
 

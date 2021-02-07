@@ -9,8 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -40,7 +38,7 @@ class PrefillViewHelper extends AbstractViewHelper
     {
         $fieldname = $this->arguments['fieldname'];
         $prefillSettings = $this->arguments['prefillSettings'];
-        $piVars = GeneralUtility::_GP('tx_sfeventmgt_pievent');
+        $piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_sfeventmgt_pievent');
         if (isset($piVars['registration'][$fieldname]) && $piVars['registration'][$fieldname] !== '') {
             return $piVars['registration'][$fieldname];
         }
@@ -63,7 +61,7 @@ class PrefillViewHelper extends AbstractViewHelper
     /**
      * Shortcut for retrieving the request from the controller context
      *
-     * @return Request
+     * @return \TYPO3\CMS\Extbase\Mvc\Request
      */
     protected function getRequest()
     {

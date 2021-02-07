@@ -9,7 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -22,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class UserRegistrationDemandTest extends UnitTestCase
 {
     /**
-     * @var UserRegistrationDemand
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
      */
     protected $subject;
 
@@ -94,9 +93,9 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     public function getCurrentDateTimeReturnsGivenValueIfValueSet()
     {
-        $this->subject->setCurrentDateTime(new DateTime('01.01.2014'));
+        $this->subject->setCurrentDateTime(new \DateTime('01.01.2014'));
         self::assertEquals(
-            new DateTime('01.01.2014'),
+            new \DateTime('01.01.2014'),
             $this->subject->getCurrentDateTime()
         );
     }

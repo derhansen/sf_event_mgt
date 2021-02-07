@@ -23,7 +23,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
     /**
      * Viewhelper
      *
-     * @var SimultaneousRegistrationsViewHelper
+     * @var \DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper
      */
     protected $viewhelper;
 

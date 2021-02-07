@@ -9,19 +9,14 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
-use DateTime;
-use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Registration
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class Registration extends AbstractEntity
+class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * Firstname
@@ -110,7 +105,7 @@ class Registration extends AbstractEntity
     /**
      * Date of birth
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $dateOfBirth;
 
@@ -145,28 +140,28 @@ class Registration extends AbstractEntity
     /**
      * Event
      *
-     * @var Event
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
     protected $event;
 
     /**
      * Main registration (if available)
      *
-     * @var Registration
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
      */
     protected $mainRegistration;
 
     /**
      * DateTime until the registration must be confirmed
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $confirmationUntil;
 
     /**
      * The registration date
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $registrationDate;
 
@@ -201,7 +196,7 @@ class Registration extends AbstractEntity
     /**
      * FrontendUser if available
      *
-     * @var FrontendUser
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     protected $feUser;
 
@@ -229,7 +224,7 @@ class Registration extends AbstractEntity
     /**
      * Registration fields
      *
-     * @var ObjectStorage<FieldValue>
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
@@ -240,7 +235,7 @@ class Registration extends AbstractEntity
      */
     public function __construct()
     {
-        $this->fieldValues = new ObjectStorage();
+        $this->fieldValues = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
@@ -496,7 +491,7 @@ class Registration extends AbstractEntity
     /**
      * Sets the date of birth
      *
-     * @param DateTime $dateOfBirth DateOfBirth
+     * @param \DateTime $dateOfBirth DateOfBirth
      */
     public function setDateOfBirth($dateOfBirth)
     {
@@ -506,7 +501,7 @@ class Registration extends AbstractEntity
     /**
      * Returns the date of birth
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getDateOfBirth()
     {
@@ -596,7 +591,7 @@ class Registration extends AbstractEntity
     /**
      * Sets the event
      *
-     * @param Event $event Event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      */
     public function setEvent($event)
     {
@@ -606,7 +601,7 @@ class Registration extends AbstractEntity
     /**
      * Returns the event
      *
-     * @return Event
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
     public function getEvent()
     {
@@ -616,7 +611,7 @@ class Registration extends AbstractEntity
     /**
      * Sets the mainRegistration
      *
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      */
     public function setMainRegistration($registration)
     {
@@ -626,7 +621,7 @@ class Registration extends AbstractEntity
     /**
      * Returns the event
      *
-     * @return Registration
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration
      */
     public function getMainRegistration()
     {
@@ -656,7 +651,7 @@ class Registration extends AbstractEntity
     /**
      * Sets confirmUntil
      *
-     * @param DateTime $confirmationUntil Confirmation Until
+     * @param \DateTime $confirmationUntil Confirmation Until
      */
     public function setConfirmationUntil($confirmationUntil)
     {
@@ -666,7 +661,7 @@ class Registration extends AbstractEntity
     /**
      * Returns confirmationUntil
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getConfirmationUntil()
     {
@@ -676,7 +671,7 @@ class Registration extends AbstractEntity
     /**
      * Returns registrationDate
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getRegistrationDate()
     {
@@ -686,7 +681,7 @@ class Registration extends AbstractEntity
     /**
      * Sets registrationDate
      *
-     * @param DateTime $registrationDate
+     * @param \DateTime $registrationDate
      */
     public function setRegistrationDate($registrationDate)
     {
@@ -776,7 +771,7 @@ class Registration extends AbstractEntity
     /**
      * Returns the frontenduser
      *
-     * @return FrontendUser
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     public function getFeUser()
     {
@@ -786,7 +781,7 @@ class Registration extends AbstractEntity
     /**
      * Sets the frontenduser
      *
-     * @param FrontendUser $feUser
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feUser
      */
     public function setFeUser($feUser)
     {
@@ -854,7 +849,7 @@ class Registration extends AbstractEntity
     }
 
     /**
-     * @return ObjectStorage<FieldValue>
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
      */
     public function getFieldValues()
     {
@@ -862,7 +857,7 @@ class Registration extends AbstractEntity
     }
 
     /**
-     * @param ObjectStorage $fieldValues
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $fieldValues
      */
     public function setFieldValues($fieldValues)
     {

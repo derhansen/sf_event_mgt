@@ -9,15 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
-use DateTime;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /**
  * Search demand
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class SearchDemand extends AbstractEntity
+class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * Search string
@@ -36,21 +33,21 @@ class SearchDemand extends AbstractEntity
     /**
      * StartDate
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $startDate;
 
     /**
      * EndDate
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $endDate;
 
     /**
      * Set the start date
      *
-     * @param DateTime $startDate StartDate
+     * @param \DateTime $startDate StartDate
      */
     public function setStartDate($startDate)
     {
@@ -60,7 +57,7 @@ class SearchDemand extends AbstractEntity
     /**
      * Returns the start date
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getStartDate()
     {
@@ -70,7 +67,7 @@ class SearchDemand extends AbstractEntity
     /**
      * Set the end date
      *
-     * @param DateTime $endDate EndDate
+     * @param \DateTime $endDate EndDate
      */
     public function setEndDate($endDate)
     {
@@ -80,7 +77,7 @@ class SearchDemand extends AbstractEntity
     /**
      * Get the end date
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getEndDate()
     {

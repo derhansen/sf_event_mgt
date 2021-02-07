@@ -12,7 +12,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -22,10 +21,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class LocationRepositoryTest extends FunctionalTestCase
 {
-    /** @var ObjectManagerInterface The object manager */
+    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
     protected $objectManager;
 
-    /** @var LocationRepository */
+    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
     protected $locationRepository;
 
     /** @var array */

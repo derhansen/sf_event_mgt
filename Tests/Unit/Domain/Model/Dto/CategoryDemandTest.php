@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class CategoryDemandTest extends UnitTestCase
 {
     /**
-     * @var CategoryDemand
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
      */
     protected $subject;
 

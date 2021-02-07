@@ -28,7 +28,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class AttachmentServiceTest extends UnitTestCase
 {
     /**
-     * @var AttachmentService
+     * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
      */
     protected $subject;
 

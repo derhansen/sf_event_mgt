@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class EmailServiceTest extends UnitTestCase
 {
     /**
-     * @var EmailService
+     * @var \DERHANSEN\SfEventMgt\Service\EmailService
      */
     protected $subject;
 

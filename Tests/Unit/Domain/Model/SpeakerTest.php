@@ -23,7 +23,7 @@ class SpeakerTest extends UnitTestCase
     /**
      * Speaker object
      *
-     * @var Speaker
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
      */
     protected $subject;
 

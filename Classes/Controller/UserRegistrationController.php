@@ -24,11 +24,11 @@ class UserRegistrationController extends AbstractController
      *
      * @param array $settings The settings
      *
-     * @return UserRegistrationDemand
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
      */
     public function createUserRegistrationDemandObjectFromSettings(array $settings)
     {
-        /** @var UserRegistrationDemand $demand */
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = $this->objectManager->get(UserRegistrationDemand::class);
         $demand->setDisplayMode($settings['userRegistration']['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren(

@@ -10,12 +10,9 @@
 namespace DERHANSEN\SfEventMgt\Service\Notification;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * AttachmentService
@@ -25,16 +22,16 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 class AttachmentService
 {
     /**
-     * @var ICalendarService
+     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
      */
     protected $iCalendarService;
 
     /**
      * DI for iCalService
      *
-     * @param ICalendarService $iCalService
+     * @param \DERHANSEN\SfEventMgt\Service\ICalendarService $iCalService
      */
-    public function injectICalService(ICalendarService $iCalService)
+    public function injectICalService(\DERHANSEN\SfEventMgt\Service\ICalendarService $iCalService)
     {
         $this->iCalendarService = $iCalService;
     }
@@ -123,12 +120,12 @@ class AttachmentService
 
         if (isset($settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) &&
             (bool)$settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) {
-            $file = GeneralUtility::tempnam(
+            $file = \TYPO3\CMS\Core\Utility\GeneralUtility::tempnam(
                 'event-' . $registration->getEvent()->getUid() . '-',
                 '.ics'
             );
             $content = $this->iCalendarService->getiCalendarContent($registration->getEvent());
-            GeneralUtility::writeFile($file, $content);
+            \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($file, $content);
         }
 
         return $file;
@@ -212,15 +209,15 @@ class AttachmentService
         $attachments = [];
         $property = $object->_getProperty($propertyName);
 
-        if ($property instanceof ObjectStorage) {
+        if ($property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
             foreach ($property as $object) {
-                if ($object instanceof FileReference) {
+                if ($object instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
                     $attachments[] = $object->getOriginalResource()->getForLocalProcessing(false);
                 }
             }
         }
 
-        if ($property instanceof FileReference) {
+        if ($property instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
             $attachments[] = $property->getOriginalResource()->getForLocalProcessing(false);
         }
 

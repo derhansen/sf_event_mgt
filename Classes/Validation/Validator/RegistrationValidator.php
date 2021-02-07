@@ -11,12 +11,8 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
-use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Error\Result;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
@@ -28,29 +24,29 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class RegistrationValidator extends AbstractValidator
+class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {
     /**
      * Configuration Manager
      *
-     * @var ConfigurationManager
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
      */
     protected $configurationManager;
 
     /**
      * Object Manager
      *
-     * @var ObjectManagerInterface
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
      * DI for $configurationManager
      *
-     * @param ConfigurationManager $configurationManager
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
      */
     public function injectConfigurationManager(
-        ConfigurationManager $configurationManager
+        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
     ) {
         $this->configurationManager = $configurationManager;
     }
@@ -58,9 +54,9 @@ class RegistrationValidator extends AbstractValidator
     /**
      * DI for $objectManager
      *
-     * @param ObjectManagerInterface $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
      */
-    public function injectObjectManager(ObjectManagerInterface $objectManager)
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -105,7 +101,7 @@ class RegistrationValidator extends AbstractValidator
         foreach ($requiredFields as $requiredField) {
             if ($value->_hasProperty($requiredField)) {
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
-                /** @var Result $validationResult */
+                /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
                 $validationResult = $validator->validate($value->_getProperty($requiredField));
                 if ($validationResult->hasErrors()) {
                     $result = false;
@@ -139,7 +135,7 @@ class RegistrationValidator extends AbstractValidator
         $defaultFields = ['firstname', 'lastname', 'email'];
         foreach ($defaultFields as $defaultField) {
             $validator = GeneralUtility::makeInstance(NotEmptyValidator::class);
-            /** @var Result $validationResult */
+            /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
             $validationResult = $validator->validate($value->_getProperty($defaultField));
             if ($validationResult->hasErrors()) {
                 $result = false;
@@ -150,7 +146,7 @@ class RegistrationValidator extends AbstractValidator
         }
 
         $validator = GeneralUtility::makeInstance(EmailAddressValidator::class);
-        /** @var Result $validationResult */
+        /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
         $validationResult = $validator->validate($value->_getProperty('email'));
         if ($validationResult->hasErrors()) {
             $result = false;
@@ -167,7 +163,7 @@ class RegistrationValidator extends AbstractValidator
      *
      * @param Registration $registration
      * @param array $settings
-     * @throws SpamCheckNotFoundException
+     * @throws \DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException
      * @return bool
      */
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
@@ -201,10 +197,10 @@ class RegistrationValidator extends AbstractValidator
                 break;
             default:
                 if ($field == 'recaptcha') {
-                    /** @var RecaptchaValidator $validator */
+                    /** @var \DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator $validator */
                     $validator = $this->objectManager->get(RecaptchaValidator::class);
                 } else {
-                    /** @var NotEmptyValidator $validator */
+                    /** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
                     $validator = $this->objectManager->get(NotEmptyValidator::class);
                 }
         }

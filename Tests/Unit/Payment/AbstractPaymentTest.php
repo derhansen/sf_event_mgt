@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class AbstractPaymentTest extends UnitTestCase
 {
     /**
-     * @var AbstractPayment
+     * @var \DERHANSEN\SfEventMgt\Payment\AbstractPayment
      */
     protected $subject;
 

@@ -10,9 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Service;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -25,17 +23,17 @@ class FluidStandaloneService
     /**
      * The configuration manager
      *
-     * @var ConfigurationManager
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
      */
     protected $configurationManager;
 
     /**
      * DI for $configurationManager
      *
-     * @param ConfigurationManager $configurationManager
+     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
      */
     public function injectConfigurationManager(
-        ConfigurationManager $configurationManager
+        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
     ) {
         $this->configurationManager = $configurationManager;
     }
@@ -44,7 +42,7 @@ class FluidStandaloneService
      * Returns the template folders for the given part
      *
      * @param string $part
-     * @throws InvalidConfigurationTypeException
+     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @return array
      */
     public function getTemplateFolders($part = 'template')

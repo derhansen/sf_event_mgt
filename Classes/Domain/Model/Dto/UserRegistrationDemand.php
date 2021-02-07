@@ -9,16 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
-use DateTime;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /**
  * UserRegistrationDemand
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class UserRegistrationDemand extends AbstractEntity
+class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * Display mode
@@ -51,14 +47,14 @@ class UserRegistrationDemand extends AbstractEntity
     /**
      * Current DateTime
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $currentDateTime;
 
     /**
      * Frontend user
      *
-     * @var FrontendUser
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     protected $user;
 
@@ -145,9 +141,9 @@ class UserRegistrationDemand extends AbstractEntity
     /**
      * Sets the current DateTime
      *
-     * @param DateTime $currentDateTime CurrentDateTime
+     * @param \DateTime $currentDateTime CurrentDateTime
      */
-    public function setCurrentDateTime(DateTime $currentDateTime)
+    public function setCurrentDateTime(\DateTime $currentDateTime)
     {
         $this->currentDateTime = $currentDateTime;
     }
@@ -155,7 +151,7 @@ class UserRegistrationDemand extends AbstractEntity
     /**
      * Returns the current datetime
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCurrentDateTime()
     {
@@ -163,13 +159,13 @@ class UserRegistrationDemand extends AbstractEntity
             return $this->currentDateTime;
         }
 
-        return new DateTime();
+        return new \DateTime();
     }
 
     /**
      * Returns the frontend user
      *
-     * @return FrontendUser
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
      */
     public function getUser()
     {
@@ -179,7 +175,7 @@ class UserRegistrationDemand extends AbstractEntity
     /**
      * Sets the frontend user
      *
-     * @param FrontendUser $user
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
      */
     public function setUser($user)
     {

@@ -9,8 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\Controller;
 
-use DateInterval;
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
@@ -43,9 +41,7 @@ use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
-use TYPO3\CMS\Extbase\Property\Exception;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -74,9 +70,9 @@ class EventController extends AbstractController
     /**
      * Assign contentObjectData and pageData to earch view
      *
-     * @param ViewInterface $view
+     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
      */
-    protected function initializeView(ViewInterface $view)
+    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
     {
         $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
         if (is_object($GLOBALS['TSFE'])) {
@@ -106,11 +102,11 @@ class EventController extends AbstractController
      *
      * @param array $settings The settings
      *
-     * @return EventDemand
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
      */
     public function createEventDemandObjectFromSettings(array $settings)
     {
-        /** @var EventDemand $demand */
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get(EventDemand::class);
         $demand->setDisplayMode($settings['displayMode']);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
@@ -134,11 +130,11 @@ class EventController extends AbstractController
      *
      * @param array $settings The settings
      *
-     * @return ForeignRecordDemand
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand
      */
     public function createForeignRecordDemandObjectFromSettings(array $settings)
     {
-        /** @var ForeignRecordDemand $demand */
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand */
         $demand = $this->objectManager->get(ForeignRecordDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictForeignRecordsToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
@@ -151,11 +147,11 @@ class EventController extends AbstractController
      *
      * @param array $settings The settings
      *
-     * @return CategoryDemand
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
      */
     public function createCategoryDemandObjectFromSettings(array $settings)
     {
-        /** @var CategoryDemand $demand */
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
         $demand = $this->objectManager->get(CategoryDemand::class);
         $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
@@ -194,7 +190,7 @@ class EventController extends AbstractController
         $previousException = $exception->getPrevious();
         $actions = ['detailAction', 'registrationAction', 'icalDownloadAction'];
         if (in_array($this->actionMethodName, $actions, true)
-            && $previousException instanceof Exception
+            && $previousException instanceof \TYPO3\CMS\Extbase\Property\Exception
         ) {
             $this->handleEventNotFoundError($this->settings);
         } else {
@@ -302,7 +298,7 @@ class EventController extends AbstractController
                 'eventDemand' => $eventDemand,
                 'overwriteDemand' => $overwriteDemand,
                 'currentPageId' => $GLOBALS['TSFE']->id,
-                'firstDayOfMonth' => DateTime::createFromFormat(
+                'firstDayOfMonth' => \DateTime::createFromFormat(
                     'd.m.Y',
                     sprintf('1.%s.%s', $currentMonth, $currentYear)
                 ),
@@ -335,9 +331,9 @@ class EventController extends AbstractController
         $eventDemand->setMonth(0);
         $eventDemand->setYear(0);
 
-        $startDate = new DateTime();
+        $startDate = new \DateTime();
         $startDate->setTimestamp($calendarDateRange['firstDayOfCalendar']);
-        $endDate = new DateTime();
+        $endDate = new \DateTime();
         $endDate->setTimestamp($calendarDateRange['lastDayOfCalendar']);
         $endDate->setTime(23, 59, 59);
 
@@ -352,7 +348,7 @@ class EventController extends AbstractController
     /**
      * Detail view for an event
      *
-     * @param Event $event Event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      * @return mixed string|void
      */
     public function detailAction(Event $event = null)
@@ -438,7 +434,7 @@ class EventController extends AbstractController
     /**
      * Registration view for an event
      *
-     * @param Event $event Event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      *
      * @return mixed string|void
      */
@@ -590,8 +586,8 @@ class EventController extends AbstractController
     /**
      * Saves the registration
      *
-     * @param Registration $registration Registration
-     * @param Event $event Event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
      *
@@ -620,12 +616,12 @@ class EventController extends AbstractController
                 // Use 3600 seconds as default value if not set
                 $linkValidity = 3600;
             }
-            $confirmationUntil = new DateTime();
-            $confirmationUntil->add(new DateInterval('PT' . $linkValidity . 'S'));
+            $confirmationUntil = new \DateTime();
+            $confirmationUntil->add(new \DateInterval('PT' . $linkValidity . 'S'));
 
             $registration->setEvent($event);
             $registration->setPid($event->getPid());
-            $registration->setRegistrationDate(new DateTime());
+            $registration->setRegistrationDate(new \DateTime());
             $registration->setConfirmationUntil($confirmationUntil);
             $registration->setLanguage($this->getCurrentLanguageTwoLetterIsoCode());
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
@@ -955,7 +951,7 @@ class EventController extends AbstractController
     /**
      * Search view
      *
-     * @param SearchDemand $searchDemand SearchDemand
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
      * @param array $overwriteDemand OverwriteDemand
      */
     public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
@@ -1051,8 +1047,8 @@ class EventController extends AbstractController
      * Checks if the event pid could be found in the storagePage settings of the detail plugin and
      * if the pid could not be found it return null instead of the event object.
      *
-     * @param Event $event
-     * @return Event|null
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event|null
      */
     protected function checkPidOfEventRecord(Event $event)
     {

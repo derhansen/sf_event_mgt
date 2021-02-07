@@ -23,7 +23,7 @@ class OrganisatorTest extends UnitTestCase
     /**
      * Organisator object
      *
-     * @var Organisator
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
      */
     protected $subject;
 

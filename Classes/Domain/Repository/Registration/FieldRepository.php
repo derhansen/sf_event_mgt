@@ -9,13 +9,11 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository\Registration;
 
-use TYPO3\CMS\Extbase\Persistence\Repository;
-
 /**
  * The repository for registration field
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class FieldRepository extends Repository
+class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 }

@@ -13,7 +13,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * PaymentService
@@ -48,7 +47,7 @@ class PaymentService
      */
     protected function translate($key, $extension, $arguments = null)
     {
-        return LocalizationUtility::translate($key, $extension, $arguments);
+        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, $extension, $arguments);
     }
 
     /**

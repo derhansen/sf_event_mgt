@@ -9,10 +9,8 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
-use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class CacheService
@@ -45,9 +43,9 @@ class EventCacheService
      * Adds page cache tags by used storagePages.
      * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
      *
-     * @param EventDemand $demand
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
      */
-    public function addPageCacheTagsByEventDemandObject(EventDemand $demand)
+    public function addPageCacheTagsByEventDemandObject(\DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand)
     {
         $cacheTags = [];
         if ($demand->getStoragePage()) {
@@ -85,7 +83,7 @@ class EventCacheService
     }
 
     /**
-     * @return TypoScriptFrontendController
+     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
      */
     protected function getTypoScriptFrontendController()
     {

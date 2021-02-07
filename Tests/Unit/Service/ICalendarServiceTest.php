@@ -25,7 +25,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class ICalendarServiceTest extends UnitTestCase
 {
     /**
-     * @var ICalendarService
+     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
      */
     protected $subject;
 

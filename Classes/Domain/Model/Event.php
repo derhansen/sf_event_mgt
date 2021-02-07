@@ -9,15 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -26,10 +23,10 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class Event extends AbstractEntity
+class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $tstamp;
 
@@ -39,12 +36,12 @@ class Event extends AbstractEntity
     protected $hidden = false;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $starttime;
 
     /**
-     * @var DateTime
+     * @var \DateTime
      */
     protected $endtime;
 
@@ -79,14 +76,14 @@ class Event extends AbstractEntity
     /**
      * Startdate and time
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $startdate;
 
     /**
      * Enddate and time
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $enddate;
 
@@ -142,7 +139,7 @@ class Event extends AbstractEntity
     /**
      * Category
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
      * @Extbase\ORM\Lazy
      */
     protected $category;
@@ -150,7 +147,7 @@ class Event extends AbstractEntity
     /**
      * Related
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Event>
      * @Extbase\ORM\Lazy
      */
     protected $related;
@@ -158,7 +155,7 @@ class Event extends AbstractEntity
     /**
      * Registration
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
@@ -167,7 +164,7 @@ class Event extends AbstractEntity
     /**
      * Registration waitlist
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
      * @Extbase\ORM\Lazy
      */
     protected $registrationWaitlist;
@@ -175,7 +172,7 @@ class Event extends AbstractEntity
     /**
      * Registration fields
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\Field>
      * @Extbase\ORM\Lazy
      */
     protected $registrationFields;
@@ -183,21 +180,21 @@ class Event extends AbstractEntity
     /**
      * Registration start date
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $registrationStartdate;
 
     /**
      * Registration deadline date
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $registrationDeadline;
 
     /**
      * The image
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
     protected $image;
@@ -205,7 +202,7 @@ class Event extends AbstractEntity
     /**
      * Additional files
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
     protected $files;
@@ -213,7 +210,7 @@ class Event extends AbstractEntity
     /**
      * The Location
      *
-     * @var Location
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
      */
     protected $location;
 
@@ -262,7 +259,7 @@ class Event extends AbstractEntity
     /**
      * The additionalImage
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
      * @Extbase\ORM\Lazy
      */
     protected $additionalImage;
@@ -270,7 +267,7 @@ class Event extends AbstractEntity
     /**
      * The organisator
      *
-     * @var Organisator
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
      */
     protected $organisator;
 
@@ -298,7 +295,7 @@ class Event extends AbstractEntity
     /**
      * Deadline for cancel
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $cancelDeadline;
 
@@ -319,7 +316,7 @@ class Event extends AbstractEntity
     /**
      * Price options
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
@@ -328,7 +325,7 @@ class Event extends AbstractEntity
     /**
      * Speaker
      *
-     * @var ObjectStorage
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Speaker>
      * @Extbase\ORM\Lazy
      */
     protected $speaker;
@@ -338,22 +335,22 @@ class Event extends AbstractEntity
      */
     public function __construct()
     {
-        $this->category = new ObjectStorage();
-        $this->related = new ObjectStorage();
-        $this->registration = new ObjectStorage();
-        $this->registrationWaitlist = new ObjectStorage();
-        $this->registrationFields = new ObjectStorage();
-        $this->image = new ObjectStorage();
-        $this->files = new ObjectStorage();
-        $this->additionalImage = new ObjectStorage();
-        $this->priceOptions = new ObjectStorage();
-        $this->speaker = new ObjectStorage();
+        $this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->related = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->registrationWaitlist = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->registrationFields = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->priceOptions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->speaker = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
     }
 
     /**
      * Get timestamp
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getTstamp()
     {
@@ -363,7 +360,7 @@ class Event extends AbstractEntity
     /**
      * Set time stamp
      *
-     * @param DateTime $tstamp time stamp
+     * @param \DateTime $tstamp time stamp
      */
     public function setTstamp($tstamp)
     {
@@ -393,7 +390,7 @@ class Event extends AbstractEntity
     /**
      * Get start time
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getStarttime()
     {
@@ -403,7 +400,7 @@ class Event extends AbstractEntity
     /**
      * Set start time
      *
-     * @param DateTime $starttime start time
+     * @param \DateTime $starttime start time
      */
     public function setStarttime($starttime)
     {
@@ -413,7 +410,7 @@ class Event extends AbstractEntity
     /**
      * Get endtime
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getEndtime()
     {
@@ -423,7 +420,7 @@ class Event extends AbstractEntity
     /**
      * Set end time
      *
-     * @param DateTime $endtime end time
+     * @param \DateTime $endtime end time
      */
     public function setEndtime($endtime)
     {
@@ -513,7 +510,7 @@ class Event extends AbstractEntity
     /**
      * Returns the startdate
      *
-     * @return DateTime $startdate
+     * @return \DateTime $startdate
      */
     public function getStartdate()
     {
@@ -523,9 +520,9 @@ class Event extends AbstractEntity
     /**
      * Sets the startdate
      *
-     * @param DateTime $startdate Startdate
+     * @param \DateTime $startdate Startdate
      */
-    public function setStartdate(DateTime $startdate)
+    public function setStartdate(\DateTime $startdate)
     {
         $this->startdate = $startdate;
     }
@@ -533,7 +530,7 @@ class Event extends AbstractEntity
     /**
      * Returns the enddate
      *
-     * @return DateTime $enddate
+     * @return \DateTime $enddate
      */
     public function getEnddate()
     {
@@ -543,9 +540,9 @@ class Event extends AbstractEntity
     /**
      * Sets the enddate
      *
-     * @param DateTime $enddate Enddate
+     * @param \DateTime $enddate Enddate
      */
-    public function setEnddate(DateTime $enddate)
+    public function setEnddate(\DateTime $enddate)
     {
         $this->enddate = $enddate;
     }
@@ -673,9 +670,9 @@ class Event extends AbstractEntity
     /**
      * Adds a Category
      *
-     * @param Category $category Category
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $category Category
      */
-    public function addCategory(Category $category)
+    public function addCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $category)
     {
         $this->category->attach($category);
     }
@@ -683,9 +680,9 @@ class Event extends AbstractEntity
     /**
      * Removes a Category
      *
-     * @param Category $categoryToRemove The Category to be removed
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
      */
-    public function removeCategory(Category $categoryToRemove)
+    public function removeCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove)
     {
         $this->category->detach($categoryToRemove);
     }
@@ -693,7 +690,7 @@ class Event extends AbstractEntity
     /**
      * Returns the category
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getCategory()
     {
@@ -703,9 +700,9 @@ class Event extends AbstractEntity
     /**
      * Sets the category
      *
-     * @param ObjectStorage $category Category
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $category Category
      */
-    public function setCategory(ObjectStorage $category)
+    public function setCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $category)
     {
         $this->category = $category;
     }
@@ -713,7 +710,7 @@ class Event extends AbstractEntity
     /**
      * Returns related events
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getRelated()
     {
@@ -723,7 +720,7 @@ class Event extends AbstractEntity
     /**
      * Sets related events
      *
-     * @param ObjectStorage $related
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $related
      */
     public function setRelated($related)
     {
@@ -735,7 +732,7 @@ class Event extends AbstractEntity
      *
      * @param Event $event
      */
-    public function addRelated(Event $event)
+    public function addRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
         $this->related->attach($event);
     }
@@ -745,7 +742,7 @@ class Event extends AbstractEntity
      *
      * @param Event $event
      */
-    public function removeRelated(Event $event)
+    public function removeRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
     {
         $this->related->detach($event);
     }
@@ -753,9 +750,9 @@ class Event extends AbstractEntity
     /**
      * Adds a Registration
      *
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      */
-    public function addRegistration(Registration $registration)
+    public function addRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
     {
         $this->registration->attach($registration);
     }
@@ -763,9 +760,9 @@ class Event extends AbstractEntity
     /**
      * Removes a Registration
      *
-     * @param Registration $registrationToRemove Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
      */
-    public function removeRegistration(Registration $registrationToRemove)
+    public function removeRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
     {
         $this->registration->detach($registrationToRemove);
     }
@@ -773,7 +770,7 @@ class Event extends AbstractEntity
     /**
      * Returns the Registration
      *
-     * @return ObjectStorage $registration
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration
      */
     public function getRegistration()
     {
@@ -783,9 +780,9 @@ class Event extends AbstractEntity
     /**
      * Sets the Registration
      *
-     * @param ObjectStorage $registration Registration
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
      */
-    public function setRegistration(ObjectStorage $registration)
+    public function setRegistration(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
     {
         $this->registration = $registration;
     }
@@ -793,9 +790,9 @@ class Event extends AbstractEntity
     /**
      * Adds an image
      *
-     * @param FileReference $image Image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
      */
-    public function addImage(FileReference $image)
+    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
     {
         $this->image->attach($image);
     }
@@ -803,9 +800,9 @@ class Event extends AbstractEntity
     /**
      * Removes an image
      *
-     * @param FileReference $imageToRemove Image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove Image
      */
-    public function removeImage(FileReference $imageToRemove)
+    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
     {
         $this->image->detach($imageToRemove);
     }
@@ -813,7 +810,7 @@ class Event extends AbstractEntity
     /**
      * Returns the image
      *
-     * @return ObjectStorage $image
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image
      */
     public function getImage()
     {
@@ -823,9 +820,9 @@ class Event extends AbstractEntity
     /**
      * Sets the image
      *
-     * @param ObjectStorage $image Image
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image Image
      */
-    public function setImage(ObjectStorage $image)
+    public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
     {
         $this->image = $image;
     }
@@ -833,9 +830,9 @@ class Event extends AbstractEntity
     /**
      * Adds a file
      *
-     * @param FileReference $file File
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file File
      */
-    public function addFiles(FileReference $file)
+    public function addFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $file)
     {
         $this->files->attach($file);
     }
@@ -843,9 +840,9 @@ class Event extends AbstractEntity
     /**
      * Removes a file
      *
-     * @param FileReference $fileToRemove File
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove File
      */
-    public function removeFiles(FileReference $fileToRemove)
+    public function removeFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove)
     {
         $this->files->detach($fileToRemove);
     }
@@ -853,7 +850,7 @@ class Event extends AbstractEntity
     /**
      * Returns the files
      *
-     * @return ObjectStorage $files
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files
      */
     public function getFiles()
     {
@@ -863,9 +860,9 @@ class Event extends AbstractEntity
     /**
      * Sets the files
      *
-     * @param ObjectStorage $files Files
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files Files
      */
-    public function setFiles(ObjectStorage $files)
+    public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files)
     {
         $this->files = $files;
     }
@@ -882,15 +879,15 @@ class Event extends AbstractEntity
             $maxParticipantsNotReached = false;
         }
         $deadlineNotReached = true;
-        if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new DateTime()) {
+        if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new \DateTime()) {
             $deadlineNotReached = false;
         }
         $registrationStartReached = true;
-        if ($this->getRegistrationStartdate() != null && $this->getRegistrationStartdate() > new DateTime()) {
+        if ($this->getRegistrationStartdate() != null && $this->getRegistrationStartdate() > new \DateTime()) {
             $registrationStartReached = false;
         }
 
-        return ($this->getStartdate() > new DateTime()) &&
+        return ($this->getStartdate() > new \DateTime()) &&
         ($maxParticipantsNotReached || !$maxParticipantsNotReached && $this->enableWaitlist) &&
         $this->getEnableRegistration() && $deadlineNotReached && $registrationStartReached;
     }
@@ -908,7 +905,7 @@ class Event extends AbstractEntity
     /**
      * Sets the location
      *
-     * @param Location $location Location
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
      */
     public function setLocation($location)
     {
@@ -918,7 +915,7 @@ class Event extends AbstractEntity
     /**
      * Returns the location
      *
-     * @return Location
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
      */
     public function getLocation()
     {
@@ -1004,9 +1001,9 @@ class Event extends AbstractEntity
     /**
      * Sets the registration startdate
      *
-     * @param DateTime $registrationStartdate RegistrationStartdate
+     * @param \DateTime $registrationStartdate RegistrationStartdate
      */
-    public function setRegistrationStartdate(DateTime $registrationStartdate)
+    public function setRegistrationStartdate(\DateTime $registrationStartdate)
     {
         $this->registrationStartdate = $registrationStartdate;
     }
@@ -1014,7 +1011,7 @@ class Event extends AbstractEntity
     /**
      * Returns the registration startdate
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getRegistrationStartdate()
     {
@@ -1024,9 +1021,9 @@ class Event extends AbstractEntity
     /**
      * Sets the registration deadline
      *
-     * @param DateTime $registrationDeadline RegistrationDeadline
+     * @param \DateTime $registrationDeadline RegistrationDeadline
      */
-    public function setRegistrationDeadline(DateTime $registrationDeadline)
+    public function setRegistrationDeadline(\DateTime $registrationDeadline)
     {
         $this->registrationDeadline = $registrationDeadline;
     }
@@ -1034,7 +1031,7 @@ class Event extends AbstractEntity
     /**
      * Returns the registration deadline
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getRegistrationDeadline()
     {
@@ -1104,9 +1101,9 @@ class Event extends AbstractEntity
     /**
      * Adds an additionalImage
      *
-     * @param FileReference $additionalImage The Image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage The Image
      */
-    public function addAdditionalImage(FileReference $additionalImage)
+    public function addAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage)
     {
         $this->additionalImage->attach($additionalImage);
     }
@@ -1114,9 +1111,9 @@ class Event extends AbstractEntity
     /**
      * Removes an additionalImage
      *
-     * @param FileReference $additionalImageToRemove The Image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove The Image
      */
-    public function removeAdditionalImage(FileReference $additionalImageToRemove)
+    public function removeAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove)
     {
         $this->additionalImage->detach($additionalImageToRemove);
     }
@@ -1124,7 +1121,7 @@ class Event extends AbstractEntity
     /**
      * Returns the additionalImage
      *
-     * @return ObjectStorage $additionalImage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage
      */
     public function getAdditionalImage()
     {
@@ -1134,9 +1131,9 @@ class Event extends AbstractEntity
     /**
      * Sets the additionalImage
      *
-     * @param ObjectStorage $additionalImage The Image
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage The Image
      */
-    public function setAdditionalImage(ObjectStorage $additionalImage)
+    public function setAdditionalImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage)
     {
         $this->additionalImage = $additionalImage;
     }
@@ -1224,9 +1221,9 @@ class Event extends AbstractEntity
     /**
      * Sets the cancel deadline
      *
-     * @param DateTime $cancelDeadline CancelDeadline
+     * @param \DateTime $cancelDeadline CancelDeadline
      */
-    public function setCancelDeadline(DateTime $cancelDeadline)
+    public function setCancelDeadline(\DateTime $cancelDeadline)
     {
         $this->cancelDeadline = $cancelDeadline;
     }
@@ -1234,7 +1231,7 @@ class Event extends AbstractEntity
     /**
      * Returns the cancel deadline
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCancelDeadline()
     {
@@ -1284,7 +1281,7 @@ class Event extends AbstractEntity
     /**
      * Returns price options
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
      */
     public function getPriceOptions()
     {
@@ -1294,7 +1291,7 @@ class Event extends AbstractEntity
     /**
      * Sets price options
      *
-     * @param ObjectStorage $priceOptions
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $priceOptions
      */
     public function setPriceOptions($priceOptions)
     {
@@ -1304,9 +1301,9 @@ class Event extends AbstractEntity
     /**
      * Adds a price option
      *
-     * @param PriceOption $priceOption Price option
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
      */
-    public function addPriceOptions(PriceOption $priceOption)
+    public function addPriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
     {
         $this->priceOptions->attach($priceOption);
     }
@@ -1314,9 +1311,9 @@ class Event extends AbstractEntity
     /**
      * Removes a Registration
      *
-     * @param PriceOption $priceOption Price option
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
      */
-    public function removePriceOptions(PriceOption $priceOption)
+    public function removePriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
     {
         $this->priceOptions->detach($priceOption);
     }
@@ -1330,7 +1327,7 @@ class Event extends AbstractEntity
     {
         $activePriceOptions = [];
         if ($this->getPriceOptions()) {
-            $compareDate = new DateTime('today midnight');
+            $compareDate = new \DateTime('today midnight');
             foreach ($this->getPriceOptions() as $priceOption) {
                 if ($priceOption->getValidUntil() >= $compareDate) {
                     $activePriceOptions[$priceOption->getValidUntil()->getTimestamp()] = $priceOption;
@@ -1361,7 +1358,7 @@ class Event extends AbstractEntity
     /**
      * Returns registrationWaitlist
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getRegistrationWaitlist()
     {
@@ -1371,9 +1368,9 @@ class Event extends AbstractEntity
     /**
      * Sets registrationWaitlist
      *
-     * @param ObjectStorage $registration Registration
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
      */
-    public function setRegistrationWaitlist(ObjectStorage $registration)
+    public function setRegistrationWaitlist(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
     {
         $this->registrationWaitlist = $registration;
     }
@@ -1381,9 +1378,9 @@ class Event extends AbstractEntity
     /**
      * Adds a Registration to the waitlist
      *
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      */
-    public function addRegistrationWaitlist(Registration $registration)
+    public function addRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
     {
         $this->registrationWaitlist->attach($registration);
     }
@@ -1391,9 +1388,9 @@ class Event extends AbstractEntity
     /**
      * Removes a Registration from the waitlist
      *
-     * @param Registration $registrationToRemove Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
      */
-    public function removeRegistrationWaitlist(Registration $registrationToRemove)
+    public function removeRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
     {
         $this->registrationWaitlist->detach($registrationToRemove);
     }
@@ -1405,7 +1402,7 @@ class Event extends AbstractEntity
      */
     public function getCancellationPossible()
     {
-        $today = new DateTime('today');
+        $today = new \DateTime('today');
 
         return ($this->getEnableCancel() && $this->getCancelDeadline() > $today) ||
             ($this->getEnableCancel() && $this->getCancelDeadline() === null && $this->getStartdate() > $today);
@@ -1414,7 +1411,7 @@ class Event extends AbstractEntity
     /**
      * Returns speaker
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getSpeaker()
     {
@@ -1424,7 +1421,7 @@ class Event extends AbstractEntity
     /**
      * Sets speaker
      *
-     * @param ObjectStorage $speaker
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $speaker
      */
     public function setSpeaker($speaker)
     {
@@ -1434,9 +1431,9 @@ class Event extends AbstractEntity
     /**
      * Adds a speaker
      *
-     * @param Speaker $speaker
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
      */
-    public function addSpeaker(Speaker $speaker)
+    public function addSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
     {
         $this->speaker->attach($speaker);
     }
@@ -1444,9 +1441,9 @@ class Event extends AbstractEntity
     /**
      * Removes a speaker
      *
-     * @param Speaker $speaker
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
      */
-    public function removeSpeaker(Speaker $speaker)
+    public function removeSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
     {
         $this->speaker->detach($speaker);
     }
@@ -1454,7 +1451,7 @@ class Event extends AbstractEntity
     /**
      * Returns registrationFields
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getRegistrationFields()
     {
@@ -1464,9 +1461,9 @@ class Event extends AbstractEntity
     /**
      * Sets registrationWaitlist
      *
-     * @param ObjectStorage $registrationFields
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields
      */
-    public function setRegistrationFields(ObjectStorage $registrationFields)
+    public function setRegistrationFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields)
     {
         $this->registrationFields = $registrationFields;
     }
@@ -1526,7 +1523,7 @@ class Event extends AbstractEntity
      * Special getter to return the amount of registrations that are saved to default language
      * Required since TYPO3 9.5 (#82363)
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getRegistrations()
     {
@@ -1542,7 +1539,7 @@ class Event extends AbstractEntity
      * Special getter to return the amount of waitlist registrations that are saved to default language
      * Required since TYPO3 9.5 (#82363)
      *
-     * @return ObjectStorage
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
     public function getRegistrationsWaitlist()
     {

@@ -22,7 +22,7 @@ class LocationTest extends UnitTestCase
     /**
      * Location object
      *
-     * @var Location
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
      */
     protected $subject;
 

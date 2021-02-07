@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class BeUserSessionServiceTest extends UnitTestCase
 {
     /**
-     * @var BeUserSessionService
+     * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
      */
     protected $subject;
 

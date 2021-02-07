@@ -9,23 +9,18 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
-use Datetime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
-use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use InvalidArgumentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * The repository for registrations
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class RegistrationRepository extends Repository
+class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
     /**
      * Disable the use of storage records, because the StoragePage can be set
@@ -41,9 +36,9 @@ class RegistrationRepository extends Repository
      * Returns all registrations, where the confirmation date is less than the
      * given date
      *
-     * @param Datetime $dateNow Date
+     * @param \Datetime $dateNow Date
      *
-     * @return QueryResultInterface|array
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
      */
     public function findExpiredRegistrations($dateNow)
     {
@@ -63,7 +58,7 @@ class RegistrationRepository extends Repository
      * @param CustomNotification $customNotification
      * @param array $findConstraints FindConstraints
      *
-     * @return array|QueryResultInterface
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findNotificationRegistrations(
         Event $event,
@@ -104,7 +99,7 @@ class RegistrationRepository extends Repository
                     $constraints[] = $query->greaterThanOrEqual($findConstraint, $value[$condition]);
                     break;
                 default:
-                    throw new InvalidArgumentException('An error occured - Unknown condition: ' . $condition);
+                    throw new \InvalidArgumentException('An error occured - Unknown condition: ' . $condition);
             }
         }
 
@@ -114,8 +109,8 @@ class RegistrationRepository extends Repository
     /**
      * Returns registrations for the given UserRegistrationDemand demand
      *
-     * @param UserRegistrationDemand $demand
-     * @return array|QueryResultInterface
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findRegistrationsByUserRegistrationDemand($demand)
     {
@@ -137,7 +132,7 @@ class RegistrationRepository extends Repository
      *
      * @param Event $event
      * @param bool $waitlist
-     * @return array|QueryResultInterface
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findByEventAndWaitlist($event, $waitlist = false)
     {
@@ -153,7 +148,7 @@ class RegistrationRepository extends Repository
      * Returns all potential move up registrations for the given event ordered by "registration_date"
      *
      * @param Event $event
-     * @return array|QueryResultInterface
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
     public function findWaitlistMoveUpRegistrations(Event $event)
     {
@@ -171,8 +166,8 @@ class RegistrationRepository extends Repository
     /**
      * Sets the displayMode constraint to the given constraints array
      *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      * @param array $constraints Constraints
      */
     protected function setDisplayModeConstraint($query, $demand, &$constraints)
@@ -191,8 +186,8 @@ class RegistrationRepository extends Repository
     /**
      * Sets the storagePage constraint to the given constraints array
      *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      * @param array $constraints Constraints
      */
     protected function setStoragePageConstraint($query, $demand, &$constraints)
@@ -206,8 +201,8 @@ class RegistrationRepository extends Repository
     /**
      * Sets the user constraint to the given constraints array
      *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      * @param array $constraints Constraints
      */
     protected function setUserConstraint($query, $demand, &$constraints)
@@ -220,16 +215,16 @@ class RegistrationRepository extends Repository
     /**
      * Sets the ordering to the given query for the given demand
      *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
+     * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand
      */
     protected function setOrderingsFromDemand($query, $demand)
     {
         $orderings = [];
         if ($demand->getOrderField() != '' && $demand->getOrderDirection() != '') {
             $orderings[$demand->getOrderField()] = ((strtolower($demand->getOrderDirection()) == 'desc') ?
-                QueryInterface::ORDER_DESCENDING :
-                QueryInterface::ORDER_ASCENDING);
+                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
+                \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
             $query->setOrderings($orderings);
         }
     }

@@ -9,18 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
-use DateTime;
-use DERHANSEN\SfEventMgt\Domain\Model\Location;
-use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
-use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /**
  * Event demand
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class EventDemand extends AbstractEntity
+class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * Display mode
@@ -39,7 +33,7 @@ class EventDemand extends AbstractEntity
     /**
      * Current DateTime
      *
-     * @var DateTime
+     * @var \DateTime
      */
     protected $currentDateTime;
 
@@ -102,14 +96,14 @@ class EventDemand extends AbstractEntity
     /**
      * Location
      *
-     * @var Location
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
      */
     protected $location;
 
     /**
      * Speaker
      *
-     * @var Speaker
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
      */
     protected $speaker;
 
@@ -151,14 +145,14 @@ class EventDemand extends AbstractEntity
     /**
      * Search Demand
      *
-     * @var SearchDemand
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
      */
     protected $searchDemand;
 
     /**
      * Organisator
      *
-     * @var Organisator
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
      */
     protected $organisator;
 
@@ -210,9 +204,9 @@ class EventDemand extends AbstractEntity
     /**
      * Sets the current DateTime
      *
-     * @param DateTime $currentDateTime CurrentDateTime
+     * @param \DateTime $currentDateTime CurrentDateTime
      */
-    public function setCurrentDateTime(DateTime $currentDateTime)
+    public function setCurrentDateTime(\DateTime $currentDateTime)
     {
         $this->currentDateTime = $currentDateTime;
     }
@@ -220,7 +214,7 @@ class EventDemand extends AbstractEntity
     /**
      * Returns the current datetime
      *
-     * @return DateTime
+     * @return \DateTime
      */
     public function getCurrentDateTime()
     {
@@ -228,7 +222,7 @@ class EventDemand extends AbstractEntity
             return $this->currentDateTime;
         }
 
-        return new DateTime();
+        return new \DateTime();
     }
 
     /**
@@ -374,7 +368,7 @@ class EventDemand extends AbstractEntity
     /**
      * Returns the location
      *
-     * @return Location
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
      */
     public function getLocation()
     {
@@ -384,7 +378,7 @@ class EventDemand extends AbstractEntity
     /**
      * Sets the location
      *
-     * @param Location $location Location
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
      */
     public function setLocation($location)
     {
@@ -512,7 +506,7 @@ class EventDemand extends AbstractEntity
     /**
      * Returns organisator
      *
-     * @return Organisator
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Organisator
      */
     public function getOrganisator()
     {
@@ -522,7 +516,7 @@ class EventDemand extends AbstractEntity
     /**
      * Sets organisator
      *
-     * @param Organisator $organisator
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Organisator $organisator
      */
     public function setOrganisator($organisator)
     {
@@ -552,7 +546,7 @@ class EventDemand extends AbstractEntity
     /**
      * Returns speaker
      *
-     * @return Speaker
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\Speaker
      */
     public function getSpeaker()
     {
@@ -562,7 +556,7 @@ class EventDemand extends AbstractEntity
     /**
      * Sets speaker
      *
-     * @param Speaker $speaker
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
      */
     public function setSpeaker($speaker)
     {

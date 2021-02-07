@@ -18,7 +18,6 @@ use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
-use TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -29,7 +28,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class RegistrationValidatorTest extends UnitTestCase
 {
     /**
-     * @var StringLengthValidator
+     * @var \TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator
      */
     protected $validator;
 

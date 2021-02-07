@@ -9,8 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
-use DateInterval;
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Category;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
@@ -31,7 +29,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class EventTest extends UnitTestCase
 {
     /**
-     * @var Event
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
      */
     protected $subject;
 
@@ -146,7 +144,7 @@ class EventTest extends UnitTestCase
      */
     public function setStartdateForDateTimeSetsStartdate()
     {
-        $dateTimeFixture = new DateTime();
+        $dateTimeFixture = new \DateTime();
         $this->subject->setStartdate($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getStartdate());
     }
@@ -166,7 +164,7 @@ class EventTest extends UnitTestCase
      */
     public function setEnddateForDateTimeSetsEnddate()
     {
-        $dateTimeFixture = new DateTime();
+        $dateTimeFixture = new \DateTime();
         $this->subject->setEnddate($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getEnddate());
     }
@@ -572,8 +570,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsFalseIfEventHasTakenPlace()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('yesterday'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('yesterday'));
         $this->subject->setStartdate($startdate);
         $this->subject->setEnableRegistration(true);
 
@@ -585,8 +583,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsFalseIfRegistrationNotEnabled()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
 
         $this->subject->setEnableRegistration(false);
@@ -598,10 +596,10 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsFalseIfRegistrationDeadlineReached()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
-        $deadline = new DateTime();
-        $deadline->add(DateInterval::createFromDateString('yesterday'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $deadline = new \DateTime();
+        $deadline->add(\DateInterval::createFromDateString('yesterday'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setRegistrationDeadline($deadline);
@@ -615,10 +613,10 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsTrueIfRegistrationStartdateReached()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
-        $registrationStartDate = new DateTime();
-        $registrationStartDate->add(DateInterval::createFromDateString('yesterday'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $registrationStartDate = new \DateTime();
+        $registrationStartDate->add(\DateInterval::createFromDateString('yesterday'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setRegistrationStartdate($registrationStartDate);
@@ -632,10 +630,10 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsFalseIfRegistrationStartdateNotReached()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
-        $registrationStartDate = new DateTime();
-        $registrationStartDate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $registrationStartDate = new \DateTime();
+        $registrationStartDate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setRegistrationStartdate($registrationStartDate);
@@ -653,8 +651,8 @@ class EventTest extends UnitTestCase
         $registration->setFirstname('John');
         $registration->setLastname('Doe');
 
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->addRegistration($registration);
@@ -667,8 +665,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsTrueIfMaxParticipantsNotSet()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(0);
         $this->subject->setEnableRegistration(true);
@@ -681,8 +679,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsFalseIfMaxParticipantsSetAndEventFull()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setEnableRegistration(true);
@@ -700,8 +698,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsTrueIfMaxParticipantsSetAndWaitlistEnabled()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setEnableRegistration(true);
@@ -720,8 +718,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsTrueIfMaxParticipantsIsZero()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setEnableRegistration(true);
 
@@ -733,10 +731,10 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsTrueIfRegistrationDeadlineNotReached()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
-        $deadline = new DateTime();
-        $deadline->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $deadline = new \DateTime();
+        $deadline->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setRegistrationDeadline($deadline);
@@ -750,8 +748,8 @@ class EventTest extends UnitTestCase
      */
     public function getRegistrationPossibleReturnsTrueIfRegistrationIsLogicallyPossible()
     {
-        $startdate = new DateTime();
-        $startdate->add(DateInterval::createFromDateString('tomorrow'));
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
         $this->subject->setStartdate($startdate);
         $this->subject->setMaxParticipants(1);
         $this->subject->setEnableRegistration(true);
@@ -903,7 +901,7 @@ class EventTest extends UnitTestCase
      */
     public function setRegistrationDeadlineForDateTimeSetsStartdate()
     {
-        $dateTimeFixture = new DateTime();
+        $dateTimeFixture = new \DateTime();
         $this->subject->setRegistrationDeadline($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getRegistrationDeadline());
     }
@@ -1045,7 +1043,7 @@ class EventTest extends UnitTestCase
      */
     public function setCancelDeallineSetsCancelDeadlineForDate()
     {
-        $date = new DateTime();
+        $date = new \DateTime();
         $this->subject->setCancelDeadline($date);
         self::assertEquals($date, $this->subject->getCancelDeadline());
     }
@@ -1158,9 +1156,9 @@ class EventTest extends UnitTestCase
      */
     public function getActivePriceOptionsReturnsOnlyActivePriceOptions()
     {
-        $dateYesterday = new DateTime('yesterday');
-        $dateToday = new DateTime('today');
-        $dateTomorrow = new DateTime('tomorrow');
+        $dateYesterday = new \DateTime('yesterday');
+        $dateToday = new \DateTime('today');
+        $dateTomorrow = new \DateTime('tomorrow');
 
         $priceOption1 = new PriceOption();
         $priceOption1->setPrice(10.00);
@@ -1203,11 +1201,11 @@ class EventTest extends UnitTestCase
 
         $priceOption1 = new PriceOption();
         $priceOption1->setPrice(14.99);
-        $priceOption1->setValidUntil(new DateTime('today'));
+        $priceOption1->setValidUntil(new \DateTime('today'));
 
         $priceOption2 = new PriceOption();
         $priceOption2->setPrice(16.99);
-        $priceOption2->setValidUntil(new DateTime('tomorrow'));
+        $priceOption2->setValidUntil(new \DateTime('tomorrow'));
 
         $this->subject->addPriceOptions($priceOption1);
         $this->subject->addPriceOptions($priceOption2);
@@ -1277,26 +1275,26 @@ class EventTest extends UnitTestCase
         return [
             'cancellationNotEnabled' => [
                 false,
-                new DateTime('tomorrow'),
-                new DateTime('today'),
+                new \DateTime('tomorrow'),
+                new \DateTime('today'),
                 false
             ],
             'cancellationEnabledButDeadlineReached' => [
                 true,
-                new DateTime('tomorrow'),
-                new DateTime('yesterday'),
+                new \DateTime('tomorrow'),
+                new \DateTime('yesterday'),
                 false
             ],
             'cancellationEnabledDeadlineNotReached' => [
                 true,
-                (new DateTime('tomorrow'))->modify('+1 day'),
-                new DateTime('tomorrow'),
+                (new \DateTime('tomorrow'))->modify('+1 day'),
+                new \DateTime('tomorrow'),
                 true
             ],
             'cancellationEnabledDeadlineNotReachedEventExpired' => [
                 true,
-                new DateTime('yesterday'),
-                new DateTime('tomorrow'),
+                new \DateTime('yesterday'),
+                new \DateTime('tomorrow'),
                 true
             ]
         ];
@@ -1323,7 +1321,7 @@ class EventTest extends UnitTestCase
      */
     public function getCancellationPossibleReturnsTrueIfNoDeadlineSet()
     {
-        $this->subject->setStartdate(new DateTime('tomorrow'));
+        $this->subject->setStartdate(new \DateTime('tomorrow'));
         $this->subject->setEnableCancel(true);
         self::assertTrue($this->subject->getCancellationPossible());
     }
@@ -1333,7 +1331,7 @@ class EventTest extends UnitTestCase
      */
     public function getCancellationPossibleReturnsFalseIfNoDeadlineSetButEventExpired()
     {
-        $this->subject->setStartdate(new DateTime('yesterday'));
+        $this->subject->setStartdate(new \DateTime('yesterday'));
         $this->subject->setEnableCancel(true);
         self::assertFalse($this->subject->getCancellationPossible());
     }
@@ -1527,18 +1525,18 @@ class EventTest extends UnitTestCase
                 true
             ],
             'no enddate' => [
-                DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
                 null,
                 true
             ],
             'start- and enddate same day' => [
-                DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
-                DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 18:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 18:00:00'),
                 true
             ],
             'start- and enddate on different day' => [
-                DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
-                DateTime::createFromFormat('d.m.Y H:i:s', '02.01.2019 10:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
+                \DateTime::createFromFormat('d.m.Y H:i:s', '02.01.2019 10:00:00'),
                 false
             ],
         ];
@@ -1592,7 +1590,7 @@ class EventTest extends UnitTestCase
      */
     public function setStarttimeSetsValueForDateTime()
     {
-        $date = new DateTime('01.01.2020 18:00:00');
+        $date = new \DateTime('01.01.2020 18:00:00');
         $this->subject->setStarttime($date);
 
         self::assertEquals($date, $this->subject->getStarttime());
@@ -1611,7 +1609,7 @@ class EventTest extends UnitTestCase
      */
     public function setEndtimeSetsValueForDateTime()
     {
-        $date = new DateTime('01.01.2020 18:00:00');
+        $date = new \DateTime('01.01.2020 18:00:00');
         $this->subject->setEndtime($date);
 
         self::assertEquals($date, $this->subject->getEndtime());
@@ -1639,7 +1637,7 @@ class EventTest extends UnitTestCase
      */
     public function getBackendIconOverlayReturnsExpectedValueForStarttimeEvent()
     {
-        $this->subject->setStarttime(new DateTime());
+        $this->subject->setStarttime(new \DateTime());
         self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
     }
 
@@ -1648,7 +1646,7 @@ class EventTest extends UnitTestCase
      */
     public function getBackendIconOverlayReturnsExpectedValueForEndtimeEvent()
     {
-        $this->subject->setEndtime(new DateTime());
+        $this->subject->setEndtime(new \DateTime());
         self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
     }
 
@@ -1658,7 +1656,7 @@ class EventTest extends UnitTestCase
     public function getBackendIconOverlayReturnsExpectedValueForHiddenAndStarttimeEvent()
     {
         $this->subject->setHidden(true);
-        $this->subject->setEndtime(new DateTime());
+        $this->subject->setEndtime(new \DateTime());
         self::assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
     }
 }

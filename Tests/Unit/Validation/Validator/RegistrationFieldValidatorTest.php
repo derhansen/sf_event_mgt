@@ -25,7 +25,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class RegistrationFieldValidatorTest extends UnitTestCase
 {
     /**
-     * @var RegistrationFieldValidator
+     * @var \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator
      */
     protected $validator;
 

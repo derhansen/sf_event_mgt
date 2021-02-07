@@ -39,7 +39,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class AdministrationControllerTest extends UnitTestCase
 {
     /**
-     * @var AdministrationController
+     * @var \DERHANSEN\SfEventMgt\Controller\AdministrationController
      */
     protected $subject;
 

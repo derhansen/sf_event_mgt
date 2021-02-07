@@ -9,7 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Extbase\Domain\Model\BackendUser;
@@ -23,7 +22,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class CustomNotificationLogTest extends UnitTestCase
 {
     /**
-     * @var CustomNotificationLog
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog
      */
     protected $subject;
 
@@ -96,7 +95,7 @@ class CustomNotificationLogTest extends UnitTestCase
      */
     public function setTstampForDateTimeSetsTstamp()
     {
-        $tstamp = new DateTime('01.01.2014 10:00:00');
+        $tstamp = new \DateTime('01.01.2014 10:00:00');
         $this->subject->setTstamp($tstamp);
         self::assertEquals($tstamp, $this->subject->getTstamp());
     }

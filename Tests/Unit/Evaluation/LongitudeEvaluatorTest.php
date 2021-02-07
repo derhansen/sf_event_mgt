@@ -22,7 +22,7 @@ class LongitudeEvaluatorTest extends UnitTestCase
     /**
      * LongitudeEvaluator
      *
-     * @var LongitudeEvaluator
+     * @var \DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator
      */
     protected $subject;
 

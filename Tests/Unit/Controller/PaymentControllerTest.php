@@ -30,7 +30,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class PaymentControllerTest extends UnitTestCase
 {
     /**
-     * @var PaymentController
+     * @var \DERHANSEN\SfEventMgt\Controller\PaymentController
      */
     protected $subject;
 

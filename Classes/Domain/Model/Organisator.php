@@ -9,15 +9,12 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /**
  * Organisator
  *
  * @author AlexPixelant
  */
-class Organisator extends AbstractEntity
+class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
     /**
      * Name of Organisator
@@ -50,7 +47,7 @@ class Organisator extends AbstractEntity
     /**
      * Image of Organisator
      *
-     * @var FileReference
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $image;
 
@@ -133,7 +130,7 @@ class Organisator extends AbstractEntity
     /**
      * Returns the image
      *
-     * @return FileReference $image
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
      */
     public function getImage()
     {
@@ -143,9 +140,9 @@ class Organisator extends AbstractEntity
     /**
      * Sets the image
      *
-     * @param FileReference $image The image
+     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image The image
      */
-    public function setImage(FileReference $image)
+    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
     {
         $this->image = $image;
     }

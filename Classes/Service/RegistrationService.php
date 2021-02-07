@@ -9,10 +9,8 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationMovedFromWaitlist;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
@@ -22,10 +20,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * RegistrationService
@@ -37,7 +32,7 @@ class RegistrationService
     /**
      * The object manager
      *
-     * @var ObjectManager
+     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
      * */
     protected $objectManager;
 
@@ -49,45 +44,45 @@ class RegistrationService
     /**
      * RegistrationRepository
      *
-     * @var RegistrationRepository
+     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
      * */
     protected $registrationRepository;
 
     /**
      * FrontendUserRepository
      *
-     * @var FrontendUserRepository
+     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
      * */
     protected $frontendUserRepository;
 
     /**
      * Hash Service
      *
-     * @var HashService
+     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
      * */
     protected $hashService;
 
     /**
      * Payment Service
      *
-     * @var PaymentService
+     * @var \DERHANSEN\SfEventMgt\Service\PaymentService
      * */
     protected $paymentService;
 
     /**
      * Notification Service
      *
-     * @var NotificationService
+     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
      */
     protected $notificationService;
 
     /**
      * DI for $frontendUserRepository
      *
-     * @param FrontendUserRepository $frontendUserRepository
+     * @param \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
      */
     public function injectFrontendUserRepository(
-        FrontendUserRepository $frontendUserRepository
+        \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
     ) {
         $this->frontendUserRepository = $frontendUserRepository;
     }
@@ -95,17 +90,17 @@ class RegistrationService
     /**
      * DI for $hashService
      *
-     * @param HashService $hashService
+     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
      */
-    public function injectHashService(HashService $hashService)
+    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
     {
         $this->hashService = $hashService;
     }
 
     /**
-     * @param NotificationService $notificationService
+     * @param \DERHANSEN\SfEventMgt\Service\NotificationService $notificationService
      */
-    public function injectNotificationService(NotificationService $notificationService)
+    public function injectNotificationService(\DERHANSEN\SfEventMgt\Service\NotificationService $notificationService)
     {
         $this->notificationService = $notificationService;
     }
@@ -113,9 +108,9 @@ class RegistrationService
     /**
      * DI for $objectManager
      *
-     * @param ObjectManager $objectManager
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
      */
-    public function injectObjectManager(ObjectManager $objectManager)
+    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -131,9 +126,9 @@ class RegistrationService
     /**
      * DI for $paymentService
      *
-     * @param PaymentService $paymentService
+     * @param \DERHANSEN\SfEventMgt\Service\PaymentService $paymentService
      */
-    public function injectPaymentService(PaymentService $paymentService)
+    public function injectPaymentService(\DERHANSEN\SfEventMgt\Service\PaymentService $paymentService)
     {
         $this->paymentService = $paymentService;
     }
@@ -141,10 +136,10 @@ class RegistrationService
     /**
      * DI for $registrationRepository
      *
-     * @param RegistrationRepository $registrationRepository
+     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
      */
     public function injectRegistrationRepository(
-        RegistrationRepository $registrationRepository
+        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
     ) {
         $this->registrationRepository = $registrationRepository;
     }
@@ -153,13 +148,13 @@ class RegistrationService
      * Duplicates (all public accessable properties) the given registration the
      * amount of times configured in amountOfRegistrations
      *
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      */
     public function createDependingRegistrations($registration)
     {
         $registrations = $registration->getAmountOfRegistrations();
         for ($i = 1; $i <= $registrations - 1; $i++) {
-            /** @var Registration $newReg */
+            /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $newReg */
             $newReg = $this->objectManager->get(Registration::class);
             $properties = ObjectAccess::getGettableProperties($registration);
             foreach ($properties as $propertyName => $propertyValue) {
@@ -175,13 +170,13 @@ class RegistrationService
     /**
      * Confirms all depending registrations based on the given main registration
      *
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      */
     public function confirmDependingRegistrations($registration)
     {
         $registrations = $this->registrationRepository->findByMainRegistration($registration);
         foreach ($registrations as $foundRegistration) {
-            /** @var Registration $foundRegistration */
+            /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $foundRegistration */
             $foundRegistration->setConfirmed(true);
             $this->registrationRepository->update($foundRegistration);
         }
@@ -217,7 +212,7 @@ class RegistrationService
             $titleKey = 'confirmRegistration.title.failed';
         }
 
-        if (!$failed && $registration->getConfirmationUntil() < new DateTime()) {
+        if (!$failed && $registration->getConfirmationUntil() < new \DateTime()) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_confirmation_until_expired';
             $titleKey = 'confirmRegistration.title.failed';
@@ -245,7 +240,7 @@ class RegistrationService
     /**
      * Cancels all depending registrations based on the given main registration
      *
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      */
     public function cancelDependingRegistrations($registration)
     {
@@ -292,14 +287,14 @@ class RegistrationService
         }
 
         if (!$failed && $registration->getEvent()->getCancelDeadline()
-            && $registration->getEvent()->getCancelDeadline() < new DateTime()
+            && $registration->getEvent()->getCancelDeadline() < new \DateTime()
         ) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_deadline_expired';
             $titleKey = 'cancelRegistration.title.failed';
         }
 
-        if (!$failed && $registration->getEvent()->getStartdate() < new DateTime()) {
+        if (!$failed && $registration->getEvent()->getStartdate() < new \DateTime()) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_event_started';
             $titleKey = 'cancelRegistration.title.failed';
@@ -331,8 +326,8 @@ class RegistrationService
      * Checks, if the registration can successfully be created. Note, that
      * $result is passed by reference!
      *
-     * @param Event $event Event
-     * @param Registration $registration Registration
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
      * @param int $result Result
      *
      * @return array
@@ -343,10 +338,10 @@ class RegistrationService
         if ($event->getEnableRegistration() === false) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_NOT_ENABLED;
-        } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new DateTime()) {
+        } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new \DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
-        } elseif ($event->getStartdate() < new DateTime()) {
+        } elseif ($event->getStartdate() < new \DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
         } elseif ($event->getRegistrations()->count() >= $event->getMaxParticipants()
@@ -379,7 +374,7 @@ class RegistrationService
     /**
      * Returns if the given email is registered to the given event
      *
-     * @param Event $event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @param string $email
      * @return bool
      */
@@ -431,7 +426,7 @@ class RegistrationService
      * Returns if the given amount of registrations for the event will be registrations for the waitlist
      * (depending on the total amount of registrations and free places)
      *
-     * @param Event $event
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @param int $amountOfRegistrations
      * @return bool
      */

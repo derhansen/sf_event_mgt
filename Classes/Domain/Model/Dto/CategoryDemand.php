@@ -9,16 +9,14 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
-use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-
 /**
  * Category demand
  *
  * @author Torben Hansen <derhansen@gmail.com>
  */
-class CategoryDemand extends AbstractEntity
+class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
-    public const ORDER_FIELD_ALLOWED = ['title', 'uid', 'sorting'];
+    const ORDER_FIELD_ALLOWED = ['title', 'uid', 'sorting'];
 
     /**
      * Storage page

@@ -9,8 +9,6 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-
 /**
  * BeUserSessionService
  *
@@ -23,7 +21,7 @@ class BeUserSessionService
      *
      * @var string
      */
-    public const SESSION_KEY = 'sf_event_mgt';
+    const SESSION_KEY = 'sf_event_mgt';
 
     /**
      * Saves the given data to the session
@@ -65,7 +63,7 @@ class BeUserSessionService
     /**
      * Returns the current Backend User
      *
-     * @return mixed|BackendUserAuthentication
+     * @return mixed|\TYPO3\CMS\Core\Authentication\BackendUserAuthentication
      */
     protected function getBackendUser()
     {

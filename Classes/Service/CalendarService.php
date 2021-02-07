@@ -9,9 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * CalendarService
@@ -27,7 +25,7 @@ class CalendarService
      * @param int $year
      * @param int $today
      * @param int $firstDayOfWeek
-     * @param array|QueryResultInterface $events
+     * @param array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $events
      * @return array
      */
     public function getCalendarArray($month, $year, $today, $firstDayOfWeek = 0, $events = null)
@@ -46,7 +44,7 @@ class CalendarService
                 $day['isCurrentMonth'] = $day['month'] === (int)$month;
                 $day['isCurrentDay'] = date('Ymd', $today) === date('Ymd', $day['timestamp']);
                 if ($events) {
-                    $searchDay = new DateTime();
+                    $searchDay = new \DateTime();
                     $searchDay->setTimestamp($currentDay);
                     $day['events'] = $this->getEventsForDay($events, $searchDay);
                 }
@@ -97,8 +95,8 @@ class CalendarService
     /**
      * Returns an array of events for the given day
      *
-     * @param array|QueryResultInterface $events
-     * @param DateTime $currentDay
+     * @param array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $events
+     * @param \DateTime $currentDay
      * @return array
      */
     protected function getEventsForDay($events, $currentDay)
@@ -137,7 +135,7 @@ class CalendarService
      */
     public function getDateConfig($month, $year, $modifier = '')
     {
-        $date = DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
+        $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
         $date->setTime(0, 0, 0);
         if (!empty($modifier)) {
             $date->modify($modifier);
