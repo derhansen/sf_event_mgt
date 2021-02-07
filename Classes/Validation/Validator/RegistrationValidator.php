@@ -21,8 +21,6 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /**
  * RegistrationValidator
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
 {

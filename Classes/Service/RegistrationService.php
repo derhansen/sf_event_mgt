@@ -24,8 +24,6 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * RegistrationService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationService
 {

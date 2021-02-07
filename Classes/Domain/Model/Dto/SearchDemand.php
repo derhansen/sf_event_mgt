@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * Search demand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
@@ -118,7 +116,6 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Sets fields
      *
      * @param string $fields
-     * @return void
      */
     public function setFields($fields)
     {

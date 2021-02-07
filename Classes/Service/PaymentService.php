@@ -16,8 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * PaymentService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PaymentService
 {

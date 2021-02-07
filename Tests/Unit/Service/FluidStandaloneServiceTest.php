@@ -19,8 +19,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class FluidStandaloneServiceTest
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class FluidStandaloneServiceTest extends UnitTestCase
 {

@@ -16,8 +16,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Class PaymentServiceTest
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PaymentServiceTest extends UnitTestCase
 {

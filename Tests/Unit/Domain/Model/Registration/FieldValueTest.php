@@ -17,8 +17,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class FieldValueTest extends UnitTestCase
 {

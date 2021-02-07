@@ -22,8 +22,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * NotificationService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationService
 {

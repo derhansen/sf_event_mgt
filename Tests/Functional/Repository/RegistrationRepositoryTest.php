@@ -21,8 +21,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationRepositoryTest extends FunctionalTestCase
 {

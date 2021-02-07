@@ -14,8 +14,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class LatitudeEvaluatorTest extends UnitTestCase
 {

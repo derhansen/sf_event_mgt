@@ -16,8 +16,6 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * AttachmentService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class AttachmentService
 {

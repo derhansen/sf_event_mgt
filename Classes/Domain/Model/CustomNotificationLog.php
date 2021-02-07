@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * CustomNotificationLog
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

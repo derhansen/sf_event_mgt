@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * UserRegistrationDemand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

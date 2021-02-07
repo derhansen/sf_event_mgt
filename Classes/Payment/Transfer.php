@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Payment;
 
 /**
  * Transfer
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class Transfer extends AbstractPayment
 {

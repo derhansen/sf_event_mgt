@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 /**
  * Price option
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PriceOption extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

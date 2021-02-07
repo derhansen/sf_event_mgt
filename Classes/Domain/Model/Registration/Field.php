@@ -16,8 +16,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Field
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

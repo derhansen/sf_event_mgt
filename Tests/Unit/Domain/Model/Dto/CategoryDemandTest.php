@@ -14,8 +14,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryDemandTest extends UnitTestCase
 {
@@ -97,7 +95,7 @@ class CategoryDemandTest extends UnitTestCase
      */
     public function orderFieldReturnsDefaultValue()
     {
-        $this->assertSame('uid', $this->subject->getOrderField());
+        self::assertSame('uid', $this->subject->getOrderField());
     }
 
     /**
@@ -106,7 +104,7 @@ class CategoryDemandTest extends UnitTestCase
     public function orderFieldCanBeSet()
     {
         $this->subject->setOrderField('title');
-        $this->assertSame('title', $this->subject->getOrderField());
+        self::assertSame('title', $this->subject->getOrderField());
     }
 
     /**
@@ -114,7 +112,7 @@ class CategoryDemandTest extends UnitTestCase
      */
     public function orderDirectionReturnsDefaultValue()
     {
-        $this->assertSame('asc', $this->subject->getOrderDirection());
+        self::assertSame('asc', $this->subject->getOrderDirection());
     }
 
     /**
@@ -123,6 +121,6 @@ class CategoryDemandTest extends UnitTestCase
     public function orderDirectionCanBeSet()
     {
         $this->subject->setOrderDirection('desc');
-        $this->assertSame('desc', $this->subject->getOrderDirection());
+        self::assertSame('desc', $this->subject->getOrderDirection());
     }
 }

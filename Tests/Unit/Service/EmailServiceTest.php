@@ -15,8 +15,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\EmailService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class EmailServiceTest extends UnitTestCase
 {

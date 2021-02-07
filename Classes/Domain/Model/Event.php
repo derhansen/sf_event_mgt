@@ -20,8 +20,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Event
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 /**
  * BeUserSessionService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class BeUserSessionService
 {

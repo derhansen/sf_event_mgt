@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 /**
  * SettingsService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class SettingsService
 {

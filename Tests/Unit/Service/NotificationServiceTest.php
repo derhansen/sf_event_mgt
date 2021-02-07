@@ -28,8 +28,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\NotificationService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class NotificationServiceTest extends UnitTestCase
 {

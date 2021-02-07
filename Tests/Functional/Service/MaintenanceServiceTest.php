@@ -16,8 +16,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Service\MaintenanceService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class MaintenanceServiceTest extends FunctionalTestCase
 {

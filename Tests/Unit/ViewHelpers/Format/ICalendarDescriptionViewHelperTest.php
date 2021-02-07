@@ -14,8 +14,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for iCalendar Description viewhelper
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ICalendarDescriptionViewHelperTest extends UnitTestCase
 {

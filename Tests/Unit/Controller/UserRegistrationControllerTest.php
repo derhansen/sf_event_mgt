@@ -20,8 +20,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\UserRegistrationController
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class UserRegistrationControllerTest extends UnitTestCase
 {

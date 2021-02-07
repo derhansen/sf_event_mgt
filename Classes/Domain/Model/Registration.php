@@ -13,8 +13,6 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Registration
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

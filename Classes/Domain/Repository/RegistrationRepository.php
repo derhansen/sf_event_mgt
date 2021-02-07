@@ -17,8 +17,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /**
  * The repository for registrations
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {

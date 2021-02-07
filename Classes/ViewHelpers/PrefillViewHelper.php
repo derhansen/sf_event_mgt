@@ -13,8 +13,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * Prefill ViewHelper
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class PrefillViewHelper extends AbstractViewHelper
 {

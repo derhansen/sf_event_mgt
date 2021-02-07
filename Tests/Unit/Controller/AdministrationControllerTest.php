@@ -33,8 +33,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Controller\AdministrationController.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class AdministrationControllerTest extends UnitTestCase
 {

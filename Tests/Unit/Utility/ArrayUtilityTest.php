@@ -49,6 +49,6 @@ class ArrayUtilityTest extends UnitTestCase
      */
     public function isJsonArrayReturnsExpectedValues($value, $expected)
     {
-        $this->assertSame($expected, ArrayUtility::isJsonArray($value));
+        self::assertSame($expected, ArrayUtility::isJsonArray($value));
     }
 }

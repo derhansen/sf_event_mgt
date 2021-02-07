@@ -25,8 +25,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationServiceTest extends UnitTestCase
 {

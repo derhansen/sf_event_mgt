@@ -17,8 +17,6 @@ use TYPO3\CMS\Core\Utility\CsvUtility;
 
 /**
  * Class ExportService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ExportService
 {

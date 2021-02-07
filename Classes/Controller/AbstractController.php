@@ -14,8 +14,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * EventController
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 abstract class AbstractController extends ActionController
 {

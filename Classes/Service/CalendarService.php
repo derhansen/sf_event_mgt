@@ -13,8 +13,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 
 /**
  * CalendarService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CalendarService
 {

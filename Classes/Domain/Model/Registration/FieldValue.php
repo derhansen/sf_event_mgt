@@ -15,8 +15,6 @@ use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 
 /**
  * Answer
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

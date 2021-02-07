@@ -14,8 +14,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  * ForeignRecordRepository which respects the ForeignRecordDemandObject
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {

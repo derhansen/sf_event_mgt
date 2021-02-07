@@ -22,8 +22,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
  * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class RegistrationValidatorTest extends UnitTestCase
 {

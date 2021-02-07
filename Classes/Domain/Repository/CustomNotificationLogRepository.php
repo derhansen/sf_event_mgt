@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 /**
  * The repository for custom notification log entries
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {

@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * Event demand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

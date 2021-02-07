@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * ForeignRecord demand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {

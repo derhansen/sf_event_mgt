@@ -11,8 +11,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 /**
  * Category demand
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
@@ -135,8 +133,6 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->includeSubcategories = $includeSubcategories;
     }
-
-
 
     /**
      * @return string

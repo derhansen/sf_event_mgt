@@ -16,8 +16,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
  * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class OrganisatorRepositoryTest extends FunctionalTestCase
 {

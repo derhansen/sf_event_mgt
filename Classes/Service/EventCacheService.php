@@ -14,8 +14,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class CacheService
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventCacheService
 {

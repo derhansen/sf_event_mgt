@@ -19,8 +19,6 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 
 /**
  * The repository for Events
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {

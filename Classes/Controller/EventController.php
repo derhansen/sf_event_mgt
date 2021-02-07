@@ -49,8 +49,6 @@ use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 /**
  * EventController
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class EventController extends AbstractController
 {
