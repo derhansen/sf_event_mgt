@@ -28,7 +28,7 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
     /**
      * Renders a edit link for the given Event UID
      *
-     * @return string
+     * @return bool
      */
     public function render()
     {

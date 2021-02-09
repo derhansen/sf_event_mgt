@@ -2,10 +2,13 @@ includes:
     - phpstan-baseline.neon
 
 parameters:
-    level: 2
+    level: 3
     paths:
         - Classes/
         - Configuration/
+
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: true
 
     bootstrapFiles:
         - %rootDir%/../../typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php
