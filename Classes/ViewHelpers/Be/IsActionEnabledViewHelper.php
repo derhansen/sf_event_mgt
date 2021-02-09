@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,6 +11,7 @@
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -30,15 +33,13 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
      *
      * @return bool
      */
-    public function render()
+    public function render(): bool
     {
         $action = $this->arguments['action'];
         $settings = $this->arguments['settings'];
-        $result = isset($settings['enabledActions'][$action]) &&
+        return isset($settings['enabledActions'][$action]) &&
             (int)$settings['enabledActions'][$action] === 1
             && $this->checkAccess($action);
-
-        return $result;
     }
 
     /**
@@ -47,7 +48,7 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
      * @param string $action
      * @return bool
      */
-    private function checkAccess(string $action)
+    private function checkAccess(string $action): bool
     {
         $result = false;
         switch ($action) {
@@ -75,10 +76,10 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
     }
 
     /**
-     * @return mixed|\TYPO3\CMS\Core\Authentication\BackendUserAuthentication
+     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
      */
-    private function getBackendUser()
+    private function getBackendUser(): ?BackendUserAuthentication
     {
-        return $GLOBALS['BE_USER'];
+        return $GLOBALS['BE_USER'] ?? null;
     }
 }

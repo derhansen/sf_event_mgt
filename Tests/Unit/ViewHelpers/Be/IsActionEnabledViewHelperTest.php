@@ -10,6 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Be\IsActionEnabledViewHelper;
+use Prophecy\Argument;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -81,10 +82,9 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
             'settings' => $settings
         ]);
 
-        $mockBeUser = $this->getMockBuilder(BackendUserAuthentication::class)
-            ->setMethods(['check'])->disableOriginalConstructor()->getMock();
-        $mockBeUser->expects(self::any())->method('check')->willReturn($access);
-        $GLOBALS['BE_USER'] = $mockBeUser;
+        $beUserProphecy = $this->prophesize(BackendUserAuthentication::class);
+        $beUserProphecy->check(Argument::any(), Argument::any())->willReturn($access);
+        $GLOBALS['BE_USER'] = $beUserProphecy->reveal();
 
         self::assertEquals($expected, $viewHelper->render());
     }
