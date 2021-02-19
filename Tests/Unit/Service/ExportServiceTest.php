@@ -11,8 +11,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
-use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -22,42 +22,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ExportServiceTest extends UnitTestCase
 {
-    /**
-     * @var ExportService
-     */
-    protected $subject;
-
-    /**
-     * Setup
-     */
-    protected function setUp(): void
-    {
-        $this->subject = new ExportService();
-    }
-
-    /**
-     * Teardown
-     */
-    protected function tearDown(): void
-    {
-        unset($this->subject);
-    }
-
-    /**
-     * Data Provider for unit tests
-     *
-     * @return array
-     */
-    public function wrongFieldValuesInTypoScriptDataProvider()
-    {
-        return [
-            'wrongFieldValuesInTypoScript' => [
-                1,
-                'uid, firstname, wrongfield'
-            ],
-        ];
-    }
-
     /**
      * Data Provider for unit tests
      *
@@ -167,9 +131,11 @@ class ExportServiceTest extends UnitTestCase
         $registrationRepository->expects(self::once())->method('findByEvent')->willReturn(
             $allRegistrations
         );
-        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
 
-        $returnValue = $this->subject->exportRegistrationsCsv($uid, $fields);
+        $eventRepository = $this->prophesize(EventRepository::class);
+        $exportService = new ExportService($registrationRepository, $eventRepository->reveal());
+
+        $returnValue = $exportService->exportRegistrationsCsv($uid, $fields);
         self::assertSame($expected, $returnValue);
     }
 }
