@@ -104,7 +104,7 @@ plugin.tx_sfeventmgt {
 module.tx_sfeventmgt {
     settings {
         csvExport {
-            # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export
+            # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list of fields to include in CSV export (e.g. firstname or event.title)
             fields = uid, gender, firstname, lastname, title, company, email, address, zip, city, country, notes, registration_fields
             # cat=module.tx_sfeventmgt//a; type=string; label=Comma seperated list delimiter
             fieldDelimiter = ,

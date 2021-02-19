@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
@@ -115,46 +116,27 @@ class ExportServiceTest extends UnitTestCase
                 ],
                 chr(239) . chr(187) . chr(191) . '"uid";"firstname";"lastname"' . chr(10) . '"1";"Max";"Mustermann"' . chr(10)
             ],
+            'fieldValuesWithSubproperty' => [
+                1,
+                [
+                    'fields' => 'uid,firstname,lastname,event.title',
+                    'fieldDelimiter' => ',',
+                    'fieldQuoteCharacter' => '"',
+                    'prependBOM' => 0
+                ],
+                '"uid","firstname","lastname","event.title"' . chr(10) . '"1","Max","Mustermann","Some event"' . chr(10)
+            ],
+            'fieldValuesWithNonExistingFieldReturnsEmptyString' => [
+                1,
+                [
+                    'fields' => 'uid,firstname,lastname,foo',
+                    'fieldDelimiter' => ',',
+                    'fieldQuoteCharacter' => '"',
+                    'prependBOM' => 0
+                ],
+                '"uid","firstname","lastname","foo"' . chr(10) . '"1","Max","Mustermann",""' . chr(10)
+            ],
         ];
-    }
-
-    /**
-     * @test
-     */
-    public function exportServiceThrowsExceptionWhenFieldIsNotValidForRegistrationModel()
-    {
-        $this->expectException(Exception::class);
-        $mockRegistration = $this->getMockBuilder(Registration::class)->setMethods(['_hasProperty'])->getMock();
-        $mockRegistration->expects(self::at(0))->method('_hasProperty')->with(
-            self::equalTo('uid')
-        )->willReturn(true);
-        $mockRegistration->expects(self::at(1))->method('_hasProperty')->with(
-            self::equalTo('firstname')
-        )->willReturn(true);
-        $mockRegistration->expects(self::at(2))->method('_hasProperty')->with(
-            self::equalTo('wrongfield')
-        )->willReturn(false);
-
-        $allRegistrations = new ObjectStorage();
-        $allRegistrations->attach($mockRegistration);
-
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->setMethods(['findByEvent'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects(self::once())->method('findByEvent')->willReturn(
-            $allRegistrations
-        );
-        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
-
-        $this->subject->exportRegistrationsCsv(
-            1,
-            [
-                'fields' => 'uid, firstname, wrongfield',
-                'fieldDelimiter' => ',',
-                'fieldQuoteCharacter' => '"'
-            ]
-        );
     }
 
     /**
@@ -166,28 +148,17 @@ class ExportServiceTest extends UnitTestCase
      */
     public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected)
     {
-        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects(self::at(0))->method('_hasProperty')->with(
-            self::equalTo('uid')
-        )->willReturn(true);
-        $mockRegistration->expects(self::at(2))->method('_hasProperty')->with(
-            self::equalTo('firstname')
-        )->willReturn(true);
-        $mockRegistration->expects(self::at(4))->method('_hasProperty')->with(
-            self::equalTo('lastname')
-        )->willReturn(true);
-        $mockRegistration->expects(self::at(1))->method('_getCleanProperty')->with(
-            self::equalTo('uid')
-        )->willReturn(1);
-        $mockRegistration->expects(self::at(3))->method('_getCleanProperty')->with(
-            self::equalTo('firstname')
-        )->willReturn('Max');
-        $mockRegistration->expects(self::at(5))->method('_getCleanProperty')->with(
-            self::equalTo('lastname')
-        )->willReturn('Mustermann');
+        $event = new Event();
+        $event->setTitle('Some event');
+
+        $registration = new Registration();
+        $registration->setFirstname('Max');
+        $registration->setLastname('Mustermann');
+        $registration->_setProperty('uid', 1);
+        $registration->setEvent($event);
 
         $allRegistrations = new ObjectStorage();
-        $allRegistrations->attach($mockRegistration);
+        $allRegistrations->attach($registration);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->setMethods(['findByEvent'])

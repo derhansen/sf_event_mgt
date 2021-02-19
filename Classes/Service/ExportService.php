@@ -11,9 +11,11 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use TYPO3\CMS\Core\Utility\CsvUtility;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
  * Class ExportService
@@ -30,20 +32,9 @@ class ExportService
      */
     protected $eventRepository;
 
-    /**
-     * @param RegistrationRepository $registrationRepository
-     */
-    public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-    ) {
-        $this->registrationRepository = $registrationRepository;
-    }
-
-    /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository
-     */
-    public function injectEventRepository(\DERHANSEN\SfEventMgt\Domain\Repository\EventRepository $eventRepository)
+    public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
     {
+        $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
     }
 
@@ -95,12 +86,7 @@ class ExportService
         foreach ($registrations as $registration) {
             $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
-                if ($registration->_hasProperty($field)) {
-                    $exportedRegistration[] = $this->getFieldValue($registration, $field);
-                } else {
-                    throw new Exception('Field ' . $field .
-                        ' is not a Property of Model Registration, please check your TS configuration', 1475590002);
-                }
+                $exportedRegistration[] = $this->getFieldValue($registration, $field);
             }
             if ($hasRegistrationFields) {
                 $exportedRegistration = array_merge(
@@ -192,7 +178,7 @@ class ExportService
      */
     protected function getFieldValue($registration, $field)
     {
-        $value = $registration->_getCleanProperty($field);
+        $value = ObjectAccess::getPropertyPath($registration, $field);
         if ($value instanceof \DateTime) {
             $value = $value->format('d.m.Y');
         }

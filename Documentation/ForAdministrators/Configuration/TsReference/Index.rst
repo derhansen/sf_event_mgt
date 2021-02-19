@@ -660,7 +660,7 @@ module.tx_sfeventmgt
 
    :Description:
          Comma seperated list of fields to include in CSV export. Please note, that you must write the **property
-         names** of the fields to export (e.g. firstname, lastname, dateOfBirth)
+         names** of the fields to export (e.g. firstname, lastname, dateOfBirth, event.title)
 
          In order to export the values of registration fields, use "registration_fields" as fieldname. Note, that
          it is only possible to export all registrations fields at once.
