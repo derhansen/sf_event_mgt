@@ -175,6 +175,9 @@
 			<trans-unit id="flexforms_general.displayMode.current_future">
 				<source>Show only current and future events</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.displayMode.time_restriction">
+				<source>Show events by a given time restriction</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.userRegistration.displayMode.all">
 				<source>Show registrations for all events</source>
 			</trans-unit>
@@ -194,6 +197,21 @@
 			</trans-unit>
 			<trans-unit id="flexforms_general.disableOverrideDemand">
 				<source>Disable overwrite demand</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.timeRestrictionDescription">
+				<source>The values is passed to PHPs strtotime() function, so you can use expressions like "first day of this month" and "last day of this month 23:59:59" to get events of the current month</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.timeRestrictionLow">
+				<source>Time from</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.timeRestrictionHigh">
+				<source>Time to</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.includeCurrent">
+				<source>Include current</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.includeCurrent.description">
+				<source>Include events that start before and end after time from</source>
 			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>Email address of emails sent to the user</source>

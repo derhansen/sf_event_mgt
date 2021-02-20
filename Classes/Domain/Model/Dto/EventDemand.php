@@ -160,6 +160,21 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $ignoreEnableFields = false;
 
     /**
+     * @var string
+     */
+    protected $timeRestrictionLow;
+
+    /**
+     * @var string
+     */
+    protected $timeRestrictionHigh;
+
+    /**
+     * @var bool
+     */
+    protected $includeCurrent = false;
+
+    /**
      * Sets the displayMode
      *
      * @param string $displayMode Displaymode
@@ -575,5 +590,53 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setIgnoreEnableFields(bool $ignoreEnableFields): void
     {
         $this->ignoreEnableFields = $ignoreEnableFields;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeRestrictionLow(): ?string
+    {
+        return $this->timeRestrictionLow;
+    }
+
+    /**
+     * @param string $timeRestrictionLow
+     */
+    public function setTimeRestrictionLow($timeRestrictionLow): void
+    {
+        $this->timeRestrictionLow = $timeRestrictionLow;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimeRestrictionHigh(): ?string
+    {
+        return $this->timeRestrictionHigh;
+    }
+
+    /**
+     * @param string $timeRestrictionHigh
+     */
+    public function setTimeRestrictionHigh($timeRestrictionHigh): void
+    {
+        $this->timeRestrictionHigh = $timeRestrictionHigh;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getIncludeCurrent(): bool
+    {
+        return $this->includeCurrent;
+    }
+
+    /**
+     * @param bool $includeCurrent
+     */
+    public function setIncludeCurrent($includeCurrent): void
+    {
+        $this->includeCurrent = $includeCurrent;
     }
 }

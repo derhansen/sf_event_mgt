@@ -582,4 +582,33 @@
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
 
+    <!-- Tests for search demand with time restriction -->
+    <tx_sfeventmgt_domain_model_event>
+        <uid>130</uid>
+        <pid>130</pid>
+        <description>Test Event (31.01.2021)</description>
+        <startdate>1612047600</startdate>
+        <enddate>1612047601</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>131</uid>
+        <pid>130</pid>
+        <description>Test Event (31.01.2021 - 02.02.2021)</description>
+        <startdate>1612047600</startdate>
+        <enddate>1612220400</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>132</uid>
+        <pid>130</pid>
+        <description>Test Event (02.02.2021)</description>
+        <startdate>1612220400</startdate>
+        <enddate>1612220401</enddate>
+    </tx_sfeventmgt_domain_model_event>
+    <tx_sfeventmgt_domain_model_event>
+        <uid>133</uid>
+        <pid>130</pid>
+        <description>Test Event (01.03.2021)</description>
+        <startdate>1614553200</startdate>
+        <enddate>1614553201</enddate>
+    </tx_sfeventmgt_domain_model_event>
 </dataset>

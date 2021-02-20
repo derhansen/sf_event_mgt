@@ -180,6 +180,43 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
+     * Test if displayMode 'time_restriction' in demand works
+     *
+     * @test
+     */
+    public function findDemandedRecordsByDisplayModeTimeRestriction()
+    {
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
+        $demand = $this->objectManager->get(EventDemand::class);
+        $demand->setStoragePage(130);
+        $demand->setDisplayMode('time_restriction');
+        $demand->setTimeRestrictionLow('2021-02-01');
+        $events = $this->eventRepository->findDemanded($demand);
+
+        self::assertSame(2, $events->count());
+
+        $eventIds = [$events[0]->getUid(), $events[1]->getUid()];
+        sort($eventIds);
+
+        self::assertSame('132,133', implode(',', $eventIds));
+
+        $demand->setTimeRestrictionHigh('2021-02-28 23:59:59');
+        $events = $this->eventRepository->findDemanded($demand);
+
+        self::assertSame(1, $events->count());
+
+        $demand->setIncludeCurrent(true);
+        $events = $this->eventRepository->findDemanded($demand);
+
+        self::assertSame(2, $events->count());
+
+        $eventIds = [$events[0]->getUid(), $events[1]->getUid()];
+        sort($eventIds);
+
+        self::assertSame('131,132', implode(',', $eventIds));
+    }
+
+    /**
      * DataProvider for findDemandedRecordsByCategoryWithConjunction
      *
      * @return array

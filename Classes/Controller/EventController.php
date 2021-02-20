@@ -119,6 +119,9 @@ class EventController extends AbstractController
         $demand->setLocation($settings['location']);
         $demand->setOrganisator($settings['organisator']);
         $demand->setSpeaker($settings['speaker']);
+        $demand->setTimeRestrictionLow($settings['timeRestrictionLow']);
+        $demand->setTimeRestrictionHigh($settings['timeRestrictionHigh']);
+        $demand->setIncludeCurrent($settings['includeCurrent']);
 
         return $demand;
     }
