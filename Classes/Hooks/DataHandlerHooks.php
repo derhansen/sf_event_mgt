@@ -42,7 +42,8 @@ class DataHandlerHooks
 
     /**
      * Checks if the fields defined in $checkFields are set in the data-array of pi_flexform.
-     * If a field is present and contains an empty value, the field is unset.
+     * If a field is present and contains an empty value, the field is unset. This way empty plugin settings
+     * don't overwrite TypoScript settings.
      *
      * Structure of the checkFields array:
      *
@@ -52,11 +53,23 @@ class DataHandlerHooks
      * @param string $table
      * @param string $id
      * @param array $fieldArray
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $reference
+     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
      */
-    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$reference)
+    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler)
     {
-        if ($table === 'tt_content' && $status == 'update' && isset($fieldArray['pi_flexform'])) {
+        if ($table === 'tt_content' &&
+            $status == 'update' &&
+            isset($fieldArray['pi_flexform']) &&
+            $dataHandler->checkValue_currentRecord['CType'] === 'list' &&
+            in_array(
+                $dataHandler->checkValue_currentRecord['list_type'],
+                [
+                    'sfeventmgt_pievent',
+                    'sfeventmgt_piuserreg',
+                    'sfeventmgt_pipayment',
+                ]
+            )
+        ) {
             $checkFields = [
                 'notification' => [
                     'settings.notification.senderEmail',
