@@ -99,7 +99,7 @@
                                 <default></default>
                                 <type>input</type>
                                 <size>20</size>
-                                <eval>trim</eval>
+                                <eval>trim,DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator</eval>
                             </config>
                         </TCEforms>
                     </settings.timeRestrictionLow>
@@ -117,7 +117,7 @@
                                 <default></default>
                                 <type>input</type>
                                 <size>20</size>
-                                <eval>trim</eval>
+                                <eval>trim,DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator</eval>
                             </config>
                         </TCEforms>
                     </settings.timeRestrictionHigh>
