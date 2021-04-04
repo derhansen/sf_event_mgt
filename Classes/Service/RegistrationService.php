@@ -278,6 +278,12 @@ class RegistrationService
             $titleKey = 'cancelRegistration.title.failed';
         }
 
+        if (!$failed && is_null($registration->getEvent())) {
+            $failed = true;
+            $messageKey = 'event.message.cancel_failed_event_not_found';
+            $titleKey = 'cancelRegistration.title.failed';
+        }
+
         if (!$failed && $registration->getEvent()->getEnableCancel() === false) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_cancel_disabled';

@@ -234,6 +234,9 @@
 			<trans-unit id="event.message.confirmation_failed_registration_not_found">
 				<source>Confirmation failed, registration not found.</source>
 			</trans-unit>
+			<trans-unit id="event.message.cancel_failed_event_not_found">
+				<source>Cancellation failed, event not found.</source>
+			</trans-unit>
 			<trans-unit id="event.message.confirmation_failed_confirmation_until_expired">
 				<source>Confirmation failed, confirmation date has expired.</source>
 			</trans-unit>
