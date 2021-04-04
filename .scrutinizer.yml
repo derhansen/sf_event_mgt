@@ -1,6 +1,11 @@
 build:
   nodes:
     analysis:
+      environment:
+        php:
+          version: 7.4
+          pecl_extensions:
+            - zip
       tests:
         override:
           - php-scrutinizer-run
