@@ -104,4 +104,13 @@ call_user_func(function () {
             \TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline::class,
         ]
     ];
+
+    // Custom FormDataProvider for event plausability checks
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
+    \DERHANSEN\SfEventMgt\Form\FormDataProvider\EventPlausability::class
+    ] = [
+        'depends' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields::class,
+        ]
+    ];
 });

@@ -441,6 +441,12 @@
 			<trans-unit id="evaluation.timeRestriction.format">
 				<source>d.m.Y H:i:s</source>
 			</trans-unit>
+			<trans-unit id="event.startdateNotBeforeEnddate.title">
+				<source>Invalid event configuration</source>
+			</trans-unit>
+			<trans-unit id="event.startdateNotBeforeEnddate.message">
+				<source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
