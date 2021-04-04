@@ -189,6 +189,33 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             case 'past':
                 $constraints['displayMode'] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
                 break;
+            case 'time_restriction':
+                if (!empty($eventDemand->getTimeRestrictionLow())) {
+                    $timeRestriction = strtotime($eventDemand->getTimeRestrictionLow());
+                    $timeRestrictionConstraints['timeRestrictionLow'] = $query->greaterThanOrEqual('startdate', $timeRestriction);
+
+                    if ($eventDemand->getIncludeCurrent()) {
+                        $includeCurrentConstraint = $query->logicalAnd([
+                            $query->lessThan('startdate', $timeRestriction),
+                            $query->greaterThan('enddate', $timeRestriction)
+                        ]);
+                    }
+                }
+                if (!empty($eventDemand->getTimeRestrictionHigh())) {
+                    $timeRestrictionHigh = strtotime($eventDemand->getTimeRestrictionHigh());
+                    $timeRestrictionConstraints['timeRestrictionHigh'] = $query->lessThanOrEqual('startdate', $timeRestrictionHigh);
+                }
+                if (isset($timeRestrictionConstraints)) {
+                    if ($eventDemand->getIncludeCurrent()) {
+                        $constraints['displayMode'] = $query->logicalOr([
+                            $includeCurrentConstraint,
+                            $query->logicalAnd($timeRestrictionConstraints)
+                        ]);
+                    } else {
+                        $constraints['displayMode'] = $query->logicalAnd($timeRestrictionConstraints);
+                    }
+                }
+                break;
             default:
         }
     }

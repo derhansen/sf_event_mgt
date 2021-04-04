@@ -49,6 +49,7 @@
                     <settings.displayMode>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.displayMode</label>
+                            <onChange>reload</onChange>
                             <displayCond>
                                 <AND>
                                     <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
@@ -75,10 +76,67 @@
                                         <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.displayMode.past</numIndex>
                                         <numIndex index="1">past</numIndex>
                                     </numIndex>
+                                    <numIndex index="4">
+                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.displayMode.time_restriction</numIndex>
+                                        <numIndex index="1">time_restriction</numIndex>
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
                     </settings.displayMode>
+
+                    <!-- Time restriction Low -->
+                    <settings.timeRestrictionLow>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.timeRestrictionLow</label>
+                            <description>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.timeRestrictionDescription</description>
+                            <displayCond>
+                                <AND>
+                                    <numIndex index="0">FIELD:settings.displayMode:=:time_restriction</numIndex>
+                                </AND>
+                            </displayCond>
+                            <config>
+                                <default></default>
+                                <type>input</type>
+                                <size>20</size>
+                                <eval>trim,DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.timeRestrictionLow>
+
+                    <!-- Time restriction High -->
+                    <settings.timeRestrictionHigh>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.timeRestrictionHigh</label>
+                            <displayCond>
+                                <AND>
+                                    <numIndex index="0">FIELD:settings.displayMode:=:time_restriction</numIndex>
+                                </AND>
+                            </displayCond>
+                            <config>
+                                <default></default>
+                                <type>input</type>
+                                <size>20</size>
+                                <eval>trim,DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator</eval>
+                            </config>
+                        </TCEforms>
+                    </settings.timeRestrictionHigh>
+
+                    <!-- Include current -->
+                    <settings.includeCurrent>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.includeCurrent</label>
+                            <description>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.includeCurrent.description</description>
+                            <displayCond>
+                                <AND>
+                                    <numIndex index="0">FIELD:settings.displayMode:=:time_restriction</numIndex>
+                                </AND>
+                            </displayCond>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.includeCurrent>
 
                     <!-- Order field -->
                     <settings.orderField>

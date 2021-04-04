@@ -68,6 +68,9 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
         \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator::class
     ] = '';
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
+        \DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator::class
+    ] = '';
 
     // Implement get_cache_timeout hook
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['get_cache_timeout'][] =
