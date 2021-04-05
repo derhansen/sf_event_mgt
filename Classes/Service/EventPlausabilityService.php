@@ -22,6 +22,12 @@ class EventPlausabilityService
 {
     const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
 
+    /**
+     * Enqueues an error flash message, if the event startdate is not before the enddate
+     *
+     * @param int $startDate
+     * @param int $endDate
+     */
     public function verifyEventStartAndEnddate(int $startDate, int $endDate): void
     {
         if (!$this->isStartDateBeforeEndDate($startDate, $endDate)) {
@@ -49,13 +55,6 @@ class EventPlausabilityService
         return $startDate < $endDate;
     }
 
-    /**
-     * Adds a localized FlashMessage to the message queue
-     *
-     * @param string $message
-     * @param string $title
-     * @param int $severity
-     */
     protected function addMessageToFlashMessageQueue(
         string $message,
         string $title = '',
@@ -72,11 +71,6 @@ class EventPlausabilityService
         $this->addFlashMessage($flashMessage);
     }
 
-    /**
-     * Add flash message to message queue
-     *
-     * @param FlashMessage $flashMessage
-     */
     protected function addFlashMessage(FlashMessage $flashMessage)
     {
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
