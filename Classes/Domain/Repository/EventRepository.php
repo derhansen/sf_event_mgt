@@ -89,6 +89,20 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     }
 
     /**
+     * Returns the event with the given UID and also respects the hidden state
+     *
+     * @param int $uid
+     * @return object
+     */
+    public function findByUidIncludeHidden(int $uid)
+    {
+        $query = $this->createQuery();
+        $query->getQuerySettings()->setIgnoreEnableFields(true);
+        $query->matching($query->equals('uid', $uid));
+        return $query->execute()->getFirst();
+    }
+
+    /**
      * Sets a query limit to the given query for the given demand
      *
      * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query Query
