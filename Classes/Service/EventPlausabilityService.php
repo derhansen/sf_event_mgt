@@ -40,6 +40,38 @@ class EventPlausabilityService
     }
 
     /**
+     * Enqueues an warning flash message, if the event is set to notify the organisator, but no organisator
+     * is set or organisator has no email address
+     *
+     * @param array $databaseRow
+     */
+    public function verifyOrganisatorConfiguration(array $databaseRow): void
+    {
+        if ((int)$databaseRow['notify_organisator'] === 0) {
+            return;
+        }
+
+        if (empty($databaseRow['organisator'])) {
+            $this->addMessageToFlashMessageQueue(
+                $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.message'),
+                $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.title'),
+                FlashMessage::WARNING
+            );
+            return;
+        }
+
+        foreach ($databaseRow['organisator'] as $organisator) {
+            if (!GeneralUtility::validEmail($organisator['row']['email'])) {
+                $this->addMessageToFlashMessageQueue(
+                    $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.message'),
+                    $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.title'),
+                    FlashMessage::WARNING
+                );
+            }
+        }
+    }
+
+    /**
      * Returns if the startdate is before the enddate
      *
      * @param int $startDate

@@ -447,6 +447,18 @@
 			<trans-unit id="event.startdateNotBeforeEnddate.message">
 				<source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
 			</trans-unit>
+			<trans-unit id="event.noOrganisator.title">
+				<source>No organisator</source>
+			</trans-unit>
+			<trans-unit id="event.noOrganisator.message">
+				<source>The event is configured to notify the organisator, but no organisator is set. Please select an organisator or change the notification settings.</source>
+			</trans-unit>
+			<trans-unit id="event.noOrganisatorEmail.title">
+				<source>Organisator has no email</source>
+			</trans-unit>
+			<trans-unit id="event.noOrganisatorEmail.message">
+				<source>The event is configured to notify the organisator, but the organisator has no email address. Please set an email address for the organisator or change the notification settings.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

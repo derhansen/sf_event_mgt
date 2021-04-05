@@ -22,7 +22,7 @@ class EventPlausability implements FormDataProviderInterface
 {
     public function addData(array $result): array
     {
-        if ($result['tableName'] !== 'tx_sfeventmgt_domain_model_event') {
+        if ($result['tableName'] !== 'tx_sfeventmgt_domain_model_event' || empty($result['databaseRow'])) {
             return $result;
         }
 
@@ -31,6 +31,7 @@ class EventPlausability implements FormDataProviderInterface
             (int)$result['databaseRow']['startdate'],
             (int)$result['databaseRow']['enddate']
         );
+        $eventPlausabilityService->verifyOrganisatorConfiguration($result['databaseRow']);
 
         return $result;
     }
