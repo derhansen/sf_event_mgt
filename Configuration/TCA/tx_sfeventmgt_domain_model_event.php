@@ -302,7 +302,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'required,datetime',
                 'checkbox' => 1,
                 'default' => time()
             ],
@@ -316,7 +316,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'required,datetime',
                 'checkbox' => 1,
                 'default' => time() + 3600
             ],
