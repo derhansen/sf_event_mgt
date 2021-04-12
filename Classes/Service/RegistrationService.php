@@ -581,7 +581,7 @@ class RegistrationService
             $registration->setIgnoreNotifications(false);
 
             if (!(bool)$keepMainRegistrationDependency) {
-                $registration->setMainRegistration(null);
+                $registration->_setProperty('mainRegistration', 0);
             }
 
             $this->registrationRepository->update($registration);
