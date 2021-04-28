@@ -32,7 +32,7 @@ $showItemDivider = 'title, type,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
-$showItemDateTime = 'title, type, datepickermode, 
+$showItemDateTime = 'title, type, datepickermode,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
         required, default_value,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
@@ -163,7 +163,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'datetime,int',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -177,7 +177,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'datetime,int',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
