@@ -31,20 +31,20 @@ return [
             'showitem' => '
             --palette--;;paletteGenderTitle,
             --palette--;;paletteName,
-            company, 
+            company,
             --palette--;;paletteAddress,
-            country, phone, email, date_of_birth, accepttc, notes, registration_date, 
+            country, phone, email, date_of_birth, accepttc, notes, registration_date,
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
                 fe_user, confirmation_until, confirmed, ignore_notifications, amount_of_registrations,
                 waitlist, main_registration,
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
-                field_values, 
-            
+                field_values,
+
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
-                paid, paymentmethod, payment_reference, 
-                
+                paid, paymentmethod, payment_reference,
+
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 hidden,--palette--;;timeRestriction'
         ],
@@ -79,7 +79,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'datetime,int',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -93,7 +93,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'datetime,int',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -240,7 +240,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 10,
-                'eval' => 'date',
+                'eval' => 'date,int',
                 'default' => 0,
             ],
         ],
@@ -252,7 +252,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'datetime,int',
                 'default' => time()
             ],
         ],
@@ -327,7 +327,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'datetime',
+                'eval' => 'datetime,int',
                 'default' => 0,
             ],
         ],
