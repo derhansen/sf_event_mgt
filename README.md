@@ -30,13 +30,14 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Notification module with configurable email templates to notify event participants
 * Extendable with own fields through own extension
 * Configurable template layouts for the listview
-* Configurable category menu 
+* Configurable category menu
 * Searchview for events
 * Create multiple registrations at once by a single user
 * Optionally check email address of registrations for uniqueness per event
 * Configurable and extendable spam checks (included honeypot, amount of links, challenge/response)
 * Optional Spam-Protection with reCAPTCHA
 * Download of iCal file for events
+* Add event to online calender (Google, Outlook, Office 365 and Yahoo)
 * Uses TYPO3 system categories to structure events by category
 * Price options valid until selected dates (e.g. for early bird prices)
 * Payment processing after successful registration
@@ -44,7 +45,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Show events using the "Insert Record" Content Element
 * Calendar view with possibility to navigate to next/previous month
 * Automatic cache clearing when event has been changed in backend
-* Lots of PSR-14 Events to extend the extension with own functionality  
+* Lots of PSR-14 Events to extend the extension with own functionality
 
 **Background**
 
@@ -61,7 +62,7 @@ ext:sphinx to view the documentation directly in your TYPO3 installation.
 
 ### Installation using Composer
 
-The recommended way to install the extension is by using [Composer](https://getcomposer.org/). In your Composer based TYPO3 project root, just do `composer require derhansen/sf_event_mgt`. 
+The recommended way to install the extension is by using [Composer](https://getcomposer.org/). In your Composer based TYPO3 project root, just do `composer require derhansen/sf_event_mgt`.
 
 ### Installation as extension from TYPO3 Extension Repository (TER)
 
@@ -84,7 +85,7 @@ You can ask questions at https://stackoverflow.com and tag your question with `T
 
 ## Contributing
 
-Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.  
+Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.
 
 ## Screenshot
 
