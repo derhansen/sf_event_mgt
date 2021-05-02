@@ -172,7 +172,7 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-		
+
 		<f:if condition='{event.enableWaitlist}'>
 			<div class="event-detail-row">
 				<div class="event-detail-label">
@@ -305,8 +305,6 @@
 			</div>
 		</f:if>
 
-		<f:link.action action="icalDownload" arguments="{event : event}" class="button"><f:translate key="event.icalDownload" /></f:link.action>
-
 		<f:link.action action="list" pageUid="{settings.listPid}" class="button"><f:translate key="event.backtext" /></f:link.action>
 		<f:if condition="{event.registrationPossible}">
 			<f:if condition="{settings.registrationPid} !=''">
@@ -315,6 +313,18 @@
 				</f:link.action>
 			</f:if>
 		</f:if>
+
+        <div>
+            <br/>
+            <strong>Add event to calendar:</strong>
+            <ul>
+                <li><f:link.action action="icalDownload" arguments="{event : event}" class="button"><f:translate key="event.icalDownload" /></f:link.action></li>
+                <li><f:link.external uri="{e:uri.onlineCalendar(type: 'google', event: event)}" target="_blank">Add to Google Calendar</f:link.external></li>
+                <li><f:link.external uri="{e:uri.onlineCalendar(type: 'outlook', event: event)}" target="_blank">Add to Outlook Calendar</f:link.external></li>
+                <li><f:link.external uri="{e:uri.onlineCalendar(type: 'office365', event: event)}" target="_blank">Add to Office 365 Calendar</f:link.external></li>
+                <li><f:link.external uri="{e:uri.onlineCalendar(type: 'yahoo', event: event)}" target="_blank">Add to Yahoo Calendar</f:link.external></li>
+            </ul>
+        </div>
 	</f:if>
 </f:section>
 

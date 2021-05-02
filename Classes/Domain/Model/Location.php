@@ -256,4 +256,26 @@ class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->latitude = $latitude;
     }
+
+    /**
+     * Special getter to return the full address of the location
+     *
+     * @param string $separator
+     * @return string
+     */
+    public function getFullAddress(string $separator = '<br/>'): string
+    {
+        $locationData = [];
+        $locationData[] = $this->getTitle();
+        $locationData[] = $this->getAddress();
+        $locationData[] = trim($this->getZip() . ' ' . $this->getCity());
+        $locationData[] = $this->getCountry();
+        $locationData = array_filter(
+            $locationData,
+            function ($value) {
+                return str_replace(' ', '', $value) !== '';
+            }
+        );
+        return implode($separator, $locationData);
+    }
 }

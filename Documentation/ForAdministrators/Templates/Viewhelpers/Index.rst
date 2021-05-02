@@ -80,6 +80,23 @@ given page in you TYPO3 website.
 
   <e:uri.page pageUid="4" additionalParams="{tx_sfeventmgt_pievent:{event: registration.event, action: 'detail', controller: 'Event'}}" absolute="1"/>
 
+Uri.OnlineCalendar
+~~~~~~~~~~~~~~~~~~
+
+This viewhelper renders a link which will add the given event to an online
+calendar of either Google, Outlook, Office 365 or Yahoo.
+
+Available types:
+
+* google
+* outlook
+* office365
+* yahoo
+
+**Example**::
+
+  <e:uri.onlineCalendar type="google" event="{event}" />
+
 
 Event.SimultaneousRegistrationsViewHelper
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -233,4 +233,68 @@ class LocationTest extends UnitTestCase
         $this->subject->setLatitude(12.345678);
         self::assertSame(12.345678, $this->subject->getLatitude());
     }
+
+    public function getFullAddressReturnsExpectedResultDataProvider(): array
+    {
+        $location1 = new Location();
+        $location1->setAddress('Address 123');
+        $location1->setCity('A City');
+        $location1->setZip('12345');
+        $location1->setCountry('A Country');
+
+        $location2 = new Location();
+        $location2->setAddress('Address 123');
+
+        $location3 = new Location();
+        $location3->setAddress('Address 123');
+        $location3->setZip('12345');
+
+        $location4 = new Location();
+        $location4->setAddress('Address 123');
+        $location4->setCity('A City');
+
+        return [
+            'default location' => [
+                new Location(),
+                '<br/>',
+                ''
+            ],
+            'location with all data with br as separator' => [
+                $location1,
+                '<br/>',
+                'Address 123<br/>12345 A City<br/>A Country'
+            ],
+            'location with all data with comma as separator' => [
+                $location1,
+                ',',
+                'Address 123,12345 A City,A Country'
+            ],
+            'location with no zip and city' => [
+                $location2,
+                ',',
+                'Address 123'
+            ],
+            'location with no city' => [
+                $location3,
+                ',',
+                'Address 123,12345'
+            ],
+            'location with no zip' => [
+                $location4,
+                ',',
+                'Address 123,A City'
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider getFullAddressReturnsExpectedResultDataProvider
+     */
+    public function getFullAddressReturnsExpectedResult($location, $separator, $expected)
+    {
+        /** @var Location $location */
+        $result = $location->getFullAddress($separator);
+        $this->assertEquals($expected, $result);
+    }
 }
