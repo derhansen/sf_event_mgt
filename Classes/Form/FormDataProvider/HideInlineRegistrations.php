@@ -25,7 +25,7 @@ class HideInlineRegistrations implements FormDataProviderInterface
 {
     public function addData(array $result): array
     {
-        if ($result['tableName'] !== 'tx_sfeventmgt_domain_model_event') {
+        if ($result['tableName'] !== 'tx_sfeventmgt_domain_model_event' || !is_int($result['databaseRow']['uid'])) {
             return $result;
         }
 
