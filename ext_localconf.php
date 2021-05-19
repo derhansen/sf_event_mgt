@@ -90,7 +90,7 @@ call_user_func(function () {
 
     // Add page TSConfig
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
-        <INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.txt">
+        <INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.tsconfig">
     ');
 
     // Custom FormDataProvider to hide TCA inline fields for registrations on given conditions
