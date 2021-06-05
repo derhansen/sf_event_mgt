@@ -58,6 +58,12 @@ class OnlineCalendarViewHelper extends AbstractViewHelper
         $event = $arguments['event'];
         $type = strtolower($arguments['type']);
 
+        // If event has no enddate, set a default enddate (startdate + 1 hour)
+        if (!$event->getEnddate()) {
+            $enddate = (clone $event->getStartdate())->modify('+1 hour');
+            $event->setEnddate($enddate);
+        }
+
         switch ($type) {
             case 'google':
                 $link = self::getGoogleCalendarLink($event);

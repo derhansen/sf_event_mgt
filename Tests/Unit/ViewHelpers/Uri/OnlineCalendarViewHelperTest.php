@@ -96,4 +96,34 @@ class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
         );
         self::assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function defaultEnddateIsSetToEventsWithNoEnddate()
+    {
+        $location = new Location();
+        $location->setTitle('A location');
+        $location->setAddress('Street 123');
+        $location->setZip('12345');
+        $location->setCity('A City');
+        $location->setCountry('A Country');
+
+        $event = new Event();
+        $event->setTitle('A test event');
+        $event->setDescription('A description for the event');
+        $event->setStartdate(new \DateTime('01.01.2021 19:00:00 CEST'));
+
+        $result = $this->viewHelper::renderStatic(
+            [
+                'event' => $event,
+                'type' => 'google'
+            ],
+            function () {
+            },
+            $this->prophesize(RenderingContextInterface::class)->reveal()
+        );
+        $expected = 'https://www.google.com/calendar/render?action=TEMPLATE&text=A%20test%20event&dates=20210101T190000Z%2B0200%2F20210101T200000Z%2B0200&details=A%20description%20for%20the%20event';
+        self::assertEquals($expected, $result);
+    }
 }
