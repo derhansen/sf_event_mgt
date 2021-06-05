@@ -54,7 +54,6 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
-        self::markTestSkipped('Needs investigation');
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(5);
         $mockRegistration->expects(self::any())->method('getPid')->willReturn(1);

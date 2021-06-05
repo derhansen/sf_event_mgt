@@ -54,6 +54,7 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Frontend\Controller\ErrorController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -2287,7 +2288,6 @@ class EventControllerTest extends UnitTestCase
      */
     public function handleEventNotFoundShows404Page()
     {
-        self::markTestSkipped('Needs a fix. See Core TSFE tests.');
         $settings = [
             'event' => [
                 'errorHandling' => 'pageNotFoundHandler'
@@ -2296,6 +2296,8 @@ class EventControllerTest extends UnitTestCase
 
         $GLOBALS['TYPO3_REQUEST'] = new ServerRequest();
 
+        $mockErrorController = $this->getMockBuilder(ErrorController::class)->getMock();
+        GeneralUtility::addInstance(ErrorController::class, $mockErrorController);
         $this->expectException(ImmediateResponseException::class);
         $mock = $this->getAccessibleMock(EventController::class, ['dummy']);
         $mock->_call('handleEventNotFoundError', $settings);
