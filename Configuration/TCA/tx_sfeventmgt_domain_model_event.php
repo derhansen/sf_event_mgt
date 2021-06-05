@@ -340,7 +340,7 @@ return [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
                 'size' => 13,
-                'eval' => 'required,datetime',
+                'eval' => 'datetime,int',
                 'default' => time() + 3600
             ],
         ],
