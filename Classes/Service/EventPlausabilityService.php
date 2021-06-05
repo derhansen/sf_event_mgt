@@ -30,7 +30,7 @@ class EventPlausabilityService
      */
     public function verifyEventStartAndEnddate(int $startDate, int $endDate): void
     {
-        if (!$this->isStartDateBeforeEndDate($startDate, $endDate)) {
+        if (!$this->isStartDateBeforeEndDate($startDate, $endDate) && !($startDate === $endDate)) {
             $this->addMessageToFlashMessageQueue(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.message'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.title'),
