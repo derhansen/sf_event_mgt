@@ -518,6 +518,22 @@
                         </TCEforms>
                     </settings.registration.requiredFields>
 
+                    <!-- Link for terms an conditions -->
+                    <settings.registration.linkTermsAndConditions>
+                        <TCEforms>
+                            <displayCond>
+                                <AND>
+                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
+                                </AND>
+                            </displayCond>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.linkTermsAndConditions</label>
+                            <config>
+                                <type>input</type>
+                                <renderType>inputLink</renderType>
+                            </config>
+                        </TCEforms>
+                    </settings.registration.linkTermsAndConditions>
+
                 </el>
             </ROOT>
         </sDEF>

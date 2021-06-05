@@ -64,6 +64,9 @@
 			<trans-unit id="flexforms_general.paymentPid">
 				<source>Payment Page</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.linkTermsAndConditions">
+				<source>Link to terms and conditions</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.queryLimit">
 				<source>Max records displayed</source>
 			</trans-unit>

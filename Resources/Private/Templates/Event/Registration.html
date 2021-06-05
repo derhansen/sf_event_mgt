@@ -274,6 +274,7 @@
                         <label for="accepttc">
                             <f:form.checkbox id="accepttc" property="accepttc" value="1"/>
                             <f:translate key="tx_sfeventmgt_domain_model_registration.accepttc"/>
+                            <f:link.typolink parameter="{settings.registration.linkTermsAndConditions}"/>
                             <e:registration.isRequiredField settings="{settings}" fieldname="accepttc">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>

@@ -239,6 +239,18 @@ plugin.tx_sfeventmgt
    :Default:
          empty
 
+- :Property:
+         settings.registration.linkTermsAndConditions
+
+   :Date type:
+         String
+
+   :Description:
+         A page or an external URL that can be used in the registration template to show "Terms & Conditions"
+
+   :Default:
+         empty
+
  - :Property:
          settings.reCaptcha.siteKey
 
