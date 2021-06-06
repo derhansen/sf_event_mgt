@@ -397,7 +397,7 @@ class EventController extends AbstractController
                     $GLOBALS['TYPO3_REQUEST'],
                     'Event not found.'
                 );
-                throw new ImmediateResponseException($response, 1549896549734);
+                throw new ImmediateResponseException($response, 1549896549);
                 break;
             case 'showStandaloneTemplate':
                 if (isset($configuration[2])) {
