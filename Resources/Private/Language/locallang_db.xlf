@@ -431,6 +431,18 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1">
 				<source>Array</source>
 			</trans-unit>
+			<trans-unit id="sys_file_reference.show_in_views">
+				<source>Show in views</source>
+			</trans-unit>
+			<trans-unit id="sys_file_reference.show_in_views.0">
+				<source>Show in all views</source>
+			</trans-unit>
+			<trans-unit id="sys_file_reference.show_in_views.1">
+				<source>Show only in detail views</source>
+			</trans-unit>
+			<trans-unit id="sys_file_reference.show_in_views.2">
+				<source>Show only in list views</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

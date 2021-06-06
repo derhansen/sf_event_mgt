@@ -453,3 +453,10 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_fieldvalue (
 CREATE TABLE sys_category (
     slug varchar(2048)
 );
+
+#
+# Table structure for table 'sys_file_reference'
+#
+CREATE TABLE sys_file_reference (
+    show_in_views tinyint(4) DEFAULT '0' NOT NULL
+);

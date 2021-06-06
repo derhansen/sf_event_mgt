@@ -17,6 +17,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
+use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -1656,5 +1657,60 @@ class EventTest extends UnitTestCase
         $this->subject->setHidden(true);
         $this->subject->setEndtime(new \DateTime());
         self::assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getImagesReturnsValueOfImage()
+    {
+        $image = new FileReference();
+        $objectStorageHoldingExactlyOneImage = new ObjectStorage();
+        $objectStorageHoldingExactlyOneImage->attach($image);
+        $this->subject->setImage($objectStorageHoldingExactlyOneImage);
+        self::assertEquals($objectStorageHoldingExactlyOneImage, $this->subject->getImages());
+    }
+
+    /**
+     * @test
+     */
+    public function specialGettersForImagesReturnsExpectedResults()
+    {
+        $fileProphecy1 = $this->prophesize(\TYPO3\CMS\Core\Resource\File::class);
+
+        $fileReferenceProphecy1 = $this->prophesize(\TYPO3\CMS\Core\Resource\FileReference::class);
+        $fileReferenceProphecy1->getUid()->willReturn(1);
+        $fileReferenceProphecy1->getOriginalFile()->willReturn($fileProphecy1->reveal());
+        $fileReferenceProphecy1->hasProperty('show_in_views')->willReturn(true);
+        $fileReferenceProphecy1->getProperty('show_in_views')->willReturn(ShowInPreviews::LIST_VIEWS);
+
+        $extbaseFileReference1 = new FileReference();
+        $extbaseFileReference1->setOriginalResource($fileReferenceProphecy1->reveal());
+
+        $fileProphecy2 = $this->prophesize(\TYPO3\CMS\Core\Resource\File::class);
+
+        $fileReferenceProphecy2 = $this->prophesize(\TYPO3\CMS\Core\Resource\FileReference::class);
+        $fileReferenceProphecy2->getUid()->willReturn(1);
+        $fileReferenceProphecy2->getOriginalFile()->willReturn($fileProphecy2->reveal());
+        $fileReferenceProphecy2->hasProperty('show_in_views')->willReturn(true);
+        $fileReferenceProphecy2->getProperty('show_in_views')->willReturn(ShowInPreviews::DETAIL_VIEWS);
+
+        $extbaseFileReference2 = new FileReference();
+        $extbaseFileReference2->setOriginalResource($fileReferenceProphecy2->reveal());
+
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($extbaseFileReference1);
+        $objectStorage->attach($extbaseFileReference2);
+
+        $this->subject->setImage($objectStorage);
+
+        self::assertEquals(1, $this->subject->getListViewImages()->count());
+        self::assertEquals($extbaseFileReference1, $this->subject->getListViewImages()->current());
+
+        self::assertEquals(1, $this->subject->getDetailViewImages()->count());
+        self::assertEquals($extbaseFileReference2, $this->subject->getListViewImages()->current());
+
+        self::assertEquals($extbaseFileReference1, $this->subject->getFirstListViewImage());
+        self::assertEquals($extbaseFileReference2, $this->subject->getFirstDetailViewImage());
     }
 }

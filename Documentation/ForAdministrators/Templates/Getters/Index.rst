@@ -84,4 +84,34 @@ The Event-Object has the following special getters
    :Description:
          Returns if the event ends on the same day
 
+ - :Object:
+         {event.images}
+
+   :Description:
+         Returns the same ans {event.image}
+
+ - :Object:
+         {event.listViewImages}
+
+   :Description:
+         Returns all images from {event.image} that are configured to be shown in list view
+
+ - :Object:
+         {event.firstListViewImage}
+
+   :Description:
+         Returns the first image from {event.image} which is configured to be shown in list view
+
+ - :Object:
+         {event.detailViewImages}
+
+   :Description:
+         Returns all images from {event.image} that are configured to be shown in detail view
+
+ - :Object:
+         {event.firstDetailViewImage}
+
+   :Description:
+         Returns the first image from {event.image} which is configured to be shown in detail view
+
 

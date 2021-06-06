@@ -194,7 +194,7 @@ The media tab contains fields which holds media-data for the event.
          Image
 
    :Description:
-         One or more images.
+         One or more images. Each image can be configured to be shown either in the listview, the detailview or both.
 
  - :Field:
          Files

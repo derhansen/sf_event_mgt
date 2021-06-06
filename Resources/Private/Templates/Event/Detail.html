@@ -219,6 +219,16 @@
 			<div class="clear"></div>
 		</div>
 
+        <f:comment>
+            The following getters are available to work with event images:
+
+            {event.image} = All images
+            {event.images} = All images
+            {event.listViewImages} = All images marked for list view
+            {event.firstListViewImage} = First image for list view (as file reference)
+            {event.detailViewImages} = All images marked for detail view
+            {event.firstDetailViewImage} = First image for detail view (as file reference)
+        </f:comment>
 		<f:if condition="{event.image}">
 			<div class="event-detail-row">
 				<div class="event-detail-label">

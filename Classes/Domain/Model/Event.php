@@ -12,7 +12,9 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
+use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -806,9 +808,9 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the image
+     * Returns all items of the field image
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $image
      */
     public function getImage()
     {
@@ -816,9 +818,95 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Special getter to return images when accesses as {event.images}
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     */
+    public function getImages()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Returns all image items configured for list view
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     */
+    public function getListViewImages()
+    {
+        return $this->getImagesByType(ShowInPreviews::LIST_VIEWS);
+    }
+
+    /**
+     * Returns the first list view image as file reference object
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     */
+    public function getFirstListViewImage()
+    {
+        $images = $this->getImagesByType(ShowInPreviews::LIST_VIEWS);
+        $image = $images->current();
+
+        if (is_a($image, \TYPO3\CMS\Extbase\Domain\Model\FileReference::class)) {
+            return $image;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns all image items configured for list view
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     */
+    public function getDetailViewImages()
+    {
+        return $this->getImagesByType(ShowInPreviews::DETAIL_VIEWS);
+    }
+
+    /**
+     * Returns the first detail view image as file reference object
+     *
+     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
+     */
+    public function getFirstDetailViewImage()
+    {
+        $images = $this->getImagesByType(ShowInPreviews::DETAIL_VIEWS);
+        $image = $images->current();
+
+        if (is_a($image, \TYPO3\CMS\Extbase\Domain\Model\FileReference::class)) {
+            return $image;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Returns all image items by the given type
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     */
+    protected function getImagesByType(int $type)
+    {
+        $result = new ObjectStorage();
+
+        foreach ($this->image as $image) {
+            /** @var FileReference $fileReference */
+            $fileReference = $image->getOriginalResource();
+            if ($fileReference && $fileReference->hasProperty('show_in_views') &&
+                in_array($fileReference->getProperty('show_in_views'), [$type, ShowInPreviews::ALL_VIEWS])
+            ) {
+                $result->attach($image);
+            }
+        }
+
+        return $result;
+    }
+
+    /**
      * Sets the image
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $image Image
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $image Image
      */
     public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
     {
