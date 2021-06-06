@@ -52,6 +52,7 @@ class HideInlineRegistrations implements FormDataProviderInterface
 
             $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
             $messageQueue = $flashMessageService->getMessageQueueByIdentifier();
+            // @extensionScannerIgnoreLine
             $messageQueue->addMessage($flashMessage);
 
             // Unset the field "registration" and "registration_waitlist", so no data will be shows/loaded
