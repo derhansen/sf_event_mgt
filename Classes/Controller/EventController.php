@@ -399,7 +399,6 @@ class EventController extends AbstractController
                     'Event not found.'
                 );
                 throw new ImmediateResponseException($response, 1549896549);
-                break;
             case 'showStandaloneTemplate':
                 if (isset($configuration[2])) {
                     $statusCode = constant(HttpUtility::class . '::HTTP_STATUS_' . $configuration[2]);
