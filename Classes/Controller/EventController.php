@@ -408,7 +408,6 @@ class EventController extends AbstractController
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
 
                 return $standaloneTemplate->render();
-                break;
             default:
         }
     }
