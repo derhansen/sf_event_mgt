@@ -4,10 +4,10 @@
 		<header/>
 		<body>
 			<trans-unit id="firstname.description">
-				<source>Firstname</source>
+				<source>First name</source>
 			</trans-unit>
 			<trans-unit id="lastname.description">
-				<source>Lastname</source>
+				<source>Last name</source>
 			</trans-unit>
 			<trans-unit id="address.description">
 				<source>Address</source>

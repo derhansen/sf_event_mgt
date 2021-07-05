@@ -100,10 +100,10 @@
 				<source>Registration</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
-				<source>Firstname</source>
+				<source>First name</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.lastname">
-				<source>Lastname</source>
+				<source>Last name</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.title">
 				<source>Title</source>
