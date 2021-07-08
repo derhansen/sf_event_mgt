@@ -311,4 +311,29 @@ class AbstractEventsTests
 
         $I->see('Your form submission has been classified as spam.');
     }
+
+    public function expectedEventUidIsSavedToRegistrationIndependentFromWebsiteLanguage(AcceptanceTester $I)
+    {
+        $I->deleteAllEventRegistrations();
+
+        $emailPrefix = str_replace(['[', ']'], '', $this->lang);
+        $email = 'event-uid-test-' . strtolower($emailPrefix) . '@sfeventmgt.local';
+        $expectedEventUid = 2;
+
+        $I->amOnPage($this->basePath . 'event-list-all');
+        $I->click('Event (reg, cat1) ' . $this->lang);
+        $I->see('Registration', 'a');
+        $I->click('Registration');
+
+        $I->fillField(['id' => 'firstname'], 'John');
+        $I->fillField(['id' => 'lastname'], 'Doe');
+        $I->fillField(['id' => 'company'], 'TYPO3');
+        $I->fillField(['id' => 'email'], $email);
+
+        $I->click('Send registration');
+
+        $I->see('Registration successful');
+
+        $I->seeInDatabase('tx_sfeventmgt_domain_model_registration', ['email' => $email, 'event' => $expectedEventUid]);
+    }
 }
