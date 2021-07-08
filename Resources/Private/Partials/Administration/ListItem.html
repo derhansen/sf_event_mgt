@@ -38,7 +38,7 @@
         {event.registration->f:count()}
     </td>
     <td>
-        <f:if condition="{event.enableRegistration} && {e:be.isActionEnabled(action: 'notify', settings: settings)}">
+        <f:if condition="{event.enableRegistration} && !{event.hidden} && {e:be.isActionEnabled(action: 'notify', settings: settings)}">
             <f:link.action action="indexNotify" arguments="{event: '{event}'}" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify')}">
                 <f:image src="EXT:sf_event_mgt/Resources/Public/Icons/icon-notify.svg" width="16" height="16" />
             </f:link.action>
