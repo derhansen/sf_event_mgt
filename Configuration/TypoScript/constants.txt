@@ -113,7 +113,7 @@ module.tx_sfeventmgt {
             # cat=module.tx_sfeventmgt//a; type=boolean; label=Prepend UTF-8 BOM to export
             prependBOM = 0
             # cat=module.tx_sfeventmgt//a; type=string; label=Date format for date/datetime fields
-            dateFieldFormat = d.m.Y H:i
+            dateFieldFormat = d.m.Y
         }
         list {
             itemsPerPage = 10
