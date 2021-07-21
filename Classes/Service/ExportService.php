@@ -86,7 +86,7 @@ class ExportService
         foreach ($registrations as $registration) {
             $exportedRegistration = [];
             foreach ($fieldsArray as $field) {
-                $exportedRegistration[] = $this->getFieldValue($registration, $field);
+                $exportedRegistration[] = $this->getFieldValue($registration, $field, $settings);
             }
             if ($hasRegistrationFields) {
                 $exportedRegistration = array_merge(
@@ -174,13 +174,15 @@ class ExportService
      *
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
      * @param string $field
+     * @param array $settings
      * @return string
      */
-    protected function getFieldValue($registration, $field)
+    protected function getFieldValue($registration, $field, array $settings)
     {
         $value = ObjectAccess::getPropertyPath($registration, $field);
         if ($value instanceof \DateTime) {
-            $value = $value->format('d.m.Y');
+            $dateFormat = $settings['dateFieldFormat'] ?? 'd.m.Y';
+            $value = $value->format($dateFormat);
         }
 
         return $this->replaceLineBreaks($value);
