@@ -50,8 +50,8 @@ Configuration::
             routeFieldName: uid
           reguid:
             type: PersistedAliasMapper
-            tableName: tx_sfeventmgt_domain_model_registration
-            routeFieldName: uid
+            tableName: 'tx_sfeventmgt_domain_model_registration'
+            routeFieldName: 'uid'
           event_title:
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_event'
@@ -62,8 +62,8 @@ Configuration::
             routeFieldName: 'slug'
           category_title:
             type: PersistedAliasMapper
-            tableName: sys_category
-            routeFieldName: slug
+            tableName: 'sys_category'
+            routeFieldName: 'slug'
           speaker_name:
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_speaker'
