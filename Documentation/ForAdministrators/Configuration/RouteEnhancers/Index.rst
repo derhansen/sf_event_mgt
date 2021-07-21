@@ -35,7 +35,7 @@ Configuration::
           - { routePath: '/cancel-registration/{reguid}/{hmac}', _controller: 'Event::cancelRegistration', _arguments: {'reguid': 'reguid', 'hmac': 'hmac'} }
           - { routePath: '/location/{location_title}', _controller: 'Event::list', _arguments: {'location_title': 'overwriteDemand/location'}}
           - { routePath: '/speaker/{speaker_name}', _controller: 'Event::list', _arguments: {'speaker_name': 'overwriteDemand/speaker'}}
-          - { routePath: '/organisator/{speaker_name}', _controller: 'Event::list', _arguments: {'organisator_name': 'overwriteDemand/organisator'}}
+          - { routePath: '/organisator/{organisator_name}', _controller: 'Event::list', _arguments: {'organisator_name': 'overwriteDemand/organisator'}}
           - { routePath: '/category/{category_title}', _controller: 'Event::list', _arguments: {'category_title': 'overwriteDemand/category'}}
         defaultController: 'Event::list'
         requirements:
@@ -46,8 +46,8 @@ Configuration::
         aspects:
           reguid:
             type: PersistedAliasMapper
-            tableName: tx_sfeventmgt_domain_model_registration
-            routeFieldName: uid
+            tableName: 'tx_sfeventmgt_domain_model_registration'
+            routeFieldName: 'uid'
           event_title:
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_event'
@@ -58,8 +58,8 @@ Configuration::
             routeFieldName: 'slug'
           category_title:
             type: PersistedAliasMapper
-            tableName: sys_category
-            routeFieldName: slug
+            tableName: 'sys_category'
+            routeFieldName: 'slug'
           speaker_name:
             type: PersistedAliasMapper
             tableName: 'tx_sfeventmgt_domain_model_speaker'
