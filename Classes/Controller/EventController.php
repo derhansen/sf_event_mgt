@@ -1052,7 +1052,7 @@ class EventController extends AbstractController
     protected function getCurrentLanguageTwoLetterIsoCode(): string
     {
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 9000000) {
-            return $GLOBALS['TSFE']->config['config']['language'];
+            return $GLOBALS['TSFE']->config['config']['language'] ?? '';
         }
 
         if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface &&
