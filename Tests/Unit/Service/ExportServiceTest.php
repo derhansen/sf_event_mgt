@@ -175,7 +175,7 @@ class ExportServiceTest extends UnitTestCase
     {
         if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 9000000) {
             $this->markTestSkipped(
-                'CSV export format changes due to TYPO3 security update have not been backported as it to TYPO3 8.7'
+                'CSV export format changes due to TYPO3 security update are not publically available for TYPO3 8.7'
             );
         }
 
