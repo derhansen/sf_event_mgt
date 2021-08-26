@@ -1,0 +1,3 @@
+mod.linkvalidator.searchFields {
+	tx_sfeventmgt_domain_model_event = description,program,link
+}
