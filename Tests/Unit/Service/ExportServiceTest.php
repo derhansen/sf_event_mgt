@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -172,6 +173,12 @@ class ExportServiceTest extends UnitTestCase
      */
     public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected)
     {
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 9000000) {
+            $this->markTestSkipped(
+                'CSV export format changes due to TYPO3 security update have not been backported as it to TYPO3 8.7'
+            );
+        }
+
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects($this->at(0))->method('_hasProperty')->with(
             $this->equalTo('uid')
