@@ -29,6 +29,13 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     protected $details;
 
     /**
+     * Message
+     *
+     * @var string
+     */
+    protected $message = '';
+
+    /**
      * E-Mails sent
      *
      * @var int
@@ -67,6 +74,22 @@ class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnti
     public function getDetails()
     {
         return $this->details;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMessage(): string
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param string $message
+     */
+    public function setMessage(string $message): void
+    {
+        $this->message = $message;
     }
 
     /**

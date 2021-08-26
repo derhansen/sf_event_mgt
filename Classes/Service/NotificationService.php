@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyCustomNotificationLogEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
@@ -233,6 +234,15 @@ class NotificationService
         $notificationlogEntry->setDetails($details);
         $notificationlogEntry->setEmailsSent($emailsSent);
         $notificationlogEntry->setCruserId($GLOBALS['BE_USER']->user['uid']);
+
+        $modifyCustomNotificationLogEntry = new ModifyCustomNotificationLogEvent(
+            $notificationlogEntry,
+            $event,
+            $details
+        );
+        $this->eventDispatcher->dispatch($modifyCustomNotificationLogEntry);
+        $notificationlogEntry = $modifyCustomNotificationLogEntry->getCustomNotificationLog();
+
         $this->customNotificationLogRepository->add($notificationlogEntry);
     }
 

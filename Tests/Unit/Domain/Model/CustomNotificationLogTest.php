@@ -109,4 +109,21 @@ class CustomNotificationLogTest extends UnitTestCase
         $this->subject->setCruserId($beuser);
         self::assertEquals($beuser, $this->subject->getCruserId());
     }
+
+    /**
+     * @test
+     */
+    public function getMessageReturnsInitialValueForString()
+    {
+        self::assertEquals('', $this->subject->getMessage());
+    }
+
+    /**
+     * @test
+     */
+    public function setMessageSetsMessage()
+    {
+        $this->subject->setMessage('test');
+        self::assertEquals('test', $this->subject->getMessage());
+    }
 }

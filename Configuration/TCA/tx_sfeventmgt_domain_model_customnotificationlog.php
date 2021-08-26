@@ -50,6 +50,15 @@ return [
                 'type' => 'input',
             ],
         ],
+        'message' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.message',
+            'config' => [
+                'type' => 'text',
+                'cols' => 60,
+                'rows' => 5,
+            ],
+        ],
         'emails_sent' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.emailsSent',

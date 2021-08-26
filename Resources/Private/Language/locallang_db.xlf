@@ -297,6 +297,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details">
 				<source>Details</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.message">
+				<source>Message</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent">
 				<source>Emails sent</source>
 			</trans-unit>

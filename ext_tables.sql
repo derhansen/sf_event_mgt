@@ -151,6 +151,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_customnotificationlog (
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 	details text,
 	emails_sent int(11) DEFAULT '0' NOT NULL,
+	message text,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

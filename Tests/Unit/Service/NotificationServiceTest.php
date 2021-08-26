@@ -22,6 +22,7 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -544,11 +545,14 @@ class NotificationServiceTest extends UnitTestCase
     public function createCustomNotificationLogentryCreatesLog()
     {
         $mockLogRepo = $this->getMockBuilder(CustomNotificationLogRepository::class)
-            ->setMethods(['add'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockLogRepo->expects(self::once())->method('add');
-        $this->inject($this->subject, 'customNotificationLogRepository', $mockLogRepo);
+        $this->subject->injectCustomNotificationLogRepository($mockLogRepo);
+
+        $mockEventDispatcher = $this->getMockBuilder(EventDispatcher::class)->disableOriginalConstructor()->getMock();
+        $mockEventDispatcher->expects($this->once())->method('dispatch');
+        $this->subject->injectEventDispatcher($mockEventDispatcher);
 
         $event = new Event();
         $event->setPid(1);

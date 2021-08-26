@@ -58,6 +58,7 @@ Notification Service
 * ModifyUserMessageAttachmentsEvent
 * AfterUserMessageSentEvent
 * AfterAdminMessageSentEvent
+* ModifyCustomNotificationLogEvent
 
 Registration Service
 --------------------
