@@ -18,9 +18,12 @@ use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\Page;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
@@ -594,7 +597,7 @@ class EventController extends AbstractController
             $registration->setEvent($event);
             $registration->setPid($event->getPid());
             $registration->setConfirmationUntil($confirmationUntil);
-            $registration->setLanguage($GLOBALS['TSFE']->config['config']['language']);
+            $registration->setLanguage($this->getCurrentLanguageTwoLetterIsoCode());
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
             $registration->setWaitlist($isWaitlistRegistration);
             $registration->_setProperty('_languageUid', $this->getSysLanguageUid());
@@ -1039,6 +1042,28 @@ class EventController extends AbstractController
         }
 
         return $event;
+    }
+
+    /**
+     * Returns the two letter ISO code for the current language
+     *
+     * @return string
+     */
+    protected function getCurrentLanguageTwoLetterIsoCode(): string
+    {
+        if (VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 9000000) {
+            return $GLOBALS['TSFE']->config['config']['language'];
+        }
+
+        if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface &&
+            $GLOBALS['TYPO3_REQUEST']->getAttribute('language') instanceof SiteLanguage
+        ) {
+            /** @var SiteLanguage $siteLanguage */
+            $siteLanguage = $GLOBALS['TYPO3_REQUEST']->getAttribute('language');
+            return $siteLanguage->getTwoLetterIsoCode();
+        }
+
+        return '';
     }
 
     /**
