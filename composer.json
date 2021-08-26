@@ -19,20 +19,23 @@
     "GPL-2.0-or-later"
   ],
   "require": {
-    "typo3/cms-core": "^10.4.2"
+    "typo3/cms-core": "~11.4.0 || dev-master"
   },
   "require-dev": {
-    "typo3/testing-framework": "^5",
+    "typo3/cms-backend": "~11.4.0 || dev-master",
+    "typo3/cms-frontend": "~11.4.0 || dev-master",
+    "typo3/cms-recordlist": "~11.4.0 || dev-master",
+    "typo3/cms-extbase": "~11.4.0 || dev-master",
+    "typo3/cms-felogin": "~11.4.0 || dev-master",
+    "typo3/cms-fluid-styled-content": "~11.4.0 || dev-master",
+    "typo3/cms-fluid": "~11.4.0 || dev-master",
+    "typo3/cms-tstemplate": "~11.4.0 || dev-master",
+    "typo3/testing-framework": "^6.9.0",
     "codeception/codeception": "^4.1",
     "ericmartel/codeception-email": "^1.0",
     "codeception/module-webdriver": "^1.0",
     "codeception/module-db": "^1.0",
-    "friendsofphp/php-cs-fixer": "^2.16.1",
-    "helhum/typo3-console": "^6.1",
-    "typo3/cms-fluid-styled-content": "^10.4",
-    "typo3/cms-frontend": "^10.4",
-    "typo3/cms-felogin": "^10.4",
-    "typo3/cms-tstemplate": "^10.4",
+    "friendsofphp/php-cs-fixer": "^3.0",
     "saschaegerer/phpstan-typo3": "^0.13.1",
     "phpstan/extension-installer": "^1.1",
     "jangregor/phpstan-prophecy": "^0.8.1"
