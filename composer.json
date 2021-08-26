@@ -24,7 +24,7 @@
   "require-dev": {
     "typo3/testing-framework": "^5",
     "codeception/codeception": "^4.1",
-    "ericmartel/codeception-email-mailhog": "^1.0",
+    "ericmartel/codeception-email": "^1.0",
     "codeception/module-webdriver": "^1.0",
     "codeception/module-db": "^1.0",
     "friendsofphp/php-cs-fixer": "^2.16.1",
