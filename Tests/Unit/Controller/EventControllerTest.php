@@ -863,12 +863,11 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'hashService', $hashService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
+            ->setMethods(['checkRegistrationSuccess'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
             ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST]);
-        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -962,11 +961,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
+            ->setMethods(['checkRegistrationSuccess'])
             ->getMock();
         $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
             ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
-        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $this->subject->expects(self::once())->method('redirect')->with(
@@ -1027,11 +1025,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
+            ->setMethods(['checkRegistrationSuccess'])
             ->getMock();
         $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
             ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
-        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -1106,11 +1103,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent'])
+            ->setMethods(['checkRegistrationSuccess'])
             ->getMock();
         $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
             ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
-        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -1185,11 +1181,10 @@ class EventControllerTest extends UnitTestCase
         $this->inject($this->subject, 'eventCacheService', $eventCacheService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['checkRegistrationSuccess', 'fixRegistrationEvent', 'createDependingRegistrations'])
+            ->setMethods(['checkRegistrationSuccess', 'createDependingRegistrations'])
             ->getMock();
         $mockRegistrationService->expects(self::once())->method('checkRegistrationSuccess')
             ->willReturn([true, RegistrationResult::REGISTRATION_SUCCESSFUL]);
-        $mockRegistrationService->expects(self::once())->method('fixRegistrationEvent');
         $mockRegistrationService->expects(self::once())->method('createDependingRegistrations');
         $this->inject($this->subject, 'registrationService', $mockRegistrationService);
 

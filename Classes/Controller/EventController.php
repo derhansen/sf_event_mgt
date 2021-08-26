@@ -637,9 +637,6 @@ class EventController extends AbstractController
                 $messageType = MessageType::REGISTRATION_NEW;
             }
 
-            // Fix event in registration for language other than default language
-            $this->registrationService->fixRegistrationEvent($registration, $event);
-
             $this->eventDispatcher->dispatch(new AfterRegistrationSavedEvent($registration, $this));
 
             // Send notifications to user and admin if confirmation link should be sent
