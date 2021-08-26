@@ -78,7 +78,7 @@ class ExportServiceTest extends UnitTestCase
                     'fieldQuoteCharacter' => '"',
                     'prependBOM' => 0
                 ],
-                '"uid","firstname","lastname"' . chr(10) . '"1","Max","Mustermann"' . chr(10)
+                '"uid","firstname","lastname"' . chr(10) . '1,"Max","Mustermann"' . chr(10)
             ],
             'fieldValuesWithoutWhitespacesInTypoScript' => [
                 1,
@@ -88,7 +88,7 @@ class ExportServiceTest extends UnitTestCase
                     'fieldQuoteCharacter' => '"',
                     'prependBOM' => 0
                 ],
-                '"uid","firstname","lastname"' . chr(10) . '"1","Max","Mustermann"' . chr(10)
+                '"uid","firstname","lastname"' . chr(10) . '1,"Max","Mustermann"' . chr(10)
             ],
             'fieldValuesWithDifferentDelimiter' => [
                 1,
@@ -98,7 +98,7 @@ class ExportServiceTest extends UnitTestCase
                     'fieldQuoteCharacter' => '"',
                     'prependBOM' => 0
                 ],
-                '"uid";"firstname";"lastname"' . chr(10) . '"1";"Max";"Mustermann"' . chr(10)
+                '"uid";"firstname";"lastname"' . chr(10) . '1;"Max";"Mustermann"' . chr(10)
             ],
             'fieldValuesWithDifferentQuoteCharacter' => [
                 1,
@@ -108,7 +108,7 @@ class ExportServiceTest extends UnitTestCase
                     'fieldQuoteCharacter' => '\'',
                     'prependBOM' => 0
                 ],
-                '\'uid\',\'firstname\',\'lastname\'' . chr(10) . '\'1\',\'Max\',\'Mustermann\'' . chr(10)
+                '\'uid\',\'firstname\',\'lastname\'' . chr(10) . '1,\'Max\',\'Mustermann\'' . chr(10)
             ],
             'fieldValuesWithBomSetting' => [
                 1,
@@ -118,7 +118,7 @@ class ExportServiceTest extends UnitTestCase
                     'fieldQuoteCharacter' => '"',
                     'prependBOM' => 1
                 ],
-                chr(239) . chr(187) . chr(191) . '"uid";"firstname";"lastname"' . chr(10) . '"1";"Max";"Mustermann"' . chr(10)
+                chr(239) . chr(187) . chr(191) . '"uid";"firstname";"lastname"' . chr(10) . '1;"Max";"Mustermann"' . chr(10)
             ],
         ];
     }
