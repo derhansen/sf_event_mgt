@@ -1,6 +1,6 @@
 <?php
 
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 // Override events icon
 $GLOBALS['TCA']['pages']['columns']['module']['config']['items'][] = [
