@@ -92,13 +92,13 @@ class RegistrationValidatorTest extends UnitTestCase
 
         // Inject configuration and configurationManager
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
-            ->setMethods(['getConfiguration'])
+            ->onlyMethods(['getConfiguration'])
             ->disableOriginalConstructor()
             ->getMock();
         $configurationManager->expects(self::once())->method('getConfiguration')->willReturn(
             $settings
         );
-        $this->inject($this->validator, 'configurationManager', $configurationManager);
+        $this->validator->injectConfigurationManager($configurationManager);
 
         self::assertEquals($expected, $this->validator->validate($registration)->hasErrors());
     }
@@ -180,13 +180,13 @@ class RegistrationValidatorTest extends UnitTestCase
 
         // Inject configuration and configurationManager
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
-            ->setMethods(['getConfiguration'])
+            ->onlyMethods(['getConfiguration'])
             ->disableOriginalConstructor()
             ->getMock();
         $configurationManager->expects(self::once())->method('getConfiguration')->willReturn(
             $settings
         );
-        $this->inject($this->validator, 'configurationManager', $configurationManager);
+        $this->validator->injectConfigurationManager($configurationManager);
 
         // Inject the object manager
         $validationError = $this->getMockBuilder(Error::class)
@@ -266,11 +266,11 @@ class RegistrationValidatorTest extends UnitTestCase
         $validator = $this->getAccessibleMock($this->validatorClassName, ['dummy'], [], '', false);
 
         $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->setMethods(['get'])
+            ->onlyMethods(['get'])
             ->disableOriginalConstructor()
             ->getMock();
         $objectManager->expects(self::once())->method('get')->willReturn($returnedObject);
-        $this->inject($validator, 'objectManager', $objectManager);
+        $validator->injectObjectManager($objectManager);
 
         $result = $validator->_call('getValidator', $type, '');
         self::assertInstanceOf($expectedClass, $result);

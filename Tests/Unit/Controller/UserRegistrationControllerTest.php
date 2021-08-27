@@ -51,42 +51,6 @@ class UserRegistrationControllerTest extends UnitTestCase
     }
 
     /**
-     * Test if settings are used in UserRegistrationDemand object
-     *
-     * @test
-     */
-    public function createUserRegistrationDemandObjectFromSettingsTest()
-    {
-        $mockController = $this->getMockBuilder(UserRegistrationController::class)
-            ->setMethods(['redirect', 'forward', 'addFlashMessage'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $settings = [];
-        $settings['userRegistration'] = [
-            'displayMode' => 'all',
-            'storagePage' => 1,
-            'orderField' => 'event.title',
-            'orderDirection' => 'asc',
-        ];
-
-        $mockDemand = $this->getMockBuilder(UserRegistrationDemand::class)
-            ->getMock();
-        $mockDemand->expects(self::at(0))->method('setDisplayMode')->with('all');
-        $mockDemand->expects(self::at(1))->method('setStoragePage')->with(1);
-        $mockDemand->expects(self::at(2))->method('setOrderField')->with('event.title');
-        $mockDemand->expects(self::at(3))->method('setOrderDirection')->with('asc');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($mockDemand);
-        $this->inject($mockController, 'objectManager', $objectManager);
-
-        $mockController->createUserRegistrationDemandObjectFromSettings($settings);
-    }
-
-    /**
      * Test if listAction assigns registrations to view
      *
      * @test
@@ -94,7 +58,7 @@ class UserRegistrationControllerTest extends UnitTestCase
     public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView()
     {
         $demand = $this->getMockBuilder(UserRegistrationDemand::class)
-            ->setMethods(['setUser'])
+            ->onlyMethods(['setUser'])
             ->disableOriginalConstructor()
             ->getMock();
         $demand->expects(self::once())->method('setUser');
@@ -103,30 +67,30 @@ class UserRegistrationControllerTest extends UnitTestCase
             ->getMock();
 
         $settings = ['settings'];
-        $this->inject($this->subject, 'settings', $settings);
+        $this->subject->_set('settings', $settings);
 
         $this->subject->expects(self::once())->method('createUserRegistrationDemandObjectFromSettings')
             ->with($settings)->willReturn($demand);
 
         $registrationServiceMock = $this->getMockBuilder(RegistrationService::class)
-            ->setMethods(['getCurrentFeUserObject'])
+            ->onlyMethods(['getCurrentFeUserObject'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationServiceMock->expects(self::once())->method('getCurrentFeUserObject');
-        $this->inject($this->subject, 'registrationService', $registrationServiceMock);
+        $this->subject->injectRegistrationService($registrationServiceMock);
 
         $registrationRepository = $this->getMockBuilder(
             RegistrationRepository::class
-        )->setMethods(['findRegistrationsByUserRegistrationDemand'])
+        )->onlyMethods(['findRegistrationsByUserRegistrationDemand'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationRepository->expects(self::once())->method('findRegistrationsByUserRegistrationDemand')
             ->willReturn($registrations);
-        $this->inject($this->subject, 'registrationRepository', $registrationRepository);
+        $this->subject->injectRegistrationRepository($registrationRepository);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
-        $view->expects(self::at(0))->method('assign')->with('registrations', $registrations);
-        $this->inject($this->subject, 'view', $view);
+        $view->expects(self::any())->method('assign')->with('registrations', $registrations);
+        $this->subject->_set('view', $view);
 
         $this->subject->listAction();
     }

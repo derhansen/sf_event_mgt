@@ -10,6 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Form\formDataProvider;
 
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -19,6 +20,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class HideInlineRegistrationsTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     const LLL = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.';
 
     /**

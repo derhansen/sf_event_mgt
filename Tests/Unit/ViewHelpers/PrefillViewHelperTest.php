@@ -10,6 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
+use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -19,6 +20,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class PrefillViewHelperTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */

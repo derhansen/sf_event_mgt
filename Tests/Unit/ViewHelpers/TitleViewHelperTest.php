@@ -10,6 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\TitleViewHelper;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -19,6 +20,8 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  */
 class TitleViewHelperTest extends ViewHelperBaseTestcase
 {
+    use ProphecyTrait;
+
     /**
      * @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
      */

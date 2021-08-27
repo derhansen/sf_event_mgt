@@ -14,6 +14,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\ExportService;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -22,6 +23,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ExportServiceTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * Data Provider for unit tests
      *
@@ -125,7 +128,7 @@ class ExportServiceTest extends UnitTestCase
         $allRegistrations->attach($registration);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->setMethods(['findByEvent'])
+            ->addMethods(['findByEvent'])
             ->disableOriginalConstructor()
             ->getMock();
         $registrationRepository->expects(self::once())->method('findByEvent')->willReturn(

@@ -27,7 +27,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
     public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
     {
         $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
+            ->onlyMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
@@ -40,7 +40,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $currentValue = 'Default';
 
         $viewHelper->_set('arguments', ['registrationField' => $field, 'currentValue' => $currentValue]);
-        $actual = $viewHelper->_callRef('render');
+        $actual = $viewHelper->_call('render');
         self::assertTrue($actual);
     }
 
@@ -106,32 +106,32 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         ];
 
         $mockField = $this->getMockBuilder(Field::class)
-            ->setMethods(['getUid'])
+            ->onlyMethods(['getUid'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockField->expects(self::any())->method('getUid')->willReturn($submittedRegistrationFieldUid);
 
         $mockFieldValue = $this->getMockBuilder(FieldValue::class)
-            ->setMethods(['getField', 'getValue'])
+            ->onlyMethods(['getField', 'getValue'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFieldValue->expects(self::any())->method('getField')->willReturn($mockField);
         $mockFieldValue->expects(self::any())->method('getValue')->willReturn($fieldValue);
 
         $mockPropertyMapper = $this->getMockBuilder(PropertyMapper::class)
-            ->setMethods(['convert'])
+            ->onlyMethods(['convert'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockPropertyMapper->expects(self::any())->method('convert')->willReturn($mockFieldValue);
 
         $mockOriginalRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getArguments'])
+            ->onlyMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn($arguments);
 
         $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
+            ->onlyMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects(self::once())->method('getOriginalRequest')
@@ -145,7 +145,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $mockSubmittedField->expects(self::once())->method('getUid')->willReturn($registrationFieldUid);
 
         $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => $currentValue]);
-        $actual = $viewHelper->_callRef('render');
+        $actual = $viewHelper->_call('render');
         self::assertSame($expected, $actual);
     }
 
@@ -155,13 +155,13 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
     public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationfieldValues()
     {
         $mockOriginalRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getArguments'])
+            ->onlyMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
-        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn(null);
+        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn([]);
 
         $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
+            ->onlyMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects(self::once())->method('getOriginalRequest')
@@ -173,7 +173,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
 
         $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => null]);
-        $actual = $viewHelper->_callRef('render');
+        $actual = $viewHelper->_call('render');
         self::assertFalse($actual);
     }
 }

@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -22,6 +23,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ICalendarServiceTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
      */

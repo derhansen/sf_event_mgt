@@ -57,7 +57,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
     public function validatorHasNoErrorsWhenRegistrationHasNoFieldValues()
     {
         $mockEvent = $this->getMockBuilder(Event::class)
-            ->setMethods(['getRegistrationFields'])
+            ->onlyMethods(['getRegistrationFields'])
             ->getMock();
         $mockEvent->expects(self::once())->method('getRegistrationFields')
             ->willReturn(new ObjectStorage());
@@ -84,7 +84,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $registrationFieldObjectStorage->attach($mockRegistrationField);
 
         $mockEvent = $this->getMockBuilder(Event::class)
-            ->setMethods(['getRegistrationFields'])
+            ->onlyMethods(['getRegistrationFields'])
             ->getMock();
         $mockEvent->expects(self::any())->method('getRegistrationFields')
             ->willReturn($registrationFieldObjectStorage);
@@ -100,7 +100,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
             ->willReturn($fieldValueObjectStorage);
 
         $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
-            ->setMethods(['translateErrorMessage'])
+            ->onlyMethods(['translateErrorMessage'])
             ->getMock();
         $this->validator->expects(self::any())->method('getNotEmptyValidator')
             ->willReturn($mockNotEmptyValidator);
@@ -124,7 +124,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $registrationFieldObjectStorage->attach($mockRegistrationField);
 
         $mockEvent = $this->getMockBuilder(Event::class)
-            ->setMethods(['getRegistrationFields'])
+            ->onlyMethods(['getRegistrationFields'])
             ->getMock();
         $mockEvent->expects(self::any())->method('getRegistrationFields')
             ->willReturn($registrationFieldObjectStorage);
@@ -141,7 +141,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
             ->willReturn($fieldValueObjectStorage);
 
         $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
-            ->setMethods(['translateErrorMessage'])
+            ->onlyMethods(['translateErrorMessage'])
             ->getMock();
         $this->validator->expects(self::any())->method('getNotEmptyValidator')
             ->willReturn($mockNotEmptyValidator);
@@ -162,7 +162,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
         $registrationFieldObjectStorage = new ObjectStorage();
         $registrationFieldObjectStorage->attach($mockRegistrationField);
 
-        $mockEvent = $this->getMockBuilder(Event::class)->setMethods(['getRegistrationFields'])->getMock();
+        $mockEvent = $this->getMockBuilder(Event::class)->onlyMethods(['getRegistrationFields'])->getMock();
         $mockEvent->expects(self::any())->method('getRegistrationFields')
             ->willReturn($registrationFieldObjectStorage);
 
@@ -177,7 +177,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
             ->willReturn($fieldValueObjectStorage);
 
         $mockNotEmptyValidator = $this->getMockBuilder(NotEmptyValidator::class)
-            ->setMethods(['translateErrorMessage'])
+            ->onlyMethods(['translateErrorMessage'])
             ->getMock();
         $this->validator->expects(self::any())->method('getNotEmptyValidator')
             ->willReturn($mockNotEmptyValidator);

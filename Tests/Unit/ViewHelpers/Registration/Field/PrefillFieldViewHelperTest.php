@@ -25,7 +25,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
     public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
     {
         $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
+            ->onlyMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
@@ -37,7 +37,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         $field->setDefaultValue('Default');
 
         $viewHelper->_set('arguments', ['registrationField' => $field]);
-        $actual = $viewHelper->_callRef('render');
+        $actual = $viewHelper->_call('render');
         self::assertSame('Default', $actual);
     }
 
@@ -82,13 +82,13 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         ];
 
         $mockOriginalRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getArguments'])
+            ->onlyMethods(['getArguments'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn($arguments);
 
         $mockRequest = $this->getMockBuilder(Request::class)
-            ->setMethods(['getOriginalRequest'])
+            ->onlyMethods(['getOriginalRequest'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRequest->expects(self::once())->method('getOriginalRequest')
@@ -101,7 +101,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         $mockField->expects(self::once())->method('getUid')->willReturn($fieldUid);
 
         $viewHelper->_set('arguments', ['registrationField' => $mockField]);
-        $actual = $viewHelper->_callRef('render');
+        $actual = $viewHelper->_call('render');
         self::assertSame($expected, $actual);
     }
 }

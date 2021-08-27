@@ -154,23 +154,19 @@ class AttachmentServiceTest extends UnitTestCase
         $event = new Event();
 
         $mockFile1 = $this->getMockBuilder(File::class)
-            ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile1->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/somefile.pdf');
         $mockFileRef1 = $this->getMockBuilder(FileReference::class)
-            ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFileRef1->expects(self::any())->method('getOriginalResource')->willReturn($mockFile1);
 
         $mockFile2 = $this->getMockBuilder(File::class)
-            ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile2->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/anotherfile.pdf');
         $mockFileRef2 = $this->getMockBuilder(FileReference::class)
-            ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFileRef2->expects(self::any())->method('getOriginalResource')->willReturn($mockFile2);
@@ -214,18 +210,15 @@ class AttachmentServiceTest extends UnitTestCase
         $event = new Event();
 
         $mockFile = $this->getMockBuilder(File::class)
-            ->setMethods(['getForLocalProcessing'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFile->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/somefile.pdf');
         $mockFileRef = $this->getMockBuilder(FileReference::class)
-            ->setMethods(['getOriginalResource'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockFileRef->expects(self::any())->method('getOriginalResource')->willReturn($mockFile);
 
         $mockRegistration = $this->getMockBuilder(Registration::class)
-            ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRegistration->expects(self::once())->method('getEvent')->willReturn($event);
@@ -275,16 +268,14 @@ class AttachmentServiceTest extends UnitTestCase
         ]];
 
         $mockRegistration = $this->getMockBuilder(Registration::class)
-            ->setMethods(['getEvent', '_hasProperty', '_getProperty'])
             ->disableOriginalConstructor()
             ->getMock();
         $mockRegistration->expects(self::any())->method('getEvent')->willReturn($event);
 
         $mockICalendarService = $this->getMockBuilder(ICalendarService::class)
-            ->setMethods(['getiCalendarContent'])
             ->disableOriginalConstructor()
             ->getMock();
-        $this->inject($this->subject, 'iCalendarService', $mockICalendarService);
+        $this->subject->injectICalService($mockICalendarService);
 
         $attachment = $this->subject->getICalAttachment(
             $settings,

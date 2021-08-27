@@ -33,7 +33,7 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
         $this->subject = new TimeRestrictionEvaluator();
         $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
             ->disableOriginalConstructor()
-            ->setMethods(['sL'])
+            ->onlyMethods(['sL'])
             ->getMock();
         $GLOBALS['LANG']->expects(self::any())->method('sL')->willReturn('test');
     }

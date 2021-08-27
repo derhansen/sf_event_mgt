@@ -12,6 +12,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Uri;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\ViewHelpers\Uri\OnlineCalendarViewHelper;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
@@ -20,6 +21,8 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  */
 class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
 {
+    use ProphecyTrait;
+
     /**
      * @var OnlineCalendarViewHelper
      */

@@ -11,6 +11,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -22,6 +23,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class FluidStandaloneServiceTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var FluidStandaloneService
      */
