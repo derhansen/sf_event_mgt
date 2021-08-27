@@ -43,34 +43,5 @@ call_user_func(function () {
                 'labels' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_modadministration.xlf',
             ]
         );
-
-        /**
-         * Register icons
-         */
-        $icons = [
-            'apps-pagetree-folder-contains-events' => 'apps-pagetree-folder-contains-events.svg',
-            'ext-sfeventmgt-wizard' => 'events.svg',
-            'ext-sfeventmgt-registration-unconfirmed' => 'tx_sfeventmgt_domain_model_registration_unconfirmed.svg',
-            'ext-sfeventmgt-registration-confirmed' => 'tx_sfeventmgt_domain_model_registration_confirmed.svg',
-            'ext-sfeventmgt-event' => 'tx_sfeventmgt_domain_model_event.svg',
-            'ext-sfeventmgt-priceoption' => 'tx_sfeventmgt_domain_model_priceoption.svg',
-            'ext-sfeventmgt-organisator' => 'tx_sfeventmgt_domain_model_organisator.svg',
-            'ext-sfeventmgt-location' => 'tx_sfeventmgt_domain_model_location.svg',
-            'ext-sfeventmgt-speaker' => 'tx_sfeventmgt_domain_model_speaker.svg',
-            'ext-sfeventmgt-registration-field' => 'tx_sfeventmgt_domain_model_registration_field.svg',
-            'ext-sfeventmgt-logfile' => 'logfile.svg',
-            'ext-sfeventmgt-action-handle-expired' => 'hande-expired-registrations.svg'
-        ];
-        /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
-        $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Core\Imaging\IconRegistry::class
-        );
-        foreach ($icons as $identifier => $path) {
-            $iconRegistry->registerIcon(
-                $identifier,
-                \TYPO3\CMS\Core\Imaging\IconProvider\BitmapIconProvider::class,
-                ['source' => 'EXT:sf_event_mgt/Resources/Public/Icons/' . $path]
-            );
-        }
     }
 });
