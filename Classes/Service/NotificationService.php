@@ -19,6 +19,8 @@ use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -550,7 +552,10 @@ class NotificationService
      */
     protected function getNotificationBody($event, $registration, $template, $settings, $additionalBodyVariables = [])
     {
-        if (TYPO3_MODE === 'BE' && $registration->getLanguage() !== '') {
+        $isBackendRequest = ($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface
+            && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend();
+
+        if ($isBackendRequest && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
             $GLOBALS['BE_USER']->uc['lang'] = $registration->getLanguage();
         }
