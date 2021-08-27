@@ -29,7 +29,9 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'title, slug, address, zip, city, country, description, link, latitude, longitude,
+            'showitem' => 'title, slug, address, zip, city, country, description, link,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:location.tabs.geodata,
+                    --palette--;;geodata,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -39,6 +41,7 @@ return [
     'palettes' => [
         'timeRestriction' => ['showitem' => 'starttime, endtime'],
         'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
+        'geodata' => ['showitem' => 'latitude, longitude'],
     ],
     'columns' => [
         'sys_language_uid' => [

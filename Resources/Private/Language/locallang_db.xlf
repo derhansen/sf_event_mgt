@@ -246,6 +246,9 @@
 			<trans-unit id="event.tabs.payment">
 				<source>Payment</source>
 			</trans-unit>
+			<trans-unit id="location.tabs.geodata">
+				<source>Geodata</source>
+			</trans-unit>
 			<trans-unit id="event.sections.notification">
 				<source>When a registration is created, confirmed, cancelled or moved from the waitlist, send a notification email to:</source>
 			</trans-unit>
