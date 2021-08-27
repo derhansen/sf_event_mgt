@@ -12,7 +12,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -20,9 +19,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class CategoryRepositoryTest extends FunctionalTestCase
 {
-    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
-    protected $objectManager;
-
     /** @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository */
     protected $categoryRepository;
 
@@ -35,8 +31,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->categoryRepository = $this->objectManager->get(CategoryRepository::class);
+        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
         $this->importDataSet(__DIR__ . '/../Fixtures/sys_category.xml');
     }
 
@@ -58,8 +53,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      */
     public function findDemandedRecordsByStoragePageRestriction()
     {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get(CategoryDemand::class);
+        $demand = new CategoryDemand();
         $demand->setStoragePage(1);
         $demand->setRestrictToStoragePage(true);
         $events = $this->categoryRepository->findDemanded($demand);
@@ -71,7 +65,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      *
      * @return array
      */
-    public function findDemandedRecordsByCategoryDataProvider()
+    public function findDemandedRecordsByCategoryDataProvider(): array
     {
         return [
             'category 1' => [
@@ -108,8 +102,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      */
     public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
     {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get(CategoryDemand::class);
+        $demand = new CategoryDemand();
         $demand->setIncludeSubcategories($includeSubcategory);
 
         $demand->setCategories($category);

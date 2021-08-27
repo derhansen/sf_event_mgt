@@ -11,7 +11,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -19,9 +18,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class LocationRepositoryTest extends FunctionalTestCase
 {
-    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
-    protected $objectManager;
-
     /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
     protected $locationRepository;
 
@@ -34,8 +30,7 @@ class LocationRepositoryTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->locationRepository = $this->objectManager->get(LocationRepository::class);
+        $this->locationRepository = GeneralUtility::makeInstance(LocationRepository::class);
 
         $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.xml');
     }

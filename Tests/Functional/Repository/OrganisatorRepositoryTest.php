@@ -11,7 +11,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -19,9 +18,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class OrganisatorRepositoryTest extends FunctionalTestCase
 {
-    /** @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface The object manager */
-    protected $objectManager;
-
     /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
     protected $organisatorRepository;
 
@@ -34,8 +30,7 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->organisatorRepository = $this->objectManager->get(OrganisatorRepository::class);
+        $this->organisatorRepository = GeneralUtility::makeInstance(OrganisatorRepository::class);
 
         $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_organisator.xml');
     }
