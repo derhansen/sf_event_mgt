@@ -29,7 +29,9 @@ return [
     ],
     'types' => [
         '0' => [
-            'showitem' => 'name, job_title, slug, description, image,
+            'showitem' => 'name, job_title, slug, description,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
+                    image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
