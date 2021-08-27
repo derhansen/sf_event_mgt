@@ -2,6 +2,6 @@
 .DS_Store
 .Build/
 composer.lock
-.php_cs.cache
+.php-cs-fixer.cache
 /var/
 .phpunit.result.cache
