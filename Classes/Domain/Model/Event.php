@@ -849,9 +849,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         if (is_a($image, \TYPO3\CMS\Extbase\Domain\Model\FileReference::class)) {
             return $image;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
@@ -876,9 +875,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
         if (is_a($image, \TYPO3\CMS\Extbase\Domain\Model\FileReference::class)) {
             return $image;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

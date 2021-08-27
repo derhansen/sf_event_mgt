@@ -295,6 +295,6 @@ class LocationTest extends UnitTestCase
     {
         /** @var Location $location */
         $result = $location->getFullAddress($separator);
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

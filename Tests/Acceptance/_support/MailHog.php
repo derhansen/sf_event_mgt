@@ -56,22 +56,23 @@ class MailHog extends \Codeception\Module
      *
      * @var array
      */
-    protected $config = array('url', 'port', 'guzzleRequestOptions', 'deleteEmailsAfterScenario', 'timeout');
+    protected $config = ['url', 'port', 'guzzleRequestOptions', 'deleteEmailsAfterScenario', 'timeout'];
 
     /**
      * Codeception required variables
      *
      * @var array
      */
-    protected $requiredFields = array('url', 'port');
+    protected $requiredFields = ['url', 'port'];
 
     public function _initialize()
     {
         $url = trim($this->config['url'], '/') . ':' . $this->config['port'];
 
         $timeout = 1.0;
-        if(isset($this->config['timeout']))
+        if (isset($this->config['timeout'])) {
             $timeout = $this->config['timeout'];
+        }
         $this->mailhog = new \GuzzleHttp\Client(['base_uri' => $url, 'timeout' => $timeout]);
 
         if (isset($this->config['guzzleRequestOptions'])) {
@@ -86,8 +87,7 @@ class MailHog extends \Codeception\Module
      */
     public function _after(\Codeception\TestCase $test)
     {
-        if(isset($this->config['deleteEmailsAfterScenario']) && $this->config['deleteEmailsAfterScenario'])
-        {
+        if (isset($this->config['deleteEmailsAfterScenario']) && $this->config['deleteEmailsAfterScenario']) {
             $this->deleteAllEmails();
         }
     }
@@ -99,12 +99,9 @@ class MailHog extends \Codeception\Module
      */
     public function deleteAllEmails()
     {
-        try
-        {
+        try {
             $this->mailhog->request('DELETE', '/api/v1/messages');
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $this->fail('Exception: ' . $e->getMessage());
         }
     }
@@ -116,15 +113,12 @@ class MailHog extends \Codeception\Module
      */
     public function fetchEmails()
     {
-        $this->fetchedEmails = array();
+        $this->fetchedEmails = [];
 
-        try
-        {
+        try {
             $response = $this->mailhog->request('GET', '/api/v1/messages');
             $this->fetchedEmails = json_decode($response->getBody());
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $this->fail('Exception: ' . $e->getMessage());
         }
 
@@ -143,7 +137,7 @@ class MailHog extends \Codeception\Module
      */
     public function accessInboxFor($address)
     {
-        $inbox = array();
+        $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
             if (strpos($email->Content->Headers->To[0], $address) !== false) {
@@ -170,7 +164,7 @@ class MailHog extends \Codeception\Module
      */
     public function accessInboxForTo($address)
     {
-        $inbox = array();
+        $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
             if (strpos($email->Content->Headers->To[0], $address) !== false) {
@@ -189,7 +183,7 @@ class MailHog extends \Codeception\Module
      */
     public function accessInboxForCc($address)
     {
-        $inbox = array();
+        $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
             if (isset($email->Content->Headers->Cc) && array_search($address, $email->Content->Headers->Cc)) {
@@ -208,7 +202,7 @@ class MailHog extends \Codeception\Module
      */
     public function accessInboxForBcc($address)
     {
-        $inbox = array();
+        $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
             if (isset($email->Content->Headers->Bcc) && array_search($address, $email->Content->Headers->Bcc)) {
@@ -236,10 +230,9 @@ class MailHog extends \Codeception\Module
      * @param bool $fetchNextUnread Goes to the next Unread Email
      * @return mixed Returns a JSON encoded Email
      */
-    protected function getOpenedEmail($fetchNextUnread = FALSE)
+    protected function getOpenedEmail($fetchNextUnread = false)
     {
-        if($fetchNextUnread || $this->openedEmail == NULL)
-        {
+        if ($fetchNextUnread || $this->openedEmail == null) {
             $this->openNextUnreadEmail();
         }
 
@@ -255,8 +248,7 @@ class MailHog extends \Codeception\Module
      */
     protected function getMostRecentUnreadEmail()
     {
-        if(empty($this->unreadInbox))
-        {
+        if (empty($this->unreadInbox)) {
             $this->fail('Unread Inbox is Empty');
         }
 
@@ -274,12 +266,9 @@ class MailHog extends \Codeception\Module
      */
     protected function getFullEmail($id)
     {
-        try
-        {
+        try {
             $response = $this->mailhog->request('GET', "/api/v1/messages/{$id}");
-        }
-        catch(Exception $e)
-        {
+        } catch (Exception $e) {
             $this->fail('Exception: ' . $e->getMessage());
         }
         $fullEmail = json_decode($response->getBody());
@@ -376,7 +365,7 @@ class MailHog extends \Codeception\Module
         if (isset($email->Content->Headers->Cc)) {
             $recipients[] = $this->getEmailCC($email);
         }
-        if(isset($email->Content->Headers->Bcc)) {
+        if (isset($email->Content->Headers->Bcc)) {
             $recipients[] = $this->getEmailBCC($email);
         }
 
@@ -430,7 +419,8 @@ class MailHog extends \Codeception\Module
      * @param string $property
      * @return string
      */
-    protected function getDecodedEmailProperty($email, $property) {
+    protected function getDecodedEmailProperty($email, $property)
+    {
         if ((string)$property != '') {
             if (!empty($email->Content->Headers->{'Content-Transfer-Encoding'}) &&
                 in_array('quoted-printable', $email->Content->Headers->{'Content-Transfer-Encoding'})
@@ -495,7 +485,7 @@ class MailHog extends \Codeception\Module
      */
     protected function sortEmails($inbox)
     {
-        usort($inbox, array($this, 'sortEmailsByCreationDatePredicate'));
+        usort($inbox, [$this, 'sortEmailsByCreationDatePredicate']);
     }
 
     /**
@@ -507,7 +497,7 @@ class MailHog extends \Codeception\Module
      * @param mixed $emailB Email
      * @return int Which email should go first
      */
-    static function sortEmailsByCreationDatePredicate($emailA, $emailB)
+    public static function sortEmailsByCreationDatePredicate($emailA, $emailB)
     {
         $sortKeyA = $emailA->Content->Headers->Date;
         $sortKeyB = $emailB->Content->Headers->Date;

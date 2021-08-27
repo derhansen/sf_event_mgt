@@ -551,7 +551,7 @@ class NotificationServiceTest extends UnitTestCase
         $this->subject->injectCustomNotificationLogRepository($mockLogRepo);
 
         $mockEventDispatcher = $this->getMockBuilder(EventDispatcher::class)->disableOriginalConstructor()->getMock();
-        $mockEventDispatcher->expects($this->once())->method('dispatch');
+        $mockEventDispatcher->expects(self::once())->method('dispatch');
         $this->subject->injectEventDispatcher($mockEventDispatcher);
 
         $event = new Event();
