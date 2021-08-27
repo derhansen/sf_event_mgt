@@ -220,6 +220,13 @@ return [
                 ],
             ],
         ],
+        'category' => [
+            'exclude' => 1,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.category',
+            'config' => [
+                'type' => 'category',
+            ]
+        ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [

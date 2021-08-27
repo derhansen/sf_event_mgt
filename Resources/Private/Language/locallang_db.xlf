@@ -6,6 +6,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event">
 				<source>Event</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
+				<source>Category</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.title">
 				<source>Title</source>
 			</trans-unit>
