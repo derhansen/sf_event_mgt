@@ -39,8 +39,6 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
@@ -163,41 +161,6 @@ class EventController extends AbstractController
         $demand->setOrderDirection($settings['categoryMenu']['orderDirection'] ?? 'asc');
 
         return $demand;
-    }
-
-    /**
-     * Hook into request processing and catch exceptions
-     *
-     * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @throws \Exception
-     */
-    public function processRequest(RequestInterface $request, ResponseInterface $response)
-    {
-        try {
-            parent::processRequest($request, $response);
-        } catch (\Exception $exception) {
-            $this->handleKnownExceptionsElseThrowAgain($exception);
-        }
-    }
-
-    /**
-     * Handle known exceptions
-     *
-     * @param \Exception $exception
-     * @throws \Exception
-     */
-    private function handleKnownExceptionsElseThrowAgain(\Exception $exception)
-    {
-        $previousException = $exception->getPrevious();
-        $actions = ['detailAction', 'registrationAction', 'icalDownloadAction'];
-        if (in_array($this->actionMethodName, $actions, true)
-            && $previousException instanceof \TYPO3\CMS\Extbase\Property\Exception
-        ) {
-            $this->handleEventNotFoundError($this->settings);
-        } else {
-            throw $exception;
-        }
     }
 
     /**
