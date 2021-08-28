@@ -13,7 +13,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
@@ -22,41 +21,25 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 /**
  * RegistrationValidator
  */
-class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+class RegistrationValidator extends AbstractValidator
 {
     /**
-     * Configuration Manager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
+     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      */
     protected $configurationManager;
 
-    /**
-     * Object Manager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-     */
-    protected $objectManager;
+    protected array $settings;
 
-    /**
-     * DI for $configurationManager
-     *
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
-     */
-    public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
-    ) {
-        $this->configurationManager = $configurationManager;
-    }
-
-    /**
-     * DI for $objectManager
-     *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
-     */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    public function __construct(array $options = [])
     {
-        $this->objectManager = $objectManager;
+        parent::__construct($options);
+        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+
+        $this->settings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'SfEventMgt',
+            'Pievent'
+        );
     }
 
     /**
@@ -70,17 +53,10 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      */
     protected function isValid($value)
     {
-        $settings = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'SfEventMgt',
-            'Pievent'
-        );
-
-        $spamSettings = $settings['registration']['spamCheck'] ?? [];
+        $spamSettings = $this->settings['registration']['spamCheck'] ?? [];
         if ((bool)$spamSettings['enabled'] && $this->isSpamCheckFailed($value, $spamSettings)) {
             $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
-            $error = new Error($message, 1578855253965);
-            $this->result->forProperty('spamCheck')->addError($error);
+            $this->addErrorForProperty('spamCheck', $message, 1578855253);
 
             return false;
         }
@@ -88,18 +64,17 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
         $result = $this->validateDefaultFields($value);
 
         // If no required fields are set, then the registration is valid
-        if ($settings['registration']['requiredFields'] === '' ||
-            !isset($settings['registration']['requiredFields'])
+        if ($this->settings['registration']['requiredFields'] === '' ||
+            !isset($this->settings['registration']['requiredFields'])
         ) {
-            return true;
+            return $result;
         }
 
-        $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields']));
+        $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields']));
 
         foreach ($requiredFields as $requiredField) {
             if ($value->_hasProperty($requiredField)) {
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
-                /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
                 $validationResult = $validator->validate($value->_getProperty($requiredField));
                 if ($validationResult->hasErrors()) {
                     $result = false;
@@ -132,8 +107,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
 
         $defaultFields = ['firstname', 'lastname', 'email'];
         foreach ($defaultFields as $defaultField) {
-            $validator = GeneralUtility::makeInstance(NotEmptyValidator::class);
-            /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
+            $validator = new NotEmptyValidator();
             $validationResult = $validator->validate($value->_getProperty($defaultField));
             if ($validationResult->hasErrors()) {
                 $result = false;
@@ -143,8 +117,7 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
             }
         }
 
-        $validator = GeneralUtility::makeInstance(EmailAddressValidator::class);
-        /** @var \TYPO3\CMS\Extbase\Error\Result $validationResult */
+        $validator = new EmailAddressValidator();
         $validationResult = $validator->validate($value->_getProperty('email'));
         if ($validationResult->hasErrors()) {
             $result = false;
@@ -183,23 +156,18 @@ class RegistrationValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abst
      *
      * @return AbstractValidator
      */
-    protected function getValidator($type, $field)
+    protected function getValidator(string $type, string $field): AbstractValidator
     {
         switch ($type) {
             case 'boolean':
                 /** @var BooleanValidator $validator */
-                $validator = $this->objectManager->get(
-                    BooleanValidator::class,
-                    ['is' => true]
-                );
+                $validator = new BooleanValidator(['is' => true]);
                 break;
             default:
                 if ($field == 'recaptcha') {
-                    /** @var \DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator $validator */
-                    $validator = $this->objectManager->get(RecaptchaValidator::class);
+                    $validator = new RecaptchaValidator();
                 } else {
-                    /** @var \TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator $validator */
-                    $validator = $this->objectManager->get(NotEmptyValidator::class);
+                    $validator = new NotEmptyValidator();
                 }
         }
 

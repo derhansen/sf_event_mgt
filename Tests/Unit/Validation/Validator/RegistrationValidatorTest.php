@@ -12,10 +12,20 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
+use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Localization\LanguageStore;
+use TYPO3\CMS\Core\Localization\Locales;
+use TYPO3\CMS\Core\Localization\LocalizationFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Error\Error;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Error\Result;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -25,15 +35,14 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class RegistrationValidatorTest extends UnitTestCase
 {
-    /**
-     * @var \TYPO3\CMS\Extbase\Validation\Validator\StringLengthValidator
-     */
-    protected $validator;
+    use ProphecyTrait;
+
+    protected $resetSingletonInstances = true;
 
     /**
-     * @var string
+     * @var RegistrationValidator
      */
-    protected $validatorClassName = RegistrationValidator::class;
+    protected $validator;
 
     /**
      * Setup
@@ -41,7 +50,7 @@ class RegistrationValidatorTest extends UnitTestCase
     protected function setup(): void
     {
         $this->validator = $this->getAccessibleMock(
-            $this->validatorClassName,
+            RegistrationValidator::class,
             ['translateErrorMessage', 'getValidator'],
             [],
             '',
@@ -90,15 +99,7 @@ class RegistrationValidatorTest extends UnitTestCase
             $registration->_setProperty($key, $value);
         }
 
-        // Inject configuration and configurationManager
-        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
-            ->onlyMethods(['getConfiguration'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $configurationManager->expects(self::once())->method('getConfiguration')->willReturn(
-            $settings
-        );
-        $this->validator->injectConfigurationManager($configurationManager);
+        $this->validator->_set('settings', $settings);
 
         self::assertEquals($expected, $this->validator->validate($registration)->hasErrors());
     }
@@ -178,17 +179,8 @@ class RegistrationValidatorTest extends UnitTestCase
             $registration->_setProperty($key, $value);
         }
 
-        // Inject configuration and configurationManager
-        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
-            ->onlyMethods(['getConfiguration'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $configurationManager->expects(self::once())->method('getConfiguration')->willReturn(
-            $settings
-        );
-        $this->validator->injectConfigurationManager($configurationManager);
+        $this->validator->_set('settings', $settings);
 
-        // Inject the object manager
         $validationError = $this->getMockBuilder(Error::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -243,13 +235,18 @@ class RegistrationValidatorTest extends UnitTestCase
         return [
             'string' => [
                 'string',
-                new NotEmptyValidator(),
+                '',
                 NotEmptyValidator::class
             ],
             'boolean' => [
                 'boolean',
-                new BooleanValidator(),
+                '',
                 BooleanValidator::class
+            ],
+            'recaptcha' => [
+                'string',
+                'recaptcha',
+                RecaptchaValidator::class
             ]
         ];
     }
@@ -257,22 +254,15 @@ class RegistrationValidatorTest extends UnitTestCase
     /**
      * @test
      * @@dataProvider getValidatorDataProvider
-     * @param mixed $type
-     * @param mixed $returnedObject
-     * @param mixed $expectedClass
+     * @param string $type
+     * @param string $field
+     * @param string $expectedClass
      */
-    public function getValidatorReturnsValidatorTest($type, $returnedObject, $expectedClass)
+    public function getValidatorReturnsValidatorTest(string $type, string $field, string $expectedClass)
     {
-        $validator = $this->getAccessibleMock($this->validatorClassName, ['dummy'], [], '', false);
+        $validator = $this->getAccessibleMock(RegistrationValidator::class, ['dummy'], [], '', false);
 
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->onlyMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::once())->method('get')->willReturn($returnedObject);
-        $validator->injectObjectManager($objectManager);
-
-        $result = $validator->_call('getValidator', $type, '');
+        $result = $validator->_call('getValidator', $type, $field);
         self::assertInstanceOf($expectedClass, $result);
     }
 }
