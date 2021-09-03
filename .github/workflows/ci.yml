@@ -17,8 +17,8 @@ jobs:
     strategy:
       matrix:
         env:
-          - { php: 7.4, coverage: 1 }
-          - { php: 8.0, coverage: 0 }
+          - { php: 7.4, coverage: 1, continue-on-error: false }
+          - { php: 8.0, coverage: 0, continue-on-error: true }
 
     env: ${{ matrix.env }}
 
@@ -54,6 +54,7 @@ jobs:
           composer install --no-progress
 
       - name: Unit tests
+        continue-on-error: ${{ matrix.env.continue-on-error }}
         run: |
           if [[ "$coverage" == "0" ]]; then
             echo "Running unit tests";
@@ -64,6 +65,7 @@ jobs:
           fi
 
       - name: Functional tests
+        continue-on-error: ${{ matrix.env.continue-on-error }}
         run: |
           export typo3DatabaseName="typo3";
           export typo3DatabaseHost="127.0.0.1";
@@ -102,6 +104,7 @@ jobs:
           sleep 5;
 
       - name: Codeception Acceptance Tests
+        continue-on-error: ${{ matrix.env.continue-on-error }}
         run: .Build/bin/codecept run acceptance --fail-fast --env=github-actions -c Tests/Build/AcceptanceTests.yml --html
 
       - name: Upload Codeception output
