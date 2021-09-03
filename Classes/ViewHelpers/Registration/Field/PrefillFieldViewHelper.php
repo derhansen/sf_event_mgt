@@ -10,13 +10,12 @@
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
-use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
+use DERHANSEN\SfEventMgt\ViewHelpers\AbstractPrefillViewHelper;
 
 /**
  * PrefillField ViewHelper for registration fields
  */
-class PrefillFieldViewHelper extends AbstractViewHelper
+class PrefillFieldViewHelper extends AbstractPrefillViewHelper
 {
     /**
      * Initialize arguments
@@ -37,10 +36,13 @@ class PrefillFieldViewHelper extends AbstractViewHelper
     {
         /** @var Field $registrationField */
         $registrationField = $this->arguments['registrationField'];
-        // If mapping errors occured for form, return value that has been submitted
-        $originalRequest = $this->getRequest()->getOriginalRequest();
+
+        // If mapping errors occured for form, return value that has been submitted from POST data
+        $originalRequest = $this->renderingContext->getRequest()->getOriginalRequest();
+
         if ($originalRequest) {
-            return $this->getFieldValueFromArguments($originalRequest->getArguments(), $registrationField->getUid());
+            $registrationData = $originalRequest->getParsedBody()[$this->getPluginNamespace($originalRequest)] ?? [];
+            return $this->getFieldValueFromSubmittedData($registrationData, $registrationField->getUid());
         }
 
         return $registrationField->getDefaultValue();
@@ -49,32 +51,19 @@ class PrefillFieldViewHelper extends AbstractViewHelper
     /**
      * Returns the submitted value for the given field uid
      *
-     * @param array $submittedValues
+     * @param array $submittedData
      * @param int $fieldUid
      * @return string
      */
-    protected function getFieldValueFromArguments($submittedValues, $fieldUid)
+    protected function getFieldValueFromSubmittedData(array $submittedData, int $fieldUid): string
     {
         $result = '';
-        foreach ($submittedValues['registration']['fieldValues'] as $fieldValue) {
-            if ((int)$fieldValue['field'] === $fieldUid) {
-                $result = $fieldValue['value'];
+        foreach ($submittedData['registration']['fields'] ?? [] as $submittedFieldUid => $fieldValue) {
+            if ((int)$submittedFieldUid === $fieldUid) {
+                $result = $fieldValue;
             }
         }
 
         return $result;
-    }
-
-    /**
-     * Shortcut for retrieving the request from the controller context
-     *
-     * @return \TYPO3\CMS\Extbase\Mvc\Request
-     */
-    protected function getRequest()
-    {
-        /** @var ControllerContext $controllerContext */
-        $controllerContext = $this->renderingContext->getControllerContext();
-
-        return $controllerContext->getRequest();
     }
 }

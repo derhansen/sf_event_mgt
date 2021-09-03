@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -27,7 +28,14 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfTsfeNotAvailabe()
     {
+        $request = $this->prophesize(Request::class);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
+
         $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'a field'
         ]);
@@ -38,34 +46,31 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewReturnsCurrentFieldValueIfValueInGPAvailable()
+    public function viewReturnsCurrentFieldValueIfValueInParsedBodyAvailable()
     {
-        $_GET = [
+        $submittedData = [
             'tx_sfeventmgt_pievent' => [
-                'registration' => ['fieldname' => 'Existing Value']
+                'registration' => ['firstname' => 'Torben']
             ]
         ];
         $GLOBALS['TSFE'] = new stdClass();
-        $viewHelper = new PrefillViewHelper();
-        $viewHelper->setArguments([
-            'fieldname' => 'fieldname'
-        ]);
-        $actual = $viewHelper->render();
-        self::assertSame('Existing Value', $actual);
-    }
 
-    /**
-     * @test
-     */
-    public function viewReturnsEmptyStringIfNoTsfeLoginuserNotAvailabe()
-    {
-        $GLOBALS['TSFE'] = new stdClass();
+        $request = $this->prophesize(Request::class);
+        $request->getControllerExtensionName()->willReturn('SfEventMgt');
+        $request->getPluginName()->willReturn('Pievent');
+        $request->getParsedBody()->willReturn($submittedData);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
+
         $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
-            'fieldname' => 'a field'
+            'fieldname' => 'firstname'
         ]);
         $actual = $viewHelper->render();
-        self::assertSame('', $actual);
+        self::assertSame('Torben', $actual);
     }
 
     /**
@@ -73,10 +78,23 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfPrefillSettingsEmpty()
     {
+        $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
+
+        $request = $this->prophesize(Request::class);
+        $request->getControllerExtensionName()->willReturn('SfEventMgt');
+        $request->getPluginName()->willReturn('Pievent');
+        $request->getParsedBody()->willReturn($submittedData);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
+
         $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
-            'fieldname' => 'a field'
+            'fieldname' => 'firstname',
+            'prefillSettings' => []
         ]);
         $actual = $viewHelper->render();
         self::assertSame('', $actual);
@@ -87,8 +105,20 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsEmptyStringIfFieldNotFoundInPrefillSettings()
     {
+        $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
+
+        $request = $this->prophesize(Request::class);
+        $request->getControllerExtensionName()->willReturn('SfEventMgt');
+        $request->getPluginName()->willReturn('Pievent');
+        $request->getParsedBody()->willReturn($submittedData);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
+
         $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
             'prefillSettings' => ['firstname' => 'first_name']
@@ -108,18 +138,22 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John'
         ];
 
-        $arguments = [
-            'fieldname' => 'lastname',
-            'prefillSettings' => ['lastname' => 'last_name']
-        ];
-
         $request = $this->prophesize(Request::class);
-        $request->getOriginalRequest()->willReturn(null);
+        $request->getControllerExtensionName()->willReturn('SfEventMgt');
+        $request->getPluginName()->willReturn('Pievent');
+        $request->getParsedBody()->willReturn([]);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
 
-        $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
-        $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($request->reveal());
-        $actual = $viewHelper->_call('render');
+        $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setArguments([
+            'fieldname' => 'lastname',
+            'prefillSettings' => ['firstname' => 'first_name']
+        ]);
+        $actual = $viewHelper->render();
         self::assertSame('', $actual);
     }
 
@@ -135,18 +169,22 @@ class PrefillViewHelperTest extends UnitTestCase
             'last_name' => 'Doe'
         ];
 
-        $arguments = [
+        $request = $this->prophesize(Request::class);
+        $request->getControllerExtensionName()->willReturn('SfEventMgt');
+        $request->getPluginName()->willReturn('Pievent');
+        $request->getParsedBody()->willReturn([]);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
+
+        $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setArguments([
             'fieldname' => 'lastname',
             'prefillSettings' => ['lastname' => 'last_name']
-        ];
-
-        $request = $this->prophesize(Request::class);
-        $request->getOriginalRequest()->willReturn(null);
-
-        $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
-        $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($request->reveal());
-        $actual = $viewHelper->_call('render');
+        ]);
+        $actual = $viewHelper->render();
         self::assertSame('Doe', $actual);
     }
 
@@ -155,34 +193,28 @@ class PrefillViewHelperTest extends UnitTestCase
      */
     public function viewReturnsSubmittedValueIfValidationError()
     {
-        $GLOBALS['TSFE'] = new stdClass();
-        $GLOBALS['TSFE']->fe_user = new stdClass();
-        $GLOBALS['TSFE']->fe_user->user = [
-            'first_name' => 'John',
-            'last_name' => 'Doe'
-        ];
-
-        $arguments = [
-            'fieldname' => 'lastname',
-            'prefillSettings' => ['lastname' => 'last_name']
-        ];
-
-        $requestArguments = [
-            'registration' => [
-                'lastname' => 'Submitted Lastname'
+        $submittedData = [
+            'tx_sfeventmgt_pievent' => [
+                'registration' => ['firstname' => 'Torben']
             ]
         ];
 
-        $originalRequest = $this->prophesize(Request::class);
-        $originalRequest->getArguments()->willReturn($requestArguments);
-
         $request = $this->prophesize(Request::class);
-        $request->getOriginalRequest()->willReturn($originalRequest->reveal());
+        $request->getControllerExtensionName()->willReturn('SfEventMgt');
+        $request->getPluginName()->willReturn('Pievent');
+        $request->getParsedBody()->willReturn($submittedData);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
 
-        $viewHelper = $this->getAccessibleMock(PrefillViewHelper::class, ['getRequest']);
-        $viewHelper->_set('arguments', $arguments);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($request->reveal());
-        $actual = $viewHelper->_call('render');
-        self::assertSame('Submitted Lastname', $actual);
+        $viewHelper = new PrefillViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setArguments([
+            'fieldname' => 'firstname',
+            'prefillSettings' => ['firstname' => 'first_name']
+        ]);
+        $actual = $viewHelper->render();
+        self::assertSame('Torben', $actual);
     }
 }

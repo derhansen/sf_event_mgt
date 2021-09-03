@@ -1,35 +1,33 @@
-<phpunit
-    backupGlobals="true"
-    backupStaticAttributes="false"
-    bootstrap="../../.Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
-    colors="true"
-    convertErrorsToExceptions="true"
-    convertWarningsToExceptions="true"
-    convertDeprecationsToExceptions="false"
-    forceCoversAnnotation="false"
-    processIsolation="false"
-    stopOnError="false"
-    stopOnFailure="false"
-    stopOnIncomplete="false"
-    stopOnSkipped="false"
-    beStrictAboutTestsThatDoNotTestAnything="false"
-    verbose="false"
->
-    <testsuites>
-        <testsuite name="Unit Tests">
-            <directory>../Unit/</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist>
-            <directory suffix=".php">./Classes</directory>
-        </whitelist>
-    </filter>
-
-    <php>
-        <!-- suppress deprecation warnings - set error reporting to: E_ALL & ~E_NOTICE & ~E_USER_ERROR & ~E_USER_WARNING & ~E_USER_NOTICE & ~E_STRICT & ~E_USER_DEPRECATED -->
-        <ini name="error_reporting" value="12535"/>
-    </php>
-
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         backupGlobals="true"
+         backupStaticAttributes="false"
+         bootstrap="../../.Build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertWarningsToExceptions="true"
+         convertDeprecationsToExceptions="false"
+         forceCoversAnnotation="false"
+         processIsolation="false"
+         stopOnError="false"
+         stopOnFailure="false"
+         stopOnIncomplete="false"
+         stopOnSkipped="false"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         verbose="false">
+  <coverage>
+    <include>
+      <directory suffix=".php">./Classes</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="Unit Tests">
+      <directory>../Unit/</directory>
+    </testsuite>
+  </testsuites>
+  <php>
+    <!-- suppress deprecation warnings - set error reporting to: E_ALL & ~E_NOTICE & ~E_USER_ERROR & ~E_USER_WARNING & ~E_USER_NOTICE & ~E_STRICT & ~E_USER_DEPRECATED -->
+    <ini name="error_reporting" value="12535"/>
+  </php>
 </phpunit>

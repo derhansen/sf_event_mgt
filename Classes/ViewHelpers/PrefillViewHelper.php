@@ -9,12 +9,10 @@
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
-use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-
 /**
  * Prefill ViewHelper
  */
-class PrefillViewHelper extends AbstractViewHelper
+class PrefillViewHelper extends AbstractPrefillViewHelper
 {
     /**
      * Initialize arguments
@@ -27,8 +25,8 @@ class PrefillViewHelper extends AbstractViewHelper
     }
 
     /**
-     * Returns a property from fe_user (if logged in and if the given field is
-     * configured to be prefilled)
+     * If the current field is available in POST data of the current request, return the value, otherwise
+     * a property from fe_user (if logged in and if the given field is configured to be prefilled) is returned.
      *
      * @return string
      */
@@ -36,33 +34,19 @@ class PrefillViewHelper extends AbstractViewHelper
     {
         $fieldname = $this->arguments['fieldname'];
         $prefillSettings = $this->arguments['prefillSettings'];
-        $piVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('tx_sfeventmgt_pievent');
-        if (isset($piVars['registration'][$fieldname]) && $piVars['registration'][$fieldname] !== '') {
-            return $piVars['registration'][$fieldname];
+
+        $request = $this->renderingContext->getRequest();
+        $registrationData = $request->getParsedBody()[$this->getPluginNamespace($request)] ?? [];
+        if (isset($registrationData['registration'][$fieldname])) {
+            return $registrationData['registration'][$fieldname];
         }
+
         if (!isset($GLOBALS['TSFE']) || !$GLOBALS['TSFE']->fe_user->user || empty($prefillSettings) ||
             !array_key_exists($fieldname, $prefillSettings)
         ) {
             return '';
         }
-        // If mapping errors occured for form, return value that has been submitted
-        $originalRequest = $this->getRequest()->getOriginalRequest();
-        if ($originalRequest) {
-            $submittedValues = $originalRequest->getArguments();
-
-            return $submittedValues['registration'][$fieldname];
-        }
 
         return (string)($GLOBALS['TSFE']->fe_user->user[$prefillSettings[$fieldname]]);
-    }
-
-    /**
-     * Shortcut for retrieving the request from the controller context
-     *
-     * @return \TYPO3\CMS\Extbase\Mvc\Request
-     */
-    protected function getRequest()
-    {
-        return $this->renderingContext->getControllerContext()->getRequest();
     }
 }

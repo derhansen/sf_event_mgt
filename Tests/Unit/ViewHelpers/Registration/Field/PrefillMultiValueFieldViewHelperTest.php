@@ -7,13 +7,16 @@
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
+use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillFieldViewHelper;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillMultiValueFieldViewHelper;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Property\PropertyMapper;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -21,27 +24,44 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
+    public function viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider()
+    {
+        return [
+            'Default value selected' => [
+                'Default',
+                'Default',
+                true
+            ],
+            'Default value not selected' => [
+                'Default',
+                'Foo',
+                false
+            ],
+        ];
+    }
+
     /**
      * @test
+     * @dataProvider viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider
      */
-    public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
+    public function viewHelperReturnsExpectedResultIfNoOriginalRequest($defaultValue, $currentValue, $expected)
     {
-        $mockRequest = $this->getMockBuilder(Request::class)
-            ->onlyMethods(['getOriginalRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRequest->expects(self::once())->method('getOriginalRequest')->willReturn(null);
-
-        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
-
         $field = new Field();
-        $field->setDefaultValue('Default');
-        $currentValue = 'Default';
+        $field->setDefaultValue($defaultValue);
 
-        $viewHelper->_set('arguments', ['registrationField' => $field, 'currentValue' => $currentValue]);
-        $actual = $viewHelper->_call('render');
-        self::assertTrue($actual);
+        $request = $this->prophesize(Request::class);
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
+
+        $viewHelper = new PrefillMultiValueFieldViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setArguments(['registrationField' => $field, 'currentValue' => $currentValue]);
+
+        self::assertEquals($expected, $viewHelper->render());
     }
 
     /**
@@ -97,83 +117,68 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $fieldValue,
         $expected
     ) {
-        $arguments = [
-            'registration' => [
-                'fieldValues' => [
-                    ['dummy' => 'value']
+        $field = $this->prophesize(Field::class);
+        $field->getUid()->willReturn($registrationFieldUid);
+
+        $submittedData = [
+            'tx_sfeventmgt_pievent' => [
+                'registration' => [
+                    'fields' => [
+                        $submittedRegistrationFieldUid => $fieldValue
+                    ]
                 ]
             ]
         ];
 
-        $mockField = $this->getMockBuilder(Field::class)
-            ->onlyMethods(['getUid'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockField->expects(self::any())->method('getUid')->willReturn($submittedRegistrationFieldUid);
+        $originalRequest = $this->prophesize(Request::class);
+        $originalRequest->getControllerExtensionName()->willReturn('SfEventMgt');
+        $originalRequest->getPluginName()->willReturn('Pievent');
+        $originalRequest->getParsedBody()->willReturn($submittedData);
+        $request = $this->prophesize(Request::class);
+        $request->getOriginalRequest()->willReturn($originalRequest->reveal());
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
 
-        $mockFieldValue = $this->getMockBuilder(FieldValue::class)
-            ->onlyMethods(['getField', 'getValue'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFieldValue->expects(self::any())->method('getField')->willReturn($mockField);
-        $mockFieldValue->expects(self::any())->method('getValue')->willReturn($fieldValue);
+        $viewHelper = new PrefillMultiValueFieldViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setArguments(['registrationField' => $field->reveal(), 'currentValue' => $currentValue]);
 
-        $mockPropertyMapper = $this->getMockBuilder(PropertyMapper::class)
-            ->onlyMethods(['convert'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockPropertyMapper->expects(self::any())->method('convert')->willReturn($mockFieldValue);
-
-        $mockOriginalRequest = $this->getMockBuilder(Request::class)
-            ->onlyMethods(['getArguments'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn($arguments);
-
-        $mockRequest = $this->getMockBuilder(Request::class)
-            ->onlyMethods(['getOriginalRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRequest->expects(self::once())->method('getOriginalRequest')
-            ->willReturn($mockOriginalRequest);
-
-        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
-        $viewHelper->_set('propertyMapper', $mockPropertyMapper);
-
-        $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
-        $mockSubmittedField->expects(self::once())->method('getUid')->willReturn($registrationFieldUid);
-
-        $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => $currentValue]);
-        $actual = $viewHelper->_call('render');
-        self::assertSame($expected, $actual);
+        self::assertEquals($expected, $viewHelper->render());
     }
 
     /**
      * @test
      */
-    public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationfieldValues()
+    public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationFieldValues()
     {
-        $mockOriginalRequest = $this->getMockBuilder(Request::class)
-            ->onlyMethods(['getArguments'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockOriginalRequest->expects(self::once())->method('getArguments')->willReturn([]);
+        $field = $this->prophesize(Field::class);
+        $field->getUid()->willReturn(1);
 
-        $mockRequest = $this->getMockBuilder(Request::class)
-            ->onlyMethods(['getOriginalRequest'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRequest->expects(self::once())->method('getOriginalRequest')
-            ->willReturn($mockOriginalRequest);
+        $submittedData = [
+            'tx_sfeventmgt_pievent' => [
+                'registration' => [
+                    'fields' => []
+                ]
+            ]
+        ];
 
-        $viewHelper = $this->getAccessibleMock(PrefillMultiValueFieldViewHelper::class, ['getRequest'], [], '', false);
-        $viewHelper->expects(self::once())->method('getRequest')->willReturn($mockRequest);
+        $originalRequest = $this->prophesize(Request::class);
+        $originalRequest->getControllerExtensionName()->willReturn('SfEventMgt');
+        $originalRequest->getPluginName()->willReturn('Pievent');
+        $originalRequest->getParsedBody()->willReturn($submittedData);
+        $request = $this->prophesize(Request::class);
+        $request->getOriginalRequest()->willReturn($originalRequest->reveal());
+        $renderingContext = $this->prophesize(RenderingContext::class);
+        $renderingContext->getVariableProvider()->willReturn(null);
+        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
+        $renderingContext->getRequest()->willReturn($request->reveal());
 
-        $mockSubmittedField = $this->getMockBuilder(Field::class)->getMock();
+        $viewHelper = new PrefillMultiValueFieldViewHelper();
+        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setArguments(['registrationField' => $field->reveal(), 'currentValue' => 'foo']);
 
-        $viewHelper->_set('arguments', ['registrationField' => $mockSubmittedField, 'currentValue' => null]);
-        $actual = $viewHelper->_call('render');
-        self::assertFalse($actual);
+        self::assertFalse($viewHelper->render());
     }
 }
