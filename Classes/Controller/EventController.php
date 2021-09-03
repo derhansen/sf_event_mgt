@@ -29,7 +29,7 @@ use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use DERHANSEN\SfEventMgt\Utility\Page;
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
@@ -101,12 +101,14 @@ class EventController extends AbstractController
      *
      * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
      */
-    public function createEventDemandObjectFromSettings(array $settings)
+    public function createEventDemandObjectFromSettings(array $settings): EventDemand
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
         $demand = $this->objectManager->get(EventDemand::class);
         $demand->setDisplayMode($settings['displayMode']);
-        $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+        $demand->setStoragePage(
+            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
+        );
         $demand->setCategoryConjunction($settings['categoryConjunction']);
         $demand->setCategory($settings['category']);
         $demand->setIncludeSubcategories($settings['includeSubcategories']);
@@ -132,11 +134,13 @@ class EventController extends AbstractController
      *
      * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand
      */
-    public function createForeignRecordDemandObjectFromSettings(array $settings)
+    public function createForeignRecordDemandObjectFromSettings(array $settings): ForeignRecordDemand
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand */
         $demand = $this->objectManager->get(ForeignRecordDemand::class);
-        $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+        $demand->setStoragePage(
+            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
+        );
         $demand->setRestrictForeignRecordsToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
 
         return $demand;
@@ -149,11 +153,13 @@ class EventController extends AbstractController
      *
      * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
      */
-    public function createCategoryDemandObjectFromSettings(array $settings)
+    public function createCategoryDemandObjectFromSettings(array $settings): CategoryDemand
     {
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
         $demand = $this->objectManager->get(CategoryDemand::class);
-        $demand->setStoragePage(Page::extendPidListByChildren($settings['storagePage'], $settings['recursive']));
+        $demand->setStoragePage(
+            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
+        );
         $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
         $demand->setCategories($settings['categoryMenu']['categories']);
         $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
@@ -1010,13 +1016,13 @@ class EventController extends AbstractController
      * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @return \DERHANSEN\SfEventMgt\Domain\Model\Event|null
      */
-    protected function checkPidOfEventRecord(Event $event)
+    protected function checkPidOfEventRecord(Event $event): ?Event
     {
         $allowedStoragePages = GeneralUtility::trimExplode(
             ',',
-            Page::extendPidListByChildren(
-                $this->settings['storagePage'],
-                $this->settings['recursive']
+            PageUtility::extendPidListByChildren(
+                $this->settings['storagePage'] ?? '',
+                $this->settings['recursive'] ?? 0
             ),
             true
         );

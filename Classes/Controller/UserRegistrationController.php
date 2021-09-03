@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
-use DERHANSEN\SfEventMgt\Utility\Page;
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -41,9 +41,9 @@ class UserRegistrationController extends AbstractController
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = GeneralUtility::makeInstance(UserRegistrationDemand::class);
         $demand->setDisplayMode($settings['userRegistration']['displayMode']);
-        $demand->setStoragePage(Page::extendPidListByChildren(
-            $settings['userRegistration']['storagePage'],
-            $settings['userRegistration']['recursive']
+        $demand->setStoragePage(PageUtility::extendPidListByChildren(
+            $settings['userRegistration']['storagePage'] ?? '',
+            $settings['userRegistration']['recursive'] ?? 0
         ));
         $demand->setOrderField($settings['userRegistration']['orderField']);
         $demand->setOrderDirection($settings['userRegistration']['orderDirection']);
