@@ -44,6 +44,8 @@ return [
         'sf_event_mgt' => [
             'enableInvoice' => '1',
             'enableTransfer' => '1',
+            'hideInlineRegistrations' => '0',
+            'hideInlineRegistrationsLimit' => '500',
             'slugBehaviour' => 'uniqueInSite',
         ],
     ],
