@@ -15,9 +15,9 @@ use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Mvc\ResponseInterface;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -30,18 +30,22 @@ class PaymentController extends AbstractController
      * Catches all PaymentExceptions and sets the Exception message to the response content
      *
      * @param RequestInterface $request
-     * @param ResponseInterface $response
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\UnsupportedRequestTypeException
+     * @return ResponseInterface
      */
-    public function processRequest(RequestInterface $request, ResponseInterface $response)
+    public function processRequest(RequestInterface $request): ResponseInterface
     {
         try {
-            parent::processRequest($request, $response);
+            $response = parent::processRequest($request);
         } catch (\DERHANSEN\SfEventMgt\Exception $e) {
-            $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
+            // @todo return Response
+            //$response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
         } catch (\TYPO3\CMS\Extbase\Security\Exception\InvalidHashException $e) {
-            $response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
+            // @todo return Response
+            //$response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
         }
+        // @todo handle else case where exception is not catched
+
+        return $response;
     }
 
     /**
