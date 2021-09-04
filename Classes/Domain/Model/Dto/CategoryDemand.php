@@ -150,7 +150,10 @@ class CategoryDemand
     {
         $demand = new CategoryDemand();
         $demand->setStoragePage(
-            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
+            PageUtility::extendPidListByChildren(
+                (string)($settings['storagePage'] ?? ''),
+                (int)($settings['recursive'] ?? 0)
+            )
         );
         $demand->setRestrictToStoragePage((bool)($settings['restrictForeignRecordsToStoragePage'] ?? false));
         $demand->setCategories($settings['categoryMenu']['categories'] ?? '');
