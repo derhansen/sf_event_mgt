@@ -94,7 +94,7 @@ class CategoryDemand
      * @param array $settings
      * @return CategoryDemand
      */
-    public static function createFromSettings(array $settings = []): CategoryDemand
+    public static function createFromSettings(array $settings = []): self
     {
         $demand = new CategoryDemand();
         $demand->setStoragePage(
