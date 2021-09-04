@@ -27,113 +27,61 @@ class CategoryDemand
     protected string $orderField = 'uid';
     protected string $orderDirection = 'asc';
 
-    /**
-     * Sets the storage page
-     *
-     * @param string $storagePage Storagepage
-     */
     public function setStoragePage(string $storagePage): void
     {
         $this->storagePage = $storagePage;
     }
 
-    /**
-     * Returns the storage page
-     *
-     * @return string
-     */
     public function getStoragePage(): string
     {
         return $this->storagePage;
     }
 
-    /**
-     * Returns restrictToStoragePage
-     *
-     * @return bool
-     */
     public function getRestrictToStoragePage(): bool
     {
         return $this->restrictToStoragePage;
     }
 
-    /**
-     * Sets restrictToStoragePage
-     *
-     * @param bool $restrictToStoragePage
-     */
     public function setRestrictToStoragePage(bool $restrictToStoragePage): void
     {
         $this->restrictToStoragePage = $restrictToStoragePage;
     }
 
-    /**
-     * Returns the categories
-     *
-     * @return string
-     */
     public function getCategories(): string
     {
         return $this->categories;
     }
 
-    /**
-     * Sets the categories
-     *
-     * @param string $categories
-     */
     public function setCategories(string $categories): void
     {
         $this->categories = $categories;
     }
 
-    /**
-     * Returns includeSubcategories
-     *
-     * @return bool
-     */
     public function getIncludeSubcategories(): bool
     {
         return $this->includeSubcategories;
     }
 
-    /**
-     * Sets includeSubcategories
-     *
-     * @param bool $includeSubcategories
-     */
     public function setIncludeSubcategories(bool $includeSubcategories)
     {
         $this->includeSubcategories = $includeSubcategories;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderDirection(): string
     {
         return $this->orderDirection;
     }
 
-    /**
-     * @param string $orderDirection
-     */
     public function setOrderDirection(string $orderDirection): void
     {
         $this->orderDirection = $orderDirection;
     }
 
-    /**
-     * @return string
-     */
     public function getOrderField(): string
     {
         return $this->orderField;
     }
 
-    /**
-     * @param string $orderField
-     */
     public function setOrderField(string $orderField): void
     {
         $this->orderField = $orderField;
