@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,57 +11,28 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
+
 /**
  * Category demand
  */
-class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class CategoryDemand
 {
-    const ORDER_FIELD_ALLOWED = ['title', 'uid', 'sorting'];
+    public const ORDER_FIELD_ALLOWED = ['title', 'uid', 'sorting'];
 
-    /**
-     * Storage page
-     *
-     * @var string
-     */
-    protected $storagePage;
-
-    /**
-     * Restrict categories to storagePage
-     *
-     * @var bool
-     */
-    protected $restrictToStoragePage = false;
-
-    /**
-     * Categories (seperated by comma)
-     *
-     * @var string
-     */
-    protected $categories = '';
-
-    /**
-     * Include subcategories
-     *
-     * @var bool
-     */
-    protected $includeSubcategories = false;
-
-    /**
-     * @var string
-     */
-    protected $orderField = 'uid';
-
-    /**
-     * @var string
-     */
-    protected $orderDirection = 'asc';
+    protected string $storagePage = '';
+    protected bool $restrictToStoragePage = false;
+    protected string $categories = '';
+    protected bool $includeSubcategories = false;
+    protected string $orderField = 'uid';
+    protected string $orderDirection = 'asc';
 
     /**
      * Sets the storage page
      *
      * @param string $storagePage Storagepage
      */
-    public function setStoragePage($storagePage)
+    public function setStoragePage(string $storagePage): void
     {
         $this->storagePage = $storagePage;
     }
@@ -69,7 +42,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string
      */
-    public function getStoragePage()
+    public function getStoragePage(): string
     {
         return $this->storagePage;
     }
@@ -79,7 +52,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool
      */
-    public function getRestrictToStoragePage()
+    public function getRestrictToStoragePage(): bool
     {
         return $this->restrictToStoragePage;
     }
@@ -89,7 +62,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param bool $restrictToStoragePage
      */
-    public function setRestrictToStoragePage($restrictToStoragePage)
+    public function setRestrictToStoragePage(bool $restrictToStoragePage): void
     {
         $this->restrictToStoragePage = $restrictToStoragePage;
     }
@@ -99,7 +72,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string
      */
-    public function getCategories()
+    public function getCategories(): string
     {
         return $this->categories;
     }
@@ -109,7 +82,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $categories
      */
-    public function setCategories($categories)
+    public function setCategories(string $categories): void
     {
         $this->categories = $categories;
     }
@@ -119,7 +92,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool
      */
-    public function getIncludeSubcategories()
+    public function getIncludeSubcategories(): bool
     {
         return $this->includeSubcategories;
     }
@@ -129,7 +102,7 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param bool $includeSubcategories
      */
-    public function setIncludeSubcategories($includeSubcategories)
+    public function setIncludeSubcategories(bool $includeSubcategories)
     {
         $this->includeSubcategories = $includeSubcategories;
     }
@@ -164,5 +137,26 @@ class CategoryDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setOrderField(string $orderField): void
     {
         $this->orderField = $orderField;
+    }
+
+    /**
+     * Creates a new CategoryDemand object from the given settings. Respects recursive setting for storage page
+     * and extends all PIDs to children if set.
+     *
+     * @param array $settings
+     * @return CategoryDemand
+     */
+    public static function createFromSettings(array $settings = []): CategoryDemand
+    {
+        $demand = new CategoryDemand();
+        $demand->setStoragePage(
+            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
+        );
+        $demand->setRestrictToStoragePage((bool)($settings['restrictForeignRecordsToStoragePage'] ?? false));
+        $demand->setCategories($settings['categoryMenu']['categories'] ?? '');
+        $demand->setIncludeSubcategories((bool)($settings['categoryMenu']['includeSubcategories'] ?? false));
+        $demand->setOrderField($settings['categoryMenu']['orderField'] ?? 'uid');
+        $demand->setOrderDirection($settings['categoryMenu']['orderDirection'] ?? 'asc');
+        return $demand;
     }
 }

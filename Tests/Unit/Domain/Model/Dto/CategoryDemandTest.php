@@ -41,6 +41,14 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
+    public function getStoragePageReturnsIntialValueForString()
+    {
+        $this->assertEquals('', $this->subject->getStoragePage());
+    }
+
+    /**
+     * @test
+     */
     public function setStoragePageSetsStoragePageForString()
     {
         $this->subject->setStoragePage('1,2,3');
@@ -62,6 +70,11 @@ class CategoryDemandTest extends UnitTestCase
     {
         $this->subject->setRestrictToStoragePage(true);
         self::assertTrue($this->subject->getRestrictToStoragePage());
+    }
+
+    public function getCategoriesReturnsInitialValueForString()
+    {
+        $this->assertEquals('', $this->subject->getCategories());
     }
 
     /**
@@ -122,5 +135,46 @@ class CategoryDemandTest extends UnitTestCase
     {
         $this->subject->setOrderDirection('desc');
         self::assertSame('desc', $this->subject->getOrderDirection());
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
+    {
+        $expected = new CategoryDemand();
+        $current = CategoryDemand::createFromSettings();
+
+        $this->assertEquals($expected, $current);
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectWidthSettings()
+    {
+        $expected = new CategoryDemand();
+        $expected->setStoragePage('1,2,3');
+        $expected->setRestrictToStoragePage(true);
+        $expected->setCategories('1,2,3');
+        $expected->setIncludeSubcategories(true);
+        $expected->setOrderField('title');
+        $expected->setOrderDirection('desc');
+
+        $settings = [
+            'storagePage' => '1,2,3',
+            'recursive' => 0,
+            'restrictForeignRecordsToStoragePage' => true,
+            'categoryMenu' => [
+                'categories' => '1,2,3',
+                'includeSubcategories' => true,
+                'orderField' => 'title',
+                'orderDirection' => 'desc',
+            ]
+        ];
+
+        $current = CategoryDemand::createFromSettings($settings);
+
+        $this->assertEquals($expected, $current);
     }
 }

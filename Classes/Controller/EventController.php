@@ -147,29 +147,6 @@ class EventController extends AbstractController
     }
 
     /**
-     * Creates a category demand object with the given settings
-     *
-     * @param array $settings The settings
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
-     */
-    public function createCategoryDemandObjectFromSettings(array $settings): CategoryDemand
-    {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand $demand */
-        $demand = $this->objectManager->get(CategoryDemand::class);
-        $demand->setStoragePage(
-            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
-        );
-        $demand->setRestrictToStoragePage((bool)$settings['restrictForeignRecordsToStoragePage']);
-        $demand->setCategories($settings['categoryMenu']['categories']);
-        $demand->setIncludeSubcategories($settings['categoryMenu']['includeSubcategories']);
-        $demand->setOrderField($settings['categoryMenu']['orderField'] ?? 'uid');
-        $demand->setOrderDirection($settings['categoryMenu']['orderDirection'] ?? 'asc');
-
-        return $demand;
-    }
-
-    /**
      * Initialize list action and set format
      */
     public function initializeListAction()
@@ -188,7 +165,7 @@ class EventController extends AbstractController
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
-        $categoryDemand = $this->createCategoryDemandObjectFromSettings($this->settings);
+        $categoryDemand = CategoryDemand::createFromSettings($this->settings);
         if ($this->isOverwriteDemand($overwriteDemand)) {
             $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         }
@@ -226,7 +203,7 @@ class EventController extends AbstractController
     {
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
-        $categoryDemand = $this->createCategoryDemandObjectFromSettings($this->settings);
+        $categoryDemand = CategoryDemand::createFromSettings($this->settings);
         if ($this->isOverwriteDemand($overwriteDemand)) {
             $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         }
@@ -925,7 +902,7 @@ class EventController extends AbstractController
         $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
-        $categoryDemand = $this->createCategoryDemandObjectFromSettings($this->settings);
+        $categoryDemand = CategoryDemand::createFromSettings($this->settings);
 
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields']);

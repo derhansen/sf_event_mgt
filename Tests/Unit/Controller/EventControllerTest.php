@@ -10,7 +10,6 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
-use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -22,15 +21,11 @@ use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
-use DERHANSEN\SfEventMgt\Event\AfterRegistrationConfirmedEvent;
-use DERHANSEN\SfEventMgt\Event\AfterRegistrationSavedEvent;
 use DERHANSEN\SfEventMgt\Event\EventPidCheckFailedEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyCancelRegistrationViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyConfirmRegistrationViewVariablesEvent;
-use DERHANSEN\SfEventMgt\Event\ModifyCreateDependingRegistrationsEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
-use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
@@ -48,7 +43,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
@@ -300,7 +294,6 @@ class EventControllerTest extends UnitTestCase
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $eventDemand = new EventDemand();
-        $categoryDemand = new CategoryDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -311,8 +304,6 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
 
-        $this->subject->expects(self::once())->method('createCategoryDemandObjectFromSettings')
-            ->with($settings)->willReturn($categoryDemand);
         $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
             ->with($settings)->willReturn($eventDemand);
         $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn($eventDemand);
