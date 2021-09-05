@@ -95,39 +95,6 @@ class EventController extends AbstractController
     }
 
     /**
-     * Creates an event demand object with the given settings
-     *
-     * @param array $settings The settings
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
-     */
-    public function createEventDemandObjectFromSettings(array $settings): EventDemand
-    {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand */
-        $demand = $this->objectManager->get(EventDemand::class);
-        $demand->setDisplayMode($settings['displayMode']);
-        $demand->setStoragePage(
-            PageUtility::extendPidListByChildren($settings['storagePage'] ?? '', $settings['recursive'] ?? 0)
-        );
-        $demand->setCategoryConjunction($settings['categoryConjunction']);
-        $demand->setCategory($settings['category']);
-        $demand->setIncludeSubcategories($settings['includeSubcategories']);
-        $demand->setTopEventRestriction((int)$settings['topEventRestriction']);
-        $demand->setOrderField($settings['orderField']);
-        $demand->setOrderFieldAllowed($settings['orderFieldAllowed']);
-        $demand->setOrderDirection($settings['orderDirection']);
-        $demand->setQueryLimit($settings['queryLimit']);
-        $demand->setLocation($settings['location']);
-        $demand->setOrganisator($settings['organisator']);
-        $demand->setSpeaker($settings['speaker']);
-        $demand->setTimeRestrictionLow($settings['timeRestrictionLow']);
-        $demand->setTimeRestrictionHigh($settings['timeRestrictionHigh']);
-        $demand->setIncludeCurrent($settings['includeCurrent']);
-
-        return $demand;
-    }
-
-    /**
      * Creates a foreign record demand object with the given settings
      *
      * @param array $settings The settings
