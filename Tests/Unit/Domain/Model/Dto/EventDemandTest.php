@@ -13,6 +13,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
+use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -426,5 +427,54 @@ class EventDemandTest extends UnitTestCase
     {
         $expected = new EventDemand();
         $this->assertEquals($expected, EventDemand::createFromSettings());
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectWithSettings()
+    {
+        $location = new Location();
+        $organisator = new Organisator();
+        $speaker = new Speaker();
+
+        $expected = new EventDemand();
+        $expected->setDisplayMode('current');
+        $expected->setStoragePage('1,2,3');
+        $expected->setCategoryConjunction('AND');
+        $expected->setCategory('1');
+        $expected->setIncludeSubcategories(true);
+        $expected->setTopEventRestriction(1);
+        $expected->setOrderField('title');
+        $expected->setOrderFieldAllowed('uid,title');
+        $expected->setOrderDirection('desc');
+        $expected->setQueryLimit(1);
+        $expected->setTimeRestrictionLow('low');
+        $expected->setTimeRestrictionHigh('high');
+        $expected->setIncludeCurrent(true);
+        $expected->setSpeaker($speaker);
+        $expected->setOrganisator($organisator);
+        $expected->setLocation($location);
+
+        $settings = [
+            'displayMode' => 'current',
+            'storagePage' => '1,2,3',
+            'categoryConjunction' => 'AND',
+            'category' => '1',
+            'includeSubcategories' => true,
+            'topEventRestriction' => 1,
+            'orderField' => 'title',
+            'orderFieldAllowed' => 'uid,title',
+            'orderDirection' => 'desc',
+            'queryLimit' => 1,
+            'timeRestrictionLow' => 'low',
+            'timeRestrictionHigh' => 'high',
+            'includeCurrent' => true,
+            'location' => $location,
+            'organisator' => $organisator,
+            'speaker' => $speaker,
+        ];
+
+        $this->assertEquals($expected, EventDemand::createFromSettings($settings));
     }
 }
