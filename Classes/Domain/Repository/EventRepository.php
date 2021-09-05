@@ -155,7 +155,7 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setStoragePageConstraint($query, $eventDemand, &$constraints)
     {
-        if ($eventDemand->getStoragePage() !== null && $eventDemand->getStoragePage() !== '') {
+        if ($eventDemand->getStoragePage() !== '') {
             $pidList = GeneralUtility::intExplode(',', $eventDemand->getStoragePage(), true);
             $constraints['storagePage'] = $query->in('pid', $pidList);
         }

@@ -83,7 +83,7 @@ class EventRepositoryTest extends FunctionalTestCase
                 0
             ],
             'pid not set' => [
-                null,
+                '',
                 51
             ]
         ];
