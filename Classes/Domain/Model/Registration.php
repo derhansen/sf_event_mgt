@@ -194,7 +194,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * FrontendUser if available
      *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @var \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser
      */
     protected $feUser;
 
@@ -769,7 +769,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the frontenduser
      *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
+     * @return \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser
      */
     public function getFeUser()
     {
@@ -779,7 +779,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the frontenduser
      *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $feUser
+     * @param \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser $feUser
      */
     public function setFeUser($feUser)
     {

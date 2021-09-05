@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**

@@ -10,7 +10,9 @@
 namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationMovedFromWaitlist;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
@@ -46,12 +48,7 @@ class RegistrationService
      * */
     protected $registrationRepository;
 
-    /**
-     * FrontendUserRepository
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
-     * */
-    protected $frontendUserRepository;
+    protected ?FrontendUserRepository $frontendUserRepository = null;
 
     /**
      * Hash Service
@@ -74,14 +71,8 @@ class RegistrationService
      */
     protected $notificationService;
 
-    /**
-     * DI for $frontendUserRepository
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
-     */
-    public function injectFrontendUserRepository(
-        \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $frontendUserRepository
-    ) {
+    public function injectFrontendUserRepository(FrontendUserRepository $frontendUserRepository)
+    {
         $this->frontendUserRepository = $frontendUserRepository;
     }
 
@@ -315,9 +306,9 @@ class RegistrationService
     /**
      * Returns the current frontend user object if available
      *
-     * @return mixed \TYPO3\CMS\Extbase\Domain\Model\FrontendUser|null
+     * @return FrontendUser|null
      */
-    public function getCurrentFeUserObject()
+    public function getCurrentFeUserObject(): ?FrontendUser
     {
         if (isset($GLOBALS['TSFE']->fe_user->user['uid'])) {
             return $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);

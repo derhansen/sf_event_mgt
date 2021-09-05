@@ -13,7 +13,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 use DateTime;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 
 /**
  * UserRegistrationDemand
