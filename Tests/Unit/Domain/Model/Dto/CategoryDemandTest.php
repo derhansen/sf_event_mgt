@@ -151,7 +151,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsExpectedObjectWidthSettings()
+    public function createFromSettingsReturnsExpectedObjectWithSettings()
     {
         $expected = new CategoryDemand();
         $expected->setStoragePage('1,2,3');
