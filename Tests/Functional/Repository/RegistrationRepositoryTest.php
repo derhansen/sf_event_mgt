@@ -15,7 +15,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use InvalidArgumentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
