@@ -41,6 +41,14 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
+    public function getStoragePageReturnsInitialValue()
+    {
+        self::assertEquals('', $this->subject->getStoragePage());
+    }
+
+    /**
+     * @test
+     */
     public function setStoragePageSetsStoragePageForString()
     {
         $this->subject->setStoragePage('1,2,3');
@@ -62,5 +70,33 @@ class ForeignRecordDemandTest extends UnitTestCase
     {
         $this->subject->setRestrictForeignRecordsToStoragePage(true);
         self::assertTrue($this->subject->getRestrictForeignRecordsToStoragePage());
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
+    {
+        $expected = new ForeignRecordDemand();
+        $this->assertEquals($expected, ForeignRecordDemand::createFromSettings());
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectWithSettings()
+    {
+        $expected = new ForeignRecordDemand();
+        $expected->setStoragePage('1,2,3');
+        $expected->setRestrictForeignRecordsToStoragePage(true);
+
+        $settings = [
+            'storagePage' => '1,2,3',
+            'restrictForeignRecordsToStoragePage' => true,
+        ];
+
+        $current = ForeignRecordDemand::createFromSettings($settings);
+
+        $this->assertEquals($expected, $current);
     }
 }

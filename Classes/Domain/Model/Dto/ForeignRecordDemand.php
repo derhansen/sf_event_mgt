@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -12,59 +14,45 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 /**
  * ForeignRecord demand
  */
-class ForeignRecordDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class ForeignRecordDemand
 {
-    /**
-     * Storage page
-     *
-     * @var string
-     */
-    protected $storagePage;
+    protected string $storagePage = '';
+    protected bool $restrictForeignRecordsToStoragePage = false;
 
-    /**
-     * Restrict foreign records to storagePage
-     *
-     * @var bool
-     */
-    protected $restrictForeignRecordsToStoragePage = false;
-
-    /**
-     * Sets the storage page
-     *
-     * @param string $storagePage Storagepage
-     */
-    public function setStoragePage($storagePage)
-    {
-        $this->storagePage = $storagePage;
-    }
-
-    /**
-     * Returns the storage page
-     *
-     * @return string
-     */
-    public function getStoragePage()
+    public function getStoragePage(): string
     {
         return $this->storagePage;
     }
 
-    /**
-     * Returns restrictForeignRecordsToStoragePage
-     *
-     * @return bool
-     */
-    public function getRestrictForeignRecordsToStoragePage()
+    public function setStoragePage(string $storagePage): void
+    {
+        $this->storagePage = $storagePage;
+    }
+
+    public function getRestrictForeignRecordsToStoragePage(): bool
     {
         return $this->restrictForeignRecordsToStoragePage;
     }
 
-    /**
-     * Sets restrictForeignRecordsToStoragePage
-     *
-     * @param bool $restrictForeignRecordsToStoragePage
-     */
-    public function setRestrictForeignRecordsToStoragePage($restrictForeignRecordsToStoragePage)
+    public function setRestrictForeignRecordsToStoragePage(bool $restrictForeignRecordsToStoragePage): void
     {
         $this->restrictForeignRecordsToStoragePage = $restrictForeignRecordsToStoragePage;
+    }
+
+    /**
+     * Creates a new ForeignRecordDemand object from the given settings.
+     *
+     * @param array $settings
+     * @return ForeignRecordDemand
+     */
+    public static function createFromSettings(array $settings = []): self
+    {
+        $demand = new ForeignRecordDemand();
+        $demand->setStoragePage((string)($settings['storagePage'] ?? ''));
+        $demand->setRestrictForeignRecordsToStoragePage(
+            (bool)($settings['restrictForeignRecordsToStoragePage'] ?? false)
+        );
+
+        return $demand;
     }
 }

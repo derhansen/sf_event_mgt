@@ -11,7 +11,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
-use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -81,7 +80,6 @@ class EventControllerTest extends UnitTestCase
                 'redirect',
                 'forward',
                 'addFlashMessage',
-                'createForeignRecordDemandObjectFromSettings',
                 'overwriteEventDemandObject',
                 'getSysLanguageUid',
                 'persistAll'
@@ -202,7 +200,6 @@ class EventControllerTest extends UnitTestCase
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $demand = new EventDemand();
-        $foreignRecordDemand = new ForeignRecordDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -211,9 +208,6 @@ class EventControllerTest extends UnitTestCase
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
-            ->with($settings)->willReturn($foreignRecordDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -1588,8 +1582,6 @@ class EventControllerTest extends UnitTestCase
      */
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewForNoSearchDemand()
     {
-        $demand = new EventDemand();
-        $foreignRecordDemand = new ForeignRecordDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1598,9 +1590,6 @@ class EventControllerTest extends UnitTestCase
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
-            ->with($settings)->willReturn($foreignRecordDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -1674,7 +1663,6 @@ class EventControllerTest extends UnitTestCase
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
         $searchDemand->expects(self::once())->method('setFields');
 
-        $foreignRecordDemand = new ForeignRecordDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1683,9 +1671,6 @@ class EventControllerTest extends UnitTestCase
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
-            ->with($settings)->willReturn($foreignRecordDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
