@@ -122,11 +122,8 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      */
     protected function setQueryLimitFromDemand($query, EventDemand $eventDemand)
     {
-        if ($eventDemand->getQueryLimit() != null &&
-            MathUtility::canBeInterpretedAsInteger($eventDemand->getQueryLimit()) &&
-            (int)$eventDemand->getQueryLimit() > 0
-        ) {
-            $query->setLimit((int)$eventDemand->getQueryLimit());
+        if ($eventDemand->getQueryLimit() > 0) {
+            $query->setLimit($eventDemand->getQueryLimit());
         }
     }
 

@@ -81,8 +81,6 @@ class EventControllerTest extends UnitTestCase
                 'redirect',
                 'forward',
                 'addFlashMessage',
-                'createEventDemandObjectFromSettings',
-                'createCategoryDemandObjectFromSettings',
                 'createForeignRecordDemandObjectFromSettings',
                 'overwriteEventDemandObject',
                 'getSysLanguageUid',
@@ -149,7 +147,7 @@ class EventControllerTest extends UnitTestCase
             false
         );
         $resultDemand = $mockController->_call('overwriteEventDemandObject', $demand, $overwriteDemand);
-        self::assertSame(1, $resultDemand->getCategory());
+        self::assertSame('1', $resultDemand->getCategory());
     }
 
     /**
@@ -213,9 +211,6 @@ class EventControllerTest extends UnitTestCase
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
             ->with($settings)->willReturn($foreignRecordDemand);
@@ -304,8 +299,6 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
 
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($eventDemand);
         $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn($eventDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
@@ -391,9 +384,6 @@ class EventControllerTest extends UnitTestCase
 
         $settings = ['disableOverrideDemand' => 1];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($eventDemand);
 
         // Ensure overwriteDemand is not called
         $this->subject->expects(self::never())->method('overwriteEventDemandObject');
@@ -1609,9 +1599,6 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
 
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
-
         $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
             ->with($settings)->willReturn($foreignRecordDemand);
 
@@ -1687,11 +1674,6 @@ class EventControllerTest extends UnitTestCase
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
         $searchDemand->expects(self::once())->method('setFields');
 
-        $demand = $this->getMockBuilder(EventDemand::class)
-            ->onlyMethods(['setSearchDemand'])
-            ->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
-
         $foreignRecordDemand = new ForeignRecordDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1701,9 +1683,6 @@ class EventControllerTest extends UnitTestCase
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $this->subject->expects(self::once())->method('createForeignRecordDemandObjectFromSettings')
             ->with($settings)->willReturn($foreignRecordDemand);
@@ -1780,16 +1759,8 @@ class EventControllerTest extends UnitTestCase
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
         $searchDemand->expects(self::once())->method('setFields');
 
-        $demand = $this->getMockBuilder(EventDemand::class)
-            ->onlyMethods(['setSearchDemand'])
-            ->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
-
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1861,18 +1832,12 @@ class EventControllerTest extends UnitTestCase
         $searchDemand->expects(self::any())->method('getStartDate')->willReturn($mockStartDate);
         $searchDemand->expects(self::any())->method('getEndDate')->willReturn($mockEndDate);
 
-        $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
-
         $settings = [
             'search' => [
                 'adjustTime' => 1
             ]
         ];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1937,17 +1902,11 @@ class EventControllerTest extends UnitTestCase
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
         $searchDemand->expects(self::once())->method('setFields');
 
-        $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
-
         $overrideDemand = ['category' => 10];
-        $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn($demand);
+        $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn(new EventDemand());
 
         $settings = ['disableOverrideDemand' => 0];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -2011,17 +1970,11 @@ class EventControllerTest extends UnitTestCase
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
         $searchDemand->expects(self::once())->method('setFields');
 
-        $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
-
         $overrideDemand = ['category' => 10];
         $this->subject->expects(self::never())->method('overwriteEventDemandObject');
 
         $settings = ['disableOverrideDemand' => 1];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createEventDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();

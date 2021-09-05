@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,379 +11,272 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use DateTime;
+use DERHANSEN\SfEventMgt\Domain\Model\Location;
+use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
+use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
+
 /**
  * Event demand
  */
-class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class EventDemand
 {
+    protected string $displayMode = 'all';
+    protected string $storagePage = '';
+    protected ?DateTime $currentDateTime = null;
+    protected string $category = '';
+    protected bool $includeSubcategories = false;
+    protected string $categoryConjunction = '';
+    protected int $topEventRestriction = 0;
+    protected string $orderField = '';
+    protected string $orderFieldAllowed = '';
+    protected string $orderDirection = '';
+    protected int $queryLimit = 0;
+    protected string $locationCity = '';
+    protected string $locationCountry = '';
+    protected int $year = 0;
+    protected int $month = 0;
+    protected int $day = 0;
+    protected ?SearchDemand $searchDemand = null;
+    protected bool $ignoreEnableFields = false;
+    protected string $timeRestrictionLow = '';
+    protected string $timeRestrictionHigh = '';
+    protected bool $includeCurrent = false;
+
     /**
-     * Display mode
+     * Can be an object (if set by code/property mapper) or a string if set by settings array from plugin
      *
-     * @var string
+     * @var Location|string|null
      */
-    protected $displayMode = 'all';
+    protected $location = null;
 
     /**
-     * Storage page
+     * Can be an object (if set by code/property mapper) or a string if set by settings array from plugin
      *
-     * @var string
+     * @var Speaker|string|null
      */
-    protected $storagePage = '';
+    protected $speaker = null;
 
     /**
-     * Current DateTime
+     * Can be an object (if set by code/property mapper) or a string if set by settings array from plugin
      *
-     * @var \DateTime
+     * @var Organisator|string|null
      */
-    protected $currentDateTime;
+    protected $organisator = null;
 
-    /**
-     * Category
-     *
-     * @var string
-     */
-    protected $category;
-
-    /**
-     * Include subcategories
-     *
-     * @var bool
-     */
-    protected $includeSubcategories = false;
-
-    /**
-     * Category Conjunction
-     *
-     * @var string
-     */
-    protected $categoryConjunction = '';
-
-    /**
-     * Top event
-     *
-     * @var int
-     */
-    protected $topEventRestriction = 0;
-
-    /**
-     * Order field
-     *
-     * @var string
-     */
-    protected $orderField = '';
-
-    /**
-     * Allowed order fields
-     *
-     * @var string
-     */
-    protected $orderFieldAllowed = '';
-
-    /**
-     * Order direction
-     *
-     * @var string
-     */
-    protected $orderDirection = '';
-
-    /**
-     * Query limit
-     *
-     * @var int
-     */
-    protected $queryLimit;
-
-    /**
-     * Location
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
-     */
-    protected $location;
-
-    /**
-     * Speaker
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Speaker
-     */
-    protected $speaker;
-
-    /**
-     * City for location
-     *
-     * @var string
-     */
-    protected $locationCity = '';
-
-    /**
-     * Country for location
-     *
-     * @var string
-     */
-    protected $locationCountry = '';
-
-    /**
-     * Year
-     *
-     * @var int
-     */
-    protected $year;
-
-    /**
-     * Month
-     *
-     * @var int
-     */
-    protected $month;
-
-    /**
-     * Day
-     *
-     * @var int
-     */
-    protected $day;
-
-    /**
-     * Search Demand
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
-     */
-    protected $searchDemand;
-
-    /**
-     * Organisator
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
-     */
-    protected $organisator;
-
-    /**
-     * @var bool
-     */
-    protected $ignoreEnableFields = false;
-
-    /**
-     * @var string
-     */
-    protected $timeRestrictionLow;
-
-    /**
-     * @var string
-     */
-    protected $timeRestrictionHigh;
-
-    /**
-     * @var bool
-     */
-    protected $includeCurrent = false;
-
-    /**
-     * Sets the displayMode
-     *
-     * @param string $displayMode Displaymode
-     */
-    public function setDisplayMode($displayMode)
-    {
-        $this->displayMode = $displayMode;
-    }
-
-    /**
-     * Returns the displayMode
-     *
-     * @return string
-     */
-    public function getDisplayMode()
+    public function getDisplayMode(): string
     {
         return $this->displayMode;
     }
 
-    /**
-     * Sets the storage page
-     *
-     * @param string $storagePage Storagepage
-     */
-    public function setStoragePage($storagePage)
+    public function setDisplayMode(string $displayMode): void
     {
-        $this->storagePage = $storagePage;
+        $this->displayMode = $displayMode;
     }
 
-    /**
-     * Returns the storage page
-     *
-     * @return string
-     */
-    public function getStoragePage()
+    public function getStoragePage(): string
     {
         return $this->storagePage;
     }
 
-    /**
-     * Sets the current DateTime
-     *
-     * @param \DateTime $currentDateTime CurrentDateTime
-     */
-    public function setCurrentDateTime(\DateTime $currentDateTime)
+    public function setStoragePage(string $storagePage): void
+    {
+        $this->storagePage = $storagePage;
+    }
+
+    public function setCurrentDateTime(DateTime $currentDateTime): void
     {
         $this->currentDateTime = $currentDateTime;
     }
 
-    /**
-     * Returns the current datetime
-     *
-     * @return \DateTime
-     */
-    public function getCurrentDateTime()
+    public function getCurrentDateTime(): DateTime
     {
-        if ($this->currentDateTime != null) {
-            return $this->currentDateTime;
-        }
-
-        return new \DateTime();
+        return $this->currentDateTime ?? new \DateTime();
     }
 
-    /**
-     * Sets the category (seperated by comma)
-     *
-     * @param string $category Category
-     */
-    public function setCategory($category)
+    public function setCategory(string $category): void
     {
         $this->category = $category;
     }
 
-    /**
-     * Returns the category (seperated by comma)
-     *
-     * @return string
-     */
-    public function getCategory()
+    public function getCategory(): string
     {
         return $this->category;
     }
 
-    /**
-     * Returns includeSubcategories
-     *
-     * @return bool
-     */
-    public function getIncludeSubcategories()
+    public function getIncludeSubcategories(): bool
     {
         return $this->includeSubcategories;
     }
 
-    /**
-     * Sets includeSubcategories
-     *
-     * @param bool $includeSubcategories
-     */
-    public function setIncludeSubcategories($includeSubcategories)
+    public function setIncludeSubcategories(bool $includeSubcategories): void
     {
         $this->includeSubcategories = $includeSubcategories;
     }
 
-    /**
-     * Returns topEventRestriction
-     *
-     * @return int
-     */
-    public function getTopEventRestriction()
+    public function getTopEventRestriction(): int
     {
         return $this->topEventRestriction;
     }
 
-    /**
-     * Sets topEventRestriction
-     *
-     * @param int $topEventRestriction TopEventRestriction
-     */
-    public function setTopEventRestriction($topEventRestriction)
+    public function setTopEventRestriction(int $topEventRestriction): void
     {
         $this->topEventRestriction = $topEventRestriction;
     }
 
-    /**
-     * Returns the order direction
-     *
-     * @return string
-     */
-    public function getOrderDirection()
+    public function getOrderDirection(): string
     {
         return $this->orderDirection;
     }
 
-    /**
-     * Sets the order direction
-     *
-     * @param string $orderDirection OrderDirection
-     */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(string $orderDirection): void
     {
         $this->orderDirection = $orderDirection;
     }
 
-    /**
-     * Returns the order field
-     *
-     * @return string
-     */
-    public function getOrderField()
+    public function getOrderField(): string
     {
         return $this->orderField;
     }
 
-    /**
-     * Sets the order field
-     *
-     * @param string $orderField OrderField
-     */
-    public function setOrderField($orderField)
+    public function setOrderField(string $orderField): void
     {
         $this->orderField = $orderField;
     }
 
-    /**
-     * Returns orderFieldAllowed
-     *
-     * @return string
-     */
-    public function getOrderFieldAllowed()
+    public function getOrderFieldAllowed(): string
     {
         return $this->orderFieldAllowed;
     }
 
-    /**
-     * Sets orderFieldAllowed
-     *
-     * @param string $orderFieldAllowed
-     */
-    public function setOrderFieldAllowed($orderFieldAllowed)
+    public function setOrderFieldAllowed(string $orderFieldAllowed): void
     {
         $this->orderFieldAllowed = $orderFieldAllowed;
     }
 
-    /**
-     * Returns the query limit
-     *
-     * @return int
-     */
-    public function getQueryLimit()
+    public function getQueryLimit(): int
     {
         return $this->queryLimit;
     }
 
-    /**
-     * Sets the query limit
-     *
-     * @param int $queryLimit QueryLimit
-     */
-    public function setQueryLimit($queryLimit)
+    public function setQueryLimit(int $queryLimit): void
     {
         $this->queryLimit = $queryLimit;
     }
 
+    public function getLocationCity(): string
+    {
+        return $this->locationCity;
+    }
+
+    public function setLocationCity(string $locationCity): void
+    {
+        $this->locationCity = $locationCity;
+    }
+
+    public function getLocationCountry(): string
+    {
+        return $this->locationCountry;
+    }
+
+    public function setLocationCountry(string $locationCountry): void
+    {
+        $this->locationCountry = $locationCountry;
+    }
+
+    public function getYear(): int
+    {
+        return $this->year;
+    }
+
+    public function setYear(int $year): void
+    {
+        $this->year = $year;
+    }
+
+    public function getMonth(): int
+    {
+        return $this->month;
+    }
+
+    public function setMonth(int $month): void
+    {
+        $this->month = $month;
+    }
+
+    public function getDay(): int
+    {
+        return $this->day;
+    }
+
+    public function setDay(int $day): void
+    {
+        $this->day = $day;
+    }
+
+    public function getSearchDemand(): ?SearchDemand
+    {
+        return $this->searchDemand;
+    }
+
+    public function setSearchDemand(?SearchDemand $searchDemand): void
+    {
+        $this->searchDemand = $searchDemand;
+    }
+
+    public function getCategoryConjunction(): string
+    {
+        return $this->categoryConjunction;
+    }
+
+    public function setCategoryConjunction(string $categoryConjunction): void
+    {
+        $this->categoryConjunction = $categoryConjunction;
+    }
+
+    public function getIgnoreEnableFields(): bool
+    {
+        return $this->ignoreEnableFields;
+    }
+
+    public function setIgnoreEnableFields(bool $ignoreEnableFields): void
+    {
+        $this->ignoreEnableFields = $ignoreEnableFields;
+    }
+
+    public function getTimeRestrictionLow(): string
+    {
+        return $this->timeRestrictionLow;
+    }
+
+    public function setTimeRestrictionLow(string $timeRestrictionLow): void
+    {
+        $this->timeRestrictionLow = $timeRestrictionLow;
+    }
+
+    public function getTimeRestrictionHigh(): string
+    {
+        return $this->timeRestrictionHigh;
+    }
+
+    public function setTimeRestrictionHigh(string $timeRestrictionHigh): void
+    {
+        $this->timeRestrictionHigh = $timeRestrictionHigh;
+    }
+
+    public function getIncludeCurrent(): bool
+    {
+        return $this->includeCurrent;
+    }
+
+    public function setIncludeCurrent(bool $includeCurrent): void
+    {
+        $this->includeCurrent = $includeCurrent;
+    }
+
     /**
-     * Returns the location
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
+     * @return Location|string|null
      */
     public function getLocation()
     {
@@ -389,177 +284,15 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Sets the location
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
+     * @param Location|string|null $location
      */
-    public function setLocation($location)
+    public function setLocation($location): void
     {
         $this->location = $location;
     }
 
     /**
-     * Returns locationCity
-     *
-     * @return string
-     */
-    public function getLocationCity()
-    {
-        return $this->locationCity;
-    }
-
-    /**
-     * Sets locationCity
-     *
-     * @param string $locationCity LocationCity
-     */
-    public function setLocationCity($locationCity)
-    {
-        $this->locationCity = $locationCity;
-    }
-
-    /**
-     * Returns locationCountry
-     *
-     * @return string
-     */
-    public function getLocationCountry()
-    {
-        return $this->locationCountry;
-    }
-
-    /**
-     * Sets locationCountry
-     *
-     * @param string $locationCountry LocationCountry
-     */
-    public function setLocationCountry($locationCountry)
-    {
-        $this->locationCountry = $locationCountry;
-    }
-
-    /**
-     * Returns year
-     *
-     * @return int
-     */
-    public function getYear()
-    {
-        return $this->year;
-    }
-
-    /**
-     * Sets year
-     *
-     * @param int $year
-     */
-    public function setYear($year)
-    {
-        $this->year = $year;
-    }
-
-    /**
-     * Returns month
-     *
-     * @return int
-     */
-    public function getMonth()
-    {
-        return $this->month;
-    }
-
-    /**
-     * Sets month
-     *
-     * @param int $month
-     */
-    public function setMonth($month)
-    {
-        $this->month = $month;
-    }
-
-    /**
-     * Returns day
-     *
-     * @return int
-     */
-    public function getDay()
-    {
-        return $this->day;
-    }
-
-    /**
-     * @param int $day
-     */
-    public function setDay($day)
-    {
-        $this->day = $day;
-    }
-
-    /**
-     * Returns the searchDemand
-     *
-     * @return SearchDemand
-     */
-    public function getSearchDemand()
-    {
-        return $this->searchDemand;
-    }
-
-    /**
-     * Sets the searchDemand
-     *
-     * @param SearchDemand $searchDemand
-     */
-    public function setSearchDemand($searchDemand)
-    {
-        $this->searchDemand = $searchDemand;
-    }
-
-    /**
-     * Returns organisator
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Organisator
-     */
-    public function getOrganisator()
-    {
-        return $this->organisator;
-    }
-
-    /**
-     * Sets organisator
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Organisator $organisator
-     */
-    public function setOrganisator($organisator)
-    {
-        $this->organisator = $organisator;
-    }
-
-    /**
-     * Returns categoryConjuction
-     *
-     * @return string
-     */
-    public function getCategoryConjunction()
-    {
-        return $this->categoryConjunction;
-    }
-
-    /**
-     * Sets categoryConjuction
-     *
-     * @param string $categoryConjunction
-     */
-    public function setCategoryConjunction($categoryConjunction)
-    {
-        $this->categoryConjunction = $categoryConjunction;
-    }
-
-    /**
-     * Returns speaker
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Speaker
+     * @return Speaker|string|null
      */
     public function getSpeaker()
     {
@@ -567,76 +300,62 @@ class EventDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Sets speaker
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
+     * @param Speaker|string|null $speaker
      */
-    public function setSpeaker($speaker)
+    public function setSpeaker($speaker): void
     {
         $this->speaker = $speaker;
     }
 
     /**
-     * @return bool
+     * @return Organisator|string|null
      */
-    public function getIgnoreEnableFields(): bool
+    public function getOrganisator()
     {
-        return $this->ignoreEnableFields;
+        return $this->organisator;
     }
 
     /**
-     * @param bool $ignoreEnableFields
+     * @param Organisator|string|null $organisator
      */
-    public function setIgnoreEnableFields(bool $ignoreEnableFields): void
+    public function setOrganisator($organisator): void
     {
-        $this->ignoreEnableFields = $ignoreEnableFields;
+        $this->organisator = $organisator;
     }
 
     /**
-     * @return string
+     * Creates a new EventDemand object from the given settings. Respects recursive setting for storage page
+     * and extends all PIDs to children if set.
+     *
+     * @param array $settings
+     * @return EventDemand
      */
-    public function getTimeRestrictionLow(): ?string
+    public static function createFromSettings(array $settings = []): self
     {
-        return $this->timeRestrictionLow;
-    }
+        $demand = new EventDemand();
 
-    /**
-     * @param string $timeRestrictionLow
-     */
-    public function setTimeRestrictionLow($timeRestrictionLow): void
-    {
-        $this->timeRestrictionLow = $timeRestrictionLow;
-    }
+        $demand->setDisplayMode($settings['displayMode'] ?? 'all');
+        $demand->setStoragePage(
+            PageUtility::extendPidListByChildren(
+                (string)($settings['storagePage'] ?? ''),
+                (int)($settings['recursive'] ?? 0)
+            )
+        );
+        $demand->setCategoryConjunction($settings['categoryConjunction'] ?? '');
+        $demand->setCategory($settings['category'] ?? '');
+        $demand->setIncludeSubcategories((bool)($settings['includeSubcategories'] ?? false));
+        $demand->setTopEventRestriction((int)($settings['topEventRestriction'] ?? 0));
+        $demand->setOrderField($settings['orderField'] ?? '');
+        $demand->setOrderFieldAllowed($settings['orderFieldAllowed'] ?? '');
+        $demand->setOrderDirection($settings['orderDirection'] ?? '');
+        $demand->setQueryLimit((int)($settings['queryLimit'] ?? 0));
+        $demand->setTimeRestrictionLow($settings['timeRestrictionLow'] ?? '');
+        $demand->setTimeRestrictionHigh($settings['timeRestrictionHigh'] ?? '');
+        $demand->setIncludeCurrent((bool)($settings['includeCurrent'] ?? false));
+        $demand->setLocation($settings['location']);
+        $demand->setOrganisator($settings['organisator']);
+        $demand->setSpeaker($settings['speaker']);
 
-    /**
-     * @return string
-     */
-    public function getTimeRestrictionHigh(): ?string
-    {
-        return $this->timeRestrictionHigh;
-    }
-
-    /**
-     * @param string $timeRestrictionHigh
-     */
-    public function setTimeRestrictionHigh($timeRestrictionHigh): void
-    {
-        $this->timeRestrictionHigh = $timeRestrictionHigh;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getIncludeCurrent(): bool
-    {
-        return $this->includeCurrent;
-    }
-
-    /**
-     * @param bool $includeCurrent
-     */
-    public function setIncludeCurrent($includeCurrent): void
-    {
-        $this->includeCurrent = $includeCurrent;
+        return $demand;
     }
 }

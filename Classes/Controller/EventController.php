@@ -163,7 +163,7 @@ class EventController extends AbstractController
      */
     public function listAction(array $overwriteDemand = [])
     {
-        $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
+        $eventDemand = EventDemand::createFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
         $categoryDemand = CategoryDemand::createFromSettings($this->settings);
         if ($this->isOverwriteDemand($overwriteDemand)) {
@@ -201,7 +201,7 @@ class EventController extends AbstractController
      */
     public function calendarAction(array $overwriteDemand = [])
     {
-        $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
+        $eventDemand = EventDemand::createFromSettings($this->settings);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
         $categoryDemand = CategoryDemand::createFromSettings($this->settings);
         if ($this->isOverwriteDemand($overwriteDemand)) {
@@ -899,7 +899,7 @@ class EventController extends AbstractController
      */
     public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
-        $eventDemand = $this->createEventDemandObjectFromSettings($this->settings);
+        $eventDemand = EventDemand::createFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
         $foreignRecordDemand = $this->createForeignRecordDemandObjectFromSettings($this->settings);
         $categoryDemand = CategoryDemand::createFromSettings($this->settings);

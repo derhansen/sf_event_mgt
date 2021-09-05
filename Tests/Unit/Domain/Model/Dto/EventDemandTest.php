@@ -10,7 +10,9 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
+use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -125,6 +127,14 @@ class EventDemandTest extends UnitTestCase
     /**
      * @test
      */
+    public function getCategoryReturnsInitialValue()
+    {
+        self::assertEquals('', $this->subject->getCategory());
+    }
+
+    /**
+     * @test
+     */
     public function getCategoryForStringSetsCategory()
     {
         $this->subject->setCategory('1,2,3,4');
@@ -193,7 +203,7 @@ class EventDemandTest extends UnitTestCase
      */
     public function getQueryLimitReturnsNullIfNoValueSet()
     {
-        self::assertNull($this->subject->getQueryLimit());
+        self::assertEquals(0, $this->subject->getQueryLimit());
     }
 
     /**
@@ -276,7 +286,7 @@ class EventDemandTest extends UnitTestCase
      */
     public function getYearReturnsDefaultValue()
     {
-        self::assertNull($this->subject->getYear());
+        self::assertEquals(0, $this->subject->getYear());
     }
 
     /**
@@ -293,7 +303,7 @@ class EventDemandTest extends UnitTestCase
      */
     public function getMonthReturnsDefaultValue()
     {
-        self::assertNull($this->subject->getMonth());
+        self::assertEquals(0, $this->subject->getMonth());
     }
 
     /**
@@ -310,7 +320,7 @@ class EventDemandTest extends UnitTestCase
      */
     public function getDayReturnsDefaultValue()
     {
-        self::assertNull($this->subject->getDay());
+        self::assertEquals(0, $this->subject->getDay());
     }
 
     /**
@@ -354,5 +364,67 @@ class EventDemandTest extends UnitTestCase
     {
         $this->subject->setIgnoreEnableFields(true);
         self::assertTrue($this->subject->getIgnoreEnableFields());
+    }
+
+    /**
+     * @test
+     */
+    public function getSearchDemandReturnsInitialValue()
+    {
+        self::assertNull($this->subject->getSearchDemand());
+    }
+
+    /**
+     * @test
+     */
+    public function searchDemandCanBeSet()
+    {
+        $searchDemamd = new SearchDemand();
+        $this->subject->setSearchDemand($searchDemamd);
+        self::assertSame($searchDemamd, $this->subject->getSearchDemand());
+    }
+
+    /**
+     * @test
+     */
+    public function getOrganisatorReturnsInitialValue()
+    {
+        self::assertNull($this->subject->getOrganisator());
+    }
+
+    /**
+     * @test
+     */
+    public function organisatorCanBeSet()
+    {
+        $organisator = new Organisator();
+        $this->subject->setOrganisator($organisator);
+        self::assertSame($organisator, $this->subject->getOrganisator());
+    }
+
+    /**
+     * @test
+     */
+    public function getIncludeCurrentReturnsInitialValue()
+    {
+        self::assertFalse($this->subject->getIncludeCurrent());
+    }
+
+    /**
+     * @test
+     */
+    public function includeCurrentCanBeSet()
+    {
+        $this->subject->setIncludeCurrent(true);
+        self::assertTrue($this->subject->getIncludeCurrent());
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
+    {
+        $expected = new EventDemand();
+        $this->assertEquals($expected, EventDemand::createFromSettings());
     }
 }

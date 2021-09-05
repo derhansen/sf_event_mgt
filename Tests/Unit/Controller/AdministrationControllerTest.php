@@ -85,19 +85,6 @@ class AdministrationControllerTest extends UnitTestCase
 
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
 
-        $demand = $this->getMockBuilder(EventDemand::class)
-            ->onlyMethods(['setSearchDemand'])
-            ->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with(null);
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->onlyMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $objectManager->expects(self::any())->method('get')->willReturn($demand);
-        $this->subject->injectObjectManager($objectManager);
-
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::any())->method('getSessionDataByKey');
         $this->subject->injectBeUserSessionService($beUserSessionService);
@@ -137,18 +124,6 @@ class AdministrationControllerTest extends UnitTestCase
 
         $searchDemand = new SearchDemand();
         $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-
-        $demand = $this->getMockBuilder(EventDemand::class)
-            ->onlyMethods(['setSearchDemand'])
-            ->getMock();
-        $demand->expects(self::once())->method('setSearchDemand')->with($searchDemand);
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->onlyMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($demand);
-        $this->subject->injectObjectManager($objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');

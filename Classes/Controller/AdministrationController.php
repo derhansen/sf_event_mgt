@@ -327,10 +327,9 @@ class AdministrationController extends AbstractController
             $overwriteDemand = $this->beUserSessionService->getSessionDataByKey('overwriteDemand');
         }
 
-        /** @var EventDemand $eventDemand */
-        $eventDemand = $this->objectManager->get(EventDemand::class);
+        $eventDemand = new EventDemand();
         $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand ?? []);
-        $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed']);
+        $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage($this->pid);
         $eventDemand->setIgnoreEnableFields(true);
