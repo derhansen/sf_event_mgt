@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,149 +11,68 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use DateTime;
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
+
 /**
  * UserRegistrationDemand
  */
-class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class UserRegistrationDemand
 {
-    /**
-     * Display mode
-     *
-     * @var string
-     */
-    protected $displayMode = 'all';
+    protected string $displayMode = 'all';
+    protected string $storagePage = '';
+    protected string $orderField = '';
+    protected string $orderDirection = '';
+    protected ?DateTime $currentDateTime = null;
+    protected ?FrontendUser $user = null;
 
-    /**
-     * Storage page
-     *
-     * @var string
-     */
-    protected $storagePage;
-
-    /**
-     * Order field
-     *
-     * @var string
-     */
-    protected $orderField = '';
-
-    /**
-     * Order direction
-     *
-     * @var string
-     */
-    protected $orderDirection = '';
-
-    /**
-     * Current DateTime
-     *
-     * @var \DateTime
-     */
-    protected $currentDateTime;
-
-    /**
-     * Frontend user
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
-     */
-    protected $user;
-
-    /**
-     * Returns displayMode
-     *
-     * @return string
-     */
-    public function getDisplayMode()
+    public function getDisplayMode(): string
     {
         return $this->displayMode;
     }
 
-    /**
-     * Sets displaymode
-     *
-     * @param string $displayMode
-     */
-    public function setDisplayMode($displayMode)
+    public function setDisplayMode(string $displayMode): void
     {
         $this->displayMode = $displayMode;
     }
 
-    /**
-     * Sets storagePage
-     *
-     * @return string
-     */
-    public function getStoragePage()
+    public function getStoragePage(): string
     {
         return $this->storagePage;
     }
 
-    /**
-     * Returns storagePage
-     *
-     * @param string $storagePage
-     */
-    public function setStoragePage($storagePage)
+    public function setStoragePage(string $storagePage): void
     {
         $this->storagePage = $storagePage;
     }
 
-    /**
-     * Returns orderField
-     *
-     * @return string
-     */
-    public function getOrderField()
+    public function getOrderField(): string
     {
         return $this->orderField;
     }
 
-    /**
-     * Sets orderField
-     *
-     * @param string $orderField
-     */
-    public function setOrderField($orderField)
+    public function setOrderField(string $orderField): void
     {
         $this->orderField = $orderField;
     }
 
-    /**
-     * Returns orderDirection
-     *
-     * @return string
-     */
-    public function getOrderDirection()
+    public function getOrderDirection(): string
     {
         return $this->orderDirection;
     }
 
-    /**
-     * Sets orderDirection
-     *
-     * @param string $orderDirection
-     */
-    public function setOrderDirection($orderDirection)
+    public function setOrderDirection(string $orderDirection): void
     {
         $this->orderDirection = $orderDirection;
     }
 
-    /**
-     * Sets the current DateTime
-     *
-     * @param \DateTime $currentDateTime CurrentDateTime
-     */
-    public function setCurrentDateTime(\DateTime $currentDateTime)
+    public function setCurrentDateTime(DateTime $currentDateTime): void
     {
         $this->currentDateTime = $currentDateTime;
     }
 
-    /**
-     * Returns the current datetime
-     *
-     * @return \DateTime
-     */
-    public function getCurrentDateTime()
+    public function getCurrentDateTime(): DateTime
     {
         if ($this->currentDateTime != null) {
             return $this->currentDateTime;
@@ -160,23 +81,36 @@ class UserRegistrationDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEnt
         return new \DateTime();
     }
 
-    /**
-     * Returns the frontend user
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FrontendUser
-     */
-    public function getUser()
+    public function getUser(): ?FrontendUser
     {
         return $this->user;
     }
 
-    /**
-     * Sets the frontend user
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FrontendUser $user
-     */
-    public function setUser($user)
+    public function setUser(?FrontendUser $user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * Creates a new UserRegistrationDemand object from the given settings. Respects recursive setting for storage page
+     * and extends all PIDs to children if set.
+     *
+     * @param array $settings
+     * @return UserRegistrationDemand
+     */
+    public static function createFromSettings(array $settings = []): self
+    {
+        $demand = new UserRegistrationDemand();
+        $demand->setDisplayMode($settings['userRegistration']['displayMode'] ?? 'all');
+        $demand->setStoragePage(
+            PageUtility::extendPidListByChildren(
+                (string)($settings['userRegistration']['storagePage'] ?? ''),
+                (int)($settings['userRegistration']['recursive'] ?? 0)
+            )
+        );
+        $demand->setOrderField($settings['userRegistration']['orderField'] ?? '');
+        $demand->setOrderDirection($settings['userRegistration']['orderDirection'] ?? '');
+
+        return $demand;
     }
 }

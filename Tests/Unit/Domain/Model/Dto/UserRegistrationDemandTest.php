@@ -64,9 +64,7 @@ class UserRegistrationDemandTest extends UnitTestCase
      */
     public function getStoragePageReturnsInitialValue()
     {
-        self::assertNull(
-            $this->subject->getStoragePage()
-        );
+        self::assertEquals('', $this->subject->getStoragePage());
     }
 
     /**
@@ -161,4 +159,42 @@ class UserRegistrationDemandTest extends UnitTestCase
         $this->subject->setUser($user);
         self::assertSame($this->subject->getUser(), $user);
     }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
+    {
+        $expected = new UserRegistrationDemand();
+        $current = UserRegistrationDemand::createFromSettings();
+
+        $this->assertEquals($expected, $current);
+    }
+
+    /**
+     * @test
+     */
+    public function createFromSettingsReturnsExpectedObjectWithSettings()
+    {
+        $expected = new UserRegistrationDemand();
+        $expected->setDisplayMode('current');
+        $expected->setOrderField('title');
+        $expected->setOrderDirection('desc');
+        $expected->setStoragePage('1,2,3');
+
+        $settings = [
+            'userRegistration' => [
+                'displayMode' => 'current',
+                'orderField' => 'title',
+                'orderDirection' => 'desc',
+                'storagePage' => '1,2,3',
+                'recursive' => 0
+            ],
+        ];
+
+        $current = UserRegistrationDemand::createFromSettings($settings);
+
+        $this->assertEquals($expected, $current);
+    }
+
 }

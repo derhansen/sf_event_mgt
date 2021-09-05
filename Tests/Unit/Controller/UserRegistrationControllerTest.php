@@ -10,11 +10,9 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
-use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -35,7 +33,7 @@ class UserRegistrationControllerTest extends UnitTestCase
     {
         $this->subject = $this->getAccessibleMock(
             UserRegistrationController::class,
-            ['createUserRegistrationDemandObjectFromSettings'],
+            ['dummy'],
             [],
             '',
             false
@@ -57,20 +55,12 @@ class UserRegistrationControllerTest extends UnitTestCase
      */
     public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView()
     {
-        $demand = $this->getMockBuilder(UserRegistrationDemand::class)
-            ->onlyMethods(['setUser'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $demand->expects(self::once())->method('setUser');
         $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->disableOriginalConstructor()
             ->getMock();
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
-
-        $this->subject->expects(self::once())->method('createUserRegistrationDemandObjectFromSettings')
-            ->with($settings)->willReturn($demand);
 
         $registrationServiceMock = $this->getMockBuilder(RegistrationService::class)
             ->onlyMethods(['getCurrentFeUserObject'])
