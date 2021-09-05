@@ -315,7 +315,7 @@ class AdministrationController extends AbstractController
     public function listAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
         if ($searchDemand !== null) {
-            $searchDemand->setFields($this->settings['search']['fields']);
+            $searchDemand->setFields($this->settings['search']['fields'] ?? '');
 
             $sessionData = [];
             $sessionData['searchDemand'] = $searchDemand;

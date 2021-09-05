@@ -842,7 +842,7 @@ class EventController extends AbstractController
     /**
      * Search view
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
+     * @param SearchDemand|null $searchDemand
      * @param array $overwriteDemand OverwriteDemand
      */
     public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
@@ -853,13 +853,14 @@ class EventController extends AbstractController
         $categoryDemand = CategoryDemand::createFromSettings($this->settings);
 
         if ($searchDemand !== null) {
-            $searchDemand->setFields($this->settings['search']['fields']);
+            $searchDemand->setFields($this->settings['search']['fields'] ?? '');
 
-            if ($this->settings['search']['adjustTime'] && $searchDemand->getStartDate() !== null) {
-                $searchDemand->getStartDate()->setTime(0, 0, 0);
+            $adjustTime = (bool)($this->settings['search']['adjustTime'] ?? false);
+            if ($adjustTime && $searchDemand->getStartDate() !== null) {
+                $searchDemand->getStartDate()->setTime(0, 0);
             }
 
-            if ($this->settings['search']['adjustTime'] && $searchDemand->getEndDate() !== null) {
+            if ($adjustTime && $searchDemand->getEndDate() !== null) {
                 $searchDemand->getEndDate()->setTime(23, 59, 59);
             }
         }

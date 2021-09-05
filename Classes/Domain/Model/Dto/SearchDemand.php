@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,117 +11,80 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use DateTime;
+
 /**
  * Search demand
  */
-class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class SearchDemand
 {
-    /**
-     * Search string
-     *
-     * @var string
-     */
-    protected $search = '';
+    protected string $search = '';
+    protected string $fields = '';
+    protected ?DateTime $startDate = null;
+    protected ?DateTime $endDate = null;
 
     /**
-     * Search fields
-     *
-     * @var string
-     */
-    protected $fields;
-
-    /**
-     * StartDate
-     *
-     * @var \DateTime
-     */
-    protected $startDate;
-
-    /**
-     * EndDate
-     *
-     * @var \DateTime
-     */
-    protected $endDate;
-
-    /**
-     * Set the start date
-     *
-     * @param \DateTime $startDate StartDate
-     */
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-    }
-
-    /**
-     * Returns the start date
-     *
-     * @return \DateTime
-     */
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set the end date
-     *
-     * @param \DateTime $endDate EndDate
-     */
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-    }
-
-    /**
-     * Get the end date
-     *
-     * @return \DateTime
-     */
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * Returns Search
-     *
      * @return string
      */
-    public function getSearch()
+    public function getSearch(): string
     {
         return $this->search;
     }
 
     /**
-     * Sets search
-     *
      * @param string $search
      */
-    public function setSearch($search)
+    public function setSearch(string $search): void
     {
         $this->search = $search;
     }
 
     /**
-     * Returns fields
-     *
      * @return string
      */
-    public function getFields()
+    public function getFields(): string
     {
         return $this->fields;
     }
 
     /**
-     * Sets fields
-     *
      * @param string $fields
      */
-    public function setFields($fields)
+    public function setFields(string $fields): void
     {
         $this->fields = $fields;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getStartDate(): ?DateTime
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param DateTime|null $startDate
+     */
+    public function setStartDate(?DateTime $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getEndDate(): ?DateTime
+    {
+        return $this->endDate;
+    }
+
+    /**
+     * @param DateTime|null $endDate
+     */
+    public function setEndDate(?DateTime $endDate): void
+    {
+        $this->endDate = $endDate;
     }
 
     /**
@@ -127,7 +92,7 @@ class SearchDemand extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool
      */
-    public function getHasQuery()
+    public function getHasQuery(): bool
     {
         return $this->search !== '' || $this->startDate !== null || $this->endDate !== null;
     }
