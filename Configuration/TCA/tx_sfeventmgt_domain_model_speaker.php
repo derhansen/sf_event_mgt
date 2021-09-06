@@ -47,18 +47,8 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.language',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'special' => 'languages',
-                'items' => [
-                    [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.allLanguages',
-                        -1,
-                        'flags-multiple'
-                    ],
-                ],
-                'default' => 0,
-            ]
+                'type' => 'language',
+            ],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
@@ -196,7 +186,6 @@ return [
                     'appearance' => [
                         'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                         'showPossibleLocalizationRecords' => true,
-                        'showRemovedLocalizationRecords' => true,
                         'showAllLocalizationLink' => true,
                         'showSynchronizationLink' => true
                     ],
