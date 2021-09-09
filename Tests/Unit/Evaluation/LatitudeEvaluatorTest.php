@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -17,35 +19,19 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class LatitudeEvaluatorTest extends UnitTestCase
 {
-    /**
-     * LatitudeEvaluator
-     *
-     * @var \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator
-     */
-    protected $subject;
+    protected LatitudeEvaluator $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new LatitudeEvaluator();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
     }
 
-    /**
-     * Data Provider for latitudeEvaluatorTest
-     *
-     * @return array
-     */
-    public function latitudeEvaluatorDataProvider()
+    public function latitudeEvaluatorDataProvider(): array
     {
         return [
             'emptyValue' => [
@@ -80,8 +66,6 @@ class LatitudeEvaluatorTest extends UnitTestCase
     }
 
     /**
-     * Tests for latitudeEvaluator with the given dataProvider
-     *
      * @test
      * @dataProvider latitudeEvaluatorDataProvider
      *

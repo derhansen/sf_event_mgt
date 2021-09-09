@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -22,7 +24,7 @@ class LongitudeEvaluator
      *
      * @param mixed $value the value that has to be checked
      * @param string $is_in Is-In String
-     * @param int $set Determines if the field can be set (value correct) or not
+     * @param bool $set Determines if the field can be set (value correct) or not
      *
      * @return string The new value of the field
      */

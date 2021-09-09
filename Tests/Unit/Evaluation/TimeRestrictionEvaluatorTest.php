@@ -18,16 +18,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class TimeRestrictionEvaluatorTest extends UnitTestCase
 {
-    /**
-     * TimeRestrictionEvaluator
-     *
-     * @var \DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator
-     */
-    protected $subject;
+    protected TimeRestrictionEvaluator $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new TimeRestrictionEvaluator();
@@ -38,21 +30,13 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
         $GLOBALS['LANG']->expects(self::any())->method('sL')->willReturn('test');
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
         unset($GLOBALS['LANG']);
     }
 
-    /**
-     * Data Provider for timeRestrictionEvaluatorTest
-     *
-     * @return array
-     */
-    public function timeRestrictionEvaluatorDataProvider()
+    public function timeRestrictionEvaluatorDataProvider(): array
     {
         return [
             'emptyValue' => [
@@ -71,8 +55,6 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
     }
 
     /**
-     * Tests for timeRestrictionEvaluator with the given dataProvider
-     *
      * @test
      * @dataProvider timeRestrictionEvaluatorDataProvider
      *

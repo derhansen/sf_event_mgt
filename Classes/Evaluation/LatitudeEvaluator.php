@@ -22,7 +22,7 @@ class LatitudeEvaluator
      *
      * @param mixed $value The value that has to be checked
      * @param string $is_in Is-In String
-     * @param int $set Determines if the field can be set (value correct) or not
+     * @param bool $set Determines if the field can be set (value correct) or not
      *
      * @return string The new value of the field
      */
