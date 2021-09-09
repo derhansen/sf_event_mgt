@@ -202,6 +202,11 @@ module.tx_sfeventmgt {
             notify = 1
             export = 1
         }
+        pagination {
+            enablePagination = 1
+            itemsPerPage = 10
+            maxNumPages = 10
+        }
     }
 }
 

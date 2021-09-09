@@ -331,6 +331,11 @@ class AdministrationController extends AbstractController
         if ($this->isResetFilter()) {
             $searchDemand = new SearchDemand();
             $overwriteDemand = [];
+
+            $sessionData = [];
+            $sessionData['searchDemand'] = $searchDemand->toArray();
+            $sessionData['overwriteDemand'] = $overwriteDemand;
+            $this->beUserSessionService->saveSessionData($sessionData);
         }
 
         $eventDemand = new EventDemand();
@@ -352,6 +357,7 @@ class AdministrationController extends AbstractController
             'orderByFields' => $this->getOrderByFields(),
             'orderDirections' => $this->getOrderDirections(),
             'overwriteDemand' => $overwriteDemand,
+            'pagination' => $this->getPagination($events, $this->settings['pagination'] ?? [])
         ]);
     }
 

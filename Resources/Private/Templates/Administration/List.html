@@ -95,43 +95,54 @@
 
     <f:if condition="{events}">
         <f:then>
-            <f:be.widget.paginate objects="{events}" as="paginatedEvents"
-                                  configuration="{itemsPerPage: settings.list.itemsPerPage}">
-                <table cellpadding="0" cellspacing="0" class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th class="event-icon"></th>
-                        <th class="title">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
-                        </th>
-                        <th class="startdate">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
-                        </th>
-                        <th class="enddate">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
-                        </th>
-                        <th class="registrationenabled">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration"/>
-                        </th>
-                        <th class="maxparticipants">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
-                        </th>
-                        <th class="registrations">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
-                        </th>
-                        <th class="notify">
-                        </th>
-                        <th class="export">
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <f:for each="{paginatedEvents}" as="event">
-                        <f:render partial="Administration/ListItem" arguments="{event: event}"/>
-                    </f:for>
-                    </tbody>
-                </table>
-            </f:be.widget.paginate>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="event-icon"></th>
+                    <th class="title">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+                    </th>
+                    <th class="startdate">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                    </th>
+                    <th class="enddate">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                    </th>
+                    <th class="registrationenabled">
+                        <f:translate key="tx_sfeventmgt_domain_model_registration"/>
+                    </th>
+                    <th class="maxparticipants">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                    </th>
+                    <th class="registrations">
+                        <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                    </th>
+                    <th class="notify">
+                    </th>
+                    <th class="export">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <f:if condition="{pagination}">
+                    <f:then>
+                        <f:for each="{pagination.paginator.paginatedItems}" as="event" iteration="iterator">
+                            <f:render partial="Administration/ListItem" arguments="{event: event}"/>
+                        </f:for>
+                    </f:then>
+                    <f:else>
+                        <f:for each="{events}" as="event">
+                            <f:render partial="Administration/ListItem" arguments="{event: event}"/>
+                        </f:for>
+                    </f:else>
+                </f:if>
+                </tbody>
+            </table>
+
+            <f:if condition="{pagination}">
+                <f:render partial="Administration/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
+            </f:if>
         </f:then>
         <f:else>
             <div class="callout callout-info">

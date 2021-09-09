@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -84,7 +84,7 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $this->subject->_set('pid', 0);
 
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::any())->method('getSessionDataByKey');
@@ -94,9 +94,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
-        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
-        $this->subject->_set('request', $mockRequest);
+        $requestProphecy = $this->prophesize(Request::class);
+        $requestProphecy->hasArgument('operation')->willReturn(false);
+        $requestProphecy->hasArgument('currentPage')->willReturn(false);
+        $this->subject->_set('request', $requestProphecy->reveal());
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -113,7 +114,8 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => new SearchDemand(),
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => null
+            'overwriteDemand' => null,
+            'pagination' => [],
         ]);
         $this->subject->_set('view', $view);
 
@@ -128,7 +130,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('pid', 0);
 
         $searchDemand = new SearchDemand();
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');
@@ -138,9 +140,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
-        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
-        $this->subject->_set('request', $mockRequest);
+        $requestProphecy = $this->prophesize(Request::class);
+        $requestProphecy->hasArgument('operation')->willReturn(false);
+        $requestProphecy->hasArgument('currentPage')->willReturn(false);
+        $this->subject->_set('request', $requestProphecy->reveal());
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -156,7 +159,8 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => []
+            'overwriteDemand' => [],
+            'pagination' => [],
         ]);
         $this->subject->_set('view', $view);
 
@@ -171,7 +175,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
 
         $demand = $this->getMockBuilder(EventDemand::class)
             ->onlyMethods(['setSearchDemand', 'setStoragePage'])
@@ -194,9 +198,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
-        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
-        $this->subject->_set('request', $mockRequest);
+        $requestProphecy = $this->prophesize(Request::class);
+        $requestProphecy->hasArgument('operation')->willReturn(false);
+        $requestProphecy->hasArgument('currentPage')->willReturn(false);
+        $this->subject->_set('request', $requestProphecy->reveal());
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -211,7 +216,8 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => []
+            'overwriteDemand' => [],
+            'pagination' => [],
         ]);
         $this->subject->_set('view', $view);
 
@@ -226,7 +232,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
 
         $demand = $this->getMockBuilder(EventDemand::class)->getMock();
         $demand->expects(self::any())->method('setSearchDemand')->with($searchDemand);
@@ -246,9 +252,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
-        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
-        $this->subject->_set('request', $mockRequest);
+        $requestProphecy = $this->prophesize(Request::class);
+        $requestProphecy->hasArgument('operation')->willReturn(false);
+        $requestProphecy->hasArgument('currentPage')->willReturn(false);
+        $this->subject->_set('request', $requestProphecy->reveal());
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -264,7 +271,8 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => ['orderDirection' => 'desc']
+            'overwriteDemand' => ['orderDirection' => 'desc'],
+            'pagination' => [],
         ]);
         $this->subject->_set('view', $view);
 
