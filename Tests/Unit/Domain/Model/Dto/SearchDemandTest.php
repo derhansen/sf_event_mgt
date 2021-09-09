@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -155,5 +156,62 @@ class SearchDemandTest extends UnitTestCase
     {
         $this->subject->setEndDate(new \DateTime());
         self::assertTrue($this->subject->getHasQuery());
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayReturnsExpectedArray()
+    {
+        $startDate = new \DateTime('01.01.2020 00:00');
+        $endDate = new \DateTime('01.01.2020 23:59:59');
+
+        $searchDemand = new SearchDemand();
+        $searchDemand->setSearch('search');
+        $searchDemand->setFields('fields');
+        $searchDemand->setStartDate($startDate);
+        $searchDemand->setEndDate($endDate);
+
+        $expected = [
+            'search' => 'search',
+            'fields' => 'fields',
+            'startDate' => $startDate->format(DateTime::RFC3339),
+            'endDate' => $endDate->format(DateTime::RFC3339),
+        ];
+
+        $this->assertEquals($expected, $searchDemand->toArray());
+    }
+
+    /**
+     * @test
+     */
+    public function fromArrayReturnsExpectedObjectForEmptyData()
+    {
+        $searchDemand = new SearchDemand();
+        $this->assertEquals($searchDemand, SearchDemand::fromArray([]));
+    }
+
+    /**
+     * @test
+     */
+    public function fromArrayReturnsExpectedObjectForGivenData()
+    {
+        $startDate = new \DateTime('01.01.2020 00:00');
+        $endDate = new \DateTime('01.01.2020 23:59:59');
+
+        $searchDemand = new SearchDemand();
+        $searchDemand->setSearch('search');
+        $searchDemand->setFields('fields');
+        $searchDemand->setStartDate($startDate);
+        $searchDemand->setEndDate($endDate);
+
+        $data = [
+            'search' => 'search',
+            'fields' => 'fields',
+            'startDate' => $startDate->format(DateTime::RFC3339),
+            'endDate' => $endDate->format(DateTime::RFC3339),
+        ];
+
+        $this->assertEquals($searchDemand, SearchDemand::fromArray($data));
     }
 }

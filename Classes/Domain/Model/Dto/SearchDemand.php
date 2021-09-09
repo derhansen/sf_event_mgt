@@ -96,4 +96,29 @@ class SearchDemand
     {
         return $this->search !== '' || $this->startDate !== null || $this->endDate !== null;
     }
+
+    public function toArray(): array
+    {
+        return [
+            'search' => $this->search,
+            'fields' => $this->fields,
+            'startDate' => $this->startDate ? $this->startDate->format(DateTime::RFC3339) : null,
+            'endDate' => $this->endDate ? $this->endDate->format(DateTime::RFC3339) : null,
+        ];
+    }
+
+    public static function fromArray(array $data): self
+    {
+        $demand = new SearchDemand();
+        $demand->setSearch($data['search'] ?? '');
+        $demand->setFields($data['fields'] ?? '');
+        $demand->setStartDate(
+            $data['startDate'] ? DateTime::createFromFormat(DateTime::RFC3339, (string)$data['startDate']) : null
+        );
+        $demand->setEndDate(
+            $data['endDate'] ? DateTime::createFromFormat(DateTime::RFC3339, (string)$data['endDate']) : null
+        );
+
+        return $demand;
+    }
 }

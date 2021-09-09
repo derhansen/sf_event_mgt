@@ -309,22 +309,28 @@ class AdministrationController extends AbstractController
     /**
      * List action for backend module
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand $searchDemand SearchDemand
+     * @param SearchDemand|null $searchDemand SearchDemand
      * @param array $overwriteDemand OverwriteDemand
      */
-    public function listAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
+    public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields'] ?? '');
 
             $sessionData = [];
-            $sessionData['searchDemand'] = $searchDemand;
+            $sessionData['searchDemand'] = $searchDemand->toArray();
             $sessionData['overwriteDemand'] = $overwriteDemand;
             $this->beUserSessionService->saveSessionData($sessionData);
         } else {
             // Try to restore search demand from Session
-            $searchDemand = $this->beUserSessionService->getSessionDataByKey('searchDemand');
+            $sessionSearchDemand = $this->beUserSessionService->getSessionDataByKey('searchDemand') ?? [];
+            $searchDemand = SearchDemand::fromArray($sessionSearchDemand);
             $overwriteDemand = $this->beUserSessionService->getSessionDataByKey('overwriteDemand');
+        }
+
+        if ($this->isResetFilter()) {
+            $searchDemand = new SearchDemand();
+            $overwriteDemand = [];
         }
 
         $eventDemand = new EventDemand();
@@ -347,6 +353,21 @@ class AdministrationController extends AbstractController
             'orderDirections' => $this->getOrderDirections(),
             'overwriteDemand' => $overwriteDemand,
         ]);
+    }
+
+    /**
+     * Returns, if reset filter operation has been used
+     *
+     * @return bool
+     */
+    private function isResetFilter(): bool
+    {
+        $resetFilter = false;
+        if ($this->request->hasArgument('operation')) {
+            $resetFilter = $this->request->getArgument('operation') === 'reset-filters' ?? false;
+        }
+
+        return $resetFilter;
     }
 
     /**

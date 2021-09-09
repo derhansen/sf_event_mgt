@@ -26,6 +26,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -93,6 +94,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
+        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
+        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $mockRequest);
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
             ->disableOriginalConstructor()
@@ -105,7 +110,7 @@ class AdministrationControllerTest extends UnitTestCase
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
             'events' => $allEvents,
-            'searchDemand' => null,
+            'searchDemand' => new SearchDemand(),
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => null
@@ -132,6 +137,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
+
+        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
+        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $mockRequest);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -185,6 +194,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
+        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
+        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $mockRequest);
+
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
@@ -232,6 +245,10 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
+
+        $mockRequest = $this->getMockBuilder(Request::class)->getMock();
+        $mockRequest->expects($this->once())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $mockRequest);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
