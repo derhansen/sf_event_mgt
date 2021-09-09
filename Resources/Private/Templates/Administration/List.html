@@ -12,81 +12,75 @@
 </f:section>
 
 <f:section name="content">
-    <f:form name="searchDemand" object="{searchDemand}" class="form-horizontal settings">
-        <div class="form-group">
-            <label for="search" class="col-xs-2 control-label">
-                <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search" />
-            </label>
+    <f:form name="searchDemand" object="{searchDemand}">
+        <div class="row row-cols-auto align-items-end g-3 mb-3">
+            <div class="col">
+                <label for="search" class="form-label">
+                    <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search" />
+                </label>
 
-            <div class="col-xs-10">
-                <div class="form-control-clearable">
+                <div class="input-group">
                     <f:form.textfield property="search" id="search" class="form-control t3js-clearable"/>
-                    <button type="button" class="close" tabindex="-1" aria-hidden="true" style="display: none;">
-                        <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-close" data-identifier="actions-close">
-                            <span class="icon-markup"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                                <path d="M11.9 5.5L9.4 8l2.5 2.5c.2.2.2.5 0 .7l-.7.7c-.2.2-.5.2-.7 0L8 9.4l-2.5 2.5c-.2.2-.5.2-.7 0l-.7-.7c-.2-.2-.2-.5 0-.7L6.6 8 4.1 5.5c-.2-.2-.2-.5 0-.7l.7-.7c.2-.2.5-.2.7 0L8 6.6l2.5-2.5c.2-.2.5-.2.7 0l.7.7c.2.2.2.5 0 .7z" class="icon-color"></path></svg>
-                            </span>
-                        </span>
-                    </button>
+
+                    <label class="mb-0 btn btn-default" for="search">
+                        <core:icon identifier="actions-search" />
+                    </label>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="startDate" class="col-xs-2 control-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
-            </label>
+            <div class="col">
+                <label for="startDate" class="form-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                </label>
 
-            <div class="col-xs-10">
                 <div class="input-group">
-                    <f:form.textfield type="datetime" property="startDate" id="startDate" class="form-control t3js-datetimepicker t3js-clearable" data="{date-type: 'datetime', date-offset: '0'}" value="{searchDemand.startDate -> f:format.date(format: settings.search.dateFormat)}"/>
-                    <span class="input-group-btn">
-                        <label class="btn btn-default" for="startDate">
-                            <span class="fa fa-calendar"></span>
-                        </label>
-                    </span>
+                    <f:form.textfield type="datetime"
+                                      property="startDate"
+                                      id="startDate"
+                                      class="form-control t3js-datetimepicker t3js-clearable"
+                                      data="{date-type: 'datetime', date-offset: '0'}"
+                                      additionalAttributes="{'autocomplete': 'off'}"
+                                      value="{searchDemand.startDate -> f:format.date(format: settings.search.dateFormat)}"/>
+
+                    <label class="mb-0 btn btn-default" for="startDate">
+                        <core:icon identifier="actions-calendar" />
+                    </label>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="endDate" class="col-xs-2 control-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
-            </label>
+            <div class="col">
+                <label for="endDate" class="form-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                </label>
 
-            <div class="col-xs-10">
                 <div class="input-group">
-                    <f:form.textfield type="datetime" property="endDate" id="endDate" class="form-control t3js-datetimepicker t3js-clearable" data="{date-type: 'datetime', date-offset: '0'}" value="{searchDemand.endDate -> f:format.date(format: settings.search.dateFormat)}"/>
-                    <span class="input-group-btn">
-                        <label class="btn btn-default" for="endDate">
-                            <span class="fa fa-calendar"></span>
-                        </label>
-                    </span>
+                    <f:form.textfield type="datetime"
+                                      property="endDate"
+                                      id="endDate"
+                                      class="form-control t3js-datetimepicker t3js-clearable"
+                                      data="{date-type: 'datetime', date-offset: '0'}"
+                                      additionalAttributes="{'autocomplete': 'off'}"
+                                      value="{searchDemand.endDate -> f:format.date(format: settings.search.dateFormat)}"/>
+
+                    <label class="mb-0 btn btn-default" for="endDate">
+                        <core:icon identifier="actions-calendar" />
+                    </label>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="orderField" class="col-xs-2 control-label">
-                <f:translate key="admin.sorting"/>
-            </label>
-            <div class="col-xs-5">
-                <f:form.select id="orderField" name="overwriteDemand[orderField]" options="{orderByFields}" class="form-control" value="{overwriteDemand.orderField}"/>
+            <div class="col">
+                <label for="orderField" class="form-label">
+                    <f:translate key="admin.sorting"/>
+                </label>
+                <f:form.select id="orderField" name="overwriteDemand[orderField]" options="{orderByFields}" class="form-select" value="{overwriteDemand.orderField}"/>
             </div>
-            <div class="col-xs-5">
-                <f:form.select id="orderDirection" name="overwriteDemand[orderDirection]" options="{orderDirections}" class="form-control" value="{overwriteDemand.orderDirection}"/>
+            <div class="col">
+                <f:form.select id="orderDirection" name="overwriteDemand[orderDirection]" options="{orderDirections}" class="form-select" value="{overwriteDemand.orderDirection}"/>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-xs-offset-2 col-xs-10">
-                <button type="submit" class="btn btn-default" name="search" title="Search">
-                    <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-search" data-identifier="actions-search">
-                        <span class="icon-markup">
-                            <core:icon identifier="actions-search" size="small" />
-                        </span>
-                    </span> {f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search')}
-                </button>
+            <div class="col">
+                <f:form.button type="submit" name="operation" value="search" class="btn btn-light">{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search')}</f:form.button>
+                <f:form.button type="submit" name="operation" value="reset-filters" class="btn btn-link">Reset</f:form.button>
             </div>
         </div>
     </f:form>
