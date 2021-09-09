@@ -45,17 +45,6 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	slug varchar(2048)
 );
 
-#
-# Table structure for table 'tx_sfeventmgt_domain_model_event_related_mm'
-#
-CREATE TABLE tx_sfeventmgt_domain_model_event_related_mm (
-	uid_local int(11) DEFAULT '0' NOT NULL,
-	uid_foreign int(11) DEFAULT '0' NOT NULL,
-	sorting int(11) DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) DEFAULT '0' NOT NULL,
-	KEY uid_local (uid_local),
-	KEY uid_foreign (uid_foreign)
-);
 
 #
 # Table structure for table 'tx_sfeventmgt_domain_model_organisator'
@@ -154,19 +143,6 @@ CREATE TABLE tx_sfeventmgt_domain_model_speaker (
 	description text,
 	image int(11) unsigned DEFAULT '0' NOT NULL,
 	slug varchar(2048),
-);
-
-#
-# Table structure for table 'tx_sfeventmgt_event_speaker_mm'
-#
-CREATE TABLE tx_sfeventmgt_event_speaker_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-	KEY uid_local (uid_local),
-	KEY uid_foreign (uid_foreign)
 );
 
 #
