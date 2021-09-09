@@ -1,4 +1,4 @@
-name: CI
+name: Unit- and functional tests
 
 on: [push, pull_request]
 

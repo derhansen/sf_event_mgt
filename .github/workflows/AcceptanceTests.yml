@@ -1,4 +1,4 @@
-name: CI
+name: Acceptance Tests
 
 on: [push, pull_request]
 
