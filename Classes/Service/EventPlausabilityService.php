@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -20,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EventPlausabilityService
 {
-    const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
+    private const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
 
     /**
      * Enqueues an error flash message, if the event startdate is not before the enddate
@@ -71,13 +73,6 @@ class EventPlausabilityService
         }
     }
 
-    /**
-     * Returns if the startdate is before the enddate
-     *
-     * @param int $startDate
-     * @param int $endDate
-     * @return bool
-     */
     protected function isStartDateBeforeEndDate(int $startDate, int $endDate): bool
     {
         if ($startDate === 0 || $endDate === 0) {
@@ -103,7 +98,7 @@ class EventPlausabilityService
         $this->addFlashMessage($flashMessage);
     }
 
-    protected function addFlashMessage(FlashMessage $flashMessage)
+    protected function addFlashMessage(FlashMessage $flashMessage): void
     {
         $flashMessageService = GeneralUtility::makeInstance(FlashMessageService::class);
         $defaultFlashMessageQueue = $flashMessageService->getMessageQueueByIdentifier();

@@ -10,6 +10,10 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\EventPlausabilityService;
+use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
+use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -17,6 +21,19 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class EventPlausabilityServiceTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->resetSingletonInstances = true;
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+    }
+
     public function isStartDateBeforeEndDateDataProvider(): array
     {
         return [
@@ -49,7 +66,72 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function isStartDateBeforeEndDateReturnsExpectedResults($startdate, $enddate, $expected)
     {
-        $dataHandlerHooks = $this->getAccessibleMock(EventPlausabilityService::class, ['dummy'], [], '', false);
-        self::assertEquals($expected, $dataHandlerHooks->_call('isStartDateBeforeEndDate', $startdate, $enddate));
+        $service = $this->getAccessibleMock(EventPlausabilityService::class, ['dummy'], [], '', false);
+        self::assertEquals($expected, $service->_call('isStartDateBeforeEndDate', $startdate, $enddate));
+    }
+
+    /**
+     * @test
+     */
+    public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage()
+    {
+        $languageService = $this->prophesize(LanguageService::class);
+        $languageService->sL(Argument::cetera())->shouldBeCalled()->willReturn('foo');
+        $GLOBALS['LANG'] = $languageService->reveal();
+
+        $databaseRow = [
+            'notify_organisator' => 1
+        ];
+
+        $service = new EventPlausabilityService();
+        $service->verifyOrganisatorConfiguration($databaseRow);
+    }
+
+    /**
+     * @test
+     */
+    public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage()
+    {
+        $languageService = $this->prophesize(LanguageService::class);
+        $languageService->sL(Argument::cetera())->shouldBeCalled()->willReturn('foo');
+        $GLOBALS['LANG'] = $languageService->reveal();
+
+        $databaseRow = [
+            'notify_organisator' => 1,
+            'organisator' => [
+                [
+                    'row' => [
+                        'email' => ''
+                    ]
+                ]
+            ]
+        ];
+
+        $service = new EventPlausabilityService();
+        $service->verifyOrganisatorConfiguration($databaseRow);
+    }
+
+    /**
+     * @test
+     */
+    public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage()
+    {
+        $languageService = $this->prophesize(LanguageService::class);
+        $languageService->sL(Argument::cetera())->shouldNotBeCalled()->willReturn('foo');
+        $GLOBALS['LANG'] = $languageService->reveal();
+
+        $databaseRow = [
+            'notify_organisator' => 1,
+            'organisator' => [
+                [
+                    'row' => [
+                        'email' => 'email@domain.tld'
+                    ]
+                ]
+            ]
+        ];
+
+        $service = new EventPlausabilityService();
+        $service->verifyOrganisatorConfiguration($databaseRow);
     }
 }
