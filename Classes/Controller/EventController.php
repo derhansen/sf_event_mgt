@@ -33,7 +33,7 @@ use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Http\ImmediateResponseException;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -273,8 +273,12 @@ class EventController extends AbstractController
      * Error handling if event is not found
      *
      * @param array $settings
+     * @return \Psr\Http\Message\ResponseInterface|void|null
+     * @throws PropagateResponseException
+     * @throws \TYPO3\CMS\Core\Error\Http\PageNotFoundException
+     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
      */
-    protected function handleEventNotFoundError($settings)
+    protected function handleEventNotFoundError(array $settings)
     {
         if (empty($settings['event']['errorHandling'])) {
             return null;
@@ -284,24 +288,32 @@ class EventController extends AbstractController
 
         switch ($configuration[0]) {
             case 'redirectToListView':
-                $listPid = (int)$settings['listPid'] > 0 ? (int)$settings['listPid'] : 1;
+                $listPid = (int)($settings['listPid'] ?? 0) > 0 ? (int)$settings['listPid'] : 1;
                 $this->redirect('list', null, null, null, $listPid);
                 break;
             case 'pageNotFoundHandler':
+                // @todo: Does not work properly with `subrequestPageErrors` (see https://forge.typo3.org/issues/95174)
                 $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
-                    $GLOBALS['TYPO3_REQUEST'],
+                    $this->request,
                     'Event not found.'
                 );
-                throw new ImmediateResponseException($response, 1549896549);
+                throw new PropagateResponseException($response, 1631261423);
             case 'showStandaloneTemplate':
-                if (isset($configuration[2])) {
-                    $statusCode = constant(HttpUtility::class . '::HTTP_STATUS_' . $configuration[2]);
-                    HttpUtility::setResponseCode($statusCode);
+                $status = (int)($configuration[2] ?? 200);
+                if ($status !== 200) {
+                    // Manually set HTTP status header (see https://forge.typo3.org/issues/94533)
+                    // @todo: Remove when core supports handling HTTP status code from request
+                    $statusCode = constant(HttpUtility::class . '::HTTP_STATUS_' . $status);
+                    header($statusCode);
                 }
                 $standaloneTemplate = GeneralUtility::makeInstance(StandaloneView::class);
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
 
-                return $standaloneTemplate->render();
+                $response = $this->responseFactory->createResponse()
+                    ->withStatus($status)
+                    ->withHeader('Content-Type', 'text/html; charset=utf-8');
+                $response->getBody()->write($standaloneTemplate->render());
+                return $response;
             default:
         }
     }

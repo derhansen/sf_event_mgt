@@ -33,7 +33,7 @@ use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Http\ImmediateResponseException;
+use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
@@ -46,7 +46,6 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -2070,8 +2069,9 @@ class EventControllerTest extends UnitTestCase
 
         $mockErrorController = $this->getMockBuilder(ErrorController::class)->getMock();
         GeneralUtility::addInstance(ErrorController::class, $mockErrorController);
-        $this->expectException(ImmediateResponseException::class);
+        $this->expectException(PropagateResponseException::class);
         $mock = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mock->_set('request', $GLOBALS['TYPO3_REQUEST']);
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
@@ -2106,27 +2106,6 @@ class EventControllerTest extends UnitTestCase
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
         $mock->expects(self::once())->method('redirect')->with('list', null, null, null, 1);
         $mock->_call('handleEventNotFoundError', $settings);
-    }
-
-    /**
-     * @test
-     */
-    public function handleEventNotFoundRendersStandaloneView()
-    {
-        $settings = [
-            'event' => [
-                'errorHandling' => 'showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html'
-            ]
-        ];
-
-        $mockEventController = $this->getAccessibleMock(EventController::class, ['redirect']);
-
-        $standAloneView = $this->prophesize(StandaloneView::class);
-        $standAloneView->setTemplatePathAndFilename(\Prophecy\Argument::any())->shouldBeCalled();
-        $standAloneView->render()->willReturn('foo');
-        GeneralUtility::addInstance(StandaloneView::class, $standAloneView->reveal());
-
-        $mockEventController->_call('handleEventNotFoundError', $settings);
     }
 
     /**
