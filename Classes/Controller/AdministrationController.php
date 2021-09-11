@@ -13,7 +13,11 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use DERHANSEN\SfEventMgt\Service;
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
+use DERHANSEN\SfEventMgt\Service\ExportService;
+use DERHANSEN\SfEventMgt\Service\MaintenanceService;
+use DERHANSEN\SfEventMgt\Service\SettingsService;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -25,132 +29,63 @@ use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder as ExtbaseUriBuilder;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
  * AdministrationController
  *
- * Several parts are heavily inspired by ext:news from Georg Ringer
+ * Several parts are heavily inspired from ext:news by Georg Ringer
  */
 class AdministrationController extends AbstractController
 {
-    const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
+    private const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
 
     /**
-     * Backend Template Container
-     *
      * @var string
      */
-    protected $defaultViewObjectName = \TYPO3\CMS\Backend\View\BackendTemplateView::class;
+    protected $defaultViewObjectName = BackendTemplateView::class;
 
     /**
-     * CustomNotificationLogRepository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
-     */
-    protected $customNotificationLogRepository;
-
-    /**
-     * ExportService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\ExportService
-     */
-    protected $exportService;
-
-    /**
-     * SettingsService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\SettingsService
-     */
-    protected $settingsService;
-
-    /**
-     * Backend User Session Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\BeUserSessionService
-     */
-    protected $beUserSessionService;
-
-    /**
-     * @var \DERHANSEN\SfEventMgt\Service\MaintenanceService
-     */
-    protected $maintenanceService;
-
-    /**
-     * The current page uid
-     *
-     * @var int
-     */
-    protected $pid = 0;
-
-    /**
-     * BackendTemplateContainer
-     *
      * @var BackendTemplateView
      */
     protected $view;
 
-    /**
-     * @var IconFactory
-     */
-    protected $iconFactory;
+    protected CustomNotificationLogRepository $customNotificationLogRepository;
+    protected ExportService $exportService;
+    protected SettingsService $settingsService;
+    protected BeUserSessionService $beUserSessionService;
+    protected MaintenanceService $maintenanceService;
+    protected IconFactory $iconFactory;
 
-    /**
-     * DI for $customNotificationLogRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
-     */
+    protected int $pid = 0;
+
     public function injectCustomNotificationLogRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+        CustomNotificationLogRepository $customNotificationLogRepository
     ) {
         $this->customNotificationLogRepository = $customNotificationLogRepository;
     }
 
-    /**
-     * DI for $exportService
-     *
-     * @param Service\ExportService $exportService
-     */
-    public function injectExportService(\DERHANSEN\SfEventMgt\Service\ExportService $exportService)
+    public function injectExportService(ExportService $exportService)
     {
         $this->exportService = $exportService;
     }
 
-    /**
-     * DI for $settingsService
-     *
-     * @param Service\SettingsService $settingsService
-     */
-    public function injectSettingsService(\DERHANSEN\SfEventMgt\Service\SettingsService $settingsService)
+    public function injectSettingsService(SettingsService $settingsService)
     {
         $this->settingsService = $settingsService;
     }
 
-    /**
-     * DI for $beUserSessionService
-     *
-     * @param Service\BeUserSessionService $beUserSessionService
-     */
-    public function injectBeUserSessionService(\DERHANSEN\SfEventMgt\Service\BeUserSessionService $beUserSessionService)
+    public function injectBeUserSessionService(BeUserSessionService $beUserSessionService)
     {
         $this->beUserSessionService = $beUserSessionService;
     }
 
-    /**
-     * DI for $iconFactory
-     *
-     * @param IconFactory $iconFactory
-     */
     public function injectIconFactory(IconFactory $iconFactory)
     {
         $this->iconFactory = $iconFactory;
     }
 
-    /**
-     * @param Service\MaintenanceService $maintenanceService
-     */
-    public function injectMaintenanceService(\DERHANSEN\SfEventMgt\Service\MaintenanceService $maintenanceService)
+    public function injectMaintenanceService(MaintenanceService $maintenanceService)
     {
         $this->maintenanceService = $maintenanceService;
     }
@@ -178,7 +113,7 @@ class AdministrationController extends AbstractController
                 ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
             $pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
 
-            $this->view->getModuleTemplate()->setFlashMessageQueue($this->controllerContext->getFlashMessageQueue());
+            $this->view->getModuleTemplate()->setFlashMessageQueue($this->getFlashMessageQueue());
             if ($view instanceof BackendTemplateView) {
                 $view->getModuleTemplate()->getPageRenderer()->addCssFile(
                     'EXT:sf_event_mgt/Resources/Public/Css/administration.css'
@@ -190,12 +125,9 @@ class AdministrationController extends AbstractController
     /**
      * Register docHeaderButtons
      */
-    protected function registerDocHeaderButtons()
+    protected function registerDocHeaderButtons(): void
     {
         $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
-
-        $uriBuilder = $this->objectManager->get(ExtbaseUriBuilder::class);
-        $uriBuilder->setRequest($this->request);
 
         if ($this->request->getControllerActionName() === 'list') {
             $buttons = [
@@ -225,13 +157,13 @@ class AdministrationController extends AbstractController
                 ],
                 [
                     'label' => 'administration.handleExpiredRegistrations',
-                    'link' => $uriBuilder->reset()->setRequest($this->request)
+                    'link' => $this->uriBuilder->reset()->setRequest($this->request)
                         ->uriFor('handleExpiredRegistrations', [], 'Administration'),
                     'icon' => 'ext-sfeventmgt-action-handle-expired',
                     'group' => 2,
                 ]
             ];
-            foreach ($buttons as $key => $tableConfiguration) {
+            foreach ($buttons as $tableConfiguration) {
                 $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
                 $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], Icon::SIZE_SMALL);
                 $viewButton = $buttonBar->makeLinkButton()
@@ -255,7 +187,7 @@ class AdministrationController extends AbstractController
      * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
      * @return string
      */
-    private function getCreateNewRecordUri($table): string
+    private function getCreateNewRecordUri(string $table): string
     {
         $pid = $this->pid;
         $tsConfig = BackendUtility::getPagesTSconfig(0);
@@ -279,7 +211,7 @@ class AdministrationController extends AbstractController
      */
     public function initializeAction()
     {
-        $this->pid = (int)\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('id');
+        $this->pid = (int)GeneralUtility::_GET('id');
     }
 
     /**
@@ -287,7 +219,7 @@ class AdministrationController extends AbstractController
      */
     public function initializeListAction()
     {
-        if ($this->settings === null || empty($this->settings)) {
+        if (empty($this->settings)) {
             $this->redirect('settingsError');
         }
         $this->arguments->getArgument('searchDemand')
@@ -295,22 +227,22 @@ class AdministrationController extends AbstractController
             ->setTypeConverterOption(
                 DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['search']['dateFormat']
+                $this->settings['search']['dateFormat'] ?? 'H:i d-m-Y'
             );
         $this->arguments->getArgument('searchDemand')
             ->getPropertyMappingConfiguration()->forProperty('endDate')
             ->setTypeConverterOption(
                 DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['search']['dateFormat']
+                $this->settings['search']['dateFormat'] ?? 'H:i d-m-Y'
             );
     }
 
     /**
      * List action for backend module
      *
-     * @param SearchDemand|null $searchDemand SearchDemand
-     * @param array $overwriteDemand OverwriteDemand
+     * @param SearchDemand|null $searchDemand
+     * @param array $overwriteDemand
      */
     public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = [])
     {
@@ -342,7 +274,7 @@ class AdministrationController extends AbstractController
         $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand ?? []);
         $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
         $eventDemand->setSearchDemand($searchDemand);
-        $eventDemand->setStoragePage($this->pid);
+        $eventDemand->setStoragePage((string)$this->pid);
         $eventDemand->setIgnoreEnableFields(true);
 
         $events = [];
@@ -379,15 +311,15 @@ class AdministrationController extends AbstractController
     /**
      * Export registrations for a given event
      *
-     * @param int $eventUid Event UID
+     * @param int $eventUid
      */
-    public function exportAction($eventUid)
+    public function exportAction(int $eventUid): void
     {
         /** @var Event $event */
         $event = $this->eventRepository->findByUidIncludeHidden($eventUid);
-        if ($event) {
+        if ($event !== null) {
             $this->checkEventAccess($event);
-            $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport']);
+            $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport'] ?? []);
         }
         exit();
     }
@@ -395,9 +327,9 @@ class AdministrationController extends AbstractController
     /**
      * Handles expired registrations
      */
-    public function handleExpiredRegistrationsAction()
+    public function handleExpiredRegistrationsAction(): void
     {
-        $delete = (bool)$this->settings['registration']['deleteExpiredRegistrations'];
+        $delete = (bool)($this->settings['registration']['deleteExpiredRegistrations'] ?? false);
         $this->maintenanceService->handleExpiredRegistrations($delete);
 
         $this->addFlashMessage(
@@ -412,7 +344,7 @@ class AdministrationController extends AbstractController
     /**
      * The index notify action
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event $event
      */
     public function indexNotifyAction(Event $event)
     {
@@ -461,7 +393,7 @@ class AdministrationController extends AbstractController
     /**
      * Notify action
      *
-     * @param Event $event Event
+     * @param Event $event
      * @param CustomNotification $customNotification
      */
     public function notifyAction(Event $event, CustomNotification $customNotification)
@@ -514,7 +446,7 @@ class AdministrationController extends AbstractController
      *
      * @return bool
      */
-    protected function getErrorFlashMessage()
+    protected function getErrorFlashMessage(): bool
     {
         return false;
     }
@@ -534,7 +466,7 @@ class AdministrationController extends AbstractController
      *
      * @return array
      */
-    public function getOrderDirections()
+    public function getOrderDirections(): array
     {
         return [
             'asc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.asc'),
@@ -547,7 +479,7 @@ class AdministrationController extends AbstractController
      *
      * @return array
      */
-    public function getOrderByFields()
+    public function getOrderByFields(): array
     {
         return [
             'title' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.title'),
