@@ -19,15 +19,8 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class AfterRegistrationConfirmedEvent
 {
-    /**
-     * @var Registration
-     */
-    private $registration;
-
-    /**
-     * @var EventController
-     */
-    private $eventController;
+    private Registration $registration;
+    private EventController $eventController;
 
     public function __construct(Registration $registration, EventController $eventController)
     {
@@ -35,17 +28,11 @@ final class AfterRegistrationConfirmedEvent
         $this->eventController = $eventController;
     }
 
-    /**
-     * @return Registration
-     */
     public function getRegistration(): Registration
     {
         return $this->registration;
     }
 
-    /**
-     * @return EventController
-     */
     public function getEventController(): EventController
     {
         return $this->eventController;

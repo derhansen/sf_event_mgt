@@ -19,20 +19,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
  */
 final class ModifyCustomNotificationLogEvent
 {
-    /**
-     * @var CustomNotificationLog
-     */
-    protected $customNotificationLog;
-
-    /**
-     * @var Event
-     */
-    protected $event;
-
-    /**
-     * @var string
-     */
-    protected $details;
+    protected CustomNotificationLog $customNotificationLog;
+    protected Event $event;
+    protected string $details;
 
     public function __construct(CustomNotificationLog $customNotificationLog, Event $event, string $details)
     {
@@ -41,33 +30,21 @@ final class ModifyCustomNotificationLogEvent
         $this->details = $details;
     }
 
-    /**
-     * @return CustomNotificationLog
-     */
     public function getCustomNotificationLog(): CustomNotificationLog
     {
         return $this->customNotificationLog;
     }
 
-    /**
-     * @param CustomNotificationLog $customNotificationLog
-     */
     public function setCustomNotificationLog(CustomNotificationLog $customNotificationLog): void
     {
         $this->customNotificationLog = $customNotificationLog;
     }
 
-    /**
-     * @return Event
-     */
     public function getEvent(): Event
     {
         return $this->event;
     }
 
-    /**
-     * @return string
-     */
     public function getDetails(): string
     {
         return $this->details;

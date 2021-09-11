@@ -19,45 +19,14 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
  */
 final class AfterUserMessageSentEvent
 {
-    /**
-     * @var Registration
-     */
-    private $registration;
-
-    /**
-     * @var string
-     */
-    private $body;
-
-    /**
-     * @var string
-     */
-    private $subject;
-
-    /**
-     * @var array
-     */
-    private $attachments;
-
-    /**
-     * @var string
-     */
-    private $senderName;
-
-    /**
-     * @var string
-     */
-    private $senderEmail;
-
-    /**
-     * @var string
-     */
-    private $replyToEmail;
-
-    /**
-     * @var NotificationService
-     */
-    private $notificationService;
+    private Registration $registration;
+    private string $body;
+    private string $subject;
+    private array $attachments;
+    private string $senderName;
+    private string $senderEmail;
+    private string $replyToEmail;
+    private NotificationService $notificationService;
 
     public function __construct(
         Registration $registration,
@@ -79,65 +48,41 @@ final class AfterUserMessageSentEvent
         $this->notificationService = $notificationService;
     }
 
-    /**
-     * @return Registration
-     */
     public function getRegistration(): Registration
     {
         return $this->registration;
     }
 
-    /**
-     * @return string
-     */
     public function getBody(): string
     {
         return $this->body;
     }
 
-    /**
-     * @return string
-     */
     public function getSubject(): string
     {
         return $this->subject;
     }
 
-    /**
-     * @return array
-     */
     public function getAttachments(): array
     {
         return $this->attachments;
     }
 
-    /**
-     * @return string
-     */
     public function getSenderName(): string
     {
         return $this->senderName;
     }
 
-    /**
-     * @return string
-     */
     public function getSenderEmail(): string
     {
         return $this->senderEmail;
     }
 
-    /**
-     * @return string
-     */
     public function getReplyToEmail(): string
     {
         return $this->replyToEmail;
     }
 
-    /**
-     * @return NotificationService
-     */
     public function getNotificationService(): NotificationService
     {
         return $this->notificationService;

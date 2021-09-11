@@ -20,25 +20,10 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
  */
 final class ModifyUserMessageAttachmentsEvent
 {
-    /**
-     * @var array
-     */
-    private $attachments;
-
-    /**
-     * @var Registration
-     */
-    private $registration;
-
-    /**
-     * @var int
-     */
-    private $type;
-
-    /**
-     * @var NotificationService
-     */
-    private $notificationService;
+    private array $attachments;
+    private Registration $registration;
+    private int $type;
+    private NotificationService $notificationService;
 
     public function __construct(
         array $attachments,
@@ -52,41 +37,26 @@ final class ModifyUserMessageAttachmentsEvent
         $this->notificationService = $notificationService;
     }
 
-    /**
-     * @return array
-     */
     public function getAttachments(): array
     {
         return $this->attachments;
     }
 
-    /**
-     * @return Registration
-     */
     public function getRegistration(): Registration
     {
         return $this->registration;
     }
 
-    /**
-     * @return int
-     */
     public function getType(): int
     {
         return $this->type;
     }
 
-    /**
-     * @return NotificationService
-     */
     public function getNotificationService(): NotificationService
     {
         return $this->notificationService;
     }
 
-    /**
-     * @param array $attachments
-     */
     public function setAttachments(array $attachments): void
     {
         $this->attachments = $attachments;

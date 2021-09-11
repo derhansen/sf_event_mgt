@@ -19,15 +19,8 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
  */
 final class EventPidCheckFailedEvent
 {
-    /**
-     * @var Event
-     */
-    private $event;
-
-    /**
-     * @var EventController
-     */
-    private $eventController;
+    private Event $event;
+    private EventController $eventController;
 
     public function __construct(Event $event, EventController $eventController)
     {
@@ -35,17 +28,11 @@ final class EventPidCheckFailedEvent
         $this->eventController = $eventController;
     }
 
-    /**
-     * @return Event
-     */
     public function getEvent(): Event
     {
         return $this->event;
     }
 
-    /**
-     * @return EventController
-     */
     public function getEventController(): EventController
     {
         return $this->eventController;

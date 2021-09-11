@@ -20,25 +20,10 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 final class ModifyEventQueryConstraintsEvent
 {
-    /**
-     * @var array
-     */
-    private $constraints;
-
-    /**
-     * @var QueryInterface
-     */
-    private $query;
-
-    /**
-     * @var EventDemand
-     */
-    private $eventDemand;
-
-    /**
-     * @var EventRepository
-     */
-    private $eventRepository;
+    private array $constraints;
+    private QueryInterface $query;
+    private EventDemand $eventDemand;
+    private EventRepository $eventRepository;
 
     public function __construct(
         array $constraints,
@@ -52,41 +37,26 @@ final class ModifyEventQueryConstraintsEvent
         $this->eventRepository = $eventRepository;
     }
 
-    /**
-     * @return array
-     */
     public function getConstraints(): array
     {
         return $this->constraints;
     }
 
-    /**
-     * @return QueryInterface
-     */
     public function getQuery(): QueryInterface
     {
         return $this->query;
     }
 
-    /**
-     * @return EventDemand
-     */
     public function getEventDemand(): EventDemand
     {
         return $this->eventDemand;
     }
 
-    /**
-     * @return EventRepository
-     */
     public function getEventRepository(): EventRepository
     {
         return $this->eventRepository;
     }
 
-    /**
-     * @param array $constraints
-     */
     public function setConstraints(array $constraints): void
     {
         $this->constraints = $constraints;

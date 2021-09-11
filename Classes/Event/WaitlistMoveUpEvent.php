@@ -19,20 +19,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
  */
 final class WaitlistMoveUpEvent
 {
-    /**
-     * @var Event
-     */
-    private $event;
-
-    /**
-     * @var EventController
-     */
-    private $eventController;
-
-    /**
-     * @var bool
-     */
-    private $processDefaultMoveUp;
+    private Event $event;
+    private EventController $eventController;
+    private bool $processDefaultMoveUp;
 
     public function __construct(Event $event, EventController $eventController, bool $processDefaultMoveUp = true)
     {
@@ -41,33 +30,21 @@ final class WaitlistMoveUpEvent
         $this->processDefaultMoveUp = $processDefaultMoveUp;
     }
 
-    /**
-     * @return Event
-     */
     public function getEvent(): Event
     {
         return $this->event;
     }
 
-    /**
-     * @return EventController
-     */
     public function getEventController(): EventController
     {
         return $this->eventController;
     }
 
-    /**
-     * @return bool
-     */
     public function getProcessDefaultMoveUp(): bool
     {
         return $this->processDefaultMoveUp;
     }
 
-    /**
-     * @param bool $processDefaultMoveUp
-     */
     public function setProcessDefaultMoveUp(bool $processDefaultMoveUp): void
     {
         $this->processDefaultMoveUp = $processDefaultMoveUp;

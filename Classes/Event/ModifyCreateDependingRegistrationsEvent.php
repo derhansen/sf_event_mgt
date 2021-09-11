@@ -20,20 +20,9 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class ModifyCreateDependingRegistrationsEvent
 {
-    /**
-     * @var Registration
-     */
-    private $registration;
-
-    /**
-     * @var bool
-     */
-    private $createDependingRegistrations;
-
-    /**
-     * @var EventController
-     */
-    private $eventController;
+    private Registration $registration;
+    private bool $createDependingRegistrations;
+    private EventController $eventController;
 
     public function __construct(
         Registration $registration,
@@ -45,33 +34,21 @@ final class ModifyCreateDependingRegistrationsEvent
         $this->eventController = $eventController;
     }
 
-    /**
-     * @return Registration
-     */
     public function getRegistration(): Registration
     {
         return $this->registration;
     }
 
-    /**
-     * @return EventController
-     */
     public function getEventController(): EventController
     {
         return $this->eventController;
     }
 
-    /**
-     * @return bool
-     */
     public function getCreateDependingRegistrations(): bool
     {
         return $this->createDependingRegistrations;
     }
 
-    /**
-     * @param bool $createDependingRegistrations
-     */
     public function setCreateDependingRegistrations(bool $createDependingRegistrations): void
     {
         $this->createDependingRegistrations = $createDependingRegistrations;

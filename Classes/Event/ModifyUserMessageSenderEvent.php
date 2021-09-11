@@ -20,35 +20,12 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
  */
 final class ModifyUserMessageSenderEvent
 {
-    /**
-     * @var string
-     */
-    private $senderName;
-
-    /**
-     * @var string
-     */
-    private $senderEmail;
-
-    /**
-     * @var string
-     */
-    private $replyToEmail;
-
-    /**
-     * @var Registration
-     */
-    private $registration;
-
-    /**
-     * @var int
-     */
-    private $type;
-
-    /**
-     * @var NotificationService
-     */
-    private $notificationService;
+    private string $senderName;
+    private string $senderEmail;
+    private string $replyToEmail;
+    private Registration $registration;
+    private int $type;
+    private NotificationService $notificationService;
 
     public function __construct(
         string $senderName,
@@ -66,73 +43,46 @@ final class ModifyUserMessageSenderEvent
         $this->notificationService = $notificationService;
     }
 
-    /**
-     * @return string
-     */
     public function getSenderName(): string
     {
         return $this->senderName;
     }
 
-    /**
-     * @return string
-     */
     public function getSenderEmail(): string
     {
         return $this->senderEmail;
     }
 
-    /**
-     * @return string
-     */
     public function getReplyToEmail(): string
     {
         return $this->replyToEmail;
     }
 
-    /**
-     * @return Registration
-     */
     public function getRegistration(): Registration
     {
         return $this->registration;
     }
 
-    /**
-     * @return int
-     */
     public function getType(): int
     {
         return $this->type;
     }
 
-    /**
-     * @return NotificationService
-     */
     public function getNotificationService(): NotificationService
     {
         return $this->notificationService;
     }
 
-    /**
-     * @param string $senderName
-     */
     public function setSenderName(string $senderName): void
     {
         $this->senderName = $senderName;
     }
 
-    /**
-     * @param string $senderEmail
-     */
     public function setSenderEmail(string $senderEmail): void
     {
         $this->senderEmail = $senderEmail;
     }
 
-    /**
-     * @param string $replyToEmail
-     */
     public function setReplyToEmail(string $replyToEmail): void
     {
         $this->replyToEmail = $replyToEmail;

@@ -19,15 +19,8 @@ use DERHANSEN\SfEventMgt\Service\RegistrationService;
  */
 final class AfterRegistrationMovedFromWaitlist
 {
-    /**
-     * @var Registration
-     */
-    private $registration;
-
-    /**
-     * @var RegistrationService
-     */
-    private $registrationService;
+    private Registration $registration;
+    private RegistrationService $registrationService;
 
     public function __construct(Registration $registration, RegistrationService $registrationService)
     {
@@ -35,17 +28,11 @@ final class AfterRegistrationMovedFromWaitlist
         $this->registrationService = $registrationService;
     }
 
-    /**
-     * @return Registration
-     */
     public function getRegistration(): Registration
     {
         return $this->registration;
     }
 
-    /**
-     * @return RegistrationService
-     */
     public function getRegistrationService(): RegistrationService
     {
         return $this->registrationService;

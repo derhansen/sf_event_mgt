@@ -18,15 +18,8 @@ use DERHANSEN\SfEventMgt\Controller\EventController;
  */
 final class ModifyDetailViewVariablesEvent
 {
-    /**
-     * @var array
-     */
-    private $variables;
-
-    /**
-     * @var EventController
-     */
-    private $eventController;
+    private array $variables;
+    private EventController $eventController;
 
     public function __construct(array $variables, EventController $eventController)
     {
@@ -34,25 +27,16 @@ final class ModifyDetailViewVariablesEvent
         $this->eventController = $eventController;
     }
 
-    /**
-     * @return array
-     */
     public function getVariables(): array
     {
         return $this->variables;
     }
 
-    /**
-     * @param array $variables
-     */
     public function setVariables(array $variables): void
     {
         $this->variables = $variables;
     }
 
-    /**
-     * @return EventController
-     */
     public function getEventController(): EventController
     {
         return $this->eventController;
