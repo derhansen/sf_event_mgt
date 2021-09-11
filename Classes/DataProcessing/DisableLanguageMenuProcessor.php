@@ -33,8 +33,12 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
      * @param array $processedData
      * @return array
      */
-    public function process(ContentObjectRenderer $cObj, array $contentObjectConfiguration, array $processorConfiguration, array $processedData)
-    {
+    public function process(
+        ContentObjectRenderer $cObj,
+        array $contentObjectConfiguration,
+        array $processorConfiguration,
+        array $processedData
+    ) {
         if (!$processorConfiguration['menus']) {
             return $processedData;
         }
