@@ -999,11 +999,12 @@ class EventController extends AbstractController
      */
     protected function getCurrentLanguageTwoLetterIsoCode(): string
     {
-        if ($GLOBALS['TYPO3_REQUEST'] instanceof ServerRequestInterface &&
-            $GLOBALS['TYPO3_REQUEST']->getAttribute('language') instanceof SiteLanguage
+        $serverRequest = $this->request->getServerRequest();
+        if ($serverRequest instanceof ServerRequestInterface &&
+            $serverRequest->getAttribute('language') instanceof SiteLanguage
         ) {
             /** @var SiteLanguage $siteLanguage */
-            $siteLanguage = $GLOBALS['TYPO3_REQUEST']->getAttribute('language');
+            $siteLanguage = $serverRequest->getAttribute('language');
             return $siteLanguage->getTwoLetterIsoCode();
         }
 

@@ -758,6 +758,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationAndWaitlistRedirectsWithMessageIfRegistrationSuccessful()
     {
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $this->subject->_set('request', $request->reveal());
+
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->subject->injectHashService($hashService);
@@ -821,6 +826,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationRedirectsWithMessageIfRegistrationSuccessful()
     {
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $this->subject->_set('request', $request->reveal());
+
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->subject->injectHashService($hashService);
@@ -883,6 +893,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationWithSettingAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $this->subject->_set('request', $request->reveal());
+
         $regUid = 1;
         $regHmac = 'someRandomHMAC';
 
@@ -952,6 +967,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationWithEventAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $this->subject->_set('request', $request->reveal());
+
         $regUid = 1;
         $regHmac = 'someRandomHMAC';
 
@@ -1015,8 +1035,13 @@ class EventControllerTest extends UnitTestCase
      *
      * @test
      */
-    public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreatherThanOne()
+    public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreaterThanOne()
     {
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $this->subject->_set('request', $request->reveal());
+
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
         $this->subject->injectHashService($hashService);
