@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -139,10 +141,10 @@ abstract class AbstractController extends ActionController
     /**
      * Overwrites a given demand object by an propertyName =>  $propertyValue array
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+     * @param EventDemand $demand
      * @param array $overwriteDemand
      *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand
+     * @return EventDemand
      */
     protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand): EventDemand
     {

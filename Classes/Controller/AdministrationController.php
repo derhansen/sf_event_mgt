@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -200,7 +202,7 @@ class AdministrationController extends AbstractController
 
         $uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
 
-        return $uriBuilder->buildUriFromRoute('record_edit', [
+        return (string)$uriBuilder->buildUriFromRoute('record_edit', [
             'edit[' . $table . '][' . $pid . ']' => 'new',
             'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
         ]);
