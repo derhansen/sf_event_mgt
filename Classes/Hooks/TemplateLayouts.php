@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -21,7 +23,7 @@ class TemplateLayouts
      *
      * @param array $config Configuration array
      */
-    public function user_templateLayout(array &$config)
+    public function user_templateLayout(array &$config): void
     {
         $templateLayouts = $this->getTemplateLayoutsFromTsConfig($config['flexParentDatabaseRow']['pid']);
         foreach ($templateLayouts as $index => $layout) {
@@ -40,7 +42,7 @@ class TemplateLayouts
      *
      * @return array
      */
-    protected function getTemplateLayoutsFromTsConfig($pageUid)
+    protected function getTemplateLayoutsFromTsConfig(int $pageUid): array
     {
         $templateLayouts = [];
         $pagesTsConfig = BackendUtility::getPagesTSconfig($pageUid);

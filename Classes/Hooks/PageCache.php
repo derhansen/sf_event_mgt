@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -51,7 +53,7 @@ class PageCache
      *
      * @return int Page cache timeout or PHP_INT_MAX if cannot be determined
      */
-    protected function calculatePageCacheTimeout(TypoScriptFrontendController $pObj)
+    protected function calculatePageCacheTimeout(TypoScriptFrontendController $pObj): int
     {
         $result = PHP_INT_MAX;
         $tablesToConsider = $this->getCurrentPageCacheConfiguration($pObj);
@@ -73,6 +75,7 @@ class PageCache
      * Nearly similar to TypoScriptFrontendController::getCurrentPageCacheConfiguration, but only returns
      * entries that are relevant for sf_event_mgt
      *
+     * @param TypoScriptFrontendController $pObj
      * @return array
      */
     protected function getCurrentPageCacheConfiguration(TypoScriptFrontendController $pObj): array

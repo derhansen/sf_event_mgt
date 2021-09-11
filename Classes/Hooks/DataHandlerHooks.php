@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -12,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -53,7 +56,7 @@ class DataHandlerHooks
      * @param string $table
      * @param string $id
      * @param array $fieldArray
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler
+     * @param DataHandler $dataHandler
      */
     public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler)
     {
@@ -140,7 +143,6 @@ class DataHandlerHooks
                 }
             }
 
-            /** @var \TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools $flexFormTools */
             $flexFormTools = GeneralUtility::makeInstance(FlexFormTools::class);
             $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData, true);
         }
@@ -154,7 +156,7 @@ class DataHandlerHooks
      * @param string $table
      * @param int $id
      * @param mixed $value
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
+     * @param DataHandler $pObj
      * @param bool $pasteUpdate
      */
     public function processCmdmap_preProcess($command, $table, $id, $value, $pObj, $pasteUpdate)
@@ -173,7 +175,7 @@ class DataHandlerHooks
      * @param string $table
      * @param int $id
      * @param string $value
-     * @param \TYPO3\CMS\Core\DataHandling\DataHandler $pObj
+     * @param DataHandler $pObj
      * @param bool $pasteUpdate
      * @param array $pasteDatamap
      */

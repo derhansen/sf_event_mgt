@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -22,35 +24,11 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class PageLayoutView
 {
-    /**
-     * Path to the locallang file
-     *
-     * @var string
-     */
-    const LLPATH = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
+    private const LLPATH = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
+    public array $data = [];
+    public array $flexformData = [];
+    protected IconFactory $iconFactory;
 
-    /**
-     * Data rendered in table of Plugin settings
-     *
-     * @var array
-     */
-    public $data = [];
-
-    /**
-     * Flexform information
-     *
-     * @var array
-     */
-    public $flexformData = [];
-
-    /**
-     * @var IconFactory
-     */
-    protected $iconFactory;
-
-    /**
-     * PageLayoutView constructor
-     */
     public function __construct()
     {
         $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
@@ -62,7 +40,7 @@ class PageLayoutView
      * @param array $params Parameters to the hook
      * @return string Information about plugin
      */
-    public function getEventPluginSummary(array $params)
+    public function getEventPluginSummary(array $params): string
     {
         $header = htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'plugin.title'));
 
@@ -86,9 +64,7 @@ class PageLayoutView
             $this->getCategorySettings();
         }
 
-        $result = $this->renderSettingsAsTable($header, $action, $this->data);
-
-        return $result;
+        return $this->renderSettingsAsTable($header, $action, $this->data);
     }
 
     /**
@@ -97,7 +73,7 @@ class PageLayoutView
      * @param array $params Parameters to the hook
      * @return string Information about plugin
      */
-    public function getUserRegPluginSummary(array $params)
+    public function getUserRegPluginSummary(array $params): string
     {
         $header = htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'plugin_userreg.title'));
 
@@ -108,9 +84,7 @@ class PageLayoutView
         $this->getStoragePage('settings.userRegistration.storagePage');
         $this->getOrderSettings('settings.userRegistration.orderField', 'settings.userRegistration.orderDirection');
 
-        $result = $this->renderSettingsAsTable($header, null, $this->data);
-
-        return $result;
+        return $this->renderSettingsAsTable($header, '', $this->data);
     }
 
     /**
@@ -118,7 +92,7 @@ class PageLayoutView
      *
      * @return string
      */
-    protected function getSwitchableControllerActionTitle()
+    protected function getSwitchableControllerActionTitle(): string
     {
         $title = '';
         $actions = $this->getFieldFromFlexform('switchableControllerActions');
@@ -149,7 +123,7 @@ class PageLayoutView
      *
      * @return bool
      */
-    protected function showFieldsForListViewOnly()
+    protected function showFieldsForListViewOnly(): bool
     {
         $actions = $this->getFieldFromFlexform('switchableControllerActions');
         switch ($actions) {
@@ -171,7 +145,7 @@ class PageLayoutView
      * @param string $pidSetting
      * @param string $sheet
      */
-    public function getPluginPidConfig($pidSetting, $sheet = 'sDEF')
+    public function getPluginPidConfig(string $pidSetting, string $sheet = 'sDEF'): void
     {
         $pid = (int)$this->getFieldFromFlexform('settings.' . $pidSetting, $sheet);
         if ($pid > 0) {
@@ -187,7 +161,7 @@ class PageLayoutView
      * @param string $table
      * @return string
      */
-    public function getRecordData($id, $table = 'pages')
+    public function getRecordData(int $id, string $table = 'pages'): string
     {
         $content = '';
         $record = BackendUtilityCore::getRecord($table, $id);
@@ -196,7 +170,7 @@ class PageLayoutView
             $data = '<span data-toggle="tooltip" data-placement="top" data-title="id=' . $record['uid'] . '">'
                 . $this->iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render()
                 . '</span> ';
-            $content = BackendUtilityCore::wrapClickMenuOnIcon($data, $table, $record['uid'], true, '');
+            $content = BackendUtilityCore::wrapClickMenuOnIcon($data, $table, $record['uid']);
 
             $linkTitle = htmlspecialchars(BackendUtilityCore::getRecordTitle($table, $record));
             $content .= $linkTitle;
@@ -210,7 +184,7 @@ class PageLayoutView
      *
      * @param string $field
      */
-    public function getStoragePage($field)
+    public function getStoragePage(string $field): void
     {
         $value = $this->getFieldFromFlexform($field);
 
@@ -249,7 +223,7 @@ class PageLayoutView
      * @param string $orderByField
      * @param string $orderDirectionField
      */
-    public function getOrderSettings($orderByField, $orderDirectionField)
+    public function getOrderSettings(string $orderByField, string $orderDirectionField): void
     {
         $orderField = $this->getFieldFromFlexform($orderByField);
         if (!empty($orderField)) {
@@ -273,7 +247,7 @@ class PageLayoutView
      * @param string $orderDirectionField
      * @return string
      */
-    public function getOrderDirectionSetting($orderDirectionField)
+    public function getOrderDirectionSetting(string $orderDirectionField): string
     {
         $text = '';
 
@@ -288,7 +262,7 @@ class PageLayoutView
     /**
      * Get category conjunction if a category is selected
      */
-    public function getCategoryConjuction()
+    public function getCategoryConjuction(): void
     {
         // If not category is selected, we do not need to display the category mode
         $categories = $this->getFieldFromFlexform('settings.category');
@@ -324,7 +298,7 @@ class PageLayoutView
     /**
      * Get information if override demand setting is disabled or not
      */
-    public function getOverrideDemandSettings()
+    public function getOverrideDemandSettings(): void
     {
         $field = $this->getFieldFromFlexform('settings.disableOverrideDemand', 'additional');
 
@@ -348,7 +322,7 @@ class PageLayoutView
     /**
      * Get category settings
      */
-    public function getCategorySettings()
+    public function getCategorySettings(): void
     {
         $categories = GeneralUtility::intExplode(',', $this->getFieldFromFlexform('settings.category'), true);
         if (count($categories) > 0) {
@@ -381,7 +355,7 @@ class PageLayoutView
      * @param array $data
      * @return string
      */
-    protected function renderSettingsAsTable($header, $action, $data)
+    protected function renderSettingsAsTable(string $header, string $action, array $data): string
     {
         $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/News/PageLayout');
@@ -408,7 +382,7 @@ class PageLayoutView
      * @param string $sheet name of the sheet
      * @return string|null if nothing found, value if found
      */
-    public function getFieldFromFlexform($key, $sheet = 'sDEF')
+    public function getFieldFromFlexform(string $key, string $sheet = 'sDEF'): ?string
     {
         $flexform = $this->flexformData;
         if (isset($flexform['data'])) {
@@ -423,11 +397,6 @@ class PageLayoutView
         return null;
     }
 
-    /**
-     * Return language service instance
-     *
-     * @return LanguageService
-     */
     public function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];

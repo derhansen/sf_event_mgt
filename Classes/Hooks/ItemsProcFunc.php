@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -17,14 +19,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ItemsProcFunc
 {
-    /**
-     * @var PaymentService
-     */
-    protected $paymentService;
+    protected PaymentService $paymentService;
 
-    /**
-     * ItemsProcFunc constructor.
-     */
     public function __construct()
     {
         $this->paymentService = GeneralUtility::makeInstance(PaymentService::class);
@@ -35,7 +31,7 @@ class ItemsProcFunc
      *
      * @param array $config
      */
-    public function getPaymentMethods(array &$config)
+    public function getPaymentMethods(array &$config): void
     {
         $paymentMethods = $this->paymentService->getPaymentMethods();
         foreach ($paymentMethods as $value => $label) {
