@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -11,154 +13,67 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyCustomNotificationLogEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
+use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 /**
  * NotificationService
  */
 class NotificationService
 {
-    /**
-     * The object manager
-     *
-     * @var \TYPO3\CMS\Extbase\Object\ObjectManager
-     */
-    protected $objectManager;
+    protected RegistrationRepository $registrationRepository;
+    protected EmailService $emailService;
+    protected HashService $hashService;
+    protected FluidStandaloneService $fluidStandaloneService;
+    protected CustomNotificationLogRepository $customNotificationLogRepository;
+    protected AttachmentService $attachmentService;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    /**
-     * Registration repository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     */
-    protected $registrationRepository;
-
-    /**
-     * Email Service
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\EmailService
-     */
-    protected $emailService;
-
-    /**
-     * Hash Service
-     *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     */
-    protected $hashService;
-
-    /**
-     * FluidStandaloneService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\FluidStandaloneService
-     */
-    protected $fluidStandaloneService;
-
-    /**
-     * CustomNotificationLogRepository
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository
-     */
-    protected $customNotificationLogRepository;
-
-    /**
-     * AttachmentService
-     *
-     * @var \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService
-     */
-    protected $attachmentService;
-
-    /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
-     * DI for $attachmentService
-     *
-     * @param Notification\AttachmentService $attachmentService
-     */
-    public function injectAttachmentService(
-        \DERHANSEN\SfEventMgt\Service\Notification\AttachmentService $attachmentService
-    ) {
+    public function injectAttachmentService(AttachmentService $attachmentService)
+    {
         $this->attachmentService = $attachmentService;
     }
 
-    /**
-     * DI for $customNotificationLogRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
-     */
     public function injectCustomNotificationLogRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository $customNotificationLogRepository
+        CustomNotificationLogRepository $customNotificationLogRepository
     ) {
         $this->customNotificationLogRepository = $customNotificationLogRepository;
     }
 
-    /**
-     * DI for $emailService
-     *
-     * @param EmailService $emailService
-     */
-    public function injectEmailService(\DERHANSEN\SfEventMgt\Service\EmailService $emailService)
+    public function injectEmailService(EmailService $emailService)
     {
         $this->emailService = $emailService;
     }
 
-    /**
-     * DI for $fluidStandaloneService
-     *
-     * @param FluidStandaloneService $fluidStandaloneService
-     */
-    public function injectFluidStandaloneService(
-        \DERHANSEN\SfEventMgt\Service\FluidStandaloneService $fluidStandaloneService
-    ) {
+    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService)
+    {
         $this->fluidStandaloneService = $fluidStandaloneService;
     }
 
-    /**
-     * DI for $hashService
-     *
-     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
-     */
-    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    public function injectHashService(HashService $hashService)
     {
         $this->hashService = $hashService;
     }
 
-    /**
-     * DI for $objectManager
-     *
-     * @param \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager
-     */
-    public function injectObjectManager(\TYPO3\CMS\Extbase\Object\ObjectManager $objectManager)
+    public function injectRegistrationRepository(RegistrationRepository $registrationRepository)
     {
-        $this->objectManager = $objectManager;
-    }
-
-    /**
-     * DI for $registrationRepository
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-     */
-    public function injectRegistrationRepository(
-        \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository $registrationRepository
-    ) {
         $this->registrationRepository = $registrationRepository;
     }
 
-    /**
-     * @param EventDispatcherInterface $eventDispatcher
-     */
     public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
     {
         $this->eventDispatcher = $eventDispatcher;
@@ -168,20 +83,23 @@ class NotificationService
      * Sends a custom notification defined by the given customNotification key
      * to all confirmed users of the event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
+     * @param Event $event
      * @param CustomNotification $customNotification
-     * @param array $settings Settings
+     * @param array $settings
      *
      * @return int Number of notifications sent
      */
-    public function sendCustomNotification(Event $event, CustomNotification $customNotification, array $settings = [])
-    {
-        if ($this->cantSendCustomNotification($event, $settings, $customNotification)) {
+    public function sendCustomNotification(
+        Event $event,
+        CustomNotification $customNotification,
+        array $settings = []
+    ): int {
+        if ($this->cantSendCustomNotification($settings, $customNotification)) {
             return 0;
         }
         $count = 0;
 
-        $customNotificationSettings = $settings['notification']['customNotifications'];
+        $customNotificationSettings = $settings['notification']['customNotifications'] ?? [];
         $constraints = $customNotificationSettings[$customNotification->getTemplate()]['constraints'] ?? [];
         $registrations = $this->registrationRepository->findNotificationRegistrations(
             $event,
@@ -190,7 +108,7 @@ class NotificationService
         );
 
         foreach ($registrations as $registration) {
-            /** @var \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration */
+            /** @var Registration $registration */
             $result = $this->sendUserMessage(
                 $event,
                 $registration,
@@ -209,26 +127,26 @@ class NotificationService
     /**
      * Returns true if conditions are not met to send a custom notification
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
      * @param array $settings
-     * @param CustomNotification $customNotification
+     * @param CustomNotification|null $customNotification
      *
      * @return bool
      */
-    protected function cantSendCustomNotification($event, $settings, $customNotification)
-    {
-        return is_null($event) || $customNotification === null || $customNotification->getTemplate() === '' ||
-            empty($settings);
+    protected function cantSendCustomNotification(
+        array $settings,
+        CustomNotification $customNotification
+    ): bool {
+        return $customNotification->getTemplate() === '' || empty($settings);
     }
 
     /**
      * Adds a logentry to the custom notification log
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param string $details Details
-     * @param int $emailsSent E-Mails sent
+     * @param Event $event
+     * @param string $details
+     * @param int $emailsSent
      */
-    public function createCustomNotificationLogentry($event, $details, $emailsSent)
+    public function createCustomNotificationLogentry(Event $event, string $details, int $emailsSent): void
     {
         $notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
         $notificationlogEntry->setPid($event->getPid());
@@ -251,25 +169,28 @@ class NotificationService
     /**
      * Sends a message to the user based on the given type
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     * @param array $settings Settings
-     * @param int $type Type
-     * @param CustomNotification $customNotification
+     * @param Event $event
+     * @param Registration $registration
+     * @param array $settings
+     * @param int $type
+     * @param CustomNotification|null $customNotification
      *
      * @return bool TRUE if successful, else FALSE
      */
-    public function sendUserMessage($event, $registration, $settings, $type, $customNotification = null)
-    {
+    public function sendUserMessage(
+        Event $event,
+        Registration $registration,
+        array $settings,
+        int $type,
+        ?CustomNotification $customNotification = null
+    ): bool {
         list($template, $subject) = $this->getUserMessageTemplateSubject(
             $settings,
             $type,
             $customNotification
         );
 
-        if (is_null($event) || is_null($registration) || is_null($type) || !is_array($settings) ||
-            (substr($template, -5) != '.html') || (bool)$settings['notification']['disabled']
-        ) {
+        if (!is_array($settings) || (substr($template, -5) != '.html') || (bool)$settings['notification']['disabled']) {
             return false;
         }
 
@@ -351,7 +272,7 @@ class NotificationService
 
             // Cleanup iCal attachment if available
             if ($iCalAttachment !== '') {
-                \TYPO3\CMS\Core\Utility\GeneralUtility::unlink_tempfile($iCalAttachment);
+                GeneralUtility::unlink_tempfile($iCalAttachment);
             }
 
             return $result;
@@ -365,41 +286,44 @@ class NotificationService
      *
      * @param array $settings
      * @param int $type Type
-     * @param CustomNotification $customNotification
+     * @param CustomNotification|null $customNotification
      * @return array
      */
-    protected function getUserMessageTemplateSubject($settings, $type, $customNotification = null)
-    {
+    protected function getUserMessageTemplateSubject(
+        array $settings,
+        int $type,
+        CustomNotification $customNotification = null
+    ): array {
         switch ($type) {
             case MessageType::REGISTRATION_NEW:
                 $template = 'Notification/User/RegistrationNew.html';
-                $subject = $settings['notification']['registrationNew']['userSubject'];
+                $subject = $settings['notification']['registrationNew']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_NEW:
                 $template = 'Notification/User/RegistrationWaitlistNew.html';
-                $subject = $settings['notification']['registrationWaitlistNew']['userSubject'];
+                $subject = $settings['notification']['registrationWaitlistNew']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CONFIRMED:
                 $template = 'Notification/User/RegistrationConfirmed.html';
-                $subject = $settings['notification']['registrationConfirmed']['userSubject'];
+                $subject = $settings['notification']['registrationConfirmed']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
                 $template = 'Notification/User/RegistrationWaitlistConfirmed.html';
-                $subject = $settings['notification']['registrationWaitlistConfirmed']['userSubject'];
+                $subject = $settings['notification']['registrationWaitlistConfirmed']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CANCELLED:
                 $template = 'Notification/User/RegistrationCancelled.html';
-                $subject = $settings['notification']['registrationCancelled']['userSubject'];
+                $subject = $settings['notification']['registrationCancelled']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_MOVE_UP:
                 $template = 'Notification/User/RegistrationWaitlistMoveUp.html';
-                $subject = $settings['notification']['registrationWaitlistMoveUp']['userSubject'];
+                $subject = $settings['notification']['registrationWaitlistMoveUp']['userSubject'] ?? '';
                 break;
             case MessageType::CUSTOM_NOTIFICATION && $customNotification:
-                $customNotificationSettings = $settings['notification']['customNotifications'];
+                $customNotificationSettings = $settings['notification']['customNotifications'] ?? '';
                 $templateKey = $customNotification->getTemplate();
-                $template = 'Notification/User/Custom/' . $customNotificationSettings[$templateKey]['template'];
-                $subject = $customNotificationSettings[$templateKey]['subject'];
+                $template = 'Notification/User/Custom/' . $customNotificationSettings[$templateKey]['template'] ?? '';
+                $subject = $customNotificationSettings[$templateKey]['subject'] ?? '';
                 if ($customNotification->getOverwriteSubject() !== '') {
                     $subject = $customNotification->getOverwriteSubject();
                 }
@@ -418,20 +342,20 @@ class NotificationService
     /**
      * Sends a message to the admin based on the given type
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param Event $event Event
+     * @param Registration $registration Registration
      * @param array $settings Settings
      * @param int $type Type
      *
      * @return bool TRUE if successful, else FALSE
      */
-    public function sendAdminMessage($event, $registration, $settings, $type)
+    public function sendAdminMessage(Event $event, Registration $registration, array $settings, int $type): bool
     {
         list($template, $subject) = $this->getAdminMessageTemplateSubject($settings, $type);
 
-        if (is_null($event) || is_null($registration || !is_array($settings)) ||
+        if (!is_array($settings) ||
             ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false) ||
-            (bool)$settings['notification']['disabled']
+            (bool)($settings['notification']['disabled'] ?? false)
         ) {
             return false;
         }
@@ -452,15 +376,15 @@ class NotificationService
             MessageRecipient::ADMIN
         );
 
-        $senderName = $settings['notification']['senderName'];
-        $senderEmail = $settings['notification']['senderEmail'];
-        if ((bool)$settings['notification']['registrationDataAsSenderForAdminEmails']) {
+        $senderName = $settings['notification']['senderName'] ?? '';
+        $senderEmail = $settings['notification']['senderEmail'] ?? '';
+        if ((bool)($settings['notification']['registrationDataAsSenderForAdminEmails'] ?? false)) {
             $senderName = $registration->getFullname();
             $senderEmail = $registration->getEmail();
         }
 
         if ($event->getNotifyAdmin()) {
-            $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'], true);
+            $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'] ?? '', true);
             foreach ($adminEmailArr as $adminEmail) {
                 $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
                     $senderEmail,
@@ -505,53 +429,55 @@ class NotificationService
      * @param int $type Type
      * @return array
      */
-    protected function getAdminMessageTemplateSubject($settings, $type)
+    protected function getAdminMessageTemplateSubject(array $settings, int $type): array
     {
         $template = 'Notification/Admin/RegistrationNew.html';
-        $subject = $settings['notification']['registrationNew']['adminSubject'];
+        $subject = $settings['notification']['registrationNew']['adminSubject'] ?? '';
         switch ($type) {
             case MessageType::REGISTRATION_WAITLIST_NEW:
                 $template = 'Notification/Admin/RegistrationWaitlistNew.html';
-                $subject = $settings['notification']['registrationWaitlistNew']['adminSubject'];
+                $subject = $settings['notification']['registrationWaitlistNew']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CONFIRMED:
                 $template = 'Notification/Admin/RegistrationConfirmed.html';
-                $subject = $settings['notification']['registrationConfirmed']['adminSubject'];
+                $subject = $settings['notification']['registrationConfirmed']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
                 $template = 'Notification/Admin/RegistrationWaitlistConfirmed.html';
-                $subject = $settings['notification']['registrationWaitlistConfirmed']['adminSubject'];
+                $subject = $settings['notification']['registrationWaitlistConfirmed']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CANCELLED:
                 $template = 'Notification/Admin/RegistrationCancelled.html';
-                $subject = $settings['notification']['registrationCancelled']['adminSubject'];
+                $subject = $settings['notification']['registrationCancelled']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_MOVE_UP:
                 $template = 'Notification/Admin/RegistrationWaitlistMoveUp.html';
-                $subject = $settings['notification']['registrationWaitlistMoveUp']['adminSubject'];
+                $subject = $settings['notification']['registrationWaitlistMoveUp']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_NEW:
             default:
         }
 
-        return [
-            $template ?? '',
-            $subject ?? ''
-        ];
+        return [$template, $subject];
     }
 
     /**
      * Returns the rendered HTML for the given template
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
+     * @param Event $event Event
+     * @param Registration $registration Registration
      * @param string $template Template
      * @param array $settings Settings
      * @param array $additionalBodyVariables
      * @return string
      */
-    protected function getNotificationBody($event, $registration, $template, $settings, $additionalBodyVariables = [])
-    {
+    protected function getNotificationBody(
+        Event $event,
+        Registration $registration,
+        string $template,
+        array $settings,
+        array $additionalBodyVariables = []
+    ): string {
         $isBackendRequest = ($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface
             && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend();
 

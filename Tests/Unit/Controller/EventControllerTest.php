@@ -1295,15 +1295,17 @@ class EventControllerTest extends UnitTestCase
      */
     public function confirmRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
+        $event = new Event();
+
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::once())->method('setConfirmed')->with(true);
-        $mockRegistration->expects(self::any())->method('getEvent');
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($event);
         $mockRegistration->expects(self::once())->method('getAmountOfRegistrations')->willReturn(2);
 
         $variables = [
             'messageKey' => 'event.message.confirmation_successful',
             'titleKey' => 'confirmRegistration.title.successful',
-            'event' => null,
+            'event' => $event,
             'registration' => $mockRegistration,
             'failed' => false
         ];
@@ -1359,17 +1361,19 @@ class EventControllerTest extends UnitTestCase
      */
     public function confirmRegistrationWaitlistActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
+        $event = new Event();
+
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::once())->method('setConfirmed')->with(true);
         $mockRegistration->expects(self::once())->method('getAmountOfRegistrations')->willReturn(2);
         $mockRegistration->expects(self::any())->method('getWaitlist')->willReturn(true);
-        $mockRegistration->expects(self::any())->method('getEvent');
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($event);
 
         $view = $this->getMockBuilder(ViewInterface::class)->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.confirmation_waitlist_successful',
             'titleKey' => 'confirmRegistrationWaitlist.title.successful',
-            'event' => null,
+            'event' => $event,
             'registration' => $mockRegistration,
             'failed' => false
         ]);

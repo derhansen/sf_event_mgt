@@ -102,15 +102,6 @@ class NotificationServiceTest extends UnitTestCase
 
     /**
      * @test
-     */
-    public function sendUserMessageReturnsFalseIfInvalidArgumentsGiven()
-    {
-        $result = $this->subject->sendUserMessage(null, null, null, null);
-        self::assertFalse($result);
-    }
-
-    /**
-     * @test
      * @dataProvider messageTypeDataProvider
      * @param mixed $messageType
      */
@@ -236,15 +227,6 @@ class NotificationServiceTest extends UnitTestCase
         $this->subject->injectEventDispatcher($eventDispatcher);
 
         $result = $this->subject->sendAdminMessage($event, $registration, $settings, $messageType);
-        self::assertFalse($result);
-    }
-
-    /**
-     * @test
-     */
-    public function sendAdminMessageReturnsFalseIfInvalidArgumentsGiven()
-    {
-        $result = $this->subject->sendAdminMessage(null, null, null, MessageType::REGISTRATION_NEW);
         self::assertFalse($result);
     }
 
@@ -559,16 +541,16 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function userNotificationNotSentIfNotificationsDisabled()
     {
-        $mockEvent = $this->prophesize(Event::class);
-        $mockRegistration = $this->prophesize(Registration::class);
+        $eventProphecy = $this->prophesize(Event::class);
+        $registrationProphecy = $this->prophesize(Registration::class);
         $settings = [
             'notification' => [
                 'disabled' => 1
             ]
         ];
         $result = $this->subject->sendUserMessage(
-            $mockEvent,
-            $mockRegistration,
+            $eventProphecy->reveal(),
+            $registrationProphecy->reveal(),
             $settings,
             MessageType::REGISTRATION_NEW
         );
@@ -580,16 +562,16 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function adminNotificationNotSentIfNotificationsDisabled()
     {
-        $mockEvent = $this->prophesize(Event::class);
-        $mockRegistration = $this->prophesize(Registration::class);
+        $eventProphecy = $this->prophesize(Event::class);
+        $registrationProphecy = $this->prophesize(Registration::class);
         $settings = [
             'notification' => [
                 'disabled' => 1
             ]
         ];
         $result = $this->subject->sendAdminMessage(
-            $mockEvent,
-            $mockRegistration,
+            $eventProphecy->reveal(),
+            $registrationProphecy->reveal(),
             $settings,
             MessageType::REGISTRATION_NEW
         );

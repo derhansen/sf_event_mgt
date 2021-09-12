@@ -410,11 +410,8 @@ class AdministrationControllerTest extends UnitTestCase
         );
         $this->subject->injectSettingsService($mockSettingsService);
 
-        $mockNotificationService = $this->getMockBuilder(NotificationService::class)
-            ->getMock();
-        $mockNotificationService->expects(self::once())->method('sendCustomNotification')->willReturn(
-            1
-        );
+        $mockNotificationService = $this->getMockBuilder(NotificationService::class)->getMock();
+        $mockNotificationService->expects(self::once())->method('sendCustomNotification')->willReturn(1);
         $mockNotificationService->expects(self::once())->method('createCustomNotificationLogentry');
         $this->subject->injectNotificationService($mockNotificationService);
 
@@ -423,6 +420,7 @@ class AdministrationControllerTest extends UnitTestCase
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $customNotification = new CustomNotification();
+        $customNotification->setTemplate('key');
 
         $this->subject->_set('settings', []);
         $this->subject->expects(self::once())->method('redirect');
