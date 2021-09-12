@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -16,9 +18,6 @@ use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
  */
 class EventPageTitleProvider extends AbstractPageTitleProvider
 {
-    /**
-     * @param string $title
-     */
     public function setTitle(string $title): void
     {
         $this->title = $title;
