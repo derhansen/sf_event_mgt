@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,8 +11,10 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class CacheService
@@ -25,7 +29,7 @@ class EventCacheService
      *
      * @param array $eventRecords array with event records
      */
-    public function addCacheTagsByEventRecords(array $eventRecords)
+    public function addCacheTagsByEventRecords(array $eventRecords): void
     {
         $cacheTags = [];
         foreach ($eventRecords as $event) {
@@ -41,9 +45,9 @@ class EventCacheService
      * Adds page cache tags by used storagePages.
      * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand
+     * @param EventDemand $demand
      */
-    public function addPageCacheTagsByEventDemandObject(\DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand $demand)
+    public function addPageCacheTagsByEventDemandObject(EventDemand $demand): void
     {
         $cacheTags = [];
         if ($demand->getStoragePage()) {
@@ -63,7 +67,7 @@ class EventCacheService
      * @param int $eventUid
      * @param int $eventPid
      */
-    public function flushEventCache(int $eventUid = 0, int $eventPid = 0)
+    public function flushEventCache(int $eventUid = 0, int $eventPid = 0): void
     {
         $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
         $cacheTagsToFlush = [];
@@ -80,10 +84,7 @@ class EventCacheService
         }
     }
 
-    /**
-     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
-     */
-    protected function getTypoScriptFrontendController()
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
         return $GLOBALS['TSFE'] ?: null;
     }

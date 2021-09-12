@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -28,7 +30,7 @@ class CategoryService
      * @param string $categories
      * @return string
      */
-    public static function getCategoryListWithChilds($categories)
+    public static function getCategoryListWithChilds(string $categories): string
     {
         return self::getChildrenCategoriesRecursive($categories);
     }
@@ -40,7 +42,7 @@ class CategoryService
      * @param int $counter
      * @return string comma separated list of category ids
      */
-    private static function getChildrenCategoriesRecursive($idList, $counter = 0): string
+    private static function getChildrenCategoriesRecursive(string $idList, int $counter = 0): string
     {
         $result = [];
 
@@ -73,13 +75,11 @@ class CategoryService
 
                 return implode(',', $result);
             }
-            $subcategories = self::getChildrenCategoriesRecursive($row['uid'], $counter);
+            $subcategories = self::getChildrenCategoriesRecursive((string)$row['uid'], $counter);
             $result[] = $row['uid'] . ($subcategories ? ',' . $subcategories : '');
         }
 
-        $result = implode(',', $result);
-
-        return $result;
+        return implode(',', $result);
     }
 
     /**
@@ -88,7 +88,7 @@ class CategoryService
      * @param string $list
      * @return string
      */
-    private static function cleanIntList($list): string
+    private static function cleanIntList(string $list): string
     {
         return implode(',', GeneralUtility::intExplode(',', $list));
     }

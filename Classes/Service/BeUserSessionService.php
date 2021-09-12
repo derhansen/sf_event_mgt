@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,24 +11,21 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+
 /**
  * BeUserSessionService
  */
 class BeUserSessionService
 {
-    /**
-     * The session key
-     *
-     * @var string
-     */
-    const SESSION_KEY = 'sf_event_mgt';
+    private const SESSION_KEY = 'sf_event_mgt';
 
     /**
      * Saves the given data to the session
      *
      * @param array $data
      */
-    public function saveSessionData($data)
+    public function saveSessionData(array $data): void
     {
         $this->getBackendUser()->setAndSaveSessionData(self::SESSION_KEY, $data);
     }
@@ -47,7 +46,7 @@ class BeUserSessionService
      * @param string $key
      * @return mixed|null
      */
-    public function getSessionDataByKey($key)
+    public function getSessionDataByKey(string $key)
     {
         $result = null;
         $data = $this->getSessionData();
@@ -58,13 +57,8 @@ class BeUserSessionService
         return $result;
     }
 
-    /**
-     * Returns the current Backend User
-     *
-     * @return mixed|\TYPO3\CMS\Core\Authentication\BackendUserAuthentication
-     */
-    protected function getBackendUser()
+    protected function getBackendUser(): ?BackendUserAuthentication
     {
-        return $GLOBALS['BE_USER'];
+        return $GLOBALS['BE_USER'] ?? null;
     }
 }

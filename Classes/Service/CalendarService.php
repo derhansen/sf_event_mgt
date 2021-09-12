@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,7 +11,9 @@
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * CalendarService
@@ -23,10 +27,10 @@ class CalendarService
      * @param int $year
      * @param int $today
      * @param int $firstDayOfWeek
-     * @param array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $events
+     * @param array|QueryResultInterface $events
      * @return array
      */
-    public function getCalendarArray($month, $year, $today, $firstDayOfWeek = 0, $events = null)
+    public function getCalendarArray(int $month, int $year, int $today, int $firstDayOfWeek = 0, $events = null): array
     {
         $weeks = [];
         $dateRange = $this->getCalendarDateRange($month, $year, $firstDayOfWeek);
@@ -39,7 +43,7 @@ class CalendarService
                 $day['day'] = (int)date('j', $currentDay);
                 $day['month'] = (int)date('n', $currentDay);
                 $day['weekNumber'] = (int)date('W', $currentDay);
-                $day['isCurrentMonth'] = $day['month'] === (int)$month;
+                $day['isCurrentMonth'] = $day['month'] === $month;
                 $day['isCurrentDay'] = date('Ymd', $today) === date('Ymd', $day['timestamp']);
                 if ($events) {
                     $searchDay = new \DateTime();
@@ -64,7 +68,7 @@ class CalendarService
      * @param int $firstDayOfWeek
      * @return array
      */
-    public function getCalendarDateRange($month, $year, $firstDayOfWeek = 0)
+    public function getCalendarDateRange(int $month, int $year, int $firstDayOfWeek = 0): array
     {
         $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
         $dayOfWeekOfFirstDay = (int)date('w', $firstDayOfMonth);
@@ -93,18 +97,18 @@ class CalendarService
     /**
      * Returns an array of events for the given day
      *
-     * @param array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $events
-     * @param \DateTime $currentDay
+     * @param array|QueryResultInterface $events
+     * @param DateTime $currentDay
      * @return array
      */
-    protected function getEventsForDay($events, $currentDay)
+    protected function getEventsForDay($events, DateTime $currentDay): array
     {
         $foundEvents = [];
         /** @var Event $event */
         foreach ($events as $event) {
             $eventBeginDate = $event->getStartdate()->format('Y-m-d');
             $day = date('Y-m-d', $currentDay->getTimestamp());
-            if ($event->getEnddate() === null) {
+            if (!is_a($event->getEnddate(), DateTime::class)) {
                 if ($eventBeginDate === $day) {
                     $foundEvents[] = $event;
                 }
@@ -131,7 +135,7 @@ class CalendarService
      * @param string $modifier
      * @return array
      */
-    public function getDateConfig($month, $year, $modifier = '')
+    public function getDateConfig(int $month, int $year, string $modifier = ''): array
     {
         $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
         $date->setTime(0, 0, 0);

@@ -221,7 +221,7 @@ class EventController extends AbstractController
         $calendarDateRange = $this->calendarService->getCalendarDateRange(
             $eventDemand->getMonth(),
             $eventDemand->getYear(),
-            $this->settings['calendar']['firstDayOfWeek']
+            (int)($this->settings['calendar']['firstDayOfWeek'] ?? 0)
         );
 
         $eventDemand->setMonth(0);

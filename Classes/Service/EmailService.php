@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -24,21 +26,21 @@ class EmailService
      * @param string $recipient The recipient
      * @param string $subject The subject
      * @param string $body E-Mail body
-     * @param string $name Optional sendername
+     * @param string|null $name Optional sendername
      * @param array $attachments Array of files (e.g. ['/absolute/path/doc.pdf'])
-     * @param string $replyTo The reply-to mail
+     * @param string|null $replyTo The reply-to mail
      *
      * @return bool true/false if message is sent
      */
     public function sendEmailMessage(
-        $sender,
-        $recipient,
-        $subject,
-        $body,
-        $name = null,
-        $attachments = [],
-        $replyTo = null
-    ) {
+        string $sender,
+        string $recipient,
+        string $subject,
+        string $body,
+        ?string $name = null,
+        array $attachments = [],
+        ?string $replyTo = null
+    ): bool {
         if (!GeneralUtility::validEmail($sender) || !GeneralUtility::validEmail($recipient)) {
             return false;
         }
