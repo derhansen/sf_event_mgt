@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -22,14 +24,14 @@ class SettingsService
      *
      * @return array
      */
-    public function getCustomNotifications($settings)
+    public function getCustomNotifications(array $settings): array
     {
         if (!is_array($settings['notification']['customNotifications'])) {
             return [];
         }
         $notifications = [];
         foreach ($settings['notification']['customNotifications'] as $notificationKey => $notificationValue) {
-            $notifications[$notificationKey] = $notificationValue['title'];
+            $notifications[$notificationKey] = $notificationValue['title'] ?? '';
         }
 
         return $notifications;

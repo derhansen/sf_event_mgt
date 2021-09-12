@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -18,30 +20,11 @@ use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
  */
 class SpamCheckService
 {
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var array
-     */
-    protected $arguments = [];
-
-    /**
-     * @var Registration
-     */
-    protected $registration;
-
-    /**
-     * @var int
-     */
-    protected $maxSpamScore = 10;
-
-    /**
-     * @var int
-     */
-    protected $checkScore = 0;
+    protected array $settings = [];
+    protected array $arguments = [];
+    protected Registration $registration;
+    protected int $maxSpamScore = 10;
+    protected int $checkScore = 0;
 
     /**
      * SpamCheckService constructor.
@@ -60,7 +43,7 @@ class SpamCheckService
             $this->maxSpamScore = (int)$settings['maxSpamScore'];
         }
 
-        if (!isset($settings['checks']) || $settings['checks'] === null) {
+        if (!isset($settings['checks']) || empty($settings['checks'])) {
             $this->settings['checks'] = [];
         }
     }
@@ -73,7 +56,7 @@ class SpamCheckService
      */
     public function isSpamCheckFailed(): bool
     {
-        if ((bool)$this->settings['enabled']) {
+        if ((bool)($this->settings['enabled'] ?? false)) {
             $this->processSpamChecks();
         }
 
@@ -87,8 +70,8 @@ class SpamCheckService
      */
     protected function processSpamChecks()
     {
-        foreach ($this->settings['checks'] as $checkConfig) {
-            if (!class_exists($checkConfig['class'])) {
+        foreach ($this->settings['checks'] ?? [] as $checkConfig) {
+            if (!class_exists($checkConfig['class'] ?? '')) {
                 throw new SpamCheckNotFoundException('Class ' . $checkConfig['class'] . ' does not exists');
             }
             $this->processSpamCheck($checkConfig);
@@ -100,9 +83,9 @@ class SpamCheckService
      *
      * @param array $checkConfig
      */
-    protected function processSpamCheck(array $checkConfig)
+    protected function processSpamCheck(array $checkConfig): void
     {
-        if (!(bool)$checkConfig['enabled']) {
+        if (!(bool)($checkConfig['enabled'] ?? false)) {
             return;
         }
         $configuration = $checkConfig['configuration'] ?? [];

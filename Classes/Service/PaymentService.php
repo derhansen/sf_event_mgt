@@ -80,7 +80,7 @@ class PaymentService
     protected function getConfiguredPaymentMethodConfig(): array
     {
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sf_event_mgt');
-        $allPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] ?? '';
+        $allPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] ?? [];
         if ((bool)($extensionConfiguration['enableInvoice'] ?? false) === false) {
             unset($allPaymentMethods['invoice']);
         }

@@ -352,7 +352,7 @@ class AdministrationController extends AbstractController
     {
         $this->checkEventAccess($event);
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
-        $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
+        $customNotifications = $this->settingsService->getCustomNotifications($this->settings ?? []);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
         $this->view->assignMultiple([
             'event' => $event,

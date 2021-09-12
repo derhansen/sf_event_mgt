@@ -35,7 +35,7 @@ class RegistrationService
 {
     protected EventDispatcherInterface $eventDispatcher;
     protected RegistrationRepository $registrationRepository;
-    protected ?FrontendUserRepository $frontendUserRepository = null;
+    protected FrontendUserRepository $frontendUserRepository;
     protected HashService $hashService;
     protected PaymentService $paymentService;
     protected NotificationService $notificationService;
