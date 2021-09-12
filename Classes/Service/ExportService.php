@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -11,9 +13,11 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Exception;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\CsvUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
@@ -22,15 +26,8 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
  */
 class ExportService
 {
-    /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     */
-    protected $registrationRepository;
-
-    /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
-     */
-    protected $eventRepository;
+    protected RegistrationRepository $registrationRepository;
+    protected EventRepository $eventRepository;
 
     public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
     {
@@ -45,7 +42,7 @@ class ExportService
      * @param array $settings Settings
      * @throws Exception RuntimeException
      */
-    public function downloadRegistrationsCsv($eventUid, $settings = [])
+    public function downloadRegistrationsCsv(int $eventUid, array $settings = []): void
     {
         $content = $this->exportRegistrationsCsv($eventUid, $settings);
         header('Content-Disposition: attachment; filename="event_' . $eventUid . '_reg_' . date('dmY_His') . '.csv"');
@@ -65,11 +62,11 @@ class ExportService
      * @throws Exception RuntimeException
      * @return string
      */
-    public function exportRegistrationsCsv($eventUid, $settings = [])
+    public function exportRegistrationsCsv(int $eventUid, array $settings = []): string
     {
         $hasRegistrationFields = false;
         $registrationFieldData = [];
-        $fieldsArray = array_map('trim', explode(',', $settings['fields']));
+        $fieldsArray = array_map('trim', explode(',', ($settings['fields'] ?? '')));
 
         if (in_array('registration_fields', $fieldsArray)) {
             $hasRegistrationFields = true;
@@ -79,8 +76,8 @@ class ExportService
         $registrations = $this->registrationRepository->findByEvent($eventUid);
         $exportedRegistrations = CsvUtility::csvValues(
             array_merge($fieldsArray, $registrationFieldData),
-            $settings['fieldDelimiter'],
-            $settings['fieldQuoteCharacter']
+            $settings['fieldDelimiter'] ?? ',',
+            $settings['fieldQuoteCharacter'] ?? '"'
         ) . chr(10);
         /** @var Registration $registration */
         foreach ($registrations as $registration) {
@@ -96,8 +93,8 @@ class ExportService
             }
             $exportedRegistrations .= CsvUtility::csvValues(
                 $exportedRegistration,
-                $settings['fieldDelimiter'],
-                $settings['fieldQuoteCharacter']
+                $settings['fieldDelimiter'] ?? ',',
+                $settings['fieldQuoteCharacter'] ?? '"'
             ) . chr(10);
         }
 
@@ -111,14 +108,14 @@ class ExportService
      * @param array $registrationFieldData
      * @return array
      */
-    protected function getRegistrationFieldValues($registration, $registrationFieldData)
+    protected function getRegistrationFieldValues(Registration $registration, array $registrationFieldData): array
     {
         $result = [];
         $registrationFieldValues = [];
         /** @var Registration\FieldValue $fieldValue */
         foreach ($registration->getFieldValues() as $fieldValue) {
             $field = $fieldValue->getField();
-            if ($field) {
+            if ($field !== null) {
                 $registrationFieldValues[$field->getUid()] =
                     $this->replaceLineBreaks($fieldValue->getValueForCsvExport());
             }
@@ -140,12 +137,12 @@ class ExportService
      * @param int $eventUid
      * @return array
      */
-    protected function getRegistrationFieldData($eventUid)
+    protected function getRegistrationFieldData(int $eventUid): array
     {
         $result = [];
         /** @var Event $event */
         $event = $this->eventRepository->findByUid($eventUid);
-        if ($event) {
+        if ($event !== null) {
             $result = $event->getRegistrationFieldUidsWithTitle();
         }
 
@@ -159,9 +156,9 @@ class ExportService
      * @param array $settings
      * @return string
      */
-    protected function prependByteOrderMark($exportedRegistrations, $settings)
+    protected function prependByteOrderMark(string $exportedRegistrations, array $settings): string
     {
-        if ((bool)$settings['prependBOM']) {
+        if ((bool)($settings['prependBOM'] ??  false)) {
             $exportedRegistrations = chr(239) . chr(187) . chr(191) . $exportedRegistrations;
         }
 
@@ -172,12 +169,12 @@ class ExportService
      * Returns the requested field from the given registration. If the field is a DateTime object,
      * a formatted date string is returned
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $field
      * @param array $settings
      * @return string
      */
-    protected function getFieldValue($registration, $field, array $settings)
+    protected function getFieldValue(Registration $registration, string $field, array $settings): string
     {
         $value = ObjectAccess::getPropertyPath($registration, $field);
         if ($value instanceof \DateTime) {
@@ -199,11 +196,8 @@ class ExportService
         return str_replace(["\r\n", "\r", "\n"], ' ', $value);
     }
 
-    /**
-     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
-     */
-    protected function getBackendUser()
+    protected function getBackendUser(): ?BackendUserAuthentication
     {
-        return $GLOBALS['BE_USER'];
+        return $GLOBALS['BE_USER'] ?? null;
     }
 }

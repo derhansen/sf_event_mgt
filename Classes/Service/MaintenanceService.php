@@ -24,7 +24,7 @@ class MaintenanceService
      *
      * @param bool $delete
      */
-    public function handleExpiredRegistrations(bool $delete = false)
+    public function handleExpiredRegistrations(bool $delete = false): void
     {
         $eventCacheService = GeneralUtility::makeInstance(EventCacheService::class);
         $registrationUids = $this->getExpiredRegistrations();
@@ -40,7 +40,7 @@ class MaintenanceService
      * @param int $registrationUid
      * @param bool $delete
      */
-    protected function updateRegistration(int $registrationUid, bool $delete = false)
+    protected function updateRegistration(int $registrationUid, bool $delete = false): void
     {
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getConnectionForTable('tx_sfeventmgt_domain_model_registration');

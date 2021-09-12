@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -10,7 +12,9 @@
 namespace DERHANSEN\SfEventMgt\Service;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -18,21 +22,10 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
  */
 class FluidStandaloneService
 {
-    /**
-     * The configuration manager
-     *
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager
-     */
-    protected $configurationManager;
+    protected ConfigurationManager $configurationManager;
 
-    /**
-     * DI for $configurationManager
-     *
-     * @param \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
-     */
-    public function injectConfigurationManager(
-        \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager
-    ) {
+    public function injectConfigurationManager(ConfigurationManager $configurationManager)
+    {
         $this->configurationManager = $configurationManager;
     }
 
@@ -40,10 +33,10 @@ class FluidStandaloneService
      * Returns the template folders for the given part
      *
      * @param string $part
-     * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @throws InvalidConfigurationTypeException
      * @return array
      */
-    public function getTemplateFolders($part = 'template')
+    public function getTemplateFolders(string $part = 'template'): array
     {
         $extbaseConfig = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK,
@@ -80,7 +73,7 @@ class FluidStandaloneService
      * @param string $path
      * @return string
      */
-    protected function ensureSuffixedPath($path)
+    protected function ensureSuffixedPath(string $path): string
     {
         return rtrim($path, '/') . '/';
     }
@@ -94,8 +87,12 @@ class FluidStandaloneService
      * @param string $pluginName
      * @return string
      */
-    public function renderTemplate($template, $variables, $extensionName = 'SfEventMgt', $pluginName = 'Pievent')
-    {
+    public function renderTemplate(
+        string $template,
+        array $variables,
+        string $extensionName = 'SfEventMgt',
+        string $pluginName = 'Pievent'
+    ): string {
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
         $emailView->getRequest()->setControllerExtensionName($extensionName);
         $emailView->getRequest()->setPluginName($pluginName);
@@ -105,9 +102,7 @@ class FluidStandaloneService
         $emailView->setPartialRootPaths($this->getTemplateFolders('partial'));
         $emailView->setTemplate($template);
         $emailView->assignMultiple($variables);
-        $emailBody = $emailView->render();
-
-        return $emailBody;
+        return $emailView->render();
     }
 
     /**
