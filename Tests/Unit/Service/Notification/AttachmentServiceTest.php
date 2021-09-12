@@ -125,7 +125,9 @@ class AttachmentServiceTest extends UnitTestCase
         $settingsPath,
         $expected
     ) {
+        $event = new Event();
         $registration = new Registration();
+        $registration->setEvent($event);
 
         $settings = ['notification' => [
             $settingsPath => [

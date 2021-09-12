@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -10,26 +12,21 @@
 namespace DERHANSEN\SfEventMgt\Service\Notification;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * AttachmentService
  */
 class AttachmentService
 {
-    /**
-     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
-     */
-    protected $iCalendarService;
+    protected ICalendarService $iCalendarService;
 
-    /**
-     * DI for iCalService
-     *
-     * @param \DERHANSEN\SfEventMgt\Service\ICalendarService $iCalService
-     */
-    public function injectICalService(\DERHANSEN\SfEventMgt\Service\ICalendarService $iCalService)
+    public function injectICalService(ICalendarService $iCalService)
     {
         $this->iCalendarService = $iCalService;
     }
@@ -68,8 +65,12 @@ class AttachmentService
      *
      * @return array Array with absolute filenames to attachments
      */
-    public function getAttachments($settings, $registration, $messageType, $messageRecipient)
-    {
+    public function getAttachments(
+        array $settings,
+        Registration $registration,
+        int $messageType,
+        string $messageRecipient
+    ): array {
         $attachments = [];
         $settingPath = $this->getSettingsPath($messageType);
 
@@ -79,11 +80,17 @@ class AttachmentService
             $attachments = $this->getFileAttachments($config);
 
             // Attachments from Event properties
-            $eventAttachments = $this->getObjectAttachments($config['fromEventProperty'], $registration->getEvent());
+            $eventAttachments = $this->getObjectAttachments(
+                $config['fromEventProperty'] ?? [],
+                $registration->getEvent()
+            );
             $attachments = array_merge($attachments, $eventAttachments);
 
             // Attachments from Registration properties
-            $registrationAttachments = $this->getObjectAttachments($config['fromRegistrationProperty'], $registration);
+            $registrationAttachments = $this->getObjectAttachments(
+                $config['fromRegistrationProperty'] ?? [],
+                $registration
+            );
             $attachments = array_merge($attachments, $registrationAttachments);
         }
 
@@ -111,19 +118,23 @@ class AttachmentService
      * @param string $messageRecipient
      * @return string
      */
-    public function getICalAttachment($settings, $registration, $messageType, $messageRecipient)
-    {
+    public function getICalAttachment(
+        array $settings,
+        Registration $registration,
+        int $messageType,
+        string $messageRecipient
+    ): string {
         $file = '';
         $settingPath = $this->getSettingsPath($messageType);
 
         if (isset($settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) &&
             (bool)$settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) {
-            $file = \TYPO3\CMS\Core\Utility\GeneralUtility::tempnam(
+            $file = GeneralUtility::tempnam(
                 'event-' . $registration->getEvent()->getUid() . '-',
                 '.ics'
             );
             $content = $this->iCalendarService->getiCalendarContent($registration->getEvent());
-            \TYPO3\CMS\Core\Utility\GeneralUtility::writeFile($file, $content);
+            GeneralUtility::writeFile($file, $content);
         }
 
         return $file;
@@ -132,10 +143,10 @@ class AttachmentService
     /**
      * Returns the settingspath for the given messagetype
      *
-     * @param string $messageType
+     * @param int $messageType
      * @return string
      */
-    protected function getSettingsPath($messageType)
+    protected function getSettingsPath(int $messageType): string
     {
         $settingPath = '';
         switch ($messageType) {
@@ -162,10 +173,10 @@ class AttachmentService
      * @param array $settings
      * @return array
      */
-    protected function getFileAttachments($settings)
+    protected function getFileAttachments(array $settings): array
     {
         $attachments = [];
-        if (isset($settings['fromFiles']) && $settings['fromFiles'] !== '' && count($settings['fromFiles']) > 0) {
+        if (isset($settings['fromFiles']) && is_array($settings['fromFiles']) && count($settings['fromFiles']) > 0) {
             foreach ($settings['fromFiles'] as $file) {
                 $attachments[] = GeneralUtility::getFileAbsFileName($file);
             }
@@ -181,10 +192,10 @@ class AttachmentService
      * @param AbstractEntity $object
      * @return array
      */
-    protected function getObjectAttachments($propertyNames, $object)
+    protected function getObjectAttachments(array $propertyNames, AbstractEntity $object): array
     {
         $attachments = [];
-        if ($object && $propertyNames !== '' && is_array($propertyNames) && count($propertyNames) > 0) {
+        if (count($propertyNames) > 0) {
             foreach ($propertyNames as $propertyName) {
                 if ($object->_hasProperty($propertyName)) {
                     $attachments = array_merge($attachments, $this->getAttachmentsFromProperty($object, $propertyName));
@@ -202,20 +213,20 @@ class AttachmentService
      * @param string $propertyName
      * @return array
      */
-    protected function getAttachmentsFromProperty($object, $propertyName)
+    protected function getAttachmentsFromProperty(AbstractEntity $object, string $propertyName): array
     {
         $attachments = [];
         $property = $object->_getProperty($propertyName);
 
-        if ($property instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+        if ($property instanceof ObjectStorage) {
             foreach ($property as $object) {
-                if ($object instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+                if ($object instanceof FileReference) {
                     $attachments[] = $object->getOriginalResource()->getForLocalProcessing(false);
                 }
             }
         }
 
-        if ($property instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+        if ($property instanceof FileReference) {
             $attachments[] = $property->getOriginalResource()->getForLocalProcessing(false);
         }
 

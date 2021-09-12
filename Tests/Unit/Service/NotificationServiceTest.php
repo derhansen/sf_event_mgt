@@ -419,7 +419,7 @@ class NotificationServiceTest extends UnitTestCase
         $eventDispatcher->expects(self::once())->method('dispatch');
         $this->subject->injectEventDispatcher($eventDispatcher);
 
-        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, MessageRecipient::ADMIN);
+        $result = $this->subject->sendAdminMessage($event, $mockRegistration, $settings, MessageType::REGISTRATION_NEW);
         self::assertTrue($result);
     }
 
