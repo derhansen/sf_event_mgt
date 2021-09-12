@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -13,6 +15,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * PaymentService
@@ -24,7 +27,7 @@ class PaymentService
      *
      * @return array
      */
-    public function getPaymentMethods()
+    public function getPaymentMethods(): array
     {
         $paymentMethods = [];
         $configuredPaymentMethods = $this->getConfiguredPaymentMethodConfig();
@@ -40,12 +43,12 @@ class PaymentService
      *
      * @param string $key
      * @param string $extension
-     * @param array $arguments
+     * @param array|null $arguments
      * @return string|null
      */
-    protected function translate($key, $extension, $arguments = null)
+    protected function translate(string $key, string $extension, ?array $arguments = null): ?string
     {
-        return \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate($key, $extension, $arguments);
+        return LocalizationUtility::translate($key, $extension, $arguments);
     }
 
     /**
@@ -54,7 +57,7 @@ class PaymentService
      * @param Event $event
      * @return array
      */
-    public function getRestrictedPaymentMethods($event)
+    public function getRestrictedPaymentMethods(Event $event): array
     {
         $restrictedPaymentMethods = [];
         $allPaymentMethods = $this->getPaymentMethods();
@@ -74,14 +77,14 @@ class PaymentService
      *
      * @return array
      */
-    protected function getConfiguredPaymentMethodConfig()
+    protected function getConfiguredPaymentMethodConfig(): array
     {
         $extensionConfiguration = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sf_event_mgt');
-        $allPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
-        if ((bool)$extensionConfiguration['enableInvoice'] === false) {
+        $allPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] ?? '';
+        if ((bool)($extensionConfiguration['enableInvoice'] ?? false) === false) {
             unset($allPaymentMethods['invoice']);
         }
-        if ((bool)$extensionConfiguration['enableTransfer'] === false) {
+        if ((bool)($extensionConfiguration['enableTransfer'] ?? false) === false) {
             unset($allPaymentMethods['transfer']);
         }
 
@@ -94,12 +97,12 @@ class PaymentService
      * @param string $paymentMethod
      * @return AbstractPayment|null
      */
-    public function getPaymentInstance($paymentMethod)
+    public function getPaymentInstance(string $paymentMethod): ?AbstractPayment
     {
         $paymentInstance = null;
-        $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'];
+        $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] ?? '';
         if (isset($configuredPaymentMethods[$paymentMethod]) &&
-            class_exists($configuredPaymentMethods[$paymentMethod]['class'])) {
+            class_exists($configuredPaymentMethods[$paymentMethod]['class'] ?? '')) {
             /** @var AbstractPayment $paymentInstance */
             $paymentInstance = GeneralUtility::makeInstance($configuredPaymentMethods[$paymentMethod]['class']);
         }
@@ -114,7 +117,7 @@ class PaymentService
      * @param string $action
      * @return bool
      */
-    public function paymentActionEnabled($paymentMethod, $action)
+    public function paymentActionEnabled(string $paymentMethod, string $action): bool
     {
         $result = false;
         $paymentInstance = $this->getPaymentInstance($paymentMethod);

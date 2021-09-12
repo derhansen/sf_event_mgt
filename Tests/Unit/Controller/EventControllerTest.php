@@ -776,6 +776,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectRegistrationService($mockRegistrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
+        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
@@ -836,6 +837,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
+        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
@@ -902,6 +904,7 @@ class EventControllerTest extends UnitTestCase
         $regHmac = 'someRandomHMAC';
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
+        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
         $registration->expects(self::any())->method('getUid')->willReturn($regUid);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -976,6 +979,7 @@ class EventControllerTest extends UnitTestCase
         $regHmac = 'someRandomHMAC';
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
+        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
         $registration->expects(self::any())->method('getUid')->willReturn($regUid);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();

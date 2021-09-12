@@ -18,7 +18,7 @@ use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -28,6 +28,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class RegistrationServiceTest extends UnitTestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
      */
@@ -58,21 +60,10 @@ class RegistrationServiceTest extends UnitTestCase
         $mockRegistration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(5);
         $mockRegistration->expects(self::any())->method('getPid')->willReturn(1);
 
-        $newRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-        $newRegistration->expects(self::any())->method('setMainRegistration');
-        $newRegistration->expects(self::any())->method('setAmountOfRegistrations');
-        $newRegistration->expects(self::any())->method('setIgnoreNotifications');
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($newRegistration);
-        $this->subject->injectObjectManager($objectManager);
-
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $registrationRepository->expects(self::exactly(4))->method('add')->with($newRegistration);
+        $registrationRepository->expects(self::exactly(4))->method('add');
         $this->subject->injectRegistrationRepository($registrationRepository);
 
         $this->subject->createDependingRegistrations($mockRegistration);
@@ -720,7 +711,7 @@ class RegistrationServiceTest extends UnitTestCase
             ->onlyMethods(['getEvent', 'getPaymentMethod'])
             ->getMock();
         $mockRegistration->expects(self::once())->method('getEvent')->willReturn($event);
-        $mockRegistration->expects(self::once())->method('getPaymentMethod');
+        $mockRegistration->expects(self::once())->method('getPaymentMethod')->willReturn('');
 
         // Payment mock object with redirect enabled
         $mockInvoice = $this->getMockBuilder(Invoice::class)
