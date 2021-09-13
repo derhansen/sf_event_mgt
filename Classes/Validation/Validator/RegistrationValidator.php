@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -11,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
+use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
@@ -24,9 +27,9 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 class RegistrationValidator extends AbstractValidator
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
+     * @var ConfigurationManagerInterface
      */
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
     protected array $settings;
 
@@ -54,7 +57,7 @@ class RegistrationValidator extends AbstractValidator
     protected function isValid($value)
     {
         $spamSettings = $this->settings['registration']['spamCheck'] ?? [];
-        if ((bool)$spamSettings['enabled'] && $this->isSpamCheckFailed($value, $spamSettings)) {
+        if ((bool)($spamSettings['enabled'] ?? false) && $this->isSpamCheckFailed($value, $spamSettings)) {
             $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
             $this->addErrorForProperty('spamCheck', $message, 1578855253);
 
@@ -64,8 +67,8 @@ class RegistrationValidator extends AbstractValidator
         $result = $this->validateDefaultFields($value);
 
         // If no required fields are set, then the registration is valid
-        if ($this->settings['registration']['requiredFields'] === '' ||
-            !isset($this->settings['registration']['requiredFields'])
+        if (!isset($this->settings['registration']['requiredFields']) ||
+            $this->settings['registration']['requiredFields'] === ''
         ) {
             return $result;
         }
@@ -134,7 +137,7 @@ class RegistrationValidator extends AbstractValidator
      *
      * @param Registration $registration
      * @param array $settings
-     * @throws \DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException
+     * @throws SpamCheckNotFoundException
      * @return bool
      */
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
