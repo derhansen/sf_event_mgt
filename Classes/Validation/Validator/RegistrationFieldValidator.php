@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -12,12 +14,13 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
 /**
  * RegistrationFieldValidator
  */
-class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator
+class RegistrationFieldValidator extends AbstractValidator
 {
     /**
      * Validates the additional fields of the given registration.
@@ -53,14 +56,13 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
      * @param ObjectStorage $fieldValues
      * @return bool
      */
-    protected function validateField($registrationField, $fieldValues)
+    protected function validateField(Registration\Field $registrationField, ObjectStorage $fieldValues): bool
     {
         $result = true;
         if (!$registrationField->getRequired()) {
             return $result;
         }
 
-        /** @var NotEmptyValidator $validator */
         $validator = $this->getNotEmptyValidator();
 
         $fieldValue = $this->getFieldValue($registrationField, $fieldValues);
@@ -80,7 +82,7 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
      *
      * @return NotEmptyValidator
      */
-    protected function getNotEmptyValidator()
+    protected function getNotEmptyValidator(): NotEmptyValidator
     {
         return GeneralUtility::makeInstance(NotEmptyValidator::class);
     }
@@ -90,9 +92,9 @@ class RegistrationFieldValidator extends \TYPO3\CMS\Extbase\Validation\Validator
      *
      * @param Registration\Field $registrationField
      * @param ObjectStorage $fieldValues
-     * @return string
+     * @return string|array
      */
-    protected function getFieldValue($registrationField, $fieldValues)
+    protected function getFieldValue(Registration\Field $registrationField, ObjectStorage $fieldValues)
     {
         $result = '';
         /** @var Registration\FieldValue $fieldValue */
