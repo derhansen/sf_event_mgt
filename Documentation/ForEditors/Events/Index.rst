@@ -366,7 +366,7 @@ Contains all registrations for the event. Only visible, when registration is ena
          Registrations on the waitlist
 
    :Description:
-         A list of participants registered to the waitlist of the event. This option is only visible, when the
+         A list of participants registered to the waitlist of the event. This option is only visible, when the waitlist feature is enabled for the event.
 
 Payment
 ~~~~~~~
