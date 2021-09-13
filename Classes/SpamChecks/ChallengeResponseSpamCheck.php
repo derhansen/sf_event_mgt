@@ -30,10 +30,11 @@ class ChallengeResponseSpamCheck extends AbstractSpamCheck
         }
 
         $challenge =  MiscUtility::getSpamCheckChallenge((int)$this->arguments['event']);
-        $originalChallenge = $this->configuration['prefix'] . $challenge . $this->configuration['postfix'];
+        $originalChallenge = ($this->configuration['prefix'] ?? 'SfEventMgt') .
+            $challenge . ($this->configuration['postfix'] ?? 'TYPO3');
 
         $expectedResponse = str_rot13($originalChallenge);
-        $response = $this->arguments['registration']['cr-response'];
+        $response = $this->arguments['registration']['cr-response'] ?? '';
 
         return $expectedResponse !== $response;
     }

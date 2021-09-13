@@ -18,25 +18,10 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 abstract class AbstractSpamCheck implements SpamCheckInterface
 {
-    /**
-     * @var Registration
-     */
-    protected $registration;
-
-    /**
-     * @var array
-     */
-    protected $settings = [];
-
-    /**
-     * @var array
-     */
-    protected $configuration = [];
-
-    /**
-     * @var array
-     */
-    protected $arguments = [];
+    protected Registration $registration;
+    protected array $settings = [];
+    protected array $configuration = [];
+    protected array $arguments = [];
 
     /**
      * AbstractSpamCheck constructor.
