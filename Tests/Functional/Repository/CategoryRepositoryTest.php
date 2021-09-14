@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -19,7 +21,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class CategoryRepositoryTest extends FunctionalTestCase
 {
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository */
+    /** @var CategoryRepository */
     protected $categoryRepository;
 
     /** @var array */
@@ -54,7 +56,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByStoragePageRestriction()
     {
         $demand = new CategoryDemand();
-        $demand->setStoragePage(1);
+        $demand->setStoragePage('1');
         $demand->setRestrictToStoragePage(true);
         $events = $this->categoryRepository->findDemanded($demand);
         self::assertEquals(3, $events->count());
