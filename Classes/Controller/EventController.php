@@ -977,7 +977,7 @@ class EventController extends AbstractController
      */
     protected function persistAll()
     {
-        $this->objectManager->get(PersistenceManager::class)->persistAll();
+        GeneralUtility::makeInstance(PersistenceManager::class)->persistAll();
     }
 
     /**
