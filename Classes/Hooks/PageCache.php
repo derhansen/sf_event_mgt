@@ -80,13 +80,16 @@ class PageCache
      */
     protected function getCurrentPageCacheConfiguration(TypoScriptFrontendController $pObj): array
     {
-        $tables = ['tt_content:' . $pObj->id];
-        if (isset($pObj->config['config']['cache.'][$pObj->id])) {
-            $cacheConfig = str_replace(':current', ':' . $pObj->id, $pObj->config['config']['cache.'][$pObj->id]);
+        // @extensionScannerIgnoreLine
+        $id = $pObj->id;
+
+        $tables = ['tt_content:' . $id];
+        if (isset($pObj->config['config']['cache.'][$id])) {
+            $cacheConfig = str_replace(':current', ':' . $id, $pObj->config['config']['cache.'][$id]);
             $tables = array_merge($tables, GeneralUtility::trimExplode(',', $cacheConfig));
         }
         if (isset($pObj->config['config']['cache.']['all'])) {
-            $cacheConfig = str_replace(':current', ':' . $pObj->id, $pObj->config['config']['cache.']['all']);
+            $cacheConfig = str_replace(':current', ':' . $id, $pObj->config['config']['cache.']['all']);
             $tables = array_merge($tables, GeneralUtility::trimExplode(',', $cacheConfig));
         }
         $tables = array_unique($tables);
