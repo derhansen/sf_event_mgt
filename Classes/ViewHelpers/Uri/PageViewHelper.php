@@ -16,15 +16,15 @@
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 
 use TYPO3\CMS\Core\Utility\MathUtility;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * Modified version of TYPO3 f:uri.page viewHelper, which always generates frontend URLs, so views created in
  * backend context can render links in frontend context
  */
-class PageViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
+class PageViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
@@ -58,31 +58,28 @@ class PageViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelpe
         $pageType = $arguments['pageType'];
         $noCache = $arguments['noCache'];
         $section = $arguments['section'];
+        $language = $arguments['language'] ?? null;
         $linkAccessRestrictedPages = $arguments['linkAccessRestrictedPages'];
         $absolute = $arguments['absolute'];
         $addQueryString = $arguments['addQueryString'];
         $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'];
-        $addQueryStringMethod = $arguments['addQueryStringMethod'];
 
-        /** @var UriBuilder $uriBuilder */
-        $uriBuilder = $renderingContext->getControllerContext()->getUriBuilder();
+        $uriBuilder = $renderingContext->getUriBuilder();
         $uri = $uriBuilder
             ->reset()
             ->setTargetPageType($pageType)
             ->setNoCache($noCache)
             ->setSection($section)
+            ->setLanguage($language)
             ->setLinkAccessRestrictedPages($linkAccessRestrictedPages)
             ->setArguments($additionalParams)
             ->setCreateAbsoluteUri($absolute)
             ->setAddQueryString($addQueryString)
-            ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString);
+            ->setArgumentsToBeExcludedFromQueryString($argumentsToBeExcludedFromQueryString)
+        ;
 
         if (MathUtility::canBeInterpretedAsInteger($pageUid)) {
             $uriBuilder->setTargetPageUid((int)$pageUid);
-        }
-
-        if (is_string($addQueryStringMethod)) {
-            $uriBuilder->setAddQueryStringMethod($addQueryStringMethod);
         }
 
         return $uri->buildFrontendUri();
