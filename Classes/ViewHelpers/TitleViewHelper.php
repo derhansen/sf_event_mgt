@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -47,8 +49,8 @@ class TitleViewHelper extends AbstractViewHelper
         \Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
-        $pageTitle = isset($arguments['pageTitle']) ? $arguments['pageTitle'] : '';
-        $indexedDocTitle = isset($arguments['indexedDocTitle']) ? $arguments['indexedDocTitle'] : $pageTitle;
+        $pageTitle = $arguments['pageTitle'] ?? '';
+        $indexedDocTitle = $arguments['indexedDocTitle'] ?? $pageTitle;
         if ($pageTitle !== '') {
             GeneralUtility::makeInstance(EventPageTitleProvider::class)->setTitle($pageTitle);
         }
