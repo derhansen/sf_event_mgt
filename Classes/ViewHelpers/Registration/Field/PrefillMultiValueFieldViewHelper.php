@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -35,7 +37,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
      *
      * @return bool
      */
-    public function render()
+    public function render(): bool
     {
         /** @var Field $registrationField */
         $registrationField = $this->arguments['registrationField'];
@@ -92,11 +94,11 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $registrationField
+     * @param Field $registrationField
      * @param string $currentValue
      * @return bool
      */
-    protected function getFieldValueFromDefaultProperty(Field $registrationField, string $currentValue)
+    protected function getFieldValueFromDefaultProperty(Field $registrationField, string $currentValue): bool
     {
         $defaultValues = GeneralUtility::trimExplode(',', $registrationField->getDefaultValue());
 

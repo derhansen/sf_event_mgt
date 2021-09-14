@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -33,12 +35,15 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
      * @param array|null $arguments
      * @return bool
      */
-    protected static function evaluateCondition($arguments = null)
+    protected static function evaluateCondition($arguments = null): bool
     {
         $result = false;
         if (isset($arguments['fieldname']) && isset($arguments['settings'])) {
             $defaultRequiredFields = ['firstname', 'lastname', 'email'];
-            $requiredFields = array_map('trim', explode(',', $arguments['settings']['registration']['requiredFields']));
+            $requiredFields = array_map(
+                'trim',
+                explode(',', $arguments['settings']['registration']['requiredFields'] ?? [])
+            );
             $allRequiredFields = array_merge($requiredFields, $defaultRequiredFields);
             $result = in_array($arguments['fieldname'], $allRequiredFields);
         }

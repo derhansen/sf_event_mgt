@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -10,6 +12,7 @@
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -17,19 +20,9 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class HmacViewHelper extends AbstractViewHelper
 {
-    /**
-     * Hash Service
-     *
-     * @var \TYPO3\CMS\Extbase\Security\Cryptography\HashService
-     * */
-    protected $hashService;
+    protected HashService $hashService;
 
-    /**
-     * DI for $hashService
-     *
-     * @param \TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService
-     */
-    public function injectHashService(\TYPO3\CMS\Extbase\Security\Cryptography\HashService $hashService)
+    public function injectHashService(HashService $hashService)
     {
         $this->hashService = $hashService;
     }
@@ -40,7 +33,7 @@ class HmacViewHelper extends AbstractViewHelper
     public function initializeArguments()
     {
         parent::initializeArguments();
-        $this->registerArgument('registration', 'object', 'Registration', false);
+        $this->registerArgument('registration', 'object', 'Registration', true);
     }
 
     /**
@@ -48,7 +41,7 @@ class HmacViewHelper extends AbstractViewHelper
      *
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         /** @var Registration $registration */
         $registration = $this->arguments['registration'];

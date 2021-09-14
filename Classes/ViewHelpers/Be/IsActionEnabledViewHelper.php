@@ -75,9 +75,6 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
         return $result;
     }
 
-    /**
-     * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
-     */
     private function getBackendUser(): ?BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'] ?? null;

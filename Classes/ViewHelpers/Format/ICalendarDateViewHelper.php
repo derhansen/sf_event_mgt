@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -31,7 +33,7 @@ class ICalendarDateViewHelper extends AbstractViewHelper
      * @see http://tools.ietf.org/html/rfc5545#section-3.3.5
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         $date = $this->arguments['date'];
         if ($date === null) {
