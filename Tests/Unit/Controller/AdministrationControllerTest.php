@@ -28,7 +28,6 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -177,19 +176,6 @@ class AdministrationControllerTest extends UnitTestCase
         $searchDemand = new SearchDemand();
         $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
 
-        $demand = $this->getMockBuilder(EventDemand::class)
-            ->onlyMethods(['setSearchDemand', 'setStoragePage'])
-            ->getMock();
-        $demand->expects(self::any())->method('setSearchDemand')->with($searchDemand);
-        $demand->expects(self::any())->method('setStoragePage')->with(1);
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->onlyMethods(['get'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($demand);
-        $this->subject->injectObjectManager($objectManager);
-
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');
         $this->subject->injectBeUserSessionService($beUserSessionService);
@@ -233,16 +219,6 @@ class AdministrationControllerTest extends UnitTestCase
 
         $searchDemand = new SearchDemand();
         $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
-
-        $demand = $this->getMockBuilder(EventDemand::class)->getMock();
-        $demand->expects(self::any())->method('setSearchDemand')->with($searchDemand);
-        $demand->expects(self::any())->method('setStoragePage')->with(1);
-
-        $objectManager = $this->getMockBuilder(ObjectManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $objectManager->expects(self::any())->method('get')->willReturn($demand);
-        $this->subject->injectObjectManager($objectManager);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');
