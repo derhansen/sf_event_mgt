@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -31,7 +33,7 @@ class ErrorClassViewHelper extends AbstractViewHelper
     /**
      * @return string
      */
-    public function render()
+    public function render(): string
     {
         $result = '';
         $validationErrors = $this->getValidationErrors();
@@ -58,10 +60,9 @@ class ErrorClassViewHelper extends AbstractViewHelper
     /**
      * @return array
      */
-    protected function getValidationErrors()
+    protected function getValidationErrors(): array
     {
-        $validationResults = $this->renderingContext->getControllerContext()
-            ->getRequest()->getOriginalRequestMappingResults();
+        $validationResults = $this->renderingContext->getRequest()->getOriginalRequestMappingResults();
 
         return $validationResults->getFlattenedErrors();
     }
