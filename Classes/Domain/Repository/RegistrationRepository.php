@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
-use Datetime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -34,24 +33,6 @@ class RegistrationRepository extends Repository
     {
         $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
-    }
-
-    /**
-     * Returns all registrations, where the confirmation date is less than the
-     * given date
-     *
-     * @param Datetime $dateNow Date
-     *
-     * @return QueryResultInterface|array
-     */
-    public function findExpiredRegistrations(DateTime $dateNow)
-    {
-        $constraints = [];
-        $query = $this->createQuery();
-        $constraints[] = $query->lessThanOrEqual('confirmationUntil', $dateNow);
-        $constraints[] = $query->equals('confirmed', false);
-
-        return $query->matching($query->logicalAnd($constraints))->execute();
     }
 
     /**
