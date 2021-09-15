@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,9 +11,11 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository\Registration;
 
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * The repository for registration field
  */
-class FieldRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class FieldRepository extends Repository
 {
 }

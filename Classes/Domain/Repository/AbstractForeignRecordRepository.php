@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,13 +11,16 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * ForeignRecordRepository which respects the ForeignRecordDemandObject
  */
-abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+abstract class AbstractForeignRecordRepository extends Repository
 {
     /**
      * Disable the use of storage records, because the StoragePage can be set
@@ -23,18 +28,18 @@ abstract class AbstractForeignRecordRepository extends \TYPO3\CMS\Extbase\Persis
      */
     public function initializeObject()
     {
-        $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
+        $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
     }
 
     /**
      * Returns all records depending on the settings in the demand object
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand $demand ForeignRecordDemand
+     * @param ForeignRecordDemand $demand ForeignRecordDemand
      *
-     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     * @return array|QueryResultInterface
      */
-    public function findDemanded($demand)
+    public function findDemanded(ForeignRecordDemand $demand)
     {
         $constraints = [];
         $query = $this->createQuery();

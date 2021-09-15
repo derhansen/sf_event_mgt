@@ -45,41 +45,6 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * Data provider for findExpiredRegistrations
-     *
-     * @return array
-     */
-    public function findExpiredRegistrationsDataProvider()
-    {
-        return [
-            'allRegistrationsExpired' => [
-                1402826400, /* 15.06.2014 10:00 */
-                4
-            ],
-            'noRegistrationsExpired' => [
-                1402736400, /* 14.06.2014 09:00 */
-                0
-            ],
-            'nowIs1030Am' => [
-                1402741800, /* 14.06.2014 10:30 */
-                1
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider findExpiredRegistrationsDataProvider
-     * @test
-     * @param int $dateNow
-     * @param int $expected
-     */
-    public function findExpiredRegistrations($dateNow, $expected)
-    {
-        $registrations = $this->registrationRepository->findExpiredRegistrations($dateNow);
-        self::assertSame($expected, $registrations->count());
-    }
-
-    /**
      * Test for match on Event
      *
      * @test

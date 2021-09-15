@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,10 +11,13 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+
 /**
  * The repository for custom notification log entries
  */
-class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class CustomNotificationLogRepository extends Repository
 {
     /**
      * Set default sorting
@@ -20,6 +25,6 @@ class CustomNotificationLogRepository extends \TYPO3\CMS\Extbase\Persistence\Rep
      * @var array
      */
     protected $defaultOrderings = [
-        'tstamp' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
+        'tstamp' => QueryInterface::ORDER_DESCENDING
     ];
 }
