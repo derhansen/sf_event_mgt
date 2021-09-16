@@ -17,7 +17,6 @@ use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -1644,9 +1643,8 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected function getRegistrationsDefaultLanguage(bool $waitlist = false)
     {
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $result = $objectManager->get(ObjectStorage::class);
-        $registrationRepository = $objectManager->get(RegistrationRepository::class);
+        $result = GeneralUtility::makeInstance(ObjectStorage::class);
+        $registrationRepository = GeneralUtility::makeInstance(RegistrationRepository::class);
         $registrations = $registrationRepository->findByEventAndWaitlist($this, $waitlist);
         foreach ($registrations as $registration) {
             $result->attach($registration);
