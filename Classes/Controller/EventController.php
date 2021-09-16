@@ -292,7 +292,6 @@ class EventController extends AbstractController
                 $this->redirect('list', null, null, null, $listPid);
                 break;
             case 'pageNotFoundHandler':
-                // @todo: Does not work properly with `subrequestPageErrors` (see https://forge.typo3.org/issues/95174)
                 $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
                     $this->request,
                     'Event not found.'
@@ -300,12 +299,6 @@ class EventController extends AbstractController
                 throw new PropagateResponseException($response, 1631261423);
             case 'showStandaloneTemplate':
                 $status = (int)($configuration[2] ?? 200);
-                if ($status !== 200) {
-                    // Manually set HTTP status header (see https://forge.typo3.org/issues/94533)
-                    // @todo: Remove when core supports handling HTTP status code from request
-                    $statusCode = constant(HttpUtility::class . '::HTTP_STATUS_' . $status);
-                    header($statusCode);
-                }
                 $standaloneTemplate = GeneralUtility::makeInstance(StandaloneView::class);
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
 
