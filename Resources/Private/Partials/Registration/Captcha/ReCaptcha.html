@@ -1,0 +1,13 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:if condition="{settings.registration.captcha.enabled} && {settings.registration.captcha.reCaptcha.siteKey}">
+    <div class="event-registration-row captcha {e:validation.errorClass(fieldname: 'captcha')}">
+        <script src="{settings.registration.captcha.reCaptcha.apiScript}" async defer></script>
+        <div class="g-recaptcha" data-sitekey="{settings.registration.captcha.reCaptcha.siteKey}"></div>
+        <f:render partial="FormErrors" arguments="{field: 'registration.captcha'}"/>
+    </div>
+</f:if>
+
+</html>

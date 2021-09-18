@@ -189,7 +189,7 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $recaptcha = '';
+    protected $captcha = '';
 
     /**
      * FrontendUser if available
@@ -747,23 +747,23 @@ class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns recaptcha
+     * Returns captcha
      *
      * @return string
      */
-    public function getRecaptcha()
+    public function getCaptcha()
     {
-        return $this->recaptcha;
+        return $this->captcha;
     }
 
     /**
-     * Sets recaptcha
+     * Sets captcha
      *
-     * @param string $recaptcha
+     * @param string $captcha
      */
-    public function setRecaptcha($recaptcha)
+    public function setCaptcha($captcha)
     {
-        $this->recaptcha = $recaptcha;
+        $this->captcha = $captcha;
     }
 
     /**

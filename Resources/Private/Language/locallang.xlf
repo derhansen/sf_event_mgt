@@ -337,13 +337,13 @@
 				<source>Image</source>
 			</trans-unit>
 			<trans-unit id="validation.possible_robot">
-				<source>Possible robot detected!</source>
+				<source>Captcha field empty or possible robot detected.</source>
 			</trans-unit>
-			<trans-unit id="validation.missing_recaptcha">
-				<source>reCAPTCHA field is missing!</source>
+			<trans-unit id="validation.missing_captcha">
+				<source>Captcha field is missing or invalid.</source>
 			</trans-unit>
-			<trans-unit id="error.no_secretKey">
-				<source>No secretKey set in TypoScript!</source>
+			<trans-unit id="error.no_secret">
+				<source>No secret set in TypoScript for captcha.</source>
 			</trans-unit>
 			<trans-unit id="search.searchFor">
 				<source>Search</source>

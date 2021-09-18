@@ -24,7 +24,7 @@ The extension offers possibilities to reduce the amount of spam in the registrat
    :glob:
 
    Spamcheck/Index
-   Recaptcha/Index
+   Captcha/Index
 
 
 

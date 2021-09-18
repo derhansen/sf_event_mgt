@@ -18,6 +18,24 @@ plugin.tx_sfeventmgt {
             deleteExpiredRegistrations = 0
             # cat=plugin.tx_sfeventmgt//a; type=string; label=Validation format for date of birth
             formatDateOfBirth = d.m.Y
+            captcha {
+                # cat=plugin.tx_sfeventmgt//a; type=boolean; label=Enable Captcha
+                enabled = 0
+                # cat=plugin.tx_sfeventmgt//a; type=options[reCaptcha,hCaptcha]; label=Captcha Type
+                type = hCaptcha
+                hCaptcha {
+                    # cat=plugin.tx_sfeventmgt//a; type=string; label=publicKey for hCaptcha
+                    publicKey =
+                    # cat=plugin.tx_sfeventmgt//a; type=string; label=privateKey for hCaptcha
+                    privateKey =
+                }
+                reCaptcha {
+                    # cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
+                    siteKey =
+                    # cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
+                    secretKey =
+                }
+            }
         }
         confirmation {
             # cat=plugin.tx_sfeventmgt//a; type=string; label=Validity of confirmation link in seconds
@@ -74,12 +92,6 @@ plugin.tx_sfeventmgt {
                 # cat=plugin.tx_sfeventmgt//a; type=string; label=Subject for emails sent to admin when registration moved up from the waitlist
                 adminSubject = Registration on the waitlist moved up for event "{event.title}"
             }
-        }
-        reCaptcha {
-            # cat=plugin.tx_sfeventmgt//a; type=string; label=SiteKey for reCaptcha
-              siteKey =
-              # cat=plugin.tx_sfeventmgt//a; type=string; label=SecretKey for reCaptcha
-            secretKey =
         }
         search {
             fields = title, teaser

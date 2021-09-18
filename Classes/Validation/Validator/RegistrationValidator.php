@@ -167,8 +167,8 @@ class RegistrationValidator extends AbstractValidator
                 $validator = new BooleanValidator(['is' => true]);
                 break;
             default:
-                if ($field == 'recaptcha') {
-                    $validator = new RecaptchaValidator();
+                if ($field == 'captcha') {
+                    $validator = new CaptchaValidator();
                 } else {
                     $validator = new NotEmptyValidator();
                 }

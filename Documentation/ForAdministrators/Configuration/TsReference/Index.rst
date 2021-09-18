@@ -231,7 +231,7 @@ plugin.tx_sfeventmgt
          * dateOfBirth
          * notes
          * accepttc
-         * recaptcha
+         * captcha
 
          Note, that all fields are just checked, if they are empty or not. If the field "accepttc" (or any other
          boolean field) is included in the list of required fields, it is checked if the field value is true.

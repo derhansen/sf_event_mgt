@@ -526,18 +526,18 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecaptchaReturnsDefaultForString()
+    public function getCaptchaReturnsDefaultForString()
     {
-        self::assertEmpty($this->subject->getRecaptcha());
+        self::assertEmpty($this->subject->getCaptcha());
     }
 
     /**
      * @test
      */
-    public function setRecaptchaSetsGivenLanguage()
+    public function setCaptchaSetsGivenLanguage()
     {
-        $this->subject->setRecaptcha('1234567890');
-        self::assertEquals('1234567890', $this->subject->getRecaptcha());
+        $this->subject->setCaptcha('1234567890');
+        self::assertEquals('1234567890', $this->subject->getCaptcha());
     }
 
     /**

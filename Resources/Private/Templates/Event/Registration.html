@@ -281,12 +281,9 @@
                         </label>
                     </div>
                     <f:render partial="FormErrors" arguments="{field: 'registration.accepttc'}"/>
-                    <f:if condition="{settings.reCaptcha.siteKey}">
-                        <div class="event-registration-row recaptcha {e:validation.errorClass(fieldname: 'recaptcha')}">
-                            <script src="{settings.reCaptcha.apiUrl}" async defer></script>
-                            <div class="g-recaptcha" data-sitekey="{settings.reCaptcha.siteKey}"></div>
-                            <f:render partial="FormErrors" arguments="{field: 'registration.recaptcha'}"/>
-                        </div>
+
+                    <f:if condition="{settings.registration.captcha.enabled}">
+                        <f:render partial="Registration/Captcha/{settings.registration.captcha.type -> f:format.case(mode: 'capital')}" arguments="{_all}" />
                     </f:if>
                     <br/>
                     <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit"/>

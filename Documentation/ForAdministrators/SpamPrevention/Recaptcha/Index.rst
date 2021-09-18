@@ -6,35 +6,60 @@
 .. include:: ../../Includes.txt
 
 
-.. _recaptcha:
+.. _captcha:
 
-Configurable reCAPTCHA field
-============================
+Configurable captcha field
+==========================
 
-It is possible to add a reCAPTCHA v2 field in the registration form. If configured, it is only possible to
-submit the form when the captcha is "solved". reCAPTCHA sometimes just works by checking a checkbox, but
-it does also often ask user to identify objects of a larger image.
+The extension support 2 captcha Services:
+
+* Google reCAPTCHA - https://www.google.com/recaptcha/about/
+* hCaptcha - https://hcaptcha.com/
+
+.. caution::
+   You should evaluate, which captcha service suits best for your needs, since the reCAPTCHA
+   service may not be inline with local laws (e.g. privacy concerns due to GDPR)
 
 Configuration
 -------------
 
-reCAPTCHA does only work with valid Google API credentials. To obtain API credentials, you need a Google Account.
-Once you registered for the reCAPTCHA service, you will get 2 keys (site key and secret key) which must be added
-to the TypoScript settings (constants) of sf_event_mgt.
-To activate the validation for reCAPTCHA, you will also have to add 'recaptcha' to the list of required fields.
+Both hCaptcha and Google reCAPTCHA require API credentials, so the captcha can be check against an API.
+The API credentials must be added as TypoScript constants (see example below).
 
 TypoScript Constants::
 
   plugin.tx_sfeventmgt {
     settings {
-      reCaptcha {
-        siteKey = <your-site-key>
-        secretKey = <your-secret-key>
+      registration {
+        captcha {
+          enabled = 0
+          type = hCaptcha
+          hCaptcha {
+            publicKey =
+            privateKey =
+          }
+          reCaptcha {
+            siteKey =
+            secretKey =
+          }
+        }
       }
-      registration.requiredFields = recaptcha
     }
   }
 
-.. caution::
-   You should evaluate, if the usage of a reCAPTCHA field is inline with local laws (e.g. privacy concerns due to GDPR)
+TypoScript Setup::
 
+  plugin.tx_sfeventmgt {
+    settings {
+      registration {
+        requiredFields = captcha
+      }
+    }
+  }
+
+In order to use one of the captcha services, the following must be fullfilled:
+
+* Obtain API keys for either hCaptcha or Google reCAPTCHA service
+* Enable the captcha check in TypoScript constant :php:`plugin.tx_sfeventmgt.settings.registration.captcha.enabled = 1`
+* Set the type of captcha service you use in TypoScript constant :php:`plugin.tx_sfeventmgt.settings.registration.captcha.type = 1`
+* Add the API credentials to TypoScript constants in the associated section for the captcha service

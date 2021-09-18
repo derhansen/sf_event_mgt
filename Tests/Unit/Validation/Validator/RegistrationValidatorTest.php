@@ -10,6 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Validation\Validator\CaptchaValidator;
 use DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use Prophecy\Argument;
@@ -143,14 +144,14 @@ class RegistrationValidatorTest extends UnitTestCase
                 false
             ],
             'requiredFieldsSettingsForRecaptchaIfRecatchaNotSet' => [
-                ['registration' => ['requiredFields' => 'recaptcha']],
+                ['registration' => ['requiredFields' => 'captcha']],
                 [],
                 true,
                 true
             ],
             'requiredFieldsSettingsForRecaptchaIfRecatchaSet' => [
-                ['registration' => ['requiredFields' => 'recaptcha']],
-                ['recaptcha' => 'recaptcha-value'],
+                ['registration' => ['requiredFields' => 'captcha']],
+                ['captcha' => 'captcha-value'],
                 false,
                 false
             ],
@@ -205,7 +206,7 @@ class RegistrationValidatorTest extends UnitTestCase
             $validationResult
         );
 
-        $recaptchaValidator = $this->getMockBuilder(RecaptchaValidator::class)
+        $recaptchaValidator = $this->getMockBuilder(CaptchaValidator::class)
             ->disableOriginalConstructor()
             ->getMock();
         $recaptchaValidator->expects(self::any())->method('validate')->willReturn(
@@ -216,7 +217,7 @@ class RegistrationValidatorTest extends UnitTestCase
         $map = [
             ['string', 'city', $notEmptyValidator],
             ['string', 'zip', $notEmptyValidator],
-            ['string', 'recaptcha', $recaptchaValidator],
+            ['string', 'captcha', $recaptchaValidator],
             ['boolean', 'accepttc', $booleanValidator]
         ];
 
@@ -245,8 +246,8 @@ class RegistrationValidatorTest extends UnitTestCase
             ],
             'recaptcha' => [
                 'string',
-                'recaptcha',
-                RecaptchaValidator::class
+                'captcha',
+                CaptchaValidator::class
             ]
         ];
     }
@@ -261,6 +262,10 @@ class RegistrationValidatorTest extends UnitTestCase
     public function getValidatorReturnsValidatorTest(string $type, string $field, string $expectedClass)
     {
         $validator = $this->getAccessibleMock(RegistrationValidator::class, ['dummy'], [], '', false);
+
+        $configurationManager = $this->prophesize(ConfigurationManager::class);
+        $configurationManager->getConfiguration(Argument::cetera())->willReturn([]);
+        GeneralUtility::setSingletonInstance(ConfigurationManagerInterface::class, $configurationManager->reveal());
 
         $result = $validator->_call('getValidator', $type, $field);
         self::assertInstanceOf($expectedClass, $result);

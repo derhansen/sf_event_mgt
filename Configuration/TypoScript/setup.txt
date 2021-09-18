@@ -97,6 +97,22 @@ plugin.tx_sfeventmgt {
                     }
                 }
             }
+            captcha {
+                enabled = {$plugin.tx_sfeventmgt.settings.registration.captcha.enabled}
+                type = {$plugin.tx_sfeventmgt.settings.registration.captcha.type}
+                reCaptcha {
+                    apiScript = https://www.google.com/recaptcha/api.js
+                    verificationServer = https://www.google.com/recaptcha/api/siteverify
+                    siteKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.reCaptcha.siteKey}
+                    secretKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.reCaptcha.secretKey}
+                }
+                hCaptcha {
+                    apiScript = https://hcaptcha.com/1/api.js
+                    verificationServer = https://hcaptcha.com/siteverify
+                    publicKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.hCaptcha.publicKey}
+                    privateKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.hCaptcha.privateKey}
+                }
+            }
         }
         waitlist {
             moveUp {
@@ -141,11 +157,6 @@ plugin.tx_sfeventmgt {
                 userSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistMoveUp.userSubject}
                 adminSubject = {$plugin.tx_sfeventmgt.settings.notification.registrationWaitlistMoveUp.adminSubject}
             }
-        }
-        reCaptcha {
-            apiUrl = https://www.google.com/recaptcha/api.js
-            siteKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.siteKey}
-            secretKey = {$plugin.tx_sfeventmgt.settings.reCaptcha.secretKey}
         }
         search {
             fields = {$plugin.tx_sfeventmgt.settings.search.fields}
