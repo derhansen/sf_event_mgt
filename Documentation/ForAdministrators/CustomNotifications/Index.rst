@@ -31,12 +31,12 @@ In this example, I create the file **MyNotification.html**
 
 You can use the following objects in your template:
 
-* {registration}
-* {event}
-* {settings}
-* {hmac}
-* {reghmac}
-* {customNotification}
+* :php:`{registration}`
+* :php:`{event}`
+* :php:`{settings}`
+* :php:`{hmac}`
+* :php:`{reghmac}`
+* :php:`{customNotification}`
 
 After you created the notification template, you have to configure the new notification
 in the TypoScript settings of the **admin module**.::
@@ -85,11 +85,11 @@ Using the example above, only those participants will receive an email where the
 
 You can use the following conditions
 
-* equals
-* lessThan
-* lessThanOrEqual
-* greaterThan
-* greaterThanOrEqual
+* :php:`equals`
+* :php:`lessThan`
+* :php:`lessThanOrEqual`
+* :php:`greaterThan`
+* :php:`greaterThanOrEqual`
 
 You may also combine the conditions like shown below:::
 

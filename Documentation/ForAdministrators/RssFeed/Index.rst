@@ -30,7 +30,7 @@ needs:
 
 .. code-block:: typoscript
 
-   [globalVar = TSFE:type = 9918]
+   [getTSFE().type == 9918]
    config {
      disableAllHeaderCode = 1
      xhtml_cleaning = none

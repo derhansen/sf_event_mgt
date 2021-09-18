@@ -110,7 +110,7 @@ program/schedule.
          * Price
          * Date until the price is valid (selected date is included)
 
-         The event management will automatically output the current price if the ``{event.currentPrice}`` getter is used.
+         The event management will automatically output the current price if the :php:`{event.currentPrice}` getter is used.
 
  - :Field:
          Link
@@ -296,7 +296,7 @@ registrations per user" is set to a value greater than 1.
 
    :Description:
          If set, new registrations for the event will automatically be confirmed regardless of the global
-         setting ``settings.registration.autoConfirmation``
+         setting :php:`settings.registration.autoConfirmation`
 
  - :Field:
          Max. participants

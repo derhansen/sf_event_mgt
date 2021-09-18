@@ -25,8 +25,8 @@ confirmed by the user.
 This section describes how to create your own payment solution for sf_event_mgt which makes use of the provided
 payment actions.
 
-I will assume, that the new payment method is called ``mypaymentmethod`` and the extension key for the new
-payment method is ``sf_event_mgt_mypaymentmethod``
+I will assume, that the new payment method is called :php:`mypaymentmethod` and the extension key for the new
+payment method is :php:`sf_event_mgt_mypaymentmethod`
 
 General workflow
 ----------------
@@ -40,12 +40,12 @@ Depending on the selected payment method, the user is redirected to the payment 
 1. Blank extension
 ------------------
 
-First of all you need a blank TYPO3 extension with at least an ``ext_emconf.php`` and an ``ext_localconf.php`` file.
+First of all you need a blank TYPO3 extension with at least an :php:`ext_emconf.php` and an :php:`ext_localconf.php` file.
 
 2. Registration of payment method
 ---------------------------------
 
-Add the following content to the file ``ext_localconf.php``::
+Add the following content to the file :php:`ext_localconf.php`::
 
  // Register payment provider
  $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods']['mypaymentmethod'] = [
@@ -91,13 +91,13 @@ The setters in all events allow you to control the behavior of the payment proce
 4. Add payment class
 --------------------
 
-Please refer to the class ``AbstractPayment`` in sf_event_mgt for possible settings. You payment class
-must extend ``AbstractPayment`` and you should override/set the local ``$enable`` properties in order
+Please refer to the class :php:`AbstractPayment` in sf_event_mgt for possible settings. You payment class
+must extend :php:`AbstractPayment` and you should override/set the local :php:`$enable` properties in order
 to enable the actions in sf_event_mgt
 
-Please also refer to the ``PaymentController`` in sf_event_mgt to see all available PSR-14 Events.
+Please also refer to the :php:`PaymentController` in sf_event_mgt to see all available PSR-14 Events.
 
-In this example I create the class ``DERHANSEN\SfEventMgtMypaymentmethod\Payment\Mypaymentmethod`` and add
+In this example I create the class :php:`DERHANSEN\SfEventMgtMypaymentmethod\Payment\Mypaymentmethod` and add
 the following method.::
 
  /**
@@ -141,10 +141,10 @@ view could include a JavaScript redirect to the payment providers payment page.
 --------------------
 
 Step 4 already showed how to implement one action. Feel free to implement other required
-actions (at least ``success``, ``failure`` and ``cancel`` to your need.
+actions (at least :php:`success`, :php:`failure` and :php:`cancel` to your need.
 
 Each PSR-14 Event enables you to update the given registration. Just set the properties of the
-``$registration`` object and set ``$updateRegistration`` to ``true``.
+:php:`$registration` object and set :php:`$updateRegistration` to :php:`true`.
 
 It is also possible to remove a registrations, if payment failed or was cancelled. Please
 see the corresponding PSr-14 Events for possible options.
@@ -153,4 +153,4 @@ see the corresponding PSr-14 Events for possible options.
 --------------------------
 
 Make sure that your rendered Fluid standlone views do not contain sensitive data or possibilities
-for XSS (``values['html']`` is rendered with ``f:render.raw``).
+for XSS (:php:`values['html']` is rendered with :php:`f:render.raw`).

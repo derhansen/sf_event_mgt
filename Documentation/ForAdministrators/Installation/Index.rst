@@ -27,11 +27,11 @@ The installation and initial configuration of the extension is as following:
 
 #. Optionally add the plugin :ref:`userregistrationplugin-settings` to a page, to show registered frontend users their event registrations
 
-Important
-~~~~~~~~~
 
-#. If you use **registrations for events**, you must follow the instructions regarding the :ref:`cronjob`
+.. important::
 
-#. If you use **registrations for events** with a **registration start date** or a **registration deadline**, you must follow the instructions regarding the :ref:`pagecache`
+   #. If you use **registrations for events**, you must follow the instructions regarding the :ref:`cronjob`
 
-#. For the **calendar view**, make sure to uncheck the **Disable overwrite demand** setting in the plugin
+   #. If you use **registrations for events** with a **registration start date** or a **registration deadline**, you must follow the instructions regarding the :ref:`pagecache`
+
+   #. For the **calendar view**, make sure to uncheck the **Disable overwrite demand** setting in the plugin

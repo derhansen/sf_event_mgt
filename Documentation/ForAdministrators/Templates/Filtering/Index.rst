@@ -13,7 +13,7 @@ Filtering the listview
 In the :ref:`eventplugin-settings` you can define criterias for the listview, so it e.g. only
 shows the events of a special category or for a special location. Nearly all settings
 affecting the demand of the shown events can be overwritten by a URL parameter called
-``overwriteDemand``.
+:php:`overwriteDemand`.
 
 Below follows some examples for the overwriteDemand setting:
 
@@ -34,7 +34,7 @@ to the given category::
         </f:if>
     </f:for>
 
-As all links are generated using the ``f:link.action`` viewHelper, they are fully cached.
+As all links are generated using the :php:`f:link.action` viewHelper, they are fully cached.
 
 Filter by special location properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

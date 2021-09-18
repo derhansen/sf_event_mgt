@@ -40,7 +40,7 @@ The spam check must be activated using Typoscript.::
     }
   }
 
-To enable the spam check, ``plugin.tx_sfeventmgt.settings.registration.spamCheck.enabled = 1`` must be set.
+To enable the spam check, :php:`plugin.tx_sfeventmgt.settings.registration.spamCheck.enabled = 1` must be set.
 Next, each spam check must be activated and configured to your needs.
 
 The honeypot spam check
@@ -48,7 +48,7 @@ The honeypot spam check
 
 This check adds a field (either invisible input field or a hidden form field) to the registration form.
 If the field is filled out, it is very likely that the form submission is spam. Therefore you should configure
-a high ``increaseScore``, so the spam check as a whole already is considered as failed when this check fails.
+a high :php:`increaseScore`, so the spam check as a whole already is considered as failed when this check fails.
 
 Example template::
 
@@ -67,7 +67,7 @@ considered as failed.
 The link spam check
 ~~~~~~~~~~~~~~~~~~~
 
-This check counts the amount of links in all submitted form fields. If the configured ``maxAmountOfLinks`` is
+This check counts the amount of links in all submitted form fields. If the configured :php:`maxAmountOfLinks` is
 exceeded, the check is considered failed.
 
 The challenge/response spam check
@@ -93,13 +93,13 @@ The spam check calculates a challenge consisting of the configured pre- and post
 uid of the event. This challenge is added as data-attribute to the hidden form field.
 
 The check expects the challenge to be returned ROT13 encrypted/encoded. There is a plain vanilla JS script in
-``Resources/Public/JavaScript/cr-spamcheck.js`` that does the job for you, if you use the included partial for
+:php:`Resources/Public/JavaScript/cr-spamcheck.js` that does the job for you, if you use the included partial for
 the spam checks of the extension.
 
 Creating a custom spam check
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 It is also possible to create custom spam checks. To do so, just add an own configuration array to the
-``checks`` array and implement your check as a class that extends ``DERHANSEN\SfEventMgt\SpamChecks\AbstractSpamCheck``
+:php:`checks` array and implement your check as a class that extends :php:`DERHANSEN\SfEventMgt\SpamChecks\AbstractSpamCheck`
 
 Please refer to the existing spam checks in the extension for details.

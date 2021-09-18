@@ -12,7 +12,7 @@ TypoScript reference
 ====================
 
 More TypoScript settings are available on the :ref:`eventplugin-settings` page. Also make sure to check the included
-``setup.txt`` file for available/default TypoScript settings.
+:php:`setup.txt` file for available/default TypoScript settings.
 
 plugin.tx_sfeventmgt
 ~~~~~~~~~~~~~~~~~~~~
@@ -239,7 +239,7 @@ plugin.tx_sfeventmgt
    :Default:
          empty
 
-- :Property:
+ - :Property:
          settings.registration.linkTermsAndConditions
 
    :Date type:
@@ -247,30 +247,6 @@ plugin.tx_sfeventmgt
 
    :Description:
          A page or an external URL that can be used in the registration template to show "Terms & Conditions"
-
-   :Default:
-         empty
-
- - :Property:
-         settings.reCaptcha.siteKey
-
-   :Date type:
-         string
-
-   :Description:
-         Sitekey for reCATCHA check. Note: If this setting is left blank, the reCAPTCHA field will not be shown
-
-   :Default:
-         empty
-
- - :Property:
-         settings.reCaptcha.secretKey
-
-   :Date type:
-         string
-
-   :Description:
-         SecretKey for reCATCHA check.
 
    :Default:
          empty

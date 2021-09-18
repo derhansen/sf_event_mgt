@@ -13,7 +13,7 @@ Default waitlist move up process
 
 The extension contains a built in waitlist feature to allow your users to register on a waitlist for events, where
 all places are taken. It is possible to automatically move up user from the waitlist either by the built in logic
-in the extension or by implementing a custom logic using the PSR-14 event ``WaitlistMoveUpEvent``
+in the extension or by implementing a custom logic using the PSR-14 event :php:`WaitlistMoveUpEvent`
 
 .. note::
 
@@ -57,9 +57,9 @@ Things to keep in mind when using the default move up process
 Customizing the move up process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If the default move up process does not fulfill your needs, you can use the PSR-14 event ``WaitlistMoveUpEvent``
+If the default move up process does not fulfill your needs, you can use the PSR-14 event :php:`WaitlistMoveUpEvent`
 to create a custom move up logic. Please refer to the code of the default move up process to see how a custom
 logic can be implemented.
 
 If you implement a custom move up logic and to not want the default move up process to be executed, make sure
-so set ``$processDefaultMoveUp`` to ``false`` in your event listener.
+so set :php:`$processDefaultMoveUp` to :php:`false` in your event listener.

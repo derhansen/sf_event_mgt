@@ -34,12 +34,12 @@ Possible attachment configurations
 
 Attachment configuration can be added to the following TypoScript settings:
 
-* ``plugin.tx_sfeventmgt.settings.notification.registrationNew``
-* ``plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew``
-* ``plugin.tx_sfeventmgt.settings.notification.registrationConfirmed``
-* ``plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed``
+* :php:`plugin.tx_sfeventmgt.settings.notification.registrationNew`
+* :php:`plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew`
+* :php:`plugin.tx_sfeventmgt.settings.notification.registrationConfirmed`
+* :php:`plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed`
 
-Note, that you also need to configure the recipient group (``user`` or ``admin``).
+Note, that you also need to configure the recipient group (:php:`user` or :php:`admin`).
 
 Properties for attachment configuration
 ---------------------------------------
@@ -131,22 +131,22 @@ Example for new event registrations:
 The example above configures the attachments for emails to the user (the participant) when a new registration is
 created.
 
-The ``fromFiles`` setting configures the file ``fileadmin/terms-and-conditions.pdf`` to be added to the email. If the
+The :php:`fromFiles` setting configures the file :php:`fileadmin/terms-and-conditions.pdf` to be added to the email. If the
 file does not exist, it will not be added.
 
-The ``fromEventProperty`` setting configures to add all files from the event properties ``files`` and ``image``. Those
-properties are of the type ``\TYPO3\CMS\Extbase\Persistence\ObjectStorage`` and may contain fileReferences. It is also
-possible to use properties of the type ``\TYPO3\CMS\Extbase\Domain\Model\FileReference``
+The :php:`fromEventProperty` setting configures to add all files from the event properties :php:`files` and :php:`image`. Those
+properties are of the type :php:`\TYPO3\CMS\Extbase\Persistence\ObjectStorage` and may contain fileReferences. It is also
+possible to use properties of the type :php:`\TYPO3\CMS\Extbase\Domain\Model\FileReference`
 
-The configuration ot the ``fromRegistrationProperty`` setting is similar to the ``fromEventProperty`` setting. In the
-example above, the property ``registrationFiles`` will be used. Note, that the registration model of the extension does
+The configuration ot the :php:`fromRegistrationProperty` setting is similar to the :php:`fromEventProperty` setting. In the
+example above, the property :php:`registrationFiles` will be used. Note, that the registration model of the extension does
 not contain any default fields that can be used as attachments, so you have to add your own if you need them.
 
 iCal attachment
 ===============
 
 Configuration of an iCal attachment is similar to the configuration of attachments (see above). The only difference is,
-that the iCal attachment is only supported for the recipient group ``user``
+that the iCal attachment is only supported for the recipient group :php:`user`
 
 Properties for attachment configuration
 ---------------------------------------

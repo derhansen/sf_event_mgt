@@ -15,8 +15,8 @@ The event detail page shows a 404 error
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This problem can occur in TYPO3 versions greater than 9.5.17 or 10.4.2 when the TYPO3 website has multiple
-sites that use a shared folder for events. If this is the case, you must configure `unique` slug handling
-in the extension settings `slugBehaviour`.
+sites that use a shared folder for events. If this is the case, you must configure :php:`unique` slug handling
+in the extension settings :php:`slugBehaviour`.
 
 Why do you not include a nice CSS stylesheet?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -57,8 +57,8 @@ Can I add the HMAC or an appended HMAC of the registration UID to emails?
 
 Yes, you can use the following objects in you email templates
 
-* {hmac} = HMAC of uid
-* {reghmac} = appended uid+HMAC
+* :php:`{hmac}` = HMAC of uid
+* :php:`{reghmac}` = appended uid+HMAC
 
 Is it possible to filter by categories in the listview
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,7 +67,7 @@ Yes, filtering of events by a category is possible if you pass the category to t
 
  <f:link.action action="list" controller="Event" arguments="{overwriteDemand:{category: category}}">{category.title}</f:link.action>
 
-This only works, if you create links with f:link.action as shown above. If you want to display the
+This only works, if you create links with :php:`f:link.action` as shown above. If you want to display the
 categories in a select-box, then I suggest you create a CSS only select box (e.g. UL menu)
 
 When does {event.registrationPossible} return TRUE
@@ -144,9 +144,9 @@ How do I add my own custom translations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can override all language files with your own translations/labels. As an example, the following code
-overrides/extends the ``locallang_db.xlf`` and the ``locallang.xlf``
+overrides/extends the :php:`locallang_db.xlf` and the :php:`locallang.xlf`
 
-Add this example code to a ``ext_localconf.php`` file (e.g. in a site package extension).::
+Add this example code to a :php:`ext_localconf.php` file (e.g. in a site package extension).::
 
  $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['de']['EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf'][] = 'EXT:your_ext/Resources/Private/Language/de.custom_locallang_db.xlf';
  $GLOBALS['TYPO3_CONF_VARS']['SYS']['locallangXMLOverride']['de']['EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf'][] = 'EXT:your_ext/Resources/Private/Language/de.custom_locallang.xlf';
@@ -182,7 +182,7 @@ For each event with registration enabled, you can also enable payment. If paymen
 available payment methods for the event in the registration form. When a user registers for an event, he
 can select a payment method.
 
-The extension comes with 2 default payment methods "debit" and "transfer". Both payment methods do not include
+The extension comes with 2 default payment methods :php:`debit` and :php:`transfer`. Both payment methods do not include
 any further payment processing.
 
 It is possible to extend the extension with own payment methods that include further payment processing (e.g. by
@@ -198,7 +198,7 @@ Open the extension settings in the extension manager and press the "Save" button
 Configured price options do not show up in frontend
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Make sure that the date for the price option is valid. Also make sure, that you use ``{event.currentPrice}`` in your
+Make sure that the date for the price option is valid. Also make sure, that you use :php:`{event.currentPrice}` in your
 Fluid template to output the current price.
 
 How can I use the iCalDownload action in the Listview?
@@ -214,15 +214,15 @@ Note, that you have to set the pageUid to a page with the detail view plugin.
 Why does the next/previous month links not work for the calendar view?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The next/previous links use the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
+The next/previous links use the :php:`overwriteDemand` feature, which by default is disabled. Make sure you have
 unchecked the **Disable overwrite demand** setting in the plugin.
 
 The category filter for the list view does not work
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The filtering also uses the ``overwriteDemand`` feature, which by default is disabled. Make sure you have
+The filtering also uses the :php:`overwriteDemand` feature, which by default is disabled. Make sure you have
 unchecked the **Disable overwrite demand** setting in the plugin and also ensure that the category mode is not
-equal to ``Ignore category selection``.
+equal to :php:`Ignore category selection`.
 
 How do I show the event title as page title on the detail page?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -240,7 +240,7 @@ The Payment Plugin throws exception about missing default controller
 
 The page with the Payment Plugin shows the following error::
 
-The default controller for extension "SfEventMgt" and plugin "Pipayment" can not be determined. Please check for TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin() in your ext_localconf.php
+ The default controller for extension "SfEventMgt" and plugin "Pipayment" can not be determined. Please check for TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin() in your ext_localconf.php
 
 Please delete the content element with the Payment Plugin and create a blank content element of type "Plugin" and
 next directly select the Payment Plugin from the plugins select box.
@@ -254,23 +254,14 @@ How can I move registrations on the waitlist automativally up, if a registered u
 Yes, since version 5.2.0 there is a simple and default waitlist move up process. Please refer to the documentation
 section about the :ref:`waitlist_moveup` for further information.
 
-If the default move up process does not fulfill your needs, you can use the PSR-14 Event ``WaitlistMoveUpEvent``
+If the default move up process does not fulfill your needs, you can use the PSR-14 Event :php:`WaitlistMoveUpEvent`
 to implement your own move up logic.
-
-Images and/or image attributes do not get translated
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Translation of FAL object in Extbase is broken in TYPO3 up to version 8.7. Please refer to the following forge issue
-and use ext:repair_translation.
-
-Forge issue: https://forge.typo3.org/issues/57272
-Extension - Repair Translation: https://github.com/froemken/repair_translation
 
 Event registrations get confirmed by search engines
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Under certain conditions with extensions that create sitemaps it may happen, that a confirmation link of a
 registration email gets added to the sitemap and afterwards visited by a search engine crawler.
-This behavior has at least been seen when the extension ``metaseo`` has been used to create a sitemap.
+This behavior has at least been seen when the extension :php:`metaseo` has been used to create a sitemap.
 
 In order to avoid the registration link from being added to the sitemap, the page with the
 registration plugin needs to be excluded from the sitemap, i.e. use "Exclude from sitemap" in the page
@@ -282,7 +273,7 @@ Displaying events using the "Insert Record" content element
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If you display events using the "Insert Record" content element, you may want to use a different layout to display
-the event detail view. For this purpose, you can use ``{settings.detail.isShortcut}`` in the Detail.html Fluid
+the event detail view. For this purpose, you can use :php:`{settings.detail.isShortcut}` in the Detail.html Fluid
 Template to render a different layout.
 
 How can I display JSON-LD data for events?
@@ -343,7 +334,7 @@ fields (e.g. an image-field) to the category domain model.
 If you want ext:sf_event_mgt to use the category domain model of ext:news, the category domain model
 of ext:sf_event_mgt needs to be overridden as shown below:
 
-Add this to an extension (e.g. your sitepackage) in ext_localconf.php::
+Add this to an extension (e.g. your sitepackage) in :php:`ext_localconf.php`::
 
  GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
      ->registerImplementation(

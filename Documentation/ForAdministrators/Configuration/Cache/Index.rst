@@ -13,7 +13,7 @@ Page Cache Configuration
 
 Since TYPO3 does not know, which records a plugin will show, it can not automatically consider starttime/stoptime
 of e.g. event records for the page cache lifetime calculation. It has to be configured that TYPO3 will include the
-starttime/stoptime of records in the page cache lifetime calculation using `config.cache` as described in the
+starttime/stoptime of records in the page cache lifetime calculation using :php:`config.cache` as described in the
 `TypoScript reference <https://docs.typo3.org/m/typo3/reference-typoscript/master/en-us/Setup/Config/Index.html#cache>`__
 
 Example::

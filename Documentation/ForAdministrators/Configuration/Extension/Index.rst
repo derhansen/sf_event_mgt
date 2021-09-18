@@ -11,6 +11,9 @@
 Extension settings
 ==================
 
+The following settings are available in the "Settings" section of the  "Admin Tool"
+backend module. Open "Extension Configuration" to edit the settings for the extension.
+
 .. t3-field-list-table::
  :header-rows: 1
 
@@ -76,7 +79,7 @@ Extension settings
    :Default:
          False
 
-- :Property:
+ - :Property:
          hideInlineRegistrationsLimit
 
    :Date type:

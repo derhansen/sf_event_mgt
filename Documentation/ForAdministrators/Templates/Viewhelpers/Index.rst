@@ -136,7 +136,7 @@ Registration.IsRequiredField
 Can be used to show content, if a field or registration field is configured as required.
 See usage in Registration template and registration field partials.
 
-**Example**:
+**Example**::
 
   <e:registration.isRequiredField settings="{settings}" fieldname="lastname">
       <span class="event-required">*</span>
@@ -148,7 +148,7 @@ Validation.ErrorClass
 Can be used to show a string, when a given field or registration field has validation errors
 See usage in Registration template and registration field partials.
 
-**Example**:
+**Example**::
 
   <e:validation.errorClass fieldname="email" class="my-custom-class" />
 

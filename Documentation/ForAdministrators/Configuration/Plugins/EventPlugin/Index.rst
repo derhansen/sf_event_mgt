@@ -13,7 +13,7 @@ Events and event-registration
 
 Nearly all important settings can be made through the plugin, which override the
 settings made with TypoScript. All plugin settings can also be configured with TypoScript
-(use ``plugin.tx_sfeventmgt.settings.`` with the keys shown below).
+(use :php:`plugin.tx_sfeventmgt.settings.` with the keys shown below).
 
 Tab settings
 ~~~~~~~~~~~~

@@ -43,7 +43,7 @@ List view
          {categories}
 
    :Description:
-         All configured categories for the category menu (see ``plugin.tx_sfeventmgt.settings.categoryMenu`` in the :ref:`eventplugin-settings`)
+         All configured categories for the category menu (see :php:`plugin.tx_sfeventmgt.settings.categoryMenu` in the :ref:`eventplugin-settings`)
 
  - :Object:
          {locations}
@@ -175,7 +175,7 @@ Calendar view
          {categories}
 
    :Description:
-         All configured categories for the category menu (see ``plugin.tx_sfeventmgt.settings.categoryMenu`` in the :ref:`eventplugin-settings`)
+         All configured categories for the category menu (see :php:`plugin.tx_sfeventmgt.settings.categoryMenu` in the :ref:`eventplugin-settings`)
 
  - :Object:
          {locations}
@@ -382,7 +382,7 @@ The following objects can be used in email subjects for event registration and c
 Registration message views
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Registration message views are ``cancelRegistration``, ``confirmRegistration`` and ``saveRegistrationResult``
+Registration message views are :php:`cancelRegistration`, :php:`confirmRegistration` and :php:`saveRegistrationResult`
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -409,7 +409,7 @@ Registration message views are ``cancelRegistration``, ``confirmRegistration`` a
          {failed}
 
    :Description:
-         If the status is failed (not available in ``saveRegistrationResult``)
+         If the status is failed (not available in :php:`saveRegistrationResult`)
 
  - :Object:
          {titleKey}
