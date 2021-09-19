@@ -465,6 +465,25 @@
 			<trans-unit id="event.noOrganisatorEmail.message">
 				<source>The event is configured to notify the organisator, but the organisator has no email address. Please set an email address for the organisator or change the notification settings.</source>
 			</trans-unit>
+
+			<trans-unit id="constants.subcategory.registration">
+				<source>Registration</source>
+			</trans-unit>
+			<trans-unit id="constants.subcategory.confirmation">
+				<source>Confirmation</source>
+			</trans-unit>
+			<trans-unit id="constants.subcategory.notification">
+				<source>Notification</source>
+			</trans-unit>
+			<trans-unit id="constants.subcategory.search">
+				<source>Search</source>
+			</trans-unit>
+			<trans-unit id="constants.subcategory.rss">
+				<source>RSS feed</source>
+			</trans-unit>
+			<trans-unit id="constants.subcategory.csv">
+				<source>CSV export</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

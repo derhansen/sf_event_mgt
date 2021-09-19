@@ -186,9 +186,6 @@ module.tx_sfeventmgt {
             prependBOM = {$module.tx_sfeventmgt.settings.csvExport.prependBOM}
             dateFieldFormat = {$module.tx_sfeventmgt.settings.csvExport.dateFieldFormat}
         }
-        list {
-            itemsPerPage = {$module.tx_sfeventmgt.settings.list.itemsPerPage}
-        }
         search {
             dateFormat = {$module.tx_sfeventmgt.settings.search.dateFormat}
             fields = {$module.tx_sfeventmgt.settings.search.fields}
