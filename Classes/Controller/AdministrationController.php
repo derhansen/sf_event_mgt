@@ -20,45 +20,38 @@ use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Template\ModuleTemplate;
+use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\View\BackendTemplateView;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
  * AdministrationController
- *
- * Several parts are heavily inspired from ext:news by Georg Ringer
  */
 class AdministrationController extends AbstractController
 {
     private const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
 
-    /**
-     * @var string
-     */
-    protected $defaultViewObjectName = BackendTemplateView::class;
-
-    /**
-     * @var BackendTemplateView
-     */
-    protected $view;
-
+    protected ModuleTemplateFactory $moduleTemplateFactory;
     protected CustomNotificationLogRepository $customNotificationLogRepository;
     protected ExportService $exportService;
     protected SettingsService $settingsService;
     protected BeUserSessionService $beUserSessionService;
     protected MaintenanceService $maintenanceService;
     protected IconFactory $iconFactory;
-
+    protected PageRenderer $pageRenderer;
     protected int $pid = 0;
 
     public function injectCustomNotificationLogRepository(
@@ -92,44 +85,22 @@ class AdministrationController extends AbstractController
         $this->maintenanceService = $maintenanceService;
     }
 
-    /**
-     * Set up the doc header properly here
-     *
-     * @param ViewInterface $view
-     */
-    protected function initializeView(ViewInterface $view)
+    public function injectModuleTemplateFactory(ModuleTemplateFactory $moduleTemplateFactory)
     {
-        /** @var BackendTemplateView $view */
-        parent::initializeView($view);
-        if ($this->actionMethodName === 'listAction'
-            || $this->actionMethodName === 'indexNotifyAction'
-            || $this->actionMethodName === 'settingsErrorAction'
-        ) {
-            $this->registerDocHeaderButtons();
+        $this->moduleTemplateFactory = $moduleTemplateFactory;
+    }
 
-            $pageRenderer = $this->view->getModuleTemplate()->getPageRenderer();
-            $pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
-
-            $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ?
-                ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY'] :
-                ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
-            $pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
-
-            $this->view->getModuleTemplate()->setFlashMessageQueue($this->getFlashMessageQueue());
-            if ($view instanceof BackendTemplateView) {
-                $view->getModuleTemplate()->getPageRenderer()->addCssFile(
-                    'EXT:sf_event_mgt/Resources/Public/Css/administration.css'
-                );
-            }
-        }
+    public function injectPageRenderer(PageRenderer $pageRenderer)
+    {
+        $this->pageRenderer = $pageRenderer;
     }
 
     /**
      * Register docHeaderButtons
      */
-    protected function registerDocHeaderButtons(): void
+    protected function registerDocHeaderButtons(ModuleTemplate $moduleTemplate): void
     {
-        $buttonBar = $this->view->getModuleTemplate()->getDocHeaderComponent()->getButtonBar();
+        $buttonBar = $moduleTemplate->getDocHeaderComponent()->getButtonBar();
 
         if ($this->request->getControllerActionName() === 'list') {
             $buttons = [
@@ -186,7 +157,7 @@ class AdministrationController extends AbstractController
      * Returns the create new record URL for the given table
      *
      * @param string $table
-     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     * @throws RouteNotFoundException
      * @return string
      */
     private function getCreateNewRecordUri(string $table): string
@@ -206,6 +177,31 @@ class AdministrationController extends AbstractController
             'edit[' . $table . '][' . $pid . ']' => 'new',
             'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
         ]);
+    }
+
+    /**
+     * Initializes module template and returns a response which must be used as response for any extbase action
+     * that should render a view.
+     *
+     * @return ResponseInterface
+     */
+    protected function initModuleTemplateAndReturnResponse(): ResponseInterface
+    {
+        $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
+        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
+        $this->pageRenderer->addCssFile('EXT:sf_event_mgt/Resources/Public/Css/administration.css');
+
+        $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ?
+            ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY'] :
+            ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
+        $this->pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
+
+        $this->registerDocHeaderButtons($moduleTemplate);
+
+        $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
+
+        $moduleTemplate->setContent($this->view->render());
+        return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
     /**
@@ -245,8 +241,9 @@ class AdministrationController extends AbstractController
      *
      * @param SearchDemand|null $searchDemand
      * @param array $overwriteDemand
+     * @return ResponseInterface
      */
-    public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = [])
+    public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
         if ($searchDemand !== null) {
             $searchDemand->setFields($this->settings['search']['fields'] ?? '');
@@ -293,6 +290,8 @@ class AdministrationController extends AbstractController
             'overwriteDemand' => $overwriteDemand,
             'pagination' => $this->getPagination($events, $this->settings['pagination'] ?? [])
         ]);
+
+        return $this->initModuleTemplateAndReturnResponse();
     }
 
     /**
@@ -347,8 +346,10 @@ class AdministrationController extends AbstractController
      * The index notify action
      *
      * @param Event $event
+     * @return ResponseInterface
+     * @throws StopActionException
      */
-    public function indexNotifyAction(Event $event)
+    public function indexNotifyAction(Event $event): ResponseInterface
     {
         $this->checkEventAccess($event);
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
@@ -361,6 +362,8 @@ class AdministrationController extends AbstractController
             'customNotifications' => $customNotifications,
             'logEntries' => $logEntries,
         ]);
+
+        return $this->initModuleTemplateAndReturnResponse();
     }
 
     /**
@@ -421,7 +424,7 @@ class AdministrationController extends AbstractController
      * access denied flash message and redirect to list view
      *
      * @param Event $event
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws StopActionException
      */
     public function checkEventAccess(Event $event)
     {
@@ -454,16 +457,6 @@ class AdministrationController extends AbstractController
     }
 
     /**
-     * Returns the LanguageService
-     *
-     * @return LanguageService
-     */
-    protected function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
-
-    /**
      * Returns an array with possible order directions
      *
      * @return array
@@ -490,10 +483,11 @@ class AdministrationController extends AbstractController
         ];
     }
 
-    /**
-     * Returns the Backend User
-     * @return BackendUserAuthentication
-     */
+    protected function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
+    }
+
     protected function getBackendUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
