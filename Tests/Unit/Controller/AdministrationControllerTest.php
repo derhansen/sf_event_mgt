@@ -11,7 +11,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
-use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
@@ -27,9 +26,9 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
+use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -51,7 +50,7 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $this->subject = $this->getAccessibleMock(
             AdministrationController::class,
-            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getLanguageService'],
+            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getLanguageService', 'initModuleTemplateAndReturnResponse'],
             [],
             '',
             false
@@ -106,7 +105,7 @@ class AdministrationControllerTest extends UnitTestCase
         $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->subject->injectEventRepository($eventRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
             'events' => $allEvents,
@@ -151,7 +150,7 @@ class AdministrationControllerTest extends UnitTestCase
         $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->subject->injectEventRepository($eventRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
             'events' => $allEvents,
@@ -195,7 +194,7 @@ class AdministrationControllerTest extends UnitTestCase
         $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->subject->injectEventRepository($eventRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 1,
             'events' => $allEvents,
@@ -239,7 +238,7 @@ class AdministrationControllerTest extends UnitTestCase
         $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->subject->injectEventRepository($eventRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
 
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 1,
@@ -357,7 +356,7 @@ class AdministrationControllerTest extends UnitTestCase
 
         $recipients = $this->subject->getNotificationRecipients();
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with(self::equalTo(
             [
                 'event' => $event,

@@ -12,8 +12,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -78,7 +78,7 @@ class UserRegistrationControllerTest extends UnitTestCase
             ->willReturn($registrations);
         $this->subject->injectRegistrationRepository($registrationRepository);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::any())->method('assign')->with('registrations', $registrations);
         $this->subject->_set('view', $view);
 

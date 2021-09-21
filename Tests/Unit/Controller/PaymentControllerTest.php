@@ -17,9 +17,9 @@ use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
+use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -94,7 +94,7 @@ class PaymentControllerTest extends UnitTestCase
         );
         $this->subject->injectEventDispatcher($eventDispatcher);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $this->subject->_set('view', $view);
 
         $this->subject->redirectAction($mockRegistration, 'a-hmac');
@@ -130,7 +130,7 @@ class PaymentControllerTest extends UnitTestCase
         );
         $this->subject->injectEventDispatcher($eventDispatcher);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $this->subject->_set('view', $view);
 
         $this->subject->successAction($mockRegistration, 'a-hmac');
@@ -166,7 +166,7 @@ class PaymentControllerTest extends UnitTestCase
         );
         $this->subject->injectEventDispatcher($eventDispatcher);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $this->subject->_set('view', $view);
 
         $this->subject->failureAction($mockRegistration, 'a-hmac');
@@ -202,7 +202,7 @@ class PaymentControllerTest extends UnitTestCase
         );
         $this->subject->injectEventDispatcher($eventDispatcher);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $this->subject->_set('view', $view);
 
         $this->subject->cancelAction($mockRegistration, 'a-hmac');
@@ -238,7 +238,7 @@ class PaymentControllerTest extends UnitTestCase
         );
         $this->subject->injectEventDispatcher($eventDispatcher);
 
-        $view = $this->getMockBuilder(ViewInterface::class)->getMock();
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $this->subject->_set('view', $view);
 
         $this->subject->notifyAction($mockRegistration, 'a-hmac');

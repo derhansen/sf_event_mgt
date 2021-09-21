@@ -37,8 +37,8 @@ use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\HttpUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
@@ -65,17 +65,17 @@ class EventController extends AbstractController
 
     /**
      * Assign contentObjectData and pageData to earch view
+     * @todo: Remove $view parameter for TYPO3 v12 version and use $this->view instead to assign variables.
      *
-     * @param \TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view
+     * @param ViewInterface $view @extensionScannerIgnoreLine
      */
-    protected function initializeView(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface $view)
+    protected function initializeView(ViewInterface $view)
     {
         // @extensionScannerIgnoreLine
         $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
         if (is_object($GLOBALS['TSFE'])) {
             $view->assign('pageData', $GLOBALS['TSFE']->page);
         }
-        parent::initializeView($view);
     }
 
     /**
