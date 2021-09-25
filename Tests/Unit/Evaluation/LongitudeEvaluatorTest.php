@@ -36,31 +36,31 @@ class LongitudeEvaluatorTest extends UnitTestCase
         return [
             'emptyValue' => [
                 null,
-                '0.000000'
+                '0.000000',
             ],
             'givenIntegerGetsConvertedToFloatWith6Decimals' => [
                 1,
-                '1.000000'
+                '1.000000',
             ],
             'maxValuePossible' => [
                 180,
-                '180.000000'
+                '180.000000',
             ],
             'minValuePossible' => [
                 -180,
-                '-180.000000'
+                '-180.000000',
             ],
             'greaterThanMaxValueNotPossible' => [
                 180.000001,
-                '0.000000'
+                '0.000000',
             ],
             'lessThanMinValueNotPossible' => [
                 -180.000001,
-                '0.000000'
+                '0.000000',
             ],
             'validLongitudeIsReturned' => [
                 12.345678,
-                '12.345678'
+                '12.345678',
             ],
         ];
     }

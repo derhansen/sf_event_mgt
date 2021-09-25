@@ -78,7 +78,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
     {
         $expected = new ForeignRecordDemand();
-        $this->assertEquals($expected, ForeignRecordDemand::createFromSettings());
+        self::assertEquals($expected, ForeignRecordDemand::createFromSettings());
     }
 
     /**
@@ -97,6 +97,6 @@ class ForeignRecordDemandTest extends UnitTestCase
 
         $current = ForeignRecordDemand::createFromSettings($settings);
 
-        $this->assertEquals($expected, $current);
+        self::assertEquals($expected, $current);
     }
 }

@@ -36,31 +36,31 @@ class LatitudeEvaluatorTest extends UnitTestCase
         return [
             'emptyValue' => [
                 null,
-                '0.000000'
+                '0.000000',
             ],
             'givenIntegerGetsConvertedToFloatWith6Decimals' => [
                 1,
-                '1.000000'
+                '1.000000',
             ],
             'maxValuePossible' => [
                 90,
-                '90.000000'
+                '90.000000',
             ],
             'minValuePossible' => [
                 -90,
-                '-90.000000'
+                '-90.000000',
             ],
             'greaterThanMaxValueNotPossible' => [
                 90.000001,
-                '0.000000'
+                '0.000000',
             ],
             'lessThanMinValueNotPossible' => [
                 -90.000001,
-                '0.000000'
+                '0.000000',
             ],
             'validLongitudeIsReturned' => [
                 12.345678,
-                '12.345678'
+                '12.345678',
             ],
         ];
     }

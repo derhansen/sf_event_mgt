@@ -37,7 +37,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
-            'fieldname' => 'a field'
+            'fieldname' => 'a field',
         ]);
         $actual = $viewHelper->render();
         self::assertSame('', $actual);
@@ -50,8 +50,8 @@ class PrefillViewHelperTest extends UnitTestCase
     {
         $submittedData = [
             'tx_sfeventmgt_pievent' => [
-                'registration' => ['firstname' => 'Torben']
-            ]
+                'registration' => ['firstname' => 'Torben'],
+            ],
         ];
         $GLOBALS['TSFE'] = new stdClass();
 
@@ -67,7 +67,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
-            'fieldname' => 'firstname'
+            'fieldname' => 'firstname',
         ]);
         $actual = $viewHelper->render();
         self::assertSame('Torben', $actual);
@@ -94,7 +94,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
-            'prefillSettings' => []
+            'prefillSettings' => [],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('', $actual);
@@ -121,7 +121,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
-            'prefillSettings' => ['firstname' => 'first_name']
+            'prefillSettings' => ['firstname' => 'first_name'],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('', $actual);
@@ -135,7 +135,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $GLOBALS['TSFE'] = new stdClass();
         $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
-            'first_name' => 'John'
+            'first_name' => 'John',
         ];
 
         $request = $this->prophesize(Request::class);
@@ -151,7 +151,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
-            'prefillSettings' => ['firstname' => 'first_name']
+            'prefillSettings' => ['firstname' => 'first_name'],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('', $actual);
@@ -166,7 +166,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [
             'first_name' => 'John',
-            'last_name' => 'Doe'
+            'last_name' => 'Doe',
         ];
 
         $request = $this->prophesize(Request::class);
@@ -182,7 +182,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
-            'prefillSettings' => ['lastname' => 'last_name']
+            'prefillSettings' => ['lastname' => 'last_name'],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('Doe', $actual);
@@ -195,8 +195,8 @@ class PrefillViewHelperTest extends UnitTestCase
     {
         $submittedData = [
             'tx_sfeventmgt_pievent' => [
-                'registration' => ['firstname' => 'Torben']
-            ]
+                'registration' => ['firstname' => 'Torben'],
+            ],
         ];
 
         $request = $this->prophesize(Request::class);
@@ -212,7 +212,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
-            'prefillSettings' => ['firstname' => 'first_name']
+            'prefillSettings' => ['firstname' => 'first_name'],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('Torben', $actual);

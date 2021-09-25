@@ -179,8 +179,8 @@ class EventRepository extends Repository
                     $query->greaterThan('startdate', $eventDemand->getCurrentDateTime()),
                     $query->logicalAnd([
                         $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
-                        $query->lessThanOrEqual('startdate', $eventDemand->getCurrentDateTime())
-                    ])
+                        $query->lessThanOrEqual('startdate', $eventDemand->getCurrentDateTime()),
+                    ]),
                 ]);
                 break;
             case 'past':
@@ -195,7 +195,7 @@ class EventRepository extends Repository
                     if ($eventDemand->getIncludeCurrent()) {
                         $includeCurrentConstraint = $query->logicalAnd([
                             $query->lessThan('startdate', $timeRestriction),
-                            $query->greaterThan('enddate', $timeRestriction)
+                            $query->greaterThan('enddate', $timeRestriction),
                         ]);
                     }
                 }
@@ -207,7 +207,7 @@ class EventRepository extends Repository
                     if ($eventDemand->getIncludeCurrent() && $includeCurrentConstraint) {
                         $constraints['displayMode'] = $query->logicalOr([
                             $includeCurrentConstraint,
-                            $query->logicalAnd($timeRestrictionConstraints)
+                            $query->logicalAnd($timeRestrictionConstraints),
                         ]);
                     } else {
                         $constraints['displayMode'] = $query->logicalAnd($timeRestrictionConstraints);
@@ -382,8 +382,8 @@ class EventRepository extends Repository
                 $query->between('enddate', $begin, $end),
                 $query->logicalAnd([
                     $query->greaterThanOrEqual('enddate', $begin),
-                    $query->lessThanOrEqual('startdate', $begin)
-                ])
+                    $query->lessThanOrEqual('startdate', $begin),
+                ]),
             ]);
         } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
             /* StartDate - Search for events beginning at a given date */
@@ -471,8 +471,8 @@ class EventRepository extends Repository
                 $query->between('enddate', $begin, $end),
                 $query->logicalAnd([
                     $query->greaterThanOrEqual('enddate', $begin),
-                    $query->lessThanOrEqual('startdate', $begin)
-                ])
+                    $query->lessThanOrEqual('startdate', $begin),
+                ]),
             ]);
         }
     }

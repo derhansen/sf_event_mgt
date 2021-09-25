@@ -24,7 +24,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'firstname,lastname,address,zip,city,phone,email,gender,confirmed,paid,paymentmethod,payment_reference,notes,fe_user,waitlist,',
-        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.svg'
+        'iconfile' => 'EXT:sf_event_mgt/Resources/Public/Icons/tx_sfeventmgt_domain_model_registration_unconfirmed.svg',
     ],
     'types' => [
         '1' => [
@@ -46,7 +46,7 @@ return [
                 paid, paymentmethod, payment_reference,
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                hidden,--palette--;;timeRestriction'
+                hidden,--palette--;;timeRestriction',
         ],
     ],
     'palettes' => [
@@ -67,7 +67,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -113,7 +113,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
             ],
         ],
         'lastname' => [
@@ -122,7 +122,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
             ],
         ],
         'title' => [
@@ -131,7 +131,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'company' => [
@@ -140,7 +140,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'address' => [
@@ -149,7 +149,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'zip' => [
@@ -158,7 +158,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
-            ]
+            ],
         ],
         'city' => [
             'exclude' => true,
@@ -166,7 +166,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'country' => [
@@ -175,7 +175,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'phone' => [
@@ -184,7 +184,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'email' => [
@@ -193,7 +193,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'email,trim,required'
+                'eval' => 'email,trim,required',
             ],
         ],
         'ignore_notifications' => [
@@ -201,8 +201,8 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.ignoreNotifications',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'gender' => [
             'exclude' => true,
@@ -213,19 +213,19 @@ return [
                 'items' => [
                     [
                         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender.notset',
-                        ''
+                        '',
                     ],
                     [
                         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender.female',
-                        'f'
+                        'f',
                     ],
                     [
                         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender.male',
-                        'm'
+                        'm',
                     ],
                     [
                         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.gender.various',
-                        'v'
+                        'v',
                     ],
                 ],
                 'size' => 1,
@@ -252,7 +252,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime,int',
-                'default' => time()
+                'default' => time(),
             ],
         ],
         'confirmed' => [
@@ -260,24 +260,24 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.confirmed',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'accepttc' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.accepttc',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'waitlist' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.waitlist',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'paymentmethod' => [
             'exclude' => true,
@@ -286,12 +286,12 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paymentmethod.notSet', '']
+                    ['LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paymentmethod.notSet', ''],
                 ],
                 'itemsProcFunc' => 'DERHANSEN\SfEventMgt\Hooks\ItemsProcFunc->getPaymentMethods',
                 'size' => 1,
                 'maxitems' => 1,
-            ]
+            ],
         ],
         'payment_reference' => [
             'exclude' => true,
@@ -299,7 +299,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'paid' => [
@@ -307,8 +307,8 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paid',
             'config' => [
                 'type' => 'check',
-                'default' => 0
-            ]
+                'default' => 0,
+            ],
         ],
         'notes' => [
             'exclude' => true,
@@ -317,7 +317,7 @@ return [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 5,
-            ]
+            ],
         ],
         'registration_date' => [
             'exclude' => true,
@@ -343,8 +343,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
-                'readOnly' => 1
-            ]
+                'readOnly' => 1,
+            ],
         ],
         'main_registration' => [
             'exclude' => true,
@@ -356,7 +356,7 @@ return [
                 'allowed' => 'tx_sfeventmgt_domain_model_registration',
                 'maxitems' => 1,
                 'size' => 1,
-                'readOnly' => 1
+                'readOnly' => 1,
             ],
         ],
         'recaptcha' => [
@@ -380,7 +380,7 @@ return [
                     'showSynchronizationLink' => 0,
                     'showPossibleLocalizationRecords' => 0,
                     'useSortable' => 0,
-                    'showAllLocalizationLink' => 0
+                    'showAllLocalizationLink' => 0,
                 ],
             ],
         ],

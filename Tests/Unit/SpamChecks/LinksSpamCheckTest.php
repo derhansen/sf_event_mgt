@@ -31,7 +31,7 @@ class LinksSpamCheckTest extends UnitTestCase
         $settings = [];
         $arguments = [];
         $configuration = [
-            'maxAmountOfLinks' => 2
+            'maxAmountOfLinks' => 2,
         ];
 
         $check = new LinkSpamCheck($registration, $settings, $arguments, $configuration);
@@ -53,7 +53,7 @@ class LinksSpamCheckTest extends UnitTestCase
         $settings = [];
         $arguments = [];
         $configuration = [
-            'maxAmountOfLinks' => 1
+            'maxAmountOfLinks' => 1,
         ];
 
         $check = new LinkSpamCheck($registration, $settings, $arguments, $configuration);
@@ -70,7 +70,7 @@ class LinksSpamCheckTest extends UnitTestCase
         $settings = [];
         $arguments = [];
         $configuration = [
-            'maxAmountOfLinks' => 1
+            'maxAmountOfLinks' => 1,
         ];
 
         $check = new LinkSpamCheck($registration, $settings, $arguments, $configuration);

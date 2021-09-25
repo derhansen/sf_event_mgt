@@ -39,9 +39,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ',',
                     'fieldQuoteCharacter' => '"',
-                    'prependBOM' => 0
+                    'prependBOM' => 0,
                 ],
-                '"uid","firstname","lastname"' . chr(10) . '1,"Max","Mustermann"' . chr(10)
+                '"uid","firstname","lastname"' . chr(10) . '1,"Max","Mustermann"' . chr(10),
             ],
             'fieldValuesWithoutWhitespacesInTypoScript' => [
                 1,
@@ -49,9 +49,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ',',
                     'fieldQuoteCharacter' => '"',
-                    'prependBOM' => 0
+                    'prependBOM' => 0,
                 ],
-                '"uid","firstname","lastname"' . chr(10) . '1,"Max","Mustermann"' . chr(10)
+                '"uid","firstname","lastname"' . chr(10) . '1,"Max","Mustermann"' . chr(10),
             ],
             'fieldValuesWithDifferentDelimiter' => [
                 1,
@@ -59,9 +59,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ';',
                     'fieldQuoteCharacter' => '"',
-                    'prependBOM' => 0
+                    'prependBOM' => 0,
                 ],
-                '"uid";"firstname";"lastname"' . chr(10) . '1;"Max";"Mustermann"' . chr(10)
+                '"uid";"firstname";"lastname"' . chr(10) . '1;"Max";"Mustermann"' . chr(10),
             ],
             'fieldValuesWithDifferentQuoteCharacter' => [
                 1,
@@ -69,9 +69,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ',',
                     'fieldQuoteCharacter' => '\'',
-                    'prependBOM' => 0
+                    'prependBOM' => 0,
                 ],
-                '\'uid\',\'firstname\',\'lastname\'' . chr(10) . '1,\'Max\',\'Mustermann\'' . chr(10)
+                '\'uid\',\'firstname\',\'lastname\'' . chr(10) . '1,\'Max\',\'Mustermann\'' . chr(10),
             ],
             'fieldValuesWithBomSetting' => [
                 1,
@@ -79,9 +79,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid, firstname, lastname',
                     'fieldDelimiter' => ';',
                     'fieldQuoteCharacter' => '"',
-                    'prependBOM' => 1
+                    'prependBOM' => 1,
                 ],
-                chr(239) . chr(187) . chr(191) . '"uid";"firstname";"lastname"' . chr(10) . '1;"Max";"Mustermann"' . chr(10)
+                chr(239) . chr(187) . chr(191) . '"uid";"firstname";"lastname"' . chr(10) . '1;"Max";"Mustermann"' . chr(10),
             ],
             'fieldValuesWithSubproperty' => [
                 1,
@@ -89,9 +89,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid,firstname,lastname,event.title',
                     'fieldDelimiter' => ',',
                     'fieldQuoteCharacter' => '"',
-                    'prependBOM' => 0
+                    'prependBOM' => 0,
                 ],
-                '"uid","firstname","lastname","event.title"' . chr(10) . '1,"Max","Mustermann","Some event"' . chr(10)
+                '"uid","firstname","lastname","event.title"' . chr(10) . '1,"Max","Mustermann","Some event"' . chr(10),
             ],
             'fieldValuesWithNonExistingFieldReturnsEmptyString' => [
                 1,
@@ -99,9 +99,9 @@ class ExportServiceTest extends UnitTestCase
                     'fields' => 'uid,firstname,lastname,foo',
                     'fieldDelimiter' => ',',
                     'fieldQuoteCharacter' => '"',
-                    'prependBOM' => 0
+                    'prependBOM' => 0,
                 ],
-                '"uid","firstname","lastname","foo"' . chr(10) . '1,"Max","Mustermann",' . chr(10)
+                '"uid","firstname","lastname","foo"' . chr(10) . '1,"Max","Mustermann",' . chr(10),
             ],
         ];
     }

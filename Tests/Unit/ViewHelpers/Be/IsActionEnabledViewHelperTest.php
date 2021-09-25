@@ -31,41 +31,41 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
             'actionNotFoundInSettings' => [
                 'unknown',
                 [
-                    'enabledActions' => []
+                    'enabledActions' => [],
                 ],
                 false,
-                false
+                false,
             ],
             'actionDisabledInSetting' => [
                 'export',
                 [
                     'enabledActions' => [
-                        'export' => 0
-                    ]
+                        'export' => 0,
+                    ],
                 ],
                 false,
-                false
+                false,
             ],
             'actionEnabledInSettingNoAccess' => [
                 'export',
                 [
                     'enabledActions' => [
-                        'export' => 1
-                    ]
+                        'export' => 1,
+                    ],
                 ],
                 false,
-                false
+                false,
             ],
             'actionEnabledInSettingAccess' => [
                 'export',
                 [
                     'enabledActions' => [
-                        'export' => 1
-                    ]
+                        'export' => 1,
+                    ],
                 ],
                 true,
-                true
-            ]
+                true,
+            ],
         ];
     }
 
@@ -82,7 +82,7 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
         $viewHelper = new IsActionEnabledViewHelper();
         $viewHelper->setArguments([
             'action' => $action,
-            'settings' => $settings
+            'settings' => $settings,
         ]);
 
         $beUserProphecy = $this->prophesize(BackendUserAuthentication::class);

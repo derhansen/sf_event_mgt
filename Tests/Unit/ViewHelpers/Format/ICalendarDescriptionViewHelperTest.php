@@ -27,28 +27,28 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
         return [
             'emptyValue' => [
                 '',
-                ''
+                '',
             ],
             'shortDescriptionLess75Chars' => [
                 'This is just a short text with less than 75 chars',
-                'This is just a short text with less than 75 chars'
+                'This is just a short text with less than 75 chars',
             ],
             'shortDescriptionLess75CharsWithHtml' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars',
-                'This is just a short text with less than 75 chars'
+                'This is just a short text with less than 75 chars',
             ],
             'shortDescriptionLess75CharsWithHtmlAndLineBreak' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars' . chr(13) . ' and some more text',
-                'This is just a short text with less than 75 chars\n\n and some more text'
+                'This is just a short text with less than 75 chars\n\n and some more text',
             ],
             'longDescriptionWithoutLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
-                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ' . chr(10) . ' sed diam'
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ' . chr(10) . ' sed diam',
             ],
             'longDescriptionWithLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ' . chr(13) . 'nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
-                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er' . chr(10) . ' at, sed diam'
-            ]
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er' . chr(10) . ' at, sed diam',
+            ],
         ];
     }
 

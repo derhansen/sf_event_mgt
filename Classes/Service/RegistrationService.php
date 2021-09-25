@@ -158,7 +158,7 @@ class RegistrationService
             $failed,
             $registration,
             $messageKey,
-            $titleKey
+            $titleKey,
         ];
     }
 
@@ -235,7 +235,7 @@ class RegistrationService
             $failed,
             $registration,
             $messageKey,
-            $titleKey
+            $titleKey,
         ];
     }
 

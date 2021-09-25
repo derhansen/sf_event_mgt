@@ -56,7 +56,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
         $this->subject->injectConfigurationManager($configurationManager->reveal());
 
         $expected = [
-            GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/')
+            GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
         ];
 
         self::assertEquals($expected, $this->subject->getTemplateFolders());
@@ -101,38 +101,38 @@ class FluidStandaloneServiceTest extends UnitTestCase
                     'view' => [
                         'templateRootPaths' => [
                             0 => 'EXT:sf_event_mgt/Resources/Private/Templates/',
-                            1 => 'fileadmin/user_upload/'
-                        ]
-                    ]
+                            1 => 'fileadmin/user_upload/',
+                        ],
+                    ],
                 ],
                 [
                     GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/user_upload/')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/user_upload/'),
+                ],
             ],
             'ensureSuffixPathIsAdded' => [
                 [
                     'view' => [
                         'templateRootPaths' => [
                             0 => 'EXT:sf_event_mgt/Resources/Private/Templates',
-                            1 => 'fileadmin/user_upload'
-                        ]
-                    ]
+                            1 => 'fileadmin/user_upload',
+                        ],
+                    ],
                 ],
                 [
                     GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/user_upload/')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/user_upload/'),
+                ],
             ],
             'fallbackForOldTemplatePathSetting' => [
                 [
                     'view' => [
-                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/'
-                    ]
+                        'templateRootPath' => 'EXT:sf_event_mgt/Resources/Private/Templates/',
+                    ],
                 ],
                 [
                     GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
-                ]
+                ],
             ],
             'ensureArrayKeysAreSorted' => [
                 [
@@ -140,15 +140,15 @@ class FluidStandaloneServiceTest extends UnitTestCase
                         'templateRootPaths' => [
                             2 => 'fileadmin/__temp__/',
                             0 => 'EXT:sf_event_mgt/Resources/Private/Templates',
-                            1 => 'fileadmin/user_upload/'
-                        ]
-                    ]
+                            1 => 'fileadmin/user_upload/',
+                        ],
+                    ],
                 ],
                 [
                     0 => GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
                     1 => GeneralUtility::getFileAbsFileName('fileadmin/user_upload/'),
                     2 => GeneralUtility::getFileAbsFileName('fileadmin/__temp__/'),
-                ]
+                ],
             ],
         ];
     }

@@ -42,7 +42,7 @@ class PaymentControllerTest extends UnitTestCase
             [
                 'redirect',
                 'validateHmacForAction',
-                'proceedWithAction'
+                'proceedWithAction',
             ],
             [],
             '',
@@ -84,7 +84,7 @@ class PaymentControllerTest extends UnitTestCase
             'cancelUrl' => null,
             'notifyUrl' => null,
             'registration' => $mockRegistration,
-            'html' => ''
+            'html' => '',
         ];
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -120,7 +120,7 @@ class PaymentControllerTest extends UnitTestCase
         $this->subject->injectHashService($mockHashService);
 
         $values = [
-            'html' => ''
+            'html' => '',
         ];
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -156,7 +156,7 @@ class PaymentControllerTest extends UnitTestCase
         $this->subject->injectHashService($mockHashService);
 
         $values = [
-            'html' => ''
+            'html' => '',
         ];
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -192,7 +192,7 @@ class PaymentControllerTest extends UnitTestCase
         $this->subject->injectHashService($mockHashService);
 
         $values = [
-            'html' => ''
+            'html' => '',
         ];
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -228,7 +228,7 @@ class PaymentControllerTest extends UnitTestCase
         $this->subject->injectHashService($mockHashService);
 
         $values = [
-            'html' => ''
+            'html' => '',
         ];
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)

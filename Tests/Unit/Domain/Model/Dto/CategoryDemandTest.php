@@ -43,7 +43,7 @@ class CategoryDemandTest extends UnitTestCase
      */
     public function getStoragePageReturnsIntialValueForString()
     {
-        $this->assertEquals('', $this->subject->getStoragePage());
+        self::assertEquals('', $this->subject->getStoragePage());
     }
 
     /**
@@ -74,7 +74,7 @@ class CategoryDemandTest extends UnitTestCase
 
     public function getCategoriesReturnsInitialValueForString()
     {
-        $this->assertEquals('', $this->subject->getCategories());
+        self::assertEquals('', $this->subject->getCategories());
     }
 
     /**
@@ -145,7 +145,7 @@ class CategoryDemandTest extends UnitTestCase
         $expected = new CategoryDemand();
         $current = CategoryDemand::createFromSettings();
 
-        $this->assertEquals($expected, $current);
+        self::assertEquals($expected, $current);
     }
 
     /**
@@ -170,11 +170,11 @@ class CategoryDemandTest extends UnitTestCase
                 'includeSubcategories' => true,
                 'orderField' => 'title',
                 'orderDirection' => 'desc',
-            ]
+            ],
         ];
 
         $current = CategoryDemand::createFromSettings($settings);
 
-        $this->assertEquals($expected, $current);
+        self::assertEquals($expected, $current);
     }
 }

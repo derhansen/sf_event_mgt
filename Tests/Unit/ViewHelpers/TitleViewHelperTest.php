@@ -64,7 +64,7 @@ class TitleViewHelperTest extends ViewHelperBaseTestcase
         $this->viewHelper::renderStatic(
             [
                 'pageTitle' => $pageTitle,
-                'indexedDocTitle' => $indexedSearchDocTitle
+                'indexedDocTitle' => $indexedSearchDocTitle,
             ],
             function () {
             },

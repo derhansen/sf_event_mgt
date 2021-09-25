@@ -195,7 +195,7 @@ class NotificationService
         }
 
         $additionalBodyVariables = [
-            'customNotification' => $customNotification
+            'customNotification' => $customNotification,
         ];
 
         if (!$registration->isIgnoreNotifications()) {
@@ -204,7 +204,7 @@ class NotificationService
                 $subject,
                 [
                     'event' => $event,
-                    'registration' => $registration
+                    'registration' => $registration,
                 ]
             );
             $attachments = $this->attachmentService->getAttachments(
@@ -335,7 +335,7 @@ class NotificationService
 
         return [
             $template ?? '',
-            $subject ?? ''
+            $subject ?? '',
         ];
     }
 
@@ -366,7 +366,7 @@ class NotificationService
             $subject,
             [
                 'event' => $event,
-                'registration' => $registration
+                'registration' => $registration,
             ]
         );
         $attachments = $this->attachmentService->getAttachments(
@@ -490,7 +490,7 @@ class NotificationService
             'registration' => $registration,
             'settings' => $settings,
             'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
-            'reghmac' => $this->hashService->appendHmac((string)$registration->getUid())
+            'reghmac' => $this->hashService->appendHmac((string)$registration->getUid()),
         ];
         $variables = array_merge($additionalBodyVariables, $defaultVariables);
 

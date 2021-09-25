@@ -19,7 +19,6 @@ use DERHANSEN\SfEventMgt\Service\EmailService;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
-use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -68,17 +67,17 @@ class NotificationServiceTest extends UnitTestCase
     {
         return [
             'messageTypeRegistrationNew' => [
-                MessageType::REGISTRATION_NEW
+                MessageType::REGISTRATION_NEW,
             ],
             'messageTypeRegistrationWaitlistNew' => [
-                MessageType::REGISTRATION_WAITLIST_NEW
+                MessageType::REGISTRATION_WAITLIST_NEW,
             ],
             'messageTypeRegistrationConfirmed' => [
-                MessageType::REGISTRATION_CONFIRMED
+                MessageType::REGISTRATION_CONFIRMED,
             ],
             'messageTypeRegistrationWaitlistConfirmed' => [
-                MessageType::REGISTRATION_WAITLIST_CONFIRMED
-            ]
+                MessageType::REGISTRATION_WAITLIST_CONFIRMED,
+            ],
         ];
     }
 
@@ -197,8 +196,8 @@ class NotificationServiceTest extends UnitTestCase
             'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'senderName' => 'Sender',
-                'adminEmail' => 'valid@email.tld'
-            ]
+                'adminEmail' => 'valid@email.tld',
+            ],
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
@@ -244,8 +243,8 @@ class NotificationServiceTest extends UnitTestCase
             'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'senderName' => 'Sender',
-                'adminEmail' => 'valid@email.tld'
-            ]
+                'adminEmail' => 'valid@email.tld',
+            ],
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
@@ -292,8 +291,8 @@ class NotificationServiceTest extends UnitTestCase
         $settings = [
             'notification' => [
                 'senderEmail' => 'valid@email.tld',
-                'adminEmail' => 'valid@email.tld'
-            ]
+                'adminEmail' => 'valid@email.tld',
+            ],
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
@@ -322,8 +321,8 @@ class NotificationServiceTest extends UnitTestCase
             'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'senderName' => 'Sender',
-                'adminEmail' => 'valid@email.tld'
-            ]
+                'adminEmail' => 'valid@email.tld',
+            ],
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
@@ -369,7 +368,7 @@ class NotificationServiceTest extends UnitTestCase
         $settings = [
             'notification' => [
                 'registrationDataAsSenderForAdminEmails' => 1,
-            ]
+            ],
         ];
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
@@ -421,8 +420,8 @@ class NotificationServiceTest extends UnitTestCase
             'notification' => [
                 'senderEmail' => 'valid@email.tld',
                 'senderName' => 'Sender',
-                'adminEmail' => 'valid1@email.tld,valid2@email.tld ,invalid-email,,'
-            ]
+                'adminEmail' => 'valid1@email.tld,valid2@email.tld ,invalid-email,,',
+            ],
         ];
 
         $emailService = $this->getMockBuilder(EmailService::class)->getMock();
@@ -545,8 +544,8 @@ class NotificationServiceTest extends UnitTestCase
         $registrationProphecy = $this->prophesize(Registration::class);
         $settings = [
             'notification' => [
-                'disabled' => 1
-            ]
+                'disabled' => 1,
+            ],
         ];
         $result = $this->subject->sendUserMessage(
             $eventProphecy->reveal(),
@@ -566,8 +565,8 @@ class NotificationServiceTest extends UnitTestCase
         $registrationProphecy = $this->prophesize(Registration::class);
         $settings = [
             'notification' => [
-                'disabled' => 1
-            ]
+                'disabled' => 1,
+            ],
         ];
         $result = $this->subject->sendAdminMessage(
             $eventProphecy->reveal(),

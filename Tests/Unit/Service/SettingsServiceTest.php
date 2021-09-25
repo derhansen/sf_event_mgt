@@ -48,7 +48,7 @@ class SettingsServiceTest extends UnitTestCase
         return [
             'emptySettings' => [
                 [],
-                []
+                [],
             ],
             'oneEntry' => [
                 [
@@ -57,12 +57,12 @@ class SettingsServiceTest extends UnitTestCase
                             'firstEntry' => [
                                 'title' => 'First title',
                                 'template' => 'First template',
-                                'subject' => 'First subject'
-                            ]
-                        ]
-                    ]
+                                'subject' => 'First subject',
+                            ],
+                        ],
+                    ],
                 ],
-                ['firstEntry' => 'First title']
+                ['firstEntry' => 'First title'],
             ],
             'twoEntry' => [
                 [
@@ -71,17 +71,17 @@ class SettingsServiceTest extends UnitTestCase
                             'firstEntry' => [
                                 'title' => 'First title',
                                 'template' => 'First template',
-                                'subject' => 'First subject'
+                                'subject' => 'First subject',
                             ],
                             'secondEntry' => [
                                 'title' => 'Second title',
                                 'template' => 'Second template',
-                                'subject' => 'Second subject'
-                            ]
-                        ]
-                    ]
+                                'subject' => 'Second subject',
+                            ],
+                        ],
+                    ],
                 ],
-                ['firstEntry' => 'First title', 'secondEntry' => 'Second title']
+                ['firstEntry' => 'First title', 'secondEntry' => 'Second title'],
             ],
         ];
     }

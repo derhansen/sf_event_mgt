@@ -29,7 +29,7 @@ class TemplateLayouts
         foreach ($templateLayouts as $index => $layout) {
             $additionalLayout = [
                 $GLOBALS['LANG']->sL($layout),
-                $index
+                $index,
             ];
             array_push($config['items'], $additionalLayout);
         }

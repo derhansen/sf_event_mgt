@@ -10,12 +10,9 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
-use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
-use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillFieldViewHelper;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillMultiValueFieldViewHelper;
 use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Extbase\Property\PropertyMapper;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -32,12 +29,12 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
             'Default value selected' => [
                 'Default',
                 'Default',
-                true
+                true,
             ],
             'Default value not selected' => [
                 'Default',
                 'Foo',
-                false
+                false,
             ],
         ];
     }
@@ -75,29 +72,29 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
                 1,
                 'option1',
                 'option1',
-                true
+                true,
             ],
             'submitted value is field value for array' => [
                 1,
                 1,
                 'option1',
                 ['option1', 'option2'],
-                true
+                true,
             ],
             'submitted value is not field value for array' => [
                 1,
                 1,
                 'option3',
                 ['option1', 'option2'],
-                false
+                false,
             ],
             'submitted registration field uid is not registration field uid' => [
                 1,
                 2,
                 'option1',
                 ['option1', 'option2'],
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -124,10 +121,10 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
             'tx_sfeventmgt_pievent' => [
                 'registration' => [
                     'fields' => [
-                        $submittedRegistrationFieldUid => $fieldValue
-                    ]
-                ]
-            ]
+                        $submittedRegistrationFieldUid => $fieldValue,
+                    ],
+                ],
+            ],
         ];
 
         $originalRequest = $this->prophesize(Request::class);
@@ -159,9 +156,9 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $submittedData = [
             'tx_sfeventmgt_pievent' => [
                 'registration' => [
-                    'fields' => []
-                ]
-            ]
+                    'fields' => [],
+                ],
+            ],
         ];
 
         $originalRequest = $this->prophesize(Request::class);

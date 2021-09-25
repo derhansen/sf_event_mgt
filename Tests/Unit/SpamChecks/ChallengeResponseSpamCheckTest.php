@@ -42,12 +42,12 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
         $settings = [];
         $arguments = [
             'registration' => [
-                'cr-response' => ''
-            ]
+                'cr-response' => '',
+            ],
         ];
         $configuration = [
             'prefix' => 'test',
-            'postfix' => 'test'
+            'postfix' => 'test',
         ];
 
         $check = new ChallengeResponseSpamCheck($registration, $settings, $arguments, $configuration);
@@ -65,12 +65,12 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
         $arguments = [
             'event' => 5,
             'registration' => [
-                'cr-response' => str_rot13('test' . MiscUtility::getSpamCheckChallenge(5) . 'test')
-            ]
+                'cr-response' => str_rot13('test' . MiscUtility::getSpamCheckChallenge(5) . 'test'),
+            ],
         ];
         $configuration = [
             'prefix' => 'test',
-            'postfix' => 'test'
+            'postfix' => 'test',
         ];
 
         $check = new ChallengeResponseSpamCheck($registration, $settings, $arguments, $configuration);

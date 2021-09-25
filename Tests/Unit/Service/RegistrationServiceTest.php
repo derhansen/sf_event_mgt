@@ -10,14 +10,14 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
-use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
-use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
@@ -148,7 +148,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             null,
             'event.message.confirmation_failed_wrong_hmac',
-            'confirmRegistration.title.failed'
+            'confirmRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -182,7 +182,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             null,
             'event.message.confirmation_failed_registration_not_found',
-            'confirmRegistration.title.failed'
+            'confirmRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -219,7 +219,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             $mockRegistration,
             'event.message.confirmation_failed_confirmation_until_expired',
-            'confirmRegistration.title.failed'
+            'confirmRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -257,7 +257,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             $mockRegistration,
             'event.message.confirmation_failed_already_confirmed',
-            'confirmRegistration.title.failed'
+            'confirmRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -284,7 +284,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             null,
             'event.message.cancel_failed_wrong_hmac',
-            'cancelRegistration.title.failed'
+            'cancelRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -318,7 +318,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             null,
             'event.message.cancel_failed_registration_not_found_or_cancelled',
-            'cancelRegistration.title.failed'
+            'cancelRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -358,7 +358,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             $mockRegistration,
             'event.message.confirmation_failed_cancel_disabled',
-            'cancelRegistration.title.failed'
+            'cancelRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -399,7 +399,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             $mockRegistration,
             'event.message.cancel_failed_deadline_expired',
-            'cancelRegistration.title.failed'
+            'cancelRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -441,7 +441,7 @@ class RegistrationServiceTest extends UnitTestCase
             true,
             $mockRegistration,
             'event.message.cancel_failed_event_started',
-            'cancelRegistration.title.failed'
+            'cancelRegistration.title.failed',
         ];
         self::assertEquals($expected, $result);
     }
@@ -795,17 +795,17 @@ class RegistrationServiceTest extends UnitTestCase
             'move up not enabled' => [
                 false,
                 0,
-                0
+                0,
             ],
             'move up enabled, but no waitlist registrations' => [
                 true,
                 0,
-                0
+                0,
             ],
             'with waitlist registrations, but no free places' => [
                 true,
                 1,
-                0
+                0,
             ],
         ];
     }

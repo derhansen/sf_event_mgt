@@ -277,7 +277,7 @@ class EventTest extends UnitTestCase
         $this->subject->setCategory(new ObjectStorage());
         $this->subject->addCategory($category);
 
-        $this->assertEquals($objectStorage, $this->subject->getCategory());
+        self::assertEquals($objectStorage, $this->subject->getCategory());
     }
 
     /**
@@ -292,7 +292,7 @@ class EventTest extends UnitTestCase
         $this->subject->setCategory($objectStorage);
         $this->subject->removeCategory($category);
 
-        $this->assertEmpty($this->subject->getCategory());
+        self::assertEmpty($this->subject->getCategory());
     }
 
     /**
@@ -331,7 +331,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistration(new ObjectStorage());
         $this->subject->addRegistration($registration);
 
-        $this->assertEquals($objectStorage, $this->subject->getRegistration());
+        self::assertEquals($objectStorage, $this->subject->getRegistration());
     }
 
     /**
@@ -346,7 +346,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistration($objectStorage);
         $this->subject->removeRegistration($registration);
 
-        $this->assertEmpty($this->subject->getRegistration());
+        self::assertEmpty($this->subject->getRegistration());
     }
 
     /**
@@ -385,7 +385,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistrationWaitlist(new ObjectStorage());
         $this->subject->addRegistrationWaitlist($registration);
 
-        $this->assertEquals($objectStorage, $this->subject->getRegistrationWaitlist());
+        self::assertEquals($objectStorage, $this->subject->getRegistrationWaitlist());
     }
 
     /**
@@ -400,7 +400,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistrationWaitlist($objectStorage);
         $this->subject->removeRegistrationWaitlist($registration);
 
-        $this->assertEmpty($this->subject->getRegistrationWaitlist());
+        self::assertEmpty($this->subject->getRegistrationWaitlist());
     }
 
     /**
@@ -439,7 +439,7 @@ class EventTest extends UnitTestCase
         $this->subject->setImage(new ObjectStorage());
         $this->subject->addImage($fileReference);
 
-        $this->assertEquals($objectStorage, $this->subject->getImage());
+        self::assertEquals($objectStorage, $this->subject->getImage());
     }
 
     /**
@@ -454,7 +454,7 @@ class EventTest extends UnitTestCase
         $this->subject->setImage($objectStorage);
         $this->subject->removeImage($fileReference);
 
-        $this->assertEmpty($this->subject->getImage());
+        self::assertEmpty($this->subject->getImage());
     }
 
     /**
@@ -493,7 +493,7 @@ class EventTest extends UnitTestCase
         $this->subject->setFiles(new ObjectStorage());
         $this->subject->addFiles($fileReference);
 
-        $this->assertEquals($objectStorage, $this->subject->getFiles());
+        self::assertEquals($objectStorage, $this->subject->getFiles());
     }
 
     /**
@@ -508,7 +508,7 @@ class EventTest extends UnitTestCase
         $this->subject->setFiles($objectStorage);
         $this->subject->removeFiles($fileReference);
 
-        $this->assertEmpty($this->subject->getFiles());
+        self::assertEmpty($this->subject->getFiles());
     }
 
     /**
@@ -547,7 +547,7 @@ class EventTest extends UnitTestCase
         $this->subject->setAdditionalImage(new ObjectStorage());
         $this->subject->addAdditionalImage($fileReference);
 
-        $this->assertEquals($objectStorage, $this->subject->getAdditionalImage());
+        self::assertEquals($objectStorage, $this->subject->getAdditionalImage());
     }
 
     /**
@@ -562,7 +562,7 @@ class EventTest extends UnitTestCase
         $this->subject->setAdditionalImage($objectStorage);
         $this->subject->removeAdditionalImage($fileReference);
 
-        $this->assertEmpty($this->subject->getAdditionalImage());
+        self::assertEmpty($this->subject->getAdditionalImage());
     }
 
     /**
@@ -1132,7 +1132,7 @@ class EventTest extends UnitTestCase
         $this->subject->setPriceOptions(new ObjectStorage());
         $this->subject->addPriceOptions($object);
 
-        $this->assertEquals($objectStorage, $this->subject->getPriceOptions());
+        self::assertEquals($objectStorage, $this->subject->getPriceOptions());
     }
 
     /**
@@ -1147,7 +1147,7 @@ class EventTest extends UnitTestCase
         $this->subject->setPriceOptions($objectStorage);
         $this->subject->removePriceOptions($object);
 
-        $this->assertEmpty($this->subject->getPriceOptions());
+        self::assertEmpty($this->subject->getPriceOptions());
     }
 
     /**
@@ -1246,7 +1246,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRelated(new ObjectStorage());
         $this->subject->addRelated($object);
 
-        $this->assertEquals($objectStorage, $this->subject->getRelated());
+        self::assertEquals($objectStorage, $this->subject->getRelated());
     }
 
     /**
@@ -1261,7 +1261,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRelated($objectStorage);
         $this->subject->removeRelated($object);
 
-        $this->assertEmpty($this->subject->getRelated());
+        self::assertEmpty($this->subject->getRelated());
     }
 
     /**
@@ -1276,26 +1276,26 @@ class EventTest extends UnitTestCase
                 false,
                 new \DateTime('tomorrow'),
                 new \DateTime('today'),
-                false
+                false,
             ],
             'cancellationEnabledButDeadlineReached' => [
                 true,
                 new \DateTime('tomorrow'),
                 new \DateTime('yesterday'),
-                false
+                false,
             ],
             'cancellationEnabledDeadlineNotReached' => [
                 true,
                 (new \DateTime('tomorrow'))->modify('+1 day'),
                 new \DateTime('tomorrow'),
-                true
+                true,
             ],
             'cancellationEnabledDeadlineNotReachedEventExpired' => [
                 true,
                 new \DateTime('yesterday'),
                 new \DateTime('tomorrow'),
-                true
-            ]
+                true,
+            ],
         ];
     }
 
@@ -1388,7 +1388,7 @@ class EventTest extends UnitTestCase
         $this->subject->setSpeaker(new ObjectStorage());
         $this->subject->addSpeaker($object);
 
-        $this->assertEquals($objectStorage, $this->subject->getSpeaker());
+        self::assertEquals($objectStorage, $this->subject->getSpeaker());
     }
 
     /**
@@ -1442,7 +1442,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistrationFields(new ObjectStorage());
         $this->subject->addRegistrationFields($object);
 
-        $this->assertEquals($objectStorage, $this->subject->getRegistrationFields());
+        self::assertEquals($objectStorage, $this->subject->getRegistrationFields());
     }
 
     /**
@@ -1457,7 +1457,7 @@ class EventTest extends UnitTestCase
         $this->subject->setRegistrationFields($objectStorage);
         $this->subject->removeRegistrationFields($object);
 
-        $this->assertEmpty($this->subject->getRegistrationFields());
+        self::assertEmpty($this->subject->getRegistrationFields());
     }
 
     /**
@@ -1504,7 +1504,7 @@ class EventTest extends UnitTestCase
 
         $expected = [
             1 => 'A Title',
-            2 => 'Another Title'
+            2 => 'Another Title',
         ];
         self::assertEquals($expected, $this->subject->getRegistrationFieldUidsWithTitle());
     }
@@ -1520,22 +1520,22 @@ class EventTest extends UnitTestCase
             'no start- and enddate' => [
                 null,
                 null,
-                true
+                true,
             ],
             'no enddate' => [
                 \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
                 null,
-                true
+                true,
             ],
             'start- and enddate same day' => [
                 \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
                 \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 18:00:00'),
-                true
+                true,
             ],
             'start- and enddate on different day' => [
                 \DateTime::createFromFormat('d.m.Y H:i:s', '01.01.2019 14:00:00'),
                 \DateTime::createFromFormat('d.m.Y H:i:s', '02.01.2019 10:00:00'),
-                false
+                false,
             ],
         ];
     }

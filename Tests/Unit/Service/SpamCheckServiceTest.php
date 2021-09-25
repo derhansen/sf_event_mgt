@@ -49,19 +49,19 @@ class SpamCheckServiceTest extends UnitTestCase
     {
         return [
             'empty settings' => [
-                []
+                [],
             ],
             'spamcheck disabled' => [
                 [
-                    'enabled' => 0
-                ]
+                    'enabled' => 0,
+                ],
             ],
             'spamcheck enabled but no checks' => [
                 [
                     'enabled' => 1,
-                    'checks' => []
-                ]
-            ]
+                    'checks' => [],
+                ],
+            ],
         ];
     }
 
@@ -89,9 +89,9 @@ class SpamCheckServiceTest extends UnitTestCase
             'enabled' => 1,
             'checks' => [
                 0 => [
-                    'class' => 'DERHANSEN\SfEventMgt\SpamChecks\FooCheck'
-                ]
-            ]
+                    'class' => 'DERHANSEN\SfEventMgt\SpamChecks\FooCheck',
+                ],
+            ],
         ];
         $arguments = [];
         $service = new SpamCheckService($registration, $settings, $arguments);
@@ -106,7 +106,7 @@ class SpamCheckServiceTest extends UnitTestCase
         $registration = new Registration();
         $settings = [
             'enabled' => 1,
-            'maxSpamScore' => 20
+            'maxSpamScore' => 20,
         ];
         $arguments = [];
 
@@ -142,8 +142,8 @@ class SpamCheckServiceTest extends UnitTestCase
                     'enabled' => 1,
                     'class' => 'DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck',
                     'increaseScore' => 10,
-                ]
-            ]
+                ],
+            ],
         ];
         $arguments = [];
         $service = new SpamCheckService($registration, $settings, $arguments);

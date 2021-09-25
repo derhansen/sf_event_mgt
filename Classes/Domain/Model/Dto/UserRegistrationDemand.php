@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 use DateTime;
-use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
 
 /**
  * UserRegistrationDemand

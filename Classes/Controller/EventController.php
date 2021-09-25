@@ -131,7 +131,7 @@ class EventController extends AbstractController
                 'organisators' => $organisators,
                 'speakers' => $speakers,
                 'overwriteDemand' => $overwriteDemand,
-                'eventDemand' => $eventDemand
+                'eventDemand' => $eventDemand,
             ],
             $this
         );
@@ -199,7 +199,7 @@ class EventController extends AbstractController
                     sprintf('1.%s.%s', $currentMonth, $currentYear)
                 ),
                 'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
-                'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month')
+                'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month'),
             ],
             $this
         );
@@ -415,7 +415,7 @@ class EventController extends AbstractController
             PersistentObjectConverter::class,
             [
                 PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED => true,
-                PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => true
+                PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => true,
             ]
         );
 
@@ -453,7 +453,7 @@ class EventController extends AbstractController
                 'pid' => $field->getPid(),
                 'value' => $value,
                 'field' => (string)$fieldUid,
-                'valueType' => $field->getValueType()
+                'valueType' => $field->getValueType(),
             ];
 
             $index++;
@@ -577,7 +577,7 @@ class EventController extends AbstractController
                 null,
                 [
                     'reguid' => $registration->getUid(),
-                    'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid())
+                    'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
                 ]
             );
         } else {
@@ -588,7 +588,7 @@ class EventController extends AbstractController
                 [
                     'result' => $result,
                     'eventuid' => $event->getUid(),
-                    'hmac' => $this->hashService->generateHmac('event-' . $event->getUid())
+                    'hmac' => $this->hashService->generateHmac('event-' . $event->getUid()),
                 ]
             );
         }
@@ -718,7 +718,7 @@ class EventController extends AbstractController
                 'redirect',
                 [
                     'registration' => $registration,
-                    'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid())
+                    'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid()),
                 ],
                 'Payment',
                 'sfeventmgt',

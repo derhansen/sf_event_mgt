@@ -72,20 +72,20 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'pid is numeric and valid' => [
                 3,
-                3
+                3,
             ],
             'pid is string and valid' => [
                 '3',
-                3
+                3,
             ],
             'pid is zero' => [
                 0,
-                0
+                0,
             ],
             'pid not set' => [
                 '',
-                51
-            ]
+                51,
+            ],
         ];
     }
 
@@ -217,61 +217,61 @@ class EventRepositoryTest extends FunctionalTestCase
                 '5',
                 '',
                 false,
-                5
+                5,
             ],
             'category 5 with AND - no subcategories' => [
                 '5',
                 'and',
                 false,
-                4
+                4,
             ],
             'category 5,6 with AND - no subcategories' => [
                 '5,6',
                 'and',
                 false,
-                3
+                3,
             ],
             'category 5,6,7 with AND - no subcategories' => [
                 '5,6,7',
                 'and',
                 false,
-                2
+                2,
             ],
             'category 5,6,7,8 with AND - no subcategories' => [
                 '5,6,7,8',
                 'and',
                 false,
-                1
+                1,
             ],
             'category 5,6 with OR - no subcategories' => [
                 '5,6',
                 'or',
                 false,
-                4
+                4,
             ],
             'category 7,8 with OR - no subcategories' => [
                 '7,8',
                 'or',
                 false,
-                2
+                2,
             ],
             'category 7,8 with NOTAND - no subcategories' => [
                 '7,8',
                 'notand',
                 false,
-                4
+                4,
             ],
             'category 7,8 with NOTOR - no subcategories' => [
                 '7,8',
                 'notor',
                 false,
-                3
+                3,
             ],
             'category 8 with AND - with subcategories' => [
                 '8',
                 'or',
                 true,
-                2
+                2,
             ],
         ];
     }
@@ -306,16 +306,16 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'location 1' => [
                 1,
-                1
+                1,
             ],
             'location 2' => [
                 2,
-                1
+                1,
             ],
             'location 3' => [
                 3,
-                0
-            ]
+                0,
+            ],
         ];
     }
 
@@ -347,12 +347,12 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'City: Flensburg' => [
                 'Flensburg',
-                2
+                2,
             ],
             'City: Hamburg' => [
                 'Hamburg',
-                1
-            ]
+                1,
+            ],
         ];
     }
 
@@ -383,12 +383,12 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'Country: Germany' => [
                 'Germany',
-                2
+                2,
             ],
             'Country: Denmark' => [
                 'Denmark',
-                1
-            ]
+                1,
+            ],
         ];
     }
 
@@ -477,15 +477,15 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'noRestriction' => [
                 0,
-                2
+                2,
             ],
             'onlyTopEvents' => [
                 1,
-                1
+                1,
             ],
             'exceptTopEvents' => [
                 2,
-                1
+                1,
             ],
         ];
     }
@@ -520,37 +520,37 @@ class EventRepositoryTest extends FunctionalTestCase
             'noSorting' => [
                 '',
                 '',
-                'Test2'
+                'Test2',
             ],
             'titleAsc' => [
                 'title',
                 'asc',
-                'Test1'
+                'Test1',
             ],
             'titleDesc' => [
                 'title',
                 'desc',
-                'Test4'
+                'Test4',
             ],
             'startdateAsc' => [
                 'startdate',
                 'asc',
-                'Test2'
+                'Test2',
             ],
             'startdateDesc' => [
                 'startdate',
                 'desc',
-                'Test3'
+                'Test3',
             ],
             'enddateAsc' => [
                 'enddate',
                 'asc',
-                'Test2'
+                'Test2',
             ],
             'enddateDesc' => [
                 'enddate',
                 'desc',
-                'Test4'
+                'Test4',
             ],
         ];
     }
@@ -732,16 +732,16 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'events with speaker 1' => [
                 1,
-                1
+                1,
             ],
             'events with speaker 2' => [
                 2,
-                2
+                2,
             ],
             'events with speaker 3' => [
                 3,
-                1
-            ]
+                1,
+            ],
         ];
     }
 
@@ -793,11 +793,11 @@ class EventRepositoryTest extends FunctionalTestCase
         return [
             'ignoreEnableFields inactive' => [
                 false,
-                0
+                0,
             ],
             'ignoreEnableFields active' => [
                 true,
-                1
+                1,
             ],
         ];
     }

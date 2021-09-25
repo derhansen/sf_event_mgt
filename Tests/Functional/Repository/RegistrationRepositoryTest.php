@@ -12,10 +12,10 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use InvalidArgumentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -63,15 +63,15 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         return [
             'all registrations' => [
                 0,
-                3
+                3,
             ],
             'confirmed' => [
                 1,
-                2
+                2,
             ],
             'unconfirmed' => [
                 2,
-                1
+                1,
             ],
         ];
     }
@@ -100,44 +100,44 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         return [
             'withEmptyConstraints' => [
                 [],
-                3
+                3,
             ],
             'allPaidEquals1' => [
                 [
-                    'paid' => ['equals' => '1']
+                    'paid' => ['equals' => '1'],
                 ],
-                2
+                2,
             ],
             'confirmationUntilLessThan' => [
                 [
-                    'confirmationUntil' => ['lessThan' => '1402743600']
+                    'confirmationUntil' => ['lessThan' => '1402743600'],
                 ],
-                2
+                2,
             ],
             'confirmationUntilLessThanOrEqual' => [
                 [
-                    'confirmationUntil' => ['lessThanOrEqual' => '1402743600']
+                    'confirmationUntil' => ['lessThanOrEqual' => '1402743600'],
                 ],
-                3
+                3,
             ],
             'confirmationUntilGreaterThan' => [
                 [
-                    'confirmationUntil' => ['greaterThan' => '1402740000']
+                    'confirmationUntil' => ['greaterThan' => '1402740000'],
                 ],
-                1
+                1,
             ],
             'confirmationUntilGreaterThanOrEqual' => [
                 [
-                    'confirmationUntil' => ['greaterThanOrEqual' => '1402740000']
+                    'confirmationUntil' => ['greaterThanOrEqual' => '1402740000'],
                 ],
-                3
+                3,
             ],
             'multipleContraints' => [
                 [
                     'confirmationUntil' => ['lessThan' => '1402743600'],
-                    'paid' => ['equals' => '0']
+                    'paid' => ['equals' => '0'],
                 ],
-                1
+                1,
             ],
         ];
     }

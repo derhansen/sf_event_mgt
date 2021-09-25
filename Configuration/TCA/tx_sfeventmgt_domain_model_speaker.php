@@ -24,7 +24,7 @@ return [
         ],
         'searchFields' => 'name,job_title,description',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-speaker'
+            'default' => 'ext-sfeventmgt-speaker',
         ],
     ],
     'types' => [
@@ -35,7 +35,7 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                    hidden,--palette--;;timeRestriction'
+                    hidden,--palette--;;timeRestriction',
         ],
     ],
     'palettes' => [
@@ -75,7 +75,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -88,7 +88,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -143,13 +143,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['name'],
                     'replacements' => [
-                        '/' => '-'
+                        '/' => '-',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => $slugBehaviour,
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'job_title' => [
             'exclude' => true,
@@ -174,8 +174,8 @@ return [
                 'eval' => 'trim',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
-                ]
-            ]
+                ],
+            ],
         ],
         'image' => [
             'exclude' => true,
@@ -187,7 +187,7 @@ return [
                         'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                         'showPossibleLocalizationRecords' => true,
                         'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true
+                        'showSynchronizationLink' => true,
                     ],
                     'foreign_match_fields' => [
                         'fieldname' => 'image',
@@ -199,7 +199,7 @@ return [
                             \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
                                 'showitem' => '
                                         --palette--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                        --palette--;;filePalette'
+                                        --palette--;;filePalette',
                             ],
                         ],
                     ],

@@ -108,7 +108,7 @@ class DataHandlerHooks
                     'settings.userRegistration.orderField',
                     'settings.userRegistration.orderDirection',
                     'settings.userRegistration.storagePage',
-                    'settings.userRegistration.recursive'
+                    'settings.userRegistration.recursive',
                 ],
                 'additional' => [
                     'settings.detailPid',
@@ -116,11 +116,11 @@ class DataHandlerHooks
                     'settings.registrationPid',
                     'settings.paymentPid',
                     'settings.restrictForeignRecordsToStoragePage',
-                    'settings.disableOverrideDemand'
+                    'settings.disableOverrideDemand',
                 ],
                 'template' => [
-                    'settings.templateLayout'
-                ]
+                    'settings.templateLayout',
+                ],
             ];
 
             $flexformData = GeneralUtility::xml2array($fieldArray['pi_flexform']);

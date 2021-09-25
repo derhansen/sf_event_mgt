@@ -55,8 +55,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 1,
                 false,
                 [
-                    1 => 1
-                ]
+                    1 => 1,
+                ],
             ],
             'moreMaxRegistrationsThanFreePlaces' => [
                 5,
@@ -64,8 +64,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 2,
                 false,
                 [
-                    1 => 1
-                ]
+                    1 => 1,
+                ],
             ],
             'moreFreePlacesThanMaxRegistrations' => [
                 5,
@@ -73,8 +73,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 1,
                 false,
                 [
-                    1 => 1
-                ]
+                    1 => 1,
+                ],
             ],
             'moreFreePlacesThanMaxRegistrationsWithSimultaneousAllowed' => [
                 5,
@@ -86,8 +86,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                     2 => 2,
                     3 => 3,
                     4 => 4,
-                    5 => 5
-                ]
+                    5 => 5,
+                ],
             ],
             'noFreePlacesAvailable' => [
                 5,
@@ -95,8 +95,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 1,
                 false,
                 [
-                    0 => 0
-                ]
+                    0 => 0,
+                ],
             ],
             'noFreePlacesAndNoMaxRegistrations' => [
                 5,
@@ -104,8 +104,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 0,
                 false,
                 [
-                    0 => 0
-                ]
+                    0 => 0,
+                ],
             ],
             'noMaxParticipants' => [
                 0,
@@ -115,8 +115,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 [
                     1 => 1,
                     2 => 2,
-                    3 => 3
-                ]
+                    3 => 3,
+                ],
             ],
             'SimultaneousAllowedWithWaitlistAndNotEnoughFreePlacesForFullRegistration' => [
                 5,
@@ -125,7 +125,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 true,
                 [
                     1 => 1, // Must only show one possible registration (which will not be on the waitlist)
-                ]
+                ],
             ],
             'SimultaneousAllowedWithWaitlistAndNoFreePlacesforFullRegistration' => [
                 5,
@@ -135,7 +135,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
                 [
                     1 => 1,
                     2 => 2,
-                ]
+                ],
             ],
         ];
     }

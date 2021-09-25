@@ -64,36 +64,36 @@ return [
         'searchFields' => 'title, type',
         'typeicon_column' => 'type',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-registration-field'
+            'default' => 'ext-sfeventmgt-registration-field',
         ],
     ],
     'types' => [
         '0' => [
-            'showitem' => $showItemDefault
+            'showitem' => $showItemDefault,
         ],
         'input' => [
-            'showitem' => $showItemDefault
+            'showitem' => $showItemDefault,
         ],
         'radio' => [
-            'showitem' => $showItemRadioCheck
+            'showitem' => $showItemRadioCheck,
         ],
         'check' => [
-            'showitem' => $showItemRadioCheck
+            'showitem' => $showItemRadioCheck,
         ],
         'textarea' => [
-            'showitem' => $showItemDefault
+            'showitem' => $showItemDefault,
         ],
         'text' => [
-            'showitem' => $showItemText
+            'showitem' => $showItemText,
         ],
         'divider' => [
-            'showitem' => $showItemDivider
+            'showitem' => $showItemDivider,
         ],
         'select' => [
-            'showitem' => $showItemRadioCheck
+            'showitem' => $showItemRadioCheck,
         ],
         'datetime' => [
-            'showitem' => $showItemDateTime
+            'showitem' => $showItemDateTime,
         ],
     ],
     'palettes' => [
@@ -133,7 +133,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -146,7 +146,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -230,40 +230,40 @@ return [
                 'items' => [
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.0',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::INPUT
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::INPUT,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.1',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::RADIO
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::RADIO,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.2',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::CHECK
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::CHECK,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.3',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXTAREA
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXTAREA,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.4',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXT
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXT,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.5',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::DIVIDER
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::DIVIDER,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.6',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::SELECT
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::SELECT,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.7',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::DATETIME
+                        \DERHANSEN\SfEventMgt\Utility\FieldType::DATETIME,
                     ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
-                'eval' => 'required'
+                'eval' => 'required',
             ],
         ],
         'settings' => [
@@ -285,7 +285,7 @@ return [
             'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.required',
             'config' => [
-                'type' => 'check'
+                'type' => 'check',
             ],
         ],
         'placeholder' => [
@@ -325,7 +325,7 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'enableRichtext' => true,
-            ]
+            ],
         ],
         'datepickermode'  => [
             'exclude' => true,
@@ -337,8 +337,8 @@ return [
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0', 0],
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1', 1],
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2', 2],
-                ]
-            ]
+                ],
+            ],
         ],
     ],
 ];

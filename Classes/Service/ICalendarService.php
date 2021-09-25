@@ -74,7 +74,7 @@ class ICalendarService
         $icalView->setTemplate('Event/ICalendar.txt');
         $icalView->assignMultiple([
             'event' => $event,
-            'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY')
+            'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY'),
         ]);
         // Render view and remove empty lines
         $icalContent = preg_replace('/^\h*\v+/m', '', $icalView->render());

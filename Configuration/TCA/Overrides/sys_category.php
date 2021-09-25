@@ -18,13 +18,13 @@ $newSysCategoryColumns = [
             'generatorOptions' => [
                 'fields' => ['title'],
                 'replacements' => [
-                    '/' => '-'
+                    '/' => '-',
                 ],
             ],
             'fallbackCharacter' => '-',
             'eval' => $slugBehaviour,
-            'default' => ''
-        ]
+            'default' => '',
+        ],
     ],
 ];
 

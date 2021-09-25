@@ -16,13 +16,13 @@ return [
         ],
         'searchFields' => 'value',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-registration-field'
+            'default' => 'ext-sfeventmgt-registration-field',
         ],
     ],
     'types' => [
         '0' => [
             'showitem' => 'value, value_type, field',
-            ]
+            ],
     ],
     'palettes' => [],
     'columns' => [
@@ -37,7 +37,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -60,7 +60,7 @@ return [
                 'size' => 1,
                 'maxitems' => 1,
                 'multiple' => 0,
-                'default' => 0
+                'default' => 0,
             ],
         ],
         'value_type' => [
@@ -73,11 +73,11 @@ return [
                 'items' => [
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0',
-                        '0'
+                        '0',
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1',
-                        '1'
+                        '1',
                     ],
                 ],
             ],

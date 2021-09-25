@@ -179,7 +179,7 @@ class SearchDemandTest extends UnitTestCase
             'endDate' => $endDate->format(DateTime::RFC3339),
         ];
 
-        $this->assertEquals($expected, $searchDemand->toArray());
+        self::assertEquals($expected, $searchDemand->toArray());
     }
 
     /**
@@ -188,7 +188,7 @@ class SearchDemandTest extends UnitTestCase
     public function fromArrayReturnsExpectedObjectForEmptyData()
     {
         $searchDemand = new SearchDemand();
-        $this->assertEquals($searchDemand, SearchDemand::fromArray([]));
+        self::assertEquals($searchDemand, SearchDemand::fromArray([]));
     }
 
     /**
@@ -212,6 +212,6 @@ class SearchDemandTest extends UnitTestCase
             'endDate' => $endDate->format(DateTime::RFC3339),
         ];
 
-        $this->assertEquals($searchDemand, SearchDemand::fromArray($data));
+        self::assertEquals($searchDemand, SearchDemand::fromArray($data));
     }
 }

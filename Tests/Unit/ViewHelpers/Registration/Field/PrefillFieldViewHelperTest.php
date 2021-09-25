@@ -53,17 +53,17 @@ class PrefillFieldViewHelperTest extends UnitTestCase
             'submitted value returned' => [
                 1,
                 [
-                    '1' => 'Submitted value'
+                    '1' => 'Submitted value',
                 ],
-                'Submitted value'
+                'Submitted value',
             ],
             'empty value returned if not found' => [
                 2,
                 [
-                    '1' => 'Submitted value'
+                    '1' => 'Submitted value',
                 ],
-                ''
-            ]
+                '',
+            ],
         ];
     }
 
@@ -82,9 +82,9 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         $submittedData = [
             'tx_sfeventmgt_pievent' => [
                 'registration' => [
-                    'fields' => $fieldValues
-                ]
-            ]
+                    'fields' => $fieldValues,
+                ],
+            ],
         ];
 
         $originalRequest = $this->prophesize(Request::class);

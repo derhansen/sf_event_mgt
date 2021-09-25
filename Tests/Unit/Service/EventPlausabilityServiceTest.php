@@ -13,7 +13,6 @@ use DERHANSEN\SfEventMgt\Service\EventPlausabilityService;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -40,23 +39,23 @@ class EventPlausabilityServiceTest extends UnitTestCase
             'no dates' => [
                 0,
                 0,
-                true
+                true,
             ],
             'startdate only' => [
                strtotime('2021-03-01T10:00:00+00:00'),
                 0,
-                true
+                true,
             ],
             'startdate before enddate' => [
                 strtotime('2021-03-01T10:00:00+00:00'),
                 strtotime('2021-03-01T11:00:00+00:00'),
-                true
+                true,
             ],
             'enddate before startdate' => [
                 strtotime('2021-03-01T11:00:00+00:00'),
                 strtotime('2021-03-01T10:00:00+00:00'),
-                false
-            ]
+                false,
+            ],
         ];
     }
 
@@ -80,7 +79,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
         $GLOBALS['LANG'] = $languageService->reveal();
 
         $databaseRow = [
-            'notify_organisator' => 1
+            'notify_organisator' => 1,
         ];
 
         $service = new EventPlausabilityService();
@@ -101,10 +100,10 @@ class EventPlausabilityServiceTest extends UnitTestCase
             'organisator' => [
                 [
                     'row' => [
-                        'email' => ''
-                    ]
-                ]
-            ]
+                        'email' => '',
+                    ],
+                ],
+            ],
         ];
 
         $service = new EventPlausabilityService();
@@ -125,10 +124,10 @@ class EventPlausabilityServiceTest extends UnitTestCase
             'organisator' => [
                 [
                     'row' => [
-                        'email' => 'email@domain.tld'
-                    ]
-                ]
-            ]
+                        'email' => 'email@domain.tld',
+                    ],
+                ],
+            ],
         ];
 
         $service = new EventPlausabilityService();

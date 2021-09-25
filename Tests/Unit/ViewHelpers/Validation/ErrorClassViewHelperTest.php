@@ -51,29 +51,29 @@ class ErrorClassViewHelperTest extends UnitTestCase
             'No fieldname' => [
                 [],
                 '',
-                ''
+                '',
             ],
             'No error for fieldname' => [
                 [
-                    'registration.lastname' => []
+                    'registration.lastname' => [],
                 ],
                 'firstname',
-                ''
+                '',
             ],
             'Error for fieldname with default class name' => [
                 [
-                    'registration.firstname' => []
+                    'registration.firstname' => [],
                 ],
                 'firstname',
-                'error-class'
+                'error-class',
             ],
             'Error for fieldname with custom class name' => [
                 [
-                    'registration.firstname' => []
+                    'registration.firstname' => [],
                 ],
                 'firstname',
                 'custom-class',
-                'custom-class'
+                'custom-class',
             ],
         ];
     }
@@ -96,7 +96,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
             ->willReturn($validationErrors);
         $this->viewhelper->setArguments([
             'fieldname' => $fieldname,
-            'class' => $errorClass
+            'class' => $errorClass,
         ]);
         self::assertEquals($expected, $this->viewhelper->render());
     }
@@ -113,29 +113,29 @@ class ErrorClassViewHelperTest extends UnitTestCase
             'No registration field' => [
                 [],
                 '',
-                ''
+                '',
             ],
             'No error for registration field' => [
                 [
-                    'registration.fields.1' => []
+                    'registration.fields.1' => [],
                 ],
                 $mockField->reveal(),
-                ''
+                '',
             ],
             'Error for fieldname with default class name' => [
                 [
-                    'registration.fields.2' => []
+                    'registration.fields.2' => [],
                 ],
                 $mockField->reveal(),
-                'error-class'
+                'error-class',
             ],
             'Error for fieldname with custom class name' => [
                 [
-                    'registration.fields.2' => []
+                    'registration.fields.2' => [],
                 ],
                 $mockField->reveal(),
                 'custom-class',
-                'custom-class'
+                'custom-class',
             ],
         ];
     }
@@ -158,7 +158,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
             ->willReturn($validationErrors);
         $this->viewhelper->setArguments([
             'registrationField' => $registrationField,
-            'class' => $errorClass
+            'class' => $errorClass,
         ]);
         self::assertEquals($expected, $this->viewhelper->render());
     }

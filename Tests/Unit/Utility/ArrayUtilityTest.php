@@ -22,24 +22,24 @@ class ArrayUtilityTest extends UnitTestCase
         return [
             'null' => [
                 null,
-                false
+                false,
             ],
             'array' => [
                 [],
-                false
+                false,
             ],
             'empty string' => [
                 '',
-                false
+                false,
             ],
             'invalid json' => [
                 '{"key": "value"',
-                false
+                false,
             ],
             'valid json' => [
                 '{"key": "value"}',
-                true
-            ]
+                true,
+            ],
         ];
     }
 

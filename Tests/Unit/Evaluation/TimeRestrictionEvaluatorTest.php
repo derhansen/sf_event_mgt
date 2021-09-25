@@ -41,15 +41,15 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
         return [
             'emptyValue' => [
                 '',
-                true
+                true,
             ],
             'validValue' => [
                 'today',
-                true
+                true,
             ],
             'invalidValue' => [
                 'foo',
-                false
+                false,
             ],
         ];
     }

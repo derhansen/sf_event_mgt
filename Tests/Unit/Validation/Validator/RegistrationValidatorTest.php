@@ -11,21 +11,13 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\CaptchaValidator;
-use DERHANSEN\SfEventMgt\Validation\Validator\RecaptchaValidator;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
-use TYPO3\CMS\Core\Cache\CacheManager;
-use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
-use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Localization\LanguageStore;
-use TYPO3\CMS\Core\Localization\Locales;
-use TYPO3\CMS\Core\Localization\LocalizationFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Error\Result;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
@@ -70,12 +62,12 @@ class RegistrationValidatorTest extends UnitTestCase
             'emptySettings' => [
                 [],
                 [],
-                false
+                false,
             ],
             'noRequiredFieldsSettings' => [
                 ['registration' => ['requiredFields' => '']],
                 [],
-                false
+                false,
             ],
         ];
     }
@@ -117,43 +109,43 @@ class RegistrationValidatorTest extends UnitTestCase
                 ['registration' => ['requiredFields' => 'city']],
                 [],
                 true,
-                true
+                true,
             ],
             'requiredFieldsSettingsForCityIfCitySet' => [
                 ['registration' => ['requiredFields' => 'city']],
                 ['city' => 'Some city'],
                 false,
-                false
+                false,
             ],
             'requiredFieldsSettingsForCityAndZipWithWhitespace' => [
                 ['registration' => ['requiredFields' => 'city, zip']],
                 ['city' => 'Some city', 'zip' => '12345'],
                 false,
-                false
+                false,
             ],
             'requiredFieldsSettingsForAccepttcBoolean' => [
                 ['registration' => ['requiredFields' => 'accepttc']],
                 ['accepttc' => false],
                 false,
-                false
+                false,
             ],
             'requiredFieldsSettingsForUnknownProperty' => [
                 ['registration' => ['requiredFields' => 'unknown_field']],
                 [],
                 false,
-                false
+                false,
             ],
             'requiredFieldsSettingsForRecaptchaIfRecatchaNotSet' => [
                 ['registration' => ['requiredFields' => 'captcha']],
                 [],
                 true,
-                true
+                true,
             ],
             'requiredFieldsSettingsForRecaptchaIfRecatchaSet' => [
                 ['registration' => ['requiredFields' => 'captcha']],
                 ['captcha' => 'captcha-value'],
                 false,
-                false
+                false,
             ],
         ];
     }
@@ -218,7 +210,7 @@ class RegistrationValidatorTest extends UnitTestCase
             ['string', 'city', $notEmptyValidator],
             ['string', 'zip', $notEmptyValidator],
             ['string', 'captcha', $recaptchaValidator],
-            ['boolean', 'accepttc', $booleanValidator]
+            ['boolean', 'accepttc', $booleanValidator],
         ];
 
         $this->validator->expects(self::any())->method('getValidator')->willReturnMap($map);
@@ -237,18 +229,18 @@ class RegistrationValidatorTest extends UnitTestCase
             'string' => [
                 'string',
                 '',
-                NotEmptyValidator::class
+                NotEmptyValidator::class,
             ],
             'boolean' => [
                 'boolean',
                 '',
-                BooleanValidator::class
+                BooleanValidator::class,
             ],
             'recaptcha' => [
                 'string',
                 'captcha',
-                CaptchaValidator::class
-            ]
+                CaptchaValidator::class,
+            ],
         ];
     }
 

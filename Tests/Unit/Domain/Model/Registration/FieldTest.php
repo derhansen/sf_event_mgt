@@ -174,7 +174,7 @@ class FieldTest extends UnitTestCase
             'empty string' => [
                 '',
                 '',
-                []
+                [],
             ],
             'string with one option and no value' => [
                 'First option',
@@ -183,9 +183,9 @@ class FieldTest extends UnitTestCase
                     [
                         'label' => 'First option',
                         'value' => 'First option',
-                        'selected' => 0
-                    ]
-                ]
+                        'selected' => 0,
+                    ],
+                ],
             ],
             'string with two options and no value' => [
                 "First option\nSecond option",
@@ -194,14 +194,14 @@ class FieldTest extends UnitTestCase
                     [
                         'label' => 'First option',
                         'value' => 'First option',
-                        'selected' => 0
+                        'selected' => 0,
                     ],
                     [
                         'label' => 'Second option',
                         'value' => 'Second option',
-                        'selected' => 0
-                    ]
-                ]
+                        'selected' => 0,
+                    ],
+                ],
             ],
             'string with two options and values' => [
                 "First option|value1\nSecond option|value2",
@@ -210,14 +210,14 @@ class FieldTest extends UnitTestCase
                     [
                         'label' => 'First option',
                         'value' => 'value1',
-                        'selected' => 0
+                        'selected' => 0,
                     ],
                     [
                         'label' => 'Second option',
                         'value' => 'value2',
-                        'selected' => 0
-                    ]
-                ]
+                        'selected' => 0,
+                    ],
+                ],
             ],
             'string with two options and values, second option default value' => [
                 "First option|value1\nSecond option|value2",
@@ -226,15 +226,15 @@ class FieldTest extends UnitTestCase
                     [
                         'label' => 'First option',
                         'value' => 'value1',
-                        'selected' => 0
+                        'selected' => 0,
                     ],
                     [
                         'label' => 'Second option',
                         'value' => 'value2',
-                        'selected' => 1
-                    ]
-                ]
-            ]
+                        'selected' => 1,
+                    ],
+                ],
+            ],
         ];
     }
 
@@ -268,36 +268,36 @@ class FieldTest extends UnitTestCase
         return [
             'Input' => [
                 FieldType::INPUT,
-                FieldValueType::TYPE_TEXT
+                FieldValueType::TYPE_TEXT,
             ],
             'Checkbox' => [
                 FieldType::CHECK,
-                FieldValueType::TYPE_ARRAY
+                FieldValueType::TYPE_ARRAY,
             ],
             'Radio' => [
                 FieldType::RADIO,
-                FieldValueType::TYPE_TEXT
+                FieldValueType::TYPE_TEXT,
             ],
             'Textarea' => [
                 FieldType::TEXTAREA,
-                FieldValueType::TYPE_TEXT
+                FieldValueType::TYPE_TEXT,
             ],
             'Text' => [
                 FieldType::TEXT,
-                FieldValueType::TYPE_TEXT
+                FieldValueType::TYPE_TEXT,
             ],
             'Divider' => [
                 FieldType::DIVIDER,
-                FieldValueType::TYPE_TEXT
+                FieldValueType::TYPE_TEXT,
             ],
             'Select' => [
                 FieldType::SELECT,
-                FieldValueType::TYPE_ARRAY
+                FieldValueType::TYPE_ARRAY,
             ],
             'Datetime' => [
                 FieldType::DATETIME,
-                FieldValueType::TYPE_TEXT
-            ]
+                FieldValueType::TYPE_TEXT,
+            ],
         ];
     }
 
@@ -330,16 +330,16 @@ class FieldTest extends UnitTestCase
         return [
             'datetime-local' => [
                 1,
-                'datetime-local'
+                'datetime-local',
             ],
             'time' => [
                 2,
-                'time'
+                'time',
             ],
             'date' => [
                 0,
-                'date'
-            ]
+                'date',
+            ],
         ];
     }
 

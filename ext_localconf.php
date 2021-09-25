@@ -78,12 +78,12 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
         'invoice' => [
             'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Invoice',
-            'extkey' => 'sf_event_mgt'
+            'extkey' => 'sf_event_mgt',
         ],
         'transfer' => [
             'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Transfer',
-            'extkey' => 'sf_event_mgt'
-        ]
+            'extkey' => 'sf_event_mgt',
+        ],
     ];
 
     // Add page TSConfig
@@ -100,7 +100,7 @@ call_user_func(function () {
         ],
         'before' => [
             \TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline::class,
-        ]
+        ],
     ];
 
     // Custom FormDataProvider for event plausability checks
@@ -109,7 +109,7 @@ call_user_func(function () {
     ] = [
         'depends' => [
             \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields::class,
-        ]
+        ],
     ];
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('linkvalidator')) {

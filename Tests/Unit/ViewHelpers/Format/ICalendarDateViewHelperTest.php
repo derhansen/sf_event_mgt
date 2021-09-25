@@ -27,12 +27,12 @@ class ICalendarDateViewHelperTest extends UnitTestCase
         return [
             'emptyValue' => [
                 '',
-                ''
+                '',
             ],
             'dateTimeObject' => [
                 new \DateTime('@1425234250'),
-                '20150301T182410Z'
-            ]
+                '20150301T182410Z',
+            ],
         ];
     }
 

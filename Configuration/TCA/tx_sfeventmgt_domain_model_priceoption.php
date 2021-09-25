@@ -24,7 +24,7 @@ return [
         ],
         'searchFields' => 'price,',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-priceoption'
+            'default' => 'ext-sfeventmgt-priceoption',
         ],
     ],
     'types' => [
@@ -33,7 +33,7 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                    hidden, --palette--;;timeRestriction, fe_group'
+                    hidden, --palette--;;timeRestriction, fe_group',
         ],
     ],
     'palettes' => [
@@ -74,7 +74,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
 
         'hidden' => [
@@ -88,7 +88,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -161,7 +161,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'valid_until' => [
             'exclude' => true,

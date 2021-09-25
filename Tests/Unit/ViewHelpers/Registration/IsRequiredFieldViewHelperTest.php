@@ -27,7 +27,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
         $viewHelper->expects(self::never())->method('renderThenChild');
@@ -36,9 +36,9 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             'fieldname' => '',
             'settings' => [
                 'registration' => [
-                    'requiredFields' => 'zip'
-                ]
-            ]
+                    'requiredFields' => 'zip',
+                ],
+            ],
         ]);
         $viewHelper->render();
     }
@@ -52,7 +52,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
         $viewHelper->expects(self::never())->method('renderThenChild');
@@ -61,9 +61,9 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             'fieldname' => 'zip',
             'settings' => [
                 'registration' => [
-                    'requiredFields' => 'firstname,lastname'
-                ]
-            ]
+                    'requiredFields' => 'firstname,lastname',
+                ],
+            ],
         ]);
         $viewHelper->render();
     }
@@ -77,7 +77,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
         $viewHelper->expects(self::once())->method('renderThenChild');
@@ -86,9 +86,9 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             'fieldname' => 'zip',
             'settings' => [
                 'registration' => [
-                    'requiredFields' => 'zip,otherfield'
-                ]
-            ]
+                    'requiredFields' => 'zip,otherfield',
+                ],
+            ],
         ]);
         $viewHelper->render();
     }
@@ -102,7 +102,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
         $viewHelper->expects(self::once())->method('renderThenChild');
@@ -111,9 +111,9 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             'fieldname' => 'firstname',
             'settings' => [
                 'registration' => [
-                    'requiredFields' => 'zip,otherfield'
-                ]
-            ]
+                    'requiredFields' => 'zip,otherfield',
+                ],
+            ],
         ]);
         $viewHelper->render();
     }
@@ -127,14 +127,14 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
         $viewHelper->expects(self::never())->method('renderThenChild');
         $viewHelper->expects(self::once())->method('renderElseChild');
         $viewHelper->setArguments([
             'registrationField' => null,
-            'settings' => []
+            'settings' => [],
         ]);
         $viewHelper->render();
     }
@@ -148,7 +148,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
 
@@ -159,7 +159,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
         $viewHelper->expects(self::once())->method('renderElseChild');
         $viewHelper->setArguments([
             'registrationField' => $optionalRegistrationField,
-            'settings' => []
+            'settings' => [],
         ]);
         $viewHelper->render();
     }
@@ -173,7 +173,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
             IsRequiredFieldViewHelper::class,
             [
                 'renderThenChild',
-                'renderElseChild'
+                'renderElseChild',
             ]
         );
 
@@ -184,7 +184,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
         $viewHelper->expects(self::never())->method('renderElseChild');
         $viewHelper->setArguments([
             'registrationField' => $requiredRegistrationField,
-            'settings' => []
+            'settings' => [],
         ]);
         $viewHelper->render();
     }

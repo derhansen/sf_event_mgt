@@ -58,7 +58,7 @@ class AttachmentServiceTest extends UnitTestCase
                 MessageType::REGISTRATION_NEW,
                 MessageRecipient::USER,
                 'invalidTypoScriptSetting',
-                []
+                [],
             ],
             'messageTypeRegistrationNewForUser' => [
                 MessageType::REGISTRATION_NEW,
@@ -66,8 +66,8 @@ class AttachmentServiceTest extends UnitTestCase
                 'registrationNew',
                 [
                     GeneralUtility::getFileAbsFileName('fileadmin/attachment1.pdf'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf'),
+                ],
             ],
             'messageTypeRegistrationWaitlistNewForUser' => [
                 MessageType::REGISTRATION_WAITLIST_NEW,
@@ -75,8 +75,8 @@ class AttachmentServiceTest extends UnitTestCase
                 'registrationWaitlistNew',
                 [
                     GeneralUtility::getFileAbsFileName('fileadmin/attachment1.pdf'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf'),
+                ],
             ],
             'messageTypeRegistrationConfirmedForUser' => [
                 MessageType::REGISTRATION_CONFIRMED,
@@ -84,8 +84,8 @@ class AttachmentServiceTest extends UnitTestCase
                 'registrationConfirmed',
                 [
                     GeneralUtility::getFileAbsFileName('fileadmin/attachment1.pdf'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf'),
+                ],
             ],
             'messageTypeRegistrationWaitlistConfirmedForUser' => [
                 MessageType::REGISTRATION_WAITLIST_CONFIRMED,
@@ -93,8 +93,8 @@ class AttachmentServiceTest extends UnitTestCase
                 'registrationWaitlistConfirmed',
                 [
                     GeneralUtility::getFileAbsFileName('fileadmin/attachment1.pdf'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf'),
+                ],
             ],
             'messageTypeRegistrationNewForAdmin' => [
                 MessageType::REGISTRATION_NEW,
@@ -102,8 +102,8 @@ class AttachmentServiceTest extends UnitTestCase
                 'registrationNew',
                 [
                     GeneralUtility::getFileAbsFileName('fileadmin/attachment1.pdf'),
-                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf')
-                ]
+                    GeneralUtility::getFileAbsFileName('fileadmin/attachment2.pdf'),
+                ],
             ],
         ];
     }
@@ -136,10 +136,10 @@ class AttachmentServiceTest extends UnitTestCase
                         'fromFiles' => [
                             'fileadmin/attachment1.pdf',
                             'fileadmin/attachment2.pdf',
-                        ]
-                    ]
-                ]
-            ]
+                        ],
+                    ],
+                ],
+            ],
         ]];
 
         $attachments = $this->subject->getAttachments($settings, $registration, $messageType, $messageRecipient);
@@ -182,16 +182,16 @@ class AttachmentServiceTest extends UnitTestCase
                 'attachments' => [
                     'user' => [
                         'fromEventProperty' => [
-                            'files'
-                        ]
-                    ]
-                ]
-            ]
+                            'files',
+                        ],
+                    ],
+                ],
+            ],
         ]];
 
         $expected = [
             '/path/to/somefile.pdf',
-            '/path/to/anotherfile.pdf'
+            '/path/to/anotherfile.pdf',
         ];
 
         $attachments = $this->subject->getAttachments(
@@ -232,11 +232,11 @@ class AttachmentServiceTest extends UnitTestCase
                 'attachments' => [
                     'user' => [
                         'fromRegistrationProperty' => [
-                            'fileProperty'
-                        ]
-                    ]
-                ]
-            ]
+                            'fileProperty',
+                        ],
+                    ],
+                ],
+            ],
         ]];
 
         $expected = [
@@ -263,10 +263,10 @@ class AttachmentServiceTest extends UnitTestCase
             'registrationNew' => [
                 'attachments' => [
                     'user' => [
-                        'iCalFile' => 1
-                    ]
-                ]
-            ]
+                        'iCalFile' => 1,
+                    ],
+                ],
+            ],
         ]];
 
         $mockRegistration = $this->getMockBuilder(Registration::class)

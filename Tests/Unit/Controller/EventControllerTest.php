@@ -81,7 +81,7 @@ class EventControllerTest extends UnitTestCase
                 'addFlashMessage',
                 'overwriteEventDemandObject',
                 'getSysLanguageUid',
-                'persistAll'
+                'persistAll',
             ],
             [],
             '',
@@ -154,8 +154,8 @@ class EventControllerTest extends UnitTestCase
     {
         $settings = [
             'registration' => [
-                'formatDateOfBirth' => 'd.m.Y'
-            ]
+                'formatDateOfBirth' => 'd.m.Y',
+            ],
         ];
 
         $mockPropertyMapperConfig = $this->getMockBuilder(MvcPropertyMappingConfiguration::class)->getMock();
@@ -259,7 +259,7 @@ class EventControllerTest extends UnitTestCase
             'organisators' => $allOrganisators,
             'speakers' => $allSpeakers,
             'overwriteDemand' => [],
-            'eventDemand' => $demand
+            'eventDemand' => $demand,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -345,7 +345,7 @@ class EventControllerTest extends UnitTestCase
             'organisators' => $allOrganisators,
             'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
-            'eventDemand' => $eventDemand
+            'eventDemand' => $eventDemand,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -432,7 +432,7 @@ class EventControllerTest extends UnitTestCase
             'organisators' => $allOrganisators,
             'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
-            'eventDemand' => $eventDemand
+            'eventDemand' => $eventDemand,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -489,7 +489,7 @@ class EventControllerTest extends UnitTestCase
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'event' => $event,
-            'paymentMethods' => ['invoice']
+            'paymentMethods' => ['invoice'],
         ]);
         $this->subject->_set('view', $view);
 
@@ -776,7 +776,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectRegistrationService($mockRegistrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(1);
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
@@ -837,7 +837,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(1);
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
@@ -904,7 +904,7 @@ class EventControllerTest extends UnitTestCase
         $regHmac = 'someRandomHMAC';
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(1);
         $registration->expects(self::any())->method('getUid')->willReturn($regUid);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -944,8 +944,8 @@ class EventControllerTest extends UnitTestCase
         // Inject settings so autoconfirmation is disabled
         $settings = [
             'registration' => [
-                'autoConfirmation' => 1
-            ]
+                'autoConfirmation' => 1,
+            ],
         ];
         $this->subject->_set('settings', $settings);
 
@@ -979,7 +979,7 @@ class EventControllerTest extends UnitTestCase
         $regHmac = 'someRandomHMAC';
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
-        $registration->expects($this->any())->method('getAmountOfRegistrations')->willReturn(1);
+        $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(1);
         $registration->expects(self::any())->method('getUid')->willReturn($regUid);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
@@ -1130,7 +1130,7 @@ class EventControllerTest extends UnitTestCase
         $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => 'event.message.registrationsuccessfulwrongeventhmac',
             'titleKey' => 'registrationResult.title.failed',
-            'event' => null
+            'event' => null,
         ]);
         $this->subject->_set('view', $view);
 
@@ -1150,63 +1150,63 @@ class EventControllerTest extends UnitTestCase
                 1,
                 'somehmac',
                 'event.message.registrationfailedeventexpired',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'RegistrationDeadlineExpired' => [
                 RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED,
                 1,
                 'somehmac',
                 'event.message.registrationfaileddeadlineexpired',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'EventFull' => [
                 RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS,
                 1,
                 'somehmac',
                 'event.message.registrationfailedmaxparticipants',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'RegistrationSuccessful' => [
                 RegistrationResult::REGISTRATION_SUCCESSFUL,
                 1,
                 'somehmac',
                 'event.message.registrationsuccessful',
-                'registrationResult.title.successful'
+                'registrationResult.title.successful',
             ],
             'RegistrationNotEnabled' => [
                 RegistrationResult::REGISTRATION_NOT_ENABLED,
                 1,
                 'somehmac',
                 'event.message.registrationfailednotenabled',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'NotEnoughFreePlaces' => [
                 RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES,
                 1,
                 'somehmac',
                 'event.message.registrationfailednotenoughfreeplaces',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'MaxAmountRegistrationsExceeded' => [
                 RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED,
                 1,
                 'somehmac',
                 'event.message.registrationfailedmaxamountregistrationsexceeded',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'EmailNotUnique' => [
                 RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE,
                 1,
                 'somehmac',
                 'event.message.registrationfailedemailnotunique',
-                'registrationResult.title.failed'
+                'registrationResult.title.failed',
             ],
             'UnknownResult' => [
                 -1,
                 1,
                 'somehmac',
                 '',
-                ''
+                '',
             ],
         ];
     }
@@ -1240,7 +1240,7 @@ class EventControllerTest extends UnitTestCase
         $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => $message,
             'titleKey' => $title,
-            'event' => null
+            'event' => null,
         ]);
         $this->subject->_set('view', $view);
 
@@ -1259,7 +1259,7 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'confirmRegistration.title.failed',
             'event' => null,
             'registration' => null,
-            'failed' => true
+            'failed' => true,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1270,7 +1270,7 @@ class EventControllerTest extends UnitTestCase
             true,
             null,
             'event.message.confirmation_failed_wrong_hmac',
-            'confirmRegistration.title.failed'
+            'confirmRegistration.title.failed',
         ];
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
@@ -1311,7 +1311,7 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'confirmRegistration.title.successful',
             'event' => $event,
             'registration' => $mockRegistration,
-            'failed' => false
+            'failed' => false,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1322,7 +1322,7 @@ class EventControllerTest extends UnitTestCase
             false,
             $mockRegistration,
             'event.message.confirmation_successful',
-            'confirmRegistration.title.successful'
+            'confirmRegistration.title.successful',
         ];
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
@@ -1379,7 +1379,7 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'confirmRegistrationWaitlist.title.successful',
             'event' => $event,
             'registration' => $mockRegistration,
-            'failed' => false
+            'failed' => false,
         ]);
         $this->subject->_set('view', $view);
 
@@ -1387,7 +1387,7 @@ class EventControllerTest extends UnitTestCase
             false,
             $mockRegistration,
             'event.message.confirmation_waitlist_successful',
-            'confirmRegistrationWaitlist.title.successful'
+            'confirmRegistrationWaitlist.title.successful',
         ];
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
@@ -1430,7 +1430,7 @@ class EventControllerTest extends UnitTestCase
             'messageKey' => 'event.message.cancel_failed_wrong_hmac',
             'titleKey' => 'cancelRegistration.title.failed',
             'event' => null,
-            'failed' => true
+            'failed' => true,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1441,7 +1441,7 @@ class EventControllerTest extends UnitTestCase
             true,
             null,
             'event.message.cancel_failed_wrong_hmac',
-            'cancelRegistration.title.failed'
+            'cancelRegistration.title.failed',
         ];
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
@@ -1484,7 +1484,7 @@ class EventControllerTest extends UnitTestCase
             false,
             $mockRegistration,
             'event.message.cancel_successful',
-            'cancelRegistration.title.successful'
+            'cancelRegistration.title.successful',
         ];
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)
@@ -1519,7 +1519,7 @@ class EventControllerTest extends UnitTestCase
             'messageKey' => 'event.message.cancel_successful',
             'titleKey' => 'cancelRegistration.title.successful',
             'event' => $mockEvent,
-            'failed' => false
+            'failed' => false,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1600,8 +1600,8 @@ class EventControllerTest extends UnitTestCase
     {
         $settings = [
             'search' => [
-                'dateFormat' => 'Y-m-d'
-            ]
+                'dateFormat' => 'Y-m-d',
+            ],
         ];
 
         $this->subject->_set('arguments', $this->getInitializeSearchActionArgumentMock('Y-m-d'));
@@ -1851,8 +1851,8 @@ class EventControllerTest extends UnitTestCase
 
         $settings = [
             'search' => [
-                'adjustTime' => 1
-            ]
+                'adjustTime' => 1,
+            ],
         ];
         $this->subject->_set('settings', $settings);
 
@@ -2079,8 +2079,8 @@ class EventControllerTest extends UnitTestCase
     {
         $settings = [
             'event' => [
-                'errorHandling' => ''
-            ]
+                'errorHandling' => '',
+            ],
         ];
 
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
@@ -2094,8 +2094,8 @@ class EventControllerTest extends UnitTestCase
     {
         $settings = [
             'event' => [
-                'errorHandling' => 'pageNotFoundHandler'
-            ]
+                'errorHandling' => 'pageNotFoundHandler',
+            ],
         ];
 
         $GLOBALS['TYPO3_REQUEST'] = new ServerRequest();
@@ -2116,8 +2116,8 @@ class EventControllerTest extends UnitTestCase
         $settings = [
             'listPid' => 100,
             'event' => [
-                'errorHandling' => 'redirectToListView'
-            ]
+                'errorHandling' => 'redirectToListView',
+            ],
         ];
 
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
@@ -2132,8 +2132,8 @@ class EventControllerTest extends UnitTestCase
     {
         $settings = [
             'event' => [
-                'errorHandling' => 'redirectToListView'
-            ]
+                'errorHandling' => 'redirectToListView',
+            ],
         ];
 
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
@@ -2150,7 +2150,7 @@ class EventControllerTest extends UnitTestCase
             'firstDayOfMonth' => strtotime('01.01.2017'),
             'lastDayOfMonth' => strtotime('31.01.2017'),
             'firstDayOfCalendar' => strtotime('26.12.2016'),
-            'lastDayOfCalendar' => strtotime('05.02.2017')
+            'lastDayOfCalendar' => strtotime('05.02.2017'),
         ];
 
         $eventDemand = new EventDemand();

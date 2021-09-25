@@ -135,8 +135,8 @@ class CalendarServiceTest extends UnitTestCase
                     'firstDayOfMonth' => strtotime('01.01.2017'),
                     'lastDayOfMonth' => strtotime('31.01.2017'),
                     'firstDayOfCalendar' => strtotime('26.12.2016'),
-                    'lastDayOfCalendar' => strtotime('05.02.2017')
-                ]
+                    'lastDayOfCalendar' => strtotime('05.02.2017'),
+                ],
             ],
             'january-2017-first-day-of-week-sunday' => [
                 1,
@@ -146,8 +146,8 @@ class CalendarServiceTest extends UnitTestCase
                     'firstDayOfMonth' => strtotime('01.01.2017'),
                     'lastDayOfMonth' => strtotime('31.01.2017'),
                     'firstDayOfCalendar' => strtotime('01.01.2017'),
-                    'lastDayOfCalendar' => strtotime('04.02.2017')
-                ]
+                    'lastDayOfCalendar' => strtotime('04.02.2017'),
+                ],
             ],
             'december-2017-first-day-of-week-monday' => [
                 12,
@@ -157,8 +157,8 @@ class CalendarServiceTest extends UnitTestCase
                     'firstDayOfMonth' => strtotime('01.12.2017'),
                     'lastDayOfMonth' => strtotime('31.12.2017'),
                     'firstDayOfCalendar' => strtotime('27.11.2017'),
-                    'lastDayOfCalendar' => strtotime('31.12.2017')
-                ]
+                    'lastDayOfCalendar' => strtotime('31.12.2017'),
+                ],
             ],
             'december-2017-first-day-of-week-sunday' => [
                 12,
@@ -168,8 +168,8 @@ class CalendarServiceTest extends UnitTestCase
                     'firstDayOfMonth' => strtotime('01.12.2017'),
                     'lastDayOfMonth' => strtotime('31.12.2017'),
                     'firstDayOfCalendar' => strtotime('26.11.2017'),
-                    'lastDayOfCalendar' => strtotime('06.01.2018')
-                ]
+                    'lastDayOfCalendar' => strtotime('06.01.2018'),
+                ],
             ],
             'october-2018-first-day-of-week-monday' => [
                 10,
@@ -179,8 +179,8 @@ class CalendarServiceTest extends UnitTestCase
                     'firstDayOfMonth' => strtotime('01.10.2018'),
                     'lastDayOfMonth' => strtotime('31.10.2018'),
                     'firstDayOfCalendar' => strtotime('01.10.2018'),
-                    'lastDayOfCalendar' => strtotime('04.11.2018')
-                ]
+                    'lastDayOfCalendar' => strtotime('04.11.2018'),
+                ],
             ],
             'october-2018-first-day-of-week-sunday' => [
                 10,
@@ -190,9 +190,9 @@ class CalendarServiceTest extends UnitTestCase
                     'firstDayOfMonth' => strtotime('01.10.2018'),
                     'lastDayOfMonth' => strtotime('31.10.2018'),
                     'firstDayOfCalendar' => strtotime('30.09.2018'),
-                    'lastDayOfCalendar' => strtotime('03.11.2018')
-                ]
-            ]
+                    'lastDayOfCalendar' => strtotime('03.11.2018'),
+                ],
+            ],
         ];
     }
 
@@ -225,8 +225,8 @@ class CalendarServiceTest extends UnitTestCase
                 [
                     'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 1, 2017))->setTime(0, 0, 0),
                     'month' => 1,
-                    'year' => 2017
-                ]
+                    'year' => 2017,
+                ],
             ],
             'january-2017-plus-one-month' => [
                 1,
@@ -235,8 +235,8 @@ class CalendarServiceTest extends UnitTestCase
                 [
                     'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 2, 2017))->setTime(0, 0, 0),
                     'month' => 2,
-                    'year' => 2017
-                ]
+                    'year' => 2017,
+                ],
             ],
             'january-2017-minus-one-month' => [
                 1,
@@ -245,9 +245,9 @@ class CalendarServiceTest extends UnitTestCase
                 [
                     'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 12, 2016))->setTime(0, 0, 0),
                     'month' => 12,
-                    'year' => 2016
-                ]
-            ]
+                    'year' => 2016,
+                ],
+            ],
         ];
     }
 

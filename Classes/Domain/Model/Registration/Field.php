@@ -220,7 +220,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
             $options[] = [
                 'label' => $label,
                 'value' => $value,
-                'selected' => $this->defaultValue === $value ? 1 : 0
+                'selected' => $this->defaultValue === $value ? 1 : 0,
             ];
         }
 

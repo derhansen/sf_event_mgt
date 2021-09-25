@@ -301,8 +301,8 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $settings = [
             'search' => [
-                'dateFormat' => 'd.m.Y'
-            ]
+                'dateFormat' => 'd.m.Y',
+            ],
         ];
 
         $this->subject->_set('arguments', $this->getInitializeListActionArgumentMock('d.m.Y'));
@@ -363,7 +363,7 @@ class AdministrationControllerTest extends UnitTestCase
                 'customNotification' => $mockCustomNotification,
                 'customNotifications' => $customNotifications,
                 'logEntries' => $logEntries,
-                'recipients' => $recipients
+                'recipients' => $recipients,
             ]
         ));
         $this->subject->_set('view', $view);

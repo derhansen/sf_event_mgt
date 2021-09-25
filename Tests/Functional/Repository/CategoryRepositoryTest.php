@@ -73,23 +73,23 @@ class CategoryRepositoryTest extends FunctionalTestCase
             'category 1' => [
                 '1',
                 false,
-                1
+                1,
             ],
             'category 1,2' => [
                 '1,2',
                 false,
-                2
+                2,
             ],
             'category 3 excluding subcategories' => [
                 '3',
                 false,
-                1
+                1,
             ],
             'category 3 including subcategories' => [
                 '3',
                 true,
-                3
-            ]
+                3,
+            ],
         ];
     }
 

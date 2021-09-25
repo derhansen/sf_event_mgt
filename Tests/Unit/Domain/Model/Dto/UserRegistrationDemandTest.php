@@ -168,7 +168,7 @@ class UserRegistrationDemandTest extends UnitTestCase
         $expected = new UserRegistrationDemand();
         $current = UserRegistrationDemand::createFromSettings();
 
-        $this->assertEquals($expected, $current);
+        self::assertEquals($expected, $current);
     }
 
     /**
@@ -188,13 +188,12 @@ class UserRegistrationDemandTest extends UnitTestCase
                 'orderField' => 'title',
                 'orderDirection' => 'desc',
                 'storagePage' => '1,2,3',
-                'recursive' => 0
+                'recursive' => 0,
             ],
         ];
 
         $current = UserRegistrationDemand::createFromSettings($settings);
 
-        $this->assertEquals($expected, $current);
+        self::assertEquals($expected, $current);
     }
-
 }

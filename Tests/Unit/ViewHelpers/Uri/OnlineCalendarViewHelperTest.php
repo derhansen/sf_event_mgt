@@ -52,19 +52,19 @@ class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
         return [
             'google' => [
                 'google',
-                'https://www.google.com/calendar/render?action=TEMPLATE&text=A%20test%20event&dates=20210101T180000Z%2B0200%2F20210101T200000Z%2B0200&details=A%20description%20for%20the%20event'
+                'https://www.google.com/calendar/render?action=TEMPLATE&text=A%20test%20event&dates=20210101T180000Z%2B0200%2F20210101T200000Z%2B0200&details=A%20description%20for%20the%20event',
             ],
             'outlook' => [
                 'outlook',
-                'https://outlook.live.com/calendar/0/deeplink/compose?subject=A%20test%20event&startdt=2021-01-01T18%3A00%3A00%2B0200&enddt=2021-01-01T20%3A00%3A00%2B0200&body=A%20description%20for%20the%20event&path=%2Fcalendar%2Faction%2Fcompose%26rru%3Daddevent'
+                'https://outlook.live.com/calendar/0/deeplink/compose?subject=A%20test%20event&startdt=2021-01-01T18%3A00%3A00%2B0200&enddt=2021-01-01T20%3A00%3A00%2B0200&body=A%20description%20for%20the%20event&path=%2Fcalendar%2Faction%2Fcompose%26rru%3Daddevent',
             ],
             'office365' => [
                 'office365',
-                'https://outlook.office.com/calendar/0/deeplink/compose?subject=A%20test%20event&startdt=2021-01-01T18%3A00%3A00%2B0200&enddt=2021-01-01T20%3A00%3A00%2B0200&body=A%20description%20for%20the%20event&path=%2Fcalendar%2Faction%2Fcompose%26rru%3Daddevent'
+                'https://outlook.office.com/calendar/0/deeplink/compose?subject=A%20test%20event&startdt=2021-01-01T18%3A00%3A00%2B0200&enddt=2021-01-01T20%3A00%3A00%2B0200&body=A%20description%20for%20the%20event&path=%2Fcalendar%2Faction%2Fcompose%26rru%3Daddevent',
             ],
             'yahoo' => [
                 'yahoo',
-                'https://calendar.yahoo.com/?title=A%20test%20event&st=20210101T180000Z%2B0200&et=20210101T200000Z%2B0200&desc=A%20description%20for%20the%20event&v=60'
+                'https://calendar.yahoo.com/?title=A%20test%20event&st=20210101T180000Z%2B0200&et=20210101T200000Z%2B0200&desc=A%20description%20for%20the%20event&v=60',
             ],
         ];
     }
@@ -91,7 +91,7 @@ class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
         $result = $this->viewHelper::renderStatic(
             [
                 'event' => $event,
-                'type' => $type
+                'type' => $type,
             ],
             function () {
             },
@@ -120,7 +120,7 @@ class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
         $result = $this->viewHelper::renderStatic(
             [
                 'event' => $event,
-                'type' => 'google'
+                'type' => 'google',
             ],
             function () {
             },

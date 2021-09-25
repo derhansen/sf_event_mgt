@@ -26,7 +26,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
             'verificationServer' => 'https://hcaptcha-verificationserver.tld/',
             'publicKey' => 'publickey',
             'privateKey' => 'privatekey',
-        ]
+        ],
     ];
     private const VALID_RECAPTCHA_CONFIG = [
         'enabled' => 1,
@@ -36,7 +36,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
             'verificationServer' => 'https://recaptcha-verificationserver.tld/',
             'siteKey' => 'sitekey',
             'secretKey' => 'secretkey',
-        ]
+        ],
     ];
 
     /**
@@ -45,7 +45,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
     public function captchaConfigurationServiceIsNotEnabledForEmptySettings()
     {
         $service = new CaptchaConfigurationService();
-        $this->assertFalse($service->getEnabled());
+        self::assertFalse($service->getEnabled());
     }
 
     public function captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider(): array
@@ -54,36 +54,36 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
             'emptyType' => [
                 [
                     'enabled' => 1,
-                    'type' => ''
+                    'type' => '',
                 ],
-                1631962901
+                1631962901,
             ],
             'invalidType' => [
                 [
                     'enabled' => 1,
-                    'type' => 'foo'
+                    'type' => 'foo',
                 ],
-                1631962901
+                1631962901,
             ],
             'emptyApiScript' => [
                 [
                     'enabled' => 1,
                     'type' => 'hCaptcha',
                     'hCaptcha' => [
-                        'apiScript' => ''
-                    ]
+                        'apiScript' => '',
+                    ],
                 ],
-                1631962907
+                1631962907,
             ],
             'invalidApiScript' => [
                 [
                     'enabled' => 1,
                     'type' => 'hCaptcha',
                     'hCaptcha' => [
-                        'apiScript' => 'no url'
-                    ]
+                        'apiScript' => 'no url',
+                    ],
                 ],
-                1631962907
+                1631962907,
             ],
             'emptyVerificationServer' => [
                 [
@@ -91,10 +91,10 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
                     'type' => 'hCaptcha',
                     'hCaptcha' => [
                         'apiScript' => 'https://apiserver.tld/',
-                        'verificationServer' => ''
-                    ]
+                        'verificationServer' => '',
+                    ],
                 ],
-                1631962990
+                1631962990,
             ],
             'invalidVerificationServer' => [
                 [
@@ -102,10 +102,10 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
                     'type' => 'hCaptcha',
                     'hCaptcha' => [
                         'apiScript' => 'https://apiserver.tld/',
-                        'verificationServer' => 'no url'
-                    ]
+                        'verificationServer' => 'no url',
+                    ],
                 ],
-                1631962990
+                1631962990,
             ],
             'invalidPublicKey' => [
                 [
@@ -114,10 +114,10 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
                     'hCaptcha' => [
                         'apiScript' => 'https://apiserver.tld/',
                         'verificationServer' => 'https://verificationserver.tld/',
-                        'publicKey' => ''
-                    ]
+                        'publicKey' => '',
+                    ],
                 ],
-                1631964323
+                1631964323,
             ],
             'noPublicKey' => [
                 [
@@ -126,9 +126,9 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
                     'hCaptcha' => [
                         'apiScript' => 'https://apiserver.tld/',
                         'verificationServer' => 'https://verificationserver.tld/',
-                    ]
+                    ],
                 ],
-                1631964323
+                1631964323,
             ],
             'invalidPrivateKey' => [
                 [
@@ -138,10 +138,10 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
                         'apiScript' => 'https://apiserver.tld/',
                         'verificationServer' => 'https://verificationserver.tld/',
                         'publicKey' => '1234567890',
-                        'privateKey' => ''
-                    ]
+                        'privateKey' => '',
+                    ],
                 ],
-                1631964328
+                1631964328,
             ],
             'noPrivateKey' => [
                 [
@@ -151,9 +151,9 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
                         'apiScript' => 'https://apiserver.tld/',
                         'verificationServer' => 'https://verificationserver.tld/',
                         'publicKey' => '1234567890',
-                    ]
+                    ],
                 ],
-                1631964328
+                1631964328,
             ],
         ];
     }
@@ -174,70 +174,70 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
         return [
             'captchaDisabled' => [
                 [
-                    'disabled' => 1
+                    'disabled' => 1,
                 ],
                 'getEnabled',
-                false
+                false,
             ],
             'hCaptchaType' => [
                 self::VALID_HCAPTCHA_CONFIG,
                 'getType',
-                'hCaptcha'
+                'hCaptcha',
             ],
             'hCaptchaApiScript' => [
                 self::VALID_HCAPTCHA_CONFIG,
                 'getApiScript',
-                'https://hcaptcha-apiscript.tld/'
+                'https://hcaptcha-apiscript.tld/',
             ],
             'hCaptchaVerificationServer' => [
                 self::VALID_HCAPTCHA_CONFIG,
                 'getVerificationServer',
-                'https://hcaptcha-verificationserver.tld/'
+                'https://hcaptcha-verificationserver.tld/',
             ],
             'hCaptchaPublicKey' => [
                 self::VALID_HCAPTCHA_CONFIG,
                 'getPublicKey',
-                'publickey'
+                'publickey',
             ],
             'hCaptchaPrivateKey' => [
                 self::VALID_HCAPTCHA_CONFIG,
                 'getPrivateKey',
-                'privatekey'
+                'privatekey',
             ],
             'hCaptchaResponseField' => [
                 self::VALID_HCAPTCHA_CONFIG,
                 'getResponseField',
-                'h-captcha-response'
+                'h-captcha-response',
             ],
             'reCaptchaType' => [
                 self::VALID_RECAPTCHA_CONFIG,
                 'getType',
-                'reCaptcha'
+                'reCaptcha',
             ],
             'reCaptchaApiScript' => [
                 self::VALID_RECAPTCHA_CONFIG,
                 'getApiScript',
-                'https://recaptcha-apiscript.tld/'
+                'https://recaptcha-apiscript.tld/',
             ],
             'reCaptchaVerificationServer' => [
                 self::VALID_RECAPTCHA_CONFIG,
                 'getVerificationServer',
-                'https://recaptcha-verificationserver.tld/'
+                'https://recaptcha-verificationserver.tld/',
             ],
             'reCaptchaPublicKey' => [
                 self::VALID_RECAPTCHA_CONFIG,
                 'getPublicKey',
-                'sitekey'
+                'sitekey',
             ],
             'reCaptchaPrivateKey' => [
                 self::VALID_RECAPTCHA_CONFIG,
                 'getPrivateKey',
-                'secretkey'
+                'secretkey',
             ],
             'reCaptchaResponseField' => [
                 self::VALID_RECAPTCHA_CONFIG,
                 'getResponseField',
-                'g-recaptcha-response'
+                'g-recaptcha-response',
             ],
         ];
     }
@@ -250,6 +250,6 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
     {
         $service = new CaptchaConfigurationService($settings);
         $result = $service->{$method}();
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

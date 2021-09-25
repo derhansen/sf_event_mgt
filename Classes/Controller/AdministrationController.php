@@ -108,25 +108,25 @@ class AdministrationController extends AbstractController
                     'label' => 'administration.newEvent',
                     'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_event'),
                     'icon' => 'ext-sfeventmgt-event',
-                    'group' => 1
+                    'group' => 1,
                 ],
                 [
                     'label' => 'administration.newLocation',
                     'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_location'),
                     'icon' => 'ext-sfeventmgt-location',
-                    'group' => 1
+                    'group' => 1,
                 ],
                 [
                     'label' => 'administration.newOrganisator',
                     'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_organisator'),
                     'icon' => 'ext-sfeventmgt-organisator',
-                    'group' => 1
+                    'group' => 1,
                 ],
                 [
                     'label' => 'administration.newSpeaker',
                     'link' => $this->getCreateNewRecordUri('tx_sfeventmgt_domain_model_speaker'),
                     'icon' => 'ext-sfeventmgt-speaker',
-                    'group' => 1
+                    'group' => 1,
                 ],
                 [
                     'label' => 'administration.handleExpiredRegistrations',
@@ -134,7 +134,7 @@ class AdministrationController extends AbstractController
                         ->uriFor('handleExpiredRegistrations', [], 'Administration'),
                     'icon' => 'ext-sfeventmgt-action-handle-expired',
                     'group' => 2,
-                ]
+                ],
             ];
             foreach ($buttons as $tableConfiguration) {
                 $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
@@ -144,7 +144,7 @@ class AdministrationController extends AbstractController
                     ->setDataAttributes([
                         'toggle' => 'tooltip',
                         'placement' => 'bottom',
-                        'title' => $title
+                        'title' => $title,
                         ])
                     ->setTitle($title)
                     ->setIcon($icon);
@@ -175,7 +175,7 @@ class AdministrationController extends AbstractController
 
         return (string)$uriBuilder->buildUriFromRoute('record_edit', [
             'edit[' . $table . '][' . $pid . ']' => 'new',
-            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI')
+            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
         ]);
     }
 
@@ -288,7 +288,7 @@ class AdministrationController extends AbstractController
             'orderByFields' => $this->getOrderByFields(),
             'orderDirections' => $this->getOrderDirections(),
             'overwriteDemand' => $overwriteDemand,
-            'pagination' => $this->getPagination($events, $this->settings['pagination'] ?? [])
+            'pagination' => $this->getPagination($events, $this->settings['pagination'] ?? []),
         ]);
 
         return $this->initModuleTemplateAndReturnResponse();
@@ -378,19 +378,19 @@ class AdministrationController extends AbstractController
                 'value' => CustomNotification::RECIPIENTS_ALL,
                 'label' => $this->getLanguageService()->sL(
                     self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_ALL
-                )
+                ),
             ],
             [
                 'value' => CustomNotification::RECIPIENTS_CONFIRMED,
                 'label' => $this->getLanguageService()->sL(
                     self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_CONFIRMED
-                )
+                ),
             ],
             [
                 'value' => CustomNotification::RECIPIENTS_UNCONFIRMED,
                 'label' => $this->getLanguageService()->sL(
                     self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_UNCONFIRMED
-                )
+                ),
             ],
         ];
     }
@@ -465,7 +465,7 @@ class AdministrationController extends AbstractController
     {
         return [
             'asc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.asc'),
-            'desc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.desc')
+            'desc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.desc'),
         ];
     }
 
@@ -479,7 +479,7 @@ class AdministrationController extends AbstractController
         return [
             'title' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.title'),
             'startdate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.startdate'),
-            'enddate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.enddate')
+            'enddate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.enddate'),
         ];
     }
 

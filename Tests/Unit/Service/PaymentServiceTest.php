@@ -32,12 +32,12 @@ class PaymentServiceTest extends UnitTestCase
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
             'invoice' => [
                 'class' => Invoice::class,
-                'extkey' => 'sf_event_mgt'
+                'extkey' => 'sf_event_mgt',
             ],
             'transfer' => [
                 'class' => Transfer::class,
-                'extkey' => 'sf_event_mgt'
-            ]
+                'extkey' => 'sf_event_mgt',
+            ],
         ];
     }
 
@@ -60,17 +60,17 @@ class PaymentServiceTest extends UnitTestCase
             'Default Payment Methods enabled' => [
                 'extConf' => [
                     'enableInvoice' => true,
-                    'enableTransfer' => true
+                    'enableTransfer' => true,
                 ],
-                'expected' => ['invoice' => null, 'transfer' => null]
+                'expected' => ['invoice' => null, 'transfer' => null],
             ],
             'Invoice disabled' => [
                 'extConf' => [
                     'enableInvoice' => false,
-                    'enableTransfer' => true
+                    'enableTransfer' => true,
                 ],
-                'expected' => ['transfer' => null]
-            ]
+                'expected' => ['transfer' => null],
+            ],
         ];
     }
 
@@ -115,23 +115,23 @@ class PaymentServiceTest extends UnitTestCase
         return [
             'redirectAction' => [
                 'redirectAction',
-                false
+                false,
             ],
             'successAction' => [
                 'successAction',
-                false
+                false,
             ],
             'failureAction' => [
                 'failureAction',
-                false
+                false,
             ],
             'cancelAction' => [
                 'cancelAction',
-                false
+                false,
             ],
             'notifyAction' => [
                 'notifyAction',
-                false
+                false,
             ],
         ];
     }
@@ -160,23 +160,23 @@ class PaymentServiceTest extends UnitTestCase
         return [
             'redirectAction' => [
                 'redirectAction',
-                true
+                true,
             ],
             'successAction' => [
                 'successAction',
-                true
+                true,
             ],
             'failureAction' => [
                 'failureAction',
-                true
+                true,
             ],
             'cancelAction' => [
                 'cancelAction',
-                true
+                true,
             ],
             'notifyAction' => [
                 'notifyAction',
-                true
+                true,
             ],
         ];
     }

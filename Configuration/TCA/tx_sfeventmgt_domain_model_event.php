@@ -26,7 +26,7 @@ return [
         ],
         'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-event'
+            'default' => 'ext-sfeventmgt-event',
         ],
     ],
     'types' => [
@@ -70,7 +70,7 @@ return [
                     hidden, --palette--;;timeRestriction, fe_group,
 
                 --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
-                    rowDescription'
+                    rowDescription',
         ],
     ],
     'palettes' => [
@@ -135,7 +135,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -148,7 +148,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -215,13 +215,13 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.category',
             'config' => [
                 'type' => 'category',
-            ]
+            ],
         ],
         'tstamp' => [
             'label' => 'tstamp',
             'config' => [
                 'type' => 'passthrough',
-            ]
+            ],
         ],
         'title' => [
             'exclude' => true,
@@ -230,7 +230,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
             ],
         ],
         'slug' => [
@@ -243,13 +243,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['title'],
                     'replacements' => [
-                        '/' => '-'
+                        '/' => '-',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => $slugBehaviour,
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'teaser' => [
             'exclude' => true,
@@ -259,7 +259,7 @@ return [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 5,
-            ]
+            ],
         ],
         'description' => [
             'exclude' => true,
@@ -272,7 +272,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'softref' => 'typolink_tag,email[subst],url',
-            ]
+            ],
         ],
         'program' => [
             'exclude' => true,
@@ -285,7 +285,7 @@ return [
                 'rows' => 15,
                 'eval' => 'trim',
                 'softref' => 'typolink_tag,email[subst],url',
-            ]
+            ],
         ],
         'link' => [
             'exclude' => true,
@@ -299,7 +299,7 @@ return [
                     'allowLanguageSynchronization' => true,
                 ],
                 'softref' => 'typolink',
-            ]
+            ],
         ],
         'top_event' => [
             'exclude' => true,
@@ -314,7 +314,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -328,7 +328,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'required,datetime',
-                'default' => time()
+                'default' => time(),
             ],
         ],
         'enddate' => [
@@ -341,7 +341,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime,int',
-                'default' => time() + 3600
+                'default' => time() + 3600,
             ],
         ],
         'enable_registration' => [
@@ -358,7 +358,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -377,7 +377,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -395,7 +395,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -442,7 +442,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -474,7 +474,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -487,8 +487,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
-                'eval' => 'int'
-            ]
+                'eval' => 'int',
+            ],
         ],
         'max_registrations_per_user' => [
             'exclude' => true,
@@ -499,8 +499,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
-                'eval' => 'int'
-            ]
+                'eval' => 'int',
+            ],
         ],
         'price' => [
             'exclude' => true,
@@ -512,7 +512,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'currency' => [
             'exclude' => true,
@@ -539,7 +539,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -571,7 +571,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'location' => [
             'exclude' => true,
@@ -662,7 +662,7 @@ return [
                         'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                         'showPossibleLocalizationRecords' => true,
                         'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true
+                        'showSynchronizationLink' => true,
                     ],
                     'foreign_match_fields' => [
                         'fieldname' => 'image',
@@ -675,7 +675,7 @@ return [
                                 'showitem' => '
                                         --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
                                         --palette--;;imageoverlayPalette,
-                                        --palette--;;filePalette'
+                                        --palette--;;filePalette',
                             ],
                         ],
                     ],
@@ -696,7 +696,7 @@ return [
                     'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:media.addFileReference',
                     'showPossibleLocalizationRecords' => true,
                     'showAllLocalizationLink' => true,
-                    'showSynchronizationLink' => true
+                    'showSynchronizationLink' => true,
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -718,7 +718,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'additional_image' => [
             'exclude' => true,
@@ -730,7 +730,7 @@ return [
                         'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                         'showPossibleLocalizationRecords' => true,
                         'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true
+                        'showSynchronizationLink' => true,
                     ],
                     'foreign_match_fields' => [
                         'fieldname' => 'additional_image',
@@ -742,7 +742,7 @@ return [
                             \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
                                 'showitem' => '
                                     --palette--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                    --palette--;;filePalette'
+                                    --palette--;;filePalette',
                             ],
                         ],
                     ],
@@ -809,7 +809,7 @@ return [
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 1,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -850,7 +850,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -869,7 +869,7 @@ return [
                     'showSynchronizationLink' => 1,
                     'showPossibleLocalizationRecords' => 1,
                     'useSortable' => 0,
-                    'showAllLocalizationLink' => 1
+                    'showAllLocalizationLink' => 1,
                 ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -882,8 +882,8 @@ return [
             'config' => [
                 'type' => 'text',
                 'rows' => 5,
-                'cols' => 30
-            ]
+                'cols' => 30,
+            ],
         ],
     ],
 ];

@@ -79,19 +79,19 @@ class BeUserSessionServiceTest extends UnitTestCase
             'key_found' => [
                 [
                     'key1' => 'value1',
-                    'key2' => 'value2'
+                    'key2' => 'value2',
                 ],
                 'key1',
-                'value1'
+                'value1',
             ],
             'key_not_found' => [
                 [
                     'key1' => 'value1',
-                    'key2' => 'value2'
+                    'key2' => 'value2',
                 ],
                 'key3',
-                null
-            ]
+                null,
+            ],
         ];
     }
 

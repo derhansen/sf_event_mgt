@@ -28,7 +28,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
         $settings = [];
         $arguments = [
             'event' => 1,
-            'registration' => []
+            'registration' => [],
         ];
         $configuration = [];
 
@@ -47,8 +47,8 @@ class HoneypotSpamCheckTest extends UnitTestCase
         $arguments = [
             'event' => 1,
             'registration' => [
-                'hp1' => 'spam'
-            ]
+                'hp1' => 'spam',
+            ],
         ];
         $configuration = [];
 
@@ -67,8 +67,8 @@ class HoneypotSpamCheckTest extends UnitTestCase
         $arguments = [
             'event' => 1,
             'registration' => [
-                'hp1' => ''
-            ]
+                'hp1' => '',
+            ],
         ];
         $configuration = [];
 

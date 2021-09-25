@@ -24,7 +24,7 @@ return [
         ],
         'searchFields' => 'title,',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-location'
+            'default' => 'ext-sfeventmgt-location',
         ],
     ],
     'types' => [
@@ -35,7 +35,7 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                    hidden, --palette--;;timeRestriction'
+                    hidden, --palette--;;timeRestriction',
         ],
     ],
     'palettes' => [
@@ -77,7 +77,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
 
         'hidden' => [
@@ -91,7 +91,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -131,7 +131,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
             ],
         ],
         'slug' => [
@@ -144,13 +144,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['title'],
                     'replacements' => [
-                        '/' => '-'
+                        '/' => '-',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => $slugBehaviour,
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'address' => [
             'exclude' => true,
@@ -173,7 +173,7 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 4,
-            ]
+            ],
         ],
         'city' => [
             'exclude' => true,
@@ -210,8 +210,8 @@ return [
                 'eval' => 'trim',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
-                ]
-            ]
+                ],
+            ],
         ],
         'link' => [
             'exclude' => true,
@@ -231,7 +231,7 @@ return [
                         ],
                     ],
                 ],
-            ]
+            ],
         ],
         'longitude' => [
             'exclude' => true,
@@ -241,7 +241,7 @@ return [
                 'size' => 11,
                 'max' => 11,
                 'default' => '0.00',
-                'eval' => 'trim,DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator'
+                'eval' => 'trim,DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator',
             ],
         ],
         'latitude' => [
@@ -252,7 +252,7 @@ return [
                 'size' => 11,
                 'max' => 11,
                 'default' => '0.00',
-                'eval' => 'trim,DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator'
+                'eval' => 'trim,DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator',
             ],
         ],
     ],

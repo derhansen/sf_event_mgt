@@ -90,7 +90,7 @@ class CalendarService
             'firstDayOfMonth' => $firstDayOfMonth,
             'lastDayOfMonth' => $lastDayOfMonth,
             'firstDayOfCalendar' => $firstDayOfCalendar,
-            'lastDayOfCalendar' => $lastDayOfCalendar
+            'lastDayOfCalendar' => $lastDayOfCalendar,
         ];
     }
 
@@ -146,7 +146,7 @@ class CalendarService
         return [
             'date' => $date,
             'month' => (int)$date->format('n'),
-            'year' => (int)$date->format('Y')
+            'year' => (int)$date->format('Y'),
         ];
     }
 }

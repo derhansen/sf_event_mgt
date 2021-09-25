@@ -66,7 +66,7 @@ class PaymentController extends AbstractController
             'cancelUrl' => $this->getPaymentUriForAction('cancel', $registration),
             'notifyUrl' => $this->getPaymentUriForAction('notify', $registration),
             'registration' => $registration,
-            'html' => ''
+            'html' => '',
         ];
 
         $paymentMethod = $registration->getPaymentmethod();
@@ -338,7 +338,7 @@ class PaymentController extends AbstractController
             $action,
             [
                 'registration' => $registration,
-                'hmac' => $this->hashService->generateHmac($action . 'Action-' . $registration->getUid())
+                'hmac' => $this->hashService->generateHmac($action . 'Action-' . $registration->getUid()),
             ],
             'Payment',
             'sfeventmgt',

@@ -64,7 +64,7 @@ class ICalendarServiceTest extends UnitTestCase
         $standAloneView->assignMultiple(
             [
                 'event' => $eventProphecy,
-                'typo3Host' => 'myhostname.tld'
+                'typo3Host' => 'myhostname.tld',
             ]
         )->shouldbeCalled();
         $standAloneView->render()->willReturn('foo');

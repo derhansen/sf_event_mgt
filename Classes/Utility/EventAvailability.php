@@ -84,7 +84,7 @@ class EventAvailability
                     $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, \PDO::PARAM_INT)),
                     $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, \PDO::PARAM_INT))
                 ),
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, \PDO::PARAM_INT)),
             ];
         } else {
             $where = [
@@ -102,7 +102,7 @@ class EventAvailability
                         $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)),
                         $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, \PDO::PARAM_INT))
                     )
-                )
+                ),
             ];
         }
 

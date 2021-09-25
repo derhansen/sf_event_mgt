@@ -426,7 +426,7 @@ class EventDemandTest extends UnitTestCase
     public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
     {
         $expected = new EventDemand();
-        $this->assertEquals($expected, EventDemand::createFromSettings());
+        self::assertEquals($expected, EventDemand::createFromSettings());
     }
 
     /**
@@ -475,6 +475,6 @@ class EventDemandTest extends UnitTestCase
             'speaker' => $speaker,
         ];
 
-        $this->assertEquals($expected, EventDemand::createFromSettings($settings));
+        self::assertEquals($expected, EventDemand::createFromSettings($settings));
     }
 }

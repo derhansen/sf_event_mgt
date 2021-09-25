@@ -49,21 +49,21 @@ class EventDemand
      *
      * @var Location|string|null
      */
-    protected $location = null;
+    protected $location;
 
     /**
      * Can be an object (if set by code/property mapper) or a string if set by settings array from plugin
      *
      * @var Speaker|string|null
      */
-    protected $speaker = null;
+    protected $speaker;
 
     /**
      * Can be an object (if set by code/property mapper) or a string if set by settings array from plugin
      *
      * @var Organisator|string|null
      */
-    protected $organisator = null;
+    protected $organisator;
 
     public function getDisplayMode(): string
     {

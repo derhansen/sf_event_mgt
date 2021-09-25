@@ -10,7 +10,7 @@ return [
         'searchFields' => 'title,',
         'hideTable' => true,
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-logfile'
+            'default' => 'ext-sfeventmgt-logfile',
         ],
     ],
     'types' => [
@@ -28,8 +28,8 @@ return [
                 'renderType' => 'selectSingle',
                 'foreign_table' => 'be_users',
                 'foreign_class' => '\TYPO3\CMS\Beuser\Domain\Model\BackendUser',
-                'maxitems' => 1
-            ]
+                'maxitems' => 1,
+            ],
         ],
         'event' => [
             'exclude' => true,

@@ -56,8 +56,8 @@ class HideInlineRegistrationsTest extends UnitTestCase
                 'columns' => [
                     'registration' => [],
                     'registration_waitlist' => [],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $expected = $input;
@@ -84,8 +84,8 @@ class HideInlineRegistrationsTest extends UnitTestCase
                     'title' => [],
                     'registration' => [],
                     'registration_waitlist' => [],
-                ]
-            ]
+                ],
+            ],
         ];
 
         $mockHideInlineRegistrations = $this->getMockBuilder(HideInlineRegistrations::class)

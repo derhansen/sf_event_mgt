@@ -25,6 +25,6 @@ class CustomNotificationLogRepository extends Repository
      * @var array
      */
     protected $defaultOrderings = [
-        'tstamp' => QueryInterface::ORDER_DESCENDING
+        'tstamp' => QueryInterface::ORDER_DESCENDING,
     ];
 }

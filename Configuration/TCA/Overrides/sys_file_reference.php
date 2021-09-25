@@ -15,7 +15,7 @@ $additionalSysFileReferenceColumns = [
                 ['LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:sys_file_reference.show_in_views.2', 2, ''],
             ],
             'default' => 0,
-        ]
+        ],
     ],
 ];
 

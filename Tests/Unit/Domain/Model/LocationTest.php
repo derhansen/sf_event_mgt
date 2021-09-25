@@ -257,32 +257,32 @@ class LocationTest extends UnitTestCase
             'default location' => [
                 new Location(),
                 '<br/>',
-                ''
+                '',
             ],
             'location with all data with br as separator' => [
                 $location1,
                 '<br/>',
-                'Address 123<br/>12345 A City<br/>A Country'
+                'Address 123<br/>12345 A City<br/>A Country',
             ],
             'location with all data with comma as separator' => [
                 $location1,
                 ',',
-                'Address 123,12345 A City,A Country'
+                'Address 123,12345 A City,A Country',
             ],
             'location with no zip and city' => [
                 $location2,
                 ',',
-                'Address 123'
+                'Address 123',
             ],
             'location with no city' => [
                 $location3,
                 ',',
-                'Address 123,12345'
+                'Address 123,12345',
             ],
             'location with no zip' => [
                 $location4,
                 ',',
-                'Address 123,A City'
+                'Address 123,A City',
             ],
         ];
     }

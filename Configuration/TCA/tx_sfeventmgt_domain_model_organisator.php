@@ -24,7 +24,7 @@ return [
         ],
         'searchFields' => 'name, email, phone, email_signature,',
         'typeicon_classes' => [
-            'default' => 'ext-sfeventmgt-organisator'
+            'default' => 'ext-sfeventmgt-organisator',
         ],
     ],
     'types' => [
@@ -34,7 +34,7 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
-                    hidden, --palette--;;timeRestriction'
+                    hidden, --palette--;;timeRestriction',
         ],
     ],
     'palettes' => [
@@ -74,7 +74,7 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
-            ]
+            ],
         ],
         'hidden' => [
             'exclude' => true,
@@ -87,7 +87,7 @@ return [
                     [
                         0 => '',
                         1 => '',
-                    ]
+                    ],
                 ],
             ],
         ],
@@ -142,13 +142,13 @@ return [
                 'generatorOptions' => [
                     'fields' => ['name'],
                     'replacements' => [
-                        '/' => '-'
+                        '/' => '-',
                     ],
                 ],
                 'fallbackCharacter' => '-',
                 'eval' => $slugBehaviour,
-                'default' => ''
-            ]
+                'default' => '',
+            ],
         ],
         'email' => [
             'exclude' => true,
@@ -160,7 +160,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'email_signature' => [
             'exclude' => true,
@@ -174,7 +174,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'phone' => [
             'exclude' => true,
@@ -186,7 +186,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-            ]
+            ],
         ],
         'image' => [
             'exclude' => true,
@@ -198,7 +198,7 @@ return [
                         'createNewRelationLinkTitle' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:images.addFileReference',
                         'showPossibleLocalizationRecords' => true,
                         'showAllLocalizationLink' => true,
-                        'showSynchronizationLink' => true
+                        'showSynchronizationLink' => true,
                     ],
                     'foreign_match_fields' => [
                         'fieldname' => 'image',
@@ -210,7 +210,7 @@ return [
                             \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
                                 'showitem' => '
                                         --palette--;LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                        --palette--;;filePalette'
+                                        --palette--;;filePalette',
                             ],
                         ],
                     ],
