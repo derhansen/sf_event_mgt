@@ -31,6 +31,9 @@
 			<trans-unit id="flexforms_tab.additional">
 				<source>Additional</source>
 			</trans-unit>
+			<trans-unit id="flexforms_tab.pagination">
+				<source>Pagination</source>
+			</trans-unit>
 			<trans-unit id="flexforms_general.mode">
 				<source>What to display</source>
 			</trans-unit>
@@ -483,6 +486,16 @@
 			</trans-unit>
 			<trans-unit id="constants.subcategory.csv">
 				<source>CSV export</source>
+			</trans-unit>
+
+			<trans-unit id="flexforms.plugin.field.enablePagination">
+				<source>Enable pagination</source>
+			</trans-unit>
+			<trans-unit id="flexforms.plugin.field.itemsPerPage">
+				<source>Items per page</source>
+			</trans-unit>
+			<trans-unit id="flexforms.plugin.field.maxNumPages">
+				<source>Maximum number of pages</source>
 			</trans-unit>
 		</body>
 	</file>

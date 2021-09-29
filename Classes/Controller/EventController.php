@@ -126,6 +126,7 @@ class EventController extends AbstractController
         $modifyListViewVariablesEvent = new ModifyListViewVariablesEvent(
             [
                 'events' => $events,
+                'pagination' => $this->getPagination($events, $this->settings['pagination']),
                 'categories' => $categories,
                 'locations' => $locations,
                 'organisators' => $organisators,

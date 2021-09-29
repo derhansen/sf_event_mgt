@@ -41,6 +41,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
@@ -198,14 +199,22 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
-        $demand = new EventDemand();
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
+        $this->subject->_set('request', $request->reveal());
 
-        $settings = ['settings'];
+        $demand = new EventDemand();
+        $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allCategories = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allLocations = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allOrganisators = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allSpeakers = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+
+        $settings = [
+            'pagination' => []
+        ];
         $this->subject->_set('settings', $settings);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
@@ -260,6 +269,7 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'overwriteDemand' => [],
             'eventDemand' => $demand,
+            'pagination' => [],
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -281,17 +291,25 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
-        $eventDemand = new EventDemand();
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
+        $this->subject->_set('request', $request->reveal());
+
+        $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allCategories = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allLocations = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allOrganisators = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allSpeakers = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
         $overrideDemand = ['category' => 10];
 
-        $settings = ['settings'];
+        $settings = [
+            'pagination' => []
+        ];
         $this->subject->_set('settings', $settings);
 
+        $eventDemand = new EventDemand();
         $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn($eventDemand);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
@@ -346,6 +364,7 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand,
+            'pagination' => [],
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -367,18 +386,25 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
-        $eventDemand = new EventDemand();
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $serverRequest = $this->prophesize(ServerRequest::class);
+        $request = $this->prophesize(Request::class);
+        $request->getServerRequest()->willReturn($serverRequest->reveal());
+        $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
+        $this->subject->_set('request', $request->reveal());
+
+        $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allCategories = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allLocations = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allOrganisators = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+        $allSpeakers = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
+
         $overrideDemand = ['category' => 10];
 
-        $settings = ['disableOverrideDemand' => 1];
+        $settings = ['disableOverrideDemand' => 1, 'pagination' => []];
         $this->subject->_set('settings', $settings);
 
         // Ensure overwriteDemand is not called
+        $eventDemand = new EventDemand();
         $this->subject->expects(self::never())->method('overwriteEventDemandObject');
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
@@ -433,6 +459,7 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand,
+            'pagination' => [],
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();

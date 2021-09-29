@@ -20,9 +20,20 @@
     </f:for>
 
     <!-- Output all events -->
-    <f:for each="{events}" as="event">
-        <f:render partial="Event/ListItem" arguments="{_all}"/>
-    </f:for>
+    <f:if condition="{pagination}">
+        <f:then>
+            <f:for each="{pagination.paginator.paginatedItems}" as="event" iteration="iterator">
+                <f:render partial="Event/ListItem" arguments="{_all}"/>
+            </f:for>
+            <f:render partial="Event/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator, overwriteDemand: overwriteDemand}" />
+        </f:then>
+        <f:else>
+            <f:for each="{events}" as="event">
+                <f:render partial="Event/ListItem" arguments="{_all}"/>
+            </f:for>
+        </f:else>
+    </f:if>
+
 
 </f:section>
 

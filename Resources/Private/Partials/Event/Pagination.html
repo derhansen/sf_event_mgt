@@ -1,0 +1,39 @@
+<f:if condition="{pagination.paginator.numberOfPages} > 1">
+    <ul class="paginator">
+        <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
+            <li class="first">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: 1, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.first')}">
+                    {f:translate(key:'pagination.first')}
+                </a>
+            </li>
+            <li class="previous">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.previous')}">
+                    {f:translate(key:'pagination.previous')}
+                </a>
+            </li>
+        </f:if>
+        <f:if condition="{pagination.hasLessPages}">
+            <li>…</li>
+        </f:if>
+        <f:for each="{pagination.allPageNumbers}" as="page">
+            <li class="{f:if(condition: '{page} == {paginator.currentPageNumber}', then:'current')}">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: page, overwriteDemand: overwriteDemand})}">{page}</a>
+            </li>
+        </f:for>
+        <f:if condition="{pagination.hasMorePages}">
+            <li>…</li>
+        </f:if>
+        <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
+            <li class="next">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.next')}">
+                    {f:translate(key:'pagination.next')}
+                </a>
+            </li>
+            <li class="last">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.lastPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.last')}">
+                    {f:translate(key:'pagination.last')}
+                </a>
+            </li>
+        </f:if>
+    </ul>
+</f:if>

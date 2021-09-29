@@ -165,15 +165,22 @@ category, you must pass the category UID as shown below (the value field contain
 How can I add pagination to the listview?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can use the Paginate ViewHelper that comes with TYPO3 Fluid. Below follows example code which
-should be added to the List-Template.::
+Since version 6.0 of the extension, the list view uses the TYPO3 pagination API to provide
+necessary objects required.::
 
- <f:widget.paginate objects="{events}" as="paginatedEvents" configuration="{itemsPerPage: 5, insertAbove: 1, insertBelow: 1, maximumNumberOfLinks: 10, addQueryStringMethod: 'POST,GET'}">
-     <f:for each="{paginatedEvents}" as="event">
-         <f:render partial="Event/ListItem" arguments="{_all}"/>
-     </f:for>
- </f:widget.paginate>
+ <f:for each="{pagination.paginator.paginatedItems}" as="event" iteration="iterator">
+     <f:render partial="Event/ListItem" arguments="{_all}"/>
+ </f:for>
 
+How can I add pagination to the searchview?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Native pagination is not supported for the searchview, since besides GET parameters
+also POST parameters need to be considered in order to render the pagination. Although
+it technically would be possible to implement this feature, it will not be includes
+in the extension as it is a suboptimal solution (search word as dynamic GET parameter).
+If you need a paginated search for events, it is recommended to use a search extension
+(e.g. ext:ke_search or ext:solr).
 
 How does the payment process work
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

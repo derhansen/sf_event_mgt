@@ -845,6 +845,57 @@
             </ROOT>
         </additional>
 
+        <!-- Sheet: Pagination -->
+        <pagination>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_tab.pagination</sheetTitle>
+                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->list</displayCond>
+                </TCEforms>
+                <type>array</type>
+                <el>
+
+                    <!-- Enable pagination -->
+                    <settings.pagination.enablePagination>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms.plugin.field.enablePagination</label>
+                            <config>
+                                <type>check</type>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </settings.pagination.enablePagination>
+
+                    <!-- Items per page -->
+                    <settings.pagination.itemsPerPage>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms.plugin.field.itemsPerPage</label>
+                            <config>
+                                <type>input</type>
+                                <eval>num</eval>
+                                <size>5</size>
+                                <default>10</default>
+                            </config>
+                        </TCEforms>
+                    </settings.pagination.itemsPerPage>
+
+                    <!-- Maximum number of pages -->
+                    <settings.pagination.maxNumPages>
+                        <TCEforms>
+                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms.plugin.field.maxNumPages</label>
+                            <config>
+                                <type>input</type>
+                                <eval>num</eval>
+                                <size>5</size>
+                                <default>10</default>
+                            </config>
+                        </TCEforms>
+                    </settings.pagination.maxNumPages>
+
+                </el>
+            </ROOT>
+        </pagination>
+
         <!-- Sheet: Template -->
         <template>
             <ROOT>

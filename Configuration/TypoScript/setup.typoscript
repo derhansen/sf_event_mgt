@@ -163,6 +163,11 @@ plugin.tx_sfeventmgt {
             dateFormat = {$plugin.tx_sfeventmgt.settings.search.dateFormat}
             adjustTime = {$plugin.tx_sfeventmgt.settings.search.adjustTime}
         }
+        pagination {
+          enablePagination = 0
+          itemsPerPage = 10
+          maxNumPages = 10
+        }
     }
 }
 

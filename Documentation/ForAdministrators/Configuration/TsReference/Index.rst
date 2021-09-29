@@ -596,6 +596,42 @@ plugin.tx_sfeventmgt
          true
 
  - :Property:
+         settings.pagination.enablePagination
+
+   :Date type:
+         boolean
+
+   :Description:
+         If true, the list view outputs required variables to render a pagination.
+
+   :Default:
+         false
+
+ - :Property:
+         settings.pagination.itemsPerPage
+
+   :Date type:
+         integer
+
+   :Description:
+         Amount of items per paginated page.
+
+   :Default:
+         10
+
+ - :Property:
+         settings.pagination.maxNumPages
+
+   :Date type:
+         integer
+
+   :Description:
+         Maximum number of pages to show in the pagination.
+
+   :Default:
+         10
+
+ - :Property:
          settings.event.errorHandling
 
    :Date type:
