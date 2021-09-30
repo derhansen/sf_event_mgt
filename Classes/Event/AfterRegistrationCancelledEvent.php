@@ -19,8 +19,15 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class AfterRegistrationCancelledEvent
 {
-    private Registration $registration;
-    private EventController $eventController;
+    /**
+     * @var Registration
+     */
+    private $registration;
+
+    /**
+     * @var EventController
+     */
+    private $eventController;
 
     public function __construct(Registration $registration, EventController $eventController)
     {
