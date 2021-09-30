@@ -15,6 +15,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationCancelledEvent;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationConfirmedEvent;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationSavedEvent;
 use DERHANSEN\SfEventMgt\Event\EventPidCheckFailedEvent;
@@ -884,6 +885,9 @@ class EventController extends AbstractController
 
             // Persist changes, so following functions can work with $event properties (e.g. amount of registrations)
             $this->persistAll();
+
+            $afterRegistrationCancelledEvent = new AfterRegistrationCancelledEvent($registration, $this);
+            $this->eventDispatcher->dispatch($afterRegistrationCancelledEvent);
 
             // Dispatch event, so waitlist registrations can be moved up and default move up process can be stopped
             $waitlistMoveUpEvent = new WaitlistMoveUpEvent($event, $this, true);

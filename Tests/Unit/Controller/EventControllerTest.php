@@ -22,6 +22,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
+use DERHANSEN\SfEventMgt\Event\AfterRegistrationCancelledEvent;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationConfirmedEvent;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationSavedEvent;
 use DERHANSEN\SfEventMgt\Event\EventPidCheckFailedEvent;
@@ -1647,9 +1648,12 @@ class EventControllerTest extends UnitTestCase
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
         $eventDispatcher->expects(self::at(0))->method('dispatch')->with(
-            new WaitlistMoveUpEvent($mockEvent, $this->subject)
+            new AfterRegistrationCancelledEvent($mockRegistration, $this->subject)
         );
         $eventDispatcher->expects(self::at(1))->method('dispatch')->with(
+            new WaitlistMoveUpEvent($mockEvent, $this->subject)
+        );
+        $eventDispatcher->expects(self::at(2))->method('dispatch')->with(
             new ModifyCancelRegistrationViewVariablesEvent($variables, $this->subject)
         );
         $this->inject($this->subject, 'eventDispatcher', $eventDispatcher);

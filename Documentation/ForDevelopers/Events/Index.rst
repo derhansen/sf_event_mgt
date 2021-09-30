@@ -37,6 +37,7 @@ Event Controller
 * ModifySearchViewVariablesEvent
 * AfterRegistrationSavedEvent
 * AfterRegistrationConfirmedEvent
+* AfterRegistrationCancelledEvent
 * EventPidCheckFailedEvent
 * WaitlistMoveUpEvent
 
