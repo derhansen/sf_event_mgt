@@ -271,7 +271,7 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'softref' => 'typolink_tag,email[subst],url',
+                'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
             ],
         ],
         'program' => [
@@ -284,7 +284,7 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'softref' => 'typolink_tag,email[subst],url',
+                'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
             ],
         ],
         'link' => [
