@@ -112,12 +112,12 @@ class SearchDemand
         $demand = new SearchDemand();
         $demand->setSearch($data['search'] ?? '');
         $demand->setFields($data['fields'] ?? '');
-        $demand->setStartDate(
-            $data['startDate'] ? DateTime::createFromFormat(DateTime::RFC3339, (string)$data['startDate']) : null
-        );
-        $demand->setEndDate(
-            $data['endDate'] ? DateTime::createFromFormat(DateTime::RFC3339, (string)$data['endDate']) : null
-        );
+        if (isset($data['startDate'])) {
+            $demand->setStartDate(DateTime::createFromFormat(DateTime::RFC3339, (string)$data['startDate']));
+        }
+        if (isset($data['endDate'])) {
+            $demand->setEndDate(DateTime::createFromFormat(DateTime::RFC3339, (string)$data['endDate']));
+        }
 
         return $demand;
     }
