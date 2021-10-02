@@ -12,7 +12,11 @@ parameters:
       count: 2
       path: Classes/Domain/Model/Event.php
     -
-      message: "#Call to an undefined method TYPO3\\\\CMS\\\\Core\\\\Context\\\\AspectInterface\\:\\:getId\\(\\)\\.#"
+      message: "#^Unreachable statement - code above always terminates\\.#"
+      count: 1
+      path: Classes/Controller/EventController.php
+    -
+      message: "#^Parameter \\#2 \\$optionKey of method TYPO3\\\\CMS\\\\Extbase\\\\Property\\\\PropertyMappingConfiguration\\:\\:setTypeConverterOption\\(\\) expects string, int given\\.#"
       count: 1
       path: Classes/Controller/EventController.php
     -

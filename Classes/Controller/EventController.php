@@ -106,7 +106,7 @@ class EventController extends AbstractController
      *
      * @param array $overwriteDemand OverwriteDemand
      */
-    public function listAction(array $overwriteDemand = [])
+    public function listAction(array $overwriteDemand = []): ResponseInterface
     {
         $eventDemand = EventDemand::createFromSettings($this->settings);
         $foreignRecordDemand = ForeignRecordDemand::createFromSettings($this->settings);
@@ -138,6 +138,8 @@ class EventController extends AbstractController
         $this->view->assignMultiple($variables);
 
         $this->eventCacheService->addPageCacheTagsByEventDemandObject($eventDemand);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -145,7 +147,7 @@ class EventController extends AbstractController
      *
      * @param array $overwriteDemand OverwriteDemand
      */
-    public function calendarAction(array $overwriteDemand = [])
+    public function calendarAction(array $overwriteDemand = []): ResponseInterface
     {
         $eventDemand = EventDemand::createFromSettings($this->settings);
         $foreignRecordDemand = ForeignRecordDemand::createFromSettings($this->settings);
@@ -205,6 +207,7 @@ class EventController extends AbstractController
         $variables = $modifyCalendarViewVariablesEvent->getVariables();
 
         $this->view->assignMultiple($variables);
+        return $this->htmlResponse();
     }
 
     /**
@@ -243,7 +246,7 @@ class EventController extends AbstractController
      * Detail view for an event
      *
      * @param Event|null $event Event
-     * @return mixed string|void
+     * @return mixed
      */
     public function detailAction(?Event $event = null)
     {
@@ -265,6 +268,8 @@ class EventController extends AbstractController
         if ($event !== null) {
             $this->eventCacheService->addCacheTagsByEventRecords([$event]);
         }
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -360,6 +365,8 @@ class EventController extends AbstractController
         $this->eventDispatcher->dispatch($modifyRegistrationViewVariablesEvent);
         $variables = $modifyRegistrationViewVariablesEvent->getVariables();
         $this->view->assignMultiple($variables);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -398,7 +405,7 @@ class EventController extends AbstractController
 
         /** @var Event $event */
         $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
-        if (!$event || $event->getRegistrationFields()->count() === 0) {
+        if (!is_a($event, Event::class) || $event->getRegistrationFields()->count() === 0) {
             return;
         }
 
@@ -488,7 +495,7 @@ class EventController extends AbstractController
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
      *
-     * @return mixed string|void
+     * @return mixed|void
      */
     public function saveRegistrationAction(Registration $registration, Event $event)
     {
@@ -599,8 +606,9 @@ class EventController extends AbstractController
      * @param int $result Result
      * @param int $eventuid
      * @param string $hmac
+     * @return ResponseInterface
      */
-    public function saveRegistrationResultAction(int $result, int $eventuid, string $hmac)
+    public function saveRegistrationResultAction(int $result, int $eventuid, string $hmac): ResponseInterface
     {
         $event = null;
 
@@ -658,6 +666,8 @@ class EventController extends AbstractController
             'titleKey' => $titleKey,
             'event' => $event,
         ]);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -739,6 +749,8 @@ class EventController extends AbstractController
         $this->eventDispatcher->dispatch($modifyConfirmRegistrationViewVariablesEvent);
         $variables = $modifyConfirmRegistrationViewVariablesEvent->getVariables();
         $this->view->assignMultiple($variables);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -747,7 +759,7 @@ class EventController extends AbstractController
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
      */
-    public function cancelRegistrationAction(int $reguid, string $hmac)
+    public function cancelRegistrationAction(int $reguid, string $hmac): ResponseInterface
     {
         $event = null;
 
@@ -811,6 +823,8 @@ class EventController extends AbstractController
         $this->eventDispatcher->dispatch($modifyCancelRegistrationViewVariablesEvent);
         $variables = $modifyCancelRegistrationViewVariablesEvent->getVariables();
         $this->view->assignMultiple($variables);
+
+        return $this->htmlResponse();
     }
 
     /**
@@ -852,7 +866,7 @@ class EventController extends AbstractController
      * @param SearchDemand|null $searchDemand
      * @param array $overwriteDemand OverwriteDemand
      */
-    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = [])
+    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
         $eventDemand = EventDemand::createFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
@@ -897,6 +911,8 @@ class EventController extends AbstractController
         $this->eventDispatcher->dispatch($modifySearchViewVariablesEvent);
         $variables = $modifySearchViewVariablesEvent->getVariables();
         $this->view->assignMultiple($variables);
+
+        return $this->htmlResponse();
     }
 
     /**

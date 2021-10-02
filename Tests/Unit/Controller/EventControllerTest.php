@@ -83,6 +83,7 @@ class EventControllerTest extends UnitTestCase
                 'overwriteEventDemandObject',
                 'getSysLanguageUid',
                 'persistAll',
+                'htmlResponse'
             ],
             [],
             '',
