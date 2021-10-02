@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -32,7 +34,7 @@ use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -51,14 +53,8 @@ use TYPO3\CMS\Frontend\Controller\ErrorController;
  */
 class EventController extends AbstractController
 {
-    /**
-     * @var EventCacheService
-     */
-    protected $eventCacheService;
+    protected EventCacheService $eventCacheService;
 
-    /**
-     * @param EventCacheService $cacheService
-     */
     public function injectEventCacheService(EventCacheService $cacheService)
     {
         $this->eventCacheService = $cacheService;
@@ -74,8 +70,8 @@ class EventController extends AbstractController
     {
         // @extensionScannerIgnoreLine
         $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
-        if (is_object($GLOBALS['TSFE'])) {
-            $view->assign('pageData', $GLOBALS['TSFE']->page);
+        if ($this->getTypoScriptFrontendController()) {
+            $view->assign('pageData', $this->getTypoScriptFrontendController()->page);
         }
     }
 
@@ -127,7 +123,7 @@ class EventController extends AbstractController
         $modifyListViewVariablesEvent = new ModifyListViewVariablesEvent(
             [
                 'events' => $events,
-                'pagination' => $this->getPagination($events, $this->settings['pagination']),
+                'pagination' => $this->getPagination($events, $this->settings['pagination'] ?? []),
                 'categories' => $categories,
                 'locations' => $locations,
                 'organisators' => $organisators,
@@ -160,20 +156,20 @@ class EventController extends AbstractController
 
         // Set month/year to demand if not given
         if (!$eventDemand->getMonth()) {
-            $currentMonth = date('n');
+            $currentMonth = (int)date('n');
             $eventDemand->setMonth($currentMonth);
         } else {
             $currentMonth = $eventDemand->getMonth();
         }
         if (!$eventDemand->getYear()) {
-            $currentYear = date('Y');
+            $currentYear = (int)date('Y');
             $eventDemand->setYear($currentYear);
         } else {
             $currentYear = $eventDemand->getYear();
         }
 
         // Set demand from calendar date range instead of month / year
-        if ((bool)$this->settings['calendar']['includeEventsForEveryDayOfAllCalendarWeeks']) {
+        if ((bool)($this->settings['calendar']['includeEventsForEveryDayOfAllCalendarWeeks'] ?? false)) {
             $eventDemand = $this->changeEventDemandToFullMonthDateRange($eventDemand);
         }
 
@@ -182,7 +178,7 @@ class EventController extends AbstractController
             $currentMonth,
             $currentYear,
             strtotime('today midnight'),
-            (int)$this->settings['calendar']['firstDayOfWeek'],
+            (int)($this->settings['calendar']['firstDayOfWeek'] ?? 1),
             $events
         );
 
@@ -195,7 +191,7 @@ class EventController extends AbstractController
                 'organisators' => $this->organisatorRepository->findDemanded($foreignRecordDemand),
                 'eventDemand' => $eventDemand,
                 'overwriteDemand' => $overwriteDemand,
-                'currentPageId' => $GLOBALS['TSFE']->id,
+                'currentPageId' => $this->getTypoScriptFrontendController()->id,
                 'firstDayOfMonth' => \DateTime::createFromFormat(
                     'd.m.Y',
                     sprintf('1.%s.%s', $currentMonth, $currentYear)
@@ -218,7 +214,7 @@ class EventController extends AbstractController
      * @param EventDemand $eventDemand
      * @return EventDemand
      */
-    protected function changeEventDemandToFullMonthDateRange(EventDemand $eventDemand)
+    protected function changeEventDemandToFullMonthDateRange(EventDemand $eventDemand): EventDemand
     {
         $calendarDateRange = $this->calendarService->getCalendarDateRange(
             $eventDemand->getMonth(),
@@ -246,14 +242,14 @@ class EventController extends AbstractController
     /**
      * Detail view for an event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event|null $event Event
      * @return mixed string|void
      */
-    public function detailAction(Event $event = null)
+    public function detailAction(?Event $event = null)
     {
         $event = $this->evaluateSingleEventSetting($event);
         $event = $this->evaluateIsShortcutSetting($event);
-        if (is_a($event, Event::class) && $this->settings['detail']['checkPidOfEventRecord']) {
+        if (is_a($event, Event::class) && ($this->settings['detail']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($event);
         }
 
@@ -275,7 +271,7 @@ class EventController extends AbstractController
      * Error handling if event is not found
      *
      * @param array $settings
-     * @return \Psr\Http\Message\ResponseInterface|void|null
+     * @return ResponseInterface|void|null
      * @throws PropagateResponseException
      * @throws \TYPO3\CMS\Core\Error\Http\PageNotFoundException
      * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
@@ -316,13 +312,13 @@ class EventController extends AbstractController
     /**
      * Initiates the iCalendar download for the given event
      *
-     * @param Event $event The event
+     * @param Event|null $event The event
      *
-     * @return string|false
+     * @return mixed
      */
-    public function icalDownloadAction(Event $event = null)
+    public function icalDownloadAction(?Event $event = null)
     {
-        if (is_a($event, Event::class) && $this->settings['detail']['checkPidOfEventRecord']) {
+        if (is_a($event, Event::class) && ($this->settings['detail']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($event);
         }
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
@@ -335,14 +331,14 @@ class EventController extends AbstractController
     /**
      * Registration view for an event
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Event|null $event Event
      *
-     * @return mixed string|void
+     * @return mixed
      */
-    public function registrationAction(Event $event = null)
+    public function registrationAction(?Event $event = null)
     {
         $event = $this->evaluateSingleEventSetting($event);
-        if (is_a($event, Event::class) && $this->settings['registration']['checkPidOfEventRecord']) {
+        if (is_a($event, Event::class) && ($this->settings['registration']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($event);
         }
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
@@ -369,7 +365,7 @@ class EventController extends AbstractController
     /**
      * Removes all possible spamcheck fields (which do not belong to the domain model) from arguments.
      */
-    protected function removePossibleSpamCheckFieldsFromArguments()
+    protected function removePossibleSpamCheckFieldsFromArguments(): void
     {
         $arguments = $this->request->getArguments();
         if (!isset($arguments['event'])) {
@@ -393,7 +389,7 @@ class EventController extends AbstractController
     /**
      * Processes incoming registrations fields and adds field values to arguments
      */
-    protected function setRegistrationFieldValuesToArguments()
+    protected function setRegistrationFieldValuesToArguments(): void
     {
         $arguments = $this->request->getArguments();
         if (!isset($arguments['event'])) {
@@ -478,7 +474,7 @@ class EventController extends AbstractController
             ->setTypeConverterOption(
                 DateTimeConverter::class,
                 DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['registration']['formatDateOfBirth']
+                $this->settings['registration']['formatDateOfBirth'] ?? 'd.m.Y'
             );
         $this->removePossibleSpamCheckFieldsFromArguments();
         $this->setRegistrationFieldValuesToArguments();
@@ -487,8 +483,8 @@ class EventController extends AbstractController
     /**
      * Saves the registration
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
+     * @param Registration $registration Registration
+     * @param Event $event Event
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
      *
@@ -496,13 +492,14 @@ class EventController extends AbstractController
      */
     public function saveRegistrationAction(Registration $registration, Event $event)
     {
-        if (is_a($event, Event::class) && $this->settings['registration']['checkPidOfEventRecord']) {
+        if (is_a($event, Event::class) && ($this->settings['registration']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($event);
         }
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
-        $autoConfirmation = (bool)$this->settings['registration']['autoConfirmation'] || $event->getEnableAutoconfirm();
+        $autoConfirmation = (bool)($this->settings['registration']['autoConfirmation'] ?? false) ||
+            $event->getEnableAutoconfirm();
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
         list($success, $result) = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
 
@@ -512,9 +509,9 @@ class EventController extends AbstractController
                 $event,
                 $registration->getAmountOfRegistrations()
             );
-            $linkValidity = (int)$this->settings['confirmation']['linkValidity'];
+            $linkValidity = (int)($this->settings['confirmation']['linkValidity'] ?? 3600);
             if ($linkValidity === 0) {
-                // Use 3600 seconds as default value if not set
+                // Use 3600 seconds as default value if not set or zero
                 $linkValidity = 3600;
             }
             $confirmationUntil = new \DateTime();
@@ -603,7 +600,7 @@ class EventController extends AbstractController
      * @param int $eventuid
      * @param string $hmac
      */
-    public function saveRegistrationResultAction($result, $eventuid, $hmac)
+    public function saveRegistrationResultAction(int $result, int $eventuid, string $hmac)
     {
         $event = null;
 
@@ -669,7 +666,7 @@ class EventController extends AbstractController
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
      */
-    public function confirmRegistrationAction($reguid, $hmac)
+    public function confirmRegistrationAction(int $reguid, string $hmac)
     {
         $event = null;
 
@@ -712,7 +709,7 @@ class EventController extends AbstractController
         }
 
         // Redirect to payment provider if payment/redirect is enabled
-        $paymentPid = (int)$this->settings['paymentPid'];
+        $paymentPid = (int)($this->settings['paymentPid'] ?? 0);
         if (!$failed && $paymentPid > 0 && $this->registrationService->redirectPaymentEnabled($registration)) {
             $this->uriBuilder->reset()
                 ->setTargetPageUid($paymentPid);
@@ -750,7 +747,7 @@ class EventController extends AbstractController
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
      */
-    public function cancelRegistrationAction($reguid, $hmac)
+    public function cancelRegistrationAction(int $reguid, string $hmac)
     {
         $event = null;
 
@@ -821,7 +818,7 @@ class EventController extends AbstractController
      */
     public function initializeSearchAction()
     {
-        if ($this->settings !== null && $this->settings['search']['dateFormat']) {
+        if ($this->settings !== null && ($this->settings['search']['dateFormat'] ?? false)) {
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('startDate')
                 ->setTypeConverterOption(
@@ -908,9 +905,9 @@ class EventController extends AbstractController
      * @param array $overwriteDemand
      * @return bool
      */
-    protected function isOverwriteDemand($overwriteDemand)
+    protected function isOverwriteDemand(array $overwriteDemand): bool
     {
-        return $this->settings['disableOverrideDemand'] != 1 && $overwriteDemand !== [];
+        return $this->settings['disableOverrideDemand'] !== 1 && $overwriteDemand !== [];
     }
 
     /**
@@ -919,9 +916,9 @@ class EventController extends AbstractController
      * @param Event|null $event
      * @return Event|null
      */
-    protected function evaluateSingleEventSetting($event)
+    protected function evaluateSingleEventSetting(?Event $event): ?Event
     {
-        if ($event === null && (int)$this->settings['singleEvent'] > 0) {
+        if ($event === null && (int)($this->settings['singleEvent'] ?? 0) > 0) {
             $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
         }
 
@@ -935,9 +932,9 @@ class EventController extends AbstractController
      * @param Event|null $event
      * @return Event|null
      */
-    protected function evaluateIsShortcutSetting($event)
+    protected function evaluateIsShortcutSetting(?Event $event): ?Event
     {
-        if ($event === null && (bool)$this->settings['detail']['isShortcut']) {
+        if ($event === null && (bool)($this->settings['detail']['isShortcut'] ?? false)) {
             $eventRawData = $this->configurationManager->getContentObject()->data;
             $event = $this->eventRepository->findByUid($eventRawData['uid']);
         }
@@ -949,8 +946,8 @@ class EventController extends AbstractController
      * Checks if the event pid could be found in the storagePage settings of the detail plugin and
      * if the pid could not be found it return null instead of the event object.
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event|null
+     * @param Event $event
+     * @return Event|null
      */
     protected function checkPidOfEventRecord(Event $event): ?Event
     {
@@ -973,7 +970,7 @@ class EventController extends AbstractController
     /**
      * Calls persistAll() of the persistenceManager
      */
-    protected function persistAll()
+    protected function persistAll(): void
     {
         GeneralUtility::makeInstance(PersistenceManager::class)->persistAll();
     }
@@ -997,12 +994,9 @@ class EventController extends AbstractController
      */
     protected function getCurrentLanguageTwoLetterIsoCode(): string
     {
-        $serverRequest = $this->request->getServerRequest();
-        if ($serverRequest instanceof ServerRequestInterface &&
-            $serverRequest->getAttribute('language') instanceof SiteLanguage
-        ) {
+        if ($this->request->getAttribute('language') instanceof SiteLanguage) {
             /** @var SiteLanguage $siteLanguage */
-            $siteLanguage = $serverRequest->getAttribute('language');
+            $siteLanguage = $this->request->getAttribute('language');
             return $siteLanguage->getTwoLetterIsoCode();
         }
 
