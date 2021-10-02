@@ -675,6 +675,7 @@ class EventController extends AbstractController
      *
      * @param int $reguid UID of registration
      * @param string $hmac HMAC for parameters
+     * @return mixed
      */
     public function confirmRegistrationAction(int $reguid, string $hmac)
     {
