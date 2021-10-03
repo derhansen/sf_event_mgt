@@ -37,6 +37,8 @@ General workflow
 
 Depending on the selected payment method, the user is redirected to the payment providers payment page.
 
+As a reference, please check this demo extension: https://github.com/derhansen/sf_event_mgt_payment_demo
+
 1. Blank extension
 ------------------
 
@@ -149,8 +151,21 @@ Each PSR-14 Event enables you to update the given registration. Just set the pro
 It is also possible to remove a registrations, if payment failed or was cancelled. Please
 see the corresponding PSr-14 Events for possible options.
 
-6. Security conciderations
+6. cHash in generated links
+---------------------------
+
+All links created in :php:`PaymentController` will automatically have a cHash added by TYPO3.
+This should be ok for most scenarios, but sometimes the payment provider will append GET
+parameters to links (e.g. successUrl or failureUrl), which then leads to the situation,
+that the TYPO3 cHash check fails.
+
+Since all Payment actions are uncached and the registration GET parameter is checked
+using a HMAC, the cHash can manually be removed from generated URLs by implementing
+the :php:`ProcessPaymentInitializeEvent` PSR-14 event.
+
+
+7. Security conciderations
 --------------------------
 
 Make sure that your rendered Fluid standlone views do not contain sensitive data or possibilities
-for XSS (:php:`values['html']` is rendered with :php:`f:render.raw`).
+for Cross Site Scripting (XSS) (:php:`values['html']` is rendered with :php:`f:render.raw`).

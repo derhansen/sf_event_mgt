@@ -9,9 +9,11 @@
 
 namespace DERHANSEN\SfEventMgt\Payment\Exception;
 
+use DERHANSEN\SfEventMgt\Exception;
+
 /**
  * PaymentException
  */
-class PaymentException extends \DERHANSEN\SfEventMgt\Exception
+class PaymentException extends Exception
 {
 }

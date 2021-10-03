@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,15 +11,18 @@
 
 namespace DERHANSEN\SfEventMgt\Controller;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
+use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
@@ -36,14 +41,22 @@ class PaymentController extends AbstractController
     {
         try {
             $response = parent::processRequest($request);
-        } catch (\DERHANSEN\SfEventMgt\Exception $e) {
-            // @todo return Response
-            //$response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
-        } catch (\TYPO3\CMS\Extbase\Security\Exception\InvalidHashException $e) {
-            // @todo return Response
-            //$response->setContent('<div class="payment-error">' . $e->getMessage() . '</div>');
+        } catch (Exception $e) {
+            $response = $this->responseFactory->createResponse()
+                ->withStatus(200)
+                ->withHeader('Content-Type', 'text/html; charset=utf-8');
+            $response->getBody()->write('<div class="payment-error">' . $e->getMessage() . '</div>');
+        } catch (InvalidHashException $e) {
+            $response = $this->responseFactory->createResponse()
+                ->withStatus(403)
+                ->withHeader('Content-Type', 'text/html; charset=utf-8');
+            $response->getBody()->write('<div class="payment-error">' . $e->getMessage() . '</div>');
+        } catch (\Exception $e) {
+            $response = $this->responseFactory->createResponse()
+                ->withStatus(500)
+                ->withHeader('Content-Type', 'text/html; charset=utf-8');
+            $response->getBody()->write('<div class="payment-error">' . $e->getMessage() . '</div>');
         }
-        // @todo handle else case where exception is not catched
 
         return $response;
     }
@@ -51,10 +64,11 @@ class PaymentController extends AbstractController
     /**
      * Redirect to payment provider
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
+     * @return ResponseInterface
      */
-    public function redirectAction($registration, $hmac)
+    public function redirectAction(Registration $registration, string $hmac): ResponseInterface
     {
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
@@ -71,9 +85,7 @@ class PaymentController extends AbstractController
 
         $paymentMethod = $registration->getPaymentmethod();
 
-        /**
-         * If true, the externally called BeforeRedirect method requested, that the registration should be updated
-         */
+        // If true, an external event listener requested the registration to be updated
         $updateRegistration = false;
 
         $processPaymentInitializeEvent = new ProcessPaymentInitializeEvent(
@@ -92,13 +104,18 @@ class PaymentController extends AbstractController
         }
 
         $this->view->assign('result', $variables);
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * Action is called when payment was successful
+     *
+     * @param Registration $registration
      * @param string $hmac
+     * @return ResponseInterface
      */
-    public function successAction($registration, $hmac)
+    public function successAction(Registration $registration, string $hmac): ResponseInterface
     {
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
@@ -107,9 +124,7 @@ class PaymentController extends AbstractController
 
         $paymentMethod = $registration->getPaymentmethod();
 
-        /**
-         * If true, the externally called ProcessSuccess method requested, that the registration should be updated
-         */
+        // If true, an external event listener requested the registration to be updated
         $updateRegistration = false;
 
         $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
@@ -130,13 +145,17 @@ class PaymentController extends AbstractController
         }
 
         $this->view->assign('result', $variables);
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * Action is called when payment failed
+     *
+     * @param Registration $registration
      * @param string $hmac
      */
-    public function failureAction($registration, $hmac)
+    public function failureAction(Registration $registration, string $hmac): ResponseInterface
     {
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
@@ -179,13 +198,18 @@ class PaymentController extends AbstractController
         }
 
         $this->view->assign('result', $variables);
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * Action is called, when payment was cancelled
+     *
+     * @param Registration $registration
      * @param string $hmac
+     * @return ResponseInterface
      */
-    public function cancelAction($registration, $hmac)
+    public function cancelAction(Registration $registration, string $hmac): ResponseInterface
     {
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
@@ -228,13 +252,18 @@ class PaymentController extends AbstractController
         }
 
         $this->view->assign('result', $variables);
+
+        return $this->htmlResponse();
     }
 
     /**
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * Action can be called by payment provider to perform custom logic after the payment process
+     *
+     * @param Registration $registration
      * @param string $hmac
+     * @return ResponseInterface
      */
-    public function notifyAction($registration, $hmac)
+    public function notifyAction(Registration $registration, string $hmac): ResponseInterface
     {
         $this->validateHmacForAction($registration, $hmac, $this->actionMethodName);
         $this->proceedWithAction($registration, $this->actionMethodName);
@@ -243,11 +272,7 @@ class PaymentController extends AbstractController
 
         $paymentMethod = $registration->getPaymentmethod();
 
-        /**
-         * Initialize update-flag
-         *
-         * If true, the externally called ProcessNotify method requested, that the registration should be updated
-         */
+        // If true, an external event listener requested the registration to be updated
         $updateRegistration = false;
 
         $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
@@ -268,17 +293,19 @@ class PaymentController extends AbstractController
         }
 
         $this->view->assign('result', $variables);
+
+        return $this->htmlResponse();
     }
 
     /**
      * Checks if the given action can be called for the given registration / event and throws
      * an exception if action should not proceed
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $actionName
      * @throws PaymentException
      */
-    protected function proceedWithAction($registration, $actionName)
+    protected function proceedWithAction(Registration $registration, string $actionName)
     {
         if ($registration->getEvent()->getEnablePayment() === false) {
             $message = LocalizationUtility::translate('payment.messages.paymentNotEnabled', 'SfEventMgt');
@@ -307,12 +334,12 @@ class PaymentController extends AbstractController
     /**
      * Checks the HMAC for the given action and registration
      *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
+     * @param Registration $registration
      * @param string $hmac
      * @param string $action
      * @throws InvalidHashException
      */
-    protected function validateHmacForAction($registration, $hmac, $action)
+    protected function validateHmacForAction(Registration $registration, string $hmac, string $action)
     {
         $result = $this->hashService->validateHmac($action . '-' . $registration->getUid(), $hmac);
         if (!$result) {
@@ -325,11 +352,11 @@ class PaymentController extends AbstractController
      * Returns the payment Uri for the given action and registration
      *
      * @param string $action
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration
-     * @throws \TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException
+     * @param Registration $registration
      * @return string
+     * @throws InvalidArgumentForHashGenerationException
      */
-    protected function getPaymentUriForAction($action, $registration)
+    protected function getPaymentUriForAction(string $action, Registration $registration): string
     {
         $this->uriBuilder
             ->setCreateAbsoluteUri(true);

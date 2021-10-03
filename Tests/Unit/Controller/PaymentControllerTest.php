@@ -43,6 +43,7 @@ class PaymentControllerTest extends UnitTestCase
                 'redirect',
                 'validateHmacForAction',
                 'proceedWithAction',
+                'htmlResponse',
             ],
             [],
             '',

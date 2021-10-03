@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -19,42 +21,42 @@ abstract class AbstractPayment
      *
      * @var bool
      */
-    protected $enableRedirect = false;
+    protected bool $enableRedirect = false;
 
     /**
      * Enable success link for payment method
      *
      * @var bool
      */
-    protected $enableSuccessLink = false;
+    protected bool $enableSuccessLink = false;
 
     /**
      * Enable failure link for payment method
      *
      * @var bool
      */
-    protected $enableFailureLink = false;
+    protected bool $enableFailureLink = false;
 
     /**
      * Enable cancel link for payment method
      *
      * @var bool
      */
-    protected $enableCancelLink = false;
+    protected bool $enableCancelLink = false;
 
     /**
      * Enable notify link for payment method
      *
      * @var bool
      */
-    protected $enableNotifyLink = false;
+    protected bool $enableNotifyLink = false;
 
     /**
      * Returns, if redirect is enabled for the payment method
      *
      * @return bool
      */
-    public function isRedirectEnabled()
+    public function isRedirectEnabled(): bool
     {
         return $this->enableRedirect;
     }
@@ -64,7 +66,7 @@ abstract class AbstractPayment
      *
      * @return bool
      */
-    public function isSuccessLinkEnabled()
+    public function isSuccessLinkEnabled(): bool
     {
         return $this->enableSuccessLink;
     }
@@ -74,7 +76,7 @@ abstract class AbstractPayment
      *
      * @return bool
      */
-    public function isFailureLinkEnabled()
+    public function isFailureLinkEnabled(): bool
     {
         return $this->enableFailureLink;
     }
@@ -84,7 +86,7 @@ abstract class AbstractPayment
      *
      * @return bool
      */
-    public function isCancelLinkEnabled()
+    public function isCancelLinkEnabled(): bool
     {
         return $this->enableCancelLink;
     }
@@ -94,7 +96,7 @@ abstract class AbstractPayment
      *
      * @return bool
      */
-    public function isNotifyLinkEnabled()
+    public function isNotifyLinkEnabled(): bool
     {
         return $this->enableNotifyLink;
     }
