@@ -52,3 +52,11 @@ $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist']['sfeventmgt_p
  * Register event as "Insert Record"
  */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_sfeventmgt_domain_model_event');
+
+/**
+ * Register plugin preview renderers
+ */
+$GLOBALS['TCA']['tt_content']['types']['list']['previewRenderer']['sfeventmgt_pievent'] =
+    \DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer::class;
+$GLOBALS['TCA']['tt_content']['types']['list']['previewRenderer']['sfeventmgt_piuserreg'] =
+    \DERHANSEN\SfEventMgt\Preview\PiuserregPreviewRenderer::class;

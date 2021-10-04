@@ -1,11 +1,13 @@
 <f:if condition="{data}">
     <f:then>
         <table class="table table-condensed table-hover sfeventmgt-table">
-            <thead>
-            <tr>
-                <th colspan="2">{header -> f:format.raw()}<br/>{action -> f:format.raw()}</th>
-            </tr>
-            </thead>
+            <f:if condition="{action}">
+                <thead>
+                    <tr>
+                        <th colspan="2">{action}</th>
+                    </tr>
+                </thead>
+            </f:if>
             <tbody>
                 <f:for each="{data}" as="item">
                     <tr>
