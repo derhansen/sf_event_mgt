@@ -43,7 +43,7 @@ jobs:
 
       - name: Install composer dependencies
         run: |
-          composer require typo3/cms-core=${{ matrix.typo3 }} --no-progress
+          composer require typo3/cms-core=${{ matrix.env.typo3 }} --no-progress
 
       - name: Unit tests
         run: |
