@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         env:
-          - { php: 7.4, coverage: 1, typo3: '^11.5'}
+          - { php: 7.4, coverage: 1}
 
     env: ${{ matrix.env }}
 
@@ -43,7 +43,7 @@ jobs:
 
       - name: Install composer dependencies
         run: |
-          composer require typo3/cms-core=${{ matrix.env.typo3 }} --no-progress
+          composer install --no-progress
 
       - name: Unit tests
         run: |

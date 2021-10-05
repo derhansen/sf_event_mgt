@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         env:
-          - { php: 7.4, coverage: 1, typo3: '^11.5'}
+          - { php: 7.4, coverage: 1}
 
     env: ${{ matrix.env }}
 
@@ -50,15 +50,14 @@ jobs:
 
       - name: Install composer dependencies
         run: |
-          composer require typo3/cms-core=${{ matrix.env.typo3 }} --no-progress
-          git checkout composer.json
+          composer install --no-progress
 
       - name: Initialize TYPO3 environment
         run: |
           cp -R Tests/Acceptance/_data/typo3conf .Build/public/
           cp -R Tests/Acceptance/_data/config .Build/
           echo "Run 'composer install' to activate extension"
-          composer require typo3/cms-core=${{ matrix.env.typo3 }} --no-progress
+          composer install --no-progress
 
       - name: Run PHP webserver
         run: |
