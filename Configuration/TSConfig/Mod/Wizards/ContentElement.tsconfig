@@ -2,11 +2,11 @@ mod.wizards.newContentElement.wizardItems.plugins {
   elements {
     sf_event_mgt {
       iconIdentifier = ext-sfeventmgt-wizard
-      title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.title
-      description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.description
+      title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.title
+      description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.description
       tt_content_defValues {
         CType = list
-        list_type = sfeventmgt_pievent
+        list_type = sfeventmgt_pieventlist
       }
     }
   }

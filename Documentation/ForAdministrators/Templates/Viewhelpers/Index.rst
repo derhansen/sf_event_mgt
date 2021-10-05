@@ -78,7 +78,7 @@ given page in you TYPO3 website.
 
 **Example**::
 
-  <e:uri.page pageUid="4" additionalParams="{tx_sfeventmgt_pievent:{event: registration.event, action: 'detail', controller: 'Event'}}" absolute="1"/>
+  <e:uri.page pageUid="4" additionalParams="{tx_sfeventmgt_pieventdetail:{event: registration.event, action: 'detail', controller: 'Event'}}" absolute="1"/>
 
 Uri.OnlineCalendar
 ~~~~~~~~~~~~~~~~~~

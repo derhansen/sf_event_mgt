@@ -41,7 +41,7 @@ class RegistrationValidator extends AbstractValidator
         $this->settings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'SfEventMgt',
-            'Pievent'
+            'Pieventregistration'
         );
     }
 
@@ -145,7 +145,7 @@ class RegistrationValidator extends AbstractValidator
         $spamCheckService = new SpamCheckService(
             $registration,
             $settings,
-            GeneralUtility::_GPmerged('tx_sfeventmgt_pievent')
+            GeneralUtility::_GPmerged('tx_sfeventmgt_pieventregistration')
         );
 
         return $spamCheckService->isSpamCheckFailed();

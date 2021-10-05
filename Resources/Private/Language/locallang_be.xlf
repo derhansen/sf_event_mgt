@@ -4,17 +4,38 @@
 		  product-name="sf_event_mgt">
 		<header/>
 		<body>
-			<trans-unit id="plugin.title">
+			<trans-unit id="extension.title">
 				<source>Events and event-registration</source>
 			</trans-unit>
-			<trans-unit id="plugin.description">
+			<trans-unit id="CType.div.plugingroup">
+				<source>Events and event-registration</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventlist.title">
+				<source>List view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventdetail.title">
+				<source>Detail view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventregistration.title">
+				<source>Registration view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventsearch.title">
+				<source>Search view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventcalendar.title">
+				<source>Calendar view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pipayment.title">
+				<source>Payment</source>
+			</trans-unit>
+			<trans-unit id="plugin.piuserreg.title">
+				<source>Frontend user registrations</source>
+			</trans-unit>
+			<trans-unit id="plugin.wizard.title">
+				<source>Events and event-registration</source>
+			</trans-unit>
+			<trans-unit id="plugin.wizard.description">
 				<source>Configurable event management and registration system</source>
-			</trans-unit>
-			<trans-unit id="plugin_userreg.title">
-				<source>Events and event-registration - FE user registrations</source>
-			</trans-unit>
-			<trans-unit id="plugin_payment.title">
-				<source>Events and event-registration - Payment</source>
 			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>

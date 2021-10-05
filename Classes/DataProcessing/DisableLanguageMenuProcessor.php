@@ -88,10 +88,10 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         $eventId = 0;
         /** @var PageArguments $pageArguments */
         $pageArguments = $this->getRequest()->getAttribute('routing');
-        if (isset($pageArguments->getRouteArguments()['tx_sfeventmgt_pievent']['event'])) {
-            $eventId = (int)$pageArguments->getRouteArguments()['tx_sfeventmgt_pievent']['event'];
-        } elseif (isset($this->getRequest()->getQueryParams()['tx_sfeventmgt_pievent']['event'])) {
-            $eventId = (int)$this->getRequest()->getQueryParams()['tx_sfeventmgt_pievent']['event'];
+        if (isset($pageArguments->getRouteArguments()['tx_sfeventmgt_pieventdetail']['event'])) {
+            $eventId = (int)$pageArguments->getRouteArguments()['tx_sfeventmgt_pieventdetail']['event'];
+        } elseif (isset($this->getRequest()->getQueryParams()['tx_sfeventmgt_pieventdetail']['event'])) {
+            $eventId = (int)$this->getRequest()->getQueryParams()['tx_sfeventmgt_pieventdetail']['event'];
         }
 
         return $eventId;

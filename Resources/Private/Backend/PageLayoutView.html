@@ -1,10 +1,15 @@
-<f:if condition="{data}">
+<f:if condition="{data} || {pluginName}">
     <f:then>
         <table class="table table-condensed table-hover sfeventmgt-table">
-            <f:if condition="{action}">
+            <f:if condition="{pluginName}">
                 <thead>
                     <tr>
-                        <th colspan="2">{action}</th>
+                        <th colspan="2">
+                            <strong>
+                                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extension.title" /><br/>
+                                {pluginName}
+                            </strong>
+                        </th>
                     </tr>
                 </thead>
             </f:if>
@@ -18,7 +23,4 @@
             </tbody>
         </table>
     </f:then>
-    <f:else>
-        {header -> f:format.raw()}
-    </f:else>
 </f:if>

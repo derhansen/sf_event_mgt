@@ -145,7 +145,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'lastname'], 'Doe');
         $I->fillField(['id' => 'company'], 'TYPO3');
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
-        $I->fillField(['name' => 'tx_sfeventmgt_pievent[registration][fields][2]'], 'Field Value ' . $this->lang);
+        $I->fillField(['name' => 'tx_sfeventmgt_pieventregistration[registration][fields][2]'], 'Field Value ' . $this->lang);
 
         $I->click('Send registration');
 
@@ -303,9 +303,9 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
 
-        $I->seeElementInDOM('input[name="tx_sfeventmgt_pievent[registration][hp2]"]');
+        $I->seeElementInDOM('input[name="tx_sfeventmgt_pieventregistration[registration][hp2]"]');
 
-        $I->executeJS('document.getElementsByName("tx_sfeventmgt_pievent[registration][hp2]")[0].value = "spam";');
+        $I->executeJS('document.getElementsByName("tx_sfeventmgt_pieventregistration[registration][hp2]")[0].value = "spam";');
 
         $I->click('Send registration');
 

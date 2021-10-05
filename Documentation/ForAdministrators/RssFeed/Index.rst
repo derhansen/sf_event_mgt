@@ -46,13 +46,8 @@ needs:
    pageEventRSS = PAGE
    pageEventRSS {
      typeNum = 9918
-     10 < tt_content.list.20.sfeventmgt_pievent
+     10 < tt_content.list.20.sfeventmgt_pieventlist
      10 {
-       switchableControllerActions {
-         Event {
-           1 = list
-         }
-       }
        settings < plugin.tx_sfeventmgt.settings
        settings {
          detailPid = 4

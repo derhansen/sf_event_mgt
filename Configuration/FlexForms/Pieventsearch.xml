@@ -11,51 +11,11 @@
                 </TCEforms>
                 <type>array</type>
                 <el>
-                    <!-- View -->
-                    <switchableControllerActions>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode</label>
-                            <onChange>reload</onChange>
-                            <config>
-                                <type>select</type>
-                                <renderType>selectSingle</renderType>
-                                <items>
-                                    <numIndex index="1">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.list</numIndex>
-                                        <numIndex index="1">Event->list</numIndex>
-                                    </numIndex>
-                                    <numIndex index="2">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.detail</numIndex>
-                                        <numIndex index="1">Event->detail;Event->icalDownload</numIndex>
-                                    </numIndex>
-                                    <numIndex index="3">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.registration</numIndex>
-                                        <numIndex index="1">Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                    </numIndex>
-                                    <numIndex index="4">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.search</numIndex>
-                                        <numIndex index="1">Event->search</numIndex>
-                                    </numIndex>
-                                    <numIndex index="5">
-                                        <numIndex index="0">LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.mode.calendar</numIndex>
-                                        <numIndex index="1">Event->calendar</numIndex>
-                                    </numIndex>
-                                </items>
-                            </config>
-                        </TCEforms>
-                    </switchableControllerActions>
-
                     <!-- Display options -->
                     <settings.displayMode>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.displayMode</label>
                             <onChange>reload</onChange>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -142,12 +102,6 @@
                     <settings.orderField>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderField</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -177,12 +131,6 @@
                     <settings.orderDirection>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -208,12 +156,6 @@
                     <settings.topEventRestriction>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.topEventRestriction</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -239,12 +181,6 @@
                     <settings.queryLimit>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.queryLimit</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>input</type>
                                 <eval>num</eval>
@@ -253,46 +189,10 @@
                         </TCEforms>
                     </settings.queryLimit>
 
-                    <!-- single news -->
-                    <settings.singleEvent>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.singleEvent</label>
-                            <displayCond>
-                                <OR>
-                                    <numIndex index="0">FIELD:switchableControllerActions:=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </OR>
-                            </displayCond>
-                            <config>
-                                <type>group</type>
-                                <internal_type>db</internal_type>
-                                <allowed>tx_sfeventmgt_domain_model_event</allowed>
-                                <size>1</size>
-                                <maxitems>1</maxitems>
-                                <minitems>0</minitems>
-                                <show_thumbs>1</show_thumbs>
-                                <wizards>
-                                    <suggest>
-                                        <type>suggest</type>
-                                        <default>
-                                            <searchWholePhrase>1</searchWholePhrase>
-                                        </default>
-                                    </suggest>
-                                </wizards>
-                            </config>
-                        </TCEforms>
-                    </settings.singleEvent>
-
                     <!-- Category conjunction -->
                     <settings.categoryConjunction>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.categoryConjunction</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderType>selectSingle</renderType>
@@ -326,12 +226,6 @@
                     <settings.category>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.category</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>select</type>
                                 <renderType>selectTree</renderType>
@@ -356,12 +250,6 @@
                     <settings.includeSubcategories>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.includeSubcategories</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>check</type>
                             </config>
@@ -372,12 +260,6 @@
                     <settings.location>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.location</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -399,12 +281,6 @@
                     <settings.organisator>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.organisator</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -426,12 +302,6 @@
                     <settings.speaker>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.speaker</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>group</type>
                                 <internal_type>db</internal_type>
@@ -507,213 +377,9 @@
                         </TCEforms>
                     </settings.recursive>
 
-                    <!-- Required fields for registration -->
-                    <settings.registration.requiredFields>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.requiredFields</label>
-                            <displayCond>FIELD:switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</displayCond>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.registration.requiredFields>
-
-                    <!-- Link for terms an conditions -->
-                    <settings.registration.linkTermsAndConditions>
-                        <TCEforms>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.linkTermsAndConditions</label>
-                            <config>
-                                <type>input</type>
-                                <renderType>inputLink</renderType>
-                            </config>
-                        </TCEforms>
-                    </settings.registration.linkTermsAndConditions>
-
                 </el>
             </ROOT>
         </sDEF>
-
-        <!-- Sheet: Notification -->
-        <notification>
-            <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_tab.notification</sheetTitle>
-                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</displayCond>
-                </TCEforms>
-                <type>array</type>
-                <el>
-
-                    <!-- Sender email address -->
-                    <settings.notification.senderEmail>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.sender_email</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.senderEmail>
-
-                    <!-- Sender name -->
-                    <settings.notification.senderName>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.sender_name</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.senderName>
-
-                    <!-- Reply to email address -->
-                    <settings.notification.replyToEmail>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.replyto_email</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.replyToEmail>
-
-                    <!-- Admin email address -->
-                    <settings.notification.adminEmail>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.admin_email</label>
-                            <config>
-                                <type>input</type>
-                                <eval>trim</eval>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.adminEmail>
-
-                    <!-- New registration - subject of user email -->
-                    <settings.notification.registrationNew.userSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_new_user_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationNew.userSubject>
-
-                    <!-- New waitlist registration - subject of user email -->
-                    <settings.notification.registrationWaitlistNew.userSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_new_user_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationWaitlistNew.userSubject>
-
-                    <!-- New registration - subject of admin email -->
-                    <settings.notification.registrationNew.adminSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_new_admin_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationNew.adminSubject>
-
-                    <!-- New waitlist registration - subject of admin email -->
-                    <settings.notification.registrationWaitlistNew.adminSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_new_admin_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationWaitlistNew.adminSubject>
-
-                    <!-- Registration confirmed - subject of user email -->
-                    <settings.notification.registrationConfirmed.userSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_confirmed_user_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationConfirmed.userSubject>
-
-                    <!-- Registration waitlist confirmed - subject of user email -->
-                    <settings.notification.registrationWaitlistConfirmed.userSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_confirmed_user_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationWaitlistConfirmed.userSubject>
-
-                    <!-- Registration confirmed - subject of admin email -->
-                    <settings.notification.registrationConfirmed.adminSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_confirmed_admin_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationConfirmed.adminSubject>
-
-                    <!-- Registration waitlist confirmed - subject of admin email -->
-                    <settings.notification.registrationWaitlistConfirmed.adminSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_confirmed_admin_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationWaitlistConfirmed.adminSubject>
-
-                    <!-- Registration cancelled - subject of user email -->
-                    <settings.notification.registrationCancelled.userSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_cancelled_user_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationCancelled.userSubject>
-
-                    <!-- Registration cancelled - subject of admin email -->
-                    <settings.notification.registrationCancelled.adminSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_cancelled_admin_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationCancelled.adminSubject>
-
-                    <!-- Registration waitlist move up - subject of user email -->
-                    <settings.notification.registrationWaitlistMoveUp.userSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_move_up_user_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationWaitlistMoveUp.userSubject>
-
-                    <!-- Registration waitlist move up - subject of admin email -->
-                    <settings.notification.registrationWaitlistMoveUp.adminSubject>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_notification.registration_waitlist_move_up_admin_subject</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.notification.registrationWaitlistMoveUp.adminSubject>
-
-                </el>
-            </ROOT>
-        </notification>
 
         <!-- Sheet: Additional -->
         <additional>
@@ -811,12 +477,6 @@
                     <!-- restrict Categories and Locations to storagePage -->
                     <settings.restrictForeignRecordsToStoragePage>
                         <TCEforms>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.restrictForeignRecordsToStoragePage</label>
                             <config>
                                 <type>check</type>
@@ -828,12 +488,6 @@
                     <settings.disableOverrideDemand>
                         <TCEforms>
                             <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.disableOverrideDemand</label>
-                            <displayCond>
-                                <AND>
-                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:!=:Event->detail;Event->icalDownload</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:!=:Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration</numIndex>
-                                </AND>
-                            </displayCond>
                             <config>
                                 <type>check</type>
                                 <default>1</default>
@@ -844,57 +498,6 @@
                 </el>
             </ROOT>
         </additional>
-
-        <!-- Sheet: Pagination -->
-        <pagination>
-            <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_tab.pagination</sheetTitle>
-                    <displayCond>FIELD:sDEF.switchableControllerActions:=:Event->list</displayCond>
-                </TCEforms>
-                <type>array</type>
-                <el>
-
-                    <!-- Enable pagination -->
-                    <settings.pagination.enablePagination>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms.plugin.field.enablePagination</label>
-                            <config>
-                                <type>check</type>
-                                <default>0</default>
-                            </config>
-                        </TCEforms>
-                    </settings.pagination.enablePagination>
-
-                    <!-- Items per page -->
-                    <settings.pagination.itemsPerPage>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms.plugin.field.itemsPerPage</label>
-                            <config>
-                                <type>input</type>
-                                <eval>num</eval>
-                                <size>5</size>
-                                <default>10</default>
-                            </config>
-                        </TCEforms>
-                    </settings.pagination.itemsPerPage>
-
-                    <!-- Maximum number of pages -->
-                    <settings.pagination.maxNumPages>
-                        <TCEforms>
-                            <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms.plugin.field.maxNumPages</label>
-                            <config>
-                                <type>input</type>
-                                <eval>num</eval>
-                                <size>5</size>
-                                <default>10</default>
-                            </config>
-                        </TCEforms>
-                    </settings.pagination.maxNumPages>
-
-                </el>
-            </ROOT>
-        </pagination>
 
         <!-- Sheet: Template -->
         <template>
@@ -932,12 +535,6 @@
             <ROOT>
                 <TCEforms>
                     <sheetTitle>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_tab.categoryMenu</sheetTitle>
-                    <displayCond>
-                        <OR>
-                            <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Event->list</numIndex>
-                            <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Event->search</numIndex>
-                        </OR>
-                    </displayCond>
                 </TCEforms>
                 <type>array</type>
                 <el>

@@ -30,11 +30,11 @@ The example below shows a XML Sitemap configuration for sf_event_mgt::
             url {
               pageId = <detail-pid>
               fieldToParameterMap {
-                uid = tx_sfeventmgt_pievent[event]
+                uid = tx_sfeventmgt_pieventdetail[event]
               }
               additionalGetParameters {
-                tx_sfeventmgt_pievent.controller = Event
-                tx_sfeventmgt_pievent.action = detail
+                tx_sfeventmgt_pieventdetail.controller = Event
+                tx_sfeventmgt_pieventdetail.action = detail
               }
               useCacheHash = 1
             }

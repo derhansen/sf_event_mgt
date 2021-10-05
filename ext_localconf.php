@@ -5,13 +5,61 @@ defined('TYPO3') or die();
 call_user_func(function () {
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'SfEventMgt',
-        'Pievent',
+        'Pieventlist',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'list, detail, calendar, registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'list',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload, search',
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => '',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'SfEventMgt',
+        'Pieventdetail',
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'detail, icalDownload',
+        ],
+        // non-cacheable actions
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'icalDownload',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'SfEventMgt',
+        'Pieventregistration',
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
+        ],
+        // non-cacheable actions
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'SfEventMgt',
+        'Pieventsearch',
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'search',
+        ],
+        // non-cacheable actions
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'search',
+        ]
+    );
+
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+        'SfEventMgt',
+        'Pieventcalendar',
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'calendar',
+        ],
+        // non-cacheable actions
+        [
+            \DERHANSEN\SfEventMgt\Controller\EventController::class => '',
         ]
     );
 
@@ -104,6 +152,10 @@ call_user_func(function () {
             \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields::class,
         ],
     ];
+
+    // Register event management plugin updater
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['piEventPluginUpdater']
+        = \DERHANSEN\SfEventMgt\Updates\PiEventPluginUpdater::class;
 
     if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('linkvalidator')) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(

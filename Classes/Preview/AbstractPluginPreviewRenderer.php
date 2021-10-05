@@ -35,21 +35,14 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     }
 
     /**
-     * Renders the header
+     * Renders the header (actually empty, since header is rendered in content)
      *
      * @param GridColumnItem $item
      * @return string
      */
     public function renderPageModulePreviewHeader(GridColumnItem $item): string
     {
-        $record = $item->getRecord();
-        $label = BackendUtility::getLabelFromItemListMerged(
-            $record['pid'],
-            'tt_content',
-            'list_type',
-            $record['list_type']
-        );
-        return '<strong>' . htmlspecialchars($this->getLanguageService()->sL($label)) . '</strong> <br/>';
+        return '';
     }
 
     /**
@@ -88,13 +81,25 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     }
 
     /**
+     * Returns the plugin name
+     *
+     * @param array $record
+     * @return string
+     */
+    protected function getPluginName(array $record): string
+    {
+        $pluginId = str_replace('sfeventmgt_', '', $record['list_type']);
+        return htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'plugin.' . $pluginId . '.title'));
+    }
+
+    /**
      * Renders the given data and action as HTML table for plugin preview
      *
      * @param array $data
-     * @param string $action
+     * @param string $pluginName
      * @return string
      */
-    protected function renderAsTable(array $data, string $action = ''): string
+    protected function renderAsTable(array $data, string $pluginName = ''): string
     {
         $view = GeneralUtility::makeInstance(StandaloneView::class);
         $view->setTemplatePathAndFilename(
@@ -102,7 +107,7 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
         );
         $view->assignMultiple([
             'data' => $data,
-            'action' => $action,
+            'pluginName' => $pluginName,
         ]);
 
         return $view->render();

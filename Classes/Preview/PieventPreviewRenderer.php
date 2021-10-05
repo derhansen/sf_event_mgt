@@ -28,8 +28,7 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
         $record = $item->getRecord();
         $flexFormData = GeneralUtility::xml2array($record['pi_flexform']);
 
-        $action = htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode')) . ': ';
-        $action .= $this->getSwitchableControllerActionTitle($flexFormData);
+        $pluginName = $this->getPluginName($record);
 
         $this->setPluginPidConfig($data, $flexFormData, 'listPid', 'additional');
         $this->setPluginPidConfig($data, $flexFormData, 'detailPid', 'additional');
@@ -41,35 +40,12 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
         $this->setOrderSettings($data, $flexFormData, 'settings.orderField', 'settings.orderDirection');
         $this->setOverrideDemandSettings($data, $flexFormData);
 
-        if ($this->showFieldsForListViewOnly($flexFormData)) {
-            $this->setCategoryConjuction($data, $flexFormData);
-            $this->setCategorySettings($data, $flexFormData);
-        }
+        $this->setCategoryConjuction($data, $flexFormData);
+        $this->setCategorySettings($data, $flexFormData);
 
-        return $this->renderAsTable($data, $action);
+        return $this->renderAsTable($data, $pluginName);
     }
 
-    /**
-     * Returns, if fields, that are only visible for list view, should be shown
-     *
-     * @param array $flexFormData
-     * @return bool
-     */
-    protected function showFieldsForListViewOnly(array $flexFormData): bool
-    {
-        $actions = $this->getFlexFormFieldValue($flexFormData, 'switchableControllerActions');
-        switch ($actions) {
-            case 'Event->list':
-            case 'Event->search':
-            case 'Event->calendar':
-                $result = true;
-                break;
-            default:
-                $result = false;
-        }
-
-        return $result;
-    }
 
     /**
      * Sets category conjunction if a category is selected
