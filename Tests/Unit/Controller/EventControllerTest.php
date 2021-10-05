@@ -200,9 +200,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
-        $serverRequest = $this->prophesize(ServerRequest::class);
         $request = $this->prophesize(Request::class);
-        $request->getServerRequest()->willReturn($serverRequest->reveal());
         $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
         $this->subject->_set('request', $request->reveal());
 
@@ -292,9 +290,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
-        $serverRequest = $this->prophesize(ServerRequest::class);
         $request = $this->prophesize(Request::class);
-        $request->getServerRequest()->willReturn($serverRequest->reveal());
         $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
         $this->subject->_set('request', $request->reveal());
 
@@ -387,9 +383,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
-        $serverRequest = $this->prophesize(ServerRequest::class);
         $request = $this->prophesize(Request::class);
-        $request->getServerRequest()->willReturn($serverRequest->reveal());
         $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
         $this->subject->_set('request', $request->reveal());
 

@@ -19,7 +19,10 @@ use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Prophecy\PhpUnit\ProphecyTrait;
+use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -56,6 +59,7 @@ class RegistrationServiceTest extends UnitTestCase
      */
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
+        GeneralUtility::setSingletonInstance(ReflectionService::class, new ReflectionService(new NullFrontend('extbase'), 'ClassSchemata'));
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $mockRegistration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(5);
         $mockRegistration->expects(self::any())->method('getPid')->willReturn(1);
