@@ -19,19 +19,19 @@
     "GPL-2.0-or-later"
   ],
   "require": {
-    "typo3/cms-core": "~11.4.0 || dev-master"
+    "typo3/cms-core": "^11.5 || dev-master"
   },
   "require-dev": {
-    "typo3/cms-backend": "~11.4.0 || dev-master",
-    "typo3/cms-frontend": "~11.4.0 || dev-master",
-    "typo3/cms-recordlist": "~11.4.0 || dev-master",
-    "typo3/cms-extbase": "~11.4.0 || dev-master",
-    "typo3/cms-felogin": "~11.4.0 || dev-master",
-    "typo3/cms-fluid-styled-content": "~11.4.0 || dev-master",
-    "typo3/cms-fluid": "~11.4.0 || dev-master",
-    "typo3/cms-tstemplate": "~11.4.0 || dev-master",
-    "typo3/cms-install": "~11.4.0 || dev-master",
-    "typo3/cms-extensionmanager": "~11.4.0 || dev-master",
+    "typo3/cms-backend": "^11.5 || dev-master",
+    "typo3/cms-frontend": "^11.5 || dev-master",
+    "typo3/cms-recordlist": "^11.5 || dev-master",
+    "typo3/cms-extbase": "^11.5 || dev-master",
+    "typo3/cms-felogin": "^11.5 || dev-master",
+    "typo3/cms-fluid-styled-content": "^11.5 || dev-master",
+    "typo3/cms-fluid": "^11.5 || dev-master",
+    "typo3/cms-tstemplate": "^11.5 || dev-master",
+    "typo3/cms-install": "^11.5 || dev-master",
+    "typo3/cms-extensionmanager": "^11.5 || dev-master",
     "typo3/testing-framework": "^6.9.0",
     "phpspec/prophecy": "^1.13",
     "phpspec/prophecy-phpunit": "^2.0",
