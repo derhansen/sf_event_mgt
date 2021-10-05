@@ -16,6 +16,6 @@ Plugins
    :titlesonly:
    :glob:
 
-   EventPlugin/Index
+   EventPlugins/Index
    UserRegistrationPlugin/Index
    PaymentPlugin/Index

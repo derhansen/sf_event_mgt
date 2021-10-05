@@ -8,10 +8,19 @@
 
 .. _eventplugin-settings:
 
-Events and event-registration
-=============================
+List view, Detail view, Registration view, Calendar view, Search view
+=====================================================================
 
-Nearly all important settings can be made through the plugin, which override the
+Since some plugins use the same settings, this section covers the settings
+for the following plugins:
+
+* List view
+* Detail view
+* Registration view
+* Calendar view
+* Search view
+
+Nearly all important settings can be made through the plugins, which override the
 settings made with TypoScript. All plugin settings can also be configured with TypoScript
 (use :php:`plugin.tx_sfeventmgt.settings.` with the keys shown below).
 

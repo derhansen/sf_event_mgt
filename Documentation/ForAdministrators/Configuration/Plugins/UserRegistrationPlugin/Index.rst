@@ -8,8 +8,8 @@
 
 .. _userregistrationplugin-settings:
 
-Events and event-registration - FE user registrations
-=====================================================
+Frontend user registrations
+===========================
 
 **NOTE:** Make sure,that you place the Plugin on a page with "Usergroup Access Rights" configured to only show
 the plugin output for logged in users and/or users belonging to a user group. Anyway, the plugin will only output
