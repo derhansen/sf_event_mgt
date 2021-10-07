@@ -6,6 +6,7 @@ services:
 
     DERHANSEN\SfEventMgt\:
         resource: '../Classes/*'
+        exclude: '../Classes/Domain/Model/*'
 
     DERHANSEN\SfEventMgt\Command\CleanupCommand:
         tags:
