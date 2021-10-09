@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -13,192 +15,80 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Utility\FieldType;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Field
  */
-class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Field extends AbstractEntity
 {
-    /**
-     * The title
-     *
-     * @var string
-     */
-    protected $title = '';
+    protected string $title = '';
+    protected string $type = '';
+    protected bool $required = false;
+    protected string $placeholder = '';
+    protected string $defaultValue = '';
+    protected string $settings = '';
+    protected ?Event $event = null;
+    protected string $text = '';
+    protected int $datepickermode = 0;
+    protected string $datepickermodeType = '';
 
-    /**
-     * Type - possible values
-     *
-     *  "input", "radio", "check", "textarea"
-     *
-     * @var string
-     */
-    protected $type = '';
-
-    /**
-     * Field is required
-     *
-     * @var bool
-     */
-    protected $required = false;
-
-    /**
-     * Placeholder
-     *
-     * @var string
-     */
-    protected $placeholder = '';
-
-    /**
-     * Default value
-     *
-     * @var string
-     */
-    protected $defaultValue = '';
-
-    /**
-     * Settings
-     *
-     * @var string
-     */
-    protected $settings = '';
-
-    /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
-    protected $event;
-
-    /**
-     * @var string
-     */
-    protected $text;
-
-    /**
-     * @var int
-     */
-    protected $datepickermode;
-
-    /**
-     * @var string
-     */
-    protected $datepickermodeType;
-
-    /**
-     * Returns the title
-     *
-     * @return string
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets the title
-     *
-     * @param string $title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the type
-     *
-     * @return string
-     */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * Sets the type
-     *
-     * @param string $type
-     */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
     }
 
-    /**
-     * Returns the required flag
-     *
-     * @return bool
-     */
-    public function getRequired()
+    public function getRequired(): bool
     {
         return $this->required;
     }
 
-    /**
-     * Sets the required flag
-     *
-     * @param bool $required
-     */
-    public function setRequired($required)
+    public function setRequired(bool $required)
     {
         $this->required = $required;
     }
 
-    /**
-     * Returns placeholder
-     *
-     * @return string
-     */
-    public function getPlaceholder()
+    public function getPlaceholder(): string
     {
         return $this->placeholder;
     }
 
-    /**
-     * Sets placeholder
-     *
-     * @param string $placeholder
-     */
-    public function setPlaceholder($placeholder)
+    public function setPlaceholder(string $placeholder)
     {
         $this->placeholder = $placeholder;
     }
 
-    /**
-     * Returns default value
-     *
-     * @return string
-     */
-    public function getDefaultValue()
+    public function getDefaultValue(): string
     {
         return $this->defaultValue;
     }
 
-    /**
-     * Sets default value
-     *
-     * @param string $defaultValue
-     */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue(string $defaultValue)
     {
         $this->defaultValue = $defaultValue;
     }
 
-    /**
-     * Returns settings
-     *
-     * @return string
-     */
-    public function getSettings()
+    public function getSettings(): string
     {
         return $this->settings;
     }
 
-    /**
-     * Sets settings
-     *
-     * @param string $settings
-     */
-    public function setSettings($settings)
+    public function setSettings(string $settings)
     {
         $this->settings = $settings;
     }
@@ -208,14 +98,14 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return array
      */
-    public function getSettingsForOption()
+    public function getSettingsForOption(): array
     {
         $options = [];
         $string = str_replace('[\n]', PHP_EOL, $this->settings);
         $settingsField = GeneralUtility::trimExplode(PHP_EOL, $string, true);
         foreach ($settingsField as $line) {
             $settings = GeneralUtility::trimExplode('|', $line, false);
-            $value = (isset($settings[1]) ? $settings[1] : $settings[0]);
+            $value = ($settings[1] ?? $settings[0]);
             $label = $settings[0];
             $options[] = [
                 'label' => $label,
@@ -227,22 +117,12 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $options;
     }
 
-    /**
-     * Returns the event
-     *
-     * @return Event
-     */
-    public function getEvent()
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
 
-    /**
-     * Sets the event
-     *
-     * @param Event $event
-     */
-    public function setEvent($event)
+    public function setEvent(?Event $event)
     {
         $this->event = $event;
     }
@@ -252,7 +132,7 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getValueType()
+    public function getValueType(): int
     {
         $valueTypes = [
             FieldType::INPUT => FieldValueType::TYPE_TEXT,
@@ -270,62 +150,32 @@ class Field extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return FieldValueType::TYPE_TEXT;
     }
 
-    /**
-     * Returns the name of the partial for the field
-     *
-     * @return string
-     */
-    public function getPartialName()
+    public function getPartialName(): string
     {
         return ucfirst($this->type);
     }
 
-    /**
-     * Returns the text
-     *
-     * @return string
-     */
-    public function getText()
+    public function getText(): string
     {
         return $this->text;
     }
 
-    /**
-     * Sets the text
-     *
-     * @param string $text
-     */
-    public function setText($text)
+    public function setText(string $text)
     {
         $this->text = $text;
     }
 
-    /**
-     * Returns the datepickermode
-     *
-     * @return int
-     */
-    public function getDatepickermode()
+    public function getDatepickermode(): int
     {
         return $this->datepickermode;
     }
 
-    /**
-     * Sets the datepickermode
-     *
-     * @param int $datepickermode
-     */
-    public function setDatepickermode($datepickermode)
+    public function setDatepickermode(int $datepickermode)
     {
         $this->datepickermode = $datepickermode;
     }
 
-    /**
-     * Returns the datepickermode type as string
-     *
-     * @return string
-     */
-    public function getDatepickermodeType()
+    public function getDatepickermodeType(): string
     {
         switch ($this->datepickermode) {
             case 1:

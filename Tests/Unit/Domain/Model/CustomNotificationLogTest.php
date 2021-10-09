@@ -41,18 +41,6 @@ class CustomNotificationLogTest extends UnitTestCase
     }
 
     /**
-     * Test if initial value for event is returned
-     *
-     * @test
-     */
-    public function getEventReturnsInitialValueForEvent()
-    {
-        self::assertNull(
-            $this->subject->getEvent()
-        );
-    }
-
-    /**
      * Test if event can be set
      *
      * @test
@@ -103,11 +91,10 @@ class CustomNotificationLogTest extends UnitTestCase
      *
      * @test
      */
-    public function setCruserIdForBackendUserSetsBackendUser()
+    public function setCruserIdForBackendUserSetsBackendUserId()
     {
-        $beuser = new BackendUser();
-        $this->subject->setCruserId($beuser);
-        self::assertEquals($beuser, $this->subject->getCruserId());
+        $this->subject->setCruserId(1);
+        self::assertEquals(1, $this->subject->getCruserId());
     }
 
     /**

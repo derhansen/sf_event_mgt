@@ -153,7 +153,7 @@ class NotificationService
         $notificationlogEntry->setEvent($event);
         $notificationlogEntry->setDetails($details);
         $notificationlogEntry->setEmailsSent($emailsSent);
-        $notificationlogEntry->setCruserId($GLOBALS['BE_USER']->user['uid']);
+        $notificationlogEntry->setCruserId($GLOBALS['BE_USER']->user['uid'] ?? 0);
 
         $modifyCustomNotificationLogEntry = new ModifyCustomNotificationLogEvent(
             $notificationlogEntry,

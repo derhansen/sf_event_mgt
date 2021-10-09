@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,165 +11,77 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use DateTime;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * CustomNotificationLog
  */
-class CustomNotificationLog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class CustomNotificationLog extends AbstractEntity
 {
-    /**
-     * Event
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
-    protected $event;
+    protected Event $event;
+    protected string $details = '';
+    protected string $message = '';
+    protected int $emailsSent = 0;
+    protected ?DateTime $tstamp = null;
+    protected int $cruserId = 0;
 
-    /**
-     * Details
-     *
-     * @var string
-     */
-    protected $details;
-
-    /**
-     * Message
-     *
-     * @var string
-     */
-    protected $message = '';
-
-    /**
-     * E-Mails sent
-     *
-     * @var int
-     */
-    protected $emailsSent;
-
-    /**
-     * Timestamp
-     *
-     * @var \DateTime
-     */
-    protected $tstamp;
-
-    /**
-     * Backend user
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\BackendUser
-     */
-    protected $cruserId;
-
-    /**
-     * Sets the details
-     *
-     * @param string $details Details
-     */
-    public function setDetails($details)
+    public function setDetails(string $details)
     {
         $this->details = $details;
     }
 
-    /**
-     * Returns the details
-     *
-     * @return string
-     */
-    public function getDetails()
+    public function getDetails(): string
     {
         return $this->details;
     }
 
-    /**
-     * @return string
-     */
     public function getMessage(): string
     {
         return $this->message;
     }
 
-    /**
-     * @param string $message
-     */
     public function setMessage(string $message): void
     {
         $this->message = $message;
     }
 
-    /**
-     * Sets the event
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     */
     public function setEvent(Event $event)
     {
         $this->event = $event;
     }
 
-    /**
-     * Returns the event
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
     public function getEvent()
     {
         return $this->event;
     }
 
-    /**
-     * Sets emailsSent
-     *
-     * @param int $emailsSent E-Mails sent
-     */
-    public function setEmailsSent($emailsSent)
+    public function setEmailsSent(int $emailsSent)
     {
         $this->emailsSent = $emailsSent;
     }
 
-    /**
-     * Returns emailsSent
-     *
-     * @return int
-     */
-    public function getEmailsSent()
+    public function getEmailsSent(): int
     {
         return $this->emailsSent;
     }
 
-    /**
-     * Returns tstamp
-     *
-     * @return \DateTime
-     */
-    public function getTstamp()
+    public function getTstamp(): ?DateTime
     {
         return $this->tstamp;
     }
 
-    /**
-     * Sets the timestamp
-     *
-     * @param \DateTime $tstamp Tstamp
-     */
-    public function setTstamp(\DateTime $tstamp)
+    public function setTstamp(?DateTime $tstamp)
     {
         $this->tstamp = $tstamp;
     }
 
-    /**
-     * Returns the backend user
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\BackendUser
-     */
-    public function getCruserId()
+    public function getCruserId(): int
     {
         return $this->cruserId;
     }
 
-    /**
-     * Sets the backend user
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\BackendUser $cruserId CruserId
-     */
-    public function setCruserId($cruserId)
+    public function setCruserId(int $cruserId)
     {
         $this->cruserId = $cruserId;
     }

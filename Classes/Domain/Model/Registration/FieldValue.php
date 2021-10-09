@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -12,39 +14,23 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 /**
  * Answer
  */
-class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class FieldValue extends AbstractEntity
 {
     /**
-     * Value
+     * Annotation is required, so propertyMapper will find a suiteable typeConverter
      *
      * @var string
      */
-    protected $value = '';
+    protected string $value = '';
 
-    /**
-     * The type of the value
-     *
-     * @var int
-     */
-    protected $valueType = FieldValueType::TYPE_TEXT;
-
-    /**
-     * Field
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
-     */
-    protected $field;
-
-    /**
-     * Registration
-     *
-     * @var Registration
-     */
-    protected $registration;
+    protected int $valueType = FieldValueType::TYPE_TEXT;
+    protected ?Field $field = null;
+    protected ?Registration $registration = null;
 
     /**
      * Returns value depending on the valueType
@@ -70,7 +56,7 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string
      */
-    public function getValueForCsvExport()
+    public function getValueForCsvExport(): string
     {
         $value = $this->value;
         if ($this->getField() && $this->getField()->getValueType() === FieldValueType::TYPE_ARRAY &&
@@ -83,71 +69,39 @@ class FieldValue extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Sets value
-     *
-     * @param string $value
+     * @param string|array $value
      */
     public function setValue($value)
     {
         $this->value = $value;
     }
 
-    /**
-     * Returns field
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
-     */
-    public function getField()
+    public function getField(): ?Field
     {
         return $this->field;
     }
 
-    /**
-     * Sets field
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field $field
-     */
-    public function setField($field)
+    public function setField(?Field $field)
     {
         $this->field = $field;
     }
 
-    /**
-     * Returns registration
-     *
-     * @return Registration
-     */
-    public function getRegistration()
+    public function getRegistration(): ?Registration
     {
         return $this->registration;
     }
 
-    /**
-     * Sets registration
-     *
-     * @param Registration $registration
-     */
-    public function setRegistration($registration)
+    public function setRegistration(?Registration $registration)
     {
         $this->registration = $registration;
     }
 
-    /**
-     * Sets value type
-     *
-     * @return int
-     */
-    public function getValueType()
+    public function getValueType(): int
     {
         return $this->valueType;
     }
 
-    /**
-     * Returns value type
-     *
-     * @param int $valueType
-     */
-    public function setValueType($valueType)
+    public function setValueType(int $valueType)
     {
         $this->valueType = $valueType;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,88 +11,44 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use DateTime;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Price option
  */
-class PriceOption extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class PriceOption extends AbstractEntity
 {
-    /**
-     * Price
-     *
-     * @var float
-     */
-    protected $price = 0.0;
+    protected float $price = 0.0;
+    protected ?DateTime $validUntil = null;
+    protected ?Event $event = null;
 
-    /**
-     * Valid until
-     *
-     * @var \DateTime
-     */
-    protected $validUntil;
-
-    /**
-     * Event
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
-    protected $event;
-
-    /**
-     * Returns the price
-     *
-     * @return float
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * Sets the price
-     *
-     * @param float $price
-     */
-    public function setPrice($price)
+    public function setPrice(float $price)
     {
         $this->price = $price;
     }
 
-    /**
-     * Returns the date until the price is valid
-     *
-     * @return \DateTime
-     */
-    public function getValidUntil()
+    public function getValidUntil(): ?DateTime
     {
         return $this->validUntil;
     }
 
-    /**
-     * Sets the date until the price is valil
-     *
-     * @param \DateTime $validUntil
-     */
-    public function setValidUntil($validUntil)
+    public function setValidUntil(?DateTime $validUntil)
     {
         $this->validUntil = $validUntil;
     }
 
-    /**
-     * Returns the event
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
-    public function getEvent()
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
 
-    /**
-     * Sets the event
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event
-     */
-    public function setEvent($event)
+    public function setEvent(?Event $event)
     {
         $this->event = $event;
     }

@@ -562,6 +562,8 @@ class NotificationServiceTest extends UnitTestCase
     public function adminNotificationNotSentIfNotificationsDisabled()
     {
         $eventProphecy = $this->prophesize(Event::class);
+        $eventProphecy->getNotifyAdmin()->willReturn(true);
+        $eventProphecy->getNotifyOrganisator()->willReturn(true);
         $registrationProphecy = $this->prophesize(Registration::class);
         $settings = [
             'notification' => [

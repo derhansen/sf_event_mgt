@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,140 +11,66 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Organisator
- *
- * @author AlexPixelant
  */
-class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Organisator extends AbstractEntity
 {
-    /**
-     * Name of Organisator
-     *
-     * @var string
-     */
-    protected $name = '';
+    protected string $name = '';
+    protected string $email = '';
+    protected string $emailSignature = '';
+    protected string $phone = '';
+    protected ?FileReference $image = null;
 
-    /**
-     * E-Mail of Organisator
-     *
-     * @var string
-     */
-    protected $email = '';
-
-    /**
-     * E-Mail signature of Organisator
-     *
-     * @var string
-     */
-    protected $emailSignature = '';
-
-    /**
-     * Phone number of Organisator
-     *
-     * @var string
-     */
-    protected $phone = '';
-
-    /**
-     * Image of Organisator
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $image;
-
-    /**
-     * Returns the name
-     *
-     * @return string $name
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Sets the name
-     *
-     * @param string $name The name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * Returns the email
-     *
-     * @return string $email
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * Sets the email
-     *
-     * @param string $email The email
-     */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @return string
-     */
     public function getEmailSignature(): string
     {
         return $this->emailSignature;
     }
 
-    /**
-     * @param string $emailSignature
-     */
     public function setEmailSignature(string $emailSignature)
     {
         $this->emailSignature = $emailSignature;
     }
 
-    /**
-     * Returns the phone
-     *
-     * @return string $phone
-     */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
-    /**
-     * Sets the phone
-     *
-     * @param string $phone The phone
-     */
-    public function setPhone($phone)
+    public function setPhone(string $phone)
     {
         $this->phone = $phone;
     }
 
-    /**
-     * Returns the image
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         return $this->image;
     }
 
-    /**
-     * Sets the image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image The image
-     */
-    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function setImage(?FileReference $image)
     {
         $this->image = $image;
     }

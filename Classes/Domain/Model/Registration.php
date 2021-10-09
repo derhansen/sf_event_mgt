@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,864 +11,379 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use DateTime;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Registration
  */
-class Registration extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Registration extends AbstractEntity
 {
-    /**
-     * Firstname
-     *
-     * @var string
-     */
-    protected $firstname = '';
+    protected string $firstname = '';
+    protected string $lastname = '';
+    protected string $title = '';
+    protected string $company = '';
+    protected string $address = '';
+    protected string $zip = '';
+    protected string $city = '';
+    protected string $country = '';
+    protected string $phone = '';
+    protected string $email = '';
+    protected bool $ignoreNotifications = false;
+    protected string $gender = '';
+    protected ?DateTime $dateOfBirth = null;
+    protected bool $accepttc = false;
+    protected bool $confirmed = false;
+    protected bool $paid = false;
+    protected string $notes = '';
+    protected ?Event $event = null;
+    protected ?Registration $mainRegistration = null;
+    protected ?DateTime $confirmationUntil = null;
+    protected ?DateTime $registrationDate = null;
+    protected bool $hidden = false;
+    protected int $amountOfRegistrations = 1;
+    protected string $language = '';
+    protected string $captcha = '';
+    protected ?FrontendUser $feUser = null;
+    protected string $paymentmethod = '';
+    protected string $paymentReference = '';
+    protected bool $waitlist = false;
 
     /**
-     * Lastname
-     *
-     * @var string
-     */
-    protected $lastname = '';
-
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title = '';
-
-    /**
-     * Company
-     *
-     * @var string
-     */
-    protected $company = '';
-
-    /**
-     * Address
-     *
-     * @var string
-     */
-    protected $address = '';
-
-    /**
-     * Zip
-     *
-     * @var string
-     */
-    protected $zip = '';
-
-    /**
-     * City
-     *
-     * @var string
-     */
-    protected $city = '';
-
-    /**
-     * Country
-     *
-     * @var string
-     */
-    protected $country = '';
-
-    /**
-     * Phone
-     *
-     * @var string
-     */
-    protected $phone = '';
-
-    /**
-     * E-Mail
-     *
-     * @var string
-     */
-    protected $email = '';
-
-    /**
-     * Ignore notifications
-     *
-     * @var bool
-     */
-    protected $ignoreNotifications = false;
-
-    /**
-     * Gender
-     *
-     * @var string
-     */
-    protected $gender = '';
-
-    /**
-     * Date of birth
-     *
-     * @var \DateTime
-     */
-    protected $dateOfBirth;
-
-    /**
-     * Accept terms and conditions
-     *
-     * @var bool
-     */
-    protected $accepttc = false;
-
-    /**
-     * Confirmed
-     *
-     * @var bool
-     */
-    protected $confirmed = false;
-
-    /**
-     * Paid
-     *
-     * @var bool
-     */
-    protected $paid = false;
-
-    /**
-     * Notes
-     *
-     * @var string
-     */
-    protected $notes = '';
-
-    /**
-     * Event
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
-    protected $event;
-
-    /**
-     * Main registration (if available)
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration
-     */
-    protected $mainRegistration;
-
-    /**
-     * DateTime until the registration must be confirmed
-     *
-     * @var \DateTime
-     */
-    protected $confirmationUntil;
-
-    /**
-     * The registration date
-     *
-     * @var \DateTime
-     */
-    protected $registrationDate;
-
-    /**
-     * Indicates if record is hidden
-     *
-     * @var bool
-     */
-    protected $hidden = false;
-
-    /**
-     * Amount of registrations (if multiple registrations created by one user)
-     *
-     * @var int
-     */
-    protected $amountOfRegistrations = 1;
-
-    /**
-     * The language (e.g. de)
-     *
-     * @var string
-     */
-    protected $language = '';
-
-    /**
-     * reCaptcha
-     *
-     * @var string
-     */
-    protected $captcha = '';
-
-    /**
-     * FrontendUser if available
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser
-     */
-    protected $feUser;
-
-    /**
-     * Payment method
-     *
-     * @var string
-     */
-    protected $paymentmethod = '';
-
-    /**
-     * Payment reference (e.g. from Payment provider)
-     *
-     * @var string
-     */
-    protected $paymentReference = '';
-
-    /**
-     * Flags if this is a registration on the waitlist
-     *
-     * @var bool
-     */
-    protected $waitlist = false;
-
-    /**
-     * Registration fields
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
+     * @var null|ObjectStorage<FieldValue>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected $fieldValues;
+    protected ?ObjectStorage $fieldValues = null;
 
     /**
      * Registration constructor.
      */
     public function __construct()
     {
-        $this->fieldValues = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->fieldValues = new ObjectStorage();
     }
 
-    /**
-     * Returns the firstname
-     *
-     * @return string $firstname
-     */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
 
-    /**
-     * Sets the firstname
-     *
-     * @param string $firstname Firstname
-     */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname)
     {
         $this->firstname = $firstname;
     }
 
-    /**
-     * Returns the lastname
-     *
-     * @return string $lastname
-     */
-    public function getLastname()
+    public function getLastname(): string
     {
         return $this->lastname;
     }
 
-    /**
-     * Sets the lastname
-     *
-     * @param string $lastname Lastname
-     */
-    public function setLastname($lastname)
+    public function setLastname(string $lastname)
     {
         $this->lastname = $lastname;
     }
 
-    /**
-     * Returns the title
-     *
-     * @return string $title
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets the title
-     *
-     * @param string $title Title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the company
-     *
-     * @return string $company
-     */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
 
-    /**
-     * Sets the company
-     *
-     * @param string $company Company
-     */
-    public function setCompany($company)
+    public function setCompany(string $company)
     {
         $this->company = $company;
     }
 
-    /**
-     * Returns the address
-     *
-     * @return string $address
-     */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * Sets the address
-     *
-     * @param string $address Address
-     */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->address = $address;
     }
 
-    /**
-     * Returns the zip
-     *
-     * @return string $zip
-     */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }
 
-    /**
-     * Sets the zip
-     *
-     * @param string $zip Zip
-     */
-    public function setZip($zip)
+    public function setZip(string $zip)
     {
         $this->zip = $zip;
     }
 
-    /**
-     * Returns the city
-     *
-     * @return string $city
-     */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * Sets the city
-     *
-     * @param string $city City
-     */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
 
-    /**
-     * Returns the country
-     *
-     * @return string $country
-     */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
 
-    /**
-     * Sets the country
-     *
-     * @param string $country Country
-     */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
 
-    /**
-     * Returns the phone
-     *
-     * @return string $phone
-     */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
 
-    /**
-     * Sets the phone
-     *
-     * @param string $phone Phone
-     */
-    public function setPhone($phone)
+    public function setPhone(string $phone)
     {
         $this->phone = $phone;
     }
 
-    /**
-     * Returns the email
-     *
-     * @return string $email
-     */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    /**
-     * Sets the email
-     *
-     * @param string $email E-Mail
-     */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = trim($email);
     }
 
-    /**
-     * Returns boolean state of ignoreNotifications
-     *
-     * @return bool
-     */
-    public function isIgnoreNotifications()
+    public function isIgnoreNotifications(): bool
     {
         return $this->ignoreNotifications;
     }
 
-    /**
-     * Returns ignoreNotifications
-     *
-     * @return bool
-     */
-    public function getIgnoreNotifications()
+    public function getIgnoreNotifications(): bool
     {
         return $this->ignoreNotifications;
     }
 
-    /**
-     * Sets ignoreNotifications
-     *
-     * @param bool $ignoreNotifications IgnoreNotifications
-     */
-    public function setIgnoreNotifications($ignoreNotifications)
+    public function setIgnoreNotifications(bool $ignoreNotifications)
     {
         $this->ignoreNotifications = $ignoreNotifications;
     }
 
-    /**
-     * Returns the gender
-     *
-     * @return string $gender
-     */
-    public function getGender()
+    public function getGender(): string
     {
         return $this->gender;
     }
 
-    /**
-     * Sets the gender
-     *
-     * @param string $gender Gender
-     */
-    public function setGender($gender)
+    public function setGender(string $gender)
     {
         $this->gender = $gender;
     }
 
-    /**
-     * Sets the date of birth
-     *
-     * @param \DateTime $dateOfBirth DateOfBirth
-     */
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth(?DateTime $dateOfBirth)
     {
         $this->dateOfBirth = $dateOfBirth;
     }
 
-    /**
-     * Returns the date of birth
-     *
-     * @return \DateTime
-     */
-    public function getDateOfBirth()
+    public function getDateOfBirth(): ?DateTime
     {
         return $this->dateOfBirth;
     }
 
-    /**
-     * Returns accept terms and conditions
-     *
-     * @return bool $accepttc
-     */
-    public function getAccepttc()
+    public function getAccepttc(): bool
     {
         return $this->accepttc;
     }
 
-    /**
-     * Sets accept terms and conditions
-     *
-     * @param bool $accepttc Accept terms and conditions
-     */
-    public function setAccepttc($accepttc)
+    public function setAccepttc(bool $accepttc)
     {
         $this->accepttc = $accepttc;
     }
 
-    /**
-     * Returns the confirmed
-     *
-     * @return bool $confirmed Confirmed
-     */
-    public function getConfirmed()
+    public function getConfirmed(): bool
     {
         return $this->confirmed;
     }
 
-    /**
-     * Sets the confirmed
-     *
-     * @param bool $confirmed Confirmed
-     */
-    public function setConfirmed($confirmed)
+    public function setConfirmed(bool $confirmed)
     {
         $this->confirmed = $confirmed;
     }
 
-    /**
-     * Returns the boolean state of confirmed
-     *
-     * @return bool
-     */
-    public function isConfirmed()
+    public function isConfirmed(): bool
     {
         return $this->confirmed;
     }
 
-    /**
-     * Returns the paid
-     *
-     * @return bool $paid
-     */
-    public function getPaid()
+    public function getPaid(): bool
     {
         return $this->paid;
     }
 
-    /**
-     * Sets the paid
-     *
-     * @param bool $paid Paid
-     */
-    public function setPaid($paid)
+    public function setPaid(bool $paid)
     {
         $this->paid = $paid;
     }
 
-    /**
-     * Returns the boolean state of paid
-     *
-     * @return bool
-     */
-    public function isPaid()
+    public function isPaid(): bool
     {
         return $this->paid;
     }
 
-    /**
-     * Sets the event
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Event $event Event
-     */
-    public function setEvent($event)
+    public function setEvent(?Event $event)
     {
         $this->event = $event;
     }
 
-    /**
-     * Returns the event
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Event
-     */
-    public function getEvent()
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
 
-    /**
-     * Sets the mainRegistration
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     */
-    public function setMainRegistration($registration)
+    public function setMainRegistration(?Registration $registration)
     {
         $this->mainRegistration = $registration;
     }
 
-    /**
-     * Returns the event
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Registration
-     */
-    public function getMainRegistration()
+    public function getMainRegistration(): ?Registration
     {
         return $this->mainRegistration;
     }
 
-    /**
-     * Setter for notes
-     *
-     * @param string $notes Notes
-     */
-    public function setNotes($notes)
+    public function setNotes(string $notes)
     {
         $this->notes = $notes;
     }
 
-    /**
-     * Getter for notes
-     *
-     * @return string
-     */
-    public function getNotes()
+    public function getNotes(): string
     {
         return $this->notes;
     }
 
-    /**
-     * Sets confirmUntil
-     *
-     * @param \DateTime $confirmationUntil Confirmation Until
-     */
-    public function setConfirmationUntil($confirmationUntil)
+    public function setConfirmationUntil(?DateTime $confirmationUntil)
     {
         $this->confirmationUntil = $confirmationUntil;
     }
 
-    /**
-     * Returns confirmationUntil
-     *
-     * @return \DateTime
-     */
-    public function getConfirmationUntil()
+    public function getConfirmationUntil(): ?DateTime
     {
         return $this->confirmationUntil;
     }
 
-    /**
-     * Returns registrationDate
-     *
-     * @return \DateTime
-     */
-    public function getRegistrationDate()
+    public function getRegistrationDate(): ?DateTime
     {
         return $this->registrationDate;
     }
 
-    /**
-     * Sets registrationDate
-     *
-     * @param \DateTime $registrationDate
-     */
-    public function setRegistrationDate($registrationDate)
+    public function setRegistrationDate(?DateTime $registrationDate)
     {
         $this->registrationDate = $registrationDate;
     }
 
-    /**
-     * Sets hidden
-     *
-     * @param bool $hidden Hidden
-     */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
 
-    /**
-     * Returns hidden
-     *
-     * @return bool
-     */
-    public function getHidden()
+    public function getHidden(): bool
     {
         return $this->hidden;
     }
 
-    /**
-     * Returns amountOfRegistrations
-     *
-     * @return int
-     */
-    public function getAmountOfRegistrations()
+    public function getAmountOfRegistrations(): int
     {
         return $this->amountOfRegistrations;
     }
 
-    /**
-     * Sets amountOfRegistrations
-     *
-     * @param int $amountOfRegistrations AmountOfRegistrations
-     */
-    public function setAmountOfRegistrations($amountOfRegistrations)
+    public function setAmountOfRegistrations(int $amountOfRegistrations)
     {
         $this->amountOfRegistrations = $amountOfRegistrations;
     }
 
-    /**
-     * Returns the language
-     *
-     * @return string
-     */
-    public function getLanguage()
+    public function getLanguage(): string
     {
         return $this->language;
     }
 
-    /**
-     * Sets the language
-     *
-     * @param string $language
-     */
-    public function setLanguage($language)
+    public function setLanguage(string $language)
     {
         $this->language = $language;
     }
 
-    /**
-     * Returns captcha
-     *
-     * @return string
-     */
-    public function getCaptcha()
+    public function getCaptcha(): string
     {
         return $this->captcha;
     }
 
-    /**
-     * Sets captcha
-     *
-     * @param string $captcha
-     */
-    public function setCaptcha($captcha)
+    public function setCaptcha(string $captcha)
     {
         $this->captcha = $captcha;
     }
 
-    /**
-     * Returns the frontenduser
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser
-     */
-    public function getFeUser()
+    public function getFeUser(): ?FrontendUser
     {
         return $this->feUser;
     }
 
-    /**
-     * Sets the frontenduser
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser $feUser
-     */
-    public function setFeUser($feUser)
+    public function setFeUser(?FrontendUser $feUser)
     {
         $this->feUser = $feUser;
     }
 
-    /**
-     * Returns the payment method
-     *
-     * @return string
-     */
-    public function getPaymentmethod()
+    public function getPaymentmethod(): string
     {
         return $this->paymentmethod;
     }
 
-    /**
-     * Sets the payment method
-     *
-     * @param string $paymentmethod
-     */
-    public function setPaymentmethod($paymentmethod)
+    public function setPaymentmethod(string $paymentmethod)
     {
         $this->paymentmethod = $paymentmethod;
     }
 
-    /**
-     * Returns paymentReference
-     *
-     * @return string
-     */
-    public function getPaymentReference()
+    public function getPaymentReference(): string
     {
         return $this->paymentReference;
     }
 
-    /**
-     * Sets paymentReference
-     *
-     * @param string $paymentReference
-     */
-    public function setPaymentReference($paymentReference)
+    public function setPaymentReference(string $paymentReference)
     {
         $this->paymentReference = $paymentReference;
     }
 
-    /**
-     * Returns waitlist
-     *
-     * @return bool
-     */
-    public function getWaitlist()
+    public function getWaitlist(): bool
     {
         return $this->waitlist;
     }
 
-    /**
-     * Sets waitlist
-     *
-     * @param bool $waitlist
-     */
-    public function setWaitlist($waitlist)
+    public function setWaitlist(bool $waitlist)
     {
         $this->waitlist = $waitlist;
     }
 
-    /**
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue>
-     */
-    public function getFieldValues()
+    public function getFieldValues(): ?ObjectStorage
     {
         return $this->fieldValues;
     }
 
-    /**
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $fieldValues
-     */
-    public function setFieldValues($fieldValues)
+    public function setFieldValues(?ObjectStorage $fieldValues)
     {
         $this->fieldValues = $fieldValues;
     }
 
-    /**
-     * @return string
-     */
-    public function getFullname()
+    public function getFullname(): string
     {
-        return $this->getFirstname() . ' ' . $this->lastname;
+        return $this->firstname . ' ' . $this->lastname;
     }
 }

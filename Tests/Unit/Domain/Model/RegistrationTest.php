@@ -10,8 +10,8 @@
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**

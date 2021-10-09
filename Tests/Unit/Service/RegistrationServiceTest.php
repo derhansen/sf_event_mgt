@@ -60,9 +60,9 @@ class RegistrationServiceTest extends UnitTestCase
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
         GeneralUtility::setSingletonInstance(ReflectionService::class, new ReflectionService(new NullFrontend('extbase'), 'ClassSchemata'));
-        $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-        $mockRegistration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(5);
-        $mockRegistration->expects(self::any())->method('getPid')->willReturn(1);
+        $registration = new Registration();
+        $registration->setAmountOfRegistrations(5);
+        $registration->setPid(1);
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->disableOriginalConstructor()
@@ -70,7 +70,7 @@ class RegistrationServiceTest extends UnitTestCase
         $registrationRepository->expects(self::exactly(4))->method('add');
         $this->subject->injectRegistrationRepository($registrationRepository);
 
-        $this->subject->createDependingRegistrations($mockRegistration);
+        $this->subject->createDependingRegistrations($registration);
     }
 
     /**

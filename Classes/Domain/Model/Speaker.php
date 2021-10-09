@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,115 +11,58 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
- * Conference speaker model
+ * Speaker model
  */
-class Speaker extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Speaker extends AbstractEntity
 {
-    /**
-     * Name
-     *
-     * @var string
-     */
-    protected $name = '';
+    protected string $name = '';
 
-    /**
-     * Job title
-     *
-     * @var string
-     */
-    protected $jobTitle = '';
+    protected string $jobTitle = '';
 
-    /**
-     * Description
-     *
-     * @var string
-     */
-    protected $description = '';
+    protected string $description = '';
 
-    /**
-     * The image
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $image;
+    protected ?FileReference $image = null;
 
-    /**
-     * Returns the speaker name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Sets the speaker name
-     *
-     * @param string $name
-     */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * Returns the job title
-     *
-     * @return string
-     */
-    public function getJobTitle()
+    public function getJobTitle(): string
     {
         return $this->jobTitle;
     }
 
-    /**
-     * Sets the job title
-     *
-     * @param string $title
-     */
-    public function setJobTitle($title)
+    public function setJobTitle(string $title)
     {
         $this->jobTitle = $title;
     }
 
-    /**
-     * Returns the description
-     *
-     * @return string $description
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Sets the description
-     *
-     * @param string $description The description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * Returns the image
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $image
-     */
-    public function getImage()
+    public function getImage(): ?FileReference
     {
         return $this->image;
     }
 
-    /**
-     * Sets the image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
-     */
-    public function setImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function setImage(?FileReference $image)
     {
         $this->image = $image;
     }

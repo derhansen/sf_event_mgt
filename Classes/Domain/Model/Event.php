@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,888 +11,413 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Core\Resource\FileReference;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Event
  */
-class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Event extends AbstractEntity
 {
-    /**
-     * @var \DateTime
-     */
-    protected $tstamp;
+    protected ?DateTime $tstamp = null;
+    protected bool $hidden = false;
+    protected ?DateTime $starttime = null;
+    protected ?DateTime $endtime = null;
+    protected string $title = '';
+    protected string $teaser = '';
+    protected string $description = '';
+    protected string $program = '';
+    protected ?DateTime $startdate = null;
+    protected ?DateTime $enddate = null;
+    protected int $maxParticipants = 0;
+    protected int $maxRegistrationsPerUser = 1;
+    protected float $price = 0.0;
+    protected string $currency = '';
+    protected bool $enablePayment = false;
+    protected bool $restrictPaymentMethods = false;
+    protected string $selectedPaymentMethods = '';
+    protected ?DateTime $registrationStartdate = null;
+    protected ?DateTime $registrationDeadline = null;
+    protected ?Location $location = null;
+    protected string $room = '';
+    protected bool $enableRegistration = false;
+    protected bool $enableWaitlist = false;
+    protected bool $enableWaitlistMoveup = false;
+    protected string $link = '';
+    protected bool $topEvent = false;
+    protected ?Organisator $organisator = null;
+    protected bool $notifyAdmin = true;
+    protected bool $notifyOrganisator = false;
+    protected bool $enableCancel = false;
+    protected ?DateTime $cancelDeadline = null;
+    protected bool $enableAutoconfirm = false;
+    protected bool $uniqueEmailCheck = false;
 
     /**
-     * @var bool
-     */
-    protected $hidden = false;
-
-    /**
-     * @var \DateTime
-     */
-    protected $starttime;
-
-    /**
-     * @var \DateTime
-     */
-    protected $endtime;
-
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title = '';
-
-    /**
-     * Teaser
-     *
-     * @var string
-     */
-    protected $teaser = '';
-
-    /**
-     * Description
-     *
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * Program/Schedule
-     *
-     * @var string
-     */
-    protected $program = '';
-
-    /**
-     * Startdate and time
-     *
-     * @var \DateTime
-     */
-    protected $startdate;
-
-    /**
-     * Enddate and time
-     *
-     * @var \DateTime
-     */
-    protected $enddate;
-
-    /**
-     * Max participants
-     *
-     * @var int
-     */
-    protected $maxParticipants = 0;
-
-    /**
-     * Max registrations per user
-     *
-     * @var int
-     */
-    protected $maxRegistrationsPerUser = 1;
-
-    /**
-     * Price
-     *
-     * @var float
-     */
-    protected $price = 0.0;
-
-    /**
-     * Currency
-     *
-     * @var string
-     */
-    protected $currency = '';
-
-    /**
-     * Enable payment
-     *
-     * @var bool
-     */
-    protected $enablePayment = false;
-
-    /**
-     * Restrict payment methods
-     *
-     * @var bool
-     */
-    protected $restrictPaymentMethods = false;
-
-    /**
-     * Selected payment methods
-     *
-     * @var string
-     */
-    protected $selectedPaymentMethods = '';
-
-    /**
-     * Category
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Category>
+     * @var null|ObjectStorage<Category>
      * @Extbase\ORM\Lazy
      */
-    protected $category;
+    protected ?ObjectStorage $category = null;
 
     /**
-     * Related
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Event>
+     * @var null|ObjectStorage<Event>
      * @Extbase\ORM\Lazy
      */
-    protected $related;
+    protected ?ObjectStorage $related = null;
 
     /**
-     * Registration
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
+     * @var null|ObjectStorage<Registration>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected $registration;
+    protected ?ObjectStorage $registration = null;
 
     /**
-     * Registration waitlist
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration>
+     * @var null|ObjectStorage<Registration>
      * @Extbase\ORM\Lazy
      */
-    protected $registrationWaitlist;
+    protected ?ObjectStorage $registrationWaitlist = null;
 
     /**
-     * Registration fields
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Registration\Field>
+     * @var null|ObjectStorage<Field>
      * @Extbase\ORM\Lazy
      */
-    protected $registrationFields;
+    protected ?ObjectStorage $registrationFields = null;
 
     /**
-     * Registration start date
-     *
-     * @var \DateTime
-     */
-    protected $registrationStartdate;
-
-    /**
-     * Registration deadline date
-     *
-     * @var \DateTime
-     */
-    protected $registrationDeadline;
-
-    /**
-     * The image
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var null|ObjectStorage<FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $image;
+    protected ?ObjectStorage $image = null;
 
     /**
-     * Additional files
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var null|ObjectStorage<FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $files;
+    protected ?ObjectStorage $files = null;
 
     /**
-     * The Location
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Location
-     */
-    protected $location;
-
-    /**
-     * Room
-     *
-     * @var string
-     */
-    protected $room;
-
-    /**
-     * Enable registration
-     *
-     * @var bool
-     */
-    protected $enableRegistration = false;
-
-    /**
-     * Enable waitlist
-     *
-     * @var bool
-     */
-    protected $enableWaitlist = false;
-
-    /**
-     * Enable waitlist
-     *
-     * @var bool
-     */
-    protected $enableWaitlistMoveup = false;
-
-    /**
-     * Link
-     *
-     * @var string
-     */
-    protected $link;
-
-    /**
-     * Top event
-     *
-     * @var bool
-     */
-    protected $topEvent = false;
-
-    /**
-     * The additionalImage
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+     * @var null|ObjectStorage<FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected $additionalImage;
+    protected ?ObjectStorage $additionalImage = null;
 
     /**
-     * The organisator
-     *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Organisator
-     */
-    protected $organisator;
-
-    /**
-     * Notify admin
-     *
-     * @var bool
-     */
-    protected $notifyAdmin = true;
-
-    /**
-     * Notify organisator
-     *
-     * @var bool
-     */
-    protected $notifyOrganisator = false;
-
-    /**
-     * Enable cancel of registration
-     *
-     * @var bool
-     */
-    protected $enableCancel = false;
-
-    /**
-     * Deadline for cancel
-     *
-     * @var \DateTime
-     */
-    protected $cancelDeadline;
-
-    /**
-     * Enable auto confirmation
-     *
-     * @var bool
-     */
-    protected $enableAutoconfirm = false;
-
-    /**
-     * Unique email check
-     *
-     * @var bool
-     */
-    protected $uniqueEmailCheck = false;
-
-    /**
-     * Price options
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
+     * @var null|ObjectStorage<PriceOption>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected $priceOptions;
+    protected ?ObjectStorage $priceOptions = null;
 
     /**
-     * Speaker
-     *
-     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\Speaker>
+     * @var null|ObjectStorage<Speaker>
      * @Extbase\ORM\Lazy
      */
-    protected $speaker;
+    protected ?ObjectStorage $speaker = null;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
-        $this->category = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->related = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->registration = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->registrationWaitlist = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->registrationFields = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->image = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->additionalImage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->priceOptions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-        $this->speaker = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+        $this->category = new ObjectStorage();
+        $this->related = new ObjectStorage();
+        $this->registration = new ObjectStorage();
+        $this->registrationWaitlist = new ObjectStorage();
+        $this->registrationFields = new ObjectStorage();
+        $this->image = new ObjectStorage();
+        $this->files = new ObjectStorage();
+        $this->additionalImage = new ObjectStorage();
+        $this->priceOptions = new ObjectStorage();
+        $this->speaker = new ObjectStorage();
     }
 
-    /**
-     * Get timestamp
-     *
-     * @return \DateTime
-     */
-    public function getTstamp()
+    public function getTstamp(): ?DateTime
     {
         return $this->tstamp;
     }
 
-    /**
-     * Set time stamp
-     *
-     * @param \DateTime $tstamp time stamp
-     */
-    public function setTstamp($tstamp)
+    public function setTstamp(?DateTime $tstamp)
     {
         $this->tstamp = $tstamp;
     }
 
-    /**
-     * Get hidden flag
-     *
-     * @return bool
-     */
-    public function getHidden()
+    public function getHidden(): bool
     {
         return $this->hidden;
     }
 
-    /**
-     * Set hidden flag
-     *
-     * @param bool $hidden hidden flag
-     */
-    public function setHidden($hidden)
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
 
-    /**
-     * Get start time
-     *
-     * @return \DateTime
-     */
-    public function getStarttime()
+    public function getStarttime(): ?DateTime
     {
         return $this->starttime;
     }
 
-    /**
-     * Set start time
-     *
-     * @param \DateTime $starttime start time
-     */
-    public function setStarttime($starttime)
+    public function setStarttime(?DateTime $starttime)
     {
         $this->starttime = $starttime;
     }
 
-    /**
-     * Get endtime
-     *
-     * @return \DateTime
-     */
-    public function getEndtime()
+    public function getEndtime(): ?DateTime
     {
         return $this->endtime;
     }
 
-    /**
-     * Set end time
-     *
-     * @param \DateTime $endtime end time
-     */
-    public function setEndtime($endtime)
+    public function setEndtime(?DateTime $endtime)
     {
         $this->endtime = $endtime;
     }
 
-    /**
-     * Returns the title
-     *
-     * @return string $title
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets the title
-     *
-     * @param string $title Title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the teaser
-     *
-     * @return string
-     */
-    public function getTeaser()
+    public function getTeaser(): string
     {
         return $this->teaser;
     }
 
-    /**
-     * Sets the teaser
-     *
-     * @param string $teaser Teaser
-     */
-    public function setTeaser($teaser)
+    public function setTeaser(string $teaser)
     {
         $this->teaser = $teaser;
     }
 
-    /**
-     * Returns the description
-     *
-     * @return string $description
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Sets the description
-     *
-     * @param string $description Description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * Returns the program
-     *
-     * @return string $program
-     */
-    public function getProgram()
+    public function getProgram(): string
     {
         return $this->program;
     }
 
-    /**
-     * Sets the program
-     *
-     * @param string $program The program
-     */
-    public function setProgram($program)
+    public function setProgram(string $program)
     {
         $this->program = $program;
     }
 
-    /**
-     * Returns the startdate
-     *
-     * @return \DateTime $startdate
-     */
-    public function getStartdate()
+    public function getStartdate(): ?DateTime
     {
         return $this->startdate;
     }
 
-    /**
-     * Sets the startdate
-     *
-     * @param \DateTime $startdate Startdate
-     */
-    public function setStartdate(\DateTime $startdate)
+    public function setStartdate(?DateTime $startdate)
     {
         $this->startdate = $startdate;
     }
 
-    /**
-     * Returns the enddate
-     *
-     * @return \DateTime $enddate
-     */
-    public function getEnddate()
+    public function getEnddate(): ?DateTime
     {
         return $this->enddate;
     }
 
-    /**
-     * Sets the enddate
-     *
-     * @param \DateTime $enddate Enddate
-     */
-    public function setEnddate(\DateTime $enddate)
+    public function setEnddate(?DateTime $enddate)
     {
         $this->enddate = $enddate;
     }
 
-    /**
-     * Returns the participants
-     *
-     * @return int $participants
-     */
-    public function getMaxParticipants()
+    public function getMaxParticipants(): int
     {
         return $this->maxParticipants;
     }
 
-    /**
-     * Sets the participants
-     *
-     * @param int $participants Participants
-     */
-    public function setMaxParticipants($participants)
+    public function setMaxParticipants(int $participants)
     {
         $this->maxParticipants = $participants;
     }
 
-    /**
-     * Returns the price
-     *
-     * @return float $price
-     */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
 
-    /**
-     * Sets the price
-     *
-     * @param float $price Price
-     */
-    public function setPrice($price)
+    public function setPrice(float $price)
     {
         $this->price = $price;
     }
 
-    /**
-     * Returns the currency
-     *
-     * @return string $currency
-     */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
 
-    /**
-     * Sets the currency
-     *
-     * @param string $currency Currency
-     */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
 
-    /**
-     * Returns if payment is enabled
-     *
-     * @return bool
-     */
-    public function getEnablePayment()
+    public function getEnablePayment(): bool
     {
         return $this->enablePayment;
     }
 
-    /**
-     * Sets enablePayment
-     *
-     * @param bool $enablePayment
-     */
-    public function setEnablePayment($enablePayment)
+    public function setEnablePayment(bool $enablePayment)
     {
         $this->enablePayment = $enablePayment;
     }
 
-    /**
-     * Returns if payment methods should be restricted
-     *
-     * @return bool
-     */
-    public function getRestrictPaymentMethods()
+    public function getRestrictPaymentMethods(): bool
     {
         return $this->restrictPaymentMethods;
     }
 
-    /**
-     * Sets if payment methods should be restricted
-     *
-     * @param bool $restrictPaymentMethods
-     */
-    public function setRestrictPaymentMethods($restrictPaymentMethods)
+    public function setRestrictPaymentMethods(bool $restrictPaymentMethods)
     {
         $this->restrictPaymentMethods = $restrictPaymentMethods;
     }
 
-    /**
-     * Returns selected payment methods
-     *
-     * @return string
-     */
-    public function getSelectedPaymentMethods()
+    public function getSelectedPaymentMethods(): string
     {
         return $this->selectedPaymentMethods;
     }
 
-    /**
-     * Sets selected payment methods
-     *
-     * @param string $selectedPaymentMethods
-     */
-    public function setSelectedPaymentMethods($selectedPaymentMethods)
+    public function setSelectedPaymentMethods(string $selectedPaymentMethods)
     {
         $this->selectedPaymentMethods = $selectedPaymentMethods;
     }
 
-    /**
-     * Adds a Category
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $category Category
-     */
-    public function addCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $category)
+    public function addCategory(Category $category)
     {
         $this->category->attach($category);
     }
 
-    /**
-     * Removes a Category
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove The Category to be removed
-     */
-    public function removeCategory(\DERHANSEN\SfEventMgt\Domain\Model\Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove)
     {
         $this->category->detach($categoryToRemove);
     }
 
-    /**
-     * Returns the category
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getCategory()
+    public function getCategory(): ?ObjectStorage
     {
         return $this->category;
     }
 
-    /**
-     * Sets the category
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $category Category
-     */
-    public function setCategory(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $category)
+    public function setCategory(?ObjectStorage $category)
     {
         $this->category = $category;
     }
 
-    /**
-     * Returns related events
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getRelated()
+    public function getRelated(): ?ObjectStorage
     {
         return $this->related;
     }
 
-    /**
-     * Sets related events
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $related
-     */
-    public function setRelated($related)
+    public function setRelated(?ObjectStorage $related)
     {
         $this->related = $related;
     }
 
-    /**
-     * Adds a related event
-     *
-     * @param Event $event
-     */
-    public function addRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    public function addRelated(Event $event)
     {
         $this->related->attach($event);
     }
 
-    /**
-     * Removes a related event
-     *
-     * @param Event $event
-     */
-    public function removeRelated(\DERHANSEN\SfEventMgt\Domain\Model\Event $event)
+    public function removeRelated(Event $event)
     {
         $this->related->detach($event);
     }
 
-    /**
-     * Adds a Registration
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     */
-    public function addRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
+    public function addRegistration(Registration $registration)
     {
         $this->registration->attach($registration);
     }
 
-    /**
-     * Removes a Registration
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
-     */
-    public function removeRegistration(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
+    public function removeRegistration(Registration $registrationToRemove)
     {
         $this->registration->detach($registrationToRemove);
     }
 
-    /**
-     * Returns the Registration
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration
-     */
-    public function getRegistration()
+    public function getRegistration(): ?ObjectStorage
     {
         return $this->registration;
     }
 
-    /**
-     * Sets the Registration
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
-     */
-    public function setRegistration(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
+    public function setRegistration(?ObjectStorage $registration)
     {
         $this->registration = $registration;
     }
 
-    /**
-     * Adds an image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $image Image
-     */
-    public function addImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $image)
+    public function addImage(FileReference $image)
     {
         $this->image->attach($image);
     }
 
-    /**
-     * Removes an image
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove Image
-     */
-    public function removeImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $imageToRemove)
+    public function removeImage(FileReference $imageToRemove)
     {
         $this->image->detach($imageToRemove);
     }
 
-    /**
-     * Returns all items of the field image
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $image
-     */
-    public function getImage()
+    public function getImage(): ?ObjectStorage
     {
         return $this->image;
     }
 
-    /**
-     * Special getter to return images when accesses as {event.images}
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    public function getImages()
+    public function getImages(): ?ObjectStorage
     {
         return $this->image;
     }
 
-    /**
-     * Returns all image items configured for list view
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    public function getListViewImages()
+    public function getListViewImages(): ?ObjectStorage
     {
         return $this->getImagesByType(ShowInPreviews::LIST_VIEWS);
     }
 
-    /**
-     * Returns the first list view image as file reference object
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
-     */
-    public function getFirstListViewImage()
+    public function getFirstListViewImage(): ?FileReference
     {
         $images = $this->getImagesByType(ShowInPreviews::LIST_VIEWS);
         $image = $images->current();
 
-        if (is_a($image, \TYPO3\CMS\Extbase\Domain\Model\FileReference::class)) {
+        if (is_a($image, FileReference::class)) {
             return $image;
         }
         return null;
     }
 
-    /**
-     * Returns all image items configured for list view
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    public function getDetailViewImages()
+    public function getDetailViewImages(): ?ObjectStorage
     {
         return $this->getImagesByType(ShowInPreviews::DETAIL_VIEWS);
     }
 
-    /**
-     * Returns the first detail view image as file reference object
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
-     */
-    public function getFirstDetailViewImage()
+    public function getFirstDetailViewImage(): ?FileReference
     {
         $images = $this->getImagesByType(ShowInPreviews::DETAIL_VIEWS);
         $image = $images->current();
 
-        if (is_a($image, \TYPO3\CMS\Extbase\Domain\Model\FileReference::class)) {
+        if (is_a($image, FileReference::class)) {
             return $image;
         }
         return null;
     }
 
-    /**
-     * Returns all image items by the given type
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
-     */
-    protected function getImagesByType(int $type)
+    protected function getImagesByType(int $type): ?ObjectStorage
     {
         $result = new ObjectStorage();
 
         foreach ($this->image as $image) {
-            /** @var FileReference $fileReference */
+            /** @var \TYPO3\CMS\Core\Resource\FileReference $fileReference */
             $fileReference = $image->getOriginalResource();
-            if ($fileReference && $fileReference->hasProperty('show_in_views') &&
+            if ($fileReference !== null && $fileReference->hasProperty('show_in_views') &&
                 in_array($fileReference->getProperty('show_in_views'), [$type, ShowInPreviews::ALL_VIEWS])
             ) {
                 $result->attach($image);
@@ -900,52 +427,27 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $result;
     }
 
-    /**
-     * Sets the image
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference> $image Image
-     */
-    public function setImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $image)
+    public function setImage(?ObjectStorage $image)
     {
         $this->image = $image;
     }
 
-    /**
-     * Adds a file
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file File
-     */
-    public function addFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $file)
+    public function addFiles(FileReference $file)
     {
         $this->files->attach($file);
     }
 
-    /**
-     * Removes a file
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove File
-     */
-    public function removeFiles(\TYPO3\CMS\Extbase\Domain\Model\FileReference $fileToRemove)
+    public function removeFiles(FileReference $fileToRemove)
     {
         $this->files->detach($fileToRemove);
     }
 
-    /**
-     * Returns the files
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files
-     */
-    public function getFiles()
+    public function getFiles(): ?ObjectStorage
     {
         return $this->files;
     }
 
-    /**
-     * Sets the files
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $files Files
-     */
-    public function setFiles(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $files)
+    public function setFiles(?ObjectStorage $files)
     {
         $this->files = $files;
     }
@@ -955,23 +457,23 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool
      */
-    public function getRegistrationPossible()
+    public function getRegistrationPossible(): bool
     {
         $maxParticipantsNotReached = true;
         if ($this->getMaxParticipants() > 0 && $this->getRegistrations()->count() >= $this->maxParticipants) {
             $maxParticipantsNotReached = false;
         }
         $deadlineNotReached = true;
-        if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new \DateTime()) {
+        if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new DateTime()) {
             $deadlineNotReached = false;
         }
         $registrationStartReached = true;
-        if ($this->getRegistrationStartdate() != null && $this->getRegistrationStartdate() > new \DateTime()) {
+        if ($this->getRegistrationStartdate() != null && $this->getRegistrationStartdate() > new DateTime()) {
             $registrationStartReached = false;
         }
 
-        return ($this->getStartdate() > new \DateTime()) &&
-        ($maxParticipantsNotReached || !$maxParticipantsNotReached && $this->enableWaitlist) &&
+        return ($this->getStartdate() > new DateTime()) &&
+        ($maxParticipantsNotReached || $this->enableWaitlist) &&
         $this->getEnableRegistration() && $deadlineNotReached && $registrationStartReached;
     }
 
@@ -980,423 +482,217 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int
      */
-    public function getFreePlaces()
+    public function getFreePlaces(): int
     {
         return $this->maxParticipants - $this->getRegistrations()->count();
     }
 
-    /**
-     * Sets the location
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Location $location Location
-     */
-    public function setLocation($location)
+    public function setLocation(?Location $location)
     {
         $this->location = $location;
     }
 
-    /**
-     * Returns the location
-     *
-     * @return \DERHANSEN\SfEventMgt\Domain\Model\Location
-     */
-    public function getLocation()
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
 
-    /**
-     * Returns the room
-     *
-     * @return string
-     */
-    public function getRoom()
+    public function getRoom(): string
     {
         return $this->room;
     }
 
-    /**
-     * Sets the room
-     *
-     * @param string $room
-     */
-    public function setRoom($room)
+    public function setRoom(string $room)
     {
         $this->room = $room;
     }
 
-    /**
-     * Sets enableRegistration
-     *
-     * @param bool $enableRegistration EnableRegistration
-     */
-    public function setEnableRegistration($enableRegistration)
+    public function setEnableRegistration(bool $enableRegistration)
     {
         $this->enableRegistration = $enableRegistration;
     }
 
-    /**
-     * Returns if registration is enabled
-     *
-     * @return bool
-     */
-    public function getEnableRegistration()
+    public function getEnableRegistration(): bool
     {
         return $this->enableRegistration;
     }
 
-    /**
-     * Returns enableWaitlist
-     *
-     * @return bool
-     */
-    public function getEnableWaitlist()
+    public function getEnableWaitlist(): bool
     {
         return $this->enableWaitlist;
     }
 
-    /**
-     * Sets enableWaitlist
-     *
-     * @param bool $enableWaitlist
-     */
-    public function setEnableWaitlist($enableWaitlist)
+    public function setEnableWaitlist(bool $enableWaitlist)
     {
         $this->enableWaitlist = $enableWaitlist;
     }
 
-    /**
-     * @return bool
-     */
     public function getEnableWaitlistMoveup(): bool
     {
         return $this->enableWaitlistMoveup;
     }
 
-    /**
-     * @param bool $enableWaitlistMoveup
-     */
-    public function setEnableWaitlistMoveup($enableWaitlistMoveup): void
+    public function setEnableWaitlistMoveup(bool $enableWaitlistMoveup): void
     {
         $this->enableWaitlistMoveup = $enableWaitlistMoveup;
     }
 
-    /**
-     * Sets the registration startdate
-     *
-     * @param \DateTime $registrationStartdate RegistrationStartdate
-     */
-    public function setRegistrationStartdate(\DateTime $registrationStartdate)
+    public function setRegistrationStartdate(?DateTime $registrationStartdate)
     {
         $this->registrationStartdate = $registrationStartdate;
     }
 
-    /**
-     * Returns the registration startdate
-     *
-     * @return \DateTime
-     */
-    public function getRegistrationStartdate()
+    public function getRegistrationStartdate(): ?DateTime
     {
         return $this->registrationStartdate;
     }
 
-    /**
-     * Sets the registration deadline
-     *
-     * @param \DateTime $registrationDeadline RegistrationDeadline
-     */
-    public function setRegistrationDeadline(\DateTime $registrationDeadline)
+    public function setRegistrationDeadline(?DateTime $registrationDeadline)
     {
         $this->registrationDeadline = $registrationDeadline;
     }
 
-    /**
-     * Returns the registration deadline
-     *
-     * @return \DateTime
-     */
-    public function getRegistrationDeadline()
+    public function getRegistrationDeadline(): ?DateTime
     {
         return $this->registrationDeadline;
     }
 
-    /**
-     * Sets the link
-     *
-     * @param string $link Link
-     */
-    public function setLink($link)
+    public function setLink(string $link)
     {
         $this->link = $link;
     }
 
-    /**
-     * Returns the link
-     *
-     * @return string
-     */
-    public function getLink()
+    public function getLink(): string
     {
         return $this->link;
     }
 
-    /**
-     * Sets topEvent
-     *
-     * @param bool $topEvent TopEvent
-     */
-    public function setTopEvent($topEvent)
+    public function setTopEvent(bool $topEvent)
     {
         $this->topEvent = $topEvent;
     }
 
-    /**
-     * Returns if topEvent is checked
-     *
-     * @return bool
-     */
-    public function getTopEvent()
+    public function getTopEvent(): bool
     {
         return $this->topEvent;
     }
 
-    /**
-     * Returns max regisrations per user
-     *
-     * @return int
-     */
-    public function getMaxRegistrationsPerUser()
+    public function getMaxRegistrationsPerUser(): int
     {
         return $this->maxRegistrationsPerUser;
     }
 
-    /**
-     * Sets max registrations per user
-     *
-     * @param int $maxRegistrationsPerUser MaxRegistrationsPerUser
-     */
-    public function setMaxRegistrationsPerUser($maxRegistrationsPerUser)
+    public function setMaxRegistrationsPerUser(int $maxRegistrationsPerUser)
     {
         $this->maxRegistrationsPerUser = $maxRegistrationsPerUser;
     }
 
-    /**
-     * Adds an additionalImage
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage The Image
-     */
-    public function addAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImage)
+    public function addAdditionalImage(FileReference $additionalImage)
     {
         $this->additionalImage->attach($additionalImage);
     }
 
-    /**
-     * Removes an additionalImage
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove The Image
-     */
-    public function removeAdditionalImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $additionalImageToRemove)
+    public function removeAdditionalImage(FileReference $additionalImageToRemove)
     {
         $this->additionalImage->detach($additionalImageToRemove);
     }
 
-    /**
-     * Returns the additionalImage
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage
-     */
-    public function getAdditionalImage()
+    public function getAdditionalImage(): ?ObjectStorage
     {
         return $this->additionalImage;
     }
 
-    /**
-     * Sets the additionalImage
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage The Image
-     */
-    public function setAdditionalImage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $additionalImage)
+    public function setAdditionalImage(?ObjectStorage $additionalImage)
     {
         $this->additionalImage = $additionalImage;
     }
 
-    /**
-     * Returns the organisator
-     *
-     * @return Organisator
-     */
-    public function getOrganisator()
+    public function getOrganisator(): ?Organisator
     {
         return $this->organisator;
     }
 
-    /**
-     * Sets the organisator
-     *
-     * @param Organisator $organisator The organisator
-     */
-    public function setOrganisator($organisator)
+    public function setOrganisator(Organisator $organisator)
     {
         $this->organisator = $organisator;
     }
 
-    /**
-     * Returns notifyAdmin
-     *
-     * @return bool
-     */
-    public function getNotifyAdmin()
+    public function getNotifyAdmin(): bool
     {
         return $this->notifyAdmin;
     }
 
-    /**
-     * Sets notifyAdmin
-     *
-     * @param bool $notifyAdmin NotifyAdmin
-     */
-    public function setNotifyAdmin($notifyAdmin)
+    public function setNotifyAdmin(bool $notifyAdmin)
     {
         $this->notifyAdmin = $notifyAdmin;
     }
 
-    /**
-     * Returns if notifyAdmin is set
-     *
-     * @return bool
-     */
-    public function getNotifyOrganisator()
+    public function getNotifyOrganisator(): bool
     {
         return $this->notifyOrganisator;
     }
 
-    /**
-     * Sets notifyOrganisator
-     *
-     * @param bool $notifyOrganisator NotifyOrganisator
-     */
-    public function setNotifyOrganisator($notifyOrganisator)
+    public function setNotifyOrganisator(bool $notifyOrganisator)
     {
         $this->notifyOrganisator = $notifyOrganisator;
     }
 
-    /**
-     * Sets enableCancel
-     *
-     * @param bool $enableCancel EnableCancel
-     */
-    public function setEnableCancel($enableCancel)
+    public function setEnableCancel(bool $enableCancel)
     {
         $this->enableCancel = $enableCancel;
     }
 
-    /**
-     * Returns if registration can be canceled
-     *
-     * @return bool
-     */
-    public function getEnableCancel()
+    public function getEnableCancel(): bool
     {
         return $this->enableCancel;
     }
 
-    /**
-     * Sets the cancel deadline
-     *
-     * @param \DateTime $cancelDeadline CancelDeadline
-     */
-    public function setCancelDeadline(\DateTime $cancelDeadline)
+    public function setCancelDeadline(?DateTime $cancelDeadline)
     {
         $this->cancelDeadline = $cancelDeadline;
     }
 
-    /**
-     * Returns the cancel deadline
-     *
-     * @return \DateTime
-     */
-    public function getCancelDeadline()
+    public function getCancelDeadline(): ?DateTime
     {
         return $this->cancelDeadline;
     }
 
-    /**
-     * Returns if autoconfirmation is enabled
-     *
-     * @return bool
-     */
-    public function getEnableAutoconfirm()
+    public function getEnableAutoconfirm(): bool
     {
         return $this->enableAutoconfirm;
     }
 
-    /**
-     * Sets enable autoconfirm
-     *
-     * @param bool $enableAutoconfirm
-     */
-    public function setEnableAutoconfirm($enableAutoconfirm)
+    public function setEnableAutoconfirm(bool $enableAutoconfirm)
     {
         $this->enableAutoconfirm = $enableAutoconfirm;
     }
 
-    /**
-     * Returns uniqueEmailCheck
-     *
-     * @return bool
-     */
-    public function getUniqueEmailCheck()
+    public function getUniqueEmailCheck(): bool
     {
         return $this->uniqueEmailCheck;
     }
 
-    /**
-     * Sets UniqueEmailCheck
-     *
-     * @param bool $uniqueEmailCheck
-     */
-    public function setUniqueEmailCheck($uniqueEmailCheck)
+    public function setUniqueEmailCheck(bool $uniqueEmailCheck)
     {
         $this->uniqueEmailCheck = $uniqueEmailCheck;
     }
 
-    /**
-     * Returns price options
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
-     */
-    public function getPriceOptions()
+    public function getPriceOptions(): ?ObjectStorage
     {
         return $this->priceOptions;
     }
 
-    /**
-     * Sets price options
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $priceOptions
-     */
-    public function setPriceOptions($priceOptions)
+    public function setPriceOptions(?ObjectStorage $priceOptions)
     {
         $this->priceOptions = $priceOptions;
     }
 
-    /**
-     * Adds a price option
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
-     */
-    public function addPriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
+    public function addPriceOptions(PriceOption $priceOption)
     {
         $this->priceOptions->attach($priceOption);
     }
 
-    /**
-     * Removes a Registration
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption Price option
-     */
-    public function removePriceOptions(\DERHANSEN\SfEventMgt\Domain\Model\PriceOption $priceOption)
+    public function removePriceOptions(PriceOption $priceOption)
     {
         $this->priceOptions->detach($priceOption);
     }
@@ -1406,11 +702,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return array
      */
-    public function getActivePriceOptions()
+    public function getActivePriceOptions(): array
     {
         $activePriceOptions = [];
         if ($this->getPriceOptions()) {
-            $compareDate = new \DateTime('today midnight');
+            $compareDate = new DateTime('today midnight');
             foreach ($this->getPriceOptions() as $priceOption) {
                 if ($priceOption->getValidUntil() >= $compareDate) {
                     $activePriceOptions[$priceOption->getValidUntil()->getTimestamp()] = $priceOption;
@@ -1427,7 +723,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return float
      */
-    public function getCurrentPrice()
+    public function getCurrentPrice(): float
     {
         $activePriceOptions = $this->getActivePriceOptions();
         if (count($activePriceOptions) >= 1) {
@@ -1438,42 +734,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->price;
     }
 
-    /**
-     * Returns registrationWaitlist
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getRegistrationWaitlist()
+    public function getRegistrationWaitlist(): ?ObjectStorage
     {
         return $this->registrationWaitlist;
     }
 
-    /**
-     * Sets registrationWaitlist
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration Registration
-     */
-    public function setRegistrationWaitlist(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registration)
+    public function setRegistrationWaitlist(?ObjectStorage $registration)
     {
         $this->registrationWaitlist = $registration;
     }
 
-    /**
-     * Adds a Registration to the waitlist
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registration Registration
-     */
-    public function addRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registration)
+    public function addRegistrationWaitlist(Registration $registration)
     {
         $this->registrationWaitlist->attach($registration);
     }
 
-    /**
-     * Removes a Registration from the waitlist
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove Registration
-     */
-    public function removeRegistrationWaitlist(\DERHANSEN\SfEventMgt\Domain\Model\Registration $registrationToRemove)
+    public function removeRegistrationWaitlist(Registration $registrationToRemove)
     {
         $this->registrationWaitlist->detach($registrationToRemove);
     }
@@ -1483,100 +759,55 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return bool
      */
-    public function getCancellationPossible()
+    public function getCancellationPossible(): bool
     {
-        $today = new \DateTime('today');
+        $today = new DateTime('today');
 
         return ($this->getEnableCancel() && $this->getCancelDeadline() > $today) ||
             ($this->getEnableCancel() && $this->getCancelDeadline() === null && $this->getStartdate() > $today);
     }
 
-    /**
-     * Returns speaker
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getSpeaker()
+    public function getSpeaker(): ?ObjectStorage
     {
         return $this->speaker;
     }
 
-    /**
-     * Sets speaker
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $speaker
-     */
-    public function setSpeaker($speaker)
+    public function setSpeaker(?ObjectStorage $speaker)
     {
         $this->speaker = $speaker;
     }
 
-    /**
-     * Adds a speaker
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
-     */
-    public function addSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
+    public function addSpeaker(Speaker $speaker)
     {
         $this->speaker->attach($speaker);
     }
 
-    /**
-     * Removes a speaker
-     *
-     * @param \DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker
-     */
-    public function removeSpeaker(\DERHANSEN\SfEventMgt\Domain\Model\Speaker $speaker)
+    public function removeSpeaker(Speaker $speaker)
     {
         $this->speaker->detach($speaker);
     }
 
-    /**
-     * Returns registrationFields
-     *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     */
-    public function getRegistrationFields()
+    public function getRegistrationFields(): ?ObjectStorage
     {
         return $this->registrationFields;
     }
 
-    /**
-     * Sets registrationWaitlist
-     *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields
-     */
-    public function setRegistrationFields(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrationFields)
+    public function setRegistrationFields(?ObjectStorage $registrationFields)
     {
         $this->registrationFields = $registrationFields;
     }
 
-    /**
-     * Adds a registrationField
-     *
-     * @param Field $registrationField
-     */
     public function addRegistrationFields(Field $registrationField)
     {
         $this->registrationFields->attach($registrationField);
     }
 
-    /**
-     * Removed a registrationField
-     *
-     * @param Field $registrationField
-     */
     public function removeRegistrationFields(Field $registrationField)
     {
         $this->registrationFields->detach($registrationField);
     }
 
-    /**
-     * Returns an array with registration field uids
-     *
-     * @return array
-     */
-    public function getRegistrationFieldsUids()
+    public function getRegistrationFieldsUids(): array
     {
         $result = [];
         foreach ($this->registrationFields as $registrationField) {
@@ -1592,7 +823,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return array
      */
-    public function getRegistrationFieldUidsWithTitle()
+    public function getRegistrationFieldUidsWithTitle(): array
     {
         $result = [];
         foreach ($this->registrationFields as $registrationField) {
@@ -1608,7 +839,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function getRegistrations()
+    public function getRegistrations(): ?ObjectStorage
     {
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
         if ($languageAspect->getId() > 0) {
@@ -1624,7 +855,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      */
-    public function getRegistrationsWaitlist()
+    public function getRegistrationsWaitlist(): ?ObjectStorage
     {
         $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
         if ($languageAspect->getId() > 0) {
@@ -1641,7 +872,7 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param bool $waitlist
      * @return ObjectStorage
      */
-    protected function getRegistrationsDefaultLanguage(bool $waitlist = false)
+    protected function getRegistrationsDefaultLanguage(bool $waitlist = false): ObjectStorage
     {
         $result = GeneralUtility::makeInstance(ObjectStorage::class);
         $registrationRepository = GeneralUtility::makeInstance(RegistrationRepository::class);
@@ -1653,11 +884,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $result;
     }
 
-    /**
-     * Returns if the event ends on the same day
-     *
-     * @return bool
-     */
     public function getEndsSameDay(): bool
     {
         if ($this->enddate !== null) {
@@ -1667,11 +893,6 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return true;
     }
 
-    /**
-     * Returns the challenge for the challenge/response spam check
-     *
-     * @return string
-     */
     public function getSpamCheckChallenge(): string
     {
         return MiscUtility::getSpamCheckChallenge($this->getUid());

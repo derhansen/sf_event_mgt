@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -9,250 +11,109 @@
 
 namespace DERHANSEN\SfEventMgt\Domain\Model;
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * Location
  */
-class Location extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Location extends AbstractEntity
 {
-    /**
-     * Title
-     *
-     * @var string
-     */
-    protected $title = '';
+    protected string $title = '';
+    protected string $address = '';
+    protected string $zip = '';
+    protected string $city = '';
+    protected string $country = '';
+    protected string $description = '';
+    protected string $link = '';
+    protected float $longitude = 0.0;
+    protected float $latitude = 0.0;
 
-    /**
-     * Address
-     *
-     * @var string
-     */
-    protected $address = '';
-
-    /**
-     * Zip
-     *
-     * @var string
-     */
-    protected $zip = '';
-
-    /**
-     * City
-     *
-     * @var string
-     */
-    protected $city = '';
-
-    /**
-     * Country
-     *
-     * @var string
-     */
-    protected $country = '';
-
-    /**
-     * Description
-     *
-     * @var string
-     */
-    protected $description = '';
-
-    /**
-     * Link
-     *
-     * @var string
-     */
-    protected $link = '';
-
-    /**
-     * Longitude
-     *
-     * @var float
-     */
-    protected $longitude = 0.0;
-
-    /**
-     * Latitude
-     *
-     * @var float
-     */
-    protected $latitude = 0.0;
-
-    /**
-     * Returns the title
-     *
-     * @return string $title
-     */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
-    /**
-     * Sets the title
-     *
-     * @param string $title The title
-     */
-    public function setTitle($title)
+    public function setTitle(string $title)
     {
         $this->title = $title;
     }
 
-    /**
-     * Returns the address
-     *
-     * @return string $address
-     */
-    public function getAddress()
+    public function getAddress(): string
     {
         return $this->address;
     }
 
-    /**
-     * Sets the address
-     *
-     * @param string $address Address
-     */
-    public function setAddress($address)
+    public function setAddress(string $address)
     {
         $this->address = $address;
     }
 
-    /**
-     * Returns the zip
-     *
-     * @return string $zip
-     */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }
 
-    /**
-     * Sets the zip
-     *
-     * @param string $zip Zip
-     */
-    public function setZip($zip)
+    public function setZip(string $zip)
     {
         $this->zip = $zip;
     }
 
-    /**
-     * Returns the city
-     *
-     * @return string $city
-     */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
 
-    /**
-     * Sets the city
-     *
-     * @param string $city City
-     */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
 
-    /**
-     * Returns the country
-     *
-     * @return string $country
-     */
-    public function getCountry()
+    public function getCountry(): string
     {
         return $this->country;
     }
 
-    /**
-     * Sets the country
-     *
-     * @param string $country Country
-     */
-    public function setCountry($country)
+    public function setCountry(string $country)
     {
         $this->country = $country;
     }
 
-    /**
-     * Returns the description
-     *
-     * @return string $description
-     */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
-    /**
-     * Sets the description
-     *
-     * @param string $description The description
-     */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
     }
 
-    /**
-     * Returns link
-     *
-     * @return string
-     */
-    public function getLink()
+    public function getLink(): string
     {
         return $this->link;
     }
 
-    /**
-     * Sets link
-     *
-     * @param string $link
-     */
-    public function setLink($link)
+    public function setLink(string $link)
     {
         $this->link = $link;
     }
 
-    /**
-     * Returns the longitude
-     *
-     * @return float
-     */
-    public function getLongitude()
+    public function getLongitude(): float
     {
         return $this->longitude;
     }
 
-    /**
-     * Sets the the longitude
-     *
-     * @param float $longitude The longitude
-     */
-    public function setLongitude($longitude)
+    public function setLongitude(float $longitude)
     {
         $this->longitude = $longitude;
     }
 
-    /**
-     * Returns the latitude
-     *
-     * @return float
-     */
-    public function getLatitude()
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
 
-    /**
-     * Sets the latitude
-     *
-     * @param float $latitude The latitude
-     */
-    public function setLatitude($latitude)
+    public function setLatitude(float $latitude)
     {
         $this->latitude = $latitude;
     }

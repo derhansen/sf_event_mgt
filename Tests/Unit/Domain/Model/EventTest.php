@@ -839,7 +839,8 @@ class EventTest extends UnitTestCase
      */
     public function getLinkReturnsInitialValueForLink()
     {
-        self::assertNull(
+        self::assertEquals(
+            '',
             $this->subject->getLink()
         );
     }
@@ -939,6 +940,20 @@ class EventTest extends UnitTestCase
     public function getOrganisatorReturnsInitialValueForOrganisator()
     {
         self::assertNull($this->subject->getOrganisator());
+    }
+
+    /**
+     * @test
+     */
+    public function getRoomReturnsInitialValue()
+    {
+        $this->assertEquals('', $this->subject->getRoom());
+    }
+
+    public function setRoomSetsRoomForString()
+    {
+        $this->subject->setRoom('a room');
+        $this->assertEquals('a room', $this->subject->getRoom());
     }
 
     /**
@@ -1116,8 +1131,11 @@ class EventTest extends UnitTestCase
     public function setPriceOptionSetsPriceOptionForPriceOption()
     {
         $priceOption = new PriceOption();
-        $this->subject->setPriceOptions($priceOption);
-        self::assertEquals($priceOption, $this->subject->getPriceOptions());
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($priceOption);
+
+        $this->subject->setPriceOptions($objectStorage);
+        self::assertEquals($objectStorage, $this->subject->getPriceOptions());
     }
 
     /**
@@ -1229,9 +1247,12 @@ class EventTest extends UnitTestCase
      */
     public function setRelatedSetsRelatedForRelated()
     {
-        $event = new Event();
-        $this->subject->setRelated($event);
-        self::assertEquals($event, $this->subject->getRelated());
+        $object = new Event();
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($object);
+
+        $this->subject->setRelated($objectStorage);
+        self::assertEquals($objectStorage, $this->subject->getRelated());
     }
 
     /**
