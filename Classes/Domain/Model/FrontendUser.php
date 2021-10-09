@@ -37,16 +37,16 @@ class FrontendUser extends AbstractEntity
     protected string $company = '';
 
     /**
-     * @var null|ObjectStorage<FileReference>
+     * @var ObjectStorage<FileReference>
      */
-    protected ?ObjectStorage $image;
+    protected ObjectStorage $image;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->image = new ObjectStorage();
+        $this->initializeObject();
     }
 
     /**
@@ -210,7 +210,7 @@ class FrontendUser extends AbstractEntity
     /**
      * @param ObjectStorage<FileReference> $image
      */
-    public function setImage(?ObjectStorage $image)
+    public function setImage(ObjectStorage $image)
     {
         $this->image = $image;
     }
@@ -218,7 +218,7 @@ class FrontendUser extends AbstractEntity
     /**
      * @return ObjectStorage<FileReference>
      */
-    public function getImage(): ?ObjectStorage
+    public function getImage(): ObjectStorage
     {
         return $this->image;
     }

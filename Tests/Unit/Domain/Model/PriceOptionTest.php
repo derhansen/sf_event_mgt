@@ -88,16 +88,6 @@ class PriceOptionTest extends UnitTestCase
     }
 
     /**
-     * Test if event returns intitial value
-     *
-     * @test
-     */
-    public function getEventReturnsInitialValue()
-    {
-        self::assertNull($this->subject->getEvent());
-    }
-
-    /**
      * @test
      */
     public function setEventForEventSetsEvent()

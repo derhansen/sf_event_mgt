@@ -44,16 +44,6 @@ class RegistrationFieldValidatorTest extends UnitTestCase
     /**
      * @test
      */
-    public function validatorHasNoErrorsWhenRegistrationHasNoEvent()
-    {
-        $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
-        $mockRegistration->expects(self::once())->method('getEvent')->willReturn(null);
-        self::assertFalse($this->validator->validate($mockRegistration)->hasErrors());
-    }
-
-    /**
-     * @test
-     */
     public function validatorHasNoErrorsWhenRegistrationHasNoFieldValues()
     {
         $mockEvent = $this->getMockBuilder(Event::class)

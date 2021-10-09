@@ -39,7 +39,7 @@ class Registration extends AbstractEntity
     protected bool $confirmed = false;
     protected bool $paid = false;
     protected string $notes = '';
-    protected ?Event $event = null;
+    protected Event $event;
     protected ?Registration $mainRegistration = null;
     protected ?DateTime $confirmationUntil = null;
     protected ?DateTime $registrationDate = null;
@@ -53,18 +53,26 @@ class Registration extends AbstractEntity
     protected bool $waitlist = false;
 
     /**
-     * @var null|ObjectStorage<FieldValue>
+     * @var ObjectStorage<FieldValue>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $fieldValues = null;
+    protected ObjectStorage $fieldValues;
 
     /**
      * Registration constructor.
      */
     public function __construct()
     {
-        $this->fieldValues = new ObjectStorage();
+        $this->initializeObject();
+    }
+
+    /**
+     * Initialize all ObjectStorages as fetching an entity from the DB does not use the constructor
+     */
+    public function initializeObject()
+    {
+        $this->fieldValues = $this->fieldValues ?? new ObjectStorage();
     }
 
     public function getFirstname(): string
@@ -242,12 +250,12 @@ class Registration extends AbstractEntity
         return $this->paid;
     }
 
-    public function setEvent(?Event $event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
     }
 
-    public function getEvent(): ?Event
+    public function getEvent(): Event
     {
         return $this->event;
     }

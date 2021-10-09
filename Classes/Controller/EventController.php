@@ -405,7 +405,7 @@ class EventController extends AbstractController
 
         /** @var Event $event */
         $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
-        if (!is_a($event, Event::class) || $event->getRegistrationFields()->count() === 0) {
+        if (!is_a($event, Event::class)) {
             return;
         }
 
@@ -415,6 +415,18 @@ class EventController extends AbstractController
         $propertyMapping->allowCreationForSubProperty('fieldValues');
         $propertyMapping->allowModificationForSubProperty('fieldValues');
 
+        // Set event to registration (required for validation)
+        $propertyMapping->allowProperties('event');
+        $propertyMapping->allowCreationForSubProperty('event');
+        $propertyMapping->allowModificationForSubProperty('event');
+        $arguments['registration']['event'] = (int)$this->request->getArgument('event');
+
+        if ($event->getRegistrationFields()->count() === 0) {
+            // Set arguments to request, so event is set for event
+            $this->request->setArguments($arguments);
+            return;
+        }
+
         // allow creation of new objects (for validation)
         $propertyMapping->setTypeConverterOptions(
             PersistentObjectConverter::class,
@@ -423,12 +435,6 @@ class EventController extends AbstractController
                 PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED => true,
             ]
         );
-
-        // Set event to registration (required for validation)
-        $propertyMapping->allowProperties('event');
-        $propertyMapping->allowCreationForSubProperty('event');
-        $propertyMapping->allowModificationForSubProperty('event');
-        $arguments['registration']['event'] = (int)$this->request->getArgument('event');
 
         $index = 0;
         foreach ((array)$arguments['registration']['fields'] as $fieldUid => $value) {

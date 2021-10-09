@@ -63,68 +63,76 @@ class Event extends AbstractEntity
     protected bool $uniqueEmailCheck = false;
 
     /**
-     * @var null|ObjectStorage<Category>
+     * @var ObjectStorage<Category>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $category = null;
+    protected ObjectStorage $category;
 
     /**
-     * @var null|ObjectStorage<Event>
+     * @var ObjectStorage<Event>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $related = null;
+    protected ObjectStorage $related;
 
     /**
-     * @var null|ObjectStorage<Registration>
+     * @var ObjectStorage<Registration>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $registration = null;
+    protected ObjectStorage $registration;
 
     /**
-     * @var null|ObjectStorage<Registration>
+     * @var ObjectStorage<Registration>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $registrationWaitlist = null;
+    protected ObjectStorage $registrationWaitlist;
 
     /**
-     * @var null|ObjectStorage<Field>
+     * @var ObjectStorage<Field>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $registrationFields = null;
+    protected ObjectStorage $registrationFields;
 
     /**
-     * @var null|ObjectStorage<FileReference>
+     * @var ObjectStorage<FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $image = null;
+    protected ObjectStorage $image;
 
     /**
-     * @var null|ObjectStorage<FileReference>
+     * @var ObjectStorage<FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $files = null;
+    protected ObjectStorage $files;
 
     /**
-     * @var null|ObjectStorage<FileReference>
+     * @var ObjectStorage<FileReference>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $additionalImage = null;
+    protected ObjectStorage $additionalImage;
 
     /**
-     * @var null|ObjectStorage<PriceOption>
+     * @var ObjectStorage<PriceOption>
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $priceOptions = null;
+    protected ObjectStorage $priceOptions;
 
     /**
-     * @var null|ObjectStorage<Speaker>
+     * @var ObjectStorage<Speaker>
      * @Extbase\ORM\Lazy
      */
-    protected ?ObjectStorage $speaker = null;
+    protected ObjectStorage $speaker;
 
     public function __construct()
+    {
+        $this->initializeObject();
+    }
+
+    /**
+     * Initialize all ObjectStorages as fetching an entity from the DB does not use the constructor
+     */
+    public function initializeObject()
     {
         $this->category = new ObjectStorage();
         $this->related = new ObjectStorage();

@@ -60,7 +60,9 @@ class RegistrationServiceTest extends UnitTestCase
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
     {
         GeneralUtility::setSingletonInstance(ReflectionService::class, new ReflectionService(new NullFrontend('extbase'), 'ClassSchemata'));
+        $event = new Event();
         $registration = new Registration();
+        $registration->setEvent($event);
         $registration->setAmountOfRegistrations(5);
         $registration->setPid(1);
 

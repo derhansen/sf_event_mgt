@@ -68,10 +68,7 @@ class FieldValue extends AbstractEntity
         return $value;
     }
 
-    /**
-     * @param string|array $value
-     */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = $value;
     }
