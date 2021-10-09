@@ -39,7 +39,7 @@ class Registration extends AbstractEntity
     protected bool $confirmed = false;
     protected bool $paid = false;
     protected string $notes = '';
-    protected Event $event;
+    protected ?Event $event = null;
     protected ?Registration $mainRegistration = null;
     protected ?DateTime $confirmationUntil = null;
     protected ?DateTime $registrationDate = null;
@@ -250,12 +250,12 @@ class Registration extends AbstractEntity
         return $this->paid;
     }
 
-    public function setEvent(Event $event)
+    public function setEvent(?Event $event)
     {
         $this->event = $event;
     }
 
-    public function getEvent(): Event
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
