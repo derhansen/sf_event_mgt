@@ -67,7 +67,11 @@ class DataHandlerHooks
             in_array(
                 $dataHandler->checkValue_currentRecord['list_type'],
                 [
-                    'sfeventmgt_pievent',
+                    'sfeventmgt_pieventlist',
+                    'sfeventmgt_pieventdetail',
+                    'sfeventmgt_pieventregistration',
+                    'sfeventmgt_pieventsearch',
+                    'sfeventmgt_pieventcalendar',
                     'sfeventmgt_piuserreg',
                     'sfeventmgt_pipayment',
                 ]
