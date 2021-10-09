@@ -7,12 +7,12 @@
 </ul>
 <p>Please confirm your registration by opening the following confirmation link:</p>
 <p>
-    <f:uri.action action="confirmRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
+    <f:uri.action action="confirmRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" />
 </p>
 <f:if condition="{event.enableCancel}">
     <p>If you wish to cancel your registration, please open the following link:</p>
     <p>
-        <f:uri.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pievent" />
+        <f:uri.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" />
     </p>
 </f:if>
 <p>Note, that your registration will be cancelled, if you do not open the confirmation link until {f:format.date(date: registration.confirmationUntil, format: '%d.%m.%Y - %H:%M:%S')}</p>
