@@ -387,6 +387,9 @@
 			<trans-unit id="administration.notify.sentBy">
 				<source>Sent by</source>
 			</trans-unit>
+			<trans-unit id="administration.notify.notAvailable">
+				<source>N/A</source>
+			</trans-unit>
 			<trans-unit id="administration.nopageselected">
 				<source>Please click the page title in the page tree to the left to show the records on that page.</source>
 			</trans-unit>

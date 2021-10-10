@@ -92,7 +92,17 @@
                 <td class="logdate"><f:format.date format="%d.%m.%Y - %H:%M:%S">{logEntry.tstamp}</f:format.date></td>
                 <td>{logEntry.details}</td>
                 <td>{logEntry.emailsSent}</td>
-                <td>{logEntry.cruserId.username}</td>
+                <td>
+                    <f:variable name="backendUser" value="{e:be.backendUser(userUid: logEntry.cruserId)}" />
+                    <f:if condition="{backendUser}">
+                        <f:then>
+                            {backendUser.username}
+                        </f:then>
+                        <f:else>
+                            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.notAvailable"/>
+                        </f:else>
+                    </f:if>
+                </td>
             </tr>
         </f:for>
         </tbody>
