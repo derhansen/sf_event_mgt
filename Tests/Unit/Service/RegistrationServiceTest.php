@@ -34,7 +34,7 @@ class RegistrationServiceTest extends UnitTestCase
     use ProphecyTrait;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\RegistrationService
+     * @var RegistrationService
      */
     protected $subject;
 

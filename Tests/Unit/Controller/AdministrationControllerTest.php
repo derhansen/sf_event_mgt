@@ -39,7 +39,7 @@ class AdministrationControllerTest extends UnitTestCase
     use ProphecyTrait;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Controller\AdministrationController
+     * @var AdministrationController
      */
     protected $subject;
 

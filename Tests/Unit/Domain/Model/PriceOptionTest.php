@@ -21,7 +21,7 @@ class PriceOptionTest extends UnitTestCase
     /**
      * Location object
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\PriceOption
+     * @var PriceOption
      */
     protected $subject;
 

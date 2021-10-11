@@ -18,7 +18,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class SettingsServiceTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\SettingsService
+     * @var SettingsService
      */
     protected $subject;
 

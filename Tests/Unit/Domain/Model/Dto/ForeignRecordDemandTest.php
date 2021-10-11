@@ -18,7 +18,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class ForeignRecordDemandTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand
+     * @var ForeignRecordDemand
      */
     protected $subject;
 

@@ -13,13 +13,14 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\ViewHelpers\Uri\OnlineCalendarViewHelper;
 use Prophecy\PhpUnit\ProphecyTrait;
+use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 /**
  * Test case for IsRequiredField viewhelper
  */
-class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
+class OnlineCalendarViewHelperTest extends UnitTestCase
 {
     use ProphecyTrait;
 
@@ -35,7 +36,6 @@ class OnlineCalendarViewHelperTest extends ViewHelperBaseTestcase
     {
         parent::setUp();
         $this->viewHelper = new OnlineCalendarViewHelper();
-        $this->injectDependenciesIntoViewHelper($this->viewHelper);
         $this->viewHelper->initializeArguments();
     }
 

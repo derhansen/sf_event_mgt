@@ -23,7 +23,7 @@ class FieldTest extends UnitTestCase
     /**
      * Registrationfield object
      *
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Registration\Field
+     * @var Field
      */
     protected $subject;
 

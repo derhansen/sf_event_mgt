@@ -19,7 +19,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class UserRegistrationDemandTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand
+     * @var UserRegistrationDemand
      */
     protected $subject;
 

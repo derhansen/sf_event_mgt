@@ -31,7 +31,7 @@ class EventTest extends UnitTestCase
     use ProphecyTrait;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Event
+     * @var Event
      */
     protected $subject;
 

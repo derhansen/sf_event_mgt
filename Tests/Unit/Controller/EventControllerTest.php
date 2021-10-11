@@ -60,7 +60,7 @@ class EventControllerTest extends UnitTestCase
     use ProphecyTrait;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Controller\EventController
+     * @var EventController
      */
     protected $subject;
 

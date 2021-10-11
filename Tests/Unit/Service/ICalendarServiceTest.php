@@ -26,7 +26,7 @@ class ICalendarServiceTest extends UnitTestCase
     use ProphecyTrait;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\ICalendarService
+     * @var ICalendarService
      */
     protected $subject;
 

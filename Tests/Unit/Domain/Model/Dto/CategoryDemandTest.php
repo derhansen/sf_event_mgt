@@ -18,7 +18,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class CategoryDemandTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
+     * @var CategoryDemand
      */
     protected $subject;
 

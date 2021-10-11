@@ -49,7 +49,7 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsCurrentFieldValueIfValueInParsedBodyAvailable()
     {
         $submittedData = [
-            'tx_sfeventmgt_pievent' => [
+            'tx_sfeventmgt_pieventregistration' => [
                 'registration' => ['firstname' => 'Torben'],
             ],
         ];
@@ -57,7 +57,7 @@ class PrefillViewHelperTest extends UnitTestCase
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pievent');
+        $request->getPluginName()->willReturn('Pieventregistration');
         $request->getParsedBody()->willReturn($submittedData);
         $renderingContext = $this->prophesize(RenderingContext::class);
         $renderingContext->getVariableProvider()->willReturn(null);
@@ -83,7 +83,7 @@ class PrefillViewHelperTest extends UnitTestCase
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pievent');
+        $request->getPluginName()->willReturn('Pieventregistration');
         $request->getParsedBody()->willReturn($submittedData);
         $renderingContext = $this->prophesize(RenderingContext::class);
         $renderingContext->getVariableProvider()->willReturn(null);
@@ -110,7 +110,7 @@ class PrefillViewHelperTest extends UnitTestCase
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pievent');
+        $request->getPluginName()->willReturn('Pieventregistration');
         $request->getParsedBody()->willReturn($submittedData);
         $renderingContext = $this->prophesize(RenderingContext::class);
         $renderingContext->getVariableProvider()->willReturn(null);
@@ -140,7 +140,7 @@ class PrefillViewHelperTest extends UnitTestCase
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pievent');
+        $request->getPluginName()->willReturn('Pieventregistration');
         $request->getParsedBody()->willReturn([]);
         $renderingContext = $this->prophesize(RenderingContext::class);
         $renderingContext->getVariableProvider()->willReturn(null);
@@ -171,7 +171,7 @@ class PrefillViewHelperTest extends UnitTestCase
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pievent');
+        $request->getPluginName()->willReturn('Pieventregistration');
         $request->getParsedBody()->willReturn([]);
         $renderingContext = $this->prophesize(RenderingContext::class);
         $renderingContext->getVariableProvider()->willReturn(null);
@@ -194,14 +194,14 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewReturnsSubmittedValueIfValidationError()
     {
         $submittedData = [
-            'tx_sfeventmgt_pievent' => [
+            'tx_sfeventmgt_pieventregistration' => [
                 'registration' => ['firstname' => 'Torben'],
             ],
         ];
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pievent');
+        $request->getPluginName()->willReturn('Pieventregistration');
         $request->getParsedBody()->willReturn($submittedData);
         $renderingContext = $this->prophesize(RenderingContext::class);
         $renderingContext->getVariableProvider()->willReturn(null);

@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class CustomNotificationLogTest extends UnitTestCase
 {
     /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog
+     * @var CustomNotificationLog
      */
     protected $subject;
 

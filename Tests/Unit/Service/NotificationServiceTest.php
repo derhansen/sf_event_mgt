@@ -35,7 +35,7 @@ class NotificationServiceTest extends UnitTestCase
     use ProphecyTrait;
 
     /**
-     * @var \DERHANSEN\SfEventMgt\Service\NotificationService
+     * @var NotificationService
      */
     protected $subject;
 
