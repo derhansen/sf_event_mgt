@@ -91,7 +91,7 @@ class FluidStandaloneService
         string $template,
         array $variables,
         string $extensionName = 'SfEventMgt',
-        string $pluginName = 'Pievent'
+        string $pluginName = 'Pieventregistration'
     ): string {
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
         $emailView->getRequest()->setControllerExtensionName($extensionName);

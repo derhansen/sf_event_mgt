@@ -48,7 +48,7 @@ class CaptchaValidator extends AbstractValidator
         $this->settings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
             'SfEventMgt',
-            'Pievent'
+            'Pieventregistration'
         );
     }
 
