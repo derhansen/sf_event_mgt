@@ -40,7 +40,7 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
      */
     public function render(): string
     {
-        $description = $this->arguments['description'];
+        $description = $this->arguments['description'] ?? null;
         if ($description === null) {
             $description = $this->renderChildren();
         }

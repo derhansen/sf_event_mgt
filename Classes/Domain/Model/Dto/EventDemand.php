@@ -352,9 +352,9 @@ class EventDemand
         $demand->setTimeRestrictionLow($settings['timeRestrictionLow'] ?? '');
         $demand->setTimeRestrictionHigh($settings['timeRestrictionHigh'] ?? '');
         $demand->setIncludeCurrent((bool)($settings['includeCurrent'] ?? false));
-        $demand->setLocation($settings['location']);
-        $demand->setOrganisator($settings['organisator']);
-        $demand->setSpeaker($settings['speaker']);
+        $demand->setLocation($settings['location'] ?? null);
+        $demand->setOrganisator($settings['organisator'] ?? null);
+        $demand->setSpeaker($settings['speaker'] ?? null);
 
         return $demand;
     }

@@ -190,7 +190,10 @@ class NotificationService
             $customNotification
         );
 
-        if (!is_array($settings) || (substr($template, -5) != '.html') || (bool)$settings['notification']['disabled']) {
+        if (!is_array($settings) ||
+            (substr($template, -5) != '.html') ||
+            (bool)($settings['notification']['disabled'] ?? false)
+        ) {
             return false;
         }
 

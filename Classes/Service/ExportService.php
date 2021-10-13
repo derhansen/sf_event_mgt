@@ -193,7 +193,7 @@ class ExportService
      */
     protected function replaceLineBreaks($value)
     {
-        return str_replace(["\r\n", "\r", "\n"], ' ', $value);
+        return str_replace(["\r\n", "\r", "\n"], ' ', (string)$value);
     }
 
     protected function getBackendUser(): ?BackendUserAuthentication

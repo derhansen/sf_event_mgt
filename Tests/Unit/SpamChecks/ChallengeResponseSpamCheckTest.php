@@ -46,6 +46,7 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
             'registration' => [
                 'cr-response' => '',
             ],
+            'event' => 123,
         ];
         $configuration = [
             'prefix' => 'test',

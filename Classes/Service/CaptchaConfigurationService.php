@@ -43,11 +43,14 @@ class CaptchaConfigurationService
     {
         $this->enabled = (bool)($captchaSettings['enabled'] ?? false);
         $this->type = $captchaSettings['type'] ?? '';
-        $this->apiScript = $captchaSettings[$this->type]['apiScript'] ?? '';
-        $this->verificationServer = $captchaSettings[$this->type]['verificationServer'] ?? '';
-        $this->publicKey = $captchaSettings[$this->type][self::PUBLIC_KEY_FIELD[$this->type]] ?? '';
-        $this->privateKey = $captchaSettings[$this->type][self::PRIVATE_KEY_FIELD[$this->type]] ?? '';
-        $this->responseField = self::RESPONSE_FIELD[$this->type] ?? '';
+
+        if ($this->isValidCaptchaType($this->type)) {
+            $this->apiScript = $captchaSettings[$this->type]['apiScript'] ?? '';
+            $this->verificationServer = $captchaSettings[$this->type]['verificationServer'] ?? '';
+            $this->publicKey = $captchaSettings[$this->type][self::PUBLIC_KEY_FIELD[$this->type]] ?? '';
+            $this->privateKey = $captchaSettings[$this->type][self::PRIVATE_KEY_FIELD[$this->type]] ?? '';
+            $this->responseField = self::RESPONSE_FIELD[$this->type] ?? '';
+        }
 
         $this->validateSettings();
     }
@@ -87,6 +90,11 @@ class CaptchaConfigurationService
         return $this->responseField;
     }
 
+    private function isValidCaptchaType(string $type): bool
+    {
+        return in_array($type, ['hCaptcha', 'reCaptcha']);
+    }
+
     /**
      * Checks, if all properties contain valid values
      */
@@ -97,7 +105,7 @@ class CaptchaConfigurationService
             return;
         }
 
-        if ($this->type === '' || !in_array($this->type, ['hCaptcha', 'reCaptcha'])) {
+        if ($this->type === '' || !$this->isValidCaptchaType($this->type)) {
             throw new InvalidCaptchaConfigurationException(
                 'Invalid captcha type settings. Valid values are "hCaptcha" and "reCaptcha',
                 1631962901

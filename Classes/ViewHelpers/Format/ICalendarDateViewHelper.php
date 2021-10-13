@@ -35,7 +35,7 @@ class ICalendarDateViewHelper extends AbstractViewHelper
      */
     public function render(): string
     {
-        $date = $this->arguments['date'];
+        $date = $this->arguments['date'] ?? null;
         if ($date === null) {
             $date = $this->renderChildren();
         }

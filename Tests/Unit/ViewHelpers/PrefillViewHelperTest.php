@@ -40,6 +40,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'a field',
+            'prefillSettings' => [],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('', $actual);
@@ -70,6 +71,7 @@ class PrefillViewHelperTest extends UnitTestCase
         $viewHelper->setRenderingContext($renderingContext->reveal());
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
+            'prefillSettings' => [],
         ]);
         $actual = $viewHelper->render();
         self::assertSame('Torben', $actual);
@@ -82,6 +84,10 @@ class PrefillViewHelperTest extends UnitTestCase
     {
         $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
+        $GLOBALS['TSFE']->fe_user->user = [
+            'first_name' => 'John',
+        ];
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');
@@ -109,6 +115,10 @@ class PrefillViewHelperTest extends UnitTestCase
     {
         $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
+        $GLOBALS['TSFE']->fe_user->user = [
+            'first_name' => 'John',
+        ];
 
         $request = $this->prophesize(Request::class);
         $request->getControllerExtensionName()->willReturn('SfEventMgt');

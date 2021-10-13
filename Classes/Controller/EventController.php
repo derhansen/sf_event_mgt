@@ -930,7 +930,7 @@ class EventController extends AbstractController
      */
     protected function isOverwriteDemand(array $overwriteDemand): bool
     {
-        return $this->settings['disableOverrideDemand'] !== 1 && $overwriteDemand !== [];
+        return ($this->settings['disableOverrideDemand'] ?? 0) !== 1 && $overwriteDemand !== [];
     }
 
     /**

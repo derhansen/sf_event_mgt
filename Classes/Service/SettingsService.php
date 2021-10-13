@@ -26,7 +26,9 @@ class SettingsService
      */
     public function getCustomNotifications(array $settings): array
     {
-        if (!is_array($settings['notification']['customNotifications'])) {
+        if (!isset($settings['notification']['customNotifications']) ||
+            !is_array($settings['notification']['customNotifications'])
+        ) {
             return [];
         }
         $notifications = [];
