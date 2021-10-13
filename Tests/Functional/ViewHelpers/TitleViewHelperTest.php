@@ -16,6 +16,7 @@ use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -49,6 +50,9 @@ class TitleViewHelperTest extends FunctionalTestCase
      */
     public function indexedSearchTitleIsSet()
     {
+        $tsfe = $this->prophesize(TypoScriptFrontendController::class);
+        $GLOBALS['TSFE'] = $tsfe->reveal();
+
         self::assertEmpty($this->view->assign('title', 'Test')->render());
         self::assertEquals('Test', $GLOBALS['TSFE']->indexedDocTitle);
     }
