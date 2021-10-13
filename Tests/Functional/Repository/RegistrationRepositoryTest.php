@@ -226,7 +226,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
-        $demand->setStoragePage(7);
+        $demand->setStoragePage('7');
         $demand->setUser($feUser);
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         self::assertEquals(3, $registrations->count());
@@ -245,7 +245,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('future');
-        $demand->setStoragePage(7);
+        $demand->setStoragePage('7');
         $demand->setUser($feUser);
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         self::assertEquals(0, $registrations->count());
@@ -264,7 +264,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
-        $demand->setStoragePage(7);
+        $demand->setStoragePage('7');
         $demand->setUser($feUser);
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         self::assertEquals(1, $registrations->count());
@@ -283,7 +283,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
-        $demand->setStoragePage(7);
+        $demand->setStoragePage('7');
         $demand->setUser($feUser);
         $demand->setOrderField('event.startdate');
         $demand->setOrderDirection('asc');
@@ -304,7 +304,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
-        $demand->setStoragePage(7);
+        $demand->setStoragePage('7');
         $demand->setUser($feUser);
         $demand->setOrderField('event.startdate');
         $demand->setOrderDirection('desc');

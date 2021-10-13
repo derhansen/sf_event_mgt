@@ -25,17 +25,10 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class EventRepositoryTest extends FunctionalTestCase
 {
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository */
-    protected $eventRepository;
-
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
-    protected $locationRepository;
-
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository */
-    protected $speakerRepository;
-
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
-    protected $organisatorRepository;
+    protected EventRepository $eventRepository;
+    protected LocationRepository $locationRepository;
+    protected SpeakerRepository $speakerRepository;
+    protected OrganisatorRepository $organisatorRepository;
 
     /** @var array */
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
@@ -72,16 +65,12 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByStoragePageDataProvider(): array
     {
         return [
-            'pid is numeric and valid' => [
-                3,
-                3,
-            ],
             'pid is string and valid' => [
                 '3',
                 3,
             ],
             'pid is zero' => [
-                0,
+                '0',
                 0,
             ],
             'pid not set' => [
@@ -116,7 +105,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDisplayModeAll()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('all');
         $events = $this->eventRepository->findDemanded($demand);
 
@@ -131,7 +120,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDisplayModePast()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('past');
         $demand->setCurrentDateTime(new \DateTime('30.05.2014'));
         $events = $this->eventRepository->findDemanded($demand);
@@ -147,7 +136,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDisplayModeFuture()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('future');
         $demand->setCurrentDateTime(new \DateTime('30.05.2014 14:00:00'));
         $events = $this->eventRepository->findDemanded($demand);
@@ -163,7 +152,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDisplayModeCurrentFuture()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('current_future');
         $demand->setCurrentDateTime(new \DateTime('02.06.2014 08:00:00'));
         $events = $this->eventRepository->findDemanded($demand);
@@ -179,7 +168,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDisplayModeTimeRestriction()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(130);
+        $demand->setStoragePage('130');
         $demand->setDisplayMode('time_restriction');
         $demand->setTimeRestrictionLow('2021-02-01');
         $events = $this->eventRepository->findDemanded($demand);
@@ -291,7 +280,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $includeSub, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(90);
+        $demand->setStoragePage('90');
         $demand->setCategoryConjunction($conjunction);
         $demand->setCategory($category);
         $demand->setIncludeSubcategories($includeSub);
@@ -332,7 +321,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByLocation($locationUid, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(40);
+        $demand->setStoragePage('40');
 
         $location = $this->locationRepository->findByUid($locationUid);
         $demand->setLocation($location);
@@ -369,7 +358,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByLocationCity($locationCity, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(50);
+        $demand->setStoragePage('50');
 
         $demand->setLocationCity($locationCity);
         self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
@@ -405,7 +394,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByLocationCountry($locationCountry, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(60);
+        $demand->setStoragePage('60');
 
         $demand->setLocationCountry($locationCountry);
         self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
@@ -419,7 +408,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findSearchDemandedRecordsByStartDate()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(6);
+        $demand->setStoragePage('6');
 
         $searchDemand = new SearchDemand();
         $searchDemand->setStartDate(new \DateTime('30.05.2014 14:00:00'));
@@ -438,7 +427,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findSearchDemandedRecordsByEndDate()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(7);
+        $demand->setStoragePage('7');
 
         $searchDemand = new SearchDemand();
         $searchDemand->setEndDate(new \DateTime('02.06.2014 08:00'));
@@ -457,7 +446,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findSearchDemandedRecordsByFieldTitle()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(8);
+        $demand->setStoragePage('8');
 
         $searchDemand = new SearchDemand();
         $searchDemand->setSearch('TYPO3 CMS course');
@@ -503,7 +492,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByTopEvent($topEventRestriction, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(30);
+        $demand->setStoragePage('30');
 
         $demand->setTopEventRestriction($topEventRestriction);
         $events = $this->eventRepository->findDemanded($demand);
@@ -569,7 +558,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByOrdering($orderField, $orderDirection, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('all');
         $demand->setOrderField($orderField);
         $demand->setOrderFieldAllowed($orderField);
@@ -587,7 +576,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByOrderingIgnoresUnknownOrderField()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('all');
         $demand->setOrderField('unknown_field');
         $demand->setOrderFieldAllowed('title');
@@ -605,7 +594,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsSetsLimit()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(4);
+        $demand->setStoragePage('4');
         $demand->setDisplayMode('all');
         $demand->setQueryLimit(2);
 
@@ -622,7 +611,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByYear()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(70);
+        $demand->setStoragePage('70');
         $demand->setDisplayMode('all');
         $demand->setYear(2018);
 
@@ -639,7 +628,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByMonth()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(70);
+        $demand->setStoragePage('70');
         $demand->setDisplayMode('all');
         $demand->setYear(2017);
         $demand->setMonth(10);
@@ -657,7 +646,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByMonthWithStartdateInGivenMonth()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(70);
+        $demand->setStoragePage('70');
         $demand->setDisplayMode('all');
         $demand->setYear(2018);
         $demand->setMonth(2);
@@ -675,7 +664,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByMonthWithEnddateInGivenMonth()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(70);
+        $demand->setStoragePage('70');
         $demand->setDisplayMode('all');
         $demand->setYear(2018);
         $demand->setMonth(3);
@@ -693,7 +682,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDay()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(70);
+        $demand->setStoragePage('70');
         $demand->setDisplayMode('all');
         $demand->setYear(2017);
         $demand->setMonth(10);
@@ -713,7 +702,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsByDayForEventSpanningDateRange()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(70);
+        $demand->setStoragePage('70');
         $demand->setDisplayMode('all');
         $demand->setYear(2017);
         $demand->setMonth(10);
@@ -724,12 +713,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(1, $events->count());
     }
 
-    /**
-     * DataProvider for findDemandedRecordsBySpeaker
-     *
-     * @return array
-     */
-    public function findDemandedRecordsBySpeakerDataProvider()
+    public function findDemandedRecordsBySpeakerDataProvider(): array
     {
         return [
             'events with speaker 1' => [
@@ -758,7 +742,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRecordsBySpeaker($speakerUid, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(100);
+        $demand->setStoragePage('100');
 
         $speaker = $this->speakerRepository->findByUid($speakerUid);
         $demand->setSpeaker($speaker);
@@ -773,7 +757,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findSearchDemandedRecordsByStartAndEndDate()
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(110);
+        $demand->setStoragePage('110');
 
         $searchDemand = new SearchDemand();
         $searchDemand->setStartDate(new \DateTime('01.07.2019 00:00:00'));
@@ -815,7 +799,7 @@ class EventRepositoryTest extends FunctionalTestCase
     public function findDemandedRespectsIgnoreEnableFields($ignoreEnableFields, $expected)
     {
         $demand = new EventDemand();
-        $demand->setStoragePage(120);
+        $demand->setStoragePage('120');
         $demand->setIgnoreEnableFields($ignoreEnableFields);
         self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
