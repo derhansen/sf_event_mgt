@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * UserRegistrationDemand
@@ -100,7 +101,7 @@ class UserRegistrationDemand
      */
     public static function createFromSettings(array $settings = []): self
     {
-        $demand = new UserRegistrationDemand();
+        $demand = GeneralUtility::makeInstance(UserRegistrationDemand::class);
         $demand->setDisplayMode($settings['userRegistration']['displayMode'] ?? 'all');
         $demand->setStoragePage(
             PageUtility::extendPidListByChildren(

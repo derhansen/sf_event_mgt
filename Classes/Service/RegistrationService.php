@@ -80,7 +80,7 @@ class RegistrationService
     {
         $registrations = $registration->getAmountOfRegistrations();
         for ($i = 1; $i <= $registrations - 1; $i++) {
-            $newReg = new Registration();
+            $newReg = GeneralUtility::makeInstance(Registration::class);
             $properties = ObjectAccess::getGettableProperties($registration);
             foreach ($properties as $propertyName => $propertyValue) {
                 ObjectAccess::setProperty($newReg, $propertyName, $propertyValue);

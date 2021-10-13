@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Category demand
@@ -96,7 +97,7 @@ class CategoryDemand
      */
     public static function createFromSettings(array $settings = []): self
     {
-        $demand = new CategoryDemand();
+        $demand = GeneralUtility::makeInstance(CategoryDemand::class);
         $demand->setStoragePage(
             PageUtility::extendPidListByChildren(
                 (string)($settings['storagePage'] ?? ''),

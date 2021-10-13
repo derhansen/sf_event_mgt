@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * ForeignRecord demand
  */
@@ -47,7 +49,7 @@ class ForeignRecordDemand
      */
     public static function createFromSettings(array $settings = []): self
     {
-        $demand = new ForeignRecordDemand();
+        $demand = GeneralUtility::makeInstance(ForeignRecordDemand::class);
         $demand->setStoragePage((string)($settings['storagePage'] ?? ''));
         $demand->setRestrictForeignRecordsToStoragePage(
             (bool)($settings['restrictForeignRecordsToStoragePage'] ?? false)

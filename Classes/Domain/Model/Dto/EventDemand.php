@@ -16,6 +16,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Event demand
@@ -332,7 +333,7 @@ class EventDemand
      */
     public static function createFromSettings(array $settings = []): self
     {
-        $demand = new EventDemand();
+        $demand = GeneralUtility::makeInstance(EventDemand::class);
 
         $demand->setDisplayMode($settings['displayMode'] ?? 'all');
         $demand->setStoragePage(

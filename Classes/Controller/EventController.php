@@ -234,7 +234,7 @@ class EventController extends AbstractController
         $endDate->setTimestamp($calendarDateRange['lastDayOfCalendar']);
         $endDate->setTime(23, 59, 59);
 
-        $searchDemand = new SearchDemand();
+        $searchDemand = GeneralUtility::makeInstance(SearchDemand::class);
         $searchDemand->setStartDate($startDate);
         $searchDemand->setEndDate($endDate);
         $eventDemand->setSearchDemand($searchDemand);

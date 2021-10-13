@@ -260,7 +260,7 @@ class AdministrationController extends AbstractController
         }
 
         if ($this->isResetFilter()) {
-            $searchDemand = new SearchDemand();
+            $searchDemand = GeneralUtility::makeInstance(SearchDemand::class);
             $overwriteDemand = [];
 
             $sessionData = [];
@@ -269,7 +269,7 @@ class AdministrationController extends AbstractController
             $this->beUserSessionService->saveSessionData($sessionData);
         }
 
-        $eventDemand = new EventDemand();
+        $eventDemand = GeneralUtility::makeInstance(EventDemand::class);
         $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand ?? []);
         $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
         $eventDemand->setSearchDemand($searchDemand);

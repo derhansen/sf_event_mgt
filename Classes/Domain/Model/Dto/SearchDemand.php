@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 use DateTime;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Search demand
@@ -109,7 +110,7 @@ class SearchDemand
 
     public static function fromArray(array $data): self
     {
-        $demand = new SearchDemand();
+        $demand = GeneralUtility::makeInstance(SearchDemand::class);
         $demand->setSearch($data['search'] ?? '');
         $demand->setFields($data['fields'] ?? '');
         if (isset($data['startDate'])) {
