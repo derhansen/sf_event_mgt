@@ -1,8 +1,14 @@
 parameters:
   ignoreErrors:
     -
-      message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getControllerContext\\(\\)\\.#"
-      path: Classes/ViewHelpers/*
+      message: "#Parameter \\#1 ...\\$expressions of method TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\ExpressionBuilder\\:\\:orX\\(\\) expects string, TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\CompositeExpression given\\.#"
+      path: Classes/Utility/EventAvailability.php
+    -
+      message: "#Parameter \\#2 ...\\$expressions of method TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\ExpressionBuilder\\:\\:orX\\(\\) expects string, TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\CompositeExpression given\\.#"
+      path: Classes/Utility/EventAvailability.php
+    -
+      message: "#Parameter \\#3 ...\\$expressions of method TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\ExpressionBuilder\\:\\:orX\\(\\) expects string, TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\CompositeExpression given\\.#"
+      path: Classes/Utility/EventAvailability.php
     -
       message: "#Call to an undefined method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\:\\:between\\(\\)\\.#"
       count: 4
@@ -19,3 +25,21 @@ parameters:
       message: "#^Return type \\(bool\\) of method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\AdministrationController\\:\\:getErrorFlashMessage\\(\\) should be compatible with return type \\(string\\) of method TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:getErrorFlashMessage\\(\\)$#"
       count: 1
       path: Classes/Controller/AdministrationController.php
+    -
+      message: "#Cannot call method fetchAssociative\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.#"
+      path: Classes/ViewHelpers/Be/BackendUserViewHelper.php
+    -
+      message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.#"
+      path: Classes/ViewHelpers/PrefillViewHelper.php
+    -
+      message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.#"
+      path: Classes/ViewHelpers/Registration/Field/PrefillFieldViewHelper.php
+    -
+      message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.#"
+      path: Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
+    -
+      message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.#"
+      path: Classes/ViewHelpers/Validation/ErrorClassViewHelper.php
+    -
+      message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getUriBuilder\\(\\)\\.#"
+      path: Classes/ViewHelpers/Uri/PageViewHelper.php
