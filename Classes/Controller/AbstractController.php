@@ -164,6 +164,6 @@ abstract class AbstractController extends ActionController
 
     protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
     {
-        return $GLOBALS['TSFE'] ?: null;
+        return $GLOBALS['TSFE'] ?? null;
     }
 }

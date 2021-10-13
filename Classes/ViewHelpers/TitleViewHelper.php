@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -54,9 +55,13 @@ class TitleViewHelper extends AbstractViewHelper
         if ($pageTitle !== '') {
             GeneralUtility::makeInstance(EventPageTitleProvider::class)->setTitle($pageTitle);
         }
-        if ($indexedDocTitle !== '') {
-            // Unsure if this is still required in TYPO3 10
-            $GLOBALS['TSFE']->indexedDocTitle = $indexedDocTitle;
+        if (self::getTypoScriptFrontendController() && $indexedDocTitle !== '') {
+            self::getTypoScriptFrontendController()->indexedDocTitle = $indexedDocTitle;
         }
+    }
+
+    protected static function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'] ?? null;
     }
 }
