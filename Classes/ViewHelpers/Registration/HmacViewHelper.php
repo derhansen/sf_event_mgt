@@ -46,7 +46,7 @@ class HmacViewHelper extends AbstractViewHelper
         /** @var Registration $registration */
         $registration = $this->arguments['registration'];
         $result = '';
-        if ($registration && is_a($registration, Registration::class)) {
+        if (is_a($registration, Registration::class)) {
             $result = $this->hashService->generateHmac('reg-' . $registration->getUid());
         }
 
