@@ -128,7 +128,7 @@ class NotificationService
      * Returns true if conditions are not met to send a custom notification
      *
      * @param array $settings
-     * @param CustomNotification|null $customNotification
+     * @param CustomNotification $customNotification
      *
      * @return bool
      */
@@ -297,6 +297,10 @@ class NotificationService
         int $type,
         CustomNotification $customNotification = null
     ): array {
+        if ($type === MessageType::CUSTOM_NOTIFICATION && $customNotification === null) {
+            return ['', '',];
+        }
+
         switch ($type) {
             case MessageType::REGISTRATION_NEW:
                 $template = 'Notification/User/RegistrationNew.html';
@@ -322,7 +326,7 @@ class NotificationService
                 $template = 'Notification/User/RegistrationWaitlistMoveUp.html';
                 $subject = $settings['notification']['registrationWaitlistMoveUp']['userSubject'] ?? '';
                 break;
-            case MessageType::CUSTOM_NOTIFICATION && $customNotification:
+            case MessageType::CUSTOM_NOTIFICATION:
                 $customNotificationSettings = $settings['notification']['customNotifications'] ?? '';
                 $templateKey = $customNotification->getTemplate();
                 $template = 'Notification/User/Custom/' . $customNotificationSettings[$templateKey]['template'] ?? '';
