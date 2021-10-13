@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -17,12 +19,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ICalendarDescriptionViewHelperTest extends UnitTestCase
 {
-    /**
-     * Data Provider for unit tests
-     *
-     * @return array
-     */
-    public function iCalendarDescriptionDataProvider()
+    public function iCalendarDescriptionDataProvider(): array
     {
         return [
             'emptyValue' => [

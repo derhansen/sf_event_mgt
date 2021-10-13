@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -25,10 +27,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var FluidStandaloneService
-     */
-    protected $subject;
+    protected FluidStandaloneService $subject;
 
     /**
      * Setup
@@ -90,10 +89,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->renderTemplate('test.html', ['key' => 'value']));
     }
 
-    /**
-     * @return array
-     */
-    public function templateFoldersDataProvider()
+    public function templateFoldersDataProvider(): array
     {
         return [
             'returnsConfiguredTemplatePaths' => [

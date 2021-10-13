@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -18,10 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class EmailServiceTest extends UnitTestCase
 {
-    /**
-     * @var EmailService
-     */
-    protected $subject;
+    protected EmailService $subject;
 
     /**
      * Setup
@@ -39,12 +38,7 @@ class EmailServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * Data provider for invalid emails
-     *
-     * @return array
-     */
-    public function invalidEmailsDataProvider()
+    public function invalidEmailsDataProvider(): array
     {
         return [
             'invalidSender' => [

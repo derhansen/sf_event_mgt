@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -18,12 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
 {
-    /**
-     * Viewhelper
-     *
-     * @var \DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper
-     */
-    protected $viewhelper;
+    protected SimultaneousRegistrationsViewHelper $viewhelper;
 
     /**
      * Setup
@@ -41,12 +38,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         unset($this->viewhelper);
     }
 
-    /**
-     * Data provider for simultaneousRegistrations
-     *
-     * @return array
-     */
-    public function simultaneousRegistrationsDataProvider()
+    public function simultaneousRegistrationsDataProvider(): array
     {
         return [
             'maxRegistrationsAndFreePlacesEqual' => [

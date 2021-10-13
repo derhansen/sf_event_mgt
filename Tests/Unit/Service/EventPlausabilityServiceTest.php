@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -22,16 +24,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
 {
     use ProphecyTrait;
 
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->resetSingletonInstances = true;
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
+    protected $resetSingletonInstances = true;
 
     public function isStartDateBeforeEndDateDataProvider(): array
     {

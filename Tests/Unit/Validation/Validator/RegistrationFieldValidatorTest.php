@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -22,10 +24,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class RegistrationFieldValidatorTest extends UnitTestCase
 {
-    /**
-     * @var \DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator
-     */
-    protected $validator;
+    protected RegistrationFieldValidator $validator;
 
     /**
      * Setup

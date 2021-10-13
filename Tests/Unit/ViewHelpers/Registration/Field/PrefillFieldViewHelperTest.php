@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -44,10 +46,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         self::assertSame('Default', $viewHelper->render());
     }
 
-    /**
-     * @return array
-     */
-    public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider()
+    public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
     {
         return [
             'submitted value returned' => [

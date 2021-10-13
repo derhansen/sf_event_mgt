@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -18,10 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class BeUserSessionServiceTest extends UnitTestCase
 {
-    /**
-     * @var BeUserSessionService
-     */
-    protected $subject;
+    protected BeUserSessionService $subject;
 
     /**
      * Setup
@@ -70,10 +69,7 @@ class BeUserSessionServiceTest extends UnitTestCase
         $this->subject->getSessionData();
     }
 
-    /**
-     * @return array
-     */
-    public function getSessionDataByKeyDataProvider()
+    public function getSessionDataByKeyDataProvider(): array
     {
         return [
             'key_found' => [

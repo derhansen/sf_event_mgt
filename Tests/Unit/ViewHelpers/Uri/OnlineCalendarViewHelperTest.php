@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -24,10 +26,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var OnlineCalendarViewHelper
-     */
-    protected $viewHelper;
+    protected OnlineCalendarViewHelper $viewHelper;
 
     /**
      * Set up

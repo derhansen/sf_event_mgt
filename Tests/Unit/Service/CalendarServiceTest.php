@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -19,10 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class CalendarServiceTest extends UnitTestCase
 {
-    /**
-     * @var CalendarService
-     */
-    protected $subject;
+    protected CalendarService $subject;
 
     /**
      * Setup
@@ -119,12 +118,7 @@ class CalendarServiceTest extends UnitTestCase
         self::assertEquals(1, count($calendarArray[1][2]['events']));
     }
 
-    /**
-     * Data provider for getCalendarDateRangeReturnsExpectedValues
-     *
-     * @return array
-     */
-    public function calendarDateRangeDataProvider()
+    public function calendarDateRangeDataProvider(): array
     {
         return [
             'january-2017-first-day-of-week-monday' => [
@@ -210,12 +204,7 @@ class CalendarServiceTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
-    /**
-     * Data Provider for getDateConfigReturnsExpectedValues
-     *
-     * @return array
-     */
-    public function dateConfigDataProvider()
+    public function dateConfigDataProvider(): array
     {
         return [
             'january-2017-no-modifier' => [

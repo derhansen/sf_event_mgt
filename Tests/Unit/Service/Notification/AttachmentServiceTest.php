@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -25,10 +27,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class AttachmentServiceTest extends UnitTestCase
 {
-    /**
-     * @var AttachmentService
-     */
-    protected $subject;
+    protected AttachmentService $subject;
 
     /**
      * Setup
@@ -46,12 +45,7 @@ class AttachmentServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * Data provider for getAttachmentsRespectsTypoScriptSettingsForGivenMessageType
-     *
-     * @return array
-     */
-    public function typoScriptConfigTestDataProvider()
+    public function typoScriptConfigTestDataProvider(): array
     {
         return [
             'noTyposcriptSettingsForMessageType' => [

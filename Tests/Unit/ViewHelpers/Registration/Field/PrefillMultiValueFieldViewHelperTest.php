@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the Extension "sf_event_mgt" for TYPO3 CMS.
  *
@@ -23,7 +25,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {
     use ProphecyTrait;
 
-    public function viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider()
+    public function viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider(): array
     {
         return [
             'Default value selected' => [
@@ -61,10 +63,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         self::assertEquals($expected, $viewHelper->render());
     }
 
-    /**
-     * @return array
-     */
-    public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider()
+    public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
     {
         return [
             'submitted value is field value for string' => [
