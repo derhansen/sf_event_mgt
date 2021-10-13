@@ -48,10 +48,10 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
                     enable_registration,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.registrationPeriod;paletteRegistrationPeriod,
+                    --palette--;;participantOptions,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
-                    max_participants, max_registrations_per_user,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.waitlist;paletteWaitlist,
-                    enable_autoconfirm, unique_email_check,
+                    --palette--;;miscOptions,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
@@ -80,26 +80,32 @@ return [
         'timeRestriction' => ['showitem' => 'starttime, endtime'],
         'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
         'location' => [
-            'showitem' => 'location, --linebreak--,room,',
+            'showitem' => 'location, --linebreak--,room',
         ],
         'titleTopEvent' => ['showitem' => 'title, top_event'],
         'paletteDates' => [
-            'showitem' => 'startdate, enddate,',
+            'showitem' => 'startdate, enddate',
         ],
         'palettePrice' => [
-            'showitem' => 'price, currency,',
+            'showitem' => 'price, currency',
         ],
         'paletteNotification' => [
-            'showitem' => 'notify_admin, notify_organisator,',
+            'showitem' => 'notify_admin, notify_organisator',
         ],
         'paletteRegistrationPeriod' => [
-            'showitem' => 'registration_startdate, registration_deadline,',
+            'showitem' => 'registration_startdate, registration_deadline',
         ],
         'paletteCancellation' => [
-            'showitem' => 'enable_cancel, cancel_deadline,',
+            'showitem' => 'enable_cancel, cancel_deadline',
         ],
         'paletteWaitlist' => [
-            'showitem' => 'enable_waitlist, enable_waitlist_moveup,',
+            'showitem' => 'enable_waitlist, enable_waitlist_moveup',
+        ],
+        'participantOptions' => [
+            'showitem' => 'max_participants, max_registrations_per_user',
+        ],
+        'miscOptions' => [
+            'showitem' => 'enable_autoconfirm, unique_email_check',
         ],
     ],
     'columns' => [
