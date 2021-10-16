@@ -47,6 +47,7 @@ class EventAvailability
      */
     protected function mustBeIncluded(int $eventId, SiteLanguage $language): bool
     {
+        // @extensionScannerIgnoreLine
         if ($language->getFallbackType() === 'strict' &&
             !$this->isEventAvailableInLanguage($eventId, $language->getLanguageId())
         ) {
