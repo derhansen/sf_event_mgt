@@ -43,22 +43,6 @@ Tab settings
          Key:
 
 
- - :Property:
-         What to display
-
-   :View:
-         All
-
-   :Description:
-         Which view should be shown on the given page.
-
-         Available options:
-
-         * List
-         * Details
-         * Registration
-         * Calendar
-
    :Key:
 
  - :Property:

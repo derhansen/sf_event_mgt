@@ -49,7 +49,7 @@ Things to keep in mind when using the default move up process
   This can result in, that the main registration will be moved up, but additonal may not.
 * When the simultaneous registration process is used, the dependency to the main registration will automatically be
   removed. This is recommended, since the cancellation of the main registration will result in the cancellation
-  of all "connected" registrations. The TypoScript setting `settings.waitlist.moveUp.keepMainRegistrationDependency`
+  of all "connected" registrations. The TypoScript setting :typoscript:`settings.waitlist.moveUp.keepMainRegistrationDependency`
   can be used to keep the dependency to the main registration.
 * When the simultaneous registration process is used, moved up registrations will automatically be enabled for
   notification.

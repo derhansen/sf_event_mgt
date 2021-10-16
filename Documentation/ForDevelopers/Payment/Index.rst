@@ -19,8 +19,9 @@ Please refer to the General workflow image shown below.
 It is also required, that each Event Listener uses a Fluid standalone view to render the output that will be
 shown in the desired payment action in sf_event_mgt
 
-Please note, that it is only possible to start the payment process **after** the registration has been
-confirmed by the user.
+.. note::
+   Please note, that it is only possible to start the payment process **after** the registration has been
+   confirmed by the user.
 
 This section describes how to create your own payment solution for sf_event_mgt which makes use of the provided
 payment actions.
@@ -33,7 +34,6 @@ General workflow
 
 .. figure:: ../../Images/payment-workflow.png
    :alt: Payment workflow
-   :width: 650px
 
 Depending on the selected payment method, the user is redirected to the payment providers payment page.
 

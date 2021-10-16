@@ -16,9 +16,9 @@ since your changes will get overwritten by extension updates.
 
 The easiest way to override templates is to set the following constants:
 
-* plugin.tx_sfeventmgt.view.templateRootPath
-* plugin.tx_sfeventmgt.view.partialRootPath
-* plugin.tx_sfeventmgt.view.layoutRootPath
+* :typoscript:`plugin.tx_sfeventmgt.view.templateRootPath`
+* :typoscript:`plugin.tx_sfeventmgt.view.partialRootPath`
+* :typoscript:`plugin.tx_sfeventmgt.view.layoutRootPath`
 
 Those values will automatically be added after the default paths configuration of the extension. If you prefer
 to configure the path-values using TypoScript setup, please refer to the example below
@@ -27,13 +27,13 @@ to configure the path-values using TypoScript setup, please refer to the example
   plugin.tx_sfeventmgt {
     view {
       templateRootPaths {
-        2 = fileadmin/templates/events/Templates/
+        2 = EXT:sitepackage/Resources/Private/Extensions/SfEventMgt/Templates/
       }
       partialRootPaths {
-        2 = fileadmin/templates/events/Partials/
+        2 = EXT:sitepackage/Resources/Private/Extensions/SfEventMgt/Partials/
       }
       layoutRootPaths {
-        2 = fileadmin/templates/events/Layouts/
+        2 = EXT:sitepackage/Resources/Private/Extensions/SfEventMgt/Layouts/
       }
     }
   }

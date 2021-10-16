@@ -827,7 +827,7 @@ module.tx_sfeventmgt
 
          **Example for default custom notification**
 
-         .. figure:: ../../../Images/event-custom-notification.png
+         .. figure:: ../../../Images/event-notification.png
              :alt: Custom notifications
 
          Each custom notification must include a **title**, a **template** and a **subject**

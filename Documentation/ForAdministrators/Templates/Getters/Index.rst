@@ -29,7 +29,7 @@ The Event-Object has the following special getters
          Description:
 
  - :Object:
-         {event.registrationPossible}
+         :html:`{event.registrationPossible}`
 
    :Description:
          Returns, if registration for the event is possible. This getter respects if registration is enabled,
@@ -37,81 +37,81 @@ The Event-Object has the following special getters
          registration deadline / event startdate is reached.
 
  - :Object:
-         {event.freePlaces}
+         :html:`{event.freePlaces}`
 
    :Description:
          Returns the amount of free places for an event
 
  - :Object:
-         {event.activePriceOptions}
+         :html:`{event.activePriceOptions}`
 
    :Description:
          Returns all active price options sorted by date ASC
 
  - :Object:
-         {event.currentPrice}
+         :html:`{event.currentPrice}`
 
    :Description:
          Returns the current price of the event respecting possible price options
 
  - :Object:
-         {event.cancellationPossible}
+         :html:`{event.cancellationPossible}`
 
    :Description:
          Returns, if cancellation for registrations of the event is possible
 
  - :Object:
-         {event.registrationFieldsUids}
+         :html:`{event.registrationFieldsUids}`
 
    :Description:
          Returns an array with registration field uids
 
  - :Object:
-         {event.registrations}
+         :html:`{event.registrations}`
 
    :Description:
          Special getter to return the amount of registrations that are saved to default language
 
  - :Object:
-         {event.registrationsWaitlist}
+         :html:`{event.registrationsWaitlist}`
 
    :Description:
          Special getter to return the amount of waitlist registrations that are saved to default language
 
  - :Object:
-         {event.endsSameDay}
+         :html:`{event.endsSameDay}`
 
    :Description:
          Returns if the event ends on the same day
 
  - :Object:
-         {event.images}
+         :html:`{event.images}`
 
    :Description:
-         Returns the same ans {event.image}
+         Returns the same ans :html:`{event.image}`
 
  - :Object:
-         {event.listViewImages}
+         :html:`{event.listViewImages}`
 
    :Description:
-         Returns all images from {event.image} that are configured to be shown in list view
+         Returns all images from :html:`{event.image}` that are configured to be shown in list view
 
  - :Object:
-         {event.firstListViewImage}
+         :html:`{event.firstListViewImage}`
 
    :Description:
-         Returns the first image from {event.image} which is configured to be shown in list view
+         Returns the first image from :html:`{event.image}` which is configured to be shown in list view
 
  - :Object:
-         {event.detailViewImages}
+         :html:`{event.detailViewImages}`
 
    :Description:
-         Returns all images from {event.image} that are configured to be shown in detail view
+         Returns all images from :html:`{event.image}` that are configured to be shown in detail view
 
  - :Object:
-         {event.firstDetailViewImage}
+         :html:`{event.firstDetailViewImage}`
 
    :Description:
-         Returns the first image from {event.image} which is configured to be shown in detail view
+         Returns the first image from :html:`{event.image}` which is configured to be shown in detail view
 
 

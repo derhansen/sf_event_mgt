@@ -15,7 +15,7 @@ This section describes how you add a RSS feed for the list of events. The implem
 sf_event_mgt is similar to the RSS feed implementation in the news extension from Georg Ringer. Many parts
 of the RSS feed documentation are taken from his extension with small modifications to fit sf_event_mgt.
 
-The template for the RSS feed can be found in the file Resources/Private/Templates/Event/List.xml
+The template for the RSS feed can be found in the file :html:`Resources/Private/Templates/Event/List.xml`
 To configure sf_event_mgt to use this template, simply set the format of the output als shown below:
 
 .. code-block:: typoscript

@@ -16,7 +16,8 @@ The following objects are available in the different views.
 Please have a look at the templates included with the extension, since they show many of the properties
 of the given objects and how to use them.
 
-Tip: You can use <f:debug>{object}</f:debug> in your template to see available properties of each object.
+.. tip::
+   You can use :html:`<f:debug>{object}</f:debug>` in your template to see available properties of each object.
 
 Plugin: Events and event-registration
 -------------------------------------
@@ -34,55 +35,55 @@ List view
          Description:
 
  - :Object:
-         {events}
+         :html:`{events}`
 
    :Description:
          An object holding all events that matched the configured demand in the plugin settings
 
  - :Object:
-         {categories}
+         :html:`{categories}`
 
    :Description:
          All configured categories for the category menu (see :php:`plugin.tx_sfeventmgt.settings.categoryMenu` in the :ref:`eventplugin-settings`)
 
  - :Object:
-         {locations}
+         :html:`{locations}`
 
    :Description:
          All available locations
 
  - :Object:
-         {organisators}
+         :html:`{organisators}`
 
    :Description:
          All available organisators
 
  - :Object:
-         {speakers}
+         :html:`{speakers}`
 
    :Description:
          All available speakers
 
  - :Object:
-         {eventDemand}
+         :html:`{eventDemand}`
 
    :Description:
          The eventDemand object
 
  - :Object:
-         {overwriteDemand}
+         :html:`{overwriteDemand}`
 
    :Description:
          The overwriteDemand object
 
  - :Object:
-         {contentObjectData}
+         :html:`{contentObjectData}`
 
    :Description:
          The current content object of the plugin
 
  - :Object:
-         {pageData}
+         :html:`{pageData}`
 
    :Description:
          The current page data
@@ -100,19 +101,19 @@ Detail view
          Description:
 
  - :Object:
-         {event}
+         :html:`{event}`
 
    :Description:
          An object holding the given event
 
  - :Object:
-         {contentObjectData}
+         :html:`{contentObjectData}`
 
    :Description:
          The current content object of the plugin
 
  - :Object:
-         {pageData}
+         :html:`{pageData}`
 
    :Description:
          The current page data
@@ -130,19 +131,19 @@ Registration view
          Description:
 
  - :Object:
-         {event}
+         :html:`{event}`
 
    :Description:
          An object holding the given event
 
  - :Object:
-         {contentObjectData}
+         :html:`{contentObjectData}`
 
    :Description:
          The current content object of the plugin
 
  - :Object:
-         {pageData}
+         :html:`{pageData}`
 
    :Description:
          The current page data
@@ -160,85 +161,85 @@ Calendar view
          Description:
 
  - :Object:
-         {events}
+         :html:`{events}`
 
    :Description:
          An array holding all events for the current calendar month
 
  - :Object:
-         {weeks}
+         :html:`{weeks}`
 
    :Description:
          An array holding all events grouped by week and day
 
  - :Object:
-         {categories}
+         :html:`{categories}`
 
    :Description:
          All configured categories for the category menu (see :php:`plugin.tx_sfeventmgt.settings.categoryMenu` in the :ref:`eventplugin-settings`)
 
  - :Object:
-         {locations}
+         :html:`{locations}`
 
    :Description:
          All available locations
 
  - :Object:
-         {organisators}
+         :html:`{organisators}`
 
    :Description:
          All available organisators
 
  - :Object:
-         {speakers}
+         :html:`{speakers}`
 
    :Description:
          All available speakers
 
  - :Object:
-         {eventDemand}
+         :html:`{eventDemand}`
 
    :Description:
          The eventDemand object
 
  - :Object:
-         {overwriteDemand}
+         :html:`{overwriteDemand}`
 
    :Description:
          The overwriteDemand object
 
  - :Object:
-         {currentPageId}
+         :html:`{currentPageId}`
 
    :Description:
          The PID of the current page
 
  - :Object:
-         {firstDayOfMonth}
+         :html:`{firstDayOfMonth}`
 
    :Description:
          DateTime object with the first day of the current month
 
  - :Object:
-         {previousMonthConfig}
+         :html:`{previousMonthConfig}`
 
    :Description:
          Array with date, month and year of the previous month
 
  - :Object:
-         {nextMonthConfig}
+         :html:`{nextMonthConfig}`
 
    :Description:
          Array with date, month and year of the next month
 
  - :Object:
-         {contentObjectData}
+         :html:`{contentObjectData}`
 
    :Description:
          The current content object of the plugin
 
  - :Object:
-         {pageData}
+         :html:`{pageData}`
 
    :Description:
          The current page data
@@ -256,55 +257,55 @@ Search view
              Description:
 
  - :Object:
-         {events}
+         :html:`{events}`
 
    :Description:
          An object holding all events that matched the configured demand in the plugin settings and the given searchdemand
 
  - :Object:
-         {categories}
+         :html:`{categories}`
 
    :Description:
          All available categories
 
  - :Object:
-         {locations}
+         :html:`{locations}`
 
    :Description:
          All available locations
 
  - :Object:
-         {organisators}
+         :html:`{organisators}`
 
    :Description:
          All available organisators
 
  - :Object:
-         {speakers}
+         :html:`{speakers}`
 
    :Description:
          All available speakers
 
  - :Object:
-         {searchDemand}
+         :html:`{searchDemand}`
 
    :Description:
          The searchDemand object
 
  - :Object:
-         {overwriteDemand}
+         :html:`{overwriteDemand}`
 
    :Description:
          The overwriteDemand object
 
  - :Object:
-         {contentObjectData}
+         :html:`{contentObjectData}`
 
    :Description:
          The current content object data
 
  - :Object:
-         {pageData}
+         :html:`{pageData}`
 
    :Description:
          The current page data
@@ -324,31 +325,31 @@ The following objects can be used in notification views
          Description:
 
  - :Object:
-         {event}
+         :html:`{event}`
 
    :Description:
          An object holding the given event
 
  - :Object:
-         {registration}
+         :html:`{registration}`
 
    :Description:
          An object holding the given registration
 
  - :Object:
-         {settings}
+         :html:`{settings}`
 
    :Description:
          An array of extension settings
 
  - :Object:
-         {hmac}
+         :html:`{hmac}`
 
    :Description:
          HMAC for the registration UID
 
  - :Object:
-         {reghmac}
+         :html:`{reghmac}`
 
    :Description:
          Appended HMAC for the registration UID
@@ -368,13 +369,13 @@ The following objects can be used in email subjects for event registration and c
          Description:
 
  - :Object:
-         {event}
+         :html:`{event}`
 
    :Description:
          An object holding the event for a registration
 
  - :Object:
-         {registration}
+         :html:`{registration}`
 
    :Description:
          An object holding the registration
@@ -394,31 +395,31 @@ Registration message views are :php:`cancelRegistration`, :php:`confirmRegistrat
          Description:
 
  - :Object:
-         {event}
+         :html:`{event}`
 
    :Description:
          An object holding the given event
 
  - :Object:
-         {registration}
+         :html:`{registration}`
 
    :Description:
          An object holding the given registration
 
  - :Object:
-         {failed}
+         :html:`{failed}`
 
    :Description:
          If the status is failed (not available in :php:`saveRegistrationResult`)
 
  - :Object:
-         {titleKey}
+         :html:`{titleKey}`
 
    :Description:
          The key of the title to use in <f:translate> viewHelper
 
  - :Object:
-         {messageKey}
+         :html:`{messageKey}`
 
    :Description:
          The key of the message to use in <f:translate> viewHelper
@@ -441,7 +442,7 @@ new fields are compliant with RFC 5545 https://tools.ietf.org/html/rfc5545
          Description:
 
  - :Object:
-         {event}
+         :html:`{event}`
 
    :Description:
          An object holding the given event
@@ -462,7 +463,7 @@ List view
          Description:
 
  - :Object:
-         {registrations}
+         :html:`{registrations}`
 
    :Description:
          An object holding all registrations that matched the configured demand in the plugin settings

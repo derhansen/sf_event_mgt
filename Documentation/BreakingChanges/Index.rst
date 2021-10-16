@@ -11,6 +11,18 @@
 Breaking Changes
 ================
 
+6.0.0
+~~~~~
+
+This version contains several breaking changes. Make sure, you read the release notes with instructions
+at https://github.com/derhansen/sf_event_mgt/releases/tag/6.0.0
+
+It is at least required to execute the "Migrate plugins and settings" update wizard
+and to apply database migrations.
+
+Note, that manual changes (at least to existing templates) is required. For further
+information please refer to the change log.
+
 5.1.0
 ~~~~~
 
@@ -70,7 +82,6 @@ to the new structure. Please use the update script in the extension manager to p
 migration as shown below.
 
 .. figure:: ../Images/ext-update-category.png
-   :width: 147px
    :alt: Extension Update Icon
 
 Please click on the update-icon to start the category migration.
@@ -108,7 +119,6 @@ categories will get migrated to sys_category entries. Please use the update scri
 manager to process the migration as shown below.
 
 .. figure:: ../Images/ext-update-category.png
-   :width: 147px
    :alt: Extension Update Icon
 
 Please click on the update-icon to start the category migration.

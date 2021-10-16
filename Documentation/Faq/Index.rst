@@ -23,7 +23,7 @@ Why do you not include a nice CSS stylesheet?
 
 Because you normally customize templates/stylesheets to your needs. Therefore the
 extension just comes with a rudementary CSS stylesheet available in
-EXT:Resources/Public/Css/events_default.css which must be included manually like
+:php:`EXT:Resources/Public/Css/events_default.css` which must be included manually like
 shown below::
 
 	page.includeCSS {
@@ -74,7 +74,7 @@ When does {event.registrationPossible} return TRUE
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For each event, the attribute registrationPossible returns TRUE or FALSE, if registration for
-the event is possible. TRUE is returned, when all conditions below are
+the event is possible. TRUE is returned, when all conditions below are fulfilled:
 
 * Registration option is activated for the event
 * Max participants is not reached (if max. participants > 0) or max participants is not reached and waitlist is enabled
@@ -211,8 +211,7 @@ Fluid template to output the current price.
 How can I use the iCalDownload action in the Listview?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The switchableControllerAction for the ListView does not allow to call the iCalDownload action. With the following
-Fluid snippet, you can also use the iCalDownload in the listview::
+With the following Fluid snippet, you can use the iCalDownload in the listview::
 
  <f:link.action action="icalDownload" arguments="{event : event}" pageUid="{settings.detailPid}"><f:translate key="event.icalDownload" /></f:link.action>
 
@@ -234,8 +233,7 @@ equal to :php:`Ignore category selection`.
 How do I show the event title as page title on the detail page?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can either use a SEO extension (e.g. ext:cs_seo), which has a custom and configurable page title rendering
-function or you can use the title-ViewHelper of this extension.
+Either use the TYPO3 PageTitle API or you can use the title-ViewHelper of this extension.
 
 How do I set the indexed search title for an event?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,7 +256,7 @@ will remain in the database field pi_flexform and lead to the described error.
 How can I move registrations on the waitlist automativally up, if a registered user cancels a registration?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Yes, since version 5.2.0 there is a simple and default waitlist move up process. Please refer to the documentation
+Since version 5.2.0 there is a simple and default waitlist move up process. Please refer to the documentation
 section about the :ref:`waitlist_moveup` for further information.
 
 If the default move up process does not fulfill your needs, you can use the PSR-14 Event :php:`WaitlistMoveUpEvent`
@@ -335,8 +333,8 @@ As an alternative, you could create an own ViewHelper which generates the requir
 
 Images for categories are not shown in the frontend?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Categories in TYPO3 backend do not have an image by default. It is ext:news that adds additional
-fields (e.g. an image-field) to the category domain model.
+Categories in TYPO3 backend do not have an image by default. The TYPO3 extension ext:news
+by Georg Ringer adds additional fields (e.g. an image-field) to the category domain model.
 
 If you want ext:sf_event_mgt to use the category domain model of ext:news, the category domain model
 of ext:sf_event_mgt needs to be overridden as shown below:

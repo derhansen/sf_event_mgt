@@ -41,7 +41,7 @@ For events which are enabled with the registration option, you can also send cus
 email notification to the participants of the event. Press the "+" icon to get to
 the view, where you can select the custom notification template.
 
-.. figure:: ../../Images/event-custom-notification.png
+.. figure:: ../../Images/event-notification.png
    :alt: Actions of the backend module
 
 If you want to create a custom notification, you just need to add some TypoScript

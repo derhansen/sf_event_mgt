@@ -203,4 +203,4 @@ Email attachments using PSR-14 Events
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If the TypoScript configuration settings for email attachments do not fulfill your requirements, you can
-use the `ModifyUserMessageAttachmentsEvent` Event to add custom attachments using PHP (see :ref:`psr14events`)
+use the :php:`ModifyUserMessageAttachmentsEvent` Event to add custom attachments using PHP (see :ref:`psr14events`)

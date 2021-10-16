@@ -76,7 +76,6 @@ The additional tab contains additional fields for the event like price, location
 program/schedule.
 
 .. figure:: ../../Images/event-additional.png
-   :width: 700px
    :alt: Event additional tab
 
 .. t3-field-list-table::
@@ -136,7 +135,6 @@ Relations
 The relations tab contains fields which holds relations locations, organisators and related events.
 
 .. figure:: ../../Images/event-related.png
-   :width: 700px
    :alt: Event related tab
 
 .. t3-field-list-table::
@@ -184,7 +182,6 @@ Media
 The media tab contains fields which holds media-data for the event.
 
 .. figure:: ../../Images/event-media.png
-   :width: 700px
    :alt: Event media tab
 
 .. t3-field-list-table::
@@ -220,13 +217,12 @@ The media tab contains fields which holds media-data for the event.
    :Description:
          One or more additional images (e.g. images from the event).
 
-Category
-~~~~~~~~
+Categories
+~~~~~~~~~~
 
 You can assign one or multiple categories to an event.
 
 .. figure:: ../../Images/event-category.png
-   :width: 700px
    :alt: Event category tab
 
 .. t3-field-list-table::
@@ -253,7 +249,6 @@ possible to allow the user to create multiple registrations at once, if the fiel
 registrations per user" is set to a value greater than 1.
 
 .. figure:: ../../Images/event-registration-options.png
-   :width: 700px
    :alt: Event record (Tab: registration options)
 
 .. t3-field-list-table::
@@ -331,6 +326,26 @@ registrations per user" is set to a value greater than 1.
          If set, email adresses of registrations are checked for uniqueness for the event.
 
  - :Field:
+         Enable Payment
+
+   :Description:
+         If checked, a user registering for an event can select available payment options.
+
+ - :Field:
+            Restrict available payment methods
+
+   :Description:
+         If checked, the available payment methods for the event can be restricted
+
+ - :Field:
+            Selected payment methods
+
+   :Description:
+         Selected payment methods, if "Restrict available payment methods" is checked.
+         Custom payment methods can be added. For documentation, please refer to the
+         :ref:`developer_payment` section in the developers manual.
+
+ - :Field:
          Notify admin
 
    :Description:
@@ -350,7 +365,6 @@ Registrations
 Contains all registrations for the event. Only visible, when registration is enabled.
 
 .. figure:: ../../Images/event-registrations.png
-   :width: 700px
    :alt: Event record (Tab: registrations)
 
 .. t3-field-list-table::
@@ -373,41 +387,3 @@ Contains all registrations for the event. Only visible, when registration is ena
 
    :Description:
          A list of participants registered to the waitlist of the event. This option is only visible, when the waitlist feature is enabled for the event.
-
-Payment
-~~~~~~~
-
-Contains payment options for the event. Only visible, when registration is enabled.
-
-Custom payment methods can be added. For documentation, please refer to the :ref:`developer_payment` section in the developers manual.
-
-.. figure:: ../../Images/event-payment.png
-   :width: 700px
-   :alt: Event record (Tab: payment)
-
-.. t3-field-list-table::
- :header-rows: 1
-
- - :Field:
-         Field:
-
-   :Description:
-         Description:
-
- - :Field:
-         Enable Payment
-
-   :Description:
-         If checked, a user registering for an event can select available payment options
-
- - :Field:
-            Restrict available payment methods
-
-   :Description:
-         If checked, the available payment methods for the event can be restricted
-
- - :Field:
-            Selected payment methods
-
-   :Description:
-         Selected payment methods, if "Restrict available payment methods" is checked

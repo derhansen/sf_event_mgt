@@ -27,40 +27,40 @@ The following PSR-14 Events are available:
 Event Controller
 ----------------
 
-* ModifyListViewVariablesEvent
-* ModifyCalendarViewVariablesEvent
-* ModifyDetailViewVariablesEvent
-* ModifyRegistrationViewVariablesEvent
-* ModifyCreateDependingRegistrationsEvent
-* ModifyConfirmRegistrationViewVariablesEvent
-* ModifyCancelRegistrationViewVariablesEvent
-* ModifySearchViewVariablesEvent
-* AfterRegistrationSavedEvent
-* AfterRegistrationConfirmedEvent
-* AfterRegistrationCancelledEvent
-* EventPidCheckFailedEvent
-* WaitlistMoveUpEvent
+* :php:`ModifyListViewVariablesEvent`
+* :php:`ModifyCalendarViewVariablesEvent`
+* :php:`ModifyDetailViewVariablesEvent`
+* :php:`ModifyRegistrationViewVariablesEvent`
+* :php:`ModifyCreateDependingRegistrationsEvent`
+* :php:`ModifyConfirmRegistrationViewVariablesEvent`
+* :php:`ModifyCancelRegistrationViewVariablesEvent`
+* :php:`ModifySearchViewVariablesEvent`
+* :php:`AfterRegistrationSavedEvent`
+* :php:`AfterRegistrationConfirmedEvent`
+* :php:`AfterRegistrationCancelledEvent`
+* :php:`EventPidCheckFailedEvent`
+* :php:`WaitlistMoveUpEvent`
 
 Payment Controller
 ------------------
-* ProcessPaymentInitializeEvent
-* ProcessPaymentSuccessEvent
-* ProcessPaymentFailureEvent
-* ProcessPaymentCancelEvent
-* ProcessPaymentNotifyEvent
+* :php:`ProcessPaymentInitializeEvent`
+* :php:`ProcessPaymentSuccessEvent`
+* :php:`ProcessPaymentFailureEvent`
+* :php:`ProcessPaymentCancelEvent`
+* :php:`ProcessPaymentNotifyEvent`
 
 Event Repository
 ----------------
-* ModifyEventQueryConstraintsEvent
+* :php:`ModifyEventQueryConstraintsEvent`
 
 Notification Service
 --------------------
-* ModifyUserMessageSenderEvent
-* ModifyUserMessageAttachmentsEvent
-* AfterUserMessageSentEvent
-* AfterAdminMessageSentEvent
-* ModifyCustomNotificationLogEvent
+* :php:`ModifyUserMessageSenderEvent`
+* :php:`ModifyUserMessageAttachmentsEvent`
+* :php:`AfterUserMessageSentEvent`
+* :php:`AfterAdminMessageSentEvent`
+* :php:`ModifyCustomNotificationLogEvent`
 
 Registration Service
 --------------------
-* AfterRegistrationMovedFromWaitlist
+* :php:`AfterRegistrationMovedFromWaitlist`

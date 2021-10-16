@@ -20,11 +20,11 @@ Configuration
 
 The configuration is (hopefully) self explaining.
 
-The spam check must be activated using Typoscript.::
+The spam check can be enabled or disabled using Typoscript.::
 
   plugin.tx_sfeventmgt.settings.registration {
     spamCheck {
-      enabled = 0
+      enabled = 1
       maxSpamScore = 10
       checks {
         honeypot {

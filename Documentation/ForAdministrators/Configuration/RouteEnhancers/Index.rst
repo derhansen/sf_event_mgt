@@ -16,6 +16,12 @@ can configure route enhancers to create speaking URLs for extension parameters.
 
 The following example shows a basic configuration for routes of sf_event_mgt.
 
+.. note::
+
+   The examples shown are for version 6.x of the extension, where several new plugins
+   have been introduced. For an example routing configuration that covers version 4.x and 5.x
+   of the extension, please switch to the version of the documentation to the left.
+
 Configuration::
 
     routeEnhancers:
