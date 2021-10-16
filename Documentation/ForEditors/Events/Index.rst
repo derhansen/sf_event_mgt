@@ -124,6 +124,12 @@ program/schedule.
    :Description:
          The program/schedule for the event.
 
+ - :Field:
+         Custom text
+
+   :Description:
+         A custom RTE text field. The field can e.g. be used to show, that event registration has ended.
+
 Relations
 ~~~~~~~~~
 

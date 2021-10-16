@@ -36,6 +36,7 @@ class Event extends AbstractEntity
     protected string $teaser = '';
     protected string $description = '';
     protected string $program = '';
+    protected string $customText = '';
     protected ?DateTime $startdate = null;
     protected ?DateTime $enddate = null;
     protected int $maxParticipants = 0;
@@ -225,6 +226,17 @@ class Event extends AbstractEntity
     {
         $this->program = $program;
     }
+
+    public function getCustomText(): string
+    {
+        return $this->customText;
+    }
+
+    public function setCustomText(string $customText): void
+    {
+        $this->customText = $customText;
+    }
+
 
     public function getStartdate(): ?DateTime
     {

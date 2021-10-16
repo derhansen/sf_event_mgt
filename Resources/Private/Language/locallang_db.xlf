@@ -7,7 +7,7 @@
 				<source>Event</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
-				<source>Category</source>
+				<source>Categories</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.title">
 				<source>Title</source>
@@ -20,6 +20,9 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
 				<source>Program/Schedule</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.custom_text">
+				<source>Custom text</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
 				<source>Link</source>
@@ -74,9 +77,6 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.selected_payment_methods">
 				<source>Selected payment methods</source>
-			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_event.category">
-				<source>Category</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.related">
 				<source>Related events</source>
