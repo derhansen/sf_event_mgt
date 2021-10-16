@@ -53,6 +53,7 @@ return [
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.waitlist;paletteWaitlist,
                     --palette--;;miscOptions,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.payment;palettePayment,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
                     registration_fields,
@@ -61,7 +62,7 @@ return [
                     registration,registration_waitlist,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
-                     enable_payment, restrict_payment_methods, selected_payment_methods,
+
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
@@ -106,6 +107,9 @@ return [
         ],
         'miscOptions' => [
             'showitem' => 'enable_autoconfirm, unique_email_check',
+        ],
+        'palettePayment' => [
+            'showitem' => 'enable_payment, restrict_payment_methods, --linebreak--, selected_payment_methods',
         ],
     ],
     'columns' => [
@@ -559,6 +563,14 @@ return [
             'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'default' => 0,
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ],
+                ],
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
