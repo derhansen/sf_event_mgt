@@ -73,8 +73,9 @@ Download and install the extension with the TYPO3 extension manager module.
 
 | Version             | TYPO3      | PHP       | Support/Development                     |
 | ------------------- | ---------- | ----------|---------------------------------------- |
-| 5.x                 | 10.x       | >= 7.2    | Features, Bugfixes, Security Updates    |
-| 4.x                 | 8.7 - 9.5  | 7.0 - 7.4 | Bugfixes, Security Updates              |
+| 6.x                 | 11.5       | 7.4 - 8.0 | Features, Bugfixes, Security Updates    |
+| 5.x                 | 10.4       | 7.2 - 7.4 | Features, Bugfixes, Security Updates    |
+| 4.x                 | 8.7 - 9.5  | 7.0 - 7.4 | Security Updates                        |
 | 3.x                 | 7.6 - 8.7  | 5.5 - 7.3 | Support dropped                         |
 | 2.x                 | 7.6 - 8.7  | 5.5 - 7.2 | Support dropped                         |
 | 1.x                 | 6.2 - 7.6  | 5.5 - 5.6 | Support dropped                         |
