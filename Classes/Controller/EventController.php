@@ -61,7 +61,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * Assign contentObjectData and pageData to earch view
+     * Assign contentObjectData and pageData view
      * @todo: Remove $view parameter for TYPO3 v12 version and use $this->view instead to assign variables.
      *
      * @param ViewInterface $view @extensionScannerIgnoreLine
