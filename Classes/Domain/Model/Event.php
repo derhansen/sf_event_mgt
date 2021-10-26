@@ -925,12 +925,16 @@ class Event extends AbstractEntity
      */
     public function getBackendIconOverlay(): string
     {
+        $date = new DateTime();
         $overlay = '';
         if ($this->getHidden()) {
             $overlay = 'overlay-hidden';
-        }
-        if (!$this->getHidden() && ($this->getStarttime() || $this->getEndtime())) {
+        } elseif ($this->getEndtime() && $this->getEndtime() < $date) {
             $overlay = 'overlay-endtime';
+        } elseif (($this->getStarttime() && $this->getStarttime() > $date) ||
+            ($this->getEndtime() && $this->getEndtime() > $date)
+        ) {
+            $overlay = 'overlay-scheduled';
         }
 
         return $overlay;

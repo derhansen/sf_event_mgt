@@ -1673,19 +1673,37 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
-    public function getBackendIconOverlayReturnsExpectedValueForStarttimeEvent()
+    public function getBackendIconOverlayReturnsExpectedValueForNotStartedStarttimeEvent()
     {
-        $this->subject->setStarttime(new \DateTime());
+        $this->subject->setStarttime((new \DateTime())->modify('+1 day'));
+        self::assertEquals('overlay-scheduled', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsExpectedValueForStartedStarttimeEvent()
+    {
+        $this->subject->setStarttime((new \DateTime())->modify('-1 day'));
+        self::assertEquals('', $this->subject->getBackendIconOverlay());
+    }
+
+    /**
+     * @test
+     */
+    public function getBackendIconOverlayReturnsExpectedValueForEndedEndtimeEvent()
+    {
+        $this->subject->setEndtime((new \DateTime())->modify('-1 day'));
         self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
     }
 
     /**
      * @test
      */
-    public function getBackendIconOverlayReturnsExpectedValueForEndtimeEvent()
+    public function getBackendIconOverlayReturnsExpectedValueForNotEndedEndtimeEvent()
     {
-        $this->subject->setEndtime(new \DateTime());
-        self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
+        $this->subject->setEndtime((new \DateTime())->modify('+1 day'));
+        self::assertEquals('overlay-scheduled', $this->subject->getBackendIconOverlay());
     }
 
     /**
