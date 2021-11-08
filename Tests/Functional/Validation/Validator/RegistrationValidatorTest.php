@@ -15,7 +15,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
@@ -72,9 +71,9 @@ class RegistrationValidatorTest extends FunctionalTestCase
             'pluginName' => 'Pieventregistration',
             'settings.' => [
                 'registration.' => [
-                    'requiredFields' => 'city,zip,accepttc'
-                ]
-            ]
+                    'requiredFields' => 'city,zip,accepttc',
+                ],
+            ],
         ];
 
         $configurationManager = $this->getContainer()->get(ConfigurationManager::class);
@@ -105,9 +104,9 @@ class RegistrationValidatorTest extends FunctionalTestCase
             'pluginName' => 'Pieventregistration',
             'settings.' => [
                 'registration.' => [
-                    'requiredFields' => 'unknown'
-                ]
-            ]
+                    'requiredFields' => 'unknown',
+                ],
+            ],
         ];
 
         $configurationManager = $this->getContainer()->get(ConfigurationManager::class);

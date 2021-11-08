@@ -25,27 +25,27 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
         [
             'sourceListType' => 'sfeventmgt_pievent',
             'switchableControllerActions' => 'Event->list',
-            'targetListType' => 'sfeventmgt_pieventlist'
+            'targetListType' => 'sfeventmgt_pieventlist',
         ],
         [
             'sourceListType' => 'sfeventmgt_pievent',
             'switchableControllerActions' => 'Event->detail;Event->icalDownload',
-            'targetListType' => 'sfeventmgt_pieventdetail'
+            'targetListType' => 'sfeventmgt_pieventdetail',
         ],
         [
             'sourceListType' => 'sfeventmgt_pievent',
             'switchableControllerActions' => 'Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration',
-            'targetListType' => 'sfeventmgt_pieventregistration'
+            'targetListType' => 'sfeventmgt_pieventregistration',
         ],
         [
             'sourceListType' => 'sfeventmgt_pievent',
             'switchableControllerActions' => 'Event->search',
-            'targetListType' => 'sfeventmgt_pieventsearch'
+            'targetListType' => 'sfeventmgt_pieventsearch',
         ],
         [
             'sourceListType' => 'sfeventmgt_pievent',
             'switchableControllerActions' => 'Event->calendar',
-            'targetListType' => 'sfeventmgt_pieventcalendar'
+            'targetListType' => 'sfeventmgt_pieventcalendar',
         ],
     ];
 
@@ -77,7 +77,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class
+            DatabaseUpdatedPrerequisite::class,
         ];
     }
 
@@ -225,9 +225,9 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                 'field' => 'value',
                 'field:el' => 'el',
                 'el:_IS_NUM' => 'section',
-                'section' => 'itemType'
+                'section' => 'itemType',
             ],
-            'disableTypeAttrib' => 2
+            'disableTypeAttrib' => 2,
         ];
         $spaceInd = 4;
         $output = GeneralUtility::array2xml($input, '', 0, 'T3FlexForms', $spaceInd, $options);

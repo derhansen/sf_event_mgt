@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Preview;
 
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PipaymentPreviewRenderer extends AbstractPluginPreviewRenderer
 {
@@ -29,5 +28,4 @@ class PipaymentPreviewRenderer extends AbstractPluginPreviewRenderer
 
         return $this->renderAsTable([], $pluginName);
     }
-
 }

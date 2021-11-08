@@ -298,7 +298,7 @@ class NotificationService
         CustomNotification $customNotification = null
     ): array {
         if ($type === MessageType::CUSTOM_NOTIFICATION && $customNotification === null) {
-            return ['', '',];
+            return ['', ''];
         }
 
         switch ($type) {

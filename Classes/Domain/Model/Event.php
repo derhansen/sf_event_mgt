@@ -17,9 +17,9 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
 use TYPO3\CMS\Core\Context\Context;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -236,7 +236,6 @@ class Event extends AbstractEntity
     {
         $this->customText = $customText;
     }
-
 
     public function getStartdate(): ?DateTime
     {

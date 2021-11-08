@@ -85,7 +85,7 @@ class EventControllerTest extends UnitTestCase
                 'overwriteEventDemandObject',
                 'getSysLanguageUid',
                 'persistAll',
-                'htmlResponse'
+                'htmlResponse',
             ],
             [],
             '',
@@ -214,7 +214,7 @@ class EventControllerTest extends UnitTestCase
         $allSpeakers = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
 
         $settings = [
-            'pagination' => []
+            'pagination' => [],
         ];
         $this->subject->_set('settings', $settings);
 
@@ -304,7 +304,7 @@ class EventControllerTest extends UnitTestCase
         $overrideDemand = ['category' => 10];
 
         $settings = [
-            'pagination' => []
+            'pagination' => [],
         ];
         $this->subject->_set('settings', $settings);
 

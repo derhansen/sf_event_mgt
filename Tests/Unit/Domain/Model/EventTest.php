@@ -966,13 +966,13 @@ class EventTest extends UnitTestCase
      */
     public function getRoomReturnsInitialValue()
     {
-        $this->assertEquals('', $this->subject->getRoom());
+        self::assertEquals('', $this->subject->getRoom());
     }
 
     public function setRoomSetsRoomForString()
     {
         $this->subject->setRoom('a room');
-        $this->assertEquals('a room', $this->subject->getRoom());
+        self::assertEquals('a room', $this->subject->getRoom());
     }
 
     /**

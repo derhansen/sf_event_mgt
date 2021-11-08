@@ -46,7 +46,6 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
         return $this->renderAsTable($data, $pluginName);
     }
 
-
     /**
      * Sets category conjunction if a category is selected
      */

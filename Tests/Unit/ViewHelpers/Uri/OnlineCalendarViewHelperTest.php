@@ -16,7 +16,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\ViewHelpers\Uri\OnlineCalendarViewHelper;
 use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
-use TYPO3\TestingFramework\Fluid\Unit\ViewHelpers\ViewHelperBaseTestcase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 /**
