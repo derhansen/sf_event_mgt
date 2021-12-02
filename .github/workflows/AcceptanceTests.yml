@@ -75,7 +75,7 @@ jobs:
       - name: Start Selenium standalone
         run: |
           echo $SELENIUM_JAR_PATH
-          java -Djava.awt.headless=true -jar $SELENIUM_JAR_PATH &
+          java -Djava.awt.headless=true -jar $SELENIUM_JAR_PATH standalone &
           sleep 5;
 
       - name: Codeception Acceptance Tests
