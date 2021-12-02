@@ -26,6 +26,7 @@ final class AfterAdminMessageSentEvent
     private string $senderName;
     private string $senderEmail;
     private NotificationService $notificationService;
+    private int $messageType;
 
     public function __construct(
         Registration $registration,
@@ -34,7 +35,8 @@ final class AfterAdminMessageSentEvent
         array $attachments,
         string $senderName,
         string $senderEmail,
-        NotificationService $notificationService
+        NotificationService $notificationService,
+        int $messageType
     ) {
         $this->registration = $registration;
         $this->body = $body;
@@ -43,6 +45,7 @@ final class AfterAdminMessageSentEvent
         $this->senderName = $senderName;
         $this->senderEmail = $senderEmail;
         $this->notificationService = $notificationService;
+        $this->messageType = $messageType;
     }
 
     public function getRegistration(): Registration
@@ -78,5 +81,10 @@ final class AfterAdminMessageSentEvent
     public function getNotificationService(): NotificationService
     {
         return $this->notificationService;
+    }
+
+    public function getMessageType(): int
+    {
+        return $this->messageType;
     }
 }
