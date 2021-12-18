@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
     var challenge = crElement.getAttribute('data-challenge');
-    console.log('foo');
 
     // ROT13 the challenge - source: https://stackoverflow.com/a/617685/1744743
     challenge = challenge.replace(/[a-zA-Z]/g, function (c) {
