@@ -698,6 +698,16 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Returns the category
+     *
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     */
+    public function getCategories()
+    {
+        return $this->category;
+    }
+
+    /**
      * Sets the category
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $category Category

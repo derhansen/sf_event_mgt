@@ -320,6 +320,22 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getCategoriesReturnsTheSameAsGetCategory()
+    {
+        $category = new Category();
+        $objectStorage = new ObjectStorage();
+        $objectStorage->attach($category);
+
+        $this->subject->setCategory(new ObjectStorage());
+        $this->subject->addCategory($category);
+
+        self::assertEquals($objectStorage, $this->subject->getCategory());
+        self::assertEquals($objectStorage, $this->subject->getCategories());
+    }
+
+    /**
+     * @test
+     */
     public function addRegistrationToObjectStorageHoldingRegistration()
     {
         $registration = new Registration();
