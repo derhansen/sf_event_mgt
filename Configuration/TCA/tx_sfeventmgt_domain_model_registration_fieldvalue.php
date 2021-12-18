@@ -55,7 +55,6 @@ return [
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.field',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_registration_field',
                 'size' => 1,
                 'maxitems' => 1,

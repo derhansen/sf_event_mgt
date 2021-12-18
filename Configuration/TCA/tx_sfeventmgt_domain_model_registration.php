@@ -352,7 +352,6 @@ return [
             'displayCond' => 'FIELD:main_registration:>:0',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_registration',
                 'maxitems' => 1,
                 'size' => 1,
@@ -389,7 +388,6 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.fe_user',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'fe_users',
                 'foreign_table' => 'fe_users',
                 'size' => 1,

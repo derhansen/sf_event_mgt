@@ -610,7 +610,6 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.location',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_location',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_location',
                 'size' => 1,
@@ -644,7 +643,6 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.organisator',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_organisator',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_organisator',
                 'size' => 1,
@@ -666,7 +664,6 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.speaker',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_speaker',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_speaker',
                 'size' => 5,
@@ -740,7 +737,6 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.related',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tx_sfeventmgt_domain_model_event',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_event',
                 'size' => 5,
