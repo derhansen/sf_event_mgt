@@ -422,8 +422,8 @@ class NotificationService
             $attachments,
             $senderName,
             $senderEmail,
-            $this,
-            $type
+            $type,
+            $this
         );
         $this->eventDispatcher->dispatch($afterAdminMessageSentEvent);
 

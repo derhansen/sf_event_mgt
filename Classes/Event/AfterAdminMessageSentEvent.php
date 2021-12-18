@@ -35,8 +35,8 @@ final class AfterAdminMessageSentEvent
         array $attachments,
         string $senderName,
         string $senderEmail,
-        NotificationService $notificationService,
-        int $messageType
+        int $messageType,
+        NotificationService $notificationService
     ) {
         $this->registration = $registration;
         $this->body = $body;
