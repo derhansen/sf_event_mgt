@@ -332,6 +332,11 @@ class Event extends AbstractEntity
         return $this->category;
     }
 
+    public function getCategories(): ?ObjectStorage
+    {
+        return $this->category;
+    }
+
     public function setCategory(?ObjectStorage $category)
     {
         $this->category = $category;
