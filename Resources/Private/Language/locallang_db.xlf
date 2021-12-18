@@ -18,6 +18,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.program">
 				<source>Program/Schedule</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.custom_text">
+				<source>Custom text</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.link">
 				<source>Link</source>
 			</trans-unit>

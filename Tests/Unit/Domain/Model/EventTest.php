@@ -111,6 +111,23 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getCustomTextReturnsInitialValueForString()
+    {
+        self::assertSame('', $this->subject->getCustomText());
+    }
+
+    /**
+     * @test
+     */
+    public function setCustomTextForStringSetsCustomText()
+    {
+        $this->subject->setCustomText('A custom text');
+        self::assertEquals('A custom text', $this->subject->getCustomText());
+    }
+
+    /**
+     * @test
+     */
     public function getTeaserReturnsInitialValueForString()
     {
         self::assertSame(

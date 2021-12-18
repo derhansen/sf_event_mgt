@@ -75,6 +75,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $program = '';
 
     /**
+     * Custom Text
+     *
+     * @var string
+     */
+    protected $customText = '';
+
+    /**
      * Startdate and time
      *
      * @var \DateTime
@@ -506,6 +513,22 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setProgram($program)
     {
         $this->program = $program;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCustomText()
+    {
+        return $this->customText;
+    }
+
+    /**
+     * @param string $customText
+     */
+    public function setCustomText($customText)
+    {
+        $this->customText = $customText;
     }
 
     /**

@@ -34,7 +34,7 @@ return [
             'showitem' => '--palette--;;titleTopEvent, slug, --palette--;;paletteDates, teaser, description,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
-                    --palette--;;palettePrice, price_options, link, program,
+                    --palette--;;palettePrice, price_options, link, program, custom_text,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.relations,
                     --palette--;;location, organisator, speaker, related,
@@ -289,6 +289,19 @@ return [
                 'eval' => 'trim',
                 'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
             ]
+        ],
+        'custom_text' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.custom_text',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'softref' => 'rtehtmlarea_images,typolink_tag,images,email[subst],url',
+            ],
         ],
         'link' => [
             'exclude' => true,
