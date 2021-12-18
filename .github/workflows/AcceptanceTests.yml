@@ -19,6 +19,7 @@ jobs:
         env:
           - { php: 7.4, coverage: 1}
           - { php: 8.0, coverage: 0}
+          - { php: 8.1, coverage: 0}
 
     env: ${{ matrix.env }}
 
