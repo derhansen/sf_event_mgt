@@ -114,6 +114,8 @@
                         <label>
                             <f:form.radio name="gender" property="gender" value="v"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.various" />
                         </label>
+
+                        <f:render partial="FormErrors" arguments="{field: 'registration.gender'}"/>
                     </div>
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'firstname')}">
