@@ -107,7 +107,6 @@ class MaintenanceService
      * Deletes the registration with the given uid
      *
      * @param int $registrationUid
-     * @return void
      */
     protected function deleteRegistration(int $registrationUid): void
     {
@@ -124,7 +123,6 @@ class MaintenanceService
      * Deletes all registration field values for the given registrationUid
      *
      * @param int $registrationUid
-     * @return void
      */
     protected function deleteRegistrationFieldValues(int $registrationUid): void
     {
