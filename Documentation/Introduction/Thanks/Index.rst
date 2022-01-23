@@ -37,3 +37,4 @@ Thanks from me to:
 * Manuel Munz for adding additional registration fields
 * Christoph Lehmann for several Pull Requests
 * Christoph Lehmann from networkteam GmbH for sponsoring the backport of user generated content in custom notifications.
+* Der PARITÄTISCHE Wohlfahrtsverband Hamburg e.V. for sponsoring the GDPR clean command

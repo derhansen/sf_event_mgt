@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Command;
 
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,9 +21,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
- * Class CleanupCommand
+ * Class CleanupGdprCommand
  */
-class CleanupCommand extends Command
+class CleanupGdprCommand extends Command
 {
     /**
      * Configuring the command options
@@ -30,14 +31,22 @@ class CleanupCommand extends Command
     public function configure()
     {
         $this
-            ->setDescription(
-                'Cleanup registrations which are not confirmed and where the confirmation date is expired.'
+            ->addArgument(
+                'days',
+                InputArgument::REQUIRED,
+                'Amount of days reduced from todays date for expired event selection'
             )
             ->addOption(
-                'delete',
-                'd',
+                'softDelete',
+                's',
                 InputOption::VALUE_NONE,
-                'If set, registrations will be set to deleted instead of hidden'
+                'If set, registration will not be deleted hard, but only flagged as deleted',
+            )
+            ->addOption(
+                'ignoreEventRestriction',
+                'i',
+                InputOption::VALUE_NONE,
+                'If set, simply all available registrations will be selected and deleted. Use with care!',
             );
     }
 
@@ -53,9 +62,11 @@ class CleanupCommand extends Command
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
         $io = new SymfonyStyle($input, $output);
         $io->title($this->getDescription());
-        $delete = (bool)$input->getOption('delete');
-        $maintenanceService->handleExpiredRegistrations($delete);
-        $io->success('All done!');
+        $days = (int)$input->getArgument('days');
+        $softDelete = (bool)$input->getOption('softDelete');
+        $ignoreEventRestriction = (bool)$input->getOption('ignoreEventRestriction');
+        $amountDeleted = $maintenanceService->processGdprCleanup($days, $softDelete, $ignoreEventRestriction);
+        $io->success($amountDeleted . ' registrations deleted.');
 
         return 0;
     }
