@@ -160,3 +160,12 @@ Use this viewhelper to set the page title and indexed search title on event-deta
 **Example**::
 
   <e:title pageTitle="{event.title}" indexedDocTitle="A custom title for indexed search"/>
+
+Category.Count
+~~~~~~~~~~~~~~
+
+Can be used to get the amount of events per category.
+
+**Example**::
+
+  <e:category.count categoryUid="{category.item.uid}" />
