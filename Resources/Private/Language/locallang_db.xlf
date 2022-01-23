@@ -31,10 +31,10 @@
 				<source>Top event</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.startdate">
-				<source>Start date</source>
+				<source>Start date and time</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enddate">
-				<source>End date</source>
+				<source>End date and time</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
 				<source>Max. participants</source>
