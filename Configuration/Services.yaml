@@ -7,8 +7,17 @@ services:
     DERHANSEN\SfEventMgt\:
         resource: '../Classes/*'
 
-    DERHANSEN\SfEventMgt\Command\CleanupCommand:
+    DERHANSEN\SfEventMgt\Command\CleanupExpiredCommand:
         tags:
             - name: 'console.command'
+              command: 'sf_event_mgt:cleanup:expired'
+              schedulable: true
+            - name: 'console.command'
               command: 'sf_event_mgt:cleanup'
+              alias: true
+              schedulable: true
+    DERHANSEN\SfEventMgt\Command\CleanupGdprCommand:
+        tags:
+            - name: 'console.command'
+              command: 'sf_event_mgt:cleanup:gdpr'
               schedulable: true

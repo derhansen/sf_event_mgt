@@ -46,6 +46,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Flag event images for either listview, detailview or both
 * Calendar view with possibility to navigate to next/previous month
 * Automatic cache clearing when event has been changed in backend
+* Console command to delete registrations of expired registrations
 * Lots of PSR-14 Events to extend the extension with own functionality
 
 **Background**

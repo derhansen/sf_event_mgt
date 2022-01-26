@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class CleanupCommand
  */
-class CleanupCommand extends Command
+class CleanupExpiredCommand extends Command
 {
     /**
      * Configuring the command options
