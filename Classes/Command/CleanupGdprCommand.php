@@ -43,13 +43,13 @@ class CleanupGdprCommand extends Command
                 'softDelete',
                 's',
                 InputOption::VALUE_NONE,
-                'If set, registration will not be deleted hard, but only flagged as deleted',
+                'If set, registration will not be deleted hard, but only flagged as deleted'
             )
             ->addOption(
                 'ignoreEventRestriction',
                 'i',
                 InputOption::VALUE_NONE,
-                'If set, simply all available registrations will be selected and deleted. Use with care!',
+                'If set, simply all available registrations will be selected and deleted. Use with care!'
             );
     }
 
