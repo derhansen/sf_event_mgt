@@ -23,6 +23,7 @@ class Organisator extends AbstractEntity
     protected string $email = '';
     protected string $emailSignature = '';
     protected string $phone = '';
+    protected string $link = '';
     protected ?FileReference $image = null;
 
     public function getName(): string
@@ -73,5 +74,15 @@ class Organisator extends AbstractEntity
     public function setImage(?FileReference $image)
     {
         $this->image = $image;
+    }
+
+    public function getLink(): string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): void
+    {
+        $this->link = $link;
     }
 }

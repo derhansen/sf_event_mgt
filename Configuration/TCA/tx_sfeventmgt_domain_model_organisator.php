@@ -22,13 +22,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'name, email, phone, email_signature,',
+        'searchFields' => 'name, email, phone, email_signature,link,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-organisator',
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'name, slug, email, email_signature, phone,
+        '1' => ['showitem' => 'name, slug, email, email_signature, phone, link,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.media,
                     image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
@@ -183,6 +183,28 @@ return [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
+        'link' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.link',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'fieldControl' => [
+                    'linkPopup' => [
+                        'options' => [
+                            'blindLinkOptions' => 'mail,file,spec,folder',
+                        ],
+                    ],
+                ],
+                'eval' => 'trim',
+                'size' => 30,
+                'max' => 255,
+                'softref' => 'typolink,url',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],

@@ -105,7 +105,7 @@ class OrganisatorTest extends UnitTestCase
     }
 
     /**
-     * Test if email can be set
+     * Test if phone can be set
      *
      * @test
      */
@@ -113,6 +113,30 @@ class OrganisatorTest extends UnitTestCase
     {
         $this->subject->setPhone('+49 123 4567890');
         self::assertEquals('+49 123 4567890', $this->subject->getPhone());
+    }
+
+    /**
+     * Test if initial value for link is returned
+     *
+     * @test
+     */
+    public function getLinkReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getLink()
+        );
+    }
+
+    /**
+     * Test if link can be set
+     *
+     * @test
+     */
+    public function setLinkForStringSetsLink()
+    {
+        $this->subject->setLink('https://www.derhansen.com');
+        self::assertEquals('https://www.derhansen.com', $this->subject->getLink());
     }
 
     /**

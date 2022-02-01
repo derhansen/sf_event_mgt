@@ -15,6 +15,9 @@
 			<trans-unit id="image.description">
 				<source>Image</source>
 			</trans-unit>
+			<trans-unit id="link.description">
+				<source>Link</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
