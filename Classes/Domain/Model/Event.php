@@ -64,6 +64,12 @@ class Event extends AbstractEntity
     protected bool $uniqueEmailCheck = false;
 
     /**
+     * @var ObjectStorage<Content>
+     * @Extbase\ORM\Lazy
+     */
+    protected ObjectStorage $contentElements;
+
+    /**
      * @var ObjectStorage<Category>
      * @Extbase\ORM\Lazy
      */
@@ -135,6 +141,7 @@ class Event extends AbstractEntity
      */
     public function initializeObject()
     {
+        $this->contentElements = new ObjectStorage();
         $this->category = new ObjectStorage();
         $this->related = new ObjectStorage();
         $this->registration = new ObjectStorage();
@@ -315,6 +322,83 @@ class Event extends AbstractEntity
     public function setSelectedPaymentMethods(string $selectedPaymentMethods)
     {
         $this->selectedPaymentMethods = $selectedPaymentMethods;
+    }
+
+    /**
+     * Get content elements
+     *
+     * @return ObjectStorage
+     */
+    public function getContentElements(): ?ObjectStorage
+    {
+        return $this->contentElements;
+    }
+
+    /**
+     * Set content element list
+     *
+     * @param ObjectStorage $contentElements content elements
+     *
+     * @return void
+     */
+    public function setContentElements($contentElements): void
+    {
+        $this->contentElements = $contentElements;
+    }
+
+    /**
+     * Adds a content element to the record
+     *
+     * @param Content $contentElement
+     *
+     * @return void
+     */
+    public function addContentElement(Content $contentElement): void
+    {
+        if ($this->getContentElements() === null) {
+            $this->contentElements = new ObjectStorage();
+        }
+        $this->contentElements->attach($contentElement);
+    }
+
+    /**
+     * Get id list of content elements
+     *
+     * @return string
+     */
+    public function getContentElementIdList(): string
+    {
+        return $this->getIdOfContentElements();
+    }
+
+    /**
+     * Get translated id list of content elements
+     *
+     * @return string
+     */
+    public function getTranslatedContentElementIdList(): string
+    {
+        return $this->getIdOfContentElements(false);
+    }
+
+    /**
+     * Collect id list
+     *
+     * @param bool $original
+     * @return string
+     */
+    protected function getIdOfContentElements($original = true): string
+    {
+        $idList = [];
+        $contentElements = $this->getContentElements();
+        if ($contentElements) {
+            foreach ($this->getContentElements() as $contentElement) {
+                if ($contentElement->getColPos() >= 0) {
+                    $idList[] = $original ? $contentElement->getUid() : $contentElement->_getProperty('_localizedUid');
+                }
+            }
+        }
+        return implode(',', $idList);
     }
 
     public function addCategory(Category $category)

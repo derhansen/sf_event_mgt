@@ -43,7 +43,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	cancel_deadline int(11) DEFAULT '0' NOT NULL,
 	enable_autoconfirm tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	unique_email_check tinyint(4) unsigned DEFAULT '0' NOT NULL,
-	slug varchar(2048)
+	slug varchar(2048),
+	content_elements int(11) DEFAULT '0' NOT NULL
 );
 
 
@@ -187,4 +188,12 @@ CREATE TABLE sys_category (
 #
 CREATE TABLE sys_file_reference (
     show_in_views tinyint(4) DEFAULT '0' NOT NULL
+);
+
+#
+# Table structure for table 'tt_content'
+#
+CREATE TABLE tt_content (
+	tx_sfeventmgt_related_events int(11) DEFAULT '0' NOT NULL,
+	KEY index_eventcontent (tx_sfeventmgt_related_events)
 );

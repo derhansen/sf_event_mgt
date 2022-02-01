@@ -80,3 +80,13 @@ foreach ($plugins as $pluginName => $pluginConfig) {
  * Register event as "Insert Record"
  */
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_sfeventmgt_domain_model_event');
+
+$newFields = [
+    'tx_sfeventmgt_related_events' => [
+        'label' => 'tx_sfeventmgt_related_events',
+        'config' => [
+            'type' => 'passthrough'
+        ]
+    ]
+];
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_content', $newFields);

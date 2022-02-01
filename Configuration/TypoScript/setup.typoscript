@@ -218,6 +218,14 @@ module.tx_sfeventmgt {
     }
 }
 
+# Rendering of content elements in detail view
+lib.tx_sfeventmgt.contentElementRendering = RECORDS
+lib.tx_sfeventmgt.contentElementRendering {
+  tables = tt_content
+  source.current = 1
+  dontCheckPid = 1
+}
+
 #==============================================
 # Rendering of events, displayed by "Insert Record" content element
 #==============================================

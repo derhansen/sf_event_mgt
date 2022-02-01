@@ -37,6 +37,11 @@
 			<div class="clear"></div>
 		</div>
 
+		<f:if condition="{event.contentElements}">
+			<!-- content elements -->
+			<f:cObject typoscriptObjectPath="lib.tx_sfeventmnt.contentElementRendering">{event.contentElementIdList}</f:cObject>
+		</f:if>
+
 		<f:if condition="{event.program}">
 			<div class="event-detail-row">
 				<div class="event-detail-label">
