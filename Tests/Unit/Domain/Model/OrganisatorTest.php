@@ -114,27 +114,27 @@ class OrganisatorTest extends UnitTestCase
     }
 
     /**
-     * Test if initial value for www is returned
+     * Test if initial value for link is returned
      *
      * @test
      */
-    public function getWwwReturnsInitialValueForString()
+    public function getLinkReturnsInitialValueForString()
     {
         self::assertSame(
             '',
-            $this->subject->getWww()
+            $this->subject->getLink()
         );
     }
 
     /**
-     * Test if www can be set
+     * Test if link can be set
      *
      * @test
      */
-    public function setWwwForStringSetsWww()
+    public function setLinkForStringSetsLink()
     {
-        $this->subject->setWww('+49 123 4567890');
-        self::assertEquals('+49 123 4567890', $this->subject->getWww());
+        $this->subject->setLink('+49 123 4567890');
+        self::assertEquals('+49 123 4567890', $this->subject->getLink());
     }
 
     /**

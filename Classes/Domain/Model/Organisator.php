@@ -49,7 +49,7 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $www = '';
+    protected $link = '';
 
     /**
      * Image of Organisator
@@ -135,23 +135,23 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the www
+     * Returns the link
      *
-     * @return string $www
+     * @return string $link
      */
-    public function getWww()
+    public function getLink()
     {
-        return $this->www;
+        return $this->link;
     }
 
     /**
-     * Sets the www
+     * Sets the link
      *
-     * @param string $www The www
+     * @param string $link The link
      */
-    public function setWww($www)
+    public function setLink($link)
     {
-        $this->www = $www;
+        $this->link = $link;
     }
 
     /**

@@ -12,6 +12,9 @@
 			<trans-unit id="phone.description">
 				<source>Phone</source>
 			</trans-unit>
+			<trans-unit id="link.description">
+				<source>Link</source>
+			</trans-unit>
 			<trans-unit id="image.description">
 				<source>Image</source>
 			</trans-unit>

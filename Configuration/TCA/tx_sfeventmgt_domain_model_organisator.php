@@ -22,13 +22,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'name, email, phone, email_signature, www,',
+        'searchFields' => 'name, email, phone, email_signature, link,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-organisator'
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'name, slug, email, email_signature, phone, www, image,
+        '1' => ['showitem' => 'name, slug, email, email_signature, phone, link, image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -196,9 +196,9 @@ return [
                 ],
             ]
         ],
-        'www' => [
+        'link' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.www',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_organisator.link',
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputLink',

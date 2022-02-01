@@ -138,9 +138,9 @@
 				<f:translate key="tx_sfeventmgt_domain_model_event.organisator" />
 			</div>
 			<div class="event-detail-value event-organisator">
-                <f:if condition="{event.organisator.www}">
+                <f:if condition="{event.organisator.link}">
                     <f:then>
-                        <f:link.typolink parameter="{event.organisator.www}">{event.organisator.name}</f:link.typolink>
+                        <f:link.typolink parameter="{event.organisator.link}">{event.organisator.name}</f:link.typolink>
                     </f:then>
                     <f:else>
                         <f:format.html>{event.organisator.name}</f:format.html>
