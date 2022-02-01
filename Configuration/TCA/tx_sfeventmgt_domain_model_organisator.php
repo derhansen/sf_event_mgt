@@ -22,13 +22,13 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'name, email, phone, email_signature,',
+        'searchFields' => 'name, email, phone, email_signature, www,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-organisator'
         ],
     ],
     'types' => [
-        '1' => ['showitem' => 'name, slug, email, email_signature, phone, image,
+        '1' => ['showitem' => 'name, slug, email, email_signature, phone, www, image,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -195,6 +195,28 @@ return [
                     'allowLanguageSynchronization' => true,
                 ],
             ]
+        ],
+        'www' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.www',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'inputLink',
+                'fieldControl' => [
+                    'linkPopup' => [
+                        'options' => [
+                            'blindLinkOptions' => 'mail,file,spec,folder',
+                        ],
+                    ],
+                ],
+                'eval' => 'trim',
+                'size' => 20,
+                'max' => 255,
+                'softref' => 'typolink,url',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
         ],
         'image' => [
             'exclude' => true,
