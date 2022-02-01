@@ -402,6 +402,9 @@
 			<trans-unit id="events-folder">
 				<source>Events</source>
 			</trans-unit>
+			<trans-unit id="extmng.contentElementRelation">
+				<source>Use content element relation:If set, content elements can be added to event records.</source>
+			</trans-unit>
 			<trans-unit id="extmng.enableInvoice">
 				<source>Enable payment method 'invoice'</source>
 			</trans-unit>

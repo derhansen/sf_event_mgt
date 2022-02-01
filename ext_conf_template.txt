@@ -1,14 +1,17 @@
 # Records
 ###########################
 # cat=records/enable/10; type=options[unique=unique,uniqueInSite=uniqueInSite]; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.slugBehaviour
-	slugBehaviour = uniqueInSite
+slugBehaviour = uniqueInSite
+
+# cat=records/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.contentElementRelation
+contentElementRelation = 0
 
 # Payment
 ###########################
-	# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableInvoice
+# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableInvoice
 enableInvoice = 1
 
-	# cat=payment/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableTransfer
+# cat=payment/enable/21; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableTransfer
 enableTransfer = 1
 
 # Backend
