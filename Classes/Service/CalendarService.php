@@ -37,12 +37,13 @@ class CalendarService
         $currentDay = $dateRange['firstDayOfCalendar'];
         while ($currentDay <= $dateRange['lastDayOfCalendar']) {
             $week = [];
+            $weekNumber = (int)date('W', $currentDay);
             for ($d = 0; $d < 7; $d++) {
                 $day = [];
                 $day['timestamp'] = $currentDay;
                 $day['day'] = (int)date('j', $currentDay);
                 $day['month'] = (int)date('n', $currentDay);
-                $day['weekNumber'] = (int)date('W', $currentDay);
+                $day['weekNumber'] = $weekNumber;
                 $day['isCurrentMonth'] = $day['month'] === $month;
                 $day['isCurrentDay'] = date('Ymd', $today) === date('Ymd', $day['timestamp']);
                 if ($events) {
@@ -53,7 +54,7 @@ class CalendarService
                 $currentDay = strtotime('+1 day', $currentDay);
                 $week[] = $day;
             }
-            $weeks[] = $week;
+            $weeks[$weekNumber] = $week;
         }
 
         return $weeks;
@@ -147,6 +148,33 @@ class CalendarService
             'date' => $date,
             'month' => (int)$date->format('n'),
             'year' => (int)$date->format('Y'),
+        ];
+    }
+
+    /**
+     * Returns an array holding weeknumber any year for the current, previous and next week
+     *
+     * @param DateTime $firstDayOfCurrentWeek
+     * @return array
+     */
+    public function getWeekConfig(DateTime $firstDayOfCurrentWeek): array
+    {
+        $firstDayPreviousWeek = (clone $firstDayOfCurrentWeek)->modify('-1 week');
+        $firstDayNextWeek = (clone $firstDayOfCurrentWeek)->modify('+1 week');
+
+        return [
+            'previous' => [
+                'weeknumber' => (int)$firstDayPreviousWeek->format('W'),
+                'year' => (int)$firstDayPreviousWeek->format('Y'),
+            ],
+            'current' => [
+                'weeknumber' => (int)$firstDayOfCurrentWeek->format('W'),
+                'year' => (int)$firstDayOfCurrentWeek->format('Y'),
+            ],
+            'next' => [
+                'weeknumber' => (int)$firstDayNextWeek->format('W'),
+                'year' => (int)$firstDayNextWeek->format('Y'),
+            ],
         ];
     }
 }

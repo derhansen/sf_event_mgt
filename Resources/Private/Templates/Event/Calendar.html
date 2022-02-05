@@ -8,6 +8,34 @@
 
 	<div class="event-calendar">
 
+        <f:comment>
+            === Browse calendar by week ====
+
+            <ul class="event-calendar__browser">
+                <li class="event-calendar__browser-prev">
+                    <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{week: weekConfig.previous.weeknumber, year: weekConfig.previous.year}}">
+                        &larr; Week {weekConfig.previous.weeknumber}
+                    </f:link.action>
+                </li>
+                <li class="event-calendar__browser-current"><h3>Week {weekConfig.current.weeknumber}</h3></li>
+                <li class="event-calendar__browser-next">
+                    <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{week: weekConfig.next.weeknumber, year: weekConfig.next.year}}">
+                        Week {weekConfig.next.weeknumber} &rarr;
+                    </f:link.action>
+                </li>
+            </ul>
+
+            <ul class="event-calendar__days">
+                <f:for each="{weeks.{weekConfig.current.weeknumber}}" as="day">
+                    <f:render partial="Event/CalendarDayItem" arguments="{day: day, settings: settings}"/>
+                </f:for>
+            </ul>
+
+        </f:comment>
+
+        <f:comment>
+            === Browse calendar by month ===
+        </f:comment>
 		<ul class="event-calendar__browser">
 			<li class="event-calendar__browser-prev">
 		                <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{month: previousMonthConfig.month, year: previousMonthConfig.year}}">

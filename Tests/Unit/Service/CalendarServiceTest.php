@@ -51,6 +51,22 @@ class CalendarServiceTest extends UnitTestCase
     }
 
     /**
+     * Test if the calendar array index contains week numbers
+     *
+     * @test
+     */
+    public function getCalendarArrayHasWeekNumbersAsIndex()
+    {
+        $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1);
+        self::assertArrayHasKey(52, $calendarArray);
+        self::assertArrayHasKey(1, $calendarArray);
+        self::assertArrayHasKey(2, $calendarArray);
+        self::assertArrayHasKey(3, $calendarArray);
+        self::assertArrayHasKey(4, $calendarArray);
+        self::assertArrayHasKey(5, $calendarArray);
+    }
+
+    /**
      * Test, if the first weekday of the calendar is a sunday if the first day of week setting is set to sunday
      *
      * @test
@@ -58,7 +74,7 @@ class CalendarServiceTest extends UnitTestCase
     public function getCalendarArrayRespectsFirstDayOfWeekParameter()
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 0);
-        self::assertEquals(date('w', $calendarArray[0][0]['timestamp']), 0);
+        self::assertEquals(date('w', $calendarArray[52][0]['timestamp']), 0);
     }
 
     /**
@@ -252,5 +268,31 @@ class CalendarServiceTest extends UnitTestCase
     {
         $result = $this->subject->getDateConfig($month, $year, $modifier);
         self::assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @return void
+     */
+    public function getWeekConfigReturnsExpectedValue()
+    {
+        $firstDayOfWeek = \DateTime::createFromFormat('d.m.Y', '3.1.2022')->setTime(0, 0);
+
+        $expected = [
+            'previous' => [
+                'weeknumber' => 52,
+                'year' => 2021,
+            ],
+            'current' => [
+                'weeknumber' => 1,
+                'year' => 2022,
+            ],
+            'next' => [
+                'weeknumber' => 2,
+                'year' => 2022,
+            ],
+        ];
+
+        $this->assertEquals($expected, $this->subject->getWeekConfig($firstDayOfWeek));
     }
 }
