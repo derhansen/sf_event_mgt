@@ -170,7 +170,8 @@ Calendar view
          :html:`{weeks}`
 
    :Description:
-         An array holding all events grouped by week and day
+         An array holding all events grouped by week (represented by the
+         week number as key) and day.
 
  - :Object:
          :html:`{categories}`
@@ -231,6 +232,13 @@ Calendar view
 
    :Description:
          Array with date, month and year of the next month
+
+ - :Object:
+         :html:`{weekConfig}`
+
+   :Description:
+         Array holding the year and weeknumber for the current, previous and next week.
+         This variable must be used to create a calendar view by week.
 
  - :Object:
          :html:`{contentObjectData}`

@@ -366,3 +366,17 @@ registration inline fields and prevent TYPO3 from loading all data when a config
 is reached per event.
 
 Please refer to section :ref:`_extconf` for available options.
+
+How can I show and browse the event calendar by weeks?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The calendar view is able to show events by week or by month. The default template
+contains the markup for the month view including links to browse to the previous
+and next month.
+
+In order to show events by week, it is recommended to create a new template layout
+for the calendar view and next to use the fluid variable :php:`{weekConfig}` to
+show events for the current week and to create previous and next week links. The
+default template includes an example, which is surrounded by :php:`<f:comment>`
+
+

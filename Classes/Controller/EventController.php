@@ -170,6 +170,15 @@ class EventController extends AbstractController
             $currentYear = $eventDemand->getYear();
         }
 
+        // If a weeknumber is given in overwriteDemand['week'], we overwrite the current month
+        if ($overwriteDemand['week'] ?? false) {
+            $firstDayOfWeek = (new \DateTime())->setISODate($currentYear, (int)$overwriteDemand['week']);
+            $currentMonth = (int)$firstDayOfWeek->format('m');
+            $eventDemand->setMonth($currentMonth);
+        } else {
+            $firstDayOfWeek = (new \DateTime())->setISODate($currentYear, (int)date('W'));
+        }
+
         // Set demand from calendar date range instead of month / year
         if ((bool)($this->settings['calendar']['includeEventsForEveryDayOfAllCalendarWeeks'] ?? false)) {
             $eventDemand = $this->changeEventDemandToFullMonthDateRange($eventDemand);
@@ -200,6 +209,7 @@ class EventController extends AbstractController
                 ),
                 'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
                 'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month'),
+                'weekConfig' => $this->calendarService->getWeekConfig($firstDayOfWeek),
             ],
             $this
         );
