@@ -106,6 +106,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_organisator (
 	email varchar(255) DEFAULT '' NOT NULL,
 	email_signature text,
 	phone varchar(255) DEFAULT '' NOT NULL,
+	link varchar(255) DEFAULT '' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
 	slug varchar(2048),
 

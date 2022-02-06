@@ -45,6 +45,13 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $phone = '';
 
     /**
+     * URL of Organisator
+     *
+     * @var string
+     */
+    protected $link = '';
+
+    /**
      * Image of Organisator
      *
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
@@ -125,6 +132,26 @@ class Organisator extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setPhone($phone)
     {
         $this->phone = $phone;
+    }
+
+    /**
+     * Returns the link
+     *
+     * @return string $link
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * Sets the link
+     *
+     * @param string $link The link
+     */
+    public function setLink($link)
+    {
+        $this->link = $link;
     }
 
     /**
