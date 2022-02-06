@@ -158,7 +158,7 @@ Configuration::
             routePath: /
             _controller: 'Event::calendar'
           -
-            routePath: '/{year}/{month}'
+            routePath: '/{year}/month/{month}'
             _controller: 'Event::calendar'
             _arguments:
               'month': 'overwriteDemand/month'
@@ -166,12 +166,25 @@ Configuration::
             requirements:
               month: '\d+'
               year: '\d+'
+          -
+            routePath: '/{year}/week/{week}'
+            _controller: 'Event::calendar'
+            _arguments:
+              'week': 'overwriteDemand/week'
+              'year': 'overwriteDemand/year'
+            requirements:
+              week: '\d+'
+              year: '\d+'
         defaultController: 'Event::calendar'
         aspects:
           month:
             type: StaticRangeMapper
             start: '1'
             end: '12'
+          week:
+            type: StaticRangeMapper
+            start: '1'
+            end: '53'
           year:
             type: StaticRangeMapper
             start: '2000'
