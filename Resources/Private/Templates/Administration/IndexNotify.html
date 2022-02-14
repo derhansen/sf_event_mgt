@@ -90,7 +90,7 @@
         <f:for each="{logEntries}" as="logEntry">
             <tr>
                 <td class="logdate"><f:format.date format="%d.%m.%Y - %H:%M:%S">{logEntry.tstamp}</f:format.date></td>
-                <td>{logEntry.details}</td>
+                <td>{logEntry.details -> f:format.nl2br()}</td>
                 <td>{logEntry.emailsSent}</td>
                 <td>
                     <f:variable name="backendUser" value="{e:be.backendUser(userUid: logEntry.cruserId)}" />
