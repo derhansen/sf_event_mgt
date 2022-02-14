@@ -531,7 +531,7 @@ class NotificationServiceTest extends UnitTestCase
 
         $event = new Event();
         $event->setPid(1);
-        $this->subject->createCustomNotificationLogentry($event, 'A description', 1);
+        $this->subject->createCustomNotificationLogentry($event, 'A description', 1, new CustomNotification());
     }
 
     /**
