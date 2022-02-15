@@ -11,7 +11,7 @@
 Events
 ======
 
-Events are the main record of this extesion. An event contains several fields, which can be used to
+Events are the main record of this extension. An event contains several fields, which can be used to
 describe the event in detail.
 
 General
