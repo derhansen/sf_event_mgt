@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 
 /**
@@ -22,12 +23,14 @@ final class ModifyCustomNotificationLogEvent
     protected CustomNotificationLog $customNotificationLog;
     protected Event $event;
     protected string $details;
+    protected CustomNotification $customNotification;
 
-    public function __construct(CustomNotificationLog $customNotificationLog, Event $event, string $details)
+    public function __construct(CustomNotificationLog $customNotificationLog, Event $event, string $details, CustomNotification $customNotification)
     {
         $this->customNotificationLog = $customNotificationLog;
         $this->event = $event;
         $this->details = $details;
+        $this->customNotification = $customNotification;
     }
 
     public function getCustomNotificationLog(): CustomNotificationLog
@@ -48,5 +51,10 @@ final class ModifyCustomNotificationLogEvent
     public function getDetails(): string
     {
         return $this->details;
+    }
+
+    public function getCustomNotification(): CustomNotification
+    {
+        return $this->getCustomNotification();
     }
 }

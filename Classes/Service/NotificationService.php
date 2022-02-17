@@ -145,8 +145,9 @@ class NotificationService
      * @param Event $event
      * @param string $details
      * @param int $emailsSent
+     * @param CustomNotification
      */
-    public function createCustomNotificationLogentry(Event $event, string $details, int $emailsSent): void
+    public function createCustomNotificationLogentry(Event $event, string $details, int $emailsSent, CustomNotification $customNotification): void
     {
         $notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
         $notificationlogEntry->setPid($event->getPid());
@@ -158,7 +159,8 @@ class NotificationService
         $modifyCustomNotificationLogEntry = new ModifyCustomNotificationLogEvent(
             $notificationlogEntry,
             $event,
-            $details
+            $details,
+            $customNotification
         );
         $this->eventDispatcher->dispatch($modifyCustomNotificationLogEntry);
         $notificationlogEntry = $modifyCustomNotificationLogEntry->getCustomNotificationLog();

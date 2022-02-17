@@ -409,7 +409,8 @@ class AdministrationController extends AbstractController
         $this->notificationService->createCustomNotificationLogentry(
             $event,
             $customNotifications[$customNotification->getTemplate()],
-            $result
+            $result,
+            $customNotification
         );
         $this->addFlashMessage(
             $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.content'),
