@@ -49,12 +49,22 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
         $tmpDescription = str_replace(chr(13), '\n\n', $tmpDescription);
         // Strip new lines
         $tmpDescription = str_replace(chr(10), '', $tmpDescription);
-        // Glue everything together, so every line is max 75 chars
+
+        /*
+         * Glue everything together, so every line is max 75 octets/bytes (not chars) long
+         * @see: https://www.rfc-editor.org/rfc/rfc5545#section-3.1
+         *
+         * Assumption for description text:
+         * In worst case there are a max of 2 bytes per UTF8-character - averaged per line.
+         */
+        // Important: `strlen` checks for length in bytes instead of chars.
         if (strlen($tmpDescription) > 63) {
-            // first line has max 63 bytes of content as the 12 byte long string "DESCRIPTION:" is added
-            $newDescription = substr($tmpDescription, 0, 63);
-            $tmpDescription = substr($tmpDescription, 63);
-            $arrPieces = str_split($tmpDescription, 74);
+            // First line has max 63 bytes of content and the 12 byte long string "DESCRIPTION:" is added.
+            // Split to max 31 chars: roughly equals max 63 bytes.
+            $newDescription = mb_substr($tmpDescription, 0, 31);
+            $tmpDescription = mb_substr($tmpDescription, 31);
+            // Split to max 37 chars: roughly equals max 74 bytes (plus 1 byte for white-space).
+            $arrPieces = mb_str_split($tmpDescription, 37);
             $newDescription .= chr(10) . ' ' . implode(chr(10) . ' ', $arrPieces);
         } else {
             $newDescription = $tmpDescription;
