@@ -51,13 +51,10 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
         $tmpDescription = str_replace(chr(10), '', $tmpDescription);
         // Glue everything together, so every line is max 75 chars
         if (strlen($tmpDescription) > 75) {
-            $newDescription = substr($tmpDescription, 0, 63) . chr(10);
+            $newDescription = substr($tmpDescription, 0, 63);
             $tmpDescription = substr($tmpDescription, 63);
             $arrPieces = str_split($tmpDescription, 74);
-            foreach ($arrPieces as &$value) {
-                $value = ' ' . $value;
-            }
-            $newDescription .= implode(chr(10), $arrPieces);
+            $newDescription .= chr(10) . ' ' . implode(chr(10) . ' ', $arrPieces);
         } else {
             $newDescription = $tmpDescription;
         }
