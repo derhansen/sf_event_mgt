@@ -24,27 +24,38 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
         return [
             'emptyValue' => [
                 '',
+                12,
                 '',
             ],
             'shortDescriptionLess75Chars' => [
                 'This is just a short text with less than 75 chars',
+                12,
                 'This is just a short text with less than 75 chars',
             ],
             'shortDescriptionLess75CharsWithHtml' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars',
+                12,
                 'This is just a short text with less than 75 chars',
             ],
             'shortDescriptionLess75CharsWithHtmlAndLineBreak' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars' . chr(13) . ' and some more text',
+                12,
                 'This is just a short text with less than 75 chars\n\n and some ' . chr(10) . ' more text',
             ],
             'longDescriptionWithoutLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
+                12,
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, s' . chr(10) . ' ed diam',
             ],
             'longDescriptionWithLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ' . chr(13) . 'nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
+                12,
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam era' . chr(10) . ' t, sed diam',
+            ],
+            'longDescriptionWithDifferentSubstractCharsOption' => [
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
+                48,
+                'Lorem ipsum dolor sit amet,' . chr(10) . '  consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut lab' . chr(10) . ' ore et dolore magna aliquyam erat, sed diam',
             ],
         ];
     }
@@ -57,12 +68,13 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
      * @dataProvider iCalendarDescriptionDataProvider
      *
      * @param mixed $value
+     * @param mixed $substractChars
      * @param mixed $expected
      */
-    public function viewHelperReturnsExpectedValues($value, $expected)
+    public function viewHelperReturnsExpectedValues($value, $substractChars, $expected)
     {
         $viewHelper = new ICalendarDescriptionViewHelper();
-        $viewHelper->setArguments(['description' => $value]);
+        $viewHelper->setArguments(['description' => $value, 'substractChars' => $substractChars]);
         $actual = $viewHelper->render();
         self::assertEquals($expected, $actual);
     }

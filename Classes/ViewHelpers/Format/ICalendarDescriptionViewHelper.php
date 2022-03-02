@@ -15,7 +15,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  * ICalendar Description viewhelper. Note, this ViewHelper does not escape output and should only be used
- * to process the iCal description field.
+ * to process the iCal description field and any other foldable ICal text fields.
  */
 class ICalendarDescriptionViewHelper extends AbstractViewHelper
 {
@@ -31,6 +31,7 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('description', 'string', 'The description', false);
+        $this->registerArgument('substractChars', 'integer', 'Amount of chars to substract from 75 in first line', false, 12);
     }
 
     /**
@@ -41,6 +42,8 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
     public function render(): string
     {
         $description = $this->arguments['description'] ?? null;
+        $substractChars = $this->arguments['substractChars'] ?? 0;
+        $firstLineMaxChars = 75 - $substractChars;
         if ($description === null) {
             $description = $this->renderChildren();
         }
@@ -51,10 +54,10 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
         $tmpDescription = str_replace(chr(13), '\n\n', $tmpDescription);
         // Strip new lines
         $tmpDescription = str_replace(chr(10), '', $tmpDescription);
-        // Glue everything together, so every line is max 75 chars
-        if (mb_strlen($tmpDescription) > 63) {
-            $newDescription = mb_substr($tmpDescription, 0, 63) . chr(10);
-            $tmpDescription = mb_substr($tmpDescription, 63);
+        // Glue everything together, so every line is max 75 chars respecting max. length of first line
+        if (mb_strlen($tmpDescription) > $firstLineMaxChars) {
+            $newDescription = mb_substr($tmpDescription, 0, $firstLineMaxChars) . chr(10);
+            $tmpDescription = mb_substr($tmpDescription, $firstLineMaxChars);
             $arrPieces = mb_str_split($tmpDescription, 75);
             foreach ($arrPieces as &$value) {
                 $value = ' ' . $value;
