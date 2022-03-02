@@ -237,9 +237,6 @@
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 			</trans-unit>
-			<trans-unit id="event.tabs.payment">
-				<source>Payment</source>
-			</trans-unit>
 			<trans-unit id="event.tabs.registration_options">
 				<source>Registration options</source>
 			</trans-unit>
