@@ -36,15 +36,15 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
             ],
             'shortDescriptionLess75CharsWithHtmlAndLineBreak' => [
                 'This is just a short text <b>with</b> less&nbsp;than 75 chars' . chr(13) . ' and some more text',
-                'This is just a short text with less than 75 chars\n\n and some more text',
+                'This is just a short text with less than 75 chars\n\n and some ' . chr(10) . ' more text',
             ],
             'longDescriptionWithoutLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
-                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, ' . chr(10) . ' sed diam',
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, s' . chr(10) . ' ed diam',
             ],
             'longDescriptionWithLineBreaks' => [
                 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam ' . chr(13) . 'nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam',
-                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam er' . chr(10) . ' at, sed diam',
+                'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed di' . chr(10) . ' am \n\nnonumy eirmod tempor invidunt ut labore et dolore magna aliquyam era' . chr(10) . ' t, sed diam',
             ],
         ];
     }
