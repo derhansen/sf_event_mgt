@@ -6,10 +6,10 @@ METHOD:PUBLISH
 BEGIN:VEVENT
 UID:{event.uid}-{event.pid}@{typo3Host}
 CLASS: PUBLIC
-SUMMARY:{event.title -> f:format.htmlentitiesDecode()}
-DESCRIPTION:<e:format.ICalendarDescription>{event.description -> f:format.htmlentitiesDecode()}</e:format.ICalendarDescription>
+SUMMARY:<e:format.ICalendarDescription substractChars="8">{event.title -> f:format.htmlentitiesDecode()}</e:format.ICalendarDescription>
+DESCRIPTION:<e:format.ICalendarDescription substractChars="12">{event.description -> f:format.htmlentitiesDecode()}</e:format.ICalendarDescription>
 <f:if condition="{event.location}">
-LOCATION:{event.location.title -> f:format.htmlentitiesDecode()}
+LOCATION:<e:format.ICalendarDescription substractChars="9">{event.location.title -> f:format.htmlentitiesDecode()}</e:format.ICalendarDescription>
 </f:if>
 DTSTAMP:<e:format.ICalendarDate>{event.tstamp}</e:format.ICalendarDate>
 DTSTART:<e:format.ICalendarDate>{event.startdate}</e:format.ICalendarDate>
