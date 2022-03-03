@@ -387,3 +387,40 @@ Contains all registrations for the event. Only visible, when registration is ena
 
    :Description:
          A list of participants registered to the waitlist of the event. This option is only visible, when the waitlist feature is enabled for the event.
+
+Metadata
+~~~~~~~~
+
+Contains fields related to meta tags
+
+.. figure:: ../../Images/event-metadata.png
+   :alt: Event record (Tab: metadata)
+
+.. t3-field-list-table::
+ :header-rows: 1
+
+ - :Field:
+         Field:
+
+   :Description:
+         Description:
+
+ - :Field:
+         Keywords
+
+   :Description:
+         One or multiple keywords used to output the meta tag "keywords"
+
+ - :Field:
+         Description
+
+   :Description:
+         A description used to output the meta tag "description"
+
+ - :Field:
+         Alternative title
+
+   :Description:
+         An alternative title which either can be used as meta tag "title" or
+         which is is used to override the page title.
+

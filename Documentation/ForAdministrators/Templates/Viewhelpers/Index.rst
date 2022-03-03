@@ -169,3 +169,14 @@ Can be used to get the amount of events per category.
 **Example**::
 
   <e:category.count categoryUid="{category.item.uid}" />
+
+Metatag
+~~~~~~~
+
+Use this viewhelper to add various meta tags related to the event. The default template for the event
+detail view uses this viewhelper to output the meta tags "keyword", "description" and "og:title".
+
+**Example**::
+
+  <e:metaTag name="keywords" content="{event.metaKeywords}" />
+

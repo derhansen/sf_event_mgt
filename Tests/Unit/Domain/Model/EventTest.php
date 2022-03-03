@@ -1747,6 +1747,78 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getMetaKeywordsReturnsInitialValue()
+    {
+        self::assertEquals('', $this->subject->getMetaKeywords());
+    }
+
+    /**
+     * @test
+     */
+    public function setMetaKeywordsSetsKeywords()
+    {
+        $this->subject->setMetaKeywords('keyword1, keyword2');
+        self::assertEquals('keyword1, keyword2', $this->subject->getMetaKeywords());
+    }
+
+    /**
+     * @test
+     */
+    public function getMetaDescriptionReturnsInitialValue()
+    {
+        self::assertEquals('', $this->subject->getMetaDescription());
+    }
+
+    /**
+     * @test
+     */
+    public function setMetaDescriptionSetsDescription()
+    {
+        $this->subject->setMetaDescription('the description');
+        self::assertEquals('the description', $this->subject->getMetaDescription());
+    }
+
+    /**
+     * @test
+     */
+    public function getAlternativeTitleReturnsInitialValue()
+    {
+        self::assertEquals('', $this->subject->getAlternativeTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function setAlternativetitleSetsAlternativeTitle()
+    {
+        $this->subject->setAlternativeTitle('the alternative title');
+        self::assertEquals('the alternative title', $this->subject->getAlternativeTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getMetaTitleReturnsTitleWhenNoAlternativeTitle()
+    {
+        $this->subject->setTitle('the title');
+
+        self::assertEquals('the title', $this->subject->getMetaTitle());
+    }
+
+    /**
+     * @test
+     */
+    public function getMetaTitleReturnsAlternativeTitleWhenNoAlternativeTitle()
+    {
+        $this->subject->setTitle('the title');
+        $this->subject->setAlternativeTitle('the alternative title');
+
+        self::assertEquals('the alternative title', $this->subject->getMetaTitle());
+    }
+
+    /**
+     * @test
+     */
     public function specialGettersForImagesReturnsExpectedResults()
     {
         $fileProphecy1 = $this->prophesize(\TYPO3\CMS\Core\Resource\File::class);

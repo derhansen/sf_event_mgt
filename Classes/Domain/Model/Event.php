@@ -62,6 +62,9 @@ class Event extends AbstractEntity
     protected ?DateTime $cancelDeadline = null;
     protected bool $enableAutoconfirm = false;
     protected bool $uniqueEmailCheck = false;
+    protected string $metaKeywords = '';
+    protected string $metaDescription = '';
+    protected string $alternativeTitle = '';
 
     /**
      * @var ObjectStorage<Category>
@@ -699,6 +702,41 @@ class Event extends AbstractEntity
     public function setUniqueEmailCheck(bool $uniqueEmailCheck)
     {
         $this->uniqueEmailCheck = $uniqueEmailCheck;
+    }
+
+    public function getMetaKeywords(): string
+    {
+        return $this->metaKeywords;
+    }
+
+    public function setMetaKeywords(string $metaKeywords): void
+    {
+        $this->metaKeywords = $metaKeywords;
+    }
+
+    public function getMetaDescription(): string
+    {
+        return $this->metaDescription;
+    }
+
+    public function setMetaDescription(string $metaDescription): void
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
+    public function getAlternativeTitle(): string
+    {
+        return $this->alternativeTitle;
+    }
+
+    public function setAlternativeTitle(string $alternativeTitle): void
+    {
+        $this->alternativeTitle = $alternativeTitle;
+    }
+
+    public function getMetaTitle(): string
+    {
+        return $this->getAlternativeTitle() !== '' ? $this->getAlternativeTitle() : $this->getTitle();
     }
 
     public function getPriceOptions(): ?ObjectStorage
