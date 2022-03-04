@@ -170,7 +170,7 @@ Can be used to get the amount of events per category.
 
   <e:category.count categoryUid="{category.item.uid}" />
 
-Metatag
+MetaTag
 ~~~~~~~
 
 Use this viewhelper to add various meta tags related to the event. The default template for the event
