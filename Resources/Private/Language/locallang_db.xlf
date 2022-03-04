@@ -126,6 +126,15 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
 				<source>Organisator</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords">
+				<source>Keywords (,)</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.meta_description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.alternative_title">
+				<source>Alternative title</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration">
 				<source>Event - Registration</source>
 			</trans-unit>
@@ -237,6 +246,9 @@
 			<trans-unit id="event.tabs.media">
 				<source>Media</source>
 			</trans-unit>
+			<trans-unit id="event.tabs.metadata">
+				<source>Metadata</source>
+			</trans-unit>
 			<trans-unit id="event.tabs.registration_options">
 				<source>Registration options</source>
 			</trans-unit>
@@ -260,6 +272,9 @@
 			</trans-unit>
 			<trans-unit id="event.sections.waitlist">
 				<source>Waitlist</source>
+			</trans-unit>
+			<trans-unit id="event.sections.metatags">
+				<source>Meta Tags</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_location">
 				<source>Event - Location</source>

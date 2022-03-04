@@ -322,6 +322,21 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $uniqueEmailCheck = false;
 
     /**
+     * @var string
+     */
+    protected $metaKeywords = '';
+
+    /**
+     * @var string
+     */
+    protected $metaDescription = '';
+
+    /**
+     * @var string
+     */
+    protected $alternativeTitle = '';
+
+    /**
      * Price options
      *
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DERHANSEN\SfEventMgt\Domain\Model\PriceOption>
@@ -1397,6 +1412,63 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->uniqueEmailCheck = $uniqueEmailCheck;
     }
+
+    /**
+     * @return string
+     */
+    public function getMetaKeywords(): string
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * @param string $metaKeywords
+     */
+    public function setMetaKeywords(string $metaKeywords): void
+    {
+        $this->metaKeywords = $metaKeywords;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaDescription(): string
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * @param string $metaDescription
+     */
+    public function setMetaDescription(string $metaDescription): void
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAlternativeTitle(): string
+    {
+        return $this->alternativeTitle;
+    }
+
+    /**
+     * @param string $alternativeTitle
+     */
+    public function setAlternativeTitle(string $alternativeTitle): void
+    {
+        $this->alternativeTitle = $alternativeTitle;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaTitle(): string
+    {
+        return $this->getAlternativeTitle() !== '' ? $this->getAlternativeTitle() : $this->getTitle();
+    }
+
 
     /**
      * Returns price options

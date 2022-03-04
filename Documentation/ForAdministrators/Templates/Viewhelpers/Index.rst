@@ -160,3 +160,14 @@ Use this viewhelper to set the page title and indexed search title on event-deta
 **Example**::
 
   <e:title pageTitle="{event.title}" indexedDocTitle="A custom title for indexed search"/>
+
+MetaTag
+~~~~~~~
+
+Use this viewhelper to add various meta tags related to the event. The default template for the event
+detail view uses this viewhelper to output the meta tags "keyword", "description" and "og:title".
+
+**Example**::
+
+  <e:metaTag name="keywords" content="{event.metaKeywords}" />
+

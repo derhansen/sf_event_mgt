@@ -7,7 +7,10 @@
 <f:section name="main">
 
 	<f:if condition="{event}">
-		<e:title pageTitle="{event.title}" />
+        <e:title pageTitle="{event.metaTitle}" />
+        <e:metaTag property="og:title" content="{event.metaTitle}" />
+        <e:metaTag name="keywords" content="{event.metaKeywords}" />
+        <e:metaTag name="description" content="{event.metaDescription}" />
 
 		<h1><f:translate key="detail.title" /></h1>
 

@@ -331,6 +331,26 @@ registrations per user" is set to a value greater than 1.
          If set, email adresses of registrations are checked for uniqueness for the event.
 
  - :Field:
+         Enable Payment
+
+   :Description:
+         If checked, a user registering for an event can select available payment options.
+
+ - :Field:
+            Restrict available payment methods
+
+   :Description:
+         If checked, the available payment methods for the event can be restricted
+
+ - :Field:
+            Selected payment methods
+
+   :Description:
+         Selected payment methods, if "Restrict available payment methods" is checked.
+         Custom payment methods can be added. For documentation, please refer to the
+         :ref:`developer_payment` section in the developers manual.
+
+ - :Field:
          Notify admin
 
    :Description:
@@ -374,16 +394,13 @@ Contains all registrations for the event. Only visible, when registration is ena
    :Description:
          A list of participants registered to the waitlist of the event. This option is only visible, when the
 
-Payment
-~~~~~~~
+Metadata
+~~~~~~~~
 
-Contains payment options for the event. Only visible, when registration is enabled.
+Contains fields related to meta tags
 
-Custom payment methods can be added. For documentation, please refer to the :ref:`developer_payment` section in the developers manual.
-
-.. figure:: ../../Images/event-payment.png
-   :width: 700px
-   :alt: Event record (Tab: payment)
+.. figure:: ../../Images/event-metadata.png
+   :alt: Event record (Tab: metadata)
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -395,19 +412,20 @@ Custom payment methods can be added. For documentation, please refer to the :ref
          Description:
 
  - :Field:
-         Enable Payment
+         Keywords
 
    :Description:
-         If checked, a user registering for an event can select available payment options
+         One or multiple keywords used to output the meta tag "keywords"
 
  - :Field:
-            Restrict available payment methods
+         Description
 
    :Description:
-         If checked, the available payment methods for the event can be restricted
+         A description used to output the meta tag "description"
 
  - :Field:
-            Selected payment methods
+         Alternative title
 
    :Description:
-         Selected payment methods, if "Restrict available payment methods" is checked
+         An alternative title which either can be used as meta tag "title" or
+         which is is used to override the page title.

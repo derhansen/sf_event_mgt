@@ -24,7 +24,7 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group',
         ],
-        'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker',
+        'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker,meta_keywords,meta_description',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-event'
         ],
@@ -53,6 +53,7 @@ return [
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.waitlist;paletteWaitlist,
                     enable_autoconfirm, unique_email_check,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.notification;paletteNotification,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.payment;palettePayment,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
                     registration_fields,
@@ -60,8 +61,8 @@ return [
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registrations,
                     registration,registration_waitlist,
 
-                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
-                     enable_payment, restrict_payment_methods, selected_payment_methods,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.metadata,
+                    --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.metatags;paletteMetatags, alternative_title,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
@@ -100,6 +101,12 @@ return [
         ],
         'paletteWaitlist' => [
             'showitem' => 'enable_waitlist, enable_waitlist_moveup,',
+        ],
+        'palettePayment' => [
+            'showitem' => 'enable_payment, restrict_payment_methods, --linebreak--, selected_payment_methods',
+        ],
+        'paletteMetatags' => [
+            'showitem' => 'meta_keywords, meta_description',
         ],
     ],
     'columns' => [
@@ -893,6 +900,32 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
+            ],
+        ],
+        'meta_keywords' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.meta_keywords',
+            'config' => [
+                'type' => 'text',
+                'cols' => 60,
+                'rows' => 5,
+            ],
+        ],
+        'meta_description' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.meta_description',
+            'config' => [
+                'type' => 'text',
+                'cols' => 60,
+                'rows' => 5,
+            ],
+        ],
+        'alternative_title' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.alternative_title',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
             ],
         ],
         'rowDescription' => [
