@@ -21,7 +21,7 @@ class PriceOption extends AbstractEntity
 {
     protected float $price = 0.0;
     protected ?DateTime $validUntil = null;
-    protected Event $event;
+    protected ?Event $event = null;
 
     public function getPrice(): float
     {
@@ -43,12 +43,12 @@ class PriceOption extends AbstractEntity
         $this->validUntil = $validUntil;
     }
 
-    public function getEvent(): Event
+    public function getEvent(): ?Event
     {
         return $this->event;
     }
 
-    public function setEvent(Event $event)
+    public function setEvent(?Event $event)
     {
         $this->event = $event;
     }
