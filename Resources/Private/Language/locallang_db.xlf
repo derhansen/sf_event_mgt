@@ -258,6 +258,9 @@
 			<trans-unit id="event.tabs.registrations">
 				<source>Registrations</source>
 			</trans-unit>
+			<trans-unit id="event.tabs.payment">
+				<source>Payment</source>
+			</trans-unit>
 			<trans-unit id="event.sections.payment">
 				<source>Payment</source>
 			</trans-unit>
