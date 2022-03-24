@@ -42,7 +42,7 @@ return [
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
                 field_values,
 
-            --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.payment,
+            --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration.tabs.payment,
                 paid, paymentmethod, payment_reference,
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
