@@ -57,7 +57,7 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
             return;
         }
 
-        $categoryConjunction = strtolower($this->getFlexFormFieldValue($flexFormData, 'settings.categoryConjunction'));
+        $categoryConjunction = strtolower($this->getFlexFormFieldValue($flexFormData, 'settings.categoryConjunction') ?? '');
         switch ($categoryConjunction) {
             case 'or':
             case 'and':
