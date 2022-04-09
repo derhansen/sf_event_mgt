@@ -46,7 +46,7 @@ needs:
    pageEventRSS = PAGE
    pageEventRSS {
      typeNum = 9918
-     10 < tt_content.list.20.sfeventmgt_pieventlist
+     10 < tt_content.list.20.sfeventmgt_pievent
      10 {
        settings < plugin.tx_sfeventmgt.settings
        settings {
