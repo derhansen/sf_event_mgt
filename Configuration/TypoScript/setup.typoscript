@@ -30,6 +30,7 @@ plugin.tx_sfeventmgt {
                     copyright = {$plugin.tx_sfeventmgt.rss.channel.copyright}
                     generator = {$plugin.tx_sfeventmgt.rss.channel.generator}
                     link = {$plugin.tx_sfeventmgt.rss.channel.link}
+                    typeNum = {$plugin.tx_sfeventmgt.rss.channel.typeNum}
                 }
             }
         }
