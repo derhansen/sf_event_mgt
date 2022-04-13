@@ -277,8 +277,10 @@ class AdministrationController extends AbstractController
         $eventDemand->setIgnoreEnableFields(true);
 
         $events = [];
+        $pagination = null;
         if ($this->getBackendUser()->isInWebMount($this->pid)) {
             $events = $this->eventRepository->findDemanded($eventDemand);
+            $pagination = $this->getPagination($events, $this->settings['pagination'] ?? []);
         }
 
         $this->view->assignMultiple([
@@ -288,7 +290,7 @@ class AdministrationController extends AbstractController
             'orderByFields' => $this->getOrderByFields(),
             'orderDirections' => $this->getOrderDirections(),
             'overwriteDemand' => $overwriteDemand,
-            'pagination' => $this->getPagination($events, $this->settings['pagination'] ?? []),
+            'pagination' => $pagination,
         ]);
 
         return $this->initModuleTemplateAndReturnResponse();
