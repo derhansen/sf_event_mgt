@@ -30,22 +30,19 @@ needs:
 
 .. code-block:: typoscript
 
-   [getTSFE().type == 9918]
-   config {
-     disableAllHeaderCode = 1
-     xhtml_cleaning = none
-     admPanel = 0
-     debug = 0
-     disablePrefixComment = 1
-     metaCharset = utf-8
-     additionalHeaders = Content-Type:application/rss+xml;charset=utf-8
-     additionalHeaders.10.header = Content-Type:application/rss+xml;charset=utf-8
-     absRefPrefix = {$plugin.tx_sfeventmgt.rss.channel.link}
-   }
-
    pageEventRSS = PAGE
    pageEventRSS {
-     typeNum = 9918
+     typeNum = {$plugin.tx_sfeventmgt.rss.channel.typeNum}
+     config {
+       disableAllHeaderCode = 1
+       xhtml_cleaning = none
+       admPanel = 0
+       debug = 0
+       disablePrefixComment = 1
+       metaCharset = utf-8
+       additionalHeaders.10.header = Content-Type:application/rss+xml;charset=utf-8
+       absRefPrefix = {$plugin.tx_sfeventmgt.rss.channel.link}
+     }
      10 < tt_content.list.20.sfeventmgt_pieventlist
      10 {
        settings < plugin.tx_sfeventmgt.settings
@@ -58,7 +55,6 @@ needs:
        }
      }
    }
-   [global]
 
 This example will show all events which are saved on the page with uid 3. The detail view page is the one with uid 4.
 
