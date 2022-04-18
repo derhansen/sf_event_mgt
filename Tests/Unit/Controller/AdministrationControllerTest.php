@@ -84,8 +84,6 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $this->subject->_set('pid', 0);
 
-        $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
-
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::any())->method('getSessionDataByKey');
         $this->subject->injectBeUserSessionService($beUserSessionService);
@@ -99,23 +97,15 @@ class AdministrationControllerTest extends UnitTestCase
         $requestProphecy->hasArgument('currentPage')->willReturn(false);
         $this->subject->_set('request', $requestProphecy->reveal());
 
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->onlyMethods(['findDemanded'])
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
-        $this->subject->injectEventRepository($eventRepository);
-
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
-            'events' => $allEvents,
+            'events' => [],
             'searchDemand' => new SearchDemand(),
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => null,
-            'pagination' => [],
+            'pagination' => null,
         ]);
         $this->subject->_set('view', $view);
 
@@ -130,7 +120,6 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('pid', 0);
 
         $searchDemand = new SearchDemand();
-        $allEvents = $this->getMockBuilder(QueryResultInterface::class)->getMock();
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
         $beUserSessionService->expects(self::once())->method('saveSessionData');
@@ -145,22 +134,15 @@ class AdministrationControllerTest extends UnitTestCase
         $requestProphecy->hasArgument('currentPage')->willReturn(false);
         $this->subject->_set('request', $requestProphecy->reveal());
 
-        $eventRepository = $this->getMockBuilder(EventRepository::class)
-            ->onlyMethods(['findDemanded'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
-        $this->subject->injectEventRepository($eventRepository);
-
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'pid' => 0,
-            'events' => $allEvents,
+            'events' => [],
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => [],
-            'pagination' => [],
+            'pagination' => null,
         ]);
         $this->subject->_set('view', $view);
 
@@ -183,6 +165,7 @@ class AdministrationControllerTest extends UnitTestCase
 
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
+        $mockBackendUser->expects(self::once())->method('check')->willReturn(true);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $requestProphecy = $this->prophesize(Request::class);
@@ -227,6 +210,7 @@ class AdministrationControllerTest extends UnitTestCase
 
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
+        $mockBackendUser->expects(self::once())->method('check')->willReturn(true);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
         $requestProphecy = $this->prophesize(Request::class);
