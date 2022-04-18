@@ -278,7 +278,9 @@ class AdministrationController extends AbstractController
 
         $events = [];
         $pagination = null;
-        if ($this->getBackendUser()->isInWebMount($this->pid)) {
+        if ($this->getBackendUser()->isInWebMount($this->pid) &&
+            $this->getBackendUser()->check('tables_select', 'tx_sfeventmgt_domain_model_event')
+        ) {
             $events = $this->eventRepository->findDemanded($eventDemand);
             $pagination = $this->getPagination($events, $this->settings['pagination'] ?? []);
         }
