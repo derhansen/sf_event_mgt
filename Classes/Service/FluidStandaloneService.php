@@ -106,7 +106,10 @@ class FluidStandaloneService
     }
 
     /**
-     * Parses the given string with Fluid View
+     * Parses the given string with Fluid View and decodes the result with html_entity_decode to revert Fluids encoding
+     * of variables.
+     *
+     * Note, the result of this function must never be used as raw/direct output in HTML/frontend context.
      *
      * @param string $string Any string
      * @param array $variables Variables
@@ -120,7 +123,8 @@ class FluidStandaloneService
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
+        $result = $standaloneView->render() ?? '';
 
-        return $standaloneView->render() ?? '';
+        return html_entity_decode($result);
     }
 }
