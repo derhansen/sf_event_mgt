@@ -67,7 +67,7 @@ return [
         ],
         'tstamp' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.emailsSent',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.tstamp',
             'config' => [
                 'type' => 'input',
             ],
