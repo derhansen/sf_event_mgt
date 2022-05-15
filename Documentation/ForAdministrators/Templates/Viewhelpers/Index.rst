@@ -168,7 +168,7 @@ Can be used to get the amount of events per category.
 
 **Example**::
 
-  <e:category.count categoryUid="{category.item.uid}" />
+  <e:category.count categoryUid="{category.uid}" />
 
 MetaTag
 ~~~~~~~
