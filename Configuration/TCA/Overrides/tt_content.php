@@ -55,7 +55,7 @@ foreach ($plugins as $pluginName => $pluginConfig) {
         'SfEventMgt',
         $pluginName,
         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.' . strtolower($pluginName) . '.title',
-        'ext-sfeventmgt-wizard',
+        null,
         'sf_event_mgt'
     );
 
