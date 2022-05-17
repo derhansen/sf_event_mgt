@@ -233,11 +233,11 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     }
 
     /**
-     * Test if findRegistrationsByUserRegistrationDemand respects displayMode constraint
+     * Test if findRegistrationsByUserRegistrationDemand respects displayMode "future" constraint
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymode()
+    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeFuture()
     {
         /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
@@ -247,8 +247,29 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         $demand->setDisplayMode('future');
         $demand->setStoragePage('7');
         $demand->setUser($feUser);
+        $demand->setCurrentDateTime(new \DateTime('01.06.2014 20:00'));
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
-        self::assertEquals(0, $registrations->count());
+        self::assertEquals(1, $registrations->count());
+    }
+
+    /**
+     * Test if findRegistrationsByUserRegistrationDemand respects displayMode "future" constraint
+     *
+     * @test
+     */
+    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeCurrentFuture()
+    {
+        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
+        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUser = $feUserRepository->findByUid(1);
+        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
+        $demand = new UserRegistrationDemand();
+        $demand->setDisplayMode('current_future');
+        $demand->setStoragePage('7');
+        $demand->setUser($feUser);
+        $demand->setCurrentDateTime(new \DateTime('01.06.2014 10:00'));
+        $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
+        self::assertEquals(2, $registrations->count());
     }
 
     /**
