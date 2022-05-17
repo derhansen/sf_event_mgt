@@ -164,6 +164,15 @@ class RegistrationRepository extends Repository
             case 'future':
                 $constraints[] = $query->greaterThan('event.startdate', $demand->getCurrentDateTime());
                 break;
+            case 'current_future':
+                $constraints[] = $query->logicalOr([
+                    $query->greaterThan('event.startdate', $demand->getCurrentDateTime()),
+                    $query->logicalAnd([
+                        $query->greaterThanOrEqual('event.enddate', $demand->getCurrentDateTime()),
+                        $query->lessThanOrEqual('event.startdate', $demand->getCurrentDateTime()),
+                    ]),
+                ]);
+                break;
             case 'past':
                 $constraints[] = $query->lessThanOrEqual('event.enddate', $demand->getCurrentDateTime());
                 break;
