@@ -988,7 +988,7 @@ class EventController extends AbstractController
             ',',
             PageUtility::extendPidListByChildren(
                 $this->settings['storagePage'] ?? '',
-                $this->settings['recursive'] ?? 0
+                (int)($this->settings['recursive'] ?? 0)
             ),
             true
         );
