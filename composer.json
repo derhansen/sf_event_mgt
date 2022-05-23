@@ -40,9 +40,9 @@
     "codeception/module-webdriver": "^1.0",
     "codeception/module-db": "^1.0",
     "friendsofphp/php-cs-fixer": "^3.0",
-    "saschaegerer/phpstan-typo3": "^0.13.1",
+    "saschaegerer/phpstan-typo3": "^1.1.2",
     "phpstan/extension-installer": "^1.1",
-    "jangregor/phpstan-prophecy": "^0.8.1"
+    "jangregor/phpstan-prophecy": "^1.0"
   },
   "replace": {
     "typo3-ter/sf-event-mgt": "self.version"
@@ -59,7 +59,12 @@
   },
   "config": {
     "vendor-dir": ".Build/vendor",
-    "bin-dir": ".Build/bin"
+    "bin-dir": ".Build/bin",
+    "allow-plugins": {
+      "typo3/class-alias-loader": true,
+      "typo3/cms-composer-installers": true,
+      "phpstan/extension-installer": true
+    }
   },
   "scripts": {
     "post-autoload-dump": [
