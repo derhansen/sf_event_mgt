@@ -1,13 +1,13 @@
 <?php
 
 return [
+    'ext-sfeventmgt-default' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/events.svg',
+    ],
     'apps-pagetree-folder-contains-events' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/apps-pagetree-folder-contains-events.svg',
-    ],
-    'ext-sfeventmgt-wizard' => [
-        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/events.svg',
     ],
     'ext-sfeventmgt-registration-unconfirmed' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,

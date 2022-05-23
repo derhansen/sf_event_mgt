@@ -1,7 +1,7 @@
 mod.wizards.newContentElement.wizardItems.plugins {
   elements {
     sf_event_mgt {
-      iconIdentifier = ext-sfeventmgt-wizard
+      iconIdentifier = ext-sfeventmgt-default
       title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.title
       description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.description
       tt_content_defValues {
