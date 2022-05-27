@@ -145,7 +145,7 @@ class NotificationService
      * @param Event $event
      * @param string $details
      * @param int $emailsSent
-     * @param CustomNotification
+     * @param CustomNotification $customNotification
      */
     public function createCustomNotificationLogentry(Event $event, string $details, int $emailsSent, CustomNotification $customNotification): void
     {
@@ -329,7 +329,7 @@ class NotificationService
                 $subject = $settings['notification']['registrationWaitlistMoveUp']['userSubject'] ?? '';
                 break;
             case MessageType::CUSTOM_NOTIFICATION:
-                $customNotificationSettings = $settings['notification']['customNotifications'] ?? '';
+                $customNotificationSettings = $settings['notification']['customNotifications'] ?? [];
                 $templateKey = $customNotification->getTemplate();
                 $template = 'Notification/User/Custom/' . $customNotificationSettings[$templateKey]['template'] ?? '';
                 $subject = $customNotificationSettings[$templateKey]['subject'] ?? '';
@@ -343,8 +343,8 @@ class NotificationService
         }
 
         return [
-            $template ?? '',
-            $subject ?? '',
+            $template,
+            $subject,
         ];
     }
 
