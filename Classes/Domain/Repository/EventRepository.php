@@ -416,14 +416,10 @@ class EventRepository extends Repository
 
             $searchSubject = $eventDemand->getSearchDemand()->getSearch();
             foreach ($searchFields as $field) {
-                if (!empty($searchSubject)) {
-                    $searchConstraints[] = $query->like($field, '%' . addcslashes($searchSubject, '_%') . '%');
-                }
+                $searchConstraints[] = $query->like($field, '%' . addcslashes($searchSubject, '_%') . '%');
             }
 
-            if (count($searchConstraints)) {
-                $constraints['search'] = $query->logicalOr($searchConstraints);
-            }
+            $constraints['search'] = $query->logicalOr($searchConstraints);
         }
     }
 
