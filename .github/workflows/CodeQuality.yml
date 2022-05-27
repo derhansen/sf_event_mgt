@@ -41,3 +41,7 @@ jobs:
       - name: Validate PHP coding guidelines
         run: |
           .Build/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --stop-on-violation --using-cache=no
+
+      - name: Run phpstan checks
+        run: |
+          .Build/bin/phpstan
