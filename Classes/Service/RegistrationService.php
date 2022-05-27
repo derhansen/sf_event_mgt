@@ -330,7 +330,7 @@ class RegistrationService
                 )
             )
             ->execute()
-            ->fetchColumn();
+            ->fetchOne();
 
         return $registrations >= 1;
     }

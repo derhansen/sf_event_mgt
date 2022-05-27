@@ -159,7 +159,7 @@ class MaintenanceService
                 )
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
     }
 
     /**
@@ -192,7 +192,7 @@ class MaintenanceService
                     $queryBuilder->createNamedParameter($maxEndDate->getTimestamp(), \PDO::PARAM_INT)
                 )
             )->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
     }
 
     /**
@@ -210,6 +210,6 @@ class MaintenanceService
             ->select('uid')
             ->from('tx_sfeventmgt_domain_model_registration')
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
     }
 }

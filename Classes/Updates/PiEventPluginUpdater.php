@@ -153,7 +153,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                 )
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
     }
 
     protected function getTargetListType(string $sourceListType, string $switchableControllerActions): string

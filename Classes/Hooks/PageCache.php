@@ -163,7 +163,7 @@ class PageCache
                 $timeConditions
             )
             ->execute()
-            ->fetch();
+            ->fetchAssociative();
 
         if ($row) {
             foreach ($timeFields as $timeField) {

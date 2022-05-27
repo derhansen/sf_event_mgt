@@ -78,7 +78,7 @@ class HideInlineRegistrations implements FormDataProviderInterface
                 )
             )
             ->execute()
-            ->fetchColumn();
+            ->fetchOne();
     }
 
     protected function getLanguageService(): LanguageService

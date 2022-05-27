@@ -112,10 +112,9 @@ class EventAvailability
            ->from('tx_sfeventmgt_domain_model_event')
            ->where(...$where)
            ->execute()
-           ->fetchColumn(0);
-        $eventIsAvailable = $eventsFound > 0;
+           ->fetchOne();
 
-        return $eventIsAvailable;
+        return $eventsFound > 0;
     }
 
     protected function getRequest(): ServerRequestInterface
