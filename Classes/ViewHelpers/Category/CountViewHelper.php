@@ -24,7 +24,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
  * Get usage count
  *
  * Example usage
- * {e:category.count(categoryUid:category.item.uid) -> f:variable(name: 'categoryUsageCount')}
+ * {e:category.count(categoryUid:category.uid) -> f:variable(name: 'categoryUsageCount')}
  * {categoryUsageCount}
  */
 class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
@@ -93,7 +93,7 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
                 )
             )
             ->execute()
-            ->fetchColumn(0);
+            ->fetchOne();
 
         return $count;
     }
