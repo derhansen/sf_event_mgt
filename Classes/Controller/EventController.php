@@ -565,13 +565,13 @@ class EventController extends AbstractController
                 $this->notificationService->sendUserMessage(
                     $event,
                     $registration,
-                    $this->settings ?? [],
+                    $this->settings,
                     $messageType
                 );
                 $this->notificationService->sendAdminMessage(
                     $event,
                     $registration,
-                    $this->settings ?? [],
+                    $this->settings,
                     $messageType
                 );
             }
@@ -719,13 +719,13 @@ class EventController extends AbstractController
             $this->notificationService->sendUserMessage(
                 $registration->getEvent(),
                 $registration,
-                $this->settings ?? [],
+                $this->settings,
                 $messageType
             );
             $this->notificationService->sendAdminMessage(
                 $registration->getEvent(),
                 $registration,
-                $this->settings ?? [],
+                $this->settings,
                 $messageType
             );
 

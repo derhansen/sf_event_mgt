@@ -837,6 +837,7 @@ class EventControllerTest extends UnitTestCase
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
         $this->subject->injectEventDispatcher($eventDispatcher);
+        $this->subject->_set('settings', []);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -903,6 +904,7 @@ class EventControllerTest extends UnitTestCase
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
         $this->subject->injectEventDispatcher($eventDispatcher);
+        $this->subject->_set('settings', []);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -1117,6 +1119,7 @@ class EventControllerTest extends UnitTestCase
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
         $this->subject->injectEventDispatcher($eventDispatcher);
+        $this->subject->_set('settings', []);
 
         $this->subject->saveRegistrationAction($registration, $event);
     }
@@ -1367,6 +1370,7 @@ class EventControllerTest extends UnitTestCase
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
         $this->subject->injectEventDispatcher($eventDispatcher);
+        $this->subject->_set('settings', []);
 
         $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
     }
@@ -1429,6 +1433,7 @@ class EventControllerTest extends UnitTestCase
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
         $this->subject->injectEventDispatcher($eventDispatcher);
+        $this->subject->_set('settings', []);
 
         $this->subject->confirmRegistrationAction(1, 'VALID-HMAC');
     }
