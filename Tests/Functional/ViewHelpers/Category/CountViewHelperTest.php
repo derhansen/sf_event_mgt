@@ -11,12 +11,9 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Category;
 
-use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 /**
