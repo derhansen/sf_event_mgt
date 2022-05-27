@@ -277,7 +277,7 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     {
         if (isset($flexformData['data'])) {
             $flexform = $flexformData['data'];
-            if (is_array($flexform ?? false) && is_array($flexform[$sheet] ?? false) &&
+            if (is_array($flexform) && is_array($flexform[$sheet] ?? false) &&
                 is_array($flexform[$sheet]['lDEF'] ?? false) && is_array($flexform[$sheet]['lDEF'][$key] ?? false) &&
                 isset($flexform[$sheet]['lDEF'][$key]['vDEF'])
             ) {
