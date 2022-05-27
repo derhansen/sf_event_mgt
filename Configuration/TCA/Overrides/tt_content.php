@@ -71,7 +71,7 @@ foreach ($plugins as $pluginName => $pluginConfig) {
         );
     }
 
-    if (isset($pluginConfig['previewRenderer'])) {
+    if ($pluginConfig['previewRenderer'] !== null) {
         $GLOBALS['TCA']['tt_content']['types']['list']['previewRenderer'][$signature] = $pluginConfig['previewRenderer'];
     }
 }

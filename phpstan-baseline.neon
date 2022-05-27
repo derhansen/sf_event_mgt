@@ -22,13 +22,6 @@ parameters:
       count: 1
       path: Classes/Controller/EventController.php
     -
-      message: "#^Return type \\(bool\\) of method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\AdministrationController\\:\\:getErrorFlashMessage\\(\\) should be compatible with return type \\(string\\) of method TYPO3\\\\CMS\\\\Extbase\\\\Mvc\\\\Controller\\\\ActionController\\:\\:getErrorFlashMessage\\(\\)$#"
-      count: 1
-      path: Classes/Controller/AdministrationController.php
-    -
-      message: "#Cannot call method fetchAssociative\\(\\) on Doctrine\\\\DBAL\\\\Driver\\\\ResultStatement\\|int\\.#"
-      path: Classes/ViewHelpers/Be/BackendUserViewHelper.php
-    -
       message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.#"
       path: Classes/ViewHelpers/PrefillViewHelper.php
     -
@@ -43,3 +36,10 @@ parameters:
     -
       message: "#Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getUriBuilder\\(\\)\\.#"
       path: Classes/ViewHelpers/Uri/PageViewHelper.php
+    -
+      message: "#Expression on left side of \\?\\? is not nullable\\.#"
+      path: Classes/Service/FluidStandaloneService.php
+    -
+      message: "#Expression on left side of \\?\\? is not nullable\\.#"
+      path: Classes/Service/NotificationService.php
+
