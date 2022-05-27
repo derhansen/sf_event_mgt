@@ -352,6 +352,7 @@ class AdministrationControllerTest extends UnitTestCase
                 'recipients' => $recipients,
             ]
         ));
+        $this->subject->_set('settings', []);
         $this->subject->_set('view', $view);
 
         $this->subject->indexNotifyAction($event);

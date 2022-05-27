@@ -307,7 +307,7 @@ class AdministrationController extends AbstractController
     {
         $resetFilter = false;
         if ($this->request->hasArgument('operation')) {
-            $resetFilter = $this->request->getArgument('operation') === 'reset-filters' ?? false;
+            $resetFilter = $this->request->getArgument('operation') === 'reset-filters';
         }
 
         return $resetFilter;
@@ -357,7 +357,7 @@ class AdministrationController extends AbstractController
     {
         $this->checkEventAccess($event);
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
-        $customNotifications = $this->settingsService->getCustomNotifications($this->settings ?? []);
+        $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
         $this->view->assignMultiple([
             'event' => $event,
