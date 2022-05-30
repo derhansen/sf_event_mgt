@@ -103,7 +103,7 @@ Old::
 New::
 
  plugin.tx_sfeventmgt.settings {
-   details {
+   detail {
      imageWidth = 200
      imageHeight =
    }
