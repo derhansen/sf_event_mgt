@@ -1,6 +1,41 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Command\\\\CleanupExpiredCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Command/CleanupExpiredCommand.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Command\\\\CleanupGdprCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Command/CleanupGdprCommand.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\EventController\\:\\:initializeAction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Controller/EventController.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\EventController\\:\\:initializeListAction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Controller/EventController.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\EventController\\:\\:initializeSaveRegistrationAction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Controller/EventController.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\EventController\\:\\:initializeSearchAction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Controller/EventController.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Controller\\\\EventController\\:\\:initializeView\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Controller/EventController.php
+
+		-
 			message: "#^Parameter \\#2 \\$optionKey of method TYPO3\\\\CMS\\\\Extbase\\\\Property\\\\PropertyMappingConfiguration\\:\\:setTypeConverterOption\\(\\) expects string, int given\\.$#"
 			count: 1
 			path: Classes/Controller/EventController.php
@@ -44,6 +79,11 @@ parameters:
 			message: "#^Parameter \\#3 \\.\\.\\.\\$expressions of method TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\ExpressionBuilder\\:\\:orX\\(\\) expects string, TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\CompositeExpression given\\.$#"
 			count: 1
 			path: Classes/Utility/EventAvailability.php
+
+		-
+			message: "#^Method DERHANSEN\\\\SfEventMgt\\\\Validation\\\\Validator\\\\CaptchaValidator\\:\\:isValid\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Classes/Validation/Validator/CaptchaValidator.php
 
 		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"

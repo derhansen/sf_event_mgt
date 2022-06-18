@@ -54,8 +54,6 @@ class CaptchaValidator extends AbstractValidator
 
     /**
      * @param Registration $value Registration
-     *
-     * @return void
      */
     protected function isValid($value)
     {

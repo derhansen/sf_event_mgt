@@ -27,8 +27,6 @@ class CleanupGdprCommand extends Command
 {
     /**
      * Configuring the command options
-     *
-     * @return void
      */
     public function configure()
     {
