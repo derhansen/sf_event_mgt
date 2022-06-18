@@ -68,7 +68,7 @@ class SpamCheckService
      *
      * @throws SpamCheckNotFoundException
      */
-    protected function processSpamChecks()
+    protected function processSpamChecks(): void
     {
         foreach ($this->settings['checks'] ?? [] as $checkConfig) {
             if (!class_exists($checkConfig['class'] ?? '')) {

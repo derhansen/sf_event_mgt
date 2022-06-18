@@ -40,32 +40,32 @@ class RegistrationService
     protected PaymentService $paymentService;
     protected NotificationService $notificationService;
 
-    public function injectFrontendUserRepository(FrontendUserRepository $frontendUserRepository)
+    public function injectFrontendUserRepository(FrontendUserRepository $frontendUserRepository): void
     {
         $this->frontendUserRepository = $frontendUserRepository;
     }
 
-    public function injectHashService(HashService $hashService)
+    public function injectHashService(HashService $hashService): void
     {
         $this->hashService = $hashService;
     }
 
-    public function injectNotificationService(NotificationService $notificationService)
+    public function injectNotificationService(NotificationService $notificationService): void
     {
         $this->notificationService = $notificationService;
     }
 
-    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
     }
 
-    public function injectPaymentService(PaymentService $paymentService)
+    public function injectPaymentService(PaymentService $paymentService): void
     {
         $this->paymentService = $paymentService;
     }
 
-    public function injectRegistrationRepository(RegistrationRepository $registrationRepository)
+    public function injectRegistrationRepository(RegistrationRepository $registrationRepository): void
     {
         $this->registrationRepository = $registrationRepository;
     }

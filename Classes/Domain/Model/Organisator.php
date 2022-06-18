@@ -31,7 +31,7 @@ class Organisator extends AbstractEntity
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -41,7 +41,7 @@ class Organisator extends AbstractEntity
         return $this->email;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -51,7 +51,7 @@ class Organisator extends AbstractEntity
         return $this->emailSignature;
     }
 
-    public function setEmailSignature(string $emailSignature)
+    public function setEmailSignature(string $emailSignature): void
     {
         $this->emailSignature = $emailSignature;
     }
@@ -61,7 +61,7 @@ class Organisator extends AbstractEntity
         return $this->phone;
     }
 
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
@@ -71,7 +71,7 @@ class Organisator extends AbstractEntity
         return $this->image;
     }
 
-    public function setImage(?FileReference $image)
+    public function setImage(?FileReference $image): void
     {
         $this->image = $image;
     }

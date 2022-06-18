@@ -26,7 +26,7 @@ class AttachmentService
 {
     protected ICalendarService $iCalendarService;
 
-    public function injectICalService(ICalendarService $iCalService)
+    public function injectICalService(ICalendarService $iCalService): void
     {
         $this->iCalendarService = $iCalService;
     }

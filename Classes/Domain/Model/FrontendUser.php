@@ -52,12 +52,12 @@ class FrontendUser extends AbstractEntity
     /**
      * Called again with initialize object, as fetching an entity from the DB does not use the constructor
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->image = $this->image ?? new ObjectStorage();
     }
 
-    public function setUsername(string $username)
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -67,7 +67,7 @@ class FrontendUser extends AbstractEntity
         return $this->username;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -77,7 +77,7 @@ class FrontendUser extends AbstractEntity
         return $this->name;
     }
 
-    public function setFirstName(string $firstName)
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -87,7 +87,7 @@ class FrontendUser extends AbstractEntity
         return $this->firstName;
     }
 
-    public function setMiddleName(string $middleName)
+    public function setMiddleName(string $middleName): void
     {
         $this->middleName = $middleName;
     }
@@ -97,7 +97,7 @@ class FrontendUser extends AbstractEntity
         return $this->middleName;
     }
 
-    public function setLastName(string $lastName)
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -107,7 +107,7 @@ class FrontendUser extends AbstractEntity
         return $this->lastName;
     }
 
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
@@ -117,7 +117,7 @@ class FrontendUser extends AbstractEntity
         return $this->address;
     }
 
-    public function setTelephone(string $telephone)
+    public function setTelephone(string $telephone): void
     {
         $this->telephone = $telephone;
     }
@@ -127,7 +127,7 @@ class FrontendUser extends AbstractEntity
         return $this->telephone;
     }
 
-    public function setFax(string $fax)
+    public function setFax(string $fax): void
     {
         $this->fax = $fax;
     }
@@ -137,7 +137,7 @@ class FrontendUser extends AbstractEntity
         return $this->fax;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = $email;
     }
@@ -147,7 +147,7 @@ class FrontendUser extends AbstractEntity
         return $this->email;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -157,7 +157,7 @@ class FrontendUser extends AbstractEntity
         return $this->title;
     }
 
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -167,7 +167,7 @@ class FrontendUser extends AbstractEntity
         return $this->zip;
     }
 
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -177,7 +177,7 @@ class FrontendUser extends AbstractEntity
         return $this->city;
     }
 
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -187,7 +187,7 @@ class FrontendUser extends AbstractEntity
         return $this->country;
     }
 
-    public function setWww(string $www)
+    public function setWww(string $www): void
     {
         $this->www = $www;
     }
@@ -197,7 +197,7 @@ class FrontendUser extends AbstractEntity
         return $this->www;
     }
 
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
@@ -210,7 +210,7 @@ class FrontendUser extends AbstractEntity
     /**
      * @param ObjectStorage<FileReference> $image
      */
-    public function setImage(ObjectStorage $image)
+    public function setImage(ObjectStorage $image): void
     {
         $this->image = $image;
     }

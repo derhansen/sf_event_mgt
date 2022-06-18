@@ -29,7 +29,7 @@ class RegistrationRepository extends Repository
      * Disable the use of storage records, because the StoragePage can be set
      * in the plugin
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);

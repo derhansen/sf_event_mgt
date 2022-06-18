@@ -70,7 +70,7 @@ class Registration extends AbstractEntity
     /**
      * Initialize all ObjectStorages as fetching an entity from the DB does not use the constructor
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->fieldValues = $this->fieldValues ?? new ObjectStorage();
     }
@@ -80,7 +80,7 @@ class Registration extends AbstractEntity
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname)
+    public function setFirstname(string $firstname): void
     {
         $this->firstname = $firstname;
     }
@@ -90,7 +90,7 @@ class Registration extends AbstractEntity
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname)
+    public function setLastname(string $lastname): void
     {
         $this->lastname = $lastname;
     }
@@ -100,7 +100,7 @@ class Registration extends AbstractEntity
         return $this->title;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -110,7 +110,7 @@ class Registration extends AbstractEntity
         return $this->company;
     }
 
-    public function setCompany(string $company)
+    public function setCompany(string $company): void
     {
         $this->company = $company;
     }
@@ -120,7 +120,7 @@ class Registration extends AbstractEntity
         return $this->address;
     }
 
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
@@ -130,7 +130,7 @@ class Registration extends AbstractEntity
         return $this->zip;
     }
 
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -140,7 +140,7 @@ class Registration extends AbstractEntity
         return $this->city;
     }
 
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -150,7 +150,7 @@ class Registration extends AbstractEntity
         return $this->country;
     }
 
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -160,7 +160,7 @@ class Registration extends AbstractEntity
         return $this->phone;
     }
 
-    public function setPhone(string $phone)
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
     }
@@ -170,7 +170,7 @@ class Registration extends AbstractEntity
         return $this->email;
     }
 
-    public function setEmail(string $email)
+    public function setEmail(string $email): void
     {
         $this->email = trim($email);
     }
@@ -185,7 +185,7 @@ class Registration extends AbstractEntity
         return $this->ignoreNotifications;
     }
 
-    public function setIgnoreNotifications(bool $ignoreNotifications)
+    public function setIgnoreNotifications(bool $ignoreNotifications): void
     {
         $this->ignoreNotifications = $ignoreNotifications;
     }
@@ -195,12 +195,12 @@ class Registration extends AbstractEntity
         return $this->gender;
     }
 
-    public function setGender(string $gender)
+    public function setGender(string $gender): void
     {
         $this->gender = $gender;
     }
 
-    public function setDateOfBirth(?DateTime $dateOfBirth)
+    public function setDateOfBirth(?DateTime $dateOfBirth): void
     {
         $this->dateOfBirth = $dateOfBirth;
     }
@@ -215,7 +215,7 @@ class Registration extends AbstractEntity
         return $this->accepttc;
     }
 
-    public function setAccepttc(bool $accepttc)
+    public function setAccepttc(bool $accepttc): void
     {
         $this->accepttc = $accepttc;
     }
@@ -225,7 +225,7 @@ class Registration extends AbstractEntity
         return $this->confirmed;
     }
 
-    public function setConfirmed(bool $confirmed)
+    public function setConfirmed(bool $confirmed): void
     {
         $this->confirmed = $confirmed;
     }
@@ -240,7 +240,7 @@ class Registration extends AbstractEntity
         return $this->paid;
     }
 
-    public function setPaid(bool $paid)
+    public function setPaid(bool $paid): void
     {
         $this->paid = $paid;
     }
@@ -250,7 +250,7 @@ class Registration extends AbstractEntity
         return $this->paid;
     }
 
-    public function setEvent(?Event $event)
+    public function setEvent(?Event $event): void
     {
         $this->event = $event;
     }
@@ -260,7 +260,7 @@ class Registration extends AbstractEntity
         return $this->event;
     }
 
-    public function setMainRegistration(?Registration $registration)
+    public function setMainRegistration(?Registration $registration): void
     {
         $this->mainRegistration = $registration;
     }
@@ -270,7 +270,7 @@ class Registration extends AbstractEntity
         return $this->mainRegistration;
     }
 
-    public function setNotes(string $notes)
+    public function setNotes(string $notes): void
     {
         $this->notes = $notes;
     }
@@ -280,7 +280,7 @@ class Registration extends AbstractEntity
         return $this->notes;
     }
 
-    public function setConfirmationUntil(?DateTime $confirmationUntil)
+    public function setConfirmationUntil(?DateTime $confirmationUntil): void
     {
         $this->confirmationUntil = $confirmationUntil;
     }
@@ -295,12 +295,12 @@ class Registration extends AbstractEntity
         return $this->registrationDate;
     }
 
-    public function setRegistrationDate(?DateTime $registrationDate)
+    public function setRegistrationDate(?DateTime $registrationDate): void
     {
         $this->registrationDate = $registrationDate;
     }
 
-    public function setHidden(bool $hidden)
+    public function setHidden(bool $hidden): void
     {
         $this->hidden = $hidden;
     }
@@ -315,7 +315,7 @@ class Registration extends AbstractEntity
         return $this->amountOfRegistrations;
     }
 
-    public function setAmountOfRegistrations(int $amountOfRegistrations)
+    public function setAmountOfRegistrations(int $amountOfRegistrations): void
     {
         $this->amountOfRegistrations = $amountOfRegistrations;
     }
@@ -325,7 +325,7 @@ class Registration extends AbstractEntity
         return $this->language;
     }
 
-    public function setLanguage(string $language)
+    public function setLanguage(string $language): void
     {
         $this->language = $language;
     }
@@ -335,7 +335,7 @@ class Registration extends AbstractEntity
         return $this->captcha;
     }
 
-    public function setCaptcha(string $captcha)
+    public function setCaptcha(string $captcha): void
     {
         $this->captcha = $captcha;
     }
@@ -345,7 +345,7 @@ class Registration extends AbstractEntity
         return $this->feUser;
     }
 
-    public function setFeUser(?FrontendUser $feUser)
+    public function setFeUser(?FrontendUser $feUser): void
     {
         $this->feUser = $feUser;
     }
@@ -355,7 +355,7 @@ class Registration extends AbstractEntity
         return $this->paymentmethod;
     }
 
-    public function setPaymentmethod(string $paymentmethod)
+    public function setPaymentmethod(string $paymentmethod): void
     {
         $this->paymentmethod = $paymentmethod;
     }
@@ -365,7 +365,7 @@ class Registration extends AbstractEntity
         return $this->paymentReference;
     }
 
-    public function setPaymentReference(string $paymentReference)
+    public function setPaymentReference(string $paymentReference): void
     {
         $this->paymentReference = $paymentReference;
     }
@@ -375,7 +375,7 @@ class Registration extends AbstractEntity
         return $this->waitlist;
     }
 
-    public function setWaitlist(bool $waitlist)
+    public function setWaitlist(bool $waitlist): void
     {
         $this->waitlist = $waitlist;
     }
@@ -385,7 +385,7 @@ class Registration extends AbstractEntity
         return $this->fieldValues;
     }
 
-    public function setFieldValues(?ObjectStorage $fieldValues)
+    public function setFieldValues(?ObjectStorage $fieldValues): void
     {
         $this->fieldValues = $fieldValues;
     }

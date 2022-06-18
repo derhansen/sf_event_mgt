@@ -24,7 +24,7 @@ class FluidStandaloneService
 {
     protected ConfigurationManager $configurationManager;
 
-    public function injectConfigurationManager(ConfigurationManager $configurationManager)
+    public function injectConfigurationManager(ConfigurationManager $configurationManager): void
     {
         $this->configurationManager = $configurationManager;
     }

@@ -33,7 +33,7 @@ class Location extends AbstractEntity
         return $this->title;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -43,7 +43,7 @@ class Location extends AbstractEntity
         return $this->address;
     }
 
-    public function setAddress(string $address)
+    public function setAddress(string $address): void
     {
         $this->address = $address;
     }
@@ -53,7 +53,7 @@ class Location extends AbstractEntity
         return $this->zip;
     }
 
-    public function setZip(string $zip)
+    public function setZip(string $zip): void
     {
         $this->zip = $zip;
     }
@@ -63,7 +63,7 @@ class Location extends AbstractEntity
         return $this->city;
     }
 
-    public function setCity(string $city)
+    public function setCity(string $city): void
     {
         $this->city = $city;
     }
@@ -73,7 +73,7 @@ class Location extends AbstractEntity
         return $this->country;
     }
 
-    public function setCountry(string $country)
+    public function setCountry(string $country): void
     {
         $this->country = $country;
     }
@@ -83,7 +83,7 @@ class Location extends AbstractEntity
         return $this->description;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -93,7 +93,7 @@ class Location extends AbstractEntity
         return $this->link;
     }
 
-    public function setLink(string $link)
+    public function setLink(string $link): void
     {
         $this->link = $link;
     }
@@ -103,7 +103,7 @@ class Location extends AbstractEntity
         return $this->longitude;
     }
 
-    public function setLongitude(float $longitude)
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }
@@ -113,7 +113,7 @@ class Location extends AbstractEntity
         return $this->latitude;
     }
 
-    public function setLatitude(float $latitude)
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }

@@ -26,7 +26,7 @@ class CustomNotificationLog extends AbstractEntity
     protected ?DateTime $tstamp = null;
     protected int $cruserId = 0;
 
-    public function setDetails(string $details)
+    public function setDetails(string $details): void
     {
         $this->details = $details;
     }
@@ -46,17 +46,17 @@ class CustomNotificationLog extends AbstractEntity
         $this->message = $message;
     }
 
-    public function setEvent(Event $event)
+    public function setEvent(Event $event): void
     {
         $this->event = $event;
     }
 
-    public function getEvent()
+    public function getEvent(): Event
     {
         return $this->event;
     }
 
-    public function setEmailsSent(int $emailsSent)
+    public function setEmailsSent(int $emailsSent): void
     {
         $this->emailsSent = $emailsSent;
     }
@@ -71,7 +71,7 @@ class CustomNotificationLog extends AbstractEntity
         return $this->tstamp;
     }
 
-    public function setTstamp(?DateTime $tstamp)
+    public function setTstamp(?DateTime $tstamp): void
     {
         $this->tstamp = $tstamp;
     }
@@ -81,7 +81,7 @@ class CustomNotificationLog extends AbstractEntity
         return $this->cruserId;
     }
 
-    public function setCruserId(int $cruserId)
+    public function setCruserId(int $cruserId): void
     {
         $this->cruserId = $cruserId;
     }

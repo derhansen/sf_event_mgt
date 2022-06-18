@@ -21,7 +21,7 @@ class UserRegistrationController extends AbstractController
     /**
      * Shows a list of all registration of the current frontend user
      */
-    public function listAction()
+    public function listAction(): void
     {
         $demand = UserRegistrationDemand::createFromSettings($this->settings);
         $demand->setUser($this->registrationService->getCurrentFeUserObject());

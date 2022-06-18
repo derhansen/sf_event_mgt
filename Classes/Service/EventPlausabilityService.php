@@ -85,7 +85,7 @@ class EventPlausabilityService
     protected function addMessageToFlashMessageQueue(
         string $message,
         string $title = '',
-        $severity = FlashMessage::INFO
+        int $severity = FlashMessage::INFO
     ): void {
         $flashMessage = GeneralUtility::makeInstance(
             FlashMessage::class,

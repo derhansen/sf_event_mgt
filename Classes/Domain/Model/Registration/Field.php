@@ -38,7 +38,7 @@ class Field extends AbstractEntity
         return $this->title;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -48,7 +48,7 @@ class Field extends AbstractEntity
         return $this->type;
     }
 
-    public function setType(string $type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
@@ -58,7 +58,7 @@ class Field extends AbstractEntity
         return $this->required;
     }
 
-    public function setRequired(bool $required)
+    public function setRequired(bool $required): void
     {
         $this->required = $required;
     }
@@ -68,7 +68,7 @@ class Field extends AbstractEntity
         return $this->placeholder;
     }
 
-    public function setPlaceholder(string $placeholder)
+    public function setPlaceholder(string $placeholder): void
     {
         $this->placeholder = $placeholder;
     }
@@ -78,7 +78,7 @@ class Field extends AbstractEntity
         return $this->defaultValue;
     }
 
-    public function setDefaultValue(string $defaultValue)
+    public function setDefaultValue(string $defaultValue): void
     {
         $this->defaultValue = $defaultValue;
     }
@@ -88,7 +88,7 @@ class Field extends AbstractEntity
         return $this->settings;
     }
 
-    public function setSettings(string $settings)
+    public function setSettings(string $settings): void
     {
         $this->settings = $settings;
     }
@@ -122,7 +122,7 @@ class Field extends AbstractEntity
         return $this->event;
     }
 
-    public function setEvent(?Event $event)
+    public function setEvent(?Event $event): void
     {
         $this->event = $event;
     }
@@ -160,7 +160,7 @@ class Field extends AbstractEntity
         return $this->text;
     }
 
-    public function setText(string $text)
+    public function setText(string $text): void
     {
         $this->text = $text;
     }
@@ -170,7 +170,7 @@ class Field extends AbstractEntity
         return $this->datepickermode;
     }
 
-    public function setDatepickermode(int $datepickermode)
+    public function setDatepickermode(int $datepickermode): void
     {
         $this->datepickermode = $datepickermode;
     }

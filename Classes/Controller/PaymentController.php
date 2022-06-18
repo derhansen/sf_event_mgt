@@ -305,7 +305,7 @@ class PaymentController extends AbstractController
      * @param string $actionName
      * @throws PaymentException
      */
-    protected function proceedWithAction(Registration $registration, string $actionName)
+    protected function proceedWithAction(Registration $registration, string $actionName): void
     {
         if ($registration->getEvent()->getEnablePayment() === false) {
             $message = LocalizationUtility::translate('payment.messages.paymentNotEnabled', 'SfEventMgt');
@@ -339,7 +339,7 @@ class PaymentController extends AbstractController
      * @param string $action
      * @throws InvalidHashException
      */
-    protected function validateHmacForAction(Registration $registration, string $hmac, string $action)
+    protected function validateHmacForAction(Registration $registration, string $hmac, string $action): void
     {
         $result = $this->hashService->validateHmac($action . '-' . $registration->getUid(), $hmac);
         if (!$result) {

@@ -43,38 +43,38 @@ class NotificationService
     protected AttachmentService $attachmentService;
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function injectAttachmentService(AttachmentService $attachmentService)
+    public function injectAttachmentService(AttachmentService $attachmentService): void
     {
         $this->attachmentService = $attachmentService;
     }
 
     public function injectCustomNotificationLogRepository(
         CustomNotificationLogRepository $customNotificationLogRepository
-    ) {
+    ): void {
         $this->customNotificationLogRepository = $customNotificationLogRepository;
     }
 
-    public function injectEmailService(EmailService $emailService)
+    public function injectEmailService(EmailService $emailService): void
     {
         $this->emailService = $emailService;
     }
 
-    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService)
+    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService): void
     {
         $this->fluidStandaloneService = $fluidStandaloneService;
     }
 
-    public function injectHashService(HashService $hashService)
+    public function injectHashService(HashService $hashService): void
     {
         $this->hashService = $hashService;
     }
 
-    public function injectRegistrationRepository(RegistrationRepository $registrationRepository)
+    public function injectRegistrationRepository(RegistrationRepository $registrationRepository): void
     {
         $this->registrationRepository = $registrationRepository;
     }
 
-    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
     }

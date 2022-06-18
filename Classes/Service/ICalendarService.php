@@ -25,12 +25,12 @@ class ICalendarService
     protected ConfigurationManager $configurationManager;
     protected FluidStandaloneService $fluidStandaloneService;
 
-    public function injectConfigurationManager(ConfigurationManager $configurationManager)
+    public function injectConfigurationManager(ConfigurationManager $configurationManager): void
     {
         $this->configurationManager = $configurationManager;
     }
 
-    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService)
+    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService): void
     {
         $this->fluidStandaloneService = $fluidStandaloneService;
     }

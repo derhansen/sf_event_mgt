@@ -32,7 +32,7 @@ class Speaker extends AbstractEntity
         return $this->name;
     }
 
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -42,7 +42,7 @@ class Speaker extends AbstractEntity
         return $this->jobTitle;
     }
 
-    public function setJobTitle(string $title)
+    public function setJobTitle(string $title): void
     {
         $this->jobTitle = $title;
     }
@@ -52,7 +52,7 @@ class Speaker extends AbstractEntity
         return $this->description;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -62,7 +62,7 @@ class Speaker extends AbstractEntity
         return $this->image;
     }
 
-    public function setImage(?FileReference $image)
+    public function setImage(?FileReference $image): void
     {
         $this->image = $image;
     }

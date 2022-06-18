@@ -136,7 +136,7 @@ class Event extends AbstractEntity
     /**
      * Initialize all ObjectStorages as fetching an entity from the DB does not use the constructor
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->category = new ObjectStorage();
         $this->related = new ObjectStorage();
@@ -155,7 +155,7 @@ class Event extends AbstractEntity
         return $this->tstamp;
     }
 
-    public function setTstamp(?DateTime $tstamp)
+    public function setTstamp(?DateTime $tstamp): void
     {
         $this->tstamp = $tstamp;
     }
@@ -165,7 +165,7 @@ class Event extends AbstractEntity
         return $this->hidden;
     }
 
-    public function setHidden(bool $hidden)
+    public function setHidden(bool $hidden): void
     {
         $this->hidden = $hidden;
     }
@@ -175,7 +175,7 @@ class Event extends AbstractEntity
         return $this->starttime;
     }
 
-    public function setStarttime(?DateTime $starttime)
+    public function setStarttime(?DateTime $starttime): void
     {
         $this->starttime = $starttime;
     }
@@ -185,7 +185,7 @@ class Event extends AbstractEntity
         return $this->endtime;
     }
 
-    public function setEndtime(?DateTime $endtime)
+    public function setEndtime(?DateTime $endtime): void
     {
         $this->endtime = $endtime;
     }
@@ -195,7 +195,7 @@ class Event extends AbstractEntity
         return $this->title;
     }
 
-    public function setTitle(string $title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
@@ -205,7 +205,7 @@ class Event extends AbstractEntity
         return $this->teaser;
     }
 
-    public function setTeaser(string $teaser)
+    public function setTeaser(string $teaser): void
     {
         $this->teaser = $teaser;
     }
@@ -215,7 +215,7 @@ class Event extends AbstractEntity
         return $this->description;
     }
 
-    public function setDescription(string $description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -225,7 +225,7 @@ class Event extends AbstractEntity
         return $this->program;
     }
 
-    public function setProgram(string $program)
+    public function setProgram(string $program): void
     {
         $this->program = $program;
     }
@@ -245,7 +245,7 @@ class Event extends AbstractEntity
         return $this->startdate;
     }
 
-    public function setStartdate(?DateTime $startdate)
+    public function setStartdate(?DateTime $startdate): void
     {
         $this->startdate = $startdate;
     }
@@ -255,7 +255,7 @@ class Event extends AbstractEntity
         return $this->enddate;
     }
 
-    public function setEnddate(?DateTime $enddate)
+    public function setEnddate(?DateTime $enddate): void
     {
         $this->enddate = $enddate;
     }
@@ -265,7 +265,7 @@ class Event extends AbstractEntity
         return $this->maxParticipants;
     }
 
-    public function setMaxParticipants(int $participants)
+    public function setMaxParticipants(int $participants): void
     {
         $this->maxParticipants = $participants;
     }
@@ -275,7 +275,7 @@ class Event extends AbstractEntity
         return $this->price;
     }
 
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
@@ -285,7 +285,7 @@ class Event extends AbstractEntity
         return $this->currency;
     }
 
-    public function setCurrency(string $currency)
+    public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
     }
@@ -295,7 +295,7 @@ class Event extends AbstractEntity
         return $this->enablePayment;
     }
 
-    public function setEnablePayment(bool $enablePayment)
+    public function setEnablePayment(bool $enablePayment): void
     {
         $this->enablePayment = $enablePayment;
     }
@@ -305,7 +305,7 @@ class Event extends AbstractEntity
         return $this->restrictPaymentMethods;
     }
 
-    public function setRestrictPaymentMethods(bool $restrictPaymentMethods)
+    public function setRestrictPaymentMethods(bool $restrictPaymentMethods): void
     {
         $this->restrictPaymentMethods = $restrictPaymentMethods;
     }
@@ -315,17 +315,17 @@ class Event extends AbstractEntity
         return $this->selectedPaymentMethods;
     }
 
-    public function setSelectedPaymentMethods(string $selectedPaymentMethods)
+    public function setSelectedPaymentMethods(string $selectedPaymentMethods): void
     {
         $this->selectedPaymentMethods = $selectedPaymentMethods;
     }
 
-    public function addCategory(Category $category)
+    public function addCategory(Category $category): void
     {
         $this->category->attach($category);
     }
 
-    public function removeCategory(Category $categoryToRemove)
+    public function removeCategory(Category $categoryToRemove): void
     {
         $this->category->detach($categoryToRemove);
     }
@@ -340,7 +340,7 @@ class Event extends AbstractEntity
         return $this->category;
     }
 
-    public function setCategory(?ObjectStorage $category)
+    public function setCategory(?ObjectStorage $category): void
     {
         $this->category = $category;
     }
@@ -350,27 +350,27 @@ class Event extends AbstractEntity
         return $this->related;
     }
 
-    public function setRelated(?ObjectStorage $related)
+    public function setRelated(?ObjectStorage $related): void
     {
         $this->related = $related;
     }
 
-    public function addRelated(Event $event)
+    public function addRelated(Event $event): void
     {
         $this->related->attach($event);
     }
 
-    public function removeRelated(Event $event)
+    public function removeRelated(Event $event): void
     {
         $this->related->detach($event);
     }
 
-    public function addRegistration(Registration $registration)
+    public function addRegistration(Registration $registration): void
     {
         $this->registration->attach($registration);
     }
 
-    public function removeRegistration(Registration $registrationToRemove)
+    public function removeRegistration(Registration $registrationToRemove): void
     {
         $this->registration->detach($registrationToRemove);
     }
@@ -380,17 +380,17 @@ class Event extends AbstractEntity
         return $this->registration;
     }
 
-    public function setRegistration(?ObjectStorage $registration)
+    public function setRegistration(?ObjectStorage $registration): void
     {
         $this->registration = $registration;
     }
 
-    public function addImage(FileReference $image)
+    public function addImage(FileReference $image): void
     {
         $this->image->attach($image);
     }
 
-    public function removeImage(FileReference $imageToRemove)
+    public function removeImage(FileReference $imageToRemove): void
     {
         $this->image->detach($imageToRemove);
     }
@@ -454,17 +454,17 @@ class Event extends AbstractEntity
         return $result;
     }
 
-    public function setImage(?ObjectStorage $image)
+    public function setImage(?ObjectStorage $image): void
     {
         $this->image = $image;
     }
 
-    public function addFiles(FileReference $file)
+    public function addFiles(FileReference $file): void
     {
         $this->files->attach($file);
     }
 
-    public function removeFiles(FileReference $fileToRemove)
+    public function removeFiles(FileReference $fileToRemove): void
     {
         $this->files->detach($fileToRemove);
     }
@@ -474,7 +474,7 @@ class Event extends AbstractEntity
         return $this->files;
     }
 
-    public function setFiles(?ObjectStorage $files)
+    public function setFiles(?ObjectStorage $files): void
     {
         $this->files = $files;
     }
@@ -514,7 +514,7 @@ class Event extends AbstractEntity
         return $this->maxParticipants - $this->getRegistrations()->count();
     }
 
-    public function setLocation(?Location $location)
+    public function setLocation(?Location $location): void
     {
         $this->location = $location;
     }
@@ -529,12 +529,12 @@ class Event extends AbstractEntity
         return $this->room;
     }
 
-    public function setRoom(string $room)
+    public function setRoom(string $room): void
     {
         $this->room = $room;
     }
 
-    public function setEnableRegistration(bool $enableRegistration)
+    public function setEnableRegistration(bool $enableRegistration): void
     {
         $this->enableRegistration = $enableRegistration;
     }
@@ -549,7 +549,7 @@ class Event extends AbstractEntity
         return $this->enableWaitlist;
     }
 
-    public function setEnableWaitlist(bool $enableWaitlist)
+    public function setEnableWaitlist(bool $enableWaitlist): void
     {
         $this->enableWaitlist = $enableWaitlist;
     }
@@ -564,7 +564,7 @@ class Event extends AbstractEntity
         $this->enableWaitlistMoveup = $enableWaitlistMoveup;
     }
 
-    public function setRegistrationStartdate(?DateTime $registrationStartdate)
+    public function setRegistrationStartdate(?DateTime $registrationStartdate): void
     {
         $this->registrationStartdate = $registrationStartdate;
     }
@@ -574,7 +574,7 @@ class Event extends AbstractEntity
         return $this->registrationStartdate;
     }
 
-    public function setRegistrationDeadline(?DateTime $registrationDeadline)
+    public function setRegistrationDeadline(?DateTime $registrationDeadline): void
     {
         $this->registrationDeadline = $registrationDeadline;
     }
@@ -584,7 +584,7 @@ class Event extends AbstractEntity
         return $this->registrationDeadline;
     }
 
-    public function setLink(string $link)
+    public function setLink(string $link): void
     {
         $this->link = $link;
     }
@@ -594,7 +594,7 @@ class Event extends AbstractEntity
         return $this->link;
     }
 
-    public function setTopEvent(bool $topEvent)
+    public function setTopEvent(bool $topEvent): void
     {
         $this->topEvent = $topEvent;
     }
@@ -609,17 +609,17 @@ class Event extends AbstractEntity
         return $this->maxRegistrationsPerUser;
     }
 
-    public function setMaxRegistrationsPerUser(int $maxRegistrationsPerUser)
+    public function setMaxRegistrationsPerUser(int $maxRegistrationsPerUser): void
     {
         $this->maxRegistrationsPerUser = $maxRegistrationsPerUser;
     }
 
-    public function addAdditionalImage(FileReference $additionalImage)
+    public function addAdditionalImage(FileReference $additionalImage): void
     {
         $this->additionalImage->attach($additionalImage);
     }
 
-    public function removeAdditionalImage(FileReference $additionalImageToRemove)
+    public function removeAdditionalImage(FileReference $additionalImageToRemove): void
     {
         $this->additionalImage->detach($additionalImageToRemove);
     }
@@ -629,7 +629,7 @@ class Event extends AbstractEntity
         return $this->additionalImage;
     }
 
-    public function setAdditionalImage(?ObjectStorage $additionalImage)
+    public function setAdditionalImage(?ObjectStorage $additionalImage): void
     {
         $this->additionalImage = $additionalImage;
     }
@@ -639,7 +639,7 @@ class Event extends AbstractEntity
         return $this->organisator;
     }
 
-    public function setOrganisator(Organisator $organisator)
+    public function setOrganisator(Organisator $organisator): void
     {
         $this->organisator = $organisator;
     }
@@ -649,7 +649,7 @@ class Event extends AbstractEntity
         return $this->notifyAdmin;
     }
 
-    public function setNotifyAdmin(bool $notifyAdmin)
+    public function setNotifyAdmin(bool $notifyAdmin): void
     {
         $this->notifyAdmin = $notifyAdmin;
     }
@@ -659,12 +659,12 @@ class Event extends AbstractEntity
         return $this->notifyOrganisator;
     }
 
-    public function setNotifyOrganisator(bool $notifyOrganisator)
+    public function setNotifyOrganisator(bool $notifyOrganisator): void
     {
         $this->notifyOrganisator = $notifyOrganisator;
     }
 
-    public function setEnableCancel(bool $enableCancel)
+    public function setEnableCancel(bool $enableCancel): void
     {
         $this->enableCancel = $enableCancel;
     }
@@ -674,7 +674,7 @@ class Event extends AbstractEntity
         return $this->enableCancel;
     }
 
-    public function setCancelDeadline(?DateTime $cancelDeadline)
+    public function setCancelDeadline(?DateTime $cancelDeadline): void
     {
         $this->cancelDeadline = $cancelDeadline;
     }
@@ -689,7 +689,7 @@ class Event extends AbstractEntity
         return $this->enableAutoconfirm;
     }
 
-    public function setEnableAutoconfirm(bool $enableAutoconfirm)
+    public function setEnableAutoconfirm(bool $enableAutoconfirm): void
     {
         $this->enableAutoconfirm = $enableAutoconfirm;
     }
@@ -699,7 +699,7 @@ class Event extends AbstractEntity
         return $this->uniqueEmailCheck;
     }
 
-    public function setUniqueEmailCheck(bool $uniqueEmailCheck)
+    public function setUniqueEmailCheck(bool $uniqueEmailCheck): void
     {
         $this->uniqueEmailCheck = $uniqueEmailCheck;
     }
@@ -744,17 +744,17 @@ class Event extends AbstractEntity
         return $this->priceOptions;
     }
 
-    public function setPriceOptions(?ObjectStorage $priceOptions)
+    public function setPriceOptions(?ObjectStorage $priceOptions): void
     {
         $this->priceOptions = $priceOptions;
     }
 
-    public function addPriceOptions(PriceOption $priceOption)
+    public function addPriceOptions(PriceOption $priceOption): void
     {
         $this->priceOptions->attach($priceOption);
     }
 
-    public function removePriceOptions(PriceOption $priceOption)
+    public function removePriceOptions(PriceOption $priceOption): void
     {
         $this->priceOptions->detach($priceOption);
     }
@@ -801,17 +801,17 @@ class Event extends AbstractEntity
         return $this->registrationWaitlist;
     }
 
-    public function setRegistrationWaitlist(?ObjectStorage $registration)
+    public function setRegistrationWaitlist(?ObjectStorage $registration): void
     {
         $this->registrationWaitlist = $registration;
     }
 
-    public function addRegistrationWaitlist(Registration $registration)
+    public function addRegistrationWaitlist(Registration $registration): void
     {
         $this->registrationWaitlist->attach($registration);
     }
 
-    public function removeRegistrationWaitlist(Registration $registrationToRemove)
+    public function removeRegistrationWaitlist(Registration $registrationToRemove): void
     {
         $this->registrationWaitlist->detach($registrationToRemove);
     }
@@ -834,17 +834,17 @@ class Event extends AbstractEntity
         return $this->speaker;
     }
 
-    public function setSpeaker(?ObjectStorage $speaker)
+    public function setSpeaker(?ObjectStorage $speaker): void
     {
         $this->speaker = $speaker;
     }
 
-    public function addSpeaker(Speaker $speaker)
+    public function addSpeaker(Speaker $speaker): void
     {
         $this->speaker->attach($speaker);
     }
 
-    public function removeSpeaker(Speaker $speaker)
+    public function removeSpeaker(Speaker $speaker): void
     {
         $this->speaker->detach($speaker);
     }
@@ -854,17 +854,17 @@ class Event extends AbstractEntity
         return $this->registrationFields;
     }
 
-    public function setRegistrationFields(?ObjectStorage $registrationFields)
+    public function setRegistrationFields(?ObjectStorage $registrationFields): void
     {
         $this->registrationFields = $registrationFields;
     }
 
-    public function addRegistrationFields(Field $registrationField)
+    public function addRegistrationFields(Field $registrationField): void
     {
         $this->registrationFields->attach($registrationField);
     }
 
-    public function removeRegistrationFields(Field $registrationField)
+    public function removeRegistrationFields(Field $registrationField): void
     {
         $this->registrationFields->detach($registrationField);
     }

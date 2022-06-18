@@ -68,7 +68,7 @@ class FieldValue extends AbstractEntity
         return $value;
     }
 
-    public function setValue(string $value)
+    public function setValue(string $value): void
     {
         $this->value = $value;
     }
@@ -78,7 +78,7 @@ class FieldValue extends AbstractEntity
         return $this->field;
     }
 
-    public function setField(?Field $field)
+    public function setField(?Field $field): void
     {
         $this->field = $field;
     }
@@ -88,7 +88,7 @@ class FieldValue extends AbstractEntity
         return $this->registration;
     }
 
-    public function setRegistration(?Registration $registration)
+    public function setRegistration(?Registration $registration): void
     {
         $this->registration = $registration;
     }
@@ -98,7 +98,7 @@ class FieldValue extends AbstractEntity
         return $this->valueType;
     }
 
-    public function setValueType(int $valueType)
+    public function setValueType(int $valueType): void
     {
         $this->valueType = $valueType;
     }

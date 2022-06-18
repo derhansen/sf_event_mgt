@@ -51,62 +51,62 @@ abstract class AbstractController extends ActionController
     protected PaymentService $paymentService;
     protected FieldRepository $fieldRepository;
 
-    public function injectCalendarService(CalendarService $calendarService)
+    public function injectCalendarService(CalendarService $calendarService): void
     {
         $this->calendarService = $calendarService;
     }
 
-    public function injectCategoryRepository(CategoryRepository $categoryRepository)
+    public function injectCategoryRepository(CategoryRepository $categoryRepository): void
     {
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function injectEventRepository(EventRepository $eventRepository)
+    public function injectEventRepository(EventRepository $eventRepository): void
     {
         $this->eventRepository = $eventRepository;
     }
 
-    public function injectIcalendarService(ICalendarService $icalendarService)
+    public function injectIcalendarService(ICalendarService $icalendarService): void
     {
         $this->icalendarService = $icalendarService;
     }
 
-    public function injectLocationRepository(LocationRepository $locationRepository)
+    public function injectLocationRepository(LocationRepository $locationRepository): void
     {
         $this->locationRepository = $locationRepository;
     }
 
-    public function injectNotificationService(NotificationService $notificationService)
+    public function injectNotificationService(NotificationService $notificationService): void
     {
         $this->notificationService = $notificationService;
     }
 
-    public function injectOrganisatorRepository(OrganisatorRepository $organisatorRepository)
+    public function injectOrganisatorRepository(OrganisatorRepository $organisatorRepository): void
     {
         $this->organisatorRepository = $organisatorRepository;
     }
 
-    public function injectSpeakerRepository(SpeakerRepository $speakerRepository)
+    public function injectSpeakerRepository(SpeakerRepository $speakerRepository): void
     {
         $this->speakerRepository = $speakerRepository;
     }
 
-    public function injectPaymentService(PaymentService $paymentService)
+    public function injectPaymentService(PaymentService $paymentService): void
     {
         $this->paymentService = $paymentService;
     }
 
-    public function injectRegistrationRepository(RegistrationRepository $registrationRepository)
+    public function injectRegistrationRepository(RegistrationRepository $registrationRepository): void
     {
         $this->registrationRepository = $registrationRepository;
     }
 
-    public function injectRegistrationService(RegistrationService $registrationService)
+    public function injectRegistrationService(RegistrationService $registrationService): void
     {
         $this->registrationService = $registrationService;
     }
 
-    public function injectFieldRepository(FieldRepository $fieldRepository)
+    public function injectFieldRepository(FieldRepository $fieldRepository): void
     {
         $this->fieldRepository = $fieldRepository;
     }

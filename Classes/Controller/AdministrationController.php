@@ -56,41 +56,41 @@ class AdministrationController extends AbstractController
 
     public function injectCustomNotificationLogRepository(
         CustomNotificationLogRepository $customNotificationLogRepository
-    ) {
+    ): void {
         $this->customNotificationLogRepository = $customNotificationLogRepository;
     }
 
-    public function injectExportService(ExportService $exportService)
+    public function injectExportService(ExportService $exportService): void
     {
         $this->exportService = $exportService;
     }
 
-    public function injectSettingsService(SettingsService $settingsService)
+    public function injectSettingsService(SettingsService $settingsService): void
     {
         $this->settingsService = $settingsService;
     }
 
-    public function injectBeUserSessionService(BeUserSessionService $beUserSessionService)
+    public function injectBeUserSessionService(BeUserSessionService $beUserSessionService): void
     {
         $this->beUserSessionService = $beUserSessionService;
     }
 
-    public function injectIconFactory(IconFactory $iconFactory)
+    public function injectIconFactory(IconFactory $iconFactory): void
     {
         $this->iconFactory = $iconFactory;
     }
 
-    public function injectMaintenanceService(MaintenanceService $maintenanceService)
+    public function injectMaintenanceService(MaintenanceService $maintenanceService): void
     {
         $this->maintenanceService = $maintenanceService;
     }
 
-    public function injectModuleTemplateFactory(ModuleTemplateFactory $moduleTemplateFactory)
+    public function injectModuleTemplateFactory(ModuleTemplateFactory $moduleTemplateFactory): void
     {
         $this->moduleTemplateFactory = $moduleTemplateFactory;
     }
 
-    public function injectPageRenderer(PageRenderer $pageRenderer)
+    public function injectPageRenderer(PageRenderer $pageRenderer): void
     {
         $this->pageRenderer = $pageRenderer;
     }
@@ -207,7 +207,7 @@ class AdministrationController extends AbstractController
     /**
      * Initialize action
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $this->pid = (int)GeneralUtility::_GET('id');
     }
@@ -215,7 +215,7 @@ class AdministrationController extends AbstractController
     /**
      * Set date format for fields startDate and endDate
      */
-    public function initializeListAction()
+    public function initializeListAction(): void
     {
         if (empty($this->settings)) {
             $this->redirect('settingsError');
@@ -405,7 +405,7 @@ class AdministrationController extends AbstractController
      * @param Event $event
      * @param CustomNotification $customNotification
      */
-    public function notifyAction(Event $event, CustomNotification $customNotification)
+    public function notifyAction(Event $event, CustomNotification $customNotification): void
     {
         $this->checkEventAccess($event);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
@@ -431,7 +431,7 @@ class AdministrationController extends AbstractController
      * @param Event $event
      * @throws StopActionException
      */
-    public function checkEventAccess(Event $event)
+    public function checkEventAccess(Event $event): void
     {
         if ($this->getBackendUser()->isInWebMount($event->getPid()) === null) {
             $this->addFlashMessage(
@@ -447,7 +447,7 @@ class AdministrationController extends AbstractController
     /**
      * Shows the settings error view
      */
-    public function settingsErrorAction()
+    public function settingsErrorAction(): void
     {
     }
 

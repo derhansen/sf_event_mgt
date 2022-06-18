@@ -33,7 +33,7 @@ class EventRepository extends Repository
 
     protected EventDispatcherInterface $eventDispatcher;
 
-    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher)
+    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
     {
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -42,7 +42,7 @@ class EventRepository extends Repository
      * Disable the use of storage records, because the StoragePage can be set
      * in the plugin
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
         $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
@@ -287,7 +287,7 @@ class EventRepository extends Repository
      * @param EventDemand $eventDemand EventDemand
      * @param array $constraints Constraints
      */
-    protected function setLocationConstraint($query, $eventDemand, &$constraints)
+    protected function setLocationConstraint($query, $eventDemand, &$constraints): void
     {
         if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() != '') {
             $constraints['location'] = $query->equals('location', $eventDemand->getLocation());

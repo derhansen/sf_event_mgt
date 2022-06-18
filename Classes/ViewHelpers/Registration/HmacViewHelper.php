@@ -22,7 +22,7 @@ class HmacViewHelper extends AbstractViewHelper
 {
     protected HashService $hashService;
 
-    public function injectHashService(HashService $hashService)
+    public function injectHashService(HashService $hashService): void
     {
         $this->hashService = $hashService;
     }

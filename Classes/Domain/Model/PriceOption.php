@@ -28,7 +28,7 @@ class PriceOption extends AbstractEntity
         return $this->price;
     }
 
-    public function setPrice(float $price)
+    public function setPrice(float $price): void
     {
         $this->price = $price;
     }
@@ -38,7 +38,7 @@ class PriceOption extends AbstractEntity
         return $this->validUntil;
     }
 
-    public function setValidUntil(?DateTime $validUntil)
+    public function setValidUntil(?DateTime $validUntil): void
     {
         $this->validUntil = $validUntil;
     }
@@ -48,7 +48,7 @@ class PriceOption extends AbstractEntity
         return $this->event;
     }
 
-    public function setEvent(?Event $event)
+    public function setEvent(?Event $event): void
     {
         $this->event = $event;
     }

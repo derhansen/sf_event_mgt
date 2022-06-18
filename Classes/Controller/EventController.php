@@ -55,7 +55,7 @@ class EventController extends AbstractController
 {
     protected EventCacheService $eventCacheService;
 
-    public function injectEventCacheService(EventCacheService $cacheService)
+    public function injectEventCacheService(EventCacheService $cacheService): void
     {
         $this->eventCacheService = $cacheService;
     }
@@ -65,6 +65,8 @@ class EventController extends AbstractController
      * @todo: Remove $view parameter for TYPO3 v12 version and use $this->view instead to assign variables.
      *
      * @param ViewInterface $view @extensionScannerIgnoreLine
+     *
+     * @return void
      */
     protected function initializeView(ViewInterface $view)
     {
@@ -77,6 +79,8 @@ class EventController extends AbstractController
 
     /**
      * Initializes the current action
+     *
+     * @return void
      */
     public function initializeAction()
     {
@@ -93,6 +97,8 @@ class EventController extends AbstractController
 
     /**
      * Initialize list action and set format
+     *
+     * @return void
      */
     public function initializeListAction()
     {
@@ -489,6 +495,8 @@ class EventController extends AbstractController
 
     /**
      * Set date format for field dateOfBirth
+     *
+     * @return void
      */
     public function initializeSaveRegistrationAction()
     {
@@ -846,6 +854,8 @@ class EventController extends AbstractController
 
     /**
      * Set date format for field startDate and endDate
+     *
+     * @return void
      */
     public function initializeSearchAction()
     {

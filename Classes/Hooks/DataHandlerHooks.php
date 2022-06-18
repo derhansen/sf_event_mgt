@@ -31,7 +31,7 @@ class DataHandlerHooks
      *
      * @param array $params
      */
-    public function clearCachePostProc(array $params)
+    public function clearCachePostProc(array $params): void
     {
         if (isset($params['table']) && $params['table'] === self::EVENT_TABLE) {
             $eventUid = $params['uid'] ?? 0;
@@ -58,7 +58,7 @@ class DataHandlerHooks
      * @param array $fieldArray
      * @param DataHandler $dataHandler
      */
-    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler)
+    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler): void
     {
         if ($table === 'tt_content' &&
             $status == 'update' &&
@@ -163,7 +163,7 @@ class DataHandlerHooks
      * @param DataHandler $pObj
      * @param bool $pasteUpdate
      */
-    public function processCmdmap_preProcess($command, $table, $id, $value, $pObj, $pasteUpdate)
+    public function processCmdmap_preProcess($command, $table, $id, $value, $pObj, $pasteUpdate): void
     {
         if (in_array($command, ['copy', 'localize']) && $table === self::EVENT_TABLE) {
             $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration']['config']['type'] = 'none';
@@ -183,7 +183,7 @@ class DataHandlerHooks
      * @param bool $pasteUpdate
      * @param array $pasteDatamap
      */
-    public function processCmdmap_postProcess($command, $table, $id, $value, $pObj, $pasteUpdate, $pasteDatamap)
+    public function processCmdmap_postProcess($command, $table, $id, $value, $pObj, $pasteUpdate, $pasteDatamap): void
     {
         if (in_array($command, ['copy', 'localize']) && $table === self::EVENT_TABLE) {
             $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration']['config']['type'] = 'inline';

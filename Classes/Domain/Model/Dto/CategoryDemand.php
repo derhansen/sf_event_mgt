@@ -63,7 +63,7 @@ class CategoryDemand
         return $this->includeSubcategories;
     }
 
-    public function setIncludeSubcategories(bool $includeSubcategories)
+    public function setIncludeSubcategories(bool $includeSubcategories): void
     {
         $this->includeSubcategories = $includeSubcategories;
     }
