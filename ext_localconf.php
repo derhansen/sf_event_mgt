@@ -153,6 +153,14 @@ call_user_func(function () {
         ],
     ];
 
+    // Register tables for garbage collection task
+    foreach (['tx_sfeventmgt_domain_model_registration', 'tx_sfeventmgt_domain_model_registration_fieldvalue'] as $table) {
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][TYPO3\CMS\Scheduler\Task\TableGarbageCollectionTask::class]['options']['tables'][$table] = [
+            'dateField' => 'tstamp',
+            'expirePeriod' => 30,
+        ];
+    }
+
     // Register event management plugin updater
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['piEventPluginUpdater']
         = \DERHANSEN\SfEventMgt\Updates\PiEventPluginUpdater::class;
