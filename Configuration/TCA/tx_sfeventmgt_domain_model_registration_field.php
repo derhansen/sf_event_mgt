@@ -66,6 +66,7 @@ return [
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-registration-field',
         ],
+        'hideTable' => true,
     ],
     'types' => [
         '0' => [
