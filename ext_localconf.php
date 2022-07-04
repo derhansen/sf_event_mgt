@@ -159,7 +159,7 @@ call_user_func(function () {
     ] = [
         'depends' => [
             \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class,
-        ]
+        ],
     ];
 
     // Register tables for garbage collection task
