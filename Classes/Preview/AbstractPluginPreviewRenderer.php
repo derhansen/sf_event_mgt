@@ -275,17 +275,7 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
      */
     protected function getFlexFormFieldValue(array $flexformData, string $key, string $sheet = 'sDEF'): ?string
     {
-        if (isset($flexformData['data'])) {
-            $flexform = $flexformData['data'];
-            if (is_array($flexform) && is_array($flexform[$sheet] ?? false) &&
-                is_array($flexform[$sheet]['lDEF'] ?? false) && is_array($flexform[$sheet]['lDEF'][$key] ?? false) &&
-                isset($flexform[$sheet]['lDEF'][$key]['vDEF'])
-            ) {
-                return $flexform[$sheet]['lDEF'][$key]['vDEF'];
-            }
-        }
-
-        return null;
+        return $flexformData['data'][$sheet]['lDEF'][$key]['vDEF'] ?? '';
     }
 
     /**
