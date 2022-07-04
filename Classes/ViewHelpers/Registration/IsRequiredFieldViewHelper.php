@@ -42,7 +42,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
             $defaultRequiredFields = ['firstname', 'lastname', 'email'];
             $requiredFields = array_map(
                 'trim',
-                explode(',', $arguments['settings']['registration']['requiredFields'] ?? [])
+                explode(',', $arguments['settings']['registration']['requiredFields'] ?? '')
             );
             $allRequiredFields = array_merge($requiredFields, $defaultRequiredFields);
             $result = in_array($arguments['fieldname'], $allRequiredFields);
