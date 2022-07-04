@@ -355,7 +355,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'required,datetime',
-                'default' => time(),
+                'default' => 0,
             ],
         ],
         'enddate' => [
@@ -368,7 +368,7 @@ return [
                 'renderType' => 'inputDateTime',
                 'size' => 13,
                 'eval' => 'datetime,int',
-                'default' => time() + 3600,
+                'default' => 0,
             ],
         ],
         'enable_registration' => [

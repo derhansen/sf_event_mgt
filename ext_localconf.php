@@ -153,6 +153,15 @@ call_user_func(function () {
         ],
     ];
 
+    // Custom FormDataProvider for default value of datetime fields
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
+            \DERHANSEN\SfEventMgt\Form\FormDataProvider\EventRowInitializeNew::class
+    ] = [
+        'depends' => [
+            \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew::class,
+        ]
+    ];
+
     // Register tables for garbage collection task
     foreach (['tx_sfeventmgt_domain_model_registration', 'tx_sfeventmgt_domain_model_registration_fieldvalue'] as $table) {
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][TYPO3\CMS\Scheduler\Task\TableGarbageCollectionTask::class]['options']['tables'][$table] = [
