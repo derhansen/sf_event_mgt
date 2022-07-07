@@ -37,7 +37,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	enable_waitlist_moveup tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	registration_startdate int(11) DEFAULT '0' NOT NULL,
 	registration_deadline int(11) DEFAULT '0' NOT NULL,
-	link tinytext,
+	link varchar(2048) DEFAULT '' NULL,
 	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	organisator int(11) unsigned DEFAULT '0' NOT NULL,
 	speaker int(11) unsigned DEFAULT '0' NOT NULL,
