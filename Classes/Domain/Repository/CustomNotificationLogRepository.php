@@ -19,11 +19,6 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
  */
 class CustomNotificationLogRepository extends Repository
 {
-    /**
-     * Set default sorting
-     *
-     * @var array
-     */
     protected $defaultOrderings = [
         'tstamp' => QueryInterface::ORDER_DESCENDING,
     ];
