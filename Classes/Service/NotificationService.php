@@ -464,8 +464,6 @@ class NotificationService
                 $template = 'Notification/Admin/RegistrationWaitlistMoveUp.html';
                 $subject = $settings['notification']['registrationWaitlistMoveUp']['adminSubject'] ?? '';
                 break;
-            case MessageType::REGISTRATION_NEW:
-            default:
         }
 
         return [$template, $subject];

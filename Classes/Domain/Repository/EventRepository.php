@@ -214,7 +214,6 @@ class EventRepository extends Repository
                     }
                 }
                 break;
-            default:
         }
     }
 

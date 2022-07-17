@@ -176,7 +176,6 @@ class RegistrationRepository extends Repository
             case 'past':
                 $constraints[] = $query->lessThanOrEqual('event.enddate', $demand->getCurrentDateTime());
                 break;
-            default:
         }
     }
 

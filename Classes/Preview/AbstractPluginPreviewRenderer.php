@@ -260,7 +260,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
             case 'Event->calendar':
                 $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.calendar');
                 break;
-            default:
         }
 
         return $title;

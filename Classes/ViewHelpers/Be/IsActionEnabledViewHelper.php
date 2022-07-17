@@ -69,7 +69,6 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
                         'tx_sfeventmgt_domain_model_registration_fieldvalue'
                     );
                 break;
-            default:
         }
 
         return $result;
