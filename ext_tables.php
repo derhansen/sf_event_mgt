@@ -3,9 +3,6 @@
 defined('TYPO3') or die();
 
 call_user_func(function () {
-    /**
-     * Table description files for localization and allowing sf_event_mgt tables on pages of type default
-     */
     $tables = [
         'tx_sfeventmgt_domain_model_event',
         'tx_sfeventmgt_domain_model_location',
@@ -18,10 +15,6 @@ call_user_func(function () {
     ];
 
     foreach ($tables as $table) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr(
-            $table,
-            'EXT:sf_event_mgt/Resources/Private/Language/locallang_csh_' . $table . '.xlf'
-        );
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages($table);
     }
 
