@@ -68,6 +68,6 @@ class CleanupGdprCommand extends Command
         $amountDeleted = $maintenanceService->processGdprCleanup($days, $softDelete, $ignoreEventRestriction);
         $io->success($amountDeleted . ' registrations deleted.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

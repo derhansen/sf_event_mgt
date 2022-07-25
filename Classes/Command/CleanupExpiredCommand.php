@@ -53,6 +53,6 @@ class CleanupExpiredCommand extends Command
         $maintenanceService->handleExpiredRegistrations($delete);
         $io->success('All done!');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }
