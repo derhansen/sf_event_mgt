@@ -54,8 +54,12 @@
 			<f:if condition="{settings.calendar.showWeekNumber}">
 				<li class="event-calendar__weeknumber"></li>
 			</f:if>
-			<f:for each="{weeks.0}" as="weekday">
-				<li class="event-calendar__weekdays-weekday">{f:format.date(date: weekday.timestamp, format: '%a')}</li>
+			<f:for each="{weeks}" as="week" iteration="i">
+                <f:if condition="{i.isFirst}">
+                    <f:for each="{week}" as="weekday">
+                        <li class="event-calendar__weekdays-weekday">{f:format.date(date: weekday.timestamp, format: '%a')}</li>
+                    </f:for>
+                </f:if>
 			</f:for>
 		</ul>
 
