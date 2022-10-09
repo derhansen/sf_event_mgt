@@ -50,7 +50,7 @@ return [
     'palettes' => [
         'paletteName' => ['showitem' => 'firstname, lastname,'],
         'paletteAddress' => ['showitem' => 'address, zip, city,'],
-        'paletteGenderTitle' => ['showitem' => 'gender, title,']
+        'paletteGenderTitle' => ['showitem' => 'gender, title,'],
     ],
     'columns' => [
         'hidden' => [
