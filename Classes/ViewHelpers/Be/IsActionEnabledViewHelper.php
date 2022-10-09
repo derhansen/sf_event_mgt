@@ -22,7 +22,7 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('action', 'string', 'Name of the action', true);
         $this->registerArgument('settings', 'array', 'Settings for backend module', true);

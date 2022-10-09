@@ -31,7 +31,7 @@ class PageViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('pageUid', 'int', 'target PID');
         $this->registerArgument('additionalParams', 'array', 'query parameters to be attached to the resulting URI', false, []);

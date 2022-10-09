@@ -19,7 +19,7 @@ class PrefillViewHelper extends AbstractPrefillViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('fieldname', 'string', 'FieldName', true);

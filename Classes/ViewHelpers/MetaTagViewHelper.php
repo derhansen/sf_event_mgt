@@ -24,7 +24,7 @@ class MetaTagViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('property', 'string', 'Property of meta tag', false, '', false);
         $this->registerArgument('name', 'string', 'Content of meta tag using the name attribute', false, '', false);

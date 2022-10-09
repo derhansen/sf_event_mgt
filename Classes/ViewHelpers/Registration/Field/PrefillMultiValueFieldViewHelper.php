@@ -23,7 +23,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('registrationField', 'object', 'RegistrationField', true);

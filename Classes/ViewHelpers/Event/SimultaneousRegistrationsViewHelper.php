@@ -22,7 +22,7 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('event', 'object', 'The event', true);

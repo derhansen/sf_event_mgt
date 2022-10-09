@@ -34,7 +34,7 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('categoryUid', 'int', 'Uid of the category', true);

@@ -61,11 +61,6 @@ parameters:
 			path: Classes/Service/NotificationService.php
 
 		-
-			message: "#^Unable to resolve the template type T in call to method static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\GeneralUtility\\:\\:makeInstance\\(\\)$#"
-			count: 1
-			path: Classes/Service/PaymentService.php
-
-		-
 			message: "#^Parameter \\#1 \\.\\.\\.\\$expressions of method TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\ExpressionBuilder\\:\\:orX\\(\\) expects string, TYPO3\\\\CMS\\\\Core\\\\Database\\\\Query\\\\Expression\\\\CompositeExpression given\\.$#"
 			count: 1
 			path: Classes/Utility/EventAvailability.php

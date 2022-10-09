@@ -27,7 +27,7 @@ class BackendUserViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('userUid', 'int', 'UID of backend user', true);
     }

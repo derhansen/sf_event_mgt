@@ -21,7 +21,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
     /**
      * InitializeArguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('fieldname', 'string', 'A fieldname to be checked', false);
         $this->registerArgument('registrationField', 'object', 'A registration field record', false);

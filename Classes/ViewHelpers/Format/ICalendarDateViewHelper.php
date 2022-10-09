@@ -21,7 +21,7 @@ class ICalendarDateViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('date', 'datetime', 'The DateTime object', false);

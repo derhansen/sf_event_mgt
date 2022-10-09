@@ -27,7 +27,7 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('description', 'string', 'The description', false);

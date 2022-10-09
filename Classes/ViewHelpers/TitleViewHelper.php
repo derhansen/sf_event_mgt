@@ -28,7 +28,7 @@ class TitleViewHelper extends AbstractViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('pageTitle', 'String', 'The page title');
