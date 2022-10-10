@@ -29,7 +29,7 @@ class PrefillViewHelperTest extends UnitTestCase
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -54,11 +54,11 @@ class PrefillViewHelperTest extends UnitTestCase
         $GLOBALS['TSFE'] = new stdClass();
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects($this->any())->method('getParsedBody')->willReturn($submittedData);
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -83,11 +83,11 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects($this->any())->method('getParsedBody')->willReturn($submittedData);
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -112,11 +112,11 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects($this->any())->method('getParsedBody')->willReturn($submittedData);
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -140,11 +140,11 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects($this->any())->method('getParsedBody')->willReturn([]);
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn([]);
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -169,11 +169,11 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects($this->any())->method('getParsedBody')->willReturn([]);
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn([]);
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -197,11 +197,11 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects($this->any())->method('getParsedBody')->willReturn($submittedData);
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);

@@ -32,8 +32,8 @@ class TitleViewHelperTest extends FunctionalTestCase
 
         // Default LANG just returns incoming value as label if calling ->sL()
         $languageService = $this->getMockBuilder(LanguageService::class)->disableOriginalConstructor()->getMock();
-        $languageService->expects($this->any())->method('loadSingleTableDescription')->willReturn(null);
-        $languageService->expects($this->any())->method('sL')->willReturn('foo');
+        $languageService->expects(self::any())->method('loadSingleTableDescription')->willReturn(null);
+        $languageService->expects(self::any())->method('sL')->willReturn('foo');
         $GLOBALS['LANG'] = $languageService;
 
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);

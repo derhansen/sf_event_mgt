@@ -98,7 +98,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
     public function registrationFieldDataProvider(): array
     {
         $mockField = $this->getMockBuilder(Field::class)->getMock();
-        $mockField->expects($this->any())->method('getUid')->willReturn(2);
+        $mockField->expects(self::any())->method('getUid')->willReturn(2);
 
         return [
             'No registration field' => [

@@ -32,7 +32,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillFieldViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -71,7 +71,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist($fieldUid, $fieldValues, $expected)
     {
         $field = $this->getMockBuilder(Field::class)->getMock();
-        $field->expects($this->any())->method('getUid')->willReturn($fieldUid);
+        $field->expects(self::any())->method('getUid')->willReturn($fieldUid);
 
         $submittedData = [
             'tx_sfeventmgt_pievent' => [
@@ -82,15 +82,15 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         ];
 
         $originalRequest = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $originalRequest->expects($this->any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
-        $originalRequest->expects($this->any())->method('getPluginName')->willReturn('Pievent');
-        $originalRequest->expects($this->any())->method('getParsedBody')->willReturn($submittedData);
+        $originalRequest->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $originalRequest->expects(self::any())->method('getPluginName')->willReturn('Pievent');
+        $originalRequest->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('getOriginalRequest')->willReturn($originalRequest);
+        $request->expects(self::any())->method('getOriginalRequest')->willReturn($originalRequest);
 
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects($this->any())->method('getRequest')->willReturn($request);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillFieldViewHelper();
         $viewHelper->setRenderingContext($renderingContext);

@@ -558,8 +558,8 @@ class NotificationServiceTest extends UnitTestCase
     public function adminNotificationNotSentIfNotificationsDisabled()
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects($this->any())->method('getNotifyAdmin')->willReturn(true);
-        $event->expects($this->any())->method('getNotifyOrganisator')->willReturn(true);
+        $event->expects(self::any())->method('getNotifyAdmin')->willReturn(true);
+        $event->expects(self::any())->method('getNotifyOrganisator')->willReturn(true);
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
         $settings = [

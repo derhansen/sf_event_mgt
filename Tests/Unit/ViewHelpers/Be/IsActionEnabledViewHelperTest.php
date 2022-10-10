@@ -81,7 +81,7 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
         ]);
 
         $beUserMock = $this->getMockBuilder(BackendUserAuthentication::class)->disableOriginalConstructor()->getMock();
-        $beUserMock->expects($this->any())->method('check')->willReturn($access);
+        $beUserMock->expects(self::any())->method('check')->willReturn($access);
         $GLOBALS['BE_USER'] = $beUserMock;
 
         self::assertEquals($expected, $viewHelper->render());

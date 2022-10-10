@@ -200,7 +200,7 @@ class EventControllerTest extends UnitTestCase
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('hasArgument')->willReturn(false);
+        $request->expects(self::any())->method('hasArgument')->willReturn(false);
         $this->subject->_set('request', $request);
 
         $demand = new EventDemand();
@@ -290,7 +290,7 @@ class EventControllerTest extends UnitTestCase
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('hasArgument')->willReturn(false);
+        $request->expects(self::any())->method('hasArgument')->willReturn(false);
         $this->subject->_set('request', $request);
 
         $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
@@ -383,7 +383,7 @@ class EventControllerTest extends UnitTestCase
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->any())->method('hasArgument')->willReturn(false);
+        $request->expects(self::any())->method('hasArgument')->willReturn(false);
         $this->subject->_set('request', $request);
 
         $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();

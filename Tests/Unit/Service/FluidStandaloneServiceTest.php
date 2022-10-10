@@ -69,18 +69,18 @@ class FluidStandaloneServiceTest extends UnitTestCase
         $this->subject->injectConfigurationManager($configurationManager);
 
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects($this->once())->method('setControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects($this->once())->method('setPluginName')->willReturn('Pievent');
+        $request->expects(self::once())->method('setControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::once())->method('setPluginName')->willReturn('Pievent');
 
         $standAloneView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
-        $standAloneView->expects($this->any())->method('getRequest')->willReturn($request);
-        $standAloneView->expects($this->once())->method('setLayoutRootPaths');
-        $standAloneView->expects($this->once())->method('setPartialRootPaths');
-        $standAloneView->expects($this->once())->method('setTemplateRootPaths');
-        $standAloneView->expects($this->once())->method('setTemplate')->with('test.html');
-        $standAloneView->expects($this->once())->method('setFormat')->with('html');
-        $standAloneView->expects($this->once())->method('assignMultiple')->with(['key' => 'value']);
-        $standAloneView->expects($this->once())->method('render')->willReturn('<p>dummy content</p>');
+        $standAloneView->expects(self::any())->method('getRequest')->willReturn($request);
+        $standAloneView->expects(self::once())->method('setLayoutRootPaths');
+        $standAloneView->expects(self::once())->method('setPartialRootPaths');
+        $standAloneView->expects(self::once())->method('setTemplateRootPaths');
+        $standAloneView->expects(self::once())->method('setTemplate')->with('test.html');
+        $standAloneView->expects(self::once())->method('setFormat')->with('html');
+        $standAloneView->expects(self::once())->method('assignMultiple')->with(['key' => 'value']);
+        $standAloneView->expects(self::once())->method('render')->willReturn('<p>dummy content</p>');
         GeneralUtility::addInstance(StandaloneView::class, $standAloneView);
 
         $expected = '<p>dummy content</p>';
@@ -158,7 +158,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $configurationManager->expects($this->any())->method('getConfiguration')->willReturn($settings);
+        $configurationManager->expects(self::any())->method('getConfiguration')->willReturn($settings);
         $this->subject->injectConfigurationManager($configurationManager);
         self::assertSame($expected, $this->subject->getTemplateFolders());
     }

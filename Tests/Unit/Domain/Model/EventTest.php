@@ -1823,22 +1823,22 @@ class EventTest extends UnitTestCase
         $file1 = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
 
         $fileReference1 = $this->getMockBuilder(CoreFileReference::class)->disableOriginalConstructor()->getMock();
-        $fileReference1->expects($this->any())->method('getOriginalFile')->willReturn($file1);
-        $fileReference1->expects($this->any())->method('hasProperty')->with('show_in_views')->willReturn(true);
-        $fileReference1->expects($this->any())->method('getProperty')->with('show_in_views')->willReturn(ShowInPreviews::LIST_VIEWS);
+        $fileReference1->expects(self::any())->method('getOriginalFile')->willReturn($file1);
+        $fileReference1->expects(self::any())->method('hasProperty')->with('show_in_views')->willReturn(true);
+        $fileReference1->expects(self::any())->method('getProperty')->with('show_in_views')->willReturn(ShowInPreviews::LIST_VIEWS);
 
         $extbaseFileReference1 = $this->getMockBuilder(FileReference::class)->disableOriginalConstructor()->getMock();
-        $extbaseFileReference1->expects($this->any())->method('getOriginalResource')->willReturn($fileReference1);
+        $extbaseFileReference1->expects(self::any())->method('getOriginalResource')->willReturn($fileReference1);
 
         $file2 = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
 
         $fileReference2 = $this->getMockBuilder(CoreFileReference::class)->disableOriginalConstructor()->getMock();
-        $fileReference2->expects($this->any())->method('getOriginalFile')->willReturn($file2);
-        $fileReference2->expects($this->any())->method('hasProperty')->with('show_in_views')->willReturn(true);
-        $fileReference2->expects($this->any())->method('getProperty')->with('show_in_views')->willReturn(ShowInPreviews::DETAIL_VIEWS);
+        $fileReference2->expects(self::any())->method('getOriginalFile')->willReturn($file2);
+        $fileReference2->expects(self::any())->method('hasProperty')->with('show_in_views')->willReturn(true);
+        $fileReference2->expects(self::any())->method('getProperty')->with('show_in_views')->willReturn(ShowInPreviews::DETAIL_VIEWS);
 
         $extbaseFileReference2 = $this->getMockBuilder(FileReference::class)->disableOriginalConstructor()->getMock();
-        $extbaseFileReference2->expects($this->any())->method('getOriginalResource')->willReturn($fileReference2);
+        $extbaseFileReference2->expects(self::any())->method('getOriginalResource')->willReturn($fileReference2);
 
         $objectStorage = new ObjectStorage();
         $objectStorage->attach($extbaseFileReference1);

@@ -51,12 +51,12 @@ class ICalendarServiceTest extends UnitTestCase
         $eventMock = $this->getMockBuilder(Event::class)->getMock();
 
         $standAloneView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
-        $standAloneView->expects($this->once())->method('setLayoutRootPaths');
-        $standAloneView->expects($this->once())->method('setPartialRootPaths');
-        $standAloneView->expects($this->once())->method('setTemplateRootPaths');
-        $standAloneView->expects($this->once())->method('setTemplate')->with('Event/ICalendar.txt');
-        $standAloneView->expects($this->once())->method('setFormat')->with('txt');
-        $standAloneView->expects($this->once())->method('assignMultiple')->with(
+        $standAloneView->expects(self::once())->method('setLayoutRootPaths');
+        $standAloneView->expects(self::once())->method('setPartialRootPaths');
+        $standAloneView->expects(self::once())->method('setTemplateRootPaths');
+        $standAloneView->expects(self::once())->method('setTemplate')->with('Event/ICalendar.txt');
+        $standAloneView->expects(self::once())->method('setFormat')->with('txt');
+        $standAloneView->expects(self::once())->method('assignMultiple')->with(
             [
                 'event' => $eventMock,
                 'typo3Host' => 'myhostname.tld',
@@ -66,7 +66,7 @@ class ICalendarServiceTest extends UnitTestCase
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
             ->disableOriginalConstructor()->getMock();
-        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->willReturn([]);
+        $fluidStandaloneService->expects(self::any())->method('getTemplateFolders')->willReturn([]);
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $this->subject->getiCalendarContent($eventMock);
