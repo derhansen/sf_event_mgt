@@ -12,8 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Be\IsActionEnabledViewHelper;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -22,8 +20,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class IsActionEnabledViewHelperTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     public function viewHelperReturnsExpectedResultDataProvider(): array
     {
         return [
@@ -84,9 +80,9 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
             'settings' => $settings,
         ]);
 
-        $beUserProphecy = $this->prophesize(BackendUserAuthentication::class);
-        $beUserProphecy->check(Argument::any(), Argument::any())->willReturn($access);
-        $GLOBALS['BE_USER'] = $beUserProphecy->reveal();
+        $beUserMock = $this->getMockBuilder(BackendUserAuthentication::class)->disableOriginalConstructor()->getMock();
+        $beUserMock->expects($this->any())->method('check')->willReturn($access);
+        $GLOBALS['BE_USER'] = $beUserMock;
 
         self::assertEquals($expected, $viewHelper->render());
     }

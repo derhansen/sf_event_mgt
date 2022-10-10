@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Category;
 
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -21,8 +20,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class CountViewHelperTest extends FunctionalTestCase
 {
-    use ProphecyTrait;
-
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     protected StandaloneView $view;

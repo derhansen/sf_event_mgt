@@ -20,7 +20,8 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
-use Prophecy\PhpUnit\ProphecyTrait;
+use TYPO3\CMS\Core\Resource\File;
+use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -30,8 +31,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class EventTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     /**
      * @var Event
      */
@@ -1821,27 +1820,25 @@ class EventTest extends UnitTestCase
      */
     public function specialGettersForImagesReturnsExpectedResults()
     {
-        $fileProphecy1 = $this->prophesize(\TYPO3\CMS\Core\Resource\File::class);
+        $file1 = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
 
-        $fileReferenceProphecy1 = $this->prophesize(\TYPO3\CMS\Core\Resource\FileReference::class);
-        $fileReferenceProphecy1->getUid()->willReturn(1);
-        $fileReferenceProphecy1->getOriginalFile()->willReturn($fileProphecy1->reveal());
-        $fileReferenceProphecy1->hasProperty('show_in_views')->willReturn(true);
-        $fileReferenceProphecy1->getProperty('show_in_views')->willReturn(ShowInPreviews::LIST_VIEWS);
+        $fileReference1 = $this->getMockBuilder(CoreFileReference::class)->disableOriginalConstructor()->getMock();
+        $fileReference1->expects($this->any())->method('getOriginalFile')->willReturn($file1);
+        $fileReference1->expects($this->any())->method('hasProperty')->with('show_in_views')->willReturn(true);
+        $fileReference1->expects($this->any())->method('getProperty')->with('show_in_views')->willReturn(ShowInPreviews::LIST_VIEWS);
 
-        $extbaseFileReference1 = new FileReference();
-        $extbaseFileReference1->setOriginalResource($fileReferenceProphecy1->reveal());
+        $extbaseFileReference1 = $this->getMockBuilder(FileReference::class)->disableOriginalConstructor()->getMock();
+        $extbaseFileReference1->expects($this->any())->method('getOriginalResource')->willReturn($fileReference1);
 
-        $fileProphecy2 = $this->prophesize(\TYPO3\CMS\Core\Resource\File::class);
+        $file2 = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();
 
-        $fileReferenceProphecy2 = $this->prophesize(\TYPO3\CMS\Core\Resource\FileReference::class);
-        $fileReferenceProphecy2->getUid()->willReturn(1);
-        $fileReferenceProphecy2->getOriginalFile()->willReturn($fileProphecy2->reveal());
-        $fileReferenceProphecy2->hasProperty('show_in_views')->willReturn(true);
-        $fileReferenceProphecy2->getProperty('show_in_views')->willReturn(ShowInPreviews::DETAIL_VIEWS);
+        $fileReference2 = $this->getMockBuilder(CoreFileReference::class)->disableOriginalConstructor()->getMock();
+        $fileReference2->expects($this->any())->method('getOriginalFile')->willReturn($file2);
+        $fileReference2->expects($this->any())->method('hasProperty')->with('show_in_views')->willReturn(true);
+        $fileReference2->expects($this->any())->method('getProperty')->with('show_in_views')->willReturn(ShowInPreviews::DETAIL_VIEWS);
 
-        $extbaseFileReference2 = new FileReference();
-        $extbaseFileReference2->setOriginalResource($fileReferenceProphecy2->reveal());
+        $extbaseFileReference2 = $this->getMockBuilder(FileReference::class)->disableOriginalConstructor()->getMock();
+        $extbaseFileReference2->expects($this->any())->method('getOriginalResource')->willReturn($fileReference2);
 
         $objectStorage = new ObjectStorage();
         $objectStorage->attach($extbaseFileReference1);

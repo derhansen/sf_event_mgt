@@ -11,8 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -24,8 +22,6 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class TitleViewHelperTest extends FunctionalTestCase
 {
-    use ProphecyTrait;
-
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     protected StandaloneView $view;
@@ -34,11 +30,11 @@ class TitleViewHelperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        // Default LANG prophecy just returns incoming value as label if calling ->sL()
-        $languageServiceProphecy = $this->prophesize(LanguageService::class);
-        $languageServiceProphecy->loadSingleTableDescription(Argument::cetera())->willReturn(null);
-        $languageServiceProphecy->sL(Argument::cetera())->willReturnArgument(0);
-        $GLOBALS['LANG'] = $languageServiceProphecy->reveal();
+        // Default LANG just returns incoming value as label if calling ->sL()
+        $languageService = $this->getMockBuilder(LanguageService::class)->disableOriginalConstructor()->getMock();
+        $languageService->expects($this->any())->method('loadSingleTableDescription')->willReturn(null);
+        $languageService->expects($this->any())->method('sL')->willReturn('foo');
+        $GLOBALS['LANG'] = $languageService;
 
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->getRenderingContext()->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
@@ -50,8 +46,8 @@ class TitleViewHelperTest extends FunctionalTestCase
      */
     public function indexedSearchTitleIsSet()
     {
-        $tsfe = $this->prophesize(TypoScriptFrontendController::class);
-        $GLOBALS['TSFE'] = $tsfe->reveal();
+        $tsfe = $this->getMockBuilder(TypoScriptFrontendController::class)->disableOriginalConstructor()->getMock();
+        $GLOBALS['TSFE'] = $tsfe;
 
         self::assertEmpty($this->view->assign('title', 'Test')->render());
         self::assertEquals('Test', $GLOBALS['TSFE']->indexedDocTitle);

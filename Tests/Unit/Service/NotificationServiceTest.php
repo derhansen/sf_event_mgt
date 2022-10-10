@@ -22,7 +22,6 @@ use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -34,8 +33,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class NotificationServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected NotificationService $subject;
 
     /**
@@ -539,16 +536,16 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function userNotificationNotSentIfNotificationsDisabled()
     {
-        $eventProphecy = $this->prophesize(Event::class);
-        $registrationProphecy = $this->prophesize(Registration::class);
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
         $settings = [
             'notification' => [
                 'disabled' => 1,
             ],
         ];
         $result = $this->subject->sendUserMessage(
-            $eventProphecy->reveal(),
-            $registrationProphecy->reveal(),
+            $event,
+            $registration,
             $settings,
             MessageType::REGISTRATION_NEW
         );
@@ -560,18 +557,19 @@ class NotificationServiceTest extends UnitTestCase
      */
     public function adminNotificationNotSentIfNotificationsDisabled()
     {
-        $eventProphecy = $this->prophesize(Event::class);
-        $eventProphecy->getNotifyAdmin()->willReturn(true);
-        $eventProphecy->getNotifyOrganisator()->willReturn(true);
-        $registrationProphecy = $this->prophesize(Registration::class);
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $event->expects($this->any())->method('getNotifyAdmin')->willReturn(true);
+        $event->expects($this->any())->method('getNotifyOrganisator')->willReturn(true);
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
+
         $settings = [
             'notification' => [
                 'disabled' => 1,
             ],
         ];
         $result = $this->subject->sendAdminMessage(
-            $eventProphecy->reveal(),
-            $registrationProphecy->reveal(),
+            $event,
+            $registration,
             $settings,
             MessageType::REGISTRATION_NEW
         );

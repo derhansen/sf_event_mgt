@@ -12,8 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -25,8 +23,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class FluidStandaloneServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected FluidStandaloneService $subject;
 
     /**
@@ -50,9 +46,10 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function getTemplateFoldersReturnsDefaultPathForNoConfiguration()
     {
-        $configurationManager = $this->prophesize(ConfigurationManager::class);
-        $configurationManager->getConfiguration(Argument::any(), Argument::any())->willReturn([]);
-        $this->subject->injectConfigurationManager($configurationManager->reveal());
+        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->subject->injectConfigurationManager($configurationManager);
 
         $expected = [
             GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Templates/'),
@@ -66,24 +63,25 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function renderTemplateReturnsExpectedResult()
     {
-        $configurationManager = $this->prophesize(ConfigurationManager::class);
-        $configurationManager->getConfiguration(Argument::any(), Argument::any())->willReturn([]);
-        $this->subject->injectConfigurationManager($configurationManager->reveal());
+        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->subject->injectConfigurationManager($configurationManager);
 
-        $request = $this->prophesize(Request::class);
-        $request->setControllerExtensionName('SfEventMgt');
-        $request->setPluginName('Pievent');
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects($this->once())->method('setControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects($this->once())->method('setPluginName')->willReturn('Pievent');
 
-        $view = $this->prophesize(StandaloneView::class);
-        $view->getRequest()->willReturn($request);
-        $view->setLayoutRootPaths(Argument::any())->shouldBeCalled();
-        $view->setPartialRootPaths(Argument::any())->shouldBeCalled();
-        $view->setTemplateRootPaths(Argument::any())->shouldBeCalled();
-        $view->setTemplate('test.html')->shouldBeCalled();
-        $view->setFormat('html')->shouldBeCalled();
-        $view->assignMultiple(['key' => 'value'])->shouldbeCalled();
-        $view->render()->willReturn('<p>dummy content</p>');
-        GeneralUtility::addInstance(StandaloneView::class, $view->reveal());
+        $standAloneView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
+        $standAloneView->expects($this->any())->method('getRequest')->willReturn($request);
+        $standAloneView->expects($this->once())->method('setLayoutRootPaths');
+        $standAloneView->expects($this->once())->method('setPartialRootPaths');
+        $standAloneView->expects($this->once())->method('setTemplateRootPaths');
+        $standAloneView->expects($this->once())->method('setTemplate')->with('test.html');
+        $standAloneView->expects($this->once())->method('setFormat')->with('html');
+        $standAloneView->expects($this->once())->method('assignMultiple')->with(['key' => 'value']);
+        $standAloneView->expects($this->once())->method('render')->willReturn('<p>dummy content</p>');
+        GeneralUtility::addInstance(StandaloneView::class, $standAloneView);
 
         $expected = '<p>dummy content</p>';
         self::assertEquals($expected, $this->subject->renderTemplate('test.html', ['key' => 'value']));
@@ -157,9 +155,11 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function getTemplateFoldersReturnsExpectedResult($settings, $expected)
     {
-        $configurationManager = $this->prophesize(ConfigurationManager::class);
-        $configurationManager->getConfiguration(Argument::any(), Argument::any())->willReturn($settings);
-        $this->subject->injectConfigurationManager($configurationManager->reveal());
+        $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $configurationManager->expects($this->any())->method('getConfiguration')->willReturn($settings);
+        $this->subject->injectConfigurationManager($configurationManager);
         self::assertSame($expected, $this->subject->getTemplateFolders());
     }
 }

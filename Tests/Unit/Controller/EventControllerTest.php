@@ -33,7 +33,6 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -59,8 +58,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class EventControllerTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     /**
      * @var EventController
      */
@@ -202,9 +199,9 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
-        $request = $this->prophesize(Request::class);
-        $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects($this->any())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $request);
 
         $demand = new EventDemand();
         $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
@@ -292,9 +289,9 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
-        $request = $this->prophesize(Request::class);
-        $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects($this->any())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $request);
 
         $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
         $allCategories = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
@@ -385,9 +382,9 @@ class EventControllerTest extends UnitTestCase
      */
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
-        $request = $this->prophesize(Request::class);
-        $request->hasArgument(\Prophecy\Argument::cetera())->willReturn(false);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects($this->any())->method('hasArgument')->willReturn(false);
+        $this->subject->_set('request', $request);
 
         $allEvents = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
         $allCategories = $this->getMockBuilder(QueryResult::class)->disableOriginalConstructor()->getMock();
@@ -782,8 +779,8 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationAndWaitlistRedirectsWithMessageIfRegistrationSuccessful()
     {
-        $request = $this->prophesize(Request::class);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
@@ -850,8 +847,8 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationActionWithoutAutoConfirmationRedirectsWithMessageIfRegistrationSuccessful()
     {
-        $request = $this->prophesize(Request::class);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');
@@ -917,8 +914,8 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationWithSettingAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
-        $request = $this->prophesize(Request::class);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $regUid = 1;
         $regHmac = 'someRandomHMAC';
@@ -990,8 +987,8 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationWithEventAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
-        $request = $this->prophesize(Request::class);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $regUid = 1;
         $regHmac = 'someRandomHMAC';
@@ -1059,8 +1056,8 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreaterThanOne()
     {
-        $request = $this->prophesize(Request::class);
-        $this->subject->_set('request', $request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('generateHmac')->willReturn('somehmac');

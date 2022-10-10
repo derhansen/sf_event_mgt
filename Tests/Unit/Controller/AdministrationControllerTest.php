@@ -21,7 +21,6 @@ use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
@@ -38,8 +37,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class AdministrationControllerTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     /**
      * @var AdministrationController
      */
@@ -92,10 +89,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
@@ -129,10 +124,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
@@ -168,10 +161,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('check')->willReturn(true);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -213,10 +204,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('check')->willReturn(true);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()

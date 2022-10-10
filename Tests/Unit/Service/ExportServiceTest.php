@@ -16,7 +16,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\ExportService;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -25,8 +24,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ExportServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     public function fieldValuesInTypoScriptDataProvider(): array
     {
         return [
@@ -132,8 +129,8 @@ class ExportServiceTest extends UnitTestCase
             $allRegistrations
         );
 
-        $eventRepository = $this->prophesize(EventRepository::class);
-        $exportService = new ExportService($registrationRepository, $eventRepository->reveal());
+        $eventRepository = $this->getMockBuilder(EventRepository::class)->disableOriginalConstructor()->getMock();
+        $exportService = new ExportService($registrationRepository, $eventRepository);
 
         $returnValue = $exportService->exportRegistrationsCsv($uid, $fields);
         self::assertSame($expected, $returnValue);

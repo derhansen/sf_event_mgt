@@ -14,7 +14,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Uri;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\ViewHelpers\Uri\OnlineCalendarViewHelper;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
@@ -23,8 +22,6 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
  */
 class OnlineCalendarViewHelperTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected OnlineCalendarViewHelper $viewHelper;
 
     /**
@@ -93,7 +90,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
             ],
             function () {
             },
-            $this->prophesize(RenderingContextInterface::class)->reveal()
+            $this->getMockBuilder(RenderingContextInterface::class)->disableOriginalConstructor()->getMock()
         );
         self::assertEquals($expected, $result);
     }
@@ -122,7 +119,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
             ],
             function () {
             },
-            $this->prophesize(RenderingContextInterface::class)->reveal()
+            $this->getMockBuilder(RenderingContextInterface::class)->disableOriginalConstructor()->getMock()
         );
         $expected = 'https://www.google.com/calendar/render?action=TEMPLATE&text=A%20test%20event&dates=20210101T190000Z%2B0200%2F20210101T200000Z%2B0200&details=A%20description%20for%20the%20event';
         self::assertEquals($expected, $result);

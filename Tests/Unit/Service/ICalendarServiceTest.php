@@ -14,8 +14,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -25,8 +23,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ICalendarServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected ICalendarService $subject;
 
     /**
@@ -52,27 +48,27 @@ class ICalendarServiceTest extends UnitTestCase
     {
         $_SERVER['HTTP_HOST'] = 'myhostname.tld';
 
-        $eventProphecy = $this->prophesize(Event::class)->reveal();
+        $eventMock = $this->getMockBuilder(Event::class)->getMock();
 
-        $standAloneView = $this->prophesize(StandaloneView::class);
-        $standAloneView->setLayoutRootPaths([])->shouldBeCalled();
-        $standAloneView->setPartialRootPaths([])->shouldBeCalled();
-        $standAloneView->setTemplateRootPaths([])->shouldBeCalled();
-        $standAloneView->setTemplate('Event/ICalendar.txt')->shouldBeCalled();
-        $standAloneView->setFormat('txt')->shouldBeCalled();
-        $standAloneView->assignMultiple(
+        $standAloneView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
+        $standAloneView->expects($this->once())->method('setLayoutRootPaths');
+        $standAloneView->expects($this->once())->method('setPartialRootPaths');
+        $standAloneView->expects($this->once())->method('setTemplateRootPaths');
+        $standAloneView->expects($this->once())->method('setTemplate')->with('Event/ICalendar.txt');
+        $standAloneView->expects($this->once())->method('setFormat')->with('txt');
+        $standAloneView->expects($this->once())->method('assignMultiple')->with(
             [
-                'event' => $eventProphecy,
+                'event' => $eventMock,
                 'typo3Host' => 'myhostname.tld',
             ]
-        )->shouldbeCalled();
-        $standAloneView->render()->willReturn('foo');
-        GeneralUtility::addInstance(StandaloneView::class, $standAloneView->reveal());
+        );
+        GeneralUtility::addInstance(StandaloneView::class, $standAloneView);
 
-        $fluidStandaloneService = $this->prophesize(FluidStandaloneService::class);
-        $fluidStandaloneService->getTemplateFolders(Argument::any())->willReturn([]);
-        $this->subject->injectFluidStandaloneService($fluidStandaloneService->reveal());
+        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+            ->disableOriginalConstructor()->getMock();
+        $fluidStandaloneService->expects($this->any())->method('getTemplateFolders')->willReturn([]);
+        $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
-        $this->subject->getiCalendarContent($eventProphecy);
+        $this->subject->getiCalendarContent($eventMock);
     }
 }

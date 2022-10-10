@@ -12,8 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\EventPlausabilityService;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -22,8 +20,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class EventPlausabilityServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected $resetSingletonInstances = true;
 
     public function isStartDateBeforeEndDateDataProvider(): array
@@ -67,9 +63,10 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage()
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->sL(Argument::cetera())->shouldBeCalled()->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService->reveal();
+        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['sL'])
+            ->getMock();
 
         $databaseRow = [
             'notify_organisator' => 1,
@@ -84,9 +81,10 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage()
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->sL(Argument::cetera())->shouldBeCalled()->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService->reveal();
+        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['sL'])
+            ->getMock();
 
         $databaseRow = [
             'notify_organisator' => 1,
@@ -108,9 +106,10 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage()
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->sL(Argument::cetera())->shouldNotBeCalled()->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService->reveal();
+        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['sL'])
+            ->getMock();
 
         $databaseRow = [
             'notify_organisator' => 1,

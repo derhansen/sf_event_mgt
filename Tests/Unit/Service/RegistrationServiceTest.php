@@ -20,7 +20,6 @@ use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -33,8 +32,6 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class RegistrationServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     /**
      * @var RegistrationService
      */
