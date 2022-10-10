@@ -62,6 +62,7 @@ class ICalendarServiceTest extends UnitTestCase
                 'typo3Host' => 'myhostname.tld',
             ]
         );
+        $standAloneView->expects(self::once())->method('render')->willReturn('');
         GeneralUtility::addInstance(StandaloneView::class, $standAloneView);
 
         $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
