@@ -62,6 +62,10 @@ Tab settings
          * current_future
          * past
 
+        .. note::
+
+           Display mode `past` will not include events that have no enddate.
+
    :Key:
          displayMode
 

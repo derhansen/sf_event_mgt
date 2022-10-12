@@ -184,7 +184,10 @@ class EventRepository extends Repository
                 ]);
                 break;
             case 'past':
-                $constraints['displayMode'] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
+                $constraints['displayMode'] = $query->logicalAnd(
+                    $query->greaterThan('enddate', 0),
+                    $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime())
+                );
                 break;
             case 'time_restriction':
                 $includeCurrentConstraint = null;

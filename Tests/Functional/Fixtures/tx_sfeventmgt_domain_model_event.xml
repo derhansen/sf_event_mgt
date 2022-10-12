@@ -63,6 +63,15 @@
         <description>Test 02.06.2014</description>
         <link>link</link>
     </tx_sfeventmgt_domain_model_event>
+    <!-- 01.06.2014 10:10 - no enddate -->
+    <tx_sfeventmgt_domain_model_event>
+        <pid>4</pid>
+        <startdate>1401617400</startdate>
+        <enddate>0</enddate>
+        <title>Test5</title>
+        <description>Test 12.06.2014</description>
+        <link>link</link>
+    </tx_sfeventmgt_domain_model_event>
 
     <!-- findRecordsByStartDate -->
     <!-- 30.05.2014 10:00 - 30.05.2014 12:00 -->

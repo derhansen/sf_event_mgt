@@ -75,7 +75,7 @@ class EventRepositoryTest extends FunctionalTestCase
             ],
             'pid not set' => [
                 '',
-                51,
+                52,
             ],
         ];
     }
@@ -109,11 +109,11 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setDisplayMode('all');
         $events = $this->eventRepository->findDemanded($demand);
 
-        self::assertSame(4, $events->count());
+        self::assertSame(5, $events->count());
     }
 
     /**
-     * Test if displayMode 'past' restriction in demand works
+     * Test if displayMode 'past' restriction in demand works.
      *
      * @test
      */
@@ -129,6 +129,22 @@ class EventRepositoryTest extends FunctionalTestCase
     }
 
     /**
+     * Test if displayMode 'past' restriction in demand works and ignores events with no enddate
+     *
+     * @test
+     */
+    public function findDemandedRecordsByDisplayModePastForEventWithNoEnddate()
+    {
+        $demand = new EventDemand();
+        $demand->setStoragePage('4');
+        $demand->setDisplayMode('past');
+        $demand->setCurrentDateTime(new \DateTime('01.06.2014 11:00'));
+        $events = $this->eventRepository->findDemanded($demand);
+
+        self::assertSame(2, $events->count());
+    }
+
+    /**
      * Test if displayMode 'future' restriction in demand works
      *
      * @test
@@ -141,7 +157,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $demand->setCurrentDateTime(new \DateTime('30.05.2014 14:00:00'));
         $events = $this->eventRepository->findDemanded($demand);
 
-        self::assertSame(2, $events->count());
+        self::assertSame(3, $events->count());
     }
 
     /**
@@ -521,7 +537,7 @@ class EventRepositoryTest extends FunctionalTestCase
             'titleDesc' => [
                 'title',
                 'desc',
-                'Test4',
+                'Test5',
             ],
             'startdateAsc' => [
                 'startdate',
@@ -531,12 +547,12 @@ class EventRepositoryTest extends FunctionalTestCase
             'startdateDesc' => [
                 'startdate',
                 'desc',
-                'Test3',
+                'Test5',
             ],
             'enddateAsc' => [
                 'enddate',
                 'asc',
-                'Test2',
+                'Test5',
             ],
             'enddateDesc' => [
                 'enddate',
