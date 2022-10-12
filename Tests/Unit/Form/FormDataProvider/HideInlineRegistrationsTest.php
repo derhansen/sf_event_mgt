@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class HideInlineRegistrationsTest extends UnitTestCase
 {
-    const LLL = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.';
+    public const LLL = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.';
 
     /**
      * @var bool Reset singletons created by subject

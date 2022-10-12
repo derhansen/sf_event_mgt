@@ -67,7 +67,7 @@ class CaptchaValidator extends AbstractValidator
         $request = $GLOBALS['TYPO3_REQUEST'];
         $parsedBody = $request->getParsedBody();
         $captchaFormFieldValue = $parsedBody[$configurationService->getResponseField()] ?? null;
-        if (null === $captchaFormFieldValue) {
+        if ($captchaFormFieldValue === null) {
             $this->addError(
                 LocalizationUtility::translate('validation.missing_captcha', 'SfEventMgt'),
                 1631943016

@@ -22,8 +22,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DataHandlerHooks
 {
-    const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
-    const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
+    public const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
+    public const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
 
     /**
      * Flushes the cache if a event record was edited.
