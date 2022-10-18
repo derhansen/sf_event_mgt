@@ -17,7 +17,7 @@ You can for example add own variables to all views or extend email notifications
 Please note, that there is no documentation for each PSR-14 event in detail, so you have to check each event
 individually for supported properties. Generally I tried to make the events as self explaining as possible.
 
-If you are new to PSR-14 Events, please reffer to the official TYPO3 documentation about
+If you are new to PSR-14 Events, please refer to the official TYPO3 documentation about
 PSR-14 Events and Event Listeners.
 
 https://docs.typo3.org/m/typo3/reference-coreapi/master/en-us/ApiOverview/Hooks/EventDispatcher/Index.html
