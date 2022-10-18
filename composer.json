@@ -33,8 +33,6 @@
     "typo3/cms-install": "^11.5",
     "typo3/cms-extensionmanager": "^11.5",
     "typo3/testing-framework": "^6.9.0",
-    "phpspec/prophecy": "^1.13",
-    "phpspec/prophecy-phpunit": "^2.0",
     "codeception/codeception": "^4.1",
     "ericmartel/codeception-email": "^1.0",
     "codeception/module-webdriver": "^1.0",
