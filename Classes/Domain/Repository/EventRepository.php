@@ -131,9 +131,9 @@ class EventRepository extends Repository
     {
         $orderings = [];
         $orderFieldAllowed = GeneralUtility::trimExplode(',', $eventDemand->getOrderFieldAllowed(), true);
-        if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '' &&
+        if ($eventDemand->getOrderField() !== '' && $eventDemand->getOrderDirection() !== '' &&
             !empty($orderFieldAllowed) && in_array($eventDemand->getOrderField(), $orderFieldAllowed, true)) {
-            $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
+            $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) === 'desc') ?
                 QueryInterface::ORDER_DESCENDING :
                 QueryInterface::ORDER_ASCENDING);
             $query->setOrderings($orderings);
@@ -234,7 +234,7 @@ class EventRepository extends Repository
             return;
         }
 
-        if ($eventDemand->getCategory() != '') {
+        if ($eventDemand->getCategory() !== '') {
             $categoryConstraints = [];
             if ($eventDemand->getIncludeSubcategories()) {
                 $categoryList = CategoryService::getCategoryListWithChilds($eventDemand->getCategory());
@@ -291,7 +291,7 @@ class EventRepository extends Repository
      */
     protected function setLocationConstraint($query, $eventDemand, &$constraints): void
     {
-        if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() != '') {
+        if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() !== '') {
             $constraints['location'] = $query->equals('location', $eventDemand->getLocation());
         }
     }
@@ -308,7 +308,7 @@ class EventRepository extends Repository
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() != '') {
+        if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() !== '') {
             $constraints['locationCity'] = $query->equals('location.city', $eventDemand->getLocationCity());
         }
     }
@@ -325,7 +325,7 @@ class EventRepository extends Repository
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() != '') {
+        if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() !== '') {
             $constraints['locationCountry'] = $query->equals('location.country', $eventDemand->getLocationCountry());
         }
     }
@@ -339,7 +339,7 @@ class EventRepository extends Repository
      */
     protected function setSpeakerConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
-        if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() != '') {
+        if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() !== '') {
             $constraints['speaker'] = $query->contains('speaker', $eventDemand->getSpeaker());
         }
     }
@@ -356,7 +356,7 @@ class EventRepository extends Repository
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getOrganisator() !== null && $eventDemand->getOrganisator() != '') {
+        if ($eventDemand->getOrganisator() !== null && $eventDemand->getOrganisator() !== '') {
             $constraints['organisator'] = $query->equals('organisator', $eventDemand->getOrganisator());
         }
     }
