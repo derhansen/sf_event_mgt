@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
 
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -205,7 +206,7 @@ class DataHandlerHooks
         $queryBuilder
             ->delete(self::CUSTOMNOTIFICATIONLOG_TABLE)
             ->where(
-                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             )
             ->execute();
     }

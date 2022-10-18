@@ -76,15 +76,15 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
                 $queryBuilder->expr()->andX(
                     $queryBuilder->expr()->eq(
                         'sys_category.uid',
-                        $queryBuilder->createNamedParameter($categoryUid, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($categoryUid, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.tablenames',
-                        $queryBuilder->createNamedParameter('tx_sfeventmgt_domain_model_event', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('tx_sfeventmgt_domain_model_event')
                     ),
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.fieldname',
-                        $queryBuilder->createNamedParameter('category', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('category')
                     ),
                     $queryBuilder->expr()->in(
                         'tx_sfeventmgt_domain_model_event.sys_language_uid',

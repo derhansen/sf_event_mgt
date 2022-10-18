@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Hooks;
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
@@ -130,7 +131,7 @@ class PageCache
                 . 'CASE WHEN '
                 . $queryBuilder->expr()->lte(
                     $field,
-                    $queryBuilder->createNamedParameter($now, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($now, Connection::PARAM_INT)
                 )
                 . ' THEN NULL ELSE ' . $queryBuilder->quoteIdentifier($field) . ' END'
                 . ') AS ' . $queryBuilder->quoteIdentifier($field)
@@ -138,7 +139,7 @@ class PageCache
             $timeConditions->add(
                 $queryBuilder->expr()->gt(
                     $field,
-                    $queryBuilder->createNamedParameter($now, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($now, Connection::PARAM_INT)
                 )
             );
         }
@@ -150,15 +151,15 @@ class PageCache
             ->where(
                 $queryBuilder->expr()->eq(
                     'pid',
-                    $queryBuilder->createNamedParameter($pid, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($pid, Connection::PARAM_INT)
                 ),
                 $queryBuilder->expr()->eq(
                     'enable_registration',
-                    $queryBuilder->createNamedParameter(1, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(1, Connection::PARAM_INT)
                 ),
                 $queryBuilder->expr()->gt(
                     'startdate',
-                    $queryBuilder->createNamedParameter($now, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($now, Connection::PARAM_INT)
                 ),
                 $timeConditions
             )

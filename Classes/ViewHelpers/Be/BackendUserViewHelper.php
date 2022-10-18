@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -52,7 +53,7 @@ class BackendUserViewHelper extends AbstractViewHelper
             ->where(
                 $queryBuilder->expr()->eq(
                     'uid',
-                    $queryBuilder->createNamedParameter($arguments['userUid'], \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($arguments['userUid'], Connection::PARAM_INT)
                 )
             )
             ->execute()

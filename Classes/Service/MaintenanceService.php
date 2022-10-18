@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -151,11 +152,11 @@ class MaintenanceService
             ->where(
                 $queryBuilder->expr()->lte(
                     'confirmation_until',
-                    $queryBuilder->createNamedParameter(time(), \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(time(), Connection::PARAM_INT)
                 ),
                 $queryBuilder->expr()->eq(
                     'confirmed',
-                    $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
                 )
             )
             ->execute()
@@ -189,7 +190,7 @@ class MaintenanceService
             )->where(
                 $queryBuilder->expr()->lte(
                     'e.enddate',
-                    $queryBuilder->createNamedParameter($maxEndDate->getTimestamp(), \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter($maxEndDate->getTimestamp(), Connection::PARAM_INT)
                 )
             )->execute()
             ->fetchAllAssociative();
