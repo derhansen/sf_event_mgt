@@ -51,11 +51,7 @@ class CleanupGdprCommand extends Command
     }
 
     /**
-     * Execute the cleanup command
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
+     * Execute the cleanup GDPR command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

@@ -27,10 +27,6 @@ use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 class DisableLanguageMenuProcessor implements DataProcessorInterface
 {
     /**
-     * @param ContentObjectRenderer $cObj
-     * @param array $contentObjectConfiguration
-     * @param array $processorConfiguration
-     * @param array $processedData
      * @return array
      */
     public function process(
@@ -58,10 +54,6 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         return $processedData;
     }
 
-    /**
-     * @param int $eventId
-     * @param array $menu
-     */
     protected function handleMenu(int $eventId, array &$menu): void
     {
         $eventAvailability = GeneralUtility::makeInstance(EventAvailability::class);
@@ -80,9 +72,6 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         }
     }
 
-    /**
-     * @return int
-     */
     protected function getEventId(): int
     {
         $eventId = 0;
@@ -97,9 +86,6 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         return $eventId;
     }
 
-    /**
-     * @return ServerRequestInterface
-     */
     protected function getRequest(): ServerRequestInterface
     {
         return $GLOBALS['TYPO3_REQUEST'];

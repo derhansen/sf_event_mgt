@@ -39,10 +39,6 @@ class RegistrationRepository extends Repository
      * Returns all registrations for the given event with the given constraints
      * Constraints are combined with a logical AND
      *
-     * @param Event $event Event
-     * @param CustomNotification $customNotification
-     * @param array $findConstraints FindConstraints
-     *
      * @return array|QueryResultInterface
      */
     public function findNotificationRegistrations(
@@ -61,7 +57,7 @@ class RegistrationRepository extends Repository
             $constraints[] = $query->equals('confirmed', false);
         }
 
-        if (!is_array($findConstraints) || count($findConstraints) == 0) {
+        if (!is_array($findConstraints) || count($findConstraints) === 0) {
             return $query->matching($query->logicalAnd($constraints))->execute();
         }
 
@@ -94,7 +90,6 @@ class RegistrationRepository extends Repository
     /**
      * Returns registrations for the given UserRegistrationDemand demand
      *
-     * @param UserRegistrationDemand $demand
      * @return array|QueryResultInterface
      */
     public function findRegistrationsByUserRegistrationDemand(UserRegistrationDemand $demand)
@@ -115,8 +110,6 @@ class RegistrationRepository extends Repository
     /**
      * Returns all registrations for the given event and where the waitlist flag is as given
      *
-     * @param Event $event
-     * @param bool $waitlist
      * @return array|QueryResultInterface
      */
     public function findByEventAndWaitlist(Event $event, bool $waitlist = false)
@@ -132,7 +125,6 @@ class RegistrationRepository extends Repository
     /**
      * Returns all potential move up registrations for the given event ordered by "registration_date"
      *
-     * @param Event $event
      * @return array|QueryResultInterface
      */
     public function findWaitlistMoveUpRegistrations(Event $event)
@@ -150,10 +142,6 @@ class RegistrationRepository extends Repository
 
     /**
      * Sets the displayMode constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
-     * @param array $constraints Constraints
      */
     protected function setDisplayModeConstraint(
         QueryInterface $query,
@@ -181,10 +169,6 @@ class RegistrationRepository extends Repository
 
     /**
      * Sets the storagePage constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
-     * @param array $constraints Constraints
      */
     protected function setStoragePageConstraint(
         QueryInterface $query,
@@ -216,9 +200,6 @@ class RegistrationRepository extends Repository
 
     /**
      * Sets the ordering to the given query for the given demand
-     *
-     * @param QueryInterface $query Query
-     * @param UserRegistrationDemand $demand
      */
     protected function setOrderingsFromDemand(QueryInterface $query, UserRegistrationDemand $demand): void
     {

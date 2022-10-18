@@ -51,8 +51,6 @@ class EventRepository extends Repository
     /**
      * Returns the objects of this repository matching the given demand
      *
-     * @param EventDemand $eventDemand EventDemand
-     *
      * @return array|QueryResultInterface QueryResultInterface
      */
     public function findDemanded(EventDemand $eventDemand)
@@ -110,9 +108,6 @@ class EventRepository extends Repository
 
     /**
      * Sets a query limit to the given query for the given demand
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
      */
     protected function setQueryLimitFromDemand(QueryInterface $query, EventDemand $eventDemand): void
     {
@@ -123,9 +118,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the ordering to the given query for the given demand
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
      */
     protected function setOrderingsFromDemand(QueryInterface $query, EventDemand $eventDemand): void
     {
@@ -142,10 +134,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the storagePage constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setStoragePageConstraint(
         QueryInterface $query,
@@ -160,10 +148,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the displayMode constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setDisplayModeConstraint(
         QueryInterface $query,
@@ -222,10 +206,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the category constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setCategoryConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -253,11 +233,6 @@ class EventRepository extends Repository
 
     /**
      * Returns the category constraint depending on the category conjunction configured in eventDemand
-     *
-     * @param QueryInterface $query
-     * @param EventDemand $eventDemand
-     * @param array $categoryConstraints
-     * @return ConstraintInterface
      */
     public function getCategoryConstraint(
         QueryInterface $query,
@@ -284,12 +259,8 @@ class EventRepository extends Repository
 
     /**
      * Sets the location constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
-    protected function setLocationConstraint($query, $eventDemand, &$constraints): void
+    protected function setLocationConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
         if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() !== '') {
             $constraints['location'] = $query->equals('location', $eventDemand->getLocation());
@@ -298,10 +269,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the location.city constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setLocationCityConstraint(
         QueryInterface $query,
@@ -315,10 +282,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the location.country constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setLocationCountryConstraint(
         QueryInterface $query,
@@ -332,10 +295,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the speaker constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setSpeakerConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -346,10 +305,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the organisator constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setOrganisatorConstraint(
         QueryInterface $query,
@@ -363,10 +318,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the start- and enddate constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setStartEndDateConstraint(
         QueryInterface $query,
@@ -398,10 +349,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the search constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setSearchConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -427,10 +374,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the topEvent constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setTopEventConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -441,10 +384,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the restriction for year, year/month or year/month/day to the given constraints array
-     *
-     * @param QueryInterface $query
-     * @param EventDemand $eventDemand
-     * @param array $constraints
      */
     protected function setYearMonthDayRestriction(
         QueryInterface $query,

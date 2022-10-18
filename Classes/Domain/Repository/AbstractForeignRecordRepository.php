@@ -35,8 +35,6 @@ abstract class AbstractForeignRecordRepository extends Repository
     /**
      * Returns all records depending on the settings in the demand object
      *
-     * @param ForeignRecordDemand $demand ForeignRecordDemand
-     *
      * @return array|QueryResultInterface
      */
     public function findDemanded(ForeignRecordDemand $demand)
