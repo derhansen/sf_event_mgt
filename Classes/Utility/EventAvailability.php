@@ -84,7 +84,7 @@ class EventAvailability
             $where = [
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)),
-                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, \Connection::PARAM_INT))
+                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT))
                 ),
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)),
             ];
