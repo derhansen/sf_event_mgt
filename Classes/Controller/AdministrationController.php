@@ -21,7 +21,6 @@ use DERHANSEN\SfEventMgt\Service\ExportService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -34,7 +33,6 @@ use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
@@ -155,10 +153,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns the create new record URL for the given table
-     *
-     * @param string $table
-     * @throws RouteNotFoundException
-     * @return string
      */
     private function getCreateNewRecordUri(string $table): string
     {
@@ -182,8 +176,6 @@ class AdministrationController extends AbstractController
     /**
      * Initializes module template and returns a response which must be used as response for any extbase action
      * that should render a view.
-     *
-     * @return ResponseInterface
      */
     protected function initModuleTemplateAndReturnResponse(): ResponseInterface
     {
@@ -238,10 +230,6 @@ class AdministrationController extends AbstractController
 
     /**
      * List action for backend module
-     *
-     * @param SearchDemand|null $searchDemand
-     * @param array $overwriteDemand
-     * @return ResponseInterface
      */
     public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
@@ -300,8 +288,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns, if reset filter operation has been used
-     *
-     * @return bool
      */
     private function isResetFilter(): bool
     {
@@ -315,8 +301,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Export registrations for a given event
-     *
-     * @param int $eventUid
      */
     public function exportAction(int $eventUid): void
     {
@@ -348,10 +332,6 @@ class AdministrationController extends AbstractController
 
     /**
      * The index notify action
-     *
-     * @param Event $event
-     * @return ResponseInterface
-     * @throws StopActionException
      */
     public function indexNotifyAction(Event $event): ResponseInterface
     {
@@ -372,8 +352,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns an array of recipient option for the indexNotify action
-     *
-     * @return array|array[]
      */
     public function getNotificationRecipients(): array
     {
@@ -401,9 +379,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Notify action
-     *
-     * @param Event $event
-     * @param CustomNotification $customNotification
      */
     public function notifyAction(Event $event, CustomNotification $customNotification): void
     {
@@ -427,9 +402,6 @@ class AdministrationController extends AbstractController
     /**
      * Checks if the current backend user has access to the PID of the event and if not, enqueue an
      * access denied flash message and redirect to list view
-     *
-     * @param Event $event
-     * @throws StopActionException
      */
     public function checkEventAccess(Event $event): void
     {
@@ -453,8 +425,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Suppress default validation messages
-     *
-     * @return bool
      */
     protected function getErrorFlashMessage(): bool
     {
@@ -463,8 +433,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns an array with possible order directions
-     *
-     * @return array
      */
     public function getOrderDirections(): array
     {
@@ -476,8 +444,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns an array with possible orderBy fields
-     *
-     * @return array
      */
     public function getOrderByFields(): array
     {
