@@ -16,6 +16,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Event\InitAdministrationModuleTemplateEvent;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
@@ -192,7 +193,15 @@ class AdministrationController extends AbstractController
 
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
 
+        $initAdministrationModuleTemplateEvent = new InitAdministrationModuleTemplateEvent(
+            $moduleTemplate,
+            $this->uriBuilder,
+            $this
+        );
+        $this->eventDispatcher->dispatch($initAdministrationModuleTemplateEvent);
+
         $moduleTemplate->setContent($this->view->render());
+
         return $this->htmlResponse($moduleTemplate->renderContent());
     }
 
