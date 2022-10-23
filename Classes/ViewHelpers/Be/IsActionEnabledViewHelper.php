@@ -44,9 +44,6 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
 
     /**
      * Checks, if the current backend user has sufficient table permissions to perform the given action
-     *
-     * @param string $action
-     * @return bool
      */
     private function checkAccess(string $action): bool
     {

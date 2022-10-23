@@ -31,8 +31,6 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
     /**
      * Returns a string to be used as prefill value for the given registration field (type=input). If the form
      * has already been submitted, the submitted value for the field is returned.
-     *
-     * @return string
      */
     public function render(): string
     {

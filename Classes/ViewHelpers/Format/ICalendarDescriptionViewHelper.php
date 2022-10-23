@@ -36,8 +36,6 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
 
     /**
      * Formats the given description according to RFC 2445
-     *
-     * @return string
      */
     public function render(): string
     {

@@ -38,8 +38,6 @@ class HmacViewHelper extends AbstractViewHelper
 
     /**
      * Returns the hmac for the given registration in order to cancel the registration
-     *
-     * @return string
      */
     public function render(): string
     {

@@ -29,8 +29,6 @@ class PrefillViewHelper extends AbstractPrefillViewHelper
     /**
      * If the current field is available in POST data of the current request, return the value, otherwise
      * a property from fe_user (if logged in and if the given field is configured to be prefilled) is returned.
-     *
-     * @return string
      */
     public function render(): string
     {

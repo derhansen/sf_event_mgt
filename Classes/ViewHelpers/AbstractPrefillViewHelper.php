@@ -18,9 +18,6 @@ abstract class AbstractPrefillViewHelper extends AbstractViewHelper
 {
     /**
      * Returns the current plugin namespace
-     *
-     * @param Request $request
-     * @return string
      */
     protected function getPluginNamespace(Request $request): string
     {

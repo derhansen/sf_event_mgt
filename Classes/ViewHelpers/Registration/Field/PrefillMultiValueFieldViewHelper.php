@@ -34,8 +34,6 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
      * Returns, if the given $currentValue is selected/checked for the given registration field is selected
      * If no originalRequest exist (form is not submitted), true is returned if the given $currentValue
      * matches the default value of the field
-     *
-     * @return bool
      */
     public function render(): bool
     {

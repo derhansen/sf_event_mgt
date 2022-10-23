@@ -31,7 +31,6 @@ class ICalendarDateViewHelper extends AbstractViewHelper
      * Formats the given date according to rfc5545
      *
      * @see http://tools.ietf.org/html/rfc5545#section-3.3.5
-     * @return string
      */
     public function render(): string
     {

@@ -34,8 +34,6 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
      * of remaining free places.
      *
      * The returned array index starts at 1 if at least one registration is possible
-     *
-     * @return array
      */
     public function render(): array
     {

@@ -30,9 +30,6 @@ class ErrorClassViewHelper extends AbstractViewHelper
         parent::initializeArguments();
     }
 
-    /**
-     * @return string
-     */
     public function render(): string
     {
         $result = '';
