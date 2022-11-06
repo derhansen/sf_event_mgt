@@ -18,8 +18,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class OrganisatorRepositoryTest extends FunctionalTestCase
 {
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
-    protected $organisatorRepository;
+    protected OrganisatorRepository $organisatorRepository;
 
     /** @var array */
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
@@ -32,15 +31,13 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
         parent::setUp();
         $this->organisatorRepository = GeneralUtility::makeInstance(OrganisatorRepository::class);
 
-        $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_organisator.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_organisator.csv');
     }
 
     /**
-     * Test if startingpoint is ignored
-     *
      * @test
      */
-    public function findRecordsByUid()
+    public function startingPageIsIgnored(): void
     {
         $locations = $this->organisatorRepository->findAll();
         self::assertEquals(2, $locations->count());
