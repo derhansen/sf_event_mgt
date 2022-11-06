@@ -25,10 +25,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class RegistrationRepositoryTest extends FunctionalTestCase
 {
-    /**
-     * @var \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
-     */
-    protected $registrationRepository;
+    protected RegistrationRepository $registrationRepository;
 
     /**
      * @var array
@@ -43,7 +40,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         parent::setUp();
         $this->registrationRepository = GeneralUtility::makeInstance(RegistrationRepository::class);
 
-        $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_registration.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_confirmed_unconfirmed.csv');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_for_notification.csv');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_user_registrations.csv');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_waitlist.csv');
     }
 
     /**
@@ -51,7 +51,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findNotificationRegistrationsForEventUid2()
+    public function findNotificationRegistrationsForEventUid2(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects(self::once())->method('getUid')->willReturn(2);
@@ -60,7 +60,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertEquals(1, $registrations->count());
     }
 
-    public function confirmedAndUnconfirmedDataProvider()
+    public function confirmedAndUnconfirmedDataProvider(): array
     {
         return [
             'all registrations' => [
@@ -82,7 +82,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      * @dataProvider confirmedAndUnconfirmedDataProvider
      * @test
      */
-    public function findNotificationRegistrationsReturnsConfirmedAndUnconfirmed($recipientSetting, $expected)
+    public function findNotificationRegistrationsReturnsConfirmedAndUnconfirmed($recipientSetting, $expected): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects(self::once())->method('getUid')->willReturn(20);
@@ -92,12 +92,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertSame($expected, $registrations->count());
     }
 
-    /**
-     * Data provider for findExpiredRegistrations
-     *
-     * @return array
-     */
-    public function findNotificationRegistrationsDataProvider()
+    public function findNotificationRegistrationsDataProvider(): array
     {
         return [
             'withEmptyConstraints' => [
@@ -152,7 +147,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      * @param mixed $constraints
      * @param mixed $expected
      */
-    public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected)
+    public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects(self::once())->method('getUid')->willReturn(1);
@@ -172,7 +167,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition()
+    public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition(): void
     {
         $this->expectException(InvalidArgumentException::class);
         $constraints = ['confirmationUntil' => ['wrongcondition' => '0']];
@@ -186,7 +181,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3()
+    public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects(self::once())->method('getUid')->willReturn(3);
@@ -204,9 +199,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandReturnsEmptyArrayIfNoUser()
+    public function findRegistrationsByUserRegistrationDemandReturnsEmptyArrayIfNoUser(): void
     {
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
@@ -218,12 +212,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsStoragePage()
+    public function findRegistrationsByUserRegistrationDemandRespectsStoragePage(): void
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
         $demand->setStoragePage('7');
@@ -237,12 +229,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeFuture()
+    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeFuture(): void
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('future');
         $demand->setStoragePage('7');
@@ -257,12 +247,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeCurrentFuture()
+    public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeCurrentFuture(): void
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('current_future');
         $demand->setStoragePage('7');
@@ -277,12 +265,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsUser()
+    public function findRegistrationsByUserRegistrationDemandRespectsUser(): void
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(2);
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
         $demand->setStoragePage('7');
@@ -296,12 +282,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsOrder()
+    public function findRegistrationsByUserRegistrationDemandRespectsOrder(): void
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
         $demand->setStoragePage('7');
@@ -317,12 +301,10 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      *
      * @test
      */
-    public function findRegistrationsByUserRegistrationDemandRespectsOrderDirection()
+    public function findRegistrationsByUserRegistrationDemandRespectsOrderDirection(): void
     {
-        /** @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository $feUserRepository */
         $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
-        /** @var \DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand $demand */
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
         $demand->setStoragePage('7');
@@ -336,7 +318,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function findWaitlistMoveUpRegistrationsReturnsExpectedAmountOfRegistrationsAndRespectsOrder()
+    public function findWaitlistMoveUpRegistrationsReturnsExpectedAmountOfRegistrationsAndRespectsOrder(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects(self::once())->method('getUid')->willReturn(30);

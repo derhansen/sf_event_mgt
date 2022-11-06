@@ -1,0 +1,5 @@
+"tx_sfeventmgt_domain_model_registration"
+,"uid","event","waitlist","confirmed","registration_date","confirmation_until","notes"
+,50,30,1,1,1603656000,0,"Registration Date: 25.10.2020 08:00 pm / confirmed"
+,51,30,1,1,1603656900,0,"Registration Date: 25.10.2020 08:15 pm / confirmed"
+,52,30,1,0,1603655100,2524608000,"Registration Date: 25.10.2020 7:45 pm / not confirmed (confirmation until 01.01.2050)"

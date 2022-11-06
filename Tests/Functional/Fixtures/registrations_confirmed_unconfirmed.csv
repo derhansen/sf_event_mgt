@@ -1,0 +1,7 @@
+"tx_sfeventmgt_domain_model_registration"
+,"uid","hidden","event","confirmed","confirmation_until","paid","notes"
+,1,0,0,0,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / unconfirmed"
+,2,0,0,1,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / confirmed"
+,3,0,0,0,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / unconfirmed"
+,4,0,0,0,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / unconfirmed"
+,5,1,0,0,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / unconfirmed / hidden"
