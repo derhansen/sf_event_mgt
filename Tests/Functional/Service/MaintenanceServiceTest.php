@@ -30,7 +30,7 @@ class MaintenanceServiceTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->importDataSet(__DIR__ . '/../Fixtures/handle_expired_registrations.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/handle_expired_registrations.csv');
     }
 
     /**
