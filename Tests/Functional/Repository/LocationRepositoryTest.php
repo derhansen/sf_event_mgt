@@ -20,8 +20,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class LocationRepositoryTest extends FunctionalTestCase
 {
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
-    protected $locationRepository;
+    protected LocationRepository $locationRepository;
 
     /** @var array */
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
@@ -34,15 +33,13 @@ class LocationRepositoryTest extends FunctionalTestCase
         parent::setUp();
         $this->locationRepository = GeneralUtility::makeInstance(LocationRepository::class);
 
-        $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.csv');
     }
 
     /**
-     * Test if startingpoint is ignored
-     *
      * @test
      */
-    public function findRecordsByUid()
+    public function startingPageIsIgnored(): void
     {
         $locations = $this->locationRepository->findAll();
 
