@@ -21,39 +21,29 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
  */
 class CategoryRepositoryTest extends FunctionalTestCase
 {
-    /** @var CategoryRepository */
-    protected $categoryRepository;
-
-    /** @var array */
+    protected CategoryRepository $categoryRepository;
     protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
-    /**
-     * Setup
-     */
     public function setUp(): void
     {
         parent::setUp();
         $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
-        $this->importDataSet(__DIR__ . '/../Fixtures/sys_category.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/sys_category.csv');
     }
 
     /**
-     * Test if startingpoint is working
-     *
      * @test
      */
-    public function findRecordsByUid()
+    public function findRecordsByUid(): void
     {
         $events = $this->categoryRepository->findByUid(1);
         self::assertEquals($events->getTitle(), 'Category 1');
     }
 
     /**
-     * Test if storagePage restriction in demand works
-     *
      * @test
      */
-    public function findDemandedRecordsByStoragePageRestriction()
+    public function findDemandedRecordsByStoragePageRestriction(): void
     {
         $demand = new CategoryDemand();
         $demand->setStoragePage('1');
@@ -62,11 +52,6 @@ class CategoryRepositoryTest extends FunctionalTestCase
         self::assertEquals(3, $events->count());
     }
 
-    /**
-     * DataProvider for findDemandedRecordsByCategory
-     *
-     * @return array
-     */
     public function findDemandedRecordsByCategoryDataProvider(): array
     {
         return [
@@ -102,7 +87,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      * @param mixed $includeSubcategory
      * @param mixed $expected
      */
-    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
+    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected): void
     {
         $demand = new CategoryDemand();
         $demand->setIncludeSubcategories($includeSubcategory);
