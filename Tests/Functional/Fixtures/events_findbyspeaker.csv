@@ -1,0 +1,17 @@
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","speaker","rowDescription"
+,100,100,1,"has speaker 1"
+,101,100,1,"has speaker 2"
+,102,100,1,"has no speaker"
+,103,100,2,"has no speaker"
+"tx_sfeventmgt_domain_model_speaker"
+,"uid","name"
+,1,""
+,2,""
+,3,""
+"tx_sfeventmgt_event_speaker_mm"
+,"uid_local","uid_foreign"
+,100,1
+,101,2
+,103,2
+,103,3

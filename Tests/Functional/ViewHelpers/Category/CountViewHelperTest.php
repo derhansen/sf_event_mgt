@@ -27,17 +27,19 @@ class CountViewHelperTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->importDataSet(__DIR__ . '/../../Fixtures/tx_sfeventmgt_domain_model_event.xml');
+        $this->importCSVDataSet(__DIR__ . '/../../Fixtures/events_findbycategory.csv');
 
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
-        $this->view->getRenderingContext()->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
-        $this->view->getRenderingContext()->getTemplatePaths()->setTemplateSource('<e:category.count categoryUid="{categoryUid}"/>');
+        $this->view->getRenderingContext()->getViewHelperResolver()
+            ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $this->view->getRenderingContext()->getTemplatePaths()
+            ->setTemplateSource('<e:category.count categoryUid="{categoryUid}"/>');
     }
 
     /**
      * @test
      */
-    public function viewHelperReturnsExpectedResult()
+    public function viewHelperReturnsExpectedResult(): void
     {
         $result = $this->view->assign('categoryUid', 5)->render();
         self::assertEquals(4, $result);
