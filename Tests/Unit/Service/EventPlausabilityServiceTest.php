@@ -61,14 +61,32 @@ class EventPlausabilityServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage()
+    public function verifyOrganisatorConfigurationWithNoOrganisatorAndDisabledRegistrationAddsNoFlashMessage()
     {
-        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['sL'])
-            ->getMock();
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::never())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
+            'enable_registration' => 0,
+            'notify_organisator' => 1,
+        ];
+
+        $service = new EventPlausabilityService();
+        $service->verifyOrganisatorConfiguration($databaseRow);
+    }
+
+    /**
+     * @test
+     */
+    public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage()
+    {
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::atLeastOnce())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
+
+        $databaseRow = [
+            'enable_registration' => 1,
             'notify_organisator' => 1,
         ];
 
@@ -81,12 +99,12 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage()
     {
-        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['sL'])
-            ->getMock();
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::atLeastOnce())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
+            'enable_registration' => 1,
             'notify_organisator' => 1,
             'organisator' => [
                 [
@@ -106,12 +124,12 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage()
     {
-        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['sL'])
-            ->getMock();
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::never())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
+            'enable_registration' => 0,
             'notify_organisator' => 1,
             'organisator' => [
                 [

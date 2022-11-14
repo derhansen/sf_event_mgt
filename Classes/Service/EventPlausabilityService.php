@@ -49,7 +49,7 @@ class EventPlausabilityService
      */
     public function verifyOrganisatorConfiguration(array $databaseRow): void
     {
-        if ((int)$databaseRow['notify_organisator'] === 0) {
+        if ((int)$databaseRow['enable_registration'] === 0 || (int)$databaseRow['notify_organisator'] === 0) {
             return;
         }
 
