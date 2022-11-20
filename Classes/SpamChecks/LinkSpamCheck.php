@@ -19,8 +19,6 @@ class LinkSpamCheck extends AbstractSpamCheck
     /**
      * Counts the amount of links in all fields/registration fields and evaluates, if the found amount
      * of links is greater than the configured max. amount of links
-     *
-     * @return bool
      */
     public function isFailed(): bool
     {
@@ -49,9 +47,6 @@ class LinkSpamCheck extends AbstractSpamCheck
 
     /**
      * Returns the amount of links
-     *
-     * @param string $value
-     * @return int
      */
     private function getAmountOfLinks(string $value): int
     {

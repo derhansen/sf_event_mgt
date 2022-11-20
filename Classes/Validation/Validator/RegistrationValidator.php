@@ -26,11 +26,7 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
  */
 class RegistrationValidator extends AbstractValidator
 {
-    /**
-     * @var ConfigurationManagerInterface
-     */
     protected ConfigurationManagerInterface $configurationManager;
-
     protected array $settings;
 
     public function __construct(array $options = [])
@@ -100,9 +96,6 @@ class RegistrationValidator extends AbstractValidator
      * - firstname: NotEmpty
      * - lastname: NotEmpty
      * - email: NotEmpty, EmailAddress
-     *
-     * @param Registration $value
-     * @return bool
      */
     protected function validateDefaultFields(Registration $value): bool
     {
@@ -135,10 +128,7 @@ class RegistrationValidator extends AbstractValidator
     /**
      * Processes the spam check and returns, if it failed or not
      *
-     * @param Registration $registration
-     * @param array $settings
      * @throws SpamCheckNotFoundException
-     * @return bool
      */
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
     {
@@ -153,11 +143,6 @@ class RegistrationValidator extends AbstractValidator
 
     /**
      * Returns a validator object depending on the given type of the property
-     *
-     * @param string $type Type
-     * @param string $field The field
-     *
-     * @return AbstractValidator
      */
     protected function getValidator(string $type, string $field): AbstractValidator
     {

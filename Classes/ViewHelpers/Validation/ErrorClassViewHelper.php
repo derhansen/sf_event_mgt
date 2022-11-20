@@ -54,9 +54,6 @@ class ErrorClassViewHelper extends AbstractViewHelper
         return $result;
     }
 
-    /**
-     * @return array
-     */
     protected function getValidationErrors(): array
     {
         $validationResults = $this->renderingContext->getRequest()->getOriginalRequestMappingResults();

@@ -23,11 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class PageUtility
 {
     /**
-     * Find all ids from given ids and level
-     *
-     * @param string $pidList comma separated list of ids
-     * @param int $recursive recursive levels
-     * @return string comma separated list of ids
+     * Find all ids from given comma separated list of PIDs and level
      */
     public static function extendPidListByChildren(string $pidList = '', int $recursive = 0): string
     {

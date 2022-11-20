@@ -20,9 +20,6 @@ class MiscUtility
 {
     /**
      * Returns chars extracted from a hmac for the challenge/response spam check
-     *
-     * @param int $eventUid
-     * @return string
      */
     public static function getSpamCheckChallenge(int $eventUid): string
     {

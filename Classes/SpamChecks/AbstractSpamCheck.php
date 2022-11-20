@@ -23,14 +23,6 @@ abstract class AbstractSpamCheck implements SpamCheckInterface
     protected array $configuration = [];
     protected array $arguments = [];
 
-    /**
-     * AbstractSpamCheck constructor.
-     *
-     * @param Registration $registration
-     * @param array $settings
-     * @param array $arguments
-     * @param array $configuration
-     */
     public function __construct(
         Registration $registration,
         array $settings,
@@ -43,9 +35,6 @@ abstract class AbstractSpamCheck implements SpamCheckInterface
         $this->arguments = $arguments;
     }
 
-    /**
-     * @return bool
-     */
     public function isFailed(): bool
     {
         return true;

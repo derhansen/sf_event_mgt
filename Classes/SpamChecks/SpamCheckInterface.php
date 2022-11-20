@@ -18,14 +18,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 interface SpamCheckInterface
 {
-    /**
-     * SpamCheckInterface constructor.
-     *
-     * @param Registration $registration
-     * @param array $settings
-     * @param array $arguments
-     * @param array $configuration
-     */
     public function __construct(
         Registration $registration,
         array $settings,
@@ -33,8 +25,5 @@ interface SpamCheckInterface
         array $configuration = []
     );
 
-    /**
-     * @return bool
-     */
     public function isFailed(): bool;
 }

@@ -188,10 +188,6 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
 
     /**
      * Updates list_type and pi_flexform of the given content element UID
-     *
-     * @param int $uid
-     * @param string $newListType
-     * @param string $flexform
      */
     protected function updateContentElement(int $uid, string $newListType, string $flexform): void
     {
@@ -210,9 +206,6 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
 
     /**
      * Transforms the given array to FlexForm XML
-     *
-     * @param array $input
-     * @return string
      */
     protected function array2xml(array $input = []): string
     {

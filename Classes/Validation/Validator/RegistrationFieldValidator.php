@@ -51,10 +51,6 @@ class RegistrationFieldValidator extends AbstractValidator
 
     /**
      * Validates the given registrationField
-     *
-     * @param Registration\Field $registrationField
-     * @param ObjectStorage $fieldValues
-     * @return bool
      */
     protected function validateField(Registration\Field $registrationField, ObjectStorage $fieldValues): bool
     {
@@ -79,8 +75,6 @@ class RegistrationFieldValidator extends AbstractValidator
 
     /**
      * Returns a notEmptyValidator
-     *
-     * @return NotEmptyValidator
      */
     protected function getNotEmptyValidator(): NotEmptyValidator
     {

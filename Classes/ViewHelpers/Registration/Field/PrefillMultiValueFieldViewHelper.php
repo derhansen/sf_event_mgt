@@ -58,11 +58,6 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
 
     /**
      * Returns if the submitted field value is selected
-     *
-     * @param array $submittedData
-     * @param int $fieldUid
-     * @param string $currentValue
-     * @return bool
      */
     protected function getFieldValueFromSubmittedData(array $submittedData, int $fieldUid, string $currentValue): bool
     {
@@ -91,11 +86,6 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
         return $currentValue === $fieldValue;
     }
 
-    /**
-     * @param Field $registrationField
-     * @param string $currentValue
-     * @return bool
-     */
     protected function getFieldValueFromDefaultProperty(Field $registrationField, string $currentValue): bool
     {
         $defaultValues = GeneralUtility::trimExplode(',', $registrationField->getDefaultValue());

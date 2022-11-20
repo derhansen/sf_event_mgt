@@ -24,9 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EventAvailability
 {
     /**
-     * @param int $languageId
-     * @param int $eventId
-     * @return bool
+     * Checks if an event record is available the given language id
      */
     public function check(int $languageId, int $eventId): bool
     {
@@ -41,11 +39,6 @@ class EventAvailability
         return $this->mustBeIncluded($eventId, $targetLanguage);
     }
 
-    /**
-     * @param int $eventId
-     * @param SiteLanguage $language
-     * @return bool
-     */
     protected function mustBeIncluded(int $eventId, SiteLanguage $language): bool
     {
         // @extensionScannerIgnoreLine
@@ -72,11 +65,6 @@ class EventAvailability
         return null;
     }
 
-    /**
-     * @param int $eventId
-     * @param int $language
-     * @return bool
-     */
     protected function isEventAvailableInLanguage(int $eventId, int $language): bool
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');

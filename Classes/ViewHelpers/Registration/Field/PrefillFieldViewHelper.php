@@ -50,10 +50,6 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
 
     /**
      * Returns the submitted value for the given field uid
-     *
-     * @param array $submittedData
-     * @param int $fieldUid
-     * @return string
      */
     protected function getFieldValueFromSubmittedData(array $submittedData, int $fieldUid): string
     {
