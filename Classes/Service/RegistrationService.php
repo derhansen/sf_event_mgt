@@ -73,8 +73,6 @@ class RegistrationService
     /**
      * Duplicates (all public accessable properties) the given registration the
      * amount of times configured in amountOfRegistrations
-     *
-     * @param Registration $registration
      */
     public function createDependingRegistrations(Registration $registration): void
     {
@@ -94,8 +92,6 @@ class RegistrationService
 
     /**
      * Confirms all depending registrations based on the given main registration
-     *
-     * @param Registration $registration Registration
      */
     public function confirmDependingRegistrations(Registration $registration): void
     {
@@ -109,11 +105,6 @@ class RegistrationService
 
     /**
      * Checks if the registration can be confirmed and returns an array of variables
-     *
-     * @param int $reguid UID of registration
-     * @param string $hmac HMAC for parameters
-     *
-     * @return array
      */
     public function checkConfirmRegistration(int $reguid, string $hmac): array
     {
@@ -164,8 +155,6 @@ class RegistrationService
 
     /**
      * Cancels all depending registrations based on the given main registration
-     *
-     * @param Registration $registration Registration
      */
     public function cancelDependingRegistrations(Registration $registration): void
     {
@@ -177,11 +166,6 @@ class RegistrationService
 
     /**
      * Checks if the registration can be cancelled and returns an array of variables
-     *
-     * @param int $reguid UID of registration
-     * @param string $hmac HMAC for parameters
-     *
-     * @return array
      */
     public function checkCancelRegistration(int $reguid, string $hmac): array
     {
@@ -241,8 +225,6 @@ class RegistrationService
 
     /**
      * Returns the current frontend user object if available
-     *
-     * @return FrontendUser|null
      */
     public function getCurrentFeUserObject(): ?FrontendUser
     {
@@ -259,12 +241,6 @@ class RegistrationService
     /**
      * Checks, if the registration can successfully be created. Note, that
      * $result is passed by reference!
-     *
-     * @param Event $event Event
-     * @param Registration $registration Registration
-     * @param int $result Result
-     *
-     * @return array
      */
     public function checkRegistrationSuccess(Event $event, Registration $registration, int $result): array
     {
@@ -307,10 +283,6 @@ class RegistrationService
 
     /**
      * Returns if the given email is registered to the given event
-     *
-     * @param Event $event
-     * @param string $email
-     * @return bool
      */
     protected function emailNotUnique(Event $event, string $email): bool
     {
@@ -337,9 +309,6 @@ class RegistrationService
 
     /**
      * Returns, if payment redirect for the payment method is enabled
-     *
-     * @param Registration $registration
-     * @return bool
      */
     public function redirectPaymentEnabled(Registration $registration): bool
     {
@@ -359,10 +328,6 @@ class RegistrationService
     /**
      * Returns if the given amount of registrations for the event will be registrations for the waitlist
      * (depending on the total amount of registrations and free places)
-     *
-     * @param Event $event
-     * @param int $amountOfRegistrations
-     * @return bool
      */
     public function isWaitlistRegistration(Event $event, int $amountOfRegistrations): bool
     {
@@ -381,9 +346,6 @@ class RegistrationService
 
     /**
      * Handles the process of moving registration up from the waitlist.
-     *
-     * @param Event $event
-     * @param array $settings
      */
     public function moveUpWaitlistRegistrations(Event $event, array $settings): void
     {

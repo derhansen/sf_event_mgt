@@ -31,10 +31,6 @@ class FluidStandaloneService
 
     /**
      * Returns the template folders for the given part
-     *
-     * @param string $part
-     * @throws InvalidConfigurationTypeException
-     * @return array
      */
     public function getTemplateFolders(string $part = 'template'): array
     {
@@ -69,9 +65,6 @@ class FluidStandaloneService
 
     /**
      * Makes sure the path ends with a slash
-     *
-     * @param string $path
-     * @return string
      */
     protected function ensureSuffixedPath(string $path): string
     {
@@ -80,12 +73,6 @@ class FluidStandaloneService
 
     /**
      * Renders a fluid standlone view for the given template
-     *
-     * @param string $template
-     * @param array $variables
-     * @param string $extensionName
-     * @param string $pluginName
-     * @return string
      */
     public function renderTemplate(
         string $template,
@@ -110,10 +97,6 @@ class FluidStandaloneService
      * of variables.
      *
      * Note, the result of this function must never be used as raw/direct output in HTML/frontend context.
-     *
-     * @param string $string Any string
-     * @param array $variables Variables
-     * @return string Parsed string
      */
     public function parseStringFluid(string $string, array $variables = []): string
     {

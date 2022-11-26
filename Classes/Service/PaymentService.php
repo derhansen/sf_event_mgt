@@ -24,8 +24,6 @@ class PaymentService
 {
     /**
      * Returns an array of configured payment methods available for all events
-     *
-     * @return array
      */
     public function getPaymentMethods(): array
     {
@@ -40,11 +38,6 @@ class PaymentService
 
     /**
      * Translates the given key (required, so translations can be mocked)
-     *
-     * @param string $key
-     * @param string $extension
-     * @param array|null $arguments
-     * @return string|null
      */
     protected function translate(string $key, string $extension, ?array $arguments = null): ?string
     {
@@ -53,9 +46,6 @@ class PaymentService
 
     /**
      * Returns an array of payment methods configured in the event
-     *
-     * @param Event $event
-     * @return array
      */
     public function getRestrictedPaymentMethods(Event $event): array
     {
@@ -74,8 +64,6 @@ class PaymentService
     /**
      * Returns an array of payment method configurations and respects enabled/disabled payment methods from
      * the extension configuration
-     *
-     * @return array
      */
     protected function getConfiguredPaymentMethodConfig(): array
     {
@@ -93,9 +81,6 @@ class PaymentService
 
     /**
      * Returns an instance of the given payment method
-     *
-     * @param string $paymentMethod
-     * @return AbstractPayment|null
      */
     public function getPaymentInstance(string $paymentMethod): ?AbstractPayment
     {
@@ -112,10 +97,6 @@ class PaymentService
 
     /**
      * Returns, if the given action is enabled for the payment method
-     *
-     * @param string $paymentMethod
-     * @param string $action
-     * @return bool
      */
     public function paymentActionEnabled(string $paymentMethod, string $action): bool
     {

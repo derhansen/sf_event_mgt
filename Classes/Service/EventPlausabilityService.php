@@ -26,9 +26,6 @@ class EventPlausabilityService
 
     /**
      * Enqueues an error flash message, if the event startdate is not before the enddate
-     *
-     * @param int $startDate
-     * @param int $endDate
      */
     public function verifyEventStartAndEnddate(int $startDate, int $endDate): void
     {
@@ -44,8 +41,6 @@ class EventPlausabilityService
     /**
      * Enqueues an warning flash message, if the event is set to notify the organisator, but no organisator
      * is set or organisator has no email address
-     *
-     * @param array $databaseRow
      */
     public function verifyOrganisatorConfiguration(array $databaseRow): void
     {

@@ -37,9 +37,6 @@ class ICalendarService
 
     /**
      * Initiates the ICS download for the given event
-     *
-     * @param Event $event The event
-     * @throws Exception Exception
      */
     public function downloadiCalendarFile(Event $event): void
     {
@@ -56,10 +53,6 @@ class ICalendarService
     /**
      * Returns the rendered iCalendar entry for the given event
      * according to RFC 2445
-     *
-     * @param Event $event The event
-     *
-     * @return string
      */
     public function getiCalendarContent(Event $event): string
     {

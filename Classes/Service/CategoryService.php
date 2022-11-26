@@ -18,17 +18,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * CategoryService
- *
- * @author Georg Ringer <typo3@ringerge.org>
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class CategoryService
 {
     /**
      * Returns the given categories including their subcategories
-     *
-     * @param string $categories
-     * @return string
      */
     public static function getCategoryListWithChilds(string $categories): string
     {
@@ -37,10 +31,6 @@ class CategoryService
 
     /**
      * Get child categories
-     *
-     * @param string $idList list of category ids to start
-     * @param int $counter
-     * @return string comma separated list of category ids
      */
     private static function getChildrenCategoriesRecursive(string $idList, int $counter = 0): string
     {
@@ -84,9 +74,6 @@ class CategoryService
 
     /**
      * Clean list of integers
-     *
-     * @param string $list
-     * @return string
      */
     private static function cleanIntList(string $list): string
     {

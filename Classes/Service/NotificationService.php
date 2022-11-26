@@ -81,13 +81,7 @@ class NotificationService
 
     /**
      * Sends a custom notification defined by the given customNotification key
-     * to all confirmed users of the event
-     *
-     * @param Event $event
-     * @param CustomNotification $customNotification
-     * @param array $settings
-     *
-     * @return int Number of notifications sent
+     * to all confirmed users of the event. Returns the number of notifications sent.
      */
     public function sendCustomNotification(
         Event $event,
@@ -126,11 +120,6 @@ class NotificationService
 
     /**
      * Returns true if conditions are not met to send a custom notification
-     *
-     * @param array $settings
-     * @param CustomNotification $customNotification
-     *
-     * @return bool
      */
     protected function cantSendCustomNotification(
         array $settings,
@@ -141,14 +130,13 @@ class NotificationService
 
     /**
      * Adds a logentry to the custom notification log
-     *
-     * @param Event $event
-     * @param string $details
-     * @param int $emailsSent
-     * @param CustomNotification $customNotification
      */
-    public function createCustomNotificationLogentry(Event $event, string $details, int $emailsSent, CustomNotification $customNotification): void
-    {
+    public function createCustomNotificationLogentry(
+        Event $event,
+        string $details,
+        int $emailsSent,
+        CustomNotification $customNotification
+    ): void {
         $notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
         $notificationlogEntry->setPid($event->getPid());
         $notificationlogEntry->setEvent($event);
@@ -170,14 +158,6 @@ class NotificationService
 
     /**
      * Sends a message to the user based on the given type
-     *
-     * @param Event $event
-     * @param Registration $registration
-     * @param array $settings
-     * @param int $type
-     * @param CustomNotification|null $customNotification
-     *
-     * @return bool TRUE if successful, else FALSE
      */
     public function sendUserMessage(
         Event $event,
@@ -288,16 +268,11 @@ class NotificationService
 
     /**
      * Returns an array with template and subject for the user message
-     *
-     * @param array $settings
-     * @param int $type Type
-     * @param CustomNotification|null $customNotification
-     * @return array
      */
     protected function getUserMessageTemplateSubject(
         array $settings,
         int $type,
-        CustomNotification $customNotification = null
+        ?CustomNotification $customNotification = null
     ): array {
         if ($type === MessageType::CUSTOM_NOTIFICATION && $customNotification === null) {
             return ['', ''];
@@ -349,21 +324,13 @@ class NotificationService
     }
 
     /**
-     * Sends a message to the admin based on the given type
-     *
-     * @param Event $event Event
-     * @param Registration $registration Registration
-     * @param array $settings Settings
-     * @param int $type Type
-     *
-     * @return bool TRUE if successful, else FALSE
+     * Sends a message to the admin based on the given type. Returns true, if the message was sent, otherwise false
      */
     public function sendAdminMessage(Event $event, Registration $registration, array $settings, int $type): bool
     {
         list($template, $subject) = $this->getAdminMessageTemplateSubject($settings, $type);
 
-        if (!is_array($settings) ||
-            ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false) ||
+        if (($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false) ||
             (bool)($settings['notification']['disabled'] ?? false)
         ) {
             return false;
@@ -434,10 +401,6 @@ class NotificationService
 
     /**
      * Returns an array with template and subject for the admin message
-     *
-     * @param array $settings
-     * @param int $type Type
-     * @return array
      */
     protected function getAdminMessageTemplateSubject(array $settings, int $type): array
     {
@@ -471,13 +434,6 @@ class NotificationService
 
     /**
      * Returns the rendered HTML for the given template
-     *
-     * @param Event $event Event
-     * @param Registration $registration Registration
-     * @param string $template Template
-     * @param array $settings Settings
-     * @param array $additionalBodyVariables
-     * @return string
      */
     protected function getNotificationBody(
         Event $event,

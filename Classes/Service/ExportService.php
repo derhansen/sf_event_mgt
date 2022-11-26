@@ -38,8 +38,6 @@ class ExportService
     /**
      * Initiates the CSV downloads for registrations of the given event uid
      *
-     * @param int $eventUid EventUid
-     * @param array $settings Settings
      * @throws Exception RuntimeException
      */
     public function downloadRegistrationsCsv(int $eventUid, array $settings = []): void
@@ -57,10 +55,7 @@ class ExportService
     /**
      * Returns all Registrations for the given eventUid as a CSV string
      *
-     * @param int $eventUid EventUid
-     * @param array $settings Settings
      * @throws Exception RuntimeException
-     * @return string
      */
     public function exportRegistrationsCsv(int $eventUid, array $settings = []): string
     {
@@ -103,10 +98,6 @@ class ExportService
 
     /**
      * Returns an array with fieldvalues for the given registration
-     *
-     * @param Registration $registration
-     * @param array $registrationFieldData
-     * @return array
      */
     protected function getRegistrationFieldValues(Registration $registration, array $registrationFieldData): array
     {
@@ -133,9 +124,6 @@ class ExportService
 
     /**
      * Returns an array of registration field uids and title
-     *
-     * @param int $eventUid
-     * @return array
      */
     protected function getRegistrationFieldData(int $eventUid): array
     {
@@ -151,10 +139,6 @@ class ExportService
 
     /**
      * Prepends Byte Order Mark to exported registrations
-     *
-     * @param string $exportedRegistrations
-     * @param array $settings
-     * @return string
      */
     protected function prependByteOrderMark(string $exportedRegistrations, array $settings): string
     {
@@ -168,11 +152,6 @@ class ExportService
     /**
      * Returns the requested field from the given registration. If the field is a DateTime object,
      * a formatted date string is returned
-     *
-     * @param Registration $registration
-     * @param string $field
-     * @param array $settings
-     * @return string
      */
     protected function getFieldValue(Registration $registration, string $field, array $settings): string
     {

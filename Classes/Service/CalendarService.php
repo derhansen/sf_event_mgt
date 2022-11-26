@@ -63,11 +63,6 @@ class CalendarService
     /**
      * Returns an array with meta information about the calendar date range for the month of the given year
      * respecting the firstDayOfWeek setting
-     *
-     * @param int $month
-     * @param int $year
-     * @param int $firstDayOfWeek
-     * @return array
      */
     public function getCalendarDateRange(int $month, int $year, int $firstDayOfWeek = 0): array
     {
@@ -130,11 +125,6 @@ class CalendarService
 
     /**
      * Returns a date configuration for the given modifier
-     *
-     * @param int $month
-     * @param int $year
-     * @param string $modifier
-     * @return array
      */
     public function getDateConfig(int $month, int $year, string $modifier = ''): array
     {
@@ -153,9 +143,6 @@ class CalendarService
 
     /**
      * Returns an array holding weeknumber any year for the current, previous and next week
-     *
-     * @param DateTime $firstDayOfCurrentWeek
-     * @return array
      */
     public function getWeekConfig(DateTime $firstDayOfCurrentWeek): array
     {

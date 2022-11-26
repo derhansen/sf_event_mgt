@@ -22,8 +22,6 @@ class MaintenanceService
 {
     /**
      * Handles expired registration
-     *
-     * @param bool $delete
      */
     public function handleExpiredRegistrations(bool $delete = false): void
     {
@@ -38,11 +36,6 @@ class MaintenanceService
     /**
      * Processes a GDPR cleaup by removing all registrations of expired events. Returns the amount of registrations
      * removed.
-     *
-     * @param int $days
-     * @param bool $softDelete
-     * @param bool $ignoreEventRestriction
-     * @return int
      */
     public function processGdprCleanup(int $days, bool $softDelete, bool $ignoreEventRestriction): int
     {
@@ -67,9 +60,6 @@ class MaintenanceService
 
     /**
      * Updates the given registration
-     *
-     * @param int $registrationUid
-     * @param bool $delete
      */
     protected function updateRegistration(int $registrationUid, bool $delete = false): void
     {
@@ -89,8 +79,6 @@ class MaintenanceService
 
     /**
      * Flags all registration field values for the given registration UID as deleted
-     *
-     * @param int $registrationUid
      */
     protected function flagRegistrationFieldValuesAsDeleted(int $registrationUid): void
     {
@@ -106,8 +94,6 @@ class MaintenanceService
 
     /**
      * Deletes the registration with the given uid
-     *
-     * @param int $registrationUid
      */
     protected function deleteRegistration(int $registrationUid): void
     {
@@ -122,8 +108,6 @@ class MaintenanceService
 
     /**
      * Deletes all registration field values for the given registrationUid
-     *
-     * @param int $registrationUid
      */
     protected function deleteRegistrationFieldValues(int $registrationUid): void
     {
@@ -138,8 +122,6 @@ class MaintenanceService
 
     /**
      * Returns an array of registration uids, which are considered as expired
-     *
-     * @return array
      */
     protected function getExpiredRegistrations(): array
     {
@@ -165,9 +147,6 @@ class MaintenanceService
 
     /**
      * Returns all registrations, where the related event has expired based on the given amount of days
-     *
-     * @param int $days
-     * @return array
      */
     protected function getGdprCleanupRegistrations(int $days): array
     {
@@ -198,8 +177,6 @@ class MaintenanceService
 
     /**
      * Returns all registrations including hidden and deleted
-     *
-     * @return array
      */
     protected function getAllRegistrations(): array
     {

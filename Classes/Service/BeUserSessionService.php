@@ -22,8 +22,6 @@ class BeUserSessionService
 
     /**
      * Saves the given data to the session
-     *
-     * @param array $data
      */
     public function saveSessionData(array $data): void
     {
@@ -43,7 +41,6 @@ class BeUserSessionService
     /**
      * Returns a specific value from the session data by the given key
      *
-     * @param string $key
      * @return mixed|null
      */
     public function getSessionDataByKey(string $key)

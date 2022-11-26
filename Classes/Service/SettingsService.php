@@ -19,10 +19,6 @@ class SettingsService
     /**
      * Returns an array (key-value pair) of custom notifications that can be used in
      * select boxes
-     *
-     * @param array $settings Settings
-     *
-     * @return array
      */
     public function getCustomNotifications(array $settings): array
     {

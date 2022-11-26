@@ -32,7 +32,7 @@ class AttachmentService
     }
 
     /**
-     * Returns an array of filenames to attach to notifications
+     * Returns an array of absolute filenames to attach to notifications
      *
      * Attachments must be configured as following (example for "registrationNew"):
      *
@@ -57,13 +57,6 @@ class AttachmentService
      *     }
      *   }
      * }
-     *
-     * @param array $settings
-     * @param Registration $registration
-     * @param int $messageType
-     * @param string $messageRecipient
-     *
-     * @return array Array with absolute filenames to attachments
      */
     public function getAttachments(
         array $settings,
@@ -110,13 +103,6 @@ class AttachmentService
      *      }
      *   }
      * }
-     *
-     *
-     * @param array $settings
-     * @param Registration $registration
-     * @param int $messageType
-     * @param string $messageRecipient
-     * @return string
      */
     public function getICalAttachment(
         array $settings,
@@ -142,9 +128,6 @@ class AttachmentService
 
     /**
      * Returns the settingspath for the given messagetype
-     *
-     * @param int $messageType
-     * @return string
      */
     protected function getSettingsPath(int $messageType): string
     {
@@ -169,9 +152,6 @@ class AttachmentService
 
     /**
      * Returns configured fromFiles attachments from TypoScript settings
-     *
-     * @param array $settings
-     * @return array
      */
     protected function getFileAttachments(array $settings): array
     {
@@ -187,10 +167,6 @@ class AttachmentService
 
     /**
      * Returns the attachments from an object of all configured properties
-     *
-     * @param array $propertyNames
-     * @param AbstractEntity $object
-     * @return array
      */
     protected function getObjectAttachments(array $propertyNames, AbstractEntity $object): array
     {
@@ -208,10 +184,6 @@ class AttachmentService
 
     /**
      * Returns an array wih the absolute path to all FAL files in the given object-property
-     *
-     * @param AbstractEntity $object
-     * @param string $propertyName
-     * @return array
      */
     protected function getAttachmentsFromProperty(AbstractEntity $object, string $propertyName): array
     {
