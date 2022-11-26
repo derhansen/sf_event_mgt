@@ -34,32 +34,32 @@ class LongitudeEvaluatorTest extends UnitTestCase
     public function longitudeEvaluatorDataProvider(): array
     {
         return [
-            'emptyValue' => [
-                null,
+            'empty string' => [
+                '',
                 '0.000000',
             ],
-            'givenIntegerGetsConvertedToFloatWith6Decimals' => [
-                1,
+            'given string gets converted to float with 6 decimals' => [
+                '1',
                 '1.000000',
             ],
-            'maxValuePossible' => [
-                180,
+            'max value possible' => [
+                '180',
                 '180.000000',
             ],
-            'minValuePossible' => [
-                -180,
+            'min value possible' => [
+                '-180',
                 '-180.000000',
             ],
-            'greaterThanMaxValueNotPossible' => [
-                180.000001,
+            'greater than max value not possible' => [
+                '180.000001',
                 '0.000000',
             ],
-            'lessThanMinValueNotPossible' => [
-                -180.000001,
+            'less than min value not possible' => [
+                '-180.000001',
                 '0.000000',
             ],
-            'validLongitudeIsReturned' => [
-                12.345678,
+            'valid longitude is returned' => [
+                '12.345678',
                 '12.345678',
             ],
         ];
@@ -68,14 +68,11 @@ class LongitudeEvaluatorTest extends UnitTestCase
     /**
      * @test
      * @dataProvider longitudeEvaluatorDataProvider
-     *
-     * @param mixed $value
-     * @param mixed $expected
      */
-    public function longitudeEvaluatorTest($value, $expected)
+    public function longitudeEvaluatorTest(string $value, string $expected): void
     {
-        $set = null;
-        $actual = $this->subject->evaluateFieldValue($value, null, $set);
+        $set = true;
+        $actual = $this->subject->evaluateFieldValue($value, '', $set);
         self::assertSame($actual, $expected);
     }
 }

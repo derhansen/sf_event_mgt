@@ -34,32 +34,32 @@ class LatitudeEvaluatorTest extends UnitTestCase
     public function latitudeEvaluatorDataProvider(): array
     {
         return [
-            'emptyValue' => [
-                null,
+            'empty string' => [
+                '',
                 '0.000000',
             ],
-            'givenIntegerGetsConvertedToFloatWith6Decimals' => [
-                1,
+            'given string gets converted to float with 6 decimals' => [
+                '1',
                 '1.000000',
             ],
-            'maxValuePossible' => [
-                90,
+            'max value possible' => [
+                '90',
                 '90.000000',
             ],
-            'minValuePossible' => [
-                -90,
+            'min value possible' => [
+                '-90',
                 '-90.000000',
             ],
-            'greaterThanMaxValueNotPossible' => [
-                90.000001,
+            'greater than max value not possible' => [
+                '90.000001',
                 '0.000000',
             ],
-            'lessThanMinValueNotPossible' => [
-                -90.000001,
+            'less than min value not possible' => [
+                '-90.000001',
                 '0.000000',
             ],
-            'validLongitudeIsReturned' => [
-                12.345678,
+            'valid longitude is returned' => [
+                '12.345678',
                 '12.345678',
             ],
         ];
@@ -68,14 +68,11 @@ class LatitudeEvaluatorTest extends UnitTestCase
     /**
      * @test
      * @dataProvider latitudeEvaluatorDataProvider
-     *
-     * @param mixed $value
-     * @param mixed $expected
      */
-    public function latitudeEvaluatorTest($value, $expected)
+    public function latitudeEvaluatorTest(string $value, string $expected): void
     {
-        $set = null;
-        $actual = $this->subject->evaluateFieldValue($value, null, $set);
+        $set = true;
+        $actual = $this->subject->evaluateFieldValue($value, '', $set);
         self::assertSame($actual, $expected);
     }
 }
