@@ -67,12 +67,19 @@ class EventAvailability
 
     protected function isEventAvailableInLanguage(int $eventId, int $language): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
         if ($language === 0) {
             $where = [
                 $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)),
-                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT))
+                    $queryBuilder->expr()->eq(
+                        'sys_language_uid',
+                        $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'sys_language_uid',
+                        $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT)
+                    )
                 ),
                 $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)),
             ];
@@ -80,17 +87,38 @@ class EventAvailability
             $where = [
                 $queryBuilder->expr()->orX(
                     $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT)),
-                        $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT))
+                        $queryBuilder->expr()->eq(
+                            'sys_language_uid',
+                            $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'uid',
+                            $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
+                        )
                     ),
                     $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)),
-                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, Connection::PARAM_INT))
+                        $queryBuilder->expr()->eq(
+                            'l10n_parent',
+                            $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'sys_language_uid',
+                            $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
+                        )
                     ),
                     $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)),
-                        $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)),
-                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, Connection::PARAM_INT))
+                        $queryBuilder->expr()->eq(
+                            'uid',
+                            $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'l10n_parent',
+                            $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'sys_language_uid',
+                            $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
+                        )
                     )
                 ),
             ];
