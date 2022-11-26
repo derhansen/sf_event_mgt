@@ -22,7 +22,7 @@ class LongitudeEvaluator
      * Validates the given longitude value (between -180 and 180 degrees)
      * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
      */
-    public function evaluateFieldValue(string $value, string $is_in, bool &$set)
+    public function evaluateFieldValue(string $value, string $is_in, bool &$set): string
     {
         $newValue = '0.000000';
         $set = true;

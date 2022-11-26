@@ -20,7 +20,7 @@ class LatitudeEvaluator
      * Validates the given latitude value (between -90 and 90 degrees)
      * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
      */
-    public function evaluateFieldValue(string $value, string $is_in, bool &$set)
+    public function evaluateFieldValue(string $value, string $is_in, bool &$set): string
     {
         $newValue = '0.000000';
         $set = true;
