@@ -36,9 +36,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Renders the header (actually empty, since header is rendered in content)
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewHeader(GridColumnItem $item): string
     {
@@ -47,9 +44,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Renders the content of the plugin preview. Must be overwritten in extending class.
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
@@ -58,9 +52,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Render the footer. Can be overwritten in extending class if required
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewFooter(GridColumnItem $item): string
     {
@@ -69,11 +60,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Render the plugin preview
-     *
-     * @param string $previewHeader
-     * @param string $previewContent
-     * @param GridColumnItem $item
-     * @return string
      */
     public function wrapPageModulePreview(string $previewHeader, string $previewContent, GridColumnItem $item): string
     {
@@ -82,9 +68,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Returns the plugin name
-     *
-     * @param array $record
-     * @return string
      */
     protected function getPluginName(array $record): string
     {
@@ -94,10 +77,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Renders the given data and action as HTML table for plugin preview
-     *
-     * @param array $data
-     * @param string $pluginName
-     * @return string
      */
     protected function renderAsTable(array $data, string $pluginName = ''): string
     {
@@ -115,11 +94,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets the PID config for the configured PID settings in plugin flexform
-     *
-     * @param array $data
-     * @param array $flexFormData
-     * @param string $pidSetting
-     * @param string $sheet
      */
     protected function setPluginPidConfig(
         array &$data,
@@ -138,10 +112,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets the storagePage configuration
-     *
-     * @param array $data
-     * @param array $flexFormData
-     * @param string $field
      */
     protected function setStoragePage(array &$data, array $flexFormData, string $field): void
     {
@@ -178,9 +148,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets information to the data array if override demand setting is disabled
-     *
-     * @param array $data
-     * @param array $flexFormData
      */
     protected function setOverrideDemandSettings(array &$data, array $flexFormData): void
     {
@@ -205,11 +172,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets the order settings
-     *
-     * @param array $data
-     * @param array $flexFormData
-     * @param string $orderByField
-     * @param string $orderDirectionField
      */
     protected function setOrderSettings(
         array &$data,
@@ -267,10 +229,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Returns field value from flexform configuration, including checks if flexform configuration is available
-     *
-     * @param string $key name of the key
-     * @param string $sheet name of the sheet
-     * @return string|null if nothing found, value if found
      */
     protected function getFlexFormFieldValue(array $flexformData, string $key, string $sheet = 'sDEF'): ?string
     {
@@ -279,10 +237,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Returns the record data item
-     *
-     * @param int $id
-     * @param string $table
-     * @return string
      */
     protected function getRecordData(int $id, string $table = 'pages'): string
     {
@@ -304,10 +258,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Returns order direction
-     *
-     * @param array $flexFormData
-     * @param string $orderDirectionField
-     * @return string
      */
     private function getOrderDirectionSetting(array $flexFormData, string $orderDirectionField): string
     {
