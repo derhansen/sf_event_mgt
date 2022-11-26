@@ -103,8 +103,6 @@ class EventController extends AbstractController
 
     /**
      * List view
-     *
-     * @param array $overwriteDemand OverwriteDemand
      */
     public function listAction(array $overwriteDemand = []): ResponseInterface
     {
@@ -144,8 +142,6 @@ class EventController extends AbstractController
 
     /**
      * Calendar view
-     *
-     * @param array $overwriteDemand OverwriteDemand
      */
     public function calendarAction(array $overwriteDemand = []): ResponseInterface
     {
@@ -223,9 +219,6 @@ class EventController extends AbstractController
     /**
      * Changes the given event demand object to select a date range for a calendar month including days of the previous
      * month for the first week and they days for the next month for the last week
-     *
-     * @param EventDemand $eventDemand
-     * @return EventDemand
      */
     protected function changeEventDemandToFullMonthDateRange(EventDemand $eventDemand): EventDemand
     {
@@ -255,7 +248,6 @@ class EventController extends AbstractController
     /**
      * Detail view for an event
      *
-     * @param Event|null $event Event
      * @return mixed
      */
     public function detailAction(?Event $event = null)
@@ -285,7 +277,6 @@ class EventController extends AbstractController
     /**
      * Error handling if event is not found
      *
-     * @param array $settings
      * @return ResponseInterface|void|null
      * @throws PropagateResponseException
      * @throws \TYPO3\CMS\Core\Error\Http\PageNotFoundException
@@ -326,8 +317,6 @@ class EventController extends AbstractController
     /**
      * Initiates the iCalendar download for the given event
      *
-     * @param Event|null $event The event
-     *
      * @return mixed
      */
     public function icalDownloadAction(?Event $event = null)
@@ -344,8 +333,6 @@ class EventController extends AbstractController
 
     /**
      * Registration view for an event
-     *
-     * @param Event|null $event Event
      *
      * @return mixed
      */
@@ -505,8 +492,6 @@ class EventController extends AbstractController
     /**
      * Saves the registration
      *
-     * @param Registration $registration Registration
-     * @param Event $event Event
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
      *
@@ -617,11 +602,6 @@ class EventController extends AbstractController
 
     /**
      * Shows the result of the saveRegistrationAction
-     *
-     * @param int $result Result
-     * @param int $eventuid
-     * @param string $hmac
-     * @return ResponseInterface
      */
     public function saveRegistrationResultAction(int $result, int $eventuid, string $hmac): ResponseInterface
     {
@@ -687,12 +667,8 @@ class EventController extends AbstractController
 
     /**
      * Confirms the registration if possible and sends emails to admin and user
-     *
-     * @param int $reguid UID of registration
-     * @param string $hmac HMAC for parameters
-     * @return mixed
      */
-    public function confirmRegistrationAction(int $reguid, string $hmac)
+    public function confirmRegistrationAction(int $reguid, string $hmac): ResponseInterface
     {
         $event = null;
 
@@ -771,9 +747,6 @@ class EventController extends AbstractController
 
     /**
      * Cancels the registration if possible and sends emails to admin and user
-     *
-     * @param int $reguid UID of registration
-     * @param string $hmac HMAC for parameters
      */
     public function cancelRegistrationAction(int $reguid, string $hmac): ResponseInterface
     {
@@ -878,9 +851,6 @@ class EventController extends AbstractController
 
     /**
      * Search view
-     *
-     * @param SearchDemand|null $searchDemand
-     * @param array $overwriteDemand OverwriteDemand
      */
     public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
@@ -944,9 +914,6 @@ class EventController extends AbstractController
 
     /**
      * If no event is given and the singleEvent setting is set, the configured single event is returned
-     *
-     * @param Event|null $event
-     * @return Event|null
      */
     protected function evaluateSingleEventSetting(?Event $event): ?Event
     {
@@ -960,9 +927,6 @@ class EventController extends AbstractController
     /**
      * If no event is given and the isShortcut setting is set, the event is displayed using the "Insert Record"
      * content element and should be loaded from contect object data
-     *
-     * @param Event|null $event
-     * @return Event|null
      */
     protected function evaluateIsShortcutSetting(?Event $event): ?Event
     {
@@ -977,9 +941,6 @@ class EventController extends AbstractController
     /**
      * Checks if the event pid could be found in the storagePage settings of the detail plugin and
      * if the pid could not be found it return null instead of the event object.
-     *
-     * @param Event $event
-     * @return Event|null
      */
     protected function checkPidOfEventRecord(Event $event): ?Event
     {
@@ -1009,8 +970,6 @@ class EventController extends AbstractController
 
     /**
      * Returns the current sys_language_uid
-     *
-     * @return int
      */
     protected function getSysLanguageUid(): int
     {
@@ -1021,8 +980,6 @@ class EventController extends AbstractController
 
     /**
      * Returns the two letter ISO code for the current language
-     *
-     * @return string
      */
     protected function getCurrentLanguageTwoLetterIsoCode(): string
     {

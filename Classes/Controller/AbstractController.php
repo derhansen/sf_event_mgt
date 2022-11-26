@@ -117,10 +117,6 @@ abstract class AbstractController extends ActionController
      * - pagination disabled
      * - itemsPerPage = 10
      * - maxNumPages = 10
-     *
-     * @param QueryResultInterface $events
-     * @param array $settings
-     * @return array
      */
     protected function getPagination(QueryResultInterface $events, array $settings): array
     {
@@ -140,11 +136,6 @@ abstract class AbstractController extends ActionController
 
     /**
      * Overwrites a given demand object by an propertyName =>  $propertyValue array
-     *
-     * @param EventDemand $demand
-     * @param array $overwriteDemand
-     *
-     * @return EventDemand
      */
     protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand): EventDemand
     {

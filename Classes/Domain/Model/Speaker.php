@@ -20,11 +20,8 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 class Speaker extends AbstractEntity
 {
     protected string $name = '';
-
     protected string $jobTitle = '';
-
     protected string $description = '';
-
     protected ?FileReference $image = null;
 
     public function getName(): string

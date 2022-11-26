@@ -33,9 +33,6 @@ class PaymentController extends AbstractController
 {
     /**
      * Catches all PaymentExceptions and sets the Exception message to the response content
-     *
-     * @param RequestInterface $request
-     * @return ResponseInterface
      */
     public function processRequest(RequestInterface $request): ResponseInterface
     {
@@ -63,10 +60,6 @@ class PaymentController extends AbstractController
 
     /**
      * Redirect to payment provider
-     *
-     * @param Registration $registration
-     * @param string $hmac
-     * @return ResponseInterface
      */
     public function redirectAction(Registration $registration, string $hmac): ResponseInterface
     {
@@ -110,10 +103,6 @@ class PaymentController extends AbstractController
 
     /**
      * Action is called when payment was successful
-     *
-     * @param Registration $registration
-     * @param string $hmac
-     * @return ResponseInterface
      */
     public function successAction(Registration $registration, string $hmac): ResponseInterface
     {
@@ -151,9 +140,6 @@ class PaymentController extends AbstractController
 
     /**
      * Action is called when payment failed
-     *
-     * @param Registration $registration
-     * @param string $hmac
      */
     public function failureAction(Registration $registration, string $hmac): ResponseInterface
     {
@@ -204,10 +190,6 @@ class PaymentController extends AbstractController
 
     /**
      * Action is called, when payment was cancelled
-     *
-     * @param Registration $registration
-     * @param string $hmac
-     * @return ResponseInterface
      */
     public function cancelAction(Registration $registration, string $hmac): ResponseInterface
     {
@@ -258,10 +240,6 @@ class PaymentController extends AbstractController
 
     /**
      * Action can be called by payment provider to perform custom logic after the payment process
-     *
-     * @param Registration $registration
-     * @param string $hmac
-     * @return ResponseInterface
      */
     public function notifyAction(Registration $registration, string $hmac): ResponseInterface
     {
@@ -301,8 +279,6 @@ class PaymentController extends AbstractController
      * Checks if the given action can be called for the given registration / event and throws
      * an exception if action should not proceed
      *
-     * @param Registration $registration
-     * @param string $actionName
      * @throws PaymentException
      */
     protected function proceedWithAction(Registration $registration, string $actionName): void
