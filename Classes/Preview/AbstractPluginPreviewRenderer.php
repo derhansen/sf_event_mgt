@@ -197,37 +197,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     }
 
     /**
-     * Returns the current title of the switchableControllerAction
-     *
-     * @param array $flexFormData
-     * @return string
-     */
-    protected function getSwitchableControllerActionTitle(array $flexFormData): string
-    {
-        $title = '';
-        $actions = $this->getFlexFormFieldValue($flexFormData, 'switchableControllerActions');
-        switch ($actions) {
-            case 'Event->list':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.list');
-                break;
-            case 'Event->detail;Event->icalDownload':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.detail');
-                break;
-            case 'Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.registration');
-                break;
-            case 'Event->search':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.search');
-                break;
-            case 'Event->calendar':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.calendar');
-                break;
-        }
-
-        return $title;
-    }
-
-    /**
      * Returns field value from flexform configuration, including checks if flexform configuration is available
      */
     protected function getFlexFormFieldValue(array $flexformData, string $key, string $sheet = 'sDEF'): ?string
