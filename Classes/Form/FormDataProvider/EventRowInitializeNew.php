@@ -15,10 +15,6 @@ use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
 
 class EventRowInitializeNew implements FormDataProviderInterface
 {
-    /**
-     * @param array $result
-     * @return array
-     */
     public function addData(array $result): array
     {
         if ($result['tableName'] !== 'tx_sfeventmgt_domain_model_event') {

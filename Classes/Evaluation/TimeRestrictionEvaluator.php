@@ -21,12 +21,6 @@ class TimeRestrictionEvaluator
 {
     /**
      * Checks if $value can be intepreted with strtotime()
-     *
-     * @param string $value The value that has to be checked
-     * @param string $is_in Is-In String
-     * @param bool $set Determines if the field can be set (value correct) or not
-     *
-     * @return string The new value of the field
      */
     public function evaluateFieldValue(string $value, string $is_in, bool &$set): string
     {
@@ -68,9 +62,6 @@ class TimeRestrictionEvaluator
         return $value;
     }
 
-    /**
-     * @return LanguageService
-     */
     protected function getLanguageService(): ?LanguageService
     {
         return $GLOBALS['LANG'];
