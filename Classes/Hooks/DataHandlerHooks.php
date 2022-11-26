@@ -29,8 +29,6 @@ class DataHandlerHooks
     /**
      * Flushes the cache if a event record was edited.
      * This happens on two levels: by UID and by PID.
-     *
-     * @param array $params
      */
     public function clearCachePostProc(array $params): void
     {
@@ -196,8 +194,6 @@ class DataHandlerHooks
 
     /**
      * Removes all custom notification log entried for the given event UID
-     *
-     * @param int $eventUid
      */
     protected function deleteCustomNotificationsByEvent(int $eventUid): void
     {

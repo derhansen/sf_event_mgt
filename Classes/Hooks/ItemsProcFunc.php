@@ -28,8 +28,6 @@ class ItemsProcFunc
 
     /**
      * Itemsproc function for payment method select field
-     *
-     * @param array $config
      */
     public function getPaymentMethods(array &$config): void
     {

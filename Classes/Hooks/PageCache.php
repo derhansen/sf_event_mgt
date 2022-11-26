@@ -32,8 +32,6 @@ class PageCache
      *
      * The cache for PID 3 will respect registration_startdate/registration_deadline of event record in PID 2
      *
-     * @param array $params
-     * @param TypoScriptFrontendController $pObj
      * @return int|mixed
      */
     public function getCacheTimeout(array $params, TypoScriptFrontendController $pObj)
@@ -75,9 +73,6 @@ class PageCache
     /**
      * Nearly similar to TypoScriptFrontendController::getCurrentPageCacheConfiguration, but only returns
      * entries that are relevant for sf_event_mgt
-     *
-     * @param TypoScriptFrontendController $pObj
-     * @return array
      */
     protected function getCurrentPageCacheConfiguration(TypoScriptFrontendController $pObj): array
     {
