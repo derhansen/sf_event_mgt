@@ -710,9 +710,14 @@ class EventController extends AbstractController
             }
         }
 
-        // Redirect to payment provider if payment/redirect is enabled
+        // Redirect to payment provider if payment/redirect is enabled.
+        // Skip if the registration is a waitlist registration, since it is not sure, if the user will participate.
         $paymentPid = (int)($this->settings['paymentPid'] ?? 0);
-        if (!$failed && $paymentPid > 0 && $this->registrationService->redirectPaymentEnabled($registration)) {
+        if (!$failed &&
+            $paymentPid > 0 &&
+            !$registration->getWaitlist() &&
+            $this->registrationService->redirectPaymentEnabled($registration)
+        ) {
             $this->uriBuilder->reset()
                 ->setTargetPageUid($paymentPid);
             $uri = $this->uriBuilder->uriFor(

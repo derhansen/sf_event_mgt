@@ -53,6 +53,8 @@ Things to keep in mind when using the default move up process
   can be used to keep the dependency to the main registration.
 * When the simultaneous registration process is used, moved up registrations will automatically be enabled for
   notification.
+* If a payment process is activated for the event, the :php:`AfterRegistrationMovedFromWaitlist` event must manuelly be implemented
+  in order to send an email with payment information (e.g. payment link) to the user who moved up.
 
 Customizing the move up process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
