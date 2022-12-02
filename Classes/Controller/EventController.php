@@ -29,6 +29,7 @@ use DERHANSEN\SfEventMgt\Event\ModifyDetailViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyRegistrationViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessRedirectToPaymentEvent;
 use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
@@ -713,11 +714,12 @@ class EventController extends AbstractController
         // Redirect to payment provider if payment/redirect is enabled.
         // Skip if the registration is a waitlist registration, since it is not sure, if the user will participate.
         $paymentPid = (int)($this->settings['paymentPid'] ?? 0);
-        if (!$failed &&
+        $processRedirect = !$failed &&
             $paymentPid > 0 &&
             !$registration->getWaitlist() &&
-            $this->registrationService->redirectPaymentEnabled($registration)
-        ) {
+            $this->registrationService->redirectPaymentEnabled($registration);
+        $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($processRedirect, $registration, $this);
+        if ($processRedirectToPaymentEvent->getProcessRedirect()) {
             $this->uriBuilder->reset()
                 ->setTargetPageUid($paymentPid);
             $uri = $this->uriBuilder->uriFor(
