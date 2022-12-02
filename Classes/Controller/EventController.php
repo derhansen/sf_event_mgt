@@ -716,23 +716,11 @@ class EventController extends AbstractController
         $paymentPid = (int)($this->settings['paymentPid'] ?? 0);
         $processRedirect = !$failed &&
             $paymentPid > 0 &&
+            $registration &&
             !$registration->getWaitlist() &&
             $this->registrationService->redirectPaymentEnabled($registration);
-        $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($processRedirect, $registration, $this);
-        if ($processRedirectToPaymentEvent->getProcessRedirect()) {
-            $this->uriBuilder->reset()
-                ->setTargetPageUid($paymentPid);
-            $uri = $this->uriBuilder->uriFor(
-                'redirect',
-                [
-                    'registration' => $registration,
-                    'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid()),
-                ],
-                'Payment',
-                'sfeventmgt',
-                'Pipayment'
-            );
-            $this->redirectToUri($uri);
+        if ($processRedirect) {
+            $this->processRedirectToPayment($paymentPid, $registration);
         }
 
         $modifyConfirmRegistrationViewVariablesEvent = new ModifyConfirmRegistrationViewVariablesEvent(
@@ -750,6 +738,29 @@ class EventController extends AbstractController
         $this->view->assignMultiple($variables);
 
         return $this->htmlResponse();
+    }
+
+    /**
+     * Processes the payment redirect for the given registration
+     */
+    private function processRedirectToPayment(int $paymentPid, Registration $registration): void
+    {
+        $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($registration, $this);
+        if ($processRedirectToPaymentEvent->getProcessRedirect()) {
+            $this->uriBuilder->reset()
+                ->setTargetPageUid($paymentPid);
+            $uri = $this->uriBuilder->uriFor(
+                'redirect',
+                [
+                    'registration' => $registration,
+                    'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid()),
+                ],
+                'Payment',
+                'sfeventmgt',
+                'Pipayment'
+            );
+            $this->redirectToUri($uri);
+        }
     }
 
     /**

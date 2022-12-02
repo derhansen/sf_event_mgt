@@ -21,16 +21,14 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class ProcessRedirectToPaymentEvent
 {
-    private bool $processRedirect;
+    private bool $processRedirect = true;
     private Registration $registration;
     private EventController $eventController;
 
     public function __construct(
-        bool $processRedirect,
         Registration $registration,
         EventController $eventController
     ) {
-        $this->processRedirect = $processRedirect;
         $this->registration = $registration;
         $this->eventController = $eventController;
     }
