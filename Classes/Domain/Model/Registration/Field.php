@@ -31,7 +31,6 @@ class Field extends AbstractEntity
     protected ?Event $event = null;
     protected string $text = '';
     protected int $datepickermode = 0;
-    protected string $datepickermodeType = '';
 
     public function getTitle(): string
     {
