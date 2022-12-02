@@ -33,7 +33,7 @@ class ItemsProcFunc
     {
         $paymentMethods = $this->paymentService->getPaymentMethods();
         foreach ($paymentMethods as $value => $label) {
-            array_push($config['items'], [$label, $value]);
+            $config['items'][] = [$label, $value];
         }
     }
 }

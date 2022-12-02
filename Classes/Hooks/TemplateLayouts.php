@@ -29,7 +29,7 @@ class TemplateLayouts
                 $GLOBALS['LANG']->sL($layout),
                 $index,
             ];
-            array_push($config['items'], $additionalLayout);
+            $config['items'][] = $additionalLayout;
         }
     }
 
