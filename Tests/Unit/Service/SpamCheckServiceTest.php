@@ -21,16 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class SpamCheckServiceTest extends UnitTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->resetSingletonInstances = true;
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @test
