@@ -63,16 +63,12 @@ class EventController extends AbstractController
 
     /**
      * Assign contentObjectData and pageData view
-     * @todo: Remove $view parameter for TYPO3 v12 version and use $this->view instead to assign variables.
-     *
-     * @param ViewInterface $view @extensionScannerIgnoreLine
      */
-    protected function initializeView(ViewInterface $view)
+    protected function initializeView(): void
     {
-        // @extensionScannerIgnoreLine
-        $view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
+        $this->view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
         if ($this->getTypoScriptFrontendController()) {
-            $view->assign('pageData', $this->getTypoScriptFrontendController()->page);
+            $this->view->assign('pageData', $this->getTypoScriptFrontendController()->page);
         }
     }
 
