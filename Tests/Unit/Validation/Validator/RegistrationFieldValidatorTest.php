@@ -45,7 +45,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
      */
     public function validatorHasNoErrorsWhenRegistrationHasNoFieldValues()
     {
-        $this->markTestSkipped('Migrate to functional test');
+        self::markTestSkipped('Migrate to functional test');
         $mockEvent = $this->getMockBuilder(Event::class)
             ->onlyMethods(['getRegistrationFields'])
             ->getMock();
@@ -65,7 +65,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
      */
     public function validatorHasErrorsWhenRequiredRegistrationFieldIsEmpty()
     {
-        $this->markTestSkipped('Migrate to functional test');
+        self::markTestSkipped('Migrate to functional test');
         $fieldUid = 1;
 
         $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();
@@ -104,7 +104,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
      */
     public function validatorHasErrorsWhenRequiredRegistrationCheckboxFieldIsEmpty()
     {
-        $this->markTestSkipped('Migrate to functional test');
+        self::markTestSkipped('Migrate to functional test');
         $fieldUid = 1;
 
         $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();
@@ -146,7 +146,7 @@ class RegistrationFieldValidatorTest extends UnitTestCase
      */
     public function validatorHasNoErrorsWhenNonRequiredRegistrationFieldIsEmpty()
     {
-        $this->markTestSkipped('Migrate to functional test');
+        self::markTestSkipped('Migrate to functional test');
         $fieldUid = 1;
 
         $mockRegistrationField = $this->getMockBuilder(Registration\Field::class)->getMock();

@@ -27,7 +27,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
      */
     public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest()
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
         $field = new Field();
         $field->setDefaultValue('Default');
 
@@ -71,7 +71,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
      */
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist($fieldUid, $fieldValues, $expected)
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
 
         $field = $this->getMockBuilder(Field::class)->getMock();
         $field->expects(self::any())->method('getUid')->willReturn($fieldUid);

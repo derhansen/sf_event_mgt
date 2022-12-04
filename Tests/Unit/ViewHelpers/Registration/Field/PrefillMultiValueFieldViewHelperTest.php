@@ -44,7 +44,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
      */
     public function viewHelperReturnsExpectedResultIfNoOriginalRequest($defaultValue, $currentValue, $expected)
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
         $field = new Field();
         $field->setDefaultValue($defaultValue);
 
@@ -109,7 +109,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $fieldValue,
         $expected
     ) {
-        $this->markTestSkipped();
+        self::markTestSkipped();
 
         $field = $this->getMockBuilder(Field::class)->getMock();
         $field->expects(self::any())->method('getUid')->willReturn($registrationFieldUid);
@@ -147,7 +147,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
      */
     public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationFieldValues()
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
 
         $field = $this->getMockBuilder(Field::class)->getMock();
         $field->expects(self::any())->method('getUid')->willReturn(1);

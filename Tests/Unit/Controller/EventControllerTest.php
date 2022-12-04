@@ -2102,7 +2102,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function handleEventNotFoundShows404Page()
     {
-        $this->markTestSkipped();
+        self::markTestSkipped();
         $settings = [
             'event' => [
                 'errorHandling' => 'pageNotFoundHandler',
