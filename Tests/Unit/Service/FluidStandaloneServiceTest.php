@@ -12,8 +12,11 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -63,6 +66,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
      */
     public function renderTemplateReturnsExpectedResult()
     {
+        $this->markTestSkipped('Migrate to functional');
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->disableOriginalConstructor()
             ->getMock();

@@ -27,7 +27,7 @@ class EmailServiceTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = GeneralUtility::makeInstance(EmailService::class);
+        $this->subject = new EmailService();
     }
 
     /**

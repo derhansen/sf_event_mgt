@@ -323,7 +323,7 @@ class AdministrationControllerTest extends UnitTestCase
         );
         $this->subject->injectSettingsService($mockSettingsService);
 
-        $mockCustomNotification = GeneralUtility::makeInstance(CustomNotification::class);
+        $mockCustomNotification = new CustomNotification();
 
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
