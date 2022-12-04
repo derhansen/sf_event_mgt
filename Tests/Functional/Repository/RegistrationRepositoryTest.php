@@ -17,20 +17,15 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use InvalidArgumentException;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository
- */
 class RegistrationRepositoryTest extends FunctionalTestCase
 {
     protected RegistrationRepository $registrationRepository;
 
-    /**
-     * @var array
-     */
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup
@@ -38,12 +33,15 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->registrationRepository = GeneralUtility::makeInstance(RegistrationRepository::class);
+        $this->registrationRepository = $this->getContainer()->get(RegistrationRepository::class);
 
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_confirmed_unconfirmed.csv');
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_for_notification.csv');
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_user_registrations.csv');
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/registrations_waitlist.csv');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
@@ -214,7 +212,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsStoragePage(): void
     {
-        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
@@ -231,7 +229,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeFuture(): void
     {
-        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('future');
@@ -249,7 +247,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeCurrentFuture(): void
     {
-        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('current_future');
@@ -267,7 +265,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsUser(): void
     {
-        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(2);
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
@@ -284,7 +282,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsOrder(): void
     {
-        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');
@@ -303,7 +301,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
      */
     public function findRegistrationsByUserRegistrationDemandRespectsOrderDirection(): void
     {
-        $feUserRepository = GeneralUtility::makeInstance(FrontendUserRepository::class);
+        $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
         $feUser = $feUserRepository->findByUid(1);
         $demand = new UserRegistrationDemand();
         $demand->setDisplayMode('all');

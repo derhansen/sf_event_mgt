@@ -1,20 +1,24 @@
 <?xml version="1.0"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
          backupGlobals="true"
-         backupStaticAttributes="false"
          bootstrap="../../.Build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTestsBootstrap.php"
+         cacheResult="false"
          colors="true"
          convertErrorsToExceptions="true"
          convertWarningsToExceptions="true"
-         convertDeprecationsToExceptions="false"
+         convertNoticesToExceptions="true"
+         convertDeprecationsToExceptions="true"
          forceCoversAnnotation="false"
-         processIsolation="true"
          stopOnError="false"
          stopOnFailure="false"
          stopOnIncomplete="false"
          stopOnSkipped="false"
-         verbose="false">
+         verbose="false"
+         beStrictAboutTestsThatDoNotTestAnything="false"
+         failOnWarning="true"
+         failOnRisky="true"
+>
   <coverage>
     <include>
       <directory suffix=".php">./Classes</directory>
@@ -27,6 +31,8 @@
   </testsuites>
   <php>
     <!-- suppress deprecation warnings - set error reporting to: E_ALL & ~E_NOTICE & ~E_USER_ERROR & ~E_USER_WARNING & ~E_USER_NOTICE & ~E_STRICT & ~E_USER_DEPRECATED -->
+    <ini name="display_errors" value="1" />
     <ini name="error_reporting" value="12535"/>
+    <env name="TYPO3_CONTEXT" value="Testing" />
   </php>
 </phpunit>

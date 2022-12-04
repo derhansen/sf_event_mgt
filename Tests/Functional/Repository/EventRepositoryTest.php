@@ -17,12 +17,10 @@ use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\EventRepository
- */
 class EventRepositoryTest extends FunctionalTestCase
 {
     protected EventRepository $eventRepository;
@@ -30,8 +28,7 @@ class EventRepositoryTest extends FunctionalTestCase
     protected SpeakerRepository $speakerRepository;
     protected OrganisatorRepository $organisatorRepository;
 
-    /** @var array */
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup
@@ -39,10 +36,10 @@ class EventRepositoryTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->eventRepository = GeneralUtility::makeInstance(EventRepository::class);
-        $this->locationRepository = GeneralUtility::makeInstance(LocationRepository::class);
-        $this->organisatorRepository = GeneralUtility::makeInstance(OrganisatorRepository::class);
-        $this->speakerRepository = GeneralUtility::makeInstance(SpeakerRepository::class);
+        $this->eventRepository = $this->getContainer()->get(EventRepository::class);
+        $this->locationRepository = $this->getContainer()->get(LocationRepository::class);
+        $this->organisatorRepository = $this->getContainer()->get(OrganisatorRepository::class);
+        $this->speakerRepository = $this->getContainer()->get(SpeakerRepository::class);
 
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/events_storagepage.csv');
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/events_displaymode.csv');
@@ -56,6 +53,9 @@ class EventRepositoryTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/events_findbycategory.csv');
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/events_ignoreenablefields.csv');
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/events_findbysearchdemand.csv');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**

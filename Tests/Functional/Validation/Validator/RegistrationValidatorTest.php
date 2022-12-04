@@ -13,19 +13,21 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
- */
 class RegistrationValidatorTest extends FunctionalTestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
         $GLOBALS['LANG'] = $this->getContainer()->get(LanguageServiceFactory::class)->create('default');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
@@ -39,7 +41,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $result = $subject->validate($registration);
         self::assertTrue($result->hasErrors());
         $errors = $result->getSubResults();
-        self::assertEquals(3, count($errors));
+        self::assertCount(3, $errors);
         self::assertTrue(isset($errors['firstname']));
         self::assertTrue(isset($errors['lastname']));
         self::assertTrue(isset($errors['email']));

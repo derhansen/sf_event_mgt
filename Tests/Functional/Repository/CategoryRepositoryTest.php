@@ -13,22 +13,24 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
- */
 class CategoryRepositoryTest extends FunctionalTestCase
 {
     protected CategoryRepository $categoryRepository;
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $coreExtensionsToLoad = ['core', 'extbase', 'fluid'];
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
+        $this->categoryRepository = $this->getContainer()->get(CategoryRepository::class);
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/sys_category.csv');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**

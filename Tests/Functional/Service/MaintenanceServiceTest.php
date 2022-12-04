@@ -16,17 +16,10 @@ use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Service\MaintenanceService
- */
 class MaintenanceServiceTest extends FunctionalTestCase
 {
-    /** @var array */
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
-    /**
-     * Setup
-     */
     public function setUp(): void
     {
         parent::setUp();

@@ -17,12 +17,9 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test for TitleViewHelper
- */
 class TitleViewHelperTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     protected StandaloneView $view;
 
@@ -31,7 +28,7 @@ class TitleViewHelperTest extends FunctionalTestCase
         parent::setUp();
 
         // Default LANG just returns incoming value as label if calling ->sL()
-        $languageService = $this->getMockBuilder(LanguageService::class)->disableOriginalConstructor()->getMock();
+        $languageService = $this->createMock(LanguageService::class);
         $languageService->expects(self::any())->method('loadSingleTableDescription')->willReturn(null);
         $languageService->expects(self::any())->method('sL')->willReturn('foo');
         $GLOBALS['LANG'] = $languageService;
@@ -46,8 +43,7 @@ class TitleViewHelperTest extends FunctionalTestCase
      */
     public function indexedSearchTitleIsSet()
     {
-        $tsfe = $this->getMockBuilder(TypoScriptFrontendController::class)->disableOriginalConstructor()->getMock();
-        $GLOBALS['TSFE'] = $tsfe;
+        $GLOBALS['TSFE'] = $this->createMock(TypoScriptFrontendController::class);
 
         self::assertEmpty($this->view->assign('title', 'Test')->render());
         self::assertEquals('Test', $GLOBALS['TSFE']->indexedDocTitle);
