@@ -60,7 +60,7 @@ class CategoryRepository extends Repository
         }
 
         if (count($constraints) > 0) {
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         if ($demand->getOrderField() !== '' && $demand->getOrderDirection() !== '' &&

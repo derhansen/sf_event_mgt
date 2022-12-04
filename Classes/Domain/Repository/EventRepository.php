@@ -84,7 +84,7 @@ class EventRepository extends Repository
         $this->setOrderingsFromDemand($query, $eventDemand);
 
         if (count($constraints) > 0) {
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         $this->setQueryLimitFromDemand($query, $eventDemand);
@@ -159,19 +159,19 @@ class EventRepository extends Repository
                 $constraints['displayMode'] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
                 break;
             case 'current_future':
-                $constraints['displayMode'] = $query->logicalOr([
+                $constraints['displayMode'] = $query->logicalOr(
                     $query->greaterThan('startdate', $eventDemand->getCurrentDateTime()),
-                    $query->logicalAnd([
+                    $query->logicalAnd(
                         $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
                         $query->lessThanOrEqual('startdate', $eventDemand->getCurrentDateTime()),
-                    ]),
-                ]);
+                    ),
+                );
                 break;
             case 'past':
-                $constraints['displayMode'] = $query->logicalAnd([
+                $constraints['displayMode'] = $query->logicalAnd(
                     $query->greaterThan('enddate', 0),
                     $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
-                ]);
+                );
                 break;
             case 'time_restriction':
                 $includeCurrentConstraint = null;
@@ -180,10 +180,10 @@ class EventRepository extends Repository
                     $timeRestrictionConstraints['timeRestrictionLow'] = $query->greaterThanOrEqual('startdate', $timeRestriction);
 
                     if ($eventDemand->getIncludeCurrent()) {
-                        $includeCurrentConstraint = $query->logicalAnd([
+                        $includeCurrentConstraint = $query->logicalAnd(
                             $query->lessThan('startdate', $timeRestriction),
                             $query->greaterThan('enddate', $timeRestriction),
-                        ]);
+                        );
                     }
                 }
                 if (!empty($eventDemand->getTimeRestrictionHigh())) {
@@ -192,12 +192,12 @@ class EventRepository extends Repository
                 }
                 if (isset($timeRestrictionConstraints)) {
                     if ($eventDemand->getIncludeCurrent() && $includeCurrentConstraint) {
-                        $constraints['displayMode'] = $query->logicalOr([
+                        $constraints['displayMode'] = $query->logicalOr(
                             $includeCurrentConstraint,
-                            $query->logicalAnd($timeRestrictionConstraints),
-                        ]);
+                            $query->logicalAnd(...$timeRestrictionConstraints),
+                        );
                     } else {
-                        $constraints['displayMode'] = $query->logicalAnd($timeRestrictionConstraints);
+                        $constraints['displayMode'] = $query->logicalAnd(...$timeRestrictionConstraints);
                     }
                 }
                 break;
@@ -241,17 +241,17 @@ class EventRepository extends Repository
     ): ConstraintInterface {
         switch (strtolower($eventDemand->getCategoryConjunction())) {
             case 'and':
-                $constraint = $query->logicalAnd($categoryConstraints);
+                $constraint = $query->logicalAnd(...$categoryConstraints);
                 break;
             case 'notor':
-                $constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+                $constraint = $query->logicalNot($query->logicalOr(...$categoryConstraints));
                 break;
             case 'notand':
-                $constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+                $constraint = $query->logicalNot($query->logicalAnd(...$categoryConstraints));
                 break;
             case 'or':
             default:
-                $constraint = $query->logicalOr($categoryConstraints);
+                $constraint = $query->logicalOr(...$categoryConstraints);
         }
 
         return $constraint;
@@ -330,14 +330,14 @@ class EventRepository extends Repository
             /* StartDate and EndDate  - Search for events between two given dates */
             $begin = $eventDemand->getSearchDemand()->getStartDate();
             $end = $eventDemand->getSearchDemand()->getEndDate();
-            $constraints['startEndDate'] = $query->logicalOr([
+            $constraints['startEndDate'] = $query->logicalOr(
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
-                $query->logicalAnd([
+                $query->logicalAnd(
                     $query->greaterThanOrEqual('enddate', $begin),
                     $query->lessThanOrEqual('startdate', $begin),
-                ]),
-            ]);
+                ),
+            );
         } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
             /* StartDate - Search for events beginning at a given date */
             $constraints['startDate'] = $query->greaterThanOrEqual('startdate', $eventDemand->getSearchDemand()->getStartDate());
@@ -368,7 +368,7 @@ class EventRepository extends Repository
                 $searchConstraints[] = $query->like($field, '%' . addcslashes($searchSubject, '_%') . '%');
             }
 
-            $constraints['search'] = $query->logicalOr($searchConstraints);
+            $constraints['search'] = $query->logicalOr(...$searchConstraints);
         }
     }
 
@@ -403,14 +403,14 @@ class EventRepository extends Repository
                 $begin = mktime(0, 0, 0, 1, 1, $eventDemand->getYear());
                 $end = mktime(23, 59, 59, 12, 31, $eventDemand->getYear());
             }
-            $constraints['yearMonthDay'] = $query->logicalOr([
+            $constraints['yearMonthDay'] = $query->logicalOr(
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
-                $query->logicalAnd([
+                $query->logicalAnd(
                     $query->greaterThanOrEqual('enddate', $begin),
                     $query->lessThanOrEqual('startdate', $begin),
-                ]),
-            ]);
+                ),
+            );
         }
     }
 }

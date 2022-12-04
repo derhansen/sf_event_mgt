@@ -58,7 +58,7 @@ class RegistrationRepository extends Repository
         }
 
         if (!is_array($findConstraints) || count($findConstraints) === 0) {
-            return $query->matching($query->logicalAnd($constraints))->execute();
+            return $query->matching($query->logicalAnd(...$constraints))->execute();
         }
 
         foreach ($findConstraints as $findConstraint => $value) {
@@ -84,7 +84,7 @@ class RegistrationRepository extends Repository
             }
         }
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -104,7 +104,7 @@ class RegistrationRepository extends Repository
         $this->setUserConstraint($query, $demand, $constraints);
         $this->setOrderingsFromDemand($query, $demand);
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -119,7 +119,7 @@ class RegistrationRepository extends Repository
         $constraints[] = $query->equals('event', $event->getUid());
         $constraints[] = $query->equals('waitlist', $waitlist);
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -137,7 +137,7 @@ class RegistrationRepository extends Repository
         $constraints[] = $query->greaterThan('registrationDate', 0);
         $query->setOrderings(['registration_date' => QueryInterface::ORDER_ASCENDING]);
 
-        return $query->matching($query->logicalAnd($constraints))->execute();
+        return $query->matching($query->logicalAnd(...$constraints))->execute();
     }
 
     /**
@@ -153,13 +153,13 @@ class RegistrationRepository extends Repository
                 $constraints[] = $query->greaterThan('event.startdate', $demand->getCurrentDateTime());
                 break;
             case 'current_future':
-                $constraints[] = $query->logicalOr([
+                $constraints[] = $query->logicalOr(
                     $query->greaterThan('event.startdate', $demand->getCurrentDateTime()),
-                    $query->logicalAnd([
+                    $query->logicalAnd(
                         $query->greaterThanOrEqual('event.enddate', $demand->getCurrentDateTime()),
                         $query->lessThanOrEqual('event.startdate', $demand->getCurrentDateTime()),
-                    ]),
-                ]);
+                    ),
+                );
                 break;
             case 'past':
                 $constraints[] = $query->lessThanOrEqual('event.enddate', $demand->getCurrentDateTime());
