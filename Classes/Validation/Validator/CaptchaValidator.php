@@ -39,9 +39,8 @@ class CaptchaValidator extends AbstractValidator
 
     protected array $settings;
 
-    public function __construct(array $options = [])
+    public function __construct()
     {
-        parent::__construct($options);
         $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
         $this->requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
 
@@ -55,7 +54,7 @@ class CaptchaValidator extends AbstractValidator
     /**
      * @param Registration $value Registration
      */
-    protected function isValid($value)
+    protected function isValid(mixed $value): void
     {
         $configurationService = new CaptchaConfigurationService($this->settings['registration']['captcha'] ?? []);
 

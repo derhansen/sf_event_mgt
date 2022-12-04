@@ -29,9 +29,8 @@ class RegistrationValidator extends AbstractValidator
     protected ConfigurationManagerInterface $configurationManager;
     protected array $settings;
 
-    public function __construct(array $options = [])
+    public function __construct()
     {
-        parent::__construct($options);
         $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
 
         $this->settings = $this->configurationManager->getConfiguration(
@@ -47,26 +46,24 @@ class RegistrationValidator extends AbstractValidator
      * that boolean fields must have the value "TRUE" (for checkboxes)
      *
      * @param Registration $value Registration
-     *
-     * @return bool
      */
-    protected function isValid($value)
+    protected function isValid(mixed $value): void
     {
         $spamSettings = $this->settings['registration']['spamCheck'] ?? [];
         if ((bool)($spamSettings['enabled'] ?? false) && $this->isSpamCheckFailed($value, $spamSettings)) {
             $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
             $this->addErrorForProperty('spamCheck', $message, 1578855253);
 
-            return false;
+            return;
         }
 
-        $result = $this->validateDefaultFields($value);
+        $this->validateDefaultFields($value);
 
         // If no required fields are set, then the registration is valid
         if (!isset($this->settings['registration']['requiredFields']) ||
             $this->settings['registration']['requiredFields'] === ''
         ) {
-            return $result;
+            return;
         }
 
         $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields']));
@@ -76,15 +73,12 @@ class RegistrationValidator extends AbstractValidator
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
                 $validationResult = $validator->validate($value->_getProperty($requiredField));
                 if ($validationResult->hasErrors()) {
-                    $result = false;
                     foreach ($validationResult->getErrors() as $error) {
                         $this->result->forProperty($requiredField)->addError($error);
                     }
                 }
             }
         }
-
-        return $result;
     }
 
     /**
@@ -152,7 +146,7 @@ class RegistrationValidator extends AbstractValidator
                 $validator = new BooleanValidator(['is' => true]);
                 break;
             default:
-                if ($field == 'captcha') {
+                if ($field === 'captcha') {
                     $validator = new CaptchaValidator();
                 } else {
                     $validator = new NotEmptyValidator();
