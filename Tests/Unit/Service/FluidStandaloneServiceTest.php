@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -25,17 +27,11 @@ class FluidStandaloneServiceTest extends UnitTestCase
 {
     protected FluidStandaloneService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new FluidStandaloneService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -44,7 +40,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTemplateFoldersReturnsDefaultPathForNoConfiguration()
+    public function getTemplateFoldersReturnsDefaultPathForNoConfiguration(): void
     {
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->disableOriginalConstructor()
@@ -61,20 +57,24 @@ class FluidStandaloneServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function renderTemplateReturnsExpectedResult()
+    public function renderTemplateReturnsExpectedResult(): void
     {
-        self::markTestSkipped('Migrate to functional');
+        $serverRequest = new ServerRequest();
+        $GLOBALS['TYPO3_REQUEST'] = $serverRequest;
+
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->disableOriginalConstructor()
             ->getMock();
         $this->subject->injectConfigurationManager($configurationManager);
 
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects(self::once())->method('setControllerExtensionName')->willReturn('SfEventMgt');
-        $request->expects(self::once())->method('setPluginName')->willReturn('Pievent');
+        $extbaseRequestParams = new ExtbaseRequestParameters();
+        $extbaseRequestParams->setPluginName('Pieventregistration');
+        $extbaseRequestParams->setControllerExtensionName('SfEventMgt');
 
-        $standAloneView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
-        $standAloneView->expects(self::any())->method('getRequest')->willReturn($request);
+        $extbaseRequest = GeneralUtility::makeInstance(Request::class, $serverRequest->withAttribute('extbase', $extbaseRequestParams));
+
+        $standAloneView = $this->createMock(StandaloneView::class);
+        $standAloneView->expects(self::once())->method('setRequest')->with($extbaseRequest);
         $standAloneView->expects(self::once())->method('setLayoutRootPaths');
         $standAloneView->expects(self::once())->method('setPartialRootPaths');
         $standAloneView->expects(self::once())->method('setTemplateRootPaths');
@@ -151,10 +151,8 @@ class FluidStandaloneServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider templateFoldersDataProvider
-     * @param mixed $settings
-     * @param mixed $expected
      */
-    public function getTemplateFoldersReturnsExpectedResult($settings, $expected)
+    public function getTemplateFoldersReturnsExpectedResult(array $settings, array $expected): void
     {
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
             ->disableOriginalConstructor()

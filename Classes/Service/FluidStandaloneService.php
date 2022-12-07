@@ -11,9 +11,12 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 /**
@@ -71,7 +74,7 @@ class FluidStandaloneService
     }
 
     /**
-     * Renders a fluid standlone view for the given template
+     * Renders a fluid standalone view for the given template
      */
     public function renderTemplate(
         string $template,
@@ -80,6 +83,17 @@ class FluidStandaloneService
         string $pluginName = 'Pieventregistration'
     ): string {
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
+
+        $extbaseRequestParams = GeneralUtility::makeInstance(ExtbaseRequestParameters::class);
+        $extbaseRequestParams->setControllerExtensionName($extensionName);
+        $extbaseRequestParams->setPluginName($pluginName);
+
+        /** @var ServerRequest $serverRequest */
+        $serverRequest = $GLOBALS['TYPO3_REQUEST'];
+
+        $extbaseRequest = GeneralUtility::makeInstance(Request::class, $serverRequest->withAttribute('extbase', $extbaseRequestParams));
+        $emailView->setRequest($extbaseRequest);
+
         $emailView->setFormat('html');
         $emailView->setTemplateRootPaths($this->getTemplateFolders());
         $emailView->setLayoutRootPaths($this->getTemplateFolders('layout'));
