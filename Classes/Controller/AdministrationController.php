@@ -31,10 +31,9 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 /**
  * AdministrationController
@@ -178,16 +177,12 @@ class AdministrationController extends AbstractController
      * Initializes module template and returns a response which must be used as response for any extbase action
      * that should render a view.
      */
-    protected function initModuleTemplateAndReturnResponse(): ResponseInterface
+    protected function initModuleTemplateAndReturnResponse(string $templateFileName, array $variables = []): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
         $this->pageRenderer->addCssFile('EXT:sf_event_mgt/Resources/Public/Css/administration.css');
 
-        $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ?
-            ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY'] :
-            ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
-        $this->pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
+        $this->pageRenderer->loadJavaScriptModule('@derhansen/sf_event_mgt/administration-module.js');
 
         $this->registerDocHeaderButtons($moduleTemplate);
 
@@ -200,14 +195,12 @@ class AdministrationController extends AbstractController
         );
         $this->eventDispatcher->dispatch($initAdministrationModuleTemplateEvent);
 
-        $moduleTemplate->setContent($this->view->render());
+        $variables['settings'] = $this->settings;
+        $moduleTemplate->assignMultiple($variables);
 
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        return $moduleTemplate->renderResponse($templateFileName);
     }
 
-    /**
-     * Initialize action
-     */
     public function initializeAction(): void
     {
         $this->pid = (int)GeneralUtility::_GET('id');
@@ -218,23 +211,10 @@ class AdministrationController extends AbstractController
      */
     public function initializeListAction(): void
     {
-        if (empty($this->settings)) {
-            $this->redirect('settingsError');
+        // Static format needed for date picker (flatpickr), see BackendController::generateJavascript() and #91606
+        if (!empty($this->settings)) {
+            $this->settings['search']['dateFormat'] = 'H:i d-m-Y';
         }
-        $this->arguments->getArgument('searchDemand')
-            ->getPropertyMappingConfiguration()->forProperty('startDate')
-            ->setTypeConverterOption(
-                DateTimeConverter::class,
-                DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['search']['dateFormat'] ?? 'H:i d-m-Y'
-            );
-        $this->arguments->getArgument('searchDemand')
-            ->getPropertyMappingConfiguration()->forProperty('endDate')
-            ->setTypeConverterOption(
-                DateTimeConverter::class,
-                DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['search']['dateFormat'] ?? 'H:i d-m-Y'
-            );
     }
 
     /**
@@ -242,8 +222,12 @@ class AdministrationController extends AbstractController
      */
     public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
+        if (empty($this->settings)) {
+            return $this->redirect('settingsError');
+        }
+
         if ($searchDemand !== null) {
-            $searchDemand->setFields($this->settings['search']['fields'] ?? '');
+            $searchDemand->setFields($this->settings['search']['fields'] ?? 'title');
 
             $sessionData = [];
             $sessionData['searchDemand'] = $searchDemand->toArray();
@@ -282,7 +266,7 @@ class AdministrationController extends AbstractController
             $pagination = $this->getPagination($events, $this->settings['pagination'] ?? []);
         }
 
-        $this->view->assignMultiple([
+        $variables = [
             'pid' => $this->pid,
             'events' => $events,
             'searchDemand' => $searchDemand,
@@ -290,9 +274,9 @@ class AdministrationController extends AbstractController
             'orderDirections' => $this->getOrderDirections(),
             'overwriteDemand' => $overwriteDemand,
             'pagination' => $pagination,
-        ]);
+        ];
 
-        return $this->initModuleTemplateAndReturnResponse();
+        return $this->initModuleTemplateAndReturnResponse('Administration/List', $variables);
     }
 
     /**
@@ -325,18 +309,17 @@ class AdministrationController extends AbstractController
     /**
      * Handles expired registrations
      */
-    public function handleExpiredRegistrationsAction(): void
+    public function handleExpiredRegistrationsAction(): ResponseInterface
     {
         $delete = (bool)($this->settings['registration']['deleteExpiredRegistrations'] ?? false);
         $this->maintenanceService->handleExpiredRegistrations($delete);
 
         $this->addFlashMessage(
             $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.content'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.title'),
-            FlashMessage::OK
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.title')
         );
 
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
@@ -348,15 +331,16 @@ class AdministrationController extends AbstractController
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
-        $this->view->assignMultiple([
+
+        $variables = [
             'event' => $event,
             'recipients' => $this->getNotificationRecipients(),
             'customNotification' => $customNotification,
             'customNotifications' => $customNotifications,
             'logEntries' => $logEntries,
-        ]);
+        ];
 
-        return $this->initModuleTemplateAndReturnResponse();
+        return $this->initModuleTemplateAndReturnResponse('Administration/IndexNotify', $variables);
     }
 
     /**
@@ -389,7 +373,7 @@ class AdministrationController extends AbstractController
     /**
      * Notify action
      */
-    public function notifyAction(Event $event, CustomNotification $customNotification): void
+    public function notifyAction(Event $event, CustomNotification $customNotification): ResponseInterface
     {
         $this->checkEventAccess($event);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
@@ -402,10 +386,9 @@ class AdministrationController extends AbstractController
         );
         $this->addFlashMessage(
             $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.content'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.title'),
-            FlashMessage::OK
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.title')
         );
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
@@ -418,7 +401,7 @@ class AdministrationController extends AbstractController
             $this->addFlashMessage(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.content'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.title'),
-                FlashMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
 
             $this->redirect('list');
@@ -428,8 +411,9 @@ class AdministrationController extends AbstractController
     /**
      * Shows the settings error view
      */
-    public function settingsErrorAction(): void
+    public function settingsErrorAction(): ResponseInterface
     {
+        return $this->initModuleTemplateAndReturnResponse('Administration/SettingsError');
     }
 
     /**

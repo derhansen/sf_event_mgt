@@ -17,22 +17,4 @@ call_user_func(function () {
     foreach ($tables as $table) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages($table);
     }
-
-    /**
-     * Register Administration Module
-     */
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-        'SfEventMgt',
-        'web',
-        'tx_sfeventmgt_m1',
-        '',
-        [
-            \DERHANSEN\SfEventMgt\Controller\AdministrationController::class => 'list, export, handleExpiredRegistrations, indexNotify, notify, settingsError',
-        ],
-        [
-            'access' => 'user,group',
-            'icon' => 'EXT:sf_event_mgt/Resources/Public/Icons/module.svg',
-            'labels' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_modadministration.xlf',
-        ]
-    );
 });

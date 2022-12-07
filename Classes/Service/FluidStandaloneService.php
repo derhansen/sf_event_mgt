@@ -80,10 +80,8 @@ class FluidStandaloneService
         string $pluginName = 'Pieventregistration'
     ): string {
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
-        $emailView->getRequest()->setControllerExtensionName($extensionName);
-        $emailView->getRequest()->setPluginName($pluginName);
         $emailView->setFormat('html');
-        $emailView->setTemplateRootPaths($this->getTemplateFolders('template'));
+        $emailView->setTemplateRootPaths($this->getTemplateFolders());
         $emailView->setLayoutRootPaths($this->getTemplateFolders('layout'));
         $emailView->setPartialRootPaths($this->getTemplateFolders('partial'));
         $emailView->setTemplate($template);

@@ -161,7 +161,6 @@ plugin.tx_sfeventmgt {
         }
         search {
             fields = {$plugin.tx_sfeventmgt.settings.search.fields}
-            dateFormat = {$plugin.tx_sfeventmgt.settings.search.dateFormat}
             adjustTime = {$plugin.tx_sfeventmgt.settings.search.adjustTime}
         }
         pagination {

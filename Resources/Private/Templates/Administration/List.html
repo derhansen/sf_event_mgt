@@ -3,16 +3,14 @@
       xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
       data-namespace-typo3-fluid="true">
 
-<f:layout name="Backend" />
+<f:layout name="Module" />
 
-<f:section name="headline">
+<f:section name="Content">
     <h1>
         <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.title" />
     </h1>
-</f:section>
 
-<f:section name="content">
-    <f:form name="searchDemand" object="{searchDemand}">
+    <f:form name="searchDemand" object="{searchDemand}" action="list">
         <div class="row row-cols-auto align-items-end g-3 mb-3">
             <div class="col">
                 <label for="search" class="form-label">
@@ -32,15 +30,19 @@
                 <label for="startDate" class="form-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
                 </label>
-
                 <div class="input-group">
-                    <f:form.textfield type="datetime"
-                                      property="startDate"
-                                      id="startDate"
-                                      class="form-control t3js-datetimepicker t3js-clearable"
-                                      data="{date-type: 'datetime', date-offset: '0'}"
-                                      additionalAttributes="{'autocomplete': 'off'}"
-                                      value="{searchDemand.startDate -> f:format.date(format: settings.search.dateFormat)}"/>
+                    <f:form.textfield
+                        name="startDate"
+                        value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.startDate}')}\")}"
+                        id="startDate"
+                        additionalAttributes="{'autocomplete': 'off'}"
+                        class="form-control t3js-datetimepicker t3js-clearable"
+                        data="{date-type: 'datetime'}"
+                    />
+                    <f:form.hidden
+                        property="startDate"
+                        value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'c', date: '{searchDemand.startDate}')}\")}"
+                    />
 
                     <label class="mb-0 btn btn-default" for="startDate">
                         <core:icon identifier="actions-calendar" />
@@ -54,13 +56,18 @@
                 </label>
 
                 <div class="input-group">
-                    <f:form.textfield type="datetime"
-                                      property="endDate"
-                                      id="endDate"
-                                      class="form-control t3js-datetimepicker t3js-clearable"
-                                      data="{date-type: 'datetime', date-offset: '0'}"
-                                      additionalAttributes="{'autocomplete': 'off'}"
-                                      value="{searchDemand.endDate -> f:format.date(format: settings.search.dateFormat)}"/>
+                    <f:form.textfield
+                        name="endDate"
+                        value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.endDate}')}\")}"
+                        id="endDate"
+                        additionalAttributes="{'autocomplete': 'off'}"
+                        class="form-control t3js-datetimepicker t3js-clearable"
+                        data="{date-type: 'datetime'}"
+                    />
+                    <f:form.hidden
+                        property="endDate"
+                        value="{f:if(condition: searchDemand.endDate, then: \"{f:format.date(format:'c', date: '{searchDemand.endDate}')}\")}"
+                    />
 
                     <label class="mb-0 btn btn-default" for="endDate">
                         <core:icon identifier="actions-calendar" />
@@ -95,48 +102,50 @@
 
     <f:if condition="{events}">
         <f:then>
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th class="event-icon"></th>
-                    <th class="title">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
-                    </th>
-                    <th class="startdate">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
-                    </th>
-                    <th class="enddate">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
-                    </th>
-                    <th class="registrationenabled">
-                        <f:translate key="tx_sfeventmgt_domain_model_registration"/>
-                    </th>
-                    <th class="maxparticipants">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
-                    </th>
-                    <th class="registrations">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
-                    </th>
-                    <th class="actions">
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
+            <div class="table-fit">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th class="event-icon"></th>
+                        <th class="title">
+                            <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+                        </th>
+                        <th class="startdate">
+                            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                        </th>
+                        <th class="enddate">
+                            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                        </th>
+                        <th class="registrationenabled">
+                            <f:translate key="tx_sfeventmgt_domain_model_registration"/>
+                        </th>
+                        <th class="maxparticipants">
+                            <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                        </th>
+                        <th class="registrations">
+                            <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                        </th>
+                        <th class="actions">
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
 
-                <f:if condition="{pagination}">
-                    <f:then>
-                        <f:for each="{pagination.paginator.paginatedItems}" as="event" iteration="iterator">
-                            <f:render partial="Administration/ListItem" arguments="{event: event}"/>
-                        </f:for>
-                    </f:then>
-                    <f:else>
-                        <f:for each="{events}" as="event">
-                            <f:render partial="Administration/ListItem" arguments="{event: event}"/>
-                        </f:for>
-                    </f:else>
-                </f:if>
-                </tbody>
-            </table>
+                    <f:if condition="{pagination}">
+                        <f:then>
+                            <f:for each="{pagination.paginator.paginatedItems}" as="event" iteration="iterator">
+                                <f:render partial="Administration/ListItem" arguments="{event: event}"/>
+                            </f:for>
+                        </f:then>
+                        <f:else>
+                            <f:for each="{events}" as="event">
+                                <f:render partial="Administration/ListItem" arguments="{event: event}"/>
+                            </f:for>
+                        </f:else>
+                    </f:if>
+                    </tbody>
+                </table>
+            </div>
 
             <f:if condition="{pagination}">
                 <f:render partial="Administration/Pagination" arguments="{pagination: pagination.pagination, paginator: pagination.paginator}" />
@@ -146,8 +155,9 @@
             <div class="callout callout-info">
                 <div class="media">
                     <div class="media-left">
-                        <span class="fa-stack fa-lg callout-icon"> <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-info fa-stack-1x"></i> </span>
+                        <span class="icon-emphasized">
+                            <core:icon identifier="actions-info" />
+                        </span>
                     </div>
                     <div class="media-body">
                         <h4 class="callout-title"><f:translate key="admin.no_events_available"/></h4>
