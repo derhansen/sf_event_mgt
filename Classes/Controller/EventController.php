@@ -90,10 +90,10 @@ class EventController extends AbstractController
     /**
      * Initialize list action and set format
      */
-    public function initializeListAction()
+    public function initializeListAction(): void
     {
         if (isset($this->settings['list']['format'])) {
-            $this->request->setFormat($this->settings['list']['format']);
+            $this->request = $this->request->withFormat($this->settings['list']['format']);
         }
     }
 
@@ -382,7 +382,7 @@ class EventController extends AbstractController
             unset($arguments['registration']['cr-response']);
         }
 
-        $this->request->setArguments($arguments);
+        $this->request = $this->request->withArguments($arguments);
     }
 
     /**
@@ -415,7 +415,7 @@ class EventController extends AbstractController
 
         if ($event->getRegistrationFields()->count() === 0) {
             // Set arguments to request, so event is set for event
-            $this->request->setArguments($arguments);
+            $this->request = $this->request->withArguments($arguments);
             return;
         }
 
@@ -466,7 +466,7 @@ class EventController extends AbstractController
         if (isset($arguments['registration']['fields'])) {
             $arguments = ArrayUtility::removeByPath($arguments, 'registration/fields');
         }
-        $this->request->setArguments($arguments);
+        $this->request = $this->request->withArguments($arguments);
     }
 
     /**
