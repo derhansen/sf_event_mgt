@@ -490,10 +490,8 @@ class EventController extends AbstractController
      *
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
      * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
-     *
-     * @return mixed|void
      */
-    public function saveRegistrationAction(Registration $registration, Event $event)
+    public function saveRegistrationAction(Registration $registration, Event $event): ResponseInterface
     {
         if (is_a($event, Event::class) && ($this->settings['registration']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($event);
@@ -573,7 +571,7 @@ class EventController extends AbstractController
         }
 
         if ($autoConfirmation && $success) {
-            $this->redirect(
+            return $this->redirect(
                 'confirmRegistration',
                 null,
                 null,
@@ -582,18 +580,18 @@ class EventController extends AbstractController
                     'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
                 ]
             );
-        } else {
-            $this->redirect(
-                'saveRegistrationResult',
-                null,
-                null,
-                [
-                    'result' => $result,
-                    'eventuid' => $event->getUid(),
-                    'hmac' => $this->hashService->generateHmac('event-' . $event->getUid()),
-                ]
-            );
         }
+
+        return $this->redirect(
+            'saveRegistrationResult',
+            null,
+            null,
+            [
+                'result' => $result,
+                'eventuid' => $event->getUid(),
+                'hmac' => $this->hashService->generateHmac('event-' . $event->getUid()),
+            ]
+        );
     }
 
     /**
