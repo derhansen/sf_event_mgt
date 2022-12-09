@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Validation;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -56,7 +57,9 @@ class ErrorClassViewHelper extends AbstractViewHelper
 
     protected function getValidationErrors(): array
     {
-        $validationResults = $this->renderingContext->getRequest()->getOriginalRequestMappingResults();
+        /** @var ExtbaseRequestParameters $extbaseRequestParameters */
+        $extbaseRequestParameters = $this->renderingContext->getRequest()->getAttribute('extbase');
+        $validationResults = $extbaseRequestParameters->getOriginalRequestMappingResults();
 
         return $validationResults->getFlattenedErrors();
     }
