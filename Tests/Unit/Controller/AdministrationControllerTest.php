@@ -22,9 +22,6 @@ use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
-use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
-use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -229,7 +226,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('settings', $settings);
         $this->subject->initializeListAction();
 
-        $this->assertEquals('H:i d-m-Y', $this->subject->_get('settings')['search']['dateFormat']);
+        self::assertEquals('H:i d-m-Y', $this->subject->_get('settings')['search']['dateFormat']);
     }
 
     /**
@@ -288,7 +285,6 @@ class AdministrationControllerTest extends UnitTestCase
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/IndexNotify', $variables);
-
 
         $this->subject->indexNotifyAction($event);
     }

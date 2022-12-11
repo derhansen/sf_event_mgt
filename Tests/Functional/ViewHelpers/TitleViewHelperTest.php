@@ -48,7 +48,7 @@ class TitleViewHelperTest extends FunctionalTestCase
      */
     public function viewHelperReturnsExpectedResult(): void
     {
-        $this->assertEmpty($this->view->assign('title', 'Test')->render());
+        self::assertEmpty($this->view->assign('title', 'Test')->render());
 
         $titleProvider = GeneralUtility::makeInstance(PageTitleProviderManager::class);
         $title = $titleProvider->getTitle();

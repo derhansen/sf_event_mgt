@@ -13,7 +13,7 @@ return [
         'extensionName' => 'SfEventMgt',
         'controllerActions' => [
             AdministrationController::class => [
-                'list', 'export', 'handleExpiredRegistrations', 'indexNotify', 'notify', 'settingsError'
+                'list', 'export', 'handleExpiredRegistrations', 'indexNotify', 'notify', 'settingsError',
             ],
         ],
     ],

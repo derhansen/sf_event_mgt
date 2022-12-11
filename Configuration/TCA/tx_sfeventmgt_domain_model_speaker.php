@@ -175,7 +175,7 @@ return [
             'config' => [
                 'type' => 'file',
                 'maxitems' => 1,
-                'allowed' => 'common-image-types'
+                'allowed' => 'common-image-types',
             ],
         ],
     ],

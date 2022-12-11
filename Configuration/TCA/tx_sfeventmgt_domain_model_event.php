@@ -684,7 +684,7 @@ return [
             'config' => [
                 'type' => 'file',
                 'maxitems' => 999,
-                'allowed' => 'common-image-types'
+                'allowed' => 'common-image-types',
             ],
         ],
         'files' => [
@@ -716,7 +716,7 @@ return [
             'config' => [
                 'type' => 'file',
                 'maxitems' => 999,
-                'allowed' => 'common-image-types'
+                'allowed' => 'common-image-types',
             ],
         ],
         'registration' => [

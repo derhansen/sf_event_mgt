@@ -34,7 +34,7 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
         $expected = 'This is a subject line with a variable';
         $fluidString = 'This is a subject line with a {variable}';
 
-        $this->assertEquals($expected, $subject->parseStringFluid($fluidString, ['variable' => 'variable']));
+        self::assertEquals($expected, $subject->parseStringFluid($fluidString, ['variable' => 'variable']));
     }
 
     /**
@@ -52,6 +52,6 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
         $registration->setLastname('Hansen');
         $registration->setEmail('torben@derhansen.com');
 
-        $this->assertEquals($expected, $subject->parseStringFluid($fluidString, ['registration' => $registration]));
+        self::assertEquals($expected, $subject->parseStringFluid($fluidString, ['registration' => $registration]));
     }
 }
