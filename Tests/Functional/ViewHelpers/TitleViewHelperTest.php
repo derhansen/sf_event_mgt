@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
-use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\PageTitle\PageTitleProviderManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -27,25 +27,32 @@ class TitleViewHelperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        // Default LANG just returns incoming value as label if calling ->sL()
-        $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::any())->method('loadSingleTableDescription')->willReturn(null);
-        $languageService->expects(self::any())->method('sL')->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService;
-
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->getRenderingContext()->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
-        $this->view->getRenderingContext()->getTemplatePaths()->setTemplateSource('<e:title indexedDocTitle="{title}"/>');
+        $this->view->getRenderingContext()->getTemplatePaths()->setTemplateSource('<e:title pageTitle="{title}"/>');
+
+        $tsfe = $this->createMock(TypoScriptFrontendController::class);
+        $tsfe->config['config'] = [
+            'pageTitleProviders' => [
+                'tx_sfeventmgt' => [
+                    'provider' => 'DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider',
+                    'before' => 'record',
+                ],
+            ],
+        ];
+        $GLOBALS['TSFE'] = $tsfe;
     }
 
     /**
      * @test
      */
-    public function indexedSearchTitleIsSet()
+    public function viewHelperReturnsExpectedResult(): void
     {
-        $GLOBALS['TSFE'] = $this->createMock(TypoScriptFrontendController::class);
+        $this->assertEmpty($this->view->assign('title', 'Test')->render());
 
-        self::assertEmpty($this->view->assign('title', 'Test')->render());
-        self::assertEquals('Test', $GLOBALS['TSFE']->indexedDocTitle);
+        $titleProvider = GeneralUtility::makeInstance(PageTitleProviderManager::class);
+        $title = $titleProvider->getTitle();
+
+        self::assertEquals('Test', $title);
     }
 }
