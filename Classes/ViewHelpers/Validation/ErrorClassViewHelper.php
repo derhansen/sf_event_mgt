@@ -20,9 +20,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class ErrorClassViewHelper extends AbstractViewHelper
 {
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
         $this->registerArgument('fieldname', 'string', 'A fieldname to be checked', false);
