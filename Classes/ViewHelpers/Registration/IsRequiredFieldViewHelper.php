@@ -18,13 +18,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  */
 class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
 {
-    /**
-     * InitializeArguments
-     */
     public function initializeArguments(): void
     {
-        $this->registerArgument('fieldname', 'string', 'A fieldname to be checked', false);
-        $this->registerArgument('registrationField', 'object', 'A registration field record', false);
+        $this->registerArgument('fieldname', 'string', 'A fieldname to be checked');
+        $this->registerArgument('registrationField', 'object', 'A registration field record');
         $this->registerArgument('settings', 'array', 'The extension settings', true);
         parent::initializeArguments();
     }

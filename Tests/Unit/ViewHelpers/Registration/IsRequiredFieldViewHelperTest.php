@@ -23,7 +23,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperDoesNotRenderThenChildWhenNoFieldnameGiven()
+    public function viewHelperDoesNotRenderThenChildWhenNoFieldnameGiven(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
@@ -48,7 +48,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperDoesNotRenderThenChildWhenFieldnameNotInSettings()
+    public function viewHelperDoesNotRenderThenChildWhenFieldnameNotInSettings(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
@@ -73,7 +73,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperRendersThenChildWhenFieldnameInSettings()
+    public function viewHelperRendersThenChildWhenFieldnameInSettings(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
@@ -98,7 +98,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperRenderThenChildForDefaultRequiredFieldnames()
+    public function viewHelperRenderThenChildForDefaultRequiredFieldnames(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
@@ -123,7 +123,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperDoesNotRenderThenChildWhenNoRegistrationFieldGiven()
+    public function viewHelperDoesNotRenderThenChildWhenNoRegistrationFieldGiven(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
@@ -144,7 +144,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperDoesNotRenderThenChildWhenOptionalRegistrationFieldGiven()
+    public function viewHelperDoesNotRenderThenChildWhenOptionalRegistrationFieldGiven(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
@@ -169,7 +169,7 @@ class IsRequiredFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperDoesRenderThenChildWhenRequiredRegistrationFieldGiven()
+    public function viewHelperDoesRenderThenChildWhenRequiredRegistrationFieldGiven(): void
     {
         $viewHelper = $this->getAccessibleMock(
             IsRequiredFieldViewHelper::class,
