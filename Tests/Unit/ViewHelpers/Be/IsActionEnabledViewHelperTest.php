@@ -67,12 +67,8 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider viewHelperReturnsExpectedResultDataProvider
-     * @param string $action
-     * @param array $settings
-     * @param bool $access
-     * @param bool $expected
      */
-    public function viewHelperReturnsExpectedResult(string $action, array $settings, bool $access, bool $expected)
+    public function viewHelperReturnsExpectedResult(string $action, array $settings, bool $access, bool $expected): void
     {
         $viewHelper = new IsActionEnabledViewHelper();
         $viewHelper->setArguments([

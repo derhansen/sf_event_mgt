@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Be;
 
+use Closure;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -25,9 +26,6 @@ class BackendUserViewHelper extends AbstractViewHelper
 {
     use CompileWithRenderStatic;
 
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
         $this->registerArgument('userUid', 'int', 'UID of backend user', true);
@@ -38,7 +36,7 @@ class BackendUserViewHelper extends AbstractViewHelper
      */
     public static function renderStatic(
         array $arguments,
-        \Closure $renderChildrenClosure,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('be_users');
@@ -52,7 +50,7 @@ class BackendUserViewHelper extends AbstractViewHelper
                     $queryBuilder->createNamedParameter($arguments['userUid'], Connection::PARAM_INT)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAssociative();
     }
 }

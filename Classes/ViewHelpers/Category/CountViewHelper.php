@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Category;
 
+use Closure;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -42,7 +43,7 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
 
     public static function renderStatic(
         array $arguments,
-        \Closure $renderChildrenClosure,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): int {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -67,7 +68,7 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
                 $queryBuilder->expr()->eq('sys_category.uid', $queryBuilder->quoteIdentifier('sys_category_record_mm.uid_local'))
             )
             ->where(
-                $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq(
                         'sys_category.uid',
                         $queryBuilder->createNamedParameter($categoryUid, Connection::PARAM_INT)
@@ -86,7 +87,7 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
                     )
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchOne();
 
         return $count;
