@@ -142,8 +142,8 @@ class RegistrationValidator extends AbstractValidator
     {
         switch ($type) {
             case 'boolean':
-                /** @var BooleanValidator $validator */
-                $validator = new BooleanValidator(['is' => true]);
+                $validator = new BooleanValidator();
+                $validator->setOptions(['is' => true]);
                 break;
             default:
                 if ($field === 'captcha') {

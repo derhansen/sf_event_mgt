@@ -33,7 +33,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationInvalidWhenDefaultFieldsNotSet()
+    public function registrationInvalidWhenDefaultFieldsNotSet(): void
     {
         $registration = new Registration();
 
@@ -50,7 +50,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationValidWhenDefaultFieldsSet()
+    public function registrationValidWhenDefaultFieldsSet(): void
     {
         $registration = new Registration();
         $registration->setFirstname('Torben');
@@ -66,7 +66,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationInvalidWhenCustomRequiredFieldsNotSet()
+    public function registrationInvalidWhenCustomRequiredFieldsNotSet(): void
     {
         $configuration = [
             'extensionName' => 'SfEventMgt',
@@ -99,7 +99,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationValidWhenCustomRequiredFieldsDoesNotExist()
+    public function registrationValidWhenCustomRequiredFieldsDoesNotExist(): void
     {
         $configuration = [
             'extensionName' => 'SfEventMgt',
