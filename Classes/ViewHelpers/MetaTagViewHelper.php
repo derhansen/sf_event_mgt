@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
+use Closure;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
@@ -33,15 +34,15 @@ class MetaTagViewHelper extends AbstractViewHelper
 
     public static function renderStatic(
         array $arguments,
-        \Closure $renderChildrenClosure,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
         // Skip if current record is part of tt_content CType shortcut
         if (!empty($GLOBALS['TSFE']->recordRegister)
-            && is_array($GLOBALS['TSFE']->recordRegister)
-            && strpos(array_keys($GLOBALS['TSFE']->recordRegister)[0], 'tt_content:') !== false
             && !empty($GLOBALS['TSFE']->currentRecord)
-            && strpos($GLOBALS['TSFE']->currentRecord, 'tx_sfeventmgt_domain_model_event:') !== false
+            && is_array($GLOBALS['TSFE']->recordRegister)
+            && str_contains($GLOBALS['TSFE']->currentRecord, 'tx_sfeventmgt_domain_model_event:')
+            && str_contains(array_keys($GLOBALS['TSFE']->recordRegister)[0], 'tt_content:')
         ) {
             return;
         }

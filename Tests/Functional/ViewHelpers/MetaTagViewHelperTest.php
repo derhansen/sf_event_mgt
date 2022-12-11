@@ -34,7 +34,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function metaTagForNameIsSetByViewHelper()
+    public function metaTagForNameIsSetByViewHelper(): void
     {
         $this->view->getRenderingContext()->getViewHelperResolver()
             ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
@@ -49,7 +49,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function metaTagForPropertyIsSetByViewHelper()
+    public function metaTagForPropertyIsSetByViewHelper(): void
     {
         $this->view->getRenderingContext()->getViewHelperResolver()
             ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
