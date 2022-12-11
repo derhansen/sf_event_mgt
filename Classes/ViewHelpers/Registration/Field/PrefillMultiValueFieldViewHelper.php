@@ -75,15 +75,10 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
         return $result;
     }
 
-    /**
-     * @param mixed $fieldValue
-     * @param string $currentValue
-     * @return bool
-     */
-    protected function isGivenValueSelected($fieldValue, string $currentValue): bool
+    protected function isGivenValueSelected(mixed $fieldValue, string $currentValue): bool
     {
         if (is_array($fieldValue)) {
-            return in_array($currentValue, $fieldValue);
+            return in_array($currentValue, $fieldValue, true);
         }
 
         return $currentValue === $fieldValue;

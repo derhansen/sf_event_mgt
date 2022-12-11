@@ -13,13 +13,11 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillMultiValueFieldViewHelper;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for prefillMultiValueField viewhelper
- */
 class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {
     public function viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider(): array
@@ -42,14 +40,18 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
      * @test
      * @dataProvider viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider
      */
-    public function viewHelperReturnsExpectedResultIfNoOriginalRequest($defaultValue, $currentValue, $expected)
-    {
-        self::markTestSkipped();
+    public function viewHelperReturnsExpectedResultIfNoOriginalRequest(
+        string $defaultValue,
+        string $currentValue,
+        bool $expected
+    ): void {
         $field = new Field();
         $field->setDefaultValue($defaultValue);
 
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $extbaseRequestParameters = $this->createMock(ExtbaseRequestParameters::class);
+        $request = $this->createMock(Request::class);
+        $request->expects(self::once())->method('getAttribute')->with('extbase')->willReturn($extbaseRequestParameters);
+        $renderingContext = $this->createMock(RenderingContext::class);
         $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillMultiValueFieldViewHelper();
@@ -96,21 +98,14 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider
-     * @param mixed $submittedRegistrationFieldUid
-     * @param mixed $registrationFieldUid
-     * @param mixed $currentValue
-     * @param mixed $fieldValue
-     * @param mixed $expected
      */
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist(
-        $submittedRegistrationFieldUid,
-        $registrationFieldUid,
-        $currentValue,
-        $fieldValue,
-        $expected
-    ) {
-        self::markTestSkipped();
-
+        int $submittedRegistrationFieldUid,
+        int $registrationFieldUid,
+        string $currentValue,
+        mixed $fieldValue,
+        bool $expected
+    ): void {
         $field = $this->getMockBuilder(Field::class)->getMock();
         $field->expects(self::any())->method('getUid')->willReturn($registrationFieldUid);
 
@@ -129,8 +124,12 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $originalRequest->expects(self::any())->method('getPluginName')->willReturn('Pievent');
         $originalRequest->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
 
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects(self::any())->method('getOriginalRequest')->willReturn($originalRequest);
+        $extbaseRequestParameters = $this->createMock(ExtbaseRequestParameters::class);
+        $extbaseRequestParameters->expects(self::once())->method('getOriginalRequest')->willReturn($originalRequest);
+        $request = $this->createMock(Request::class);
+        $request->expects(self::once())->method('getAttribute')->with('extbase')->willReturn($extbaseRequestParameters);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
         $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
@@ -145,10 +144,8 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationFieldValues()
+    public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationFieldValues(): void
     {
-        self::markTestSkipped();
-
         $field = $this->getMockBuilder(Field::class)->getMock();
         $field->expects(self::any())->method('getUid')->willReturn(1);
 
@@ -165,8 +162,12 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         $originalRequest->expects(self::any())->method('getPluginName')->willReturn('Pievent');
         $originalRequest->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
 
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $request->expects(self::any())->method('getOriginalRequest')->willReturn($originalRequest);
+        $extbaseRequestParameters = $this->createMock(ExtbaseRequestParameters::class);
+        $extbaseRequestParameters->expects(self::once())->method('getOriginalRequest')->willReturn($originalRequest);
+        $request = $this->createMock(Request::class);
+        $request->expects(self::once())->method('getAttribute')->with('extbase')->willReturn($extbaseRequestParameters);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
         $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
