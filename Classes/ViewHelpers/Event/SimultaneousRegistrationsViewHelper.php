@@ -19,9 +19,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
 {
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();

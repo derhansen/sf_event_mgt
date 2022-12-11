@@ -135,14 +135,14 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider simultaneousRegistrationsDataProvider
-     * @param mixed $maxParticipants
-     * @param mixed $freePlaces
-     * @param mixed $maxRegistrations
-     * @param mixed $waitlist
-     * @param mixed $expected
      */
-    public function viewHelperReturnsExpectedValues($maxParticipants, $freePlaces, $maxRegistrations, $waitlist, $expected)
-    {
+    public function viewHelperReturnsExpectedValues(
+        int $maxParticipants,
+        int $freePlaces,
+        int $maxRegistrations,
+        bool $waitlist,
+        array $expected
+    ): void {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getFreePlaces')->willReturn($freePlaces);
         $mockEvent->expects(self::any())->method('getMaxParticipants')->willReturn($maxParticipants);
