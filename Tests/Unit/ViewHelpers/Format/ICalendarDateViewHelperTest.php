@@ -11,12 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDateViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for iCalendar Date viewhelper
- */
 class ICalendarDateViewHelperTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
@@ -29,23 +27,17 @@ class ICalendarDateViewHelperTest extends UnitTestCase
                 '',
             ],
             'dateTimeObject' => [
-                new \DateTime('@1425234250'),
+                new DateTime('@1425234250'),
                 '20150301T182410Z',
             ],
         ];
     }
 
     /**
-     * Check if the viewhelper returns the expected values
-     *
      * @test
-     *
      * @dataProvider iCalendarDateDataProvider
-     *
-     * @param mixed $value
-     * @param mixed $expected
      */
-    public function viewHelperReturnsExpectedValues($value, $expected)
+    public function viewHelperReturnsExpectedValues(mixed $value, string $expected): void
     {
         $viewHelper = new ICalendarDateViewHelper();
         $viewHelper->setArguments(['date' => $value]);
@@ -54,17 +46,15 @@ class ICalendarDateViewHelperTest extends UnitTestCase
     }
 
     /**
-     * Check if the viewhelper calls renderChildren if no value given
-     *
      * @test
      */
-    public function viewHelperRendersChildrenIfNoValueGiven()
+    public function viewHelperRendersChildrenIfNoValueGiven(): void
     {
         $viewHelper = $this->getMockBuilder(ICalendarDateViewHelper::class)
             ->onlyMethods(['renderChildren'])
             ->getMock();
         $viewHelper->expects(self::once())->method('renderChildren')
-            ->willReturn(new \DateTime('@1425234250'));
+            ->willReturn(new DateTime('@1425234250'));
         $actual = $viewHelper->render();
         self::assertSame('20150301T182410Z', $actual);
     }

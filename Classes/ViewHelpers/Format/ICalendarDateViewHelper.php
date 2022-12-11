@@ -11,16 +11,14 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Format;
 
+use DateTime;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * ICalendar Description viewhelper
+ * ICalendar Description viewHelper
  */
 class ICalendarDateViewHelper extends AbstractViewHelper
 {
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
@@ -38,7 +36,7 @@ class ICalendarDateViewHelper extends AbstractViewHelper
         if ($date === null) {
             $date = $this->renderChildren();
         }
-        if ($date instanceof \DateTime) {
+        if ($date instanceof DateTime) {
             return gmdate('Ymd\THis\Z', $date->getTimestamp());
         }
 

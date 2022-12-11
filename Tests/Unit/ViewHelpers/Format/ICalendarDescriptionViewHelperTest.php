@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for iCalendar Description viewhelper
- */
 class ICalendarDescriptionViewHelperTest extends UnitTestCase
 {
     public function iCalendarDescriptionDataProvider(): array
@@ -61,17 +58,10 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
     }
 
     /**
-     * Check if the viewhelper returns the expected values
-     *
      * @test
-     *
      * @dataProvider iCalendarDescriptionDataProvider
-     *
-     * @param mixed $value
-     * @param mixed $substractChars
-     * @param mixed $expected
      */
-    public function viewHelperReturnsExpectedValues($value, $substractChars, $expected)
+    public function viewHelperReturnsExpectedValues(string $value, int $substractChars, string $expected): void
     {
         $viewHelper = new ICalendarDescriptionViewHelper();
         $viewHelper->setArguments(['description' => $value, 'substractChars' => $substractChars]);
@@ -80,11 +70,9 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
     }
 
     /**
-     * Check if the viewhelper calls renderChildren if no value given
-     *
      * @test
      */
-    public function viewHelperRendersChildrenIfNoValueGiven()
+    public function viewHelperRendersChildrenIfNoValueGiven(): void
     {
         $viewHelper = $this->getMockBuilder(ICalendarDescriptionViewHelper::class)
             ->onlyMethods(['renderChildren'])
