@@ -18,14 +18,14 @@ use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
- * Test case for prefill viewhelper
+ * Test case for prefill viewHelper
  */
 class PrefillViewHelperTest extends UnitTestCase
 {
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfTsfeNotAvailabe()
+    public function viewHelperReturnsEmptyStringIfTsfeNotAvailabe(): void
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
         $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
@@ -44,7 +44,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsCurrentFieldValueIfValueInParsedBodyAvailable()
+    public function viewHelperReturnsCurrentFieldValueIfValueInParsedBodyAvailable(): void
     {
         $submittedData = [
             'tx_sfeventmgt_pieventregistration' => [
@@ -73,7 +73,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfPrefillSettingsEmpty()
+    public function viewHelperReturnsEmptyStringIfPrefillSettingsEmpty(): void
     {
         $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
@@ -102,7 +102,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfFieldNotFoundInPrefillSettings()
+    public function viewHelperReturnsEmptyStringIfFieldNotFoundInPrefillSettings(): void
     {
         $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
@@ -131,7 +131,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfFieldNotFoundInFeUser()
+    public function viewHelperReturnsEmptyStringIfFieldNotFoundInFeUser(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
         $GLOBALS['TSFE']->fe_user = new stdClass();
@@ -159,7 +159,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsFieldvalueIfFound()
+    public function viewHelperReturnsFieldvalueIfFound(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
         $GLOBALS['TSFE']->fe_user = new stdClass();
@@ -188,7 +188,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsSubmittedValueIfValidationError()
+    public function viewHelperReturnsSubmittedValueIfValidationError(): void
     {
         $submittedData = [
             'tx_sfeventmgt_pieventregistration' => [
