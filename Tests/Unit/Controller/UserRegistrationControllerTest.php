@@ -18,33 +18,23 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Controller\UserRegistrationController
- */
 class UserRegistrationControllerTest extends UnitTestCase
 {
-    /**
-     * @var UserRegistrationController
-     */
-    protected $subject;
+    protected UserRegistrationController $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
             UserRegistrationController::class,
-            ['dummy'],
+            [
+                'htmlResponse',
+            ],
             [],
             '',
             false
         );
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -55,7 +45,7 @@ class UserRegistrationControllerTest extends UnitTestCase
      *
      * @test
      */
-    public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView()
+    public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->disableOriginalConstructor()
