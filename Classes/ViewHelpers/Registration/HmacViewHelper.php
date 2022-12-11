@@ -27,9 +27,6 @@ class HmacViewHelper extends AbstractViewHelper
         $this->hashService = $hashService;
     }
 
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
