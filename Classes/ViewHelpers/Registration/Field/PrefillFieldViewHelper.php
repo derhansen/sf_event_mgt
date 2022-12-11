@@ -20,9 +20,6 @@ use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
  */
 class PrefillFieldViewHelper extends AbstractPrefillViewHelper
 {
-    /**
-     * Initialize arguments
-     */
     public function initializeArguments(): void
     {
         parent::initializeArguments();
