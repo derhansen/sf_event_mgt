@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * UserRegistrationController
@@ -21,11 +22,13 @@ class UserRegistrationController extends AbstractController
     /**
      * Shows a list of all registration of the current frontend user
      */
-    public function listAction(): void
+    public function listAction(): ResponseInterface
     {
         $demand = UserRegistrationDemand::createFromSettings($this->settings);
         $demand->setUser($this->registrationService->getCurrentFeUserObject());
         $registrations = $this->registrationRepository->findRegistrationsByUserRegistrationDemand($demand);
         $this->view->assign('registrations', $registrations);
+
+        return $this->htmlResponse();
     }
 }
