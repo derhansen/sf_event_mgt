@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Uri;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use DERHANSEN\SfEventMgt\ViewHelpers\Uri\OnlineCalendarViewHelper;
@@ -18,7 +19,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 
 /**
- * Test case for IsRequiredField viewhelper
+ * Test case for IsRequiredField viewHelper
  */
 class OnlineCalendarViewHelperTest extends UnitTestCase
 {
@@ -68,7 +69,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
      * @test
      * @dataProvider onlineCalendarViewHelperReturnsExpectedResultsDataProvider
      */
-    public function onlineCalendarViewHelperReturnsExpectedResults(string $type, string $expected)
+    public function onlineCalendarViewHelperReturnsExpectedResults(string $type, string $expected): void
     {
         $location = new Location();
         $location->setTitle('A location');
@@ -80,8 +81,8 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
         $event = new Event();
         $event->setTitle('A test event');
         $event->setDescription('A description for the event');
-        $event->setStartdate(new \DateTime('01.01.2021 18:00:00 CEST'));
-        $event->setEnddate(new \DateTime('01.01.2021 20:00:00 CEST'));
+        $event->setStartdate(new DateTime('01.01.2021 18:00:00 CEST'));
+        $event->setEnddate(new DateTime('01.01.2021 20:00:00 CEST'));
 
         $result = $this->viewHelper::renderStatic(
             [
@@ -98,7 +99,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function defaultEnddateIsSetToEventsWithNoEnddate()
+    public function defaultEnddateIsSetToEventsWithNoEnddate(): void
     {
         $location = new Location();
         $location->setTitle('A location');
@@ -110,7 +111,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
         $event = new Event();
         $event->setTitle('A test event');
         $event->setDescription('A description for the event');
-        $event->setStartdate(new \DateTime('01.01.2021 19:00:00 CEST'));
+        $event->setStartdate(new DateTime('01.01.2021 19:00:00 CEST'));
 
         $result = $this->viewHelper::renderStatic(
             [
