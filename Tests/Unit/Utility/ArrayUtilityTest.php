@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\ArrayUtility;
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Utility\ArrayUtility
- */
 class ArrayUtilityTest extends UnitTestCase
 {
     public function isJsonArrayReturnsExpectedValuesDataProcessor(): array
@@ -49,7 +46,7 @@ class ArrayUtilityTest extends UnitTestCase
      * @test
      * @dataProvider isJsonArrayReturnsExpectedValuesDataProcessor
      */
-    public function isJsonArrayReturnsExpectedValues($value, $expected)
+    public function isJsonArrayReturnsExpectedValues($value, $expected): void
     {
         self::assertSame($expected, ArrayUtility::isJsonArray($value));
     }

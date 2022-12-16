@@ -11,18 +11,12 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Utility;
 
-/**
- * ArrayUtility
- */
 class ArrayUtility
 {
     /**
      * Check if the given value is JSON Array
-     *
-     * @param mixed $value
-     * @return bool
      */
-    public static function isJsonArray($value): bool
+    public static function isJsonArray(mixed $value): bool
     {
         if (!is_string($value)) {
             return false;
