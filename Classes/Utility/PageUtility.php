@@ -80,6 +80,6 @@ class PageUtility
                 }
             }
         }
-        return $theList;
+        return (string)$theList;
     }
 }
