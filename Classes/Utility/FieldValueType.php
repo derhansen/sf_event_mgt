@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
- * FieldValueType
+ * Constant used for registration field value types
  */
 class FieldValueType
 {

@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
- * RegistrationResult
+ * Constants used for the registration result
  */
 class RegistrationResult
 {

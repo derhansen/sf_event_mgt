@@ -17,9 +17,6 @@ use TYPO3\CMS\Core\Database\Query\QueryHelper;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Page
- */
 class PageUtility
 {
     /**
@@ -45,14 +42,8 @@ class PageUtility
 
     /**
      * Recursively fetch all descendants of a given page
-     *
-     * @param int $id uid of the page
-     * @param int $depth
-     * @param int $begin
-     * @param string $permClause
-     * @return string comma separated list of descendant pages
      */
-    protected static function getTreeList(int $id, int $depth, int $begin = 0, $permClause = '')
+    protected static function getTreeList(int $id, int $depth, int $begin = 0, string $permClause = ''): string
     {
         if ($id < 0) {
             $id = abs($id);
@@ -75,7 +66,7 @@ class PageUtility
             if ($permClause !== '') {
                 $queryBuilder->andWhere(QueryHelper::stripLogicalOperatorPrefix($permClause));
             }
-            $statement = $queryBuilder->execute();
+            $statement = $queryBuilder->executeQuery();
             while ($row = $statement->fetchAssociative()) {
                 if ($begin <= 0) {
                     $theList .= ',' . $row['uid'];

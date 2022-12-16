@@ -17,10 +17,8 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use UnexpectedValueException;
 
-/**
- * Check if an event record is available in a language
- */
 class EventAvailability
 {
     /**
@@ -34,7 +32,7 @@ class EventAvailability
 
         $targetLanguage = $this->getLanguageFromAllLanguages($allAvailableLanguagesOfSite, $languageId);
         if (!$targetLanguage) {
-            throw new \UnexpectedValueException('Target language could not be found', 1608059129);
+            throw new UnexpectedValueException('Target language could not be found', 1608059129);
         }
         return $this->mustBeIncluded($eventId, $targetLanguage);
     }
@@ -42,12 +40,8 @@ class EventAvailability
     protected function mustBeIncluded(int $eventId, SiteLanguage $language): bool
     {
         // @extensionScannerIgnoreLine
-        if ($language->getFallbackType() === 'strict' &&
-            !$this->isEventAvailableInLanguage($eventId, $language->getLanguageId())
-        ) {
-            return false;
-        }
-        return true;
+        return !($language->getFallbackType() === 'strict' &&
+            !$this->isEventAvailableInLanguage($eventId, $language->getLanguageId()));
     }
 
     /**
@@ -71,7 +65,7 @@ class EventAvailability
             ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
         if ($language === 0) {
             $where = [
-                $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->or(
                     $queryBuilder->expr()->eq(
                         'sys_language_uid',
                         $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
@@ -85,8 +79,8 @@ class EventAvailability
             ];
         } else {
             $where = [
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->or(
+                    $queryBuilder->expr()->and(
                         $queryBuilder->expr()->eq(
                             'sys_language_uid',
                             $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT)
@@ -96,7 +90,7 @@ class EventAvailability
                             $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
                         )
                     ),
-                    $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->and(
                         $queryBuilder->expr()->eq(
                             'l10n_parent',
                             $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
@@ -106,7 +100,7 @@ class EventAvailability
                             $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
                         )
                     ),
-                    $queryBuilder->expr()->andX(
+                    $queryBuilder->expr()->and(
                         $queryBuilder->expr()->eq(
                             'uid',
                             $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
@@ -128,7 +122,7 @@ class EventAvailability
            ->count('uid')
            ->from('tx_sfeventmgt_domain_model_event')
            ->where(...$where)
-           ->execute()
+           ->executeQuery()
            ->fetchOne();
 
         return $eventsFound > 0;
