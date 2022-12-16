@@ -54,7 +54,7 @@ jobs:
 
       - name: Initialize TYPO3 environment
         run: |
-          cp -R Tests/Acceptance/_data/typo3conf .Build/public/
+          cp -R Tests/Acceptance/_data/config .Build/public/
           echo "Run 'composer install' to activate extension"
           composer install --no-progress
 
