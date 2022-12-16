@@ -1,11 +1,11 @@
 modules:
   config:
       WebDriver:
-        url: http://sf-event-mgt-acceptance-v11.typo3.local/
+        url: http://sf-event-mgt-acceptance-v12.typo3.local/
       MailHog:
         url: http://127.0.0.1
         port: 8025
       Db:
-        dsn: 'mysql:host=localhost;dbname=typo3_sfeventmgt_acceptance_v11'
+        dsn: 'mysql:host=localhost;dbname=typo3_sfeventmgt_acceptance_v12'
         user: '%DB_USERNAME%'
         password: '%DB_PASSWORD%'

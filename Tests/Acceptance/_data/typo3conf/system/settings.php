@@ -108,12 +108,6 @@ return [
         'displayErrors' => 1,
         'encryptionKey' => 'ce65db146ca7894aa19d832a8435ae2cc7db13259d7424c3efeb428e2eae6566d97712bb79a9272c6b32569882356c22',
         'exceptionalErrors' => 12290,
-        'features' => [
-            'felogin.extbase' => true,
-            'fluidBasedPageModule' => true,
-            'rearrangedRedirectMiddlewares' => true,
-            'unifiedPageTranslationHandling' => true,
-        ],
         'sitename' => 'sf_event_mgt - Acceptance Testing',
         'systemMaintainers' => [
             1,
