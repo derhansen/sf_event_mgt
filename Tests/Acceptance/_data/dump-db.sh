@@ -13,4 +13,4 @@ mysqldump --no-create-info \
           --ignore-table=typo3_sfeventmgt_acceptance_v11.cache_pagesection_tags \
           --ignore-table=typo3_sfeventmgt_acceptance_v11.cache_rootline \
           --ignore-table=typo3_sfeventmgt_acceptance_v11.cache_rootline_tags \
-          -u$DB_USERNAME -p$DB_PASSWORD typo3_sfeventmgt_acceptance_v11 >> typo3.sql
+          -u$DB_USERNAME -p$DB_PASSWORD typo3_sfeventmgt_acceptance_v12 >> typo3.sql
