@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Controller;
 
+use DateInterval;
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
@@ -31,12 +33,15 @@ use DERHANSEN\SfEventMgt\Event\ModifyRegistrationViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessRedirectToPaymentEvent;
 use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
+use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
+use TYPO3\CMS\Core\Http\ImmediateResponseException;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -164,11 +169,11 @@ class EventController extends AbstractController
 
         // If a weeknumber is given in overwriteDemand['week'], we overwrite the current month
         if ($overwriteDemand['week'] ?? false) {
-            $firstDayOfWeek = (new \DateTime())->setISODate($currentYear, (int)$overwriteDemand['week']);
+            $firstDayOfWeek = (new DateTime())->setISODate($currentYear, (int)$overwriteDemand['week']);
             $currentMonth = (int)$firstDayOfWeek->format('m');
             $eventDemand->setMonth($currentMonth);
         } else {
-            $firstDayOfWeek = (new \DateTime())->setISODate($currentYear, (int)date('W'));
+            $firstDayOfWeek = (new DateTime())->setISODate($currentYear, (int)date('W'));
         }
 
         // Set demand from calendar date range instead of month / year
@@ -195,7 +200,7 @@ class EventController extends AbstractController
                 'eventDemand' => $eventDemand,
                 'overwriteDemand' => $overwriteDemand,
                 'currentPageId' => $this->getTypoScriptFrontendController()->id,
-                'firstDayOfMonth' => \DateTime::createFromFormat(
+                'firstDayOfMonth' => DateTime::createFromFormat(
                     'd.m.Y',
                     sprintf('1.%s.%s', $currentMonth, $currentYear)
                 ),
@@ -227,9 +232,9 @@ class EventController extends AbstractController
         $eventDemand->setMonth(0);
         $eventDemand->setYear(0);
 
-        $startDate = new \DateTime();
+        $startDate = new DateTime();
         $startDate->setTimestamp($calendarDateRange['firstDayOfCalendar']);
-        $endDate = new \DateTime();
+        $endDate = new DateTime();
         $endDate->setTimestamp($calendarDateRange['lastDayOfCalendar']);
         $endDate->setTime(23, 59, 59);
 
@@ -273,15 +278,16 @@ class EventController extends AbstractController
     /**
      * Error handling if event is not found
      *
-     * @return ResponseInterface|void|null
+     * @param array $settings
+     * @return ResponseInterface
+     * @throws Exception
      * @throws PropagateResponseException
-     * @throws \TYPO3\CMS\Core\Error\Http\PageNotFoundException
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\StopActionException
+     * @throws PageNotFoundException
      */
-    protected function handleEventNotFoundError(array $settings)
+    protected function handleEventNotFoundError(array $settings): ResponseInterface
     {
         if (empty($settings['event']['errorHandling'])) {
-            return null;
+            throw new Exception('Event errorHandling not configured. Please check settings.event.errorHandling', 1671205677);
         }
 
         $configuration = GeneralUtility::trimExplode(',', $settings['event']['errorHandling'], true);
@@ -289,8 +295,7 @@ class EventController extends AbstractController
         switch ($configuration[0]) {
             case 'redirectToListView':
                 $listPid = (int)($settings['listPid'] ?? 0) > 0 ? (int)$settings['listPid'] : 1;
-                $this->redirect('list', null, null, null, $listPid);
-                break;
+                return $this->redirect('list', null, null, null, $listPid);
             case 'pageNotFoundHandler':
                 $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
                     $this->request,
@@ -515,12 +520,12 @@ class EventController extends AbstractController
                 // Use 3600 seconds as default value if not set or zero
                 $linkValidity = 3600;
             }
-            $confirmationUntil = new \DateTime();
-            $confirmationUntil->add(new \DateInterval('PT' . $linkValidity . 'S'));
+            $confirmationUntil = new DateTime();
+            $confirmationUntil->add(new DateInterval('PT' . $linkValidity . 'S'));
 
             $registration->setEvent($event);
             $registration->setPid($event->getPid());
-            $registration->setRegistrationDate(new \DateTime());
+            $registration->setRegistrationDate(new DateTime());
             $registration->setConfirmationUntil($confirmationUntil);
             $registration->setLanguage($this->getCurrentLanguageTwoLetterIsoCode());
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());

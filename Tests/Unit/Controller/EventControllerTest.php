@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
+use DateInterval;
+use DateTime;
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -37,11 +39,12 @@ use PHPUnit\Framework\MockObject\MockObject;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -50,13 +53,9 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
-use TYPO3\CMS\Frontend\Controller\ErrorController;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Controller\EventController.
- */
 class EventControllerTest extends UnitTestCase
 {
     protected EventController&MockObject $subject;
@@ -557,8 +556,8 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $deadline = new \DateTime();
-        $deadline->add(\DateInterval::createFromDateString('yesterday'));
+        $deadline = new DateTime();
+        $deadline->add(DateInterval::createFromDateString('yesterday'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::any())->method('getRegistrationDeadline')->willReturn($deadline);
         $event->expects(self::any())->method('getUid')->willReturn(1);
@@ -587,8 +586,8 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('yesterday'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('yesterday'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getUid')->willReturn(1);
@@ -620,8 +619,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::once())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::once())->method('getRegistrations')->willReturn($registrations);
@@ -657,8 +656,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -695,8 +694,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -747,8 +746,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -794,8 +793,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::any())->method('getUid')->willReturn(1);
         $event->expects(self::any())->method('getPid')->willReturn(1);
 
@@ -854,8 +853,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::any())->method('getUid')->willReturn(1);
         $event->expects(self::any())->method('getPid')->willReturn(1);
 
@@ -924,8 +923,8 @@ class EventControllerTest extends UnitTestCase
         $event = $this->getMockBuilder(Event::class)->getMock();
         $event->expects(self::once())->method('getUid')->willReturn(1);
         $event->expects(self::any())->method('getPid')->willReturn(1);
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
 
         $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->onlyMethods(['add'])
@@ -995,8 +994,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::any())->method('getRegistration')->willReturn($registrations);
         $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
         $event->expects(self::any())->method('getEnableAutoconfirm')->willReturn(true);
@@ -1064,8 +1063,8 @@ class EventControllerTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::any())->method('getRegistration')->willReturn($registrations);
         $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
         $event->expects(self::any())->method('getFreePlaces')->willReturn(10);
@@ -1483,7 +1482,7 @@ class EventControllerTest extends UnitTestCase
         $mockEvent->expects(self::any())->method('getUid')->willReturn(1);
         $mockEvent->expects(self::any())->method('getPid')->willReturn(1);
         $mockEvent->expects(self::any())->method('getEnableCancel')->willReturn(true);
-        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new \DateTime('yesterday'));
+        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new DateTime('yesterday'));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
@@ -2085,7 +2084,7 @@ class EventControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function handleEventNotFoundIsSkippedWhenNoSetting()
+    public function handleEventNotFoundIsSkippedWhenNoSetting(): void
     {
         $settings = [
             'event' => [
@@ -2093,8 +2092,9 @@ class EventControllerTest extends UnitTestCase
             ],
         ];
 
+        $this->expectExceptionCode(1671205677);
         $mock = $this->getAccessibleMock(EventController::class, ['redirect']);
-        self::assertNull($mock->_call('handleEventNotFoundError', $settings));
+        $mock->_call('handleEventNotFoundError', $settings);
     }
 
     /**
@@ -2102,20 +2102,21 @@ class EventControllerTest extends UnitTestCase
      */
     public function handleEventNotFoundShows404Page()
     {
-        self::markTestSkipped();
         $settings = [
             'event' => [
                 'errorHandling' => 'pageNotFoundHandler',
             ],
         ];
 
-        $GLOBALS['TYPO3_REQUEST'] = new ServerRequest();
+        $GLOBALS['LANG'] = $this->createMock(LanguageService::class);
 
-        $mockErrorController = $this->getMockBuilder(ErrorController::class)->getMock();
-        GeneralUtility::addInstance(ErrorController::class, $mockErrorController);
+        $serverRequest = (new ServerRequest())->withAttribute('extbase', new ExtbaseRequestParameters());
+        $request = new Request($serverRequest);
+
+        $this->expectExceptionCode(1631261423);
         $this->expectException(PropagateResponseException::class);
         $mock = $this->getAccessibleMock(EventController::class, ['dummy']);
-        $mock->_set('request', $GLOBALS['TYPO3_REQUEST']);
+        $mock->_set('request', $request);
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
