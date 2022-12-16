@@ -70,7 +70,6 @@
     "typo3/cms": {
       "extension-key": "sf_event_mgt",
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
-      "app-dir": ".Build",
       "web-dir": ".Build/public"
     }
   }
