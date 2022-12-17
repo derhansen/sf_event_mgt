@@ -80,7 +80,8 @@ class FluidStandaloneService
         string $template,
         array $variables,
         string $extensionName = 'SfEventMgt',
-        string $pluginName = 'Pieventregistration'
+        string $pluginName = 'Pieventregistration',
+        string $format = 'html'
     ): string {
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
 
@@ -94,7 +95,7 @@ class FluidStandaloneService
         $extbaseRequest = GeneralUtility::makeInstance(Request::class, $serverRequest->withAttribute('extbase', $extbaseRequestParams));
         $emailView->setRequest($extbaseRequest);
 
-        $emailView->setFormat('html');
+        $emailView->setFormat($format);
         $emailView->setTemplateRootPaths($this->getTemplateFolders());
         $emailView->setLayoutRootPaths($this->getTemplateFolders('layout'));
         $emailView->setPartialRootPaths($this->getTemplateFolders('partial'));
