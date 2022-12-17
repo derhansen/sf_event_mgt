@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\PageTitle;
 
 use TYPO3\CMS\Core\PageTitle\AbstractPageTitleProvider;
 
-/**
- * Class EventPageTitleProvider
- */
 class EventPageTitleProvider extends AbstractPageTitleProvider
 {
     public function setTitle(string $title): void

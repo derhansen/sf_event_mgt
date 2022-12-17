@@ -92,7 +92,7 @@ class PageCache
 
         $result = [];
         foreach ($tables as $table) {
-            if (strpos($table, 'tx_sfeventmgt_domain_model_event') !== false) {
+            if (str_contains($table, 'tx_sfeventmgt_domain_model_event')) {
                 $result[] = $table;
             }
         }
@@ -158,7 +158,7 @@ class PageCache
                 ),
                 $timeConditions
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAssociative();
 
         if ($row) {

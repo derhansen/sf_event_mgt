@@ -204,6 +204,6 @@ class DataHandlerHooks
             ->where(
                 $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             )
-            ->execute();
+            ->executeQuery();
     }
 }
