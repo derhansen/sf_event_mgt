@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -28,9 +29,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
-/**
- * RegistrationService
- */
 class RegistrationService
 {
     protected EventDispatcherInterface $eventDispatcher;
@@ -71,7 +69,7 @@ class RegistrationService
     }
 
     /**
-     * Duplicates (all public accessable properties) the given registration the
+     * Duplicates the given registration (all public accessible properties) the
      * amount of times configured in amountOfRegistrations
      */
     public function createDependingRegistrations(Registration $registration): void
@@ -106,7 +104,7 @@ class RegistrationService
     /**
      * Checks if the registration can be confirmed and returns an array of variables
      */
-    public function checkConfirmRegistration(int $reguid, string $hmac): array
+    public function checkConfirmRegistration(int $regUid, string $hmac): array
     {
         /* @var $registration Registration */
         $registration = null;
@@ -114,12 +112,12 @@ class RegistrationService
         $messageKey = 'event.message.confirmation_successful';
         $titleKey = 'confirmRegistration.title.successful';
 
-        if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
+        if (!$this->hashService->validateHmac('reg-' . $regUid, $hmac)) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_wrong_hmac';
             $titleKey = 'confirmRegistration.title.failed';
         } else {
-            $registration = $this->registrationRepository->findByUid($reguid);
+            $registration = $this->registrationRepository->findByUid($regUid);
         }
 
         if (!$failed && is_null($registration)) {
@@ -128,7 +126,7 @@ class RegistrationService
             $titleKey = 'confirmRegistration.title.failed';
         }
 
-        if (!$failed && $registration->getConfirmationUntil() < new \DateTime()) {
+        if (!$failed && $registration->getConfirmationUntil() < new DateTime()) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_confirmation_until_expired';
             $titleKey = 'confirmRegistration.title.failed';
@@ -167,7 +165,7 @@ class RegistrationService
     /**
      * Checks if the registration can be cancelled and returns an array of variables
      */
-    public function checkCancelRegistration(int $reguid, string $hmac): array
+    public function checkCancelRegistration(int $regUid, string $hmac): array
     {
         /* @var $registration Registration */
         $registration = null;
@@ -175,12 +173,12 @@ class RegistrationService
         $messageKey = 'event.message.cancel_successful';
         $titleKey = 'cancelRegistration.title.successful';
 
-        if (!$this->hashService->validateHmac('reg-' . $reguid, $hmac)) {
+        if (!$this->hashService->validateHmac('reg-' . $regUid, $hmac)) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_wrong_hmac';
             $titleKey = 'cancelRegistration.title.failed';
         } else {
-            $registration = $this->registrationRepository->findByUid($reguid);
+            $registration = $this->registrationRepository->findByUid($regUid);
         }
 
         if (!$failed && is_null($registration)) {
@@ -202,14 +200,14 @@ class RegistrationService
         }
 
         if (!$failed && $registration->getEvent()->getCancelDeadline() !== null
-            && $registration->getEvent()->getCancelDeadline() < new \DateTime()
+            && $registration->getEvent()->getCancelDeadline() < new DateTime()
         ) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_deadline_expired';
             $titleKey = 'cancelRegistration.title.failed';
         }
 
-        if (!$failed && $registration->getEvent()->getStartdate() < new \DateTime()) {
+        if (!$failed && $registration->getEvent()->getStartdate() < new DateTime()) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_event_started';
             $titleKey = 'cancelRegistration.title.failed';
@@ -248,10 +246,10 @@ class RegistrationService
         if ($event->getEnableRegistration() === false) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_NOT_ENABLED;
-        } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new \DateTime()) {
+        } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
-        } elseif ($event->getStartdate() < new \DateTime()) {
+        } elseif ($event->getStartdate() < new DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
         } elseif ($event->getRegistrations()->count() >= $event->getMaxParticipants()
@@ -301,7 +299,7 @@ class RegistrationService
                     $queryBuilder->createNamedParameter($email, Connection::PARAM_STR)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchOne();
 
         return $registrations >= 1;
@@ -318,11 +316,8 @@ class RegistrationService
 
         /** @var AbstractPayment $paymentInstance */
         $paymentInstance = $this->paymentService->getPaymentInstance($registration->getPaymentmethod());
-        if ($paymentInstance !== null && $paymentInstance->isRedirectEnabled()) {
-            return true;
-        }
 
-        return false;
+        return $paymentInstance !== null && $paymentInstance->isRedirectEnabled();
     }
 
     /**

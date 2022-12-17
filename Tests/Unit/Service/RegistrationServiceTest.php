@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DateInterval;
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -20,6 +22,7 @@ use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use stdClass;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -27,27 +30,15 @@ use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\RegistrationService.
- */
 class RegistrationServiceTest extends UnitTestCase
 {
-    /**
-     * @var RegistrationService
-     */
-    protected $subject;
+    protected RegistrationService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new RegistrationService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -56,7 +47,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations()
+    public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations(): void
     {
         GeneralUtility::setSingletonInstance(ReflectionService::class, new ReflectionService(new NullFrontend('extbase'), 'ClassSchemata'));
         $event = new Event();
@@ -77,7 +68,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function confirmDependingRegistrationsConfirmsDependingRegistrations()
+    public function confirmDependingRegistrationsConfirmsDependingRegistrations(): void
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
@@ -87,7 +78,6 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2->expects(self::any())->method('setConfirmed');
 
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
         $registrations = new ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
@@ -107,14 +97,13 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function cancelDependingRegistrationsRemovesDependingRegistrations()
+    public function cancelDependingRegistrationsRemovesDependingRegistrations(): void
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
         $foundRegistration1 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
         $registrations = new ObjectStorage();
         $registrations->attach($foundRegistration1);
         $registrations->attach($foundRegistration2);
@@ -136,7 +125,7 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkConfirmRegistrationIfHmacValidationFailsTest()
+    public function checkConfirmRegistrationIfHmacValidationFailsTest(): void
     {
         $reguid = 1;
         $hmac = 'invalid-hmac';
@@ -163,7 +152,7 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkConfirmRegistrationIfNoRegistrationTest()
+    public function checkConfirmRegistrationIfNoRegistrationTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
@@ -197,13 +186,13 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkConfirmRegistrationIfConfirmationDateExpiredTest()
+    public function checkConfirmRegistrationIfConfirmationDateExpiredTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new \DateTime('yesterday'));
+        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new DateTime('yesterday'));
 
         $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
             ->onlyMethods(['findByUid'])
@@ -234,13 +223,13 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkConfirmRegistrationIfRegistrationConfirmedTest()
+    public function checkConfirmRegistrationIfRegistrationConfirmedTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
-        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new \DateTime('tomorrow'));
+        $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new DateTime('tomorrow'));
         $mockRegistration->expects(self::any())->method('getConfirmed')->willReturn(true);
 
         $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -272,7 +261,7 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkCancelRegistrationIfHmacValidationFailsTest()
+    public function checkCancelRegistrationIfHmacValidationFailsTest(): void
     {
         $reguid = 1;
         $hmac = 'invalid-hmac';
@@ -299,7 +288,7 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkCancelRegistrationIfNoRegistrationTest()
+    public function checkCancelRegistrationIfNoRegistrationTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
@@ -333,7 +322,7 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkCancelRegistrationIfCancellationIsNotEnabledTest()
+    public function checkCancelRegistrationIfCancellationIsNotEnabledTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
@@ -373,14 +362,14 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkCancelRegistrationIfCancellationDeadlineExpiredTest()
+    public function checkCancelRegistrationIfCancellationDeadlineExpiredTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
 
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getEnableCancel')->willReturn(true);
-        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new \DateTime('yesterday'));
+        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new DateTime('yesterday'));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
@@ -414,15 +403,15 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function checkCancelRegistrationIfEventStartdatePassedTest()
+    public function checkCancelRegistrationIfEventStartdatePassedTest(): void
     {
         $reguid = 1;
         $hmac = 'valid-hmac';
 
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getEnableCancel')->willReturn(true);
-        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new \DateTime('tomorrow'));
-        $mockEvent->expects(self::any())->method('getStartdate')->willReturn(new \DateTime('yesterday'));
+        $mockEvent->expects(self::any())->method('getCancelDeadline')->willReturn(new DateTime('tomorrow'));
+        $mockEvent->expects(self::any())->method('getStartdate')->willReturn(new DateTime('yesterday'));
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::any())->method('getEvent')->willReturn($mockEvent);
@@ -456,10 +445,10 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCurrentFeUserObjectReturnsNullIfNoFeUser()
+    public function getCurrentFeUserObjectReturnsNullIfNoFeUser(): void
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = null;
         self::assertNull($this->subject->getCurrentFeUserObject());
     }
@@ -469,10 +458,10 @@ class RegistrationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCurrentFeUserObjectReturnsFeUser()
+    public function getCurrentFeUserObjectReturnsFeUser(): void
     {
-        $GLOBALS['TSFE'] = new \stdClass();
-        $GLOBALS['TSFE']->fe_user = new \stdClass();
+        $GLOBALS['TSFE'] = new stdClass();
+        $GLOBALS['TSFE']->fe_user = new stdClass();
         $GLOBALS['TSFE']->fe_user->user = [];
         $GLOBALS['TSFE']->fe_user->user['uid'] = 1;
 
@@ -491,7 +480,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfRegistrationNotEnabled()
+    public function checkRegistrationSuccessFailsIfRegistrationNotEnabled(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
@@ -507,13 +496,13 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfRegistrationDeadlineExpired()
+    public function checkRegistrationSuccessFailsIfRegistrationDeadlineExpired(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $deadline = new \DateTime();
-        $deadline->add(\DateInterval::createFromDateString('yesterday'));
+        $deadline = new DateTime();
+        $deadline->add(DateInterval::createFromDateString('yesterday'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::any())->method('getRegistrationDeadline')->willReturn($deadline);
 
@@ -526,13 +515,13 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfEventExpired()
+    public function checkRegistrationSuccessFailsIfEventExpired(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('yesterday'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('yesterday'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
 
@@ -545,7 +534,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfMaxParticipantsReached()
+    public function checkRegistrationSuccessFailsIfMaxParticipantsReached(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
@@ -556,8 +545,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::once())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::once())->method('getRegistrations')->willReturn($registrations);
@@ -572,7 +561,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfAmountOfRegistrationsGreaterThanRemainingPlaces()
+    public function checkRegistrationSuccessFailsIfAmountOfRegistrationsGreaterThanRemainingPlaces(): void
     {
         $registration = $this->getMockBuilder(Registration::class)
             ->onlyMethods(['getAmountOfRegistrations'])
@@ -586,8 +575,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -603,7 +592,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfUniqueEmailCheckEnabledAndEmailRegisteredToEvent()
+    public function checkRegistrationSuccessFailsIfUniqueEmailCheckEnabledAndEmailRegisteredToEvent(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects(self::any())->method('getEmail')->willReturn('email@domain.tld');
@@ -615,8 +604,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(1);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -636,7 +625,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
+    public function checkRegistrationSuccessFailsIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(6);
@@ -648,8 +637,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -666,7 +655,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessSucceedsWhenAllConditionsMet()
+    public function checkRegistrationSuccessSucceedsWhenAllConditionsMet(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
@@ -677,8 +666,8 @@ class RegistrationServiceTest extends UnitTestCase
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $startdate = new \DateTime();
-        $startdate->add(\DateInterval::createFromDateString('tomorrow'));
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('tomorrow'));
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
         $event->expects(self::any())->method('getRegistrations')->willReturn($registrations);
@@ -693,7 +682,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function redirectPaymentEnabledReturnsFalseIfPaymentNotEnabled()
+    public function redirectPaymentEnabledReturnsFalseIfPaymentNotEnabled(): void
     {
         $event = new Event();
         $event->setEnablePayment(false);
@@ -737,7 +726,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function isWaitlistRegistrationReturnsFalseIfEventNotFullyBookedAndEnoughFreePlaces()
+    public function isWaitlistRegistrationReturnsFalseIfEventNotFullyBookedAndEnoughFreePlaces(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->onlyMethods(['count'])
@@ -756,7 +745,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function isWaitlistRegistrationReturnsTrueIfEventNotFullyBookedAndNotEnoughFreePlaces()
+    public function isWaitlistRegistrationReturnsTrueIfEventNotFullyBookedAndNotEnoughFreePlaces(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->onlyMethods(['count'])
@@ -775,7 +764,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function isWaitlistRegistrationReturnsTrueIfEventFullyBookedAndNotEnoughFreePlaces()
+    public function isWaitlistRegistrationReturnsTrueIfEventFullyBookedAndNotEnoughFreePlaces(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
             ->onlyMethods(['count'])
@@ -791,10 +780,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertTrue($this->subject->isWaitlistRegistration($event, 1));
     }
 
-    /**
-     * @return array[]
-     */
-    public function moveUpWaitlistRegistrationsDataProvider()
+    public function moveUpWaitlistRegistrationsDataProvider(): array
     {
         return [
             'move up not enabled' => [
@@ -818,15 +804,12 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider moveUpWaitlistRegistrationsDataProvider
-     * @param bool $enableWaitlistMoveup
-     * @param int $amountWaitlistRegistrations
-     * @param int $freePlaces
      */
     public function moveUpWaitlistRegistrationDoesNotProceedIfCriteriaNotMatch(
-        $enableWaitlistMoveup,
-        $amountWaitlistRegistrations,
-        $freePlaces
-    ) {
+        bool $enableWaitlistMoveup,
+        int $amountWaitlistRegistrations,
+        int $freePlaces
+    ): void {
         $mockWaitlistRegistrations = $this->getMockBuilder(ObjectStorage::class)
             ->onlyMethods(['count'])
             ->disableOriginalConstructor()
