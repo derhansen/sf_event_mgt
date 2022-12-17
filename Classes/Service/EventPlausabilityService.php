@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -33,7 +34,7 @@ class EventPlausabilityService
             $this->addMessageToFlashMessageQueue(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.message'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.title'),
-                FlashMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
         }
     }
@@ -52,7 +53,7 @@ class EventPlausabilityService
             $this->addMessageToFlashMessageQueue(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.message'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.title'),
-                FlashMessage::WARNING
+                ContextualFeedbackSeverity::WARNING
             );
             return;
         }
@@ -62,7 +63,7 @@ class EventPlausabilityService
                 $this->addMessageToFlashMessageQueue(
                     $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.message'),
                     $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.title'),
-                    FlashMessage::WARNING
+                    ContextualFeedbackSeverity::WARNING
                 );
             }
         }
@@ -80,7 +81,7 @@ class EventPlausabilityService
     protected function addMessageToFlashMessageQueue(
         string $message,
         string $title = '',
-        int $severity = FlashMessage::INFO
+        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::INFO
     ): void {
         $flashMessage = GeneralUtility::makeInstance(
             FlashMessage::class,
