@@ -207,8 +207,7 @@ class CalendarServiceTest extends UnitTestCase
         int $year,
         int $firstDayOfWeek,
         array $expected
-    ): void
-    {
+    ): void {
         $result = $this->subject->getCalendarDateRange($month, $year, $firstDayOfWeek);
         self::assertEquals($expected, $result);
     }
