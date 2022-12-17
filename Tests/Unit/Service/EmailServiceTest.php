@@ -14,24 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 use DERHANSEN\SfEventMgt\Service\EmailService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\EmailService.
- */
 class EmailServiceTest extends UnitTestCase
 {
     protected EmailService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new EmailService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -56,10 +47,8 @@ class EmailServiceTest extends UnitTestCase
      *
      * @dataProvider invalidEmailsDataProvider
      * @test
-     * @param mixed $sender
-     * @param mixed $recipient
      */
-    public function sendEmailMessageWithInvalidEmailTest($sender, $recipient)
+    public function sendEmailMessageWithInvalidEmailTest(string $sender, string $recipient)
     {
         $subject = 'A subject';
         $body = 'A body';

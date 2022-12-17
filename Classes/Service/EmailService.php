@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * EmailService
- */
 class EmailService
 {
     /**
@@ -45,7 +42,6 @@ class EmailService
             return false;
         }
 
-        /** @var MailMessage $email */
         $email = GeneralUtility::makeInstance(MailMessage::class);
         $email->setFrom($sender, $name);
         $email->setTo($recipient);
