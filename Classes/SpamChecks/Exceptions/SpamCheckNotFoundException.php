@@ -11,9 +11,6 @@ namespace DERHANSEN\SfEventMgt\SpamChecks\Exceptions;
 
 use DERHANSEN\SfEventMgt\Exception;
 
-/**
- * Generic exception for sf_event_mgt
- */
 class SpamCheckNotFoundException extends Exception
 {
 }
