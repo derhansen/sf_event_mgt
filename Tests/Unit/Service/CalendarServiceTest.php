@@ -11,29 +11,21 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\CalendarServiceTest.
- */
 class CalendarServiceTest extends UnitTestCase
 {
     protected CalendarService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new CalendarService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -44,10 +36,10 @@ class CalendarServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCalendarArrayReturnsExpectedAmountOfWeeksForGivenDate()
+    public function getCalendarArrayReturnsExpectedAmountOfWeeksForGivenDate(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1);
-        self::assertEquals(6, count($calendarArray));
+        self::assertCount(6, $calendarArray);
     }
 
     /**
@@ -55,7 +47,7 @@ class CalendarServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCalendarArrayHasWeekNumbersAsIndex()
+    public function getCalendarArrayHasWeekNumbersAsIndex(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1);
         self::assertArrayHasKey(52, $calendarArray);
@@ -71,7 +63,7 @@ class CalendarServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCalendarArrayRespectsFirstDayOfWeekParameter()
+    public function getCalendarArrayRespectsFirstDayOfWeekParameter(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 0);
         self::assertEquals(date('w', $calendarArray[52][0]['timestamp']), 0);
@@ -82,7 +74,7 @@ class CalendarServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCalendarArraySetsIsCurrentDay()
+    public function getCalendarArraySetsIsCurrentDay(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 2, 2017), 1);
         self::assertTrue($calendarArray[1][0]['isCurrentDay']);
@@ -93,21 +85,21 @@ class CalendarServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCalendarArrayReturnsArrayWithEventForOneDay()
+    public function getCalendarArrayReturnsArrayWithEventForOneDay(): void
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getStartdate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         );
         $mockEvent->expects(self::any())->method('getEnddate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
         );
 
         $events = new ObjectStorage();
         $events->attach($mockEvent);
 
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
-        self::assertEquals(1, count($calendarArray[1][0]['events']));
+        self::assertCount(1, $calendarArray[1][0]['events']);
     }
 
     /**
@@ -115,23 +107,23 @@ class CalendarServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function getCalendarArrayReturnsArrayWithEventForMultipleDays()
+    public function getCalendarArrayReturnsArrayWithEventForMultipleDays(): void
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $mockEvent->expects(self::any())->method('getStartdate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(10, 0, 0)
         );
         $mockEvent->expects(self::any())->method('getEnddate')->willReturn(
-            \DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
+            DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
         );
 
         $events = new ObjectStorage();
         $events->attach($mockEvent);
 
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
-        self::assertEquals(1, count($calendarArray[1][0]['events']));
-        self::assertEquals(1, count($calendarArray[1][1]['events']));
-        self::assertEquals(1, count($calendarArray[1][2]['events']));
+        self::assertCount(1, $calendarArray[1][0]['events']);
+        self::assertCount(1, $calendarArray[1][1]['events']);
+        self::assertCount(1, $calendarArray[1][2]['events']);
     }
 
     public function calendarDateRangeDataProvider(): array
@@ -209,12 +201,13 @@ class CalendarServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider calendarDateRangeDataProvider
-     * @param mixed $month
-     * @param mixed $year
-     * @param mixed $firstDayOfWeek
-     * @param mixed $expected
      */
-    public function getCalendarDateRangeReturnsExpectedValues($month, $year, $firstDayOfWeek, $expected)
+    public function getCalendarDateRangeReturnsExpectedValues(
+        int $month,
+        int $year,
+        int $firstDayOfWeek,
+        array $expected
+    ): void
     {
         $result = $this->subject->getCalendarDateRange($month, $year, $firstDayOfWeek);
         self::assertEquals($expected, $result);
@@ -228,7 +221,7 @@ class CalendarServiceTest extends UnitTestCase
                 2017,
                 '',
                 [
-                    'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 1, 2017))->setTime(0, 0, 0),
+                    'date' => DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 1, 2017))->setTime(0, 0, 0),
                     'month' => 1,
                     'year' => 2017,
                 ],
@@ -238,7 +231,7 @@ class CalendarServiceTest extends UnitTestCase
                 2017,
                 '+1 month',
                 [
-                    'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 2, 2017))->setTime(0, 0, 0),
+                    'date' => DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 2, 2017))->setTime(0, 0, 0),
                     'month' => 2,
                     'year' => 2017,
                 ],
@@ -248,7 +241,7 @@ class CalendarServiceTest extends UnitTestCase
                 2017,
                 '-1 month',
                 [
-                    'date' => \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 12, 2016))->setTime(0, 0, 0),
+                    'date' => DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', 12, 2016))->setTime(0, 0, 0),
                     'month' => 12,
                     'year' => 2016,
                 ],
@@ -259,12 +252,8 @@ class CalendarServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider dateConfigDataProvider
-     * @param mixed $month
-     * @param mixed $year
-     * @param mixed $modifier
-     * @param mixed $expected
      */
-    public function getDateConfigReturnsExpectedValues($month, $year, $modifier, $expected)
+    public function getDateConfigReturnsExpectedValues(int $month, int $year, string $modifier, array $expected): void
     {
         $result = $this->subject->getDateConfig($month, $year, $modifier);
         self::assertEquals($expected, $result);
@@ -273,9 +262,9 @@ class CalendarServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getWeekConfigReturnsExpectedValue()
+    public function getWeekConfigReturnsExpectedValue(): void
     {
-        $firstDayOfWeek = \DateTime::createFromFormat('d.m.Y', '3.1.2022')->setTime(0, 0);
+        $firstDayOfWeek = DateTime::createFromFormat('d.m.Y', '3.1.2022')->setTime(0, 0);
 
         $expected = [
             'previous' => [

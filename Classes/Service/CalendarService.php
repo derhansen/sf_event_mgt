@@ -15,9 +15,6 @@ use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
-/**
- * CalendarService
- */
 class CalendarService
 {
     /**
@@ -47,7 +44,7 @@ class CalendarService
                 $day['isCurrentMonth'] = $day['month'] === $month;
                 $day['isCurrentDay'] = date('Ymd', $today) === date('Ymd', $day['timestamp']);
                 if ($events) {
-                    $searchDay = new \DateTime();
+                    $searchDay = new DateTime();
                     $searchDay->setTimestamp($currentDay);
                     $day['events'] = $this->getEventsForDay($events, $searchDay);
                 }
@@ -128,7 +125,7 @@ class CalendarService
      */
     public function getDateConfig(int $month, int $year, string $modifier = ''): array
     {
-        $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
+        $date = DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
         $date->setTime(0, 0, 0);
         if (!empty($modifier)) {
             $date->modify($modifier);
