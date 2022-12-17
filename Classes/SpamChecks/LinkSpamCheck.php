@@ -11,14 +11,12 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\SpamChecks;
 
-/**
- * LinksSpamCheck
- */
 class LinkSpamCheck extends AbstractSpamCheck
 {
     /**
      * Counts the amount of links in all fields/registration fields and evaluates, if the found amount
-     * of links is greater than the configured max. amount of links
+     * of links is greater than the configured max. amount of links. If no configuration is supplied,
+     * the default amount of links is 2
      */
     public function isFailed(): bool
     {
@@ -42,7 +40,7 @@ class LinkSpamCheck extends AbstractSpamCheck
             $amountOfLinks += $this->getAmountOfLinks($fieldValue->getValue());
         }
 
-        return $amountOfLinks > (int)$this->configuration['maxAmountOfLinks'];
+        return $amountOfLinks > (int)($this->configuration['maxAmountOfLinks'] ?? 2);
     }
 
     /**

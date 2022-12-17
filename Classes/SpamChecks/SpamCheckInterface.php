@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\SpamChecks;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
-/**
- * SpamCheckInterface
- */
 interface SpamCheckInterface
 {
     public function __construct(

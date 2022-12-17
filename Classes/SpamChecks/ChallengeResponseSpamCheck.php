@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\SpamChecks;
 
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 
-/**
- * ChallengeResponseSpamCheck
- */
 class ChallengeResponseSpamCheck extends AbstractSpamCheck
 {
     /**

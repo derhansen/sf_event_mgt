@@ -15,15 +15,12 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck
- */
 class HoneypotSpamCheckTest extends UnitTestCase
 {
     /**
      * @test
      */
-    public function checkIsFailedWhenHoneypotFieldNotSubmitted()
+    public function checkIsFailedWhenHoneypotFieldNotSubmitted(): void
     {
         /** @var Registration $mockRegistration */
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
@@ -41,7 +38,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkIsFailedWhenHoneypotFieldFilled()
+    public function checkIsFailedWhenHoneypotFieldFilled(): void
     {
         /** @var Registration $mockRegistration */
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
@@ -61,7 +58,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkIsNotFailedWhenHoneypotFieldEmpty()
+    public function checkIsNotFailedWhenHoneypotFieldEmpty(): void
     {
         /** @var Registration $mockRegistration */
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();

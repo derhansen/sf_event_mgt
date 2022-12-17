@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\SpamChecks;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 
-/**
- * AbstractSpamCheck
- */
 abstract class AbstractSpamCheck implements SpamCheckInterface
 {
     protected Registration $registration;
