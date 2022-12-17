@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 
-/**
- * BeUserSessionService
- */
 class BeUserSessionService
 {
     private const SESSION_KEY = 'sf_event_mgt';

@@ -15,24 +15,15 @@ use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\BeUserSessionService.
- */
 class BeUserSessionServiceTest extends UnitTestCase
 {
     protected BeUserSessionService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new BeUserSessionService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -41,7 +32,7 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function saveSessionDataSavesDataToSession()
+    public function saveSessionDataSavesDataToSession(): void
     {
         $data = ['key' => 'value'];
 
@@ -57,7 +48,7 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSessionDataReturnsSessionData()
+    public function getSessionDataReturnsSessionData(): void
     {
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)
             ->onlyMethods(['getSessionData'])
@@ -94,11 +85,8 @@ class BeUserSessionServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getSessionDataByKeyDataProvider
-     * @param mixed $sessionData
-     * @param mixed $key
-     * @param mixed $expected
      */
-    public function getSessionDataByKeyReturnsExpectedValue($sessionData, $key, $expected)
+    public function getSessionDataByKeyReturnsExpectedValue(array $sessionData, string $key, ?string $expected): void
     {
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)
             ->disableOriginalConstructor()
