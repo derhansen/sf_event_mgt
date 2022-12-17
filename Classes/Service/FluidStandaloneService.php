@@ -19,9 +19,6 @@ use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
-/**
- * FluidStandaloneService
- */
 class FluidStandaloneService
 {
     protected ConfigurationManager $configurationManager;

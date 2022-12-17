@@ -20,9 +20,6 @@ use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Class FluidStandaloneServiceTest
- */
 class FluidStandaloneServiceTest extends UnitTestCase
 {
     protected FluidStandaloneService $subject;
