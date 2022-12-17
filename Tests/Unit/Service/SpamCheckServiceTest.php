@@ -16,9 +16,6 @@ use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\SpamCheckServiceTest.
- */
 class SpamCheckServiceTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
@@ -26,7 +23,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function spamCheckServiceWorksForEmptySettingsAndArguments()
+    public function spamCheckServiceWorksForEmptySettingsAndArguments(): void
     {
         $registration = new Registration();
         $settings = [];
@@ -35,10 +32,7 @@ class SpamCheckServiceTest extends UnitTestCase
         self::assertFalse($service->isSpamCheckFailed());
     }
 
-    /**
-     * DataProvider for isSpamCheckFailedReturnsFalseForExpectedConditions
-     */
-    public function isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider()
+    public function isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider(): array
     {
         return [
             'empty settings' => [
@@ -61,9 +55,8 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider
-     * @param array $settings
      */
-    public function isSpamCheckFailedReturnsFalseForExpectedConditions($settings)
+    public function isSpamCheckFailedReturnsFalseForExpectedConditions(array $settings): void
     {
         $registration = new Registration();
         $arguments = [];
@@ -74,7 +67,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function spamCheckServiceThrowsExceptionWhenTestNotFound()
+    public function spamCheckServiceThrowsExceptionWhenTestNotFound(): void
     {
         $this->expectException(SpamCheckNotFoundException::class);
         $registration = new Registration();
@@ -94,7 +87,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function maxSpamScoreIsSetInConstructor()
+    public function maxSpamScoreIsSetInConstructor(): void
     {
         $registration = new Registration();
         $settings = [
@@ -110,7 +103,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function emptyCheckArrayIsInitializedInConstructor()
+    public function emptyCheckArrayIsInitializedInConstructor(): void
     {
         $registration = new Registration();
         $settings = [
@@ -125,7 +118,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function configuredSpamCheckIsProcessed()
+    public function configuredSpamCheckIsProcessed(): void
     {
         $registration = new Registration();
         $settings = [

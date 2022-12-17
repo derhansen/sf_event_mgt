@@ -26,9 +26,6 @@ class SpamCheckService
     protected int $maxSpamScore = 10;
     protected int $checkScore = 0;
 
-    /**
-     * SpamCheckService constructor.
-     */
     public function __construct(Registration $registration, array $settings, array $arguments)
     {
         $this->registration = $registration;
@@ -74,9 +71,7 @@ class SpamCheckService
     }
 
     /**
-     * Prococesses the spam check in the given config
-     *
-     * @param array $checkConfig
+     * Processes the spam check in the given config
      */
     protected function processSpamCheck(array $checkConfig): void
     {
