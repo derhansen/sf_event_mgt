@@ -19,6 +19,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class HideInlineRegistrations implements FormDataProviderInterface
@@ -46,7 +47,7 @@ class HideInlineRegistrations implements FormDataProviderInterface
                 FlashMessage::class,
                 $message,
                 $this->getLanguageService()->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.title'),
-                FlashMessage::INFO,
+                ContextualFeedbackSeverity::INFO,
                 true
             );
 
@@ -77,7 +78,7 @@ class HideInlineRegistrations implements FormDataProviderInterface
                     $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchOne();
     }
 

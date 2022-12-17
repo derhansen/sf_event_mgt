@@ -16,21 +16,12 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\CalendarServiceTest.
- */
 class HideInlineRegistrationsTest extends UnitTestCase
 {
     public const LLL = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.';
 
-    /**
-     * @var bool Reset singletons created by subject
-     */
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -39,7 +30,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function addDataWhenHideInlineRegistrationsIsDisabled()
+    public function addDataWhenHideInlineRegistrationsIsDisabled(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = [
             'hideInlineRegistrations' => 0,
@@ -66,7 +57,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function addDataWhenHideInlineRegistrationsIsEnabledAndLimitExceeded()
+    public function addDataWhenHideInlineRegistrationsIsEnabledAndLimitExceeded(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = [
             'hideInlineRegistrations' => 1,
