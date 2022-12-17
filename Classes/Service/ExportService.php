@@ -11,19 +11,15 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
-use DERHANSEN\SfEventMgt\Exception;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\CsvUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
-/**
- * Class ExportService
- */
 class ExportService
 {
     protected RegistrationRepository $registrationRepository;
@@ -37,8 +33,6 @@ class ExportService
 
     /**
      * Initiates the CSV downloads for registrations of the given event uid
-     *
-     * @throws Exception RuntimeException
      */
     public function downloadRegistrationsCsv(int $eventUid, array $settings = []): void
     {
@@ -54,8 +48,6 @@ class ExportService
 
     /**
      * Returns all Registrations for the given eventUid as a CSV string
-     *
-     * @throws Exception RuntimeException
      */
     public function exportRegistrationsCsv(int $eventUid, array $settings = []): string
     {
@@ -156,23 +148,20 @@ class ExportService
     protected function getFieldValue(Registration $registration, string $field, array $settings): string
     {
         $value = ObjectAccess::getPropertyPath($registration, $field);
-        if ($value instanceof \DateTime) {
+        if ($value instanceof DateTime) {
             $dateFormat = $settings['dateFieldFormat'] ?? 'd.m.Y';
             $value = $value->format($dateFormat);
         }
 
-        return $this->replaceLineBreaks($value);
+        return $this->replaceLineBreaks((string)$value);
     }
 
     /**
      * Replaces all line breaks with a space
-     *
-     * @param mixed $value
-     * @return mixed
      */
-    protected function replaceLineBreaks($value)
+    protected function replaceLineBreaks(string $value): string
     {
-        return str_replace(["\r\n", "\r", "\n"], ' ', (string)$value);
+        return str_replace(["\r\n", "\r", "\n"], ' ', $value);
     }
 
     protected function getBackendUser(): ?BackendUserAuthentication

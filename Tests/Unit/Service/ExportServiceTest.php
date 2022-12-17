@@ -19,9 +19,6 @@ use DERHANSEN\SfEventMgt\Service\ExportService;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Class ExportServiceTest
- */
 class ExportServiceTest extends UnitTestCase
 {
     public function fieldValuesInTypoScriptDataProvider(): array
@@ -103,12 +100,12 @@ class ExportServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider fieldValuesInTypoScriptDataProvider
-     * @param mixed $uid
-     * @param mixed $fields
-     * @param mixed $expected
      */
-    public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected)
-    {
+    public function exportServiceWorksWithDifferentFormattedTypoScriptValues(
+        int $uid,
+        array $fields,
+        string $expected
+    ): void {
         $event = new Event();
         $event->setTitle('Some event');
 
