@@ -12,15 +12,13 @@ namespace DERHANSEN\SfEventMgt\Evaluation;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * TimeRestrictionEvaluator
- */
 class TimeRestrictionEvaluator
 {
     /**
-     * Checks if $value can be intepreted with strtotime()
+     * Checks if $value can be interpreted with strtotime()
      */
     public function evaluateFieldValue(string $value, string $is_in, bool &$set): string
     {
@@ -31,14 +29,14 @@ class TimeRestrictionEvaluator
             $languageService = $this->getLanguageService();
 
             if ($set) {
-                $severity = FlashMessage::INFO;
+                $severity = ContextualFeedbackSeverity::INFO;
                 $message = sprintf(
                     $languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.info'),
                     $value,
                     date($languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.format'), $timestamp)
                 );
             } else {
-                $severity = FlashMessage::ERROR;
+                $severity = ContextualFeedbackSeverity::ERROR;
                 $message = sprintf(
                     $languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.error'),
                     $value

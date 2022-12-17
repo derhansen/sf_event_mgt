@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\Evaluation;
 
 use TYPO3\CMS\Core\Utility\MathUtility;
 
-/**
- * LongitudeEvaluator
- */
 class LongitudeEvaluator
 {
     /**
