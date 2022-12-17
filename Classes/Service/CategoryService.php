@@ -16,9 +16,6 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * CategoryService
- */
 class CategoryService
 {
     /**
@@ -32,13 +29,13 @@ class CategoryService
     /**
      * Get child categories
      */
-    private static function getChildrenCategoriesRecursive(string $idList, int $counter = 0): string
+    private static function getChildrenCategoriesRecursive(string $uidList, int $counter = 0): string
     {
         $result = [];
 
         // add idlist to the output too
         if ($counter === 0) {
-            $result[] = self::cleanIntList($idList);
+            $result[] = self::cleanIntList($uidList);
         }
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -50,12 +47,12 @@ class CategoryService
                 $queryBuilder->expr()->in(
                     'parent',
                     $queryBuilder->createNamedParameter(
-                        array_map('intval', explode(',', $idList)),
+                        array_map('intval', explode(',', $uidList)),
                         Connection::PARAM_INT_ARRAY
                     )
                 )
             )
-            ->execute();
+            ->executeQuery();
 
         while (($row = $res->fetchAssociative())) {
             $counter++;
@@ -72,9 +69,6 @@ class CategoryService
         return implode(',', $result);
     }
 
-    /**
-     * Clean list of integers
-     */
     private static function cleanIntList(string $list): string
     {
         return implode(',', GeneralUtility::intExplode(',', $list));
