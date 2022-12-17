@@ -303,6 +303,7 @@ class EventController extends AbstractController
                 );
                 throw new PropagateResponseException($response, 1631261423);
             case 'showStandaloneTemplate':
+            default:
                 $status = (int)($configuration[2] ?? 200);
                 $standaloneTemplate = GeneralUtility::makeInstance(StandaloneView::class);
                 $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));

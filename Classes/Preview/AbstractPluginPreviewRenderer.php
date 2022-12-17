@@ -216,7 +216,7 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
             $data = '<span data-toggle="tooltip" data-placement="top" data-title="id=' . $record['uid'] . '">'
                 . $this->iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render()
                 . '</span> ';
-            $content = BackendUtility::wrapClickMenuOnIcon($data, $table, $record['uid'], '', '', '+info');
+            $content = BackendUtility::wrapClickMenuOnIcon($data, $table, $record['uid'], '');
 
             $linkTitle = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));
             $content .= $linkTitle;
