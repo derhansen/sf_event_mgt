@@ -152,7 +152,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                     $queryBuilder->createNamedParameter($checkListTypes, Connection::PARAM_STR_ARRAY)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
     }
 
@@ -201,7 +201,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                     $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
                 )
             )
-            ->execute();
+            ->executeQuery();
     }
 
     /**
@@ -224,7 +224,6 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
         ];
         $spaceInd = 4;
         $output = GeneralUtility::array2xml($input, '', 0, 'T3FlexForms', $spaceInd, $options);
-        $output = '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . LF . $output;
-        return $output;
+        return '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . LF . $output;
     }
 }
