@@ -14,8 +14,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ICalendarServiceTest extends UnitTestCase

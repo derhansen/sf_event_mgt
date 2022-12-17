@@ -14,7 +14,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class ICalendarService
 {
@@ -64,7 +63,6 @@ class ICalendarService
             'Pieventdetail',
             'txt'
         );
-
 
         // Remove empty lines
         $icalContent = preg_replace('/^\h*\v+/m', '', $icalContent);
