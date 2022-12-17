@@ -18,24 +18,15 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\ICalendarService.
- */
 class ICalendarServiceTest extends UnitTestCase
 {
     protected ICalendarService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new ICalendarService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -44,30 +35,23 @@ class ICalendarServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getiCalendarContentAssignsVariablesToView()
+    public function getiCalendarContentAssignsVariablesToView(): void
     {
         $_SERVER['HTTP_HOST'] = 'myhostname.tld';
 
-        $eventMock = $this->getMockBuilder(Event::class)->getMock();
-
-        $standAloneView = $this->getMockBuilder(StandaloneView::class)->disableOriginalConstructor()->getMock();
-        $standAloneView->expects(self::once())->method('setLayoutRootPaths');
-        $standAloneView->expects(self::once())->method('setPartialRootPaths');
-        $standAloneView->expects(self::once())->method('setTemplateRootPaths');
-        $standAloneView->expects(self::once())->method('setTemplate')->with('Event/ICalendar.txt');
-        $standAloneView->expects(self::once())->method('setFormat')->with('txt');
-        $standAloneView->expects(self::once())->method('assignMultiple')->with(
+        $eventMock = $this->createMock(Event::class);
+        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+            ->disableOriginalConstructor()->getMock();
+        $fluidStandaloneService->expects(self::once())->method('renderTemplate')->with(
+            'Event/ICalendar.txt',
             [
                 'event' => $eventMock,
                 'typo3Host' => 'myhostname.tld',
-            ]
+            ],
+            'SfEventMgt',
+            'Pieventdetail',
+            'txt'
         );
-        $standAloneView->expects(self::once())->method('render')->willReturn('');
-        GeneralUtility::addInstance(StandaloneView::class, $standAloneView);
-
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
-            ->disableOriginalConstructor()->getMock();
-        $fluidStandaloneService->expects(self::any())->method('getTemplateFolders')->willReturn([]);
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $this->subject->getiCalendarContent($eventMock);
