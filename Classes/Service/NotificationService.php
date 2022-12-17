@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -30,9 +31,6 @@ use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
-/**
- * NotificationService
- */
 class NotificationService
 {
     protected RegistrationRepository $registrationRepository;
@@ -137,7 +135,7 @@ class NotificationService
         int $emailsSent,
         CustomNotification $customNotification
     ): void {
-        $notificationlogEntry = new \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog();
+        $notificationlogEntry = new CustomNotificationLog();
         $notificationlogEntry->setPid($event->getPid());
         $notificationlogEntry->setEvent($event);
         $notificationlogEntry->setDetails($details);
@@ -166,16 +164,13 @@ class NotificationService
         int $type,
         ?CustomNotification $customNotification = null
     ): bool {
-        list($template, $subject) = $this->getUserMessageTemplateSubject(
+        [$template, $subject] = $this->getUserMessageTemplateSubject(
             $settings,
             $type,
             $customNotification
         );
 
-        if (!is_array($settings) ||
-            (substr($template, -5) != '.html') ||
-            (bool)($settings['notification']['disabled'] ?? false)
-        ) {
+        if ((bool)($settings['notification']['disabled'] ?? false) || !str_ends_with($template, '.html')) {
             return false;
         }
 
@@ -328,10 +323,10 @@ class NotificationService
      */
     public function sendAdminMessage(Event $event, Registration $registration, array $settings, int $type): bool
     {
-        list($template, $subject) = $this->getAdminMessageTemplateSubject($settings, $type);
+        [$template, $subject] = $this->getAdminMessageTemplateSubject($settings, $type);
 
-        if (($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false) ||
-            (bool)($settings['notification']['disabled'] ?? false)
+        if ((bool)($settings['notification']['disabled'] ?? false) ||
+            ($event->getNotifyAdmin() === false && $event->getNotifyOrganisator() === false)
         ) {
             return false;
         }
