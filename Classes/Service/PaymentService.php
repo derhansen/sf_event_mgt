@@ -17,9 +17,6 @@ use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * PaymentService
- */
 class PaymentService
 {
     /**
@@ -85,7 +82,7 @@ class PaymentService
     public function getPaymentInstance(string $paymentMethod): ?AbstractPayment
     {
         $paymentInstance = null;
-        $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] ?? '';
+        $configuredPaymentMethods = $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] ?? [];
         if (isset($configuredPaymentMethods[$paymentMethod]) &&
             class_exists($configuredPaymentMethods[$paymentMethod]['class'] ?? '')) {
             /** @var AbstractPayment $paymentInstance */
