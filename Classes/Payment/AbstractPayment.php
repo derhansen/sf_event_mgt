@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Payment;
 
-/**
- * AbstractPayment
- */
 abstract class AbstractPayment
 {
     protected bool $enableRedirect = false;
