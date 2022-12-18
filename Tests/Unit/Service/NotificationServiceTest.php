@@ -25,6 +25,7 @@ use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use stdClass;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -464,9 +465,8 @@ class NotificationServiceTest extends UnitTestCase
         $registration2 = new Registration();
         $registration2->setConfirmed(true);
 
-        $registrations = new ObjectStorage();
-        $registrations->attach($registration1);
-        $registrations->attach($registration2);
+        $registrations = $this->getAccessibleMock(QueryResult::class, null, [], '', false);
+        $registrations->_set('queryResult', [$registration1, $registration2]);
 
         /** @var NotificationService $mockNotificationService */
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)

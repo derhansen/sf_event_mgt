@@ -1623,11 +1623,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewForNoSearchDemand()
     {
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->createMock(QueryResult::class);
+        $allCategories = $this->createMock(QueryResult::class);
+        $allLocations = $this->createMock(QueryResult::class);
+        $allOrganisators = $this->createMock(QueryResult::class);
+        $allSpeakers = $this->createMock(QueryResult::class);
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
@@ -1704,11 +1704,11 @@ class EventControllerTest extends UnitTestCase
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
         $searchDemand->expects(self::once())->method('setFields');
 
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->createMock(QueryResult::class);
+        $allCategories = $this->createMock(QueryResult::class);
+        $allLocations = $this->createMock(QueryResult::class);
+        $allOrganisators = $this->createMock(QueryResult::class);
+        $allSpeakers = $this->createMock(QueryResult::class);
 
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
@@ -1788,11 +1788,11 @@ class EventControllerTest extends UnitTestCase
         $settings = ['settings'];
         $this->subject->_set('settings', $settings);
 
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->createMock(QueryResult::class);
+        $allCategories = $this->createMock(QueryResult::class);
+        $allLocations = $this->createMock(QueryResult::class);
+        $allOrganisators = $this->createMock(QueryResult::class);
+        $allSpeakers = $this->createMock(QueryResult::class);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -1865,11 +1865,11 @@ class EventControllerTest extends UnitTestCase
         ];
         $this->subject->_set('settings', $settings);
 
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->createMock(QueryResult::class);
+        $allCategories = $this->createMock(QueryResult::class);
+        $allLocations = $this->createMock(QueryResult::class);
+        $allOrganisators = $this->createMock(QueryResult::class);
+        $allSpeakers = $this->createMock(QueryResult::class);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -1934,11 +1934,11 @@ class EventControllerTest extends UnitTestCase
         $settings = ['disableOverrideDemand' => 0];
         $this->subject->_set('settings', $settings);
 
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->createMock(QueryResult::class);
+        $allCategories = $this->createMock(QueryResult::class);
+        $allLocations = $this->createMock(QueryResult::class);
+        $allOrganisators = $this->createMock(QueryResult::class);
+        $allSpeakers = $this->createMock(QueryResult::class);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
@@ -2002,11 +2002,11 @@ class EventControllerTest extends UnitTestCase
         $settings = ['disableOverrideDemand' => 1];
         $this->subject->_set('settings', $settings);
 
-        $allEvents = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allCategories = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allLocations = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allOrganisators = $this->getMockBuilder(ObjectStorage::class)->getMock();
-        $allSpeakers = $this->getMockBuilder(ObjectStorage::class)->getMock();
+        $allEvents = $this->createMock(QueryResult::class);
+        $allCategories = $this->createMock(QueryResult::class);
+        $allLocations = $this->createMock(QueryResult::class);
+        $allOrganisators = $this->createMock(QueryResult::class);
+        $allSpeakers = $this->createMock(QueryResult::class);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findDemanded'])
