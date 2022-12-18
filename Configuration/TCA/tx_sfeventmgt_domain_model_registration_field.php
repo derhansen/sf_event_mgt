@@ -1,5 +1,7 @@
 <?php
 
+use DERHANSEN\SfEventMgt\Utility\FieldType;
+
 $lll = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:';
 
 $showItemDefault = 'title, type,
@@ -47,7 +49,6 @@ return [
         'type' => 'type',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'sortby' => 'sorting',
         'versioningWS' => true,
         'origUid' => 't3_origuid',
@@ -147,10 +148,7 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -161,10 +159,7 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -208,8 +203,9 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
                 'max' => 255,
+                'required' => true,
             ],
         ],
         'type' => [
@@ -223,40 +219,40 @@ return [
                 'items' => [
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.0',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::INPUT,
+                        FieldType::INPUT,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.1',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::RADIO,
+                        FieldType::RADIO,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.2',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::CHECK,
+                        FieldType::CHECK,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.3',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXTAREA,
+                        FieldType::TEXTAREA,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.4',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::TEXT,
+                        FieldType::TEXT,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.5',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::DIVIDER,
+                        FieldType::DIVIDER,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.6',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::SELECT,
+                        FieldType::SELECT,
                     ],
                     [
                         $lll . 'tx_sfeventmgt_domain_model_registration_field.type.7',
-                        \DERHANSEN\SfEventMgt\Utility\FieldType::DATETIME,
+                        FieldType::DATETIME,
                     ],
                 ],
                 'size' => 1,
                 'maxitems' => 1,
-                'eval' => 'required',
+                'required' => true,
             ],
         ],
         'settings' => [
@@ -266,7 +262,7 @@ return [
                 'type' => 'text',
                 'cols' => 60,
                 'rows' => 5,
-                'eval' => 'required',
+                'required' => true,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],

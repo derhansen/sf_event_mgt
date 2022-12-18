@@ -6,7 +6,6 @@ return [
         'label' => 'details',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'searchFields' => 'title,',
         'hideTable' => true,
         'typeicon_classes' => [

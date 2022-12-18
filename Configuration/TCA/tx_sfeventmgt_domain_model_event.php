@@ -1,9 +1,13 @@
 <?php
 
-$slugBehaviour = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+$slugBehaviour = GeneralUtility::makeInstance(ExtensionConfiguration::class)
     ->get('sf_event_mgt', 'slugBehaviour');
 
-$rteImageSoftref = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rte_ckeditor_image') ? ',rtehtmlarea_images' : '';
+$rteImageSoftref = ExtensionManagementUtility::isLoaded('rte_ckeditor_image') ? ',rtehtmlarea_images' : '';
 
 return [
     'ctrl' => [
@@ -12,7 +16,6 @@ return [
         'descriptionColumn' => 'rowDescription',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'sortby' => 'sorting',
         'versioningWS' => true,
         'origUid' => 't3_origuid',
@@ -163,10 +166,7 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.starttime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -177,10 +177,7 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.endtime',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
@@ -237,7 +234,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required',
+                'eval' => 'trim',
+                'required' => true,
             ],
         ],
         'slug' => [
@@ -312,14 +310,12 @@ return [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.link',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputLink',
+                'type' => 'link',
+                'allowedTypes' => ['page', 'url', 'record', 'email', 'file', 'telephone', 'record'],
                 'size' => 30,
-                'eval' => 'trim',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
-                'softref' => 'typolink',
             ],
         ],
         'top_event' => [
@@ -345,11 +341,9 @@ return [
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.startdate',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'required,datetime',
+                'type' => 'datetime',
                 'default' => 0,
+                'required' => true,
             ],
         ],
         'enddate' => [
@@ -358,10 +352,7 @@ return [
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enddate',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
             ],
         ],
@@ -427,10 +418,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_startdate',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
             ],
         ],
@@ -441,10 +429,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.registration_deadline',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
             ],
         ],
@@ -474,10 +459,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.cancel_deadline',
             'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
             'config' => [
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 13,
-                'eval' => 'datetime,int',
+                'type' => 'datetime',
                 'default' => 0,
             ],
         ],
@@ -506,9 +488,8 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxParticipants',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 4,
-                'eval' => 'int',
             ],
         ],
         'max_registrations_per_user' => [
@@ -518,18 +499,17 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser',
             'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
                 'size' => 4,
-                'eval' => 'int',
             ],
         ],
         'price' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price',
             'config' => [
-                'type' => 'input',
+                'type' => 'number',
+                'format' => 'decimal',
                 'size' => 5,
-                'eval' => 'double2',
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
