@@ -68,6 +68,9 @@ return [
             'default' => 'ext-sfeventmgt-registration-field',
         ],
         'hideTable' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '0' => [

@@ -33,6 +33,9 @@ return [
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-event',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [

@@ -28,6 +28,9 @@ return [
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-organisator',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => ['showitem' => 'name, slug, email, email_signature, phone, link,

@@ -25,6 +25,9 @@ return [
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-priceoption',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [

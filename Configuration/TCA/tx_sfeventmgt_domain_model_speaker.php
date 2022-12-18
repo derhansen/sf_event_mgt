@@ -28,6 +28,9 @@ return [
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-speaker',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '0' => [

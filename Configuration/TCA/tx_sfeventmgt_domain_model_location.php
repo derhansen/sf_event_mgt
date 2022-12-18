@@ -28,6 +28,9 @@ return [
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-location',
         ],
+        'security' => [
+            'ignorePageTypeRestriction' => true,
+        ],
     ],
     'types' => [
         '1' => [
