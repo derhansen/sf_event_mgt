@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
-/**
- * Custom notification DTO
- */
 class CustomNotification
 {
     public const RECIPIENTS_ALL = 0;

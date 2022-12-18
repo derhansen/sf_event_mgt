@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Category demand
- */
 class CategoryDemand
 {
     public const ORDER_FIELD_ALLOWED = ['title', 'uid', 'sorting'];

@@ -17,9 +17,6 @@ use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Field
- */
 class Field extends AbstractEntity
 {
     protected string $title = '';

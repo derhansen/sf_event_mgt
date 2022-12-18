@@ -18,9 +18,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Event demand
- */
 class EventDemand
 {
     protected string $displayMode = 'all';
@@ -93,7 +90,7 @@ class EventDemand
 
     public function getCurrentDateTime(): DateTime
     {
-        return $this->currentDateTime ?? new \DateTime();
+        return $this->currentDateTime ?? new DateTime();
     }
 
     public function setCategory(string $category): void

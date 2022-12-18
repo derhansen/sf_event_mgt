@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 use DateTime;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Search demand
- */
 class SearchDemand
 {
     protected string $search = '';

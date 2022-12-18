@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Price option
- */
 class PriceOption extends AbstractEntity
 {
     protected float $price = 0.0;

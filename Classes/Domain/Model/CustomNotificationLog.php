@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 use DateTime;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * CustomNotificationLog
- */
 class CustomNotificationLog extends AbstractEntity
 {
     protected Event $event;

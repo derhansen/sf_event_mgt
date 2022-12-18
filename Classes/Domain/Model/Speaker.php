@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Speaker model
- */
 class Speaker extends AbstractEntity
 {
     protected string $name = '';

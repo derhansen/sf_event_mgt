@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model\Dto;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * ForeignRecord demand
- */
 class ForeignRecordDemand
 {
     protected string $storagePage = '';
