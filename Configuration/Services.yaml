@@ -14,10 +14,6 @@ services:
               command: 'sf_event_mgt:cleanup:expired'
               description: 'Cleanup registrations which are not confirmed and where the confirmation date is expired.'
               schedulable: true
-            - name: 'console.command'
-              command: 'sf_event_mgt:cleanup'
-              alias: true
-              schedulable: true
     DERHANSEN\SfEventMgt\Command\CleanupGdprCommand:
       tags:
         - name: 'console.command'
