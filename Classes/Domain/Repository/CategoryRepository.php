@@ -19,9 +19,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/**
- * The repository for Categories
- */
 class CategoryRepository extends Repository
 {
     public function initializeObject(): void
@@ -32,10 +29,8 @@ class CategoryRepository extends Repository
 
     /**
      * Returns all categories depending on the settings in the demand object
-     *
-     * @return array|QueryResultInterface
      */
-    public function findDemanded(CategoryDemand $demand)
+    public function findDemanded(CategoryDemand $demand): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();

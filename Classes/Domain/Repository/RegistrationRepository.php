@@ -14,15 +14,13 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use InvalidArgumentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/**
- * The repository for registrations
- */
 class RegistrationRepository extends Repository
 {
     /**
@@ -38,14 +36,12 @@ class RegistrationRepository extends Repository
     /**
      * Returns all registrations for the given event with the given constraints
      * Constraints are combined with a logical AND
-     *
-     * @return array|QueryResultInterface
      */
     public function findNotificationRegistrations(
         Event $event,
         CustomNotification $customNotification,
         array $findConstraints = []
-    ) {
+    ): QueryResultInterface {
         $constraints = [];
         $query = $this->createQuery();
         $constraints[] = $query->equals('event', $event);
@@ -80,7 +76,7 @@ class RegistrationRepository extends Repository
                     $constraints[] = $query->greaterThanOrEqual($findConstraint, $value[$condition]);
                     break;
                 default:
-                    throw new \InvalidArgumentException('An error occured - Unknown condition: ' . $condition);
+                    throw new InvalidArgumentException('An error occured - Unknown condition: ' . $condition);
             }
         }
 
@@ -109,10 +105,8 @@ class RegistrationRepository extends Repository
 
     /**
      * Returns all registrations for the given event and where the waitlist flag is as given
-     *
-     * @return array|QueryResultInterface
      */
-    public function findByEventAndWaitlist(Event $event, bool $waitlist = false)
+    public function findByEventAndWaitlist(Event $event, bool $waitlist = false): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();
@@ -124,10 +118,8 @@ class RegistrationRepository extends Repository
 
     /**
      * Returns all potential move up registrations for the given event ordered by "registration_date"
-     *
-     * @return array|QueryResultInterface
      */
-    public function findWaitlistMoveUpRegistrations(Event $event)
+    public function findWaitlistMoveUpRegistrations(Event $event): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();

@@ -21,10 +21,8 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use UnexpectedValueException;
 
-/**
- * The repository for Events
- */
 class EventRepository extends Repository
 {
     protected $defaultOrderings = [
@@ -50,10 +48,8 @@ class EventRepository extends Repository
 
     /**
      * Returns the objects of this repository matching the given demand
-     *
-     * @return array|QueryResultInterface QueryResultInterface
      */
-    public function findDemanded(EventDemand $eventDemand)
+    public function findDemanded(EventDemand $eventDemand): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();
@@ -360,7 +356,7 @@ class EventRepository extends Repository
             $searchConstraints = [];
 
             if (count($searchFields) === 0) {
-                throw new \UnexpectedValueException('No search fields defined', 1318497755);
+                throw new UnexpectedValueException('No search fields defined', 1318497755);
             }
 
             $searchSubject = $eventDemand->getSearchDemand()->getSearch();

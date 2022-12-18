@@ -11,9 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
-/**
- * The repository for Locations
- */
 class LocationRepository extends AbstractForeignRecordRepository
 {
 }

@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/**
- * The repository for custom notification log entries
- */
 class CustomNotificationLogRepository extends Repository
 {
     protected $defaultOrderings = [
