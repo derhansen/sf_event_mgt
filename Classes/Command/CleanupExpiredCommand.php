@@ -19,14 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class CleanupExpiredCommand
- */
 class CleanupExpiredCommand extends Command
 {
-    /**
-     * Configuring the command options
-     */
     public function configure()
     {
         $this->addOption(
@@ -37,9 +31,6 @@ class CleanupExpiredCommand extends Command
         );
     }
 
-    /**
-     * Execute the cleanup expired command
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
