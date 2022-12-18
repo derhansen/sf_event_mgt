@@ -20,14 +20,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class CleanupGdprCommand
- */
 class CleanupGdprCommand extends Command
 {
-    /**
-     * Configuring the command options
-     */
     public function configure()
     {
         $this
@@ -50,9 +44,6 @@ class CleanupGdprCommand extends Command
             );
     }
 
-    /**
-     * Execute the cleanup GDPR command
-     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
