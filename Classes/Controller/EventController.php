@@ -331,10 +331,8 @@ class EventController extends AbstractController
 
     /**
      * Registration view for an event
-     *
-     * @return mixed
      */
-    public function registrationAction(?Event $event = null)
+    public function registrationAction(?Event $event = null): ResponseInterface
     {
         $event = $this->evaluateSingleEventSetting($event);
         if (is_a($event, Event::class) && ($this->settings['registration']['checkPidOfEventRecord'] ?? false)) {
