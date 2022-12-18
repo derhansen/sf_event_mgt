@@ -26,9 +26,6 @@ use TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationExcepti
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-/**
- * PaymentController
- */
 class PaymentController extends AbstractController
 {
     /**

@@ -14,9 +14,6 @@ namespace DERHANSEN\SfEventMgt\Controller;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * UserRegistrationController
- */
 class UserRegistrationController extends AbstractController
 {
     /**

@@ -31,9 +31,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * EventController
- */
 abstract class AbstractController extends ActionController
 {
     protected array $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];

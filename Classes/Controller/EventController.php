@@ -52,9 +52,6 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
 
-/**
- * EventController
- */
 class EventController extends AbstractController
 {
     protected EventCacheService $eventCacheService;
