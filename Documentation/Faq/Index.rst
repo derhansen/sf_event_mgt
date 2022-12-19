@@ -91,7 +91,7 @@ recurrences.
 Since there is no smart way to add recurring events to the extension without making it more complex and harder to
 maintain, this feature will not make it into the extension.
 
-How can I disable double opt in for event registration?
+How can I disable double opt-in for event registration?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You can enable autoConfirmation for new registrations as described in the :ref:`tsref` section.
