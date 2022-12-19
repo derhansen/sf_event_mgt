@@ -49,10 +49,10 @@ jobs:
         run: |
           if [[ "$coverage" == "0" ]]; then
             echo "Running unit tests";
-            .Build/bin/phpunit --colors -c Tests/Build/UnitTests.xml
+            .Build/bin/phpunit -c Tests/Build/UnitTests.xml
           else
             echo "Running unit tests with coverage";
-            .Build/bin/phpunit --colors --coverage-clover=unittest-coverage.clover -c Tests/Build/UnitTests.xml
+            .Build/bin/phpunit --coverage-clover=unittest-coverage.clover -c Tests/Build/UnitTests.xml
           fi
 
       - name: Functional tests
