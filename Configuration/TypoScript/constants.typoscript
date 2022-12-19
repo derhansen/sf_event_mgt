@@ -103,6 +103,8 @@ plugin.tx_sfeventmgt {
         search {
             # cat=plugin.tx_sfeventmgt/search; type=string; label=Search fields
             fields = title, teaser
+            # cat=plugin.tx_sfeventmgt/search; type=string; label=Date format for search
+            dateFormat = Y-m-d
             # cat=plugin.tx_sfeventmgt/search; type=boolean; label=If set, date start- and end-times will be adjusted to 00:00 and 23:59:59
             adjustTime = 1
         }
@@ -145,8 +147,6 @@ module.tx_sfeventmgt {
             dateFieldFormat = d.m.Y
         }
         search {
-            # cat=module.tx_sfeventmgt/search; type=string; label=Date format for date/datetime fields
-            dateFormat = H:i d-m-Y
             # cat=module.tx_sfeventmgt/search; type=string; label=Search fields
             fields = title, teaser
         }
