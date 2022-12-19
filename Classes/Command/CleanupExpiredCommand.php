@@ -21,7 +21,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CleanupExpiredCommand extends Command
 {
-    public function configure()
+    public function configure(): void
     {
         $this->addOption(
             'delete',
@@ -31,7 +31,7 @@ class CleanupExpiredCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
         $io = new SymfonyStyle($input, $output);

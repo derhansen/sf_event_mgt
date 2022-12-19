@@ -22,7 +22,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class CleanupGdprCommand extends Command
 {
-    public function configure()
+    public function configure(): void
     {
         $this
             ->addArgument(
@@ -44,7 +44,7 @@ class CleanupGdprCommand extends Command
             );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
         $io = new SymfonyStyle($input, $output);

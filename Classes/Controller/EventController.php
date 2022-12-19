@@ -75,7 +75,7 @@ class EventController extends AbstractController
     /**
      * Initializes the current action
      */
-    public function initializeAction()
+    public function initializeAction(): void
     {
         $typoScriptFrontendController = $this->getTypoScriptFrontendController();
         if ($typoScriptFrontendController !== null) {
@@ -472,7 +472,7 @@ class EventController extends AbstractController
     /**
      * Set date format for field dateOfBirth
      */
-    public function initializeSaveRegistrationAction()
+    public function initializeSaveRegistrationAction(): void
     {
         $this->arguments->getArgument('registration')
             ->getPropertyMappingConfiguration()->forProperty('dateOfBirth')
@@ -830,7 +830,7 @@ class EventController extends AbstractController
     /**
      * Set date format for field startDate and endDate
      */
-    public function initializeSearchAction()
+    public function initializeSearchAction(): void
     {
         if ($this->settings !== null && ($this->settings['search']['dateFormat'] ?? false)) {
             $this->arguments->getArgument('searchDemand')
