@@ -25,7 +25,7 @@ class TimeRestrictionEvaluator
         $timestamp = strtotime($value);
         $set = empty($value) || $timestamp !== false;
 
-        if (!empty($value)) {
+        if (!empty($value) && $timestamp !== false) {
             $languageService = $this->getLanguageService();
 
             if ($set) {
