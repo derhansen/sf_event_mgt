@@ -11,6 +11,11 @@
 Breaking Changes
 ================
 
+7.0.0
+~~~~~
+This version contains only a few breaking changes. Make sure, you read the release notes with instructions
+at https://github.com/derhansen/sf_event_mgt/releases/tag/7.0.0
+
 6.0.0
 ~~~~~
 
