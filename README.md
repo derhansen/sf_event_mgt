@@ -1,6 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/derhansen/sf_event_mgt/v/stable)](https://packagist.org/packages/derhansen/sf_event_mgt)
 ![CI](https://github.com/derhansen/sf_event_mgt/workflows/CI/badge.svg?branch=master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=main)
 [![Code Coverage](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=master)
 [![Monthly Downloads](https://poser.pugx.org/derhansen/sf_event_mgt/d/monthly)](https://packagist.org/packages/derhansen/sf_event_mgt)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -18,10 +18,10 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Registration can be activated for each event individually
 * Configurable additional fields in the registration form
 * Optional registration waitlist with move up feature when a confirmed registration is cancelled
-* Double opt in (optional) for event registration
+* Double opt-in (optional) for event registration
 * Attachments in registration emails to participant and/or admin
 * iCal attachment in emails to participant
-* Configurable validity of double opt in links
+* Configurable validity of double opt-in links
 * Cancellation configurable for each event
 * Prefill of registration fields for logged in frontend users
 * Frontend plugin to show event registrations for logged in frontend users
@@ -31,7 +31,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Extendable with own fields through own extension
 * Configurable template layouts for the listview
 * Configurable category menu
-* Searchview for events
+* Search view for events
 * Create multiple registrations at once by a single user
 * Optionally check email address of registrations for uniqueness per event
 * Configurable and extendable spam checks (included honeypot, amount of links, challenge/response)
@@ -43,7 +43,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Payment processing after successful registration
 * Configurable payment methods
 * Show events using the "Insert Record" Content Element
-* Flag event images for either listview, detailview or both
+* Flag event images for either listview, detail view or both
 * Calendar view with possibility to navigate to next/previous month and week
 * Automatic cache clearing when event has been changed in backend
 * Console command to delete registrations of expired registrations
@@ -72,14 +72,15 @@ Download and install the extension with the TYPO3 extension manager module.
 
 ## Versions
 
-| Version             | TYPO3      | PHP       | Support/Development                     |
-| ------------------- | ---------- | ----------|---------------------------------------- |
-| 6.x                 | 11.5       | 7.4 - 8.0 | Features, Bugfixes, Security Updates    |
-| 5.x                 | 10.4       | 7.2 - 7.4 | Features, Bugfixes, Security Updates    |
-| 4.x                 | 8.7 - 9.5  | 7.0 - 7.4 | Security Updates                        |
-| 3.x                 | 7.6 - 8.7  | 5.5 - 7.3 | Support dropped                         |
-| 2.x                 | 7.6 - 8.7  | 5.5 - 7.2 | Support dropped                         |
-| 1.x                 | 6.2 - 7.6  | 5.5 - 5.6 | Support dropped                         |
+| Version | TYPO3     | PHP       | Support/Development                  |
+|---------|-----------|-----------|--------------------------------------|
+| 7.x     | 12.x      | 8.1 - 8.2 | Features, Bugfixes, Security Updates |
+| 6.x     | 11.5      | 7.4 - 8.1 | Features, Bugfixes, Security Updates |
+| 5.x     | 10.4      | 7.2 - 7.4 | Bugfixes, Security Updates           |
+| 4.x     | 8.7 - 9.5 | 7.0 - 7.4 | Security Updates                     |
+| 3.x     | 7.6 - 8.7 | 5.5 - 7.3 | Support dropped                      |
+| 2.x     | 7.6 - 8.7 | 5.5 - 7.2 | Support dropped                      |
+| 1.x     | 6.2 - 7.6 | 5.5 - 5.6 | Support dropped                      |
 
 ## Support
 
