@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DateTime;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -141,7 +142,7 @@ class MaintenanceService
                     $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
     }
 
@@ -153,7 +154,7 @@ class MaintenanceService
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_registration');
         $queryBuilder->getRestrictions()->removeAll();
-        $maxEndDate = (new \DateTime())->modify('-' . $days . ' days');
+        $maxEndDate = (new DateTime())->modify('-' . $days . ' days');
 
         return $queryBuilder
             ->select('tx_sfeventmgt_domain_model_registration.uid')
@@ -171,7 +172,7 @@ class MaintenanceService
                     'e.enddate',
                     $queryBuilder->createNamedParameter($maxEndDate->getTimestamp(), Connection::PARAM_INT)
                 )
-            )->execute()
+            )->executeQuery()
             ->fetchAllAssociative();
     }
 
@@ -187,7 +188,7 @@ class MaintenanceService
         return $queryBuilder
             ->select('uid')
             ->from('tx_sfeventmgt_domain_model_registration')
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
     }
 }
