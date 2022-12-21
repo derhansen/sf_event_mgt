@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\AbstractPrefillViewHelper;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * PrefillField ViewHelper for registration fields
@@ -29,6 +31,9 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
     /**
      * Returns a string to be used as prefill value for the given registration field (type=input). If the form
      * has already been submitted, the submitted value for the field is returned.
+     *
+     * 1. Default value
+     * 2. fe_user record value
      */
     public function render(): string
     {
@@ -45,7 +50,8 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
             return $this->getFieldValueFromSubmittedData($registrationData, $registrationField->getUid());
         }
 
-        return $registrationField->getDefaultValue();
+        $value = $registrationField->getDefaultValue();
+        return $this->prefillFromFeuserData($registrationField, $value);
     }
 
     /**
@@ -61,5 +67,35 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
         }
 
         return $result;
+    }
+
+    /**
+     * Prefills $value with fe_users data if configured in registration field
+     *
+     * @param Field $field
+     * @param string $value
+     * @return string
+     */
+    protected function prefillFromFeuserData(Field $field, string $value): string
+    {
+        if (!$this->getTypoScriptFrontendController() ||
+            !$this->getFrontendUser()->user ||
+            $field->getFeuserValue() === '' ||
+            !array_key_exists($field->getFeuserValue(), $this->getFrontendUser()->user)
+        ) {
+            return $value;
+        }
+
+        return (string)$this->getFrontendUser()->user[$field->getFeuserValue()];
+    }
+
+    protected function getFrontendUser(): FrontendUserAuthentication
+    {
+        return $this->getTypoScriptFrontendController()->fe_user;
+    }
+
+    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'] ?? null;
     }
 }

@@ -162,6 +162,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_field (
 	settings text,
 	text text,
 	datepickermode tinyint(3) DEFAULT '0' NOT NULL,
+	feuser_value varchar(255) DEFAULT '' NOT NULL,
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY event (event)

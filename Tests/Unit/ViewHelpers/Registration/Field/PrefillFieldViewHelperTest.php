@@ -16,6 +16,8 @@ use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillFieldViewHelper;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class PrefillFieldViewHelperTest extends UnitTestCase
@@ -23,7 +25,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsFieldDefaultValueIfNoOriginalRequest(): void
+    public function viewHelperReturnsFieldDefaultValue(): void
     {
         $field = new Field();
         $field->setDefaultValue('Default');
@@ -39,6 +41,36 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         $viewHelper->setArguments(['registrationField' => $field]);
 
         self::assertSame('Default', $viewHelper->render());
+    }
+
+    /**
+     * @test
+     */
+    public function viewHelperReturnsFieldFeUserValue(): void
+    {
+        $field = new Field();
+        $field->setFeuserValue('first_name');
+
+        $mockFeUser = $this->createMock(FrontendUserAuthentication::class);
+        $mockFeUser->user = [
+            'first_name' => 'John',
+        ];
+
+        $mockTsfe = $this->createMock(TypoScriptFrontendController::class);
+        $mockTsfe->fe_user = $mockFeUser;
+        $GLOBALS['TSFE'] = $mockTsfe;
+
+        $extbaseRequestParameters = $this->createMock(ExtbaseRequestParameters::class);
+        $request = $this->createMock(Request::class);
+        $request->expects(self::once())->method('getAttribute')->with('extbase')->willReturn($extbaseRequestParameters);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+
+        $viewHelper = new PrefillFieldViewHelper();
+        $viewHelper->setRenderingContext($renderingContext);
+        $viewHelper->setArguments(['registrationField' => $field]);
+
+        self::assertSame('John', $viewHelper->render());
     }
 
     public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array

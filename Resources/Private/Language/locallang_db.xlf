@@ -437,6 +437,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode">
 				<source>Date input mode</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value">
+				<source>Prefill with frontend user data</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value.select">
+				<source>Select value</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0">
 				<source>Date</source>
 			</trans-unit>

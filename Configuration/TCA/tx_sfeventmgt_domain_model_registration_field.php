@@ -6,7 +6,7 @@ $lll = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:';
 
 $showItemDefault = 'title, type,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
-        required, placeholder, default_value,
+        required, placeholder, default_value, feuser_value,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -14,21 +14,19 @@ $showItemDefault = 'title, type,
 
 $showItemRadioCheck = 'title, type, settings,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
-        required, placeholder, default_value,
+        required, placeholder, default_value, feuser_value,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
 $showItemText = 'title, type, text,
-    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
         hidden, --palette--;;timeRestriction, fe_group';
 
 $showItemDivider = 'title, type,
-    --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -36,7 +34,7 @@ $showItemDivider = 'title, type,
 
 $showItemDateTime = 'title, type, datepickermode,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration_field.tabs.settings,
-        required, default_value,
+        required, default_value, feuser_value,
     --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
         --palette--;;language,
     --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -330,6 +328,20 @@ return [
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1', 1],
                     [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2', 2],
                 ],
+            ],
+        ],
+        'feuser_value' => [
+            'exclude' => true,
+            'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.feuser_value',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectSingle',
+                'items' => [
+                    ['LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration_field.feuser_value.select', ''],
+                ],
+                'itemsProcFunc' => 'DERHANSEN\SfEventMgt\Hooks\ItemsProcFunc->getFeuserValues',
+                'size' => 1,
+                'maxitems' => 1,
             ],
         ],
     ],

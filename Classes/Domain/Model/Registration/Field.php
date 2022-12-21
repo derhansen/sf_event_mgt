@@ -28,6 +28,7 @@ class Field extends AbstractEntity
     protected ?Event $event = null;
     protected string $text = '';
     protected int $datepickermode = 0;
+    protected string $feuserValue = '';
 
     public function getTitle(): string
     {
@@ -181,5 +182,15 @@ class Field extends AbstractEntity
             default:
                 return 'date';
         }
+    }
+
+    public function getFeuserValue(): string
+    {
+        return $this->feuserValue;
+    }
+
+    public function setFeuserValue(string $feuserValue): void
+    {
+        $this->feuserValue = $feuserValue;
     }
 }

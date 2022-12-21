@@ -88,3 +88,9 @@ fields to the default registration form.
 
          **Please note**: The default template just uses HTML5 input types. You might want to extend that to use a
          JavaScript datetimepicker instead.
+
+ - :Field:
+         Prefill with frontend user data
+
+   :Description:
+         Field will be prefilled with value of selected frontend user data.
