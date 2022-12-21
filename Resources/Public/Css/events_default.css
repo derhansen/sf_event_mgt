@@ -7,6 +7,7 @@
 }
 
 .userregistration-list-row,
+.userregistration-detail-row,
 .event-registration-row,
 .event-detail-row,
 .event-list-row {
@@ -18,6 +19,7 @@
 }
 
 .userregistration-list-label,
+.userregistration-detail-label,
 .event-registration-label,
 .event-detail-label,
 .event-list-label {
@@ -28,6 +30,7 @@
 }
 
 .userregistration-list-value,
+.userregistration-detail-value,
 .event-registration-value,
 .event-detail-value,
 .event-list-value {

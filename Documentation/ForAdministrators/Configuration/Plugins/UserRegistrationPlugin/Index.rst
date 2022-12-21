@@ -15,6 +15,8 @@ Frontend user registrations
 the plugin output for logged in users and/or users belonging to a user group. Anyway, the plugin will only output
 content if there is an active FE user session.
 
+The plugin is both used to output a list- and a detail view.
+
 Nearly all important settings can be made through the plugin, which override the
 settings made with TypoScript. All plugin settings can also be configured with TypoScript
 (use :php:`plugin.tx_sfeventmgt.settings.` with the keys shown below).
