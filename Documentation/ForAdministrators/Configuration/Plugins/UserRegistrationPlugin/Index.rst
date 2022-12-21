@@ -15,21 +15,18 @@ Frontend user registrations
 the plugin output for logged in users and/or users belonging to a user group. Anyway, the plugin will only output
 content if there is an active FE user session.
 
-Settings
-~~~~~~~~
-
 Nearly all important settings can be made through the plugin, which override the
 settings made with TypoScript. All plugin settings can also be configured with TypoScript
 (use :php:`plugin.tx_sfeventmgt.settings.` with the keys shown below).
+
+Tab settings
+~~~~~~~~~~~~
 
 .. t3-field-list-table::
  :header-rows: 1
 
  - :Property:
          Property:
-
-   :View:
-         View:
 
    :Description:
          Description:
@@ -39,9 +36,6 @@ settings made with TypoScript. All plugin settings can also be configured with T
 
  - :Property:
          Display mode
-
-   :View:
-         List
 
    :Description:
          With this setting the plugin can be configured to show registrations for **all** events, only
@@ -60,9 +54,6 @@ settings made with TypoScript. All plugin settings can also be configured with T
  - :Property:
          Sort by
 
-   :View:
-         List
-
    :Description:
          Defines which field should be used for sorting events in the frontend. The default sorting field is
          "startdate", which can be overridden by using this setting.
@@ -72,9 +63,6 @@ settings made with TypoScript. All plugin settings can also be configured with T
 
  - :Property:
          Sorting direction
-
-   :View:
-         List
 
    :Description:
          Defines the sorting direction for orderField. The default sorting direction is
@@ -92,9 +80,6 @@ settings made with TypoScript. All plugin settings can also be configured with T
  - :Property:
          Registration pid
 
-   :View:
-         List
-
    :Description:
          Page, where the event plugin is configured to show event registration
 
@@ -103,9 +88,6 @@ settings made with TypoScript. All plugin settings can also be configured with T
 
  - :Property:
          Record storage page
-
-   :View:
-         List
 
    :Description:
          One or more sysfolders, where events and registrations are stored
@@ -116,11 +98,38 @@ settings made with TypoScript. All plugin settings can also be configured with T
  - :Property:
          Recursive
 
-   :View:
-         List
-
    :Description:
          Recursion level for record storage page
 
    :Key:
          userRegistration.recursive
+
+Tab additional
+~~~~~~~~~~~~~~
+
+ - :Property:
+         Detail Page
+
+   :Description:
+         Page, where plugin is configured to show event details
+
+   :Key:
+         detailPid
+
+ - :Property:
+         Registration Page
+
+   :Description:
+         Page, where plugin is configured to show event registration
+
+   :Key:
+         registrationPid
+
+ - :Property:
+         Payment Page
+
+   :Description:
+         Page, where plugin is configured to handle payments for registration
+
+   :Key:
+         paymentPid
