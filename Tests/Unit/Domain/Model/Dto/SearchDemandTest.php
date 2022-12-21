@@ -15,27 +15,15 @@ use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand
- */
 class SearchDemandTest extends UnitTestCase
 {
-    /**
-     * @var SearchDemand
-     */
-    protected $subject;
+    protected SearchDemand $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new SearchDemand();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -44,7 +32,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStartDateReturnsNullIfNoValueSet()
+    public function getStartDateReturnsNullIfNoValueSet(): void
     {
         self::assertNull(
             $this->subject->getStartDate()
@@ -54,11 +42,11 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStartDateReturnsGivenValueIfValueSet()
+    public function getStartDateReturnsGivenValueIfValueSet(): void
     {
-        $this->subject->setStartDate(new \DateTime('01.01.2014 10:00:00'));
+        $this->subject->setStartDate(new DateTime('01.01.2014 10:00:00'));
         self::assertEquals(
-            new \DateTime('01.01.2014 10:00:00'),
+            new DateTime('01.01.2014 10:00:00'),
             $this->subject->getStartDate()
         );
     }
@@ -66,7 +54,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateReturnsNullIfNoValueSet()
+    public function getEndDateReturnsNullIfNoValueSet(): void
     {
         self::assertNull(
             $this->subject->getEndDate()
@@ -76,11 +64,11 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEndDateReturnsGivenValueIfValueSet()
+    public function getEndDateReturnsGivenValueIfValueSet(): void
     {
-        $this->subject->setEndDate(new \DateTime('01.01.2014 10:00:00'));
+        $this->subject->setEndDate(new DateTime('01.01.2014 10:00:00'));
         self::assertEquals(
-            new \DateTime('01.01.2014 10:00:00'),
+            new DateTime('01.01.2014 10:00:00'),
             $this->subject->getEndDate()
         );
     }
@@ -88,7 +76,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSearchReturnsEmptyStringIfNotSet()
+    public function getSearchReturnsEmptyStringIfNotSet(): void
     {
         self::assertEquals('', $this->subject->getSearch());
     }
@@ -96,7 +84,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getSearchReturnsGivenValueIfSet()
+    public function getSearchReturnsGivenValueIfSet(): void
     {
         $this->subject->setSearch('Test');
         self::assertEquals(
@@ -108,7 +96,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFieldsReturnsEmptyStringIfNotSet()
+    public function getFieldsReturnsEmptyStringIfNotSet(): void
     {
         self::assertEmpty($this->subject->getFields());
     }
@@ -116,7 +104,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFieldsReturnsGivenValueIfSet()
+    public function getFieldsReturnsGivenValueIfSet(): void
     {
         $this->subject->setFields('Field1,Field2');
         self::assertEquals(
@@ -128,7 +116,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHasQueryReturnsFalseIfNoQuerySet()
+    public function getHasQueryReturnsFalseIfNoQuerySet(): void
     {
         self::assertFalse($this->subject->getHasQuery());
     }
@@ -136,7 +124,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHasQueryReturnsTrueIfSearchSet()
+    public function getHasQueryReturnsTrueIfSearchSet(): void
     {
         $this->subject->setSearch('Test');
         self::assertTrue($this->subject->getHasQuery());
@@ -145,28 +133,28 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHasQueryReturnsTrueIfStartDateSet()
+    public function getHasQueryReturnsTrueIfStartDateSet(): void
     {
-        $this->subject->setStartDate(new \DateTime());
+        $this->subject->setStartDate(new DateTime());
         self::assertTrue($this->subject->getHasQuery());
     }
 
     /**
      * @test
      */
-    public function getHasQueryReturnsTrueIfEndDateSet()
+    public function getHasQueryReturnsTrueIfEndDateSet(): void
     {
-        $this->subject->setEndDate(new \DateTime());
+        $this->subject->setEndDate(new DateTime());
         self::assertTrue($this->subject->getHasQuery());
     }
 
     /**
      * @test
      */
-    public function toArrayReturnsExpectedArray()
+    public function toArrayReturnsExpectedArray(): void
     {
-        $startDate = new \DateTime('01.01.2020 00:00');
-        $endDate = new \DateTime('01.01.2020 23:59:59');
+        $startDate = new DateTime('01.01.2020 00:00');
+        $endDate = new DateTime('01.01.2020 23:59:59');
 
         $searchDemand = new SearchDemand();
         $searchDemand->setSearch('search');
@@ -187,7 +175,7 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromArrayReturnsExpectedObjectForEmptyData()
+    public function fromArrayReturnsExpectedObjectForEmptyData(): void
     {
         $searchDemand = new SearchDemand();
         self::assertEquals($searchDemand, SearchDemand::fromArray([]));
@@ -196,10 +184,10 @@ class SearchDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function fromArrayReturnsExpectedObjectForGivenData()
+    public function fromArrayReturnsExpectedObjectForGivenData(): void
     {
-        $startDate = new \DateTime('01.01.2020 00:00');
-        $endDate = new \DateTime('01.01.2020 23:59:59');
+        $startDate = new DateTime('01.01.2020 00:00');
+        $endDate = new DateTime('01.01.2020 23:59:59');
 
         $searchDemand = new SearchDemand();
         $searchDemand->setSearch('search');

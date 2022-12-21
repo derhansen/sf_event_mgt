@@ -14,27 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand
- */
 class ForeignRecordDemandTest extends UnitTestCase
 {
-    /**
-     * @var ForeignRecordDemand
-     */
-    protected $subject;
+    protected ForeignRecordDemand $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new ForeignRecordDemand();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -43,7 +31,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStoragePageReturnsInitialValue()
+    public function getStoragePageReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getStoragePage());
     }
@@ -51,7 +39,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStoragePageSetsStoragePageForString()
+    public function setStoragePageSetsStoragePageForString(): void
     {
         $this->subject->setStoragePage('1,2,3');
         self::assertEquals('1,2,3', $this->subject->getStoragePage());
@@ -60,7 +48,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getrestrictForeignRecordsToStoragePageReturnsInitialValue()
+    public function getrestrictForeignRecordsToStoragePageReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getRestrictForeignRecordsToStoragePage());
     }
@@ -68,7 +56,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRestrictForeignRecordsToStoragePageSetsValueForBoolean()
+    public function setRestrictForeignRecordsToStoragePageSetsValueForBoolean(): void
     {
         $this->subject->setRestrictForeignRecordsToStoragePage(true);
         self::assertTrue($this->subject->getRestrictForeignRecordsToStoragePage());
@@ -77,7 +65,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
+    public function createFromSettingsReturnsExpectedObjectIfEmptySettings(): void
     {
         $expected = new ForeignRecordDemand();
         self::assertEquals($expected, ForeignRecordDemand::createFromSettings());
@@ -86,7 +74,7 @@ class ForeignRecordDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsExpectedObjectWithSettings()
+    public function createFromSettingsReturnsExpectedObjectWithSettings(): void
     {
         $expected = new ForeignRecordDemand();
         $expected->setStoragePage('1,2,3');

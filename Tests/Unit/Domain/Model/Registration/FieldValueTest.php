@@ -17,29 +17,15 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue.
- */
 class FieldValueTest extends UnitTestCase
 {
-    /**
-     * Registrationfield object
-     *
-     * @var FieldValue
-     */
-    protected $subject;
+    protected FieldValue $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new FieldValue();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -48,7 +34,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueReturnsInitialValueForString()
+    public function getValueReturnsInitialValueForString(): void
     {
         $mockField = $this->getMockBuilder(Field::class)->onlyMethods(['getValueType'])->getMock();
         $mockField->expects(self::once())->method('getValueType')->willReturn(FieldValueType::TYPE_TEXT);
@@ -59,7 +45,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function setValueSetsValueField()
+    public function setValueSetsValueField(): void
     {
         $this->subject->setValue('A field value');
         self::assertEquals('A field value', $this->subject->getValue());
@@ -68,7 +54,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueReturnsArrayForFieldTypeArray()
+    public function getValueReturnsArrayForFieldTypeArray(): void
     {
         $expectedArray = ['value1', 'value2'];
         $mockField = $this->getMockBuilder(Field::class)->onlyMethods(['getValueType'])->getMock();
@@ -82,7 +68,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueReturnsArrayForFieldTypeArrayAndValueString()
+    public function getValueReturnsArrayForFieldTypeArrayAndValueString(): void
     {
         $expectedArray = ['value1'];
         $mockField = $this->getMockBuilder(Field::class)->onlyMethods(['getValueType'])->getMock();
@@ -96,7 +82,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFieldReturnsInitialValueForField()
+    public function getFieldReturnsInitialValueForField(): void
     {
         self::assertNull($this->subject->getField());
     }
@@ -104,7 +90,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFieldSetsField()
+    public function setFieldSetsField(): void
     {
         $field = new Field();
         $this->subject->setField($field);
@@ -114,7 +100,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRegistrationReturnsInitialValueForRegistration()
+    public function getRegistrationReturnsInitialValueForRegistration(): void
     {
         self::assertNull($this->subject->getRegistration());
     }
@@ -122,7 +108,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRegistrationSetsRegistration()
+    public function setRegistrationSetsRegistration(): void
     {
         $registration = new Registration();
         $this->subject->setRegistration($registration);
@@ -132,7 +118,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueTypeReturnsInitialValueForValueType()
+    public function getValueTypeReturnsInitialValueForValueType(): void
     {
         self::assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
     }
@@ -140,7 +126,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function setValueTypeSetsValueType()
+    public function setValueTypeSetsValueType(): void
     {
         $this->subject->setValueType(FieldValueType::TYPE_ARRAY);
         self::assertEquals(FieldValueType::TYPE_ARRAY, $this->subject->getValueType());
@@ -149,7 +135,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueForCsvExportReturnsArrayAsCommaSeparatedStringForArrayValues()
+    public function getValueForCsvExportReturnsArrayAsCommaSeparatedStringForArrayValues(): void
     {
         $expectedArray = 'value1,value2';
         $mockField = $this->getMockBuilder(Field::class)->onlyMethods(['getValueType'])->getMock();
@@ -163,7 +149,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueWhenNoFieldAvailable()
+    public function getValueWhenNoFieldAvailable(): void
     {
         $this->subject->setValue('Test');
         self::assertSame('Test', $this->subject->getValue());
@@ -172,7 +158,7 @@ class FieldValueTest extends UnitTestCase
     /**
      * @test
      */
-    public function getValueForCsvExportNoFieldAvailable()
+    public function getValueForCsvExportNoFieldAvailable(): void
     {
         $this->subject->setValue('Test');
         self::assertSame('Test', $this->subject->getValueForCsvExport());

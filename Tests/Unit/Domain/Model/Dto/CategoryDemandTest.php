@@ -14,27 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand
- */
 class CategoryDemandTest extends UnitTestCase
 {
-    /**
-     * @var CategoryDemand
-     */
-    protected $subject;
+    protected CategoryDemand $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new CategoryDemand();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -43,7 +31,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getStoragePageReturnsIntialValueForString()
+    public function getStoragePageReturnsIntialValueForString(): void
     {
         self::assertEquals('', $this->subject->getStoragePage());
     }
@@ -51,7 +39,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setStoragePageSetsStoragePageForString()
+    public function setStoragePageSetsStoragePageForString(): void
     {
         $this->subject->setStoragePage('1,2,3');
         self::assertEquals('1,2,3', $this->subject->getStoragePage());
@@ -60,7 +48,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRestrictStoragePageReturnsInitialValue()
+    public function getRestrictStoragePageReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getRestrictToStoragePage());
     }
@@ -68,13 +56,13 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRestrictStoragePageSetsValueForBoolean()
+    public function setRestrictStoragePageSetsValueForBoolean(): void
     {
         $this->subject->setRestrictToStoragePage(true);
         self::assertTrue($this->subject->getRestrictToStoragePage());
     }
 
-    public function getCategoriesReturnsInitialValueForString()
+    public function getCategoriesReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getCategories());
     }
@@ -82,7 +70,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCategoriesSetsCategoriesForString()
+    public function setCategoriesSetsCategoriesForString(): void
     {
         $this->subject->setCategories('1,2,3');
         self::assertEquals('1,2,3', $this->subject->getCategories());
@@ -91,7 +79,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function getIncludeSubcategoriesReturnsInitialValue()
+    public function getIncludeSubcategoriesReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getIncludeSubcategories());
     }
@@ -99,7 +87,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function setIncludeSubcategoriesSetsValueForBoolean()
+    public function setIncludeSubcategoriesSetsValueForBoolean(): void
     {
         $this->subject->setIncludeSubcategories(true);
         self::assertTrue($this->subject->getIncludeSubcategories());
@@ -108,7 +96,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function orderFieldReturnsDefaultValue()
+    public function orderFieldReturnsDefaultValue(): void
     {
         self::assertSame('uid', $this->subject->getOrderField());
     }
@@ -116,7 +104,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function orderFieldCanBeSet()
+    public function orderFieldCanBeSet(): void
     {
         $this->subject->setOrderField('title');
         self::assertSame('title', $this->subject->getOrderField());
@@ -125,7 +113,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function orderDirectionReturnsDefaultValue()
+    public function orderDirectionReturnsDefaultValue(): void
     {
         self::assertSame('asc', $this->subject->getOrderDirection());
     }
@@ -133,7 +121,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function orderDirectionCanBeSet()
+    public function orderDirectionCanBeSet(): void
     {
         $this->subject->setOrderDirection('desc');
         self::assertSame('desc', $this->subject->getOrderDirection());
@@ -142,7 +130,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsExpectedObjectIfEmptySettings()
+    public function createFromSettingsReturnsExpectedObjectIfEmptySettings(): void
     {
         $expected = new CategoryDemand();
         $current = CategoryDemand::createFromSettings();
@@ -153,7 +141,7 @@ class CategoryDemandTest extends UnitTestCase
     /**
      * @test
      */
-    public function createFromSettingsReturnsExpectedObjectWithSettings()
+    public function createFromSettingsReturnsExpectedObjectWithSettings(): void
     {
         $expected = new CategoryDemand();
         $expected->setStoragePage('1,2,3');

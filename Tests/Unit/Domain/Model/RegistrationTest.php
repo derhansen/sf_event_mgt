@@ -11,32 +11,21 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Registration.
- */
 class RegistrationTest extends UnitTestCase
 {
-    /**
-     * @var Registration
-     */
-    protected $subject;
+    protected Registration $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new Registration();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -45,7 +34,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstnameReturnsInitialValueForString()
+    public function getFirstnameReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -56,7 +45,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFirstnameForStringSetsFirstname()
+    public function setFirstnameForStringSetsFirstname(): void
     {
         $this->subject->setFirstname('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getFirstname());
@@ -65,7 +54,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLastnameReturnsInitialValueForString()
+    public function getLastnameReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -76,7 +65,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLastnameForStringSetsLastname()
+    public function setLastnameForStringSetsLastname(): void
     {
         $this->subject->setLastname('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getLastname());
@@ -85,7 +74,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -96,7 +85,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->subject->setTitle('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getTitle());
@@ -105,7 +94,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCompanyReturnsInitialValueForString()
+    public function getCompanyReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -116,7 +105,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCompanyForStringSetsCompany()
+    public function setCompanyForStringSetsCompany(): void
     {
         $this->subject->setCompany('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getCompany());
@@ -125,7 +114,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValueForString()
+    public function getAddressReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -136,7 +125,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressForStringSetsAddress()
+    public function setAddressForStringSetsAddress(): void
     {
         $this->subject->setAddress('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getAddress());
@@ -145,7 +134,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValueForString()
+    public function getZipReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -156,7 +145,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipForIntegerSetsZip()
+    public function setZipForIntegerSetsZip(): void
     {
         $this->subject->setZip('01234');
         self::assertEquals('01234', $this->subject->getZip());
@@ -165,7 +154,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCityReturnsInitialValueForString()
+    public function getCityReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -176,7 +165,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCountryReturnsInitialValueForString()
+    public function getCountryReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -187,7 +176,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCityForStringSetsCity()
+    public function setCityForStringSetsCity(): void
     {
         $this->subject->setCity('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getCity());
@@ -196,7 +185,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCountryForStringSetsCountry()
+    public function setCountryForStringSetsCountry(): void
     {
         $this->subject->setCountry('A country');
         self::assertEquals('A country', $this->subject->getCountry());
@@ -205,7 +194,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPhoneReturnsInitialValueForString()
+    public function getPhoneReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -216,7 +205,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPhoneForStringSetsPhone()
+    public function setPhoneForStringSetsPhone(): void
     {
         $this->subject->setPhone('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getPhone());
@@ -225,7 +214,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailReturnsInitialValueForString()
+    public function getEmailReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -236,7 +225,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEmailForStringSetsEmail()
+    public function setEmailForStringSetsEmail(): void
     {
         $this->subject->setEmail('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getEmail());
@@ -245,7 +234,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getGenderReturnsInitialValueForString()
+    public function getGenderReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -256,7 +245,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setGenderForStringSetsGender()
+    public function setGenderForStringSetsGender(): void
     {
         $this->subject->setGender('m');
         self::assertEquals('m', $this->subject->getGender());
@@ -265,7 +254,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAccepttcReturnsInitialValueForBoolean()
+    public function getAccepttcReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
             $this->subject->getAccepttc()
@@ -275,7 +264,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAccepttcForBooleanSetsConfirmed()
+    public function setAccepttcForBooleanSetsConfirmed(): void
     {
         $this->subject->setAccepttc(true);
         self::assertTrue($this->subject->getAccepttc());
@@ -284,7 +273,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getWaitlistReturnsInitialValueForBoolean()
+    public function getWaitlistReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
             $this->subject->getAccepttc()
@@ -294,7 +283,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setWaitlistForBooleanSetsWaitlist()
+    public function setWaitlistForBooleanSetsWaitlist(): void
     {
         $this->subject->setWaitlist(true);
         self::assertTrue($this->subject->getWaitlist());
@@ -303,7 +292,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getConfirmedReturnsInitialValueForBoolean()
+    public function getConfirmedReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
             $this->subject->getConfirmed()
@@ -313,7 +302,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setConfirmedForBooleanSetsConfirmed()
+    public function setConfirmedForBooleanSetsConfirmed(): void
     {
         $this->subject->setConfirmed(true);
         self::assertTrue($this->subject->getConfirmed());
@@ -322,7 +311,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isConfirmedReturnsConfirmedState()
+    public function isConfirmedReturnsConfirmedState(): void
     {
         $this->subject->setConfirmed(true);
         self::assertTrue($this->subject->isConfirmed());
@@ -331,7 +320,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPaidReturnsInitialValueForBoolean()
+    public function getPaidReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
             $this->subject->getPaid()
@@ -341,7 +330,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPaidForBooleanSetsPaid()
+    public function setPaidForBooleanSetsPaid(): void
     {
         $this->subject->setPaid(true);
         self::assertTrue($this->subject->getPaid());
@@ -350,7 +339,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function isPaidReturnsPaidState()
+    public function isPaidReturnsPaidState(): void
     {
         $this->subject->setPaid(true);
         self::assertTrue($this->subject->isPaid());
@@ -359,7 +348,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNotesReturnsInitialValueForString()
+    public function getNotesReturnsInitialValueForString(): void
     {
         self::assertSame('', $this->subject->getNotes());
     }
@@ -367,7 +356,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNotesForStringSetsNotes()
+    public function setNotesForStringSetsNotes(): void
     {
         $this->subject->setNotes('This is a longer text');
         self::assertEquals('This is a longer text', $this->subject->getNotes());
@@ -376,7 +365,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEventForEventSetsEvent()
+    public function setEventForEventSetsEvent(): void
     {
         $event = new Event();
         $this->subject->setEvent($event);
@@ -386,7 +375,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMainRegistrationReturnsInitialValue()
+    public function getMainRegistrationReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getMainRegistration());
     }
@@ -394,7 +383,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMainRegistrationForRegistrationSetsRegistration()
+    public function setMainRegistrationForRegistrationSetsRegistration(): void
     {
         $registration = new Registration();
         $this->subject->setMainRegistration($registration);
@@ -404,7 +393,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getConfirmationUntilReturnsInitialValueForDateTime()
+    public function getConfirmationUntilReturnsInitialValueForDateTime(): void
     {
         self::assertNull($this->subject->getConfirmationUntil());
     }
@@ -412,9 +401,9 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setConfirmationUntilForDateTimeSetsConfirmationUntil()
+    public function setConfirmationUntilForDateTimeSetsConfirmationUntil(): void
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setConfirmationUntil($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getConfirmationUntil());
     }
@@ -422,7 +411,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRegistrationDateReturnsInitialValueForDateTime()
+    public function getRegistrationDateReturnsInitialValueForDateTime(): void
     {
         self::assertNull($this->subject->getRegistrationDate());
     }
@@ -430,9 +419,9 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRegistrationDateForDateTimeSetsRegistrationDate()
+    public function setRegistrationDateForDateTimeSetsRegistrationDate(): void
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setRegistrationDate($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getRegistrationDate());
     }
@@ -440,7 +429,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getDateOfBirthReturnsInitialValueForDateTime()
+    public function getDateOfBirthReturnsInitialValueForDateTime(): void
     {
         self::assertNull($this->subject->getDateOfBirth());
     }
@@ -448,9 +437,9 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setDateOfBirthForDateTimeSetsDateOfBirth()
+    public function setDateOfBirthForDateTimeSetsDateOfBirth(): void
     {
-        $dateTimeFixture = new \DateTime();
+        $dateTimeFixture = new DateTime();
         $this->subject->setDateOfBirth($dateTimeFixture);
         self::assertEquals($dateTimeFixture, $this->subject->getDateOfBirth());
     }
@@ -458,7 +447,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getHiddenReturnsInitialValueForBoolean()
+    public function getHiddenReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
             $this->subject->getHidden()
@@ -468,7 +457,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setHiddenSetsHiddenFlag()
+    public function setHiddenSetsHiddenFlag(): void
     {
         $this->subject->setHidden(true);
         self::assertTrue($this->subject->getHidden());
@@ -477,7 +466,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function amountOfRegistrationReturnsInitialValue()
+    public function amountOfRegistrationReturnsInitialValue(): void
     {
         self::assertEquals(1, $this->subject->getAmountOfRegistrations());
     }
@@ -485,7 +474,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function amountOfRegistrationSetsAmountOfRegistrations()
+    public function amountOfRegistrationSetsAmountOfRegistrations(): void
     {
         $this->subject->setAmountOfRegistrations(2);
         self::assertEquals(2, $this->subject->getAmountOfRegistrations());
@@ -494,7 +483,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function ignoreNotificationsReturnsInitialValue()
+    public function ignoreNotificationsReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getIgnoreNotifications());
     }
@@ -502,7 +491,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function ignoreNotificationsCanBeSet()
+    public function ignoreNotificationsCanBeSet(): void
     {
         $this->subject->setIgnoreNotifications(true);
         self::assertTrue($this->subject->getIgnoreNotifications());
@@ -511,7 +500,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLanguageReturnsDefaultForString()
+    public function getLanguageReturnsDefaultForString(): void
     {
         self::assertEmpty($this->subject->getLanguage());
     }
@@ -519,7 +508,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLanguageSetsGivenLanguage()
+    public function setLanguageSetsGivenLanguage(): void
     {
         $this->subject->setLanguage('de');
         self::assertEquals('de', $this->subject->getLanguage());
@@ -528,7 +517,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCaptchaReturnsDefaultForString()
+    public function getCaptchaReturnsDefaultForString(): void
     {
         self::assertEmpty($this->subject->getCaptcha());
     }
@@ -536,7 +525,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCaptchaSetsGivenLanguage()
+    public function setCaptchaSetsGivenLanguage(): void
     {
         $this->subject->setCaptcha('1234567890');
         self::assertEquals('1234567890', $this->subject->getCaptcha());
@@ -545,7 +534,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFeUserReturnsInitialValue()
+    public function getFeUserReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getFeUser());
     }
@@ -553,7 +542,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFeUserSetsFeUser()
+    public function setFeUserSetsFeUser(): void
     {
         $user = new FrontendUser();
         $this->subject->setFeUser($user);
@@ -563,7 +552,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPaymentmethodReturnsInitialValue()
+    public function getPaymentmethodReturnsInitialValue(): void
     {
         self::assertEmpty($this->subject->getPaymentmethod());
     }
@@ -571,7 +560,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPaymentmethodSetsPaymentmethod()
+    public function setPaymentmethodSetsPaymentmethod(): void
     {
         $this->subject->setPaymentmethod('invoice');
         self::assertEquals('invoice', $this->subject->getPaymentmethod());
@@ -580,7 +569,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPaymentReferenceReturnsInitialValue()
+    public function getPaymentReferenceReturnsInitialValue(): void
     {
         self::assertEmpty($this->subject->getPaymentReference());
     }
@@ -588,7 +577,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setPaymentReferenceSetsPaymentmethod()
+    public function setPaymentReferenceSetsPaymentmethod(): void
     {
         $this->subject->setPaymentReference('paid-1234567890');
         self::assertEquals('paid-1234567890', $this->subject->getPaymentReference());
@@ -597,7 +586,7 @@ class RegistrationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFullnameReturnsExpectedFullname()
+    public function getFullnameReturnsExpectedFullname(): void
     {
         $this->subject->setFirstname('Torben');
         $this->subject->setLastname('Hansen');

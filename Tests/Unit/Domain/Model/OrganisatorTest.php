@@ -15,29 +15,15 @@ use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Organisator.
- */
 class OrganisatorTest extends UnitTestCase
 {
-    /**
-     * Organisator object
-     *
-     * @var Organisator
-     */
-    protected $subject;
+    protected Organisator $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new Organisator();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -48,7 +34,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function getNameReturnsInitialValueForString()
+    public function getNameReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -61,7 +47,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function setNameForStringSetsName()
+    public function setNameForStringSetsName(): void
     {
         $this->subject->setName('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getName());
@@ -72,7 +58,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function getEmailReturnsInitialValueForString()
+    public function getEmailReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -85,7 +71,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function setEmailForStringSetsEmail()
+    public function setEmailForStringSetsEmail(): void
     {
         $this->subject->setEmail('mail@domain.tld');
         self::assertEquals('mail@domain.tld', $this->subject->getEmail());
@@ -96,7 +82,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function getPhoneReturnsInitialValueForString()
+    public function getPhoneReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -109,7 +95,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function setPhoneForStringSetsPhone()
+    public function setPhoneForStringSetsPhone(): void
     {
         $this->subject->setPhone('+49 123 4567890');
         self::assertEquals('+49 123 4567890', $this->subject->getPhone());
@@ -120,7 +106,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function getLinkReturnsInitialValueForString()
+    public function getLinkReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -133,7 +119,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $this->subject->setLink('https://www.derhansen.com');
         self::assertEquals('https://www.derhansen.com', $this->subject->getLink());
@@ -144,7 +130,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function getImageReturnsInitialValueForfiles()
+    public function getImageReturnsInitialValueForfiles(): void
     {
         self::assertNull($this->subject->getImage());
     }
@@ -154,7 +140,7 @@ class OrganisatorTest extends UnitTestCase
      *
      * @test
      */
-    public function setImageForObjectStorageContainingImageSetsImage()
+    public function setImageForObjectStorageContainingImageSetsImage(): void
     {
         $file = new FileReference();
         $this->subject->setImage($file);

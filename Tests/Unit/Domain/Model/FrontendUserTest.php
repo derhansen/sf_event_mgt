@@ -15,27 +15,15 @@ use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\FrontendUser
- */
 class FrontendUserTest extends UnitTestCase
 {
-    /**
-     * @var FrontendUser
-     */
-    protected $subject;
+    protected FrontendUser $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new FrontendUser();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -44,7 +32,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getUsernameReturnsInitialValue()
+    public function getUsernameReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getUsername());
     }
@@ -52,7 +40,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setUsernameSetsUsername()
+    public function setUsernameSetsUsername(): void
     {
         $this->subject->setUsername('typo3');
         self::assertEquals('typo3', $this->subject->getUsername());
@@ -61,7 +49,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getNameReturnsInitialValue()
+    public function getNameReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getName());
     }
@@ -69,7 +57,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setNameSetsName()
+    public function setNameSetsName(): void
     {
         $this->subject->setName('Random Name');
         self::assertEquals('Random Name', $this->subject->getName());
@@ -78,7 +66,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFirstNameReturnsInitialValue()
+    public function getFirstNameReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getFirstName());
     }
@@ -86,7 +74,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFirstNameSetsFirstName()
+    public function setFirstNameSetsFirstName(): void
     {
         $this->subject->setFirstName('Firstname');
         self::assertEquals('Firstname', $this->subject->getFirstName());
@@ -95,7 +83,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMiddleNameReturnsInitialValue()
+    public function getMiddleNameReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getMiddleName());
     }
@@ -103,7 +91,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMiddleNameSetsMiddleName()
+    public function setMiddleNameSetsMiddleName(): void
     {
         $this->subject->setMiddleName('Middlename');
         self::assertEquals('Middlename', $this->subject->getMiddleName());
@@ -112,7 +100,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getLastNameReturnsInitialValue()
+    public function getLastNameReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getLastName());
     }
@@ -120,7 +108,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setLastNameSetsLastName()
+    public function setLastNameSetsLastName(): void
     {
         $this->subject->setLastName('Lastname');
         self::assertEquals('Lastname', $this->subject->getLastName());
@@ -129,7 +117,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValue()
+    public function getAddressReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getAddress());
     }
@@ -137,7 +125,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressSetsAddress()
+    public function setAddressSetsAddress(): void
     {
         $this->subject->setAddress('Address');
         self::assertEquals('Address', $this->subject->getAddress());
@@ -146,7 +134,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTelephoneReturnsInitialValue()
+    public function getTelephoneReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getTelephone());
     }
@@ -154,7 +142,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTelephoneSetsTelephone()
+    public function setTelephoneSetsTelephone(): void
     {
         $this->subject->setTelephone('Telephone');
         self::assertEquals('Telephone', $this->subject->getTelephone());
@@ -163,7 +151,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getFaxReturnsInitialValue()
+    public function getFaxReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getFax());
     }
@@ -171,7 +159,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setFaxSetsFax()
+    public function setFaxSetsFax(): void
     {
         $this->subject->setFax('Fax');
         self::assertEquals('Fax', $this->subject->getFax());
@@ -180,7 +168,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEmailReturnsInitialValue()
+    public function getEmailReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getEmail());
     }
@@ -188,7 +176,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEmailSetsEmail()
+    public function setEmailSetsEmail(): void
     {
         $this->subject->setEmail('email');
         self::assertEquals('email', $this->subject->getEmail());
@@ -197,7 +185,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTitleReturnsInitialValue()
+    public function getTitleReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getTitle());
     }
@@ -205,7 +193,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTitleSetsTitle()
+    public function setTitleSetsTitle(): void
     {
         $this->subject->setTitle('title');
         self::assertEquals('title', $this->subject->getTitle());
@@ -214,7 +202,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValue()
+    public function getZipReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getZip());
     }
@@ -222,7 +210,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipSetsZip()
+    public function setZipSetsZip(): void
     {
         $this->subject->setZip('12345');
         self::assertEquals('12345', $this->subject->getZip());
@@ -231,7 +219,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCityReturnsInitialValue()
+    public function getCityReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getCity());
     }
@@ -239,7 +227,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCitySetsCity()
+    public function setCitySetsCity(): void
     {
         $this->subject->setCity('city');
         self::assertEquals('city', $this->subject->getCity());
@@ -248,7 +236,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCountryReturnsInitialValue()
+    public function getCountryReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getCountry());
     }
@@ -256,7 +244,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCountrySetsCountry()
+    public function setCountrySetsCountry(): void
     {
         $this->subject->setCountry('country');
         self::assertEquals('country', $this->subject->getCountry());
@@ -265,7 +253,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getWwwReturnsInitialValue()
+    public function getWwwReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getWww());
     }
@@ -273,7 +261,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setWwwSetsWww()
+    public function setWwwSetsWww(): void
     {
         $this->subject->setWww('typo3.org');
         self::assertEquals('typo3.org', $this->subject->getWww());
@@ -282,7 +270,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCompanyReturnsInitialValue()
+    public function getCompanyReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getCompany());
     }
@@ -290,7 +278,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCompanySetsCompany()
+    public function setCompanySetsCompany(): void
     {
         $this->subject->setCompany('company');
         self::assertEquals('company', $this->subject->getCompany());
@@ -299,7 +287,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImageReturnsInitialValue()
+    public function getImageReturnsInitialValue(): void
     {
         self::assertEquals(new ObjectStorage(), $this->subject->getImage());
     }
@@ -307,7 +295,7 @@ class FrontendUserTest extends UnitTestCase
     /**
      * @test
      */
-    public function setImageSetsImage()
+    public function setImageSetsImage(): void
     {
         $image = new ObjectStorage();
         $this->subject->setImage($image);
