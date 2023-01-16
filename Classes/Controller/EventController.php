@@ -413,7 +413,7 @@ class EventController extends AbstractController
         $propertyMapping->allowModificationForSubProperty('event');
         $arguments['registration']['event'] = (int)$this->request->getArgument('event');
 
-        if ($event->getRegistrationFields()->count() === 0) {
+        if (count($event->getRegistrationFieldsUids()) === 0) {
             // Set arguments to request, so event is set for event
             $this->request = $this->request->withArguments($arguments);
             return;
