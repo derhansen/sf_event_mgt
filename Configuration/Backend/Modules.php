@@ -11,6 +11,7 @@ return [
         'path' => '/module/page/events',
         'labels' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_modadministration.xlf',
         'extensionName' => 'SfEventMgt',
+        'iconIdentifier' => 'ext-sfeventmgt-default',
         'controllerActions' => [
             AdministrationController::class => [
                 'list', 'export', 'handleExpiredRegistrations', 'indexNotify', 'notify', 'settingsError',
