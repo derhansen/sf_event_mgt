@@ -434,7 +434,7 @@ class EventController extends AbstractController
         );
 
         $index = 0;
-        foreach ((array)$arguments['registration']['fields'] as $fieldUid => $value) {
+        foreach ((array)($arguments['registration']['fields'] ?? []) as $fieldUid => $value) {
             // Only accept registration fields of the current event
             if (!in_array((int)$fieldUid, $event->getRegistrationFieldsUids(), true)) {
                 continue;
