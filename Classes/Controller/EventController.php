@@ -125,6 +125,7 @@ class EventController extends AbstractController
                 'speakers' => $speakers,
                 'overwriteDemand' => $overwriteDemand,
                 'eventDemand' => $eventDemand,
+                'settings' => $this->settings,
             ],
             $this
         );
@@ -203,6 +204,7 @@ class EventController extends AbstractController
                 'previousMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '-1 month'),
                 'nextMonthConfig' => $this->calendarService->getDateConfig($currentMonth, $currentYear, '+1 month'),
                 'weekConfig' => $this->calendarService->getWeekConfig($firstDayOfWeek),
+                'settings' => $this->settings,
             ],
             $this
         );
@@ -259,7 +261,7 @@ class EventController extends AbstractController
             return $this->handleEventNotFoundError($this->settings);
         }
 
-        $modifyDetailViewVariablesEvent = new ModifyDetailViewVariablesEvent(['event' => $event], $this);
+        $modifyDetailViewVariablesEvent = new ModifyDetailViewVariablesEvent(['event' => $event, 'settings' => $this->settings], $this);
         $this->eventDispatcher->dispatch($modifyDetailViewVariablesEvent);
         $variables = $modifyDetailViewVariablesEvent->getVariables();
 
@@ -351,6 +353,7 @@ class EventController extends AbstractController
             [
                 'event' => $event,
                 'paymentMethods' => $paymentMethods,
+                'settings' => $this->settings,
             ],
             $this
         );
@@ -723,6 +726,7 @@ class EventController extends AbstractController
                 'titleKey' => $titleKey,
                 'event' => $event,
                 'registration' => $registration,
+                'settings' => $this->settings,
             ],
             $this
         );
@@ -817,6 +821,7 @@ class EventController extends AbstractController
                 'messageKey' => $messageKey,
                 'titleKey' => $titleKey,
                 'event' => $event,
+                'settings' => $this->settings,
             ],
             $this
         );
@@ -902,6 +907,7 @@ class EventController extends AbstractController
                 'speakers' => $speakers,
                 'searchDemand' => $searchDemand,
                 'overwriteDemand' => $overwriteDemand,
+                'settings' => $this->settings,
             ],
             $this
         );
