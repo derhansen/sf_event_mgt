@@ -268,6 +268,7 @@ class EventControllerTest extends UnitTestCase
             'overwriteDemand' => [],
             'eventDemand' => $demand,
             'pagination' => [],
+            'settings' => $settings,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -361,6 +362,7 @@ class EventControllerTest extends UnitTestCase
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand,
             'pagination' => [],
+            'settings' => $settings,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -454,6 +456,7 @@ class EventControllerTest extends UnitTestCase
             'overwriteDemand' => $overrideDemand,
             'eventDemand' => $eventDemand,
             'pagination' => [],
+            'settings' => $settings,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -478,7 +481,7 @@ class EventControllerTest extends UnitTestCase
         $event = new Event();
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $view->expects(self::once())->method('assignMultiple')->with(['event' => $event]);
+        $view->expects(self::once())->method('assignMultiple')->with(['event' => $event, 'settings' => null]);
         $this->subject->_set('view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -511,6 +514,7 @@ class EventControllerTest extends UnitTestCase
         $view->expects(self::once())->method('assignMultiple')->with([
             'event' => $event,
             'paymentMethods' => ['invoice'],
+            'settings' => null,
         ]);
         $this->subject->_set('view', $view);
 
@@ -1274,6 +1278,7 @@ class EventControllerTest extends UnitTestCase
             'event' => null,
             'registration' => null,
             'failed' => true,
+            'settings' => null,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1326,6 +1331,7 @@ class EventControllerTest extends UnitTestCase
             'event' => $event,
             'registration' => $mockRegistration,
             'failed' => false,
+            'settings' => [],
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1395,6 +1401,7 @@ class EventControllerTest extends UnitTestCase
             'event' => $event,
             'registration' => $mockRegistration,
             'failed' => false,
+            'settings' => [],
         ]);
         $this->subject->_set('view', $view);
 
@@ -1447,6 +1454,7 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'cancelRegistration.title.failed',
             'event' => null,
             'failed' => true,
+            'settings' => null,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1536,6 +1544,7 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'cancelRegistration.title.successful',
             'event' => $mockEvent,
             'failed' => false,
+            'settings' => [],
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1684,6 +1693,7 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'searchDemand' => null,
             'overwriteDemand' => [],
+            'settings' => $settings,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -1765,6 +1775,7 @@ class EventControllerTest extends UnitTestCase
             'speakers' => $allSpeakers,
             'searchDemand' => $searchDemand,
             'overwriteDemand' => [],
+            'settings' => $settings,
         ];
 
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
@@ -2070,7 +2081,7 @@ class EventControllerTest extends UnitTestCase
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $view->expects(self::once())->method('assignMultiple')->with(['event' => $mockEvent]);
+        $view->expects(self::once())->method('assignMultiple')->with(['event' => $mockEvent, 'settings' => null]);
         $this->subject->_set('view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
