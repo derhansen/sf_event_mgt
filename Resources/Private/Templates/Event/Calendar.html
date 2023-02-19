@@ -14,13 +14,13 @@
             <ul class="event-calendar__browser">
                 <li class="event-calendar__browser-prev">
                     <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{week: weekConfig.previous.weeknumber, year: weekConfig.previous.year}}">
-                        &larr; Week {weekConfig.previous.weeknumber}
+                        &larr; <f:translate key="calendar.week" /> {weekConfig.previous.weeknumber}
                     </f:link.action>
                 </li>
-                <li class="event-calendar__browser-current"><h3>Week {weekConfig.current.weeknumber}</h3></li>
+                <li class="event-calendar__browser-current"><h3><f:translate key="calendar.week" /> {weekConfig.current.weeknumber}</h3></li>
                 <li class="event-calendar__browser-next">
                     <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{week: weekConfig.next.weeknumber, year: weekConfig.next.year}}">
-                        Week {weekConfig.next.weeknumber} &rarr;
+                        <f:translate key="calendar.week" /> {weekConfig.next.weeknumber} &rarr;
                     </f:link.action>
                 </li>
             </ul>
