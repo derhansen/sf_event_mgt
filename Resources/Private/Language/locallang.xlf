@@ -300,6 +300,9 @@
 			<trans-unit id="calendar.title">
 				<source>Event calendar</source>
 			</trans-unit>
+			<trans-unit id="calendar.week">
+				<source>Week</source>
+			</trans-unit>
 			<trans-unit id="detail.download">
 				<source>Download</source>
 			</trans-unit>
