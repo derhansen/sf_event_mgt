@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
@@ -126,10 +128,14 @@ class RegistrationValidator extends AbstractValidator
      */
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
     {
+        $pluginKey = 'tx_sfeventmgt_pieventregistration';
+        $getMergedWithPost = $this->getRequest()->getQueryParams()[$pluginKey];
+        ArrayUtility::mergeRecursiveWithOverrule($getMergedWithPost, $this->getRequest()->getParsedBody()[$pluginKey]);
+
         $spamCheckService = new SpamCheckService(
             $registration,
             $settings,
-            GeneralUtility::_GPmerged('tx_sfeventmgt_pieventregistration')
+            $getMergedWithPost
         );
 
         return $spamCheckService->isSpamCheckFailed();
@@ -154,5 +160,10 @@ class RegistrationValidator extends AbstractValidator
         }
 
         return $validator;
+    }
+
+    protected function getRequest(): ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }
