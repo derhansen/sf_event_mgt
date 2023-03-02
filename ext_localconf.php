@@ -50,11 +50,11 @@ call_user_func(function () {
         'SfEventMgt',
         'Pieventregistration',
         [
-            EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
+            EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload',
         ],
         // non-cacheable actions
         [
-            EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
+            EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration, icalDownload',
         ]
     );
 
