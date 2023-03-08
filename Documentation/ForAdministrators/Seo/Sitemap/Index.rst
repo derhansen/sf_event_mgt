@@ -33,10 +33,11 @@ The example below shows a XML Sitemap configuration for sf_event_mgt::
                 uid = tx_sfeventmgt_pieventdetail[event]
               }
               additionalGetParameters {
-                tx_sfeventmgt_pieventdetail.controller = Event
-                tx_sfeventmgt_pieventdetail.action = detail
+                tx_sfeventmgt_pieventdetail {
+                  controller = Event
+                  action = detail
+                }
               }
-              useCacheHash = 1
             }
           }
         }
