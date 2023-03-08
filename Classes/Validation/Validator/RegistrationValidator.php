@@ -71,7 +71,7 @@ class RegistrationValidator extends AbstractValidator
         $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields']));
 
         foreach ($requiredFields as $requiredField) {
-            if ($value->_hasProperty($requiredField)) {
+            if ($requiredField !== '' && $value->_hasProperty($requiredField)) {
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
                 $validationResult = $validator->validate($value->_getProperty($requiredField));
                 if ($validationResult->hasErrors()) {
