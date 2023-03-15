@@ -44,6 +44,7 @@ Event Controller
 Payment Controller
 ------------------
 * :php:`ProcessPaymentInitializeEvent`
+* :php:`ModifyPaymentRedirectResponseEvent`
 * :php:`ProcessPaymentSuccessEvent`
 * :php:`ProcessPaymentFailureEvent`
 * :php:`ProcessPaymentCancelEvent`
