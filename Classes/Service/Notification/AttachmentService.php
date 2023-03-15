@@ -188,6 +188,10 @@ class AttachmentService
     protected function getAttachmentsFromProperty(AbstractEntity $object, string $propertyName): array
     {
         $attachments = [];
+        if ($propertyName === '') {
+            return $attachments;
+        }
+
         $property = $object->_getProperty($propertyName);
 
         if ($property instanceof ObjectStorage) {
