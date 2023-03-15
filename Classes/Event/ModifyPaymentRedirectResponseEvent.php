@@ -21,13 +21,24 @@ use Psr\Http\Message\ResponseInterface;
  */
 final class ModifyPaymentRedirectResponseEvent
 {
+    private ResponseInterface $response;
+    private array $settings;
+    private array $variables;
+    private Registration $registration;
+    private PaymentController $paymentController;
+
     public function __construct(
-        private ResponseInterface $response,
-        private readonly array $settings,
-        private readonly array $variables,
-        private readonly Registration $registration,
-        private readonly PaymentController $paymentController
+        ResponseInterface $response,
+        array $settings,
+        array $variables,
+        Registration $registration,
+        PaymentController $paymentController
     ) {
+        $this->response = $response;
+        $this->settings = $settings;
+        $this->variables = $variables;
+        $this->registration = $registration;
+        $this->paymentController = $paymentController;
     }
 
     public function getResponse(): ResponseInterface
