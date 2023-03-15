@@ -710,13 +710,18 @@ class EventController extends AbstractController
         // Redirect to payment provider if payment/redirect is enabled.
         // Skip if the registration is a waitlist registration, since it is not sure, if the user will participate.
         $paymentPid = (int)($this->settings['paymentPid'] ?? 0);
+        $paymentRedirectResponse = null;
         $processRedirect = !$failed &&
             $paymentPid > 0 &&
             $registration &&
             !$registration->getWaitlist() &&
             $this->registrationService->redirectPaymentEnabled($registration);
         if ($processRedirect) {
-            $this->processRedirectToPayment($paymentPid, $registration);
+            $paymentRedirectResponse = $this->getRedirectToPaymentResponse($paymentPid, $registration);
+        }
+
+        if ($paymentRedirectResponse instanceof ResponseInterface) {
+            return $paymentRedirectResponse;
         }
 
         $modifyConfirmRegistrationViewVariablesEvent = new ModifyConfirmRegistrationViewVariablesEvent(
@@ -738,9 +743,10 @@ class EventController extends AbstractController
     }
 
     /**
-     * Processes the payment redirect for the given registration
+     * Returns a response object to the given payment PID. Extension authors can use ProcessRedirectToPaymentEvent
+     * PSR-14 event to intercept the redirect response.
      */
-    private function processRedirectToPayment(int $paymentPid, Registration $registration): void
+    private function getRedirectToPaymentResponse(int $paymentPid, Registration $registration): ?ResponseInterface
     {
         $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($registration, $this);
         if ($processRedirectToPaymentEvent->getProcessRedirect()) {
@@ -756,8 +762,10 @@ class EventController extends AbstractController
                 'sfeventmgt',
                 'Pipayment'
             );
-            $this->redirectToUri($uri);
+            return $this->redirectToUri($uri);
         }
+
+        return null;
     }
 
     /**
