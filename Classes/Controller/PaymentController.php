@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Event\ModifyPaymentRedirectResponseEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
@@ -94,8 +95,18 @@ class PaymentController extends AbstractController
         }
 
         $this->view->assign('result', $variables);
+        $response = $this->htmlResponse();
 
-        return $this->htmlResponse();
+        $modifyPaymentRedirectResponseEvent = new ModifyPaymentRedirectResponseEvent(
+            $response,
+            $this->settings,
+            $variables,
+            $registration,
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyPaymentRedirectResponseEvent);
+
+        return $modifyPaymentRedirectResponseEvent->getResponse();
     }
 
     /**
