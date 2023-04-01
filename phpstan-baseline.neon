@@ -11,6 +11,16 @@ parameters:
 			path: Classes/Domain/Repository/EventRepository.php
 
 		-
+			message: "#^Call to static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\MathUtility\\:\\:canBeInterpretedAsFloat\\(\\) with string will always evaluate to false\\.$#"
+			count: 1
+			path: Classes/Evaluation/LatitudeEvaluator.php
+
+		-
+			message: "#^Call to static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\MathUtility\\:\\:canBeInterpretedAsFloat\\(\\) with string will always evaluate to false\\.$#"
+			count: 1
+			path: Classes/Evaluation/LongitudeEvaluator.php
+
+		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: Classes/Service/FluidStandaloneService.php
