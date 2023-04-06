@@ -70,7 +70,9 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
     {
         $description = 'The old event plugin using switchableControllerActions has been split into 5 separate plugins. ';
         $description .= 'This update wizard migrates all existing plugin settings and changes the plugin (list_type) ';
-        $description .= 'to use the new plugins available.';
+        $description .= 'to use the new plugins available.' . PHP_EOL;
+        $description .= 'Note that plugin user permissions will not be migrated and must be adapted manually after the';
+        $description .= 'migration process.';
         return $description;
     }
 
