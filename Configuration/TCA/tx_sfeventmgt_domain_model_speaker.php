@@ -1,6 +1,7 @@
 <?php
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 $slugBehaviour = GeneralUtility::makeInstance(ExtensionConfiguration::class)
@@ -176,6 +177,15 @@ return [
                 'type' => 'file',
                 'maxitems' => 1,
                 'allowed' => 'common-image-types',
+                'overrideChildTca' => [
+                    'types' => [
+                        File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                        --palette--;;filePalette'
+                        ],
+                    ],
+                ],
             ],
         ],
     ],

@@ -1,6 +1,7 @@
 <?php
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -668,6 +669,16 @@ return [
                 'type' => 'file',
                 'maxitems' => 999,
                 'allowed' => 'common-image-types',
+                'overrideChildTca' => [
+                    'types' => [
+                        File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
+                                        --palette--;;imageoverlayPalette,
+                                        --palette--;;filePalette'
+                        ],
+                    ],
+                ],
             ],
         ],
         'files' => [
@@ -700,6 +711,16 @@ return [
                 'type' => 'file',
                 'maxitems' => 999,
                 'allowed' => 'common-image-types',
+                'overrideChildTca' => [
+                    'types' => [
+                        File::FILETYPE_IMAGE => [
+                            'showitem' => '
+                                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
+                                        --palette--;;imageoverlayPalette,
+                                        --palette--;;filePalette'
+                        ],
+                    ],
+                ],
             ],
         ],
         'registration' => [
