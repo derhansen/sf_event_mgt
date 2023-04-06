@@ -118,7 +118,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    [
+                        'label' => '',
+                        'value' => 0,
+                    ],
                 ],
                 'foreign_table' => 'tx_sfeventmgt_domain_model_registration_field',
                 'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_registration_field.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_registration_field.sys_language_uid IN (-1,0)',
@@ -139,8 +142,8 @@ return [
                 'default' => 0,
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'invertStateDisplay' => true,
                     ],
                 ],
             ],
@@ -177,16 +180,16 @@ return [
                 'maxitems' => 20,
                 'items' => [
                     [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hide_at_login',
-                        -1,
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hide_at_login',
+                        'value' => -1,
                     ],
                     [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.any_login',
-                        -2,
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.any_login',
+                        'value' => -2,
                     ],
                     [
-                        'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.usergroups',
-                        '--div--',
+                        'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.usergroups',
+                        'value' => '--div--',
                     ],
                 ],
                 'exclusiveKeys' => '-1,-2',
@@ -219,36 +222,36 @@ return [
                 'renderType' => 'selectSingle',
                 'items' => [
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.0',
-                        FieldType::INPUT,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.0',
+                        'value' => FieldType::INPUT,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.1',
-                        FieldType::RADIO,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.1',
+                        'value' => FieldType::RADIO,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.2',
-                        FieldType::CHECK,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.2',
+                        'value' => FieldType::CHECK,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.3',
-                        FieldType::TEXTAREA,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.3',
+                        'value' => FieldType::TEXTAREA,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.4',
-                        FieldType::TEXT,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.4',
+                        'value' => FieldType::TEXT,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.5',
-                        FieldType::DIVIDER,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.5',
+                        'value' => FieldType::DIVIDER,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.6',
-                        FieldType::SELECT,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.6',
+                        'value' => FieldType::SELECT,
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_field.type.7',
-                        FieldType::DATETIME,
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.type.7',
+                        'value' => FieldType::DATETIME,
                     ],
                 ],
                 'size' => 1,
@@ -324,9 +327,18 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0', 0],
-                    [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1', 1],
-                    [$lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2', 2],
+                    [
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0',
+                        'value' => 0,
+                    ],
+                    [
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1',
+                        'value' => 1,
+                    ],
+                    [
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2',
+                        'value' => 2,
+                    ],
                 ],
             ],
         ],
@@ -337,7 +349,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration_field.feuser_value.select', ''],
+                    [
+                        'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration_field.feuser_value.select',
+                        'value' => '',
+                    ],
                 ],
                 'itemsProcFunc' => 'DERHANSEN\SfEventMgt\Hooks\ItemsProcFunc->getFeuserValues',
                 'size' => 1,

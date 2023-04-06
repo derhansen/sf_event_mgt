@@ -66,7 +66,10 @@ return [
                 'type' => 'select',
                 'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    [
+                        'label' => '',
+                        'value' => 0,
+                    ],
                 ],
                 'foreign_table' => 'tx_sfeventmgt_domain_model_location',
                 'foreign_table_where' => 'AND tx_sfeventmgt_domain_model_location.pid=###CURRENT_PID### AND tx_sfeventmgt_domain_model_location.sys_language_uid IN (-1,0)',
@@ -88,8 +91,8 @@ return [
                 'default' => 0,
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'invertStateDisplay' => true,
                     ],
                 ],
             ],

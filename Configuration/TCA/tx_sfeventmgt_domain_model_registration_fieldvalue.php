@@ -38,8 +38,8 @@ return [
                 'default' => 0,
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'invertStateDisplay' => true,
                     ],
                 ],
             ],
@@ -74,12 +74,12 @@ return [
                 'default' => 0,
                 'items' => [
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0',
-                        '0',
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0',
+                        'value' => '0',
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1',
-                        '1',
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1',
+                        'value' => '1',
                     ],
                 ],
             ],
