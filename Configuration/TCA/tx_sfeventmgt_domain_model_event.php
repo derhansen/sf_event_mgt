@@ -675,7 +675,7 @@ return [
                             'showitem' => '
                                         --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
                                         --palette--;;imageoverlayPalette,
-                                        --palette--;;filePalette'
+                                        --palette--;;filePalette',
                         ],
                     ],
                 ],
@@ -717,7 +717,7 @@ return [
                             'showitem' => '
                                         --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
                                         --palette--;;imageoverlayPalette,
-                                        --palette--;;filePalette'
+                                        --palette--;;filePalette',
                         ],
                     ],
                 ],

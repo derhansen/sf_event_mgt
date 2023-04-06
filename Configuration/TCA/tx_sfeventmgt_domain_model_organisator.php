@@ -204,7 +204,7 @@ return [
                         File::FILETYPE_IMAGE => [
                             'showitem' => '
                                         --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                        --palette--;;filePalette'
+                                        --palette--;;filePalette',
                         ],
                     ],
                 ],
