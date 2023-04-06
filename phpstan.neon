@@ -13,7 +13,3 @@ parameters:
 
     bootstrapFiles:
         - %rootDir%/../../typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php
-
-    # Temporary use own stub for GeneralUtility - see core #100091
-    stubFiles:
-        - Tests/Build/Phpstan/Stubs/GeneralUtility.stub
