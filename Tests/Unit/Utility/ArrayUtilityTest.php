@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ArrayUtility;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Utility;
 
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
