@@ -51,7 +51,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
      */
     public function isStartDateBeforeEndDateReturnsExpectedResults(int $startdate, int $enddate, bool $expected): void
     {
-        $service = $this->getAccessibleMock(EventPlausabilityService::class, ['dummy'], [], '', false);
+        $service = $this->getAccessibleMock(EventPlausabilityService::class, null, [], '', false);
         self::assertEquals($expected, $service->_call('isStartDateBeforeEndDate', $startdate, $enddate));
     }
 

@@ -70,7 +70,6 @@ class EventControllerTest extends UnitTestCase
             EventController::class,
             [
                 'redirect',
-                'forward',
                 'addFlashMessage',
                 'overwriteEventDemandObject',
                 'getSysLanguageUid',
@@ -111,7 +110,7 @@ class EventControllerTest extends UnitTestCase
 
         $mockController = $this->getAccessibleMock(
             EventController::class,
-            ['redirect', 'forward', 'addFlashMessage'],
+            ['redirect', 'addFlashMessage'],
             [],
             '',
             false
@@ -132,7 +131,7 @@ class EventControllerTest extends UnitTestCase
 
         $mockController = $this->getAccessibleMock(
             EventController::class,
-            ['redirect', 'forward', 'addFlashMessage'],
+            ['redirect', 'addFlashMessage'],
             [],
             '',
             false
@@ -2126,7 +2125,7 @@ class EventControllerTest extends UnitTestCase
 
         $this->expectExceptionCode(1631261423);
         $this->expectException(PropagateResponseException::class);
-        $mock = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mock = $this->getAccessibleMock(EventController::class, null);
         $mock->_set('request', $request);
         $mock->_call('handleEventNotFoundError', $settings);
     }
@@ -2182,7 +2181,7 @@ class EventControllerTest extends UnitTestCase
 
         $mockController = $this->getAccessibleMock(
             EventController::class,
-            ['redirect', 'forward', 'addFlashMessage'],
+            ['redirect', 'addFlashMessage'],
             [],
             '',
             false
@@ -2207,7 +2206,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function checkPidOfEventRecordWorks()
     {
-        $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
 
         $event = new Event();
 
@@ -2241,7 +2240,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function evaluateSingleEventSettingIsWorking()
     {
-        $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
         // singleEvent setting not configured not configured
         $mockedController->_set('settings', ['singleEvent' => null]);
         self::assertNull($mockedController->_call('evaluateSingleEventSetting', null));
@@ -2266,7 +2265,7 @@ class EventControllerTest extends UnitTestCase
      */
     public function evaluateIsShortcutSettingIsWorking()
     {
-        $mockedController = $this->getAccessibleMock(EventController::class, ['dummy']);
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
 
         // isShortcut not configured
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 0]]);
@@ -2275,7 +2274,7 @@ class EventControllerTest extends UnitTestCase
         // isShortcut is configured
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
 
-        $mockContentObjectRenderer = $this->getAccessibleMock(ContentObjectRenderer::class, ['dummy']);
+        $mockContentObjectRenderer = $this->getAccessibleMock(ContentObjectRenderer::class, null);
         $mockContentObjectRenderer->_set('data', ['uid' => 123]);
 
         $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)

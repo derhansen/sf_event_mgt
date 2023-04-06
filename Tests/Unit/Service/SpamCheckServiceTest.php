@@ -96,7 +96,7 @@ class SpamCheckServiceTest extends UnitTestCase
         ];
         $arguments = [];
 
-        $service = $this->getAccessibleMock(SpamCheckService::class, ['dummy'], [$registration, $settings, $arguments]);
+        $service = $this->getAccessibleMock(SpamCheckService::class, null, [$registration, $settings, $arguments]);
         self::assertEquals(20, $service->_get('maxSpamScore'));
     }
 
@@ -111,7 +111,7 @@ class SpamCheckServiceTest extends UnitTestCase
         ];
         $arguments = [];
 
-        $service = $this->getAccessibleMock(SpamCheckService::class, ['dummy'], [$registration, $settings, $arguments]);
+        $service = $this->getAccessibleMock(SpamCheckService::class, null, [$registration, $settings, $arguments]);
         self::assertEquals([], $service->_get('settings')['checks']);
     }
 

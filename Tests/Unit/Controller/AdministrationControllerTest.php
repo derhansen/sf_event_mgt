@@ -34,7 +34,7 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $this->subject = $this->getAccessibleMock(
             AdministrationController::class,
-            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getLanguageService', 'initModuleTemplateAndReturnResponse'],
+            ['redirect', 'addFlashMessage', 'redirectToUri', 'getLanguageService', 'initModuleTemplateAndReturnResponse'],
             [],
             '',
             false
