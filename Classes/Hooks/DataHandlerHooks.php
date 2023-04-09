@@ -60,7 +60,7 @@ class DataHandlerHooks
     public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler): void
     {
         if ($table === 'tt_content' &&
-            $status == 'update' &&
+            $status === 'update' &&
             isset($fieldArray['pi_flexform']) &&
             $dataHandler->checkValue_currentRecord['CType'] === 'list' &&
             in_array(
@@ -121,6 +121,11 @@ class DataHandlerHooks
                     'settings.restrictForeignRecordsToStoragePage',
                     'settings.disableOverrideDemand',
                 ],
+                'pagination' => [
+                    'settings.pagination.enablePagination',
+                    'settings.pagination.itemsPerPage',
+                    'settings.pagination.maxNumPages',
+                ],
                 'template' => [
                     'settings.templateLayout',
                 ],
@@ -134,7 +139,8 @@ class DataHandlerHooks
             foreach ($checkFields as $sheet => $fields) {
                 foreach ($fields as $field) {
                     if (isset($flexformData['data'][$sheet]['lDEF'][$field]['vDEF']) &&
-                        $flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === ''
+                        ($flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === '' ||
+                            $flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === '0')
                     ) {
                         unset($flexformData['data'][$sheet]['lDEF'][$field]);
                     }
