@@ -57,7 +57,7 @@ class Registration extends AbstractEntity
      * @Extbase\ORM\Cascade("remove")
      * @Extbase\ORM\Lazy
      */
-    protected ObjectStorage $fieldValues;
+    protected ?ObjectStorage $fieldValues = null;
 
     /**
      * Registration constructor.

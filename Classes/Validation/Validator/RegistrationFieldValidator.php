@@ -33,7 +33,7 @@ class RegistrationFieldValidator extends AbstractValidator
     protected function isValid($registration)
     {
         $result = true;
-        if ($registration->getEvent() === null || ($registration->getFieldValues()->count() === 0 &&
+        if ($registration->getEvent() === null || ($registration->getFieldValues()?->count() === 0 &&
             $registration->getEvent()->getRegistrationFields()->count() === 0)) {
             return $result;
         }
