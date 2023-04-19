@@ -233,6 +233,7 @@
                                     <parentField>parent</parentField>
                                     <appearance>
                                         <expandAll>TRUE</expandAll>
+                                        <maxLevels>99</maxLevels>
                                         <showHeader>TRUE</showHeader>
                                     </appearance>
                                 </treeConfig>
@@ -599,6 +600,7 @@
                                     <parentField>parent</parentField>
                                     <appearance>
                                         <expandAll>TRUE</expandAll>
+                                        <maxLevels>99</maxLevels>
                                         <showHeader>TRUE</showHeader>
                                     </appearance>
                                 </treeConfig>
