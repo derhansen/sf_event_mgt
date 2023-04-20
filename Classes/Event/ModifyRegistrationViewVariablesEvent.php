@@ -18,13 +18,8 @@ use DERHANSEN\SfEventMgt\Controller\EventController;
  */
 final class ModifyRegistrationViewVariablesEvent
 {
-    private array $variables;
-    private EventController $eventController;
-
-    public function __construct(array $variables, EventController $eventController)
+    public function __construct(private array $variables, private readonly EventController $eventController)
     {
-        $this->variables = $variables;
-        $this->eventController = $eventController;
     }
 
     public function getVariables(): array

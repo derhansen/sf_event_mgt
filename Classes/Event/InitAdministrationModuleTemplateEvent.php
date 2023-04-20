@@ -21,18 +21,11 @@ use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
  */
 final class InitAdministrationModuleTemplateEvent
 {
-    private ModuleTemplate $moduleTemplate;
-    private AdministrationController $administrationController;
-    private UriBuilder $uriBuilder;
-
     public function __construct(
-        ModuleTemplate $moduleTemplate,
-        UriBuilder $uriBuilder,
-        AdministrationController $administrationController
+        private readonly ModuleTemplate $moduleTemplate,
+        private readonly UriBuilder $uriBuilder,
+        private readonly AdministrationController $administrationController
     ) {
-        $this->moduleTemplate = $moduleTemplate;
-        $this->uriBuilder = $uriBuilder;
-        $this->administrationController = $administrationController;
     }
 
     public function getModuleTemplate(): ModuleTemplate

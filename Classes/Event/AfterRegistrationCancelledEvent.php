@@ -19,13 +19,10 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class AfterRegistrationCancelledEvent
 {
-    private Registration $registration;
-    private EventController $eventController;
-
-    public function __construct(Registration $registration, EventController $eventController)
-    {
-        $this->registration = $registration;
-        $this->eventController = $eventController;
+    public function __construct(
+        private readonly Registration $registration,
+        private readonly EventController $eventController
+    ) {
     }
 
     public function getRegistration(): Registration

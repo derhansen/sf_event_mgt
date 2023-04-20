@@ -20,24 +20,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class ProcessPaymentInitializeEvent
 {
-    private array $variables;
-    private string $paymentMethod;
-    private bool $updateRegistration;
-    private Registration $registration;
-    private PaymentController $paymentController;
-
     public function __construct(
-        array $variables,
-        string $paymentMethod,
-        bool $updateRegistration,
-        Registration $registration,
-        PaymentController $paymentController
+        private array $variables,
+        private readonly string $paymentMethod,
+        private bool $updateRegistration,
+        private readonly Registration $registration,
+        private readonly PaymentController $paymentController
     ) {
-        $this->variables = $variables;
-        $this->paymentMethod = $paymentMethod;
-        $this->updateRegistration = $updateRegistration;
-        $this->registration = $registration;
-        $this->paymentController = $paymentController;
     }
 
     public function getVariables(): array

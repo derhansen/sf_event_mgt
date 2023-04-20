@@ -19,15 +19,11 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
  */
 final class WaitlistMoveUpEvent
 {
-    private Event $event;
-    private EventController $eventController;
-    private bool $processDefaultMoveUp;
-
-    public function __construct(Event $event, EventController $eventController, bool $processDefaultMoveUp = true)
-    {
-        $this->event = $event;
-        $this->eventController = $eventController;
-        $this->processDefaultMoveUp = $processDefaultMoveUp;
+    public function __construct(
+        private readonly Event $event,
+        private readonly EventController $eventController,
+        private bool $processDefaultMoveUp = true
+    ) {
     }
 
     public function getEvent(): Event
