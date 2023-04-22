@@ -525,7 +525,7 @@ class EventController extends AbstractController
             $registration->setPid($event->getPid());
             $registration->setRegistrationDate(new DateTime());
             $registration->setConfirmationUntil($confirmationUntil);
-            $registration->setLanguage($this->getCurrentLanguageTwoLetterIsoCode());
+            $registration->setLanguage($this->getCurrentLanguageCode());
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
             $registration->setWaitlist($isWaitlistRegistration);
             $this->registrationRepository->add($registration);
@@ -1004,14 +1004,14 @@ class EventController extends AbstractController
     }
 
     /**
-     * Returns the two letter ISO code for the current language
+     * Returns the language code of the current language
      */
-    protected function getCurrentLanguageTwoLetterIsoCode(): string
+    protected function getCurrentLanguageCode(): string
     {
         if ($this->request->getAttribute('language') instanceof SiteLanguage) {
             /** @var SiteLanguage $siteLanguage */
             $siteLanguage = $this->request->getAttribute('language');
-            return $siteLanguage->getTwoLetterIsoCode();
+            return $siteLanguage->getLocale()->getLanguageCode();
         }
 
         return '';
