@@ -200,7 +200,7 @@ class AdministrationController extends AbstractController
 
     public function initializeAction(): void
     {
-        $this->pid = (int)GeneralUtility::_GET('id');
+        $this->pid = (int)($this->request->getQueryParams()['id'] ?? 0);
     }
 
     /**

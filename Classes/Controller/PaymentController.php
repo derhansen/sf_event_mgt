@@ -124,13 +124,12 @@ class PaymentController extends AbstractController
         // If true, an external event listener requested the registration to be updated
         $updateRegistration = false;
 
-        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
         $processPaymentSuccessEvent = new ProcessPaymentSuccessEvent(
             $variables,
             $paymentMethod,
             $updateRegistration,
             $registration,
-            $getVariables,
+            $this->request->getQueryParams(),
             $this
         );
         $this->eventDispatcher->dispatch($processPaymentSuccessEvent);
@@ -164,14 +163,13 @@ class PaymentController extends AbstractController
         $updateRegistration = false;
         $removeRegistration = false;
 
-        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
         $processPaymentFailureEvent = new ProcessPaymentFailureEvent(
             $variables,
             $paymentMethod,
             $updateRegistration,
             $removeRegistration,
             $registration,
-            $getVariables,
+            $this->request->getQueryParams(),
             $this
         );
         $this->eventDispatcher->dispatch($processPaymentFailureEvent);
@@ -214,14 +212,13 @@ class PaymentController extends AbstractController
         $updateRegistration = false;
         $removeRegistration = false;
 
-        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
         $processPaymentCancelEvent = new ProcessPaymentCancelEvent(
             $variables,
             $paymentMethod,
             $updateRegistration,
             $removeRegistration,
             $registration,
-            $getVariables,
+            $this->request->getQueryParams(),
             $this
         );
         $this->eventDispatcher->dispatch($processPaymentCancelEvent);
@@ -261,13 +258,12 @@ class PaymentController extends AbstractController
         // If true, an external event listener requested the registration to be updated
         $updateRegistration = false;
 
-        $getVariables = is_array(GeneralUtility::_GET()) ? GeneralUtility::_GET() : [];
         $processPaymentNotifyEvent = new ProcessPaymentNotifyEvent(
             $variables,
             $paymentMethod,
             $updateRegistration,
             $registration,
-            $getVariables,
+            $this->request->getQueryParams(),
             $this
         );
         $this->eventDispatcher->dispatch($processPaymentNotifyEvent);
