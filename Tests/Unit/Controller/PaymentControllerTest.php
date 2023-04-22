@@ -20,6 +20,7 @@ use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -52,6 +53,7 @@ class PaymentControllerTest extends UnitTestCase
             '',
             false
         );
+        $this->subject->_set('request', $this->createMock(Request::class));
     }
 
     /**

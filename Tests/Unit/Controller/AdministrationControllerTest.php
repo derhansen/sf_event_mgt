@@ -52,6 +52,7 @@ class AdministrationControllerTest extends UnitTestCase
     public function initializeActionAssignsPid(): void
     {
         $this->subject->_set('pid', 1);
+        $this->subject->_set('request', $this->createMock(Request::class));
         $this->subject->initializeAction();
         self::assertSame(0, $this->subject->_get('pid'));
     }
