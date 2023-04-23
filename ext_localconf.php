@@ -189,10 +189,6 @@ call_user_func(function () {
         ];
     }
 
-    // Register event management plugin updater
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['piEventPluginUpdater']
-        = PiEventPluginUpdater::class;
-
     if (ExtensionManagementUtility::isLoaded('linkvalidator')) {
         ExtensionManagementUtility::addPageTSConfig(
             '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Page/mod.linkvalidator.txt">'
