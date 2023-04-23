@@ -40,7 +40,6 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -2277,12 +2276,6 @@ class EventControllerTest extends UnitTestCase
         $mockContentObjectRenderer = $this->getAccessibleMock(ContentObjectRenderer::class, null);
         $mockContentObjectRenderer->_set('data', ['uid' => 123]);
 
-        $mockConfigurationManager = $this->getMockBuilder(ConfigurationManager::class)
-            ->onlyMethods(['getContentObject'])->disableOriginalConstructor()->getMock();
-        $mockConfigurationManager->expects(self::once())->method('getContentObject')
-            ->willReturn($mockContentObjectRenderer);
-        $mockedController->_set('configurationManager', $mockConfigurationManager);
-
         $mockEventRepository = $this->getMockBuilder(EventRepository::class)
             ->onlyMethods(['findByUid'])
             ->disableOriginalConstructor()
@@ -2291,6 +2284,9 @@ class EventControllerTest extends UnitTestCase
             ->willReturn($mockEvent);
         $mockedController->_set('eventRepository', $mockEventRepository);
 
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->expects(self::once())->method('getAttribute')->willReturn($mockContentObjectRenderer);
+        $mockedController->_set('request', $mockRequest);
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 1]]);
         self::assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
     }

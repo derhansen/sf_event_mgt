@@ -66,7 +66,7 @@ class EventController extends AbstractController
      */
     protected function initializeView(): void
     {
-        $this->view->assign('contentObjectData', $this->configurationManager->getContentObject()->data);
+        $this->view->assign('contentObjectData', $this->request->getAttribute('currentContentObject')->data);
         if ($this->getTypoScriptFrontendController()) {
             $this->view->assign('pageData', $this->getTypoScriptFrontendController()->page);
         }
@@ -956,7 +956,7 @@ class EventController extends AbstractController
     protected function evaluateIsShortcutSetting(?Event $event): ?Event
     {
         if ($event === null && (bool)($this->settings['detail']['isShortcut'] ?? false)) {
-            $eventRawData = $this->configurationManager->getContentObject()->data;
+            $eventRawData = $this->request->getAttribute('currentContentObject')->data;
             $event = $this->eventRepository->findByUid($eventRawData['uid']);
         }
 
