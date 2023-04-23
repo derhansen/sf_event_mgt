@@ -26,4 +26,3 @@ services:
     tags:
       - name: event.listener
         identifier: 'derhansen/sf_event_mgt/cache-timeout'
-        event: TYPO3\CMS\Frontend\Event\ModifyCacheLifetimeForPageEvent
