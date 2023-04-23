@@ -9,39 +9,31 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Hooks;
+namespace DERHANSEN\SfEventMgt\EventListener;
 
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\EndTimeRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\StartTimeRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Event\ModifyCacheLifetimeForPageEvent;
 
 /**
- * PageCache class which implementes the TYPO3 Core hook:
- * $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['get_cache_timeout']
+ * Calculates the page cache timeout for configured pages with event records. Pages must be configured in TypoScript
+ * using cache.config (similar to starttime/endtime cache handling)
+ *
+ * Example: config.cache.3 = tx_sfeventmgt_domain_model_event:2
+ *
+ * The cache for PID 3 will respect registration_startdate/registration_deadline of event record in PID 2
  */
-class PageCache
+class ChangeCacheTimeout
 {
-    /**
-     * Calculates the page cache timeout for configured pages with event records. Pages must be configured in TypoScript
-     * using cache.config (similar to starttime/endtime cache handling)
-     *
-     * Example: config.cache.3 = tx_sfeventmgt_domain_model_event:2
-     *
-     * The cache for PID 3 will respect registration_startdate/registration_deadline of event record in PID 2
-     *
-     * @return int|mixed
-     */
-    public function getCacheTimeout(array $params, TypoScriptFrontendController $pObj)
+    public function __invoke(ModifyCacheLifetimeForPageEvent $event): void
     {
-        $eventBasedCacheTimeout = $this->calculatePageCacheTimeout($pObj);
-        if ($eventBasedCacheTimeout === PHP_INT_MAX || $eventBasedCacheTimeout >= $params['cacheTimeout']) {
-            // Return previous calculated timeout, since event based cache timeout is either not determined or larger
-            return $params['cacheTimeout'];
+        $eventBasedCacheTimeout = $this->calculatePageCacheTimeout($event);
+        if ($eventBasedCacheTimeout !== PHP_INT_MAX && $eventBasedCacheTimeout <= $event->getCacheLifetime()) {
+            $event->setCacheLifetime($eventBasedCacheTimeout);
         }
-        return $eventBasedCacheTimeout;
     }
 
     /**
@@ -52,10 +44,10 @@ class PageCache
      *
      * @return int Page cache timeout or PHP_INT_MAX if cannot be determined
      */
-    protected function calculatePageCacheTimeout(TypoScriptFrontendController $pObj): int
+    protected function calculatePageCacheTimeout(ModifyCacheLifetimeForPageEvent $event): int
     {
         $result = PHP_INT_MAX;
-        $tablesToConsider = $this->getCurrentPageCacheConfiguration($pObj);
+        $tablesToConsider = $this->getCurrentPageCacheConfiguration($event->getPageId(), $event->getRenderingInstructions());
 
         if (empty($tablesToConsider)) {
             return $result;
@@ -74,18 +66,15 @@ class PageCache
      * Nearly similar to TypoScriptFrontendController::getCurrentPageCacheConfiguration, but only returns
      * entries that are relevant for sf_event_mgt
      */
-    protected function getCurrentPageCacheConfiguration(TypoScriptFrontendController $pObj): array
+    protected function getCurrentPageCacheConfiguration(int $currentPageId, array $renderingInstructions): array
     {
-        // @extensionScannerIgnoreLine
-        $id = $pObj->id;
-
-        $tables = ['tt_content:' . $id];
-        if (isset($pObj->config['config']['cache.'][$id])) {
-            $cacheConfig = str_replace(':current', ':' . $id, $pObj->config['config']['cache.'][$id]);
+        $tables = ['tt_content:' . $currentPageId];
+        if (isset($renderingInstructions['cache.'][$currentPageId])) {
+            $cacheConfig = str_replace(':current', ':' . $currentPageId, $renderingInstructions['cache.'][$currentPageId]);
             $tables = array_merge($tables, GeneralUtility::trimExplode(',', $cacheConfig));
         }
-        if (isset($pObj->config['config']['cache.']['all'])) {
-            $cacheConfig = str_replace(':current', ':' . $id, $pObj->config['config']['cache.']['all']);
+        if (isset($renderingInstructions['cache.']['all'])) {
+            $cacheConfig = str_replace(':current', ':' . $currentPageId, $renderingInstructions['cache.']['all']);
             $tables = array_merge($tables, GeneralUtility::trimExplode(',', $cacheConfig));
         }
         $tables = array_unique($tables);
@@ -119,7 +108,7 @@ class PageCache
             ->removeByType(StartTimeRestriction::class)
             ->removeByType(EndTimeRestriction::class);
         $timeFields = ['registration_startdate', 'registration_deadline'];
-        $timeConditions = $queryBuilder->expr()->orX();
+        $timeConditions = $queryBuilder->expr()->or();
         foreach ($timeFields as $field) {
             $queryBuilder->addSelectLiteral(
                 'MIN('
@@ -131,7 +120,7 @@ class PageCache
                 . ' THEN NULL ELSE ' . $queryBuilder->quoteIdentifier($field) . ' END'
                 . ') AS ' . $queryBuilder->quoteIdentifier($field)
             );
-            $timeConditions->add(
+            $timeConditions->with(
                 $queryBuilder->expr()->gt(
                     $field,
                     $queryBuilder->createNamedParameter($now, Connection::PARAM_INT)

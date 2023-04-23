@@ -10,7 +10,6 @@ use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventPlausability;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventRowInitializeNew;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
 use DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks;
-use DERHANSEN\SfEventMgt\Hooks\PageCache;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
@@ -128,10 +127,6 @@ call_user_func(function () {
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
         TimeRestrictionEvaluator::class
     ] = '';
-
-    // Implement get_cache_timeout hook
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['get_cache_timeout'][] =
-        PageCache::class . '->getCacheTimeout';
 
     // Register default payment methods
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
