@@ -13,3 +13,7 @@ parameters:
 
     bootstrapFiles:
         - %rootDir%/../../typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php
+
+    typo3:
+        requestGetAttributeMapping:
+            currentContentObject: TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
