@@ -11,7 +11,6 @@ use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventRowInitializeNew;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
 use DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks;
 use DERHANSEN\SfEventMgt\Hooks\PageCache;
-use DERHANSEN\SfEventMgt\Updates\PiEventPluginUpdater;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
