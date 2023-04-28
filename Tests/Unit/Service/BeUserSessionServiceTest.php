@@ -60,7 +60,7 @@ class BeUserSessionServiceTest extends UnitTestCase
         $this->subject->getSessionData();
     }
 
-    public function getSessionDataByKeyDataProvider(): array
+    public static function getSessionDataByKeyDataProvider(): array
     {
         return [
             'key_found' => [

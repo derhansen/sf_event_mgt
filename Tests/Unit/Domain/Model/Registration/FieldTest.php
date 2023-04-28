@@ -151,7 +151,7 @@ class FieldTest extends UnitTestCase
         self::assertEquals($event, $this->subject->getEvent());
     }
 
-    public function getSettingsForOptionDataProvider(): array
+    public static function getSettingsForOptionDataProvider(): array
     {
         return [
             'empty string' => [
@@ -240,7 +240,7 @@ class FieldTest extends UnitTestCase
         self::assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
     }
 
-    public function getValueTypeReturnsExpectedFieldValuesDataProvider(): array
+    public static function getValueTypeReturnsExpectedFieldValuesDataProvider(): array
     {
         return [
             'Input' => [
@@ -297,7 +297,7 @@ class FieldTest extends UnitTestCase
         self::assertEquals('Input', $this->subject->getPartialName());
     }
 
-    public function getDatepickermodeTypeDataProvider(): array
+    public static function getDatepickermodeTypeDataProvider(): array
     {
         return [
             'datetime-local' => [

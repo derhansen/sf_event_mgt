@@ -1314,7 +1314,7 @@ class EventTest extends UnitTestCase
      *
      * @return array
      */
-    public function cancellationPossibleDataProvider(): array
+    public static function cancellationPossibleDataProvider(): array
     {
         return [
             'cancellationNotEnabled' => [
@@ -1559,7 +1559,7 @@ class EventTest extends UnitTestCase
      *
      * @return array
      */
-    public function eventEndsSameDayDataProvider(): array
+    public static function eventEndsSameDayDataProvider(): array
     {
         return [
             'no start- and enddate' => [

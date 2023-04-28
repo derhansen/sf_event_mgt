@@ -222,7 +222,7 @@ class LocationTest extends UnitTestCase
         self::assertSame(12.345678, $this->subject->getLatitude());
     }
 
-    public function getFullAddressReturnsExpectedResultDataProvider(): array
+    public static function getFullAddressReturnsExpectedResultDataProvider(): array
     {
         $location1 = new Location();
         $location1->setAddress('Address 123');

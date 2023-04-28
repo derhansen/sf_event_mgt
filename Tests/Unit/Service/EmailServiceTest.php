@@ -28,7 +28,7 @@ class EmailServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public function invalidEmailsDataProvider(): array
+    public static function invalidEmailsDataProvider(): array
     {
         return [
             'invalidSender' => [

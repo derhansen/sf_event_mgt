@@ -38,7 +38,7 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
         unset($GLOBALS['LANG']);
     }
 
-    public function timeRestrictionEvaluatorDataProvider(): array
+    public static function timeRestrictionEvaluatorDataProvider(): array
     {
         return [
             'emptyValue' => [

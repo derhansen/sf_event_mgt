@@ -39,7 +39,7 @@ class PaymentServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public function getPaymentMethodsDataProvider(): array
+    public static function getPaymentMethodsDataProvider(): array
     {
         return [
             'Default Payment Methods enabled' => [
@@ -88,7 +88,7 @@ class PaymentServiceTest extends UnitTestCase
         self::assertInstanceOf(Transfer::class, $this->subject->getPaymentInstance('transfer'));
     }
 
-    public function paymentActionEnabledForDefaultPaymentMethodDataProvider(): array
+    public static function paymentActionEnabledForDefaultPaymentMethodDataProvider(): array
     {
         return [
             'redirectAction' => [
@@ -126,7 +126,7 @@ class PaymentServiceTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->paymentActionEnabled('invoice', $action));
     }
 
-    public function paymentActionEnabledForCustomPaymentMethodDataProvider(): array
+    public static function paymentActionEnabledForCustomPaymentMethodDataProvider(): array
     {
         return [
             'redirectAction' => [

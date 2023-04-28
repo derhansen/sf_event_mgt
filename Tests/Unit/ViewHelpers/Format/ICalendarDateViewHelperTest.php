@@ -19,7 +19,7 @@ class ICalendarDateViewHelperTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    public function iCalendarDateDataProvider(): array
+    public static function iCalendarDateDataProvider(): array
     {
         return [
             'emptyValue' => [

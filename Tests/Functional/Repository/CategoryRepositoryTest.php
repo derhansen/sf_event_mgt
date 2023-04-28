@@ -54,7 +54,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
         self::assertEquals(3, $events->count());
     }
 
-    public function findDemandedRecordsByCategoryDataProvider(): array
+    public static function findDemandedRecordsByCategoryDataProvider(): array
     {
         return [
             'category 1' => [

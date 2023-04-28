@@ -85,7 +85,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->renderTemplate('test.html', ['key' => 'value']));
     }
 
-    public function templateFoldersDataProvider(): array
+    public static function templateFoldersDataProvider(): array
     {
         return [
             'returnsConfiguredTemplatePaths' => [

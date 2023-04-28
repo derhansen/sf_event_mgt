@@ -1,5 +1,5 @@
 includes:
-    - phpstan-baseline.neon
+  - phpstan-baseline.neon
 
 parameters:
     level: 7
@@ -10,9 +10,6 @@ parameters:
     checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: true
     checkGenericClassInNonGenericObjectType: false
-
-    bootstrapFiles:
-        - %rootDir%/../../typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php
 
     typo3:
         requestGetAttributeMapping:

@@ -58,7 +58,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertEquals(1, $registrations->count());
     }
 
-    public function confirmedAndUnconfirmedDataProvider(): array
+    public static function confirmedAndUnconfirmedDataProvider(): array
     {
         return [
             'all registrations' => [
@@ -90,7 +90,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertSame($expected, $registrations->count());
     }
 
-    public function findNotificationRegistrationsDataProvider(): array
+    public static function findNotificationRegistrationsDataProvider(): array
     {
         return [
             'withEmptyConstraints' => [

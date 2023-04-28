@@ -47,7 +47,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
         self::assertFalse($service->getEnabled());
     }
 
-    public function captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider(): array
+    public static function captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider(): array
     {
         return [
             'emptyType' => [
@@ -168,7 +168,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
         $service = new CaptchaConfigurationService($settings);
     }
 
-    public function gettersReturnExpectedResultDataProvider(): array
+    public static function gettersReturnExpectedResultDataProvider(): array
     {
         return [
             'captchaDisabled' => [

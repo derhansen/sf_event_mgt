@@ -19,7 +19,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    public function isStartDateBeforeEndDateDataProvider(): array
+    public static function isStartDateBeforeEndDateDataProvider(): array
     {
         return [
             'no dates' => [

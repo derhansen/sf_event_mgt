@@ -9,14 +9,14 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Format;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ICalendarDescriptionViewHelperTest extends UnitTestCase
 {
-    public function iCalendarDescriptionDataProvider(): array
+    public static function iCalendarDescriptionDataProvider(): array
     {
         return [
             'emptyValue' => [

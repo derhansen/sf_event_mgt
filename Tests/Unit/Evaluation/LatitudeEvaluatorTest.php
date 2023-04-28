@@ -31,7 +31,7 @@ class LatitudeEvaluatorTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public function latitudeEvaluatorDataProvider(): array
+    public static function latitudeEvaluatorDataProvider(): array
     {
         return [
             'empty string' => [

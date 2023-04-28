@@ -780,7 +780,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertTrue($this->subject->isWaitlistRegistration($event, 1));
     }
 
-    public function moveUpWaitlistRegistrationsDataProvider(): array
+    public static function moveUpWaitlistRegistrationsDataProvider(): array
     {
         return [
             'move up not enabled' => [

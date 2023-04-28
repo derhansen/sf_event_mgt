@@ -16,7 +16,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ArrayUtilityTest extends UnitTestCase
 {
-    public function isJsonArrayReturnsExpectedValuesDataProcessor(): array
+    public static function isJsonArrayReturnsExpectedValuesDataProcessor(): array
     {
         return [
             'null' => [

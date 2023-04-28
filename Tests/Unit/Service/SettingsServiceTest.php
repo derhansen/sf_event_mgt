@@ -28,7 +28,7 @@ class SettingsServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public function customNotificationsSettingsDataProvider(): array
+    public static function customNotificationsSettingsDataProvider(): array
     {
         return [
             'emptySettings' => [

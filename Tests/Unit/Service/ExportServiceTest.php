@@ -21,7 +21,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ExportServiceTest extends UnitTestCase
 {
-    public function fieldValuesInTypoScriptDataProvider(): array
+    public static function fieldValuesInTypoScriptDataProvider(): array
     {
         return [
             'fieldValuesWithWhitespacesInTypoScript' => [

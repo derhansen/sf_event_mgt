@@ -126,7 +126,7 @@ class CalendarServiceTest extends UnitTestCase
         self::assertCount(1, $calendarArray[1][2]['events']);
     }
 
-    public function calendarDateRangeDataProvider(): array
+    public static function calendarDateRangeDataProvider(): array
     {
         return [
             'january-2017-first-day-of-week-monday' => [
@@ -212,7 +212,7 @@ class CalendarServiceTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
-    public function dateConfigDataProvider(): array
+    public static function dateConfigDataProvider(): array
     {
         return [
             'january-2017-no-modifier' => [

@@ -43,7 +43,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
         unset($this->viewHelper);
     }
 
-    public function onlineCalendarViewHelperReturnsExpectedResultsDataProvider(): array
+    public static function onlineCalendarViewHelperReturnsExpectedResultsDataProvider(): array
     {
         return [
             'google' => [

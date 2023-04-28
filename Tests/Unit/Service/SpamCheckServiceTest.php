@@ -32,7 +32,7 @@ class SpamCheckServiceTest extends UnitTestCase
         self::assertFalse($service->isSpamCheckFailed());
     }
 
-    public function isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider(): array
+    public static function isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider(): array
     {
         return [
             'empty settings' => [

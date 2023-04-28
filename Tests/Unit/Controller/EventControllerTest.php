@@ -37,7 +37,7 @@ use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use TYPO3\CMS\Core\Http\PropagateResponseException;
+use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
@@ -1146,12 +1146,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, $eventUid, $hmac);
     }
 
-    /**
-     * Data provider for invalid emails
-     *
-     * @return array
-     */
-    public function invalidEmailsDataProvider()
+    public static function invalidEmailsDataProvider(): array
     {
         return [
             'EventExpired' => [
@@ -2122,8 +2117,8 @@ class EventControllerTest extends UnitTestCase
         $serverRequest = (new ServerRequest())->withAttribute('extbase', new ExtbaseRequestParameters());
         $request = new Request($serverRequest);
 
-        $this->expectExceptionCode(1631261423);
-        $this->expectException(PropagateResponseException::class);
+        $this->expectExceptionCode(1518472189);
+        $this->expectException(PageNotFoundException::class);
         $mock = $this->getAccessibleMock(EventController::class, null);
         $mock->_set('request', $request);
         $mock->_call('handleEventNotFoundError', $settings);

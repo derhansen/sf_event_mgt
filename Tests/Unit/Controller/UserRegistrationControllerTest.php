@@ -16,7 +16,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
-use TYPO3\CMS\Core\Http\PropagateResponseException;
+use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -98,8 +98,8 @@ class UserRegistrationControllerTest extends UnitTestCase
 
         $registration = new Registration();
 
-        $this->expectExceptionCode(1671627320);
-        $this->expectException(PropagateResponseException::class);
+        $this->expectExceptionCode(1518472189);
+        $this->expectException(PageNotFoundException::class);
 
         $this->subject->detailAction($registration);
     }

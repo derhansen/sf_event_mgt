@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
 {
-    public function viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider(): array
+    public static function viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider(): array
     {
         return [
             'Default value selected' => [
@@ -61,7 +61,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         self::assertEquals($expected, $viewHelper->render());
     }
 
-    public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
+    public static function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
     {
         return [
             'submitted value is field value for string' => [

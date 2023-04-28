@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class IsActionEnabledViewHelperTest extends UnitTestCase
 {
-    public function viewHelperReturnsExpectedResultDataProvider(): array
+    public static function viewHelperReturnsExpectedResultDataProvider(): array
     {
         return [
             'actionNotFoundInSettings' => [

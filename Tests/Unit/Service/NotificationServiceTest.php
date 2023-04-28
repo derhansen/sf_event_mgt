@@ -46,7 +46,7 @@ class NotificationServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public function messageTypeDataProvider(): array
+    public static function messageTypeDataProvider(): array
     {
         return [
             'messageTypeRegistrationNew' => [

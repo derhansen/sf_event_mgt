@@ -13,7 +13,6 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use DERHANSEN\SfEventMgt\Event\ModifyPaymentRedirectResponseEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
@@ -85,25 +84,12 @@ class PaymentControllerTest extends UnitTestCase
         $mockHashService = $this->getMockBuilder(HashService::class)->getMock();
         $this->subject->injectHashService($mockHashService);
 
-        $values = [
-            'sfEventMgtSettings' => [],
-            'successUrl' => null,
-            'failureUrl' => null,
-            'cancelUrl' => null,
-            'notifyUrl' => null,
-            'registration' => $mockRegistration,
-            'html' => '',
-        ];
-
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $this->subject->_set('view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects(self::atLeastOnce())->method('dispatch')->withConsecutive(
-            [new ProcessPaymentInitializeEvent($values, 'paypal', false, $mockRegistration, $this->subject)],
-            [new ModifyPaymentRedirectResponseEvent($this->subject->_call('htmlResponse'), [], $values, $mockRegistration, $this->subject)]
-        );
+        $eventDispatcher->expects(self::atLeastOnce())->method('dispatch');
         $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->redirectAction($mockRegistration, 'a-hmac');

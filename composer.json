@@ -19,20 +19,20 @@
     "GPL-2.0-or-later"
   ],
   "require": {
-    "typo3/cms-core": "^12.3 || dev-main"
+    "typo3/cms-core": "^12.4"
   },
   "require-dev": {
-    "typo3/cms-backend": "^12.3 || dev-main",
-    "typo3/cms-frontend": "^12.3 || dev-main",
-    "typo3/cms-extbase": "^12.3 || dev-main",
-    "typo3/cms-felogin": "^12.3 || dev-main",
-    "typo3/cms-fluid-styled-content": "^12.3 || dev-main",
-    "typo3/cms-fluid": "^12.3 || dev-main",
-    "typo3/cms-tstemplate": "^12.3 || dev-main",
-    "typo3/cms-install": "^12.3 || dev-main",
-    "typo3/cms-extensionmanager": "^12.3 || dev-main",
-    "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": "^0.1.0",
-    "typo3/testing-framework": "~7.0@dev || dev-main",
+    "typo3/cms-composer-installers": "^5.0",
+    "typo3/cms-backend": "^12.4",
+    "typo3/cms-frontend": "^12.4",
+    "typo3/cms-extbase": "^12.4",
+    "typo3/cms-felogin": "^12.4",
+    "typo3/cms-fluid-styled-content": "^12.4",
+    "typo3/cms-fluid": "^12.4",
+    "typo3/cms-tstemplate": "^12.4",
+    "typo3/cms-install": "^12.4",
+    "typo3/cms-extensionmanager": "^12.4",
+    "typo3/testing-framework": "^8.0.0 || dev-main",
     "friendsofphp/php-cs-fixer": "^3.12.0",
     "saschaegerer/phpstan-typo3": "^1.8.3",
     "phpstan/extension-installer": "^1.1",
@@ -61,8 +61,7 @@
     "allow-plugins": {
       "typo3/class-alias-loader": true,
       "typo3/cms-composer-installers": true,
-      "phpstan/extension-installer": true,
-      "sbuerk/typo3-cmscomposerinstallers-testingframework-bridge": true
+      "phpstan/extension-installer": true
     }
   },
   "extra": {

@@ -38,7 +38,7 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         unset($this->viewhelper);
     }
 
-    public function simultaneousRegistrationsDataProvider(): array
+    public static function simultaneousRegistrationsDataProvider(): array
     {
         return [
             'maxRegistrationsAndFreePlacesEqual' => [

@@ -73,7 +73,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         self::assertSame('John', $viewHelper->render());
     }
 
-    public function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
+    public static function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
     {
         return [
             'submitted value returned' => [

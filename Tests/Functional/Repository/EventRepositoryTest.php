@@ -58,10 +58,7 @@ class EventRepositoryTest extends FunctionalTestCase
         $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
-    /**
-     * @return array
-     */
-    public function findDemandedRecordsByStoragePageDataProvider(): array
+    public static function findDemandedRecordsByStoragePageDataProvider(): array
     {
         return [
             'pid is string and valid' => [
@@ -210,7 +207,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame('131,132', implode(',', $eventIds));
     }
 
-    public function findDemandedRecordsByCategoryWithConjunctionDataProvider(): array
+    public static function findDemandedRecordsByCategoryWithConjunctionDataProvider(): array
     {
         return [
             'no conjuction' => [
@@ -296,7 +293,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
-    public function findDemandedRecordsByLocationDataProvider(): array
+    public static function findDemandedRecordsByLocationDataProvider(): array
     {
         return [
             'location 1' => [
@@ -332,12 +329,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
-    /**
-     * DataProvider for findDemandedRecordsByLocationCity
-     *
-     * @return array
-     */
-    public function findDemandedRecordsByLocationCityDataProvider()
+    public static function findDemandedRecordsByLocationCityDataProvider(): array
     {
         return [
             'City: Flensburg' => [
@@ -356,10 +348,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationCityDataProvider
      * @test
-     * @param mixed $locationCity
-     * @param mixed $expected
      */
-    public function findDemandedRecordsByLocationCity($locationCity, $expected): void
+    public function findDemandedRecordsByLocationCity(string $locationCity, int $expected): void
     {
         $demand = new EventDemand();
         $demand->setStoragePage('50');
@@ -368,12 +358,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame($expected, $this->eventRepository->findDemanded($demand)->count());
     }
 
-    /**
-     * DataProvider for findDemandedRecordsByLocationCountry
-     *
-     * @return array
-     */
-    public function findDemandedRecordsByLocationCountryDataProvider()
+    public static function findDemandedRecordsByLocationCountryDataProvider(): array
     {
         return [
             'Country: Germany' => [
@@ -392,10 +377,8 @@ class EventRepositoryTest extends FunctionalTestCase
      *
      * @dataProvider findDemandedRecordsByLocationCountryDataProvider
      * @test
-     * @param mixed $locationCountry
-     * @param mixed $expected
      */
-    public function findDemandedRecordsByLocationCountry($locationCountry, $expected): void
+    public function findDemandedRecordsByLocationCountry(string $locationCountry, int $expected): void
     {
         $demand = new EventDemand();
         $demand->setStoragePage('60');
@@ -462,7 +445,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(2, $events->count());
     }
 
-    public function findDemandedRecordsByTopEventDataProvider(): array
+    public static function findDemandedRecordsByTopEventDataProvider(): array
     {
         return [
             'noRestriction' => [
@@ -499,7 +482,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame($expected, $events->count());
     }
 
-    public function findDemandedRecordsByOrderingDataProvider(): array
+    public static function findDemandedRecordsByOrderingDataProvider(): array
     {
         return [
             'noSorting' => [
@@ -707,7 +690,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(1, $events->count());
     }
 
-    public function findDemandedRecordsBySpeakerDataProvider(): array
+    public static function findDemandedRecordsBySpeakerDataProvider(): array
     {
         return [
             'events with speaker 1' => [
@@ -763,12 +746,7 @@ class EventRepositoryTest extends FunctionalTestCase
         self::assertSame(1, $events->count());
     }
 
-    /**
-     * DataProvider for findDemandedRecordsBySpeaker
-     *
-     * @return array
-     */
-    public function findDemandedRespectsIgnoreEnableFieldsDataProvider(): array
+    public static function findDemandedRespectsIgnoreEnableFieldsDataProvider(): array
     {
         return [
             'ignoreEnableFields inactive' => [

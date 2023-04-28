@@ -43,7 +43,7 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
         self::assertFalse($result->hasErrors());
     }
 
-    public function validatorDataProvider(): array
+    public static function validatorDataProvider(): array
     {
         return [
             'required string field with no value' => [
