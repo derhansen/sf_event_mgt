@@ -2,7 +2,7 @@
 
 1. Start Selenium:
 
-   `java -Djava.awt.headless=true -jar ~/Selenium/selenium-server-4.1.0.jar standalone`
+   `java -Djava.awt.headless=true -jar ~/Selenium/selenium-server-4.9.0.jar standalone`
 
 2. Execute Acceptance Testsuite
 
