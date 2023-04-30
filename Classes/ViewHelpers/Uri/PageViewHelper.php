@@ -15,8 +15,6 @@
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 
-use Closure;
-use RuntimeException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\MathUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface as ExtbaseRequestInterface;
@@ -29,7 +27,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 /**
  * Modified version of TYPO3 f:uri.page viewHelper, which always generates frontend URLs, so views created in
  * backend context always render links in frontend context. Should be used in custom notifications sent using the
- * backend module.
+ * backend module. Note, that this ViewHelper does only support extbase context
  */
 class PageViewHelper extends AbstractViewHelper
 {
@@ -45,19 +43,20 @@ class PageViewHelper extends AbstractViewHelper
         $this->registerArgument('section', 'string', 'the anchor to be added to the URI', false, '');
         $this->registerArgument('linkAccessRestrictedPages', 'bool', 'If set, links pointing to access restricted pages will still link to the page even though the page cannot be accessed.', false, false);
         $this->registerArgument('absolute', 'bool', 'If set, the URI of the rendered link is absolute', false, false);
-        $this->registerArgument('addQueryString', 'bool', 'If set, the current query parameters will be kept in the URI', false, false);
+        $this->registerArgument('addQueryString', 'string', 'If set, the current query parameters will be kept in the URL. If set to "untrusted", then ALL query parameters will be added. Be aware, that this might lead to problems when the generated link is cached.', false, false);
         $this->registerArgument('argumentsToBeExcludedFromQueryString', 'array', 'arguments to be removed from the URI. Only active if $addQueryString = TRUE', false, []);
     }
 
-    public static function renderStatic(array $arguments, Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
+    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext): string
     {
         /** @var RenderingContext $renderingContext */
         $request = $renderingContext->getRequest();
         if ($request instanceof ExtbaseRequestInterface) {
             return self::renderWithExtbaseContext($request, $arguments);
         }
-        throw new RuntimeException(
-            'ViewHelper f:uri.page can be used only in extbase context and needs a request implementing extbase RequestInterface.',
+
+        throw new \RuntimeException(
+            'The rendering context of ViewHelper e:uri.page is missing a valid request object.',
             1639820200
         );
     }
@@ -72,7 +71,7 @@ class PageViewHelper extends AbstractViewHelper
         $language = $arguments['language'] ?? null;
         $linkAccessRestrictedPages = $arguments['linkAccessRestrictedPages'];
         $absolute = $arguments['absolute'];
-        $addQueryString = $arguments['addQueryString'];
+        $addQueryString = $arguments['addQueryString'] ?? false;
         $argumentsToBeExcludedFromQueryString = $arguments['argumentsToBeExcludedFromQueryString'];
 
         $uriBuilder = GeneralUtility::makeInstance(ExtbaseUriBuilder::class);
