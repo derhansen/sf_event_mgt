@@ -92,9 +92,10 @@ The spam check has the following configuration options::
 The spam check calculates a challenge consisting of the configured pre- and postfix and a hmac which includes the
 uid of the event. This challenge is added as data-attribute to the hidden form field.
 
-The check expects the challenge to be returned ROT13 encrypted/encoded. There is a plain vanilla JS script in
+The check expects the challenge to be returned ROT13 encrypted/encoded. There is a plain vanilla JavaScript script in
 :php:`Resources/Public/JavaScript/cr-spamcheck.js` that does the job for you, if you use the included partial for
-the spam checks of the extension.
+the spam checks of the extension. The required JavaScript file is automatically included, when the challengeResponse
+check is activated.
 
 Creating a custom spam check
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
