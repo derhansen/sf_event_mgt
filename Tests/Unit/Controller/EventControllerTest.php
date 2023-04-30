@@ -71,7 +71,6 @@ class EventControllerTest extends UnitTestCase
                 'redirect',
                 'addFlashMessage',
                 'overwriteEventDemandObject',
-                'getSysLanguageUid',
                 'persistAll',
                 'htmlResponse',
             ],

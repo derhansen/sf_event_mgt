@@ -994,16 +994,6 @@ class EventController extends AbstractController
     }
 
     /**
-     * Returns the current sys_language_uid
-     */
-    protected function getSysLanguageUid(): int
-    {
-        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
-
-        return $languageAspect->getId();
-    }
-
-    /**
      * Returns the language code of the current language
      */
     protected function getCurrentLanguageCode(): string
