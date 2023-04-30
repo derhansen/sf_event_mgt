@@ -26,6 +26,7 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -106,6 +107,15 @@ abstract class AbstractController extends ActionController
     public function injectFieldRepository(FieldRepository $fieldRepository): void
     {
         $this->fieldRepository = $fieldRepository;
+    }
+
+    /**
+     * Public getter for extbase arguments. Can be used by extending extensions in e.g. event listeners to
+     * retrieve the current controller arguments.
+     */
+    public function getControllerArguments(): Arguments
+    {
+        return $this->arguments;
     }
 
     /**
