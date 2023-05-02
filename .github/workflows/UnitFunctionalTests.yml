@@ -10,9 +10,10 @@ jobs:
     strategy:
       matrix:
         env:
-          - { php: 7.4, coverage: 1}
-          - { php: 8.0, coverage: 0}
-          - { php: 8.1, coverage: 0}
+          - { php: 7.4 }
+          - { php: 8.0 }
+          - { php: 8.1 }
+          - { php: 8.2 }
 
     env: ${{ matrix.env }}
 
@@ -49,13 +50,8 @@ jobs:
 
       - name: Unit tests
         run: |
-          if [[ "$coverage" == "0" ]]; then
-            echo "Running unit tests";
-            .Build/bin/phpunit --colors -c Tests/Build/UnitTests.xml
-          else
-            echo "Running unit tests with coverage";
-            .Build/bin/phpunit --colors --coverage-clover=unittest-coverage.clover -c Tests/Build/UnitTests.xml
-          fi
+          echo "Running unit tests";
+          .Build/bin/phpunit --colors -c Tests/Build/UnitTests.xml
 
       - name: Functional tests
         run: |
@@ -63,20 +59,5 @@ jobs:
           export typo3DatabaseHost="127.0.0.1";
           export typo3DatabaseUsername="root";
           export typo3DatabasePassword="root";
-          if [[ "$coverage" == "0" ]]; then
-            echo "Running functional tests";
+          echo "Running functional tests";
           find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit -c Tests/Build/FunctionalTests.xml {}'
-          else
-            echo "Running functional tests with coverage";
-          find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/bin/phpunit --coverage-clover={}functionaltest-coverage.clover -c Tests/Build/FunctionalTests.xml {}'
-          fi
-
-      - name: Upload Code Coverage Data
-        if: ${{ env.coverage == '1' && success() }}
-        continue-on-error: true
-        run: |
-          echo;
-          echo "Uploading code coverage results";
-          wget https://scrutinizer-ci.com/ocular.phar
-          php ocular.phar code-coverage:upload --format=php-clover unittest-coverage.clover
-          find 'Tests/Functional' -wholename '*Test.php' -exec php ocular.phar code-coverage:upload --format=php-clover {}functionaltest-coverage.clover \;
