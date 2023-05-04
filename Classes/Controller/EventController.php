@@ -748,6 +748,7 @@ class EventController extends AbstractController
     private function getRedirectToPaymentResponse(int $paymentPid, Registration $registration): ?ResponseInterface
     {
         $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($registration, $this);
+        $this->eventDispatcher->dispatch($processRedirectToPaymentEvent);
         if ($processRedirectToPaymentEvent->getProcessRedirect()) {
             $this->uriBuilder->reset()
                 ->setTargetPageUid($paymentPid);
