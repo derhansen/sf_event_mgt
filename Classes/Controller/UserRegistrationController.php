@@ -67,9 +67,4 @@ class UserRegistrationController extends AbstractController
     {
         return $this->getTypoScriptFrontendController()->fe_user;
     }
-
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'] ?? null;
-    }
 }
