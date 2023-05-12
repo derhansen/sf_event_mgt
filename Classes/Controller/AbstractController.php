@@ -112,6 +112,15 @@ abstract class AbstractController extends ActionController
     }
 
     /**
+     * Public getter to retrieve extension settings. Can be used by extending extensions in e.g. event listeners to
+     * retrieve the extension settings.
+     */
+    public function getSettings(): array
+    {
+        return $this->settings;
+    }
+
+    /**
      * Returns an array with variables for the pagination. An array with pagination settings should be passed.
      * Applies default values if settings are not available:
      * - pagination disabled
