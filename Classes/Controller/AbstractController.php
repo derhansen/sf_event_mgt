@@ -124,7 +124,7 @@ abstract class AbstractController extends ActionController
      */
     public function getSettings(): array
     {
-        return $this->settings ?? [];
+        return $this->settings;
     }
 
     /**
