@@ -50,10 +50,6 @@ class UserRegistrationController extends AbstractController
     /**
      * Checks, if the given registration belongs to the current logged in frontend user. If not, a
      * page not found response is thrown.
-     *
-     * @param Registration $registration
-     * @throws PropagateResponseException
-     * @throws PageNotFoundException
      */
     public function checkRegistrationAccess(Registration $registration): void
     {
