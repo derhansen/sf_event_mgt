@@ -205,7 +205,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                     $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
                 )
             )
-            ->executeQuery();
+            ->executeStatement();
     }
 
     /**
