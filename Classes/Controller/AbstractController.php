@@ -19,12 +19,12 @@ use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
-use DERHANSEN\SfEventMgt\Pagination\NumberedPagination;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
@@ -136,18 +136,18 @@ abstract class AbstractController extends ActionController
      */
     protected function getPagination(QueryResultInterface $events, array $settings): array
     {
-        $pagination = [];
+        $paginationData = [];
         $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
         if (($settings['enablePagination'] ?? false) && (int)$settings['itemsPerPage'] > 0) {
             $paginator = new QueryResultPaginator($events, $currentPage, (int)($settings['itemsPerPage'] ?? 10));
-            $pagination = new NumberedPagination($paginator, (int)($settings['maxNumPages'] ?? 10));
-            $pagination = [
+            $pagination = new SlidingWindowPagination($paginator, (int)($settings['maxNumPages'] ?? 10));
+            $paginationData = [
                 'paginator' => $paginator,
                 'pagination' => $pagination,
             ];
         }
 
-        return $pagination;
+        return $paginationData;
     }
 
     /**
