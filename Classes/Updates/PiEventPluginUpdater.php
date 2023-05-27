@@ -106,6 +106,10 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
 
         foreach ($records as $record) {
             $flexFormData = GeneralUtility::xml2array($record['pi_flexform']);
+            if (!is_array($flexFormData)) {
+                continue;
+            }
+
             $flexForm = $this->flexFormService->convertFlexFormContentToArray($record['pi_flexform']);
             $targetListType = $this->getTargetListType(
                 $record['list_type'],
