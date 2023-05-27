@@ -149,23 +149,23 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     /**
      * Sets information to the data array if override demand setting is disabled
      */
-    protected function setOverrideDemandSettings(array &$data, array $flexFormData): void
+    protected function setOverrideDemandSettings(array &$data, array $flexFormData, array $record): void
     {
         $field = (int)$this->getFlexFormFieldValue($flexFormData, 'settings.disableOverrideDemand', 'additional');
 
         if ($field === 1) {
-            $text = '<i class="fa fa-check"></i>';
+            $text = '';
 
             // Check if plugin action is "calendar" and if so, show warning that calendar action will not work
-            $action = $this->getFlexFormFieldValue($flexFormData, 'switchableControllerActions');
-            if ($action === 'Event->calendar') {
-                $text .= ' <span class="label label-danger">' .
+            if ($record['list_type'] === 'sfeventmgt_pieventcalendar') {
+                $text .= ' <span class="badge badge-danger ms-1">' .
                     htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.pluginCalendarMisonfiguration')) . '</span>';
             }
 
             $data[] = [
                 'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.disableOverrideDemand'),
                 'value' => $text,
+                'icon' => 'actions-check-square',
             ];
         }
     }

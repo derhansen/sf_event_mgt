@@ -38,7 +38,7 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
         $this->setStoragePage($data, $flexFormData, 'settings.storagePage');
 
         $this->setOrderSettings($data, $flexFormData, 'settings.orderField', 'settings.orderDirection');
-        $this->setOverrideDemandSettings($data, $flexFormData);
+        $this->setOverrideDemandSettings($data, $flexFormData, $record);
 
         $this->setCategoryConjuction($data, $flexFormData);
         $this->setCategorySettings($data, $flexFormData);
@@ -101,7 +101,8 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
             if ((int)$includeSubcategories === 1) {
                 $data[] = [
                     'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.includeSubcategories'),
-                    'value' => '<i class="fa fa-check"></i>',
+                    'value' => '',
+                    'icon' => 'actions-check-square',
                 ];
             }
         }
