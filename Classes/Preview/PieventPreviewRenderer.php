@@ -68,7 +68,7 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
                 $text = htmlspecialchars($this->getLanguageService()->sL(
                     self::LLPATH . 'flexforms_general.categoryConjunction.ignore'
                 ));
-                $text .= ' <span class="label label-warning">' . htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.possibleMisconfiguration')) . '</span>';
+                $text .= ' <span class="badge badge-warning">' . htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.possibleMisconfiguration')) . '</span>';
         }
 
         $data[] = [
