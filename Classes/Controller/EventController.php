@@ -65,7 +65,7 @@ class EventController extends AbstractController
      */
     protected function initializeView(): void
     {
-        $this->view->assign('contentObjectData', $this->request->getAttribute('currentContentObject')->data);
+        $this->view->assign('contentObjectData', $this->request->getAttribute('currentContentObject')->data ?? null);
         if ($this->getTypoScriptFrontendController()) {
             $this->view->assign('pageData', $this->getTypoScriptFrontendController()->page);
         }
