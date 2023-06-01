@@ -31,17 +31,14 @@ class BackendUserViewHelper extends AbstractViewHelper
         $this->registerArgument('userUid', 'int', 'UID of backend user', true);
     }
 
-    /**
-     * @return array|false|mixed
-     */
     public static function renderStatic(
         array $arguments,
         Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
-    ) {
+    ): array {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('be_users');
         $queryBuilder->getRestrictions()->removeAll();
-        return $queryBuilder
+        $backendUser = $queryBuilder
             ->select('*')
             ->from('be_users')
             ->where(
@@ -52,5 +49,7 @@ class BackendUserViewHelper extends AbstractViewHelper
             )
             ->executeQuery()
             ->fetchAssociative();
+
+        return $backendUser ?? [];
     }
 }
