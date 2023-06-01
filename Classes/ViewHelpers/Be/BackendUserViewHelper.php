@@ -50,6 +50,10 @@ class BackendUserViewHelper extends AbstractViewHelper
             ->executeQuery()
             ->fetchAssociative();
 
-        return $backendUser ?? [];
+        if ($backendUser === false) {
+            $backendUser = [];
+        }
+
+        return $backendUser;
     }
 }
