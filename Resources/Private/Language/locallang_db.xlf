@@ -330,9 +330,6 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.tstamp">
 				<source>Timestamp</source>
 			</trans-unit>
-			<trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.cruser">
-				<source>User</source>
-			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
 				<source>Organisator</source>
 			</trans-unit>
