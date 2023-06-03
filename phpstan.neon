@@ -10,7 +10,3 @@ parameters:
     checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: true
     checkGenericClassInNonGenericObjectType: false
-
-    typo3:
-        requestGetAttributeMapping:
-            currentContentObject: TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
