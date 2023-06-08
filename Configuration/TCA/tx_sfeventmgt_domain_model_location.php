@@ -92,7 +92,7 @@ return [
                 'items' => [
                     [
                         'label' => '',
-                        'invertStateDisplay' => true,
+                        'invertStateDisplay' => false,
                     ],
                 ],
             ],
