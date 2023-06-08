@@ -26,3 +26,4 @@ For Administrators
    SpamPrevention/Index
    Seo/Index
    Waitlist/Index
+   Linkhandler/Index
