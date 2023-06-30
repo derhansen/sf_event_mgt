@@ -142,7 +142,7 @@ class MailHog extends Module
         $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
-            if (strpos($email->Content->Headers->To[0], $address) !== false) {
+            if (str_contains($email->Content->Headers->To[0], $address)) {
                 array_push($inbox, $email);
             }
 
@@ -169,7 +169,7 @@ class MailHog extends Module
         $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
-            if (strpos($email->Content->Headers->To[0], $address) !== false) {
+            if (str_contains($email->Content->Headers->To[0], $address)) {
                 array_push($inbox, $email);
             }
         }
@@ -430,11 +430,11 @@ class MailHog extends Module
                 $property = quoted_printable_decode($property);
             }
             if (!empty($email->Content->Headers->{'Content-Type'}[0]) &&
-                strpos($email->Content->Headers->{'Content-Type'}[0], 'multipart/mixed') !== false
+                str_contains($email->Content->Headers->{'Content-Type'}[0], 'multipart/mixed')
             ) {
                 $property = quoted_printable_decode($property);
             }
-            if (strpos($property, '=?utf-8?Q?') !== false && extension_loaded('mbstring')) {
+            if (str_contains($property, '=?utf-8?Q?')   && extension_loaded('mbstring')) {
                 $property = mb_decode_mimeheader($property);
             }
         }
