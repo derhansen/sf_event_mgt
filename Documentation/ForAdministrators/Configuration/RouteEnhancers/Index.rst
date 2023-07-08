@@ -111,10 +111,11 @@ Configuration::
             _arguments:
               event_title: event
           -
-            routePath: '/save-registration-result/{eventuid}/{result}/{hmac}'
+            routePath: '/save-registration-result/{eventuid}/{reguid}/{result}/{hmac}'
             _controller: 'Event::saveRegistrationResult'
             _arguments:
               eventuid: eventuid
+              reguid: reguid
               result: result
               hmac: hmac
           -
