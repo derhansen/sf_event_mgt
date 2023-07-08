@@ -507,6 +507,7 @@ class EventController extends AbstractController
         list($success, $result) = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
 
         // Save registration if no errors
+        $registrationUid = 0;
         if ($success) {
             $isWaitlistRegistration = $this->registrationService->isWaitlistRegistration(
                 $event,
@@ -531,6 +532,7 @@ class EventController extends AbstractController
 
             // Persist registration, so we have an UID
             $this->persistAll();
+            $registrationUid = $registration->getUid();
 
             if ($isWaitlistRegistration) {
                 $messageType = MessageType::REGISTRATION_WAITLIST_NEW;
@@ -591,7 +593,8 @@ class EventController extends AbstractController
             [
                 'result' => $result,
                 'eventuid' => $event->getUid(),
-                'hmac' => $this->hashService->generateHmac('event-' . $event->getUid()),
+                'reguid' => $registrationUid,
+                'hmac' => $this->hashService->generateHmac('event-' . $event->getUid() . '-reg-' . $registrationUid),
             ]
         );
     }
@@ -599,9 +602,10 @@ class EventController extends AbstractController
     /**
      * Shows the result of the saveRegistrationAction
      */
-    public function saveRegistrationResultAction(int $result, int $eventuid, string $hmac): ResponseInterface
+    public function saveRegistrationResultAction(int $result, int $eventuid, int $reguid, string $hmac): ResponseInterface
     {
         $event = null;
+        $registration = null;
 
         switch ($result) {
             case RegistrationResult::REGISTRATION_SUCCESSFUL:
@@ -645,17 +649,19 @@ class EventController extends AbstractController
                 $titleKey = '';
         }
 
-        if (!$this->hashService->validateHmac('event-' . $eventuid, $hmac)) {
+        if (!$this->hashService->validateHmac('event-' . $eventuid . '-reg-' . $reguid, $hmac)) {
             $messageKey = 'event.message.registrationsuccessfulwrongeventhmac';
             $titleKey = 'registrationResult.title.failed';
         } else {
-            $event = $this->eventRepository->findByUid((int)$eventuid);
+            $event = $this->eventRepository->findByUid($eventuid);
+            $registration = $this->registrationRepository->findByUid($reguid);
         }
 
         $this->view->assignMultiple([
             'messageKey' => $messageKey,
             'titleKey' => $titleKey,
             'event' => $event,
+            'registration' => $registration,
         ]);
 
         return $this->htmlResponse();
