@@ -17,11 +17,6 @@ filter:
     paths:
         - 'Classes/*'
 tools:
-
-    external_code_coverage:
-        timeout: 2400
-        runs: 7
-
     php_cpd:
         enabled: true
 
