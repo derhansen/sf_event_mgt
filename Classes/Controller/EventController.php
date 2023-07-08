@@ -602,8 +602,10 @@ class EventController extends AbstractController
     /**
      * Shows the result of the saveRegistrationAction
      */
-    public function saveRegistrationResultAction(int $result, int $eventuid, int $reguid, string $hmac): ResponseInterface
+    public function saveRegistrationResultAction(int $result, int $eventuid, string $hmac): ResponseInterface
     {
+        $reguid = $this->request->hasArgument('reguid') ? (int)$this->request->getArgument('reguid') : 0;
+
         $event = null;
         $registration = null;
 

@@ -1123,8 +1123,10 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationResultActionShowsExpectedMessageIfWrongHmacGiven()
     {
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
+
         $eventUid = 1;
-        $regUid = 123;
         $hmac = 'wrongmac';
 
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -1147,7 +1149,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->subject->_set('view', $view);
 
-        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, $eventUid, $regUid, $hmac);
+        $this->subject->saveRegistrationResultAction(RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, $eventUid, $hmac);
     }
 
     public static function invalidEmailsDataProvider(): array
@@ -1236,6 +1238,11 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $reguid, $hmac, $message, $title)
     {
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::once())->method('hasArgument')->with('reguid')->willReturn(true);
+        $request->expects(self::once())->method('getArgument')->willReturn($reguid);
+        $this->subject->_set('request', $request);
+
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
         $hashService->expects(self::once())->method('validateHmac')->with('event-' . $eventUid . '-reg-' . $reguid, $hmac)
             ->willReturn(true);
@@ -1264,7 +1271,7 @@ class EventControllerTest extends UnitTestCase
         ]);
         $this->subject->_set('view', $view);
 
-        $this->subject->saveRegistrationResultAction($result, $eventUid, $reguid, $hmac);
+        $this->subject->saveRegistrationResultAction($result, $eventUid, $hmac);
     }
 
     /**
