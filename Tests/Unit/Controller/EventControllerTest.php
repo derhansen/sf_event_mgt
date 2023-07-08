@@ -547,7 +547,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_NOT_ENABLED, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_NOT_ENABLED, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -577,7 +577,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -607,7 +607,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -642,7 +642,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -680,7 +680,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -719,7 +719,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -769,7 +769,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE, 'eventuid' => 1, 'reguid' => 0, 'hmac' => 'somehmac']
         );
 
         $this->subject->saveRegistrationAction($registration, $event);
@@ -800,6 +800,7 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(1);
+        $registration->expects(self::any())->method('getUid')->willReturn(123);
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(10);
 
@@ -832,7 +833,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST, 'eventuid' => 1, 'reguid' => 123, 'hmac' => 'somehmac']
         );
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -860,6 +861,7 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(1);
+        $registration->expects(self::any())->method('getUid')->willReturn(123);
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(9);
 
@@ -899,7 +901,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'reguid' => 123, 'hmac' => 'somehmac']
         );
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -1069,6 +1071,7 @@ class EventControllerTest extends UnitTestCase
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
         $registration->expects(self::any())->method('getAmountOfRegistrations')->willReturn(2);
+        $registration->expects(self::any())->method('getUid')->willReturn(123);
 
         $registrations = $this->getMockBuilder(ObjectStorage::class)->getMock();
         $registrations->expects(self::any())->method('count')->willReturn(9);
@@ -1114,7 +1117,7 @@ class EventControllerTest extends UnitTestCase
             'saveRegistrationResult',
             null,
             null,
-            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'hmac' => 'somehmac']
+            ['result' => RegistrationResult::REGISTRATION_SUCCESSFUL, 'eventuid' => 1, 'reguid' => 123, 'hmac' => 'somehmac']
         );
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -1130,6 +1133,9 @@ class EventControllerTest extends UnitTestCase
      */
     public function saveRegistrationResultActionShowsExpectedMessageIfWrongHmacGiven()
     {
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
+
         $eventUid = 1;
         $hmac = 'wrongmac';
 
@@ -1149,6 +1155,7 @@ class EventControllerTest extends UnitTestCase
             'messageKey' => 'event.message.registrationsuccessfulwrongeventhmac',
             'titleKey' => 'registrationResult.title.failed',
             'event' => null,
+            'registration' => null,
         ]);
         $this->subject->_set('view', $view);
 
@@ -1166,6 +1173,7 @@ class EventControllerTest extends UnitTestCase
             'EventExpired' => [
                 RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfailedeventexpired',
                 'registrationResult.title.failed',
@@ -1173,6 +1181,7 @@ class EventControllerTest extends UnitTestCase
             'RegistrationDeadlineExpired' => [
                 RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfaileddeadlineexpired',
                 'registrationResult.title.failed',
@@ -1180,6 +1189,7 @@ class EventControllerTest extends UnitTestCase
             'EventFull' => [
                 RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfailedmaxparticipants',
                 'registrationResult.title.failed',
@@ -1187,6 +1197,7 @@ class EventControllerTest extends UnitTestCase
             'RegistrationSuccessful' => [
                 RegistrationResult::REGISTRATION_SUCCESSFUL,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationsuccessful',
                 'registrationResult.title.successful',
@@ -1194,6 +1205,7 @@ class EventControllerTest extends UnitTestCase
             'RegistrationNotEnabled' => [
                 RegistrationResult::REGISTRATION_NOT_ENABLED,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfailednotenabled',
                 'registrationResult.title.failed',
@@ -1201,6 +1213,7 @@ class EventControllerTest extends UnitTestCase
             'NotEnoughFreePlaces' => [
                 RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfailednotenoughfreeplaces',
                 'registrationResult.title.failed',
@@ -1208,6 +1221,7 @@ class EventControllerTest extends UnitTestCase
             'MaxAmountRegistrationsExceeded' => [
                 RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfailedmaxamountregistrationsexceeded',
                 'registrationResult.title.failed',
@@ -1215,6 +1229,7 @@ class EventControllerTest extends UnitTestCase
             'EmailNotUnique' => [
                 RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE,
                 1,
+                123,
                 'somehmac',
                 'event.message.registrationfailedemailnotunique',
                 'registrationResult.title.failed',
@@ -1222,6 +1237,7 @@ class EventControllerTest extends UnitTestCase
             'UnknownResult' => [
                 -1,
                 1,
+                123,
                 'somehmac',
                 '',
                 '',
@@ -1234,16 +1250,16 @@ class EventControllerTest extends UnitTestCase
      *
      * @dataProvider invalidEmailsDataProvider
      * @test
-     * @param mixed $result
-     * @param mixed $eventUid
-     * @param mixed $hmac
-     * @param mixed $message
-     * @param mixed $title
      */
-    public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $hmac, $message, $title)
+    public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $reguid, $hmac, $message, $title)
     {
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::once())->method('hasArgument')->with('reguid')->willReturn(true);
+        $request->expects(self::once())->method('getArgument')->willReturn($reguid);
+        $this->subject->_set('request', $request);
+
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
-        $hashService->expects(self::once())->method('validateHmac')->with('event-' . $eventUid, $hmac)
+        $hashService->expects(self::once())->method('validateHmac')->with('event-' . $eventUid . '-reg-' . $reguid, $hmac)
             ->willReturn(true);
         $this->subject->injectHashService($hashService);
 
@@ -1254,11 +1270,19 @@ class EventControllerTest extends UnitTestCase
         $eventRepository->expects(self::any())->method('findByUid')->with($eventUid);
         $this->subject->injectEventRepository($eventRepository);
 
+        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->onlyMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $registrationRepository->expects(self::any())->method('findByUid')->with($reguid);
+        $this->subject->injectRegistrationRepository($registrationRepository);
+
         $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
         $view->expects(self::once())->method('assignMultiple')->with([
             'messageKey' => $message,
             'titleKey' => $title,
             'event' => null,
+            'registration' => null,
         ]);
         $this->subject->_set('view', $view);
 
