@@ -19,27 +19,24 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\CMS\Frontend\ContentObject\DataProcessorInterface;
 
 /**
- * Disable language item on a detail page if the event is not translated
+ * Disable language item on detail or registration page, if the event is not translated
  *
  * 20 = DERHANSEN\SfEventMgt\DataProcessing\DisableLanguageMenuProcessor
  * 20.menus = languageMenu
  */
 class DisableLanguageMenuProcessor implements DataProcessorInterface
 {
-    /**
-     * @return array
-     */
     public function process(
         ContentObjectRenderer $cObj,
         array $contentObjectConfiguration,
         array $processorConfiguration,
         array $processedData
-    ) {
+    ): array {
         if (!$processorConfiguration['menus']) {
             return $processedData;
         }
 
-        $eventId = $this->getEventId();
+        $eventId = $this->getEventId($cObj->getRequest());
         if ($eventId === 0) {
             return $processedData;
         }
@@ -72,22 +69,21 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         }
     }
 
-    protected function getEventId(): int
+    protected function getEventId(ServerRequestInterface$request): int
     {
         $eventId = 0;
         /** @var PageArguments $pageArguments */
-        $pageArguments = $this->getRequest()->getAttribute('routing');
+        $pageArguments = $request->getAttribute('routing');
         if (isset($pageArguments->getRouteArguments()['tx_sfeventmgt_pieventdetail']['event'])) {
             $eventId = (int)$pageArguments->getRouteArguments()['tx_sfeventmgt_pieventdetail']['event'];
-        } elseif (isset($this->getRequest()->getQueryParams()['tx_sfeventmgt_pieventdetail']['event'])) {
-            $eventId = (int)$this->getRequest()->getQueryParams()['tx_sfeventmgt_pieventdetail']['event'];
+        } elseif (isset($request->getQueryParams()['tx_sfeventmgt_pieventdetail']['event'])) {
+            $eventId = (int)$request->getQueryParams()['tx_sfeventmgt_pieventdetail']['event'];
+        } elseif (isset($pageArguments->getRouteArguments()['tx_sfeventmgt_pieventregistration']['event'])) {
+            $eventId = (int)$pageArguments->getRouteArguments()['tx_sfeventmgt_pieventregistration']['event'];
+        } elseif (isset($request->getQueryParams()['tx_sfeventmgt_pieventregistration']['event'])) {
+            $eventId = (int)$request->getQueryParams()['tx_sfeventmgt_pieventregistration']['event'];
         }
 
         return $eventId;
-    }
-
-    protected function getRequest(): ServerRequestInterface
-    {
-        return $GLOBALS['TYPO3_REQUEST'];
     }
 }
