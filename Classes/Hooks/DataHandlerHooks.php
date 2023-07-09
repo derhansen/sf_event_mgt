@@ -199,7 +199,7 @@ class DataHandlerHooks
     }
 
     /**
-     * Removes all custom notification log entried for the given event UID
+     * Removes all custom notification log entries for the given event UID
      */
     protected function deleteCustomNotificationsByEvent(int $eventUid): void
     {
@@ -210,6 +210,6 @@ class DataHandlerHooks
             ->where(
                 $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             )
-            ->executeQuery();
+            ->executeStatement();
     }
 }
