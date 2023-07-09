@@ -69,7 +69,7 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         }
     }
 
-    protected function getEventId(ServerRequestInterface$request): int
+    protected function getEventId(ServerRequestInterface $request): int
     {
         $eventId = 0;
         /** @var PageArguments $pageArguments */
