@@ -76,8 +76,8 @@ This extension uses semantic versioning. You can expect, that each major version
 which must be migrated manually. The [documentation](https://github.com/derhansen/sf_event_mgt/blob/main/Documentation/BreakingChanges/Index.rst) contains a summary of all breaking changes including links
 to the release notes for each affected version.
 
-When doing a TYPO3 major version update where the extension is used, please make sure follow all described migrations
-regarding breaking changes.
+When doing a TYPO3 major version update where the extension is used, please make sure to follow all described
+migrations regarding breaking changes.
 
 ## Versions
 
