@@ -69,6 +69,15 @@ The recommended way to install the extension is by using [Composer](https://getc
 
 Download and install the extension with the TYPO3 extension manager module.
 
+## Breaking changes
+
+This extension uses semantic versioning. You can expect, that each major version contains breaking changes
+which must be migrated manually. The [documentation](https://github.com/derhansen/sf_event_mgt/blob/main/Documentation/BreakingChanges/Index.rst) contains a summary of all breaking changes including links
+to the release notes for each affected version.
+
+When doing a TYPO3 major version update where the extension is used, please make sure follow all described migrations
+regarding breaking changes.
+
 ## Versions
 
 | Version | TYPO3     | PHP       | Support/Development                  |
