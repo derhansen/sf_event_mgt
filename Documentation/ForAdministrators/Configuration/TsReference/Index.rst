@@ -252,7 +252,7 @@ plugin.tx_sfeventmgt
          empty
 
  - :Property:
-         settings.confirmation.prefillFields.{fieldname}
+         settings.registration.prefillFields.{fieldname}
 
    :Date type:
          String
