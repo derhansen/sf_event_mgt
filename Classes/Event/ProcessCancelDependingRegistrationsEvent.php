@@ -19,10 +19,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
  */
 final class ProcessCancelDependingRegistrationsEvent
 {
-    public function __construct(
-        private readonly Registration $registration,
-        private bool $processCancellation
-    ) {
+    private Registration $registration;
+    private bool $processCancellation;
+
+    public function __construct(Registration $registration, bool $processCancellation)
+    {
+        $this->registration = $registration;
+        $this->processCancellation = $processCancellation;
     }
 
     public function getRegistration(): Registration
