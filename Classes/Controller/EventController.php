@@ -29,6 +29,7 @@ use DERHANSEN\SfEventMgt\Event\ModifyDetailViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyRegistrationViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifySearchViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ProcessCancelDependingRegistrationsEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessRedirectToPaymentEvent;
 use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
@@ -805,7 +806,12 @@ class EventController extends AbstractController
             );
 
             // First cancel depending registrations
-            if ($registration->getAmountOfRegistrations() > 1) {
+            $processCancelDependingRegistrations = new ProcessCancelDependingRegistrationsEvent(
+                $registration,
+                $registration->getAmountOfRegistrations() > 1
+            );
+            $this->eventDispatcher->dispatch($processCancelDependingRegistrations);
+            if ($processCancelDependingRegistrations->getProcessCancellation()) {
                 $this->registrationService->cancelDependingRegistrations($registration);
             }
 

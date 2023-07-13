@@ -40,6 +40,7 @@ Event Controller
 * :php:`EventPidCheckFailedEvent`
 * :php:`WaitlistMoveUpEvent`
 * :php:`ProcessRedirectToPaymentEvent`
+* :php:`ProcessCancelDependingRegistrationsEvent`
 
 Payment Controller
 ------------------
