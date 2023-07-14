@@ -50,6 +50,7 @@ Payment Controller
 * :php:`ProcessPaymentFailureEvent`
 * :php:`ProcessPaymentCancelEvent`
 * :php:`ProcessPaymentNotifyEvent`
+* :php:`ProceedWithPaymentActionEvent`
 
 Administration Controller
 -------------------------

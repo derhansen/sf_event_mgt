@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Event\ModifyPaymentRedirectResponseEvent;
+use DERHANSEN\SfEventMgt\Event\ProceedWithPaymentActionEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentFailureEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
@@ -304,17 +305,20 @@ class PaymentController extends AbstractController
             throw new PaymentException($message, 1899934882);
         }
 
-        if ($registration->getPaid()) {
-            $message = LocalizationUtility::translate('payment.messages.paymentAlreadyProcessed', 'SfEventMgt');
-            throw new PaymentException($message, 1899934883);
-        }
-
         if ($registration->getEvent()->getRestrictPaymentMethods()) {
             $selectedPaymentMethods = explode(',', $registration->getEvent()->getSelectedPaymentMethods());
             if (!in_array($registration->getPaymentmethod(), $selectedPaymentMethods)) {
                 $message = LocalizationUtility::translate('payment.messages.paymentMethodNotAvailable', 'SfEventMgt');
                 throw new PaymentException($message, 1899934884);
             }
+        }
+
+        $proceedWithPaymentActionEvent = new ProceedWithPaymentActionEvent($registration, $actionName);
+        $this->eventDispatcher->dispatch($proceedWithPaymentActionEvent);
+
+        if ($proceedWithPaymentActionEvent->getPerformPaidCheck() && $registration->getPaid()) {
+            $message = LocalizationUtility::translate('payment.messages.paymentAlreadyProcessed', 'SfEventMgt');
+            throw new PaymentException($message, 1899934883);
         }
     }
 
