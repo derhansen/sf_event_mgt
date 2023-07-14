@@ -312,11 +312,6 @@ class PaymentController extends AbstractController
 
     /**
      * Checks the HMAC for the given action and registration
-     *
-     * @param Registration $registration
-     * @param string $hmac
-     * @param string $action
-     * @throws InvalidHashException
      */
     protected function validateHmacForAction(Registration $registration, string $hmac, string $action): void
     {
@@ -329,11 +324,6 @@ class PaymentController extends AbstractController
 
     /**
      * Returns the payment Uri for the given action and registration
-     *
-     * @param string $action
-     * @param Registration $registration
-     * @return string
-     * @throws InvalidArgumentForHashGenerationException
      */
     protected function getPaymentUriForAction(string $action, Registration $registration): string
     {
