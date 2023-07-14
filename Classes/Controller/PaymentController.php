@@ -23,7 +23,6 @@ use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
-use TYPO3\CMS\Extbase\Security\Exception\InvalidArgumentForHashGenerationException;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
