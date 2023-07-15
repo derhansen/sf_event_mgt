@@ -20,11 +20,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 final class ProceedWithPaymentActionEvent
 {
     private bool $performPaidCheck = true;
+    private Registration $registration;
+    private string $actionName;
 
-    public function __construct(
-        private readonly Registration $registration,
-        private readonly string $actionName
-    ) {
+    public function __construct(Registration $registration, string $actionName)
+    {
+        $this->registration = $registration;
+        $this->actionName = $actionName;
     }
 
     public function getRegistration(): Registration
