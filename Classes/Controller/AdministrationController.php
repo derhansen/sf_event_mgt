@@ -17,6 +17,8 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Event\InitAdministrationModuleTemplateEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationIndexNotifyViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
@@ -263,15 +265,20 @@ class AdministrationController extends AbstractController
             $pagination = $this->getPagination($events, $this->settings['pagination'] ?? []);
         }
 
-        $variables = [
-            'pid' => $this->pid,
-            'events' => $events,
-            'searchDemand' => $searchDemand,
-            'orderByFields' => $this->getOrderByFields(),
-            'orderDirections' => $this->getOrderDirections(),
-            'overwriteDemand' => $overwriteDemand,
-            'pagination' => $pagination,
-        ];
+        $modifyAdministrationListViewVariablesEvent = new ModifyAdministrationListViewVariablesEvent(
+            [
+                'pid' => $this->pid,
+                'events' => $events,
+                'searchDemand' => $searchDemand,
+                'orderByFields' => $this->getOrderByFields(),
+                'orderDirections' => $this->getOrderDirections(),
+                'overwriteDemand' => $overwriteDemand,
+                'pagination' => $pagination,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyAdministrationListViewVariablesEvent);
+        $variables = $modifyAdministrationListViewVariablesEvent->getVariables();
 
         return $this->initModuleTemplateAndReturnResponse('Administration/List', $variables);
     }
@@ -329,13 +336,18 @@ class AdministrationController extends AbstractController
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
 
-        $variables = [
-            'event' => $event,
-            'recipients' => $this->getNotificationRecipients(),
-            'customNotification' => $customNotification,
-            'customNotifications' => $customNotifications,
-            'logEntries' => $logEntries,
-        ];
+        $modifyAdministrationIndexNotifyViewVariablesEvent = new ModifyAdministrationIndexNotifyViewVariablesEvent(
+            [
+                'event' => $event,
+                'recipients' => $this->getNotificationRecipients(),
+                'customNotification' => $customNotification,
+                'customNotifications' => $customNotifications,
+                'logEntries' => $logEntries,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyAdministrationIndexNotifyViewVariablesEvent);
+        $variables = $modifyAdministrationIndexNotifyViewVariablesEvent->getVariables();
 
         return $this->initModuleTemplateAndReturnResponse('Administration/IndexNotify', $variables);
     }
