@@ -17,10 +17,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationIndexNotifyViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
@@ -88,6 +91,13 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
 
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
+
         $this->subject->listAction();
     }
 
@@ -123,6 +133,13 @@ class AdministrationControllerTest extends UnitTestCase
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->listAction($searchDemand);
     }
@@ -168,6 +185,13 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
 
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
+
         $this->subject->listAction($searchDemand);
     }
 
@@ -211,6 +235,13 @@ class AdministrationControllerTest extends UnitTestCase
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->listAction($searchDemand, ['orderDirection' => 'desc']);
     }
@@ -286,6 +317,13 @@ class AdministrationControllerTest extends UnitTestCase
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/IndexNotify', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationIndexNotifyViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->indexNotifyAction($event);
     }
