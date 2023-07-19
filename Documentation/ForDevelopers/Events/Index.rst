@@ -55,6 +55,8 @@ Payment Controller
 Administration Controller
 -------------------------
 * :php:`InitAdministrationModuleTemplateEvent`
+* :php:`ModifyAdministrationIndexNotifyViewVariablesEvent`
+* :php:`ModifyAdministrationListViewVariablesEvent`
 
 Event Repository
 ----------------
