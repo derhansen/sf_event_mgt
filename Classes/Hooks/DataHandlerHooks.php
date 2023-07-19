@@ -119,7 +119,6 @@ class DataHandlerHooks
                     'settings.registrationPid',
                     'settings.paymentPid',
                     'settings.restrictForeignRecordsToStoragePage',
-                    'settings.disableOverrideDemand',
                 ],
                 'pagination' => [
                     'settings.pagination.enablePagination',
