@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _developer_payment:
 
+=======
 Payment
 =======
 
@@ -32,7 +33,7 @@ payment method is :php:`sf_event_mgt_mypaymentmethod`
 General workflow
 ----------------
 
-.. figure:: ../../Images/payment-workflow.png
+.. figure:: /Images/payment-workflow.png
    :alt: Payment workflow
 
 Depending on the selected payment method, the user is redirected to the payment providers payment page.
@@ -115,8 +116,7 @@ the following method.::
  {
      $pluginSettings = $this->getPluginSettings();
 
-     /** @var \TYPO3\CMS\Fluid\View\StandaloneView $view */
-     $view = $this->objectManager->get('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
+     $view = GeneralUtility::makeInstance(StandaloneView::class);
      $view->setFormat('html');
      $view->setLayoutRootPaths($pluginSettings['view']['layoutRootPaths']);
      $view->setPartialRootPaths($pluginSettings['view']['partialRootPaths']);

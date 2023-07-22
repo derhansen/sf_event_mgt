@@ -3,90 +3,88 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _extconf:
 
+==================
 Extension settings
 ==================
 
-The following settings are available in the "Settings" section of the  "Admin Tool"
-backend module. Open "Extension Configuration" to edit the settings for the extension.
+Some general settings can be configured in the Extension Configuration.
 
-.. t3-field-list-table::
- :header-rows: 1
+#. Go to :guilabel:`Admin Tools > Settings > Extension Configuration`
+#. Choose :guilabel:`sf_event_mgt`
 
- - :Property:
-         Property:
+.. only:: html
 
-   :Date type:
-         Data type:
+   .. contents:: Properties
+      :depth: 1
+      :local:
 
-   :Description:
-         Description:
+Records
+=======
 
-   :Default:
-         Default:
+Slug behaviour `slugBehaviour`
+------------------------------
 
- - :Property:
-         slugBehaviour
+.. confval:: slugBehaviour
 
-   :Date type:
-         String
+   :type: string, keyword
+   :Default: unique
 
-   :Description:
-         uniqueInSite: The same slug can be used for news in different sites. Use this setting *only* if no
-         event records are shared between sites. "unique" means that same event title will lead to different
-         slug names.
+   Choose one of the following slug behaviours:
 
-   :Default:
-         uniqueInSite
+   uniqueInSite
+      The same slug can be used for news in different sites. Use this
+      setting *only* if no event records are shared between sites.
 
- - :Property:
-         enableInvoice
+   unique
+      The same news title in different sites will lead to different slug names.
 
-   :Date type:
-         Boolen
+Payment
+=======
 
-   :Description:
-         Enable payment method 'invoice'
+Enable payment method 'invoice' `enableInvoice`
+-----------------------------------------------
 
-   :Default:
-         true
+.. confval:: enableInvoice
 
- - :Property:
-         enableTransfer
+   :type: bool
+   :Default: 1
 
-   :Date type:
-         Boolen
+   Enable payment method 'invoice'
 
-   :Description:
-         Enable payment method 'transfer'
+Enable payment method 'transfer' `enableTransfer`
+-------------------------------------------------
 
-   :Default:
-         true
+.. confval:: enableTransfer
 
- - :Property:
-         hideInlineRegistrations
+   :type: bool
+   :Default: 1
 
-   :Date type:
-         Boolen
+   Enable payment method 'transfer'
 
-   :Description:
-         Enable feature to hide registrations when editing an event in the backend
+Backend
+=======
 
-   :Default:
-         False
+Hide registrations in event record by limit `hideInlineRegistrations`
+---------------------------------------------------------------------
 
- - :Property:
-         hideInlineRegistrationsLimit
+.. confval:: hideInlineRegistrations
 
-   :Date type:
-         Integer
+   :type: bool
+   :Default: 0
 
-   :Description:
-         Max amount of registrations to display before event registrations will be hidden when editing an event.
+   Enable feature to hide registrations when editing an event in the backend
 
-   :Default:
-         500
+Hide registrations in event record by limit `hideInlineRegistrationsLimit`
+--------------------------------------------------------------------------
+
+.. confval:: hideInlineRegistrationsLimit
+
+   :type: int
+   :Default: 500
+
+   Max amount of registrations to display before event registrations will be hidden when editing an event.

@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _custom-notifications:
 
+====================
 Custom notifications
 ====================
 
@@ -15,7 +16,7 @@ If you use the registration option for events, you have to possibility to send
 custom notifications to participants of the event. In order to do so, use the
 admin module to open the "Notify participants" view.
 
-.. figure:: ../../Images/event-notification.png
+.. figure:: /Images/event-notification.png
    :alt: Actions of the backend module
 
 Create an own notification

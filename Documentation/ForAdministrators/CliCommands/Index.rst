@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _cronjob:
 
+============
 CLI Commands
 ============
 
@@ -29,7 +30,7 @@ Example with :command:`--delete` option::
 
 Output:
 
-.. figure:: ../../Images/command-cleanup-expired.png
+.. figure:: /Images/command-cleanup-expired.png
    :alt: Cleanup expired command
 
 It is recommended to setup a scheduler task to execute the CLI command periodically.
@@ -56,7 +57,7 @@ Example::
 
 Output
 
-.. figure:: ../../Images/command-cleanup-gdpr.png
+.. figure:: /Images/command-cleanup-gdpr.png
    :alt: Cleanup GDPR command
 
 It is recommended to setup a scheduler task to execute the CLI command periodically.

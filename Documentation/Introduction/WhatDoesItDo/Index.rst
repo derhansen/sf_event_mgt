@@ -3,12 +3,13 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 .. _what-does-it-do:
 
+================
 What does it do?
-----------------
+================
 
 Event management and registration is an extension for TYPO3 CMS to manage events and registrations.
 

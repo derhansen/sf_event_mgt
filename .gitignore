@@ -5,3 +5,4 @@ composer.lock
 .php-cs-fixer.cache
 /var/
 .phpunit.result.cache
+docker-compose.yml

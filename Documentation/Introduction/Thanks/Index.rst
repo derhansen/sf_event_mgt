@@ -3,12 +3,13 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 .. _thanks:
 
+==========
 Say thanks
-----------
+==========
 
 If you like this extension and want to say thanks, feel free to drop me an email or sponsor the
 development of the extension. Please also consider to support the TYPO3 community by sponsoring
