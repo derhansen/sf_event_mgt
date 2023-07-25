@@ -22,6 +22,7 @@ use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use stdClass;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -37,6 +38,8 @@ class RegistrationServiceTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = new RegistrationService();
+        $eventDispatcher = $this->createMock(EventDispatcherInterface::class);
+        $this->subject->injectEventDispatcher($eventDispatcher);
     }
 
     protected function tearDown(): void
@@ -615,6 +618,7 @@ class RegistrationServiceTest extends UnitTestCase
             ->onlyMethods(['emailNotUnique'])
             ->getMock();
         $mockRegistrationService->expects(self::once())->method('emailNotUnique')->willReturn(true);
+        $mockRegistrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
         list($success, $result) = $mockRegistrationService->checkRegistrationSuccess($event, $registration, $result);

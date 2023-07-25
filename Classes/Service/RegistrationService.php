@@ -18,6 +18,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationMovedFromWaitlist;
+use DERHANSEN\SfEventMgt\Event\ModifyCheckRegistrationSuccessEvent;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
@@ -237,8 +238,7 @@ class RegistrationService
     }
 
     /**
-     * Checks, if the registration can successfully be created. Note, that
-     * $result is passed by reference!
+     * Checks, if the registration can successfully be created.
      */
     public function checkRegistrationSuccess(Event $event, Registration $registration, int $result): array
     {
@@ -276,7 +276,10 @@ class RegistrationService
             $result = RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST;
         }
 
-        return [$success, $result];
+        $modifyCheckRegistrationSuccessEvent = new ModifyCheckRegistrationSuccessEvent($success, $result);
+        $this->eventDispatcher->dispatch($modifyCheckRegistrationSuccessEvent);
+
+        return [$modifyCheckRegistrationSuccessEvent->getSuccess(), $modifyCheckRegistrationSuccessEvent->getResult()];
     }
 
     /**

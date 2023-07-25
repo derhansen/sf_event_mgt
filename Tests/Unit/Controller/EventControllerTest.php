@@ -526,6 +526,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registrationService = new RegistrationService();
+        $registrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $this->subject->injectRegistrationService($registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -553,6 +554,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registrationService = new RegistrationService();
+        $registrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $this->subject->injectRegistrationService($registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -583,6 +585,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registrationService = new RegistrationService();
+        $registrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $this->subject->injectRegistrationService($registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -613,6 +616,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registrationService = new RegistrationService();
+        $registrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $this->subject->injectRegistrationService($registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -648,6 +652,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registrationService = new RegistrationService();
+        $registrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $this->subject->injectRegistrationService($registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -686,6 +691,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $registrationService = new RegistrationService();
+        $registrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $this->subject->injectRegistrationService($registrationService);
 
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -725,6 +731,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->injectHashService($hashService);
 
         $mockRegistrationService = $this->getMockBuilder(RegistrationService::class)->onlyMethods(['emailNotUnique'])->getMock();
+        $mockRegistrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
         $mockRegistrationService->expects(self::once())->method('emailNotUnique')->willReturn(true);
         $this->subject->injectRegistrationService($mockRegistrationService);
 
