@@ -23,17 +23,20 @@ final class ModifyUserMessageAttachmentsEvent
     private array $attachments;
     private Registration $registration;
     private int $type;
+    private array $settings;
     private NotificationService $notificationService;
 
     public function __construct(
         array $attachments,
         Registration $registration,
         int $type,
+        array $settings,
         NotificationService $notificationService
     ) {
         $this->attachments = $attachments;
         $this->registration = $registration;
         $this->type = $type;
+        $this->settings = $settings;
         $this->notificationService = $notificationService;
     }
 
@@ -50,6 +53,11 @@ final class ModifyUserMessageAttachmentsEvent
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function getSettings(): array
+    {
+        return $this->settings;
     }
 
     public function getNotificationService(): NotificationService
