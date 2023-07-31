@@ -223,6 +223,7 @@ class NotificationService
                 $attachments,
                 $registration,
                 $type,
+                $settings,
                 $this
             );
             $this->eventDispatcher->dispatch($modifyUserAttachmentsEvent);

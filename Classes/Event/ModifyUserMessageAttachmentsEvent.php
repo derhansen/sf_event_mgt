@@ -24,6 +24,7 @@ final class ModifyUserMessageAttachmentsEvent
         private array $attachments,
         private readonly Registration $registration,
         private readonly int $type,
+        private readonly array $settings,
         private readonly NotificationService $notificationService
     ) {
     }
@@ -41,6 +42,11 @@ final class ModifyUserMessageAttachmentsEvent
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function getSettings(): array
+    {
+        return $this->settings;
     }
 
     public function getNotificationService(): NotificationService
