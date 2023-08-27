@@ -16,6 +16,7 @@ Locations can be assigned to an event.
 
 .. figure:: /Images/location.png
    :alt: Event location record
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1

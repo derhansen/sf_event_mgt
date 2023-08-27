@@ -24,6 +24,7 @@ layout selectbox in the plugin settings like shown below.
 
 .. figure:: /Images/plugin-template-layout.png
    :alt: Different template layouts
+   :class: with-shadow
 
 The choosen template layout can be used in the fluid templates as shown below.::
 

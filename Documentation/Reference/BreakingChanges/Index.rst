@@ -92,6 +92,7 @@ migration as shown below.
 
 .. figure:: /Images/ext-update-category.png
    :alt: Extension Update Icon
+   :class: with-shadow
 
 Please click on the update-icon to start the category migration.
 
@@ -129,6 +130,7 @@ manager to process the migration as shown below.
 
 .. figure:: /Images/ext-update-category.png
    :alt: Extension Update Icon
+   :class: with-shadow
 
 Please click on the update-icon to start the category migration.
 

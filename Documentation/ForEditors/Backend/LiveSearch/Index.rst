@@ -17,3 +17,4 @@ as a prefix to your search like shown on the screenshot below
 
 .. figure:: /Images/live-search.png
    :alt: TYPO3 live search for events
+   :class: with-shadow

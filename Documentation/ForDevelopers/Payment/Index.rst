@@ -35,6 +35,7 @@ General workflow
 
 .. figure:: /Images/payment-workflow.png
    :alt: Payment workflow
+   :class: with-shadow
 
 Depending on the selected payment method, the user is redirected to the payment providers payment page.
 

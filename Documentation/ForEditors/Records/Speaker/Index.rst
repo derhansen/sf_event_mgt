@@ -16,6 +16,7 @@ One or multiple speakers can be assigned to an event.
 
 .. figure:: /Images/speaker.png
    :alt: Event speaker record
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1

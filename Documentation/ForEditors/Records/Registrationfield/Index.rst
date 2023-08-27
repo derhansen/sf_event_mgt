@@ -18,6 +18,7 @@ fields to the default registration form.
 
 .. figure:: /Images/event-registrationfields.png
    :alt: Registration fields
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1

@@ -23,6 +23,7 @@ The backend module contains 5 actions in the upper left.
 
 .. figure:: /Images/be-module-actions.png
    :alt: Actions of the backend module
+   :class: with-shadow
 
 * The first 4 actions creates new items (event, location, organisator, speaker)
 * The last action does the same as the cronjob, it hides/removes expired registrations
@@ -44,6 +45,7 @@ the view, where you can select the custom notification template.
 
 .. figure:: /Images/event-notification.png
    :alt: Actions of the backend module
+   :class: with-shadow
 
 If you want to create a custom notification, you just need to add some TypoScript
 and a Fluid template for the new custom notification. Please refer to the manual

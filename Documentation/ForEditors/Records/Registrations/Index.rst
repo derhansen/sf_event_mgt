@@ -39,6 +39,7 @@ For more information, see :ref:`registrationfield`
 
 .. figure:: /Images/registration.png
    :alt: Registration record
+   :class: with-shadow
 
 General
 ~~~~~~~

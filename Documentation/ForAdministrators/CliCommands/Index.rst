@@ -32,6 +32,7 @@ Output:
 
 .. figure:: /Images/command-cleanup-expired.png
    :alt: Cleanup expired command
+   :class: with-shadow
 
 It is recommended to setup a scheduler task to execute the CLI command periodically.
 
@@ -59,5 +60,6 @@ Output
 
 .. figure:: /Images/command-cleanup-gdpr.png
    :alt: Cleanup GDPR command
+   :class: with-shadow
 
 It is recommended to setup a scheduler task to execute the CLI command periodically.

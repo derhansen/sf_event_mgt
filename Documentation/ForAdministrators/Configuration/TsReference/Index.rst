@@ -748,6 +748,7 @@ settings.notification.customNotifications.{templatename}
 
    .. figure:: /Images/event-notification.png
        :alt: Custom notifications
+       :class: with-shadow
 
    Each custom notification must include a **title**, a **template**, and a **subject**
 

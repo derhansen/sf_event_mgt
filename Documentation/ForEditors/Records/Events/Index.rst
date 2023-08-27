@@ -23,6 +23,7 @@ and a description.
 
 .. figure:: /Images/event-event.png
    :alt: Event general tab
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -78,6 +79,7 @@ program/schedule.
 
 .. figure:: /Images/event-additional.png
    :alt: Event additional tab
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -137,6 +139,7 @@ The relations tab contains fields which holds relations locations, organisators 
 
 .. figure:: /Images/event-related.png
    :alt: Event related tab
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -184,6 +187,7 @@ The media tab contains fields which holds media-data for the event.
 
 .. figure:: /Images/event-media.png
    :alt: Event media tab
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -225,6 +229,7 @@ You can assign one or multiple categories to an event.
 
 .. figure:: /Images/event-category.png
    :alt: Event category tab
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -251,6 +256,7 @@ registrations per user" is set to a value greater than 1.
 
 .. figure:: /Images/event-registration-options.png
    :alt: Event record (Tab: registration options)
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -367,6 +373,7 @@ Contains all registrations for the event. Only visible, when registration is ena
 
 .. figure:: /Images/event-registrations.png
    :alt: Event record (Tab: registrations)
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1
@@ -396,6 +403,7 @@ Contains fields related to meta tags
 
 .. figure:: /Images/event-metadata.png
    :alt: Event record (Tab: metadata)
+   :class: with-shadow
 
 .. t3-field-list-table::
  :header-rows: 1

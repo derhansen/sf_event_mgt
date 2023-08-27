@@ -18,6 +18,7 @@ admin module to open the "Notify participants" view.
 
 .. figure:: /Images/event-notification.png
    :alt: Actions of the backend module
+   :class: with-shadow
 
 Create an own notification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
