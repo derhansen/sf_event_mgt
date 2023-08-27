@@ -2,13 +2,16 @@
 
 defined('TYPO3') or die();
 
-$slugBehaviour = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)
-    ->get('sf_event_mgt', 'slugBehaviour');
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+$slugBehaviour = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sf_event_mgt', 'slugBehaviour');
+
 /**
  * Add slug field to sys_category record (same field name as ext:news)
  */
 $newSysCategoryColumns = [
-    'slug' =>[
+    'slug' => [
         'exclude' => true,
         'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:pages.slug',
         'displayCond' => 'VERSION:IS:false',
