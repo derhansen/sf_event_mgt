@@ -16,7 +16,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Utility\CsvUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
@@ -162,10 +161,5 @@ class ExportService
     protected function replaceLineBreaks(string $value): string
     {
         return str_replace(["\r\n", "\r", "\n"], ' ', $value);
-    }
-
-    protected function getBackendUser(): ?BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'] ?? null;
     }
 }
