@@ -30,7 +30,7 @@ Submitting changes
 * Add new unit-, functional and/or acceptance tests for your new code
 * Extend the existing documentation if required
 * Commit your changes and make sure to add a proper commit message
-  * Examples for a proper [commit message](https://docs.typo3.org/typo3cms/ContributionWorkflowGuide/Appendix/GeneralTopics/CommitMessage.html)
+  * Examples for a proper [commit message](https://docs.typo3.org/m/typo3/guide-contributionworkflow/main/en-us/Appendix/CommitMessage.html)
 * Create a Pull Request on GitHub
   * Describe your changes. The better you describe your change and the reasons for it the more likely it is that it will be accepted.
 
