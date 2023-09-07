@@ -5,7 +5,7 @@ modules:
         host: 127.0.0.1
         capabilities:
           chromeOptions:
-            args: ["disable-dev-shm-usage", "no-sandbox", "disable-infobars", "disable-gpu"]
+            args: ["disable-dev-shm-usage", "no-sandbox", "disable-infobars", "headless", "disable-gpu"]
       Db:
         dsn: 'mysql:host=127.0.0.1'
         user: 'root'
