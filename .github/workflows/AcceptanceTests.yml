@@ -63,7 +63,7 @@ jobs:
         run: |
           export APP_IP=`ip addr show eth0 | grep -Po 'inet \K[\d.]+'`
           sed -i -e "s/LOCAL_DOMAIN/$APP_IP:8888/" Tests/Acceptance/_envs/github-actions.yml
-          php -S 0.0.0.0:8888 -t .Build/public/ &> php.log.txt &
+          php -S 0.0.0.0:8888 -t .Build/public/ &> php.log &
           sleep 2;
 
       - name: Test PHP webserver and initialize TYPO3 cache
@@ -74,8 +74,13 @@ jobs:
       - name: Start Selenium standalone
         run: |
           echo $SELENIUM_JAR_PATH
-          java -Djava.awt.headless=true -jar $SELENIUM_JAR_PATH standalone &
-          sleep 5;
+          xvfb-run --server-args="-screen 0, 1280x720x24" --auto-servernum java -jar $SELENIUM_JAR_PATH standalone --log selenium-server.log &
+
+      - name: Wait for browser & PHP to start
+        timeout-minutes: 1
+        run: |
+          while ! nc -z 127.0.0.1 4444 </dev/null; do echo Waiting for remote driver to start...; sleep 1; done
+          while ! nc -z 127.0.0.1 8888 </dev/null; do echo Waiting for PHP server to start...; sleep 1; done
 
       - name: Codeception Acceptance Tests
         run: .Build/bin/codecept run acceptance --fail-fast --env=github-actions -c Tests/Build/AcceptanceTests.yml --html
@@ -87,16 +92,12 @@ jobs:
           name: codeception-results
           path: Tests/Acceptance/_output/
 
-      - name: Upload PHP log
+      - name: Upload logs
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
-        with:
-          name: php-log
-          path: php.log.txt
-
-      - name: Upload TYPO3 log
-        if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: typo3-log
-          path: .Build/var/log/
+          path: |
+            .Build/var/log/
+            php.log
+            selenium-server.log
