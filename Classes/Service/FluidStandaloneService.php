@@ -111,9 +111,14 @@ class FluidStandaloneService
         if ($string === '') {
             return '';
         }
+
+        /** @var ServerRequest $serverRequest */
+        $serverRequest = $GLOBALS['TYPO3_REQUEST'];
+
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
+        $standaloneView->setRequest($serverRequest);
         $result = $standaloneView->render() ?? '';
 
         return html_entity_decode($result);
