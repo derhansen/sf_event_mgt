@@ -331,7 +331,7 @@
 				<source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.description">
-				<source>Please select an email template that will be used to notify participants of the event. To add own email templates, please refer to the documentation.</source>
+				<source>Please select an email template that will be used to notify participants of the event.</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.event">
 				<source>Event:</source>
