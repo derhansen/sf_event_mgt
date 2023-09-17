@@ -22,6 +22,7 @@ return (new \PhpCsFixer\Config())
         'declare_parentheses' => true,
         'dir_constant' => true,
         'function_to_constant' => ['functions' => ['get_called_class', 'get_class', 'get_class_this', 'php_sapi_name', 'phpversion', 'pi']],
+        'list_syntax' => ['syntax' => 'short'],
         'type_declaration_spaces' => true,
         'modernize_strpos' => true,
         'modernize_types_casting' => true,
@@ -57,6 +58,7 @@ return (new \PhpCsFixer\Config())
         'single_space_around_construct' => true,
         'single_line_comment_style' => ['comment_types' => ['hash']],
         'trailing_comma_in_multiline' => ['elements' => ['arrays']],
+        'single_line_empty_body' => false,
         'whitespace_after_comma_in_array' => ['ensure_single_space' => true],
         'yoda_style' => ['equal' => false, 'identical' => false, 'less_and_greater' => false],
    ])

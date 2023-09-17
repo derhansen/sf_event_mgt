@@ -491,7 +491,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::once())->method('getEnableRegistration')->willReturn(false);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_NOT_ENABLED);
     }
@@ -510,7 +510,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::any())->method('getRegistrationDeadline')->willReturn($deadline);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED);
     }
@@ -529,7 +529,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::once())->method('getStartdate')->willReturn($startdate);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
     }
@@ -556,7 +556,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
     }
@@ -587,7 +587,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::any())->method('getMaxParticipants')->willReturn(20);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES);
     }
@@ -621,7 +621,7 @@ class RegistrationServiceTest extends UnitTestCase
         $mockRegistrationService->injectEventDispatcher($this->createMock(EventDispatcherInterface::class));
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $mockRegistrationService->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $mockRegistrationService->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE);
     }
@@ -651,7 +651,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::once())->method('getMaxRegistrationsPerUser')->willReturn(5);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED);
     }
@@ -678,7 +678,7 @@ class RegistrationServiceTest extends UnitTestCase
         $event->expects(self::any())->method('getMaxParticipants')->willReturn(10);
 
         $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertTrue($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_SUCCESSFUL);
     }
