@@ -13,17 +13,10 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 
 class ICalendarService
 {
-    protected ConfigurationManager $configurationManager;
     protected FluidStandaloneService $fluidStandaloneService;
-
-    public function injectConfigurationManager(ConfigurationManager $configurationManager): void
-    {
-        $this->configurationManager = $configurationManager;
-    }
 
     public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService): void
     {

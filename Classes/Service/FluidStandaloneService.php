@@ -13,7 +13,6 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -21,9 +20,9 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class FluidStandaloneService
 {
-    protected ConfigurationManager $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
-    public function injectConfigurationManager(ConfigurationManager $configurationManager): void
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
         $this->configurationManager = $configurationManager;
     }
