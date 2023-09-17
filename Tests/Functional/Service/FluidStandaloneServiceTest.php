@@ -13,6 +13,8 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class FluidStandaloneServiceTest extends FunctionalTestCase
@@ -21,6 +23,7 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
 
     public function setUp(): void
     {
+        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         parent::setUp();
     }
 
