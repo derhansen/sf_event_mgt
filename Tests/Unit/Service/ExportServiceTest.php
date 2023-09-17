@@ -16,6 +16,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\ExportService;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -127,7 +128,9 @@ class ExportServiceTest extends UnitTestCase
         );
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)->disableOriginalConstructor()->getMock();
-        $exportService = new ExportService($registrationRepository, $eventRepository);
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $exportService = new ExportService($registrationRepository, $eventRepository, $eventDispatcher);
 
         $returnValue = $exportService->exportRegistrationsCsv($uid, $fields);
         self::assertSame($expected, $returnValue);

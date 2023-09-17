@@ -74,3 +74,7 @@ Notification Service
 Registration Service
 --------------------
 * :php:`AfterRegistrationMovedFromWaitlist`
+
+Export Service
+--------------
+* :php:`ModifyDownloadRegistrationCsvEvent`

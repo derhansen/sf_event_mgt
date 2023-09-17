@@ -16,6 +16,8 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
+use DERHANSEN\SfEventMgt\Event\ModifyDownloadRegistrationCsvEvent;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\CsvUtility;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
@@ -23,11 +25,16 @@ class ExportService
 {
     protected RegistrationRepository $registrationRepository;
     protected EventRepository $eventRepository;
+    protected EventDispatcherInterface $eventDispatcher;
 
-    public function __construct(RegistrationRepository $registrationRepository, EventRepository $eventRepository)
-    {
+    public function __construct(
+        RegistrationRepository $registrationRepository,
+        EventRepository $eventRepository,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->registrationRepository = $registrationRepository;
         $this->eventRepository = $eventRepository;
+        $this->eventDispatcher = $eventDispatcher;
     }
 
     /**
@@ -35,8 +42,18 @@ class ExportService
      */
     public function downloadRegistrationsCsv(int $eventUid, array $settings = []): void
     {
-        $content = $this->exportRegistrationsCsv($eventUid, $settings);
-        header('Content-Disposition: attachment; filename="event_' . $eventUid . '_reg_' . date('dmY_His') . '.csv"');
+        $modifyDownloadRegistrationCsvEvent = new ModifyDownloadRegistrationCsvEvent(
+            $this->exportRegistrationsCsv($eventUid, $settings),
+            'event_' . $eventUid . '_reg_' . date('dmY_His') . '.csv',
+            $eventUid,
+            $settings
+        );
+        $this->eventDispatcher->dispatch($modifyDownloadRegistrationCsvEvent);
+
+        $content = $modifyDownloadRegistrationCsvEvent->getCsvContent();
+        $filename = $modifyDownloadRegistrationCsvEvent->getDownloadFilename();
+
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
         header('Content-Type: text/csv');
         header('Content-Length: ' . strlen($content));
         header('Expires: 0');
@@ -54,7 +71,7 @@ class ExportService
         $registrationFieldData = [];
         $fieldsArray = array_map('trim', explode(',', ($settings['fields'] ?? '')));
 
-        if (in_array('registration_fields', $fieldsArray)) {
+        if (in_array('registration_fields', $fieldsArray, true)) {
             $hasRegistrationFields = true;
             $registrationFieldData = $this->getRegistrationFieldData($eventUid);
             $fieldsArray = array_diff($fieldsArray, ['registration_fields']);
