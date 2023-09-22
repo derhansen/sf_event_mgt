@@ -185,6 +185,42 @@ class RegistrationServiceTest extends UnitTestCase
     }
 
     /**
+     * Test if expected array is returned registration has no event
+     *
+     * @test
+     */
+    public function checkConfirmRegistrationIfNoRegistrationEventTest(): void
+    {
+        $reguid = 1;
+        $hmac = 'valid-hmac';
+
+        $registration = new Registration();
+
+        $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
+            ->onlyMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockRegistrationRepository->expects(self::once())->method('findByUid')->with(1)->willReturn($registration);
+        $this->subject->injectRegistrationRepository($mockRegistrationRepository);
+
+        $mockHashService = $this->getMockBuilder(HashService::class)
+            ->onlyMethods(['validateHmac'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockHashService->expects(self::once())->method('validateHmac')->willReturn(true);
+        $this->subject->injectHashService($mockHashService);
+
+        $result = $this->subject->checkConfirmRegistration($reguid, $hmac);
+        $expected = [
+            true,
+            $registration,
+            'event.message.confirmation_failed_registration_event_not_found',
+            'confirmRegistration.title.failed',
+        ];
+        self::assertEquals($expected, $result);
+    }
+
+    /**
      * Test if expected array is returned if confirmation date expired
      *
      * @test
@@ -195,6 +231,7 @@ class RegistrationServiceTest extends UnitTestCase
         $hmac = 'valid-hmac';
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($this->createMock(Event::class));
         $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new DateTime('yesterday'));
 
         $mockRegistrationRepository = $this->getMockBuilder(RegistrationRepository::class)
@@ -232,6 +269,7 @@ class RegistrationServiceTest extends UnitTestCase
         $hmac = 'valid-hmac';
 
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
+        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($this->createMock(Event::class));
         $mockRegistration->expects(self::any())->method('getConfirmationUntil')->willReturn(new DateTime('tomorrow'));
         $mockRegistration->expects(self::any())->method('getConfirmed')->willReturn(true);
 

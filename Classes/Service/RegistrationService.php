@@ -127,6 +127,12 @@ class RegistrationService
             $titleKey = 'confirmRegistration.title.failed';
         }
 
+        if (!$failed && !$registration->getEvent()) {
+            $failed = true;
+            $messageKey = 'event.message.confirmation_failed_registration_event_not_found';
+            $titleKey = 'confirmRegistration.title.failed';
+        }
+
         if (!$failed && $registration->getConfirmationUntil() < new DateTime()) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_confirmation_until_expired';

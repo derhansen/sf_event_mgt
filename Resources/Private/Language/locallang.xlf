@@ -243,6 +243,9 @@
 			<trans-unit id="event.message.confirmation_failed_registration_not_found">
 				<source>Confirmation failed, registration not found.</source>
 			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_registration_event_not_found">
+				<source>Confirmation failed, event for registration either not found or access protected.</source>
+			</trans-unit>
 			<trans-unit id="event.message.cancel_failed_event_not_found">
 				<source>Cancellation failed, event not found.</source>
 			</trans-unit>
