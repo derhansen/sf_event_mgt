@@ -2,10 +2,15 @@
 
 defined('TYPO3') or die();
 
+use DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer;
+use DERHANSEN\SfEventMgt\Preview\PipaymentPreviewRenderer;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 /**
  * Add new select group for list_type
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTcaSelectItemGroup(
+ExtensionManagementUtility::addTcaSelectItemGroup(
     'tt_content',
     'list_type',
     'sf_event_mgt',
@@ -19,27 +24,27 @@ defined('TYPO3') or die();
 $plugins = [
     'Pieventlist' => [
         'flexForm' => 'Pieventlist.xml',
-        'previewRenderer' => \DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer::class,
+        'previewRenderer' => PieventPreviewRenderer::class,
     ],
     'Pieventdetail' => [
         'flexForm' => 'Pieventdetail.xml',
-        'previewRenderer' => \DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer::class,
+        'previewRenderer' => PieventPreviewRenderer::class,
     ],
     'Pieventregistration' => [
         'flexForm' => 'Pieventregistration.xml',
-        'previewRenderer' => \DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer::class,
+        'previewRenderer' => PieventPreviewRenderer::class,
     ],
     'Pieventsearch' => [
         'flexForm' => 'Pieventsearch.xml',
-        'previewRenderer' => \DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer::class,
+        'previewRenderer' => PieventPreviewRenderer::class,
     ],
     'Pieventcalendar' => [
         'flexForm' => 'Pieventcalendar.xml',
-        'previewRenderer' => \DERHANSEN\SfEventMgt\Preview\PieventPreviewRenderer::class,
+        'previewRenderer' => PieventPreviewRenderer::class,
     ],
     'Pipayment' => [
         'flexForm' => null,
-        'previewRenderer' => \DERHANSEN\SfEventMgt\Preview\PipaymentPreviewRenderer::class,
+        'previewRenderer' => PipaymentPreviewRenderer::class,
     ],
     'Piuserreg' => [
         'flexForm' => 'Piuserreg.xml',
@@ -51,7 +56,7 @@ foreach ($plugins as $pluginName => $pluginConfig) {
     $signature = 'sfeventmgt_' . strtolower($pluginName);
 
     // Register plugin
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    ExtensionUtility::registerPlugin(
         'SfEventMgt',
         $pluginName,
         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.' . strtolower($pluginName) . '.title',
@@ -65,7 +70,7 @@ foreach ($plugins as $pluginName => $pluginConfig) {
     // Register flexform if required
     if (($pluginConfig['flexForm'] ?? null)) {
         $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$signature] = 'pi_flexform';
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+        ExtensionManagementUtility::addPiFlexFormValue(
             $signature,
             'FILE:EXT:sf_event_mgt/Configuration/FlexForms/' . $pluginConfig['flexForm']
         );
@@ -79,4 +84,4 @@ foreach ($plugins as $pluginName => $pluginConfig) {
 /**
  * Register event as "Insert Record"
  */
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToInsertRecords('tx_sfeventmgt_domain_model_event');
+ExtensionManagementUtility::addToInsertRecords('tx_sfeventmgt_domain_model_event');

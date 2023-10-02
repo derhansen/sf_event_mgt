@@ -3,6 +3,7 @@
 defined('TYPO3') or die();
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 $slugBehaviour = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('sf_event_mgt', 'slugBehaviour');
@@ -31,8 +32,8 @@ $newSysCategoryColumns = [
     ],
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('sys_category', $newSysCategoryColumns);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+ExtensionManagementUtility::addTCAcolumns('sys_category', $newSysCategoryColumns);
+ExtensionManagementUtility::addToAllTCAtypes(
     'sys_category',
     'slug',
     '',

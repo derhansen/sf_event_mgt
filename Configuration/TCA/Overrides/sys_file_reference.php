@@ -2,6 +2,8 @@
 
 defined('TYPO3') or die();
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
 $additionalSysFileReferenceColumns = [
     'show_in_views' => [
         'exclude' => true,
@@ -28,11 +30,11 @@ $additionalSysFileReferenceColumns = [
     ],
 ];
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
+ExtensionManagementUtility::addTCAcolumns(
     'sys_file_reference',
     $additionalSysFileReferenceColumns
 );
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
+ExtensionManagementUtility::addFieldsToPalette(
     'sys_file_reference',
     'eventPalette',
     'show_in_views'
