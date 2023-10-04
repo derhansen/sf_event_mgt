@@ -79,7 +79,7 @@ class NotificationService
 
     /**
      * Sends a custom notification defined by the given customNotification key
-     * to all confirmed users of the event. Returns the number of notifications sent.
+     * to users of the event. Returns the number of notifications sent.
      */
     public function sendCustomNotification(
         Event $event,
