@@ -682,10 +682,10 @@ class EventController extends AbstractController
             $reguid,
             $hmac
         );
+        $event = $registration->getEvent();
 
         if ($failed === false) {
             $registration->setConfirmed(true);
-            $event = $registration->getEvent();
             $this->registrationRepository->update($registration);
 
             $this->eventDispatcher->dispatch(new AfterRegistrationConfirmedEvent($registration, $this));
@@ -788,9 +788,9 @@ class EventController extends AbstractController
         [$failed, $registration, $messageKey, $titleKey] =
             $this->registrationService->checkCancelRegistration($reguid, $hmac);
 
-        if ($failed === false) {
-            $event = $registration->getEvent();
+        $event = $registration->getEvent();
 
+        if ($failed === false) {
             // Send notifications (must run before cancelling the registration)
             $this->notificationService->sendUserMessage(
                 $registration->getEvent(),
