@@ -157,10 +157,7 @@ class EventRepository extends Repository
             case 'current_future':
                 $constraints['displayMode'] = $query->logicalOr(
                     $query->greaterThan('startdate', $eventDemand->getCurrentDateTime()),
-                    $query->logicalAnd(
-                        $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
-                        $query->lessThanOrEqual('startdate', $eventDemand->getCurrentDateTime()),
-                    ),
+                    $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
                 );
                 break;
             case 'past':
