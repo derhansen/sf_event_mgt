@@ -77,8 +77,13 @@ jobs:
       - name: Start Selenium standalone
         run: |
           echo $SELENIUM_JAR_PATH
-          java -Djava.awt.headless=true -jar $SELENIUM_JAR_PATH standalone &
-          sleep 5;
+          xvfb-run --server-args="-screen 0, 1280x720x24" --auto-servernum java -jar $SELENIUM_JAR_PATH standalone --log selenium-server.log &
+
+      - name: Wait for browser & PHP to start
+        timeout-minutes: 1
+        run: |
+          while ! nc -z 127.0.0.1 4444 </dev/null; do echo Waiting for remote driver to start...; sleep 1; done
+          while ! nc -z 127.0.0.1 8888 </dev/null; do echo Waiting for PHP server to start...; sleep 1; done
 
       - name: Codeception Acceptance Tests
         run: .Build/bin/codecept run acceptance --fail-fast --env=github-actions -c Tests/Build/AcceptanceTests.yml --html
