@@ -14,6 +14,4 @@ use DERHANSEN\SfEventMgt\Exception;
 /**
  * Generic exception for sf_event_mgt
  */
-class SpamCheckNotFoundException extends Exception
-{
-}
+class SpamCheckNotFoundException extends Exception {}

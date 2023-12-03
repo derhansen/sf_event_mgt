@@ -14,6 +14,4 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 /**
  * The repository for Organisator
  */
-class OrganisatorRepository extends AbstractForeignRecordRepository
-{
-}
+class OrganisatorRepository extends AbstractForeignRecordRepository {}

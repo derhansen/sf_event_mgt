@@ -16,6 +16,4 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  * The repository for registration field
  */
-class FieldRepository extends Repository
-{
-}
+class FieldRepository extends Repository {}

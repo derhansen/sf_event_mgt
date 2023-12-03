@@ -428,9 +428,7 @@ class AdministrationController extends AbstractController
     /**
      * Shows the settings error view
      */
-    public function settingsErrorAction(): void
-    {
-    }
+    public function settingsErrorAction(): void {}
 
     /**
      * Suppress default validation messages

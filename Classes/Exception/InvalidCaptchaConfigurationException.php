@@ -9,6 +9,4 @@
 
 namespace DERHANSEN\SfEventMgt\Exception;
 
-class InvalidCaptchaConfigurationException extends \Exception
-{
-}
+class InvalidCaptchaConfigurationException extends \Exception {}

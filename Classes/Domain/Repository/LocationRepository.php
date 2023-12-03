@@ -14,6 +14,4 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 /**
  * The repository for Locations
  */
-class LocationRepository extends AbstractForeignRecordRepository
-{
-}
+class LocationRepository extends AbstractForeignRecordRepository {}

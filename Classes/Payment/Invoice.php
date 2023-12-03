@@ -12,6 +12,4 @@ namespace DERHANSEN\SfEventMgt\Payment;
 /**
  * Invoice
  */
-class Invoice extends AbstractPayment
-{
-}
+class Invoice extends AbstractPayment {}

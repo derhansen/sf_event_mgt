@@ -12,6 +12,4 @@ namespace DERHANSEN\SfEventMgt;
 /**
  * Generic exception for sf_event_mgt
  */
-class Exception extends \Exception
-{
-}
+class Exception extends \Exception {}

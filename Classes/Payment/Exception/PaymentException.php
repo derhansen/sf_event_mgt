@@ -14,6 +14,4 @@ use DERHANSEN\SfEventMgt\Exception;
 /**
  * PaymentException
  */
-class PaymentException extends Exception
-{
-}
+class PaymentException extends Exception {}

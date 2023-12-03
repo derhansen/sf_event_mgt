@@ -88,8 +88,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
                 'event' => $event,
                 'type' => $type,
             ],
-            function () {
-            },
+            function () {},
             $this->getMockBuilder(RenderingContextInterface::class)->disableOriginalConstructor()->getMock()
         );
         self::assertEquals($expected, $result);
@@ -117,8 +116,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
                 'event' => $event,
                 'type' => 'google',
             ],
-            function () {
-            },
+            function () {},
             $this->getMockBuilder(RenderingContextInterface::class)->disableOriginalConstructor()->getMock()
         );
         $expected = 'https://www.google.com/calendar/render?action=TEMPLATE&text=A%20test%20event&dates=20210101T190000Z%2B0200%2F20210101T200000Z%2B0200&details=A%20description%20for%20the%20event';
