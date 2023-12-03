@@ -942,9 +942,6 @@ class EventController extends AbstractController
 
     /**
      * Returns if a demand object can be overwritten with the given overwriteDemand array
-     *
-     * @param array $overwriteDemand
-     * @return bool
      */
     protected function isOverwriteDemand(array $overwriteDemand): bool
     {

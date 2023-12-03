@@ -386,7 +386,7 @@ class EventControllerTest extends UnitTestCase
 
         $overrideDemand = ['category' => 10];
 
-        $settings = ['disableOverrideDemand' => 1, 'pagination' => []];
+        $settings = ['disableOverrideDemand' => '1', 'pagination' => []];
         $this->subject->_set('settings', $settings);
 
         // Ensure overwriteDemand is not called
@@ -1965,7 +1965,7 @@ class EventControllerTest extends UnitTestCase
         $overrideDemand = ['category' => 10];
         $this->subject->expects(self::once())->method('overwriteEventDemandObject')->willReturn(new EventDemand());
 
-        $settings = ['disableOverrideDemand' => 0];
+        $settings = ['disableOverrideDemand' => '0'];
         $this->subject->_set('settings', $settings);
 
         $allEvents = $this->createMock(QueryResult::class);
@@ -2033,7 +2033,7 @@ class EventControllerTest extends UnitTestCase
         $overrideDemand = ['category' => 10];
         $this->subject->expects(self::never())->method('overwriteEventDemandObject');
 
-        $settings = ['disableOverrideDemand' => 1];
+        $settings = ['disableOverrideDemand' => '1'];
         $this->subject->_set('settings', $settings);
 
         $allEvents = $this->createMock(QueryResult::class);
@@ -2314,5 +2314,63 @@ class EventControllerTest extends UnitTestCase
         $mockedController->_set('request', $mockRequest);
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 1]]);
         self::assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
+    }
+
+    public static function isOverwriteDemandDataProvider(): array
+    {
+        return [
+            'setting is "1" - no overwriteDemand' => [
+                ['disableOverrideDemand' => '1'],
+                [],
+                false,
+            ],
+            'setting is "1" - with overwriteDemand' => [
+                ['disableOverrideDemand' => '1'],
+                ['foo' => 'bar'],
+                false,
+            ],
+            'setting is "0" - no overwriteDemand' => [
+                ['disableOverrideDemand' => '0'],
+                [],
+                false,
+            ],
+            'setting is "0" - with overwriteDemand' => [
+                ['disableOverrideDemand' => '0'],
+                ['foo' => 'bar'],
+                true,
+            ],
+            'setting is 1 - no overwriteDemand' => [
+                ['disableOverrideDemand' => 1],
+                [],
+                false,
+            ],
+            'setting is 1 - with overwriteDemand' => [
+                ['disableOverrideDemand' => 1],
+                ['foo' => 'bar'],
+                false,
+            ],
+            'setting is 0 - no overwriteDemand' => [
+                ['disableOverrideDemand' => 0],
+                [],
+                false,
+            ],
+            'setting is 0 - with overwriteDemand' => [
+                ['disableOverrideDemand' => 0],
+                ['foo' => 'bar'],
+                true,
+            ],
+        ];
+    }
+
+    /**
+     * @test
+     * @dataProvider isOverwriteDemandDataProvider
+     */
+    public function isOverwriteDemandIsWorking(array $settings, array $overwriteDemand, bool $expected): void
+    {
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
+
+        $mockedController->_set('settings', $settings);
+        self::assertEquals($expected, $mockedController->_call('isOverwriteDemand', $overwriteDemand));
     }
 }
