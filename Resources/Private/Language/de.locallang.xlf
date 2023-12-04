@@ -3,149 +3,542 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="de">
     <header/>
     <body>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-		</body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event" approved="yes">
+        <source>Event</source>
+        <target state="final">Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser" approved="yes">
+        <source>Teaser</source>
+        <target state="final">Kurzbeschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
+        <source>Program/Schedule</source>
+        <target state="final">Programm/Ablauf</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
+        <source>Top event</source>
+        <target state="final">Top Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">Startdatum und Uhrzeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">Enddatum und Uhrzeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants" approved="yes">
+        <source>Max. participants</source>
+        <target state="final">Max. Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration" approved="yes">
+        <source>Registration enabled</source>
+        <target state="final">Anmeldung möglich</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Anmeldungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.freePlaces" approved="yes">
+        <source>Free places</source>
+        <target state="final">Freie Plätze</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.hasWaitlist" approved="yes">
+        <source>There is a waitlist</source>
+        <target state="final">Es existiert eine Warteliste</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price" approved="yes">
+        <source>Price</source>
+        <target state="final">Preis</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
+        <source>Currency</source>
+        <target state="final">Währung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category" approved="yes">
+        <source>Category</source>
+        <target state="final">Kategorie</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related" approved="yes">
+        <source>Related events</source>
+        <target state="final">Zugehörige Veranstaltungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.speaker" approved="yes">
+        <source>Speaker</source>
+        <target state="final">Redner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adresse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Plz.</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.city" approved="yes">
+        <source>City</source>
+        <target state="final">Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.room" approved="yes">
+        <source>Room</source>
+        <target state="final">Raum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">Bilder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
+        <source>Files</source>
+        <target state="final">Dateien</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image" approved="yes">
+        <source>Additional Images</source>
+        <target state="final">Zusätzliche Bilder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.booking" approved="yes">
+        <source>Booking</source>
+        <target state="final">Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.firstname" approved="yes">
+        <source>First name</source>
+        <target state="final">Vorname</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.lastname" approved="yes">
+        <source>Last name</source>
+        <target state="final">Nachname</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Firma</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adresse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Plz.</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city" approved="yes">
+        <source>City</source>
+        <target state="final">Stadt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset" approved="yes">
+        <source>Not set</source>
+        <target state="final">Nicht angegeben</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female" approved="yes">
+        <source>Female</source>
+        <target state="final">Weiblich</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male" approved="yes">
+        <source>Male</source>
+        <target state="final">Männlich</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various" approved="yes">
+        <source>Various</source>
+        <target state="final">Divers</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth" approved="yes">
+        <source>Date of birth</source>
+        <target state="final">Geburtsdatum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod" approved="yes">
+        <source>Payment method</source>
+        <target state="final">Zahlungsart</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc" approved="yes">
+        <source>Accept terms and conditions</source>
+        <target state="final">AGB bestätigen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed" approved="yes">
+        <source>Confirmed</source>
+        <target state="final">Bestätigt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">Bezahlt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
+        <source>Notes</source>
+        <target state="final">Bemerkungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" approved="yes">
+        <source>Amount of registrations</source>
+        <target state="final">Anzahl Anmeldungen</target>
+      </trans-unit>
+      <trans-unit id="event.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="registration.form.header" approved="yes">
+        <source>Registration form</source>
+        <target state="final">Anmeldeformular</target>
+      </trans-unit>
+      <trans-unit id="registration.form.waitlist" approved="yes">
+        <source>Please note, that the event is fully booked and you are registering to the waitlist</source>
+        <target state="final">Bitte beachten Sie, dass die Veranstaltung ausgebucht ist und Ihre Anmeldung auf der Warteliste verzeichnet wird</target>
+      </trans-unit>
+      <trans-unit id="registration.spamCheckFailed" approved="yes">
+        <source>Your form submission has been classified as spam.</source>
+        <target state="final">Ihre Formulareingaben wurden als Spam eingestuft.</target>
+      </trans-unit>
+      <trans-unit id="event.backtext" approved="yes">
+        <source>Back to listview</source>
+        <target state="final">Zurück zur Listenansicht</target>
+      </trans-unit>
+      <trans-unit id="event.backDetailsText" approved="yes">
+        <source>Back to event details</source>
+        <target state="final">Zurück zur Detailansicht</target>
+      </trans-unit>
+      <trans-unit id="event.allEvents" approved="yes">
+        <source>All events</source>
+        <target state="final">Alle Veranstaltungen</target>
+      </trans-unit>
+      <trans-unit id="event.submit-registration" approved="yes">
+        <source>Send registration</source>
+        <target state="final">Anmeldung absenden</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventexpired" approved="yes">
+        <source>Registration is not possible any more, because the event startdate is reached.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil das Start-Datum der Veranstaltung bereits erreicht wurde.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfaileddeadlineexpired" approved="yes">
+        <source>Registration is not possible any more, because the registration deadline is reached.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil die Anmeldefrist verstrichen ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
+        <source>Registration failed, because registration is disabled.</source>
+        <target state="final">Die Anmeldung ist nicht möglich, weil für diese Veranstaltung keine Anmeldung erlaubt ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxparticipants" approved="yes">
+        <source>Registration is not possible any more, because the max. participants reached.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil die max. Teilnehmeranzahl erreicht wurde.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
+        <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+        <target state="final">Die Anmeldung ist nicht möglich, weil die Anzahl der Anmeldungen die Anzahl der freien Plätze überschreitet</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded" approved="yes">
+        <source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+        <target state="final">Die Anmeldung ist nicht möglich, weil die Anzahl der gleichzeitigen Anmeldungen in einer Anmeldung überschritten wurde.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedemailnotunique" approved="yes">
+        <source>Registration failed, the email address is already registered to the event.</source>
+        <target state="final">Registrierung fehlgeschlagen, diese E-Mail-Adresse wurde bereits für diese Veranstaltung registriert.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationnotpossible" approved="yes">
+        <source>Unable to show registration form - possible reasons: Event expired, deadline or max. participants reached.</source>
+        <target state="final">Das Registrierungsformular kann nicht angezeigt werden - mögliche Gründe: Start-Datum der Veranstaltung ist bereits erreicht, Anmeldefrist oder max. Anzahl Teilnehmer überschritten.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessful" approved="yes">
+        <source>Your registration was successful.</source>
+        <target state="final">Ihre Anmeldung war erfolgreich</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessfulwrongeventhmac" approved="yes">
+        <source>Your registration was successful, but the given event or HMAC is wrong!</source>
+        <target state="final">Die Anmeldung war erfolgreich, aber die Veranstaltungs-HMAC ist falsch!</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationwaitlistsuccessful" approved="yes">
+        <source>Your registration on the waitlist was successful.</source>
+        <target state="final">Ihre Anmeldung auf der Warteliste war erfolgreich.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_successful" approved="yes">
+        <source>Your registration has been successfully confirmed.</source>
+        <target state="final">Ihre Anmeldung wurde erfolgreich bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_waitlist_successful" approved="yes">
+        <source>Your registration on the waitlist has been successfully confirmed.</source>
+        <target state="final">Ihre Anmeldung auf der Warteliste wurde erfolgreich bestätigt.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_wrong_hmac" approved="yes">
+        <source>Confirmation failed, wrong HMAC.</source>
+        <target state="final">Bestätigung fehlgeschlagen, falsche HMAC.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_not_found" approved="yes">
+        <source>Confirmation failed, registration not found.</source>
+        <target state="final">Bestätigung fehlgeschlagen, weil die Anmeldung nicht gefunden wurde.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_event_not_found" approved="yes">
+        <source>Cancellation failed, event not found.</source>
+        <target state="final">Stornierung fehlgeschlagen, Veranstaltung nicht gefunden.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_confirmation_until_expired" approved="yes">
+        <source>Confirmation failed, confirmation date has expired.</source>
+        <target state="final">Bestätigung fehlgeschlagen, weil das Bestätigungsdatum abgelaufen ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_already_confirmed" approved="yes">
+        <source>Confirmation failed, because the registration already has been confirmed.</source>
+        <target state="final">Bestätigung fehlgeschlagen, weil die Anmeldung bereits bestätigt wurde.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_successful" approved="yes">
+        <source>Your registration has been successfully cancelled.</source>
+        <target state="final">Ihre Anmeldung wurde erfolgreich zurückgezogen.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_wrong_hmac" approved="yes">
+        <source>Cancellation failed, wrong HMAC.</source>
+        <target state="final">Stornierung fehlgeschlagen, falsche HMAC.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled" approved="yes">
+        <source>Cancellation failed, registration not found or already cancelled.</source>
+        <target state="final">Stornierung fehlgeschlagen, Registierung nicht gefunden oder Stornierung bereits durchgeführt.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_cancel_disabled" approved="yes">
+        <source>Cancellation failed, cancel option for this event is not enabled.</source>
+        <target state="final">Stornierung fehlgeschlagen, weil die Stornierungs-Option für diese Veranstaltung nicht aktiviert ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_deadline_expired" approved="yes">
+        <source>Cancellation failed, cancellation date has expired.</source>
+        <target state="final">Bestätigung fehlgeschlagen, weil das Bestätigungsdatum abgelaufen ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_event_started" approved="yes">
+        <source>Cancellation failed, because the event startdate passed.</source>
+        <target state="final">Stornierung fehlgeschlagen weil die Veranstaltung bereits begonnen hat.</target>
+      </trans-unit>
+      <trans-unit id="event.icalDownload" approved="yes">
+        <source>Download iCal file</source>
+        <target state="final">Download iCal Datei</target>
+      </trans-unit>
+      <trans-unit id="event.freeofcharge" approved="yes">
+        <source>Free of charge</source>
+        <target state="final">Kostenlos</target>
+      </trans-unit>
+      <trans-unit id="label.false" approved="yes">
+        <source>False</source>
+        <target state="final">Nein</target>
+      </trans-unit>
+      <trans-unit id="label.true" approved="yes">
+        <source>True</source>
+        <target state="final">Ja</target>
+      </trans-unit>
+      <trans-unit id="admin.no_events_available" approved="yes">
+        <source>No events available</source>
+        <target state="final">Keine Veranstaltungen vorhanden</target>
+      </trans-unit>
+      <trans-unit id="admin.sorting" approved="yes">
+        <source>Sorting</source>
+        <target state="final">Sortierung</target>
+      </trans-unit>
+      <trans-unit id="search.title" approved="yes">
+        <source>Search</source>
+        <target state="final">Suchen</target>
+      </trans-unit>
+      <trans-unit id="list.title" approved="yes">
+        <source>Events</source>
+        <target state="final">Veranstaltungen</target>
+      </trans-unit>
+      <trans-unit id="detail.title" approved="yes">
+        <source>Event details</source>
+        <target state="final">Veranstaltungsdetails</target>
+      </trans-unit>
+      <trans-unit id="calendar.title" approved="yes">
+        <source>Event calendar</source>
+        <target state="final">Veranstaltungskalender</target>
+      </trans-unit>
+      <trans-unit id="detail.download" approved="yes">
+        <source>Download</source>
+        <target state="final">Herunterladen</target>
+      </trans-unit>
+      <trans-unit id="registration.title" approved="yes">
+        <source>Registration for event</source>
+        <target state="final">Anmeldung für Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.successful" approved="yes">
+        <source>Registration confirmed</source>
+        <target state="final">Anmeldung bestätigt</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistrationWaitlist.title.successful" approved="yes">
+        <source>Registration on the waitlist confirmed</source>
+        <target state="final">Anmeldung auf Warteliste bestätigt</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.failed" approved="yes">
+        <source>Registration confirmation failed</source>
+        <target state="final">Bestätigung der Anmeldung fehlgeschlagen</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.successful" approved="yes">
+        <source>Registration cancelled</source>
+        <target state="final">Anmeldung storniert</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.failed" approved="yes">
+        <source>Cancellation failed</source>
+        <target state="final">Stornierung fehlgeschlagen</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.successful" approved="yes">
+        <source>Registration successful</source>
+        <target state="final">Anmeldung erfolgreich</target>
+      </trans-unit>
+      <trans-unit id="registrationWaitlistResult.title.successful" approved="yes">
+        <source>Registration on the waitlist successful</source>
+        <target state="final">Anmeldung auf Warteliste erfolgreich</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.failed" approved="yes">
+        <source>Registration failed</source>
+        <target state="final">Anmeldung fehlgeschlagen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
+        <source>Organisator</source>
+        <target state="final">Organisator/Ansprechpartner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
+        <source>Phone number</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Bild</target>
+      </trans-unit>
+      <trans-unit id="validation.possible_robot" approved="yes">
+        <source>Captcha field empty or possible robot detected.</source>
+        <target state="final">Captcha-Feld leer oder möglicher Bot erkannt.</target>
+      </trans-unit>
+      <trans-unit id="validation.missing_captcha" approved="yes">
+        <source>Captcha field is missing or invalid.</source>
+        <target state="final">Captcha-Feld fehlt oder ist ungültig.</target>
+      </trans-unit>
+      <trans-unit id="error.no_secret" approved="yes">
+        <source>No secret set in TypoScript for captcha.</source>
+        <target state="final">Kein Geheimer Schlüssel in TypoScript für Captcha.</target>
+      </trans-unit>
+      <trans-unit id="search.searchFor" approved="yes">
+        <source>Search</source>
+        <target state="final">Suche</target>
+      </trans-unit>
+      <trans-unit id="search.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">Startdatum</target>
+      </trans-unit>
+      <trans-unit id="search.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">Enddatum</target>
+      </trans-unit>
+      <trans-unit id="search.submit" approved="yes">
+        <source>Search</source>
+        <target state="final">Suche</target>
+      </trans-unit>
+      <trans-unit id="search.searchResult" approved="yes">
+        <source>Searchresult</source>
+        <target state="final">Suchergebnis</target>
+      </trans-unit>
+      <trans-unit id="search.noResultsFound" approved="yes">
+        <source>Your search did not match any events</source>
+        <target state="final">Keine Veranstaltungen aufgrund Ihrer Suche gefunden</target>
+      </trans-unit>
+      <trans-unit id="payment.title.invoice" approved="yes">
+        <source>Invoice</source>
+        <target state="final">Rechnung</target>
+      </trans-unit>
+      <trans-unit id="payment.title.transfer" approved="yes">
+        <source>Transfer</source>
+        <target state="final">Überweisung</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.invalidHmac" approved="yes">
+        <source>Error: The given HMAC could not be validated. Possible data manipulation.</source>
+        <target state="final">Fehler: Die HMAC konnte nicht validiert werden. Evtl. wurden die Daten manipuliert!</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentNotEnabled" approved="yes">
+        <source>Error: Unable to process payment for this registration, since payment not enabled for the event.</source>
+        <target state="final">Fehler: Die Zahlung für diese Registrierung konnte nicht durchgeführt werden, weil Bezahlungen für die Veranstaltung deaktiviert sind.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.actionNotEnabled" approved="yes">
+        <source>Error: The requested action is not enabled for the payment method.</source>
+        <target state="final">Fehler: Diese Aktion ist nicht verfügbar für die Zahlungsart.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentAlreadyProcessed" approved="yes">
+        <source>Error: The payment for this registration has already been processed.</source>
+        <target state="final">Fehler: Die Zahlung für diese Registrierung wurde bereits durchgeführt.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentMethodNotAvailable" approved="yes">
+        <source>Error: The payment method is not configured for the event.</source>
+        <target state="final">Fehler: Die Zahlungsmethode ist für diese Veranstaltung nicht aktiviert.</target>
+      </trans-unit>
+      <trans-unit id="userRegistrations.title" approved="yes">
+        <source>My event registrations</source>
+        <target state="final">Meine Veranstaltungs-Anmeldungen</target>
+      </trans-unit>
+      <trans-unit id="userRegistration.cancel" approved="yes">
+        <source>Cancel registration</source>
+        <target state="final">Anmeldung stornieren</target>
+      </trans-unit>
+      <trans-unit id="eventNotFound" approved="yes">
+        <source>The event record is not available anymore.</source>
+        <target state="final">Diese Veranstaltung ist nicht mehr verfügbar</target>
+      </trans-unit>
+      <trans-unit id="csvExportDisabled" approved="yes">
+        <source>CSV export disabled</source>
+        <target state="final">CSV Export nicht verfügbar</target>
+      </trans-unit>
+      <trans-unit id="insufficientAccessToTemp" approved="yes">
+        <source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
+        <target state="final">Ungenügende Berechtigungen um auf den Temp-Ordner im Fileadmin zuzugreifen. Der CSV Export für Anmeldungen wurde deaktiviert.</target>
+      </trans-unit>
+      <trans-unit id="pagination.first" approved="yes">
+        <source>First page</source>
+        <target state="final">Erste Seite</target>
+      </trans-unit>
+      <trans-unit id="pagination.previous" approved="yes">
+        <source>Previous</source>
+        <target state="final">Vorherige</target>
+      </trans-unit>
+      <trans-unit id="pagination.next" approved="yes">
+        <source>Next</source>
+        <target state="final">Nächste</target>
+      </trans-unit>
+      <trans-unit id="pagination.last" approved="yes">
+        <source>Last page</source>
+        <target state="final">Letzte Seite</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
