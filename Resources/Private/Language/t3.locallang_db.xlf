@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event">
+        <source>Event</source>
+        <target>crwdns300788:0crwdne300788:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category">
+        <source>Categories</source>
+        <target>crwdns300790:0crwdne300790:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title">
+        <source>Title</source>
+        <target>crwdns300792:0crwdne300792:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser">
+        <source>Teaser</source>
+        <target>crwdns300794:0crwdne300794:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description">
+        <source>Description</source>
+        <target>crwdns300796:0crwdne300796:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program">
+        <source>Program/Schedule</source>
+        <target>crwdns300798:0crwdne300798:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.custom_text">
+        <source>Custom text</source>
+        <target>crwdns300800:0crwdne300800:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link">
+        <source>Link</source>
+        <target>crwdns300802:0crwdne300802:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event">
+        <source>Top event</source>
+        <target>crwdns300804:0crwdne300804:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.startdate">
+        <source>Start date and time</source>
+        <target>crwdns300806:0crwdne300806:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enddate">
+        <source>End date and time</source>
+        <target>crwdns300808:0crwdne300808:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
+        <source>Max. participants</source>
+        <target>crwdns300810:0crwdne300810:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser">
+        <source>Max. simultaneous registrations per user</source>
+        <target>crwdns300812:0crwdne300812:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
+        <source>Enable registration</source>
+        <target>crwdns300814:0crwdne300814:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist">
+        <source>Enable waitlist</source>
+        <target>crwdns300816:0crwdne300816:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist_moveup">
+        <source>Automatic waitlist move up</source>
+        <target>crwdns300818:0crwdne300818:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_cancel">
+        <source>Enable cancellation</source>
+        <target>crwdns300820:0crwdne300820:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.unique_email_check">
+        <source>Enable unique email check for registration</source>
+        <target>crwdns300822:0crwdne300822:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_autoconfirm">
+        <source>Enable automatic confirmation of event registrations</source>
+        <target>crwdns300824:0crwdne300824:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price">
+        <source>Price</source>
+        <target>crwdns300826:0crwdne300826:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options">
+        <source>Price options</source>
+        <target>crwdns300828:0crwdne300828:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency">
+        <source>Currency</source>
+        <target>crwdns300830:0crwdne300830:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment">
+        <source>Enable payment</source>
+        <target>crwdns300832:0crwdne300832:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.restrict_payment_methods">
+        <source>Restrict available payment methods</source>
+        <target>crwdns300834:0crwdne300834:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.selected_payment_methods">
+        <source>Selected payment methods</source>
+        <target>crwdns300836:0crwdne300836:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related">
+        <source>Related events</source>
+        <target>crwdns300838:0crwdne300838:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location">
+        <source>Location</source>
+        <target>crwdns300840:0crwdne300840:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.room">
+        <source>Room</source>
+        <target>crwdns300842:0crwdne300842:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.speaker">
+        <source>Speaker</source>
+        <target>crwdns300844:0crwdne300844:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+        <source>Organisator</source>
+        <target>crwdns300846:0crwdne300846:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image">
+        <source>Images</source>
+        <target>crwdns300848:0crwdne300848:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files">
+        <source>Files</source>
+        <target>crwdns300850:0crwdne300850:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+        <source>Additional images (e.g. images from the event)</source>
+        <target>crwdns300852:0crwdne300852:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
+        <source>Registrations</source>
+        <target>crwdns300854:0crwdne300854:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_waitlist">
+        <source>Registrations on the waitlist</source>
+        <target>crwdns300856:0crwdne300856:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_fields">
+        <source>Additional registration fields (e.g. "Hotel room needed?")</source>
+        <target>crwdns300858:0crwdne300858:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_startdate">
+        <source>Registration start date</source>
+        <target>crwdns300860:0crwdne300860:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline">
+        <source>Registration deadline</source>
+        <target>crwdns300862:0crwdne300862:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.cancel_deadline">
+        <source>Cancellation deadline</source>
+        <target>crwdns300864:0crwdne300864:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin">
+        <source>Admin</source>
+        <target>crwdns300866:0crwdne300866:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
+        <source>Organisator</source>
+        <target>crwdns300868:0crwdne300868:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords">
+        <source>Keywords (,)</source>
+        <target>crwdns300870:0crwdne300870:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_description">
+        <source>Description</source>
+        <target>crwdns300872:0crwdne300872:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.alternative_title">
+        <source>Alternative title</source>
+        <target>crwdns300874:0crwdne300874:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration">
+        <source>Event - Registration</source>
+        <target>crwdns300876:0crwdne300876:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.language">
+        <source>Language</source>
+        <target>crwdns300878:0crwdne300878:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
+        <source>First name</source>
+        <target>crwdns300880:0crwdne300880:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.lastname">
+        <source>Last name</source>
+        <target>crwdns300882:0crwdne300882:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title">
+        <source>Title</source>
+        <target>crwdns300884:0crwdne300884:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company">
+        <source>Company</source>
+        <target>crwdns300886:0crwdne300886:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address">
+        <source>Address</source>
+        <target>crwdns300888:0crwdne300888:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip">
+        <source>Zip</source>
+        <target>crwdns300890:0crwdne300890:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city">
+        <source>City</source>
+        <target>crwdns300892:0crwdne300892:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country">
+        <source>Country</source>
+        <target>crwdns300894:0crwdne300894:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone">
+        <source>Phone</source>
+        <target>crwdns300896:0crwdne300896:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email">
+        <source>Email</source>
+        <target>crwdns300898:0crwdne300898:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications">
+        <source>No email notifications</source>
+        <target>crwdns300900:0crwdne300900:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.mainRegistration">
+        <source>Parent registration</source>
+        <target>crwdns300902:0crwdne300902:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender">
+        <source>Gender</source>
+        <target>crwdns300904:0crwdne300904:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset">
+        <source>Not set</source>
+        <target>crwdns300906:0crwdne300906:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female">
+        <source>Female</source>
+        <target>crwdns300908:0crwdne300908:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male">
+        <source>Male</source>
+        <target>crwdns300910:0crwdne300910:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various">
+        <source>Various</source>
+        <target>crwdns300912:0crwdne300912:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth">
+        <source>Date of birth</source>
+        <target>crwdns300914:0crwdne300914:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmationUntil">
+        <source>Confirmation until</source>
+        <target>crwdns300916:0crwdne300916:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.registration_date">
+        <source>Registration date</source>
+        <target>crwdns300918:0crwdne300918:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc">
+        <source>Accepted terms and conditions</source>
+        <target>crwdns300920:0crwdne300920:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.waitlist">
+        <source>Waitlist registration</source>
+        <target>crwdns300922:0crwdne300922:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed">
+        <source>Confirmed</source>
+        <target>crwdns300924:0crwdne300924:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod">
+        <source>Payment method</source>
+        <target>crwdns300926:0crwdne300926:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod.notSet">
+        <source>Not set</source>
+        <target>crwdns300928:0crwdne300928:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment_reference">
+        <source>Payment reference</source>
+        <target>crwdns300930:0crwdne300930:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid">
+        <source>Paid</source>
+        <target>crwdns300932:0crwdne300932:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
+        <source>Notes</source>
+        <target>crwdns300934:0crwdne300934:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.fe_user">
+        <source>Frontend User</source>
+        <target>crwdns300936:0crwdne300936:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.fieldvalues">
+        <source>Registration field values</source>
+        <target>crwdns300938:0crwdne300938:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+        <source>Amount of registrations (if user created multiple registrations at the same time)</source>
+        <target>crwdns300940:0crwdne300940:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.additional">
+        <source>Additional</source>
+        <target>crwdns300942:0crwdne300942:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.categories">
+        <source>Categories</source>
+        <target>crwdns300944:0crwdne300944:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.relations">
+        <source>Relations</source>
+        <target>crwdns300946:0crwdne300946:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.media">
+        <source>Media</source>
+        <target>crwdns300948:0crwdne300948:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.metadata">
+        <source>Metadata</source>
+        <target>crwdns300950:0crwdne300950:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registration_options">
+        <source>Registration options</source>
+        <target>crwdns300952:0crwdne300952:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registration_fields">
+        <source>Registration fields</source>
+        <target>crwdns300954:0crwdne300954:0</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registrations">
+        <source>Registrations</source>
+        <target>crwdns300956:0crwdne300956:0</target>
+      </trans-unit>
+      <trans-unit id="registration.tabs.payment">
+        <source>Payment</source>
+        <target>crwdns300958:0crwdne300958:0</target>
+      </trans-unit>
+      <trans-unit id="event.sections.payment">
+        <source>Payment</source>
+        <target>crwdns300960:0crwdne300960:0</target>
+      </trans-unit>
+      <trans-unit id="location.tabs.geodata">
+        <source>Geodata</source>
+        <target>crwdns300962:0crwdne300962:0</target>
+      </trans-unit>
+      <trans-unit id="event.sections.notification">
+        <source>When a registration is created, confirmed, cancelled or moved from the waitlist, send a notification email to:</source>
+        <target>crwdns300964:0crwdne300964:0</target>
+      </trans-unit>
+      <trans-unit id="event.sections.registrationPeriod">
+        <source>Period</source>
+        <target>crwdns300966:0crwdne300966:0</target>
+      </trans-unit>
+      <trans-unit id="event.sections.cancellation">
+        <source>Cancellation options:</source>
+        <target>crwdns300968:0crwdne300968:0</target>
+      </trans-unit>
+      <trans-unit id="event.sections.waitlist">
+        <source>Waitlist</source>
+        <target>crwdns300970:0crwdne300970:0</target>
+      </trans-unit>
+      <trans-unit id="event.sections.metatags">
+        <source>Meta Tags</source>
+        <target>crwdns300972:0crwdne300972:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location">
+        <source>Event - Location</source>
+        <target>crwdns300974:0crwdne300974:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.title">
+        <source>Title</source>
+        <target>crwdns300976:0crwdne300976:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.address">
+        <source>Address</source>
+        <target>crwdns300978:0crwdne300978:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.zip">
+        <source>Zip</source>
+        <target>crwdns300980:0crwdne300980:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.city">
+        <source>City</source>
+        <target>crwdns300982:0crwdne300982:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.country">
+        <source>Country</source>
+        <target>crwdns300984:0crwdne300984:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.description">
+        <source>Description</source>
+        <target>crwdns300986:0crwdne300986:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.link">
+        <source>Link</source>
+        <target>crwdns300988:0crwdne300988:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.longitude">
+        <source>Longitude</source>
+        <target>crwdns300990:0crwdne300990:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.latitude">
+        <source>Latitude</source>
+        <target>crwdns300992:0crwdne300992:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog">
+        <source>Event - Notificationlog</source>
+        <target>crwdns300994:0crwdne300994:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event">
+        <source>Event</source>
+        <target>crwdns300996:0crwdne300996:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details">
+        <source>Details</source>
+        <target>crwdns300998:0crwdne300998:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.message">
+        <source>Message</source>
+        <target>crwdns301000:0crwdne301000:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent">
+        <source>Emails sent</source>
+        <target>crwdns301002:0crwdne301002:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.tstamp">
+        <source>Timestamp</source>
+        <target>crwdns301004:0crwdne301004:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+        <source>Organisator</source>
+        <target>crwdns300846:0crwdne300846:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator">
+        <source>Event - Organisator</source>
+        <target>crwdns301008:0crwdne301008:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+        <source>Name</source>
+        <target>crwdns301010:0crwdne301010:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+        <source>Email</source>
+        <target>crwdns301012:0crwdne301012:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email_signature">
+        <source>Email signature</source>
+        <target>crwdns301014:0crwdne301014:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+        <source>Phone number</source>
+        <target>crwdns301016:0crwdne301016:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.link">
+        <source>Link</source>
+        <target>crwdns301018:0crwdne301018:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+        <source>Image</source>
+        <target>crwdns301020:0crwdne301020:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption">
+        <source>Price option</source>
+        <target>crwdns301022:0crwdne301022:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price">
+        <source>Price</source>
+        <target>crwdns301024:0crwdne301024:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until">
+        <source>Date until the price is valid (includes selected date)</source>
+        <target>crwdns301026:0crwdne301026:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker">
+        <source>Event - Speaker</source>
+        <target>crwdns301028:0crwdne301028:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.name">
+        <source>Name</source>
+        <target>crwdns301030:0crwdne301030:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.job_title">
+        <source>Job title</source>
+        <target>crwdns301032:0crwdne301032:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.description">
+        <source>Description</source>
+        <target>crwdns301034:0crwdne301034:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.image">
+        <source>Image</source>
+        <target>crwdns301036:0crwdne301036:0</target>
+      </trans-unit>
+      <trans-unit id="registration_field.tabs.settings">
+        <source>Settings</source>
+        <target>crwdns301038:0crwdne301038:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field">
+        <source>Event - Registrationfield</source>
+        <target>crwdns301040:0crwdne301040:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.title">
+        <source>Title</source>
+        <target>crwdns301042:0crwdne301042:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.settings">
+        <source>Options</source>
+        <target>crwdns301044:0crwdne301044:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type">
+        <source>Type</source>
+        <target>crwdns301046:0crwdne301046:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.0">
+        <source>Textfield (input)</source>
+        <target>crwdns301048:0crwdne301048:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.1">
+        <source>Radiobutton</source>
+        <target>crwdns301050:0crwdne301050:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.2">
+        <source>Checkbox</source>
+        <target>crwdns301052:0crwdne301052:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.3">
+        <source>Textarea</source>
+        <target>crwdns301054:0crwdne301054:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.4">
+        <source>Text</source>
+        <target>crwdns301056:0crwdne301056:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.5">
+        <source>Divider</source>
+        <target>crwdns301058:0crwdne301058:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.6">
+        <source>Select</source>
+        <target>crwdns301060:0crwdne301060:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.7">
+        <source>Date/Time</source>
+        <target>crwdns301062:0crwdne301062:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.required">
+        <source>Required (field must be filled out)</source>
+        <target>crwdns301064:0crwdne301064:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.placeholder">
+        <source>Placeholder</source>
+        <target>crwdns301066:0crwdne301066:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.default_value">
+        <source>Default value</source>
+        <target>crwdns301068:0crwdne301068:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.text">
+        <source>Text</source>
+        <target>crwdns301070:0crwdne301070:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode">
+        <source>Date input mode</source>
+        <target>crwdns301072:0crwdne301072:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value">
+        <source>Prefill with frontend user data</source>
+        <target>crwdns301074:0crwdne301074:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value.select">
+        <source>Select value</source>
+        <target>crwdns301076:0crwdne301076:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0">
+        <source>Date</source>
+        <target>crwdns301078:0crwdne301078:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1">
+        <source>Date and time</source>
+        <target>crwdns301080:0crwdne301080:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2">
+        <source>Time</source>
+        <target>crwdns301082:0crwdne301082:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue">
+        <source>Event - Registrationfield value</source>
+        <target>crwdns301084:0crwdne301084:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.value">
+        <source>Value</source>
+        <target>crwdns301086:0crwdne301086:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.field">
+        <source>Field</source>
+        <target>crwdns301088:0crwdne301088:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType">
+        <source>Value Datatype</source>
+        <target>crwdns301090:0crwdne301090:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0">
+        <source>Text</source>
+        <target>crwdns301092:0crwdne301092:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1">
+        <source>Array</source>
+        <target>crwdns301094:0crwdne301094:0</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views">
+        <source>Show in views</source>
+        <target>crwdns301096:0crwdne301096:0</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.0">
+        <source>Show in all views</source>
+        <target>crwdns301098:0crwdne301098:0</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.1">
+        <source>Show only in detail views</source>
+        <target>crwdns301100:0crwdne301100:0</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.2">
+        <source>Show only in list views</source>
+        <target>crwdns301102:0crwdne301102:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
