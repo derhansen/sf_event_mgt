@@ -23,6 +23,10 @@
         <source>Program/Schedule</source>
         <target state="final">Programm/Ablauf</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
         <source>Top event</source>
         <target state="final">Top Veranstaltung</target>
@@ -215,6 +219,18 @@
         <source>Amount of registrations</source>
         <target state="final">Anzahl Anmeldungen</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">Bezahlt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.yes" approved="yes">
+        <source>Yes</source>
+        <target state="final">Ja</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.no" approved="yes">
+        <source>No</source>
+        <target state="final">Nein</target>
+      </trans-unit>
       <trans-unit id="event.registration" approved="yes">
         <source>Registration</source>
         <target state="final">Anmeldung</target>
@@ -307,6 +323,10 @@
         <source>Confirmation failed, registration not found.</source>
         <target state="final">Bestätigung fehlgeschlagen, weil die Anmeldung nicht gefunden wurde.</target>
       </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_event_not_found" approved="yes">
+        <source>Confirmation failed, event for registration either not found or access protected.</source>
+        <target state="final">Bestätigung fehlgeschlagen, die Veranstaltung für die Anmeldung wurde nicht gefunden oder ist Zugriffsgeschützt.</target>
+      </trans-unit>
       <trans-unit id="event.message.cancel_failed_event_not_found" approved="yes">
         <source>Cancellation failed, event not found.</source>
         <target state="final">Stornierung fehlgeschlagen, Veranstaltung nicht gefunden.</target>
@@ -383,6 +403,10 @@
         <source>Event calendar</source>
         <target state="final">Veranstaltungskalender</target>
       </trans-unit>
+      <trans-unit id="calendar.week" approved="yes">
+        <source>Week</source>
+        <target state="final">Woche</target>
+      </trans-unit>
       <trans-unit id="detail.download" approved="yes">
         <source>Download</source>
         <target state="final">Herunterladen</target>
@@ -426,6 +450,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
         <source>Organisator</source>
         <target state="final">Organisator/Ansprechpartner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Name</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
         <source>Email</source>
@@ -506,6 +534,10 @@
       <trans-unit id="userRegistrations.title" approved="yes">
         <source>My event registrations</source>
         <target state="final">Meine Veranstaltungs-Anmeldungen</target>
+      </trans-unit>
+      <trans-unit id="userRegistration.title" approved="yes">
+        <source>My registration</source>
+        <target state="final">Meine Anmeldung</target>
       </trans-unit>
       <trans-unit id="userRegistration.cancel" approved="yes">
         <source>Cancel registration</source>
