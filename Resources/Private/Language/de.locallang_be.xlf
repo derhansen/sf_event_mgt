@@ -501,6 +501,10 @@
         <source>Date</source>
         <target state="final">Datum</target>
       </trans-unit>
+      <trans-unit id="administration.notify.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Details</target>
+      </trans-unit>
       <trans-unit id="administration.notify.emailsSent" approved="yes">
         <source>Emails sent</source>
         <target state="final">E-Mails versendet</target>
@@ -617,6 +621,10 @@
       <trans-unit id="evaluation.timeRestriction.info" approved="yes">
         <source>The value '%s' corresponds to %s</source>
         <target state="final">Der Wert '%s' entspricht %s</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.format" approved="yes">
+        <source>d.m.Y H:i:s</source>
+        <target state="final">d.m.Y H:i:s</target>
       </trans-unit>
       <trans-unit id="event.startdateNotBeforeEnddate.title" approved="yes">
         <source>Invalid event configuration</source>
