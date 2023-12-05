@@ -15,6 +15,10 @@
         <source>Title</source>
         <target state="final">Titel</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser" approved="yes">
+        <source>Teaser</source>
+        <target state="final">Kurzbeschreibung</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
         <source>Description</source>
         <target state="final">Beschreibung</target>
@@ -26,6 +30,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.custom_text" approved="yes">
         <source>Custom text</source>
         <target state="final">Eigener Text</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
         <source>Top event</source>
@@ -395,6 +403,10 @@
         <source>Description</source>
         <target state="final">Beschreibung</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_location.longitude" approved="yes">
         <source>Longitude</source>
         <target state="final">Längengrad</target>
@@ -410,6 +422,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event" approved="yes">
         <source>Event</source>
         <target state="final">Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Details</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.message" approved="yes">
         <source>Message</source>
@@ -431,6 +447,10 @@
         <source>Event - Organisator</source>
         <target state="final">Veranstaltung - Organisator/Ansprechpartner</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Name</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
         <source>Email</source>
         <target state="final">E-Mail</target>
@@ -442,6 +462,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
         <source>Phone number</source>
         <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
         <source>Image</source>
@@ -462,6 +486,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_speaker" approved="yes">
         <source>Event - Speaker</source>
         <target state="final">Veranstaltung - Redner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Name</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_speaker.job_title" approved="yes">
         <source>Job title</source>
@@ -511,6 +539,10 @@
         <source>Textarea</source>
         <target state="final">Textbereich</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.4" approved="yes">
+        <source>Text</source>
+        <target state="final">Text</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.5" approved="yes">
         <source>Divider</source>
         <target state="final">Trenner</target>
@@ -535,9 +567,21 @@
         <source>Default value</source>
         <target state="final">Standardwert</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.text" approved="yes">
+        <source>Text</source>
+        <target state="final">Text</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode" approved="yes">
         <source>Date input mode</source>
         <target state="final">Datum Eingabeformat</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value" approved="yes">
+        <source>Prefill with frontend user data</source>
+        <target state="final">Vor-ausgefüllt mit Benutzerdaten</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value.select" approved="yes">
+        <source>Select value</source>
+        <target state="final">Wert wählen</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0" approved="yes">
         <source>Date</source>
@@ -566,6 +610,14 @@
       <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType" approved="yes">
         <source>Value Datatype</source>
         <target state="final">Wert Datentyp</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0" approved="yes">
+        <source>Text</source>
+        <target state="final">Text</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1" approved="yes">
+        <source>Array</source>
+        <target state="final">Array</target>
       </trans-unit>
       <trans-unit id="sys_file_reference.show_in_views" approved="yes">
         <source>Show in views</source>
