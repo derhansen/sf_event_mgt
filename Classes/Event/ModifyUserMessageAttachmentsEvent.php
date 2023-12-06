@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Event;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 
@@ -25,6 +26,7 @@ final class ModifyUserMessageAttachmentsEvent
         private readonly Registration $registration,
         private readonly int $type,
         private readonly array $settings,
+        private readonly ?CustomNotification $customNotification,
         private readonly NotificationService $notificationService
     ) {
     }
@@ -47,6 +49,11 @@ final class ModifyUserMessageAttachmentsEvent
     public function getSettings(): array
     {
         return $this->settings;
+    }
+
+    public function getCustomNotification(): ?CustomNotification
+    {
+        return $this->customNotification;
     }
 
     public function getNotificationService(): NotificationService

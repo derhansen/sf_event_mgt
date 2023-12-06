@@ -224,6 +224,7 @@ class NotificationService
                 $registration,
                 $type,
                 $settings,
+                $customNotification,
                 $this
             );
             $this->eventDispatcher->dispatch($modifyUserAttachmentsEvent);
