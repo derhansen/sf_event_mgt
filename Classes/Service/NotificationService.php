@@ -191,7 +191,8 @@ class NotificationService
                 $settings,
                 $registration,
                 $type,
-                MessageRecipient::USER
+                MessageRecipient::USER,
+                $customNotification
             );
 
             // Get iCal attachment if configured
@@ -199,7 +200,8 @@ class NotificationService
                 $settings,
                 $registration,
                 $type,
-                MessageRecipient::USER
+                MessageRecipient::USER,
+                $customNotification
             );
 
             if ($iCalAttachment !== '') {

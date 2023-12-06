@@ -22,6 +22,7 @@ The extension supports to add attachments to the following type of emails:
 * New event registration on the waitlist
 * Confirmed event registration
 * Confirmed event registration on the waitlist
+* Custom notifications sent from backend (only recipient group :php:`user`)
 
 Configuring email attachments
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,6 +40,7 @@ Attachment configuration can be added to the following TypoScript settings:
 * :php:`plugin.tx_sfeventmgt.settings.notification.registrationWaitlistNew`
 * :php:`plugin.tx_sfeventmgt.settings.notification.registrationConfirmed`
 * :php:`plugin.tx_sfeventmgt.settings.notification.registrationWaitlistConfirmed`
+* :php:`plugin.tx_sfeventmgt.settings.notification.customNotifications.your-template-name`
 
 Note, that you also need to configure the recipient group (:php:`user` or :php:`admin`).
 
