@@ -49,4 +49,4 @@ The example below shows a XML Sitemap configuration for sf_event_mgt::
 Note, that you must replace :php:`<event-record-pid>` and :php:`<detail-pid>`  with your own values.
 
 .. tip::
-   When you only want to show future events, you can extend the config by :php:`additionalWhere = `tx_sfeventmgt_domain_model_event`.`enddate` > UNIX_TIMESTAMP()`
+   When you only want to show future events, you can extend the config by :php:`additionalWhere = tx_sfeventmgt_domain_model_event.enddate > UNIX_TIMESTAMP()`
