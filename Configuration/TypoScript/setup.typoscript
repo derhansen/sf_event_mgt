@@ -222,22 +222,12 @@ module.tx_sfeventmgt {
 # Rendering of events, displayed by "Insert Record" content element
 #==============================================
 tt_content.shortcut.20.tables := addToList(tx_sfeventmgt_domain_model_event)
-tt_content.shortcut.20.conf.tx_sfeventmgt_domain_model_event = USER
+tt_content.shortcut.20.conf.tx_sfeventmgt_domain_model_event = EXTBASEPLUGIN
 tt_content.shortcut.20.conf.tx_sfeventmgt_domain_model_event {
-    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
-    extensionName = SfEventMgt
-    pluginName = Pievent
-    vendorName = DERHANSEN
-    controller = Event
-    action = detail
-    switchableControllerActions {
-        Event {
-            1 = detail
-        }
-    }
-
-    settings =< plugin.tx_sfeventmgt.settings
-    settings.detail.isShortcut = 1
+  extensionName = SfEventMgt
+  pluginName = Pieventdetail
+  settings =< plugin.tx_sfeventmgt.settings
+  settings.detail.isShortcut = 1
 }
 
 # For fluid_styled_content
