@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service\Notification;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
@@ -62,26 +63,31 @@ class AttachmentService
         array $settings,
         Registration $registration,
         int $messageType,
-        string $messageRecipient
+        string $messageRecipient,
+        ?CustomNotification $customNotification = null
     ): array {
         $attachments = [];
         $settingPath = $this->getSettingsPath($messageType);
+        $attachmentSettings = $settings['notification'][$settingPath]['attachments'][$messageRecipient] ?? [];
 
-        if (isset($settings['notification'][$settingPath]['attachments'][$messageRecipient])) {
+        if ($customNotification) {
+            $attachmentSettings = $settings['notification']['customNotifications'][$customNotification->getTemplate()]['attachments'][$messageRecipient] ?? [];
+        }
+
+        if (!empty($attachmentSettings)) {
             // Attachments globally from TypoScript
-            $config = $settings['notification'][$settingPath]['attachments'][$messageRecipient];
-            $attachments = $this->getFileAttachments($config);
+            $attachments = $this->getFileAttachments($attachmentSettings);
 
             // Attachments from Event properties
             $eventAttachments = $this->getObjectAttachments(
-                $config['fromEventProperty'] ?? [],
+                $attachmentSettings['fromEventProperty'] ?? [],
                 $registration->getEvent()
             );
             $attachments = array_merge($attachments, $eventAttachments);
 
             // Attachments from Registration properties
             $registrationAttachments = $this->getObjectAttachments(
-                $config['fromRegistrationProperty'] ?? [],
+                $attachmentSettings['fromRegistrationProperty'] ?? [],
                 $registration
             );
             $attachments = array_merge($attachments, $registrationAttachments);
@@ -108,13 +114,19 @@ class AttachmentService
         array $settings,
         Registration $registration,
         int $messageType,
-        string $messageRecipient
+        string $messageRecipient,
+        ?CustomNotification $customNotification = null
     ): string {
         $file = '';
         $settingPath = $this->getSettingsPath($messageType);
 
-        if (isset($settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) &&
-            (bool)$settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile']) {
+        $attachICalFile = (bool)($settings['notification'][$settingPath]['attachments'][$messageRecipient]['iCalFile'] ?? false);
+
+        if ($customNotification) {
+            $attachICalFile = (bool)($settings['notification']['customNotifications'][$customNotification->getTemplate()]['attachments'][$messageRecipient]['iCalFile'] ?? false);
+        }
+
+        if ($attachICalFile) {
             $file = GeneralUtility::tempnam(
                 'event-' . $registration->getEvent()->getUid() . '-',
                 '.ics'
@@ -188,6 +200,10 @@ class AttachmentService
     protected function getAttachmentsFromProperty(AbstractEntity $object, string $propertyName): array
     {
         $attachments = [];
+        if ($propertyName === '') {
+            return $attachments;
+        }
+
         $property = $object->_getProperty($propertyName);
 
         if ($property instanceof ObjectStorage) {
