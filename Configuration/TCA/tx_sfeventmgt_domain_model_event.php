@@ -497,6 +497,9 @@ return [
             'config' => [
                 'type' => 'number',
                 'size' => 4,
+                'range' => [
+                    'lower' => 0,
+                ],
             ],
         ],
         'max_registrations_per_user' => [
@@ -508,6 +511,9 @@ return [
             'config' => [
                 'type' => 'number',
                 'size' => 4,
+                'range' => [
+                    'lower' => 1,
+                ],
             ],
         ],
         'price' => [
