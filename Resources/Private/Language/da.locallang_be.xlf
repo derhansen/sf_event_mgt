@@ -3,179 +3,691 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="da">
     <header/>
     <body>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-		</body>
+      <trans-unit id="extension.title" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">Begivenheder og begivenhedstilmelding</target>
+      </trans-unit>
+      <trans-unit id="CType.div.plugingroup" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">Begivenheder og begivenhedstilmelding</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.title" approved="yes">
+        <source>List view</source>
+        <target state="final">Listevisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventdetail.title" approved="yes">
+        <source>Detail view</source>
+        <target state="final">Detaljevisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.title" approved="yes">
+        <source>Registration view</source>
+        <target state="final">Registreringsvisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventsearch.title" approved="yes">
+        <source>Search view</source>
+        <target state="final">Søgevisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.title" approved="yes">
+        <source>Calendar view</source>
+        <target state="final">Kalendervisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pipayment.title" approved="yes">
+        <source>Payment</source>
+        <target state="final">Betaling</target>
+      </trans-unit>
+      <trans-unit id="plugin.piuserreg.title" approved="yes">
+        <source>Frontend user registrations</source>
+        <target state="final">Frontend brugerregistreringer</target>
+      </trans-unit>
+      <trans-unit id="plugin.wizard.title" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">Begivenheder og begivenhedstilmelding</target>
+      </trans-unit>
+      <trans-unit id="plugin.wizard.description" approved="yes">
+        <source>Configurable event management and registration system</source>
+        <target state="final">Konfigurérbart begivenheds- og tilmeldings-system</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Indstillinger</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.notification" approved="yes">
+        <source>Notification settings</source>
+        <target state="final">Notifikationsindstillinger</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.categoryMenu" approved="yes">
+        <source>Category menu</source>
+        <target state="final">Kategorimenu</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.template" approved="yes">
+        <source>Template</source>
+        <target state="final">Skabelon</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">Yderligere</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.pagination" approved="yes">
+        <source>Pagination</source>
+        <target state="final">Sideinddeling</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode" approved="yes">
+        <source>What to display</source>
+        <target state="final">Hvad skal vises</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.singleEvent" approved="yes">
+        <source>Show a single event record</source>
+        <target state="final">Vis en enkelt begivenhed</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.list" approved="yes">
+        <source>List</source>
+        <target state="final">Liste</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.detail" approved="yes">
+        <source>Detail</source>
+        <target state="final">Detalje</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Tilmelding</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.search" approved="yes">
+        <source>Searchform</source>
+        <target state="final">Søgeformular</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.calendar" approved="yes">
+        <source>Calendar</source>
+        <target state="final">Kalender</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.detailPid" approved="yes">
+        <source>Detail Page</source>
+        <target state="final">Detaljeside</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.listPid" approved="yes">
+        <source>List Page</source>
+        <target state="final">Listeside</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.registrationPid" approved="yes">
+        <source>Registration Page</source>
+        <target state="final">Tilmeldingsside</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.paymentPid" approved="yes">
+        <source>Payment Page</source>
+        <target state="final">Betalingsside</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.linkTermsAndConditions" approved="yes">
+        <source>Link to terms and conditions</source>
+        <target state="final">Link til vilkår og betingelser</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.queryLimit" approved="yes">
+        <source>Max records displayed</source>
+        <target state="final">Maksimalt antal elementer der vises</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.topEventRestriction" approved="yes">
+        <source>Top event restriction</source>
+        <target state="final">Top-begivenhed begrænsninger</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.none" approved="yes">
+        <source>None</source>
+        <target state="final">Ingen</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.onlyTopEvents" approved="yes">
+        <source>Only top events</source>
+        <target state="final">Kun top-begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.exceptTopEvents" approved="yes">
+        <source>Except top events</source>
+        <target state="final">Undtagen top-begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode" approved="yes">
+        <source>Display mode</source>
+        <target state="final">Visningstilstand</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField" approved="yes">
+        <source>Sort by</source>
+        <target state="final">Sortér efter</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.uid" approved="yes">
+        <source>Record ID</source>
+        <target state="final">Element ID</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.sorting" approved="yes">
+        <source>Sorting in TYPO3</source>
+        <target state="final">Sortering i TYPO3</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">Startdato</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">Slutdato</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.title" approved="yes">
+        <source>Event title</source>
+        <target state="final">Begivenhedstitel</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.startdate" approved="yes">
+        <source>Event startdate</source>
+        <target state="final">Begivenheds startdato</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.enddate" approved="yes">
+        <source>Event enddate</source>
+        <target state="final">Begivenheds slutdato</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection" approved="yes">
+        <source>Sorting direction</source>
+        <target state="final">Sorteringsretning</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.ascending" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Stigende</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.descending" approved="yes">
+        <source>Descending</source>
+        <target state="final">Faldende</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction" approved="yes">
+        <source>Category mode</source>
+        <target state="final">Kategoritilstand</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.ignore" approved="yes">
+        <source>Ignore category selection</source>
+        <target state="final">Ignorér kategorivalg</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.or" approved="yes">
+        <source>Show events with selected categories (OR)</source>
+        <target state="final">Vis begivenheder med valgte kategorier (ELLER)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.and" approved="yes">
+        <source>Show events with selected categories (AND)</source>
+        <target state="final">Vis begivenheder med valgte kategorier (OG)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notand" approved="yes">
+        <source>Do NOT show events with selected categories (AND)</source>
+        <target state="final">Vis IKKE begivenheder med de valgte kategorier (OG)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notor" approved="yes">
+        <source>Do NOT show events with selected categories (OR)</source>
+        <target state="final">Vis IKKE begivenheder med de valgte kategorier (ELLER)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.possibleMisconfiguration" approved="yes">
+        <source>Possible misconfiguration!</source>
+        <target state="final">Mulig fejlkonfiguration blev fundet!</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.pluginCalendarMisonfiguration" approved="yes">
+        <source>Plugin misconfigured: This setting must be disabled for "Calendar" to work properly!</source>
+        <target state="final">Plugin miskonfigureret: Denne indstilling skal være deaktiveret for "Kalender" for at virke ordentligt!</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.category" approved="yes">
+        <source>Category</source>
+        <target state="final">Kategori</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeSubcategories" approved="yes">
+        <source>Include subcategories</source>
+        <target state="final">Inkludér underkategorier</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Placering</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.organisator" approved="yes">
+        <source>Organisator</source>
+        <target state="final">Arrangør</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.speaker" approved="yes">
+        <source>Speaker</source>
+        <target state="final">Taler</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.storagePage" approved="yes">
+        <source>Record storage page</source>
+        <target state="final">Opbevaringsside for elementer</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage" approved="yes">
+        <source>Restrict categories, locations, organisators and speakers to storagePage setting (including recursive option)</source>
+        <target state="final">Begræns kategorier, placeringer, arrangører og talere til indstillinger for lagerside indstillinger (inklusiv rekursivt valg)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.all" approved="yes">
+        <source>Show all events</source>
+        <target state="final">Vis alle begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.future" approved="yes">
+        <source>Show only future events</source>
+        <target state="final">Vis kun fremtidige begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.past" approved="yes">
+        <source>Show only past events</source>
+        <target state="final">Vis kun tidligere begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.current_future" approved="yes">
+        <source>Show only current and future events</source>
+        <target state="final">Vis kun aktuelle og fremtidige begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.time_restriction" approved="yes">
+        <source>Show events by a given time restriction</source>
+        <target state="final">Vis begivenheder med en given tidsbegrænsning</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.all" approved="yes">
+        <source>Show registrations for all events</source>
+        <target state="final">Vis tilmeldinger til alle begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.future" approved="yes">
+        <source>Show registrations for future events</source>
+        <target state="final">Vis tilmeldinger til fremtidige begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.past" approved="yes">
+        <source>Show registrations for past events</source>
+        <target state="final">Vis tilmeldinger til tidligere begivenheder</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.requiredFields" approved="yes">
+        <source>Comma seperated list of fieldnames, which are required. The fields first name, last name and email
+					are always required and cannot be overridden
+				</source>
+        <target state="final">Kommasepareret liste af feltnavne som er krævede. Felterne fornavn, efternavn og e-mail
+					er altid krævede og kan ikke overskrives
+				</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.templateLayout" approved="yes">
+        <source>Template layout</source>
+        <target state="final">Skabelon-layout</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.disableOverrideDemand" approved="yes">
+        <source>Disable overwrite demand</source>
+        <target state="final">Deaktivér overskriv-krav</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionDescription" approved="yes">
+        <source>The values is passed to PHPs strtotime() function, so you can use expressions like "first day of this month midnight" and "last day of this month 23:59:59" to get events of the current month</source>
+        <target state="final">Værdierne overføres til PHPs strtotime() funktion, så du kan bruge udtryk som "første dag i denne måned midnat" og "sidste dag i denne måned 23:59:59" til at få begivenheder i den aktuelle måned</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionLow" approved="yes">
+        <source>Time from</source>
+        <target state="final">Tid fra</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionHigh" approved="yes">
+        <source>Time to</source>
+        <target state="final">Tid til</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeCurrent" approved="yes">
+        <source>Include current</source>
+        <target state="final">Inkludér aktuelle</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeCurrent.description" approved="yes">
+        <source>Include events that start before and end after time from</source>
+        <target state="final">Inkludér begivenheder, der starter før og slutter efter tid fra</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_email" approved="yes">
+        <source>Email address of emails sent to the user</source>
+        <target state="final">E-mailadresse af e-mail sendt til brugeren</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_name" approved="yes">
+        <source>Name of the sender</source>
+        <target state="final">Navn på afsender</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.replyto_email" approved="yes">
+        <source>Reply-to email address of emails sent to the user</source>
+        <target state="final">Besvar-til e-mailadresse af e-mail sendt til brugeren</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.admin_email" approved="yes">
+        <source>Email address(es) of website admin(s), who receives new/confirmed registrations. Multiple email addresses must be separated with a comma.</source>
+        <target state="final">E-mailadresse(r) på webside-administrator(er) som modtager nye/bekræftede tilmeldinger. Ved flere e-mailadresser, skal de adskilles med et komma.</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_user_subject" approved="yes">
+        <source>Subject of email sent to user when a new registration is created</source>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering er oprettet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_user_subject" approved="yes">
+        <source>Subject of email sent to user when a new registration on the waitlist is created</source>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering til venteliste er oprettet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a new registration is created</source>
+        <target state="final">Emne på e-mail sendt til admin, når en ny registrering er oprettet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a new registration on the waitlist is created</source>
+        <target state="final">Emne på e-mail sendt til admin, når en ny registrering til venteliste er oprettet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_confirmed_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration has been confirmed</source>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering er blevet bekræftet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_confirmed_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration on the waitlist has been confirmed</source>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering til venteliste er blevet bekræftet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_confirmed_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration has been confirmed</source>
+        <target state="final">Emne på e-mail sendt til admin, når en ny registrering er blevet bekræftet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_confirmed_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration on the waitlist has been confirmed</source>
+        <target state="final">Emne på e-mail sendt til admin, når en ny registrering til venteliste er blevet bekræftet</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_cancelled_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration has been cancelled</source>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering er blevet annulleret</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_cancelled_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration has been cancelled</source>
+        <target state="final">Emne på e-mail sendt til admin, når en ny registrering er blevet annulleret</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_move_up_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration moved up from the waitlist</source>
+        <target state="final">Emne for e-mail der sendes til bruger, når en registrering flytter op fra ventelisten</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_move_up_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration moved up from the waitlist</source>
+        <target state="final">Emne for e-mail der sendes til admin når en registrering flytter op fra ventelisten</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.categories" approved="yes">
+        <source>Categories (if empty, all categories will be shown in the category menu)</source>
+        <target state="final">Kategorier (hvis tom vil alle kategorier blive vist i kategori-menuen)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.includeSubcategories" approved="yes">
+        <source>Include subcategories</source>
+        <target state="final">Inkludér underkategorier</target>
+      </trans-unit>
+      <trans-unit id="administration.title" approved="yes">
+        <source>Event Administration</source>
+        <target state="final">Begivenhedsadministration</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">Notificér deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.newEvent" approved="yes">
+        <source>Create new event</source>
+        <target state="final">Opret ny begivenhed</target>
+      </trans-unit>
+      <trans-unit id="administration.newLocation" approved="yes">
+        <source>Create new location</source>
+        <target state="final">Opret ny placering</target>
+      </trans-unit>
+      <trans-unit id="administration.newOrganisator" approved="yes">
+        <source>Create new organisator</source>
+        <target state="final">Opret ny arrangør</target>
+      </trans-unit>
+      <trans-unit id="administration.newSpeaker" approved="yes">
+        <source>Create new speaker</source>
+        <target state="final">Opret ny taler</target>
+      </trans-unit>
+      <trans-unit id="administration.handleExpiredRegistrations" approved="yes">
+        <source>Hide/delete expired registrations</source>
+        <target state="final">Skjul/slet udløbede tilmeldinger</target>
+      </trans-unit>
+      <trans-unit id="administration.export" approved="yes">
+        <source>Export participants</source>
+        <target state="final">Eksportér deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">Notificér deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationHistory" approved="yes">
+        <source>Notification history</source>
+        <target state="final">Notifikationshistorik</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.title" approved="yes">
+        <source>TypoScript settings missing</source>
+        <target state="final">TypoScript-indstillinger mangler</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.description" approved="yes">
+        <source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
+        <target state="final">Kan ikke finde TypoScript-indstillinger for modulet. Du skal sikre dig at du har inkluderet statisk TypoScript for denne udvidelse.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description" approved="yes">
+        <source>Please select an email template that will be used to notify participants of the event.</source>
+        <target state="final">Vælg venligst en e-mail-skabelon som skal anvendes til at skrive til alle deltagere til begivenheden. Se i dokumentationen for udvidelsen hvordan du tilføjer din egen e-mail-skabelon.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.event" approved="yes">
+        <source>Event:</source>
+        <target state="final">Begivenhed:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.recipients" approved="yes">
+        <source>Recipients:</source>
+        <target state="final">Modtagere:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.0" approved="yes">
+        <source>All participants</source>
+        <target state="final">Alle deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.1" approved="yes">
+        <source>Confirmed participants</source>
+        <target state="final">Bekræftede deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.2" approved="yes">
+        <source>Unconfirmed participants</source>
+        <target state="final">Ubekræftede deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.template" approved="yes">
+        <source>Template:</source>
+        <target state="final">Skabelon:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.overwriteSubject" approved="yes">
+        <source>Overwrite subject:</source>
+        <target state="final">Overskriv emne:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.overwriteSubject" approved="yes">
+        <source>Overwrites the configured default email subject of the selected template</source>
+        <target state="final">Overskriver det konfigurerede standard e-mail emne for den valgte skabelon</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.additionalMessage" approved="yes">
+        <source>Additional message:</source>
+        <target state="final">Yderligere meddelelse:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.additionalMessage" approved="yes">
+        <source>Optional additional message in notification</source>
+        <target state="final">Valgfri yderligere besked i notifikation</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError.title" approved="yes">
+        <source>No sender email address</source>
+        <target state="final">Ingen afsenders e-mailadresse</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError" approved="yes">
+        <source>The sender email address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+        <target state="final">Afsender e-mailadresse kunne ikke bestemmes. Du skal sikre dig at du har konfigureret plugin.tx_sfeventmgt.notification indstillinger korrekt og at folderen som indeholder begivenheder har adgang til disse indstillinger.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sendNotifications" approved="yes">
+        <source>Send notifications</source>
+        <target state="final">Send notifikation</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.cancelSendNotifications" approved="yes">
+        <source>Back to event listing</source>
+        <target state="final">Tilbage til begivenhedsliste</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.date" approved="yes">
+        <source>Date</source>
+        <target state="final">Dato</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Detaljer</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.emailsSent" approved="yes">
+        <source>Emails sent</source>
+        <target state="final">E-Mails sendt</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sentBy" approved="yes">
+        <source>Sent by</source>
+        <target state="final">Sendt af</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.notAvailable" approved="yes">
+        <source>N/A</source>
+        <target state="final">N/A</target>
+      </trans-unit>
+      <trans-unit id="administration.nopageselected" approved="yes">
+        <source>Please click the page title in the page tree to the left to show the records on that page.</source>
+        <target state="final">Klik på sidetitlen i sidetræet til venstre for at få vist elementer på siden.</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.title" approved="yes">
+        <source>Notifications disabled</source>
+        <target state="final">Notifikationer er deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.description" approved="yes">
+        <source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
+        <target state="final">Notifikationer er deaktiveret på hele løsningen for udvidelsen via TypoScript konfigurationen.</target>
+      </trans-unit>
+      <trans-unit id="events-folder" approved="yes">
+        <source>Events</source>
+        <target state="final">Begivenheder</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableInvoice" approved="yes">
+        <source>Enable payment method 'invoice'</source>
+        <target state="final">Aktivér betalingsmetode 'faktura'</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableTransfer" approved="yes">
+        <source>Enable payment method 'transfer'</source>
+        <target state="final">Aktivér betalingsmetode 'overfør'</target>
+      </trans-unit>
+      <trans-unit id="extmng.slugBehaviour" xml:space="preserve" approved="yes">
+				<source>Slug behaviour: uniqueInSite: The same slug can be used for events in different sites. Use this setting *only* if no event records are shared between sites. "unique" means that same event title will lead to different slug names.</source>
+			<target state="final">URL-segment egenskab: uniqueInSite: det samme URL-segmentkan bruges til begivenheder på forskellige websider. Brug *kun* denne indstilling hvis ingen begivenheder er delt mellem websider. "Unique" betyder at samme begivenhedstitel vil føre til forskellige URL-segment navne.</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrations" xml:space="preserve" approved="yes">
+				<source>Hide registrations in event record by limit: Hides the event fields "Registration" and "Registration Waitlist" if the configured limit in "backend.hideInlineRegistrationsLimit" is reached. This option is usefull, when you have events with a huge amount of registrations where the TYPO3 backend gets slow due to performance issues of the TCA inline field.</source>
+			<target state="final">Skjul registreringer i begivenhedselementer efter begrænsning: Skjuler begivenhedsfelterne "Registrering" og "Registrering venteliste" hvis den konfigurerede grænse i "backend.hideInlineRegistrationsLimit" er nået. Denne indstilling er nyttig, når du har begivenheder med en meget stor mængde registreringer, hvor TYPO3 backend bliver langsom på grund af problemer med ydeevnen i TCA inline feltet.</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve" approved="yes">
+				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
+			<target state="final">Maksimalt antal registreringer, der vises i et begivenheds-element i TYPO3 backend.</target></trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.title" approved="yes">
+        <source>Event registrations hidden</source>
+        <target state="final">Begivenheds-registreringer skjult</target>
+      </trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.description" approved="yes">
+        <source>This event has %1$s registrations, but due to performance reasons all event registrations are not shown in this view.</source>
+        <target state="final">Denne begivenhed har %1$s registreringer, men på grund af ydeevnen, vises alle registreringer ikke i denne visning.</target>
+      </trans-unit>
+      <trans-unit id="tabs.language" approved="yes">
+        <source>Language</source>
+        <target state="final">Sprog</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.title" approved="yes">
+        <source>Information</source>
+        <target state="final">Information</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.content" approved="yes">
+        <source>All expired registrations have been marked as hidden/deleted.</source>
+        <target state="final">Alle udløbede tilmeldinger er markeret skjult/slettet.</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.title" approved="yes">
+        <source>Information</source>
+        <target state="final">Information</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.content" approved="yes">
+        <source>The selected email has been sent to all participants of the event.</source>
+        <target state="final">Den valgte e-mail er sendt til alle deltagere til begivenheden.</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.asc" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Stigende</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.desc" approved="yes">
+        <source>Descending</source>
+        <target state="final">Faldende</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.startdate" approved="yes">
+        <source>Startdate</source>
+        <target state="final">Startdato</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.enddate" approved="yes">
+        <source>Enddate</source>
+        <target state="final">Slutdato</target>
+      </trans-unit>
+      <trans-unit id="administration.accessdenied.title" approved="yes">
+        <source>Access Denied</source>
+        <target state="final">Adgang nægtet</target>
+      </trans-unit>
+      <trans-unit id="administration.accessdenied.content" approved="yes">
+        <source>Access to the given event has been denied.</source>
+        <target state="final">Adgang til den givne begivenhed er ikke tilladt.</target>
+      </trans-unit>
+      <trans-unit id="administration.pagination.records" approved="yes">
+        <source>Records</source>
+        <target state="final">Elementer</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.header" approved="yes">
+        <source>Time Restriction</source>
+        <target state="final">Tidsbegrænsning</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.error" approved="yes">
+        <source>The value '%s' can not be interpreted with strtotime()</source>
+        <target state="final">Værdien '%s' kan ikke tolkes med strtotime()</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.info" approved="yes">
+        <source>The value '%s' corresponds to %s</source>
+        <target state="final">Værdien '%s' svarer til %s</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.format" approved="yes">
+        <source>d.m.Y H:i:s</source>
+        <target state="final">d.m.Y H:i:s</target>
+      </trans-unit>
+      <trans-unit id="event.startdateNotBeforeEnddate.title" approved="yes">
+        <source>Invalid event configuration</source>
+        <target state="final">Ugyldig begivenhedskonfiguration</target>
+      </trans-unit>
+      <trans-unit id="event.startdateNotBeforeEnddate.message" approved="yes">
+        <source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
+        <target state="final">Slutdato på begivenhed ligger før startdato. Justér venligst datoerne, så startdato er før slutdato.</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.title" approved="yes">
+        <source>No organisator</source>
+        <target state="final">Ingen arrangør</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.message" approved="yes">
+        <source>The event is configured to notify the organisator, but no organisator is set. Please select an organisator or change the notification settings.</source>
+        <target state="final">Arrangementet er konfigureret til at underrette arrangøren, men ingen arrangør er angivet. Vælg en arrangør eller skift notifikationsindstillingerne.</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.title" approved="yes">
+        <source>Organisator has no email</source>
+        <target state="final">Arrangøren har ingen e-mail</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.message" approved="yes">
+        <source>The event is configured to notify the organisator, but the organisator has no email address. Please set an email address for the organisator or change the notification settings.</source>
+        <target state="final">Arrangementet er konfigureret til at underrette arrangøren, men arrangøren har ingen e-mailadresse. Angiv venligst en e-mailadresse til arrangøren eller ændre indstillingerne for notifikationer.</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Tilmelding</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.confirmation" approved="yes">
+        <source>Confirmation</source>
+        <target state="final">Bekræftelse</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.notification" approved="yes">
+        <source>Notification</source>
+        <target state="final">Notifikation</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.search" approved="yes">
+        <source>Search</source>
+        <target state="final">Søg</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.rss" approved="yes">
+        <source>RSS feed</source>
+        <target state="final">RSS feed</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.csv" approved="yes">
+        <source>CSV export</source>
+        <target state="final">CSV eksport</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.enablePagination" approved="yes">
+        <source>Enable pagination</source>
+        <target state="final">Aktivér sideinddeling</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.itemsPerPage" approved="yes">
+        <source>Items per page</source>
+        <target state="final">Antal pr. side</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.maxNumPages" approved="yes">
+        <source>Maximum number of pages</source>
+        <target state="final">Maksimum antal sider</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
