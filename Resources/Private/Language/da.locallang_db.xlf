@@ -3,166 +3,638 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="da">
     <header/>
     <body>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		</body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event" approved="yes">
+        <source>Event</source>
+        <target state="final">Begivenhed</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category" approved="yes">
+        <source>Categories</source>
+        <target state="final">Kategorier</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser" approved="yes">
+        <source>Teaser</source>
+        <target state="final">Manchet</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
+        <source>Program/Schedule</source>
+        <target state="final">Program/Plan</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.custom_text" approved="yes">
+        <source>Custom text</source>
+        <target state="final">Brugerdefineret tekst</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
+        <source>Top event</source>
+        <target state="final">Top-begivenhed</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.startdate" approved="yes">
+        <source>Start date and time</source>
+        <target state="final">Startdato og tidspunkt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enddate" approved="yes">
+        <source>End date and time</source>
+        <target state="final">Slutdato og tidspunkt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants" approved="yes">
+        <source>Max. participants</source>
+        <target state="final">Maks. deltagere</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser" approved="yes">
+        <source>Max. simultaneous registrations per user</source>
+        <target state="final">Maks. samtidige tilmeldinger pr. bruger</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration" approved="yes">
+        <source>Enable registration</source>
+        <target state="final">Aktivér tilmelding</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist" approved="yes">
+        <source>Enable waitlist</source>
+        <target state="final">Aktivér venteliste</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist_moveup" approved="yes">
+        <source>Automatic waitlist move up</source>
+        <target state="final">Flyt automatisk venteliste op</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_cancel" approved="yes">
+        <source>Enable cancellation</source>
+        <target state="final">Aktivér annullering</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.unique_email_check" approved="yes">
+        <source>Enable unique email check for registration</source>
+        <target state="final">Aktivér unik e-mail tjek ved tilmelding</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_autoconfirm" approved="yes">
+        <source>Enable automatic confirmation of event registrations</source>
+        <target state="final">Aktivér automatisk bekræftelse af tilmeldinger til begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price" approved="yes">
+        <source>Price</source>
+        <target state="final">Pris</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options" approved="yes">
+        <source>Price options</source>
+        <target state="final">Pris egenskaber</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
+        <source>Currency</source>
+        <target state="final">Valuta</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment" approved="yes">
+        <source>Enable payment</source>
+        <target state="final">Aktivér betaling</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.restrict_payment_methods" approved="yes">
+        <source>Restrict available payment methods</source>
+        <target state="final">Begræns tilgængelige betalingsmetoder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.selected_payment_methods" approved="yes">
+        <source>Selected payment methods</source>
+        <target state="final">Valgte betalingsmetoder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related" approved="yes">
+        <source>Related events</source>
+        <target state="final">Relaterede begivenheder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Placering</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.room" approved="yes">
+        <source>Room</source>
+        <target state="final">Lokale</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.speaker" approved="yes">
+        <source>Speaker</source>
+        <target state="final">Taler</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
+        <source>Organisator</source>
+        <target state="final">Arrangør</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">Billeder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
+        <source>Files</source>
+        <target state="final">Filer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image" approved="yes">
+        <source>Additional images (e.g. images from the event)</source>
+        <target state="final">Yderligere billeder (f. eks. billeder fra begivenheden)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Tilmeldinger</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_waitlist" approved="yes">
+        <source>Registrations on the waitlist</source>
+        <target state="final">Tilmeldinger til venteliste</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_fields" approved="yes">
+        <source>Additional registration fields (e.g. "Hotel room needed?")</source>
+        <target state="final">Yderligere tilmeldingsfelter (f. eks. "hotelværelse nødvendigt?")</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_startdate" approved="yes">
+        <source>Registration start date</source>
+        <target state="final">Startdato for registrering</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline" approved="yes">
+        <source>Registration deadline</source>
+        <target state="final">Frist for tilmelding</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.cancel_deadline" approved="yes">
+        <source>Cancellation deadline</source>
+        <target state="final">Frist for annullering</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin" approved="yes">
+        <source>Admin</source>
+        <target state="final">Admin</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator" approved="yes">
+        <source>Organisator</source>
+        <target state="final">Arrangør</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords" approved="yes">
+        <source>Keywords (,)</source>
+        <target state="final">Nøgleord (,)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.alternative_title" approved="yes">
+        <source>Alternative title</source>
+        <target state="final">Alternativ titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
+        <source>Event - Registration</source>
+        <target state="final">Begivenhed - tilmelding</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.language" approved="yes">
+        <source>Language</source>
+        <target state="final">Sprog</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.firstname" approved="yes">
+        <source>First name</source>
+        <target state="final">Fornavn</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.lastname" approved="yes">
+        <source>Last name</source>
+        <target state="final">Efternavn</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Virksomhed</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adresse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Postnummer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city" approved="yes">
+        <source>City</source>
+        <target state="final">By</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-mail</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications" approved="yes">
+        <source>No email notifications</source>
+        <target state="final">Ingen e-mail-meddelelser</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.mainRegistration" approved="yes">
+        <source>Parent registration</source>
+        <target state="final">Tilmelding over (parent)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Køn</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset" approved="yes">
+        <source>Not set</source>
+        <target state="final">Ikke angivet</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female" approved="yes">
+        <source>Female</source>
+        <target state="final">Kvinde</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male" approved="yes">
+        <source>Male</source>
+        <target state="final">Mand</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various" approved="yes">
+        <source>Various</source>
+        <target state="final">Diverse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth" approved="yes">
+        <source>Date of birth</source>
+        <target state="final">Fødselsdato</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmationUntil" approved="yes">
+        <source>Confirmation until</source>
+        <target state="final">Bekræft indtil</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.registration_date" approved="yes">
+        <source>Registration date</source>
+        <target state="final">Registreringsdato</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc" approved="yes">
+        <source>Accepted terms and conditions</source>
+        <target state="final">Accepterede vilkår og betingelser</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.waitlist" approved="yes">
+        <source>Waitlist registration</source>
+        <target state="final">Ventelistetilmelding</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed" approved="yes">
+        <source>Confirmed</source>
+        <target state="final">Bekræftet</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod" approved="yes">
+        <source>Payment method</source>
+        <target state="final">Betalingsmetode</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod.notSet" approved="yes">
+        <source>Not set</source>
+        <target state="final">Ikke angivet</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment_reference" approved="yes">
+        <source>Payment reference</source>
+        <target state="final">Betalings reference</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">Betalt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
+        <source>Notes</source>
+        <target state="final">Noter</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.fe_user" approved="yes">
+        <source>Frontend User</source>
+        <target state="final">Frontendbruger</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.fieldvalues" approved="yes">
+        <source>Registration field values</source>
+        <target state="final">Tilmeldingsfelt værdier</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" approved="yes">
+        <source>Amount of registrations (if user created multiple registrations at the same time)</source>
+        <target state="final">Antal tilmeldinger (hvis bruger oprettede flere tilmeldinger samtidig)</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">Yderligere</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.categories" approved="yes">
+        <source>Categories</source>
+        <target state="final">Kategorier</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.relations" approved="yes">
+        <source>Relations</source>
+        <target state="final">Relationer</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.media" approved="yes">
+        <source>Media</source>
+        <target state="final">Medie</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.metadata" approved="yes">
+        <source>Metadata</source>
+        <target state="final">Metadata</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registration_options" approved="yes">
+        <source>Registration options</source>
+        <target state="final">Tilmeldingsmuligheder</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registration_fields" approved="yes">
+        <source>Registration fields</source>
+        <target state="final">Tilmeldingsfelter</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Tilmeldinger</target>
+      </trans-unit>
+      <trans-unit id="registration.tabs.payment" approved="yes">
+        <source>Payment</source>
+        <target state="final">Betaling</target>
+      </trans-unit>
+      <trans-unit id="event.sections.payment" approved="yes">
+        <source>Payment</source>
+        <target state="final">Betaling</target>
+      </trans-unit>
+      <trans-unit id="location.tabs.geodata" approved="yes">
+        <source>Geodata</source>
+        <target state="final">Geodata</target>
+      </trans-unit>
+      <trans-unit id="event.sections.notification" approved="yes">
+        <source>When a registration is created, confirmed, cancelled or moved from the waitlist, send a notification email to:</source>
+        <target state="final">Når en registrering er oprettet, bekræftet, annulleret eller flyttet fra ventelisten, send en e-mail med notifikationer til:</target>
+      </trans-unit>
+      <trans-unit id="event.sections.registrationPeriod" approved="yes">
+        <source>Period</source>
+        <target state="final">Periode</target>
+      </trans-unit>
+      <trans-unit id="event.sections.cancellation" approved="yes">
+        <source>Cancellation options:</source>
+        <target state="final">Annulleringsmuligheder:</target>
+      </trans-unit>
+      <trans-unit id="event.sections.waitlist" approved="yes">
+        <source>Waitlist</source>
+        <target state="final">Venteliste</target>
+      </trans-unit>
+      <trans-unit id="event.sections.metatags" approved="yes">
+        <source>Meta Tags</source>
+        <target state="final">Metatags</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location" approved="yes">
+        <source>Event - Location</source>
+        <target state="final">Begivenhedsplacering</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adresse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Postnummer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.city" approved="yes">
+        <source>City</source>
+        <target state="final">By</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.longitude" approved="yes">
+        <source>Longitude</source>
+        <target state="final">Længdegrad</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.latitude" approved="yes">
+        <source>Latitude</source>
+        <target state="final">Breddegrad</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog" approved="yes">
+        <source>Event - Notificationlog</source>
+        <target state="final">Begivenhed - notifikationslog</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event" approved="yes">
+        <source>Event</source>
+        <target state="final">Begivenhed</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Detaljer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.message" approved="yes">
+        <source>Message</source>
+        <target state="final">Besked</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent" approved="yes">
+        <source>Emails sent</source>
+        <target state="final">E-Mails sendt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.tstamp" approved="yes">
+        <source>Timestamp</source>
+        <target state="final">Tidsstempel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
+        <source>Organisator</source>
+        <target state="final">Arrangør</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator" approved="yes">
+        <source>Event - Organisator</source>
+        <target state="final">Begivenhed - arrangør</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Navn</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-mail</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email_signature" approved="yes">
+        <source>Email signature</source>
+        <target state="final">E-mail signatur</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
+        <source>Phone number</source>
+        <target state="final">Telefonnummer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Billede</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Prisegenskab</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price" approved="yes">
+        <source>Price</source>
+        <target state="final">Pris</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until" approved="yes">
+        <source>Date until the price is valid (includes selected date)</source>
+        <target state="final">Dato for hvor længe prisen er gældende (inklusiv valgte datoer)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker" approved="yes">
+        <source>Event - Speaker</source>
+        <target state="final">Begivenhed - taler</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Navn</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.job_title" approved="yes">
+        <source>Job title</source>
+        <target state="final">Jobtitel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivelse</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Billede</target>
+      </trans-unit>
+      <trans-unit id="registration_field.tabs.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Indstillinger</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field" approved="yes">
+        <source>Event - Registrationfield</source>
+        <target state="final">Begivenhed - tilmeldingsfelt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.settings" approved="yes">
+        <source>Options</source>
+        <target state="final">Muligheder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type" approved="yes">
+        <source>Type</source>
+        <target state="final">Type</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.0" approved="yes">
+        <source>Textfield (input)</source>
+        <target state="final">Tekstfelt (indtastning)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.1" approved="yes">
+        <source>Radiobutton</source>
+        <target state="final">Radioknap</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.2" approved="yes">
+        <source>Checkbox</source>
+        <target state="final">Checkboks</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.3" approved="yes">
+        <source>Textarea</source>
+        <target state="final">Tekstareal</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.4" approved="yes">
+        <source>Text</source>
+        <target state="final">Tekst</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.5" approved="yes">
+        <source>Divider</source>
+        <target state="final">Adskiller</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.6" approved="yes">
+        <source>Select</source>
+        <target state="final">Vælg</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.7" approved="yes">
+        <source>Date/Time</source>
+        <target state="final">Dato/tid</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.required" approved="yes">
+        <source>Required (field must be filled out)</source>
+        <target state="final">Krævet (feltet skal være udfyldt)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.placeholder" approved="yes">
+        <source>Placeholder</source>
+        <target state="final">Pladsholder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.default_value" approved="yes">
+        <source>Default value</source>
+        <target state="final">Standardværdi</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.text" approved="yes">
+        <source>Text</source>
+        <target state="final">Tekst</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode" approved="yes">
+        <source>Date input mode</source>
+        <target state="final">Datoindsættelses-tilstand</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value" approved="yes">
+        <source>Prefill with frontend user data</source>
+        <target state="final">Forudfyld med frontend brugerdata</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value.select" approved="yes">
+        <source>Select value</source>
+        <target state="final">Vælg værdi</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0" approved="yes">
+        <source>Date</source>
+        <target state="final">Dato</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1" approved="yes">
+        <source>Date and time</source>
+        <target state="final">Dato og tid</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2" approved="yes">
+        <source>Time</source>
+        <target state="final">Tid</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue" approved="yes">
+        <source>Event - Registrationfield value</source>
+        <target state="final">Begivenhed - tilmeldingsfelts værdi</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.value" approved="yes">
+        <source>Value</source>
+        <target state="final">Værdi</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.field" approved="yes">
+        <source>Field</source>
+        <target state="final">Felt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType" approved="yes">
+        <source>Value Datatype</source>
+        <target state="final">Værdi datatype</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0" approved="yes">
+        <source>Text</source>
+        <target state="final">Tekst</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1" approved="yes">
+        <source>Array</source>
+        <target state="final">Liste</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views" approved="yes">
+        <source>Show in views</source>
+        <target state="final">Vis i visninger</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.0" approved="yes">
+        <source>Show in all views</source>
+        <target state="final">Vis i alle visninger</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.1" approved="yes">
+        <source>Show only in detail views</source>
+        <target state="final">Vis kun i detaljevisninger</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.2" approved="yes">
+        <source>Show only in list views</source>
+        <target state="final">Vis kun i listevisninger</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
