@@ -249,8 +249,16 @@ class AdministrationController extends AbstractController
             $this->beUserSessionService->saveSessionData($sessionData);
         }
 
+        // Initialize default ordering when no overwriteDemand is available
+        if (empty($overwriteDemand)) {
+            $overwriteDemand = [
+                'orderField' => $this->settings['defaultSorting']['orderField'] ?? 'title',
+                'orderDirection' => $this->settings['defaultSorting']['orderDirection'] ?? 'asc',
+            ];
+        }
+
         $eventDemand = GeneralUtility::makeInstance(EventDemand::class);
-        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand ?? []);
+        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage((string)$this->pid);

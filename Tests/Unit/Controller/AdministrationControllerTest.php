@@ -85,7 +85,10 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => new SearchDemand(),
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => null,
+            'overwriteDemand' => [
+                'orderField' => 'title',
+                'orderDirection' => 'asc',
+            ],
             'pagination' => null,
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
@@ -128,7 +131,10 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => [],
+            'overwriteDemand' => [
+                'orderField' => 'title',
+                'orderDirection' => 'asc',
+            ],
             'pagination' => null,
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
@@ -179,7 +185,10 @@ class AdministrationControllerTest extends UnitTestCase
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => [],
+            'overwriteDemand' => [
+                'orderField' => 'title',
+                'orderDirection' => 'asc',
+            ],
             'pagination' => [],
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')

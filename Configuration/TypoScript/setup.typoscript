@@ -210,6 +210,10 @@ module.tx_sfeventmgt {
             notify = 1
             export = 1
         }
+        defaultSorting {
+          orderField = title
+          orderDirection = asc
+        }
         pagination {
             enablePagination = 1
             itemsPerPage = 10

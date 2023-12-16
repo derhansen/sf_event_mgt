@@ -778,3 +778,57 @@ settings.enabledActions.export
 
    If set to "1", the Export-Action / Icon is shown for events with registration enabled.
 
+settings.defaultSorting.orderField
+------------------------------
+
+.. confval:: settings.defaultSorting.orderField
+
+   :Type: string
+   :Default: title
+
+   Defines the default field to be used for sorting. When not explicitly
+   specified, the sorting will be based on the "title" field.
+
+settings.defaultSorting.orderDirection
+----------------------------------------
+
+.. confval:: settings.defaultSorting.orderDirection
+
+   :Type: string
+   :Default: asc
+
+   Specifies the default order direction. The default value "asc" stands for
+   ascending order. Can be set to "desc" for descending order.
+
+settings.pagination.enablePagination
+------------------------------------
+
+.. confval:: settings.pagination.enablePagination
+
+   :Type: int
+   :Default: 1
+
+   Determines whether pagination is enabled (1) or disabled (0). When set to
+   "1", pagination is used to divide content into separate pages.
+
+settings.pagination.itemsPerPage
+--------------------------------
+
+.. confval:: settings.pagination.itemsPerPage
+
+   :Type: int
+   :Default: 10
+
+   Specifies the number of items to display on each page when pagination is
+   enabled. The default setting is 10 items per page.
+
+settings.pagination.maxNumPages
+-------------------------------
+
+.. confval:: settings.pagination.maxNumPages
+
+   :Type: int
+   :Default: 10
+
+   Sets the maximum number of pages to display in the pagination control.
+   The default is set to 10 pages.
