@@ -1,4 +1,7 @@
 build:
+  dependencies:
+    override:
+      - composer install --no-interaction --no-scripts --no-plugins
   nodes:
     analysis:
       environment:
