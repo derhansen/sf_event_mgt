@@ -17,7 +17,7 @@
   <coverage/>
   <testsuites>
     <testsuite name="Functional Tests">
-      <directory>../Functional/</directory>
+      <directory>../../Tests/Functional/</directory>
     </testsuite>
   </testsuites>
   <source>

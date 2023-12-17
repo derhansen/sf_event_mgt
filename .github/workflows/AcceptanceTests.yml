@@ -39,8 +39,10 @@ jobs:
         run: |
           sudo rm -rf ~/.composer
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - name: Validate composer.json
+        run: |
+          cd .Build
+          composer validate
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -50,12 +52,14 @@ jobs:
 
       - name: Install composer dependencies
         run: |
+          cd .Build
           composer install --no-progress
 
       - name: Initialize TYPO3 environment
         run: |
           echo "Copy TYPO3 config to extension root path"
-          cp -R Tests/Acceptance/_data/config .
+          cp -R Tests/Acceptance/_data/config .Build/
+          cd .Build
           echo "Run 'composer install' to activate extension"
           composer install --no-progress
 
@@ -83,7 +87,7 @@ jobs:
           while ! nc -z 127.0.0.1 8888 </dev/null; do echo Waiting for PHP server to start...; sleep 1; done
 
       - name: Codeception Acceptance Tests
-        run: .Build/bin/codecept run acceptance --fail-fast --env=github-actions -c Tests/Build/AcceptanceTests.yml --html
+        run: .Build/vendor/bin/codecept run acceptance --fail-fast --env=github-actions -c .Build/codeception/AcceptanceTests.yml --html
 
       - name: Upload Codeception output
         if: ${{ always() }}

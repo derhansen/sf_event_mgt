@@ -4,8 +4,8 @@ includes:
 parameters:
     level: 7
     paths:
-        - Classes/
-        - Configuration/
+        - ../../Classes/
+        - ../../Configuration/
 
     checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: true

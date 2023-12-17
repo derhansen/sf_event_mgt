@@ -19,7 +19,7 @@
   <coverage/>
   <testsuites>
     <testsuite name="Unit Tests">
-      <directory>../Unit/</directory>
+      <directory>../../Tests/Unit/</directory>
     </testsuite>
   </testsuites>
   <source>

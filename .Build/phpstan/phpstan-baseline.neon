@@ -3,50 +3,50 @@ parameters:
 		-
 			message: "#^Parameter \\#2 \\$optionKey of method TYPO3\\\\CMS\\\\Extbase\\\\Property\\\\PropertyMappingConfiguration\\:\\:setTypeConverterOption\\(\\) expects string, int given\\.$#"
 			count: 1
-			path: Classes/Controller/EventController.php
+			path: ../../Classes/Controller/EventController.php
 
 		-
 			message: "#^Call to an undefined method TYPO3\\\\CMS\\\\Extbase\\\\Persistence\\\\QueryInterface\\:\\:between\\(\\)\\.$#"
 			count: 4
-			path: Classes/Domain/Repository/EventRepository.php
+			path: ../../Classes/Domain/Repository/EventRepository.php
 
 		-
 			message: "#^Call to static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\MathUtility\\:\\:canBeInterpretedAsFloat\\(\\) with string will always evaluate to false\\.$#"
 			count: 1
-			path: Classes/Evaluation/LatitudeEvaluator.php
+			path: ../../Classes/Evaluation/LatitudeEvaluator.php
 
 		-
 			message: "#^Call to static method TYPO3\\\\CMS\\\\Core\\\\Utility\\\\MathUtility\\:\\:canBeInterpretedAsFloat\\(\\) with string will always evaluate to false\\.$#"
 			count: 1
-			path: Classes/Evaluation/LongitudeEvaluator.php
+			path: ../../Classes/Evaluation/LongitudeEvaluator.php
 
 		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
-			path: Classes/Service/FluidStandaloneService.php
+			path: ../../Classes/Service/FluidStandaloneService.php
 
 		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
-			path: Classes/Service/NotificationService.php
+			path: ../../Classes/Service/NotificationService.php
 
 		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
 			count: 1
-			path: Classes/ViewHelpers/PrefillViewHelper.php
+			path: ../../Classes/ViewHelpers/PrefillViewHelper.php
 
 		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
 			count: 1
-			path: Classes/ViewHelpers/Registration/Field/PrefillFieldViewHelper.php
+			path: ../../Classes/ViewHelpers/Registration/Field/PrefillFieldViewHelper.php
 
 		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
 			count: 1
-			path: Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
+			path: ../../Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
 
 		-
 			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
 			count: 1
-			path: Classes/ViewHelpers/Validation/ErrorClassViewHelper.php
+			path: ../../Classes/ViewHelpers/Validation/ErrorClassViewHelper.php
 

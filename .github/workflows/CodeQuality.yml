@@ -23,8 +23,10 @@ jobs:
           php-version: ${{ matrix.env.php }}
           tools: composer:v2
 
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+      - name: Validate composer.json
+        run: |
+          cd .Build
+          composer validate
 
       - name: Cache dependencies
         uses: actions/cache@v3
@@ -34,12 +36,13 @@ jobs:
 
       - name: Install composer dependencies
         run: |
+          cd .Build
           composer install --no-progress
 
       - name: Validate PHP coding guidelines
         run: |
-          .Build/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v --dry-run --stop-on-violation --using-cache=no
+          .Build/vendor/bin/php-cs-fixer fix --config=.Build/php-cs-fixer/.php-cs-fixer.php -v --dry-run --stop-on-violation --using-cache=no
 
       - name: Run phpstan checks
         run: |
-          .Build/bin/phpstan
+          .Build/vendor/bin/phpstan --configuration=.Build/phpstan/phpstan.neon

@@ -6,4 +6,4 @@
 
 2. Execute Acceptance Testsuite
 
-   `.Build/bin/codecept run acceptance --env local -c Tests/Build/AcceptanceTests.yml`
+   `.Build/vendor/bin/codecept run acceptance --env local -c .Build/codeception/AcceptanceTests.yml`
