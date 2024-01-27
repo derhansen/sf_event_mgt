@@ -112,6 +112,7 @@ class DataHandlerHooks
                     'settings.userRegistration.orderDirection',
                     'settings.userRegistration.storagePage',
                     'settings.userRegistration.recursive',
+                    'settings.singleEvent',
                 ],
                 'additional' => [
                     'settings.detailPid',
