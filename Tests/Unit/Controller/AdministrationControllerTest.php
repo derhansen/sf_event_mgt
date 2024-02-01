@@ -371,7 +371,7 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkEventAccessRedirectsToListViewIfNoEventAccess(): void
+    public function checkEventAccessReturnsFalseIfNoEventAccess(): void
     {
         $event = new Event();
 
@@ -379,7 +379,6 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(null);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $this->subject->expects(self::once())->method('redirect');
-        $this->subject->checkEventAccess($event);
+        self::assertFalse($this->subject->checkEventAccess($event));
     }
 }

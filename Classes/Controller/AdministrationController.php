@@ -311,8 +311,7 @@ class AdministrationController extends AbstractController
     {
         /** @var Event $event */
         $event = $this->eventRepository->findByUidIncludeHidden($eventUid);
-        if ($event !== null) {
-            $this->checkEventAccess($event);
+        if ($event !== null && $this->checkEventAccess($event)) {
             $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport'] ?? []);
         }
         exit();
@@ -339,7 +338,10 @@ class AdministrationController extends AbstractController
      */
     public function indexNotifyAction(Event $event): ResponseInterface
     {
-        $this->checkEventAccess($event);
+        if (!$this->checkEventAccess($event)) {
+            return $this->redirect('list');
+        }
+
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
@@ -392,7 +394,10 @@ class AdministrationController extends AbstractController
      */
     public function notifyAction(Event $event, CustomNotification $customNotification): ResponseInterface
     {
-        $this->checkEventAccess($event);
+        if (!$this->checkEventAccess($event)) {
+            return $this->redirect('list');
+        }
+
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
         $this->notificationService->createCustomNotificationLogentry(
@@ -410,9 +415,9 @@ class AdministrationController extends AbstractController
 
     /**
      * Checks if the current backend user has access to the PID of the event and if not, enqueue an
-     * access denied flash message and redirect to list view
+     * access denied flash message
      */
-    public function checkEventAccess(Event $event): void
+    public function checkEventAccess(Event $event): bool
     {
         if ($this->getBackendUser()->isInWebMount($event->getPid()) === null) {
             $this->addFlashMessage(
@@ -420,9 +425,10 @@ class AdministrationController extends AbstractController
                 $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.title'),
                 ContextualFeedbackSeverity::ERROR
             );
-
-            $this->redirect('list');
+            return false;
         }
+
+        return true;
     }
 
     /**
