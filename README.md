@@ -82,8 +82,8 @@ migrations regarding breaking changes.
 
 | Version | TYPO3     | PHP       | Support/Development                  |
 |---------|-----------|-----------|--------------------------------------|
-| 7.x     | 12.x      | 8.1 - 8.2 | Features, Bugfixes, Security Updates |
-| 6.x     | 11.5      | 7.4 - 8.1 | Features, Bugfixes, Security Updates |
+| 7.x     | 12.x      | 8.1 - 8.3 | Features, Bugfixes, Security Updates |
+| 6.x     | 11.5      | 7.4 - 8.3 | Features, Bugfixes, Security Updates |
 | 5.x     | 10.4      | 7.2 - 7.4 | Bugfixes, Security Updates           |
 | 4.x     | 8.7 - 9.5 | 7.0 - 7.4 | Security Updates                     |
 | 3.x     | 7.6 - 8.7 | 5.5 - 7.3 | Support dropped                      |
