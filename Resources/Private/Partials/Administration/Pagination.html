@@ -37,7 +37,9 @@
         </li>
       </f:for>
       <f:if condition="{pagination.hasMorePages}">
-        <li>…</li>
+          <li class="page-item disabled">
+              <span class="page-link">…</span>
+          </li>
       </f:if>
       <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
           <f:then>
