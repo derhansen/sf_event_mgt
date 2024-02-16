@@ -21,6 +21,12 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class ChallengeResponseSpamCheckTest extends UnitTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'foo';
+    }
+
     /**
      * @test
      */
