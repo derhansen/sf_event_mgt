@@ -349,7 +349,7 @@
       </trans-unit>
       <trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled" approved="yes">
         <source>Cancellation failed, registration not found or already cancelled.</source>
-        <target state="final">Stornierung fehlgeschlagen, Registierung nicht gefunden oder Stornierung bereits durchgeführt.</target>
+        <target state="final">Stornierung fehlgeschlagen, Registrierung nicht gefunden oder Stornierung bereits durchgeführt.</target>
       </trans-unit>
       <trans-unit id="event.message.confirmation_failed_cancel_disabled" approved="yes">
         <source>Cancellation failed, cancel option for this event is not enabled.</source>
