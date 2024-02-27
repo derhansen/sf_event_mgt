@@ -355,7 +355,7 @@ class RegistrationService
     {
         // Early return if move up not enabled, no registrations on waitlist or no free places left
         if (!$event->getEnableWaitlistMoveup() || $event->getRegistrationsWaitlist()->count() === 0 ||
-            $event->getFreePlaces() === 0
+            $event->getFreePlaces() <= 0
         ) {
             return;
         }
