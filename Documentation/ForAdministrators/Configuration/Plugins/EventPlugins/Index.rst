@@ -47,6 +47,7 @@ Display Mode
    - future
    - current_future
    - past
+   - time_restriction
 
    .. note::
 

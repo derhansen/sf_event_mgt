@@ -51,6 +51,7 @@ Display mode
    - future
    - current_future
    - past
+   - time_restriction
 
 
 Sort by
