@@ -10,32 +10,50 @@
 			<trans-unit id="CType.div.plugingroup">
 				<source>Events and event-registration</source>
 			</trans-unit>
+			<trans-unit id="plugin.wizard.header">
+				<source>Event Management</source>
+			</trans-unit>
 			<trans-unit id="plugin.pieventlist.title">
 				<source>List view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventlist.description">
+				<source>Display of events chosen by various optional properties like storage page, categories,...</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventdetail.title">
 				<source>Detail view</source>
 			</trans-unit>
+			<trans-unit id="plugin.pieventdetail.description">
+				<source>Display the detail view for events.</source>
+			</trans-unit>
 			<trans-unit id="plugin.pieventregistration.title">
 				<source>Registration view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventregistration.description">
+				<source>Display the registration view for events.</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventsearch.title">
 				<source>Search view</source>
 			</trans-unit>
+			<trans-unit id="plugin.pieventsearch.description">
+				<source>Display a search view for events with various filter options.</source>
+			</trans-unit>
 			<trans-unit id="plugin.pieventcalendar.title">
 				<source>Calendar view</source>
+			</trans-unit>
+			<trans-unit id="plugin.pieventcalendar.description">
+				<source>Display a calendar view of events chosen by various optional properties.</source>
 			</trans-unit>
 			<trans-unit id="plugin.pipayment.title">
 				<source>Payment</source>
 			</trans-unit>
+			<trans-unit id="plugin.pipayment.description">
+				<source>Display the payment view for events.</source>
+			</trans-unit>
 			<trans-unit id="plugin.piuserreg.title">
 				<source>Frontend user registrations</source>
 			</trans-unit>
-			<trans-unit id="plugin.wizard.title">
-				<source>Events and event-registration</source>
-			</trans-unit>
-			<trans-unit id="plugin.wizard.description">
-				<source>Configurable event management and registration system</source>
+			<trans-unit id="plugin.piuserreg.description">
+				<source>Display evcent registrations for the current logges in frontend user.</source>
 			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
