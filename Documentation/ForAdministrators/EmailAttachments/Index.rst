@@ -121,9 +121,9 @@ Example for new event registrations:
               }
             }
             admin {
-              fromFiles =
-              fromEventProperty =
-              fromRegistrationProperty =
+              fromFiles {}
+              fromEventProperty {}
+              fromRegistrationProperty {}
             }
           }
         }

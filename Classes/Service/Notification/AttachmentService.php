@@ -52,9 +52,9 @@ class AttachmentService
      *       }
      *     }
      *     admin {
-     *       fromFiles =
-     *       fromEventProperty =
-     *       fromRegistrationProperty =
+     *       fromFiles {}
+     *       fromEventProperty {}
+     *       fromRegistrationProperty {}
      *     }
      *   }
      * }
