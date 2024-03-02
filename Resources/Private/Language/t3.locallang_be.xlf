@@ -11,41 +11,65 @@
         <source>Events and event-registration</source>
         <target>crwdns300448:0crwdne300448:0</target>
       </trans-unit>
+      <trans-unit id="plugin.wizard.header">
+        <source>Event Management</source>
+        <target>crwdns305002:0crwdne305002:0</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventlist.title">
         <source>List view</source>
         <target>crwdns300450:0crwdne300450:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.description">
+        <source>Display of events chosen by various optional properties like storage page, categories,...</source>
+        <target>crwdns305004:0crwdne305004:0</target>
       </trans-unit>
       <trans-unit id="plugin.pieventdetail.title">
         <source>Detail view</source>
         <target>crwdns300452:0crwdne300452:0</target>
       </trans-unit>
+      <trans-unit id="plugin.pieventdetail.description">
+        <source>Display the detail view for events.</source>
+        <target>crwdns305006:0crwdne305006:0</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventregistration.title">
         <source>Registration view</source>
         <target>crwdns300454:0crwdne300454:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.description">
+        <source>Display the registration view for events.</source>
+        <target>crwdns305008:0crwdne305008:0</target>
       </trans-unit>
       <trans-unit id="plugin.pieventsearch.title">
         <source>Search view</source>
         <target>crwdns300456:0crwdne300456:0</target>
       </trans-unit>
+      <trans-unit id="plugin.pieventsearch.description">
+        <source>Display a search view for events with various filter options.</source>
+        <target>crwdns305010:0crwdne305010:0</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventcalendar.title">
         <source>Calendar view</source>
         <target>crwdns300458:0crwdne300458:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.description">
+        <source>Display a calendar view of events chosen by various optional properties.</source>
+        <target>crwdns305012:0crwdne305012:0</target>
       </trans-unit>
       <trans-unit id="plugin.pipayment.title">
         <source>Payment</source>
         <target>crwdns300460:0crwdne300460:0</target>
       </trans-unit>
+      <trans-unit id="plugin.pipayment.description">
+        <source>Display the payment view for events.</source>
+        <target>crwdns305014:0crwdne305014:0</target>
+      </trans-unit>
       <trans-unit id="plugin.piuserreg.title">
         <source>Frontend user registrations</source>
         <target>crwdns300462:0crwdne300462:0</target>
       </trans-unit>
-      <trans-unit id="plugin.wizard.title">
-        <source>Events and event-registration</source>
-        <target>crwdns300464:0crwdne300464:0</target>
-      </trans-unit>
-      <trans-unit id="plugin.wizard.description">
-        <source>Configurable event management and registration system</source>
-        <target>crwdns300466:0crwdne300466:0</target>
+      <trans-unit id="plugin.piuserreg.description">
+        <source>Display evcent registrations for the current logges in frontend user.</source>
+        <target>crwdns305016:0crwdne305016:0</target>
       </trans-unit>
       <trans-unit id="flexforms_tab.settings">
         <source>Settings</source>
