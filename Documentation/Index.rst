@@ -137,25 +137,18 @@ TYPO3 CMS.
          .. container:: card-body
 
             Various extensions improve ext:sf_event_mgt with additional features.
+
 .. Table of Contents
 
-.. toctree::
-   :maxdepth: 5
-   :titlesonly:
-   :hidden:
+..  toctree::
+    :maxdepth: 5
+    :titlesonly:
+    :hidden:
 
-   Introduction/Index
-   ForEditors/Index
-   ForAdministrators/Index
-   ForDevelopers/Index
-   Faq/Index
-   Reference/Index
-   Miscellaneous/Index
-
-.. Meta Menu
-
-.. toctree::
-   :hidden:
-
-   Sitemap
-   genindex
+    Introduction/Index
+    ForEditors/Index
+    ForAdministrators/Index
+    ForDevelopers/Index
+    Faq/Index
+    Reference/Index
+    Addons/Index

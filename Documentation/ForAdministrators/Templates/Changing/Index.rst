@@ -50,4 +50,4 @@ now required to use TSConfig::
 
   templates.derhansen/sf_event_mgt.20 = derhansen/sf_event_mgt_extend_demo:Resources/Private
 
-Details see :doc:`changelog entry<Feature-96812-OverrideBackendTemplatesWithTSconfig>`
+Details see :ref:`changelog entry <changelog:feature-96812>`

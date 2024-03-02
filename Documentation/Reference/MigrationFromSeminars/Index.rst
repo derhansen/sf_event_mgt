@@ -30,7 +30,7 @@ SQL queries
 
 We are starting with a fresh install of sf_event_mgt so we can use ids mostly 1 to 1.
 
-.. code-block:: mysql
+.. code-block:: sql
 
     /* Organizers */
     INSERT INTO tx_sfeventmgt_domain_model_organisator (uid,pid,name,email,email_signature)
