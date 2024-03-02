@@ -39,14 +39,6 @@
         <source>Frontend user registrations</source>
         <target state="final">Frontend brugerregistreringer</target>
       </trans-unit>
-      <trans-unit id="plugin.wizard.title" approved="yes">
-        <source>Events and event-registration</source>
-        <target state="final">Begivenheder og begivenhedstilmelding</target>
-      </trans-unit>
-      <trans-unit id="plugin.wizard.description" approved="yes">
-        <source>Configurable event management and registration system</source>
-        <target state="final">Konfigurérbart begivenheds- og tilmeldings-system</target>
-      </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
         <target state="final">Indstillinger</target>
