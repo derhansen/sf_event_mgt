@@ -53,7 +53,7 @@
 				<source>Frontend user registrations</source>
 			</trans-unit>
 			<trans-unit id="plugin.piuserreg.description">
-				<source>Display evcent registrations for the current logges in frontend user.</source>
+				<source>Display event registrations for the current logged in frontend user.</source>
 			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
