@@ -11,33 +11,65 @@
         <source>Events and event-registration</source>
         <target state="final">Begivenheder og begivenhedstilmelding</target>
       </trans-unit>
+      <trans-unit id="plugin.wizard.header" approved="yes">
+        <source>Event Management</source>
+        <target state="final">Begivenhedsadministration</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventlist.title" approved="yes">
         <source>List view</source>
         <target state="final">Listevisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.description" approved="yes">
+        <source>Display of events chosen by various optional properties like storage page, categories,...</source>
+        <target state="final">Visning af begivenheder valgt udfra forskellige valgfri egenskaber som opbevaringsside, kategorier,...</target>
       </trans-unit>
       <trans-unit id="plugin.pieventdetail.title" approved="yes">
         <source>Detail view</source>
         <target state="final">Detaljevisning</target>
       </trans-unit>
+      <trans-unit id="plugin.pieventdetail.description" approved="yes">
+        <source>Display the detail view for events.</source>
+        <target state="final">Vis detaljevisningen for begivenheder.</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventregistration.title" approved="yes">
         <source>Registration view</source>
         <target state="final">Registreringsvisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.description" approved="yes">
+        <source>Display the registration view for events.</source>
+        <target state="final">Vis registreringsvisningen for begivenheder.</target>
       </trans-unit>
       <trans-unit id="plugin.pieventsearch.title" approved="yes">
         <source>Search view</source>
         <target state="final">Søgevisning</target>
       </trans-unit>
+      <trans-unit id="plugin.pieventsearch.description" approved="yes">
+        <source>Display a search view for events with various filter options.</source>
+        <target state="final">Vis en søgevisning for begivenheder med forskellige filterindstillinger.</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventcalendar.title" approved="yes">
         <source>Calendar view</source>
         <target state="final">Kalendervisning</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.description" approved="yes">
+        <source>Display a calendar view of events chosen by various optional properties.</source>
+        <target state="final">Vis en kalendervisning af begivenheder valgt efter forskellige valgfrie egenskaber.</target>
       </trans-unit>
       <trans-unit id="plugin.pipayment.title" approved="yes">
         <source>Payment</source>
         <target state="final">Betaling</target>
       </trans-unit>
+      <trans-unit id="plugin.pipayment.description" approved="yes">
+        <source>Display the payment view for events.</source>
+        <target state="final">Vis betalingsvisningen for begivenheder.</target>
+      </trans-unit>
       <trans-unit id="plugin.piuserreg.title" approved="yes">
         <source>Frontend user registrations</source>
         <target state="final">Frontend brugerregistreringer</target>
+      </trans-unit>
+      <trans-unit id="plugin.piuserreg.description" approved="yes">
+        <source>Display evcent registrations for the current logges in frontend user.</source>
+        <target state="final">Vis eventregistreringer for de aktuelle logges i frontend bruger.</target>
       </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
