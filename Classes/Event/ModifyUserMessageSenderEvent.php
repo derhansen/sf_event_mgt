@@ -25,6 +25,8 @@ final class ModifyUserMessageSenderEvent
     private string $replyToEmail;
     private Registration $registration;
     private int $type;
+    private string $subject;
+    private string $body;
     private NotificationService $notificationService;
 
     public function __construct(
@@ -33,6 +35,8 @@ final class ModifyUserMessageSenderEvent
         string $replyToEmail,
         Registration $registration,
         int $type,
+        string $subject,
+        string $body,
         NotificationService $notificationService
     ) {
         $this->senderName = $senderName;
@@ -40,6 +44,9 @@ final class ModifyUserMessageSenderEvent
         $this->replyToEmail = $replyToEmail;
         $this->registration = $registration;
         $this->type = $type;
+        $this->subject = $subject;
+        $this->body = $body;
+
         $this->notificationService = $notificationService;
     }
 
@@ -66,6 +73,26 @@ final class ModifyUserMessageSenderEvent
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): void
+    {
+        $this->subject = $subject;
+    }
+
+    public function getBody(): string
+    {
+        return $this->body;
+    }
+
+    public function setBody(string $body): void
+    {
+        $this->body = $body;
     }
 
     public function getNotificationService(): NotificationService
