@@ -20,15 +20,14 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
  */
 final class ModifyUserMessageSenderEvent
 {
-
     public function __construct(
         private string $senderName,
         private string $senderEmail,
         private string $replyToEmail,
+        private string $subject,
+        private string $body,
         private readonly Registration $registration,
         private readonly int $type,
-        private readonly string $subject,
-        private readonly string $body,
         private readonly NotificationService $notificationService
     ) {
     }
