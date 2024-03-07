@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Hooks;
 
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use TYPO3\CMS\Core\Configuration\FlexForm\FlexFormTools;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -22,14 +23,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class DataHandlerHooks
 {
-    const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
-    const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
+    public const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
+    public const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
 
     /**
      * Flushes the cache if a event record was edited.
      * This happens on two levels: by UID and by PID.
-     *
-     * @param array $params
      */
     public function clearCachePostProc(array $params): void
     {
@@ -61,7 +60,7 @@ class DataHandlerHooks
     public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler): void
     {
         if ($table === 'tt_content' &&
-            $status == 'update' &&
+            $status === 'update' &&
             isset($fieldArray['pi_flexform']) &&
             $dataHandler->checkValue_currentRecord['CType'] === 'list' &&
             in_array(
@@ -113,6 +112,7 @@ class DataHandlerHooks
                     'settings.userRegistration.orderDirection',
                     'settings.userRegistration.storagePage',
                     'settings.userRegistration.recursive',
+                    'settings.singleEvent',
                 ],
                 'additional' => [
                     'settings.detailPid',
@@ -120,7 +120,11 @@ class DataHandlerHooks
                     'settings.registrationPid',
                     'settings.paymentPid',
                     'settings.restrictForeignRecordsToStoragePage',
-                    'settings.disableOverrideDemand',
+                ],
+                'pagination' => [
+                    'settings.pagination.enablePagination',
+                    'settings.pagination.itemsPerPage',
+                    'settings.pagination.maxNumPages',
                 ],
                 'template' => [
                     'settings.templateLayout',
@@ -135,7 +139,8 @@ class DataHandlerHooks
             foreach ($checkFields as $sheet => $fields) {
                 foreach ($fields as $field) {
                     if (isset($flexformData['data'][$sheet]['lDEF'][$field]['vDEF']) &&
-                        $flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === ''
+                        ($flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === '' ||
+                            $flexformData['data'][$sheet]['lDEF'][$field]['vDEF'] === '0')
                     ) {
                         unset($flexformData['data'][$sheet]['lDEF'][$field]);
                     }
@@ -194,9 +199,7 @@ class DataHandlerHooks
     }
 
     /**
-     * Removes all custom notification log entried for the given event UID
-     *
-     * @param int $eventUid
+     * Removes all custom notification log entries for the given event UID
      */
     protected function deleteCustomNotificationsByEvent(int $eventUid): void
     {
@@ -205,8 +208,8 @@ class DataHandlerHooks
         $queryBuilder
             ->delete(self::CUSTOMNOTIFICATIONLOG_TABLE)
             ->where(
-                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, \PDO::PARAM_INT))
+                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             )
-            ->execute();
+            ->executeStatement();
     }
 }

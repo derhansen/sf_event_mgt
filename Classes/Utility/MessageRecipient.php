@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
- * MessageRecipient
+ * Constants used for message recipient identification
  */
 class MessageRecipient
 {

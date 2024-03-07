@@ -17,7 +17,14 @@
                 <f:for each="{data}" as="item">
                     <tr>
                         <th>{item.title}</th>
-                        <td>{item.value -> f:format.raw()}</td>
+                        <td>
+                            <f:if condition="{item.icon}">
+                                <core:icon identifier="{item.icon}" size="small" />
+                            </f:if>
+                            <f:if condition="{item.value}">
+                                {item.value -> f:format.raw()}
+                            </f:if>
+                        </td>
                     </tr>
                 </f:for>
             </tbody>

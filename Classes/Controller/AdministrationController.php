@@ -16,12 +16,14 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
+use DERHANSEN\SfEventMgt\Event\InitAdministrationModuleTemplateEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationIndexNotifyViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
@@ -31,15 +33,10 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Exception\StopActionException;
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
-/**
- * AdministrationController
- */
 class AdministrationController extends AbstractController
 {
     private const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
@@ -155,10 +152,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns the create new record URL for the given table
-     *
-     * @param string $table
-     * @throws RouteNotFoundException
-     * @return string
      */
     private function getCreateNewRecordUri(string $table): string
     {
@@ -182,34 +175,34 @@ class AdministrationController extends AbstractController
     /**
      * Initializes module template and returns a response which must be used as response for any extbase action
      * that should render a view.
-     *
-     * @return ResponseInterface
      */
-    protected function initModuleTemplateAndReturnResponse(): ResponseInterface
+    protected function initModuleTemplateAndReturnResponse(string $templateFileName, array $variables = []): ResponseInterface
     {
         $moduleTemplate = $this->moduleTemplateFactory->create($this->request);
-        $this->pageRenderer->loadRequireJsModule('TYPO3/CMS/Backend/DateTimePicker');
         $this->pageRenderer->addCssFile('EXT:sf_event_mgt/Resources/Public/Css/administration.css');
 
-        $dateFormat = $GLOBALS['TYPO3_CONF_VARS']['SYS']['USdateFormat'] ?
-            ['MM-DD-YYYY', 'HH:mm MM-DD-YYYY'] :
-            ['DD-MM-YYYY', 'HH:mm DD-MM-YYYY'];
-        $this->pageRenderer->addInlineSetting('DateTimePicker', 'DateFormat', $dateFormat);
+        $this->pageRenderer->loadJavaScriptModule('@derhansen/sf_event_mgt/administration-module.js');
 
         $this->registerDocHeaderButtons($moduleTemplate);
 
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
 
-        $moduleTemplate->setContent($this->view->render());
-        return $this->htmlResponse($moduleTemplate->renderContent());
+        $initAdministrationModuleTemplateEvent = new InitAdministrationModuleTemplateEvent(
+            $moduleTemplate,
+            $this->uriBuilder,
+            $this
+        );
+        $this->eventDispatcher->dispatch($initAdministrationModuleTemplateEvent);
+
+        $variables['settings'] = $this->settings;
+        $moduleTemplate->assignMultiple($variables);
+
+        return $moduleTemplate->renderResponse($templateFileName);
     }
 
-    /**
-     * Initialize action
-     */
     public function initializeAction(): void
     {
-        $this->pid = (int)GeneralUtility::_GET('id');
+        $this->pid = (int)($this->request->getQueryParams()['id'] ?? 0);
     }
 
     /**
@@ -217,36 +210,23 @@ class AdministrationController extends AbstractController
      */
     public function initializeListAction(): void
     {
-        if (empty($this->settings)) {
-            $this->redirect('settingsError');
+        // Static format needed for date picker (flatpickr), see BackendController::generateJavascript() and #91606
+        if (!empty($this->settings)) {
+            $this->settings['search']['dateFormat'] = 'H:i d-m-Y';
         }
-        $this->arguments->getArgument('searchDemand')
-            ->getPropertyMappingConfiguration()->forProperty('startDate')
-            ->setTypeConverterOption(
-                DateTimeConverter::class,
-                DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['search']['dateFormat'] ?? 'H:i d-m-Y'
-            );
-        $this->arguments->getArgument('searchDemand')
-            ->getPropertyMappingConfiguration()->forProperty('endDate')
-            ->setTypeConverterOption(
-                DateTimeConverter::class,
-                DateTimeConverter::CONFIGURATION_DATE_FORMAT,
-                $this->settings['search']['dateFormat'] ?? 'H:i d-m-Y'
-            );
     }
 
     /**
      * List action for backend module
-     *
-     * @param SearchDemand|null $searchDemand
-     * @param array $overwriteDemand
-     * @return ResponseInterface
      */
     public function listAction(?SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
+        if (empty($this->settings)) {
+            return $this->redirect('settingsError');
+        }
+
         if ($searchDemand !== null) {
-            $searchDemand->setFields($this->settings['search']['fields'] ?? '');
+            $searchDemand->setFields($this->settings['search']['fields'] ?? 'title');
 
             $sessionData = [];
             $sessionData['searchDemand'] = $searchDemand->toArray();
@@ -269,8 +249,16 @@ class AdministrationController extends AbstractController
             $this->beUserSessionService->saveSessionData($sessionData);
         }
 
+        // Initialize default ordering when no overwriteDemand is available
+        if (empty($overwriteDemand)) {
+            $overwriteDemand = [
+                'orderField' => $this->settings['defaultSorting']['orderField'] ?? 'title',
+                'orderDirection' => $this->settings['defaultSorting']['orderDirection'] ?? 'asc',
+            ];
+        }
+
         $eventDemand = GeneralUtility::makeInstance(EventDemand::class);
-        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand ?? []);
+        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
         $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
         $eventDemand->setSearchDemand($searchDemand);
         $eventDemand->setStoragePage((string)$this->pid);
@@ -285,23 +273,26 @@ class AdministrationController extends AbstractController
             $pagination = $this->getPagination($events, $this->settings['pagination'] ?? []);
         }
 
-        $this->view->assignMultiple([
-            'pid' => $this->pid,
-            'events' => $events,
-            'searchDemand' => $searchDemand,
-            'orderByFields' => $this->getOrderByFields(),
-            'orderDirections' => $this->getOrderDirections(),
-            'overwriteDemand' => $overwriteDemand,
-            'pagination' => $pagination,
-        ]);
+        $modifyAdministrationListViewVariablesEvent = new ModifyAdministrationListViewVariablesEvent(
+            [
+                'pid' => $this->pid,
+                'events' => $events,
+                'searchDemand' => $searchDemand,
+                'orderByFields' => $this->getOrderByFields(),
+                'orderDirections' => $this->getOrderDirections(),
+                'overwriteDemand' => $overwriteDemand,
+                'pagination' => $pagination,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyAdministrationListViewVariablesEvent);
+        $variables = $modifyAdministrationListViewVariablesEvent->getVariables();
 
-        return $this->initModuleTemplateAndReturnResponse();
+        return $this->initModuleTemplateAndReturnResponse('Administration/List', $variables);
     }
 
     /**
      * Returns, if reset filter operation has been used
-     *
-     * @return bool
      */
     private function isResetFilter(): bool
     {
@@ -315,15 +306,12 @@ class AdministrationController extends AbstractController
 
     /**
      * Export registrations for a given event
-     *
-     * @param int $eventUid
      */
     public function exportAction(int $eventUid): void
     {
         /** @var Event $event */
         $event = $this->eventRepository->findByUidIncludeHidden($eventUid);
-        if ($event !== null) {
-            $this->checkEventAccess($event);
+        if ($event !== null && $this->checkEventAccess($event)) {
             $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport'] ?? []);
         }
         exit();
@@ -332,48 +320,50 @@ class AdministrationController extends AbstractController
     /**
      * Handles expired registrations
      */
-    public function handleExpiredRegistrationsAction(): void
+    public function handleExpiredRegistrationsAction(): ResponseInterface
     {
         $delete = (bool)($this->settings['registration']['deleteExpiredRegistrations'] ?? false);
         $this->maintenanceService->handleExpiredRegistrations($delete);
 
         $this->addFlashMessage(
             $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.content'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.title'),
-            FlashMessage::OK
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.title')
         );
 
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * The index notify action
-     *
-     * @param Event $event
-     * @return ResponseInterface
-     * @throws StopActionException
      */
     public function indexNotifyAction(Event $event): ResponseInterface
     {
-        $this->checkEventAccess($event);
+        if (!$this->checkEventAccess($event)) {
+            return $this->redirect('list');
+        }
+
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $logEntries = $this->customNotificationLogRepository->findByEvent($event);
-        $this->view->assignMultiple([
-            'event' => $event,
-            'recipients' => $this->getNotificationRecipients(),
-            'customNotification' => $customNotification,
-            'customNotifications' => $customNotifications,
-            'logEntries' => $logEntries,
-        ]);
 
-        return $this->initModuleTemplateAndReturnResponse();
+        $modifyAdministrationIndexNotifyViewVariablesEvent = new ModifyAdministrationIndexNotifyViewVariablesEvent(
+            [
+                'event' => $event,
+                'recipients' => $this->getNotificationRecipients(),
+                'customNotification' => $customNotification,
+                'customNotifications' => $customNotifications,
+                'logEntries' => $logEntries,
+            ],
+            $this
+        );
+        $this->eventDispatcher->dispatch($modifyAdministrationIndexNotifyViewVariablesEvent);
+        $variables = $modifyAdministrationIndexNotifyViewVariablesEvent->getVariables();
+
+        return $this->initModuleTemplateAndReturnResponse('Administration/IndexNotify', $variables);
     }
 
     /**
      * Returns an array of recipient option for the indexNotify action
-     *
-     * @return array|array[]
      */
     public function getNotificationRecipients(): array
     {
@@ -401,13 +391,13 @@ class AdministrationController extends AbstractController
 
     /**
      * Notify action
-     *
-     * @param Event $event
-     * @param CustomNotification $customNotification
      */
-    public function notifyAction(Event $event, CustomNotification $customNotification): void
+    public function notifyAction(Event $event, CustomNotification $customNotification): ResponseInterface
     {
-        $this->checkEventAccess($event);
+        if (!$this->checkEventAccess($event)) {
+            return $this->redirect('list');
+        }
+
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
         $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
         $this->notificationService->createCustomNotificationLogentry(
@@ -418,43 +408,39 @@ class AdministrationController extends AbstractController
         );
         $this->addFlashMessage(
             $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.content'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.title'),
-            FlashMessage::OK
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.title')
         );
-        $this->redirect('list');
+        return $this->redirect('list');
     }
 
     /**
      * Checks if the current backend user has access to the PID of the event and if not, enqueue an
-     * access denied flash message and redirect to list view
-     *
-     * @param Event $event
-     * @throws StopActionException
+     * access denied flash message
      */
-    public function checkEventAccess(Event $event): void
+    public function checkEventAccess(Event $event): bool
     {
         if ($this->getBackendUser()->isInWebMount($event->getPid()) === null) {
             $this->addFlashMessage(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.content'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.title'),
-                FlashMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
-
-            $this->redirect('list');
+            return false;
         }
+
+        return true;
     }
 
     /**
      * Shows the settings error view
      */
-    public function settingsErrorAction(): void
+    public function settingsErrorAction(): ResponseInterface
     {
+        return $this->initModuleTemplateAndReturnResponse('Administration/SettingsError');
     }
 
     /**
      * Suppress default validation messages
-     *
-     * @return bool
      */
     protected function getErrorFlashMessage(): bool
     {
@@ -463,8 +449,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns an array with possible order directions
-     *
-     * @return array
      */
     public function getOrderDirections(): array
     {
@@ -476,8 +460,6 @@ class AdministrationController extends AbstractController
 
     /**
      * Returns an array with possible orderBy fields
-     *
-     * @return array
      */
     public function getOrderByFields(): array
     {

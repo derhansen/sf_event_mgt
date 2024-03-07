@@ -17,51 +17,33 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationIndexNotifyViewVariablesEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdministrationListViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
-use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
-use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
-use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
-use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Controller\AdministrationController.
- */
 class AdministrationControllerTest extends UnitTestCase
 {
-    use ProphecyTrait;
+    protected AdministrationController $subject;
 
-    /**
-     * @var AdministrationController
-     */
-    protected $subject;
-
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMock(
             AdministrationController::class,
-            ['redirect', 'forward', 'addFlashMessage', 'redirectToUri', 'getLanguageService', 'initModuleTemplateAndReturnResponse'],
+            ['redirect', 'addFlashMessage', 'redirectToUri', 'getLanguageService', 'initModuleTemplateAndReturnResponse'],
             [],
             '',
             false
         );
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -70,9 +52,10 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function initializeActionAssignsPid()
+    public function initializeActionAssignsPid(): void
     {
         $this->subject->_set('pid', 1);
+        $this->subject->_set('request', $this->createMock(Request::class));
         $this->subject->initializeAction();
         self::assertSame(0, $this->subject->_get('pid'));
     }
@@ -80,8 +63,9 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionDoesNotFetchEventsForStoragePidZero()
+    public function listActionDoesNotFetchEventsForStoragePidZero(): void
     {
+        $this->subject->_set('settings', ['dummy' => 'settings']);
         $this->subject->_set('pid', 0);
 
         $beUserSessionService = $this->getMockBuilder(BeUserSessionService::class)->getMock();
@@ -92,22 +76,30 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
-        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $view->expects(self::once())->method('assignMultiple')->with([
+        $variables = [
             'pid' => 0,
             'events' => [],
             'searchDemand' => new SearchDemand(),
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => null,
+            'overwriteDemand' => [
+                'orderField' => 'title',
+                'orderDirection' => 'asc',
+            ],
             'pagination' => null,
-        ]);
-        $this->subject->_set('view', $view);
+        ];
+        $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
+            ->with('Administration/List', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->listAction();
     }
@@ -115,8 +107,9 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionDoesNotFetchEventsForStoragePidZeroAndDemand()
+    public function listActionDoesNotFetchEventsForStoragePidZeroAndDemand(): void
     {
+        $this->subject->_set('settings', ['dummy' => 'settings']);
         $this->subject->_set('pid', 0);
 
         $searchDemand = new SearchDemand();
@@ -129,22 +122,30 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
-        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $view->expects(self::once())->method('assignMultiple')->with([
+        $variables = [
             'pid' => 0,
             'events' => [],
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => [],
+            'overwriteDemand' => [
+                'orderField' => 'title',
+                'orderDirection' => 'asc',
+            ],
             'pagination' => null,
-        ]);
-        $this->subject->_set('view', $view);
+        ];
+        $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
+            ->with('Administration/List', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->listAction($searchDemand);
     }
@@ -152,8 +153,9 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionFetchesAllEventsForGivenStoragePidAndAssignsThemToView()
+    public function listActionFetchesAllEventsForGivenStoragePidAndPassesExpectedVariablesToTemplateView(): void
     {
+        $this->subject->_set('settings', ['dummy' => 'settings']);
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
@@ -168,10 +170,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('check')->willReturn(true);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -179,17 +179,27 @@ class AdministrationControllerTest extends UnitTestCase
         $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->subject->injectEventRepository($eventRepository);
 
-        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $view->expects(self::once())->method('assignMultiple')->with([
+        $variables = [
             'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
             'orderByFields' => $this->subject->getOrderByFields(),
             'orderDirections' => $this->subject->getOrderDirections(),
-            'overwriteDemand' => [],
+            'overwriteDemand' => [
+                'orderField' => 'title',
+                'orderDirection' => 'asc',
+            ],
             'pagination' => [],
-        ]);
-        $this->subject->_set('view', $view);
+        ];
+        $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
+            ->with('Administration/List', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->listAction($searchDemand);
     }
@@ -197,8 +207,9 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function listActionUsesOverwriteDemandArrayAndAssignsItToView()
+    public function listActionUsesOverwriteDemandArrayAndPassesExpectedVariablesToTemplateView(): void
     {
+        $this->subject->_set('settings', ['dummy' => 'settings']);
         $this->subject->_set('pid', 1);
 
         $searchDemand = new SearchDemand();
@@ -213,10 +224,8 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('check')->willReturn(true);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $requestProphecy = $this->prophesize(Request::class);
-        $requestProphecy->hasArgument('operation')->willReturn(false);
-        $requestProphecy->hasArgument('currentPage')->willReturn(false);
-        $this->subject->_set('request', $requestProphecy->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('request', $request);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)
             ->disableOriginalConstructor()
@@ -224,9 +233,7 @@ class AdministrationControllerTest extends UnitTestCase
         $eventRepository->expects(self::once())->method('findDemanded')->willReturn($allEvents);
         $this->subject->injectEventRepository($eventRepository);
 
-        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-
-        $view->expects(self::once())->method('assignMultiple')->with([
+        $variables = [
             'pid' => 1,
             'events' => $allEvents,
             'searchDemand' => $searchDemand,
@@ -234,72 +241,39 @@ class AdministrationControllerTest extends UnitTestCase
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => ['orderDirection' => 'desc'],
             'pagination' => [],
-        ]);
-        $this->subject->_set('view', $view);
+        ];
+        $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
+            ->with('Administration/List', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationListViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->listAction($searchDemand, ['orderDirection' => 'desc']);
     }
 
     /**
-     * Returns the argument mock-object required for initializeListAction tests
-     *
-     * @param string $settingsSearchDateFormat Settings for searchDateFormat
-     *
-     * @return mixed
-     */
-    protected function getInitializeListActionArgumentMock($settingsSearchDateFormat = '')
-    {
-        $mockPropertyMapperConfig = $this->getMockBuilder(
-            MvcPropertyMappingConfiguration::class
-        )->getMock();
-        $mockPropertyMapperConfig->expects(self::any())->method('setTypeConverterOption')->with(
-            self::equalTo(DateTimeConverter::class),
-            self::equalTo('dateFormat'),
-            self::equalTo($settingsSearchDateFormat)
-        );
-
-        $mockDatePmConfig = $this->getMockBuilder(
-            MvcPropertyMappingConfiguration::class
-        )->getMock();
-        $mockDatePmConfig->expects(self::any())->method('forProperty')->willReturn(
-            $mockPropertyMapperConfig
-        );
-
-        $mockDateArgument = $this->getMockBuilder(Argument::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockDateArgument->expects(self::any())->method('getPropertyMappingConfiguration')->willReturn(
-            $mockDatePmConfig
-        );
-
-        $mockArguments = $this->getMockBuilder(Arguments::class)->getMock();
-        $mockArguments->expects(self::any())->method('getArgument')->with('searchDemand')->willReturn(
-            $mockDateArgument
-        );
-
-        return $mockArguments;
-    }
-
-    /**
      * @test
      */
-    public function initializeListActionSetsDateFormat()
+    public function initializeListActionSetsDefaultDateFormatIfEmpty(): void
     {
         $settings = [
-            'search' => [
-                'dateFormat' => 'd.m.Y',
-            ],
+            'search' => [],
         ];
 
-        $this->subject->_set('arguments', $this->getInitializeListActionArgumentMock('d.m.Y'));
         $this->subject->_set('settings', $settings);
         $this->subject->initializeListAction();
+
+        self::assertEquals('H:i d-m-Y', $this->subject->_get('settings')['search']['dateFormat']);
     }
 
     /**
      * @test
      */
-    public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView()
+    public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView(): void
     {
         $mockMaintenanceService = $this->getMockBuilder(MaintenanceService::class)
             ->getMock();
@@ -313,8 +287,9 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function indexNotifyActionAssignsExpectedObjectsToView()
+    public function indexNotifyActionPassesExpectedVariablesToTemplateView(): void
     {
+        $this->subject->_set('settings', ['dummy' => 'settings']);
         $customNotifications = ['key' => 'value'];
         $logEntries = ['SomeResult'];
         $event = new Event();
@@ -334,7 +309,7 @@ class AdministrationControllerTest extends UnitTestCase
         );
         $this->subject->injectSettingsService($mockSettingsService);
 
-        $mockCustomNotification = GeneralUtility::makeInstance(CustomNotification::class);
+        $mockCustomNotification = new CustomNotification();
 
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)->getMock();
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(1);
@@ -342,18 +317,22 @@ class AdministrationControllerTest extends UnitTestCase
 
         $recipients = $this->subject->getNotificationRecipients();
 
-        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $view->expects(self::once())->method('assignMultiple')->with(self::equalTo(
-            [
-                'event' => $event,
-                'customNotification' => $mockCustomNotification,
-                'customNotifications' => $customNotifications,
-                'logEntries' => $logEntries,
-                'recipients' => $recipients,
-            ]
-        ));
-        $this->subject->_set('settings', []);
-        $this->subject->_set('view', $view);
+        $variables = [
+            'event' => $event,
+            'customNotification' => $mockCustomNotification,
+            'customNotifications' => $customNotifications,
+            'logEntries' => $logEntries,
+            'recipients' => $recipients,
+        ];
+        $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
+            ->with('Administration/IndexNotify', $variables);
+
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $eventDispatcher->expects(self::once())->method('dispatch')->with(
+            new ModifyAdministrationIndexNotifyViewVariablesEvent($variables, $this->subject)
+        );
+        $this->subject->injectEventDispatcher($eventDispatcher);
 
         $this->subject->indexNotifyAction($event);
     }
@@ -361,7 +340,7 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function notifyActionSendsNotificationsLogsAndRedirects()
+    public function notifyActionSendsNotificationsLogsAndRedirects(): void
     {
         $customNotifications = ['key' => 'value'];
         $event = new Event();
@@ -392,7 +371,7 @@ class AdministrationControllerTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkEventAccessRedirectsToListViewIfNoEventAccess()
+    public function checkEventAccessReturnsFalseIfNoEventAccess(): void
     {
         $event = new Event();
 
@@ -400,7 +379,6 @@ class AdministrationControllerTest extends UnitTestCase
         $mockBackendUser->expects(self::once())->method('isInWebMount')->willReturn(null);
         $GLOBALS['BE_USER'] = $mockBackendUser;
 
-        $this->subject->expects(self::once())->method('redirect');
-        $this->subject->checkEventAccess($event);
+        self::assertFalse($this->subject->checkEventAccess($event));
     }
 }

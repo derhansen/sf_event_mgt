@@ -16,19 +16,10 @@ use DERHANSEN\SfEventMgt\Payment\Transfer;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Class PaymentServiceTest
- */
 class PaymentServiceTest extends UnitTestCase
 {
-    /**
-     * @var PaymentService
-     */
-    protected $subject;
+    protected PaymentService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
@@ -43,20 +34,12 @@ class PaymentServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
     }
 
-    /**
-     * DataProvider for getPaymentMethodsReturnsDefaultPaymentMethods
-     *
-     * @return array
-     */
-    public function getPaymentMethodsDataProvider()
+    public static function getPaymentMethodsDataProvider(): array
     {
         return [
             'Default Payment Methods enabled' => [
@@ -79,10 +62,8 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider getPaymentMethodsDataProvider
-     * @param mixed $extConf
-     * @param mixed $expected
      */
-    public function getPaymentMethodsReturnsDefaultPaymentMethods($extConf, $expected)
+    public function getPaymentMethodsReturnsDefaultPaymentMethods(array $extConf, array $expected): void
     {
         $this->subject = $this->getAccessibleMock(PaymentService::class, ['translate'], [], '', false);
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = $extConf;
@@ -92,7 +73,7 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPaymentInstanceReturnsInvoicePaymentInsance()
+    public function getPaymentInstanceReturnsInvoicePaymentInsance(): void
     {
         $this->subject = new PaymentService();
         self::assertInstanceOf(Invoice::class, $this->subject->getPaymentInstance('invoice'));
@@ -101,18 +82,13 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function getPaymentInstanceReturnsTransferPaymentInsance()
+    public function getPaymentInstanceReturnsTransferPaymentInsance(): void
     {
         $this->subject = new PaymentService();
         self::assertInstanceOf(Transfer::class, $this->subject->getPaymentInstance('transfer'));
     }
 
-    /**
-     * Data provider for paymentActionEnabledForDefaultPaymentMethodReturnsExpectedResult
-     *
-     * @return array
-     */
-    public function paymentActionEnabledForDefaultPaymentMethodDataProvider()
+    public static function paymentActionEnabledForDefaultPaymentMethodDataProvider(): array
     {
         return [
             'redirectAction' => [
@@ -141,10 +117,8 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider paymentActionEnabledForDefaultPaymentMethodDataProvider
-     * @param mixed $action
-     * @param mixed $expected
      */
-    public function paymentActionEnabledForDefaultPaymentMethodReturnsExpectedResult($action, $expected)
+    public function paymentActionEnabledForDefaultPaymentMethodReturnsExpectedResult(string $action, bool $expected): void
     {
         $this->subject = $this->getAccessibleMock(PaymentService::class, ['getPaymentInstance'], [], '', false);
         $this->subject->expects(self::once())->method('getPaymentInstance')->willReturn(new Invoice());
@@ -152,12 +126,7 @@ class PaymentServiceTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->paymentActionEnabled('invoice', $action));
     }
 
-    /**
-     * Data provider for paymentActionEnabledForCustomPaymentMethodReturnsExpectedResult
-     *
-     * @return array
-     */
-    public function paymentActionEnabledForCustomPaymentMethodDataProvider()
+    public static function paymentActionEnabledForCustomPaymentMethodDataProvider(): array
     {
         return [
             'redirectAction' => [
@@ -186,10 +155,8 @@ class PaymentServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider paymentActionEnabledForCustomPaymentMethodDataProvider
-     * @param mixed $action
-     * @param mixed $expected
      */
-    public function paymentActionEnabledForCustomPaymentMethodReturnsExpectedResult($action, $expected)
+    public function paymentActionEnabledForCustomPaymentMethodReturnsExpectedResult(string $action, bool $expected): void
     {
         $mockPaymentInstance = $this->getAccessibleMock(
             Invoice::class,

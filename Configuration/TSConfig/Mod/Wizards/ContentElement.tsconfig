@@ -1,13 +1,70 @@
-mod.wizards.newContentElement.wizardItems.plugins {
-  elements {
-    sf_event_mgt {
-      iconIdentifier = ext-sfeventmgt-default
-      title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.title
-      description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.description
-      tt_content_defValues {
-        CType = list
-        list_type = sfeventmgt_pieventlist
-      }
+mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
+    header = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.wizard.header
+    after = common
+    elements {
+        pieventlist {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventlist.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventlist.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_pieventlist
+            }
+        }
+        pieventdetail {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventdetail.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventdetail.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_pieventdetail
+            }
+        }
+        pieventregistration {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventregistration.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventregistration.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_pieventregistration
+            }
+        }
+        pieventcalendar {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventcalendar.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventcalendar.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_pieventcalendar
+            }
+        }
+        pieventsearch {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventsearch.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventsearch.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_pieventsearch
+            }
+        }
+        pipayment {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pipayment.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pipayment.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_pipayment
+            }
+        }
+        piuserreg {
+            iconIdentifier = ext-sfeventmgt-default
+            title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.piuserreg.title
+            description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.piuserreg.description
+            tt_content_defValues {
+                CType = list
+                list_type = sfeventmgt_piuserreg
+            }
+        }
     }
-  }
+    show = *
 }

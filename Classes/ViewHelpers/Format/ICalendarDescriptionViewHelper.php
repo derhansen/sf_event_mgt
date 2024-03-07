@@ -14,7 +14,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Format;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * ICalendar Description viewhelper. Note, this ViewHelper does not escape output and should only be used
+ * ICalendar Description viewHelper. Note, this ViewHelper does not escape output and should only be used
  * to process the iCal description field and any other foldable ICal text fields.
  */
 class ICalendarDescriptionViewHelper extends AbstractViewHelper
@@ -24,10 +24,7 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
      */
     protected $escapeOutput = false;
 
-    /**
-     * Initialize arguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('description', 'string', 'The description', false);
@@ -36,8 +33,6 @@ class ICalendarDescriptionViewHelper extends AbstractViewHelper
 
     /**
      * Formats the given description according to RFC 2445
-     *
-     * @return string
      */
     public function render(): string
     {

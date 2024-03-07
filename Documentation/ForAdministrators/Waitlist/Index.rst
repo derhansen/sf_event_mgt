@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _waitlist_moveup:
 
+================================
 Default waitlist move up process
 ================================
 
@@ -44,15 +45,17 @@ As soon as a registration moved up from the waitlist, the user will recieve an e
 Things to keep in mind when using the default move up process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* The default move up process does not execute, when registrations are removed from the event because the confirmation dealine exceeded
-* When the simultaneous registration process is used, registrations are treated seperately by the default move up process.
-  This can result in, that the main registration will be moved up, but additonal may not.
+* The default move up process does not execute, when registrations are removed from the event because the confirmation deadline exceeded
+* When the simultaneous registration process is used, registrations are treated separately by the default move up process.
+  This can result in, that the main registration will be moved up, but additional may not.
 * When the simultaneous registration process is used, the dependency to the main registration will automatically be
   removed. This is recommended, since the cancellation of the main registration will result in the cancellation
   of all "connected" registrations. The TypoScript setting :typoscript:`settings.waitlist.moveUp.keepMainRegistrationDependency`
   can be used to keep the dependency to the main registration.
 * When the simultaneous registration process is used, moved up registrations will automatically be enabled for
   notification.
+* If a payment process is activated for the event, the :php:`AfterRegistrationMovedFromWaitlist` event must manuelly be implemented
+  in order to send an email with payment information (e.g. payment link) to the user who moved up.
 
 Customizing the move up process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

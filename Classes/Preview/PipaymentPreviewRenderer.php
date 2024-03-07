@@ -17,9 +17,6 @@ class PipaymentPreviewRenderer extends AbstractPluginPreviewRenderer
 {
     /**
      * Renders the content of the plugin preview.
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {

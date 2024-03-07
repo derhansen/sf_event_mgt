@@ -16,26 +16,14 @@ use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\SpamCheckServiceTest.
- */
 class SpamCheckServiceTest extends UnitTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->resetSingletonInstances = true;
-    }
-
-    protected function tearDown(): void
-    {
-        parent::tearDown();
-    }
+    protected bool $resetSingletonInstances = true;
 
     /**
      * @test
      */
-    public function spamCheckServiceWorksForEmptySettingsAndArguments()
+    public function spamCheckServiceWorksForEmptySettingsAndArguments(): void
     {
         $registration = new Registration();
         $settings = [];
@@ -44,10 +32,7 @@ class SpamCheckServiceTest extends UnitTestCase
         self::assertFalse($service->isSpamCheckFailed());
     }
 
-    /**
-     * DataProvider for isSpamCheckFailedReturnsFalseForExpectedConditions
-     */
-    public function isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider()
+    public static function isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider(): array
     {
         return [
             'empty settings' => [
@@ -70,9 +55,8 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider
-     * @param array $settings
      */
-    public function isSpamCheckFailedReturnsFalseForExpectedConditions($settings)
+    public function isSpamCheckFailedReturnsFalseForExpectedConditions(array $settings): void
     {
         $registration = new Registration();
         $arguments = [];
@@ -83,7 +67,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function spamCheckServiceThrowsExceptionWhenTestNotFound()
+    public function spamCheckServiceThrowsExceptionWhenTestNotFound(): void
     {
         $this->expectException(SpamCheckNotFoundException::class);
         $registration = new Registration();
@@ -103,7 +87,7 @@ class SpamCheckServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function maxSpamScoreIsSetInConstructor()
+    public function maxSpamScoreIsSetInConstructor(): void
     {
         $registration = new Registration();
         $settings = [
@@ -112,14 +96,14 @@ class SpamCheckServiceTest extends UnitTestCase
         ];
         $arguments = [];
 
-        $service = $this->getAccessibleMock(SpamCheckService::class, ['dummy'], [$registration, $settings, $arguments]);
+        $service = $this->getAccessibleMock(SpamCheckService::class, null, [$registration, $settings, $arguments]);
         self::assertEquals(20, $service->_get('maxSpamScore'));
     }
 
     /**
      * @test
      */
-    public function emptyCheckArrayIsInitializedInConstructor()
+    public function emptyCheckArrayIsInitializedInConstructor(): void
     {
         $registration = new Registration();
         $settings = [
@@ -127,14 +111,14 @@ class SpamCheckServiceTest extends UnitTestCase
         ];
         $arguments = [];
 
-        $service = $this->getAccessibleMock(SpamCheckService::class, ['dummy'], [$registration, $settings, $arguments]);
+        $service = $this->getAccessibleMock(SpamCheckService::class, null, [$registration, $settings, $arguments]);
         self::assertEquals([], $service->_get('settings')['checks']);
     }
 
     /**
      * @test
      */
-    public function configuredSpamCheckIsProcessed()
+    public function configuredSpamCheckIsProcessed(): void
     {
         $registration = new Registration();
         $settings = [

@@ -1,0 +1,8 @@
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","startdate","enddate","rowDescription"
+,13,6,1401444000,1401451200,"findRecordsByStartDate: 30.05.2014 10:00 - 30.05.2014 12:00"
+,14,6,1401616800,1401624000,"findRecordsByStartDate: 01.06.2014 10:00 - 01.06.2014 12:00"
+,15,6,1401616800,1401703200,"findRecordsByStartDate: 01.06.2014 10:00 - 02.06.2014 10:00"
+,16,7,1401444000,1401451200,"findRecordsByEndDate: 30.05.2014 10:00 - 30.05.2014 12:00"
+,17,7,1401616800,1401624000,"findRecordsByEndDate: 01.06.2014 10:00 - 01.06.2014 12:00"
+,18,7,1401616800,1401703200,"findRecordsByEndDate: 01.06.2014 10:00 - 02.06.2014 10:00"

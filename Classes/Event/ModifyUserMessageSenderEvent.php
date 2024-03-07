@@ -20,34 +20,17 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
  */
 final class ModifyUserMessageSenderEvent
 {
-    private string $senderName;
-    private string $senderEmail;
-    private string $replyToEmail;
-    private Registration $registration;
-    private int $type;
-    private string $subject;
-    private string $body;
-    private NotificationService $notificationService;
 
     public function __construct(
-        string $senderName,
-        string $senderEmail,
-        string $replyToEmail,
-        Registration $registration,
-        int $type,
-        string $subject,
-        string $body,
-        NotificationService $notificationService
+        private string $senderName,
+        private string $senderEmail,
+        private string $replyToEmail,
+        private readonly Registration $registration,
+        private readonly int $type,
+        private readonly string $subject,
+        private readonly string $body,
+        private readonly NotificationService $notificationService
     ) {
-        $this->senderName = $senderName;
-        $this->senderEmail = $senderEmail;
-        $this->replyToEmail = $replyToEmail;
-        $this->registration = $registration;
-        $this->type = $type;
-        $this->subject = $subject;
-        $this->body = $body;
-
-        $this->notificationService = $notificationService;
     }
 
     public function getSenderName(): string

@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _rssfeed:
 
+========
 RSS feed
 ========
 
@@ -135,4 +136,4 @@ something like this in your List.html fluid template.
 
     <e:headerData>
         <link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="{f:uri.page(additionalParams:{type:9918})}" />
-    </n:headerData>
+    </e:headerData>

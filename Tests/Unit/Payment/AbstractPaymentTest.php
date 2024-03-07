@@ -14,27 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Payment\AbstractPayment.
- */
 class AbstractPaymentTest extends UnitTestCase
 {
-    /**
-     * @var AbstractPayment
-     */
-    protected $subject;
+    protected AbstractPayment $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = $this->getAccessibleMockForAbstractClass(AbstractPayment::class);
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -43,7 +31,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * @test
      */
-    public function isEnableRedirectReturnsDefaultValue()
+    public function isEnableRedirectReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isRedirectEnabled());
     }
@@ -51,7 +39,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * @test
      */
-    public function isCancelLinkEnabledReturnsDefaultValue()
+    public function isCancelLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isCancelLinkEnabled());
     }
@@ -59,7 +47,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * @test
      */
-    public function isNotifyLinkEnabledReturnsDefaultValue()
+    public function isNotifyLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isNotifyLinkEnabled());
     }
@@ -67,7 +55,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * @test
      */
-    public function isSuccessLinkEnabledReturnsDefaultValue()
+    public function isSuccessLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isSuccessLinkEnabled());
     }
@@ -75,7 +63,7 @@ class AbstractPaymentTest extends UnitTestCase
     /**
      * @test
      */
-    public function isFailureLinkEnabledReturnsDefaultValue()
+    public function isFailureLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isFailureLinkEnabled());
     }

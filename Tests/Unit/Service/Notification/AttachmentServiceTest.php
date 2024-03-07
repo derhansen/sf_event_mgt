@@ -45,7 +45,7 @@ class AttachmentServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public function typoScriptConfigTestDataProvider(): array
+    public static function typoScriptConfigTestDataProvider(): array
     {
         return [
             'noTyposcriptSettingsForMessageType' => [

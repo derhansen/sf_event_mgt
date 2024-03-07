@@ -27,10 +27,7 @@ class HmacViewHelper extends AbstractViewHelper
         $this->hashService = $hashService;
     }
 
-    /**
-     * Initialize arguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('registration', 'object', 'Registration', true);
@@ -38,8 +35,6 @@ class HmacViewHelper extends AbstractViewHelper
 
     /**
      * Returns the hmac for the given registration in order to cancel the registration
-     *
-     * @return string
      */
     public function render(): string
     {

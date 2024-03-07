@@ -23,9 +23,6 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-/**
- * Event
- */
 class Event extends AbstractEntity
 {
     protected ?DateTime $tstamp = null;
@@ -899,7 +896,7 @@ class Event extends AbstractEntity
      * Special getter to return the amount of registrations that are saved to default language
      * Required since TYPO3 9.5 (#82363)
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return ObjectStorage
      */
     public function getRegistrations(): ?ObjectStorage
     {
@@ -915,7 +912,7 @@ class Event extends AbstractEntity
      * Special getter to return the amount of waitlist registrations that are saved to default language
      * Required since TYPO3 9.5 (#82363)
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @return ObjectStorage
      */
     public function getRegistrationsWaitlist(): ?ObjectStorage
     {

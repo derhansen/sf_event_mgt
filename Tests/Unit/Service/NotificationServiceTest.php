@@ -22,47 +22,31 @@ use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use stdClass;
 use TYPO3\CMS\Core\EventDispatcher\EventDispatcher;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\NotificationService.
- */
 class NotificationServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     protected NotificationService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new NotificationService();
 
-        $GLOBALS['BE_USER'] = new \stdClass();
+        $GLOBALS['BE_USER'] = new stdClass();
         $GLOBALS['BE_USER']->uc['lang'] = '';
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
     }
 
-    /**
-     * Data provider for messageType
-     *
-     * @return array
-     */
-    public function messageTypeDataProvider()
+    public static function messageTypeDataProvider(): array
     {
         return [
             'messageTypeRegistrationNew' => [
@@ -83,9 +67,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet($messageType)
+    public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet(int $messageType): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -101,9 +84,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendUserMessageReturnsFalseIfSendFailed($messageType)
+    public function sendUserMessageReturnsFalseIfSendFailed(int $messageType): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -142,9 +124,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendUserMessageReturnsTrueIfSendSuccessful($messageType)
+    public function sendUserMessageReturnsTrueIfSendSuccessful(int $messageType): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -184,9 +165,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed($messageType)
+    public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed(int $messageType): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -231,9 +211,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
+    public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful(int $messageType): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -278,9 +257,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendAdminMessageDoesNotSendEmailIfNotifyAdminAndNotifyOrganiserIsFalse($messageType)
+    public function sendAdminMessageDoesNotSendEmailIfNotifyAdminAndNotifyOrganiserIsFalse(int $messageType): void
     {
         $event = new Event();
         $event->setNotifyAdmin(false);
@@ -305,9 +283,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendAdminMessageSendsEmailToOrganisatorIfConfigured($messageType)
+    public function sendAdminMessageSendsEmailToOrganisatorIfConfigured(int $messageType): void
     {
         $organisator = new Organisator();
         $event = new Event();
@@ -356,7 +333,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function sendAdminMessageUsesRegistrationDataAsSenderIfConfigured()
+    public function sendAdminMessageUsesRegistrationDataAsSenderIfConfigured(): void
     {
         $organisator = new Organisator();
         $event = new Event();
@@ -408,9 +385,8 @@ class NotificationServiceTest extends UnitTestCase
      *
      * @test
      * @dataProvider messageTypeDataProvider
-     * @param mixed $messageType
      */
-    public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful($messageType)
+    public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful(int $messageType): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -455,7 +431,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function sendUserMessageReturnsFalseIfNoCustomMessageGiven()
+    public function sendUserMessageReturnsFalseIfNoCustomMessageGiven(): void
     {
         $event = new Event();
         $registration = new Registration();
@@ -479,7 +455,7 @@ class NotificationServiceTest extends UnitTestCase
      *
      * @test
      */
-    public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent()
+    public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent(): void
     {
         $event = new Event();
 
@@ -488,10 +464,8 @@ class NotificationServiceTest extends UnitTestCase
         $registration2 = new Registration();
         $registration2->setConfirmed(true);
 
-        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $registrations */
-        $registrations = new ObjectStorage();
-        $registrations->attach($registration1);
-        $registrations->attach($registration2);
+        $registrations = $this->getAccessibleMock(QueryResult::class, null, [], '', false);
+        $registrations->_set('queryResult', [$registration1, $registration2]);
 
         /** @var NotificationService $mockNotificationService */
         $mockNotificationService = $this->getMockBuilder(NotificationService::class)
@@ -517,7 +491,7 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function createCustomNotificationLogentryCreatesLog()
+    public function createCustomNotificationLogentryCreatesLog(): void
     {
         $mockLogRepo = $this->getMockBuilder(CustomNotificationLogRepository::class)
             ->disableOriginalConstructor()
@@ -537,18 +511,18 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function userNotificationNotSentIfNotificationsDisabled()
+    public function userNotificationNotSentIfNotificationsDisabled(): void
     {
-        $eventProphecy = $this->prophesize(Event::class);
-        $registrationProphecy = $this->prophesize(Registration::class);
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
         $settings = [
             'notification' => [
                 'disabled' => 1,
             ],
         ];
         $result = $this->subject->sendUserMessage(
-            $eventProphecy->reveal(),
-            $registrationProphecy->reveal(),
+            $event,
+            $registration,
             $settings,
             MessageType::REGISTRATION_NEW
         );
@@ -558,20 +532,21 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function adminNotificationNotSentIfNotificationsDisabled()
+    public function adminNotificationNotSentIfNotificationsDisabled(): void
     {
-        $eventProphecy = $this->prophesize(Event::class);
-        $eventProphecy->getNotifyAdmin()->willReturn(true);
-        $eventProphecy->getNotifyOrganisator()->willReturn(true);
-        $registrationProphecy = $this->prophesize(Registration::class);
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $event->expects(self::any())->method('getNotifyAdmin')->willReturn(true);
+        $event->expects(self::any())->method('getNotifyOrganisator')->willReturn(true);
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
+
         $settings = [
             'notification' => [
                 'disabled' => 1,
             ],
         ];
         $result = $this->subject->sendAdminMessage(
-            $eventProphecy->reveal(),
-            $registrationProphecy->reveal(),
+            $event,
+            $registration,
             $settings,
             MessageType::REGISTRATION_NEW
         );

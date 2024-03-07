@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _languagemenu:
 
+===================================
 Language menu on event detail pages
 ===================================
 

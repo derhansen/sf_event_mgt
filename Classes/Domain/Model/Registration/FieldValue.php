@@ -16,9 +16,6 @@ use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Answer
- */
 class FieldValue extends AbstractEntity
 {
     /**

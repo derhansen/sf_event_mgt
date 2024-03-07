@@ -34,12 +34,8 @@ abstract class AbstractForeignRecordRepository extends Repository
 
     /**
      * Returns all records depending on the settings in the demand object
-     *
-     * @param ForeignRecordDemand $demand ForeignRecordDemand
-     *
-     * @return array|QueryResultInterface
      */
-    public function findDemanded(ForeignRecordDemand $demand)
+    public function findDemanded(ForeignRecordDemand $demand): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();
@@ -50,7 +46,7 @@ abstract class AbstractForeignRecordRepository extends Repository
         }
 
         if (count($constraints) > 0) {
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         return $query->execute();

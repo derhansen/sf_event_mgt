@@ -16,9 +16,6 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * Class CacheService
- */
 class EventCacheService
 {
     /**
@@ -26,8 +23,6 @@ class EventCacheService
      *
      * Following cache tags will be added to tsfe:
      * "tx_sfeventmgt_uid_[event:uid]"
-     *
-     * @param array $eventRecords array with event records
      */
     public function addCacheTagsByEventRecords(array $eventRecords): void
     {
@@ -37,15 +32,13 @@ class EventCacheService
             $cacheTags[] = 'tx_sfeventmgt_uid_' . $event->getUid();
         }
         if (count($cacheTags) > 0) {
-            self::getTypoScriptFrontendController()->addCacheTags($cacheTags);
+            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
         }
     }
 
     /**
      * Adds page cache tags by used storagePages.
      * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
-     *
-     * @param EventDemand $demand
      */
     public function addPageCacheTagsByEventDemandObject(EventDemand $demand): void
     {
@@ -57,15 +50,12 @@ class EventCacheService
             }
         }
         if (count($cacheTags) > 0) {
-            self::getTypoScriptFrontendController()->addCacheTags($cacheTags);
+            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
         }
     }
 
     /**
      * Flushes the page cache by event tags for the given event uid and pid
-     *
-     * @param int $eventUid
-     * @param int $eventPid
      */
     public function flushEventCache(int $eventUid = 0, int $eventPid = 0): void
     {

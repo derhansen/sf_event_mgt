@@ -11,32 +11,30 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
+use TYPO3\CMS\Extbase\Mvc\Request;
+
 /**
  * Prefill ViewHelper
  */
 class PrefillViewHelper extends AbstractPrefillViewHelper
 {
-    /**
-     * Initialize arguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('fieldname', 'string', 'FieldName', true);
+        $this->registerArgument('fieldname', 'string', 'Fieldname', true);
         $this->registerArgument('prefillSettings', 'array', 'PrefillSettings', false, []);
     }
 
     /**
      * If the current field is available in POST data of the current request, return the value, otherwise
      * a property from fe_user (if logged in and if the given field is configured to be prefilled) is returned.
-     *
-     * @return string
      */
     public function render(): string
     {
         $fieldname = $this->arguments['fieldname'];
         $prefillSettings = $this->arguments['prefillSettings'];
 
+        /** @var Request $request */
         $request = $this->renderingContext->getRequest();
         $registrationData = $request->getParsedBody()[$this->getPluginNamespace($request)] ?? [];
         if (isset($registrationData['registration'][$fieldname])) {

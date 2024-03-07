@@ -12,28 +12,16 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Form\formDataProvider;
 
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\CalendarServiceTest.
- */
 class HideInlineRegistrationsTest extends UnitTestCase
 {
-    use ProphecyTrait;
+    public const LLL = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.';
 
-    const LLL = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.';
+    protected bool $resetSingletonInstances = true;
 
-    /**
-     * @var bool Reset singletons created by subject
-     */
-    protected $resetSingletonInstances = true;
-
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -42,7 +30,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function addDataWhenHideInlineRegistrationsIsDisabled()
+    public function addDataWhenHideInlineRegistrationsIsDisabled(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = [
             'hideInlineRegistrations' => 0,
@@ -69,7 +57,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
     /**
      * @test
      */
-    public function addDataWhenHideInlineRegistrationsIsEnabledAndLimitExceeded()
+    public function addDataWhenHideInlineRegistrationsIsEnabledAndLimitExceeded(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = [
             'hideInlineRegistrations' => 1,
@@ -96,13 +84,14 @@ class HideInlineRegistrationsTest extends UnitTestCase
         $mockHideInlineRegistrations->expects(self::once())->method('getRegistrationCount')
             ->willReturn(11);
 
-        $languageServiceProphecy = $this->prophesize(LanguageService::class);
-        $languageServiceProphecy->sL(self::LLL . 'description')->shouldBeCalled()->willReturn('desc');
-        $languageServiceProphecy->sL(self::LLL . 'title')->shouldBeCalled()->willReturn('title');
-        $GLOBALS['LANG'] = $languageServiceProphecy->reveal();
+        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['sL'])
+            ->getMock();
 
-        $beUserProphecy = $this->prophesize(BackendUserAuthentication::class);
-        $GLOBALS['BE_USER'] = $beUserProphecy->reveal();
+        $GLOBALS['BE_USER'] = $this->getMockBuilder(BackendUserAuthentication::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $expected = $input;
         unset($expected['processedTca']['columns']['registration']);

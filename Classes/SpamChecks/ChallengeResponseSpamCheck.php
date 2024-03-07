@@ -13,15 +13,10 @@ namespace DERHANSEN\SfEventMgt\SpamChecks;
 
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 
-/**
- * ChallengeResponseSpamCheck
- */
 class ChallengeResponseSpamCheck extends AbstractSpamCheck
 {
     /**
      * Checks, if the cr-response field matches the expected ROT13 encrypted/obfuscated string.
-     *
-     * @return bool
      */
     public function isFailed(): bool
     {

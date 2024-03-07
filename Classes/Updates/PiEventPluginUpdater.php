@@ -16,9 +16,11 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Service\FlexFormService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
+#[UpgradeWizard('piEventPluginUpdater')]
 class PiEventPluginUpdater implements UpgradeWizardInterface
 {
     private const MIGRATION_SETTINGS = [
@@ -70,7 +72,9 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
     {
         $description = 'The old event plugin using switchableControllerActions has been split into 5 separate plugins. ';
         $description .= 'This update wizard migrates all existing plugin settings and changes the plugin (list_type) ';
-        $description .= 'to use the new plugins available.';
+        $description .= 'to use the new plugins available.' . PHP_EOL;
+        $description .= 'Note that plugin user permissions will not be migrated and must be adapted manually after the';
+        $description .= 'migration process.';
         return $description;
     }
 
@@ -102,6 +106,10 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
 
         foreach ($records as $record) {
             $flexFormData = GeneralUtility::xml2array($record['pi_flexform']);
+            if (!is_array($flexFormData)) {
+                continue;
+            }
+
             $flexForm = $this->flexFormService->convertFlexFormContentToArray($record['pi_flexform']);
             $targetListType = $this->getTargetListType(
                 $record['list_type'],
@@ -118,7 +126,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                 }
 
                 // Remove empty sheets
-                if (!count($flexFormData['data'][$sheetKey]['lDEF']) > 0) {
+                if (count($flexFormData['data'][$sheetKey]['lDEF']) === 0) {
                     unset($flexFormData['data'][$sheetKey]);
                 }
             }
@@ -152,7 +160,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                     $queryBuilder->createNamedParameter($checkListTypes, Connection::PARAM_STR_ARRAY)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
     }
 
@@ -173,7 +181,7 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
     {
         $flexFormFile = $GLOBALS['TCA']['tt_content']['columns']['pi_flexform']['config']['ds'][$listType . ',list'];
         $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim($flexFormFile), 5)));
-        $flexFormData = GeneralUtility::xml2array($flexFormContent);
+        $flexFormData = GeneralUtility::xml2array((string)$flexFormContent);
 
         // Iterate each sheet and extract all settings
         $settings = [];
@@ -188,10 +196,6 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
 
     /**
      * Updates list_type and pi_flexform of the given content element UID
-     *
-     * @param int $uid
-     * @param string $newListType
-     * @param string $flexform
      */
     protected function updateContentElement(int $uid, string $newListType, string $flexform): void
     {
@@ -205,14 +209,11 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
                     $queryBuilder->createNamedParameter($uid, Connection::PARAM_INT)
                 )
             )
-            ->execute();
+            ->executeStatement();
     }
 
     /**
      * Transforms the given array to FlexForm XML
-     *
-     * @param array $input
-     * @return string
      */
     protected function array2xml(array $input = []): string
     {
@@ -231,7 +232,6 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
         ];
         $spaceInd = 4;
         $output = GeneralUtility::array2xml($input, '', 0, 'T3FlexForms', $spaceInd, $options);
-        $output = '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . LF . $output;
-        return $output;
+        return '<?xml version="1.0" encoding="utf-8" standalone="yes" ?>' . LF . $output;
     }
 }

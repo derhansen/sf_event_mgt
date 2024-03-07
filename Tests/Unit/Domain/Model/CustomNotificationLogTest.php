@@ -11,31 +11,20 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog
- */
 class CustomNotificationLogTest extends UnitTestCase
 {
-    /**
-     * @var CustomNotificationLog
-     */
-    protected $subject;
+    protected CustomNotificationLog $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new CustomNotificationLog();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -46,7 +35,7 @@ class CustomNotificationLogTest extends UnitTestCase
      *
      * @test
      */
-    public function setEventForEventSetsEvent()
+    public function setEventForEventSetsEvent(): void
     {
         $event = new Event();
         $this->subject->setEvent($event);
@@ -58,7 +47,7 @@ class CustomNotificationLogTest extends UnitTestCase
      *
      * @test
      */
-    public function setDetailsForStringSetsDetails()
+    public function setDetailsForStringSetsDetails(): void
     {
         $this->subject->setDetails('Description');
         self::assertEquals('Description', $this->subject->getDetails());
@@ -69,7 +58,7 @@ class CustomNotificationLogTest extends UnitTestCase
      *
      * @test
      */
-    public function setEmailsSentForIntSetsEmailsSent()
+    public function setEmailsSentForIntSetsEmailsSent(): void
     {
         $this->subject->setEmailsSent(100);
         self::assertEquals(100, $this->subject->getEmailsSent());
@@ -80,9 +69,9 @@ class CustomNotificationLogTest extends UnitTestCase
      *
      * @test
      */
-    public function setTstampForDateTimeSetsTstamp()
+    public function setTstampForDateTimeSetsTstamp(): void
     {
-        $tstamp = new \DateTime('01.01.2014 10:00:00');
+        $tstamp = new DateTime('01.01.2014 10:00:00');
         $this->subject->setTstamp($tstamp);
         self::assertEquals($tstamp, $this->subject->getTstamp());
     }
@@ -92,7 +81,7 @@ class CustomNotificationLogTest extends UnitTestCase
      *
      * @test
      */
-    public function setCruserIdForBackendUserSetsBackendUserId()
+    public function setCruserIdForBackendUserSetsBackendUserId(): void
     {
         $this->subject->setCruserId(1);
         self::assertEquals(1, $this->subject->getCruserId());
@@ -101,7 +90,7 @@ class CustomNotificationLogTest extends UnitTestCase
     /**
      * @test
      */
-    public function getMessageReturnsInitialValueForString()
+    public function getMessageReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getMessage());
     }
@@ -109,7 +98,7 @@ class CustomNotificationLogTest extends UnitTestCase
     /**
      * @test
      */
-    public function setMessageSetsMessage()
+    public function setMessageSetsMessage(): void
     {
         $this->subject->setMessage('test');
         self::assertEquals('test', $this->subject->getMessage());

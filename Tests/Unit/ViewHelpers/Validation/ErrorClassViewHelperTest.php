@@ -39,7 +39,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
         unset($this->viewhelper);
     }
 
-    public function fieldnameDataProvider(): array
+    public static function fieldnameDataProvider(): array
     {
         return [
             'No fieldname' => [
@@ -95,10 +95,10 @@ class ErrorClassViewHelperTest extends UnitTestCase
         self::assertEquals($expected, $this->viewhelper->render());
     }
 
-    public function registrationFieldDataProvider(): array
+    public static function registrationFieldDataProvider(): array
     {
-        $mockField = $this->prophesize(Field::class);
-        $mockField->getUid()->willReturn(2);
+        $field = new Field();
+        $field->_setProperty('uid', 2);
 
         return [
             'No registration field' => [
@@ -110,21 +110,21 @@ class ErrorClassViewHelperTest extends UnitTestCase
                 [
                     'registration.fields.1' => [],
                 ],
-                $mockField->reveal(),
+                $field,
                 '',
             ],
             'Error for fieldname with default class name' => [
                 [
                     'registration.fields.2' => [],
                 ],
-                $mockField->reveal(),
+                $field,
                 'error-class',
             ],
             'Error for fieldname with custom class name' => [
                 [
                     'registration.fields.2' => [],
                 ],
-                $mockField->reveal(),
+                $field,
                 'custom-class',
                 'custom-class',
             ],
@@ -144,7 +144,7 @@ class ErrorClassViewHelperTest extends UnitTestCase
         ?Field $registrationField,
         string $expected,
         string $errorClass = 'error-class'
-    ) {
+    ): void {
         $this->viewhelper->expects(self::once())->method('getValidationErrors')
             ->willReturn($validationErrors);
         $this->viewhelper->setArguments([

@@ -3,124 +3,165 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../../../Includes.txt
-
+.. include:: /Includes.rst.txt
+.. highlight:: typoscript
 
 .. _userregistrationplugin-settings:
 
+===========================
 Frontend user registrations
 ===========================
 
-**NOTE:** Make sure,that you place the Plugin on a page with "Usergroup Access Rights" configured to only show
-the plugin output for logged in users and/or users belonging to a user group. Anyway, the plugin will only output
-content if there is an active FE user session.
-
-Settings
-~~~~~~~~
+The plugin is both used to output a list- and a detail view.
 
 Nearly all important settings can be made through the plugin, which override the
 settings made with TypoScript. All plugin settings can also be configured with TypoScript
 (use :php:`plugin.tx_sfeventmgt.settings.` with the keys shown below).
 
-.. t3-field-list-table::
- :header-rows: 1
+.. important::
+   Make sure,that you place the Plugin on a page with "Usergroup Access Rights" configured to only show
+   the plugin output for logged in users and/or users belonging to a user group. Anyway, the plugin will only output
+   content if there is an active frontend user session.
 
- - :Property:
-         Property:
+.. only:: html
 
-   :View:
-         View:
+   .. contents:: Properties
+      :depth: 1
+      :local:
 
-   :Description:
-         Description:
+Tab settings
+~~~~~~~~~~~~
 
-   :Key:
-         Key:
+Display mode
+------------
 
- - :Property:
-         Display mode
+.. confval:: userRegistration.displayMode
 
-   :View:
-         List
+   :type: string
+   :Default: all
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
 
-   :Description:
-         With this setting the plugin can be configured to show registrations for **all** events, only
-         **future** or only **past events**.
+   With this setting, the plugin can be configured to show registrations for **all** events, only
+   **future** or only **past events**.
 
-         Available options
+   Available options:
 
-         * all
-         * future
-         * current_future
-         * past
+   - all
+   - future
+   - current_future
+   - past
+   - time_restriction
 
-   :Key:
-         userRegistration.displayMode
 
- - :Property:
-         Sort by
+Sort by
+-------
 
-   :View:
-         List
+.. confval:: userRegistration.orderField
 
-   :Description:
-         Defines which field should be used for sorting events in the frontend. The default sorting field is
-         "startdate", which can be overridden by using this setting.
+   :type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
 
-   :Key:
-         userRegistration.orderField
+   Defines which field should be used for sorting events in the frontend.
 
- - :Property:
-         Sorting direction
+   Possible values:
 
-   :View:
-         List
+   - event.title
+   - event.startdate
+   - event.enddate
 
-   :Description:
-         Defines the sorting direction for orderField. The default sorting direction is
-         "asc", which can be overridden by using this setting.
+Sorting direction
+-----------------
 
-         Possible values:
+.. confval:: userRegistration.orderDirection
 
-         * <empty value>
-         * asc
-         * desc
+   :type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
 
-   :Key:
-         userRegistration.orderDirection
+   Defines the sorting direction for `orderField`.
 
- - :Property:
-         Registration pid
+   Possible values:
 
-   :View:
-         List
+   - (none)
+   - asc
+   - desc
 
-   :Description:
-         Page, where the event plugin is configured to show event registration
 
-   :Key:
-         registrationPid
+Registration pid
+----------------
 
- - :Property:
-         Record storage page
+.. confval:: registrationPid
 
-   :View:
-         List
+   :type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
 
-   :Description:
-         One or more sysfolders, where events and registrations are stored
+   Page where the event plugin is configured to show event registration.
 
-   :Key:
-         userRegistration.storagePage
 
- - :Property:
-         Recursive
+Record storage page
+-------------------
 
-   :View:
-         List
+.. confval:: userRegistration.storagePage
 
-   :Description:
-         Recursion level for record storage page
+   :type: int or list of ints
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
 
-   :Key:
-         userRegistration.recursive
+   One or more sysfolders where events and registrations are stored.
+
+
+Recursive
+---------
+
+.. confval:: userRegistration.recursive
+
+   :type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+
+   Recursion level for record storage page.
+
+Tab additional
+~~~~~~~~~~~~~~
+
+Detail Page
+-----------
+.. confval:: detailPid
+
+   :type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+
+   Page where the plugin is configured to show event details.
+
+Registration Page
+-----------------
+
+.. confval:: registrationPid
+
+   :type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+
+   Page where the plugin is configured to show event registration.
+
+Payment Page
+------------
+.. confval:: paymentPid
+
+   :type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+
+   Page where the plugin is configured to handle payments for registration.

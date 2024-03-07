@@ -3,10 +3,11 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../../Includes.txt
+.. include:: /Includes.rst.txt
 
 .. _filtering_listview:
 
+======================
 Filtering the listview
 ======================
 

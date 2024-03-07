@@ -18,15 +18,15 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
 {
     /**
      * Renders the content of the plugin preview.
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
         $data = [];
         $record = $item->getRecord();
         $flexFormData = GeneralUtility::xml2array($record['pi_flexform']);
+        if (!is_array($flexFormData)) {
+            $flexFormData = [];
+        }
 
         $pluginName = $this->getPluginName($record);
 
@@ -38,7 +38,7 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
         $this->setStoragePage($data, $flexFormData, 'settings.storagePage');
 
         $this->setOrderSettings($data, $flexFormData, 'settings.orderField', 'settings.orderDirection');
-        $this->setOverrideDemandSettings($data, $flexFormData);
+        $this->setOverrideDemandSettings($data, $flexFormData, $record);
 
         $this->setCategoryConjuction($data, $flexFormData);
         $this->setCategorySettings($data, $flexFormData);
@@ -71,7 +71,7 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
                 $text = htmlspecialchars($this->getLanguageService()->sL(
                     self::LLPATH . 'flexforms_general.categoryConjunction.ignore'
                 ));
-                $text .= ' <span class="label label-warning">' . htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.possibleMisconfiguration')) . '</span>';
+                $text .= ' <span class="badge badge-warning">' . htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.possibleMisconfiguration')) . '</span>';
         }
 
         $data[] = [
@@ -101,7 +101,8 @@ class PieventPreviewRenderer extends AbstractPluginPreviewRenderer
             if ((int)$includeSubcategories === 1) {
                 $data[] = [
                     'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.includeSubcategories'),
-                    'value' => '<i class="fa fa-check"></i>',
+                    'value' => '',
+                    'icon' => 'actions-check-square',
                 ];
             }
         }

@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
- * FieldType
+ * Constants used to separate different field types
  */
 class FieldType
 {

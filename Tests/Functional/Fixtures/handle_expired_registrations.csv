@@ -1,0 +1,5 @@
+"tx_sfeventmgt_domain_model_registration"
+,"uid","pid","firstname","confirmed","hidden","deleted","confirmation_until","notes"
+,1,1,"Registration 1",0,0,0,1550083918,"Confirmation until: 02/13/2019 @ 6:51pm (UTC) / unconfirmed"
+,2,1,"Registration 2",0,0,0,1550083918,"Confirmation until: 02/13/2019 @ 6:51pm (UTC) / unconfirmed"
+,3,1,"Registration 3",1,0,0,1550083918,"Confirmation until: 02/13/2019 @ 6:51pm (UTC) / confirmed"

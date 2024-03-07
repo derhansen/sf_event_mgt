@@ -12,20 +12,17 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Utility;
 
 use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use UnexpectedValueException;
 
-/**
- * Check if an event record is available in a language
- */
 class EventAvailability
 {
     /**
-     * @param int $languageId
-     * @param int $eventId
-     * @return bool
+     * Checks if an event record is available the given language id
      */
     public function check(int $languageId, int $eventId): bool
     {
@@ -35,25 +32,16 @@ class EventAvailability
 
         $targetLanguage = $this->getLanguageFromAllLanguages($allAvailableLanguagesOfSite, $languageId);
         if (!$targetLanguage) {
-            throw new \UnexpectedValueException('Target language could not be found', 1608059129);
+            throw new UnexpectedValueException('Target language could not be found', 1608059129);
         }
         return $this->mustBeIncluded($eventId, $targetLanguage);
     }
 
-    /**
-     * @param int $eventId
-     * @param SiteLanguage $language
-     * @return bool
-     */
     protected function mustBeIncluded(int $eventId, SiteLanguage $language): bool
     {
         // @extensionScannerIgnoreLine
-        if ($language->getFallbackType() === 'strict' &&
-            !$this->isEventAvailableInLanguage($eventId, $language->getLanguageId())
-        ) {
-            return false;
-        }
-        return true;
+        return !($language->getFallbackType() === 'strict' &&
+            !$this->isEventAvailableInLanguage($eventId, $language->getLanguageId()));
     }
 
     /**
@@ -71,37 +59,60 @@ class EventAvailability
         return null;
     }
 
-    /**
-     * @param int $eventId
-     * @param int $language
-     * @return bool
-     */
     protected function isEventAvailableInLanguage(int $eventId, int $language): bool
     {
-        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
         if ($language === 0) {
             $where = [
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, \PDO::PARAM_INT)),
-                    $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, \PDO::PARAM_INT))
+                $queryBuilder->expr()->or(
+                    $queryBuilder->expr()->eq(
+                        'sys_language_uid',
+                        $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
+                    ),
+                    $queryBuilder->expr()->eq(
+                        'sys_language_uid',
+                        $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT)
+                    )
                 ),
-                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, \PDO::PARAM_INT)),
+                $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)),
             ];
         } else {
             $where = [
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter(-1, \PDO::PARAM_INT)),
-                        $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, \PDO::PARAM_INT))
+                $queryBuilder->expr()->or(
+                    $queryBuilder->expr()->and(
+                        $queryBuilder->expr()->eq(
+                            'sys_language_uid',
+                            $queryBuilder->createNamedParameter(-1, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'uid',
+                            $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
+                        )
                     ),
-                    $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter($eventId, \PDO::PARAM_INT)),
-                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, \PDO::PARAM_INT))
+                    $queryBuilder->expr()->and(
+                        $queryBuilder->expr()->eq(
+                            'l10n_parent',
+                            $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'sys_language_uid',
+                            $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
+                        )
                     ),
-                    $queryBuilder->expr()->andX(
-                        $queryBuilder->expr()->eq('uid', $queryBuilder->createNamedParameter($eventId, \PDO::PARAM_INT)),
-                        $queryBuilder->expr()->eq('l10n_parent', $queryBuilder->createNamedParameter(0, \PDO::PARAM_INT)),
-                        $queryBuilder->expr()->eq('sys_language_uid', $queryBuilder->createNamedParameter($language, \PDO::PARAM_INT))
+                    $queryBuilder->expr()->and(
+                        $queryBuilder->expr()->eq(
+                            'uid',
+                            $queryBuilder->createNamedParameter($eventId, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'l10n_parent',
+                            $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
+                        ),
+                        $queryBuilder->expr()->eq(
+                            'sys_language_uid',
+                            $queryBuilder->createNamedParameter($language, Connection::PARAM_INT)
+                        )
                     )
                 ),
             ];
@@ -111,7 +122,7 @@ class EventAvailability
            ->count('uid')
            ->from('tx_sfeventmgt_domain_model_event')
            ->where(...$where)
-           ->execute()
+           ->executeQuery()
            ->fetchOne();
 
         return $eventsFound > 0;

@@ -16,12 +16,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test for MetaTagViewHelperTest
- */
 class MetaTagViewHelperTest extends FunctionalTestCase
 {
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     protected StandaloneView $view;
     protected PageRenderer $pageRenderer;
@@ -37,7 +34,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function metaTagForNameIsSetByViewHelper()
+    public function metaTagForNameIsSetByViewHelper(): void
     {
         $this->view->getRenderingContext()->getViewHelperResolver()
             ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
@@ -52,7 +49,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function metaTagForPropertyIsSetByViewHelper()
+    public function metaTagForPropertyIsSetByViewHelper(): void
     {
         $this->view->getRenderingContext()->getViewHelperResolver()
             ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');

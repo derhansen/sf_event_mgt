@@ -13,22 +13,13 @@ namespace DERHANSEN\SfEventMgt\Evaluation;
 
 use TYPO3\CMS\Core\Utility\MathUtility;
 
-/**
- * LongitudeEvaluator
- */
 class LongitudeEvaluator
 {
     /**
      * Validates the given longitude value (between -180 and 180 degrees)
      * @see https://developers.google.com/maps/documentation/javascript/reference?hl=fr#LatLng
-     *
-     * @param mixed $value the value that has to be checked
-     * @param string $is_in Is-In String
-     * @param bool $set Determines if the field can be set (value correct) or not
-     *
-     * @return string The new value of the field
      */
-    public function evaluateFieldValue($value, $is_in, &$set)
+    public function evaluateFieldValue(string $value, string $is_in, bool &$set): string
     {
         $newValue = '0.000000';
         $set = true;

@@ -11,50 +11,16 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Payment;
 
-/**
- * AbstractPayment
- */
 abstract class AbstractPayment
 {
-    /**
-     * Enable redirect for payment method
-     *
-     * @var bool
-     */
     protected bool $enableRedirect = false;
-
-    /**
-     * Enable success link for payment method
-     *
-     * @var bool
-     */
     protected bool $enableSuccessLink = false;
-
-    /**
-     * Enable failure link for payment method
-     *
-     * @var bool
-     */
     protected bool $enableFailureLink = false;
-
-    /**
-     * Enable cancel link for payment method
-     *
-     * @var bool
-     */
     protected bool $enableCancelLink = false;
-
-    /**
-     * Enable notify link for payment method
-     *
-     * @var bool
-     */
     protected bool $enableNotifyLink = false;
 
     /**
      * Returns, if redirect is enabled for the payment method
-     *
-     * @return bool
      */
     public function isRedirectEnabled(): bool
     {
@@ -63,8 +29,6 @@ abstract class AbstractPayment
 
     /**
      * Returns, if the success link is enabled for the payment method
-     *
-     * @return bool
      */
     public function isSuccessLinkEnabled(): bool
     {
@@ -73,8 +37,6 @@ abstract class AbstractPayment
 
     /**
      * Returns, if the failure link is enabled for the payment method
-     *
-     * @return bool
      */
     public function isFailureLinkEnabled(): bool
     {
@@ -83,8 +45,6 @@ abstract class AbstractPayment
 
     /**
      * Returns, if the cancel link is enabled for the payment method
-     *
-     * @return bool
      */
     public function isCancelLinkEnabled(): bool
     {
@@ -93,8 +53,6 @@ abstract class AbstractPayment
 
     /**
      * Returns, if the notify link is enabled for the payment method
-     *
-     * @return bool
      */
     public function isNotifyLinkEnabled(): bool
     {

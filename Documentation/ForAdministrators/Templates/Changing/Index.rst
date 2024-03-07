@@ -3,13 +3,14 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _changing_templates:
 
-Changing paths of the template
-==============================
+===================================================
+Changing paths of the template for frontend plugins
+===================================================
 
 Please do never change templates directly in the Ressources folder of the extensions,
 since your changes will get overwritten by extension updates.
@@ -39,3 +40,14 @@ to configure the path-values using TypoScript setup, please refer to the example
   }
 
 Doing so, you can just **override single files** from the original templates.
+
+Changing paths of the template for backend module
+=================================================
+
+Since TYPO3 12.4 the override functionality for backend templates has been
+reworked. Instead of invoking TypoScript to retrieve template paths, it is
+now required to use TSConfig::
+
+  templates.derhansen/sf_event_mgt.20 = derhansen/sf_event_mgt_extend_demo:Resources/Private
+
+Details see :ref:`changelog entry <changelog:feature-96812>`

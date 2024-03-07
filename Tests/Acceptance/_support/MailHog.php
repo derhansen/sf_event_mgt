@@ -10,16 +10,22 @@
 
 namespace Codeception\Module;
 
-class MailHog extends \Codeception\Module
-{
-    use \Codeception\Email\TestsEmails;
+use Codeception\Email\EmailServiceProvider;
+use Codeception\Email\TestsEmails;
+use Codeception\Module;
+use Codeception\TestInterface;
+use GuzzleHttp\Client;
 
-    use \Codeception\Email\EmailServiceProvider;
+class MailHog extends Module
+{
+    use TestsEmails;
+
+    use EmailServiceProvider;
 
     /**
      * HTTP Client to interact with MailHog
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
     protected $mailhog;
 
@@ -53,17 +59,13 @@ class MailHog extends \Codeception\Module
 
     /**
      * Codeception exposed variables
-     *
-     * @var array
      */
-    protected $config = ['url', 'port', 'guzzleRequestOptions', 'deleteEmailsAfterScenario', 'timeout'];
+    protected array $config = ['url', 'port', 'guzzleRequestOptions', 'deleteEmailsAfterScenario', 'timeout'];
 
     /**
      * Codeception required variables
-     *
-     * @var array
      */
-    protected $requiredFields = ['url', 'port'];
+    protected array $requiredFields = ['url', 'port'];
 
     public function _initialize()
     {
@@ -73,7 +75,7 @@ class MailHog extends \Codeception\Module
         if (isset($this->config['timeout'])) {
             $timeout = $this->config['timeout'];
         }
-        $this->mailhog = new \GuzzleHttp\Client(['base_uri' => $url, 'timeout' => $timeout]);
+        $this->mailhog = new Client(['base_uri' => $url, 'timeout' => $timeout]);
 
         if (isset($this->config['guzzleRequestOptions'])) {
             foreach ($this->config['guzzleRequestOptions'] as $option => $value) {
@@ -85,7 +87,7 @@ class MailHog extends \Codeception\Module
     /**
      * Method executed after each scenario
      */
-    public function _after(\Codeception\TestCase $test)
+    public function _after(TestInterface $test)
     {
         if (isset($this->config['deleteEmailsAfterScenario']) && $this->config['deleteEmailsAfterScenario']) {
             $this->deleteAllEmails();
@@ -140,7 +142,7 @@ class MailHog extends \Codeception\Module
         $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
-            if (strpos($email->Content->Headers->To[0], $address) !== false) {
+            if (str_contains($email->Content->Headers->To[0], $address)) {
                 array_push($inbox, $email);
             }
 
@@ -167,7 +169,7 @@ class MailHog extends \Codeception\Module
         $inbox = [];
 
         foreach ($this->fetchedEmails as $email) {
-            if (strpos($email->Content->Headers->To[0], $address) !== false) {
+            if (str_contains($email->Content->Headers->To[0], $address)) {
                 array_push($inbox, $email);
             }
         }
@@ -428,11 +430,11 @@ class MailHog extends \Codeception\Module
                 $property = quoted_printable_decode($property);
             }
             if (!empty($email->Content->Headers->{'Content-Type'}[0]) &&
-                strpos($email->Content->Headers->{'Content-Type'}[0], 'multipart/mixed') !== false
+                str_contains($email->Content->Headers->{'Content-Type'}[0], 'multipart/mixed')
             ) {
                 $property = quoted_printable_decode($property);
             }
-            if (strpos($property, '=?utf-8?Q?') !== false && extension_loaded('mbstring')) {
+            if (str_contains($property, '=?utf-8?Q?')   && extension_loaded('mbstring')) {
                 $property = mb_decode_mimeheader($property);
             }
         }

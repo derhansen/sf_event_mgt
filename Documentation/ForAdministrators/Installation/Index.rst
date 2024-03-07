@@ -3,30 +3,32 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _installation:
 
+============
 Installation
 ============
 
-The installation and initial configuration of the extension is as following:
+.. rst-class:: bignums-tip
 
-#. Install the extension with the extension manager
+#. Install this extension
 
-#. Include the static TypoScript configuration “Event management and registration (sf\_event\_mgt)” in your TypoScript template
+   - Composer mode: :php:`composer require derhansen/sf_event_mgt`
+   - Classic mode: Install the extension with the extension manager
 
-#. Create a new sysfolder in your page tree, where you create events and categories.
+#. Configuration
 
-#. Depending on your needs, create a TYPO3 page for event listing, event details and event registration.
+   - Include the static TypoScript configuration :guilabel:`Event management and registration (sf\_event\_mgt)` in your TypoScript template
+   - Configure extension TypoScript settings depending on your needs.
 
-#. Add the plugin :ref:`eventplugin-settings` to the newly created pages and configure the plugin settings.
+#. Create initial content
 
-#. Configure extension TypoScript settings depending on your needs.
-
-#. Optionally add the plugin :ref:`userregistrationplugin-settings` to a page, to show registered frontend users their event registrations
-
+   - Create a new sysfolder in your page tree, where you create events and categories.
+   - Add the plugin :ref:`eventplugin-settings` to the newly created pages and configure the plugin settings.
+   - Optionally add the plugin :ref:`userregistrationplugin-settings` to a page, to show registered frontend users their event registrations
 
 .. important::
 

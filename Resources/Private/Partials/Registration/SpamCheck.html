@@ -19,6 +19,7 @@
 
         <f:if condition="{spamSettings.checks.challengeResponse.enabled} == 1">
             <div>
+                <f:asset.script identifier="sfeventmgt-cr-spamcheck" src="EXT:sf_event_mgt/Resources/Public/JavaScript/cr-spamcheck.js" />
                 <f:variable name="challenge" value="{spamSettings.checks.challengeResponse.configuration.prefix}{event.spamCheckChallenge}{spamSettings.checks.challengeResponse.configuration.postfix}" />
                 <f:form.hidden id="js-cr-challenge" property="cr-response" additionalAttributes="{autocomplete: 'js-cr-challenge', data-challenge: challenge}" />
             </div>

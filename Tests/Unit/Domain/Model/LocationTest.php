@@ -14,29 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Location.
- */
 class LocationTest extends UnitTestCase
 {
-    /**
-     * Location object
-     *
-     * @var Location
-     */
-    protected $subject;
+    protected Location $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new Location();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -47,7 +33,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function getTitleReturnsInitialValueForString()
+    public function getTitleReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -60,7 +46,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function setTitleForStringSetsTitle()
+    public function setTitleForStringSetsTitle(): void
     {
         $this->subject->setTitle('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getTitle());
@@ -69,7 +55,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAddressReturnsInitialValueForString()
+    public function getAddressReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -80,7 +66,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAddressForStringSetsAddress()
+    public function setAddressForStringSetsAddress(): void
     {
         $this->subject->setAddress('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getAddress());
@@ -89,7 +75,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getZipReturnsInitialValueForInteger()
+    public function getZipReturnsInitialValueForInteger(): void
     {
         self::assertSame(
             '',
@@ -100,7 +86,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setZipForIntegerSetsZip()
+    public function setZipForIntegerSetsZip(): void
     {
         $this->subject->setZip('12');
         self::assertSame('12', $this->subject->getZip());
@@ -109,7 +95,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCityReturnsInitialValueForString()
+    public function getCityReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -120,7 +106,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getCountryReturnsInitialValueForString()
+    public function getCountryReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -131,7 +117,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCityForStringSetsCity()
+    public function setCityForStringSetsCity(): void
     {
         $this->subject->setCity('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getCity());
@@ -140,7 +126,7 @@ class LocationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setCountryForStringSetsCountry()
+    public function setCountryForStringSetsCountry(): void
     {
         $this->subject->setCountry('A country');
         self::assertEquals('A country', $this->subject->getCountry());
@@ -151,7 +137,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function getDescriptionReturnsInitialValueForString()
+    public function getDescriptionReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -164,7 +150,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function setDescriptionForStringSetsDescription()
+    public function setDescriptionForStringSetsDescription(): void
     {
         $this->subject->setDescription('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getDescription());
@@ -175,7 +161,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function getLinkReturnsInitialValueForString()
+    public function getLinkReturnsInitialValueForString(): void
     {
         self::assertSame(
             '',
@@ -188,7 +174,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function setLinkForStringSetsLink()
+    public function setLinkForStringSetsLink(): void
     {
         $this->subject->setLink('http://www.typo3.org');
         self::assertEquals('http://www.typo3.org', $this->subject->getLink());
@@ -199,7 +185,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function getLongitudeReturnsInitialValueForFloat()
+    public function getLongitudeReturnsInitialValueForFloat(): void
     {
         self::assertSame(0.0, $this->subject->getLongitude());
     }
@@ -209,7 +195,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function setLongitudeSetsLongitude()
+    public function setLongitudeSetsLongitude(): void
     {
         $this->subject->setLongitude(12.345678);
         self::assertSame(12.345678, $this->subject->getLongitude());
@@ -220,7 +206,7 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function getLatitudeReturnsInitialValueForFloat()
+    public function getLatitudeReturnsInitialValueForFloat(): void
     {
         self::assertSame(0.0, $this->subject->getLatitude());
     }
@@ -230,13 +216,13 @@ class LocationTest extends UnitTestCase
      *
      * @test
      */
-    public function setLatitudeSetsLatitude()
+    public function setLatitudeSetsLatitude(): void
     {
         $this->subject->setLatitude(12.345678);
         self::assertSame(12.345678, $this->subject->getLatitude());
     }
 
-    public function getFullAddressReturnsExpectedResultDataProvider(): array
+    public static function getFullAddressReturnsExpectedResultDataProvider(): array
     {
         $location1 = new Location();
         $location1->setAddress('Address 123');
@@ -293,7 +279,7 @@ class LocationTest extends UnitTestCase
      * @test
      * @dataProvider getFullAddressReturnsExpectedResultDataProvider
      */
-    public function getFullAddressReturnsExpectedResult($location, $separator, $expected)
+    public function getFullAddressReturnsExpectedResult($location, $separator, $expected): void
     {
         /** @var Location $location */
         $result = $location->getFullAddress($separator);

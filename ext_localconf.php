@@ -1,89 +1,106 @@
 <?php
 
+use DERHANSEN\SfEventMgt\Controller\EventController;
+use DERHANSEN\SfEventMgt\Controller\PaymentController;
+use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
+use DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator;
+use DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator;
+use DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator;
+use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventPlausability;
+use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventRowInitializeNew;
+use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
+use DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks;
+use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields;
+use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
+use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
+use TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+
 defined('TYPO3') or die();
 
 call_user_func(function () {
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Pieventlist',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'list',
+            EventController::class => 'list',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => '',
+            EventController::class => '',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Pieventdetail',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'detail, icalDownload',
+            EventController::class => 'detail, icalDownload',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'icalDownload',
+            EventController::class => 'icalDownload',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Pieventregistration',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
+            EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
+            EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, cancelRegistration',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Pieventsearch',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'search',
+            EventController::class => 'search',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'search',
+            EventController::class => 'search',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Pieventcalendar',
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => 'calendar',
+            EventController::class => 'calendar',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\EventController::class => '',
+            EventController::class => '',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Piuserreg',
         [
-            \DERHANSEN\SfEventMgt\Controller\UserRegistrationController::class => 'list',
+            UserRegistrationController::class => 'list, detail',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\UserRegistrationController::class => 'list',
+            UserRegistrationController::class => 'list, detail',
         ]
     );
 
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+    ExtensionUtility::configurePlugin(
         'SfEventMgt',
         'Pipayment',
         [
-            \DERHANSEN\SfEventMgt\Controller\PaymentController::class => 'redirect, success, failure, cancel, notify',
+            PaymentController::class => 'redirect, success, failure, cancel, notify',
         ],
         // non-cacheable actions
         [
-            \DERHANSEN\SfEventMgt\Controller\PaymentController::class => 'redirect, success, failure, cancel, notify',
+            PaymentController::class => 'redirect, success, failure, cancel, notify',
         ]
     );
 
@@ -95,25 +112,21 @@ call_user_func(function () {
         'DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks';
 
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc']['event_clearcache'] =
-        \DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks::class . '->clearCachePostProc';
+        DataHandlerHooks::class . '->clearCachePostProc';
 
     // Enable live search for events using "#event:"
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['event'] = 'tx_sfeventmgt_domain_model_event';
 
     // Register longitude- and latitude-evaluator for TCA
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
-        \DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator::class
+        LongitudeEvaluator::class
     ] = '';
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
-        \DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator::class
+        LatitudeEvaluator::class
     ] = '';
     $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
-        \DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator::class
+        TimeRestrictionEvaluator::class
     ] = '';
-
-    // Implement get_cache_timeout hook
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['get_cache_timeout'][] =
-        \DERHANSEN\SfEventMgt\Hooks\PageCache::class . '->getCacheTimeout';
 
     // Register default payment methods
     $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
@@ -128,28 +141,37 @@ call_user_func(function () {
     ];
 
     // Add page TSConfig
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('
+    ExtensionManagementUtility::addPageTSConfig('
         <INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.tsconfig">
     ');
 
     // Custom FormDataProvider to hide TCA inline fields for registrations on given conditions
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
-    \DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations::class
+    HideInlineRegistrations::class
     ] = [
         'depends' => [
-            \TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca::class,
+            InitializeProcessedTca::class,
         ],
         'before' => [
-            \TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline::class,
+            TcaInline::class,
         ],
     ];
 
     // Custom FormDataProvider for event plausability checks
     $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
-    \DERHANSEN\SfEventMgt\Form\FormDataProvider\EventPlausability::class
+    EventPlausability::class
     ] = [
         'depends' => [
-            \TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields::class,
+            DatabaseRowDateTimeFields::class,
+        ],
+    ];
+
+    // Custom FormDataProvider for default value of datetime fields
+    $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
+            EventRowInitializeNew::class
+    ] = [
+        'depends' => [
+            DatabaseRowInitializeNew::class,
         ],
     ];
 
@@ -161,12 +183,8 @@ call_user_func(function () {
         ];
     }
 
-    // Register event management plugin updater
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update']['piEventPluginUpdater']
-        = \DERHANSEN\SfEventMgt\Updates\PiEventPluginUpdater::class;
-
-    if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('linkvalidator')) {
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
+    if (ExtensionManagementUtility::isLoaded('linkvalidator')) {
+        ExtensionManagementUtility::addPageTSConfig(
             '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Page/mod.linkvalidator.txt">'
         );
     }

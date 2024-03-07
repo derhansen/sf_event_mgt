@@ -15,9 +15,6 @@ use DERHANSEN\SfEventMgt\Exception\InvalidCaptchaConfigurationException;
 use DERHANSEN\SfEventMgt\Service\CaptchaConfigurationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\CaptchaConfigurationService
- */
 class CaptchaConfigurationServiceTest extends UnitTestCase
 {
     private const VALID_HCAPTCHA_CONFIG = [
@@ -44,13 +41,13 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function captchaConfigurationServiceIsNotEnabledForEmptySettings()
+    public function captchaConfigurationServiceIsNotEnabledForEmptySettings(): void
     {
         $service = new CaptchaConfigurationService();
         self::assertFalse($service->getEnabled());
     }
 
-    public function captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider(): array
+    public static function captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider(): array
     {
         return [
             'emptyType' => [
@@ -164,14 +161,14 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
      * @test
      * @dataProvider captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider
      */
-    public function captchaConfigurationThrowsExceptionForInvalidSettings(array $settings, int $code)
+    public function captchaConfigurationThrowsExceptionForInvalidSettings(array $settings, int $code): void
     {
         $this->expectException(InvalidCaptchaConfigurationException::class);
         $this->expectExceptionCode($code);
         $service = new CaptchaConfigurationService($settings);
     }
 
-    public function gettersReturnExpectedResultDataProvider(): array
+    public static function gettersReturnExpectedResultDataProvider(): array
     {
         return [
             'captchaDisabled' => [
@@ -248,7 +245,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
      * @test
      * @dataProvider gettersReturnExpectedResultDataProvider
      */
-    public function gettersReturnExpectedResult(array $settings, string $method, $expected)
+    public function gettersReturnExpectedResult(array $settings, string $method, $expected): void
     {
         $service = new CaptchaConfigurationService($settings);
         $result = $service->{$method}();

@@ -13,9 +13,6 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Location
- */
 class Location extends AbstractEntity
 {
     protected string $title = '';

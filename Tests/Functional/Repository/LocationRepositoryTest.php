@@ -12,19 +12,15 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository
- */
 class LocationRepositoryTest extends FunctionalTestCase
 {
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\LocationRepository */
-    protected $locationRepository;
+    protected LocationRepository $locationRepository;
 
-    /** @var array */
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     /**
      * Setup
@@ -32,17 +28,18 @@ class LocationRepositoryTest extends FunctionalTestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->locationRepository = GeneralUtility::makeInstance(LocationRepository::class);
+        $this->locationRepository = $this->getContainer()->get(LocationRepository::class);
 
-        $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_location.csv');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
-     * Test if startingpoint is ignored
-     *
      * @test
      */
-    public function findRecordsByUid()
+    public function startingPageIsIgnored(): void
     {
         $locations = $this->locationRepository->findAll();
 

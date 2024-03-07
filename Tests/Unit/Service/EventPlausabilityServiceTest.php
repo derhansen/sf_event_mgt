@@ -12,21 +12,14 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Service\EventPlausabilityService;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\EventPlausabilityService.
- */
 class EventPlausabilityServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
+    protected bool $resetSingletonInstances = true;
 
-    protected $resetSingletonInstances = true;
-
-    public function isStartDateBeforeEndDateDataProvider(): array
+    public static function isStartDateBeforeEndDateDataProvider(): array
     {
         return [
             'no dates' => [
@@ -56,22 +49,23 @@ class EventPlausabilityServiceTest extends UnitTestCase
      * @test
      * @dataProvider isStartDateBeforeEndDateDataProvider
      */
-    public function isStartDateBeforeEndDateReturnsExpectedResults($startdate, $enddate, $expected)
+    public function isStartDateBeforeEndDateReturnsExpectedResults(int $startdate, int $enddate, bool $expected): void
     {
-        $service = $this->getAccessibleMock(EventPlausabilityService::class, ['dummy'], [], '', false);
+        $service = $this->getAccessibleMock(EventPlausabilityService::class, null, [], '', false);
         self::assertEquals($expected, $service->_call('isStartDateBeforeEndDate', $startdate, $enddate));
     }
 
     /**
      * @test
      */
-    public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage()
+    public function verifyOrganisatorConfigurationWithNoOrganisatorAndDisabledRegistrationAddsNoFlashMessage(): void
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->sL(Argument::cetera())->shouldBeCalled()->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService->reveal();
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::never())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
+            'enable_registration' => 0,
             'notify_organisator' => 1,
         ];
 
@@ -82,13 +76,32 @@ class EventPlausabilityServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage()
+    public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage(): void
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->sL(Argument::cetera())->shouldBeCalled()->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService->reveal();
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::atLeastOnce())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
+            'enable_registration' => 1,
+            'notify_organisator' => 1,
+        ];
+
+        $service = new EventPlausabilityService();
+        $service->verifyOrganisatorConfiguration($databaseRow);
+    }
+
+    /**
+     * @test
+     */
+    public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage(): void
+    {
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::atLeastOnce())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
+
+        $databaseRow = [
+            'enable_registration' => 1,
             'notify_organisator' => 1,
             'organisator' => [
                 [
@@ -106,13 +119,14 @@ class EventPlausabilityServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage()
+    public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage(): void
     {
-        $languageService = $this->prophesize(LanguageService::class);
-        $languageService->sL(Argument::cetera())->shouldNotBeCalled()->willReturn('foo');
-        $GLOBALS['LANG'] = $languageService->reveal();
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::never())->method('sL');
+        $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
+            'enable_registration' => 0,
             'notify_organisator' => 1,
             'organisator' => [
                 [

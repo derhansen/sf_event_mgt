@@ -15,14 +15,11 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * Abstract Record viewhelper for backend links
+ * This viewhelper returns if the given action is enabled
  */
 class IsActionEnabledViewHelper extends AbstractViewHelper
 {
-    /**
-     * Initialize arguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         $this->registerArgument('action', 'string', 'Name of the action', true);
         $this->registerArgument('settings', 'array', 'Settings for backend module', true);
@@ -30,8 +27,6 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
 
     /**
      * Renders a edit link for the given Event UID
-     *
-     * @return bool
      */
     public function render(): bool
     {
@@ -44,9 +39,6 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
 
     /**
      * Checks, if the current backend user has sufficient table permissions to perform the given action
-     *
-     * @param string $action
-     * @return bool
      */
     private function checkAccess(string $action): bool
     {
@@ -69,7 +61,6 @@ class IsActionEnabledViewHelper extends AbstractViewHelper
                         'tx_sfeventmgt_domain_model_registration_fieldvalue'
                     );
                 break;
-            default:
         }
 
         return $result;

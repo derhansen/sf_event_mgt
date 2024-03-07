@@ -11,30 +11,24 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
-/**
- * FluidStandaloneService
- */
 class FluidStandaloneService
 {
-    protected ConfigurationManager $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
 
-    public function injectConfigurationManager(ConfigurationManager $configurationManager): void
+    public function injectConfigurationManager(ConfigurationManagerInterface $configurationManager): void
     {
         $this->configurationManager = $configurationManager;
     }
 
     /**
      * Returns the template folders for the given part
-     *
-     * @param string $part
-     * @throws InvalidConfigurationTypeException
-     * @return array
      */
     public function getTemplateFolders(string $part = 'template'): array
     {
@@ -69,9 +63,6 @@ class FluidStandaloneService
 
     /**
      * Makes sure the path ends with a slash
-     *
-     * @param string $path
-     * @return string
      */
     protected function ensureSuffixedPath(string $path): string
     {
@@ -79,25 +70,29 @@ class FluidStandaloneService
     }
 
     /**
-     * Renders a fluid standlone view for the given template
-     *
-     * @param string $template
-     * @param array $variables
-     * @param string $extensionName
-     * @param string $pluginName
-     * @return string
+     * Renders a fluid standalone view for the given template
      */
     public function renderTemplate(
         string $template,
         array $variables,
         string $extensionName = 'SfEventMgt',
-        string $pluginName = 'Pieventregistration'
+        string $pluginName = 'Pieventregistration',
+        string $format = 'html'
     ): string {
         $emailView = GeneralUtility::makeInstance(StandaloneView::class);
-        $emailView->getRequest()->setControllerExtensionName($extensionName);
-        $emailView->getRequest()->setPluginName($pluginName);
-        $emailView->setFormat('html');
-        $emailView->setTemplateRootPaths($this->getTemplateFolders('template'));
+
+        $extbaseRequestParams = GeneralUtility::makeInstance(ExtbaseRequestParameters::class);
+        $extbaseRequestParams->setControllerExtensionName($extensionName);
+        $extbaseRequestParams->setPluginName($pluginName);
+
+        /** @var ServerRequest $serverRequest */
+        $serverRequest = $GLOBALS['TYPO3_REQUEST'];
+
+        $extbaseRequest = GeneralUtility::makeInstance(Request::class, $serverRequest->withAttribute('extbase', $extbaseRequestParams));
+        $emailView->setRequest($extbaseRequest);
+
+        $emailView->setFormat($format);
+        $emailView->setTemplateRootPaths($this->getTemplateFolders());
         $emailView->setLayoutRootPaths($this->getTemplateFolders('layout'));
         $emailView->setPartialRootPaths($this->getTemplateFolders('partial'));
         $emailView->setTemplate($template);
@@ -110,19 +105,20 @@ class FluidStandaloneService
      * of variables.
      *
      * Note, the result of this function must never be used as raw/direct output in HTML/frontend context.
-     *
-     * @param string $string Any string
-     * @param array $variables Variables
-     * @return string Parsed string
      */
     public function parseStringFluid(string $string, array $variables = []): string
     {
         if ($string === '') {
             return '';
         }
+
+        /** @var ServerRequest $serverRequest */
+        $serverRequest = $GLOBALS['TYPO3_REQUEST'];
+
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
+        $standaloneView->setRequest($serverRequest);
         $result = $standaloneView->render() ?? '';
 
         return html_entity_decode($result);

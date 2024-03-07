@@ -147,8 +147,6 @@ module.tx_sfeventmgt {
             dateFieldFormat = d.m.Y
         }
         search {
-            # cat=module.tx_sfeventmgt/search; type=string; label=Date format for date/datetime fields
-            dateFormat = H:i d-m-Y
             # cat=module.tx_sfeventmgt/search; type=string; label=Search fields
             fields = title, teaser
         }

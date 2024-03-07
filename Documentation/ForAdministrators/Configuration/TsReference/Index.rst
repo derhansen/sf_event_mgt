@@ -1,862 +1,834 @@
-﻿.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
+﻿.. include:: /Includes.rst.txt
 
-.. include:: ../../../Includes.txt
-
-
+.. highlight:: typoscript
 .. _tsref:
 
+====================
 TypoScript reference
 ====================
 
 More TypoScript settings are available on the :ref:`eventplugin-settings` page. Also make sure to check the included
-:php:`setup.txt` file for available/default TypoScript settings.
+:php:`setup.typoscript` file for available/default TypoScript settings.
+
+.. only:: html
+
+   .. contents:: Properties
+      :depth: 1
+      :local:
 
 plugin.tx_sfeventmgt
-~~~~~~~~~~~~~~~~~~~~
+====================
 
 .. t3-field-list-table::
  :header-rows: 1
 
- - :Property:
-         Property:
+view.templateRootPath
+---------------------
 
-   :Date type:
-         Data type:
+.. confval:: view.templateRootPath
 
-   :Description:
-         Description:
+   :Type: string
+   :Default: **Extbase default**
 
-   :Default:
-         Default:
+   Path to the templates. The default setting is EXT:sf_event_mgt/Resources/Private/Templates/
 
- - :Property:
-         view.templateRootPath
 
-   :Date type:
-         String
+view.partialRootPath
+--------------------
 
-   :Description:
-         Path to the templates. The default setting is EXT:sf_event_mgt/Resources/Private/Templates/
+.. confval:: view.partialRootPath
 
-   :Default:
-         **Extbase default**
+   :Type: string
+   :Default: **Extbase default**
 
- - :Property:
-         view.partialRootPath
+   Path to the partials. The default setting is EXT:sf_event_mgt/Resources/Private/Partials/
 
-   :Date type:
-         String
 
-   :Description:
-         Path to the partials. The default setting is EXT:sf_event_mgt/Resources/Private/Partials/
+view.layoutRootPath
+-------------------
 
-   :Default:
-         **Extbase default**
+.. confval:: view.layoutRootPath
 
- - :Property:
-         view.layoutRootPath
+   :Type: string
+   :Default: **Extbase default**
 
-   :Date type:
-         String
+   Path to the layouts. The default setting is EXT:sf_event_mgt/Resources/Private/Layouts/
 
-   :Description:
-         Path to the layouts. The default setting is EXT:sf_event_mgt/Resources/Private/Layouts/
 
-   :Default:
-         **Extbase default**
+settings.calendar.firstDayOfWeek
+--------------------------------
 
- - :Property:
-         settings.calendar.firstDayOfWeek
+.. confval:: settings.calendar.firstDayOfWeek
 
-   :Date type:
-         Integer
+   :Type: int
+   :Default: 1
 
-   :Description:
-         First day of week 0 (sunday) bis 6 (saturday). The default value "1" is set to monday.
+   First day of week 0 (Sunday) bis 6 (Saturday). The default value "1" is set to Monday.
 
-   :Default:
-         1
 
- - :Property:
-         settings.calendar.includeEventsForEveryDayOfAllCalendarWeeks
+settings.calendar.includeEventsForEveryDayOfAllCalendarWeeks
+------------------------------------------------------------
 
-   :Date type:
-         Boolean
+.. confval:: settings.calendar.includeEventsForEveryDayOfAllCalendarWeeks
 
-   :Description:
-         If set, the calendar will show events for all days of all shown weeks of the calendar and not only
-         events for the current month.
+   :Type: int
+   :Default: 1
 
-   :Default:
-         1 (true)
+   If set, the calendar will show events for all days of all shown weeks of the calendar and not only
+   events for the current month.
 
- - :Property:
-         settings.calendar.showWeekNumber
 
-   :Date type:
-         Boolean
+settings.calendar.showWeekNumber
+--------------------------------
 
-   :Description:
-         Definies, if the calendar should show week numbers or not.
+.. confval:: settings.calendar.showWeekNumber
 
-   :Default:
-         1 (true)
+   :Type: int
+   :Default: 1
 
- - :Property:
-         settings.detail.checkPidOfEventRecord
+   Defines if the calendar should show week numbers or not.
 
-   :Date type:
-         Boolen
 
-   :Description:
-         If set, the detail view checks the incoming event record against the defined starting point(s).
-         If those don’t match, the event record won’t be displayed.
+settings.detail.checkPidOfEventRecord
+-------------------------------------
 
-   :Default:
-         0 (False)
+.. confval:: settings.detail.checkPidOfEventRecord
 
- - :Property:
-         settings.detail.imageWidth
+   :Type: int
+   :Default: 0
 
-   :Date type:
-         Integer
+   If set, the detail view checks the incoming event record against the defined starting point(s).
+   If those don’t match, the event record won’t be displayed.
 
-   :Description:
-         Default width of images in detail view
 
-   :Default:
-         200
+settings.detail.imageWidth
+--------------------------
 
- - :Property:
-         settings.detail.imageHeight
+.. confval:: settings.detail.imageWidth
 
-   :Date type:
-         Integer
+   :Type: int
+   :Default: 200
 
-   :Description:
-         Default height of images in detail view
+   Default width of images in detail view
 
-   :Default:
-         Empty
 
- - :Property:
-         settings.detail.isShortcut
+settings.detail.imageHeight
+---------------------------
 
-   :Date type:
-         Boolean
+.. confval:: settings.detail.imageHeight
 
-   :Description:
-         This setting should be set to "1" if the event should be fetched from the Content Object data.
-         This option should only be set to "1", if events are displayed using the "Insert Record" content element
+   :Type: int
+   :Default: (none)
 
-   :Default:
-         0 (false)
+   Default height of images in detail view
 
- - :Property:
-         settings.registration.checkPidOfEventRecord
 
-   :Date type:
-         Boolen
+settings.detail.isShortcut
+--------------------------
 
-   :Description:
-         If set, the registration view checks the incoming event record against the defined starting point(s).
-         If those don’t match, the registration to the event is not possible.
+.. confval:: settings.detail.isShortcut
 
-   :Default:
-         0 (False)
+   :Type: int
+   :Default: 0
 
- - :Property:
-         settings.registration.autoConfirmation
+   This setting should be set to "1" if the event should be fetched from the Content Object data.
+   This option should only be set to "1", if events are displayed using the "Insert Record" content element
 
-   :Date type:
-         Boolean
 
-   :Description:
-         If set to true, new registration will automatically be confirmed by redirecting
-         the user to the confirmRegistration-Action.
+settings.registration.checkPidOfEventRecord
+-------------------------------------------
 
-   :Default:
-         0 (false)
+.. confval:: settings.registration.checkPidOfEventRecord
 
- - :Property:
-         settings.registration.deleteExpiredRegistrations
+   :Type: int
+   :Default: 0
 
-   :Date type:
-         Boolean
+   If set, the registration view checks the incoming event record against the defined starting point(s).
+   If those don’t match, the registration to the event is not possible.
 
-   :Description:
-         If set to true, expired registrations will be deleted by the action in the backend module. If this
-         setting is set to false, expired registrations will just be set to **hidden**
 
-         Note, this setting has no effect for the `cleanup` CLI command.
+settings.registration.autoConfirmation
+--------------------------------------
 
-   :Default:
-         0 (false)
+.. confval:: settings.registration.autoConfirmation
 
- - :Property:
-         settings.registration.formatDateOfBirth
+   :Type: int
+   :Default: 0
 
-   :Date type:
-         string
+   If set to `1`, new registration will automatically be confirmed by redirecting
+   the user to the confirmRegistration-Action.
 
-   :Description:
-         Date format of field dateOfBirth
 
-   :Default:
-         d.m.Y
+settings.registration.deleteExpiredRegistrations
+------------------------------------------------
 
- - :Property:
-         settings.registration.requiredFields
+.. confval:: settings.registration.deleteExpiredRegistrations
 
-   :Date type:
-         String
+   :Type: int
+   :Default: 0
 
-   :Description:
-         List of required fields in registration. The fields firstname, lastname and email
-         are always required and cannot be overridden.
+   If set to `1`, expired registrations will be deleted by the action in the backend module. If this
+   setting is set to false, expired registrations will just be set to **hidden**
 
-         The following additional fields are available:
+   Note, this setting has no effect for the `cleanup` CLI command.
 
-         * title
-         * company
-         * address
-         * zip
-         * city
-         * country
-         * phone
-         * gender
-         * dateOfBirth
-         * notes
-         * accepttc
-         * captcha
 
-         Note, that all fields are just checked, if they are empty or not. If the field "accepttc" (or any other
-         boolean field) is included in the list of required fields, it is checked if the field value is true.
+settings.registration.formatDateOfBirth
+---------------------------------------
 
-   :Default:
-         empty
+.. confval:: settings.registration.formatDateOfBirth
 
- - :Property:
-         settings.registration.linkTermsAndConditions
+   :Type: string
+   :Default: d.m.Y
 
-   :Date type:
-         String
+   Date format of field dateOfBirth
 
-   :Description:
-         A page or an external URL that can be used in the registration template to show "Terms & Conditions"
 
-   :Default:
-         empty
+settings.registration.requiredFields
+------------------------------------
 
- - :Property:
-         settings.confirmation.prefillFields.{fieldname}
+.. confval:: settings.registration.requiredFields
 
-   :Date type:
-         String
+   :Type: string
+   :Default: empty
 
-   :Description:
-         Key/value mapping for prefilling fields from fe_users table. The
-         key-field is the fieldname in sf_event_mgt and the value-field is
-         the fieldname in fe_users.
+   List of required fields in registration. The fields firstname, lastname and email
+   are always required and cannot be overridden.
+
+   The following additional fields are available:
+
+   * title
+   * company
+   * address
+   * zip
+   * city
+   * country
+   * phone
+   * gender
+   * dateOfBirth
+   * notes
+   * accepttc
+   * captcha
+
+   Note, that all fields are just checked, if they are empty or not. If the field "accepttc" (or any other
+   boolean field) is included in the list of required fields, it is checked if the field value is true.
+
+
+settings.registration.linkTermsAndConditions
+--------------------------------------------
+
+.. confval:: settings.registration.linkTermsAndConditions
+
+   :Type: string
+   :Default: empty
+
+   A page or an external URL that can be used in the registration template to show "Terms & Conditions"
+
+
+settings.registration.prefillFields.{fieldname}
+-----------------------------------------------
+
+.. confval:: settings.registration.prefillFields.{fieldname}
+
+   :Type: string
+
+   Key/value mapping for prefilling fields from fe_users table. The
+   key-field is the fieldname in sf_event_mgt and the value-field is
+   the fieldname in fe_users.
 
    :Default:
 
-         * firstname = first_name
-         * lastname = last_name
-         * address = address
-         * zip = zip
-         * city = city
-         * country = country
-         * email = email
-         * phone = telephone
+   * firstname = first_name
+   * lastname = last_name
+   * address = address
+   * zip = zip
+   * city = city
+   * country = country
+   * email = email
+   * phone = telephone
 
- - :Property:
-         settings.waitlist.moveUp.keepMainRegistrationDependency
 
-   :Date type:
-         Boolean
+settings.waitlist.moveUp.keepMainRegistrationDependency
+-------------------------------------------------------
 
-   :Description:
-         If set to true (1), a registration will keep the dependency to the main registration if the registration
-         has been submitted using the simultaneous registration process. Note, that it is recommended to set this
-         value to false (0), since cancellation of the main registration will also cancel moved up "child"
-         registrations.
+.. confval:: settings.waitlist.moveUp.keepMainRegistrationDependency
 
-   :Default:
-         false,
+   :Type: int
+   :Default: false
 
- - :Property:
-         settings.confirmation.linkValidity
+   If set to `1`, a registration will keep the dependency to the main registration if the registration
+   has been submitted using the simultaneous registration process. Note, that it is recommended to set this
+   value to false (0), since cancellation of the main registration will also cancel moved up "child"
+   registrations.
 
-   :Date type:
-         Integer
 
-   :Description:
-         Validity of confirmation link in seconds
+settings.confirmation.linkValidity
+----------------------------------
 
-   :Default:
-         3600
+.. confval:: settings.confirmation.linkValidity
 
- - :Property:
-         settings.notification.senderEmail
+   :Type: int
+   :Default: 3600
 
-   :Date type:
-         String
+   Validity of confirmation link in seconds
 
-   :Description:
-         E-mail address for emails sent to user
 
-   :Default:
-         empty
+settings.notification.senderEmail
+---------------------------------
 
- - :Property:
-         settings.notification.senderName
+.. confval:: settings.notification.senderEmail
 
-   :Date type:
-         String
+   :Type: string
+   :Default: empty
 
-   :Description:
-         Sender name for emails sent to user
+   E-mail address for emails sent to user
 
-   :Default:
-         empty
 
- - :Property:
-         settings.notification.replyToEmail
+settings.notification.senderName
+--------------------------------
 
-   :Date type:
-         String
+.. confval:: settings.notification.senderName
 
-   :Description:
-         Reply-to email address of emails sent to the user
+   :Type: string
+   :Default: empty
 
-   :Default:
-         empty
+   Sender name for emails sent to user
 
- - :Property:
-         settings.notification.senderSignature
 
-   :Date type:
-         String
+settings.notification.replyToEmail
+----------------------------------
 
-   :Description:
-         Signature shown in emails sent to user
+.. confval:: settings.notification.replyToEmail
 
-   :Default:
-         empty
+   :Type: string
+   :Default: empty
 
- - :Property:
-         settings.notification.adminEmail
+   Reply-to email address of emails sent to the user
 
-   :Date type:
-         String
 
-   :Description:
-         Admin E-mail address
+settings.notification.senderSignature
+-------------------------------------
 
-   :Default:
-         empty
+.. confval:: settings.notification.senderSignature
 
- - :Property:
-         settings.notification.registrationDataAsSenderForAdminEmails
+   :Type: string
+   :Default: empty
 
-   :Date type:
-         Boolean
+   Signature shown in emails sent to user
 
-   :Description:
-         If set, admin emails will be sent by the email-address and sender name (firstname and lastname)
-         set in the registration
 
-   :Default:
-         false
+settings.notification.adminEmail
+--------------------------------
 
- - :Property:
-         settings.notification.disabled
+.. confval:: settings.notification.adminEmail
 
-   :Date type:
-         Boolean
+   :Type: string
+   :Default: empty
 
-   :Description:
-         If set, the email notification feature is completely disabled. This includes user and admin emails as well
-         as user notifications from the backend.
+   Admin E-mail address
 
-         Note, that the functionality of sending Notifications in the backend module is also disabled when this option
-         is set to "true"
 
-   :Default:
-         false
+settings.notification.registrationDataAsSenderForAdminEmails
+------------------------------------------------------------
 
- - :Property:
-         settings.notification.registrationNew.userSubject
+.. confval:: settings.notification.registrationDataAsSenderForAdminEmails
 
-   :Date type:
-         String
+   :Type: int
+   :Default: false
 
-   :Description:
-         User-Subject for new registration
+   If set, admin emails will be sent by the email-address and sender name (firstname and lastname)
+   set in the registration
 
-   :Default:
-         Your event registration
 
- - :Property:
-         settings.notification.registrationNew.adminSubject
+settings.notification.disabled
+------------------------------
 
-   :Date type:
-         String
+.. confval:: settings.notification.disabled
 
-   :Description:
-         Admin-Subject for new registration
+   :Type: int
+   :Default: false
 
-   :Default:
-         New unconfirmed event registration
+   If set, the email notification feature is completely disabled. This includes user and admin emails as well
+   as user notifications from the backend.
 
- - :Property:
-         settings.notification.registrationNew.attachments
+   Note, that the functionality of sending Notifications in the backend module is also disabled when this option
+   is set to "true"
 
-   :Date type:
-         String
 
-   :Description:
-         Attachment configuration for new unconfirmed event registrations. See :ref:`email-attachments`
+settings.notification.registrationNew.userSubject
+-------------------------------------------------
 
-   :Default:
-         empty
+.. confval:: settings.notification.registrationNew.userSubject
 
- - :Property:
-         settings.notification.registrationWaitlistNew.userSubject
+   :Type: string
+   :Default: Your event registration
 
-   :Date type:
-         String
+   User-Subject for new registration
 
-   :Description:
-         User-Subject for new registration on the waitlist
 
-   :Default:
-         Your event registration on the waitlist
+settings.notification.registrationNew.adminSubject
+--------------------------------------------------
 
- - :Property:
-         settings.notification.registrationWaitlistNew.adminSubject
+.. confval:: settings.notification.registrationNew.adminSubject
 
-   :Date type:
-         String
+   :Type: string
+   :Default: New unconfirmed event registration
 
-   :Description:
-         Admin-Subject for new registration on the waitlist
+   Admin-Subject for new registration
 
-   :Default:
-         New unconfirmed event registration on the waitlist
 
- - :Property:
-         settings.notification.registrationWaitlistNew.attachments
+settings.notification.registrationNew.attachments
+-------------------------------------------------
 
-   :Date type:
-         String
+.. confval:: settings.notification.registrationNew.attachments
 
-   :Description:
-         Attachment configuration for new unconfirmed event registrations on the waitlist. See :ref:`email-attachments`
+   :Type: string
+   :Default: empty
 
-   :Default:
-         empty
+   Attachment configuration for new unconfirmed event registrations. See :ref:`email-attachments`
 
- - :Property:
-         settings.notification.registrationConfirmed.userSubject
 
-   :Date type:
-         String
+settings.notification.registrationWaitlistNew.userSubject
+---------------------------------------------------------
 
-   :Description:
-         User-Subject for confirmed registration
+.. confval:: settings.notification.registrationWaitlistNew.userSubject
 
-   :Default:
-         Event registration successful
+   :Type: string
+   :Default: Your event registration on the waitlist
 
- - :Property:
-         settings.notification.registrationConfirmed.adminSubject
+   User-Subject for new registration on the waitlist
 
-   :Date type:
-         String
 
-   :Description:
-         Admin-Subject for confirmed registration
+settings.notification.registrationWaitlistNew.adminSubject
+----------------------------------------------------------
 
-   :Default:
-         Event registration confirmed
+.. confval:: settings.notification.registrationWaitlistNew.adminSubject
 
- - :Property:
-         settings.notification.registrationConfirmed.attachments
+   :Type: string
+   :Default: New unconfirmed event registration on the waitlist
 
-   :Date type:
-         String
+   Admin-Subject for new registration on the waitlist
 
-   :Description:
-         Attachment configuration for confirmed event registrations. See :ref:`email-attachments`
 
-   :Default:
-         empty
+settings.notification.registrationWaitlistNew.attachments
+---------------------------------------------------------
 
- - :Property:
-         settings.notification.registrationWaitlistConfirmed.userSubject
+.. confval:: settings.notification.registrationWaitlistNew.attachments
 
-   :Date type:
-         String
+   :Type: string
+   :Default: empty
 
-   :Description:
-         User-Subject for confirmed registration on the waitlist
+   Attachment configuration for new unconfirmed event registrations on the waitlist. See :ref:`email-attachments`
 
-   :Default:
-         Event registration on the waitlist successful
 
- - :Property:
-         settings.notification.registrationWaitlistConfirmed.adminSubject
+settings.notification.registrationConfirmed.userSubject
+-------------------------------------------------------
 
-   :Date type:
-         String
+.. confval:: settings.notification.registrationConfirmed.userSubject
 
-   :Description:
-         Admin-Subject for confirmed registration on the waitlist
+   :Type: string
+   :Default: Event registration successful
 
-   :Default:
-         Event registration on the waitlist confirmed
+   User-Subject for confirmed registration
 
- - :Property:
-         settings.notification.registrationWaitlistConfirmed.attachments
 
-   :Date type:
-         String
+settings.notification.registrationConfirmed.adminSubject
+--------------------------------------------------------
 
-   :Description:
-         Attachment configuration for confirmed event registrations on the waitlist. See :ref:`email-attachments`
+.. confval:: settings.notification.registrationConfirmed.adminSubject
 
-   :Default:
-         empty
+   :Type: string
+   :Default: Event registration confirmed
 
- - :Property:
-     settings.notification.registrationCancelled.userSubject
+   Admin-Subject for confirmed registration
 
-   :Date type:
-         String
 
-   :Description:
-         User-Subject for cancelled registration
+settings.notification.registrationConfirmed.attachments
+-------------------------------------------------------
 
-   :Default:
-         Event registration cancelled successful
+.. confval:: settings.notification.registrationConfirmed.attachments
 
- - :Property:
-         settings.notification.registrationCancelled.adminSubject
+   :Type: string
+   :Default: empty
 
-   :Date type:
-         String
+   Attachment configuration for confirmed event registrations. See :ref:`email-attachments`
 
-   :Description:
-         Admin-Subject for cancelled registration
 
-   :Default:
-         Event registration cancelled
+settings.notification.registrationWaitlistConfirmed.userSubject
+---------------------------------------------------------------
 
- - :Property:
-         settings.search.dateFormat
+.. confval:: settings.notification.registrationWaitlistConfirmed.userSubject
 
-   :Date type:
-         String
+   :Type: string
+   :Default: Event registration on the waitlist successful
 
-   :Description:
-         Date format for date fields in the search view
+   User-Subject for confirmed registration on the waitlist
 
-   :Default:
-         Y-m-d
 
- - :Property:
-         settings.search.fields
+settings.notification.registrationWaitlistConfirmed.adminSubject
+----------------------------------------------------------------
 
-   :Date type:
-         String
+.. confval:: settings.notification.registrationWaitlistConfirmed.adminSubject
 
-   :Description:
-         Fields to be included in a query for the search view
+   :Type: string
+   :Default: Event registration on the waitlist confirmed
 
-   :Default:
-         title, teaser
+   Admin-Subject for confirmed registration on the waitlist
 
- - :Property:
-         settings.search.adjustTime
 
-   :Date type:
-         boolean
+settings.notification.registrationWaitlistConfirmed.attachments
+---------------------------------------------------------------
 
-   :Description:
-         When the setting `settings.search.dateFormat` is set to a date only, it is recommended to set this option
-         to true. The time for a given startdate will be set to 00:00:00 and the time for a given enddate will be set
-         to 23:59:59, so all events for the given dates will be found by a search.
+.. confval:: settings.notification.registrationWaitlistConfirmed.attachments
 
-   :Default:
-         true
+   :Type: string
+   :Default: empty
 
- - :Property:
-         settings.pagination.enablePagination
+   Attachment configuration for confirmed event registrations on the waitlist. See :ref:`email-attachments`
 
-   :Date type:
-         boolean
 
-   :Description:
-         If true, the list view outputs required variables to render a pagination.
+settings.notification.registrationCancelled.userSubject
+-------------------------------------------------------
 
-   :Default:
-         false
+.. confval:: settings.notification.registrationCancelled.userSubject
 
- - :Property:
-         settings.pagination.itemsPerPage
+   :Type: string
+   :Default: Event registration cancelled successful
 
-   :Date type:
-         integer
+   User-Subject for cancelled registration
 
-   :Description:
-         Amount of items per paginated page.
 
-   :Default:
-         10
+settings.notification.registrationCancelled.adminSubject
+--------------------------------------------------------
 
- - :Property:
-         settings.pagination.maxNumPages
+.. confval:: settings.notification.registrationCancelled.adminSubject
 
-   :Date type:
-         integer
+   :Type: string
+   :Default: Event registration cancelled
 
-   :Description:
-         Maximum number of pages to show in the pagination.
+   Admin-Subject for cancelled registration
 
-   :Default:
-         10
 
- - :Property:
-         settings.event.errorHandling
+settings.search.dateFormat
+--------------------------
 
-   :Date type:
-         String
+.. confval:: settings.search.dateFormat
 
-   :Description:
-         If an event for the detail and registration view is not found (e.g. is hidden or deleted), you can configure,
-         if the plugin should redirect to the list view, show a 404 error or render the view (default) without the
-         event data.
+   :Type: string
+   :Default: Y-m-d
 
-         Possible values:
+   Date format for date fields in the search view
 
-         * redirectToListView
-         * pageNotFoundHandler
-         * showStandaloneTemplate
 
-         The "showStandaloneTemplate" option requires a Template and optional an HTTP status code.
+settings.search.fields
+----------------------
 
-         Example: showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
+.. confval:: settings.search.fields
 
-         **Note:** For TYPO3 9.5, this setting has only effect when the event is not passed through GET parameters to the
-         action (e.g. event set in plugin). For all other scenarios, the TYPO3 "sites" error handling steps in.
+   :Type: string
+   :Default: title, teaser
 
-   :Default:
-         showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
+   Fields to be included in a query for the search view
+
+
+settings.search.adjustTime
+--------------------------
+
+.. confval:: settings.search.adjustTime
+
+   :Type: int
+   :Default: true
+
+   When the setting `settings.search.dateFormat` is set to a date only, it is recommended to set this option
+   to true. The time for a given startdate will be set to 00:00:00 and the time for a given enddate will be set
+   to 23:59:59, so all events for the given dates will be found by a search.
+
+
+settings.pagination.enablePagination
+------------------------------------
+
+.. confval:: settings.pagination.enablePagination
+
+   :Type: int
+   :Default: false
+
+   If true, the list view outputs required variables to render a pagination.
+
+
+settings.pagination.itemsPerPage
+--------------------------------
+
+.. confval:: settings.pagination.itemsPerPage
+
+   :Type: int
+   :Default: 10
+
+   Amount of items per paginated page.
+
+
+settings.pagination.maxNumPages
+-------------------------------
+
+.. confval:: settings.pagination.maxNumPages
+
+   :Type: int
+   :Default: 10
+
+   Maximum number of pages to show in the pagination.
+
+
+settings.event.errorHandling
+----------------------------
+
+.. confval:: settings.event.errorHandling
+
+   :Type: string
+   :Default: showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
+
+   If an event for the detail and registration view is not found (e.g. is hidden or deleted), you can configure,
+   if the plugin should redirect to the list view, show a 404 error or render the view (default) without the
+   event data.
+
+   Possible values:
+
+   - redirectToListView
+   - pageNotFoundHandler
+   - showStandaloneTemplate
+
+   The "showStandaloneTemplate" option requires a Template and optional an HTTP status code.
+
+   Example: showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
+
+   **Note:** For TYPO3 9.5, this setting has only effect when the event is not passed through GET parameters to the
+   action (e.g. event set in plugin). For all other scenarios, the TYPO3 "sites" error handling steps in.
+
 
 module.tx_sfeventmgt
-~~~~~~~~~~~~~~~~~~~~
+====================
 
-.. t3-field-list-table::
- :header-rows: 1
+settings.csvExport.fields
+-------------------------
 
- - :Property:
-         Property:
+.. confval:: settings.csvExport.fields
 
-   :Date type:
-         Data type:
+   :Type: string
+   :Default: uid, gender, firstname, lastname, title, company, email, address, zip, city, country, registration_fields
 
-   :Description:
-         Description:
+   Comma-separated list of fields to include in CSV export. Please note, that you must write the **property
+   names** of the fields to export (e.g. firstname, lastname, dateOfBirth, event.title)
 
-   :Default:
-         Default:
+   In order to export the values of registration fields, use "registration_fields" as fieldname. Note, that
+   it is only possible to export all registration fields at once.
 
- - :Property:
-         settings.csvExport.fields
 
-   :Date type:
-         String
+settings.csvExport.showFlashMessageForInsufficientAccessRights
+--------------------------------------------------------------
 
-   :Description:
-         Comma seperated list of fields to include in CSV export. Please note, that you must write the **property
-         names** of the fields to export (e.g. firstname, lastname, dateOfBirth, event.title)
+.. confval:: settings.csvExport.showFlashMessageForInsufficientAccessRights
 
-         In order to export the values of registration fields, use "registration_fields" as fieldname. Note, that
-         it is only possible to export all registrations fields at once.
+   :Type: int
+   :Default: true
 
-   :Default:
-         uid, gender, firstname, lastname, title, company, email, address, zip, city, country, registration_fields
+   If switched on, a warning message is shown in the backend module, when a backend user does not have
+   read/write access rights to the temp-folder of the default storage.
 
- - :Property:
-         settings.csvExport.showFlashMessageForInsufficientAccessRights
 
-   :Date type:
-         Boolean
+settings.csvExport.fieldDelimiter
+---------------------------------
 
-   :Description:
-         If switched on, a warning message is shown in the backend module, when a backend user does not have
-         read/write access rights to the temp-folder of the default storage.
+.. confval:: settings.csvExport.fieldDelimiter
 
-   :Default:
-         true
+   :Type: string
+   :Default: ,
 
- - :Property:
-         settings.csvExport.fieldDelimiter
+   Comma-separated list delimiter
 
-   :Date type:
-         String
 
-   :Description:
-         Comma seperated list delimiter
+settings.csvExport.fieldQuoteCharacter
+--------------------------------------
 
-   :Default:
-         ,
+.. confval:: settings.csvExport.fieldQuoteCharacter
 
- - :Property:
-         settings.csvExport.fieldQuoteCharacter
+   :Type: string
+   :Default: "
 
-   :Date type:
-         String
+   Comma-separated list quote character
 
-   :Description:
-         Comma seperated list quote character
 
-   :Default:
-         "
+settings.csvExport.prependBOM
+-----------------------------
 
- - :Property:
-         settings.csvExport.prependBOM
+.. confval:: settings.csvExport.prependBOM
 
-   :Date type:
-         Boolean
+   :Type: int
+   :Default: 0
 
-   :Description:
-         Prepend UTF-8 BOM to export. Switch this setting on, of you have problems when opening the exported CSV file
-         with Microsoft Excel
+   Prepend UTF-8 BOM to export. Switch this setting on if you have problems when opening the exported CSV file
+   with Microsoft Excel
 
-   :Default:
-         false
 
- - :Property:
-         settings.list.itemsPerPage
+settings.list.itemsPerPage
+--------------------------
 
-   :Date type:
-         Integer
+.. confval:: settings.list.itemsPerPage
 
-   :Description:
-         Number of items to show per page in backend module
+   :Type: int
+   :Default: 10
 
-   :Default:
-         10
+   Number of items to show per page in the backend module
 
- - :Property:
-         settings.search.dateFormat
 
-   :Date type:
-         String
+settings.search.dateFormat
+--------------------------
 
-   :Description:
-         Date format for search fields in backend module
+.. confval:: settings.search.dateFormat
 
-   :Default:
-         d.m.Y H:i
+   :Type: string
+   :Default: d.m.Y H:i
 
- - :Property:
-         settings.search.fields
+   Date format for search fields in the backend module
 
-   :Date type:
-         String
 
-   :Description:
-         Fields to be included in a query from the backend module
+settings.search.fields
+----------------------
 
-   :Default:
-         title, teaser
+.. confval:: settings.search.fields
 
- - :Property:
-         settings.notification.senderEmail
+   :Type: string
+   :Default: title, teaser
 
-   :Date type:
-         String
+   Fields to be included in a query from the backend module
 
-   :Description:
-         E-mail address for emails sent to user
 
-   :Default:
-         Empty
+settings.notification.senderEmail
+---------------------------------
 
- - :Property:
-         settings.notification.senderName
+.. confval:: settings.notification.senderEmail
 
-   :Date type:
-         String
+   :Type: string
+   :Default: (none)
 
-   :Description:
-         Sender name for emails sent to user
+   E-mail address for emails sent to user
 
-   :Default:
-         Empty
 
- - :Property:
-         settings.notification.senderSignature
+settings.notification.senderName
+--------------------------------
 
-   :Date type:
-         String
+.. confval:: settings.notification.senderName
 
-   :Description:
-         Signature shown in emails sent to user
+   :Type: string
+   :Default: (none)
 
-   :Default:
-         Empty
+   Sender name for emails sent to user
 
- - :Property:
-         settings.notification.customNotifications.{templatename}
 
-   :Date type:
-         String
+settings.notification.senderSignature
+-------------------------------------
 
-   :Description:
-         Name of custom notification template. Custom notifications can be
-         sent to all registered participants of an event in the administration
-         module.
+.. confval:: settings.notification.senderSignature
 
-         **Example for default custom notification**
+   :Type: string
+   :Default: (none)
 
-         .. figure:: ../../../Images/event-notification.png
-             :alt: Custom notifications
+   Signature shown in emails sent to user
 
-         Each custom notification must include a **title**, a **template** and a **subject**
 
-         Please refer to the default custom notitication for setup example.
+settings.notification.customNotifications.{templatename}
+--------------------------------------------------------
 
-   :Default:
-         thanksForParticipation
+.. confval:: settings.notification.customNotifications.{templatename}
 
- - :Property:
-         settings.enabledActions.notify
+   :Type: string
 
-   :Date type:
-         Boolean
+   Name of custom notification template. Custom notifications can be
+   sent to all registered participants of an event in the administration
+   module.
 
-   :Description:
-         If set to "1", the Notify-Action / Icon is shown for events with registration enabled.
+   **Example for default custom notification**
 
-   :Default:
-         1 (true)
+   .. figure:: /Images/event-notification.png
+       :alt: Custom notifications
+       :class: with-shadow
 
- - :Property:
-         settings.enabledActions.export
+   Each custom notification must include a **title**, a **template**, and a **subject**
 
-   :Date type:
-         Boolean
+   Please refer to the default custom notification for a setup example.
 
-   :Description:
-         If set to "1", the Export-Action / Icon is shown for events with registration enabled.
+   :Default: thanksForParticipation
 
-   :Default:
-         1 (true)
+
+settings.enabledActions.notify
+------------------------------
+
+.. confval:: settings.enabledActions.notify
+
+   :Type: int
+   :Default: 1
+
+   If set to "1", the Notify-Action / Icon is shown for events with registration enabled.
+
+
+settings.enabledActions.export
+------------------------------
+
+.. confval:: settings.enabledActions.export
+
+   :Type: int
+   :Default: 1
+
+   If set to "1", the Export-Action / Icon is shown for events with registration enabled.
+
+settings.defaultSorting.orderField
+------------------------------
+
+.. confval:: settings.defaultSorting.orderField
+
+   :Type: string
+   :Default: title
+
+   Defines the default field to be used for sorting. When not explicitly
+   specified, the sorting will be based on the "title" field.
+
+settings.defaultSorting.orderDirection
+----------------------------------------
+
+.. confval:: settings.defaultSorting.orderDirection
+
+   :Type: string
+   :Default: asc
+
+   Specifies the default order direction. The default value "asc" stands for
+   ascending order. Can be set to "desc" for descending order.
+
+settings.pagination.enablePagination
+------------------------------------
+
+.. confval:: settings.pagination.enablePagination
+
+   :Type: int
+   :Default: 1
+
+   Determines whether pagination is enabled (1) or disabled (0). When set to
+   "1", pagination is used to divide content into separate pages.
+
+settings.pagination.itemsPerPage
+--------------------------------
+
+.. confval:: settings.pagination.itemsPerPage
+
+   :Type: int
+   :Default: 10
+
+   Specifies the number of items to display on each page when pagination is
+   enabled. The default setting is 10 items per page.
+
+settings.pagination.maxNumPages
+-------------------------------
+
+.. confval:: settings.pagination.maxNumPages
+
+   :Type: int
+   :Default: 10
+
+   Sets the maximum number of pages to display in the pagination control.
+   The default is set to 10 pages.

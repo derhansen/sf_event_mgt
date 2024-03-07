@@ -10,37 +10,31 @@
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository
- */
 class OrganisatorRepositoryTest extends FunctionalTestCase
 {
-    /** @var \DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository */
-    protected $organisatorRepository;
+    protected OrganisatorRepository $organisatorRepository;
 
-    /** @var array */
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
-    /**
-     * Setup
-     */
     public function setUp(): void
     {
         parent::setUp();
-        $this->organisatorRepository = GeneralUtility::makeInstance(OrganisatorRepository::class);
+        $this->organisatorRepository = $this->getContainer()->get(OrganisatorRepository::class);
 
-        $this->importDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_organisator.xml');
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/tx_sfeventmgt_domain_model_organisator.csv');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
-     * Test if startingpoint is ignored
-     *
      * @test
      */
-    public function findRecordsByUid()
+    public function startingPageIsIgnored(): void
     {
         $locations = $this->organisatorRepository->findAll();
         self::assertEquals(2, $locations->count());

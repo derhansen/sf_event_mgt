@@ -9,17 +9,14 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ArrayUtility;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Utility;
 
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Utility\ArrayUtility
- */
 class ArrayUtilityTest extends UnitTestCase
 {
-    public function isJsonArrayReturnsExpectedValuesDataProcessor(): array
+    public static function isJsonArrayReturnsExpectedValuesDataProcessor(): array
     {
         return [
             'null' => [
@@ -49,7 +46,7 @@ class ArrayUtilityTest extends UnitTestCase
      * @test
      * @dataProvider isJsonArrayReturnsExpectedValuesDataProcessor
      */
-    public function isJsonArrayReturnsExpectedValues($value, $expected)
+    public function isJsonArrayReturnsExpectedValues($value, $expected): void
     {
         self::assertSame($expected, ArrayUtility::isJsonArray($value));
     }

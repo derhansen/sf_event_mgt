@@ -19,26 +19,18 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
-/**
- * The repository for Categories
- */
 class CategoryRepository extends Repository
 {
     public function initializeObject(): void
     {
-        $querySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
-        $querySettings->setRespectStoragePage(false);
-        $this->setDefaultQuerySettings($querySettings);
+        $this->defaultQuerySettings = GeneralUtility::makeInstance(Typo3QuerySettings::class);
+        $this->defaultQuerySettings->setRespectStoragePage(false);
     }
 
     /**
      * Returns all categories depending on the settings in the demand object
-     *
-     * @param CategoryDemand $demand
-     *
-     * @return array|QueryResultInterface
      */
-    public function findDemanded(CategoryDemand $demand)
+    public function findDemanded(CategoryDemand $demand): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();
@@ -63,13 +55,13 @@ class CategoryRepository extends Repository
         }
 
         if (count($constraints) > 0) {
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         if ($demand->getOrderField() !== '' && $demand->getOrderDirection() !== '' &&
             in_array($demand->getOrderField(), CategoryDemand::ORDER_FIELD_ALLOWED, true)
         ) {
-            $orderings[$demand->getOrderField()] = ((strtolower($demand->getOrderDirection()) == 'desc') ?
+            $orderings[$demand->getOrderField()] = ((strtolower($demand->getOrderDirection()) === 'desc') ?
                 QueryInterface::ORDER_DESCENDING :
                 QueryInterface::ORDER_ASCENDING);
             $query->setOrderings($orderings);

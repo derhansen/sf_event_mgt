@@ -12,32 +12,27 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
-use Prophecy\PhpUnit\ProphecyTrait;
 use stdClass;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
- * Test case for prefill viewhelper
+ * Test case for prefill viewHelper
  */
 class PrefillViewHelperTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfTsfeNotAvailabe()
+    public function viewHelperReturnsEmptyStringIfTsfeNotAvailabe(): void
     {
-        $request = $this->prophesize(Request::class);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'a field',
             'prefillSettings' => [],
@@ -49,7 +44,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsCurrentFieldValueIfValueInParsedBodyAvailable()
+    public function viewHelperReturnsCurrentFieldValueIfValueInParsedBodyAvailable(): void
     {
         $submittedData = [
             'tx_sfeventmgt_pieventregistration' => [
@@ -58,17 +53,15 @@ class PrefillViewHelperTest extends UnitTestCase
         ];
         $GLOBALS['TSFE'] = new stdClass();
 
-        $request = $this->prophesize(Request::class);
-        $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pieventregistration');
-        $request->getParsedBody()->willReturn($submittedData);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
             'prefillSettings' => [],
@@ -80,7 +73,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfPrefillSettingsEmpty()
+    public function viewHelperReturnsEmptyStringIfPrefillSettingsEmpty(): void
     {
         $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
@@ -89,17 +82,15 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John',
         ];
 
-        $request = $this->prophesize(Request::class);
-        $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pieventregistration');
-        $request->getParsedBody()->willReturn($submittedData);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
             'prefillSettings' => [],
@@ -111,7 +102,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfFieldNotFoundInPrefillSettings()
+    public function viewHelperReturnsEmptyStringIfFieldNotFoundInPrefillSettings(): void
     {
         $submittedData = [];
         $GLOBALS['TSFE'] = new stdClass();
@@ -120,17 +111,15 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John',
         ];
 
-        $request = $this->prophesize(Request::class);
-        $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pieventregistration');
-        $request->getParsedBody()->willReturn($submittedData);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
             'prefillSettings' => ['firstname' => 'first_name'],
@@ -142,7 +131,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsEmptyStringIfFieldNotFoundInFeUser()
+    public function viewHelperReturnsEmptyStringIfFieldNotFoundInFeUser(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
         $GLOBALS['TSFE']->fe_user = new stdClass();
@@ -150,17 +139,15 @@ class PrefillViewHelperTest extends UnitTestCase
             'first_name' => 'John',
         ];
 
-        $request = $this->prophesize(Request::class);
-        $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pieventregistration');
-        $request->getParsedBody()->willReturn([]);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn([]);
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
             'prefillSettings' => ['firstname' => 'first_name'],
@@ -172,7 +159,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsFieldvalueIfFound()
+    public function viewHelperReturnsFieldvalueIfFound(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
         $GLOBALS['TSFE']->fe_user = new stdClass();
@@ -181,17 +168,15 @@ class PrefillViewHelperTest extends UnitTestCase
             'last_name' => 'Doe',
         ];
 
-        $request = $this->prophesize(Request::class);
-        $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pieventregistration');
-        $request->getParsedBody()->willReturn([]);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn([]);
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'lastname',
             'prefillSettings' => ['lastname' => 'last_name'],
@@ -203,7 +188,7 @@ class PrefillViewHelperTest extends UnitTestCase
     /**
      * @test
      */
-    public function viewHelperReturnsSubmittedValueIfValidationError()
+    public function viewHelperReturnsSubmittedValueIfValidationError(): void
     {
         $submittedData = [
             'tx_sfeventmgt_pieventregistration' => [
@@ -211,17 +196,15 @@ class PrefillViewHelperTest extends UnitTestCase
             ],
         ];
 
-        $request = $this->prophesize(Request::class);
-        $request->getControllerExtensionName()->willReturn('SfEventMgt');
-        $request->getPluginName()->willReturn('Pieventregistration');
-        $request->getParsedBody()->willReturn($submittedData);
-        $renderingContext = $this->prophesize(RenderingContext::class);
-        $renderingContext->getVariableProvider()->willReturn(null);
-        $renderingContext->getViewHelperVariableContainer()->willReturn(null);
-        $renderingContext->getRequest()->willReturn($request->reveal());
+        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
+        $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
+        $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
+        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
+        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
-        $viewHelper->setRenderingContext($renderingContext->reveal());
+        $viewHelper->setRenderingContext($renderingContext);
         $viewHelper->setArguments([
             'fieldname' => 'firstname',
             'prefillSettings' => ['firstname' => 'first_name'],

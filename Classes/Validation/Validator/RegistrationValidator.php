@@ -14,6 +14,8 @@ namespace DERHANSEN\SfEventMgt\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
@@ -26,16 +28,11 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
  */
 class RegistrationValidator extends AbstractValidator
 {
-    /**
-     * @var ConfigurationManagerInterface
-     */
     protected ConfigurationManagerInterface $configurationManager;
-
     protected array $settings;
 
-    public function __construct(array $options = [])
+    public function __construct()
     {
-        parent::__construct($options);
         $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
 
         $this->settings = $this->configurationManager->getConfiguration(
@@ -51,44 +48,39 @@ class RegistrationValidator extends AbstractValidator
      * that boolean fields must have the value "TRUE" (for checkboxes)
      *
      * @param Registration $value Registration
-     *
-     * @return bool
      */
-    protected function isValid($value)
+    protected function isValid(mixed $value): void
     {
         $spamSettings = $this->settings['registration']['spamCheck'] ?? [];
         if ((bool)($spamSettings['enabled'] ?? false) && $this->isSpamCheckFailed($value, $spamSettings)) {
             $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
             $this->addErrorForProperty('spamCheck', $message, 1578855253);
 
-            return false;
+            return;
         }
 
-        $result = $this->validateDefaultFields($value);
+        $this->validateDefaultFields($value);
 
         // If no required fields are set, then the registration is valid
         if (!isset($this->settings['registration']['requiredFields']) ||
             $this->settings['registration']['requiredFields'] === ''
         ) {
-            return $result;
+            return;
         }
 
         $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields']));
 
         foreach ($requiredFields as $requiredField) {
-            if ($value->_hasProperty($requiredField)) {
+            if ($requiredField !== '' && $value->_hasProperty($requiredField)) {
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
                 $validationResult = $validator->validate($value->_getProperty($requiredField));
                 if ($validationResult->hasErrors()) {
-                    $result = false;
                     foreach ($validationResult->getErrors() as $error) {
                         $this->result->forProperty($requiredField)->addError($error);
                     }
                 }
             }
         }
-
-        return $result;
     }
 
     /**
@@ -100,9 +92,6 @@ class RegistrationValidator extends AbstractValidator
      * - firstname: NotEmpty
      * - lastname: NotEmpty
      * - email: NotEmpty, EmailAddress
-     *
-     * @param Registration $value
-     * @return bool
      */
     protected function validateDefaultFields(Registration $value): bool
     {
@@ -135,17 +124,18 @@ class RegistrationValidator extends AbstractValidator
     /**
      * Processes the spam check and returns, if it failed or not
      *
-     * @param Registration $registration
-     * @param array $settings
      * @throws SpamCheckNotFoundException
-     * @return bool
      */
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
     {
+        $pluginKey = 'tx_sfeventmgt_pieventregistration';
+        $getMergedWithPost = $this->getRequest()->getQueryParams()[$pluginKey];
+        ArrayUtility::mergeRecursiveWithOverrule($getMergedWithPost, $this->getRequest()->getParsedBody()[$pluginKey] ?? []);
+
         $spamCheckService = new SpamCheckService(
             $registration,
             $settings,
-            GeneralUtility::_GPmerged('tx_sfeventmgt_pieventregistration')
+            $getMergedWithPost
         );
 
         return $spamCheckService->isSpamCheckFailed();
@@ -153,21 +143,16 @@ class RegistrationValidator extends AbstractValidator
 
     /**
      * Returns a validator object depending on the given type of the property
-     *
-     * @param string $type Type
-     * @param string $field The field
-     *
-     * @return AbstractValidator
      */
     protected function getValidator(string $type, string $field): AbstractValidator
     {
         switch ($type) {
             case 'boolean':
-                /** @var BooleanValidator $validator */
-                $validator = new BooleanValidator(['is' => true]);
+                $validator = new BooleanValidator();
+                $validator->setOptions(['is' => true]);
                 break;
             default:
-                if ($field == 'captcha') {
+                if ($field === 'captcha') {
                     $validator = new CaptchaValidator();
                 } else {
                     $validator = new NotEmptyValidator();
@@ -175,5 +160,10 @@ class RegistrationValidator extends AbstractValidator
         }
 
         return $validator;
+    }
+
+    protected function getRequest(): ServerRequestInterface
+    {
+        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

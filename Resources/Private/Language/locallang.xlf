@@ -165,6 +165,15 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
 				<source>Amount of registrations</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid">
+				<source>Paid</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.yes">
+				<source>Yes</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.no">
+				<source>No</source>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 			</trans-unit>
@@ -234,6 +243,9 @@
 			<trans-unit id="event.message.confirmation_failed_registration_not_found">
 				<source>Confirmation failed, registration not found.</source>
 			</trans-unit>
+			<trans-unit id="event.message.confirmation_failed_registration_event_not_found">
+				<source>Confirmation failed, event for registration either not found or access protected.</source>
+			</trans-unit>
 			<trans-unit id="event.message.cancel_failed_event_not_found">
 				<source>Cancellation failed, event not found.</source>
 			</trans-unit>
@@ -290,6 +302,9 @@
 			</trans-unit>
 			<trans-unit id="calendar.title">
 				<source>Event calendar</source>
+			</trans-unit>
+			<trans-unit id="calendar.week">
+				<source>Week</source>
 			</trans-unit>
 			<trans-unit id="detail.download">
 				<source>Download</source>
@@ -386,6 +401,9 @@
 			</trans-unit>
 			<trans-unit id="userRegistrations.title">
 				<source>My event registrations</source>
+			</trans-unit>
+			<trans-unit id="userRegistration.title">
+				<source>My registration</source>
 			</trans-unit>
 			<trans-unit id="userRegistration.cancel">
 				<source>Cancel registration</source>

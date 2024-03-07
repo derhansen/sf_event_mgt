@@ -19,13 +19,10 @@ use DERHANSEN\SfEventMgt\Service\RegistrationService;
  */
 final class AfterRegistrationMovedFromWaitlist
 {
-    private Registration $registration;
-    private RegistrationService $registrationService;
-
-    public function __construct(Registration $registration, RegistrationService $registrationService)
-    {
-        $this->registration = $registration;
-        $this->registrationService = $registrationService;
+    public function __construct(
+        private readonly Registration $registration,
+        private readonly RegistrationService $registrationService
+    ) {
     }
 
     public function getRegistration(): Registration

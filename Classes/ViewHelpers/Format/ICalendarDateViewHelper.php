@@ -11,17 +11,15 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Format;
 
+use DateTime;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
- * ICalendar Description viewhelper
+ * ICalendar Description viewHelper
  */
 class ICalendarDateViewHelper extends AbstractViewHelper
 {
-    /**
-     * Initialize arguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('date', 'datetime', 'The DateTime object', false);
@@ -31,7 +29,6 @@ class ICalendarDateViewHelper extends AbstractViewHelper
      * Formats the given date according to rfc5545
      *
      * @see http://tools.ietf.org/html/rfc5545#section-3.3.5
-     * @return string
      */
     public function render(): string
     {
@@ -39,7 +36,7 @@ class ICalendarDateViewHelper extends AbstractViewHelper
         if ($date === null) {
             $date = $this->renderChildren();
         }
-        if ($date instanceof \DateTime) {
+        if ($date instanceof DateTime) {
             return gmdate('Ymd\THis\Z', $date->getTimestamp());
         }
 

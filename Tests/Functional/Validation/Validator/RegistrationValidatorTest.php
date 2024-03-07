@@ -13,25 +13,27 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator.
- */
 class RegistrationValidatorTest extends FunctionalTestCase
 {
     protected function setUp(): void
     {
         parent::setUp();
         $GLOBALS['LANG'] = $this->getContainer()->get(LanguageServiceFactory::class)->create('default');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
      * @test
      */
-    public function registrationInvalidWhenDefaultFieldsNotSet()
+    public function registrationInvalidWhenDefaultFieldsNotSet(): void
     {
         $registration = new Registration();
 
@@ -39,7 +41,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $result = $subject->validate($registration);
         self::assertTrue($result->hasErrors());
         $errors = $result->getSubResults();
-        self::assertEquals(3, count($errors));
+        self::assertCount(3, $errors);
         self::assertTrue(isset($errors['firstname']));
         self::assertTrue(isset($errors['lastname']));
         self::assertTrue(isset($errors['email']));
@@ -48,7 +50,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationValidWhenDefaultFieldsSet()
+    public function registrationValidWhenDefaultFieldsSet(): void
     {
         $registration = new Registration();
         $registration->setFirstname('Torben');
@@ -64,7 +66,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationInvalidWhenCustomRequiredFieldsNotSet()
+    public function registrationInvalidWhenCustomRequiredFieldsNotSet(): void
     {
         $configuration = [
             'extensionName' => 'SfEventMgt',
@@ -97,7 +99,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function registrationValidWhenCustomRequiredFieldsDoesNotExist()
+    public function registrationValidWhenCustomRequiredFieldsDoesNotExist(): void
     {
         $configuration = [
             'extensionName' => 'SfEventMgt',

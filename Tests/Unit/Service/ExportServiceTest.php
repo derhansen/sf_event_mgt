@@ -16,18 +16,13 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\ExportService;
-use Prophecy\PhpUnit\ProphecyTrait;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Class ExportServiceTest
- */
 class ExportServiceTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
-    public function fieldValuesInTypoScriptDataProvider(): array
+    public static function fieldValuesInTypoScriptDataProvider(): array
     {
         return [
             'fieldValuesWithWhitespacesInTypoScript' => [
@@ -106,12 +101,12 @@ class ExportServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider fieldValuesInTypoScriptDataProvider
-     * @param mixed $uid
-     * @param mixed $fields
-     * @param mixed $expected
      */
-    public function exportServiceWorksWithDifferentFormattedTypoScriptValues($uid, $fields, $expected)
-    {
+    public function exportServiceWorksWithDifferentFormattedTypoScriptValues(
+        int $uid,
+        array $fields,
+        string $expected
+    ): void {
         $event = new Event();
         $event->setTitle('Some event');
 
@@ -132,8 +127,10 @@ class ExportServiceTest extends UnitTestCase
             $allRegistrations
         );
 
-        $eventRepository = $this->prophesize(EventRepository::class);
-        $exportService = new ExportService($registrationRepository, $eventRepository->reveal());
+        $eventRepository = $this->getMockBuilder(EventRepository::class)->disableOriginalConstructor()->getMock();
+        $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
+            ->disableOriginalConstructor()->getMock();
+        $exportService = new ExportService($registrationRepository, $eventRepository, $eventDispatcher);
 
         $returnValue = $exportService->exportRegistrationsCsv($uid, $fields);
         self::assertSame($expected, $returnValue);

@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Service;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Messaging\FlashMessageService;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -26,9 +27,6 @@ class EventPlausabilityService
 
     /**
      * Enqueues an error flash message, if the event startdate is not before the enddate
-     *
-     * @param int $startDate
-     * @param int $endDate
      */
     public function verifyEventStartAndEnddate(int $startDate, int $endDate): void
     {
@@ -36,7 +34,7 @@ class EventPlausabilityService
             $this->addMessageToFlashMessageQueue(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.message'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.title'),
-                FlashMessage::ERROR
+                ContextualFeedbackSeverity::ERROR
             );
         }
     }
@@ -44,12 +42,10 @@ class EventPlausabilityService
     /**
      * Enqueues an warning flash message, if the event is set to notify the organisator, but no organisator
      * is set or organisator has no email address
-     *
-     * @param array $databaseRow
      */
     public function verifyOrganisatorConfiguration(array $databaseRow): void
     {
-        if ((int)$databaseRow['notify_organisator'] === 0) {
+        if ((int)$databaseRow['enable_registration'] === 0 || (int)$databaseRow['notify_organisator'] === 0) {
             return;
         }
 
@@ -57,7 +53,7 @@ class EventPlausabilityService
             $this->addMessageToFlashMessageQueue(
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.message'),
                 $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.title'),
-                FlashMessage::WARNING
+                ContextualFeedbackSeverity::WARNING
             );
             return;
         }
@@ -67,7 +63,7 @@ class EventPlausabilityService
                 $this->addMessageToFlashMessageQueue(
                     $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.message'),
                     $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.title'),
-                    FlashMessage::WARNING
+                    ContextualFeedbackSeverity::WARNING
                 );
             }
         }
@@ -85,7 +81,7 @@ class EventPlausabilityService
     protected function addMessageToFlashMessageQueue(
         string $message,
         string $title = '',
-        int $severity = FlashMessage::INFO
+        ContextualFeedbackSeverity $severity = ContextualFeedbackSeverity::INFO
     ): void {
         $flashMessage = GeneralUtility::makeInstance(
             FlashMessage::class,

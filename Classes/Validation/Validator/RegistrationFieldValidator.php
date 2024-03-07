@@ -27,40 +27,28 @@ class RegistrationFieldValidator extends AbstractValidator
      *
      * If $registration->getEvent() is null, the registration does not contain any registration fields
      *
-     * @param Registration $registration
-     * @return bool
+     * @param Registration $value
      */
-    protected function isValid($registration)
+    protected function isValid(mixed $value): void
     {
-        $result = true;
-        if ($registration->getEvent() === null || ($registration->getFieldValues()->count() === 0 &&
-            $registration->getEvent()->getRegistrationFields()->count() === 0)) {
-            return $result;
+        if ($value->getEvent() === null || ($value->getFieldValues()->count() === 0 &&
+            $value->getEvent()->getRegistrationFields()->count() === 0)) {
+            return;
         }
 
         /** @var Registration\Field $registrationField */
-        foreach ($registration->getEvent()->getRegistrationFields() as $registrationField) {
-            $validationResult = $this->validateField($registrationField, $registration->getFieldValues());
-            if ($validationResult === false && $result === true) {
-                $result = false;
-            }
+        foreach ($value->getEvent()->getRegistrationFields() as $registrationField) {
+            $this->validateField($registrationField, $value->getFieldValues());
         }
-
-        return $result;
     }
 
     /**
      * Validates the given registrationField
-     *
-     * @param Registration\Field $registrationField
-     * @param ObjectStorage $fieldValues
-     * @return bool
      */
-    protected function validateField(Registration\Field $registrationField, ObjectStorage $fieldValues): bool
+    protected function validateField(Registration\Field $registrationField, ObjectStorage $fieldValues): void
     {
-        $result = true;
         if (!$registrationField->getRequired()) {
-            return $result;
+            return;
         }
 
         $validator = $this->getNotEmptyValidator();
@@ -73,15 +61,8 @@ class RegistrationFieldValidator extends AbstractValidator
                 $this->result->forProperty('fields.' . $registrationField->getUid())->addError($error);
             }
         }
-
-        return $result;
     }
 
-    /**
-     * Returns a notEmptyValidator
-     *
-     * @return NotEmptyValidator
-     */
     protected function getNotEmptyValidator(): NotEmptyValidator
     {
         return GeneralUtility::makeInstance(NotEmptyValidator::class);

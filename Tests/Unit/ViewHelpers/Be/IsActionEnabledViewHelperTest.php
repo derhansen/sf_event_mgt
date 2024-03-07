@@ -12,8 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\ViewHelpers\Be\IsActionEnabledViewHelper;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -22,9 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class IsActionEnabledViewHelperTest extends UnitTestCase
 {
-    use ProphecyTrait;
-
-    public function viewHelperReturnsExpectedResultDataProvider(): array
+    public static function viewHelperReturnsExpectedResultDataProvider(): array
     {
         return [
             'actionNotFoundInSettings' => [
@@ -71,12 +67,8 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
     /**
      * @test
      * @dataProvider viewHelperReturnsExpectedResultDataProvider
-     * @param string $action
-     * @param array $settings
-     * @param bool $access
-     * @param bool $expected
      */
-    public function viewHelperReturnsExpectedResult(string $action, array $settings, bool $access, bool $expected)
+    public function viewHelperReturnsExpectedResult(string $action, array $settings, bool $access, bool $expected): void
     {
         $viewHelper = new IsActionEnabledViewHelper();
         $viewHelper->setArguments([
@@ -84,9 +76,9 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
             'settings' => $settings,
         ]);
 
-        $beUserProphecy = $this->prophesize(BackendUserAuthentication::class);
-        $beUserProphecy->check(Argument::any(), Argument::any())->willReturn($access);
-        $GLOBALS['BE_USER'] = $beUserProphecy->reveal();
+        $beUserMock = $this->getMockBuilder(BackendUserAuthentication::class)->disableOriginalConstructor()->getMock();
+        $beUserMock->expects(self::any())->method('check')->willReturn($access);
+        $GLOBALS['BE_USER'] = $beUserMock;
 
         self::assertEquals($expected, $viewHelper->render());
     }

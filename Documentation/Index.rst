@@ -1,65 +1,154 @@
-﻿.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
-
-.. include:: Includes.txt
+﻿.. include:: /Includes.rst.txt
 
 .. _start:
 
-=============================================================
+=================================
 Event management and registration
-=============================================================
+=================================
 
-.. only:: html
+:Extension key:
+   sf_event_mgt
 
-	:Classification:
-		sf_event_mgt
+:Package name:
+   derhansen/sf_event_mgt
 
-	:Version:
-		|release|
+:Version:
+   |release|
 
-	:Language:
-		en
+:Language:
+   en
 
-	:Description:
-		Event management and registration
+:Author:
+   Torben Hansen & Contributors
 
-	:Keywords:
-		events, registration
+:License:
+   This document is published under the
+   `Open Publication License <https://www.opencontent.org/openpub/>`__.
 
-	:Copyright:
-		2014 - 2022
+:Rendered:
+   |today|
 
-	:Author:
-		Torben Hansen
+----
 
-	:Email:
-		derhansen@gmail.com
+This extension implements an event management an registration system
+based on Extbase & Fluid and uses the latest technologies provided by
+TYPO3 CMS.
 
-	:License:
-		This document is published under the Open Content License
-		available from http://www.opencontent.org/opl.shtml
+----
 
-	:Rendered:
-		|today|
+.. container:: row m-0 p-0
 
-	The content of this document is related to TYPO3,
-	a GNU/GPL CMS/Framework available from `www.typo3.org <http://www.typo3.org/>`_.
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
 
-	**Table of Contents**
+      .. container:: card px-0 h-100
 
-.. toctree::
-	:maxdepth: 5
-	:titlesonly:
-	:glob:
+         .. rst-class:: card-header h3
 
-	Introduction/Index
-	ForEditors/Index
-	ForAdministrators/Index
-	ForDevelopers/Index
-	Faq/Index
-	KnownProblems/Index
-	Changelog/Index
-	BreakingChanges/Index
-	Miscellaneous/Index
+            .. rubric:: :ref:`Introduction <introduction>`
+
+         .. container:: card-body
+
+            Introduction to the event management system.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Editors manual <user-manual>`
+
+         .. container:: card-body
+
+            Learn how to create event, speaker and location records. Additionally
+            learn how to use the backend module and live search.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Administration manual <admin-manual>`
+
+         .. container:: card-body
+
+            This section covers installation and setup of the extension as
+            well as a detailled overview of available configuration options.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Developers manual <developers-manual>`
+
+         .. container:: card-body
+
+            Learn how to extend the main extension without modifying existing
+            code.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`FAQ <faq>`
+
+         .. container:: card-body
+
+            A collection of frequently asked questions.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Reference <reference>`
+
+         .. container:: card-body
+
+            Breaking changes, changelog, known problems and how to migrate
+            from ext:seminars.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Support <updates-support>`
+
+         .. container:: card-body
+
+            There are various ways to get support.
+
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Addons <addons>`
+
+         .. container:: card-body
+
+            Various extensions improve ext:sf_event_mgt with additional features.
+
+.. Table of Contents
+
+..  toctree::
+    :maxdepth: 5
+    :titlesonly:
+    :hidden:
+
+    Introduction/Index
+    ForEditors/Index
+    ForAdministrators/Index
+    ForDevelopers/Index
+    Faq/Index
+    Reference/Index
+    Addons/Index

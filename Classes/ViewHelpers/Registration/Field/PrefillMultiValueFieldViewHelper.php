@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\AbstractPrefillViewHelper;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 
 /**
  * PrefillMultiValueField ViewHelper for registration fields
@@ -23,7 +24,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('registrationField', 'object', 'RegistrationField', true);
@@ -34,8 +35,6 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
      * Returns, if the given $currentValue is selected/checked for the given registration field is selected
      * If no originalRequest exist (form is not submitted), true is returned if the given $currentValue
      * matches the default value of the field
-     *
-     * @return bool
      */
     public function render(): bool
     {
@@ -43,8 +42,10 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
         $registrationField = $this->arguments['registrationField'];
         $currentValue = $this->arguments['currentValue'];
 
-        // If mapping errors occured for form, return value that has been submitted
-        $originalRequest = $this->renderingContext->getRequest()->getOriginalRequest();
+        // If mapping errors occurred for form, return value that has been submitted
+        /** @var ExtbaseRequestParameters $extbaseRequestParameters */
+        $extbaseRequestParameters = $this->renderingContext->getRequest()->getAttribute('extbase');
+        $originalRequest = $extbaseRequestParameters->getOriginalRequest();
         if ($originalRequest) {
             $registrationData = $originalRequest->getParsedBody()[$this->getPluginNamespace($originalRequest)] ?? [];
 
@@ -60,11 +61,6 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
 
     /**
      * Returns if the submitted field value is selected
-     *
-     * @param array $submittedData
-     * @param int $fieldUid
-     * @param string $currentValue
-     * @return bool
      */
     protected function getFieldValueFromSubmittedData(array $submittedData, int $fieldUid, string $currentValue): bool
     {
@@ -79,25 +75,15 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
         return $result;
     }
 
-    /**
-     * @param mixed $fieldValue
-     * @param string $currentValue
-     * @return bool
-     */
-    protected function isGivenValueSelected($fieldValue, string $currentValue): bool
+    protected function isGivenValueSelected(mixed $fieldValue, string $currentValue): bool
     {
         if (is_array($fieldValue)) {
-            return in_array($currentValue, $fieldValue);
+            return in_array($currentValue, $fieldValue, true);
         }
 
         return $currentValue === $fieldValue;
     }
 
-    /**
-     * @param Field $registrationField
-     * @param string $currentValue
-     * @return bool
-     */
     protected function getFieldValueFromDefaultProperty(Field $registrationField, string $currentValue): bool
     {
         $defaultValues = GeneralUtility::trimExplode(',', $registrationField->getDefaultValue());

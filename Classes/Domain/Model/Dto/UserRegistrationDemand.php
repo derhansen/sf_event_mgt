@@ -16,9 +16,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * UserRegistrationDemand
- */
 class UserRegistrationDemand
 {
     protected string $displayMode = 'all';
@@ -79,7 +76,7 @@ class UserRegistrationDemand
             return $this->currentDateTime;
         }
 
-        return new \DateTime();
+        return new DateTime();
     }
 
     public function getUser(): ?FrontendUser

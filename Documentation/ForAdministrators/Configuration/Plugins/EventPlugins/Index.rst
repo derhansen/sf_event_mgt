@@ -1,13 +1,9 @@
-﻿.. ==================================================
-.. FOR YOUR INFORMATION
-.. --------------------------------------------------
-.. -*- coding: utf-8 -*- with BOM.
+﻿.. include:: /Includes.rst.txt
 
-.. include:: ../../../../Includes.txt
-
-
+.. highlight:: typoscript
 .. _eventplugin-settings:
 
+=====================================================================
 List view, Detail view, Registration view, Calendar view, Search view
 =====================================================================
 
@@ -21,615 +17,575 @@ for the following plugins:
 * Search view
 
 Nearly all important settings can be made through the plugins, which override the
-settings made with TypoScript. All plugin settings can also be configured with TypoScript
-(use :php:`plugin.tx_sfeventmgt.settings.` with the keys shown below).
+settings made with TypoScript.
+
+.. only:: html
+
+   .. contents:: Properties
+      :depth: 1
+      :local:
 
 Tab settings
 ~~~~~~~~~~~~
 
-.. t3-field-list-table::
- :header-rows: 1
+Display Mode
+------------
 
- - :Property:
-         Property:
+.. confval:: displayMode
 
-   :View:
-         View:
+   :Type: string
+   :Default: all
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Description:
+   With this setting, the plugin can be configured to show **all** events, only **future** or only **past events**.
 
-   :Key:
-         Key:
+   Available options:
 
+   - all
+   - future
+   - current_future
+   - past
+   - time_restriction
 
-   :Key:
+   .. note::
 
- - :Property:
-         Display mode
+      Display mode `past` will not include events that have no enddate.
 
-   :View:
-         List, Search, Calendar
+Show a Single Event Record
+--------------------------
 
-   :Description:
-         With this setting the plugin can be configured to show **all** events, only
-         **future** or only **past events**.
+.. confval:: singleEvent
 
-         Available options
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Detail, Registration
 
-         * all
-         * future
-         * current_future
-         * past
+   The detail view will show the configured event record if no event is passed to the detail or registration
+   action by parameter. Can be used to display a single event on a page without the need to link to the detail
+   or registration page from a list view.
 
-   :Key:
-         displayMode
+Sort By
+-------
 
- - :Property:
-         Show a single event record
+.. confval:: orderField
 
-   :View:
-         Detail, Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         The detail view will show the configured event record if not event is passed to the detail or  registration
-         action by parameter. Can be used to display a single event on a page without the need to link to the detail
-         or registration page from a list view.
+   Defines which field should be used for sorting events in the frontend.
 
-   :Key:
-         singleEvent
+Sorting Direction
+-----------------
 
- - :Property:
-         Sort by
+.. confval:: orderDirection
 
-   :View:
-         List, Search, Calendar
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Defines which field should be used for sorting events in the frontend. The default sorting field is
-         "startdate", which can be overridden by using this setting.
+   Defines the sorting direction for `orderField`.
 
-   :Key:
-         orderField
+   Possible values:
 
- - :Property:
-         Sorting direction
+   - (empty value)
+   - asc
+   - desc
 
-   :View:
-         List, Search, Calendar
+Top Event Restriction
+---------------------
 
-   :Description:
-         Defines the sorting direction for orderField. The default sorting direction is
-         "asc", which can be overridden by using this setting.
+.. confval:: topEventRestriction
 
-         Possible values:
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-         * <empty value>
-         * asc
-         * desc
+   With this setting, the plugin can be configured to show **only top event** events, to **except top events**,
+   or to ignore the top event restriction.
 
-   :Key:
-         orderDirection
+   Available options:
 
- - :Property:
-         Top event restriction
+   - 0 (None - ignore top event restriction)
+   - 1 (Except top events)
+   - 2 (Only top events)
 
-   :View:
-         List, Search, Calendar
+Max Records Displayed
+---------------------
 
-   :Description:
-         With this setting the plugin can be configured to show **only top event** events, to
-         **except top events** or to ignore the top event restriction.
+.. confval:: queryLimit
 
-         Available options
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-         * 0 (None - ignore top event restriction)
-         * 1 (Except top events)
-         * 2 (Only top events)
+   The maximum number of records shown.
 
-   :Key:
-         topEventRestriction
+Category Mode
+-------------
 
- - :Property:
-         Max records displayed
+.. confval:: categoryConjunction
 
-   :View:
-         List, Search, Calendar
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-        The maximum number of records shown
+   This setting defines how categories are taken into account when selecting events.
 
-   :Key:
-        queryLimit
+   The following options are available:
 
- - :Property:
-         Category mode
+   - Ignore category selection
+   - Show events with selected categories (`OR`)
+   - Show events with selected categories (`AND`)
+   - Do NOT show events with selected categories (`NOTOR`)
+   - Do NOT show events with selected categories (`NOTAND`)
 
-   :View:
-         List, Search, Calendar
+Category
+--------
 
-   :Description:
-         This setting defines, how categories are taken into account when selecting events.
+.. confval:: category
 
-         The following options are available:
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-         * Ignore category selection
-         * Show events with selected categories (OR)
-         * Show events with selected categories (AND)
-         * Do NOT show events with selected categories (NOTOR)
-         * Do NOT show events with selected categories (NOTAND)
+   Restrict events to be shown by one or more categories.
 
-   :Key:
-         categoryConjunction
+Include Subcategory
+-------------------
 
- - :Property:
-         Category
+.. confval:: includeSubcategories
 
-   :View:
-         List, Search, Calendar
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Restrict events to be shown by one or more category
+   Includes subcategories of the selected category.
 
-   :Key:
-         category
+Location
+--------
 
- - :Property:
-         Include subcategory
+.. confval:: location
 
-   :View:
-         List, Search, Calendar
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Includes subcategories of the selected category
+   Restrict events to be shown by one location.
 
-   :Key:
-         includeSubcategories
+Organisator
+-----------
 
- - :Property:
-         Location
+.. confval:: organisator
 
-   :View:
-         List, Search, Calendar
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Restrict events to be shown by one location
+   Restrict events to be shown by one organiser.
 
-   :Key:
-         location
+Speaker
+-------
 
- - :Property:
-         Organisator
+.. confval:: speaker
 
-   :View:
-         List, Search, Calendar
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Restrict events to be shown by one organisator
+   Restrict events to be shown by one speaker.
 
-   :Key:
-         organisator
+Record Storage Page
+-------------------
 
- - :Property:
-         Speaker
+.. confval:: storagePage
 
-   :View:
-         List, Search, Calendar
+   :Type: int or list of ints
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         Restrict events to be shown by one speaker
+   One or more sysfolders where events are stored.
 
-   :Key:
-         speaker
+Recursive
+---------
 
- - :Property:
-         Record storage page
+.. confval:: recursive
 
-   :View:
-         List, Search, Calendar
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         One or more sysfolders, where events are stored
+   Recursion level for record storage page.
 
-   :Key:
-         storagePage
+Comma Separated List of Field Names, Which Are Required
+-------------------------------------------------------
 
- - :Property:
-         Comma seperated list of fieldnames, which are required.
+.. confval:: registration.requiredFields
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         List of fieldnames, which are mandatory for registration. The fields
-         firstname, lastname and email are always required and cannot be overridden.
+   List of field names that are mandatory for registration. The fields
+   firstname, lastname, and email are always required and cannot be overridden.
 
-         The following additional fields are available:
+   The following additional fields are available:
 
-         * title
-         * company
-         * address
-         * zip
-         * city
-         * country
-         * phone
-         * gender
-         * dateOfBirth
-         * notes
-         * accepttc
+   - title
+   - company
+   - address
+   - zip
+   - city
+   - country
+   - phone
+   - gender
+   - dateOfBirth
+   - notes
+   - accepttc
 
-         Note, that all fields are just checked, if they are empty or not. If the field "accepttc" (or any other
-         boolean field) is included in the list of required fields, it is checked if the field value is true.
+   Note that all fields are checked if they are empty or not. If the field "accepttc" (or any other
+   boolean field) is included in the list of required fields, it is checked if the field value is true.
 
-   :Key:
-         registration.requiredFields
 
 Tab additional
 ~~~~~~~~~~~~~~
 
-.. t3-field-list-table::
- :header-rows: 1
+Detail Page
+-----------
 
- - :Property:
-         Detail Page
+.. confval:: detailPid
 
-   :View:
-         List, Registration
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         Page, where plugin is configured to show event details
+   Page where the plugin is configured to show event details.
 
-   :Key:
-         detailPid
+List Page
+---------
 
- - :Property:
-         List Page
+.. confval:: listPid
 
-   :View:
-         List, Details, Registration
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         Page, where the listview for events is shown. Only available,
-         when the plugin is configured to show event details.
+   Page where the list view for events is shown. Only available when the plugin is configured to show event details.
 
-   :Key:
-         listPid
+Registration Page
+-----------------
 
- - :Property:
-         Registration Page
+.. confval:: registrationPid
 
-   :View:
-         List, Details
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         Page, where plugin is configured to show event registration
+   Page where the plugin is configured to show event registration.
 
-   :Key:
-         registrationPid
+Payment Page
+------------
 
- - :Property:
-         Payment Page
+.. confval:: paymentPid
 
-   :View:
-         Registration
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         Page, where plugin is configured to handle payments for registration
+   Page where the plugin is configured to handle payments for registration.
 
-   :Key:
-         paymentPid
+Restrict Foreign Records to Storage Page
+----------------------------------------
 
- - :Property:
-         Restrict foreign records to storage page
+.. confval:: restrictForeignRecordsToStoragePage
 
-   :View:
-         List
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Categories, locations and organisators will only be loaded from the configured storage page (recursive)
+   Categories, locations, and organizers will only be loaded from the configured storage page (recursive).
 
-   :Key:
-         restrictForeignRecordsToStoragePage
+Disable Override Demand
+-----------------------
 
- - :Property:
-         Disable Override demand
+.. confval:: disableOverrideDemand
 
-   :View:
-         List
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         If set, the settings of the plugin can't be overridden by arguments in the URL.
-
-   :Key:
-         disableOverrideDemand
+   If set, the settings of the plugin can't be overridden by arguments in the URL.
 
 Tab template
 ~~~~~~~~~~~~
 
-.. t3-field-list-table::
- :header-rows: 1
+Template Layout
+---------------
 
- - :Property:
-         Property:
+.. confval:: templateLayout
 
-   :View:
-         View:
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar, Registration, Detail
 
-   :Description:
-         Description:
+   With this setting, the plugin can be configured to show different template layouts.
 
-   :Key:
-         Key:
+   * Template layouts can be configured with Page TSConfig.
+   * Template layout can be used/set by TypoScript (`settings.templateLayout`)
 
- - :Property:
-         Template layout
-
-   :View:
-         List
-
-   :Description:
-         With this setting the plugin can be configured to show different template layouts.
-
-         * Template layouts can be configured with Page TSConfig.
-         * Template layout can be used/set by TypoScript (settings.templateLayout)
-
-   :Key:
-         templateLayout
 
 Tab notification
 ~~~~~~~~~~~~~~~~
 
-.. t3-field-list-table::
- :header-rows: 1
+Notification Configuration
+---------------------------
 
- - :Property:
-         Property:
+.. confval:: notification.senderEmail
 
-   :View:
-         View:
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Description:
-
-   :Key:
-         Key:
+   Email address of emails sent to the user. This should be the email address of the site admin or a general information
+   email address. The user will see this email address as sender.
 
 
- - :Property:
-         E-Mail address of emails sent to the user
+.. confval:: notification.senderName
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         E-Mail address of emails sent to the user. This should
-         be the email address of the site admin or a general information
-         email address. The user will see this email address as sender.
+   Name of the sender.
 
-   :Key:
-         notification.senderEmail
 
- - :Property:
-         Name of the sender
+.. confval:: notification.replyToEmail
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Name of the sender
+   Reply-to email address of emails sent to the user.
+   Default: empty
 
-   :Key:
-         notification.senderName
 
- - :Property:
-         settings.notification.replyToEmail
+.. confval:: notification.adminEmail
 
-   :Date type:
-         String
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Reply-to email address of emails sent to the user
+   E-Mail address(es) of website admin(s) who receive new/confirmed registrations.
+   Multiple E-Mail addresses must be separated with a comma.
 
-   :Default:
-         empty
 
- - :Property:
-         E-Mail address(es) of website admin
+.. confval:: notification.registrationNew.userSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         E-Mail address(es) of website admin(s), who receives new/confirmed registrations. Multiple E-Mail addresses
-         must be separated with a comma.
+   Subject of email sent to the user when a new registration is created.
 
-   :Key:
-         notification.adminEmail
 
- - :Property:
-         Subject of email sent to user when a new registration is created
+.. confval:: notification.registrationWaitlistNew.userSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to user when a new registration is created
+   Subject of email sent to the user when a new registration on the waitlist is created.
 
-   :Key:
-         notification.registrationNew.userSubject
 
- - :Property:
-         Subject of email sent to user when a new registration on the waitlist is created
+.. confval:: notification.registrationNew.adminSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to user when a new registration on the waitlist is created
+   Subject of email sent to the admin when a new registration is created.
 
-   :Key:
-         notification.registrationWaitlistNew.userSubject
 
- - :Property:
-         Subject of email sent to admin when a new registration is created
+.. confval:: notification.registrationWaitlistNew.adminSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to admin when a new registration is created
+   Subject of email sent to the admin when a new registration on the waitlist is created.
 
-   :Key:
-         notification.registrationNew.adminSubject
 
- - :Property:
-         Subject of email sent to admin when a new registration on the waitlist is created
+.. confval:: notification.registrationConfirmed.userSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to admin when a new registration on the waitlist is created
+   Subject of email sent to the user when a registration has been confirmed.
 
-   :Key:
-         notification.registrationWaitlistNew.adminSubject
 
- - :Property:
-         Subject of email sent to user when a registration has been confirmed
+.. confval:: notification.registrationWaitlistConfirmed.userSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to user when a registration has been confirmed
+   Subject of email sent to the user when a registration on the waitlist has been confirmed.
 
-   :Key:
-         notification.registrationConfirmed.userSubject
 
- - :Property:
-         Subject of email sent to user when a registration on the waitlist has been confirmed
+.. confval:: notification.registrationConfirmed.adminSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to user when a registration on the waitlist has been confirmed
+   Subject of email sent to the admin when a registration has been confirmed.
 
-   :Key:
-         notification.registrationWaitlistConfirmed.userSubject
 
- - :Property:
-         Subject of email sent to admin when a registration has been confirmed
+.. confval:: notification.registrationWaitlistConfirmed.adminSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to admin when a registration has been confirmed
+   Subject of email sent to the admin when a registration on the waitlist has been confirmed.
 
-   :Key:
-         notification.registrationConfirmed.adminSubject
 
- - :Property:
-         Subject of email sent to admin when a registration on the waitlist has been confirmed
+.. confval:: notification.registrationCancelled.userSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to admin when a registration on the waitlist has been confirmed
+   Subject of email sent to the user when a registration has been cancelled.
 
-   :Key:
-         notification.registrationWaitlistConfirmed.adminSubject
 
- - :Property:
-         Subject of email sent to user when a registration has been cancelled
+.. confval:: notification.registrationCancelled.adminSubject
 
-   :View:
-         Registration
+   :Type: string
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Registration
 
-   :Description:
-         Subject of email sent to user when a registration has been cancelled
+   Subject of email sent to the admin when a registration has been cancelled.
 
-   :Key:
-         notification.registrationCancelled.userSubject
-
- - :Property:
-         Subject of email sent to admin when a registration has been cancelled
-
-   :View:
-         Registration
-
-   :Description:
-         Subject of email sent to admin when a registration has been cancelled
-
-   :Key:
-         notification.registrationCancelled.adminSubject
 
 Tab category menu
 ~~~~~~~~~~~~~~~~~
 
-.. t3-field-list-table::
- :header-rows: 1
+Categories Configuration
+------------------------
 
- - :Property:
-         Property:
+.. confval:: categoryMenu.categories
 
-   :View:
-         View:
+   :Type: list of strings
+   :Default: (none)
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Description:
-
-   :Key:
-         Key:
+   A subset of categories that will be shown in the category menu. If empty, all categories will be shown.
 
 
- - :Property:
-         Categories
+.. confval:: categoryMenu.includeSubcategories
 
-   :View:
-         List
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         A subset of categories which will be shown in the category menu. If empty, all
-         categories will be shown
+   Includes subcategories of selected categories in the category menu.
 
-   :Key:
-         categoryMenu.categories
 
- - :Property:
-         Include Subcategories
+.. confval:: categoryMenu.orderField
 
-   :View:
-         List
+   :Type: string
+   :Default: title
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Includes subcategories of selected categories to the category menu
+   Order field for the category menu (internally limited to "title", "uid", and "sorting").
 
-   :Key:
-         categoryMenu.includeSubcategories
 
- - :Property:
-         Order field
+.. confval:: categoryMenu.orderDirection
 
-   :View:
-         List
+   :Type: string
+   :Default: asc
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: List, Search, Calendar
 
-   :Description:
-         Order field for the category menu (internally limited to "title", "uid" and "sorting")
-
-   :Key:
-         categoryMenu.orderField
-
- - :Property:
-         Order direction
-
-   :View:
-         List
-
-   :Description:
-         Order direction for the category menu
-
-   :Key:
-         categoryMenu.orderDirection
+   Order direction for the category menu.

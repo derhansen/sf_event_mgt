@@ -1,0 +1,8 @@
+"tx_sfeventmgt_domain_model_registration"
+,"uid","event","paid","confirmed","confirmation_until","ignore_notifications","notes"
+,10,1,0,1,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / confirmed / event 1 / paid 0"
+,11,1,1,1,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / confirmed / event 1 / paid 1"
+,12,1,1,1,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / confirmed / event 1 / paid 1"
+,13,2,0,1,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / confirmed / event 2 / paid 0"
+,14,3,0,1,1402740000,1,"Confirmation until: 14.06.2014 10:00 AM / confirmed / event 3 / paid 0 / ignoreNotification 1"
+,15,3,0,1,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / confirmed / event 3 / paid 0 / ignoreNotification 0"

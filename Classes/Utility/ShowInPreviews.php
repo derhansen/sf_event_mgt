@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
- * ShowInPreviews
+ * Constants used for the showInPreviews setting
  */
 class ShowInPreviews
 {

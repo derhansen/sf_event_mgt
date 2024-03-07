@@ -16,15 +16,29 @@ use DERHANSEN\SfEventMgt\SpamChecks\LinkSpamCheck;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\SpamChecks\LinksSpamCheckTest
- */
 class LinksSpamCheckTest extends UnitTestCase
 {
     /**
      * @test
      */
-    public function checkIsFailedWhenConfiguredAmountOfLinksIsExceeded()
+    public function fallbackToDefaultMaxAmountOfLinksIfConfigurationEmpty(): void
+    {
+        $registration = new Registration();
+        $registration->setFirstname('https://www.derhansen.com');
+        $registration->setLastname('https://www.derhansen.com');
+        $registration->setAddress('https://www.derhansen.com');
+        $settings = [];
+        $arguments = [];
+        $configuration = [];
+
+        $check = new LinkSpamCheck($registration, $settings, $arguments, $configuration);
+        self::assertTrue($check->isFailed());
+    }
+
+    /**
+     * @test
+     */
+    public function checkIsFailedWhenConfiguredAmountOfLinksIsExceeded(): void
     {
         $registration = new Registration();
         $registration->setFirstname('https://www.derhansen.com');
@@ -43,7 +57,7 @@ class LinksSpamCheckTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkIsFailedWhenConfiguredAmountOfLinksIsExceededInRegistrationField()
+    public function checkIsFailedWhenConfiguredAmountOfLinksIsExceededInRegistrationField(): void
     {
         $registrationFieldValue = new Registration\FieldValue();
         $registrationFieldValue->setValue('https://www.derhansen.com');
@@ -65,7 +79,7 @@ class LinksSpamCheckTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkIsNotFailedWhenConfiguredAmountOfLinksIsNotExceeded()
+    public function checkIsNotFailedWhenConfiguredAmountOfLinksIsNotExceeded(): void
     {
         $registration = new Registration();
         $registration->setFirstname('https://www.derhansen.com');

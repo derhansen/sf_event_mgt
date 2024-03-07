@@ -19,33 +19,7 @@
     "GPL-2.0-or-later"
   ],
   "require": {
-    "typo3/cms-core": "^11.5"
-  },
-  "require-dev": {
-    "typo3/cms-backend": "^11.5",
-    "typo3/cms-frontend": "^11.5",
-    "typo3/cms-recordlist": "^11.5",
-    "typo3/cms-extbase": "^11.5",
-    "typo3/cms-felogin": "^11.5",
-    "typo3/cms-fluid-styled-content": "^11.5",
-    "typo3/cms-fluid": "^11.5",
-    "typo3/cms-tstemplate": "^11.5",
-    "typo3/cms-install": "^11.5",
-    "typo3/cms-extensionmanager": "^11.5",
-    "typo3/testing-framework": "^6.9.0",
-    "phpspec/prophecy": "^1.13",
-    "phpspec/prophecy-phpunit": "^2.0",
-    "codeception/codeception": "^4.1",
-    "ericmartel/codeception-email": "^1.0",
-    "codeception/module-webdriver": "^1.0",
-    "codeception/module-db": "^1.0",
-    "friendsofphp/php-cs-fixer": "^3.0",
-    "saschaegerer/phpstan-typo3": "^1.1.2",
-    "phpstan/extension-installer": "^1.1",
-    "jangregor/phpstan-prophecy": "^1.0"
-  },
-  "replace": {
-    "typo3-ter/sf-event-mgt": "self.version"
+    "typo3/cms-core": "^12.4"
   },
   "autoload": {
     "psr-4": {
@@ -57,27 +31,9 @@
       "DERHANSEN\\SfEventMgt\\Tests\\": "Tests"
     }
   },
-  "config": {
-    "vendor-dir": ".Build/vendor",
-    "bin-dir": ".Build/bin",
-    "allow-plugins": {
-      "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true,
-      "phpstan/extension-installer": true
-    }
-  },
-  "scripts": {
-    "post-autoload-dump": [
-      "mkdir -p .Build/public/typo3conf/ext/",
-      "[ -L .Build/public/typo3conf/ext/sf_event_mgt ] || ln -snvf ../../../../. .Build/public/typo3conf/ext/sf_event_mgt"
-    ]
-  },
   "extra": {
     "typo3/cms": {
-      "extension-key": "sf_event_mgt",
-      "cms-package-dir": "{$vendor-dir}/typo3/cms",
-      "app-dir": ".Build",
-      "web-dir": ".Build/public"
+      "extension-key": "sf_event_mgt"
     }
   }
 }

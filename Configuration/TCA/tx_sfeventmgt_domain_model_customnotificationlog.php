@@ -6,7 +6,6 @@ return [
         'label' => 'details',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'searchFields' => 'title,',
         'hideTable' => true,
         'typeicon_classes' => [
@@ -21,14 +20,8 @@ return [
     ],
     'columns' => [
         'cruser_id' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_customnotificationlog.cruser',
             'config' => [
-                'type' => 'select',
-                'renderType' => 'selectSingle',
-                'foreign_table' => 'be_users',
-                'foreign_class' => '\TYPO3\CMS\Beuser\Domain\Model\BackendUser',
-                'maxitems' => 1,
+                'type' => 'passthrough',
             ],
         ],
         'event' => [

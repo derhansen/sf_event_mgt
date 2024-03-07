@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Category;
 
+use Closure;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -34,21 +35,15 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
     /**
      * Initialize arguments
      */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('categoryUid', 'int', 'Uid of the category', true);
     }
 
-    /**
-     * @param array $arguments
-     * @param \Closure $renderChildrenClosure
-     * @param RenderingContextInterface $renderingContext
-     * @return int
-     */
     public static function renderStatic(
         array $arguments,
-        \Closure $renderChildrenClosure,
+        Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ): int {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
@@ -73,18 +68,18 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
                 $queryBuilder->expr()->eq('sys_category.uid', $queryBuilder->quoteIdentifier('sys_category_record_mm.uid_local'))
             )
             ->where(
-                $queryBuilder->expr()->andX(
+                $queryBuilder->expr()->and(
                     $queryBuilder->expr()->eq(
                         'sys_category.uid',
-                        $queryBuilder->createNamedParameter($categoryUid, \PDO::PARAM_INT)
+                        $queryBuilder->createNamedParameter($categoryUid, Connection::PARAM_INT)
                     ),
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.tablenames',
-                        $queryBuilder->createNamedParameter('tx_sfeventmgt_domain_model_event', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('tx_sfeventmgt_domain_model_event')
                     ),
                     $queryBuilder->expr()->eq(
                         'sys_category_record_mm.fieldname',
-                        $queryBuilder->createNamedParameter('category', \PDO::PARAM_STR)
+                        $queryBuilder->createNamedParameter('category')
                     ),
                     $queryBuilder->expr()->in(
                         'tx_sfeventmgt_domain_model_event.sys_language_uid',
@@ -92,7 +87,7 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
                     )
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchOne();
 
         return $count;

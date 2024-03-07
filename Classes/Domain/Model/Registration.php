@@ -17,9 +17,6 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-/**
- * Registration
- */
 class Registration extends AbstractEntity
 {
     protected string $firstname = '';

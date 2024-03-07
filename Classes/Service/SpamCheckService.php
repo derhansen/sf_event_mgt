@@ -26,13 +26,6 @@ class SpamCheckService
     protected int $maxSpamScore = 10;
     protected int $checkScore = 0;
 
-    /**
-     * SpamCheckService constructor.
-     *
-     * @param Registration $registration
-     * @param array $settings
-     * @param array $arguments
-     */
     public function __construct(Registration $registration, array $settings, array $arguments)
     {
         $this->registration = $registration;
@@ -43,7 +36,7 @@ class SpamCheckService
             $this->maxSpamScore = (int)$settings['maxSpamScore'];
         }
 
-        if (!isset($settings['checks']) || empty($settings['checks'])) {
+        if (empty($settings['checks'] ?? [])) {
             $this->settings['checks'] = [];
         }
     }
@@ -52,7 +45,6 @@ class SpamCheckService
      * Returns, if the spam check failed
      *
      * @throws SpamCheckNotFoundException
-     * @return bool
      */
     public function isSpamCheckFailed(): bool
     {
@@ -79,9 +71,7 @@ class SpamCheckService
     }
 
     /**
-     * Prococesses the spam check in the given config
-     *
-     * @param array $checkConfig
+     * Processes the spam check in the given config
      */
     protected function processSpamCheck(array $checkConfig): void
     {

@@ -8,7 +8,6 @@ return [
         'label' => 'value',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
         'origUid' => 't3_origuid',
         'delete' => 'deleted',
         'enablecolumns' => [
@@ -17,6 +16,10 @@ return [
         'searchFields' => 'value',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-registration-field',
+        ],
+        'hideTable' => true,
+        'security' => [
+            'ignorePageTypeRestriction' => true,
         ],
     ],
     'types' => [
@@ -35,8 +38,8 @@ return [
                 'default' => 0,
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
+                        'invertStateDisplay' => false,
                     ],
                 ],
             ],
@@ -71,12 +74,12 @@ return [
                 'default' => 0,
                 'items' => [
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0',
-                        '0',
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0',
+                        'value' => '0',
                     ],
                     [
-                        $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1',
-                        '1',
+                        'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1',
+                        'value' => '1',
                     ],
                 ],
             ],

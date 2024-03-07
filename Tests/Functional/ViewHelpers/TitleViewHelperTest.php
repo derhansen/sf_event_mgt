@@ -11,22 +11,15 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\PageTitle\PageTitleProviderManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test for TitleViewHelper
- */
 class TitleViewHelperTest extends FunctionalTestCase
 {
-    use ProphecyTrait;
-
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     protected StandaloneView $view;
 
@@ -34,26 +27,32 @@ class TitleViewHelperTest extends FunctionalTestCase
     {
         parent::setUp();
 
-        // Default LANG prophecy just returns incoming value as label if calling ->sL()
-        $languageServiceProphecy = $this->prophesize(LanguageService::class);
-        $languageServiceProphecy->loadSingleTableDescription(Argument::cetera())->willReturn(null);
-        $languageServiceProphecy->sL(Argument::cetera())->willReturnArgument(0);
-        $GLOBALS['LANG'] = $languageServiceProphecy->reveal();
-
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->getRenderingContext()->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
-        $this->view->getRenderingContext()->getTemplatePaths()->setTemplateSource('<e:title indexedDocTitle="{title}"/>');
+        $this->view->getRenderingContext()->getTemplatePaths()->setTemplateSource('<e:title pageTitle="{title}"/>');
+
+        $tsfe = $this->createMock(TypoScriptFrontendController::class);
+        $tsfe->config['config'] = [
+            'pageTitleProviders' => [
+                'tx_sfeventmgt' => [
+                    'provider' => 'DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider',
+                    'before' => 'record',
+                ],
+            ],
+        ];
+        $GLOBALS['TSFE'] = $tsfe;
     }
 
     /**
      * @test
      */
-    public function indexedSearchTitleIsSet()
+    public function viewHelperReturnsExpectedResult(): void
     {
-        $tsfe = $this->prophesize(TypoScriptFrontendController::class);
-        $GLOBALS['TSFE'] = $tsfe->reveal();
-
         self::assertEmpty($this->view->assign('title', 'Test')->render());
-        self::assertEquals('Test', $GLOBALS['TSFE']->indexedDocTitle);
+
+        $titleProvider = GeneralUtility::makeInstance(PageTitleProviderManager::class);
+        $title = $titleProvider->getTitle();
+
+        self::assertEquals('Test', $title);
     }
 }

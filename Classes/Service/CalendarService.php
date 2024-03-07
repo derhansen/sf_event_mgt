@@ -13,11 +13,9 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use RuntimeException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
-/**
- * CalendarService
- */
 class CalendarService
 {
     /**
@@ -47,7 +45,7 @@ class CalendarService
                 $day['isCurrentMonth'] = $day['month'] === $month;
                 $day['isCurrentDay'] = date('Ymd', $today) === date('Ymd', $day['timestamp']);
                 if ($events) {
-                    $searchDay = new \DateTime();
+                    $searchDay = new DateTime();
                     $searchDay->setTimestamp($currentDay);
                     $day['events'] = $this->getEventsForDay($events, $searchDay);
                 }
@@ -63,15 +61,16 @@ class CalendarService
     /**
      * Returns an array with meta information about the calendar date range for the month of the given year
      * respecting the firstDayOfWeek setting
-     *
-     * @param int $month
-     * @param int $year
-     * @param int $firstDayOfWeek
-     * @return array
      */
     public function getCalendarDateRange(int $month, int $year, int $firstDayOfWeek = 0): array
     {
         $firstDayOfMonth = mktime(0, 0, 0, $month, 1, $year);
+        $lastDayOfMonth = mktime(0, 0, 0, $month + 1, 0, $year);
+
+        if (!$firstDayOfMonth || !$lastDayOfMonth) {
+            throw new RuntimeException('First- or last day of month could not be calculated. for calendar data range', 1671470629);
+        }
+
         $dayOfWeekOfFirstDay = (int)date('w', $firstDayOfMonth);
         $firstDayOfCalendarOffset = 1 - $dayOfWeekOfFirstDay + $firstDayOfWeek;
         if ($firstDayOfCalendarOffset > 1) {
@@ -79,7 +78,6 @@ class CalendarService
         }
         $firstDayOfCalendar = mktime(0, 0, 0, $month, 0 + $firstDayOfCalendarOffset, $year);
 
-        $lastDayOfMonth = mktime(0, 0, 0, $month + 1, 0, $year);
         $dayOfWeekOfLastDay = (int)date('w', $lastDayOfMonth);
         $lastDayOfCalendarOffset = 6 - $dayOfWeekOfLastDay + $firstDayOfWeek;
         if ($dayOfWeekOfLastDay === 0 && $firstDayOfWeek === 1) {
@@ -130,16 +128,15 @@ class CalendarService
 
     /**
      * Returns a date configuration for the given modifier
-     *
-     * @param int $month
-     * @param int $year
-     * @param string $modifier
-     * @return array
      */
     public function getDateConfig(int $month, int $year, string $modifier = ''): array
     {
-        $date = \DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
-        $date->setTime(0, 0, 0);
+        $date = DateTime::createFromFormat('d.m.Y', sprintf('1.%s.%s', $month, $year));
+        if (!($date instanceof DateTime)) {
+            throw new RuntimeException('Unable to create date configuration', 1671471836);
+        }
+
+        $date->setTime(0, 0);
         if (!empty($modifier)) {
             $date->modify($modifier);
         }
@@ -152,10 +149,7 @@ class CalendarService
     }
 
     /**
-     * Returns an array holding weeknumber any year for the current, previous and next week
-     *
-     * @param DateTime $firstDayOfCurrentWeek
-     * @return array
+     * Returns an array holding week number any year for the current, previous and next week
      */
     public function getWeekConfig(DateTime $firstDayOfCurrentWeek): array
     {

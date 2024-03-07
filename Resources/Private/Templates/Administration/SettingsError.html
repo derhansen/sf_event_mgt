@@ -1,17 +1,16 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
 
-<f:layout name="Backend" />
+<f:layout name="Module" />
 
-<f:section name="headline">
-
-</f:section>
-
-<f:section name="content">
+<f:section name="Content">
     <div class="callout callout-danger">
         <div class="media">
             <div class="media-left">
-                        <span class="fa-stack fa-lg callout-icon"> <i class="fa fa-circle fa-stack-2x"></i>
-                        <i class="fa fa-info fa-stack-1x"></i> </span>
+                <span class="icon-emphasized">
+                    <core:icon identifier="actions-exclamation" />
+                </span>
             </div>
             <div class="media-body">
                 <h4 class="callout-title">

@@ -19,33 +19,16 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
  */
 final class AfterUserMessageSentEvent
 {
-    private Registration $registration;
-    private string $body;
-    private string $subject;
-    private array $attachments;
-    private string $senderName;
-    private string $senderEmail;
-    private string $replyToEmail;
-    private NotificationService $notificationService;
-
     public function __construct(
-        Registration $registration,
-        string $body,
-        string $subject,
-        array $attachments,
-        string $senderName,
-        string $senderEmail,
-        string $replyToEmail,
-        NotificationService $notificationService
+        private readonly Registration $registration,
+        private readonly string $body,
+        private readonly string $subject,
+        private readonly array $attachments,
+        private readonly string $senderName,
+        private readonly string $senderEmail,
+        private readonly string $replyToEmail,
+        private readonly NotificationService $notificationService
     ) {
-        $this->registration = $registration;
-        $this->body = $body;
-        $this->subject = $subject;
-        $this->attachments = $attachments;
-        $this->senderName = $senderName;
-        $this->senderEmail = $senderEmail;
-        $this->replyToEmail = $replyToEmail;
-        $this->notificationService = $notificationService;
     }
 
     public function getRegistration(): Registration

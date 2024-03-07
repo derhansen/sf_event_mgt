@@ -21,10 +21,8 @@ use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use UnexpectedValueException;
 
-/**
- * The repository for Events
- */
 class EventRepository extends Repository
 {
     protected $defaultOrderings = [
@@ -50,12 +48,8 @@ class EventRepository extends Repository
 
     /**
      * Returns the objects of this repository matching the given demand
-     *
-     * @param EventDemand $eventDemand EventDemand
-     *
-     * @return array|QueryResultInterface QueryResultInterface
      */
-    public function findDemanded(EventDemand $eventDemand)
+    public function findDemanded(EventDemand $eventDemand): QueryResultInterface
     {
         $constraints = [];
         $query = $this->createQuery();
@@ -86,7 +80,7 @@ class EventRepository extends Repository
         $this->setOrderingsFromDemand($query, $eventDemand);
 
         if (count($constraints) > 0) {
-            $query->matching($query->logicalAnd($constraints));
+            $query->matching($query->logicalAnd(...$constraints));
         }
 
         $this->setQueryLimitFromDemand($query, $eventDemand);
@@ -110,9 +104,6 @@ class EventRepository extends Repository
 
     /**
      * Sets a query limit to the given query for the given demand
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
      */
     protected function setQueryLimitFromDemand(QueryInterface $query, EventDemand $eventDemand): void
     {
@@ -123,17 +114,14 @@ class EventRepository extends Repository
 
     /**
      * Sets the ordering to the given query for the given demand
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
      */
     protected function setOrderingsFromDemand(QueryInterface $query, EventDemand $eventDemand): void
     {
         $orderings = [];
         $orderFieldAllowed = GeneralUtility::trimExplode(',', $eventDemand->getOrderFieldAllowed(), true);
-        if ($eventDemand->getOrderField() != '' && $eventDemand->getOrderDirection() != '' &&
+        if ($eventDemand->getOrderField() !== '' && $eventDemand->getOrderDirection() !== '' &&
             !empty($orderFieldAllowed) && in_array($eventDemand->getOrderField(), $orderFieldAllowed, true)) {
-            $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) == 'desc') ?
+            $orderings[$eventDemand->getOrderField()] = ((strtolower($eventDemand->getOrderDirection()) === 'desc') ?
                 QueryInterface::ORDER_DESCENDING :
                 QueryInterface::ORDER_ASCENDING);
             $query->setOrderings($orderings);
@@ -142,10 +130,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the storagePage constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setStoragePageConstraint(
         QueryInterface $query,
@@ -160,10 +144,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the displayMode constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setDisplayModeConstraint(
         QueryInterface $query,
@@ -175,16 +155,16 @@ class EventRepository extends Repository
                 $constraints['displayMode'] = $query->greaterThan('startdate', $eventDemand->getCurrentDateTime());
                 break;
             case 'current_future':
-                $constraints['displayMode'] = $query->logicalOr([
+                $constraints['displayMode'] = $query->logicalOr(
                     $query->greaterThan('startdate', $eventDemand->getCurrentDateTime()),
-                    $query->logicalAnd([
-                        $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
-                        $query->lessThanOrEqual('startdate', $eventDemand->getCurrentDateTime()),
-                    ]),
-                ]);
+                    $query->greaterThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
+                );
                 break;
             case 'past':
-                $constraints['displayMode'] = $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime());
+                $constraints['displayMode'] = $query->logicalAnd(
+                    $query->greaterThan('enddate', 0),
+                    $query->lessThanOrEqual('enddate', $eventDemand->getCurrentDateTime()),
+                );
                 break;
             case 'time_restriction':
                 $includeCurrentConstraint = null;
@@ -193,10 +173,10 @@ class EventRepository extends Repository
                     $timeRestrictionConstraints['timeRestrictionLow'] = $query->greaterThanOrEqual('startdate', $timeRestriction);
 
                     if ($eventDemand->getIncludeCurrent()) {
-                        $includeCurrentConstraint = $query->logicalAnd([
+                        $includeCurrentConstraint = $query->logicalAnd(
                             $query->lessThan('startdate', $timeRestriction),
                             $query->greaterThan('enddate', $timeRestriction),
-                        ]);
+                        );
                     }
                 }
                 if (!empty($eventDemand->getTimeRestrictionHigh())) {
@@ -205,25 +185,20 @@ class EventRepository extends Repository
                 }
                 if (isset($timeRestrictionConstraints)) {
                     if ($eventDemand->getIncludeCurrent() && $includeCurrentConstraint) {
-                        $constraints['displayMode'] = $query->logicalOr([
+                        $constraints['displayMode'] = $query->logicalOr(
                             $includeCurrentConstraint,
-                            $query->logicalAnd($timeRestrictionConstraints),
-                        ]);
+                            $query->logicalAnd(...$timeRestrictionConstraints),
+                        );
                     } else {
-                        $constraints['displayMode'] = $query->logicalAnd($timeRestrictionConstraints);
+                        $constraints['displayMode'] = $query->logicalAnd(...$timeRestrictionConstraints);
                     }
                 }
                 break;
-            default:
         }
     }
 
     /**
      * Sets the category constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setCategoryConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -232,7 +207,7 @@ class EventRepository extends Repository
             return;
         }
 
-        if ($eventDemand->getCategory() != '') {
+        if ($eventDemand->getCategory() !== '') {
             $categoryConstraints = [];
             if ($eventDemand->getIncludeSubcategories()) {
                 $categoryList = CategoryService::getCategoryListWithChilds($eventDemand->getCategory());
@@ -251,11 +226,6 @@ class EventRepository extends Repository
 
     /**
      * Returns the category constraint depending on the category conjunction configured in eventDemand
-     *
-     * @param QueryInterface $query
-     * @param EventDemand $eventDemand
-     * @param array $categoryConstraints
-     * @return ConstraintInterface
      */
     public function getCategoryConstraint(
         QueryInterface $query,
@@ -264,17 +234,17 @@ class EventRepository extends Repository
     ): ConstraintInterface {
         switch (strtolower($eventDemand->getCategoryConjunction())) {
             case 'and':
-                $constraint = $query->logicalAnd($categoryConstraints);
+                $constraint = $query->logicalAnd(...$categoryConstraints);
                 break;
             case 'notor':
-                $constraint = $query->logicalNot($query->logicalOr($categoryConstraints));
+                $constraint = $query->logicalNot($query->logicalOr(...$categoryConstraints));
                 break;
             case 'notand':
-                $constraint = $query->logicalNot($query->logicalAnd($categoryConstraints));
+                $constraint = $query->logicalNot($query->logicalAnd(...$categoryConstraints));
                 break;
             case 'or':
             default:
-                $constraint = $query->logicalOr($categoryConstraints);
+                $constraint = $query->logicalOr(...$categoryConstraints);
         }
 
         return $constraint;
@@ -282,89 +252,65 @@ class EventRepository extends Repository
 
     /**
      * Sets the location constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
-    protected function setLocationConstraint($query, $eventDemand, &$constraints): void
+    protected function setLocationConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
-        if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() != '') {
+        if ($eventDemand->getLocation() !== null && $eventDemand->getLocation() !== '') {
             $constraints['location'] = $query->equals('location', $eventDemand->getLocation());
         }
     }
 
     /**
      * Sets the location.city constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setLocationCityConstraint(
         QueryInterface $query,
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() != '') {
+        if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() !== '') {
             $constraints['locationCity'] = $query->equals('location.city', $eventDemand->getLocationCity());
         }
     }
 
     /**
      * Sets the location.country constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setLocationCountryConstraint(
         QueryInterface $query,
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() != '') {
+        if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() !== '') {
             $constraints['locationCountry'] = $query->equals('location.country', $eventDemand->getLocationCountry());
         }
     }
 
     /**
      * Sets the speaker constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setSpeakerConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
-        if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() != '') {
+        if ($eventDemand->getSpeaker() !== null && $eventDemand->getSpeaker() !== '') {
             $constraints['speaker'] = $query->contains('speaker', $eventDemand->getSpeaker());
         }
     }
 
     /**
      * Sets the organisator constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setOrganisatorConstraint(
         QueryInterface $query,
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getOrganisator() !== null && $eventDemand->getOrganisator() != '') {
+        if ($eventDemand->getOrganisator() !== null && $eventDemand->getOrganisator() !== '') {
             $constraints['organisator'] = $query->equals('organisator', $eventDemand->getOrganisator());
         }
     }
 
     /**
      * Sets the start- and enddate constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setStartEndDateConstraint(
         QueryInterface $query,
@@ -377,14 +323,14 @@ class EventRepository extends Repository
             /* StartDate and EndDate  - Search for events between two given dates */
             $begin = $eventDemand->getSearchDemand()->getStartDate();
             $end = $eventDemand->getSearchDemand()->getEndDate();
-            $constraints['startEndDate'] = $query->logicalOr([
+            $constraints['startEndDate'] = $query->logicalOr(
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
-                $query->logicalAnd([
+                $query->logicalAnd(
                     $query->greaterThanOrEqual('enddate', $begin),
                     $query->lessThanOrEqual('startdate', $begin),
-                ]),
-            ]);
+                ),
+            );
         } elseif ($eventDemand->getSearchDemand() && $eventDemand->getSearchDemand()->getStartDate() !== null) {
             /* StartDate - Search for events beginning at a given date */
             $constraints['startDate'] = $query->greaterThanOrEqual('startdate', $eventDemand->getSearchDemand()->getStartDate());
@@ -396,10 +342,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the search constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setSearchConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -411,7 +353,7 @@ class EventRepository extends Repository
             $searchConstraints = [];
 
             if (count($searchFields) === 0) {
-                throw new \UnexpectedValueException('No search fields defined', 1318497755);
+                throw new UnexpectedValueException('No search fields defined', 1318497755);
             }
 
             $searchSubject = $eventDemand->getSearchDemand()->getSearch();
@@ -419,16 +361,12 @@ class EventRepository extends Repository
                 $searchConstraints[] = $query->like($field, '%' . addcslashes($searchSubject, '_%') . '%');
             }
 
-            $constraints['search'] = $query->logicalOr($searchConstraints);
+            $constraints['search'] = $query->logicalOr(...$searchConstraints);
         }
     }
 
     /**
      * Sets the topEvent constraint to the given constraints array
-     *
-     * @param QueryInterface $query Query
-     * @param EventDemand $eventDemand EventDemand
-     * @param array $constraints Constraints
      */
     protected function setTopEventConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
@@ -439,10 +377,6 @@ class EventRepository extends Repository
 
     /**
      * Sets the restriction for year, year/month or year/month/day to the given constraints array
-     *
-     * @param QueryInterface $query
-     * @param EventDemand $eventDemand
-     * @param array $constraints
      */
     protected function setYearMonthDayRestriction(
         QueryInterface $query,
@@ -462,14 +396,14 @@ class EventRepository extends Repository
                 $begin = mktime(0, 0, 0, 1, 1, $eventDemand->getYear());
                 $end = mktime(23, 59, 59, 12, 31, $eventDemand->getYear());
             }
-            $constraints['yearMonthDay'] = $query->logicalOr([
+            $constraints['yearMonthDay'] = $query->logicalOr(
                 $query->between('startdate', $begin, $end),
                 $query->between('enddate', $begin, $end),
-                $query->logicalAnd([
+                $query->logicalAnd(
                     $query->greaterThanOrEqual('enddate', $begin),
                     $query->lessThanOrEqual('startdate', $begin),
-                ]),
-            ]);
+                ),
+            );
         }
     }
 }

@@ -3,7 +3,7 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _route_enhancers:
@@ -111,10 +111,11 @@ Configuration::
             _arguments:
               event_title: event
           -
-            routePath: '/save-registration-result/{eventuid}/{result}/{hmac}'
+            routePath: '/save-registration-result/{eventuid}/{reguid}/{result}/{hmac}'
             _controller: 'Event::saveRegistrationResult'
             _arguments:
               eventuid: eventuid
+              reguid: reguid
               result: result
               hmac: hmac
           -
@@ -136,10 +137,6 @@ Configuration::
           result: '[0-8]'
           hmac: '^[a-zA-Z0-9]{40}$'
         aspects:
-          eventuid:
-            type: PersistedAliasMapper
-            tableName: tx_sfeventmgt_domain_model_event
-            routeFieldName: uid
           reguid:
             type: PersistedAliasMapper
             tableName: tx_sfeventmgt_domain_model_registration

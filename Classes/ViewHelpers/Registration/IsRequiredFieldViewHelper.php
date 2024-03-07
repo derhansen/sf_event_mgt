@@ -18,13 +18,10 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
  */
 class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
 {
-    /**
-     * InitializeArguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
-        $this->registerArgument('fieldname', 'string', 'A fieldname to be checked', false);
-        $this->registerArgument('registrationField', 'object', 'A registration field record', false);
+        $this->registerArgument('fieldname', 'string', 'A fieldname to be checked');
+        $this->registerArgument('registrationField', 'object', 'A registration field record');
         $this->registerArgument('settings', 'array', 'The extension settings', true);
         parent::initializeArguments();
     }
@@ -33,7 +30,6 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
      * Evaluates the condition
      *
      * @param array|null $arguments
-     * @return bool
      */
     protected static function evaluateCondition($arguments = null): bool
     {
@@ -42,7 +38,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
             $defaultRequiredFields = ['firstname', 'lastname', 'email'];
             $requiredFields = array_map(
                 'trim',
-                explode(',', $arguments['settings']['registration']['requiredFields'] ?? [])
+                explode(',', $arguments['settings']['registration']['requiredFields'] ?? '')
             );
             $allRequiredFields = array_merge($requiredFields, $defaultRequiredFields);
             $result = in_array($arguments['fieldname'], $allRequiredFields);

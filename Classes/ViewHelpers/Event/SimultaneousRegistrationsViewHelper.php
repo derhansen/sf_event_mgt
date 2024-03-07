@@ -19,10 +19,7 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
  */
 class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
 {
-    /**
-     * Initialize arguments
-     */
-    public function initializeArguments()
+    public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('event', 'object', 'The event', true);
@@ -34,8 +31,6 @@ class SimultaneousRegistrationsViewHelper extends AbstractViewHelper
      * of remaining free places.
      *
      * The returned array index starts at 1 if at least one registration is possible
-     *
-     * @return array
      */
     public function render(): array
     {

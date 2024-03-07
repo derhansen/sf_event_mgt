@@ -14,38 +14,21 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Service\SettingsService.
- */
 class SettingsServiceTest extends UnitTestCase
 {
-    /**
-     * @var SettingsService
-     */
-    protected $subject;
+    protected SettingsService $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new SettingsService();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
     }
 
-    /**
-     * Data provider for settings (custom notifications)
-     *
-     * @return array
-     */
-    public function customNotificationsSettingsDataProvider()
+    public static function customNotificationsSettingsDataProvider(): array
     {
         return [
             'emptySettings' => [
@@ -91,10 +74,8 @@ class SettingsServiceTest extends UnitTestCase
     /**
      * @test
      * @dataProvider customNotificationsSettingsDataProvider
-     * @param mixed $settings
-     * @param mixed $expected
      */
-    public function getCustomNotificationsTest($settings, $expected)
+    public function getCustomNotificationsTest(array $settings, array $expected): void
     {
         $result = $this->subject->getCustomNotifications($settings);
         self::assertEquals($expected, $result);

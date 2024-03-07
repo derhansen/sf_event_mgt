@@ -1,0 +1,89 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:e="http://typo3.org/ns/DERHANSEN/SfEventMgt/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+<f:section name="main">
+
+    <h1><f:translate key="userRegistration.title" /></h1>
+
+    <div class="userregistration-detail-row">
+        <h2 class="event-title">
+            {registration.event.title}
+        </h2>
+    </div>
+
+    <div class="userregistration-detail-row">
+        <div class="userregistration-detail-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.startdate" />
+        </div>
+        <div class="userregistration-detail-value event-startdate">
+            <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.startdate}</f:format.date>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="userregistration-detail-row">
+        <div class="userregistration-detail-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.enddate" />
+        </div>
+        <div class="userregistration-detail-value event-enddate">
+            <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.enddate}</f:format.date>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div class="userregistration-detail-row">
+        <div class="userregistration-detail-label">
+            <f:translate key="tx_sfeventmgt_domain_model_event.description" />
+        </div>
+        <div class="userregistration-detail-value event-description">
+            <f:format.html>{registration.event.description}</f:format.html>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <f:if condition="{registration.event.enablePayment}">
+        <div class="userregistration-detail-row">
+            <div class="userregistration-detail-label">
+                <f:translate key="tx_sfeventmgt_domain_model_registration.payment.paid" />
+            </div>
+            <div class="userregistration-detail-value userregistration-payment-paid">
+                <f:if condition="{registration.event.paid}">
+                    <f:then>
+                        <f:translate key="tx_sfeventmgt_domain_model_registration.payment.paid.yes" />
+                    </f:then>
+                    <f:else>
+                        <f:translate key="tx_sfeventmgt_domain_model_registration.payment.paid.no" />
+                    </f:else>
+
+                    <f:comment>
+                        If the registration is not paid, you can use {settings.paymentPid} to create a link to a payment process
+                    </f:comment>
+                </f:if>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </f:if>
+
+    <f:if condition="{registration.event.cancellationPossible}">
+        <div class="userregistration-detail-row">
+            <div class="userregistration-detail-label">
+            </div>
+            <div class="userregistration-detail-value userregistration-cancel">
+                <f:variable name="hmac" value="{e:registration.hmac(registration: registration)}"/>
+                <f:link.action action="cancelRegistration" arguments="{reguid: registration.uid, hmac: hmac}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" pageUid="{settings.registrationPid}">
+                    <f:translate key="userRegistration.cancel" />
+                </f:link.action>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </f:if>
+
+
+    <f:link.action action="list" controller="UserRegistration" pluginName="Piuserreg" class="button"><f:translate key="event.backtext" /></f:link.action>
+
+</f:section>
+
+</html>

@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _admin-manual:
 
+==================
 For Administrators
 ==================
 
@@ -26,3 +27,4 @@ For Administrators
    SpamPrevention/Index
    Seo/Index
    Waitlist/Index
+   Linkhandler/Index

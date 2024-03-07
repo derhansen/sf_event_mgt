@@ -14,27 +14,15 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotificationTest
- */
 class CustomNotificationTest extends UnitTestCase
 {
-    /**
-     * @var CustomNotification
-     */
-    protected $subject;
+    protected CustomNotification $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new CustomNotification();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -43,7 +31,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getTemplateReturnsInitialValue()
+    public function getTemplateReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getTemplate());
     }
@@ -51,7 +39,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setTemplateSetsValueForString()
+    public function setTemplateSetsValueForString(): void
     {
         $this->subject->setTemplate('a-template');
         self::assertEquals('a-template', $this->subject->getTemplate());
@@ -60,7 +48,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getRecipientsReturnsInitialValue()
+    public function getRecipientsReturnsInitialValue(): void
     {
         self::assertEquals(CustomNotification::RECIPIENTS_CONFIRMED, $this->subject->getRecipients());
     }
@@ -68,7 +56,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setRecipientsSetsValueForInteger()
+    public function setRecipientsSetsValueForInteger(): void
     {
         $this->subject->setRecipients(CustomNotification::RECIPIENTS_ALL);
         self::assertEquals(CustomNotification::RECIPIENTS_ALL, $this->subject->getRecipients());
@@ -77,7 +65,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getOverwriteSubjectReturnsInitialValue()
+    public function getOverwriteSubjectReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getOverwriteSubject());
     }
@@ -85,7 +73,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setOverwriteSubjectSetsValueForString()
+    public function setOverwriteSubjectSetsValueForString(): void
     {
         $this->subject->setOverwriteSubject('subject');
         self::assertEquals('subject', $this->subject->getOverwriteSubject());
@@ -94,7 +82,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function getAdditionalMessageReturnsInitialValue()
+    public function getAdditionalMessageReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getAdditionalMessage());
     }
@@ -102,7 +90,7 @@ class CustomNotificationTest extends UnitTestCase
     /**
      * @test
      */
-    public function setAdditionalMessageSetsValueForString()
+    public function setAdditionalMessageSetsValueForString(): void
     {
         $this->subject->setAdditionalMessage('message');
         self::assertEquals('message', $this->subject->getAdditionalMessage());

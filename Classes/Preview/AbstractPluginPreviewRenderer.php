@@ -36,9 +36,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Renders the header (actually empty, since header is rendered in content)
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewHeader(GridColumnItem $item): string
     {
@@ -47,9 +44,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Renders the content of the plugin preview. Must be overwritten in extending class.
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
@@ -58,9 +52,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Render the footer. Can be overwritten in extending class if required
-     *
-     * @param GridColumnItem $item
-     * @return string
      */
     public function renderPageModulePreviewFooter(GridColumnItem $item): string
     {
@@ -69,11 +60,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Render the plugin preview
-     *
-     * @param string $previewHeader
-     * @param string $previewContent
-     * @param GridColumnItem $item
-     * @return string
      */
     public function wrapPageModulePreview(string $previewHeader, string $previewContent, GridColumnItem $item): string
     {
@@ -82,9 +68,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Returns the plugin name
-     *
-     * @param array $record
-     * @return string
      */
     protected function getPluginName(array $record): string
     {
@@ -94,10 +77,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Renders the given data and action as HTML table for plugin preview
-     *
-     * @param array $data
-     * @param string $pluginName
-     * @return string
      */
     protected function renderAsTable(array $data, string $pluginName = ''): string
     {
@@ -115,11 +94,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets the PID config for the configured PID settings in plugin flexform
-     *
-     * @param array $data
-     * @param array $flexFormData
-     * @param string $pidSetting
-     * @param string $sheet
      */
     protected function setPluginPidConfig(
         array &$data,
@@ -138,10 +112,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets the storagePage configuration
-     *
-     * @param array $data
-     * @param array $flexFormData
-     * @param string $field
      */
     protected function setStoragePage(array &$data, array $flexFormData, string $field): void
     {
@@ -178,38 +148,30 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Sets information to the data array if override demand setting is disabled
-     *
-     * @param array $data
-     * @param array $flexFormData
      */
-    protected function setOverrideDemandSettings(array &$data, array $flexFormData): void
+    protected function setOverrideDemandSettings(array &$data, array $flexFormData, array $record): void
     {
         $field = (int)$this->getFlexFormFieldValue($flexFormData, 'settings.disableOverrideDemand', 'additional');
 
         if ($field === 1) {
-            $text = '<i class="fa fa-check"></i>';
+            $text = '';
 
             // Check if plugin action is "calendar" and if so, show warning that calendar action will not work
-            $action = $this->getFlexFormFieldValue($flexFormData, 'switchableControllerActions');
-            if ($action === 'Event->calendar') {
-                $text .= ' <span class="label label-danger">' .
+            if ($record['list_type'] === 'sfeventmgt_pieventcalendar') {
+                $text .= ' <span class="badge badge-danger ms-1">' .
                     htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.pluginCalendarMisonfiguration')) . '</span>';
             }
 
             $data[] = [
                 'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.disableOverrideDemand'),
                 'value' => $text,
+                'icon' => 'actions-check-square',
             ];
         }
     }
 
     /**
      * Sets the order settings
-     *
-     * @param array $data
-     * @param array $flexFormData
-     * @param string $orderByField
-     * @param string $orderDirectionField
      */
     protected function setOrderSettings(
         array &$data,
@@ -235,65 +197,15 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     }
 
     /**
-     * Returns the current title of the switchableControllerAction
-     *
-     * @param array $flexFormData
-     * @return string
-     */
-    protected function getSwitchableControllerActionTitle(array $flexFormData): string
-    {
-        $title = '';
-        $actions = $this->getFlexFormFieldValue($flexFormData, 'switchableControllerActions');
-        switch ($actions) {
-            case 'Event->list':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.list');
-                break;
-            case 'Event->detail;Event->icalDownload':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.detail');
-                break;
-            case 'Event->registration;Event->saveRegistration;Event->saveRegistrationResult;Event->confirmRegistration;Event->cancelRegistration':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.registration');
-                break;
-            case 'Event->search':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.search');
-                break;
-            case 'Event->calendar':
-                $title = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.mode.calendar');
-                break;
-            default:
-        }
-
-        return $title;
-    }
-
-    /**
      * Returns field value from flexform configuration, including checks if flexform configuration is available
-     *
-     * @param string $key name of the key
-     * @param string $sheet name of the sheet
-     * @return string|null if nothing found, value if found
      */
     protected function getFlexFormFieldValue(array $flexformData, string $key, string $sheet = 'sDEF'): ?string
     {
-        if (isset($flexformData['data'])) {
-            $flexform = $flexformData['data'];
-            if (is_array($flexform) && is_array($flexform[$sheet] ?? false) &&
-                is_array($flexform[$sheet]['lDEF'] ?? false) && is_array($flexform[$sheet]['lDEF'][$key] ?? false) &&
-                isset($flexform[$sheet]['lDEF'][$key]['vDEF'])
-            ) {
-                return $flexform[$sheet]['lDEF'][$key]['vDEF'];
-            }
-        }
-
-        return null;
+        return $flexformData['data'][$sheet]['lDEF'][$key]['vDEF'] ?? '';
     }
 
     /**
      * Returns the record data item
-     *
-     * @param int $id
-     * @param string $table
-     * @return string
      */
     protected function getRecordData(int $id, string $table = 'pages'): string
     {
@@ -304,7 +216,7 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
             $data = '<span data-toggle="tooltip" data-placement="top" data-title="id=' . $record['uid'] . '">'
                 . $this->iconFactory->getIconForRecord($table, $record, Icon::SIZE_SMALL)->render()
                 . '</span> ';
-            $content = BackendUtility::wrapClickMenuOnIcon($data, $table, $record['uid'], '', '', '+info');
+            $content = BackendUtility::wrapClickMenuOnIcon($data, $table, $record['uid'], '');
 
             $linkTitle = htmlspecialchars(BackendUtility::getRecordTitle($table, $record));
             $content .= $linkTitle;
@@ -315,10 +227,6 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
 
     /**
      * Returns order direction
-     *
-     * @param array $flexFormData
-     * @param string $orderDirectionField
-     * @return string
      */
     private function getOrderDirectionSetting(array $flexFormData, string $orderDirectionField): string
     {

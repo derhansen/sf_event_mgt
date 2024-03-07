@@ -1,0 +1,10 @@
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","organisator","rowDescription"
+,76,80,1,"has organisator 1"
+,77,80,1,"has organisator 2"
+,78,80,0,"has no organisator"
+"tx_sfeventmgt_domain_model_organisator"
+,"uid"
+,1
+,2
+,3

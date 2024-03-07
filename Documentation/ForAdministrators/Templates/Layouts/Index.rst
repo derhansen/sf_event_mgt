@@ -3,11 +3,12 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../../Includes.txt
+.. include:: /Includes.rst.txt
 
 
 .. _template_layouts:
 
+===================================
 Using template layouts for listview
 ===================================
 
@@ -21,8 +22,9 @@ Different template layouts can be configured in Page TSConfig.::
 This TypoScript above defines 2 new template layouts, which will appear in the template
 layout selectbox in the plugin settings like shown below.
 
-.. figure:: ../../../Images/plugin-template-layout.png
+.. figure:: /Images/plugin-template-layout.png
    :alt: Different template layouts
+   :class: with-shadow
 
 The choosen template layout can be used in the fluid templates as shown below.::
 

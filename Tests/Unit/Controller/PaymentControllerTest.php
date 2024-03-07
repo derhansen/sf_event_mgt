@@ -19,6 +19,7 @@ use DERHANSEN\SfEventMgt\Event\ProcessPaymentInitializeEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 use TYPO3\CMS\Fluid\View\TemplateView;
@@ -51,6 +52,7 @@ class PaymentControllerTest extends UnitTestCase
             '',
             false
         );
+        $this->subject->_set('request', $this->createMock(Request::class));
     }
 
     /**
@@ -71,6 +73,8 @@ class PaymentControllerTest extends UnitTestCase
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
         $mockRegistration->expects(self::once())->method('getPaymentmethod')->willReturn('paypal');
 
+        $this->subject->_set('settings', []);
+
         $mockUriBuilder = $this->getMockBuilder(UriBuilder::class)
             ->onlyMethods(['uriFor'])
             ->disableOriginalConstructor()
@@ -80,25 +84,13 @@ class PaymentControllerTest extends UnitTestCase
         $mockHashService = $this->getMockBuilder(HashService::class)->getMock();
         $this->subject->injectHashService($mockHashService);
 
-        $values = [
-            'sfEventMgtSettings' => null,
-            'successUrl' => null,
-            'failureUrl' => null,
-            'cancelUrl' => null,
-            'notifyUrl' => null,
-            'registration' => $mockRegistration,
-            'html' => '',
-        ];
+        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
+        $this->subject->_set('view', $view);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
             ->disableOriginalConstructor()->getMock();
-        $eventDispatcher->expects(self::once())->method('dispatch')->with(
-            new ProcessPaymentInitializeEvent($values, 'paypal', false, $mockRegistration, $this->subject)
-        );
+        $eventDispatcher->expects(self::atLeastOnce())->method('dispatch');
         $this->subject->injectEventDispatcher($eventDispatcher);
-
-        $view = $this->getMockBuilder(TemplateView::class)->disableOriginalConstructor()->getMock();
-        $this->subject->_set('view', $view);
 
         $this->subject->redirectAction($mockRegistration, 'a-hmac');
     }

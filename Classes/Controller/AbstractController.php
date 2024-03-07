@@ -19,21 +19,19 @@ use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\Registration\FieldRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\SpeakerRepository;
-use DERHANSEN\SfEventMgt\Pagination\NumberedPagination;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
+use TYPO3\CMS\Core\Pagination\SlidingWindowPagination;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * EventController
- */
 abstract class AbstractController extends ActionController
 {
     protected array $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
@@ -112,39 +110,48 @@ abstract class AbstractController extends ActionController
     }
 
     /**
+     * Public getter for extbase arguments. Can be used by extending extensions in e.g. event listeners to
+     * retrieve the current controller arguments.
+     */
+    public function getControllerArguments(): Arguments
+    {
+        return $this->arguments;
+    }
+
+    /**
+     * Public getter to retrieve extension settings. Can be used by extending extensions in e.g. event listeners to
+     * retrieve the extension settings.
+     */
+    public function getSettings(): array
+    {
+        return $this->settings;
+    }
+
+    /**
      * Returns an array with variables for the pagination. An array with pagination settings should be passed.
      * Applies default values if settings are not available:
      * - pagination disabled
      * - itemsPerPage = 10
      * - maxNumPages = 10
-     *
-     * @param QueryResultInterface $events
-     * @param array $settings
-     * @return array
      */
     protected function getPagination(QueryResultInterface $events, array $settings): array
     {
-        $pagination = [];
+        $paginationData = [];
         $currentPage = $this->request->hasArgument('currentPage') ? (int)$this->request->getArgument('currentPage') : 1;
         if (($settings['enablePagination'] ?? false) && (int)$settings['itemsPerPage'] > 0) {
             $paginator = new QueryResultPaginator($events, $currentPage, (int)($settings['itemsPerPage'] ?? 10));
-            $pagination = new NumberedPagination($paginator, (int)($settings['maxNumPages'] ?? 10));
-            $pagination = [
+            $pagination = new SlidingWindowPagination($paginator, (int)($settings['maxNumPages'] ?? 10));
+            $paginationData = [
                 'paginator' => $paginator,
                 'pagination' => $pagination,
             ];
         }
 
-        return $pagination;
+        return $paginationData;
     }
 
     /**
      * Overwrites a given demand object by an propertyName =>  $propertyValue array
-     *
-     * @param EventDemand $demand
-     * @param array $overwriteDemand
-     *
-     * @return EventDemand
      */
     protected function overwriteEventDemandObject(EventDemand $demand, array $overwriteDemand): EventDemand
     {

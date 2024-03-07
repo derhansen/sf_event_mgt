@@ -16,15 +16,18 @@ use DERHANSEN\SfEventMgt\SpamChecks\ChallengeResponseSpamCheck;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\SpamChecks\ChallengeResponseSpamCheckTest
- */
 class ChallengeResponseSpamCheckTest extends UnitTestCase
 {
+    public function setUp(): void
+    {
+        parent::setUp();
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'foo';
+    }
+
     /**
      * @test
      */
-    public function checkIsFailedWhenArgumentNotSet()
+    public function checkIsFailedWhenArgumentNotSet(): void
     {
         $registration = new Registration();
         $settings = [];
@@ -38,7 +41,7 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkIsFailedWhenChallengeResponseDoesNotMatch()
+    public function checkIsFailedWhenChallengeResponseDoesNotMatch(): void
     {
         $registration = new Registration();
         $settings = [];
@@ -60,7 +63,7 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkIsSuccessfulWhenChallengeResponseIsValid()
+    public function checkIsSuccessfulWhenChallengeResponseIsValid(): void
     {
         $registration = new Registration();
 

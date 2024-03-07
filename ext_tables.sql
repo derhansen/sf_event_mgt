@@ -33,7 +33,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	enable_waitlist_moveup tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	registration_startdate int(11) DEFAULT '0' NOT NULL,
 	registration_deadline int(11) DEFAULT '0' NOT NULL,
-	link varchar(2048) DEFAULT '' NOT NULL,
+	link varchar(2048) DEFAULT '' NULL,
 	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	organisator int(11) unsigned DEFAULT '0' NOT NULL,
 	speaker int(11) unsigned DEFAULT '0' NOT NULL,
@@ -71,6 +71,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_customnotificationlog (
 	details text,
 	emails_sent int(11) DEFAULT '0' NOT NULL,
 	message text,
+	cruser_id int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY event (event)
 );
@@ -162,6 +163,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_field (
 	settings text,
 	text text,
 	datepickermode tinyint(3) DEFAULT '0' NOT NULL,
+	feuser_value varchar(255) DEFAULT '' NOT NULL,
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY event (event)

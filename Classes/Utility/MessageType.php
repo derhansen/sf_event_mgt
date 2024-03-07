@@ -10,7 +10,7 @@
 namespace DERHANSEN\SfEventMgt\Utility;
 
 /**
- * MessageType
+ * Constants used for notifications
  */
 class MessageType
 {

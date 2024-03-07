@@ -13,47 +13,39 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository
- */
 class CategoryRepositoryTest extends FunctionalTestCase
 {
-    /** @var CategoryRepository */
-    protected $categoryRepository;
+    protected CategoryRepository $categoryRepository;
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected array $coreExtensionsToLoad = ['core', 'extbase', 'fluid'];
 
-    /** @var array */
-    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
-
-    /**
-     * Setup
-     */
     public function setUp(): void
     {
         parent::setUp();
-        $this->categoryRepository = GeneralUtility::makeInstance(CategoryRepository::class);
-        $this->importDataSet(__DIR__ . '/../Fixtures/sys_category.xml');
+        $this->categoryRepository = $this->getContainer()->get(CategoryRepository::class);
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/sys_category.csv');
+
+        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
     /**
-     * Test if startingpoint is working
-     *
      * @test
      */
-    public function findRecordsByUid()
+    public function findRecordsByUid(): void
     {
         $events = $this->categoryRepository->findByUid(1);
         self::assertEquals($events->getTitle(), 'Category 1');
     }
 
     /**
-     * Test if storagePage restriction in demand works
-     *
      * @test
      */
-    public function findDemandedRecordsByStoragePageRestriction()
+    public function findDemandedRecordsByStoragePageRestriction(): void
     {
         $demand = new CategoryDemand();
         $demand->setStoragePage('1');
@@ -62,12 +54,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
         self::assertEquals(3, $events->count());
     }
 
-    /**
-     * DataProvider for findDemandedRecordsByCategory
-     *
-     * @return array
-     */
-    public function findDemandedRecordsByCategoryDataProvider(): array
+    public static function findDemandedRecordsByCategoryDataProvider(): array
     {
         return [
             'category 1' => [
@@ -102,7 +89,7 @@ class CategoryRepositoryTest extends FunctionalTestCase
      * @param mixed $includeSubcategory
      * @param mixed $expected
      */
-    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected)
+    public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected): void
     {
         $demand = new CategoryDemand();
         $demand->setIncludeSubcategories($includeSubcategory);

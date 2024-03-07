@@ -11,33 +11,20 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class \DERHANSEN\SfEventMgt\Domain\Model\PriceOption.
- */
 class PriceOptionTest extends UnitTestCase
 {
-    /**
-     * Location object
-     *
-     * @var PriceOption
-     */
-    protected $subject;
+    protected PriceOption $subject;
 
-    /**
-     * Setup
-     */
     protected function setUp(): void
     {
         $this->subject = new PriceOption();
     }
 
-    /**
-     * Teardown
-     */
     protected function tearDown(): void
     {
         unset($this->subject);
@@ -48,7 +35,7 @@ class PriceOptionTest extends UnitTestCase
      *
      * @test
      */
-    public function getPriceReturnsInitialValueForFloat()
+    public function getPriceReturnsInitialValueForFloat(): void
     {
         self::assertSame(
             0.0,
@@ -61,7 +48,7 @@ class PriceOptionTest extends UnitTestCase
      *
      * @test
      */
-    public function setPriceForFloatSetsPrice()
+    public function setPriceForFloatSetsPrice(): void
     {
         $this->subject->setPrice(12.99);
         self::assertSame(12.99, $this->subject->getPrice());
@@ -72,7 +59,7 @@ class PriceOptionTest extends UnitTestCase
      *
      * @test
      */
-    public function getValidUntilReturnsInitialValueForDate()
+    public function getValidUntilReturnsInitialValueForDate(): void
     {
         self::assertNull($this->subject->getValidUntil());
     }
@@ -82,9 +69,9 @@ class PriceOptionTest extends UnitTestCase
      *
      * @test
      */
-    public function setValidUntilForDateSetsValidUntil()
+    public function setValidUntilForDateSetsValidUntil(): void
     {
-        $date = new \DateTime('01.01.2016');
+        $date = new DateTime('01.01.2016');
         $this->subject->setValidUntil($date);
         self::assertEquals($date, $this->subject->getValidUntil());
     }
@@ -92,7 +79,7 @@ class PriceOptionTest extends UnitTestCase
     /**
      * @test
      */
-    public function getEventReturnsInitialValue()
+    public function getEventReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getEvent());
     }
@@ -100,7 +87,7 @@ class PriceOptionTest extends UnitTestCase
     /**
      * @test
      */
-    public function setEventForEventSetsEvent()
+    public function setEventForEventSetsEvent(): void
     {
         $event = new Event();
         $this->subject->setEvent($event);

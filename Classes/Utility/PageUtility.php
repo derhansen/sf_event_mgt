@@ -11,22 +11,16 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Utility;
 
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryHelper;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Page
- */
 class PageUtility
 {
     /**
-     * Find all ids from given ids and level
-     *
-     * @param string $pidList comma separated list of ids
-     * @param int $recursive recursive levels
-     * @return string comma separated list of ids
+     * Find all ids from given comma separated list of PIDs and level
      */
     public static function extendPidListByChildren(string $pidList = '', int $recursive = 0): string
     {
@@ -38,7 +32,7 @@ class PageUtility
         $storagePids = GeneralUtility::intExplode(',', $pidList);
         foreach ($storagePids as $startPid) {
             $pids = self::getTreeList($startPid, $recursive);
-            if (strlen((string)$pids) > 0) {
+            if (strlen($pids) > 0) {
                 $recursiveStoragePids .= ',' . $pids;
             }
         }
@@ -48,37 +42,33 @@ class PageUtility
 
     /**
      * Recursively fetch all descendants of a given page
-     *
-     * @param int $id uid of the page
-     * @param int $depth
-     * @param int $begin
-     * @param string $permClause
-     * @return string comma separated list of descendant pages
      */
-    protected static function getTreeList(int $id, int $depth, int $begin = 0, $permClause = '')
+    protected static function getTreeList(int $id, int $depth, int $begin = 0, string $permClause = ''): string
     {
         if ($id < 0) {
-            $id = abs($id);
+            $id = (int)abs($id);
         }
+
         if ($begin === 0) {
             $theList = $id;
         } else {
             $theList = '';
         }
+
         if ($id && $depth > 0) {
             $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
             $queryBuilder->getRestrictions()->removeAll()->add(GeneralUtility::makeInstance(DeletedRestriction::class));
             $queryBuilder->select('uid')
                 ->from('pages')
                 ->where(
-                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($id, \PDO::PARAM_INT)),
+                    $queryBuilder->expr()->eq('pid', $queryBuilder->createNamedParameter($id, Connection::PARAM_INT)),
                     $queryBuilder->expr()->eq('sys_language_uid', 0)
                 )
                 ->orderBy('uid');
             if ($permClause !== '') {
                 $queryBuilder->andWhere(QueryHelper::stripLogicalOperatorPrefix($permClause));
             }
-            $statement = $queryBuilder->execute();
+            $statement = $queryBuilder->executeQuery();
             while ($row = $statement->fetchAssociative()) {
                 if ($begin <= 0) {
                     $theList .= ',' . $row['uid'];
@@ -92,6 +82,7 @@ class PageUtility
                 }
             }
         }
-        return $theList;
+
+        return (string)$theList;
     }
 }

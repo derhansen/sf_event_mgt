@@ -20,15 +20,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class CleanupGdprCommand
- */
 class CleanupGdprCommand extends Command
 {
-    /**
-     * Configuring the command options
-     */
-    public function configure()
+    public function configure(): void
     {
         $this
             ->addArgument(
@@ -50,14 +44,7 @@ class CleanupGdprCommand extends Command
             );
     }
 
-    /**
-     * Execute the cleanup command
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $maintenanceService = GeneralUtility::makeInstance(MaintenanceService::class);
         $io = new SymfonyStyle($input, $output);
@@ -68,6 +55,6 @@ class CleanupGdprCommand extends Command
         $amountDeleted = $maintenanceService->processGdprCleanup($days, $softDelete, $ignoreEventRestriction);
         $io->success($amountDeleted . ' registrations deleted.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 }

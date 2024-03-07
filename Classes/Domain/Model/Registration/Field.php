@@ -17,9 +17,6 @@ use DERHANSEN\SfEventMgt\Utility\FieldValueType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
-/**
- * Field
- */
 class Field extends AbstractEntity
 {
     protected string $title = '';
@@ -31,7 +28,7 @@ class Field extends AbstractEntity
     protected ?Event $event = null;
     protected string $text = '';
     protected int $datepickermode = 0;
-    protected string $datepickermodeType = '';
+    protected string $feuserValue = '';
 
     public function getTitle(): string
     {
@@ -185,5 +182,15 @@ class Field extends AbstractEntity
             default:
                 return 'date';
         }
+    }
+
+    public function getFeuserValue(): string
+    {
+        return $this->feuserValue;
+    }
+
+    public function setFeuserValue(string $feuserValue): void
+    {
+        $this->feuserValue = $feuserValue;
     }
 }

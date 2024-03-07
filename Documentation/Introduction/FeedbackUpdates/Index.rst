@@ -3,22 +3,23 @@
 .. --------------------------------------------------
 .. -*- coding: utf-8 -*- with BOM.
 
-.. include:: ../../Includes.txt
+.. include:: /Includes.rst.txt
 
 .. _updates-support:
 
+===================
 Updates and support
--------------------
+===================
 
-The source code of this extension is hosted on GitHub. Please report bugs and changerequests
-directly at https://github.com/derhansen/sf_event_mgt
+The source code of this extension is hosted on GitHub. Please report bugs or change requests
+in the GitHub `issue tracker <https://github.com/derhansen/sf_event_mgt>`_
 
 Updates will be published directly on TER and Packagist.
 
 Free public support
 ~~~~~~~~~~~~~~~~~~~
 
-Free public support is available on the #ext-sf_event_mgt TYPO3 Slack Channel.
+Free public support is available on the `#ext-sf_event_mgt <https://typo3.slack.com/messages/ext-sf_event_mgt/>` TYPO3 Slack Channel.
 
 Please also check the :ref:`faq` section of this documentation. New articles are added on a regular basis.
 
@@ -34,4 +35,4 @@ I also offer the following paid services:
 * Priority Bug fixes
 * Developing extensions, that extend sf_event_mgt with unique features/requirements
 
-Please contact me by email and ask for prices.
+Please contact me by `email <mailto:derhansen\@gmail.com>`__  and ask for prices.
