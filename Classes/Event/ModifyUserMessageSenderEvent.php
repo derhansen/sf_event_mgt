@@ -24,6 +24,8 @@ final class ModifyUserMessageSenderEvent
         private string $senderName,
         private string $senderEmail,
         private string $replyToEmail,
+        private string $subject,
+        private string $body,
         private readonly Registration $registration,
         private readonly int $type,
         private readonly NotificationService $notificationService
@@ -53,6 +55,26 @@ final class ModifyUserMessageSenderEvent
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): void
+    {
+        $this->subject = $subject;
+    }
+
+    public function getBody(): string
+    {
+        return $this->body;
+    }
+
+    public function setBody(string $body): void
+    {
+        $this->body = $body;
     }
 
     public function getNotificationService(): NotificationService

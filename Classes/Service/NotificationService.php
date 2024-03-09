@@ -212,11 +212,16 @@ class NotificationService
                 $settings['notification']['senderName'] ?? '',
                 $settings['notification']['senderEmail'] ?? '',
                 $settings['notification']['replyToEmail'] ?? '',
+                $subject,
+                $body,
                 $registration,
                 $type,
                 $this
             );
             $this->eventDispatcher->dispatch($modifyUserMessageSenderEvent);
+            $subject = $modifyUserMessageSenderEvent->getSubject();
+            $body = $modifyUserMessageSenderEvent->getBody();
+
             $senderName = $modifyUserMessageSenderEvent->getSenderName();
             $senderEmail = $modifyUserMessageSenderEvent->getSenderEmail();
             $replyToEmail = $modifyUserMessageSenderEvent->getReplyToEmail();
