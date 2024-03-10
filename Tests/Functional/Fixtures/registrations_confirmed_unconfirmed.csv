@@ -1,7 +1,9 @@
-"tx_sfeventmgt_domain_model_registration"
-,"uid","hidden","event","confirmed","confirmation_until","paid","notes"
-,1,0,0,0,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / unconfirmed"
-,2,0,0,1,1402740000,0,"Confirmation until: 14.06.2014 10:00 AM / confirmed"
-,3,0,0,0,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / unconfirmed"
-,4,0,0,0,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / unconfirmed"
-,5,1,0,0,1402743600,0,"Confirmation until: 14.06.2014 11:00 AM / unconfirmed / hidden"
+tx_sfeventmgt_domain_model_registration,,,,,,,,
+,uid,hidden,event,confirmed,confirmation_until,paid,notes,waitlist
+,1,0,50,0,1402740000,0,Confirmation until: 14.06.2014 10:00 AM / unconfirmed,0
+,2,0,50,1,1402740000,0,Confirmation until: 14.06.2014 10:00 AM / confirmed,0
+,3,0,50,0,1402743600,0,Confirmation until: 14.06.2014 11:00 AM / unconfirmed,0
+,4,0,50,0,1402743600,0,Confirmation until: 14.06.2014 11:00 AM / unconfirmed,0
+,5,1,50,0,1402743600,0,Confirmation until: 14.06.2014 11:00 AM / unconfirmed / hidden,0
+,6,0,50,0,1402740000,0,Confirmation until: 14.06.2014 10:00 AM / unconfirmed,1
+,7,0,50,1,1402740000,0,Confirmation until: 14.06.2014 10:00 AM / confirmed,1

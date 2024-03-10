@@ -383,6 +383,18 @@ class AdministrationController extends AbstractController
                     self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_UNCONFIRMED
                 ),
             ],
+            [
+                'value' => CustomNotification::RECIPIENTS_WAITLIST_CONFIRMED,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_WAITLIST_CONFIRMED
+                ),
+            ],
+            [
+                'value' => CustomNotification::RECIPIENTS_WAITLIST_UNCONFIRMED,
+                'label' => $this->getLanguageService()->sL(
+                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_WAITLIST_UNCONFIRMED
+                ),
+            ],
         ];
     }
 

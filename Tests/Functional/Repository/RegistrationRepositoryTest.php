@@ -65,14 +65,22 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         return [
             'all registrations' => [
                 0,
-                3,
+                6,
             ],
             'confirmed' => [
                 1,
-                2,
+                1,
             ],
             'unconfirmed' => [
                 2,
+                3,
+            ],
+            'confirmed waitlist' => [
+                3,
+                1,
+            ],
+            'unconfirmed waitlist' => [
+                4,
                 1,
             ],
         ];
@@ -85,9 +93,9 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     public function findNotificationRegistrationsReturnsConfirmedAndUnconfirmed($recipientSetting, $expected): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
-        $event->expects(self::once())->method('getUid')->willReturn(20);
-        $customNotification = $this->getMockBuilder(CustomNotification::class)->getMock();
-        $customNotification->expects(self::any())->method('getRecipients')->willReturn($recipientSetting);
+        $event->expects(self::once())->method('getUid')->willReturn(50);
+        $customNotification = new CustomNotification();
+        $customNotification->setRecipients($recipientSetting);
         $registrations = $this->registrationRepository->findNotificationRegistrations($event, $customNotification, []);
         self::assertSame($expected, $registrations->count());
     }

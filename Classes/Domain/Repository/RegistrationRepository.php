@@ -51,10 +51,24 @@ class RegistrationRepository extends Repository
         $constraints[] = $query->equals('event', $event);
         $constraints[] = $query->equals('ignoreNotifications', false);
 
-        if ($customNotification->getRecipients() === CustomNotification::RECIPIENTS_CONFIRMED) {
-            $constraints[] = $query->equals('confirmed', true);
-        } elseif ($customNotification->getRecipients() === CustomNotification::RECIPIENTS_UNCONFIRMED) {
-            $constraints[] = $query->equals('confirmed', false);
+        switch ($customNotification->getRecipients()) {
+            case CustomNotification::RECIPIENTS_CONFIRMED:
+                $constraints[] = $query->equals('confirmed', true);
+                $constraints[] = $query->equals('waitlist', false);
+                break;
+            case CustomNotification::RECIPIENTS_UNCONFIRMED:
+                $constraints[] = $query->equals('confirmed', false);
+                $constraints[] = $query->equals('waitlist', false);
+                break;
+            case CustomNotification::RECIPIENTS_WAITLIST_CONFIRMED:
+                $constraints[] = $query->equals('confirmed', true);
+                $constraints[] = $query->equals('waitlist', true);
+                break;
+            case CustomNotification::RECIPIENTS_WAITLIST_UNCONFIRMED:
+                $constraints[] = $query->equals('confirmed', false);
+                $constraints[] = $query->equals('waitlist', true);
+                break;
+            default:
         }
 
         if (!is_array($findConstraints) || count($findConstraints) === 0) {

@@ -19,6 +19,8 @@ class CustomNotification
     public const RECIPIENTS_ALL = 0;
     public const RECIPIENTS_CONFIRMED = 1;
     public const RECIPIENTS_UNCONFIRMED = 2;
+    public const RECIPIENTS_WAITLIST_CONFIRMED = 3;
+    public const RECIPIENTS_WAITLIST_UNCONFIRMED = 4;
 
     protected string $template = '';
     protected int $recipients = self::RECIPIENTS_CONFIRMED;
