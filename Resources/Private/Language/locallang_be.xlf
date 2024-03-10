@@ -366,6 +366,12 @@
 			<trans-unit id="administration.notify.recipients.2">
 				<source>Unconfirmed participants</source>
 			</trans-unit>
+			<trans-unit id="administration.notify.recipients.3">
+				<source>Confirmed waitlist participants</source>
+			</trans-unit>
+			<trans-unit id="administration.notify.recipients.4">
+				<source>Unconfirmed waitlist participants</source>
+			</trans-unit>
 			<trans-unit id="administration.notify.label.template">
 				<source>Template:</source>
 			</trans-unit>
