@@ -7,7 +7,7 @@ return [
         'parent' => 'web',
         'position' => ['after' => 'web_info'],
         'access' => 'user',
-        'workspaces' => 'live',
+        'workspaces' => '*',
         'path' => '/module/page/events',
         'labels' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_modadministration.xlf',
         'extensionName' => 'SfEventMgt',
