@@ -419,7 +419,7 @@ Registration message views are :php:`cancelRegistration`, :php:`confirmRegistrat
          :html:`{failed}`
 
    :Description:
-         If the status is failed (not available in :php:`saveRegistrationResult`)
+         If the status is failed
 
  - :Object:
          :html:`{titleKey}`
@@ -432,6 +432,12 @@ Registration message views are :php:`cancelRegistration`, :php:`confirmRegistrat
 
    :Description:
          The key of the message to use in <f:translate> viewHelper
+
+ - :Object:
+         :html:`{result}`
+
+   :Description:
+         The integer value of the {messageKey} variable
 
 iCalendar view
 ~~~~~~~~~~~~~~

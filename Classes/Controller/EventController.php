@@ -609,15 +609,18 @@ class EventController extends AbstractController
 
         $event = null;
         $registration = null;
+        $failed = true;
 
         switch ($result) {
             case RegistrationResult::REGISTRATION_SUCCESSFUL:
                 $messageKey = 'event.message.registrationsuccessful';
                 $titleKey = 'registrationResult.title.successful';
+                $failed = false;
                 break;
             case RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST:
                 $messageKey = 'event.message.registrationwaitlistsuccessful';
                 $titleKey = 'registrationWaitlistResult.title.successful';
+                $failed = false;
                 break;
             case RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED:
                 $messageKey = 'event.message.registrationfailedeventexpired';
@@ -665,6 +668,8 @@ class EventController extends AbstractController
             'titleKey' => $titleKey,
             'event' => $event,
             'registration' => $registration,
+            'result' => $result,
+            'failed' => $failed,
         ]);
 
         return $this->htmlResponse();
