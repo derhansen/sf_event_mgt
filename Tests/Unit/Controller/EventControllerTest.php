@@ -1156,6 +1156,8 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => 'registrationResult.title.failed',
             'event' => null,
             'registration' => null,
+            'result' => RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED,
+            'failed' => true,
         ]);
         $this->subject->_set('view', $view);
 
@@ -1177,6 +1179,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfailedeventexpired',
                 'registrationResult.title.failed',
+                true,
             ],
             'RegistrationDeadlineExpired' => [
                 RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED,
@@ -1185,6 +1188,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfaileddeadlineexpired',
                 'registrationResult.title.failed',
+                true,
             ],
             'EventFull' => [
                 RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS,
@@ -1193,6 +1197,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfailedmaxparticipants',
                 'registrationResult.title.failed',
+                true,
             ],
             'RegistrationSuccessful' => [
                 RegistrationResult::REGISTRATION_SUCCESSFUL,
@@ -1201,6 +1206,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationsuccessful',
                 'registrationResult.title.successful',
+                false,
             ],
             'RegistrationNotEnabled' => [
                 RegistrationResult::REGISTRATION_NOT_ENABLED,
@@ -1209,6 +1215,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfailednotenabled',
                 'registrationResult.title.failed',
+                true,
             ],
             'NotEnoughFreePlaces' => [
                 RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES,
@@ -1217,6 +1224,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfailednotenoughfreeplaces',
                 'registrationResult.title.failed',
+                true,
             ],
             'MaxAmountRegistrationsExceeded' => [
                 RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED,
@@ -1225,6 +1233,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfailedmaxamountregistrationsexceeded',
                 'registrationResult.title.failed',
+                true,
             ],
             'EmailNotUnique' => [
                 RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE,
@@ -1233,6 +1242,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 'event.message.registrationfailedemailnotunique',
                 'registrationResult.title.failed',
+                true,
             ],
             'UnknownResult' => [
                 -1,
@@ -1241,6 +1251,7 @@ class EventControllerTest extends UnitTestCase
                 'somehmac',
                 '',
                 '',
+                true,
             ],
         ];
     }
@@ -1251,7 +1262,7 @@ class EventControllerTest extends UnitTestCase
      * @dataProvider invalidEmailsDataProvider
      * @test
      */
-    public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $reguid, $hmac, $message, $title)
+    public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $reguid, $hmac, $message, $title, $failed)
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
         $request->expects(self::once())->method('hasArgument')->with('reguid')->willReturn(true);
@@ -1283,6 +1294,8 @@ class EventControllerTest extends UnitTestCase
             'titleKey' => $title,
             'event' => null,
             'registration' => null,
+            'result' => $result,
+            'failed' => $failed,
         ]);
         $this->subject->_set('view', $view);
 
