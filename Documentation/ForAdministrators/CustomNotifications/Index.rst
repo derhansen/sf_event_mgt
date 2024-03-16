@@ -119,3 +119,10 @@ paid and confirmed to the event.
 
 Also note, that the usage of conditions like shown above are rudimentary and does not cover all
 scenarios.
+
+How to create links to actions for notifications sent using the backend module
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The native :php:`f:uri.action` ViewHelper will create links in backend context when used for notifications in the
+backend module. In order to create links in frontend context, the extension comes with an a custom ViewHelper,
+which creates links for frontend context. See :php:`Uri.PageViewhelper` in :ref:`viewhelpers`

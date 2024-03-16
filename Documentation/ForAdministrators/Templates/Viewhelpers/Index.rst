@@ -77,9 +77,17 @@ generated in the TYPO3 backend.
 This viewhelper can be used in email templates for custom notifications, when you want to link to a
 given page in you TYPO3 website.
 
-**Example**::
+**Example 1**::
 
   <e:uri.page pageUid="4" additionalParams="{tx_sfeventmgt_pieventdetail:{event: registration.event, action: 'detail', controller: 'Event'}}" absolute="1"/>
+
+**Example 2**::
+
+  <a href="{e:uri.page(
+      pageUid: 123,
+      additionalParams: '{tx_sfeventmgt_pieventregistration: {pluginName:\'Pieventregistration\',extensionName:\'sfeventmgt\',action:\'cancelRegistration\',controller:\'Event\',reguid: registration.uid, hmac: hmac}}',
+      absolute: 1,
+  )}" class="button">Remove registration</a>
 
 Uri.OnlineCalendar
 ~~~~~~~~~~~~~~~~~~
