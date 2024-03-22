@@ -22,5 +22,5 @@ services:
       tags:
         - name: 'console.command'
           command: 'sf_event_mgt:cleanup:gdpr'
-          description: 'Delete registrations of expired events'
+          description: 'Delete registrations of expired events (registrations for events with no enddate will be ignored)'
           schedulable: true

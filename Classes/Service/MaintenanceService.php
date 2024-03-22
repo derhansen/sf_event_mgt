@@ -170,6 +170,10 @@ class MaintenanceService
                 $queryBuilder->expr()->lte(
                     'e.enddate',
                     $queryBuilder->createNamedParameter($maxEndDate->getTimestamp(), Connection::PARAM_INT)
+                ),
+                $queryBuilder->expr()->gt(
+                    'e.enddate',
+                    $queryBuilder->createNamedParameter(0, Connection::PARAM_INT)
                 )
             )->execute()
             ->fetchAllAssociative();

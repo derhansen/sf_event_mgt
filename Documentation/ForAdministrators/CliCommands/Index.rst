@@ -43,7 +43,7 @@ saved registration field data for expired events, a CLI command is available.
 
 **Arguments**
 
-* `days` - Amount of days reduced from todays date for expired event selection
+* `days` - Amount of days reduced from todays date for expired event selection.
 
 **Options**
 
@@ -60,3 +60,8 @@ Output
    :alt: Cleanup GDPR command
 
 It is recommended to setup a scheduler task to execute the CLI command periodically.
+
+.. note::
+
+   The GDPR cleanup only includes events, which have a start- and enddate. Events with no enddate are
+   not covered by the cleanup, since it is not possible to calculate, when the event has ended.
