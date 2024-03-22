@@ -144,7 +144,7 @@ class AdministrationController extends AbstractController
                         'toggle' => 'tooltip',
                         'placement' => 'bottom',
                         'title' => $title,
-                        ])
+                    ])
                     ->setTitle($title)
                     ->setIcon($icon);
                 $buttonBar->addButton($viewButton, ButtonBar::BUTTON_POSITION_LEFT, $tableConfiguration['group']);
