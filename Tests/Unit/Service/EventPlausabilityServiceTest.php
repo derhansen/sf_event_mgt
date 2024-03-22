@@ -28,7 +28,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
                 true,
             ],
             'startdate only' => [
-               strtotime('2021-03-01T10:00:00+00:00'),
+                strtotime('2021-03-01T10:00:00+00:00'),
                 0,
                 true,
             ],

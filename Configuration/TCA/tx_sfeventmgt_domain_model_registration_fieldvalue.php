@@ -25,7 +25,7 @@ return [
     'types' => [
         '0' => [
             'showitem' => 'value, value_type, field',
-            ],
+        ],
     ],
     'palettes' => [],
     'columns' => [
