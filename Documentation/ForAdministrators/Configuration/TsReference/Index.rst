@@ -277,7 +277,7 @@ settings.notification.senderEmail
 ---------------------------------
 
 .. confval:: settings.notification.senderEmail
-
+   :name: ts-settings-senderemail
    :Type: string
    :Default: empty
 
@@ -288,7 +288,7 @@ settings.notification.senderName
 --------------------------------
 
 .. confval:: settings.notification.senderName
-
+   :name: ts-settings-sendername
    :Type: string
    :Default: empty
 
@@ -310,7 +310,7 @@ settings.notification.senderSignature
 -------------------------------------
 
 .. confval:: settings.notification.senderSignature
-
+   :name: ts-settings-sendersignature
    :Type: string
    :Default: empty
 
@@ -513,7 +513,7 @@ settings.search.dateFormat
 --------------------------
 
 .. confval:: settings.search.dateFormat
-
+   :name: ts-search-date-format
    :Type: string
    :Default: Y-m-d
 
@@ -524,7 +524,7 @@ settings.search.fields
 ----------------------
 
 .. confval:: settings.search.fields
-
+   :name: ts-settings-search-fields
    :Type: string
    :Default: title, teaser
 
@@ -548,7 +548,7 @@ settings.pagination.enablePagination
 ------------------------------------
 
 .. confval:: settings.pagination.enablePagination
-
+   :name: ts-settings-pagination-enablepagination
    :Type: int
    :Default: false
 
@@ -559,7 +559,7 @@ settings.pagination.itemsPerPage
 --------------------------------
 
 .. confval:: settings.pagination.itemsPerPage
-
+   :name: ts-settings-pagination-itemsperpage
    :Type: int
    :Default: 10
 
@@ -570,7 +570,7 @@ settings.pagination.maxNumPages
 -------------------------------
 
 .. confval:: settings.pagination.maxNumPages
-
+   :name: ts-settings-pagination-maxnumpages
    :Type: int
    :Default: 10
 
@@ -682,7 +682,7 @@ settings.search.dateFormat
 --------------------------
 
 .. confval:: settings.search.dateFormat
-
+   :name: ts-search-date-format-backend-module
    :Type: string
    :Default: d.m.Y H:i
 
@@ -693,7 +693,7 @@ settings.search.fields
 ----------------------
 
 .. confval:: settings.search.fields
-
+   :name: ts-settings-search-fields-backend-module
    :Type: string
    :Default: title, teaser
 
@@ -704,7 +704,7 @@ settings.notification.senderEmail
 ---------------------------------
 
 .. confval:: settings.notification.senderEmail
-
+   :name: ts-settings-senderemail-backend-module
    :Type: string
    :Default: (none)
 
@@ -715,7 +715,7 @@ settings.notification.senderName
 --------------------------------
 
 .. confval:: settings.notification.senderName
-
+   :name: ts-settings-sendername-backend-module
    :Type: string
    :Default: (none)
 
@@ -726,7 +726,7 @@ settings.notification.senderSignature
 -------------------------------------
 
 .. confval:: settings.notification.senderSignature
-
+   :name: ts-settings-sendersignature-backend-module
    :Type: string
    :Default: (none)
 
@@ -804,7 +804,7 @@ settings.pagination.enablePagination
 ------------------------------------
 
 .. confval:: settings.pagination.enablePagination
-
+   :name: ts-settings-pagination-enablepagination-backend-module
    :Type: int
    :Default: 1
 
@@ -815,7 +815,7 @@ settings.pagination.itemsPerPage
 --------------------------------
 
 .. confval:: settings.pagination.itemsPerPage
-
+   :name: ts-settings-pagination-itemsperpage-backend-module
    :Type: int
    :Default: 10
 
@@ -826,7 +826,7 @@ settings.pagination.maxNumPages
 -------------------------------
 
 .. confval:: settings.pagination.maxNumPages
-
+   :name: ts-settings-pagination-maxnumpages-backend-module
    :Type: int
    :Default: 10
 

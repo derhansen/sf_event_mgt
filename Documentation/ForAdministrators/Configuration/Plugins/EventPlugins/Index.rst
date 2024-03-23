@@ -284,7 +284,7 @@ Detail Page
 -----------
 
 .. confval:: detailPid
-
+   :name: event-plugins-registration-pid
    :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
@@ -310,7 +310,7 @@ Registration Page
 -----------------
 
 .. confval:: registrationPid
-
+   :name: event-plugin-registration-pid
    :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
@@ -323,7 +323,7 @@ Payment Page
 ------------
 
 .. confval:: paymentPid
-
+   :name: event-plugin-payment-pid
    :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
@@ -365,7 +365,7 @@ Template Layout
 ---------------
 
 .. confval:: templateLayout
-
+   :name: event-plugin-template-layout
    :Type: string
    :Default: (none)
    :Path: plugin.tx_sfeventmgt.settings

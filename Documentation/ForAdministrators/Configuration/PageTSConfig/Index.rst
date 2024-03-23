@@ -12,7 +12,7 @@ templateLayout
 --------------
 
 .. confval:: templateLayout
-
+   :name: pagets-template-layout
    :type: array
 
    With this setting, the plugin can be configured to show different template layouts.

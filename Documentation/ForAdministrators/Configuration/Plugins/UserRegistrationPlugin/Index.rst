@@ -95,7 +95,7 @@ Registration pid
 ----------------
 
 .. confval:: registrationPid
-
+   :name: user-registration-plugin-registration-pid1
    :type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
@@ -135,7 +135,7 @@ Tab additional
 Detail Page
 -----------
 .. confval:: detailPid
-
+   :name: user-registration-plugins-registration-pid
    :type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
@@ -147,7 +147,7 @@ Registration Page
 -----------------
 
 .. confval:: registrationPid
-
+   :name: user-registration-plugin-registration-pid2
    :type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
@@ -158,7 +158,7 @@ Registration Page
 Payment Page
 ------------
 .. confval:: paymentPid
-
+   :name: user-registration-plugin-payment-pid
    :type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
