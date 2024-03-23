@@ -13,7 +13,7 @@ templateLayout
 
 .. confval:: templateLayout
    :name: pagets-template-layout
-   :type: array
+   :Type: array
 
    With this setting, the plugin can be configured to show different template layouts.
    Template layouts can be configured as shown below::
@@ -31,7 +31,7 @@ module.defaultPid.tx_sfeventmgt_domain_model_event
 
 .. confval:: module.defaultPid.tx_sfeventmgt_domain_model_event
 
-   :type: int
+   :Type: int
 
    This setting allows setting the default storage pid of new events generated over the backend module.
    To set the default storage pid for new event records, for example, to a sysfolder with the pid 20, use::

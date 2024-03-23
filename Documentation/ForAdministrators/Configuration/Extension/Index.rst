@@ -31,7 +31,7 @@ Slug behaviour `slugBehaviour`
 
 .. confval:: slugBehaviour
 
-   :type: string, keyword
+   :Type: string, keyword
    :Default: unique
 
    Choose one of the following slug behaviours:
@@ -51,7 +51,7 @@ Enable payment method 'invoice' `enableInvoice`
 
 .. confval:: enableInvoice
 
-   :type: bool
+   :Type: bool
    :Default: 1
 
    Enable payment method 'invoice'
@@ -61,7 +61,7 @@ Enable payment method 'transfer' `enableTransfer`
 
 .. confval:: enableTransfer
 
-   :type: bool
+   :Type: bool
    :Default: 1
 
    Enable payment method 'transfer'
@@ -74,7 +74,7 @@ Hide registrations in event record by limit `hideInlineRegistrations`
 
 .. confval:: hideInlineRegistrations
 
-   :type: bool
+   :Type: bool
    :Default: 0
 
    Enable feature to hide registrations when editing an event in the backend
@@ -84,7 +84,7 @@ Hide registrations in event record by limit `hideInlineRegistrationsLimit`
 
 .. confval:: hideInlineRegistrationsLimit
 
-   :type: int
+   :Type: int
    :Default: 500
 
    Max amount of registrations to display before event registrations will be hidden when editing an event.

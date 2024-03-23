@@ -48,7 +48,7 @@ Pricing
 The price is for the development of a custom version of sf_event_mgt_multireg
 with an extension key and a PHP namespace of your choice.
 
-Please contact me by email at torben@derhanssen.com for ordering, questions
+Please contact me by email at torben@derhansen.com for ordering, questions
 and/or additional requirements.
 
 

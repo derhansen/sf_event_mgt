@@ -37,7 +37,7 @@ Display mode
 
 .. confval:: userRegistration.displayMode
 
-   :type: string
+   :Type: string
    :Default: all
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -59,7 +59,7 @@ Sort by
 
 .. confval:: userRegistration.orderField
 
-   :type: string
+   :Type: string
    :Default: (none)
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -77,7 +77,7 @@ Sorting direction
 
 .. confval:: userRegistration.orderDirection
 
-   :type: string
+   :Type: string
    :Default: (none)
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -96,7 +96,7 @@ Registration pid
 
 .. confval:: registrationPid
    :name: user-registration-plugin-registration-pid1
-   :type: int
+   :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -109,7 +109,7 @@ Record storage page
 
 .. confval:: userRegistration.storagePage
 
-   :type: int or list of ints
+   :Type: int or list of ints
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -122,7 +122,7 @@ Recursive
 
 .. confval:: userRegistration.recursive
 
-   :type: int
+   :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -136,7 +136,7 @@ Detail Page
 -----------
 .. confval:: detailPid
    :name: user-registration-plugins-registration-pid
-   :type: int
+   :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -148,7 +148,7 @@ Registration Page
 
 .. confval:: registrationPid
    :name: user-registration-plugin-registration-pid2
-   :type: int
+   :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
@@ -159,7 +159,7 @@ Payment Page
 ------------
 .. confval:: paymentPid
    :name: user-registration-plugin-payment-pid
-   :type: int
+   :Type: int
    :Default: 0
    :Path: plugin.tx_sfeventmgt.settings
    :Scope: Plugin, TypoScript Setup
