@@ -67,6 +67,10 @@
         <source>Frontend user registrations</source>
         <target state="final">Frontend brugerregistreringer</target>
       </trans-unit>
+      <trans-unit id="plugin.piuserreg.description" approved="yes">
+        <source>Display event registrations for the current logged in frontend user.</source>
+        <target state="final">Vis begivenhedsregistreringer for den aktuelle frontend-bruger.</target>
+      </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
         <target state="final">Indstillinger</target>
@@ -482,6 +486,14 @@
       <trans-unit id="administration.notify.recipients.2" approved="yes">
         <source>Unconfirmed participants</source>
         <target state="final">Ubekræftede deltagere</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.3" approved="yes">
+        <source>Confirmed waitlist participants</source>
+        <target state="final">Bekræftet deltagere på venteliste</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.4" approved="yes">
+        <source>Unconfirmed waitlist participants</source>
+        <target state="final">Ubekræftet deltagere på venteliste</target>
       </trans-unit>
       <trans-unit id="administration.notify.label.template" approved="yes">
         <source>Template:</source>
