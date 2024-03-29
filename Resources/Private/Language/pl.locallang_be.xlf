@@ -3,187 +3,174 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="pl">
     <header/>
     <body>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-		</body>
+      <trans-unit id="flexforms_tab.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Ustawienia</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.notification" approved="yes">
+        <source>Notification settings</source>
+        <target state="final">Ustawienia powiadomień</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode" approved="yes">
+        <source>What to display</source>
+        <target state="final">Co pokazywać</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.list" approved="yes">
+        <source>List</source>
+        <target state="final">Lista</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.detail" approved="yes">
+        <source>Detail</source>
+        <target state="final">Szczegóły</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Rejestracja</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.queryLimit" approved="yes">
+        <source>Max records displayed</source>
+        <target state="final">Maks. ilość wyświetlanych rekordów</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.topEventRestriction" approved="yes">
+        <source>Top event restriction</source>
+        <target state="final">Restrykcja wydarzenia wyróżnionego</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.none" approved="yes">
+        <source>None</source>
+        <target state="final">Żadne</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.onlyTopEvents" approved="yes">
+        <source>Only top events</source>
+        <target state="final">Tylko wydarzenia wyróżnione</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.exceptTopEvents" approved="yes">
+        <source>Except top events</source>
+        <target state="final">Bez wydarzeń wyróżnionych</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode" approved="yes">
+        <source>Display mode</source>
+        <target state="final">Tryb wyświetlania</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField" approved="yes">
+        <source>Sort by</source>
+        <target state="final">Sortuj wg.</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Tytuł</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection" approved="yes">
+        <source>Sorting direction</source>
+        <target state="final">Kierunek sortowania</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.ascending" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Rosnąco</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.descending" approved="yes">
+        <source>Descending</source>
+        <target state="final">Malejąco</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.category" approved="yes">
+        <source>Category</source>
+        <target state="final">Kategoria</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Lokalizacja</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.storagePage" approved="yes">
+        <source>Record storage page</source>
+        <target state="final">Strona magazynu rekordów</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.all" approved="yes">
+        <source>Show all events</source>
+        <target state="final">Pokaż wszystkie wydarzenia</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.future" approved="yes">
+        <source>Show only future events</source>
+        <target state="final">Pokaż tylko przyszłe wydarzenia</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.past" approved="yes">
+        <source>Show only past events</source>
+        <target state="final">Pokaż wydarzenia z przeszłości</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.templateLayout" approved="yes">
+        <source>Template layout</source>
+        <target state="final">Szablon układu</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_name" approved="yes">
+        <source>Name of the sender</source>
+        <target state="final">Nazwa nadawcy</target>
+      </trans-unit>
+      <trans-unit id="administration.title" approved="yes">
+        <source>Event Administration</source>
+        <target state="final">Zarządzanie Wydarzeniami</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">Powiadamiaj uczestników</target>
+      </trans-unit>
+      <trans-unit id="administration.newEvent" approved="yes">
+        <source>Create new event</source>
+        <target state="final">Utwórz nowe wydarzenie</target>
+      </trans-unit>
+      <trans-unit id="administration.handleExpiredRegistrations" approved="yes">
+        <source>Hide/delete expired registrations</source>
+        <target state="final">Ukryj/usuń wygasłe rejestracje</target>
+      </trans-unit>
+      <trans-unit id="administration.export" approved="yes">
+        <source>Export participants</source>
+        <target state="final">Wyeksportuj uczestników</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">Powiadamiaj uczestników</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationHistory" approved="yes">
+        <source>Notification history</source>
+        <target state="final">Historia powiadomień</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.event" approved="yes">
+        <source>Event:</source>
+        <target state="final">Wydarzenie:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.template" approved="yes">
+        <source>Template:</source>
+        <target state="final">Szablon:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sendNotifications" approved="yes">
+        <source>Send notifications</source>
+        <target state="final">Tytuł powiadomień</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.cancelSendNotifications" approved="yes">
+        <source>Back to event listing</source>
+        <target state="final">Wróć do listy wydarzeń</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.date" approved="yes">
+        <source>Date</source>
+        <target state="final">Data</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Szczegóły</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sentBy" approved="yes">
+        <source>Sent by</source>
+        <target state="final">Wysłane przez</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.asc" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Rosnąco</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.desc" approved="yes">
+        <source>Descending</source>
+        <target state="final">Malejąco</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Tytuł</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
