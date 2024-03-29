@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="nl">
+    <header/>
+    <body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants" approved="yes">
+        <source>Max. participants</source>
+        <target state="final">Max.</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Aanmelden!</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">Tel.</target>
+      </trans-unit>
+      <trans-unit id="event.allEvents" approved="yes">
+        <source>All events</source>
+        <target state="final">overzicht alle opleidingen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
