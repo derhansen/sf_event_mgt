@@ -19,6 +19,10 @@
         <source>Teaser</source>
         <target state="final">Texte d'accroche</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Description</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
         <source>Program/Schedule</source>
         <target state="final">Programme/Agenda</target>
@@ -111,6 +115,10 @@
         <source>Organisator</source>
         <target state="final">Organisateur</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">Images</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
         <source>Files</source>
         <target state="final">Fichiers</target>
@@ -150,6 +158,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords" approved="yes">
         <source>Keywords (,)</source>
         <target state="final">Mots clés (,)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_description" approved="yes">
+        <source>Description</source>
+        <target state="final">Description</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.alternative_title" approved="yes">
         <source>Alternative title</source>
@@ -194,6 +206,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
         <source>Phone</source>
         <target state="final">Téléphone</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
+        <source>Email</source>
+        <target state="final">Email</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
         <source>Gender</source>
@@ -347,6 +363,10 @@
         <source>Country</source>
         <target state="final">Pays</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Description</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_location.link" approved="yes">
         <source>Link</source>
         <target state="final">Lien</target>
@@ -379,6 +399,10 @@
         <source>Name</source>
         <target state="final">Nom</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
+        <source>Email</source>
+        <target state="final">Email</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
         <source>Phone number</source>
         <target state="final">N° de téléphone</target>
@@ -386,6 +410,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.link" approved="yes">
         <source>Link</source>
         <target state="final">Lien</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Image</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption" approved="yes">
         <source>Price option</source>
@@ -410,6 +438,14 @@
       <trans-unit id="tx_sfeventmgt_domain_model_speaker.job_title" approved="yes">
         <source>Job title</source>
         <target state="final">Titre de l'emploi</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Description</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Image</target>
       </trans-unit>
       <trans-unit id="registration_field.tabs.settings" approved="yes">
         <source>Settings</source>
