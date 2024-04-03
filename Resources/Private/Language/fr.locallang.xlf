@@ -15,6 +15,10 @@
         <source>Teaser</source>
         <target state="final">Texte d'accroche</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Description</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
         <source>Program/Schedule</source>
         <target state="final">Programme/Agenda</target>
@@ -103,6 +107,14 @@
         <source>Room</source>
         <target state="final">Salle</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Description</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">Images</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
         <source>Files</source>
         <target state="final">Fichiers</target>
@@ -157,7 +169,7 @@
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
         <source>Email</source>
-        <target state="final">E-mail</target>
+        <target state="final">Email</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
         <source>Gender</source>
@@ -206,6 +218,14 @@
       <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" approved="yes">
         <source>Amount of registrations</source>
         <target state="final">Nombre d'inscriptions</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.yes" approved="yes">
+        <source>Yes</source>
+        <target state="final">Oui</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.no" approved="yes">
+        <source>No</source>
+        <target state="final">Non</target>
       </trans-unit>
       <trans-unit id="event.registration" approved="yes">
         <source>Registration</source>
@@ -375,6 +395,10 @@
         <source>Event calendar</source>
         <target state="final">Calendrier des événements</target>
       </trans-unit>
+      <trans-unit id="calendar.week" approved="yes">
+        <source>Week</source>
+        <target state="final">Semaine</target>
+      </trans-unit>
       <trans-unit id="detail.download" approved="yes">
         <source>Download</source>
         <target state="final">Téléchargement</target>
@@ -423,9 +447,17 @@
         <source>Name</source>
         <target state="final">Nom</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
+        <source>Email</source>
+        <target state="final">Email</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
         <source>Phone number</source>
         <target state="final">Téléphone</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Image</target>
       </trans-unit>
       <trans-unit id="validation.possible_robot" approved="yes">
         <source>Captcha field empty or possible robot detected.</source>
