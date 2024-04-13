@@ -20,7 +20,7 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 class CalendarServiceTest extends FunctionalTestCase
 {
     protected EventRepository $eventRepository;
-    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+    protected $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     public function setUp(): void
     {
