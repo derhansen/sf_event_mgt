@@ -103,21 +103,29 @@ class CalendarService
     protected function getEventsForDay($events, DateTime $currentDay): array
     {
         $foundEvents = [];
+        $day = date('Y-m-d', $currentDay->getTimestamp());
+
         /** @var Event $event */
         foreach ($events as $event) {
             $eventBeginDate = $event->getStartdate()->format('Y-m-d');
-            $day = date('Y-m-d', $currentDay->getTimestamp());
             if (!is_a($event->getEnddate(), DateTime::class)) {
                 if ($eventBeginDate === $day) {
                     $foundEvents[] = $event;
                 }
             } else {
+                // Create the compare date by cloning the event startdate to prevent timezone/DST issue
+                $dayParts = explode('-', $day);
+                $currentDayCompare = clone $event->getStartdate();
+                $currentDayCompare->setDate((int)$dayParts[0], (int)$dayParts[1], (int)$dayParts[2]);
+                $currentDayCompare->setTime(0, 0);
+
                 $eventEndDate = clone $event->getEnddate();
                 $eventEndDate->setTime(23, 59, 59);
                 $eventBeginDate = clone $event->getStartdate();
                 $eventBeginDate->setTime(0, 0);
                 $currentDay->setTime(0, 0);
-                if ($eventBeginDate <= $currentDay && $eventEndDate >= $currentDay) {
+
+                if ($eventBeginDate <= $currentDayCompare && $eventEndDate >= $currentDayCompare) {
                     $foundEvents[] = $event;
                 }
             }
