@@ -407,7 +407,12 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_waitlist_moveup',
-            'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
+            'displayCond' => [
+                'AND' => [
+                    'FIELD:enable_registration:REQ:TRUE',
+                    'FIELD:enable_cancel:REQ:TRUE',
+                ],
+            ],
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',
@@ -472,7 +477,12 @@ return [
             'l10n_mode' => 'exclude',
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.cancel_deadline',
-            'displayCond' => 'FIELD:enable_cancel:REQ:TRUE',
+            'displayCond' => [
+                'AND' => [
+                    'FIELD:enable_registration:REQ:TRUE',
+                    'FIELD:enable_cancel:REQ:TRUE',
+                ],
+            ],
             'config' => [
                 'type' => 'input',
                 'renderType' => 'inputDateTime',
@@ -570,7 +580,12 @@ return [
         'restrict_payment_methods' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.restrict_payment_methods',
-            'displayCond' => 'FIELD:enable_payment:REQ:TRUE',
+            'displayCond' => [
+                'AND' => [
+                    'FIELD:enable_registration:REQ:TRUE',
+                    'FIELD:enable_payment:REQ:TRUE',
+                ],
+            ],
             'onChange' => 'reload',
             'config' => [
                 'type' => 'check',
@@ -590,7 +605,13 @@ return [
         'selected_payment_methods' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.selected_payment_methods',
-            'displayCond' => 'FIELD:restrict_payment_methods:REQ:TRUE',
+            'displayCond' => [
+                'AND' => [
+                    'FIELD:enable_registration:REQ:TRUE',
+                    'FIELD:enable_payment:REQ:TRUE',
+                    'FIELD:restrict_payment_methods:REQ:TRUE',
+                ],
+            ],
             'config' => [
                 'type' => 'select',
                 'renderType' => 'selectCheckBox',
