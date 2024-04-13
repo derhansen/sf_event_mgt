@@ -30,7 +30,6 @@ class CalendarServiceTest extends FunctionalTestCase
         $this->eventRepository = $this->getContainer()->get(EventRepository::class);
     }
 
-
     /**
      * Test, if events for the 27.10.2024 (date with timeshift) will be returned in the array
      *
