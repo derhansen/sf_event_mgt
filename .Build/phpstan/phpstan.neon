@@ -7,6 +7,7 @@ parameters:
         - ../../Classes/
         - ../../Configuration/
 
-    checkMissingIterableValueType: false
     reportUnmatchedIgnoredErrors: true
-    checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+        - identifier: missingType.generics

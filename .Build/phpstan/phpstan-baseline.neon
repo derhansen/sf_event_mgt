@@ -50,3 +50,27 @@ parameters:
 			count: 1
 			path: ../../Classes/ViewHelpers/Validation/ErrorClassViewHelper.php
 
+		-
+			message: "#^Cannot access offset string on array\\|object\\.$#"
+			count: 1
+			path: ../../Classes/Validation/Validator/CaptchaValidator.php
+
+		-
+			message: "#^Cannot access offset 'tx_sfeventmgt…' on array\\|object\\.$#"
+			count: 1
+			path: ../../Classes/Validation/Validator/RegistrationValidator.php
+
+		-
+			message: "#^Cannot access offset string on array\\|object\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/PrefillViewHelper.php
+
+		-
+			message: "#^Cannot access offset string on array\\|object\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Registration/Field/PrefillFieldViewHelper.php
+
+		-
+			message: "#^Cannot access offset string on array\\|object\\.$#"
+			count: 1
+			path: ../../Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
