@@ -20,7 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailService
 {
     /**
-     * Sends an email, if sender and recipient is an valid email address
+     * Sends an email, if sender and recipient is an valid email address and if the subject is not empty
      *
      * @param string $sender The sender
      * @param string $recipient The recipient
@@ -41,7 +41,7 @@ class EmailService
         array $attachments = [],
         ?string $replyTo = null
     ): bool {
-        if (!GeneralUtility::validEmail($sender) || !GeneralUtility::validEmail($recipient)) {
+        if ($subject === '' || !GeneralUtility::validEmail($sender) || !GeneralUtility::validEmail($recipient)) {
             return false;
         }
 
