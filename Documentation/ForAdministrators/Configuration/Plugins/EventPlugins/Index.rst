@@ -71,7 +71,7 @@ Show a Single Event Record
 Allow preview of hidden event records
 -------------------------------------
 
-.. confval:: singleEvent
+.. confval:: previewEvent
 
    :Type: int
    :Default: 0
