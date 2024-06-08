@@ -258,6 +258,12 @@
 			<trans-unit id="flexforms_general.includeCurrent.description">
 				<source>Include events that start before and end after time from</source>
 			</trans-unit>
+			<trans-unit id="flexforms_general.previewHiddenRecords">
+				<source>Allow preview of hidden event records</source>
+			</trans-unit>
+			<trans-unit id="flexforms_general.previewHiddenRecords.description">
+				<source>If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone using any event record uid to see its content. Note, that this functionality requires a valid backend user session.</source>
+			</trans-unit>
 			<trans-unit id="flexforms_notification.sender_email">
 				<source>Email address of emails sent to the user</source>
 			</trans-unit>

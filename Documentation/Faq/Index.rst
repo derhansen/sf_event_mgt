@@ -442,4 +442,45 @@ for the calendar view and next to use the fluid variable :php:`{weekConfig}` to
 show events for the current week and to create previous and next week links. The
 default template includes an example, which is surrounded by :php:`<f:comment>`
 
+How can I preview event records while editing?
+==============================================
 
+It is possible to activate the :guilabel:`View` Button for event records.
+
+Add the following page TSconfig to your root page. It is recommended to use
+a site package extension, see
+:doc:`Official Tutorial: Site Package <t3sitepackage:Index>` for this purpose.
+
+.. code-block:: typoscript
+
+   TCEMAIN {
+       preview {
+           tx_sfeventmgt_domain_model_event {
+               previewPageId = 91
+               useDefaultLanguageRecord = 0
+               fieldToParameterMap {
+                   uid = tx_sfeventmgt_pieventdetail[event_preview]
+               }
+               additionalGetParameters {
+                   tx_sfeventmgt_pieventdetail.controller = Event
+                   tx_sfeventmgt_pieventdetail.action = detail
+               }
+           }
+       }
+   }
+
+By using the given example, a link will be generated which leads to the
+page with the id `91`.
+
+If a event detail plugin is placed on this page, the event will be shown.
+If hidden events should be shown, make sure to activate the
+`Allow preview of hidden event records` setting in the detail plugin.
+
+.. note::
+
+  Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone
+  using any event record uid to see its content.
+
+.. note::
+
+  For security reasons, please always use a dedicated page with a dedicated event detail plugin for event preview.

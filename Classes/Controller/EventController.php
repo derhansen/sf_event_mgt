@@ -40,6 +40,7 @@ use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -253,6 +254,7 @@ class EventController extends AbstractController
     {
         $event = $this->evaluateSingleEventSetting($event);
         $event = $this->evaluateIsShortcutSetting($event);
+        $event = $this->evaluateEventPreviewSetting($event);
         if (is_a($event, Event::class) && ($this->settings['detail']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($event);
         }
@@ -974,6 +976,27 @@ class EventController extends AbstractController
         if ($event === null && (bool)($this->settings['detail']['isShortcut'] ?? false)) {
             $eventRawData = $this->request->getAttribute('currentContentObject')->data;
             $event = $this->eventRepository->findByUid($eventRawData['uid']);
+        }
+
+        return $event;
+    }
+
+    /**
+     * If no event is given and the the `event_preview` argument is set, the event is displayed for preview
+     */
+    protected function evaluateEventPreviewSetting(?Event $event): ?Event
+    {
+        if ($event === null && $this->request->hasArgument('event_preview')) {
+            $context = GeneralUtility::makeInstance(Context::class);
+            $hasBackendUser = $context->getPropertyFromAspect('backend.user', 'isLoggedIn');
+            $previewEventId = (int)$this->request->getArgument('event_preview');
+            if ($previewEventId > 0 && $hasBackendUser) {
+                if ($this->settings['previewHiddenRecords'] ?? false) {
+                    $event = $this->eventRepository->findByUidIncludeHidden($previewEventId);
+                } else {
+                    $event = $this->eventRepository->findByUid($previewEventId);
+                }
+            }
         }
 
         return $event;

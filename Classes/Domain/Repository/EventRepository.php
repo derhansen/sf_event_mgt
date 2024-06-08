@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Event\ModifyEventQueryConstraintsEvent;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
 use Psr\EventDispatcher\EventDispatcherInterface;
@@ -90,16 +91,17 @@ class EventRepository extends Repository
 
     /**
      * Returns the event with the given UID and also respects the hidden state
-     *
-     * @param int $uid
-     * @return object
      */
-    public function findByUidIncludeHidden(int $uid): object
+    public function findByUidIncludeHidden(int $uid): ?Event
     {
         $query = $this->createQuery();
         $query->getQuerySettings()->setIgnoreEnableFields(true);
-        $query->matching($query->equals('uid', $uid));
-        return $query->execute()->getFirst();
+        return $query->matching(
+            $query->logicalAnd(
+                $query->equals('uid', $uid),
+                $query->equals('deleted', 0)
+            )
+        )->execute()->getFirst();
     }
 
     /**

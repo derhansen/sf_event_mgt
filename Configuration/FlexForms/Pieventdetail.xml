@@ -81,6 +81,15 @@
                         </config>
                     </settings.recursive>
 
+                    <!-- preview hidden records -->
+                    <settings.previewHiddenRecords>
+                        <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.previewHiddenRecords</label>
+                        <description>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.previewHiddenRecords.description</description>
+                        <config>
+                            <type>check</type>
+                        </config>
+                    </settings.previewHiddenRecords>
+
                 </el>
             </ROOT>
         </sDEF>

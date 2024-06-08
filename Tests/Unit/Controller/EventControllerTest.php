@@ -37,9 +37,13 @@ use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use PHPUnit\Framework\MockObject\MockObject;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\Argument;
 use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
@@ -2327,6 +2331,110 @@ class EventControllerTest extends UnitTestCase
         $mockedController->_set('request', $mockRequest);
         $mockedController->_set('settings', ['detail' => ['isShortcut' => 1]]);
         self::assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
+    }
+
+    /**
+     * @test
+     */
+    public function evaluateEventPreviewSettingReturnsNoEventIfNoEventPreview(): void
+    {
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockedController->_set('request', $mockRequest);
+
+        self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
+    }
+
+    /**
+     * @test
+     */
+    public function evaluateEventPreviewSettingReturnsNoEventIfNoBackendUser(): void
+    {
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->expects(self::once())->method('hasArgument')->with('event_preview')->willReturn(true);
+        $mockRequest->expects(self::once())->method('getArgument')->with('event_preview')->willReturn(1);
+        $mockedController->_set('request', $mockRequest);
+
+        $backendUser = new BackendUserAuthentication();
+        GeneralUtility::makeInstance(Context::class)->setAspect('backend.user', new UserAspect($backendUser));
+
+        self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
+    }
+
+    /**
+     * @test
+     */
+    public function evaluateEventPreviewSettingReturnsEventForValidBackendUserAndNoPreviewHiddenRecordsSetting(): void
+    {
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
+        $mockedController->_set('settings', []);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->expects(self::once())->method('hasArgument')->with('event_preview')->willReturn(true);
+        $mockRequest->expects(self::once())->method('getArgument')->with('event_preview')->willReturn(1);
+        $mockedController->_set('request', $mockRequest);
+
+        $mockEventRepository = $this->createMock(EventRepository::class);
+        $mockEventRepository->expects(self::once())->method('findByUid');
+        $mockedController->injectEventRepository($mockEventRepository);
+
+        $backendUser = new BackendUserAuthentication();
+        $backendUser->user['uid'] = 1;
+        GeneralUtility::makeInstance(Context::class)->setAspect('backend.user', new UserAspect($backendUser));
+
+        self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
+    }
+
+    /**
+     * @test
+     */
+    public function evaluateEventPreviewSettingReturnsEventForValidBackendUserAndPreviewHiddenRecordsSetting(): void
+    {
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
+        $mockedController->_set('settings', ['previewHiddenRecords' => true]);
+
+        $mockRequest = $this->createMock(Request::class);
+        $mockRequest->expects(self::once())->method('hasArgument')->with('event_preview')->willReturn(true);
+        $mockRequest->expects(self::once())->method('getArgument')->with('event_preview')->willReturn(1);
+        $mockedController->_set('request', $mockRequest);
+
+        $mockEventRepository = $this->createMock(EventRepository::class);
+        $mockEventRepository->expects(self::once())->method('findByUidIncludeHidden');
+        $mockedController->injectEventRepository($mockEventRepository);
+
+        $backendUser = new BackendUserAuthentication();
+        $backendUser->user['uid'] = 1;
+        GeneralUtility::makeInstance(Context::class)->setAspect('backend.user', new UserAspect($backendUser));
+
+        self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
+    }
+
+    /**
+     * @test
+     */
+    public function evaluateEventPreviewSettingIsWorking()
+    {
+        $mockedController = $this->getAccessibleMock(EventController::class, null);
+        // singleEvent setting not configured not configured
+        $mockedController->_set('settings', ['previewHiddenRecords' => false]);
+        self::assertNull($mockedController->_call('evaluateSingleEventSetting', null));
+
+        // isShortcut is configured
+        $mockEvent = $this->getMockBuilder(Event::class)->getMock();
+
+        $mockEventRepository = $this->getMockBuilder(EventRepository::class)
+            ->onlyMethods(['findByUid'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $mockEventRepository->expects(self::once())->method('findByUid')->with(123)
+            ->willReturn($mockEvent);
+        $mockedController->_set('eventRepository', $mockEventRepository);
+
+        $mockedController->_set('settings', ['singleEvent' => 123]);
+        self::assertEquals($mockEvent, $mockedController->_call('evaluateSingleEventSetting', null));
     }
 
     public static function isOverwriteDemandDataProvider(): array

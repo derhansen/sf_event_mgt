@@ -68,6 +68,24 @@ Show a Single Event Record
    action by parameter. Can be used to display a single event on a page without the need to link to the detail
    or registration page from a list view.
 
+Allow preview of hidden event records
+-------------------------------------
+
+.. confval:: singleEvent
+
+   :Type: int
+   :Default: 0
+   :Path: plugin.tx_sfeventmgt.settings
+   :Scope: Plugin, TypoScript Setup
+   :Plugin: Detail
+
+   If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as
+   this page could be called by anyone using any event record uid to see its content.
+
+   .. note::
+
+      Note, that this functionality requires a valid backend user session.
+
 Sort By
 -------
 
