@@ -605,6 +605,40 @@ class EventTest extends UnitTestCase
     /**
      * @test
      */
+    public function getRegistrationPossibleReturnsTrueIfEventHasStartedAndRegistrationUntilEnddateIsAllowed(): void
+    {
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('yesterday'));
+        $enddate = new DateTime();
+        $enddate->add(DateInterval::createFromDateString('tomorrow'));
+        $this->subject->setStartdate($startdate);
+        $this->subject->setEnddate($enddate);
+        $this->subject->setEnableRegistration(true);
+        $this->subject->setAllowRegistrationUntilEnddate(true);
+
+        self::assertTrue($this->subject->getRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
+    public function getRegistrationPossibleReturnsFalseIfEventHasEndedAndRegistrationUntilEnddateIsAllowed(): void
+    {
+        $startdate = new DateTime();
+        $startdate->add(DateInterval::createFromDateString('yesterday - 1 day'));
+        $enddate = new DateTime();
+        $enddate->add(DateInterval::createFromDateString('yesterday'));
+        $this->subject->setStartdate($startdate);
+        $this->subject->setEnddate($enddate);
+        $this->subject->setEnableRegistration(true);
+        $this->subject->setAllowRegistrationUntilEnddate(true);
+
+        self::assertFalse($this->subject->getRegistrationPossible());
+    }
+
+    /**
+     * @test
+     */
     public function getRegistrationPossibleReturnsFalseIfRegistrationNotEnabled(): void
     {
         $startdate = new DateTime();

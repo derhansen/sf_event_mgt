@@ -36,6 +36,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
 				<source>Registration enabled</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate">
+				<source>Registration until the end date and time possible</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
 				<source>Registrations</source>
 			</trans-unit>
@@ -199,16 +202,19 @@
 				<source>Send registration</source>
 			</trans-unit>
 			<trans-unit id="event.message.registrationfailedeventexpired">
-				<source>Registration is not possible any more, because the event startdate is reached.</source>
+				<source>Registration is not possible anymore, because the event startdate is reached.</source>
+			</trans-unit>
+			<trans-unit id="event.message.registrationfailedeventended">
+				<source>Registration is not possible anymore, because the event has ended.</source>
 			</trans-unit>
 			<trans-unit id="event.message.registrationfaileddeadlineexpired">
-				<source>Registration is not possible any more, because the registration deadline is reached.</source>
+				<source>Registration is not possible anymore, because the registration deadline is reached.</source>
 			</trans-unit>
 			<trans-unit id="event.message.registrationfailednotenabled">
 				<source>Registration failed, because registration is disabled.</source>
 			</trans-unit>
 			<trans-unit id="event.message.registrationfailedmaxparticipants">
-				<source>Registration is not possible any more, because the max. participants reached.</source>
+				<source>Registration is not possible anymore, because the max. participants reached.</source>
 			</trans-unit>
 			<trans-unit id="event.message.registrationfailednotenoughfreeplaces">
 				<source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>

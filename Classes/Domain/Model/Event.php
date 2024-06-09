@@ -45,6 +45,7 @@ class Event extends AbstractEntity
     protected string $selectedPaymentMethods = '';
     protected ?DateTime $registrationStartdate = null;
     protected ?DateTime $registrationDeadline = null;
+    protected bool $allowRegistrationUntilEnddate = false;
     protected ?Location $location = null;
     protected string $room = '';
     protected bool $enableRegistration = false;
@@ -478,8 +479,6 @@ class Event extends AbstractEntity
 
     /**
      * Returns if the registration for this event is logically possible
-     *
-     * @return bool
      */
     public function getRegistrationPossible(): bool
     {
@@ -488,15 +487,28 @@ class Event extends AbstractEntity
             $maxParticipantsNotReached = false;
         }
         $deadlineNotReached = true;
-        if ($this->getRegistrationDeadline() != null && $this->getRegistrationDeadline() <= new DateTime()) {
+        if ($this->getRegistrationDeadline() !== null && $this->getRegistrationDeadline() <= new DateTime()) {
             $deadlineNotReached = false;
         }
         $registrationStartReached = true;
-        if ($this->getRegistrationStartdate() != null && $this->getRegistrationStartdate() > new DateTime()) {
+        if ($this->getRegistrationStartdate() !== null && $this->getRegistrationStartdate() > new DateTime()) {
             $registrationStartReached = false;
         }
 
-        return ($this->getStartdate() > new DateTime()) &&
+        $allowedByEventDate = false;
+        if ($this->getStartdate() > new DateTime()) {
+            $allowedByEventDate = true;
+        }
+
+        if ($allowedByEventDate === false &&
+            $this->getEnddate() &&
+            $this->getAllowRegistrationUntilEnddate() &&
+            $this->getEnddate() > new DateTime()
+        ) {
+            $allowedByEventDate = true;
+        }
+
+        return $allowedByEventDate &&
         ($maxParticipantsNotReached || $this->enableWaitlist) &&
         $this->getEnableRegistration() && $deadlineNotReached && $registrationStartReached;
     }
@@ -579,6 +591,16 @@ class Event extends AbstractEntity
     public function getRegistrationDeadline(): ?DateTime
     {
         return $this->registrationDeadline;
+    }
+
+    public function getAllowRegistrationUntilEnddate(): bool
+    {
+        return $this->allowRegistrationUntilEnddate;
+    }
+
+    public function setAllowRegistrationUntilEnddate(bool $allowRegistrationUntilEnddate): void
+    {
+        $this->allowRegistrationUntilEnddate = $allowRegistrationUntilEnddate;
     }
 
     public function setLink(string $link): void

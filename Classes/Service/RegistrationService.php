@@ -255,9 +255,12 @@ class RegistrationService
         } elseif ($event->getRegistrationDeadline() != null && $event->getRegistrationDeadline() < new DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED;
-        } elseif ($event->getStartdate() < new DateTime()) {
+        } elseif (!$event->getAllowRegistrationUntilEnddate() && $event->getStartdate() < new DateTime()) {
             $success = false;
             $result = RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED;
+        } elseif ($event->getAllowRegistrationUntilEnddate() && $event->getEnddate() && $event->getEnddate() < new DateTime()) {
+            $success = false;
+            $result = RegistrationResult::REGISTRATION_FAILED_EVENT_ENDED;
         } elseif ($event->getRegistrations()->count() >= $event->getMaxParticipants()
             && $event->getMaxParticipants() > 0 && !$event->getEnableWaitlist()
         ) {

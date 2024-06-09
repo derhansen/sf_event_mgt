@@ -628,6 +628,10 @@ class EventController extends AbstractController
                 $messageKey = 'event.message.registrationfailedeventexpired';
                 $titleKey = 'registrationResult.title.failed';
                 break;
+            case RegistrationResult::REGISTRATION_FAILED_EVENT_ENDED:
+                $messageKey = 'event.message.registrationfailedeventended';
+                $titleKey = 'registrationResult.title.failed';
+                break;
             case RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS:
                 $messageKey = 'event.message.registrationfailedmaxparticipants';
                 $titleKey = 'registrationResult.title.failed';
