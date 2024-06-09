@@ -526,7 +526,7 @@ class RegistrationServiceTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkRegistrationSuccessFailsIfEventExpired()
+    public function checkRegistrationSuccessFailsIfEventHasStarted()
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
 
@@ -540,6 +540,28 @@ class RegistrationServiceTest extends UnitTestCase
         list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
+    }
+
+    /**
+     * @test
+     */
+    public function checkRegistrationSuccessFailsIfEventHasEndedAndRegistrationUntilEnddateIsAllowed(): void
+    {
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
+
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('yesterday - 1 day'));
+        $enddate = new \DateTime();
+        $enddate->add(\DateInterval::createFromDateString('yesterday'));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->method('getAllowRegistrationUntilEnddate')->willReturn(true);
+        $event->method('getEnddate')->willReturn($enddate);
+
+        $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        self::assertFalse($success);
+        self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EVENT_ENDED);
     }
 
     /**
@@ -567,6 +589,36 @@ class RegistrationServiceTest extends UnitTestCase
         list($success, $result) = $this->subject->checkRegistrationSuccess($event, $registration, $result);
         self::assertFalse($success);
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
+    }
+
+    /**
+     * @test
+     */
+    public function checkRegistrationSuccessSucceedsIfEventHasStartedAndRegistrationUntilEnddateIsAllowed(): void
+    {
+        $registration = $this->getMockBuilder(Registration::class)->getMock();
+
+        $registrations = $this->getMockBuilder(ObjectStorage::class)
+            ->onlyMethods(['count'])
+            ->disableOriginalConstructor()
+            ->getMock();
+        $registrations->expects(self::any())->method('count')->willReturn(9);
+
+        $event = $this->getMockBuilder(Event::class)->getMock();
+        $startdate = new \DateTime();
+        $startdate->add(\DateInterval::createFromDateString('yesterday'));
+        $enddate = new \DateTime();
+        $enddate->add(\DateInterval::createFromDateString('tomorrow'));
+        $event->expects(self::once())->method('getEnableRegistration')->willReturn(true);
+        $event->method('getAllowRegistrationUntilEnddate')->willReturn(true);
+        $event->method('getEnddate')->willReturn($enddate);
+        $event->method('getRegistrations')->willReturn($registrations);
+        $event->method('getMaxParticipants')->willReturn(10);
+
+        $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
+        [$success, $result] = $this->subject->checkRegistrationSuccess($event, $registration, $result);
+        self::assertTrue($success);
+        self::assertEquals($result, RegistrationResult::REGISTRATION_SUCCESSFUL);
     }
 
     /**

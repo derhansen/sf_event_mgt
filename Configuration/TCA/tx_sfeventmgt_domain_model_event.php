@@ -48,7 +48,7 @@ return [
                     category,
 
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_options,
-                    enable_registration,
+                    --palette--;;paletteRegistrationOptions,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.registrationPeriod;paletteRegistrationPeriod,
                     --palette--;;participantOptions,
                     --palette--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.sections.cancellation;paletteCancellation,
@@ -94,6 +94,9 @@ return [
         ],
         'paletteNotification' => [
             'showitem' => 'notify_admin, notify_organisator',
+        ],
+        'paletteRegistrationOptions' => [
+            'showitem' => 'enable_registration, allow_registration_until_enddate',
         ],
         'paletteRegistrationPeriod' => [
             'showitem' => 'registration_startdate, registration_deadline',
@@ -371,6 +374,24 @@ return [
             'l10n_display' => 'defaultAsReadonly',
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.enable_registration',
             'onChange' => 'reload',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'default' => 0,
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                    ],
+                ],
+            ],
+        ],
+        'allow_registration_until_enddate' => [
+            'exclude' => true,
+            'l10n_mode' => 'exclude',
+            'l10n_display' => 'defaultAsReadonly',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.allow_registration_until_enddate',
+            'displayCond' => 'FIELD:enable_registration:REQ:TRUE',
             'config' => [
                 'type' => 'check',
                 'renderType' => 'checkboxToggle',

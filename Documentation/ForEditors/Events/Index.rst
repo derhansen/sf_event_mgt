@@ -268,6 +268,15 @@ registrations per user" is set to a value greater than 1.
          participation to the event.
 
  - :Field:
+         Allow registration until end date and time
+
+   :Description:
+         If set, it is possible to register to an event until the event end date and time is reached.
+
+         Note, that this option has no effect, if the registration deadline is earlier than the
+         event end date and time.
+
+ - :Field:
          Registration start date
 
    :Description:
