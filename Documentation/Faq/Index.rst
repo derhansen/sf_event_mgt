@@ -60,6 +60,27 @@ A detailed description can be found in the :ref:`custom-notifications` section.
 
 .. rst-class:: panel panel-default
 
+How do I disable specific email notifications?
+=============================================
+
+Email notifications will not be sent if the subject is empty. Since the extension provides default subjects, you need to delete them as shown below::
+
+ plugin.tx_sfeventmgt {
+   settings {
+     notification {
+       registrationNew {
+	 adminSubject >
+       }
+     }
+   }
+ }
+
+In this example, admin notifications for new registrations are disabled. Please refer to section :ref:`tsref` for available options.
+
+Remember that you can also overwrite subjects in the plugin. Make sure that the corresponding subject of a notification is also empty in the plugin.
+
+.. rst-class:: panel panel-default
+
 Can I add the HMAC or an appended HMAC of the registration UID to emails?
 =========================================================================
 
