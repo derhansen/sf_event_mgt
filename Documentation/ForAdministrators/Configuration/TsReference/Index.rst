@@ -273,6 +273,32 @@ settings.confirmation.linkValidity
    Validity of confirmation link in seconds
 
 
+settings.confirmation.additionalVerificationStep
+------------------------------------------------
+
+.. confval:: settings.confirmation.additionalVerificationStep
+
+   :Type: bool
+   :Default: false
+
+   Defines, if the confirmation of a registration requires an additional manual verification step by the user.
+   If active, confirmation links in emails will refer to a page, where the user has to confirm the registration
+   by clicking a link.
+
+
+settings.cancellation.additionalVerificationStep
+------------------------------------------------
+
+.. confval:: settings.cancellation.additionalVerificationStep
+
+   :Type: bool
+   :Default: false
+
+   Defines, if the cancellation of a registration requires an additional manual verification step by the user.
+   If active, cancellation links in emails will refer to a page, where the user has to confirm the cancellation
+   by clicking a link.
+
+
 settings.notification.senderEmail
 ---------------------------------
 

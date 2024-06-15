@@ -122,6 +122,10 @@ plugin.tx_sfeventmgt {
         }
         confirmation {
             linkValidity = {$plugin.tx_sfeventmgt.settings.confirmation.linkValidity}
+            additionalVerificationStep = {$plugin.tx_sfeventmgt.settings.confirmation.additionalVerificationStep}
+        }
+        cancellation {
+            additionalVerificationStep = {$plugin.tx_sfeventmgt.settings.cancellation.additionalVerificationStep}
         }
         event {
             errorHandling = showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404

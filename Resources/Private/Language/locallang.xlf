@@ -436,6 +436,13 @@
 			<trans-unit id="pagination.last">
 				<source>Last page</source>
 			</trans-unit>
+
+			<trans-unit id="confirmRegistration">
+				<source>Confirm registration</source>
+			</trans-unit>
+			<trans-unit id="cancelRegistration">
+				<source>Cancel registration</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

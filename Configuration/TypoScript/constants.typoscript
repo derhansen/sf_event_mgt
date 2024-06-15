@@ -47,6 +47,12 @@ plugin.tx_sfeventmgt {
         confirmation {
             # cat=plugin.tx_sfeventmgt/confirmation; type=string; label=Validity of confirmation link in seconds
             linkValidity = 3600
+            # cat=plugin.tx_sfeventmgt/confirmation; type=boolean; label=If active, confirmation will require an additional, manual verification step
+            additionalVerificationStep = 0
+        }
+        cancellation {
+            # cat=plugin.tx_sfeventmgt/cancellation; type=boolean; label=If active, cancellation will require an additional, manual verification step
+            additionalVerificationStep = 0
         }
         notification {
             # cat=plugin.tx_sfeventmgt/notification; type=string; label=E-mail address for emails sent to user

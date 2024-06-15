@@ -27,6 +27,7 @@ use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
@@ -459,9 +460,29 @@ class NotificationService
             'settings' => $settings,
             'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
             'reghmac' => $this->hashService->appendHmac((string)$registration->getUid()),
+            'confirmAction' => $this->getTargetLinkAction('confirmAction', $settings),
+            'cancelAction' => $this->getTargetLinkAction('cancelAction', $settings),
         ];
         $variables = array_merge($additionalBodyVariables, $defaultVariables);
 
         return $this->fluidStandaloneService->renderTemplate($template, $variables);
+    }
+
+    private function getTargetLinkAction(string $action, array $settings): string
+    {
+        switch ($action) {
+            case 'confirmAction':
+                $additionalStep = (bool)($settings['confirmation']['additionalVerificationStep'] ?? false);
+                $action = $additionalStep ? 'verifyConfirmRegistration' : 'confirmRegistration';
+                break;
+            case 'cancelAction':
+                $additionalStep = (bool)($settings['cancellation']['additionalVerificationStep'] ?? false);
+                $action = $additionalStep ? 'verifyCancelRegistration' : 'cancelRegistration';
+                break;
+            default:
+                throw new RuntimeException('Unknown action for getTargetLinkAction()', 1718170550);
+        }
+
+        return $action;
     }
 }

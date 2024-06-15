@@ -1,0 +1,31 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+<f:section name="main">
+    <f:if condition="{confirmationPossible}">
+        <f:then>
+            <p>To finally confirm you registration for the event "{event.title}", please click the "<f:translate key="confirmRegistration" />" button.</p>
+
+            <f:link.action action="confirmRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration">
+                <f:translate key="confirmRegistration" />
+            </f:link.action>
+        </f:then>
+        <f:else>
+            <f:if condition="!{failed}">
+                <f:then>
+                    <p>
+                        Your registration has already been confirmed.
+                    </p>
+                </f:then>
+                <f:else>
+                    <h1><f:translate key="{titleKey}" /></h1>
+                    <p>
+                        <f:translate key="{messageKey}" />
+                    </p>
+                </f:else>
+            </f:if>
+        </f:else>
+    </f:if>
+
+</f:section>

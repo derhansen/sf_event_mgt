@@ -8,7 +8,7 @@
 <f:if condition="{event.enableCancel}">
     <p>If you wish to cancel your registration, please open the following link:</p>
     <p>
-        <f:uri.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" />
+        <f:uri.action action="{cancelAction}" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" />
     </p>
 </f:if>
 <p>Best regards,</p>

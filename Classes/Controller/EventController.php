@@ -682,6 +682,34 @@ class EventController extends AbstractController
     }
 
     /**
+     * Shows the verify confirmation registration view, where the user has to submit a form to finally confirm the registration
+     */
+    public function verifyConfirmRegistrationAction(int $reguid, string $hmac): ResponseInterface
+    {
+        /* @var $registration Registration */
+        [$failed, $registration, $messageKey, $titleKey] = $this->registrationService->checkConfirmRegistration(
+            $reguid,
+            $hmac
+        );
+
+        $variables = [
+            'reguid' => $reguid,
+            'hmac' => $hmac,
+            'confirmationPossible' => $registration && !$registration->getConfirmed(),
+            'failed' => $failed,
+            'messageKey' => $messageKey,
+            'titleKey' => $titleKey,
+            'event' => $registration?->getEvent(),
+            'registration' => $registration,
+            'settings' => $this->settings,
+        ];
+
+        $this->view->assignMultiple($variables);
+
+        return $this->htmlResponse();
+    }
+
+    /**
      * Confirms the registration if possible and sends emails to admin and user
      */
     public function confirmRegistrationAction(int $reguid, string $hmac): ResponseInterface
@@ -789,6 +817,34 @@ class EventController extends AbstractController
     }
 
     /**
+     * Shows the verify cancel registration view, where the user has to submit a form to finally cancel the registration
+     */
+    public function verifyCancelRegistrationAction(int $reguid, string $hmac): ResponseInterface
+    {
+        /* @var $registration Registration */
+        [$failed, $registration, $messageKey, $titleKey] = $this->registrationService->checkCancelRegistration(
+            $reguid,
+            $hmac
+        );
+
+        $variables = [
+            'reguid' => $reguid,
+            'hmac' => $hmac,
+            'cancellationPossible' => !$failed,
+            'failed' => $failed,
+            'messageKey' => $messageKey,
+            'titleKey' => $titleKey,
+            'event' => $registration?->getEvent(),
+            'registration' => $registration,
+            'settings' => $this->settings,
+        ];
+
+        $this->view->assignMultiple($variables);
+
+        return $this->htmlResponse();
+    }
+
+    /**
      * Cancels the registration if possible and sends emails to admin and user
      */
     public function cancelRegistrationAction(int $reguid, string $hmac): ResponseInterface
@@ -796,8 +852,10 @@ class EventController extends AbstractController
         $event = null;
 
         /* @var $registration Registration */
-        [$failed, $registration, $messageKey, $titleKey] =
-            $this->registrationService->checkCancelRegistration($reguid, $hmac);
+        [$failed, $registration, $messageKey, $titleKey] = $this->registrationService->checkCancelRegistration(
+            $reguid,
+            $hmac
+        );
 
         if ($failed === false) {
             $event = $registration->getEvent();

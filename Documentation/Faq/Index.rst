@@ -505,3 +505,14 @@ If hidden events should be shown, make sure to activate the
 .. note::
 
   For security reasons, please always use a dedicated page with a dedicated event detail plugin for event preview.
+
+Registrations get confirmed and/or cancelled by Email Security Gateways
+=======================================================================
+
+Some Email Security Gateways or Antivirus/Anti-Malware Software may follow links in emails. This can lead to the
+situation, that event registrations get confirmed and/or cancelled automatically.
+
+The TypoScript settings :php:`settings.confirmation.additionalVerificationStep` and
+:php:`settings.cancellation.additionalVerificationStep` can be activated to avoid this problem. When active,
+links in emails will refer to a page, where an confirmation- or cancellation-link has to be clicked manually
+by the user.
