@@ -158,8 +158,8 @@ class AbstractEventsTests
         $I->haveNumberOfUnreadEmails(2);
         $I->openNextUnreadEmail();
         $I->seeInOpenedEmailSubject('New unconfirmed registration for event "Event (reg, regfields, cat1) ' . $this->lang . '"');
-        $I->seeInOpenedEmailBody('Input field (req) ' . $this->lang . ':');
-        $I->seeInOpenedEmailBody('Field Value ' . $this->lang);
+        $I->seeInOpenedEmailHtmlBody('Input field (req) ' . $this->lang . ':');
+        $I->seeInOpenedEmailHtmlBody('Field Value ' . $this->lang);
         $I->seeInOpenedEmailRecipients('admin@sfeventmgt.local');
         $I->openNextUnreadEmail();
         $I->seeInOpenedEmailSubject('Your registration for event "Event (reg, regfields, cat1) ' . $this->lang . '"');

@@ -2,7 +2,7 @@ modules:
   config:
       WebDriver:
         url: http://sf-event-mgt-acceptance-v12.typo3.local/
-      MailHog:
+      Mailpit:
         url: http://127.0.0.1
         port: 8025
       Db:

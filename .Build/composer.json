@@ -30,7 +30,7 @@
     "jangregor/phpstan-prophecy": "^1.0",
     "codeception/codeception": "^5.0",
     "codeception/module-webdriver": "^4.0",
-    "ericmartel/codeception-email": "^1.0",
+    "koehnlein/codeception-email-mailpit": "^0.3.0",
     "codeception/module-db": "^3.1"
   },
   "config": {

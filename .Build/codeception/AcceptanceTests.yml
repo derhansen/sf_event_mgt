@@ -5,14 +5,14 @@ suites:
     modules:
       enabled:
         - WebDriver
-        - MailHog
+        - Mailpit
         - Db
         - \Helper\Acceptance
       config:
         WebDriver:
           url: http://dummy.local/
           browser: chrome
-        MailHog:
+        Mailpit:
           url: http://127.0.0.1
           port: 8025
           deleteEmailsAfterScenario: true
