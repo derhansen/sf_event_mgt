@@ -341,6 +341,14 @@
         <source>Include events that start before and end after time from</source>
         <target>crwdns300600:0crwdne300600:0</target>
       </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords">
+        <source>Allow preview of hidden event records</source>
+        <target>crwdns338144:0crwdne338144:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords.description">
+        <source>If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone using any event record uid to see its content. Note, that this functionality requires a valid backend user session.</source>
+        <target>crwdns338146:0crwdne338146:0</target>
+      </trans-unit>
       <trans-unit id="flexforms_notification.sender_email">
         <source>Email address of emails sent to the user</source>
         <target>crwdns300602:0crwdne300602:0</target>
