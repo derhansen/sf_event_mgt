@@ -263,21 +263,9 @@
         <source>Send registration</source>
         <target state="final">Send tilmelding</target>
       </trans-unit>
-      <trans-unit id="event.message.registrationfailedeventexpired" approved="yes">
-        <source>Registration is not possible any more, because the event startdate is reached.</source>
-        <target state="final">Tilmelding er ikke længere mulig da startdatoen er nået.</target>
-      </trans-unit>
-      <trans-unit id="event.message.registrationfaileddeadlineexpired" approved="yes">
-        <source>Registration is not possible any more, because the registration deadline is reached.</source>
-        <target state="final">Tilmelding er ikke længere mulig da deadline for tilmelding er nået.</target>
-      </trans-unit>
       <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
         <source>Registration failed, because registration is disabled.</source>
         <target state="final">Tilmelding fejlede fordi tilmelding er deaktiveret.</target>
-      </trans-unit>
-      <trans-unit id="event.message.registrationfailedmaxparticipants" approved="yes">
-        <source>Registration is not possible any more, because the max. participants reached.</source>
-        <target state="final">Tilmelding er ikke længere mulig da maks. antal deltagere er nået.</target>
       </trans-unit>
       <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
         <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
