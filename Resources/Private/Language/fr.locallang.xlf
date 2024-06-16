@@ -259,21 +259,9 @@
         <source>Send registration</source>
         <target state="final">Envoyer l'inscription</target>
       </trans-unit>
-      <trans-unit id="event.message.registrationfailedeventexpired" approved="yes">
-        <source>Registration is not possible any more, because the event startdate is reached.</source>
-        <target state="final">L'inscription n'est plus possible car la date de début de l'événement a déjà été atteinte.</target>
-      </trans-unit>
-      <trans-unit id="event.message.registrationfaileddeadlineexpired" approved="yes">
-        <source>Registration is not possible any more, because the registration deadline is reached.</source>
-        <target state="final">L'inscription n'est plus possible car le délai d'inscription a expiré.</target>
-      </trans-unit>
       <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
         <source>Registration failed, because registration is disabled.</source>
         <target state="final">L'inscription n'est pas possible car elle est désactivée pour cet événement.</target>
-      </trans-unit>
-      <trans-unit id="event.message.registrationfailedmaxparticipants" approved="yes">
-        <source>Registration is not possible any more, because the max. participants reached.</source>
-        <target state="final">L'inscription n'est plus possible car le nombre maximum de participants est atteint.</target>
       </trans-unit>
       <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
         <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
