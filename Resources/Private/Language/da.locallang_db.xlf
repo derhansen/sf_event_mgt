@@ -59,6 +59,10 @@
         <source>Enable registration</source>
         <target state="final">Aktivér tilmelding</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate" approved="yes">
+        <source>Allow registration until end date and time</source>
+        <target state="final">Tillad tilmelding indtil slut-dato og -tidspunkt</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist" approved="yes">
         <source>Enable waitlist</source>
         <target state="final">Aktivér venteliste</target>
@@ -149,7 +153,7 @@
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.registration_startdate" approved="yes">
         <source>Registration start date</source>
-        <target state="final">Startdato for registrering</target>
+        <target state="final">Startdato for tilmelding</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline" approved="yes">
         <source>Registration deadline</source>
@@ -265,7 +269,7 @@
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.registration_date" approved="yes">
         <source>Registration date</source>
-        <target state="final">Registreringsdato</target>
+        <target state="final">Tilmeldingsdato</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc" approved="yes">
         <source>Accepted terms and conditions</source>
@@ -357,7 +361,7 @@
       </trans-unit>
       <trans-unit id="event.sections.notification" approved="yes">
         <source>When a registration is created, confirmed, cancelled or moved from the waitlist, send a notification email to:</source>
-        <target state="final">Når en registrering er oprettet, bekræftet, annulleret eller flyttet fra ventelisten, send en e-mail med notifikationer til:</target>
+        <target state="final">Når en tilmelding er oprettet, bekræftet, annulleret eller flyttet fra ventelisten, send en e-mail med notifikationer til:</target>
       </trans-unit>
       <trans-unit id="event.sections.registrationPeriod" approved="yes">
         <source>Period</source>
