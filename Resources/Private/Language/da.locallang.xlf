@@ -47,6 +47,10 @@
         <source>Registration enabled</source>
         <target state="final">Tilmelding aktiveret</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate" approved="yes">
+        <source>Registration until the end date and time possible</source>
+        <target state="final">Tilmelding indtil slut-dato og -klokkeslæt er mulig</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
         <source>Registrations</source>
         <target state="final">Tilmeldinger</target>
@@ -263,9 +267,25 @@
         <source>Send registration</source>
         <target state="final">Send tilmelding</target>
       </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventexpired" approved="yes">
+        <source>Registration is not possible anymore, because the event startdate is reached.</source>
+        <target state="final">Tilmelding er ikke længere muligt, fordi begivenhedens startdato er nået.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventended" approved="yes">
+        <source>Registration is not possible anymore, because the event has ended.</source>
+        <target state="final">Tilmelding er ikke længere muligt, fordi begivenheden er afsluttet.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfaileddeadlineexpired" approved="yes">
+        <source>Registration is not possible anymore, because the registration deadline is reached.</source>
+        <target state="final">Tilmelding er ikke længere muligt, fordi registreringsfristen er nået.</target>
+      </trans-unit>
       <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
         <source>Registration failed, because registration is disabled.</source>
         <target state="final">Tilmelding fejlede fordi tilmelding er deaktiveret.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxparticipants" approved="yes">
+        <source>Registration is not possible anymore, because the max. participants reached.</source>
+        <target state="final">Tilmelding er ikke længere muligt, fordi det maksimale antal deltagere er nået.</target>
       </trans-unit>
       <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
         <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
@@ -313,7 +333,7 @@
       </trans-unit>
       <trans-unit id="event.message.confirmation_failed_registration_event_not_found" approved="yes">
         <source>Confirmation failed, event for registration either not found or access protected.</source>
-        <target state="final">Bekræftelse mislykkedes, begivenhed for registrering blev enten ikke fundet eller er adgangsbeskyttet.</target>
+        <target state="final">Bekræftelse mislykkedes, begivenhed for tilmelding blev enten ikke fundet eller er adgangsbeskyttet.</target>
       </trans-unit>
       <trans-unit id="event.message.cancel_failed_event_not_found" approved="yes">
         <source>Cancellation failed, event not found.</source>
@@ -523,6 +543,10 @@
         <source>My event registrations</source>
         <target state="final">Mine tilmeldinger til begivenheder</target>
       </trans-unit>
+      <trans-unit id="userRegistration.title" approved="yes">
+        <source>My registration</source>
+        <target state="final">Min tilmelding</target>
+      </trans-unit>
       <trans-unit id="userRegistration.cancel" approved="yes">
         <source>Cancel registration</source>
         <target state="final">Annullér tilmelding</target>
@@ -554,6 +578,14 @@
       <trans-unit id="pagination.last" approved="yes">
         <source>Last page</source>
         <target state="final">Sidste side</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration" approved="yes">
+        <source>Confirm registration</source>
+        <target state="final">Bekræft tilmelding</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration" approved="yes">
+        <source>Cancel registration</source>
+        <target state="final">Annullér tilmelding</target>
       </trans-unit>
     </body>
   </file>
