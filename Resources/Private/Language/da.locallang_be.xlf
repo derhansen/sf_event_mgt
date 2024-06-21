@@ -31,9 +31,13 @@
         <source>Display the detail view for events.</source>
         <target state="final">Vis detaljevisningen for begivenheder.</target>
       </trans-unit>
+      <trans-unit id="plugin.pieventregistration.title" approved="yes">
+        <source>Registration view</source>
+        <target state="final">Tilmeldingsvisning</target>
+      </trans-unit>
       <trans-unit id="plugin.pieventregistration.description" approved="yes">
         <source>Display the registration view for events.</source>
-        <target state="final">Vis registreringsvisningen for begivenheder.</target>
+        <target state="final">Vis tilmeldingsvisningen for begivenheder.</target>
       </trans-unit>
       <trans-unit id="plugin.pieventsearch.title" approved="yes">
         <source>Search view</source>
@@ -61,11 +65,11 @@
       </trans-unit>
       <trans-unit id="plugin.piuserreg.title" approved="yes">
         <source>Frontend user registrations</source>
-        <target state="final">Frontend brugerregistreringer</target>
+        <target state="final">Frontend brugerrtilmeldinger</target>
       </trans-unit>
       <trans-unit id="plugin.piuserreg.description" approved="yes">
         <source>Display event registrations for the current logged in frontend user.</source>
-        <target state="final">Vis begivenhedsregistreringer for den aktuelle frontend-bruger.</target>
+        <target state="final">Vis begivenhedstilmeldinger for den aktuelle frontend-bruger.</target>
       </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
@@ -339,6 +343,14 @@
         <source>Include events that start before and end after time from</source>
         <target state="final">Inkludér begivenheder, der starter før og slutter efter tid fra</target>
       </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords" approved="yes">
+        <source>Allow preview of hidden event records</source>
+        <target state="final">Tillad forhåndsvisning af skjulte begivenhedselementer</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords.description" approved="yes">
+        <source>If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone using any event record uid to see its content. Note, that this functionality requires a valid backend user session.</source>
+        <target state="final">Hvis angivet, vises gemte begivenhedselementer. Vær opmærksom på at sikre siden (f.eks. ved at sætte sidens synlighed til "skjult") da denne side kan kaldes af alle, der bruger enhver begivenheds element-uid for at se dens indhold. Bemærk, at denne funktionalitet kræver en gyldig backend brugersession.</target>
+      </trans-unit>
       <trans-unit id="flexforms_notification.sender_email" approved="yes">
         <source>Email address of emails sent to the user</source>
         <target state="final">E-mailadresse af e-mail sendt til brugeren</target>
@@ -357,51 +369,51 @@
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_new_user_subject" approved="yes">
         <source>Subject of email sent to user when a new registration is created</source>
-        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering er oprettet</target>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny tilmelding er oprettet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_new_user_subject" approved="yes">
         <source>Subject of email sent to user when a new registration on the waitlist is created</source>
-        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering til venteliste er oprettet</target>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny tilmelding til venteliste er oprettet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_new_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a new registration is created</source>
-        <target state="final">Emne på e-mail sendt til admin, når en ny registrering er oprettet</target>
+        <target state="final">Emne på e-mail sendt til admin, når en ny tilmelding er oprettet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_new_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a new registration on the waitlist is created</source>
-        <target state="final">Emne på e-mail sendt til admin, når en ny registrering til venteliste er oprettet</target>
+        <target state="final">Emne på e-mail sendt til admin, når en ny tilmelding til venteliste er oprettet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_confirmed_user_subject" approved="yes">
         <source>Subject of email sent to user when a registration has been confirmed</source>
-        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering er blevet bekræftet</target>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny tilmelding er blevet bekræftet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_confirmed_user_subject" approved="yes">
         <source>Subject of email sent to user when a registration on the waitlist has been confirmed</source>
-        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering til venteliste er blevet bekræftet</target>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny tilmelding til venteliste er blevet bekræftet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_confirmed_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a registration has been confirmed</source>
-        <target state="final">Emne på e-mail sendt til admin, når en ny registrering er blevet bekræftet</target>
+        <target state="final">Emne på e-mail sendt til admin, når en ny tilmelding er blevet bekræftet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_confirmed_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a registration on the waitlist has been confirmed</source>
-        <target state="final">Emne på e-mail sendt til admin, når en ny registrering til venteliste er blevet bekræftet</target>
+        <target state="final">Emne på e-mail sendt til admin, når en ny tilmelding til venteliste er blevet bekræftet</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_cancelled_user_subject" approved="yes">
         <source>Subject of email sent to user when a registration has been cancelled</source>
-        <target state="final">Emne på e-mail sendt til bruger, når en ny registrering er blevet annulleret</target>
+        <target state="final">Emne på e-mail sendt til bruger, når en ny tilmelding er blevet annulleret</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_cancelled_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a registration has been cancelled</source>
-        <target state="final">Emne på e-mail sendt til admin, når en ny registrering er blevet annulleret</target>
+        <target state="final">Emne på e-mail sendt til admin, når en ny tilmelding er blevet annulleret</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_move_up_user_subject" approved="yes">
         <source>Subject of email sent to user when a registration moved up from the waitlist</source>
-        <target state="final">Emne for e-mail der sendes til bruger, når en registrering flytter op fra ventelisten</target>
+        <target state="final">Emne for e-mail der sendes til bruger, når en tilmelding flytter op fra ventelisten</target>
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_move_up_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a registration moved up from the waitlist</source>
-        <target state="final">Emne for e-mail der sendes til admin når en registrering flytter op fra ventelisten</target>
+        <target state="final">Emne for e-mail der sendes til admin når en tilmelding flytter op fra ventelisten</target>
       </trans-unit>
       <trans-unit id="flexforms_categorymenu.categories" approved="yes">
         <source>Categories (if empty, all categories will be shown in the category menu)</source>
@@ -576,17 +588,17 @@
 			<target state="final">URL-segment egenskab: uniqueInSite: det samme URL-segmentkan bruges til begivenheder på forskellige websider. Brug *kun* denne indstilling hvis ingen begivenheder er delt mellem websider. "Unique" betyder at samme begivenhedstitel vil føre til forskellige URL-segment navne.</target></trans-unit>
       <trans-unit id="extmng.hideInlineRegistrations" xml:space="preserve" approved="yes">
 				<source>Hide registrations in event record by limit: Hides the event fields "Registration" and "Registration Waitlist" if the configured limit in "backend.hideInlineRegistrationsLimit" is reached. This option is usefull, when you have events with a huge amount of registrations where the TYPO3 backend gets slow due to performance issues of the TCA inline field.</source>
-			<target state="final">Skjul registreringer i begivenhedselementer efter begrænsning: Skjuler begivenhedsfelterne "Registrering" og "Registrering venteliste" hvis den konfigurerede grænse i "backend.hideInlineRegistrationsLimit" er nået. Denne indstilling er nyttig, når du har begivenheder med en meget stor mængde registreringer, hvor TYPO3 backend bliver langsom på grund af problemer med ydeevnen i TCA inline feltet.</target></trans-unit>
+			<target state="final">Skjul tilmeldinger i begivenhedselementer efter begrænsning: Skjuler begivenhedsfelterne "Tilmelding" og "Tilmelding venteliste" hvis den konfigurerede grænse i "backend.hideInlineRegistrationsLimit" er nået. Denne indstilling er nyttig, når du har begivenheder med en meget stor mængde tilmeldinger, hvor TYPO3 backend bliver langsom på grund af problemer med ydeevnen i TCA inline feltet.</target></trans-unit>
       <trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve" approved="yes">
 				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
-			<target state="final">Maksimalt antal registreringer, der vises i et begivenheds-element i TYPO3 backend.</target></trans-unit>
+			<target state="final">Maksimalt antal tilmeldinger, der vises i et begivenheds-element i TYPO3 backend.</target></trans-unit>
       <trans-unit id="backend.hideInlineRegistrations.title" approved="yes">
         <source>Event registrations hidden</source>
-        <target state="final">Begivenheds-registreringer skjult</target>
+        <target state="final">Begivenheds-tilmeldinger skjult</target>
       </trans-unit>
       <trans-unit id="backend.hideInlineRegistrations.description" approved="yes">
         <source>This event has %1$s registrations, but due to performance reasons all event registrations are not shown in this view.</source>
-        <target state="final">Denne begivenhed har %1$s registreringer, men på grund af ydeevnen, vises alle registreringer ikke i denne visning.</target>
+        <target state="final">Denne begivenhed har %1$s tilmeldinger, men på grund af ydeevnen, vises alle tilmeldinger ikke i denne visning.</target>
       </trans-unit>
       <trans-unit id="tabs.language" approved="yes">
         <source>Language</source>
