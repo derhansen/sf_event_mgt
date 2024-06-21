@@ -523,10 +523,6 @@
         <source>My event registrations</source>
         <target state="final">Mine tilmeldinger til begivenheder</target>
       </trans-unit>
-      <trans-unit id="userRegistration.title" approved="yes">
-        <source>My registration</source>
-        <target state="final">Min registrering</target>
-      </trans-unit>
       <trans-unit id="userRegistration.cancel" approved="yes">
         <source>Cancel registration</source>
         <target state="final">Annullér tilmelding</target>
