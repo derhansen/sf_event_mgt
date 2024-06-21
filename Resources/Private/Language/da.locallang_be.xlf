@@ -31,10 +31,6 @@
         <source>Display the detail view for events.</source>
         <target state="final">Vis detaljevisningen for begivenheder.</target>
       </trans-unit>
-      <trans-unit id="plugin.pieventregistration.title" approved="yes">
-        <source>Registration view</source>
-        <target state="final">Registreringsvisning</target>
-      </trans-unit>
       <trans-unit id="plugin.pieventregistration.description" approved="yes">
         <source>Display the registration view for events.</source>
         <target state="final">Vis registreringsvisningen for begivenheder.</target>
