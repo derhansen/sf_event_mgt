@@ -26,6 +26,7 @@ use DERHANSEN\SfEventMgt\Service\SettingsService;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -291,16 +292,11 @@ class AdministrationControllerTest extends UnitTestCase
     {
         $this->subject->_set('settings', ['dummy' => 'settings']);
         $customNotifications = ['key' => 'value'];
-        $logEntries = ['SomeResult'];
+        $logEntries = $this->createMock(QueryResult::class);
         $event = new Event();
 
-        $mockLogRepo = $this->getMockBuilder(CustomNotificationLogRepository::class)
-            ->addMethods(['findByEvent'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockLogRepo->expects(self::once())->method('findByEvent')->willReturn(
-            $logEntries
-        );
+        $mockLogRepo = $this->createMock(CustomNotificationLogRepository::class);
+        $mockLogRepo->expects(self::once())->method('findBy')->willReturn($logEntries);
         $this->subject->injectCustomNotificationLogRepository($mockLogRepo);
 
         $mockSettingsService = $this->getMockBuilder(SettingsService::class)->getMock();

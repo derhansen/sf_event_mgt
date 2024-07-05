@@ -94,7 +94,7 @@ class RegistrationService
      */
     public function confirmDependingRegistrations(Registration $registration): void
     {
-        $registrations = $this->registrationRepository->findByMainRegistration($registration);
+        $registrations = $this->registrationRepository->findBy(['mainRegistration' => $registration]);
         foreach ($registrations as $foundRegistration) {
             /** @var Registration $foundRegistration */
             $foundRegistration->setConfirmed(true);
@@ -163,7 +163,7 @@ class RegistrationService
      */
     public function cancelDependingRegistrations(Registration $registration): void
     {
-        $registrations = $this->registrationRepository->findByMainRegistration($registration);
+        $registrations = $this->registrationRepository->findBy(['mainRegistration' => $registration]);
         foreach ($registrations as $foundRegistration) {
             $this->registrationRepository->remove($foundRegistration);
         }

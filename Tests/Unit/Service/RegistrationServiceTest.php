@@ -26,6 +26,7 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use stdClass;
 use TYPO3\CMS\Core\Cache\Frontend\NullFrontend;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ReflectionService;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
@@ -81,16 +82,11 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2->expects(self::any())->method('setConfirmed');
 
-        $registrations = new ObjectStorage();
-        $registrations->attach($foundRegistration1);
-        $registrations->attach($foundRegistration2);
+        $queryResult = $this->getAccessibleMock(QueryResult::class, null, [], '', false);
+        $queryResult->_set('queryResult', [$foundRegistration1, $foundRegistration2]);
 
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->onlyMethods(['update'])
-            ->addMethods(['findByMainRegistration'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects(self::once())->method('findByMainRegistration')->willReturn($registrations);
+        $registrationRepository = $this->createMock(RegistrationRepository::class);
+        $registrationRepository->expects(self::once())->method('findBy')->willReturn($queryResult);
         $registrationRepository->expects(self::exactly(2))->method('update');
         $this->subject->injectRegistrationRepository($registrationRepository);
 
@@ -107,16 +103,11 @@ class RegistrationServiceTest extends UnitTestCase
         $foundRegistration1 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
         $foundRegistration2 = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
 
-        $registrations = new ObjectStorage();
-        $registrations->attach($foundRegistration1);
-        $registrations->attach($foundRegistration2);
+        $queryResult = $this->getAccessibleMock(QueryResult::class, null, [], '', false);
+        $queryResult->_set('queryResult', [$foundRegistration1, $foundRegistration2]);
 
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->onlyMethods(['remove'])
-            ->addMethods(['findByMainRegistration'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects(self::once())->method('findByMainRegistration')->willReturn($registrations);
+        $registrationRepository = $this->createMock(RegistrationRepository::class);
+        $registrationRepository->expects(self::once())->method('findBy')->willReturn($queryResult);
         $registrationRepository->expects(self::exactly(2))->method('remove');
         $this->subject->injectRegistrationRepository($registrationRepository);
 

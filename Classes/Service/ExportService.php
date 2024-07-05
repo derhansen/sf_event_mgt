@@ -76,7 +76,7 @@ class ExportService
             $registrationFieldData = $this->getRegistrationFieldData($eventUid);
             $fieldsArray = array_diff($fieldsArray, ['registration_fields']);
         }
-        $registrations = $this->registrationRepository->findByEvent($eventUid);
+        $registrations = $this->registrationRepository->findBy(['event' => $eventUid]);
         $exportedRegistrations = CsvUtility::csvValues(
             array_merge($fieldsArray, $registrationFieldData),
             $settings['fieldDelimiter'] ?? ',',

@@ -17,6 +17,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -116,16 +117,11 @@ class ExportServiceTest extends UnitTestCase
         $registration->_setProperty('uid', 1);
         $registration->setEvent($event);
 
-        $allRegistrations = new ObjectStorage();
-        $allRegistrations->attach($registration);
+        $queryResult = $this->getAccessibleMock(QueryResult::class, null, [], '', false);
+        $queryResult->_set('queryResult', [$registration]);
 
-        $registrationRepository = $this->getMockBuilder(RegistrationRepository::class)
-            ->addMethods(['findByEvent'])
-            ->disableOriginalConstructor()
-            ->getMock();
-        $registrationRepository->expects(self::once())->method('findByEvent')->willReturn(
-            $allRegistrations
-        );
+        $registrationRepository = $this->createMock(RegistrationRepository::class);
+        $registrationRepository->expects(self::once())->method('findBy')->willReturn($queryResult);
 
         $eventRepository = $this->getMockBuilder(EventRepository::class)->disableOriginalConstructor()->getMock();
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)

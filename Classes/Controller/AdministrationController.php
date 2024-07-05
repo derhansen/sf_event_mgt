@@ -344,7 +344,7 @@ class AdministrationController extends AbstractController
 
         $customNotification = GeneralUtility::makeInstance(CustomNotification::class);
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
-        $logEntries = $this->customNotificationLogRepository->findByEvent($event);
+        $logEntries = $this->customNotificationLogRepository->findBy(['event' => $event]);
 
         $modifyAdministrationIndexNotifyViewVariablesEvent = new ModifyAdministrationIndexNotifyViewVariablesEvent(
             [
