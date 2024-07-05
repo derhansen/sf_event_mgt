@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Preview;
 
 use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class PiuserregPreviewRenderer extends AbstractPluginPreviewRenderer
 {
@@ -20,11 +19,7 @@ class PiuserregPreviewRenderer extends AbstractPluginPreviewRenderer
     {
         $data = [];
         $record = $item->getRecord();
-        $flexFormData = GeneralUtility::xml2array($record['pi_flexform']);
-        if (!is_array($flexFormData)) {
-            $flexFormData = [];
-        }
-
+        $flexFormData = $this->getFlexFormData($record['pi_flexform']);
         $pluginName = $this->getPluginName($record);
 
         $this->setPluginPidConfig($data, $flexFormData, 'registrationPid', 'sDEF');

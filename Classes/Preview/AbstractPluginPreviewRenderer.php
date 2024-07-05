@@ -76,6 +76,18 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     }
 
     /**
+     * Returns the records flexform as array
+     */
+    protected function getFlexFormData(string $flexform): array
+    {
+        $flexFormData = GeneralUtility::xml2array($flexform);
+        if (!is_array($flexFormData)) {
+            $flexFormData = [];
+        }
+        return $flexFormData;
+    }
+
+    /**
      * Renders the given data and action as HTML table for plugin preview
      */
     protected function renderAsTable(array $data, string $pluginName = ''): string
