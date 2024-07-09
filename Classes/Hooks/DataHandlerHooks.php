@@ -60,7 +60,7 @@ class DataHandlerHooks
     public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler): void
     {
         if ($table === 'tt_content' &&
-            $status === 'update' &&
+            ($status === 'update' || $status === 'new') &&
             isset($fieldArray['pi_flexform']) &&
             $dataHandler->checkValue_currentRecord['CType'] === 'list' &&
             in_array(
