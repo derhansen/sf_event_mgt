@@ -125,8 +125,20 @@ Configuration::
               reguid: reguid
               hmac: hmac
           -
+            routePath: '/verify-confirm-registration/{reguid}/{hmac}'
+            _controller: 'Event::verifyConfirmRegistration'
+            _arguments:
+              reguid: reguid
+              hmac: hmac
+          -
             routePath: '/cancel-registration/{reguid}/{hmac}'
             _controller: 'Event::cancelRegistration'
+            _arguments:
+              reguid: reguid
+              hmac: hmac
+          -
+            routePath: '/verify-cancel-registration/{reguid}/{hmac}'
+            _controller: 'Event::verifyCancelRegistration'
             _arguments:
               reguid: reguid
               hmac: hmac
@@ -134,9 +146,13 @@ Configuration::
         requirements:
           eventuid: \d+
           reguid: \d+
-          result: '[0-8]'
+          result: '[0-9]'
           hmac: '^[a-zA-Z0-9]{40}$'
         aspects:
+          eventuid:
+            type: PersistedAliasMapper
+            tableName: tx_sfeventmgt_domain_model_event
+            routeFieldName: uid
           reguid:
             type: PersistedAliasMapper
             tableName: tx_sfeventmgt_domain_model_registration
