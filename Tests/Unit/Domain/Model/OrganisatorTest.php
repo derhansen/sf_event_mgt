@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -31,9 +32,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if initial value for name is returned
-     *
-     * @test
      */
+    #[Test]
     public function getNameReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -44,9 +44,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if name can be set
-     *
-     * @test
      */
+    #[Test]
     public function setNameForStringSetsName(): void
     {
         $this->subject->setName('Conceived at T3CON10');
@@ -55,9 +54,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if initial value for email is returned
-     *
-     * @test
      */
+    #[Test]
     public function getEmailReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -68,9 +66,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if email can be set
-     *
-     * @test
      */
+    #[Test]
     public function setEmailForStringSetsEmail(): void
     {
         $this->subject->setEmail('mail@domain.tld');
@@ -79,9 +76,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if initial value for phone is returned
-     *
-     * @test
      */
+    #[Test]
     public function getPhoneReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -92,9 +88,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if phone can be set
-     *
-     * @test
      */
+    #[Test]
     public function setPhoneForStringSetsPhone(): void
     {
         $this->subject->setPhone('+49 123 4567890');
@@ -103,9 +98,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if initial value for link is returned
-     *
-     * @test
      */
+    #[Test]
     public function getLinkReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -116,9 +110,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if link can be set
-     *
-     * @test
      */
+    #[Test]
     public function setLinkForStringSetsLink(): void
     {
         $this->subject->setLink('https://www.derhansen.com');
@@ -127,9 +120,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if initial value for image is returned
-     *
-     * @test
      */
+    #[Test]
     public function getImageReturnsInitialValueForfiles(): void
     {
         self::assertNull($this->subject->getImage());
@@ -137,9 +129,8 @@ class OrganisatorTest extends UnitTestCase
 
     /**
      * Test if image can be set
-     *
-     * @test
      */
+    #[Test]
     public function setImageForObjectStorageContainingImageSetsImage(): void
     {
         $file = new FileReference();

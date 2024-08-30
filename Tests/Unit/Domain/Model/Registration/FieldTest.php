@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Utility\FieldType;
@@ -31,119 +33,91 @@ class FieldTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTitleReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTitleSetsTitleField(): void
     {
         $this->subject->setTitle('A title');
         self::assertEquals('A title', $this->subject->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTypeReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTypeSetsTypefield(): void
     {
         $this->subject->setType('check');
         self::assertEquals('check', $this->subject->getType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRequiredReturnsInitialValueForBoolean(): void
     {
         self::assertFalse($this->subject->getRequired());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRequiredSetsRequiredField(): void
     {
         $this->subject->setRequired(true);
         self::assertTrue($this->subject->getRequired());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPlaceholderReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getPlaceholder());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPlaceholderSetsPlaceholderField(): void
     {
         $this->subject->setPlaceholder('placeholder');
         self::assertEquals('placeholder', $this->subject->getPlaceholder());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDefaultValueReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getDefaultValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setDefaultValueSetsDefaultValueField(): void
     {
         $this->subject->setDefaultValue('default');
         self::assertEquals('default', $this->subject->getDefaultValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSettingsReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getSettings());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setSettingsSetsSettingsField(): void
     {
         $this->subject->setSettings('settings');
         self::assertEquals('settings', $this->subject->getSettings());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEventReturnsInitialValueForEvent(): void
     {
         self::assertNull($this->subject->getEvent());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEventSetsEventField(): void
     {
         $event = new Event();
@@ -221,10 +195,8 @@ class FieldTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider getSettingsForOptionDataProvider
-     */
+    #[DataProvider('getSettingsForOptionDataProvider')]
+    #[Test]
     public function getSettingsForOptionReturnsExpectedValues(string $settings, string $defaultValue, array $expected): void
     {
         $this->subject->setSettings($settings);
@@ -232,9 +204,7 @@ class FieldTest extends UnitTestCase
         self::assertSame($expected, $this->subject->getSettingsForOption());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueTypeReturnsInitialValue(): void
     {
         self::assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
@@ -278,19 +248,15 @@ class FieldTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider getValueTypeReturnsExpectedFieldValuesDataProvider
-     */
+    #[DataProvider('getValueTypeReturnsExpectedFieldValuesDataProvider')]
+    #[Test]
     public function getValueTypeReturnsExpectedFieldValues(string $fieldType, int $expected): void
     {
         $this->subject->setType($fieldType);
         self::assertEquals($expected, $this->subject->getValueType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPartialNameReturnsFieldTypeInUppercase(): void
     {
         $this->subject->setType('input');
@@ -315,61 +281,47 @@ class FieldTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider getDatepickermodeTypeDataProvider
-     */
+    #[DataProvider('getDatepickermodeTypeDataProvider')]
+    #[Test]
     public function getDatepickermodeTypeReturnsExpectedValue(int $datepickerMode, string $expected): void
     {
         $this->subject->setDatepickermode($datepickerMode);
         self::assertEquals($expected, $this->subject->getDatepickermodeType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTextReturnsInitialValue(): void
     {
         self::assertEmpty($this->subject->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTextSetsTextForString(): void
     {
         $this->subject->setText('TYPO3');
         self::assertEquals('TYPO3', $this->subject->getText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDatepickermodeReturnsInitialValue(): void
     {
         self::assertEquals(0, $this->subject->getDatepickermode());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setDatepickermodeSetsValueForInt(): void
     {
         $this->subject->setDatepickermode(2);
         self::assertEquals(2, $this->subject->getDatepickermode());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFeuserValueReturnInitialValue(): void
     {
         self::assertEquals('', $this->subject->getFeuserValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setFeuserValueSetsValueForString(): void
     {
         $expected = 'John';

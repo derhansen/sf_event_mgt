@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\ForeignRecordDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -28,52 +29,40 @@ class ForeignRecordDemandTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStoragePageReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getStoragePage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStoragePageSetsStoragePageForString(): void
     {
         $this->subject->setStoragePage('1,2,3');
         self::assertEquals('1,2,3', $this->subject->getStoragePage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getrestrictForeignRecordsToStoragePageReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getRestrictForeignRecordsToStoragePage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRestrictForeignRecordsToStoragePageSetsValueForBoolean(): void
     {
         $this->subject->setRestrictForeignRecordsToStoragePage(true);
         self::assertTrue($this->subject->getRestrictForeignRecordsToStoragePage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createFromSettingsReturnsExpectedObjectIfEmptySettings(): void
     {
         $expected = new ForeignRecordDemand();
         self::assertEquals($expected, ForeignRecordDemand::createFromSettings());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createFromSettingsReturnsExpectedObjectWithSettings(): void
     {
         $expected = new ForeignRecordDemand();

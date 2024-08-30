@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use stdClass;
 use TYPO3\CMS\Extbase\Mvc\Request;
@@ -22,9 +23,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
  */
 class PrefillViewHelperTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsEmptyStringIfTsfeNotAvailabe(): void
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -41,9 +40,7 @@ class PrefillViewHelperTest extends UnitTestCase
         self::assertSame('', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsCurrentFieldValueIfValueInParsedBodyAvailable(): void
     {
         $submittedData = [
@@ -70,9 +67,7 @@ class PrefillViewHelperTest extends UnitTestCase
         self::assertSame('Torben', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsEmptyStringIfPrefillSettingsEmpty(): void
     {
         $submittedData = [];
@@ -99,9 +94,7 @@ class PrefillViewHelperTest extends UnitTestCase
         self::assertSame('', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsEmptyStringIfFieldNotFoundInPrefillSettings(): void
     {
         $submittedData = [];
@@ -128,9 +121,7 @@ class PrefillViewHelperTest extends UnitTestCase
         self::assertSame('', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsEmptyStringIfFieldNotFoundInFeUser(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
@@ -156,9 +147,7 @@ class PrefillViewHelperTest extends UnitTestCase
         self::assertSame('', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsFieldvalueIfFound(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
@@ -185,9 +174,7 @@ class PrefillViewHelperTest extends UnitTestCase
         self::assertSame('Doe', $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsSubmittedValueIfValidationError(): void
     {
         $submittedData = [

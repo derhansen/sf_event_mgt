@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use PHPUnit\Framework\Attributes\Test;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -33,9 +34,7 @@ class EventDemandTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDisplayModeReturnsInitialValue(): void
     {
         self::assertSame(
@@ -44,9 +43,7 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTopEventRestrictionReturnsInitialValueForInteger(): void
     {
         self::assertSame(
@@ -55,9 +52,7 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTopEventRestrictionForIntegerSetsTopEventRestriction(): void
     {
         $this->subject->setTopEventRestriction(1);
@@ -67,18 +62,14 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setDisplayModeForStringSetsDisplayMode(): void
     {
         $this->subject->setDisplayMode('past');
         self::assertEquals('past', $this->subject->getDisplayMode());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStoragePageReturnsInitialValue(): void
     {
         self::assertSame(
@@ -87,18 +78,14 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStoragePageForStringSetsStoragePage(): void
     {
         $this->subject->setStoragePage('1,2,3');
         self::assertEquals('1,2,3', $this->subject->getStoragePage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCurrentDateTimeReturnsGivenValueIfValueSet(): void
     {
         $this->subject->setCurrentDateTime(new DateTime('01.01.2014'));
@@ -108,17 +95,13 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoryReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getCategory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoryForStringSetsCategory(): void
     {
         $this->subject->setCategory('1,2,3,4');
@@ -128,17 +111,13 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setIncludeSubcategoriesReturnsInitialValueForBoolean(): void
     {
         self::assertFalse($this->subject->getIncludeSubcategories());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getOrderFieldReturnsEmptyStringIfNoValueSet(): void
     {
         self::assertSame(
@@ -147,9 +126,7 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getOrderFieldReturnsGivenValueIfValueSet(): void
     {
         $this->subject->setOrderField('title');
@@ -159,9 +136,7 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getOrderDirectionReturnsEmptyStringIfNoValueSet(): void
     {
         self::assertSame(
@@ -170,9 +145,7 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getOrderDirectionReturnsGivenValueIfValueSet(): void
     {
         $this->subject->setOrderDirection('asc');
@@ -182,17 +155,13 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getQueryLimitReturnsNullIfNoValueSet(): void
     {
         self::assertEquals(0, $this->subject->getQueryLimit());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getQueryLimitReturnsExpectedQueryLimit(): void
     {
         $this->subject->setQueryLimit(10);
@@ -202,17 +171,13 @@ class EventDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLocationReturnsNullIfNoValueSet(): void
     {
         self::assertNull($this->subject->getLocation());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLocationReturnsExpectedLocation(): void
     {
         $location = new Location();
@@ -225,9 +190,8 @@ class EventDemandTest extends UnitTestCase
 
     /**
      * Test if default value is returned
-     *
-     * @test
      */
+    #[Test]
     public function getLocationCityReturnsDefaultValue(): void
     {
         self::assertSame('', $this->subject->getLocationCity());
@@ -235,9 +199,8 @@ class EventDemandTest extends UnitTestCase
 
     /**
      * Test if value can be set
-     *
-     * @test
      */
+    #[Test]
     public function getLocationCityReturnsExpectedValue(): void
     {
         $this->subject->setLocationCity('Flensburg');
@@ -246,9 +209,8 @@ class EventDemandTest extends UnitTestCase
 
     /**
      * Test if default value is returned
-     *
-     * @test
      */
+    #[Test]
     public function getLocationCountryReturnsDefaultValue(): void
     {
         self::assertSame('', $this->subject->getLocationCountry());
@@ -256,111 +218,86 @@ class EventDemandTest extends UnitTestCase
 
     /**
      * Test if value can be set
-     *
-     * @test
      */
+    #[Test]
     public function getLocationCountryReturnsExpectedValue(): void
     {
         $this->subject->setLocationCountry('Germany');
         self::assertSame('Germany', $this->subject->getLocationCountry());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getYearReturnsDefaultValue(): void
     {
         self::assertEquals(0, $this->subject->getYear());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setYearSetsYearForInteger(): void
     {
         $this->subject->setYear(2017);
         self::assertSame(2017, $this->subject->getYear());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMonthReturnsDefaultValue(): void
     {
         self::assertEquals(0, $this->subject->getMonth());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMonthSetsMonthForInteger(): void
     {
         $this->subject->setMonth(12);
         self::assertSame(12, $this->subject->getMonth());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDayReturnsDefaultValue(): void
     {
         self::assertEquals(0, $this->subject->getDay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setDaySetsDayForInteger(): void
     {
         $this->subject->setDay(1);
         self::assertSame(1, $this->subject->getDay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoryConjuctionReturnsInitialValue(): void
     {
         self::assertSame('', $this->subject->getCategoryConjunction());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoryConjuctionSetsCategoryConjunctionForString(): void
     {
         $this->subject->setCategoryConjunction('AND');
         self::assertSame('AND', $this->subject->getCategoryConjunction());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIgnoreEnableFieldsReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->getIgnoreEnableFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setIgnoreEnableFieldsSetsValueForBoolean(): void
     {
         $this->subject->setIgnoreEnableFields(true);
         self::assertTrue($this->subject->getIgnoreEnableFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSearchDemandReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getSearchDemand());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchDemandCanBeSet(): void
     {
         $searchDemamd = new SearchDemand();
@@ -368,17 +305,13 @@ class EventDemandTest extends UnitTestCase
         self::assertSame($searchDemamd, $this->subject->getSearchDemand());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getOrganisatorReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getOrganisator());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function organisatorCanBeSet(): void
     {
         $organisator = new Organisator();
@@ -386,35 +319,27 @@ class EventDemandTest extends UnitTestCase
         self::assertSame($organisator, $this->subject->getOrganisator());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getIncludeCurrentReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getIncludeCurrent());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function includeCurrentCanBeSet(): void
     {
         $this->subject->setIncludeCurrent(true);
         self::assertTrue($this->subject->getIncludeCurrent());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createFromSettingsReturnsExpectedObjectIfEmptySettings(): void
     {
         $expected = new EventDemand();
         self::assertEquals($expected, EventDemand::createFromSettings());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createFromSettingsReturnsExpectedObjectWithSettings(): void
     {
         $location = new Location();

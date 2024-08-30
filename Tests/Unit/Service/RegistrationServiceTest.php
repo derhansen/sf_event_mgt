@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DateInterval;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -48,9 +50,7 @@ class RegistrationServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createDependingRegistrationsCreatesAmountOfExpectedRegistrations(): void
     {
         GeneralUtility::setSingletonInstance(ReflectionService::class, new ReflectionService(new NullFrontend('extbase'), 'ClassSchemata'));
@@ -69,9 +69,7 @@ class RegistrationServiceTest extends UnitTestCase
         $this->subject->createDependingRegistrations($registration);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function confirmDependingRegistrationsConfirmsDependingRegistrations(): void
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
@@ -93,9 +91,7 @@ class RegistrationServiceTest extends UnitTestCase
         $this->subject->confirmDependingRegistrations($mockRegistration);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function cancelDependingRegistrationsRemovesDependingRegistrations(): void
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->disableOriginalConstructor()->getMock();
@@ -116,9 +112,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if HMAC validations fails
-     *
-     * @test
      */
+    #[Test]
     public function checkConfirmRegistrationIfHmacValidationFailsTest(): void
     {
         $reguid = 1;
@@ -143,9 +138,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if no Registration found
-     *
-     * @test
      */
+    #[Test]
     public function checkConfirmRegistrationIfNoRegistrationTest(): void
     {
         $reguid = 1;
@@ -177,9 +171,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned registration has no event
-     *
-     * @test
      */
+    #[Test]
     public function checkConfirmRegistrationIfNoRegistrationEventTest(): void
     {
         $reguid = 1;
@@ -213,9 +206,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if confirmation date expired
-     *
-     * @test
      */
+    #[Test]
     public function checkConfirmRegistrationIfConfirmationDateExpiredTest(): void
     {
         $reguid = 1;
@@ -251,9 +243,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if registration already confirmed
-     *
-     * @test
      */
+    #[Test]
     public function checkConfirmRegistrationIfRegistrationConfirmedTest(): void
     {
         $reguid = 1;
@@ -290,9 +281,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if HMAC validations fails
-     *
-     * @test
      */
+    #[Test]
     public function checkCancelRegistrationIfHmacValidationFailsTest(): void
     {
         $reguid = 1;
@@ -317,9 +307,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if no Registration found
-     *
-     * @test
      */
+    #[Test]
     public function checkCancelRegistrationIfNoRegistrationTest(): void
     {
         $reguid = 1;
@@ -351,9 +340,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if cancellation is not enabled
-     *
-     * @test
      */
+    #[Test]
     public function checkCancelRegistrationIfCancellationIsNotEnabledTest(): void
     {
         $reguid = 1;
@@ -391,9 +379,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if cancellation deadline expired
-     *
-     * @test
      */
+    #[Test]
     public function checkCancelRegistrationIfCancellationDeadlineExpiredTest(): void
     {
         $reguid = 1;
@@ -432,9 +419,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected array is returned if event startdate passed
-     *
-     * @test
      */
+    #[Test]
     public function checkCancelRegistrationIfEventStartdatePassedTest(): void
     {
         $reguid = 1;
@@ -474,9 +460,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected value is returned if no frontend user logged in
-     *
-     * @test
      */
+    #[Test]
     public function getCurrentFeUserObjectReturnsNullIfNoFeUser(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
@@ -487,9 +472,8 @@ class RegistrationServiceTest extends UnitTestCase
 
     /**
      * Test if expected value is returned if a frontend user logged in
-     *
-     * @test
      */
+    #[Test]
     public function getCurrentFeUserObjectReturnsFeUser(): void
     {
         $GLOBALS['TSFE'] = new stdClass();
@@ -509,9 +493,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($this->subject->getCurrentFeUserObject(), $feUser);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfRegistrationNotEnabled(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -525,9 +507,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_NOT_ENABLED);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfRegistrationDeadlineExpired(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -544,9 +524,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfEventHasStarted(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -563,9 +541,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfEventHasEndedAndRegistrationUntilEnddateIsAllowed(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -585,9 +561,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EVENT_ENDED);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfMaxParticipantsReached(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -612,9 +586,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfAmountOfRegistrationsGreaterThanRemainingPlaces(): void
     {
         $registration = $this->getMockBuilder(Registration::class)
@@ -643,9 +615,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfUniqueEmailCheckEnabledAndEmailRegisteredToEvent(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -677,9 +647,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessFailsIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -707,9 +675,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessSucceedsWhenAllConditionsMet(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -734,9 +700,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_SUCCESSFUL);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkRegistrationSuccessSucceedsIfEventHasStartedAndRegistrationUntilEnddateIsAllowed(): void
     {
         $registration = $this->getMockBuilder(Registration::class)->getMock();
@@ -764,9 +728,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertEquals($result, RegistrationResult::REGISTRATION_SUCCESSFUL);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function redirectPaymentEnabledReturnsFalseIfPaymentNotEnabled(): void
     {
         $event = new Event();
@@ -778,9 +740,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertFalse($this->subject->redirectPaymentEnabled($mockRegistration));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function redirectPaymentEnabledReturnsTrueIfPaymentRedirectEnabled()
     {
         $event = new Event();
@@ -808,9 +768,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertTrue($this->subject->redirectPaymentEnabled($mockRegistration));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isWaitlistRegistrationReturnsFalseIfEventNotFullyBookedAndEnoughFreePlaces(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
@@ -827,9 +785,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertFalse($this->subject->isWaitlistRegistration($event, 3));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isWaitlistRegistrationReturnsTrueIfEventNotFullyBookedAndNotEnoughFreePlaces(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
@@ -846,9 +802,7 @@ class RegistrationServiceTest extends UnitTestCase
         self::assertTrue($this->subject->isWaitlistRegistration($event, 2));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isWaitlistRegistrationReturnsTrueIfEventFullyBookedAndNotEnoughFreePlaces(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
@@ -886,10 +840,8 @@ class RegistrationServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider moveUpWaitlistRegistrationsDataProvider
-     */
+    #[DataProvider('moveUpWaitlistRegistrationsDataProvider')]
+    #[Test]
     public function moveUpWaitlistRegistrationDoesNotProceedIfCriteriaNotMatch(
         bool $enableWaitlistMoveup,
         int $amountWaitlistRegistrations,

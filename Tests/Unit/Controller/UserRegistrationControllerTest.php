@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
 use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
@@ -49,9 +50,8 @@ class UserRegistrationControllerTest extends UnitTestCase
 
     /**
      * Test if listAction assigns registrations to view
-     *
-     * @test
      */
+    #[Test]
     public function listActionFetchesRegistrationsFromRepositoryAndAssignsThemToView(): void
     {
         $registrations = $this->getMockBuilder(ObjectStorage::class)
@@ -84,9 +84,7 @@ class UserRegistrationControllerTest extends UnitTestCase
         $this->subject->listAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function detailActionThrowsExpectedExceptionIfRegistrationDoesNotBelongToFrontendUser(): void
     {
         $GLOBALS['TSFE'] = $this->createMock(TypoScriptFrontendController::class);
@@ -104,9 +102,7 @@ class UserRegistrationControllerTest extends UnitTestCase
         $this->subject->detailAction($registration);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function detailActionAssignsRegistrationToViewIfRegistrationBelongsToFrontendUser(): void
     {
         $GLOBALS['TSFE'] = $this->createMock(TypoScriptFrontendController::class);

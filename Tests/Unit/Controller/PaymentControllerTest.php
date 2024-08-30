@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentCancelEvent;
@@ -65,9 +66,8 @@ class PaymentControllerTest extends UnitTestCase
 
     /**
      * Test if ProcessPaymentInitializeEvent is dispatched
-     *
-     * @test
      */
+    #[Test]
     public function redirectActionCallsBeforeRedirectSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
@@ -97,9 +97,8 @@ class PaymentControllerTest extends UnitTestCase
 
     /**
      * Test if ProcessPaymentSuccessEvent is dispatched
-     *
-     * @test
      */
+    #[Test]
     public function successActionCallsProcessSuccessSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
@@ -133,9 +132,8 @@ class PaymentControllerTest extends UnitTestCase
 
     /**
      * Test if ProcessPaymentFailureEvent is dispatched
-     *
-     * @test
      */
+    #[Test]
     public function failureActionCallsProcessFailureSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
@@ -169,9 +167,8 @@ class PaymentControllerTest extends UnitTestCase
 
     /**
      * Test if ProcessPaymentCancelEvent is dispatched
-     *
-     * @test
      */
+    #[Test]
     public function cancelActionCallsProcessCancelSignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();
@@ -205,9 +202,8 @@ class PaymentControllerTest extends UnitTestCase
 
     /**
      * Test if ProcessPaymentNotifyEvent is dispatched
-     *
-     * @test
      */
+    #[Test]
     public function notifyActionCallsProcessNotifySignal()
     {
         $mockRegistration = $this->getMockBuilder(Registration::class)->getMock();

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Utility;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -42,10 +44,8 @@ class ArrayUtilityTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider isJsonArrayReturnsExpectedValuesDataProcessor
-     */
+    #[DataProvider('isJsonArrayReturnsExpectedValuesDataProcessor')]
+    #[Test]
     public function isJsonArrayReturnsExpectedValues($value, $expected): void
     {
         self::assertSame($expected, ArrayUtility::isJsonArray($value));

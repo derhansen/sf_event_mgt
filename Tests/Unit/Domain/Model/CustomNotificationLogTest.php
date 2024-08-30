@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use PHPUnit\Framework\Attributes\Test;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -32,9 +33,8 @@ class CustomNotificationLogTest extends UnitTestCase
 
     /**
      * Test if event can be set
-     *
-     * @test
      */
+    #[Test]
     public function setEventForEventSetsEvent(): void
     {
         $event = new Event();
@@ -44,9 +44,8 @@ class CustomNotificationLogTest extends UnitTestCase
 
     /**
      * Test if details can be set
-     *
-     * @test
      */
+    #[Test]
     public function setDetailsForStringSetsDetails(): void
     {
         $this->subject->setDetails('Description');
@@ -55,9 +54,8 @@ class CustomNotificationLogTest extends UnitTestCase
 
     /**
      * Test if emailsSent can be set
-     *
-     * @test
      */
+    #[Test]
     public function setEmailsSentForIntSetsEmailsSent(): void
     {
         $this->subject->setEmailsSent(100);
@@ -66,9 +64,8 @@ class CustomNotificationLogTest extends UnitTestCase
 
     /**
      * Test if tstamp can be set
-     *
-     * @test
      */
+    #[Test]
     public function setTstampForDateTimeSetsTstamp(): void
     {
         $tstamp = new DateTime('01.01.2014 10:00:00');
@@ -78,26 +75,21 @@ class CustomNotificationLogTest extends UnitTestCase
 
     /**
      * Test if backend user can be set to field cruser_id
-     *
-     * @test
      */
+    #[Test]
     public function setCruserIdForBackendUserSetsBackendUserId(): void
     {
         $this->subject->setCruserId(1);
         self::assertEquals(1, $this->subject->getCruserId());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMessageReturnsInitialValueForString(): void
     {
         self::assertEquals('', $this->subject->getMessage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMessageSetsMessage(): void
     {
         $this->subject->setMessage('test');

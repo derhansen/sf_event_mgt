@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Validation\Validator;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
@@ -30,9 +31,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function registrationInvalidWhenDefaultFieldsNotSet(): void
     {
         $registration = new Registration();
@@ -47,9 +46,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         self::assertTrue(isset($errors['email']));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function registrationValidWhenDefaultFieldsSet(): void
     {
         $registration = new Registration();
@@ -63,9 +60,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         self::assertFalse($result->hasErrors());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function registrationInvalidWhenCustomRequiredFieldsNotSet(): void
     {
         $configuration = [
@@ -96,9 +91,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         self::assertTrue(isset($errors['accepttc']));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function registrationValidWhenCustomRequiredFieldsDoesNotExist(): void
     {
         $configuration = [

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
@@ -20,9 +22,7 @@ class SpamCheckServiceTest extends UnitTestCase
 {
     protected bool $resetSingletonInstances = true;
 
-    /**
-     * @test
-     */
+    #[Test]
     public function spamCheckServiceWorksForEmptySettingsAndArguments(): void
     {
         $registration = new Registration();
@@ -52,10 +52,8 @@ class SpamCheckServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider
-     */
+    #[DataProvider('isSpamCheckFailedReturnsFalseForExpectedConditionsDataProvider')]
+    #[Test]
     public function isSpamCheckFailedReturnsFalseForExpectedConditions(array $settings): void
     {
         $registration = new Registration();
@@ -64,9 +62,7 @@ class SpamCheckServiceTest extends UnitTestCase
         self::assertFalse($service->isSpamCheckFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function spamCheckServiceThrowsExceptionWhenTestNotFound(): void
     {
         $this->expectException(SpamCheckNotFoundException::class);
@@ -84,9 +80,7 @@ class SpamCheckServiceTest extends UnitTestCase
         $service->isSpamCheckFailed();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function maxSpamScoreIsSetInConstructor(): void
     {
         $registration = new Registration();
@@ -100,9 +94,7 @@ class SpamCheckServiceTest extends UnitTestCase
         self::assertEquals(20, $service->_get('maxSpamScore'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function emptyCheckArrayIsInitializedInConstructor(): void
     {
         $registration = new Registration();
@@ -115,9 +107,7 @@ class SpamCheckServiceTest extends UnitTestCase
         self::assertEquals([], $service->_get('settings')['checks']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function configuredSpamCheckIsProcessed(): void
     {
         $registration = new Registration();

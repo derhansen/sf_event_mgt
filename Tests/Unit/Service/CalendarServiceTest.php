@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
@@ -33,9 +35,8 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Test if the calendar array returns an expected amount of weeks for a given date
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayReturnsExpectedAmountOfWeeksForGivenDate(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1);
@@ -44,9 +45,8 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Test if the calendar array index contains week numbers
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayHasWeekNumbersAsIndex(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1);
@@ -60,9 +60,8 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Test, if the first weekday of the calendar is a sunday if the first day of week setting is set to sunday
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayRespectsFirstDayOfWeekParameter(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 0);
@@ -71,9 +70,8 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Test, if isCurrentDay is set
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArraySetsIsCurrentDay(): void
     {
         $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 2, 2017), 1);
@@ -82,9 +80,8 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Test, if an event for the 02.01.2017 will be returned in the array
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayReturnsArrayWithEventForOneDay(): void
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
@@ -104,9 +101,8 @@ class CalendarServiceTest extends UnitTestCase
 
     /**
      * Test, if an event for the 02.01.2017 to 04.01.2017 will be returned in the array
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayReturnsArrayWithEventForMultipleDays(): void
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
@@ -198,10 +194,8 @@ class CalendarServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider calendarDateRangeDataProvider
-     */
+    #[DataProvider('calendarDateRangeDataProvider')]
+    #[Test]
     public function getCalendarDateRangeReturnsExpectedValues(
         int $month,
         int $year,
@@ -248,19 +242,15 @@ class CalendarServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider dateConfigDataProvider
-     */
+    #[DataProvider('dateConfigDataProvider')]
+    #[Test]
     public function getDateConfigReturnsExpectedValues(int $month, int $year, string $modifier, array $expected): void
     {
         $result = $this->subject->getDateConfig($month, $year, $modifier);
         self::assertEquals($expected, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getWeekConfigReturnsExpectedValue(): void
     {
         $firstDayOfWeek = DateTime::createFromFormat('d.m.Y', '3.1.2022')->setTime(0, 0);

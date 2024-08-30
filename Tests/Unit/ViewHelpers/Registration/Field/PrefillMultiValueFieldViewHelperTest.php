@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration\Field;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillMultiValueFieldViewHelper;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
@@ -36,10 +38,8 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider
-     */
+    #[DataProvider('viewHelperReturnsExpectedResultIfNoOriginalRequestDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedResultIfNoOriginalRequest(
         string $defaultValue,
         string $currentValue,
@@ -95,10 +95,8 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider
-     */
+    #[DataProvider('viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist(
         int $submittedRegistrationFieldUid,
         int $registrationFieldUid,
@@ -141,9 +139,7 @@ class PrefillMultiValueFieldViewHelperTest extends UnitTestCase
         self::assertEquals($expected, $viewHelper->render());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsFalseIfOriginalRequestHasNoRegistrationFieldValues(): void
     {
         $field = $this->getMockBuilder(Field::class)->getMock();

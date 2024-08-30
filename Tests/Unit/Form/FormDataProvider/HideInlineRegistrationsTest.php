@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Form\formDataProvider;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -27,9 +28,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
         parent::setUp();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addDataWhenHideInlineRegistrationsIsDisabled(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = [
@@ -54,9 +53,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
         self::assertEquals($expected, (new HideInlineRegistrations())->addData($input));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addDataWhenHideInlineRegistrationsIsEnabledAndLimitExceeded(): void
     {
         $GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['sf_event_mgt'] = [

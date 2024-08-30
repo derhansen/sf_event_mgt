@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Category;
 
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -33,9 +34,7 @@ class CountViewHelperTest extends FunctionalTestCase
             ->setTemplateSource('<e:category.count categoryUid="{categoryUid}"/>');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsExpectedResult(): void
     {
         $result = $this->view->assign('categoryUid', 5)->render();

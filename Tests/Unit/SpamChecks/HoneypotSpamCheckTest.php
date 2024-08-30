@@ -11,15 +11,14 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\HoneypotSpamCheck;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class HoneypotSpamCheckTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsFailedWhenHoneypotFieldNotSubmitted(): void
     {
         /** @var Registration $mockRegistration */
@@ -35,9 +34,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsFailedWhenHoneypotFieldFilled(): void
     {
         /** @var Registration $mockRegistration */
@@ -55,9 +52,7 @@ class HoneypotSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsNotFailedWhenHoneypotFieldEmpty(): void
     {
         /** @var Registration $mockRegistration */

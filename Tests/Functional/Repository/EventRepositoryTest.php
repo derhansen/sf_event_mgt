@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
@@ -78,11 +80,11 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if storagePage restriction in demand works
-     * @dataProvider findDemandedRecordsByStoragePageDataProvider
-     * @test
      * @param mixed $pid
      * @param int $expected
      */
+    #[DataProvider('findDemandedRecordsByStoragePageDataProvider')]
+    #[Test]
     public function findDemandedRecordsByStoragePage(string $pid, int $expected): void
     {
         $demand = new EventDemand();
@@ -94,9 +96,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if displayMode 'all' restriction in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDisplayModeAll(): void
     {
         $demand = new EventDemand();
@@ -109,9 +110,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if displayMode 'past' restriction in demand works.
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDisplayModePast(): void
     {
         $demand = new EventDemand();
@@ -125,9 +125,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if displayMode 'past' restriction in demand works and ignores events with no enddate
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDisplayModePastForEventWithNoEnddate(): void
     {
         $demand = new EventDemand();
@@ -141,9 +140,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if displayMode 'future' restriction in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDisplayModeFuture(): void
     {
         $demand = new EventDemand();
@@ -157,9 +155,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if displayMode 'current_future' restriction in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDisplayModeCurrentFuture(): void
     {
         $demand = new EventDemand();
@@ -173,9 +170,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if displayMode 'time_restriction' in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDisplayModeTimeRestriction(): void
     {
         $demand = new EventDemand();
@@ -276,13 +272,13 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if category restiction with conjunction works
      *
-     * @dataProvider findDemandedRecordsByCategoryWithConjunctionDataProvider
-     * @test
      * @param mixed $category
      * @param mixed $conjunction
      * @param mixed $includeSub
      * @param mixed $expected
      */
+    #[DataProvider('findDemandedRecordsByCategoryWithConjunctionDataProvider')]
+    #[Test]
     public function findDemandedRecordsByCategoryWithConjunction($category, $conjunction, $includeSub, $expected): void
     {
         $demand = new EventDemand();
@@ -314,11 +310,11 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if location restriction works
      *
-     * @dataProvider findDemandedRecordsByLocationDataProvider
-     * @test
      * @param mixed $locationUid
      * @param mixed $expected
      */
+    #[DataProvider('findDemandedRecordsByLocationDataProvider')]
+    #[Test]
     public function findDemandedRecordsByLocation($locationUid, $expected): void
     {
         $demand = new EventDemand();
@@ -345,10 +341,9 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if location.city restriction works
-     *
-     * @dataProvider findDemandedRecordsByLocationCityDataProvider
-     * @test
      */
+    #[DataProvider('findDemandedRecordsByLocationCityDataProvider')]
+    #[Test]
     public function findDemandedRecordsByLocationCity(string $locationCity, int $expected): void
     {
         $demand = new EventDemand();
@@ -374,10 +369,9 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if location.country restriction works
-     *
-     * @dataProvider findDemandedRecordsByLocationCountryDataProvider
-     * @test
      */
+    #[DataProvider('findDemandedRecordsByLocationCountryDataProvider')]
+    #[Test]
     public function findDemandedRecordsByLocationCountry(string $locationCountry, int $expected): void
     {
         $demand = new EventDemand();
@@ -389,9 +383,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if startDate restriction in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findSearchDemandedRecordsByStartDate(): void
     {
         $demand = new EventDemand();
@@ -408,9 +401,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if endDate restriction in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findSearchDemandedRecordsByEndDate(): void
     {
         $demand = new EventDemand();
@@ -427,9 +419,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if title restriction in demand works
-     *
-     * @test
      */
+    #[Test]
     public function findSearchDemandedRecordsByFieldTitle(): void
     {
         $demand = new EventDemand();
@@ -466,11 +457,11 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if top event restriction in demand works
      *
-     * @dataProvider findDemandedRecordsByTopEventDataProvider
-     * @test
      * @param mixed $topEventRestriction
      * @param mixed $expected
      */
+    #[DataProvider('findDemandedRecordsByTopEventDataProvider')]
+    #[Test]
     public function findDemandedRecordsByTopEvent($topEventRestriction, $expected): void
     {
         $demand = new EventDemand();
@@ -526,12 +517,12 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if ordering for findDemanded works
      *
-     * @dataProvider findDemandedRecordsByOrderingDataProvider
-     * @test
      * @param mixed $orderField
      * @param mixed $orderDirection
      * @param mixed $expected
      */
+    #[DataProvider('findDemandedRecordsByOrderingDataProvider')]
+    #[Test]
     public function findDemandedRecordsByOrdering($orderField, $orderDirection, $expected): void
     {
         $demand = new EventDemand();
@@ -547,9 +538,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if ordering for findDemanded works but ignores unknown order by fields
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByOrderingIgnoresUnknownOrderField(): void
     {
         $demand = new EventDemand();
@@ -565,9 +555,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if limit restriction works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsSetsLimit(): void
     {
         $demand = new EventDemand();
@@ -582,9 +571,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if year restriction works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByYear(): void
     {
         $demand = new EventDemand();
@@ -599,9 +587,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if month restriction works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByMonth(): void
     {
         $demand = new EventDemand();
@@ -617,9 +604,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if month restriction works, when start/enddate oi event span more than one month
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByMonthWithStartdateInGivenMonth(): void
     {
         $demand = new EventDemand();
@@ -635,9 +621,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if month restriction works, when start/enddate oi event span more than one month
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByMonthWithEnddateInGivenMonth(): void
     {
         $demand = new EventDemand();
@@ -653,9 +638,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if day restriction works
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDay(): void
     {
         $demand = new EventDemand();
@@ -673,9 +657,8 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if day restriction works, when event spans multiple days and restriction is limited to a
      * day, which is between the event start- and enddate
-     *
-     * @test
      */
+    #[Test]
     public function findDemandedRecordsByDayForEventSpanningDateRange(): void
     {
         $demand = new EventDemand();
@@ -711,11 +694,11 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if speaker restriction works
      *
-     * @dataProvider findDemandedRecordsBySpeakerDataProvider
-     * @test
      * @param mixed $speakerUid
      * @param mixed $expected
      */
+    #[DataProvider('findDemandedRecordsBySpeakerDataProvider')]
+    #[Test]
     public function findDemandedRecordsBySpeaker($speakerUid, $expected): void
     {
         $demand = new EventDemand();
@@ -728,9 +711,8 @@ class EventRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if startDate and endDate restriction in combination work
-     *
-     * @test
      */
+    #[Test]
     public function findSearchDemandedRecordsByStartAndEndDate(): void
     {
         $demand = new EventDemand();
@@ -763,11 +745,11 @@ class EventRepositoryTest extends FunctionalTestCase
     /**
      * Test if ignoreEnableFields setting is respected
      *
-     * @dataProvider findDemandedRespectsIgnoreEnableFieldsDataProvider
-     * @test
      * @param bool $ignoreEnableFields
      * @param bool $expected
      */
+    #[DataProvider('findDemandedRespectsIgnoreEnableFieldsDataProvider')]
+    #[Test]
     public function findDemandedRespectsIgnoreEnableFields($ignoreEnableFields, $expected): void
     {
         $demand = new EventDemand();

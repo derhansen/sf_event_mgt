@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Registration;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
@@ -31,9 +32,7 @@ class FieldValueTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueReturnsInitialValueForString(): void
     {
         $mockField = $this->getMockBuilder(Field::class)->onlyMethods(['getValueType'])->getMock();
@@ -42,18 +41,14 @@ class FieldValueTest extends UnitTestCase
         self::assertEquals('', $this->subject->getValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setValueSetsValueField(): void
     {
         $this->subject->setValue('A field value');
         self::assertEquals('A field value', $this->subject->getValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueReturnsArrayForFieldTypeArray(): void
     {
         $expectedArray = ['value1', 'value2'];
@@ -65,9 +60,7 @@ class FieldValueTest extends UnitTestCase
         self::assertSame($expectedArray, $this->subject->getValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueReturnsArrayForFieldTypeArrayAndValueString(): void
     {
         $expectedArray = ['value1'];
@@ -79,17 +72,13 @@ class FieldValueTest extends UnitTestCase
         self::assertSame($expectedArray, $this->subject->getValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFieldReturnsInitialValueForField(): void
     {
         self::assertNull($this->subject->getField());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setFieldSetsField(): void
     {
         $field = new Field();
@@ -97,17 +86,13 @@ class FieldValueTest extends UnitTestCase
         self::assertEquals($field, $this->subject->getField());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationReturnsInitialValueForRegistration(): void
     {
         self::assertNull($this->subject->getRegistration());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRegistrationSetsRegistration(): void
     {
         $registration = new Registration();
@@ -115,26 +100,20 @@ class FieldValueTest extends UnitTestCase
         self::assertEquals($registration, $this->subject->getRegistration());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueTypeReturnsInitialValueForValueType(): void
     {
         self::assertEquals(FieldValueType::TYPE_TEXT, $this->subject->getValueType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setValueTypeSetsValueType(): void
     {
         $this->subject->setValueType(FieldValueType::TYPE_ARRAY);
         self::assertEquals(FieldValueType::TYPE_ARRAY, $this->subject->getValueType());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueForCsvExportReturnsArrayAsCommaSeparatedStringForArrayValues(): void
     {
         $expectedArray = 'value1,value2';
@@ -146,18 +125,14 @@ class FieldValueTest extends UnitTestCase
         self::assertSame($expectedArray, $this->subject->getValueForCsvExport());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueWhenNoFieldAvailable(): void
     {
         $this->subject->setValue('Test');
         self::assertSame('Test', $this->subject->getValue());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getValueForCsvExportNoFieldAvailable(): void
     {
         $this->subject->setValue('Test');

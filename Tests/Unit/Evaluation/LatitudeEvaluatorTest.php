@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Evaluation\LatitudeEvaluator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -65,10 +67,8 @@ class LatitudeEvaluatorTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider latitudeEvaluatorDataProvider
-     */
+    #[DataProvider('latitudeEvaluatorDataProvider')]
+    #[Test]
     public function latitudeEvaluatorTest(string $value, string $expected): void
     {
         $set = true;

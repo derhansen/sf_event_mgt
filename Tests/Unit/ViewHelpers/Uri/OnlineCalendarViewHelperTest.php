@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Uri;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Location;
@@ -65,10 +67,8 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider onlineCalendarViewHelperReturnsExpectedResultsDataProvider
-     */
+    #[DataProvider('onlineCalendarViewHelperReturnsExpectedResultsDataProvider')]
+    #[Test]
     public function onlineCalendarViewHelperReturnsExpectedResults(string $type, string $expected): void
     {
         $location = new Location();
@@ -96,9 +96,7 @@ class OnlineCalendarViewHelperTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function defaultEnddateIsSetToEventsWithNoEnddate(): void
     {
         $location = new Location();

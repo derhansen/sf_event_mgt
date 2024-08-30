@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Service\EventPlausabilityService;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -45,19 +47,15 @@ class EventPlausabilityServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider isStartDateBeforeEndDateDataProvider
-     */
+    #[DataProvider('isStartDateBeforeEndDateDataProvider')]
+    #[Test]
     public function isStartDateBeforeEndDateReturnsExpectedResults(int $startdate, int $enddate, bool $expected): void
     {
         $service = $this->getAccessibleMock(EventPlausabilityService::class, null, [], '', false);
         self::assertEquals($expected, $service->_call('isStartDateBeforeEndDate', $startdate, $enddate));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function verifyOrganisatorConfigurationWithNoOrganisatorAndDisabledRegistrationAddsNoFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
@@ -73,9 +71,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
         $service->verifyOrganisatorConfiguration($databaseRow);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
@@ -91,9 +87,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
         $service->verifyOrganisatorConfiguration($databaseRow);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
@@ -116,9 +110,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
         $service->verifyOrganisatorConfiguration($databaseRow);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);

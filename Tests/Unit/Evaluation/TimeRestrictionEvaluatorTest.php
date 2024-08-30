@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -57,12 +59,11 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider timeRestrictionEvaluatorDataProvider
-     *
      * @param string $value
      * @param string $expected
      */
+    #[DataProvider('timeRestrictionEvaluatorDataProvider')]
+    #[Test]
     public function timeRestrictionEvaluatorTest($value, $expected)
     {
         $set = true;

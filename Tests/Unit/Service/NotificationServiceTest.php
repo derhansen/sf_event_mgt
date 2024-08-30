@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Organisator;
@@ -64,10 +66,8 @@ class NotificationServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendUserMessageReturnsFalseIfIgnoreNotificationsSet(int $messageType): void
     {
         $event = new Event();
@@ -81,10 +81,8 @@ class NotificationServiceTest extends UnitTestCase
         self::assertFalse($result);
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendUserMessageReturnsFalseIfSendFailed(int $messageType): void
     {
         $event = new Event();
@@ -121,10 +119,8 @@ class NotificationServiceTest extends UnitTestCase
         self::assertFalse($result);
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendUserMessageReturnsTrueIfSendSuccessful(int $messageType): void
     {
         $event = new Event();
@@ -162,10 +158,8 @@ class NotificationServiceTest extends UnitTestCase
         self::assertTrue($result);
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendAdminNewRegistrationMessageReturnsFalseIfSendFailed(int $messageType): void
     {
         $event = new Event();
@@ -208,10 +202,8 @@ class NotificationServiceTest extends UnitTestCase
         self::assertFalse($result);
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendAdminNewRegistrationMessageReturnsTrueIfSendSuccessful(int $messageType): void
     {
         $event = new Event();
@@ -254,10 +246,8 @@ class NotificationServiceTest extends UnitTestCase
         self::assertTrue($result);
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendAdminMessageDoesNotSendEmailIfNotifyAdminAndNotifyOrganiserIsFalse(int $messageType): void
     {
         $event = new Event();
@@ -280,10 +270,8 @@ class NotificationServiceTest extends UnitTestCase
         self::assertFalse($result);
     }
 
-    /**
-     * @test
-     * @dataProvider messageTypeDataProvider
-     */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendAdminMessageSendsEmailToOrganisatorIfConfigured(int $messageType): void
     {
         $organisator = new Organisator();
@@ -330,9 +318,7 @@ class NotificationServiceTest extends UnitTestCase
         self::assertTrue($result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function sendAdminMessageUsesRegistrationDataAsSenderIfConfigured(): void
     {
         $organisator = new Organisator();
@@ -382,10 +368,9 @@ class NotificationServiceTest extends UnitTestCase
 
     /**
      * Test if the adminEmail settings get exploded and only 2 emails get sent
-     *
-     * @test
-     * @dataProvider messageTypeDataProvider
      */
+    #[DataProvider('messageTypeDataProvider')]
+    #[Test]
     public function sendMultipleAdminNewRegistrationMessageReturnsTrueIfSendSuccessful(int $messageType): void
     {
         $event = new Event();
@@ -428,9 +413,7 @@ class NotificationServiceTest extends UnitTestCase
         self::assertTrue($result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function sendUserMessageReturnsFalseIfNoCustomMessageGiven(): void
     {
         $event = new Event();
@@ -452,9 +435,8 @@ class NotificationServiceTest extends UnitTestCase
     /**
      * Test that only confirmed registrations get notified. Also test, if the ignoreNotifications
      * flag is evaluated
-     *
-     * @test
      */
+    #[Test]
     public function sendCustomNotificationReturnsExpectedAmountOfNotificationsSent(): void
     {
         $event = new Event();
@@ -488,9 +470,7 @@ class NotificationServiceTest extends UnitTestCase
         self::assertEquals(2, $result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function createCustomNotificationLogentryCreatesLog(): void
     {
         $mockLogRepo = $this->getMockBuilder(CustomNotificationLogRepository::class)
@@ -508,9 +488,7 @@ class NotificationServiceTest extends UnitTestCase
         $this->subject->createCustomNotificationLogentry($event, 'A description', 1, new CustomNotification());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function userNotificationNotSentIfNotificationsDisabled(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
@@ -529,9 +507,7 @@ class NotificationServiceTest extends UnitTestCase
         self::assertFalse($result);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function adminNotificationNotSentIfNotificationsDisabled(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();

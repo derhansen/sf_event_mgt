@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use PHPUnit\Framework\Attributes\Test;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -29,9 +30,7 @@ class SearchDemandTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStartDateReturnsNullIfNoValueSet(): void
     {
         self::assertNull(
@@ -39,9 +38,7 @@ class SearchDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStartDateReturnsGivenValueIfValueSet(): void
     {
         $this->subject->setStartDate(new DateTime('01.01.2014 10:00:00'));
@@ -51,9 +48,7 @@ class SearchDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEndDateReturnsNullIfNoValueSet(): void
     {
         self::assertNull(
@@ -61,9 +56,7 @@ class SearchDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEndDateReturnsGivenValueIfValueSet(): void
     {
         $this->subject->setEndDate(new DateTime('01.01.2014 10:00:00'));
@@ -73,17 +66,13 @@ class SearchDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSearchReturnsEmptyStringIfNotSet(): void
     {
         self::assertEquals('', $this->subject->getSearch());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSearchReturnsGivenValueIfSet(): void
     {
         $this->subject->setSearch('Test');
@@ -93,17 +82,13 @@ class SearchDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFieldsReturnsEmptyStringIfNotSet(): void
     {
         self::assertEmpty($this->subject->getFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFieldsReturnsGivenValueIfSet(): void
     {
         $this->subject->setFields('Field1,Field2');
@@ -113,44 +98,34 @@ class SearchDemandTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getHasQueryReturnsFalseIfNoQuerySet(): void
     {
         self::assertFalse($this->subject->getHasQuery());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getHasQueryReturnsTrueIfSearchSet(): void
     {
         $this->subject->setSearch('Test');
         self::assertTrue($this->subject->getHasQuery());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getHasQueryReturnsTrueIfStartDateSet(): void
     {
         $this->subject->setStartDate(new DateTime());
         self::assertTrue($this->subject->getHasQuery());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getHasQueryReturnsTrueIfEndDateSet(): void
     {
         $this->subject->setEndDate(new DateTime());
         self::assertTrue($this->subject->getHasQuery());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function toArrayReturnsExpectedArray(): void
     {
         $startDate = new DateTime('01.01.2020 00:00');
@@ -172,18 +147,14 @@ class SearchDemandTest extends UnitTestCase
         self::assertEquals($expected, $searchDemand->toArray());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromArrayReturnsExpectedObjectForEmptyData(): void
     {
         $searchDemand = new SearchDemand();
         self::assertEquals($searchDemand, SearchDemand::fromArray([]));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function fromArrayReturnsExpectedObjectForGivenData(): void
     {
         $startDate = new DateTime('01.01.2020 00:00');

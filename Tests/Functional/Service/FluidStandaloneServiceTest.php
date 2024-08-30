@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
@@ -27,9 +28,7 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
         parent::setUp();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parseStringFluidReturnsExpectedResultForSimpleVariable(): void
     {
         $subject = new FluidStandaloneService();
@@ -40,9 +39,7 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
         self::assertEquals($expected, $subject->parseStringFluid($fluidString, ['variable' => 'variable']));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function parseStringFluidReturnsExpectedResultForExtbaseDomainObjectVariable(): void
     {
         $subject = new FluidStandaloneService();

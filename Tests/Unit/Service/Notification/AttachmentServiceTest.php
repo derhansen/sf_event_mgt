@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service\Notification;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
@@ -106,13 +108,13 @@ class AttachmentServiceTest extends UnitTestCase
      * Tests if TypoScript settings are respected for the configured MessageTypes
      * and expected fromFiles result are returned
      *
-     * @test
-     * @dataProvider typoScriptConfigTestDataProvider
      * @param mixed $messageType
      * @param mixed $messageRecipient
      * @param mixed $settingsPath
      * @param mixed $expected
      */
+    #[DataProvider('typoScriptConfigTestDataProvider')]
+    #[Test]
     public function getAttachmentsRespectsTypoScriptSettingsForGivenMessageType(
         $messageType,
         $messageRecipient,
@@ -142,8 +144,8 @@ class AttachmentServiceTest extends UnitTestCase
 
     /**
      * Tests if fromEventProperty returns expected attachments for objectStorage property
-     * @test
      */
+    #[Test]
     public function getAttachmentsReturnsAttachmentsFromEventPropertyWithObjectStorage()
     {
         $registration = new Registration();
@@ -199,8 +201,8 @@ class AttachmentServiceTest extends UnitTestCase
 
     /**
      * Tests if fromRegistrationProperty returns expected attachments for FileReference property
-     * @test
      */
+    #[Test]
     public function getAttachmentsReturnsAttachmentsFromEventPropertyWithFileReference()
     {
         $event = new Event();
@@ -246,9 +248,7 @@ class AttachmentServiceTest extends UnitTestCase
         self::assertEquals($expected, $attachments);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getICalAttachmentReturnsAFilenameIfICalFileEnabled()
     {
         $event = new Event();

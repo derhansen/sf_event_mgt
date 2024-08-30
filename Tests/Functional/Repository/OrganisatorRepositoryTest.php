@@ -9,6 +9,7 @@
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Repository\OrganisatorRepository;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -31,9 +32,7 @@ class OrganisatorRepositoryTest extends FunctionalTestCase
         $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function startingPageIsIgnored(): void
     {
         $locations = $this->organisatorRepository->findAll();

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -71,10 +73,8 @@ class SettingsServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider customNotificationsSettingsDataProvider
-     */
+    #[DataProvider('customNotificationsSettingsDataProvider')]
+    #[Test]
     public function getCustomNotificationsTest(array $settings, array $expected): void
     {
         $result = $this->subject->getCustomNotifications($settings);

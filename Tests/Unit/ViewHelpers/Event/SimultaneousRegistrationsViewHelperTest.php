@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -132,10 +134,8 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider simultaneousRegistrationsDataProvider
-     */
+    #[DataProvider('simultaneousRegistrationsDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedValues(
         int $maxParticipants,
         int $freePlaces,

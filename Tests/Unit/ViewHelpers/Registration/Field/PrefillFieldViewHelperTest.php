@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Registration\Field;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillFieldViewHelper;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
@@ -22,9 +24,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class PrefillFieldViewHelperTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsFieldDefaultValue(): void
     {
         $field = new Field();
@@ -43,9 +43,7 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         self::assertSame('Default', $viewHelper->render());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsFieldFeUserValue(): void
     {
         $field = new Field();
@@ -93,10 +91,8 @@ class PrefillFieldViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider
-     */
+    #[DataProvider('viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedValueIfOriginalRequestExist(
         int $fieldUid,
         array $fieldValues,

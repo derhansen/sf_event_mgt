@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -28,41 +29,31 @@ class AbstractPaymentTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isEnableRedirectReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isRedirectEnabled());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isCancelLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isCancelLinkEnabled());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isNotifyLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isNotifyLinkEnabled());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isSuccessLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isSuccessLinkEnabled());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function isFailureLinkEnabledReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->isFailureLinkEnabled());

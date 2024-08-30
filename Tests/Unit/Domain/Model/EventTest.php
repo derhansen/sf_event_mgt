@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DateInterval;
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Category;
@@ -42,9 +44,7 @@ class EventTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTitleReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -53,18 +53,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTitleForStringSetsTitle(): void
     {
         $this->subject->setTitle('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDescriptionReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -73,18 +69,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setDescriptionForStringSetsDescription(): void
     {
         $this->subject->setDescription('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getDescription());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getProgramReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -93,35 +85,27 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setProgramForStringSetsProgram(): void
     {
         $this->subject->setProgram('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getProgram());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCustomTextReturnsInitialValueForString(): void
     {
         self::assertSame('', $this->subject->getCustomText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setCustomTextForStringSetsCustomText(): void
     {
         $this->subject->setCustomText('A custom text');
         self::assertEquals('A custom text', $this->subject->getCustomText());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTeaserReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -130,18 +114,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTeaserForStringSetsTeaser(): void
     {
         $this->subject->setTeaser('This is a teaser');
         self::assertEquals('This is a teaser', $this->subject->getTeaser());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStartdateReturnsInitialValueForDateTime(): void
     {
         self::assertNull(
@@ -149,9 +129,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStartdateForDateTimeSetsStartdate(): void
     {
         $dateTimeFixture = new DateTime();
@@ -159,9 +137,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($dateTimeFixture, $this->subject->getStartdate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEnddateReturnsInitialValueForDateTime(): void
     {
         self::assertNull(
@@ -169,9 +145,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnddateForDateTimeSetsEnddate(): void
     {
         $dateTimeFixture = new DateTime();
@@ -179,9 +153,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($dateTimeFixture, $this->subject->getEnddate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getParticipantsReturnsInitialValueForInteger(): void
     {
         self::assertSame(
@@ -190,9 +162,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTopEventReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
@@ -200,18 +170,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setParticipantsForIntegerSetsParticipants(): void
     {
         $this->subject->setMaxParticipants(12);
         self::assertEquals(12, $this->subject->getMaxParticipants());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPriceReturnsInitialValueForFloat(): void
     {
         self::assertSame(
@@ -220,18 +186,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPriceForFloatSetsPrice(): void
     {
         $this->subject->setPrice(3.99);
         self::assertEquals(3.99, $this->subject->getPrice());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCurrencyReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -240,18 +202,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setCurrencyForStringSetsCurrency(): void
     {
         $this->subject->setCurrency('Conceived at T3CON10');
         self::assertEquals('Conceived at T3CON10', $this->subject->getCurrency());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoryReturnsInitialValueForCategory(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -261,9 +219,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setCategoryForObjectStorageContainingCategorySetsCategory(): void
     {
         $category = new Category();
@@ -273,9 +229,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneCategory, $this->subject->getCategory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addCategoryToObjectStorageHoldingCategory(): void
     {
         $category = new Category();
@@ -288,9 +242,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getCategory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeCategoryFromObjectStorageHoldingCategory(): void
     {
         $category = new Category();
@@ -303,9 +255,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getCategory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCategoriesReturnsTheSameAsGetCategory(): void
     {
         $category = new Category();
@@ -319,9 +269,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getCategories());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationReturnsInitialValueForRegistration(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -331,9 +279,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRegistrationForObjectStorageContainingRegistrationSetsRegistration(): void
     {
         $registration = new Registration();
@@ -343,9 +289,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistration());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addRegistrationToObjectStorageHoldingRegistration(): void
     {
         $registration = new Registration();
@@ -358,9 +302,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getRegistration());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeRegistrationFromObjectStorageHoldingRegistration(): void
     {
         $registration = new Registration();
@@ -373,9 +315,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getRegistration());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationWaitlistReturnsInitialValueForRegistrationWaitlist(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -385,9 +325,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRegistrationWaitlistForObjectStorageContainingRegistrationSetsRegistrationWaitlist(): void
     {
         $registration = new Registration();
@@ -397,9 +335,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneRegistration, $this->subject->getRegistrationWaitlist());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addRegistrationWaitlistToObjectStorageHoldingRegistrationWaitlist(): void
     {
         $registration = new Registration();
@@ -412,9 +348,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getRegistrationWaitlist());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeRegistrationWaitlistFromObjectStorageHoldingRegistrationWaitlist(): void
     {
         $registration = new Registration();
@@ -427,9 +361,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getRegistrationWaitlist());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getImageReturnsInitialValueForImage(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -439,9 +371,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setImageForObjectStorageContainingImageSetsImage(): void
     {
         $image = new FileReference();
@@ -451,9 +381,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneImage, $this->subject->getImage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addImageToObjectStorageHoldingImage(): void
     {
         $fileReference = new FileReference();
@@ -466,9 +394,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getImage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeImageFromObjectStorageHoldingImage(): void
     {
         $fileReference = new FileReference();
@@ -481,9 +407,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getImage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFilesReturnsInitialValueForfiles(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -493,9 +417,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setFilesForObjectStorageContainingFilesSetsFiles(): void
     {
         $file = new FileReference();
@@ -505,9 +427,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getFiles());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addFilesToObjectStorageHoldingFiles(): void
     {
         $fileReference = new FileReference();
@@ -520,9 +440,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getFiles());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeFilesFromObjectStorageHoldingFiles(): void
     {
         $fileReference = new FileReference();
@@ -535,9 +453,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getFiles());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAdditionalImageReturnsInitialValueForfiles(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -547,9 +463,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAdditionalImageForObjectStorageContainingFilesSetsFiles(): void
     {
         $file = new FileReference();
@@ -559,9 +473,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneFile, $this->subject->getAdditionalImage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addAdditionalImageToObjectStorageHoldingFiles(): void
     {
         $fileReference = new FileReference();
@@ -574,9 +486,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getAdditionalImage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeAdditionalImageFromObjectStorageHoldingFiles(): void
     {
         $fileReference = new FileReference();
@@ -589,9 +499,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getAdditionalImage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfEventHasTakenPlace(): void
     {
         $startdate = new DateTime();
@@ -602,9 +510,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfEventHasStartedAndRegistrationUntilEnddateIsAllowed(): void
     {
         $startdate = new DateTime();
@@ -619,9 +525,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfEventHasEndedAndRegistrationUntilEnddateIsAllowed(): void
     {
         $startdate = new DateTime();
@@ -636,9 +540,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfRegistrationNotEnabled(): void
     {
         $startdate = new DateTime();
@@ -649,9 +551,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfRegistrationDeadlineReached(): void
     {
         $startdate = new DateTime();
@@ -666,9 +566,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfRegistrationStartdateReached(): void
     {
         $startdate = new DateTime();
@@ -683,9 +581,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfRegistrationStartdateNotReached(): void
     {
         $startdate = new DateTime();
@@ -700,9 +596,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfEventMaxParticipantsReached(): void
     {
         $registration = new Registration();
@@ -718,9 +612,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfMaxParticipantsNotSet(): void
     {
         $startdate = new DateTime();
@@ -732,9 +624,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsFalseIfMaxParticipantsSetAndEventFull(): void
     {
         $startdate = new DateTime();
@@ -751,9 +641,7 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfMaxParticipantsSetAndWaitlistEnabled(): void
     {
         $startdate = new DateTime();
@@ -771,9 +659,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfMaxParticipantsIsZero(): void
     {
         $startdate = new DateTime();
@@ -784,9 +670,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfRegistrationDeadlineNotReached(): void
     {
         $startdate = new DateTime();
@@ -801,9 +685,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationPossibleReturnsTrueIfRegistrationIsLogicallyPossible(): void
     {
         $startdate = new DateTime();
@@ -815,9 +697,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getRegistrationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLocationReturnsInitialValueForLocation(): void
     {
         self::assertNull(
@@ -825,9 +705,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setLocationSetsLocation(): void
     {
         $location = new Location();
@@ -835,9 +713,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($location, $this->subject->getLocation());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEnableRegistrationReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
@@ -845,18 +721,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnableRegistrationForBooleanSetsEnableRegistration(): void
     {
         $this->subject->setEnableRegistration(true);
         self::assertTrue($this->subject->getEnableRegistration());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEnableWaitlistReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
@@ -864,18 +736,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnableWaitlistForBooleanSetsEnableWaitlist(): void
     {
         $this->subject->setEnableWaitlist(true);
         self::assertTrue($this->subject->getEnableWaitlist());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEnableWaitlistMoveupReturnsInitialValueForBoolean(): void
     {
         self::assertFalse(
@@ -883,18 +751,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnableWaitlistMoveupForBooleanSetsEnableWaitlistMoveup(): void
     {
         $this->subject->setEnableWaitlistMoveup(true);
         self::assertTrue($this->subject->getEnableWaitlistMoveup());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getLinkReturnsInitialValueForLink(): void
     {
         self::assertEquals(
@@ -903,18 +767,14 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setLinkForStringSetsLink(): void
     {
         $this->subject->setLink('www.domain.tld');
         self::assertEquals('www.domain.tld', $this->subject->getLink());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFreePlacesWithoutRegistrationsTest(): void
     {
         $this->subject->setMaxParticipants(10);
@@ -925,9 +785,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getFreePlacesWithRegistrationsTest(): void
     {
         $this->subject->setMaxParticipants(10);
@@ -944,9 +802,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationDeadlineReturnsInitialValueForDateTime(): void
     {
         self::assertNull(
@@ -954,9 +810,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRegistrationDeadlineForDateTimeSetsStartdate(): void
     {
         $dateTimeFixture = new DateTime();
@@ -964,26 +818,20 @@ class EventTest extends UnitTestCase
         self::assertEquals($dateTimeFixture, $this->subject->getRegistrationDeadline());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTopEventForBooleanSetsTopEvent(): void
     {
         $this->subject->setTopEvent(true);
         self::assertTrue($this->subject->getTopEvent());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function maxRegistrationsPerUserReturnsInitialValue(): void
     {
         self::assertEquals(1, $this->subject->getMaxRegistrationsPerUser());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function maxRegistrationsPerUserSetsMaxRegistrationsPerUser(): void
     {
         $this->subject->setMaxRegistrationsPerUser(2);
@@ -992,17 +840,14 @@ class EventTest extends UnitTestCase
 
     /**
      * Test if initial value for organisator is returned
-     *
-     * @test
      */
+    #[Test]
     public function getOrganisatorReturnsInitialValueForOrganisator(): void
     {
         self::assertNull($this->subject->getOrganisator());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRoomReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getRoom());
@@ -1016,9 +861,8 @@ class EventTest extends UnitTestCase
 
     /**
      * Test if organisator can be set
-     *
-     * @test
      */
+    #[Test]
     public function setPhoneForStringSetsPhone(): void
     {
         $organisator = new Organisator();
@@ -1028,9 +872,8 @@ class EventTest extends UnitTestCase
 
     /**
      * Test if initial value for notifyAdmin (TRUE) is returned
-     *
-     * @test
      */
+    #[Test]
     public function getNotityAdminReturnsInitialValue(): void
     {
         self::assertTrue($this->subject->getNotifyAdmin());
@@ -1038,9 +881,8 @@ class EventTest extends UnitTestCase
 
     /**
      * Test if notifyAdmin can be set
-     *
-     * @test
      */
+    #[Test]
     public function setNotifyAdminSetsValueForNotifyAdmin(): void
     {
         $this->subject->setNotifyAdmin(false);
@@ -1049,9 +891,8 @@ class EventTest extends UnitTestCase
 
     /**
      * Test if initial value for notifyOrganisator (FALSE) is returned
-     *
-     * @test
      */
+    #[Test]
     public function getNotityOrganisatorReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getNotifyOrganisator());
@@ -1059,60 +900,47 @@ class EventTest extends UnitTestCase
 
     /**
      * Test if notifyOrganisator can be set
-     *
-     * @test
      */
+    #[Test]
     public function setNotifyOrganisatorSetsValueForNotifyOrganisator(): void
     {
         $this->subject->setNotifyOrganisator(true);
         self::assertTrue($this->subject->getNotifyOrganisator());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function uniqueEmailCheckReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getUniqueEmailCheck());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function uniqueEmailCheckSetsValueForBoolen(): void
     {
         $this->subject->setUniqueEmailCheck(true);
         self::assertTrue($this->subject->getUniqueEmailCheck());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function enableCancelReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->getEnableCancel());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnableCancelSetsEnableCancelForBoolean(): void
     {
         $this->subject->setEnableCancel(true);
         self::assertTrue($this->subject->getEnableCancel());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCancelDeallineReturnsDefaultValue(): void
     {
         self::assertEquals(0, $this->subject->getCancelDeadline());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setCancelDeallineSetsCancelDeadlineForDate(): void
     {
         $date = new DateTime();
@@ -1120,60 +948,46 @@ class EventTest extends UnitTestCase
         self::assertEquals($date, $this->subject->getCancelDeadline());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEnablePaymentReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->getEnablePayment());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnablePaymentSetsEnablePaymentForBoolean(): void
     {
         $this->subject->setEnablePayment(true);
         self::assertTrue($this->subject->getEnablePayment());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRestrictPaymentMethodsReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->getRestrictPaymentMethods());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRestrictPaymentMethodsSetsRestrictPaymentMethodsForBoolean(): void
     {
         $this->subject->setRestrictPaymentMethods(true);
         self::assertTrue($this->subject->getRestrictPaymentMethods());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSelectedPaymentMethodsReturnsDefaultValue(): void
     {
         self::assertEmpty($this->subject->getSelectedPaymentMethods());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setSelectedPaymentMethodsSetsSelectedPaymentMethodforString(): void
     {
         $this->subject->setSelectedPaymentMethods('invoice,transfer');
         self::assertEquals('invoice,transfer', $this->subject->getSelectedPaymentMethods());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPriceOptionsReturnsInitialValueforObjectStorage(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -1183,9 +997,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setPriceOptionSetsPriceOptionForPriceOption(): void
     {
         $priceOption = new PriceOption();
@@ -1196,9 +1008,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getPriceOptions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addPriceOptionAddsPriceOptionForPriceOption(): void
     {
         $object = new PriceOption();
@@ -1211,9 +1021,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getPriceOptions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removePriceOptionRemovesPriceOptionForPriceOption(): void
     {
         $object = new PriceOption();
@@ -1226,9 +1034,7 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getPriceOptions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getActivePriceOptionsReturnsOnlyActivePriceOptions(): void
     {
         $dateYesterday = new DateTime('yesterday');
@@ -1258,18 +1064,14 @@ class EventTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->getActivePriceOptions());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCurrentPriceReturnsPriceIfNoPriceOptionsSet(): void
     {
         $this->subject->setPrice(12.99);
         self::assertEquals(12.99, $this->subject->getCurrentPrice());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCurrentPriceReturnsPriceOptionIfSet(): void
     {
         $this->subject->setPrice(19.99);
@@ -1288,9 +1090,7 @@ class EventTest extends UnitTestCase
         self::assertEquals(14.99, $this->subject->getCurrentPrice());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRelatedReturnsInitialValueForObjectStorage(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -1300,9 +1100,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRelatedSetsRelatedForRelated(): void
     {
         $object = new Event();
@@ -1313,9 +1111,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getRelated());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addRelatedAddsRelatedForRelated(): void
     {
         $object = new Event();
@@ -1328,9 +1124,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getRelated());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeRelatedRemovesRelatedForRelated(): void
     {
         $object = new Event();
@@ -1378,10 +1172,8 @@ class EventTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider cancellationPossibleDataProvider
-     */
+    #[DataProvider('cancellationPossibleDataProvider')]
+    #[Test]
     public function getCancellationPossibleReturnsExpectedValues(
         bool $enabled,
         DateTime $eventDate,
@@ -1394,9 +1186,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->getCancellationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCancellationPossibleReturnsTrueIfNoDeadlineSet(): void
     {
         $this->subject->setStartdate(new DateTime('tomorrow'));
@@ -1404,9 +1194,7 @@ class EventTest extends UnitTestCase
         self::assertTrue($this->subject->getCancellationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getCancellationPossibleReturnsFalseIfNoDeadlineSetButEventExpired(): void
     {
         $this->subject->setStartdate(new DateTime('yesterday'));
@@ -1414,26 +1202,20 @@ class EventTest extends UnitTestCase
         self::assertFalse($this->subject->getCancellationPossible());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function enableAutoconfirmReturnsDefaultValue(): void
     {
         self::assertFalse($this->subject->getEnableAutoconfirm());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEnableAutoconfirmSetsAutoconfirmForBoolean(): void
     {
         $this->subject->setEnableAutoconfirm(true);
         self::assertTrue($this->subject->getEnableAutoconfirm());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSpeakerReturnsInitialValueforObjectStorage(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -1443,9 +1225,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setSpeakerSetsSpeaker(): void
     {
         $speaker = new Speaker();
@@ -1455,9 +1235,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageWithSpeaker, $this->subject->getSpeaker());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addSpeakerAddsSpeaker(): void
     {
         $object = new Speaker();
@@ -1470,9 +1248,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getSpeaker());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeSpeakerRemovesSpeaker(): void
     {
         $object = new Speaker();
@@ -1485,9 +1261,7 @@ class EventTest extends UnitTestCase
         $this->assertempty($this->subject->getSpeaker());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationFieldsReturnsInitialValueforObjectStorage(): void
     {
         $newObjectStorage = new ObjectStorage();
@@ -1497,9 +1271,7 @@ class EventTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRegistrationFieldsSetsRegistrationFields(): void
     {
         $registrationField = new Field();
@@ -1509,9 +1281,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageWithRegistrationField, $this->subject->getRegistrationFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function addRegistrationFieldsAddsRegistrationField(): void
     {
         $object = new Field();
@@ -1524,9 +1294,7 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorage, $this->subject->getRegistrationFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function removeRegistrationFieldsRemovesRegistrationField(): void
     {
         $object = new Field();
@@ -1539,43 +1307,35 @@ class EventTest extends UnitTestCase
         self::assertEmpty($this->subject->getRegistrationFields());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationFieldsUidsReturnsEmptyArrayIfNotRegistrationFields(): void
     {
         self::assertEquals([], $this->subject->getRegistrationFieldsUids());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationFieldsUidsReturnsExpectedArrayForEventWithRegistrationFields(): void
     {
-        $mockRegField = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegField = $this->getMockBuilder(Field::class)->getMock();
         $mockRegField->expects(self::any())->method('getUid')->willReturn(1);
         $this->subject->addRegistrationFields($mockRegField);
 
         self::assertEquals([0 => 1], $this->subject->getRegistrationFieldsUids());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationFieldUidsWithTitleReturnsEmptyArrayIfNotRegistrationFields(): void
     {
         self::assertEquals([], $this->subject->getRegistrationFieldUidsWithTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRegistrationFieldUidsWithTitleReturnsExpectedArrayForEventWithRegistrationFields(): void
     {
-        $mockRegField1 = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegField1 = $this->getMockBuilder(Field::class)->getMock();
         $mockRegField1->expects(self::any())->method('getUid')->willReturn(1);
         $mockRegField1->expects(self::any())->method('getTitle')->willReturn('A Title');
-        $mockRegField2 = $this->getMockBuilder(Registration\Field::class)->getMock();
+        $mockRegField2 = $this->getMockBuilder(Field::class)->getMock();
         $mockRegField2->expects(self::any())->method('getUid')->willReturn(2);
         $mockRegField2->expects(self::any())->method('getTitle')->willReturn('Another Title');
         $this->subject->addRegistrationFields($mockRegField1);
@@ -1619,10 +1379,8 @@ class EventTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider eventEndsSameDayDataProvider
-     */
+    #[DataProvider('eventEndsSameDayDataProvider')]
+    #[Test]
     public function eventEndsSameDayReturnsExpectedValue(?DateTime $startdate, ?DateTime $enddate, bool $expected): void
     {
         if ($startdate) {
@@ -1634,34 +1392,26 @@ class EventTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->getEndsSameDay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getHiddenReturnsInitialValue(): void
     {
         self::assertFalse($this->subject->getHidden());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setHiddenSetsValueForBoolean(): void
     {
         $this->subject->setHidden(true);
         self::assertTrue($this->subject->getHidden());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getStarttimeReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getStarttime());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setStarttimeSetsValueForDateTime(): void
     {
         $date = new DateTime('01.01.2020 18:00:00');
@@ -1670,17 +1420,13 @@ class EventTest extends UnitTestCase
         self::assertEquals($date, $this->subject->getStarttime());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getEndtimeReturnsInitialValue(): void
     {
         self::assertNull($this->subject->getEndtime());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setEndtimeSetsValueForDateTime(): void
     {
         $date = new DateTime('01.01.2020 18:00:00');
@@ -1689,62 +1435,48 @@ class EventTest extends UnitTestCase
         self::assertEquals($date, $this->subject->getEndtime());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsEmptyStringIfNotHiddenAndNoStartEndTime(): void
     {
         self::assertEquals('', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsExpectedValueForHiddenEvent(): void
     {
         $this->subject->setHidden(true);
         self::assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsExpectedValueForNotStartedStarttimeEvent(): void
     {
         $this->subject->setStarttime((new DateTime())->modify('+1 day'));
         self::assertEquals('overlay-scheduled', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsExpectedValueForStartedStarttimeEvent(): void
     {
         $this->subject->setStarttime((new DateTime())->modify('-1 day'));
         self::assertEquals('', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsExpectedValueForEndedEndtimeEvent(): void
     {
         $this->subject->setEndtime((new DateTime())->modify('-1 day'));
         self::assertEquals('overlay-endtime', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsExpectedValueForNotEndedEndtimeEvent(): void
     {
         $this->subject->setEndtime((new DateTime())->modify('+1 day'));
         self::assertEquals('overlay-scheduled', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getBackendIconOverlayReturnsExpectedValueForHiddenAndStarttimeEvent(): void
     {
         $this->subject->setHidden(true);
@@ -1752,9 +1484,7 @@ class EventTest extends UnitTestCase
         self::assertEquals('overlay-hidden', $this->subject->getBackendIconOverlay());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getImagesReturnsValueOfImage(): void
     {
         $image = new FileReference();
@@ -1764,60 +1494,46 @@ class EventTest extends UnitTestCase
         self::assertEquals($objectStorageHoldingExactlyOneImage, $this->subject->getImages());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMetaKeywordsReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getMetaKeywords());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMetaKeywordsSetsKeywords(): void
     {
         $this->subject->setMetaKeywords('keyword1, keyword2');
         self::assertEquals('keyword1, keyword2', $this->subject->getMetaKeywords());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMetaDescriptionReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getMetaDescription());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setMetaDescriptionSetsDescription(): void
     {
         $this->subject->setMetaDescription('the description');
         self::assertEquals('the description', $this->subject->getMetaDescription());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAlternativeTitleReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getAlternativeTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAlternativetitleSetsAlternativeTitle(): void
     {
         $this->subject->setAlternativeTitle('the alternative title');
         self::assertEquals('the alternative title', $this->subject->getAlternativeTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMetaTitleReturnsTitleWhenNoAlternativeTitle(): void
     {
         $this->subject->setTitle('the title');
@@ -1825,9 +1541,7 @@ class EventTest extends UnitTestCase
         self::assertEquals('the title', $this->subject->getMetaTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getMetaTitleReturnsAlternativeTitleWhenNoAlternativeTitle(): void
     {
         $this->subject->setTitle('the title');
@@ -1836,9 +1550,7 @@ class EventTest extends UnitTestCase
         self::assertEquals('the alternative title', $this->subject->getMetaTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function specialGettersForImagesReturnsExpectedResults(): void
     {
         $file1 = $this->getMockBuilder(File::class)->disableOriginalConstructor()->getMock();

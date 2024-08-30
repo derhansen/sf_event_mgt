@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -26,9 +27,7 @@ class MaintenanceServiceTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/handle_expired_registrations.csv');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleExpiredRegistrationsHidesExpectedRegistrations()
     {
         $subject = GeneralUtility::makeInstance(MaintenanceService::class);
@@ -44,9 +43,7 @@ class MaintenanceServiceTest extends FunctionalTestCase
         self::assertEquals(0, $registration3['hidden'], 'Registration 3');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleExpiredRegistrationsDeletesExpectedRegistrations()
     {
         $subject = GeneralUtility::makeInstance(MaintenanceService::class);

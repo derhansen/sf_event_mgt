@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Validation\Validator;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Utility\FieldType;
@@ -32,9 +36,7 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
         $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function validatorHasNoErrorsWhenRegistrationHasNoFields(): void
     {
         $registration = new Registration();
@@ -73,17 +75,15 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider validatorDataProvider
-     */
+    #[DataProvider('validatorDataProvider')]
+    #[Test]
     public function validatorReturnsExpectedResultForRegistrationField(
         bool $required,
         string $fieldType,
         string $fieldValue,
         bool $expectedResult
     ): void {
-        $registrationField = new Registration\Field();
+        $registrationField = new Field();
         $registrationField->setText($fieldType);
         $registrationField->setRequired($required);
 
@@ -95,7 +95,7 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
         $registration = new Registration();
         $registration->setEvent($event);
 
-        $registrationFieldValue = new Registration\FieldValue();
+        $registrationFieldValue = new FieldValue();
         $registrationFieldValue->setField($registrationField);
         $registrationFieldValue->setValue($fieldValue);
 

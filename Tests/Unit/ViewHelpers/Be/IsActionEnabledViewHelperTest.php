@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\ViewHelpers\Be\IsActionEnabledViewHelper;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -64,10 +66,8 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider viewHelperReturnsExpectedResultDataProvider
-     */
+    #[DataProvider('viewHelperReturnsExpectedResultDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedResult(string $action, array $settings, bool $access, bool $expected): void
     {
         $viewHelper = new IsActionEnabledViewHelper();

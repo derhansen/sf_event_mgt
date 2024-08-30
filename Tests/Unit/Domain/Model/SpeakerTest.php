@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Speaker;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -29,9 +30,7 @@ class SpeakerTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getNameReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -40,18 +39,14 @@ class SpeakerTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setNameForStringSetsName(): void
     {
         $this->subject->setName('Firstname Lastname');
         self::assertSame('Firstname Lastname', $this->subject->getName());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getJobTitleReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -60,18 +55,14 @@ class SpeakerTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setJobTitleForStringSetsJobTitle(): void
     {
         $this->subject->setJobTitle('Web-Developer');
         self::assertSame('Web-Developer', $this->subject->getJobTitle());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getDescriptionTitleReturnsInitialValueForString(): void
     {
         self::assertSame(
@@ -80,9 +71,7 @@ class SpeakerTest extends UnitTestCase
         );
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setDescriptionTitleForStringSetsDescription(): void
     {
         $this->subject->setDescription('A description');
@@ -91,9 +80,8 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * Test if initial value for image is returned
-     *
-     * @test
      */
+    #[Test]
     public function getImageReturnsInitialValueForImage(): void
     {
         self::assertNull($this->subject->getImage());
@@ -101,9 +89,8 @@ class SpeakerTest extends UnitTestCase
 
     /**
      * Test if image can be set
-     *
-     * @test
      */
+    #[Test]
     public function setImageForFileReferenceSetsImage(): void
     {
         $image = new FileReference();

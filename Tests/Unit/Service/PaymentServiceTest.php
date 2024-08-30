@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Payment\Invoice;
 use DERHANSEN\SfEventMgt\Payment\Transfer;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
@@ -59,10 +61,8 @@ class PaymentServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider getPaymentMethodsDataProvider
-     */
+    #[DataProvider('getPaymentMethodsDataProvider')]
+    #[Test]
     public function getPaymentMethodsReturnsDefaultPaymentMethods(array $extConf, array $expected): void
     {
         $this->subject = $this->getAccessibleMock(PaymentService::class, ['translate'], [], '', false);
@@ -70,18 +70,14 @@ class PaymentServiceTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->getPaymentMethods());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPaymentInstanceReturnsInvoicePaymentInsance(): void
     {
         $this->subject = new PaymentService();
         self::assertInstanceOf(Invoice::class, $this->subject->getPaymentInstance('invoice'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getPaymentInstanceReturnsTransferPaymentInsance(): void
     {
         $this->subject = new PaymentService();
@@ -114,10 +110,8 @@ class PaymentServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider paymentActionEnabledForDefaultPaymentMethodDataProvider
-     */
+    #[DataProvider('paymentActionEnabledForDefaultPaymentMethodDataProvider')]
+    #[Test]
     public function paymentActionEnabledForDefaultPaymentMethodReturnsExpectedResult(string $action, bool $expected): void
     {
         $this->subject = $this->getAccessibleMock(PaymentService::class, ['getPaymentInstance'], [], '', false);
@@ -152,10 +146,8 @@ class PaymentServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider paymentActionEnabledForCustomPaymentMethodDataProvider
-     */
+    #[DataProvider('paymentActionEnabledForCustomPaymentMethodDataProvider')]
+    #[Test]
     public function paymentActionEnabledForCustomPaymentMethodReturnsExpectedResult(string $action, bool $expected): void
     {
         $mockPaymentInstance = $this->getAccessibleMock(

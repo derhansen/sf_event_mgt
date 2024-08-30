@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\CategoryRepository;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
@@ -33,18 +35,14 @@ class CategoryRepositoryTest extends FunctionalTestCase
         $GLOBALS['TYPO3_REQUEST'] = $request;
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findRecordsByUid(): void
     {
         $events = $this->categoryRepository->findByUid(1);
         self::assertEquals($events->getTitle(), 'Category 1');
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findDemandedRecordsByStoragePageRestriction(): void
     {
         $demand = new CategoryDemand();
@@ -83,12 +81,12 @@ class CategoryRepositoryTest extends FunctionalTestCase
     /**
      * Test if category restiction works
      *
-     * @dataProvider findDemandedRecordsByCategoryDataProvider
-     * @test
      * @param mixed $category
      * @param mixed $includeSubcategory
      * @param mixed $expected
      */
+    #[DataProvider('findDemandedRecordsByCategoryDataProvider')]
+    #[Test]
     public function findDemandedRecordsByCategory($category, $includeSubcategory, $expected): void
     {
         $demand = new CategoryDemand();

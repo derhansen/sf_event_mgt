@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Domain\Model\Dto;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -28,68 +29,52 @@ class CustomNotificationTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTemplateReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getTemplate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setTemplateSetsValueForString(): void
     {
         $this->subject->setTemplate('a-template');
         self::assertEquals('a-template', $this->subject->getTemplate());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getRecipientsReturnsInitialValue(): void
     {
         self::assertEquals(CustomNotification::RECIPIENTS_CONFIRMED, $this->subject->getRecipients());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setRecipientsSetsValueForInteger(): void
     {
         $this->subject->setRecipients(CustomNotification::RECIPIENTS_ALL);
         self::assertEquals(CustomNotification::RECIPIENTS_ALL, $this->subject->getRecipients());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getOverwriteSubjectReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getOverwriteSubject());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setOverwriteSubjectSetsValueForString(): void
     {
         $this->subject->setOverwriteSubject('subject');
         self::assertEquals('subject', $this->subject->getOverwriteSubject());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getAdditionalMessageReturnsInitialValue(): void
     {
         self::assertEquals('', $this->subject->getAdditionalMessage());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function setAdditionalMessageSetsValueForString(): void
     {
         $this->subject->setAdditionalMessage('message');

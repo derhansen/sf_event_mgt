@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\PageTitle\PageTitleProviderManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -43,9 +44,7 @@ class TitleViewHelperTest extends FunctionalTestCase
         $GLOBALS['TSFE'] = $tsfe;
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperReturnsExpectedResult(): void
     {
         self::assertEmpty($this->view->assign('title', 'Test')->render());

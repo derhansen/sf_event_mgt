@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -34,9 +36,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getTemplateFoldersReturnsDefaultPathForNoConfiguration(): void
     {
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)
@@ -51,9 +51,7 @@ class FluidStandaloneServiceTest extends UnitTestCase
         self::assertEquals($expected, $this->subject->getTemplateFolders());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function renderTemplateReturnsExpectedResult(): void
     {
         $serverRequest = new ServerRequest();
@@ -145,10 +143,8 @@ class FluidStandaloneServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider templateFoldersDataProvider
-     */
+    #[DataProvider('templateFoldersDataProvider')]
+    #[Test]
     public function getTemplateFoldersReturnsExpectedResult(array $settings, array $expected): void
     {
         $configurationManager = $this->getMockBuilder(ConfigurationManager::class)

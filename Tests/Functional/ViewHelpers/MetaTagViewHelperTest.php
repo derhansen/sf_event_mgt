@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
@@ -31,9 +32,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
         $this->pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function metaTagForNameIsSetByViewHelper(): void
     {
         $this->view->getRenderingContext()->getViewHelperResolver()
@@ -46,9 +45,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
         self::assertEquals('keyword1, keyword2', $metaTag['content']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function metaTagForPropertyIsSetByViewHelper(): void
     {
         $this->view->getRenderingContext()->getViewHelperResolver()

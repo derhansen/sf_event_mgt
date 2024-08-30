@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\ChallengeResponseSpamCheck;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
@@ -24,9 +25,7 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['encryptionKey'] = 'foo';
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsFailedWhenArgumentNotSet(): void
     {
         $registration = new Registration();
@@ -38,9 +37,7 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsFailedWhenChallengeResponseDoesNotMatch(): void
     {
         $registration = new Registration();
@@ -60,9 +57,7 @@ class ChallengeResponseSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsSuccessfulWhenChallengeResponseIsValid(): void
     {
         $registration = new Registration();

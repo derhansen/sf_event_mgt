@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -29,9 +31,7 @@ class BeUserSessionServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveSessionDataSavesDataToSession(): void
     {
         $data = ['key' => 'value'];
@@ -45,9 +45,7 @@ class BeUserSessionServiceTest extends UnitTestCase
         $this->subject->saveSessionData($data);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function getSessionDataReturnsSessionData(): void
     {
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)
@@ -82,10 +80,8 @@ class BeUserSessionServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider getSessionDataByKeyDataProvider
-     */
+    #[DataProvider('getSessionDataByKeyDataProvider')]
+    #[Test]
     public function getSessionDataByKeyReturnsExpectedValue(array $sessionData, string $key, ?string $expected): void
     {
         $mockBackendUser = $this->getMockBuilder(BackendUserAuthentication::class)

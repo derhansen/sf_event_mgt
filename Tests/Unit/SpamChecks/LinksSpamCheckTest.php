@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
+use PHPUnit\Framework\Attributes\Test;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\LinkSpamCheck;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -18,9 +20,7 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class LinksSpamCheckTest extends UnitTestCase
 {
-    /**
-     * @test
-     */
+    #[Test]
     public function fallbackToDefaultMaxAmountOfLinksIfConfigurationEmpty(): void
     {
         $registration = new Registration();
@@ -35,9 +35,7 @@ class LinksSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsFailedWhenConfiguredAmountOfLinksIsExceeded(): void
     {
         $registration = new Registration();
@@ -54,12 +52,10 @@ class LinksSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsFailedWhenConfiguredAmountOfLinksIsExceededInRegistrationField(): void
     {
-        $registrationFieldValue = new Registration\FieldValue();
+        $registrationFieldValue = new FieldValue();
         $registrationFieldValue->setValue('https://www.derhansen.com');
         $objectStorage = new ObjectStorage();
         $objectStorage->attach($registrationFieldValue);
@@ -76,9 +72,7 @@ class LinksSpamCheckTest extends UnitTestCase
         self::assertTrue($check->isFailed());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkIsNotFailedWhenConfiguredAmountOfLinksIsNotExceeded(): void
     {
         $registration = new Registration();

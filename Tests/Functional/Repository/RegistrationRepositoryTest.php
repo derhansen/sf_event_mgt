@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Repository;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
@@ -46,9 +48,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test for match on Event
-     *
-     * @test
      */
+    #[Test]
     public function findNotificationRegistrationsForEventUid2(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
@@ -84,10 +85,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         ];
     }
 
-    /**
-     * @dataProvider confirmedAndUnconfirmedDataProvider
-     * @test
-     */
+    #[DataProvider('confirmedAndUnconfirmedDataProvider')]
+    #[Test]
     public function findNotificationRegistrationsReturnsConfirmedAndUnconfirmed($recipientSetting, $expected): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
@@ -148,11 +147,11 @@ class RegistrationRepositoryTest extends FunctionalTestCase
     /**
      * Test for match on Event
      *
-     * @dataProvider findNotificationRegistrationsDataProvider
-     * @test
      * @param mixed $constraints
      * @param mixed $expected
      */
+    #[DataProvider('findNotificationRegistrationsDataProvider')]
+    #[Test]
     public function findNotificationRegistrationsForEventUid1WithConstraints($constraints, $expected): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
@@ -170,9 +169,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test for match on Event with unknown condition
-     *
-     * @test
      */
+    #[Test]
     public function findNotificationRegistrationsForEventWithConstraintsButWrongCondition(): void
     {
         $this->expectException(InvalidArgumentException::class);
@@ -184,9 +182,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if ignoreNotifications is respected
-     *
-     * @test
      */
+    #[Test]
     public function findNotificationRegistrationsRespectsIgnoreNotificationsForEventUid3(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();
@@ -202,9 +199,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand returns an empty array if no user given
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandReturnsEmptyArrayIfNoUser(): void
     {
         $demand = new UserRegistrationDemand();
@@ -215,9 +211,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand respects storagePage constraint
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandRespectsStoragePage(): void
     {
         $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
@@ -232,9 +227,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand respects displayMode "future" constraint
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeFuture(): void
     {
         $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
@@ -250,9 +244,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand respects displayMode "future" constraint
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandRespectsDisplaymodeCurrentFuture(): void
     {
         $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
@@ -268,9 +261,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand respects user constraint
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandRespectsUser(): void
     {
         $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
@@ -285,9 +277,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand respects order constraint
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandRespectsOrder(): void
     {
         $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
@@ -304,9 +295,8 @@ class RegistrationRepositoryTest extends FunctionalTestCase
 
     /**
      * Test if findRegistrationsByUserRegistrationDemand respects order direction constraint
-     *
-     * @test
      */
+    #[Test]
     public function findRegistrationsByUserRegistrationDemandRespectsOrderDirection(): void
     {
         $feUserRepository = $this->getContainer()->get(FrontendUserRepository::class);
@@ -321,9 +311,7 @@ class RegistrationRepositoryTest extends FunctionalTestCase
         self::assertEquals(32, $registrations->getFirst()->getUid());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function findWaitlistMoveUpRegistrationsReturnsExpectedAmountOfRegistrationsAndRespectsOrder(): void
     {
         $event = $this->getMockBuilder(Event::class)->getMock();

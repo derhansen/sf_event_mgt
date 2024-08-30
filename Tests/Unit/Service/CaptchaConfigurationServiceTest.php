@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Exception\InvalidCaptchaConfigurationException;
 use DERHANSEN\SfEventMgt\Service\CaptchaConfigurationService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -38,9 +40,7 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
         ],
     ];
 
-    /**
-     * @test
-     */
+    #[Test]
     public function captchaConfigurationServiceIsNotEnabledForEmptySettings(): void
     {
         $service = new CaptchaConfigurationService();
@@ -157,10 +157,8 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider
-     */
+    #[DataProvider('captchaConfigurationThrowsExceptionForInvalidSettingsDataProvider')]
+    #[Test]
     public function captchaConfigurationThrowsExceptionForInvalidSettings(array $settings, int $code): void
     {
         $this->expectException(InvalidCaptchaConfigurationException::class);
@@ -241,10 +239,8 @@ class CaptchaConfigurationServiceTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider gettersReturnExpectedResultDataProvider
-     */
+    #[DataProvider('gettersReturnExpectedResultDataProvider')]
+    #[Test]
     public function gettersReturnExpectedResult(array $settings, string $method, $expected): void
     {
         $service = new CaptchaConfigurationService($settings);

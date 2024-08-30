@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
 use DERHANSEN\SfEventMgt\Domain\Repository\EventRepository;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
@@ -32,9 +33,8 @@ class CalendarServiceTest extends FunctionalTestCase
 
     /**
      * Test, if events for the 27.10.2024 (date with timeshift) will be returned in the array
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayReturnsArrayWithExpectedEventOnADayWithTimeshiftOctober(): void
     {
         $demand = new EventDemand();
@@ -48,9 +48,8 @@ class CalendarServiceTest extends FunctionalTestCase
 
     /**
      * Test, if events for the 31.03.2024 (date with timeshift) will be returned in the array
-     *
-     * @test
      */
+    #[Test]
     public function getCalendarArrayReturnsArrayWithExpectedEventOnADayWithTimeshiftMarch(): void
     {
         $demand = new EventDemand();

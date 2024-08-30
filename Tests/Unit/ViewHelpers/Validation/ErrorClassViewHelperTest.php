@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\Validation\ErrorClassViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -73,13 +75,13 @@ class ErrorClassViewHelperTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider fieldnameDataProvider
      * @param array $validationErrors
      * @param string $fieldname
      * @param string $expected
      * @param string $errorClass
      */
+    #[DataProvider('fieldnameDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedStringForFieldname(
         array $validationErrors,
         string $fieldname,
@@ -132,13 +134,13 @@ class ErrorClassViewHelperTest extends UnitTestCase
     }
 
     /**
-     * @test
-     * @dataProvider registrationFieldDataProvider
      * @param array $validationErrors
      * @param ?Field $registrationField
      * @param string $expected
      * @param string $errorClass
      */
+    #[DataProvider('registrationFieldDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedStringForRegistrationField(
         array $validationErrors,
         ?Field $registrationField,

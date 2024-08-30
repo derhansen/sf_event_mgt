@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Format;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -57,10 +59,8 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider iCalendarDescriptionDataProvider
-     */
+    #[DataProvider('iCalendarDescriptionDataProvider')]
+    #[Test]
     public function viewHelperReturnsExpectedValues(string $value, int $substractChars, string $expected): void
     {
         $viewHelper = new ICalendarDescriptionViewHelper();
@@ -69,9 +69,7 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
         self::assertEquals($expected, $actual);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function viewHelperRendersChildrenIfNoValueGiven(): void
     {
         $viewHelper = $this->getMockBuilder(ICalendarDescriptionViewHelper::class)

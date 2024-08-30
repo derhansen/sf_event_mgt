@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\Attributes\DataProvider;
 use DateInterval;
 use DateTime;
 use DERHANSEN\SfEventMgt\Controller\EventController;
@@ -102,9 +104,8 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * Test if overwriteDemand ignores properties in $ignoredSettingsForOverwriteDemand
-     *
-     * @test
      */
+    #[Test]
     public function overwriteDemandObjectIgnoresIgnoredProperties()
     {
         $demand = new EventDemand();
@@ -123,9 +124,8 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * Test if overwriteDemand sets a property in the given demand
-     *
-     * @test
      */
+    #[Test]
     public function overwriteDemandObjectSetsCategoryProperty()
     {
         $demand = new EventDemand();
@@ -142,9 +142,7 @@ class EventControllerTest extends UnitTestCase
         self::assertSame('1', $resultDemand->getCategory());
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function initializeSaveRegistrationActionSetsDateFormat()
     {
         $settings = [
@@ -188,9 +186,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->initializeSaveRegistrationAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -279,9 +275,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->listAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionOverridesDemandAndFetchesAllEventsFromRepositoryAndAssignsThemToView()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -373,9 +367,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->listAction($overrideDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionDoesNotOverrideDemandIfDisabled()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -467,9 +459,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->listAction($overrideDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function detailActionAssignsEventToView()
     {
         $event = new Event();
@@ -493,9 +483,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->detailAction($event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function registrationActionAssignsEventToView()
     {
         $event = new Event();
@@ -520,9 +508,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->registrationAction($event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDisabled()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -548,9 +534,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationActionRedirectsWithMessageIfRegistrationDeadlineExpired()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -579,9 +563,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationActionRedirectsWithMessageIfEventExpired()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -610,9 +592,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationRedirectsWithMessageIfMaxParticipantsReached()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -646,9 +626,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsGreaterThanRemainingPlaces()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -685,9 +663,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationRedirectsWithMessageIfAmountOfRegistrationsExceedsMaxAmountOfRegistrations()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -725,9 +701,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationRedirectsWithMessageIfUniqueEmailCheckEnabledAndEmailAlreadyRegistered()
     {
         $hashService = $this->getMockBuilder(HashService::class)->getMock();
@@ -779,9 +753,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Checks, if a saveRegistration action with no autoConfirmation saves the
      * registration if maxParticipants is reached and waitlist is enabled
-     *
-     * @test
      */
+    #[Test]
     public function saveRegistrationActionWithoutAutoConfirmationAndWaitlistRedirectsWithMessageIfRegistrationSuccessful()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -848,9 +821,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Checks, if a saveRegistration action with no autoConfirmation saves the
      * registration and redirects to the saveRegistrationResult action.
-     *
-     * @test
      */
+    #[Test]
     public function saveRegistrationActionWithoutAutoConfirmationRedirectsWithMessageIfRegistrationSuccessful()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -916,9 +888,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Checks, if a saveRegistration action with autoConfirmation (settings) saves the
      * registration and redirects to the confirmationRegistration action.
-     *
-     * @test
      */
+    #[Test]
     public function saveRegistrationWithSettingAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -989,9 +960,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Checks, if a saveRegistration action with autoConfirmation (in event) saves the
      * registration and redirects to the confirmationRegistration action.
-     *
-     * @test
      */
+    #[Test]
     public function saveRegistrationWithEventAutoConfirmationActionRedirectsToConfirmationWithMessage()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -1058,9 +1028,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Checks, if a saveRegistration action creates multiple registrations
      * if getAmountOfRegistrations > 1
-     *
-     * @test
      */
+    #[Test]
     public function saveRegistrationCreatesMultipleRegistrationIfAmountOfRegistrationsGreaterThanOne()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -1129,9 +1098,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->saveRegistrationAction($registration, $event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function saveRegistrationResultActionShowsExpectedMessageIfWrongHmacGiven()
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -1254,10 +1221,9 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * Test if expected messsage is returned for saveRegistrationResult
-     *
-     * @dataProvider invalidEmailsDataProvider
-     * @test
      */
+    #[DataProvider('invalidEmailsDataProvider')]
+    #[Test]
     public function saveRegistrationResultActionShowsExpectedMessage($result, $eventUid, $reguid, $hmac, $message, $title, $failed)
     {
         $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
@@ -1300,9 +1266,8 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * Test if expected message is shown if checkConfirmRegistration fails
-     *
-     * @test
      */
+    #[Test]
     public function confirmRegistrationActionShowsExpectedMessageIfCheckConfirmRegistrationFailed()
     {
         $variables = [
@@ -1346,9 +1311,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Test if expected message is shown if checkConfirmRegistration succeeds.
      * Also checks, if messages are sent and if registration gets confirmed.
-     *
-     * @test
      */
+    #[Test]
     public function confirmRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $event = new Event();
@@ -1414,9 +1378,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Test if expected message is shown if checkConfirmRegistration succeeds for waitist registrations
      * Also checks, if messages are sent and if registration gets confirmed.
-     *
-     * @test
      */
+    #[Test]
     public function confirmRegistrationWaitlistActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $event = new Event();
@@ -1477,9 +1440,8 @@ class EventControllerTest extends UnitTestCase
 
     /**
      * Test if expected message is shown if checkCancelRegistration fails
-     *
-     * @test
      */
+    #[Test]
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationFailed()
     {
         $variables = [
@@ -1521,9 +1483,8 @@ class EventControllerTest extends UnitTestCase
     /**
      * Test if expected message is shown if checkCancelRegistration succeeds.
      * Also checks, if messages are sent and if registration gets removed.
-     *
-     * @test
      */
+    #[Test]
     public function cancelRegistrationActionShowsMessageIfCheckCancelRegistrationSucceeds()
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
@@ -1651,9 +1612,7 @@ class EventControllerTest extends UnitTestCase
         return $mockArguments;
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function initializeSearchActionSetsDateFormat()
     {
         $settings = [
@@ -1667,9 +1626,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->initializeSearchAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewForNoSearchDemand()
     {
         $allEvents = $this->createMock(QueryResult::class);
@@ -1746,9 +1703,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->searchAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchActionFetchesAllEventsFromRepositoryAndAssignsThemToViewWithSearchDemand()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
@@ -1828,9 +1783,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->searchAction($searchDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchActionSetsSearchDemandFieldsIfSearchDemandGiven()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
@@ -1893,9 +1846,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->searchAction($searchDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchActionSetsAdjustsDateFieldsIfAdjustDateSettingSetAndDateFieldsGiven()
     {
         $mockStartDate = $this->getMockBuilder('\DateTime')->getMock();
@@ -1971,9 +1922,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->searchAction($searchDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchActionOverwritesDemandFieldsIfOverwriteDemandObjectGiven()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
@@ -2039,9 +1988,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->searchAction($searchDemand, $overrideDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function searchActionDoesNotOverridesDemandIfOverwriteDemandDisabled()
     {
         $searchDemand = $this->getMockBuilder(SearchDemand::class)->getMock();
@@ -2107,9 +2054,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->searchAction($searchDemand, $overrideDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function detailActionShowsEventIfEventGiven()
     {
         $mockEvent = $this->getMockBuilder(Event::class)->getMock();
@@ -2132,9 +2077,7 @@ class EventControllerTest extends UnitTestCase
         $this->subject->detailAction($mockEvent);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleEventNotFoundIsSkippedWhenNoSetting(): void
     {
         $settings = [
@@ -2148,9 +2091,7 @@ class EventControllerTest extends UnitTestCase
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleEventNotFoundShows404Page()
     {
         $settings = [
@@ -2171,9 +2112,7 @@ class EventControllerTest extends UnitTestCase
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleEventNotFoundRedirectsToListView()
     {
         $settings = [
@@ -2188,9 +2127,7 @@ class EventControllerTest extends UnitTestCase
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleEventNotFoundRedirectsToPid1IfNoListPidDefinied()
     {
         $settings = [
@@ -2204,9 +2141,7 @@ class EventControllerTest extends UnitTestCase
         $mock->_call('handleEventNotFoundError', $settings);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function changeEventDemandToFullMonthDateRangeAppliesExpectedDatesAndUnsetsMonthAndYear()
     {
         $calendarDateRangeResult = [
@@ -2242,9 +2177,7 @@ class EventControllerTest extends UnitTestCase
         self::assertSame('05.02.2017 23:59:59', $resultDemand->getSearchDemand()->getEndDate()->format('d.m.Y H:i:s'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkPidOfEventRecordWorks()
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2276,9 +2209,7 @@ class EventControllerTest extends UnitTestCase
         self::assertNull($mockedController->_call('checkPidOfEventRecord', $event));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateSingleEventSettingIsWorking()
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2301,9 +2232,7 @@ class EventControllerTest extends UnitTestCase
         self::assertEquals($mockEvent, $mockedController->_call('evaluateSingleEventSetting', null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateIsShortcutSettingIsWorking()
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2333,9 +2262,7 @@ class EventControllerTest extends UnitTestCase
         self::assertEquals($mockEvent, $mockedController->_call('evaluateIsShortcutSetting', null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateEventPreviewSettingReturnsNoEventIfNoEventPreview(): void
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2346,9 +2273,7 @@ class EventControllerTest extends UnitTestCase
         self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateEventPreviewSettingReturnsNoEventIfNoBackendUser(): void
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2364,9 +2289,7 @@ class EventControllerTest extends UnitTestCase
         self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateEventPreviewSettingReturnsEventForValidBackendUserAndNoPreviewHiddenRecordsSetting(): void
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2388,9 +2311,7 @@ class EventControllerTest extends UnitTestCase
         self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateEventPreviewSettingReturnsEventForValidBackendUserAndPreviewHiddenRecordsSetting(): void
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2412,9 +2333,7 @@ class EventControllerTest extends UnitTestCase
         self::assertNull($mockedController->_call('evaluateEventPreviewSetting', null));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function evaluateEventPreviewSettingIsWorking()
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);
@@ -2483,10 +2402,8 @@ class EventControllerTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider isOverwriteDemandDataProvider
-     */
+    #[DataProvider('isOverwriteDemandDataProvider')]
+    #[Test]
     public function isOverwriteDemandIsWorking(array $settings, array $overwriteDemand, bool $expected): void
     {
         $mockedController = $this->getAccessibleMock(EventController::class, null);

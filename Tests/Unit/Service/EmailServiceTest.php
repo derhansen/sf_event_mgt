@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Service\EmailService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -44,10 +46,9 @@ class EmailServiceTest extends UnitTestCase
 
     /**
      * Test if email-service returns false, if emails are invalid
-     *
-     * @dataProvider invalidEmailsDataProvider
-     * @test
      */
+    #[DataProvider('invalidEmailsDataProvider')]
+    #[Test]
     public function sendEmailMessageWithInvalidEmailTest(string $sender, string $recipient)
     {
         $subject = 'A subject';

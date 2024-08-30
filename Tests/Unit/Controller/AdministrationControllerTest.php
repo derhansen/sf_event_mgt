@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Controller;
 
+use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\SearchDemand;
@@ -50,9 +51,7 @@ class AdministrationControllerTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function initializeActionAssignsPid(): void
     {
         $this->subject->_set('pid', 1);
@@ -61,9 +60,7 @@ class AdministrationControllerTest extends UnitTestCase
         self::assertSame(0, $this->subject->_get('pid'));
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionDoesNotFetchEventsForStoragePidZero(): void
     {
         $this->subject->_set('settings', ['dummy' => 'settings']);
@@ -105,9 +102,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->listAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionDoesNotFetchEventsForStoragePidZeroAndDemand(): void
     {
         $this->subject->_set('settings', ['dummy' => 'settings']);
@@ -151,9 +146,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->listAction($searchDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionFetchesAllEventsForGivenStoragePidAndPassesExpectedVariablesToTemplateView(): void
     {
         $this->subject->_set('settings', ['dummy' => 'settings']);
@@ -205,9 +198,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->listAction($searchDemand);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function listActionUsesOverwriteDemandArrayAndPassesExpectedVariablesToTemplateView(): void
     {
         $this->subject->_set('settings', ['dummy' => 'settings']);
@@ -256,9 +247,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->listAction($searchDemand, ['orderDirection' => 'desc']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function initializeListActionSetsDefaultDateFormatIfEmpty(): void
     {
         $settings = [
@@ -271,9 +260,7 @@ class AdministrationControllerTest extends UnitTestCase
         self::assertEquals('H:i d-m-Y', $this->subject->_get('settings')['search']['dateFormat']);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function handleExpiredRegistrationsCallsServiceAndRedirectsToListView(): void
     {
         $mockMaintenanceService = $this->getMockBuilder(MaintenanceService::class)
@@ -285,9 +272,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->handleExpiredRegistrationsAction();
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function indexNotifyActionPassesExpectedVariablesToTemplateView(): void
     {
         $this->subject->_set('settings', ['dummy' => 'settings']);
@@ -333,9 +318,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->indexNotifyAction($event);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function notifyActionSendsNotificationsLogsAndRedirects(): void
     {
         $customNotifications = ['key' => 'value'];
@@ -364,9 +347,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->notifyAction($event, $customNotification);
     }
 
-    /**
-     * @test
-     */
+    #[Test]
     public function checkEventAccessReturnsFalseIfNoEventAccess(): void
     {
         $event = new Event();
