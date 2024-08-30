@@ -161,9 +161,4 @@ class RegistrationValidator extends AbstractValidator
 
         return $validator;
     }
-
-    protected function getRequest(): ServerRequestInterface
-    {
-        return $GLOBALS['TYPO3_REQUEST'];
-    }
 }

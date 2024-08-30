@@ -96,9 +96,4 @@ class CaptchaValidator extends AbstractValidator
             );
         }
     }
-
-    protected function getRequest(): ServerRequestInterface
-    {
-        return $GLOBALS['TYPO3_REQUEST'];
-    }
 }
