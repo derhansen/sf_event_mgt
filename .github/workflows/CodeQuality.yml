@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         env:
-          - { php: 8.1, coverage: 0}
+          - { php: 8.2, coverage: 0}
 
     env: ${{ matrix.env }}
 
