@@ -19,6 +19,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3Fluid\Fluid\View\TemplateView;
 
@@ -38,6 +39,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     #[Test]
     public function metaTagForNameIsSetByViewHelper(): void
     {
+        $GLOBALS['TSFE'] = new TypoScriptFrontendController();
         $extbaseRequestParameters = new ExtbaseRequestParameters();
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
@@ -55,6 +57,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     #[Test]
     public function metaTagForPropertyIsSetByViewHelper(): void
     {
+        $GLOBALS['TSFE'] = new TypoScriptFrontendController();
         $extbaseRequestParameters = new ExtbaseRequestParameters();
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
