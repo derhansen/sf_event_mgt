@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Validation;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
-use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -22,8 +22,8 @@ class ErrorClassViewHelper extends AbstractViewHelper
 {
     public function initializeArguments(): void
     {
-        $this->registerArgument('fieldname', 'string', 'A fieldname to be checked', false);
-        $this->registerArgument('registrationField', 'object', 'A registration field record', false);
+        $this->registerArgument('fieldname', 'string', 'A fieldname to be checked');
+        $this->registerArgument('registrationField', 'object', 'A registration field record');
         $this->registerArgument('class', 'string', 'Classname if the field has an error', false, 'error-class');
         parent::initializeArguments();
     }
@@ -54,8 +54,8 @@ class ErrorClassViewHelper extends AbstractViewHelper
 
     protected function getValidationErrors(): array
     {
-        /** @var ExtbaseRequestParameters $extbaseRequestParameters */
-        $extbaseRequestParameters = $this->renderingContext->getRequest()->getAttribute('extbase');
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
+        $extbaseRequestParameters = $request->getAttribute('extbase');
         $validationResults = $extbaseRequestParameters->getOriginalRequestMappingResults();
 
         return $validationResults->getFlattenedErrors();
