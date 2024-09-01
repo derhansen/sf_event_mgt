@@ -9,37 +9,44 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\ViewHelpers;
 
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
 class MetaTagViewHelperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
-    protected StandaloneView $view;
     protected PageRenderer $pageRenderer;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
     }
 
     #[Test]
     public function metaTagForNameIsSetByViewHelper(): void
     {
-        $this->view->getRenderingContext()->getViewHelperResolver()
-            ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
-        $this->view->getRenderingContext()->getTemplatePaths()
-            ->setTemplateSource('<e:metaTag name="keywords" content="keyword1, keyword2" />');
-        $this->view->render();
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:metaTag name="keywords" content="keyword1, keyword2" />');
+        $this->assertEquals('', (new TemplateView($context))->render());
 
         $metaTag = $this->pageRenderer->getMetaTag('name', 'keywords');
         self::assertEquals('keyword1, keyword2', $metaTag['content']);
@@ -48,11 +55,15 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     #[Test]
     public function metaTagForPropertyIsSetByViewHelper(): void
     {
-        $this->view->getRenderingContext()->getViewHelperResolver()
-            ->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
-        $this->view->getRenderingContext()->getTemplatePaths()
-            ->setTemplateSource('<e:metaTag property="og:title" content="The og:title" />');
-        $this->view->render();
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:metaTag property="og:title" content="The og:title" />');
+        $this->assertEquals('', (new TemplateView($context))->render());
 
         $metaTag = $this->pageRenderer->getMetaTag('property', 'og:title');
         self::assertEquals('The og:title', $metaTag['content']);

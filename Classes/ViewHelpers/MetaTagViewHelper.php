@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
 use Closure;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
@@ -37,12 +38,15 @@ class MetaTagViewHelper extends AbstractViewHelper
         Closure $renderChildrenClosure,
         RenderingContextInterface $renderingContext
     ) {
+        /** @var TypoScriptFrontendController $tsfe */
+        $tsfe = $GLOBALS['TSFE'];
+
         // Skip if current record is part of tt_content CType shortcut
-        if (!empty($GLOBALS['TSFE']->recordRegister)
-            && !empty($GLOBALS['TSFE']->currentRecord)
-            && is_array($GLOBALS['TSFE']->recordRegister)
-            && str_contains($GLOBALS['TSFE']->currentRecord, 'tx_sfeventmgt_domain_model_event:')
-            && str_contains(array_keys($GLOBALS['TSFE']->recordRegister)[0], 'tt_content:')
+        if (!empty($tsfe->recordRegister)
+            && !empty($tsfe->currentRecord)
+            && is_array($tsfe->recordRegister)
+            && str_contains($tsfe->currentRecord, 'tx_sfeventmgt_domain_model_event:')
+            && str_contains(array_keys($tsfe->recordRegister)[0], 'tt_content:')
         ) {
             return;
         }
