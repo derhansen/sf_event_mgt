@@ -9,49 +9,55 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\ViewHelpers;
 
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\PageTitle\PageTitleProviderManager;
+use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
 class TitleViewHelperTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
-    protected StandaloneView $view;
-
-    public function setUp(): void
+    #[Test]
+    public function viewHelperReturnsExpectedResult(): void
     {
-        parent::setUp();
-
-        $this->view = GeneralUtility::makeInstance(StandaloneView::class);
-        $this->view->getRenderingContext()->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
-        $this->view->getRenderingContext()->getTemplatePaths()->setTemplateSource('<e:title pageTitle="{title}"/>');
-
-        $tsfe = $this->createMock(TypoScriptFrontendController::class);
-        $tsfe->config['config'] = [
+        $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
+        $frontendTypoScript->setSetupTree(new RootNode());
+        $frontendTypoScript->setSetupArray([]);
+        $frontendTypoScript->setConfigArray([
             'pageTitleProviders' => [
                 'tx_sfeventmgt' => [
                     'provider' => 'DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider',
                     'before' => 'record',
                 ],
             ],
-        ];
-        $GLOBALS['TSFE'] = $tsfe;
-    }
+        ]);
 
-    #[Test]
-    public function viewHelperReturnsExpectedResult(): void
-    {
-        self::assertEmpty($this->view->assign('title', 'Test')->render());
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('frontend.typoscript', $frontendTypoScript)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:title pageTitle="{title}"/>');
+        $context->getVariableProvider()->add('title', 'Test title');
+        (new TemplateView($context))->render();
 
         $titleProvider = GeneralUtility::makeInstance(PageTitleProviderManager::class);
-        $title = $titleProvider->getTitle();
+        $title = $titleProvider->getTitle($serverRequest);
 
-        self::assertEquals('Test', $title);
+        self::assertEquals('Test title', $title);
     }
 }
