@@ -16,7 +16,10 @@ use DERHANSEN\SfEventMgt\ViewHelpers\PrefillViewHelper;
 use stdClass;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+
+use function PHPUnit\Framework\any;
 
 /**
  * Test case for prefill viewHelper
@@ -24,11 +27,13 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 class PrefillViewHelperTest extends UnitTestCase
 {
     #[Test]
-    public function viewHelperReturnsEmptyStringIfTsfeNotAvailabe(): void
+    public function viewHelperReturnsEmptyStringIfFrontendUserNotAvailable(): void
     {
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $request = $this->createMock(Request::class);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -48,14 +53,15 @@ class PrefillViewHelperTest extends UnitTestCase
                 'registration' => ['firstname' => 'Torben'],
             ],
         ];
-        $GLOBALS['TSFE'] = new stdClass();
 
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $request = $this->createMock(Request::class);
         $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
         $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
         $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -71,18 +77,18 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewHelperReturnsEmptyStringIfPrefillSettingsEmpty(): void
     {
         $submittedData = [];
-        $GLOBALS['TSFE'] = new stdClass();
-        $GLOBALS['TSFE']->fe_user = new stdClass();
-        $GLOBALS['TSFE']->fe_user->user = [
+
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $frontendUser->user = [
             'first_name' => 'John',
         ];
-
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request = $this->createMock(Request::class);
         $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
         $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
         $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -98,18 +104,17 @@ class PrefillViewHelperTest extends UnitTestCase
     public function viewHelperReturnsEmptyStringIfFieldNotFoundInPrefillSettings(): void
     {
         $submittedData = [];
-        $GLOBALS['TSFE'] = new stdClass();
-        $GLOBALS['TSFE']->fe_user = new stdClass();
-        $GLOBALS['TSFE']->fe_user->user = [
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $frontendUser->user = [
             'first_name' => 'John',
         ];
-
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request = $this->createMock(Request::class);
         $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
         $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
         $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -124,18 +129,16 @@ class PrefillViewHelperTest extends UnitTestCase
     #[Test]
     public function viewHelperReturnsEmptyStringIfFieldNotFoundInFeUser(): void
     {
-        $GLOBALS['TSFE'] = new stdClass();
-        $GLOBALS['TSFE']->fe_user = new stdClass();
-        $GLOBALS['TSFE']->fe_user->user = [
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $frontendUser->user = [
             'first_name' => 'John',
         ];
-
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request = $this->createMock(Request::class);
         $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
         $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects(self::any())->method('getParsedBody')->willReturn([]);
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -150,19 +153,17 @@ class PrefillViewHelperTest extends UnitTestCase
     #[Test]
     public function viewHelperReturnsFieldvalueIfFound(): void
     {
-        $GLOBALS['TSFE'] = new stdClass();
-        $GLOBALS['TSFE']->fe_user = new stdClass();
-        $GLOBALS['TSFE']->fe_user->user = [
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $frontendUser->user = [
             'first_name' => 'John',
             'last_name' => 'Doe',
         ];
-
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $request = $this->createMock(Request::class);
         $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
         $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
-        $request->expects(self::any())->method('getParsedBody')->willReturn([]);
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);
@@ -183,12 +184,18 @@ class PrefillViewHelperTest extends UnitTestCase
             ],
         ];
 
-        $request = $this->getMockBuilder(Request::class)->disableOriginalConstructor()->getMock();
+        $frontendUser = $this->createMock(FrontendUserAuthentication::class);
+        $frontendUser->user = [
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+        ];
+        $request = $this->createMock(Request::class);
         $request->expects(self::any())->method('getControllerExtensionName')->willReturn('SfEventMgt');
         $request->expects(self::any())->method('getPluginName')->willReturn('Pieventregistration');
         $request->expects(self::any())->method('getParsedBody')->willReturn($submittedData);
-        $renderingContext = $this->getMockBuilder(RenderingContext::class)->disableOriginalConstructor()->getMock();
-        $renderingContext->expects(self::any())->method('getRequest')->willReturn($request);
+        $request->expects(self::any())->method('getAttribute')->with('frontend.user')->willReturn($frontendUser);
+        $renderingContext = $this->createMock(RenderingContext::class);
+        $renderingContext->expects(self::any())->method('getAttribute')->willReturn($request);
 
         $viewHelper = new PrefillViewHelper();
         $viewHelper->setRenderingContext($renderingContext);

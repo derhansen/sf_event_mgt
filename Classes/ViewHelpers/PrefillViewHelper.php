@@ -11,11 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
-/**
- * Prefill ViewHelper
- */
 class PrefillViewHelper extends AbstractPrefillViewHelper
 {
     public function initializeArguments(): void
@@ -35,18 +34,24 @@ class PrefillViewHelper extends AbstractPrefillViewHelper
         $prefillSettings = $this->arguments['prefillSettings'];
 
         /** @var Request $request */
-        $request = $this->renderingContext->getRequest();
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         $registrationData = $request->getParsedBody()[$this->getPluginNamespace($request)] ?? [];
         if (isset($registrationData['registration'][$fieldname])) {
             return $registrationData['registration'][$fieldname];
         }
 
-        if (!isset($GLOBALS['TSFE']) || !$GLOBALS['TSFE']->fe_user->user || empty($prefillSettings) ||
+        $frontendUser = $this->getFrontendUser();
+        if (!$frontendUser->user || empty($prefillSettings) ||
             !array_key_exists($fieldname, $prefillSettings)
         ) {
             return '';
         }
 
-        return (string)($GLOBALS['TSFE']->fe_user->user[$prefillSettings[$fieldname]]);
+        return (string)($frontendUser->user[$prefillSettings[$fieldname]]);
+    }
+
+    protected function getFrontendUser(): FrontendUserAuthentication
+    {
+        return $this->renderingContext->getAttribute(ServerRequestInterface::class)->getAttribute('frontend.user');
     }
 }
