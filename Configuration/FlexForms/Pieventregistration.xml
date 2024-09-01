@@ -93,8 +93,7 @@
                     <settings.registration.linkTermsAndConditions>
                         <label>LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:flexforms_general.linkTermsAndConditions</label>
                         <config>
-                            <type>input</type>
-                            <renderType>inputLink</renderType>
+                            <type>link</type>
                         </config>
                     </settings.registration.linkTermsAndConditions>
 
