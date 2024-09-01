@@ -40,7 +40,7 @@ class PrefillViewHelper extends AbstractPrefillViewHelper
             return $registrationData['registration'][$fieldname];
         }
 
-        $frontendUser = $this->getFrontendUser();
+        $frontendUser = $request->getAttribute('frontend.user');
         if (!$frontendUser->user || empty($prefillSettings) ||
             !array_key_exists($fieldname, $prefillSettings)
         ) {
@@ -48,10 +48,5 @@ class PrefillViewHelper extends AbstractPrefillViewHelper
         }
 
         return (string)($frontendUser->user[$prefillSettings[$fieldname]]);
-    }
-
-    protected function getFrontendUser(): FrontendUserAuthentication
-    {
-        return $this->renderingContext->getAttribute(ServerRequestInterface::class)->getAttribute('frontend.user');
     }
 }
