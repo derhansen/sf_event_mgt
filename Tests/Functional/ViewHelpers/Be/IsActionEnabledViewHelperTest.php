@@ -9,19 +9,23 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\ViewHelpers\Be;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use DERHANSEN\SfEventMgt\ViewHelpers\Be\IsActionEnabledViewHelper;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
-/**
- * Test for IsActionEnabledViewHelper
- */
-class IsActionEnabledViewHelperTest extends UnitTestCase
+class IsActionEnabledViewHelperTest extends FunctionalTestCase
 {
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+
     public static function viewHelperReturnsExpectedResultDataProvider(): array
     {
         return [
@@ -70,16 +74,20 @@ class IsActionEnabledViewHelperTest extends UnitTestCase
     #[Test]
     public function viewHelperReturnsExpectedResult(string $action, array $settings, bool $access, bool $expected): void
     {
-        $viewHelper = new IsActionEnabledViewHelper();
-        $viewHelper->setArguments([
-            'action' => $action,
-            'settings' => $settings,
-        ]);
+        $backendUser = $this->getMockBuilder(BackendUserAuthentication::class)->disableOriginalConstructor()->getMock();
+        $backendUser->expects(self::any())->method('check')->willReturn($access);
+        $GLOBALS['BE_USER'] = $backendUser;
 
-        $beUserMock = $this->getMockBuilder(BackendUserAuthentication::class)->disableOriginalConstructor()->getMock();
-        $beUserMock->expects(self::any())->method('check')->willReturn($access);
-        $GLOBALS['BE_USER'] = $beUserMock;
-
-        self::assertEquals($expected, $viewHelper->render());
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:be.isActionEnabled action="export" settings="{settings}" />');
+        $context->getVariableProvider()->add('action', $action);
+        $context->getVariableProvider()->add('settings', $settings);
+        $this->assertEquals($expected, (new TemplateView($context))->render());
     }
 }
