@@ -9,15 +9,22 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Format;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\ViewHelpers\Format;
 
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use DERHANSEN\SfEventMgt\ViewHelpers\Format\ICalendarDescriptionViewHelper;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
-class ICalendarDescriptionViewHelperTest extends UnitTestCase
+class ICalendarDescriptionViewHelperTest extends FunctionalTestCase
 {
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
+
     public static function iCalendarDescriptionDataProvider(): array
     {
         return [
@@ -63,20 +70,16 @@ class ICalendarDescriptionViewHelperTest extends UnitTestCase
     #[Test]
     public function viewHelperReturnsExpectedValues(string $value, int $substractChars, string $expected): void
     {
-        $viewHelper = new ICalendarDescriptionViewHelper();
-        $viewHelper->setArguments(['description' => $value, 'substractChars' => $substractChars]);
-        $actual = $viewHelper->render();
-        self::assertEquals($expected, $actual);
-    }
-
-    #[Test]
-    public function viewHelperRendersChildrenIfNoValueGiven(): void
-    {
-        $viewHelper = $this->getMockBuilder(ICalendarDescriptionViewHelper::class)
-            ->onlyMethods(['renderChildren'])
-            ->getMock();
-        $viewHelper->expects(self::once())->method('renderChildren')->willReturn('Just some text');
-        $actual = $viewHelper->render();
-        self::assertSame('Just some text', $actual);
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:format.ICalendarDescription description="{description}" substractChars="{substractChars}" />');
+        $context->getVariableProvider()->add('description', $value);
+        $context->getVariableProvider()->add('substractChars', $substractChars);
+        $this->assertEquals($expected, (new TemplateView($context))->render());
     }
 }
