@@ -9,36 +9,22 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\ViewHelpers\Event;
+namespace DERHANSEN\SfEventMgt\Tests\Functional\ViewHelpers\Event;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use DERHANSEN\SfEventMgt\ViewHelpers\Event\SimultaneousRegistrationsViewHelper;
-use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
+use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
+use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\View\TemplateView;
 
-/**
- * Test cases for SimultaneousRegistrationsViewHelper
- */
-class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
+class SimultaneousRegistrationsViewHelperTest extends FunctionalTestCase
 {
-    protected SimultaneousRegistrationsViewHelper $viewhelper;
-
-    /**
-     * Setup
-     */
-    protected function setUp(): void
-    {
-        $this->viewhelper = new SimultaneousRegistrationsViewHelper();
-    }
-
-    /**
-     * Teardown
-     */
-    protected function tearDown(): void
-    {
-        unset($this->viewhelper);
-    }
+    protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
     public static function simultaneousRegistrationsDataProvider(): array
     {
@@ -148,8 +134,16 @@ class SimultaneousRegistrationsViewHelperTest extends UnitTestCase
         $mockEvent->expects(self::any())->method('getMaxParticipants')->willReturn($maxParticipants);
         $mockEvent->expects(self::any())->method('getEnableWaitlist')->willReturn($waitlist);
         $mockEvent->expects(self::any())->method('getMaxRegistrationsPerUser')->willReturn($maxRegistrations);
-        $this->viewhelper->setArguments(['event' => $mockEvent]);
-        $actual = $this->viewhelper->render();
-        self::assertEquals($expected, $actual);
+
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:event.simultaneousRegistrations event="{event}" />');
+        $context->getVariableProvider()->add('event', $mockEvent);
+        $this->assertEquals($expected, (new TemplateView($context))->render());
     }
 }
