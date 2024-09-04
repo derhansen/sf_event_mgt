@@ -13,13 +13,11 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\AbstractPrefillViewHelper;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
-/**
- * PrefillField ViewHelper for registration fields
- */
 class PrefillFieldViewHelper extends AbstractPrefillViewHelper
 {
     public function initializeArguments(): void
@@ -41,8 +39,10 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
         $registrationField = $this->arguments['registrationField'];
 
         // If mapping errors occurred for form, return value that has been submitted from POST data
+        /** @var Request $request */
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         /** @var ExtbaseRequestParameters $extbaseRequestParameters */
-        $extbaseRequestParameters = $this->renderingContext->getRequest()->getAttribute('extbase');
+        $extbaseRequestParameters = $request->getAttribute('extbase');
         $originalRequest = $extbaseRequestParameters->getOriginalRequest();
 
         if ($originalRequest) {
@@ -50,8 +50,9 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
             return $this->getFieldValueFromSubmittedData($registrationData, $registrationField->getUid());
         }
 
+        $frontendUser = $request->getAttribute('frontend.user');
         $value = $registrationField->getDefaultValue();
-        return $this->prefillFromFeuserData($registrationField, $value);
+        return $this->prefillFromFeuserData($frontendUser, $registrationField, $value);
     }
 
     /**
@@ -71,31 +72,19 @@ class PrefillFieldViewHelper extends AbstractPrefillViewHelper
 
     /**
      * Prefills $value with fe_users data if configured in registration field
-     *
-     * @param Field $field
-     * @param string $value
-     * @return string
      */
-    protected function prefillFromFeuserData(Field $field, string $value): string
-    {
-        if (!$this->getTypoScriptFrontendController() ||
-            !$this->getFrontendUser()->user ||
+    protected function prefillFromFeuserData(
+        FrontendUserAuthentication $frontendUser,
+        Field $field,
+        string $value
+    ): string {
+        if (!$frontendUser->user ||
             $field->getFeuserValue() === '' ||
-            !array_key_exists($field->getFeuserValue(), $this->getFrontendUser()->user)
+            !array_key_exists($field->getFeuserValue(), $frontendUser->user)
         ) {
             return $value;
         }
 
-        return (string)$this->getFrontendUser()->user[$field->getFeuserValue()];
-    }
-
-    protected function getFrontendUser(): FrontendUserAuthentication
-    {
-        return $this->getTypoScriptFrontendController()->fe_user;
-    }
-
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'] ?? null;
+        return (string)$frontendUser->user[$field->getFeuserValue()];
     }
 }
