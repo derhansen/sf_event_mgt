@@ -34,7 +34,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
     protected static function evaluateCondition($arguments = null): bool
     {
         $result = false;
-        if (isset($arguments['fieldname']) && isset($arguments['settings'])) {
+        if (isset($arguments['fieldname'], $arguments['settings'])) {
             $defaultRequiredFields = ['firstname', 'lastname', 'email'];
             $requiredFields = array_map(
                 'trim',
