@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use DERHANSEN\SfEventMgt\ViewHelpers\AbstractPrefillViewHelper;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 
@@ -43,8 +44,9 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
         $currentValue = $this->arguments['currentValue'];
 
         // If mapping errors occurred for form, return value that has been submitted
+        $request = $this->renderingContext->getAttribute(ServerRequestInterface::class);
         /** @var ExtbaseRequestParameters $extbaseRequestParameters */
-        $extbaseRequestParameters = $this->renderingContext->getRequest()->getAttribute('extbase');
+        $extbaseRequestParameters = $request->getAttribute('extbase');
         $originalRequest = $extbaseRequestParameters->getOriginalRequest();
         if ($originalRequest) {
             $registrationData = $originalRequest->getParsedBody()[$this->getPluginNamespace($originalRequest)] ?? [];
