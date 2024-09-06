@@ -13,7 +13,6 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 
 class PrefillViewHelper extends AbstractPrefillViewHelper
 {

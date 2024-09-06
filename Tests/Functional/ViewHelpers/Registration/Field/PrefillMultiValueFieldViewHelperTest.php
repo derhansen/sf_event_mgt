@@ -65,7 +65,7 @@ class PrefillMultiValueFieldViewHelperTest extends FunctionalTestCase
         $context->getTemplatePaths()->setTemplateSource('<e:registration.field.prefillMultiValueField registrationField="{field}" currentValue="{value}" />');
         $context->getVariableProvider()->add('field', $field);
         $context->getVariableProvider()->add('value', $currentValue);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 
     public static function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
@@ -149,7 +149,7 @@ class PrefillMultiValueFieldViewHelperTest extends FunctionalTestCase
         $context->getTemplatePaths()->setTemplateSource('<e:registration.field.prefillMultiValueField registrationField="{field}" currentValue="{value}" />');
         $context->getVariableProvider()->add('field', $field);
         $context->getVariableProvider()->add('value', $currentValue);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -191,6 +191,6 @@ class PrefillMultiValueFieldViewHelperTest extends FunctionalTestCase
         $context->getTemplatePaths()->setTemplateSource('<e:registration.field.prefillMultiValueField registrationField="{field}" currentValue="{value}" />');
         $context->getVariableProvider()->add('field', $field);
         $context->getVariableProvider()->add('value', 'foo');
-        $this->assertFalse((new TemplateView($context))->render());
+        self::assertFalse((new TemplateView($context))->render());
     }
 }

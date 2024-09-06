@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Evaluation;
 
+use DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**

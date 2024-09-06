@@ -53,6 +53,6 @@ class ICalendarDateViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:format.ICalendarDate>{date}</e:format.ICalendarDate>');
         $context->getVariableProvider()->add('date', $value);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 }

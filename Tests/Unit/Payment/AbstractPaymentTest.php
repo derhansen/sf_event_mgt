@@ -11,8 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Payment;
 
-use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class AbstractPaymentTest extends UnitTestCase

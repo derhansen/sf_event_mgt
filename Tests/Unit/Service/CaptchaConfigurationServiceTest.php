@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
-use PHPUnit\Framework\Attributes\Test;
-use PHPUnit\Framework\Attributes\DataProvider;
 use DERHANSEN\SfEventMgt\Exception\InvalidCaptchaConfigurationException;
 use DERHANSEN\SfEventMgt\Service\CaptchaConfigurationService;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CaptchaConfigurationServiceTest extends UnitTestCase

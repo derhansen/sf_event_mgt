@@ -47,7 +47,7 @@ class IsRequiredFieldViewHelperTest extends FunctionalTestCase
                         'requiredFields' => 'zip',
                     ],
                 ],
-                'else'
+                'else',
             ],
             'Fieldname not in settings' => [
                 'zip',
@@ -57,7 +57,7 @@ class IsRequiredFieldViewHelperTest extends FunctionalTestCase
                         'requiredFields' => 'firstname,lastname',
                     ],
                 ],
-                'else'
+                'else',
             ],
             'Fieldname in settings' => [
                 'zip',
@@ -67,7 +67,7 @@ class IsRequiredFieldViewHelperTest extends FunctionalTestCase
                         'requiredFields' => 'zip,otherfield',
                     ],
                 ],
-                'then'
+                'then',
             ],
             'Default required field is always required' => [
                 'firstname',
@@ -77,25 +77,25 @@ class IsRequiredFieldViewHelperTest extends FunctionalTestCase
                         'requiredFields' => 'zip,otherfield',
                     ],
                 ],
-                'then'
+                'then',
             ],
             'No registrationField given' => [
                 null,
                 null,
                 [],
-                'else'
+                'else',
             ],
             'Optional registration field' => [
                 null,
                 $optionalRegistrationField,
                 [],
-                'else'
+                'else',
             ],
             'Required registration field' => [
                 null,
                 $requiredRegistrationField,
                 [],
-                'then'
+                'then',
             ],
         ];
     }
@@ -119,6 +119,6 @@ class IsRequiredFieldViewHelperTest extends FunctionalTestCase
         $context->getVariableProvider()->add('fieldname', $fieldname);
         $context->getVariableProvider()->add('registrationField', $registrationField);
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 }

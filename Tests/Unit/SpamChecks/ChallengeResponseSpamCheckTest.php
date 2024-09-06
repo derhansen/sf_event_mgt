@@ -11,10 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\SpamChecks;
 
-use PHPUnit\Framework\Attributes\Test;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\SpamChecks\ChallengeResponseSpamCheck;
 use DERHANSEN\SfEventMgt\Utility\MiscUtility;
+use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ChallengeResponseSpamCheckTest extends UnitTestCase

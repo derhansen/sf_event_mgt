@@ -38,7 +38,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="firstname" prefillSettings="{settings.registration.prefillFields}" />');
-        $this->assertEquals('', (new TemplateView($context))->render());
+        self::assertEquals('', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -63,7 +63,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="firstname" prefillSettings="{settings.registration.prefillFields}" />');
-        $this->assertEquals('Torben', (new TemplateView($context))->render());
+        self::assertEquals('Torben', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -89,7 +89,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="firstname" prefillSettings="{settings.registration.prefillFields}" />');
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals('', (new TemplateView($context))->render());
+        self::assertEquals('', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -100,7 +100,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
             'registration' => [
                 'prefillFields' => [
                     'lastname' => 'last_name',
-                ]
+                ],
             ],
         ];
 
@@ -121,7 +121,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="firstname" prefillSettings="{settings.registration.prefillFields}" />');
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals('', (new TemplateView($context))->render());
+        self::assertEquals('', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -132,7 +132,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
             'registration' => [
                 'prefillFields' => [
                     'non_existing' => 'non_existing_field',
-                ]
+                ],
             ],
         ];
 
@@ -153,7 +153,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="non_existing" prefillSettings="{settings.registration.prefillFields}" />');
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals('', (new TemplateView($context))->render());
+        self::assertEquals('', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -164,7 +164,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
             'registration' => [
                 'prefillFields' => [
                     'firstname' => 'first_name',
-                ]
+                ],
             ],
         ];
 
@@ -185,7 +185,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="firstname" prefillSettings="{settings.registration.prefillFields}" />');
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals('John', (new TemplateView($context))->render());
+        self::assertEquals('John', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -201,7 +201,7 @@ class PrefillViewHelperTest extends FunctionalTestCase
             'registration' => [
                 'prefillFields' => [
                     'firstname' => 'first_name',
-                ]
+                ],
             ],
         ];
 
@@ -222,6 +222,6 @@ class PrefillViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:prefill fieldname="firstname" prefillSettings="{settings.registration.prefillFields}" />');
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals('Torben', (new TemplateView($context))->render());
+        self::assertEquals('Torben', (new TemplateView($context))->render());
     }
 }

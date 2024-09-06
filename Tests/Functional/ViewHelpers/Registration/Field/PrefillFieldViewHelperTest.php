@@ -11,16 +11,13 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\ViewHelpers\Registration\Field;
 
-use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
-use DERHANSEN\SfEventMgt\ViewHelpers\Registration\Field\PrefillFieldViewHelper;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -47,7 +44,7 @@ class PrefillFieldViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:registration.field.prefillField registrationField="{field}" />');
         $context->getVariableProvider()->add('field', $field);
-        $this->assertEquals('Default', (new TemplateView($context))->render());
+        self::assertEquals('Default', (new TemplateView($context))->render());
     }
 
     #[Test]
@@ -71,7 +68,7 @@ class PrefillFieldViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:registration.field.prefillField registrationField="{field}" />');
         $context->getVariableProvider()->add('field', $field);
-        $this->assertEquals('John', (new TemplateView($context))->render());
+        self::assertEquals('John', (new TemplateView($context))->render());
     }
 
     public static function viewHelperReturnsSubmittedValueIfOriginalRequestExistDataProvider(): array
@@ -143,6 +140,6 @@ class PrefillFieldViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:registration.field.prefillField registrationField="{field}" />');
         $context->getVariableProvider()->add('field', $field);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 }

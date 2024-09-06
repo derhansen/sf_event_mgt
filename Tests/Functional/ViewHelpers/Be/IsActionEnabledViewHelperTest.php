@@ -88,6 +88,6 @@ class IsActionEnabledViewHelperTest extends FunctionalTestCase
         $context->getTemplatePaths()->setTemplateSource('<e:be.isActionEnabled action="export" settings="{settings}" />');
         $context->getVariableProvider()->add('action', $action);
         $context->getVariableProvider()->add('settings', $settings);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 }

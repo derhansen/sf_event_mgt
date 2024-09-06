@@ -80,6 +80,6 @@ class ICalendarDescriptionViewHelperTest extends FunctionalTestCase
         $context->getTemplatePaths()->setTemplateSource('<e:format.ICalendarDescription description="{description}" substractChars="{substractChars}" />');
         $context->getVariableProvider()->add('description', $value);
         $context->getVariableProvider()->add('substractChars', $substractChars);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 }

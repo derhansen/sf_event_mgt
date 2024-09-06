@@ -57,7 +57,7 @@ class ErrorClassViewHelperTest extends FunctionalTestCase
                 'custom-class',
                 'custom-class',
                 'registration.firstname',
-                'Error message for registration.firstname'
+                'Error message for registration.firstname',
             ],
         ];
     }
@@ -104,28 +104,28 @@ class ErrorClassViewHelperTest extends FunctionalTestCase
                 '',
                 'error-class',
                 '',
-                ''
+                '',
             ],
             'No error for registration field' => [
                 $field,
                 '',
                 'error-class',
                 'registration.fields.1',
-                'Error message for registration.fields.1'
+                'Error message for registration.fields.1',
             ],
             'Error for fieldname with default class name' => [
                 $field,
                 'error-class',
                 'error-class',
                 'registration.fields.2',
-                'Error message for registration.fields.1'
+                'Error message for registration.fields.1',
             ],
             'Error for fieldname with custom class name' => [
                 $field,
                 'custom-class',
                 'custom-class',
                 'registration.fields.2',
-                'Error message for registration.fields.1'
+                'Error message for registration.fields.1',
             ],
         ];
     }

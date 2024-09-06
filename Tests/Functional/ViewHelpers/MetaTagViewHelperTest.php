@@ -48,7 +48,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:metaTag name="keywords" content="keyword1, keyword2" />');
-        $this->assertEquals('', (new TemplateView($context))->render());
+        self::assertEquals('', (new TemplateView($context))->render());
 
         $metaTag = $this->pageRenderer->getMetaTag('name', 'keywords');
         self::assertEquals('keyword1, keyword2', $metaTag['content']);
@@ -66,7 +66,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:metaTag property="og:title" content="The og:title" />');
-        $this->assertEquals('', (new TemplateView($context))->render());
+        self::assertEquals('', (new TemplateView($context))->render());
 
         $metaTag = $this->pageRenderer->getMetaTag('property', 'og:title');
         self::assertEquals('The og:title', $metaTag['content']);

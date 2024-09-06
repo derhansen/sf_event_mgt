@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Utility;
 
+use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use DERHANSEN\SfEventMgt\Utility\ArrayUtility;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ArrayUtilityTest extends UnitTestCase

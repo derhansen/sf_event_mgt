@@ -11,9 +11,9 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
+use DERHANSEN\SfEventMgt\Service\EmailService;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use DERHANSEN\SfEventMgt\Service\EmailService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class EmailServiceTest extends UnitTestCase

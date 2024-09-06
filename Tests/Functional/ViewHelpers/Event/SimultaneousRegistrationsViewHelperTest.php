@@ -144,6 +144,6 @@ class SimultaneousRegistrationsViewHelperTest extends FunctionalTestCase
         $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
         $context->getTemplatePaths()->setTemplateSource('<e:event.simultaneousRegistrations event="{event}" />');
         $context->getVariableProvider()->add('event', $mockEvent);
-        $this->assertEquals($expected, (new TemplateView($context))->render());
+        self::assertEquals($expected, (new TemplateView($context))->render());
     }
 }
