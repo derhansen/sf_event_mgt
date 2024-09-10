@@ -23,10 +23,12 @@ use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\EventDispatcher\EventDispatcherInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
@@ -68,6 +70,11 @@ class RegistrationService
     {
         $this->registrationRepository = $registrationRepository;
     }
+
+    /**
+     * @todo Use CPP for all other dependencies too
+     */
+    public function __construct(protected readonly Context $context) {}
 
     /**
      * Duplicates the given registration (all public accessible properties) the
@@ -235,9 +242,10 @@ class RegistrationService
     {
         $user = null;
 
-        if (isset($GLOBALS['TSFE']->fe_user->user['uid'])) {
+        $userUid = $this->context->getPropertyFromAspect('frontend.user', 'id');
+        if ($userUid > 0) {
             /** @var FrontendUser $user */
-            $user = $this->frontendUserRepository->findByUid($GLOBALS['TSFE']->fe_user->user['uid']);
+            $user = $this->frontendUserRepository->findByUid($userUid);
         }
 
         return $user;

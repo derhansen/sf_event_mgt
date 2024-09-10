@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Controller;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
@@ -21,6 +22,11 @@ use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 class UserRegistrationController extends AbstractController
 {
+    public function __construct(
+        protected readonly Context $context,
+    ) {
+    }
+
     /**
      * Shows a list of all registration of the current frontend user
      */
@@ -51,19 +57,17 @@ class UserRegistrationController extends AbstractController
      */
     public function checkRegistrationAccess(Registration $registration): void
     {
-        if (!$this->getFrontendUser()->user ||
+        $isLoggedIn = $this->context->getPropertyFromAspect('frontend.user', 'isLoggedIn');
+        $userUid = $this->context->getPropertyFromAspect('frontend.user', 'id');
+
+        if (!$isLoggedIn ||
             !$registration->getFeUser() ||
-            $this->getFrontendUser()->user['uid'] !== (int)$registration->getFeUser()->getUid()) {
+            $userUid !== (int)$registration->getFeUser()->getUid()) {
             $response = GeneralUtility::makeInstance(ErrorController::class)->pageNotFoundAction(
                 $this->request,
                 'Registration not found.'
             );
             throw new PropagateResponseException($response, 1671627320);
         }
-    }
-
-    protected function getFrontendUser(): FrontendUserAuthentication
-    {
-        return $this->getTypoScriptFrontendController()->fe_user;
     }
 }
