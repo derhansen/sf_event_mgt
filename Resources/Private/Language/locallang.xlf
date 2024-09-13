@@ -177,6 +177,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.no">
 				<source>No</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.captcha">
+				<source>Captcha</source>
+			</trans-unit>
 			<trans-unit id="event.registration">
 				<source>Registration</source>
 			</trans-unit>

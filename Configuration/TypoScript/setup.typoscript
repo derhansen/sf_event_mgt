@@ -113,6 +113,7 @@ plugin.tx_sfeventmgt {
                     publicKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.hCaptcha.publicKey}
                     privateKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.hCaptcha.privateKey}
                 }
+                bwCaptcha < plugin.tx_bwcaptcha.settings
             }
         }
         waitlist {

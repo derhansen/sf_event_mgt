@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
+use TYPO3\CMS\Extbase\Validation\Validator\ConjunctionValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
@@ -144,22 +145,26 @@ class RegistrationValidator extends AbstractValidator
     /**
      * Returns a validator object depending on the given type of the property
      */
-    protected function getValidator(string $type, string $field): AbstractValidator
+    protected function getValidator(string $type, string $field): AbstractValidator|ConjunctionValidator
     {
-        switch ($type) {
-            case 'boolean':
-                $validator = new BooleanValidator();
-                $validator->setOptions(['is' => true]);
-                break;
-            default:
-                if ($field === 'captcha') {
-                    $validator = new CaptchaValidator();
-                } else {
-                    $validator = new NotEmptyValidator();
-                }
+        if ($type === 'boolean') {
+            $validator = new BooleanValidator();
+            $validator->setOptions(['is' => true]);
+            return $validator;
         }
 
-        return $validator;
+        if ($field === 'captcha' &&  $this->settings['registration']['captcha']['type'] === 'bwCaptcha') {
+            $validator = new ConjunctionValidator();
+            $validator->addValidator(new NotEmptyValidator());
+            $validator->addValidator(new \Blueways\BwCaptcha\Validation\Validator\CaptchaValidator());
+            return $validator;
+        }
+
+        if ($field === 'captcha') {
+            return new CaptchaValidator();
+        }
+
+        return new NotEmptyValidator();
     }
 
     protected function getRequest(): ServerRequestInterface
