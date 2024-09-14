@@ -78,3 +78,7 @@ Registration Service
 Export Service
 --------------
 * :php:`ModifyDownloadRegistrationCsvEvent`
+
+Registration Validator
+----------------------
+* :php:`ModifyRegistrationValidatorResultEvent`
