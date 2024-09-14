@@ -12,8 +12,10 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Event\ModifyRegistrationValidatorResultEvent;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -28,11 +30,14 @@ use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 class RegistrationValidator extends AbstractValidator
 {
     protected ConfigurationManagerInterface $configurationManager;
+    protected EventDispatcherInterface $eventDispatcher;
     protected array $settings;
 
     public function __construct()
     {
+        // @todo Use CPP in sf_event_mgt v8 (breaking change)
         $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+        $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
 
         $this->settings = $this->configurationManager->getConfiguration(
             ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
@@ -60,15 +65,7 @@ class RegistrationValidator extends AbstractValidator
 
         $this->validateDefaultFields($value);
 
-        // If no required fields are set, then the registration is valid
-        if (!isset($this->settings['registration']['requiredFields']) ||
-            $this->settings['registration']['requiredFields'] === ''
-        ) {
-            return;
-        }
-
-        $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields']));
-
+        $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields'] ?? ''));
         foreach ($requiredFields as $requiredField) {
             if ($requiredField !== '' && $value->_hasProperty($requiredField)) {
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
@@ -80,6 +77,13 @@ class RegistrationValidator extends AbstractValidator
                 }
             }
         }
+
+        $event = new ModifyRegistrationValidatorResultEvent(
+            $value,
+            $this->settings,
+            $this->result
+        );
+        $this->eventDispatcher->dispatch($event);
     }
 
     /**
