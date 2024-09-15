@@ -30,8 +30,8 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
-use TYPO3\CMS\Core\Imaging\Icon;
 use TYPO3\CMS\Core\Imaging\IconFactory;
+use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
@@ -135,7 +135,7 @@ class AdministrationController extends AbstractController
             ];
             foreach ($buttons as $tableConfiguration) {
                 $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
-                $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], Icon::SIZE_SMALL);
+                $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], IconSize::SMALL);
                 $viewButton = $buttonBar->makeLinkButton()
                     ->setHref($tableConfiguration['link'])
                     ->setDataAttributes([
