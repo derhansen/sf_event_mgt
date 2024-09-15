@@ -144,11 +144,11 @@ module.tx_sfeventmgt {
             # cat=module.tx_sfeventmgt/csv; type=string; label=Comma seperated list of fields to include in CSV export (e.g. firstname or event.title)
             fields = event.uid, event.title, event.location.title, event.startdate, event.enddate, uid, confirmed, waitlist, registrationDate, gender, firstname, lastname, title, company, email, address, zip, city, country, notes, registration_fields
             # cat=module.tx_sfeventmgt/csv; type=string; label=Comma seperated list delimiter
-            fieldDelimiter = ,
+            fieldDelimiter = ;
             # cat=module.tx_sfeventmgt/csv; type=string; label=Comma seperated list quote character
             fieldQuoteCharacter = "
             # cat=module.tx_sfeventmgt/csv; type=boolean; label=Prepend UTF-8 BOM to export
-            prependBOM = 0
+            prependBOM = 1
             # cat=module.tx_sfeventmgt/csv; type=string; label=Date format for date/datetime fields
             dateFieldFormat = d.m.Y
         }
