@@ -24,10 +24,10 @@ class EventAvailability
     /**
      * Checks if an event record is available the given language id
      */
-    public function check(int $languageId, int $eventId): bool
+    public function check(int $languageId, int $eventId, ServerRequestInterface $request): bool
     {
         /** @var Site $site */
-        $site = $this->getRequest()->getAttribute('site');
+        $site = $request->getAttribute('site');
         $allAvailableLanguagesOfSite = $site->getAllLanguages();
 
         $targetLanguage = $this->getLanguageFromAllLanguages($allAvailableLanguagesOfSite, $languageId);
@@ -46,8 +46,6 @@ class EventAvailability
 
     /**
      * @param SiteLanguage[] $allLanguages
-     * @param int $languageId
-     * @return SiteLanguage|null
      */
     protected function getLanguageFromAllLanguages(array $allLanguages, int $languageId): ?SiteLanguage
     {
@@ -126,10 +124,5 @@ class EventAvailability
            ->fetchOne();
 
         return $eventsFound > 0;
-    }
-
-    protected function getRequest(): ServerRequestInterface
-    {
-        return $GLOBALS['TYPO3_REQUEST'];
     }
 }

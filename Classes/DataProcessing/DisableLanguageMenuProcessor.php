@@ -36,7 +36,8 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
             return $processedData;
         }
 
-        $eventId = $this->getEventId($cObj->getRequest());
+        $request = $cObj->getRequest();
+        $eventId = $this->getEventId($request);
         if ($eventId === 0) {
             return $processedData;
         }
@@ -44,22 +45,23 @@ class DisableLanguageMenuProcessor implements DataProcessorInterface
         $menus = GeneralUtility::trimExplode(',', $processorConfiguration['menus'], true);
         foreach ($menus as $menu) {
             if (isset($processedData[$menu])) {
-                $this->handleMenu($eventId, $processedData[$menu]);
+                $this->handleMenu($request, $eventId, $processedData[$menu]);
             }
         }
 
         return $processedData;
     }
 
-    protected function handleMenu(int $eventId, array &$menu): void
+    protected function handleMenu(ServerRequestInterface $request, int $eventId, array &$menu): void
     {
+        /** @var EventAvailability $eventAvailability */
         $eventAvailability = GeneralUtility::makeInstance(EventAvailability::class);
         foreach ($menu as &$item) {
             if (!$item['available']) {
                 continue;
             }
             try {
-                $availability = $eventAvailability->check((int)$item['languageId'], $eventId);
+                $availability = $eventAvailability->check((int)$item['languageId'], $eventId, $request);
                 if (!$availability) {
                     $item['available'] = false;
                     $item['availableReason'] = 'sf_event_mgt';
