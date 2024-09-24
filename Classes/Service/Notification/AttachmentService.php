@@ -20,16 +20,10 @@ use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-/**
- * AttachmentService
- */
 class AttachmentService
 {
-    protected ICalendarService $iCalendarService;
-
-    public function injectICalService(ICalendarService $iCalService): void
+    public function __construct(protected readonly ICalendarService $iCalendarService)
     {
-        $this->iCalendarService = $iCalService;
     }
 
     /**
@@ -207,9 +201,9 @@ class AttachmentService
         $property = $object->_getProperty($propertyName);
 
         if ($property instanceof ObjectStorage) {
-            foreach ($property as $object) {
-                if ($object instanceof FileReference) {
-                    $attachments[] = $object->getOriginalResource()->getForLocalProcessing(false);
+            foreach ($property as $fileRefetrenceObject) {
+                if ($fileRefetrenceObject instanceof FileReference) {
+                    $attachments[] = $fileRefetrenceObject->getOriginalResource()->getForLocalProcessing(false);
                 }
             }
         }
