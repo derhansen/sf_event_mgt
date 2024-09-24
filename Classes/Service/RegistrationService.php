@@ -20,61 +20,30 @@ use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationMovedFromWaitlist;
 use DERHANSEN\SfEventMgt\Event\ModifyCheckRegistrationSuccessEvent;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
+use DERHANSEN\SfEventMgt\Security\HashScope;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 class RegistrationService
 {
-    protected EventDispatcherInterface $eventDispatcher;
-    protected RegistrationRepository $registrationRepository;
-    protected FrontendUserRepository $frontendUserRepository;
-    protected HashService $hashService;
-    protected PaymentService $paymentService;
-    protected NotificationService $notificationService;
-
-    public function injectFrontendUserRepository(FrontendUserRepository $frontendUserRepository): void
-    {
-        $this->frontendUserRepository = $frontendUserRepository;
+    public function __construct(
+        protected readonly Context $context,
+        protected readonly EventDispatcherInterface $eventDispatcher,
+        protected readonly RegistrationRepository $registrationRepository,
+        protected readonly FrontendUserRepository $frontendUserRepository,
+        protected readonly HashService $hashService,
+        protected readonly PaymentService $paymentService,
+        protected readonly NotificationService $notificationService,
+    ) {
     }
-
-    public function injectHashService(HashService $hashService): void
-    {
-        $this->hashService = $hashService;
-    }
-
-    public function injectNotificationService(NotificationService $notificationService): void
-    {
-        $this->notificationService = $notificationService;
-    }
-
-    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
-    {
-        $this->eventDispatcher = $eventDispatcher;
-    }
-
-    public function injectPaymentService(PaymentService $paymentService): void
-    {
-        $this->paymentService = $paymentService;
-    }
-
-    public function injectRegistrationRepository(RegistrationRepository $registrationRepository): void
-    {
-        $this->registrationRepository = $registrationRepository;
-    }
-
-    /**
-     * @todo Use CPP for all other dependencies too
-     */
-    public function __construct(protected readonly Context $context) {}
 
     /**
      * Duplicates the given registration (all public accessible properties) the
@@ -120,7 +89,8 @@ class RegistrationService
         $messageKey = 'event.message.confirmation_successful';
         $titleKey = 'confirmRegistration.title.successful';
 
-        if (!$this->hashService->validateHmac('reg-' . $regUid, $hmac)) {
+        $isValidHmac = $this->hashService->validateHmac('reg-' . $regUid, HashScope::RegistrationUid->value, $hmac);
+        if (!$isValidHmac) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_wrong_hmac';
             $titleKey = 'confirmRegistration.title.failed';
@@ -187,7 +157,8 @@ class RegistrationService
         $messageKey = 'event.message.cancel_successful';
         $titleKey = 'cancelRegistration.title.successful';
 
-        if (!$this->hashService->validateHmac('reg-' . $regUid, $hmac)) {
+        $isValidHmac = $this->hashService->validateHmac('reg-' . $regUid, HashScope::RegistrationUid->value, $hmac);
+        if (!$isValidHmac) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_wrong_hmac';
             $titleKey = 'cancelRegistration.title.failed';

@@ -35,6 +35,7 @@ use DERHANSEN\SfEventMgt\Event\ProcessCancelDependingRegistrationsEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessRedirectToPaymentEvent;
 use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Exception;
+use DERHANSEN\SfEventMgt\Security\HashScope;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
@@ -584,7 +585,10 @@ class EventController extends AbstractController
                 null,
                 [
                     'reguid' => $registration->getUid(),
-                    'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
+                    'hmac' => $this->hashService->hmac(
+                        'reg-' . $registration->getUid(),
+                        HashScope::RegistrationUid->value
+                    ),
                 ]
             );
         }
@@ -597,7 +601,10 @@ class EventController extends AbstractController
                 'result' => $result,
                 'eventuid' => $event->getUid(),
                 'reguid' => $registrationUid,
-                'hmac' => $this->hashService->generateHmac('event-' . $event->getUid() . '-reg-' . $registrationUid),
+                'hmac' => $this->hashService->hmac(
+                    'event-' . $event->getUid() . '-reg-' . $registrationUid,
+                    HashScope::SaveRegistrationResult->value
+                ),
             ]
         );
     }
@@ -661,7 +668,12 @@ class EventController extends AbstractController
                 $titleKey = '';
         }
 
-        if (!$this->hashService->validateHmac('event-' . $eventuid . '-reg-' . $reguid, $hmac)) {
+        $isValidHmac = $this->hashService->validateHmac(
+            'event-' . $eventuid . '-reg-' . $reguid,
+            HashScope::SaveRegistrationResult->value,
+            $hmac
+        );
+        if (!$isValidHmac) {
             $messageKey = 'event.message.registrationsuccessfulwrongeventhmac';
             $titleKey = 'registrationResult.title.failed';
         } else {
@@ -804,7 +816,10 @@ class EventController extends AbstractController
                 'redirect',
                 [
                     'registration' => $registration,
-                    'hmac' => $this->hashService->generateHmac('redirectAction-' . $registration->getUid()),
+                    'hmac' => $this->hashService->hmac(
+                        'redirectAction-' . $registration->getUid(),
+                        HashScope::PaymentAction->value
+                    ),
                 ],
                 'Payment',
                 'sfeventmgt',

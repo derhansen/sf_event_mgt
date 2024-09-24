@@ -22,60 +22,28 @@ use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyCustomNotificationLogEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
+use DERHANSEN\SfEventMgt\Security\HashScope;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
+use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
 
 class NotificationService
 {
-    protected RegistrationRepository $registrationRepository;
-    protected EmailService $emailService;
-    protected HashService $hashService;
-    protected FluidStandaloneService $fluidStandaloneService;
-    protected CustomNotificationLogRepository $customNotificationLogRepository;
-    protected AttachmentService $attachmentService;
-    protected EventDispatcherInterface $eventDispatcher;
-
-    public function injectAttachmentService(AttachmentService $attachmentService): void
-    {
-        $this->attachmentService = $attachmentService;
-    }
-
-    public function injectCustomNotificationLogRepository(
-        CustomNotificationLogRepository $customNotificationLogRepository
-    ): void {
-        $this->customNotificationLogRepository = $customNotificationLogRepository;
-    }
-
-    public function injectEmailService(EmailService $emailService): void
-    {
-        $this->emailService = $emailService;
-    }
-
-    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService): void
-    {
-        $this->fluidStandaloneService = $fluidStandaloneService;
-    }
-
-    public function injectHashService(HashService $hashService): void
-    {
-        $this->hashService = $hashService;
-    }
-
-    public function injectRegistrationRepository(RegistrationRepository $registrationRepository): void
-    {
-        $this->registrationRepository = $registrationRepository;
-    }
-
-    public function injectEventDispatcher(EventDispatcherInterface $eventDispatcher): void
-    {
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(
+        protected readonly RegistrationRepository $registrationRepository,
+        protected readonly EmailService $emailService,
+        protected readonly HashService $hashService,
+        protected readonly FluidStandaloneService $fluidStandaloneService,
+        protected readonly CustomNotificationLogRepository $customNotificationLogRepository,
+        protected readonly AttachmentService $attachmentService,
+        protected readonly EventDispatcherInterface $eventDispatcher
+    ) {
     }
 
     /**
@@ -458,8 +426,8 @@ class NotificationService
             'event' => $event,
             'registration' => $registration,
             'settings' => $settings,
-            'hmac' => $this->hashService->generateHmac('reg-' . $registration->getUid()),
-            'reghmac' => $this->hashService->appendHmac((string)$registration->getUid()),
+            'hmac' => $this->hashService->hmac('reg-' . $registration->getUid(), HashScope::RegistrationUid->value),
+            'reghmac' => $this->hashService->appendHmac((string)$registration->getUid(), HashScope::RegistrationHmac->value),
             'confirmAction' => $this->getTargetLinkAction('confirmAction', $settings),
             'cancelAction' => $this->getTargetLinkAction('cancelAction', $settings),
         ];

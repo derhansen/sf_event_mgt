@@ -12,7 +12,8 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use TYPO3\CMS\Extbase\Security\Cryptography\HashService;
+use DERHANSEN\SfEventMgt\Security\HashScope;
+use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -42,7 +43,7 @@ class HmacViewHelper extends AbstractViewHelper
         $registration = $this->arguments['registration'];
         $result = '';
         if (is_a($registration, Registration::class)) {
-            $result = $this->hashService->generateHmac('reg-' . $registration->getUid());
+            $result = $this->hashService->hmac('reg-' . $registration->getUid(), HashScope::RegistrationUid->value);
         }
 
         return $result;

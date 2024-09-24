@@ -21,6 +21,7 @@ use DERHANSEN\SfEventMgt\Event\ProcessPaymentNotifyEvent;
 use DERHANSEN\SfEventMgt\Event\ProcessPaymentSuccessEvent;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Payment\Exception\PaymentException;
+use DERHANSEN\SfEventMgt\Security\HashScope;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Security\Exception\InvalidHashException;
@@ -318,8 +319,12 @@ class PaymentController extends AbstractController
      */
     protected function validateHmacForAction(Registration $registration, string $hmac, string $action): void
     {
-        $result = $this->hashService->validateHmac($action . '-' . $registration->getUid(), $hmac);
-        if (!$result) {
+        $isValidHmac = $this->hashService->validateHmac(
+            $action . '-' . $registration->getUid(),
+            HashScope::PaymentAction->value,
+            $hmac
+        );
+        if (!$isValidHmac) {
             $message = LocalizationUtility::translate('payment.messages.invalidHmac', 'SfEventMgt');
             throw new InvalidHashException($message, 1899934890);
         }
@@ -337,7 +342,10 @@ class PaymentController extends AbstractController
             $action,
             [
                 'registration' => $registration,
-                'hmac' => $this->hashService->generateHmac($action . 'Action-' . $registration->getUid()),
+                'hmac' => $this->hashService->hmac(
+                    $action . 'Action-' . $registration->getUid(),
+                    HashScope::PaymentAction->value
+                ),
             ],
             'Payment',
             'sfeventmgt',

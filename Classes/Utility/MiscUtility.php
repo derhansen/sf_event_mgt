@@ -11,12 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Utility;
 
+use DERHANSEN\SfEventMgt\Security\HashScope;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class MiscUtility
- */
 class MiscUtility
 {
     /**
@@ -26,7 +24,7 @@ class MiscUtility
     {
         /** @var HashService $hashService */
         $hashService = GeneralUtility::makeInstance(HashService::class);
-        $hmac = $hashService->hmac('event-' . $eventUid, 'sf_event_mgt');
+        $hmac = $hashService->hmac('event-' . $eventUid, HashScope::SpamCheckChallenge->value);
         $chars = preg_replace('/[0-9]+/', '', $hmac);
 
         return preg_replace_callback('/\w.?/', static function ($m) {
