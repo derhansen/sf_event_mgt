@@ -30,6 +30,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 class RegistrationService
@@ -333,7 +334,7 @@ class RegistrationService
     /**
      * Handles the process of moving registration up from the waitlist.
      */
-    public function moveUpWaitlistRegistrations(Event $event, array $settings): void
+    public function moveUpWaitlistRegistrations(RequestInterface $request, Event $event, array $settings): void
     {
         // Early return if move up not enabled, no registrations on waitlist or no free places left
         if (!$event->getEnableWaitlistMoveup() || $event->getRegistrationsWaitlist()->count() === 0 ||
@@ -359,12 +360,14 @@ class RegistrationService
 
             // Send messages to user and admin
             $this->notificationService->sendUserMessage(
+                $request,
                 $event,
                 $registration,
                 $settings,
                 MessageType::REGISTRATION_WAITLIST_MOVE_UP
             );
             $this->notificationService->sendAdminMessage(
+                $request,
                 $registration->getEvent(),
                 $registration,
                 $settings,

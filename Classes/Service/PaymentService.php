@@ -99,6 +99,10 @@ class PaymentService
     {
         $result = false;
         $paymentInstance = $this->getPaymentInstance($paymentMethod);
+        if (!$paymentInstance) {
+            return false;
+        }
+
         switch ($action) {
             case 'redirectAction':
                 $result = $paymentInstance->isRedirectEnabled();

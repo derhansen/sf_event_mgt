@@ -13,22 +13,18 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 class ICalendarService
 {
-    protected FluidStandaloneService $fluidStandaloneService;
-
-    public function injectFluidStandaloneService(FluidStandaloneService $fluidStandaloneService): void
-    {
-        $this->fluidStandaloneService = $fluidStandaloneService;
-    }
+    public function __construct(protected readonly FluidStandaloneService $fluidStandaloneService) {}
 
     /**
      * Initiates the ICS download for the given event
      */
-    public function downloadiCalendarFile(Event $event): void
+    public function downloadiCalendarFile(RequestInterface $request, Event $event): void
     {
-        $content = $this->getICalendarContent($event);
+        $content = $this->getICalendarContent($request, $event);
         header('Content-Disposition: attachment; filename="event' . $event->getUid() . '.ics"');
         header('Content-Type: text/calendar');
         header('Content-Length: ' . strlen($content));
@@ -42,7 +38,7 @@ class ICalendarService
      * Returns the rendered iCalendar entry for the given event
      * according to RFC 2445
      */
-    public function getiCalendarContent(Event $event): string
+    public function getiCalendarContent(RequestInterface $request, Event $event): string
     {
         $variables = [
             'event' => $event,
@@ -50,6 +46,7 @@ class ICalendarService
         ];
 
         $icalContent = $this->fluidStandaloneService->renderTemplate(
+            $request,
             'Event/ICalendar.txt',
             $variables,
             'SfEventMgt',

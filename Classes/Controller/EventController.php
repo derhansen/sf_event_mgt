@@ -330,7 +330,7 @@ class EventController extends AbstractController
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
-        $this->icalendarService->downloadiCalendarFile($event);
+        $this->icalendarService->downloadiCalendarFile($this->request, $event);
         exit();
     }
 
@@ -549,12 +549,14 @@ class EventController extends AbstractController
             // Send notifications to user and admin if confirmation link should be sent
             if (!$autoConfirmation) {
                 $this->notificationService->sendUserMessage(
+                    $this->request,
                     $event,
                     $registration,
                     $this->settings,
                     $messageType
                 );
                 $this->notificationService->sendAdminMessage(
+                    $this->request,
                     $event,
                     $registration,
                     $this->settings,
@@ -748,12 +750,14 @@ class EventController extends AbstractController
 
             // Send notifications to user and admin
             $this->notificationService->sendUserMessage(
+                $this->request,
                 $registration->getEvent(),
                 $registration,
                 $this->settings,
                 $messageType
             );
             $this->notificationService->sendAdminMessage(
+                $this->request,
                 $registration->getEvent(),
                 $registration,
                 $this->settings,
@@ -877,12 +881,14 @@ class EventController extends AbstractController
 
             // Send notifications (must run before cancelling the registration)
             $this->notificationService->sendUserMessage(
+                $this->request,
                 $registration->getEvent(),
                 $registration,
                 $this->settings,
                 MessageType::REGISTRATION_CANCELLED
             );
             $this->notificationService->sendAdminMessage(
+                $this->request,
                 $registration->getEvent(),
                 $registration,
                 $this->settings,
@@ -914,7 +920,7 @@ class EventController extends AbstractController
 
             // Move up waitlist registrations if configured on event basis and if not disabled by $waitlistMoveUpEvent
             if ($waitlistMoveUpEvent->getProcessDefaultMoveUp()) {
-                $this->registrationService->moveUpWaitlistRegistrations($event, $this->settings);
+                $this->registrationService->moveUpWaitlistRegistrations($this->request, $event, $this->settings);
             }
 
             // Flush page cache for event, since amount of registrations has changed

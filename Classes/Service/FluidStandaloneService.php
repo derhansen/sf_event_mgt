@@ -16,6 +16,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class FluidStandaloneService
@@ -73,6 +74,7 @@ class FluidStandaloneService
      * Renders a fluid standalone view for the given template
      */
     public function renderTemplate(
+        RequestInterface $request,
         string $template,
         array $variables,
         string $extensionName = 'SfEventMgt',
@@ -85,11 +87,7 @@ class FluidStandaloneService
         $extbaseRequestParams->setControllerExtensionName($extensionName);
         $extbaseRequestParams->setPluginName($pluginName);
 
-        /** @var ServerRequest $serverRequest */
-        $serverRequest = $GLOBALS['TYPO3_REQUEST'];
-
-        $extbaseRequest = GeneralUtility::makeInstance(Request::class, $serverRequest->withAttribute('extbase', $extbaseRequestParams));
-        $emailView->setRequest($extbaseRequest);
+        $emailView->setRequest($request);
 
         $emailView->setFormat($format);
         $emailView->setTemplateRootPaths($this->getTemplateFolders());
@@ -106,19 +104,16 @@ class FluidStandaloneService
      *
      * Note, the result of this function must never be used as raw/direct output in HTML/frontend context.
      */
-    public function parseStringFluid(string $string, array $variables = []): string
+    public function parseStringFluid(RequestInterface $request, string $string, array $variables = []): string
     {
         if ($string === '') {
             return '';
         }
 
-        /** @var ServerRequest $serverRequest */
-        $serverRequest = $GLOBALS['TYPO3_REQUEST'];
-
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
-        $standaloneView->setRequest($serverRequest);
+        $standaloneView->setRequest($request);
         $result = $standaloneView->render() ?? '';
 
         return html_entity_decode($result);

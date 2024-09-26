@@ -411,7 +411,12 @@ class AdministrationController extends AbstractController
         }
 
         $customNotifications = $this->settingsService->getCustomNotifications($this->settings);
-        $result = $this->notificationService->sendCustomNotification($event, $customNotification, $this->settings);
+        $result = $this->notificationService->sendCustomNotification(
+            $this->request,
+            $event,
+            $customNotification,
+            $this->settings
+        );
         $this->notificationService->createCustomNotificationLogentry(
             $event,
             $customNotifications[$customNotification->getTemplate()],

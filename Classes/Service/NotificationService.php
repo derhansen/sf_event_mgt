@@ -27,11 +27,11 @@ use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
-use Psr\Http\Message\ServerRequestInterface;
 use RuntimeException;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 class NotificationService
 {
@@ -51,6 +51,7 @@ class NotificationService
      * to users of the event. Returns the number of notifications sent.
      */
     public function sendCustomNotification(
+        RequestInterface $request, // @todo: This is a backend Request!
         Event $event,
         CustomNotification $customNotification,
         array $settings = []
@@ -71,6 +72,7 @@ class NotificationService
         foreach ($registrations as $registration) {
             /** @var Registration $registration */
             $result = $this->sendUserMessage(
+                $request,
                 $event,
                 $registration,
                 $settings,
@@ -78,7 +80,7 @@ class NotificationService
                 $customNotification
             );
             if ($result) {
-                $count += 1;
+                ++$count;
             }
         }
 
@@ -109,7 +111,7 @@ class NotificationService
         $notificationlogEntry->setEvent($event);
         $notificationlogEntry->setDetails($details);
         $notificationlogEntry->setEmailsSent($emailsSent);
-        $notificationlogEntry->setCruserId($GLOBALS['BE_USER']->user['uid'] ?? 0);
+        $notificationlogEntry->setCruserId($GLOBALS['BE_USER']->user['uid'] ?? 0); // @todo Use User Aspect
 
         $modifyCustomNotificationLogEntry = new ModifyCustomNotificationLogEvent(
             $notificationlogEntry,
@@ -127,6 +129,7 @@ class NotificationService
      * Sends a message to the user based on the given type
      */
     public function sendUserMessage(
+        RequestInterface $request,
         Event $event,
         Registration $registration,
         array $settings,
@@ -148,8 +151,9 @@ class NotificationService
         ];
 
         if (!$registration->isIgnoreNotifications()) {
-            $body = $this->getNotificationBody($event, $registration, $template, $settings, $additionalBodyVariables);
+            $body = $this->getNotificationBody($request, $event, $registration, $template, $settings, $additionalBodyVariables);
             $subject = $this->fluidStandaloneService->parseStringFluid(
+                $request,
                 $subject,
                 [
                     'event' => $event,
@@ -299,8 +303,13 @@ class NotificationService
     /**
      * Sends a message to the admin based on the given type. Returns true, if the message was sent, otherwise false
      */
-    public function sendAdminMessage(Event $event, Registration $registration, array $settings, int $type): bool
-    {
+    public function sendAdminMessage(
+        RequestInterface $request,
+        Event $event,
+        Registration $registration,
+        array $settings,
+        int $type
+    ): bool {
         [$template, $subject] = $this->getAdminMessageTemplateSubject($settings, $type);
 
         if ((bool)($settings['notification']['disabled'] ?? false) ||
@@ -310,8 +319,9 @@ class NotificationService
         }
 
         $allEmailsSent = true;
-        $body = $this->getNotificationBody($event, $registration, $template, $settings);
+        $body = $this->getNotificationBody($request, $event, $registration, $template, $settings);
         $subject = $this->fluidStandaloneService->parseStringFluid(
+            $request,
             $subject,
             [
                 'event' => $event,
@@ -409,14 +419,14 @@ class NotificationService
      * Returns the rendered HTML for the given template
      */
     protected function getNotificationBody(
+        RequestInterface $request,
         Event $event,
         Registration $registration,
         string $template,
         array $settings,
         array $additionalBodyVariables = []
     ): string {
-        $isBackendRequest = ($GLOBALS['TYPO3_REQUEST'] ?? null) instanceof ServerRequestInterface
-            && ApplicationType::fromRequest($GLOBALS['TYPO3_REQUEST'])->isBackend();
+        $isBackendRequest = ApplicationType::fromRequest($request)->isBackend();
 
         if ($isBackendRequest && $registration->getLanguage() !== '') {
             // Temporary set Language of current BE user to given language
@@ -433,7 +443,7 @@ class NotificationService
         ];
         $variables = array_merge($additionalBodyVariables, $defaultVariables);
 
-        return $this->fluidStandaloneService->renderTemplate($template, $variables);
+        return $this->fluidStandaloneService->renderTemplate($request, $template, $variables);
     }
 
     private function getTargetLinkAction(string $action, array $settings): string
