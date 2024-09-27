@@ -16,6 +16,9 @@ use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
+use TYPO3\CMS\Extbase\Mvc\Request;
+use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class FluidStandaloneServiceTest extends FunctionalTestCase
@@ -24,7 +27,6 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
 
     public function setUp(): void
     {
-        $GLOBALS['TYPO3_REQUEST'] = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         parent::setUp();
     }
 
@@ -36,7 +38,10 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
         $expected = 'This is a subject line with a variable';
         $fluidString = 'This is a subject line with a {variable}';
 
-        self::assertEquals($expected, $subject->parseStringFluid($fluidString, ['variable' => 'variable']));
+        self::assertEquals(
+            $expected,
+            $subject->parseStringFluid($this->getExtbaseRequest(), $fluidString, ['variable' => 'variable'])
+        );
     }
 
     #[Test]
@@ -52,6 +57,18 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
         $registration->setLastname('Hansen');
         $registration->setEmail('torben@derhansen.com');
 
-        self::assertEquals($expected, $subject->parseStringFluid($fluidString, ['registration' => $registration]));
+        self::assertEquals(
+            $expected,
+            $subject->parseStringFluid($this->getExtbaseRequest(), $fluidString, ['registration' => $registration])
+        );
+    }
+
+    protected function getExtbaseRequest(): RequestInterface
+    {
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        return new Request($serverRequest);
     }
 }

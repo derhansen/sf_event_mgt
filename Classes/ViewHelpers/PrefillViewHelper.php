@@ -46,6 +46,6 @@ class PrefillViewHelper extends AbstractPrefillViewHelper
             return '';
         }
 
-        return (string)($frontendUser->user[$prefillSettings[$fieldname]]);
+        return (string)($frontendUser->user[$prefillSettings[$fieldname]] ?? '');
     }
 }

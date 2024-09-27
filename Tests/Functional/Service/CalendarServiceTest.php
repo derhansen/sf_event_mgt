@@ -17,6 +17,8 @@ use DERHANSEN\SfEventMgt\Service\CalendarService;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\TypoScript\AST\Node\RootNode;
+use TYPO3\CMS\Core\TypoScript\FrontendTypoScript;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
@@ -32,8 +34,15 @@ class CalendarServiceTest extends FunctionalTestCase
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/events_calendarservice.csv');
 
         $this->eventRepository = $this->getContainer()->get(EventRepository::class);
-        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
-        $this->get(ConfigurationManagerInterface::class)->setRequest($request);
+
+        $frontendTypoScript = new FrontendTypoScript(new RootNode(), [], [], []);
+        $frontendTypoScript->setSetupTree(new RootNode());
+        $frontendTypoScript->setSetupArray([]);
+
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('frontend.typoscript', $frontendTypoScript)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $this->get(ConfigurationManagerInterface::class)->setRequest($serverRequest);
     }
 
     /**
