@@ -297,12 +297,6 @@ return [
                 'default' => 0,
             ],
         ],
-        'event' => [
-            'config' => [
-                'type' => 'passthrough',
-                'foreign_table' => 'tx_sfeventmgt_domain_model_event',
-            ],
-        ],
         'amount_of_registrations' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.amountOfRegistrations',
@@ -365,6 +359,20 @@ return [
                     'default' => [
                         'additionalSearchFields' => 'name, first_name, last_name',
                     ],
+                ],
+            ],
+        ],
+        'event' => [
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'tx_sfeventmgt_domain_model_location',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_event',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
+                'default' => 0,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
                 ],
             ],
         ],
