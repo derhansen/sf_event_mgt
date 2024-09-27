@@ -31,26 +31,6 @@ parameters:
 			path: ../../Classes/Service/NotificationService.php
 
 		-
-			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
-			count: 1
-			path: ../../Classes/ViewHelpers/PrefillViewHelper.php
-
-		-
-			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
-			count: 1
-			path: ../../Classes/ViewHelpers/Registration/Field/PrefillFieldViewHelper.php
-
-		-
-			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
-			count: 1
-			path: ../../Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
-
-		-
-			message: "#^Call to an undefined method TYPO3Fluid\\\\Fluid\\\\Core\\\\Rendering\\\\RenderingContextInterface\\:\\:getRequest\\(\\)\\.$#"
-			count: 1
-			path: ../../Classes/ViewHelpers/Validation/ErrorClassViewHelper.php
-
-		-
 			message: "#^Cannot access offset string on array\\|object\\.$#"
 			count: 1
 			path: ../../Classes/Validation/Validator/CaptchaValidator.php

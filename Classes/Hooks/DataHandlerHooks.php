@@ -153,7 +153,7 @@ class DataHandlerHooks
             }
 
             $flexFormTools = GeneralUtility::makeInstance(FlexFormTools::class);
-            $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData, true);
+            $fieldArray['pi_flexform'] = $flexFormTools->flexArray2Xml($flexformData);
         }
     }
 

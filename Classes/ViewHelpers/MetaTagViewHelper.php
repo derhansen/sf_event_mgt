@@ -44,7 +44,6 @@ class MetaTagViewHelper extends AbstractViewHelper
         // Skip if current record is part of tt_content CType shortcut
         if (!empty($tsfe->recordRegister)
             && !empty($tsfe->currentRecord)
-            && is_array($tsfe->recordRegister)
             && str_contains($tsfe->currentRecord, 'tx_sfeventmgt_domain_model_event:')
             && str_contains(array_keys($tsfe->recordRegister)[0], 'tt_content:')
         ) {

@@ -758,6 +758,9 @@ class Event extends AbstractEntity
         return $this->getAlternativeTitle() !== '' ? $this->getAlternativeTitle() : $this->getTitle();
     }
 
+    /**
+     * @return ObjectStorage<PriceOption>|null
+     */
     public function getPriceOptions(): ?ObjectStorage
     {
         return $this->priceOptions;

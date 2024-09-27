@@ -183,6 +183,10 @@ class PiEventPluginUpdater implements UpgradeWizardInterface
         $flexFormContent = file_get_contents(GeneralUtility::getFileAbsFileName(substr(trim($flexFormFile), 5)));
         $flexFormData = GeneralUtility::xml2array((string)$flexFormContent);
 
+        if (!is_array($flexFormData)) {
+            return [];
+        }
+
         // Iterate each sheet and extract all settings
         $settings = [];
         foreach ($flexFormData['sheets'] as $sheet) {

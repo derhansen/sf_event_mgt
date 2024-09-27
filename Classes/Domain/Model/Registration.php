@@ -377,6 +377,9 @@ class Registration extends AbstractEntity
         $this->waitlist = $waitlist;
     }
 
+    /**
+     * @return ObjectStorage<FieldValue>|null
+     */
     public function getFieldValues(): ?ObjectStorage
     {
         return $this->fieldValues;
