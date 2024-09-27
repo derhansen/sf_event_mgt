@@ -14,7 +14,6 @@ use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
 defined('TYPO3') or die();

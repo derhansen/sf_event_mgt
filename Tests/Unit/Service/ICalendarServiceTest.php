@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
+use DERHANSEN\SfEventMgt\Service\FluidRenderingService;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
@@ -37,7 +37,7 @@ class ICalendarServiceTest extends UnitTestCase
         $_SERVER['HTTP_HOST'] = 'myhostname.tld';
 
         $eventMock = $this->createMock(Event::class);
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->with(
             'Event/ICalendar.txt',

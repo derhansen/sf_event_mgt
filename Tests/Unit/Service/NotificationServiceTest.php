@@ -18,7 +18,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\EmailService;
-use DERHANSEN\SfEventMgt\Service\FluidStandaloneService;
+use DERHANSEN\SfEventMgt\Service\FluidRenderingService;
 use DERHANSEN\SfEventMgt\Service\Notification\AttachmentService;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
@@ -104,10 +104,10 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -142,11 +142,11 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -186,11 +186,11 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -230,11 +230,11 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -302,11 +302,11 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -350,11 +350,11 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)
@@ -397,11 +397,11 @@ class NotificationServiceTest extends UnitTestCase
         $hashService->expects(self::once())->method('appendHmac')->willReturn('HMAC');
         $this->subject->injectHashService($hashService);
 
-        $fluidStandaloneService = $this->getMockBuilder(FluidStandaloneService::class)
+        $fluidStandaloneService = $this->getMockBuilder(FluidRenderingService::class)
             ->disableOriginalConstructor()
             ->getMock();
         $fluidStandaloneService->expects(self::once())->method('renderTemplate')->willReturn('');
-        $fluidStandaloneService->expects(self::once())->method('parseStringFluid')->willReturn('');
+        $fluidStandaloneService->expects(self::once())->method('parseString')->willReturn('');
         $this->subject->injectFluidStandaloneService($fluidStandaloneService);
 
         $eventDispatcher = $this->getMockBuilder(EventDispatcherInterface::class)

@@ -39,7 +39,7 @@ class NotificationService
         protected readonly RegistrationRepository $registrationRepository,
         protected readonly EmailService $emailService,
         protected readonly HashService $hashService,
-        protected readonly FluidStandaloneService $fluidStandaloneService,
+        protected readonly FluidRenderingService $fluidRenderingService,
         protected readonly CustomNotificationLogRepository $customNotificationLogRepository,
         protected readonly AttachmentService $attachmentService,
         protected readonly EventDispatcherInterface $eventDispatcher
@@ -152,7 +152,7 @@ class NotificationService
 
         if (!$registration->isIgnoreNotifications()) {
             $body = $this->getNotificationBody($request, $event, $registration, $template, $settings, $additionalBodyVariables);
-            $subject = $this->fluidStandaloneService->parseStringFluid(
+            $subject = $this->fluidRenderingService->parseString(
                 $request,
                 $subject,
                 [
@@ -321,7 +321,7 @@ class NotificationService
 
         $allEmailsSent = true;
         $body = $this->getNotificationBody($request, $event, $registration, $template, $settings);
-        $subject = $this->fluidStandaloneService->parseStringFluid(
+        $subject = $this->fluidRenderingService->parseString(
             $request,
             $subject,
             [
@@ -444,7 +444,7 @@ class NotificationService
         ];
         $variables = array_merge($additionalBodyVariables, $defaultVariables);
 
-        return $this->fluidStandaloneService->renderTemplate($request, $template, $variables);
+        return $this->fluidRenderingService->renderTemplate($request, $template, $variables);
     }
 
     private function getTargetLinkAction(string $action, array $settings): string

@@ -17,7 +17,7 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 class ICalendarService
 {
-    public function __construct(protected readonly FluidStandaloneService $fluidStandaloneService)
+    public function __construct(protected readonly FluidRenderingService $fluidRenderingService)
     {
     }
 
@@ -47,12 +47,10 @@ class ICalendarService
             'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY'),
         ];
 
-        $icalContent = $this->fluidStandaloneService->renderTemplate(
+        $icalContent = $this->fluidRenderingService->renderTemplate(
             $request,
             'Event/ICalendar.txt',
             $variables,
-            'SfEventMgt',
-            'Pieventdetail',
             'txt'
         );
 
