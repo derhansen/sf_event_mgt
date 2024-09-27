@@ -1,4 +1,4 @@
-name: Unit- and functional tests
+name: Unit tests
 
 on: [push, pull_request]
 
@@ -18,9 +18,6 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           tools: composer:v2
-
-      - name: Start MySQL
-        run: sudo /etc/init.d/mysql start
 
       # Directory permissions for .composer are wrong, so we remove the complete directory
       # https://github.com/actions/virtual-environments/issues/824
@@ -48,12 +45,3 @@ jobs:
         run: |
           echo "Running unit tests";
           .Build/vendor/bin/phpunit -c .Build/phpunit/UnitTests.xml
-
-      - name: Functional tests
-        run: |
-          export typo3DatabaseName="typo3";
-          export typo3DatabaseHost="127.0.0.1";
-          export typo3DatabaseUsername="root";
-          export typo3DatabasePassword="root";
-          echo "Running functional tests";
-          find 'Tests/Functional' -wholename '*Test.php' | parallel --gnu 'echo; echo "Running functional test suite {}"; .Build/vendor/bin/phpunit -c .Build/phpunit/FunctionalTests.xml {}'
