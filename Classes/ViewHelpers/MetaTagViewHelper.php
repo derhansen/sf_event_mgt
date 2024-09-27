@@ -11,21 +11,16 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
-use Closure;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * ViewHelper to render meta tags
  */
 class MetaTagViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     public function initializeArguments(): void
     {
         $this->registerArgument('property', 'string', 'Property of meta tag', false, '', false);
@@ -33,13 +28,9 @@ class MetaTagViewHelper extends AbstractViewHelper
         $this->registerArgument('content', 'string', 'Content of meta tag', true, null, false);
     }
 
-    public static function renderStatic(
-        array $arguments,
-        Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
-        /** @var TypoScriptFrontendController $tsfe */
-        $tsfe = $GLOBALS['TSFE'];
+    public function render(): void
+    {
+        $tsfe = $this->getTypoScriptFrontendController();
 
         // Skip if current record is part of tt_content CType shortcut
         if (!empty($tsfe->recordRegister)
@@ -50,15 +41,20 @@ class MetaTagViewHelper extends AbstractViewHelper
             return;
         }
 
-        $content = (string)$arguments['content'];
+        $content = (string)$this->arguments['content'];
 
         if ($content !== '') {
             $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
-            if ($arguments['property']) {
-                $pageRenderer->setMetaTag('property', $arguments['property'], $content);
-            } elseif ($arguments['name']) {
-                $pageRenderer->setMetaTag('property', $arguments['name'], $content);
+            if ($this->arguments['property']) {
+                $pageRenderer->setMetaTag('property', $this->arguments['property'], $content);
+            } elseif ($this->arguments['name']) {
+                $pageRenderer->setMetaTag('property', $this->arguments['name'], $content);
             }
         }
+    }
+
+    private function getTypoScriptFrontendController(): TypoScriptFrontendController
+    {
+        return $GLOBALS['TSFE'];
     }
 }

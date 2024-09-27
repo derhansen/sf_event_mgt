@@ -13,29 +13,22 @@ namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 use DERHANSEN\SfEventMgt\PageTitle\EventPageTitleProvider;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * ViewHelper to render the page title and indexed search title
  */
 class TitleViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     public function initializeArguments(): void
     {
         parent::initializeArguments();
         $this->registerArgument('pageTitle', 'String', 'The page title');
     }
 
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
-        $pageTitle = $arguments['pageTitle'] ?? '';
+    public function render(): void
+    {
+        $pageTitle = $this->arguments['pageTitle'] ?? '';
         if ($pageTitle !== '') {
             GeneralUtility::makeInstance(EventPageTitleProvider::class)->setTitle($pageTitle);
         }

@@ -11,15 +11,11 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Category;
 
-use Closure;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
-use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
 
 /**
  * Get usage count
@@ -28,10 +24,8 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\ViewHelperInterface;
  * {e:category.count(categoryUid:category.uid) -> f:variable(name: 'categoryUsageCount')}
  * {categoryUsageCount}
  */
-class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
+class CountViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * Initialize arguments
      */
@@ -41,18 +35,15 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
         $this->registerArgument('categoryUid', 'int', 'Uid of the category', true);
     }
 
-    public static function renderStatic(
-        array $arguments,
-        Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ): int {
+    public function render(): int
+    {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
             ->getQueryBuilderForTable('tx_sfeventmgt_domain_model_event');
 
-        $categoryUid = $arguments['categoryUid'];
+        $categoryUid = $this->arguments['categoryUid'];
         $languageUid = GeneralUtility::makeInstance(Context::class)->getAspect('language')->getId();
 
-        $count = $queryBuilder
+        return $queryBuilder
             ->count('tx_sfeventmgt_domain_model_event.title')
             ->from('tx_sfeventmgt_domain_model_event')
             ->rightJoin(
@@ -89,7 +80,5 @@ class CountViewHelper extends AbstractViewHelper implements ViewHelperInterface
             )
             ->executeQuery()
             ->fetchOne();
-
-        return $count;
     }
 }

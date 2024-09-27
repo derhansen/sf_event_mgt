@@ -12,9 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Uri;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
 
 /**
  * ViewHelper to render a link to add an event to a given online calender
@@ -27,8 +25,6 @@ use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithRenderStatic;
  */
 class OnlineCalendarViewHelper extends AbstractViewHelper
 {
-    use CompileWithRenderStatic;
-
     /**
      * Initialize arguments
      */
@@ -39,17 +35,11 @@ class OnlineCalendarViewHelper extends AbstractViewHelper
         $this->registerArgument('event', 'DERHANSEN\SfEventMgt\Domain\Model\Event', 'The event');
     }
 
-    /**
-     * @return string
-     */
-    public static function renderStatic(
-        array $arguments,
-        \Closure $renderChildrenClosure,
-        RenderingContextInterface $renderingContext
-    ) {
+    public function render(): string
+    {
         /** @var Event $event */
-        $event = $arguments['event'];
-        $type = strtolower($arguments['type']);
+        $event = $this->arguments['event'];
+        $type = strtolower($this->arguments['type']);
 
         // If event has no enddate, set a default enddate (startdate + 1 hour)
         if (!$event->getEnddate()) {
@@ -57,24 +47,13 @@ class OnlineCalendarViewHelper extends AbstractViewHelper
             $event->setEnddate($enddate);
         }
 
-        switch ($type) {
-            case 'google':
-                $link = self::getGoogleCalendarLink($event);
-                break;
-            case 'outlook':
-                $link = self::getMicrosoftCalendarLink($event, 'live');
-                break;
-            case 'office365':
-                $link = self::getMicrosoftCalendarLink($event, 'office');
-                break;
-            case 'yahoo':
-                $link = self::getYahooCalendarLink($event);
-                break;
-            default:
-                $link = '';
-        }
-
-        return $link;
+        return match ($type) {
+            'google' => self::getGoogleCalendarLink($event),
+            'outlook' => self::getMicrosoftCalendarLink($event, 'live'),
+            'office365' => self::getMicrosoftCalendarLink($event, 'office'),
+            'yahoo' => self::getYahooCalendarLink($event),
+            default => '',
+        };
     }
 
     private static function getGoogleCalendarLink(Event $event): string
