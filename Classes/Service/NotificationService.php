@@ -170,6 +170,7 @@ class NotificationService
 
             // Get iCal attachment if configured
             $iCalAttachment = $this->attachmentService->getICalAttachment(
+                $request,
                 $settings,
                 $registration,
                 $type,

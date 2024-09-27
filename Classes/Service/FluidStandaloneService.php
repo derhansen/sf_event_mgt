@@ -11,11 +11,9 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
-use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
-use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 

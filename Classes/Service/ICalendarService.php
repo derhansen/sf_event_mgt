@@ -17,7 +17,9 @@ use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 class ICalendarService
 {
-    public function __construct(protected readonly FluidStandaloneService $fluidStandaloneService) {}
+    public function __construct(protected readonly FluidStandaloneService $fluidStandaloneService)
+    {
+    }
 
     /**
      * Initiates the ICS download for the given event

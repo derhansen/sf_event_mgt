@@ -15,6 +15,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\ICalendarService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
+use Psr\Http\Message\RequestInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -105,6 +106,7 @@ class AttachmentService
      * }
      */
     public function getICalAttachment(
+        RequestInterface $request,
         array $settings,
         Registration $registration,
         int $messageType,
@@ -125,7 +127,7 @@ class AttachmentService
                 'event-' . $registration->getEvent()->getUid() . '-',
                 '.ics'
             );
-            $content = $this->iCalendarService->getiCalendarContent($registration->getEvent());
+            $content = $this->iCalendarService->getiCalendarContent($request, $registration->getEvent());
             GeneralUtility::writeFile($file, $content);
         }
 
