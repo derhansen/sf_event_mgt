@@ -285,6 +285,10 @@ settings.confirmation.additionalVerificationStep
    If active, confirmation links in emails will refer to a page, where the user has to confirm the registration
    by clicking a link.
 
+   .. note::
+
+      Please ensure, that the :php:`action` argument for the :php:`f:link.action` ViewHelper in your notification
+      templates equal to :php:`{cancelAction}`
 
 settings.cancellation.additionalVerificationStep
 ------------------------------------------------
@@ -297,6 +301,11 @@ settings.cancellation.additionalVerificationStep
    Defines, if the cancellation of a registration requires an additional manual verification step by the user.
    If active, cancellation links in emails will refer to a page, where the user has to confirm the cancellation
    by clicking a link.
+
+   .. note::
+
+      Please ensure, that the :php:`action` argument for the :php:`f:link.action` ViewHelper in your notification
+      templates equal to :php:`{cancelAction}`
 
 
 settings.notification.senderEmail
