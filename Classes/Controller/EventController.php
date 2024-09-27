@@ -476,10 +476,18 @@ class EventController extends AbstractController
     }
 
     /**
-     * Set date format for field dateOfBirth
+     * Initialize arguments for saveRegistrationAction and ensures, action is only called via POST
      */
     public function initializeSaveRegistrationAction(): void
     {
+        if ($this->request->getMethod() !== 'POST') {
+            $response = GeneralUtility::makeInstance(ErrorController::class)->accessDeniedAction(
+                $this->request,
+                'HTTP method is not allowed'
+            );
+            throw new PropagateResponseException($response, 1726573183);
+        }
+
         $this->arguments->getArgument('registration')
             ->getPropertyMappingConfiguration()->forProperty('dateOfBirth')
             ->setTypeConverterOption(
