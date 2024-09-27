@@ -9,61 +9,28 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Preview;
+namespace DERHANSEN\SfEventMgt\EventListener;
 
-use TYPO3\CMS\Backend\Preview\PreviewRendererInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
-use TYPO3\CMS\Backend\View\BackendLayout\Grid\GridColumnItem;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 
-abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
+abstract class AbstractPluginPreview
 {
     protected const LLPATH = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
 
-    protected IconFactory $iconFactory;
-
-    public function __construct()
-    {
-        $this->iconFactory = GeneralUtility::makeInstance(IconFactory::class);
-        $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+    public function __construct(
+        protected readonly IconFactory $iconFactory,
+        protected readonly PageRenderer $pageRenderer,
+        protected readonly ViewFactoryInterface $viewFactory
+    ) {
         $pageRenderer->addCssFile('EXT:sf_event_mgt/Resources/Public/Css/Backend/PageLayoutView.css');
-    }
-
-    /**
-     * Renders the header (actually empty, since header is rendered in content)
-     */
-    public function renderPageModulePreviewHeader(GridColumnItem $item): string
-    {
-        return '';
-    }
-
-    /**
-     * Renders the content of the plugin preview. Must be overwritten in extending class.
-     */
-    public function renderPageModulePreviewContent(GridColumnItem $item): string
-    {
-        return '';
-    }
-
-    /**
-     * Render the footer. Can be overwritten in extending class if required
-     */
-    public function renderPageModulePreviewFooter(GridColumnItem $item): string
-    {
-        return '';
-    }
-
-    /**
-     * Render the plugin preview
-     */
-    public function wrapPageModulePreview(string $previewHeader, string $previewContent, GridColumnItem $item): string
-    {
-        return $previewHeader . $previewContent;
     }
 
     /**
@@ -90,12 +57,14 @@ abstract class AbstractPluginPreviewRenderer implements PreviewRendererInterface
     /**
      * Renders the given data and action as HTML table for plugin preview
      */
-    protected function renderAsTable(array $data, string $pluginName = ''): string
+    protected function renderAsTable(ServerRequestInterface $request, array $data, string $pluginName = ''): string
     {
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setTemplatePathAndFilename(
-            GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Backend/PageLayoutView.html')
+        $template = GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Backend/PageLayoutView.html');
+        $viewFactoryData = new ViewFactoryData(
+            templatePathAndFilename: $template,
+            request: $request,
         );
+        $view = $this->viewFactory->create($viewFactoryData);
         $view->assignMultiple([
             'data' => $data,
             'pluginName' => $pluginName,
