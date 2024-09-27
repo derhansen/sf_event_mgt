@@ -147,6 +147,8 @@ class EventControllerTest extends UnitTestCase
      */
     public function initializeSaveRegistrationActionSetsDateFormat()
     {
+        $GLOBALS['LANG'] = $this->createMock(LanguageService::class);
+
         $settings = [
             'registration' => [
                 'formatDateOfBirth' => 'd.m.Y',
@@ -181,6 +183,7 @@ class EventControllerTest extends UnitTestCase
 
         $mockRequest = $this->createMock(Request::class);
         $mockRequest->expects(self::any())->method('getArguments')->willReturn([]);
+        $mockRequest->expects(self::any())->method('getMethod')->willReturn('POST');
 
         $this->subject->_set('request', $mockRequest);
         $this->subject->_set('arguments', $mockArguments);
