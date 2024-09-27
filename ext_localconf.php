@@ -177,10 +177,4 @@ call_user_func(function () {
             'expirePeriod' => 30,
         ];
     }
-
-    if (ExtensionManagementUtility::isLoaded('linkvalidator')) {
-        ExtensionManagementUtility::addPageTSConfig(
-            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:sf_event_mgt/Configuration/TSConfig/Mod/Page/mod.linkvalidator.txt">'
-        );
-    }
 });

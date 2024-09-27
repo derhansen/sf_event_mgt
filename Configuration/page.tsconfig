@@ -1,1 +1,2 @@
 @import "EXT:sf_event_mgt/Configuration/TSConfig/Mod/Wizards/ContentElement.tsconfig"
+@import "EXT:sf_event_mgt/Configuration/TSConfig/Mod/Page/mod.linkvalidator.tsconfig"
