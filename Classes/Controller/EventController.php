@@ -47,20 +47,27 @@ use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
-use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 class EventController extends AbstractController
 {
     protected EventCacheService $eventCacheService;
+    protected ViewFactoryInterface $viewFactory;
 
     public function injectEventCacheService(EventCacheService $cacheService): void
     {
         $this->eventCacheService = $cacheService;
+    }
+
+    public function injectViewFactoryInterface(ViewFactoryInterface $viewFactory): void
+    {
+        $this->viewFactory = $viewFactory;
     }
 
     /**
@@ -306,13 +313,16 @@ class EventController extends AbstractController
             case 'showStandaloneTemplate':
             default:
                 $status = (int)($configuration[2] ?? 200);
-                $standaloneTemplate = GeneralUtility::makeInstance(StandaloneView::class);
-                $standaloneTemplate->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName($configuration[1]));
+                $viewFactoryData = new ViewFactoryData(
+                    templatePathAndFilename: GeneralUtility::getFileAbsFileName($configuration[1]),
+                    request: $this->request,
+                );
+                $view = $this->viewFactory->create($viewFactoryData);
 
                 $response = $this->responseFactory->createResponse()
                     ->withStatus($status)
                     ->withHeader('Content-Type', 'text/html; charset=utf-8');
-                $response->getBody()->write($standaloneTemplate->render());
+                $response->getBody()->write($view->render());
                 return $response;
         }
     }
