@@ -11,6 +11,10 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use Symfony\Component\Mime\Address;
+use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
+use TYPO3\CMS\Core\Mail\FluidEmail;
+use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -42,14 +46,16 @@ class EmailService
             return false;
         }
 
-        /** @var MailMessage $email */
-        $email = GeneralUtility::makeInstance(MailMessage::class);
-        $email->setFrom($sender, $name);
-        $email->setTo($recipient);
-        $email->setSubject($subject);
+        $useFluidEmail = (bool)(GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            ->get('sf_event_mgt', 'useFluidEmail'));
+
+        $email = $this->getEmailObject($useFluidEmail);
+        $email->from(new Address($sender, $name));
+        $email->to($recipient);
+        $email->subject($subject);
         $email->html($body);
-        if ($replyTo !== null && $replyTo !== '') {
-            $email->setReplyTo($replyTo);
+        if ($replyTo !== null && $replyTo !== '' && GeneralUtility::validEmail($replyTo)) {
+            $email->replyTo(new Address($replyTo));
         }
         foreach ($attachments as $attachment) {
             if (file_exists($attachment)) {
@@ -57,6 +63,29 @@ class EmailService
             }
         }
 
-        return $email->send();
+        if ($email instanceof FluidEmail) {
+            $email->format('html');
+            $email->setTemplate('EventManagement');
+            $email->assignMultiple([
+                'title' => $subject,
+                'body' => $body,
+            ]);
+        }
+
+        $mailer = GeneralUtility::makeInstance(MailerInterface::class);
+        $mailer->send($email);
+        return $mailer->getSentMessage() !== null;
+    }
+
+    private function getEmailObject(bool $useFluidEmail): MailMessage|FluidEmail
+    {
+        if ($useFluidEmail) {
+            /** @var FluidEmail $email */
+            $email = GeneralUtility::makeInstance(FluidEmail::class);
+        } else {
+            /** @var MailMessage $email */
+            $email = GeneralUtility::makeInstance(MailMessage::class);
+        }
+        return $email;
     }
 }

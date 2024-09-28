@@ -11,6 +11,11 @@ enableInvoice = 1
 	# cat=payment/enable/21; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.enableTransfer
 enableTransfer = 1
 
+# E-Mail
+###########################
+# cat=email/enable/10; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.useFluidEmail
+useFluidEmail = 0
+
 # Backend
 ###########################
 # cat=backend/enable/20; type=boolean; label=LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:extmng.hideInlineRegistrations

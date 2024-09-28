@@ -176,4 +176,8 @@ call_user_func(function () {
             'expirePeriod' => 30,
         ];
     }
+
+    // Define template path for FluidEmail template
+    $GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths'][1727540189] =
+        'EXT:sf_event_mgt/Resources/Private/Templates/Email';
 });

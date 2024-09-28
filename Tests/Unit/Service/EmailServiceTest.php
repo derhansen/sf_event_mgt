@@ -30,28 +30,34 @@ class EmailServiceTest extends UnitTestCase
         unset($this->subject);
     }
 
-    public static function invalidEmailsDataProvider(): array
+    public static function invalidArgumentsDataProvider(): array
     {
         return [
-            'invalidSender' => [
+            'invalid sender' => [
                 'invalid',
                 'recipient@domain.tld',
+                'a subject',
             ],
-            'invalidRecipient' => [
+            'invalid recipient' => [
                 'sender@domain.tld',
                 'invalid',
+                'a subject',
+            ],
+            'invalid subject' => [
+                'sender@domain.tld',
+                'invalid',
+                '',
             ],
         ];
     }
 
     /**
-     * Test if email-service returns false, if emails are invalid
+     * Test if email-service returns false, if emails are invalid or if subject is empty
      */
-    #[DataProvider('invalidEmailsDataProvider')]
+    #[DataProvider('invalidArgumentsDataProvider')]
     #[Test]
-    public function sendEmailMessageWithInvalidEmailTest(string $sender, string $recipient)
+    public function sendEmailMessageWithInvalidEmailTest(string $sender, string $recipient, string $subject): void
     {
-        $subject = 'A subject';
         $body = 'A body';
         $senderName = 'Sender name';
         $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
