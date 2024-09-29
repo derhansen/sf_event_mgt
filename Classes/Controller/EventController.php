@@ -41,6 +41,7 @@ use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
@@ -86,14 +87,11 @@ class EventController extends AbstractController
      */
     public function initializeAction(): void
     {
-        $typoScriptFrontendController = $this->getTypoScriptFrontendController();
-        if ($typoScriptFrontendController !== null) {
-            static $cacheTagsSet = false;
+        static $cacheTagsSet = false;
 
-            if (!$cacheTagsSet) {
-                $typoScriptFrontendController->addCacheTags(['tx_sfeventmgt']);
-                $cacheTagsSet = true;
-            }
+        if (!$cacheTagsSet) {
+            $this->request->getAttribute('frontend.cache.collector')->addCacheTags(new CacheTag('tx_sfeventmgt'));
+            $cacheTagsSet = true;
         }
     }
 
@@ -142,7 +140,8 @@ class EventController extends AbstractController
         $variables = $modifyListViewVariablesEvent->getVariables();
         $this->view->assignMultiple($variables);
 
-        $this->eventCacheService->addPageCacheTagsByEventDemandObject($eventDemand);
+        $cacheDataCollector = $this->request->getAttribute('frontend.cache.collector');
+        $this->eventCacheService->addPageCacheTagsByEventDemandObject($cacheDataCollector, $eventDemand);
 
         return $this->htmlResponse();
     }
@@ -277,7 +276,8 @@ class EventController extends AbstractController
 
         $this->view->assignMultiple($variables);
         if ($event !== null) {
-            $this->eventCacheService->addCacheTagsByEventRecords([$event]);
+            $cacheDataCollector = $this->request->getAttribute('frontend.cache.collector');
+            $this->eventCacheService->addCacheTagsByEventRecords($cacheDataCollector, [$event]);
         }
 
         return $this->htmlResponse();

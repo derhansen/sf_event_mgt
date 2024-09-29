@@ -12,27 +12,33 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\EventDemand;
+use TYPO3\CMS\Core\Cache\CacheDataCollectorInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
+/**
+ * This class can be removed, when TYPO3 core feature "Automatic frontend cache tagging" is active by default.
+ */
 class EventCacheService
 {
     /**
      * Adds cache tags to page cache by event records.
      *
-     * Following cache tags will be added to tsfe:
+     * Following cache tags will be added to CacheDataCollector
      * "tx_sfeventmgt_uid_[event:uid]"
      */
-    public function addCacheTagsByEventRecords(array $eventRecords): void
-    {
+    public function addCacheTagsByEventRecords(
+        CacheDataCollectorInterface $cacheDataCollector,
+        array $eventRecords
+    ): void {
         $cacheTags = [];
         foreach ($eventRecords as $event) {
             // cache tag for each event record
-            $cacheTags[] = 'tx_sfeventmgt_uid_' . $event->getUid();
+            $cacheTags[] = new CacheTag('tx_sfeventmgt_uid_' . $event->getUid());
         }
         if (count($cacheTags) > 0) {
-            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+            $cacheDataCollector->addCacheTags(...$cacheTags);
         }
     }
 
@@ -40,17 +46,19 @@ class EventCacheService
      * Adds page cache tags by used storagePages.
      * This adds tags with the scheme tx_sfeventmgt_pid_[event:pid]
      */
-    public function addPageCacheTagsByEventDemandObject(EventDemand $demand): void
-    {
+    public function addPageCacheTagsByEventDemandObject(
+        CacheDataCollectorInterface $cacheDataCollector,
+        EventDemand $demand
+    ): void {
         $cacheTags = [];
         if ($demand->getStoragePage()) {
             // Add cache tags for each storage page
             foreach (GeneralUtility::trimExplode(',', $demand->getStoragePage()) as $pageId) {
-                $cacheTags[] = 'tx_sfeventmgt_pid_' . $pageId;
+                $cacheTags[] = new CacheTag('tx_sfeventmgt_pid_' . $pageId);
             }
         }
         if (count($cacheTags) > 0) {
-            $this->getTypoScriptFrontendController()->addCacheTags($cacheTags);
+            $cacheDataCollector->addCacheTags(...$cacheTags);
         }
     }
 
@@ -72,10 +80,5 @@ class EventCacheService
         foreach ($cacheTagsToFlush as $cacheTagToFlush) {
             $cacheManager->flushCachesInGroupByTag('pages', $cacheTagToFlush);
         }
-    }
-
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
-    {
-        return $GLOBALS['TSFE'] ?? null;
     }
 }
