@@ -13,15 +13,17 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered after a registration moved from the waitlist
  */
-final class AfterRegistrationMovedFromWaitlist
+final readonly class AfterRegistrationMovedFromWaitlist
 {
     public function __construct(
-        private readonly Registration $registration,
-        private readonly RegistrationService $registrationService
+        private Registration $registration,
+        private RegistrationService $registrationService,
+        private ServerRequestInterface $request
     ) {
     }
 
@@ -33,5 +35,10 @@ final class AfterRegistrationMovedFromWaitlist
     public function getRegistrationService(): RegistrationService
     {
         return $this->registrationService;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

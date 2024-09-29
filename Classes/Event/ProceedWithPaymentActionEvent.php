@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered in PaymentController::proceedWithAction() and allows to skip the "$registration->getPaid()"
@@ -23,7 +24,8 @@ final class ProceedWithPaymentActionEvent
 
     public function __construct(
         private readonly Registration $registration,
-        private readonly string $actionName
+        private readonly string $actionName,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -45,5 +47,10 @@ final class ProceedWithPaymentActionEvent
     public function setPerformPaidCheck(bool $performPaidCheck): void
     {
         $this->performPaidCheck = $performPaidCheck;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

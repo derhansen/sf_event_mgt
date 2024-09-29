@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Event;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+
 /**
  * This event is triggered in registrationService after all `checkRegistrationSuccess` have been processed.
  * Event listeners can use this event to modify the `$success` and `$result` variable (e.g. if custom logic
@@ -18,7 +20,7 @@ namespace DERHANSEN\SfEventMgt\Event;
  */
 final class ModifyCheckRegistrationSuccessEvent
 {
-    public function __construct(private bool $success, private int $result)
+    public function __construct(private bool $success, private int $result, private readonly Registration $registration)
     {
     }
 
@@ -40,5 +42,10 @@ final class ModifyCheckRegistrationSuccessEvent
     public function setResult(int $result): void
     {
         $this->result = $result;
+    }
+
+    public function getRegistration(): Registration
+    {
+        return $this->registration;
     }
 }

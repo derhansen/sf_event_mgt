@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the payment redirect view is rendered. The given response object is the result
@@ -26,7 +27,8 @@ final class ModifyPaymentRedirectResponseEvent
         private readonly array $settings,
         private readonly array $variables,
         private readonly Registration $registration,
-        private readonly PaymentController $paymentController
+        private readonly PaymentController $paymentController,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -58,5 +60,10 @@ final class ModifyPaymentRedirectResponseEvent
     public function getPaymentController(): PaymentController
     {
         return $this->paymentController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

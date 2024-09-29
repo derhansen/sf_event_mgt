@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the user is redirected to the payment process after confirming the registration.
@@ -25,7 +26,8 @@ final class ProcessRedirectToPaymentEvent
 
     public function __construct(
         private readonly Registration $registration,
-        private readonly EventController $eventController
+        private readonly EventController $eventController,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -47,5 +49,10 @@ final class ProcessRedirectToPaymentEvent
     public function getEventController(): EventController
     {
         return $this->eventController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event should be used to modify the attachments of a user message. Use the $type variable to distinguish
@@ -27,7 +28,8 @@ final class ModifyUserMessageAttachmentsEvent
         private readonly int $type,
         private readonly array $settings,
         private readonly ?CustomNotification $customNotification,
-        private readonly NotificationService $notificationService
+        private readonly NotificationService $notificationService,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -64,5 +66,10 @@ final class ModifyUserMessageAttachmentsEvent
     public function setAttachments(array $attachments): void
     {
         $this->attachments = $attachments;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

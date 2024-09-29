@@ -84,7 +84,8 @@ class PaymentController extends AbstractController
             $paymentMethod,
             $updateRegistration,
             $registration,
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($processPaymentInitializeEvent);
         $variables = $processPaymentInitializeEvent->getVariables();
@@ -102,7 +103,8 @@ class PaymentController extends AbstractController
             $this->settings,
             $variables,
             $registration,
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyPaymentRedirectResponseEvent);
 
@@ -130,7 +132,8 @@ class PaymentController extends AbstractController
             $updateRegistration,
             $registration,
             $this->request->getQueryParams(),
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($processPaymentSuccessEvent);
         $variables = $processPaymentSuccessEvent->getVariables();
@@ -170,7 +173,8 @@ class PaymentController extends AbstractController
             $removeRegistration,
             $registration,
             $this->request->getQueryParams(),
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($processPaymentFailureEvent);
         $variables = $processPaymentFailureEvent->getVariables();
@@ -219,7 +223,8 @@ class PaymentController extends AbstractController
             $removeRegistration,
             $registration,
             $this->request->getQueryParams(),
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($processPaymentCancelEvent);
         $variables = $processPaymentCancelEvent->getVariables();
@@ -264,7 +269,8 @@ class PaymentController extends AbstractController
             $updateRegistration,
             $registration,
             $this->request->getQueryParams(),
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($processPaymentNotifyEvent);
         $variables = $processPaymentNotifyEvent->getVariables();
@@ -305,7 +311,7 @@ class PaymentController extends AbstractController
             }
         }
 
-        $proceedWithPaymentActionEvent = new ProceedWithPaymentActionEvent($registration, $actionName);
+        $proceedWithPaymentActionEvent = new ProceedWithPaymentActionEvent($registration, $actionName, $this->request);
         $this->eventDispatcher->dispatch($proceedWithPaymentActionEvent);
 
         if ($proceedWithPaymentActionEvent->getPerformPaidCheck() && $registration->getPaid()) {

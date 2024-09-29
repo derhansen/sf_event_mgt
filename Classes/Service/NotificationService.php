@@ -190,7 +190,8 @@ class NotificationService
                 $body,
                 $registration,
                 $type,
-                $this
+                $this,
+                $request
             );
             $this->eventDispatcher->dispatch($modifyUserMessageSenderEvent);
             $subject = $modifyUserMessageSenderEvent->getSubject();
@@ -206,7 +207,8 @@ class NotificationService
                 $type,
                 $settings,
                 $customNotification,
-                $this
+                $this,
+                $request
             );
             $this->eventDispatcher->dispatch($modifyUserAttachmentsEvent);
             $attachments = $modifyUserAttachmentsEvent->getAttachments();
@@ -229,7 +231,8 @@ class NotificationService
                 $senderName,
                 $senderEmail,
                 $replyToEmail,
-                $this
+                $this,
+                $request
             );
             $this->eventDispatcher->dispatch($afterUserMessageSentEvent);
 
@@ -376,7 +379,8 @@ class NotificationService
             $senderName,
             $senderEmail,
             $type,
-            $this
+            $this,
+            $request
         );
         $this->eventDispatcher->dispatch($afterAdminMessageSentEvent);
 

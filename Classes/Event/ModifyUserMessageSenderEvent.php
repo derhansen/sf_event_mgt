@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event should be used to modify the sender data of a user message. Use the $type variable to distinguish
@@ -28,7 +29,8 @@ final class ModifyUserMessageSenderEvent
         private string $body,
         private readonly Registration $registration,
         private readonly int $type,
-        private readonly NotificationService $notificationService
+        private readonly NotificationService $notificationService,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -95,5 +97,10 @@ final class ModifyUserMessageSenderEvent
     public function setReplyToEmail(string $replyToEmail): void
     {
         $this->replyToEmail = $replyToEmail;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

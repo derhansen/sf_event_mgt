@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Extbase\Error\Result;
 
 /**
@@ -20,12 +21,13 @@ use TYPO3\CMS\Extbase\Error\Result;
  *
  * Example usage: $event->getResult()->forProperty('zip')->addError(new Error('Error for ZIP field', 1726287471));
  */
-final class ModifyRegistrationValidatorResultEvent
+final readonly class ModifyRegistrationValidatorResultEvent
 {
     public function __construct(
         private Registration $registration,
         private array $settings,
-        private Result $result
+        private Result $result,
+        private ServerRequestInterface $request
     ) {
     }
 
@@ -42,5 +44,10 @@ final class ModifyRegistrationValidatorResultEvent
     public function getResult(): Result
     {
         return $this->result;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

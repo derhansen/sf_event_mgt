@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the payment redirect view is rendered. This event must be used to process initialize
@@ -25,7 +26,8 @@ final class ProcessPaymentInitializeEvent
         private readonly string $paymentMethod,
         private bool $updateRegistration,
         private readonly Registration $registration,
-        private readonly PaymentController $paymentController
+        private readonly PaymentController $paymentController,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -62,5 +64,10 @@ final class ProcessPaymentInitializeEvent
     public function setUpdateRegistration(bool $updateRegistration): void
     {
         $this->updateRegistration = $updateRegistration;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

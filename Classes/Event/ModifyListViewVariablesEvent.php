@@ -12,14 +12,18 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the list view is rendered
  */
 final class ModifyListViewVariablesEvent
 {
-    public function __construct(private array $variables, private readonly EventController $eventController)
-    {
+    public function __construct(
+        private array $variables,
+        private readonly EventController $eventController,
+        private readonly ServerRequestInterface $request
+    ) {
     }
 
     public function getVariables(): array
@@ -35,5 +39,10 @@ final class ModifyListViewVariablesEvent
     public function getEventController(): EventController
     {
         return $this->eventController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

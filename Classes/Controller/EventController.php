@@ -134,7 +134,8 @@ class EventController extends AbstractController
                 'eventDemand' => $eventDemand,
                 'settings' => $this->settings,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyListViewVariablesEvent);
         $variables = $modifyListViewVariablesEvent->getVariables();
@@ -214,7 +215,8 @@ class EventController extends AbstractController
                 'weekConfig' => $this->calendarService->getWeekConfig($firstDayOfWeek),
                 'settings' => $this->settings,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyCalendarViewVariablesEvent);
         $variables = $modifyCalendarViewVariablesEvent->getVariables();
@@ -270,7 +272,14 @@ class EventController extends AbstractController
             return $this->handleEventNotFoundError($this->settings);
         }
 
-        $modifyDetailViewVariablesEvent = new ModifyDetailViewVariablesEvent(['event' => $event, 'settings' => $this->settings], $this);
+        $modifyDetailViewVariablesEvent = new ModifyDetailViewVariablesEvent(
+            [
+                'event' => $event,
+                'settings' => $this->settings,
+            ],
+            $this,
+            $this->request
+        );
         $this->eventDispatcher->dispatch($modifyDetailViewVariablesEvent);
         $variables = $modifyDetailViewVariablesEvent->getVariables();
 
@@ -368,7 +377,8 @@ class EventController extends AbstractController
                 'paymentMethods' => $paymentMethods,
                 'settings' => $this->settings,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyRegistrationViewVariablesEvent);
         $variables = $modifyRegistrationViewVariablesEvent->getVariables();
@@ -562,7 +572,7 @@ class EventController extends AbstractController
                 $messageType = MessageType::REGISTRATION_NEW;
             }
 
-            $this->eventDispatcher->dispatch(new AfterRegistrationSavedEvent($registration, $this));
+            $this->eventDispatcher->dispatch(new AfterRegistrationSavedEvent($registration, $this, $this->request));
 
             // Send notifications to user and admin if confirmation link should be sent
             if (!$autoConfirmation) {
@@ -586,7 +596,8 @@ class EventController extends AbstractController
             $modifyCreateDependingRegistrationsEvent = new ModifyCreateDependingRegistrationsEvent(
                 $registration,
                 ($registration->getAmountOfRegistrations() > 1),
-                $this
+                $this,
+                $this->request
             );
             $this->eventDispatcher->dispatch($modifyCreateDependingRegistrationsEvent);
             $createDependingRegistrations = $modifyCreateDependingRegistrationsEvent->getCreateDependingRegistrations();
@@ -759,7 +770,7 @@ class EventController extends AbstractController
             $event = $registration->getEvent();
             $this->registrationRepository->update($registration);
 
-            $this->eventDispatcher->dispatch(new AfterRegistrationConfirmedEvent($registration, $this));
+            $this->eventDispatcher->dispatch(new AfterRegistrationConfirmedEvent($registration, $this, $this->request));
 
             $messageType = MessageType::REGISTRATION_CONFIRMED;
             if ($registration->getWaitlist()) {
@@ -814,7 +825,8 @@ class EventController extends AbstractController
                 'registration' => $registration,
                 'settings' => $this->settings,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyConfirmRegistrationViewVariablesEvent);
         $variables = $modifyConfirmRegistrationViewVariablesEvent->getVariables();
@@ -829,7 +841,7 @@ class EventController extends AbstractController
      */
     private function getRedirectToPaymentResponse(int $paymentPid, Registration $registration): ?ResponseInterface
     {
-        $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($registration, $this);
+        $processRedirectToPaymentEvent = new ProcessRedirectToPaymentEvent($registration, $this, $this->request);
         $this->eventDispatcher->dispatch($processRedirectToPaymentEvent);
         if ($processRedirectToPaymentEvent->getProcessRedirect()) {
             $this->uriBuilder->reset()
@@ -916,7 +928,8 @@ class EventController extends AbstractController
             // First cancel depending registrations
             $processCancelDependingRegistrations = new ProcessCancelDependingRegistrationsEvent(
                 $registration,
-                $registration->getAmountOfRegistrations() > 1
+                $registration->getAmountOfRegistrations() > 1,
+                $this->request
             );
             $this->eventDispatcher->dispatch($processCancelDependingRegistrations);
             if ($processCancelDependingRegistrations->getProcessCancellation()) {
@@ -929,11 +942,15 @@ class EventController extends AbstractController
             // Persist changes, so following functions can work with $event properties (e.g. amount of registrations)
             $this->persistAll();
 
-            $afterRegistrationCancelledEvent = new AfterRegistrationCancelledEvent($registration, $this);
+            $afterRegistrationCancelledEvent = new AfterRegistrationCancelledEvent(
+                $registration,
+                $this,
+                $this->request
+            );
             $this->eventDispatcher->dispatch($afterRegistrationCancelledEvent);
 
             // Dispatch event, so waitlist registrations can be moved up and default move up process can be stopped
-            $waitlistMoveUpEvent = new WaitlistMoveUpEvent($event, $this, true);
+            $waitlistMoveUpEvent = new WaitlistMoveUpEvent($event, $this, $this->request, true);
             $this->eventDispatcher->dispatch($waitlistMoveUpEvent);
 
             // Move up waitlist registrations if configured on event basis and if not disabled by $waitlistMoveUpEvent
@@ -953,7 +970,8 @@ class EventController extends AbstractController
                 'event' => $event,
                 'settings' => $this->settings,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyCancelRegistrationViewVariablesEvent);
         $variables = $modifyCancelRegistrationViewVariablesEvent->getVariables();
@@ -1039,7 +1057,8 @@ class EventController extends AbstractController
                 'overwriteDemand' => $overwriteDemand,
                 'settings' => $this->settings,
             ],
-            $this
+            $this,
+            $this->request,
         );
         $this->eventDispatcher->dispatch($modifySearchViewVariablesEvent);
         $variables = $modifySearchViewVariablesEvent->getVariables();
@@ -1118,7 +1137,7 @@ class EventController extends AbstractController
             true
         );
         if (count($allowedStoragePages) > 0 && !in_array($event->getPid(), $allowedStoragePages)) {
-            $this->eventDispatcher->dispatch(new EventPidCheckFailedEvent($event, $this));
+            $this->eventDispatcher->dispatch(new EventPidCheckFailedEvent($event, $this, $this->request));
             $event = null;
         }
 

@@ -265,7 +265,11 @@ class RegistrationService
             $result = RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST;
         }
 
-        $modifyCheckRegistrationSuccessEvent = new ModifyCheckRegistrationSuccessEvent($success, $result);
+        $modifyCheckRegistrationSuccessEvent = new ModifyCheckRegistrationSuccessEvent(
+            $success,
+            $result,
+            $registration
+        );
         $this->eventDispatcher->dispatch($modifyCheckRegistrationSuccessEvent);
 
         return [$modifyCheckRegistrationSuccessEvent->getSuccess(), $modifyCheckRegistrationSuccessEvent->getResult()];
@@ -374,7 +378,7 @@ class RegistrationService
                 MessageType::REGISTRATION_WAITLIST_MOVE_UP
             );
 
-            $this->eventDispatcher->dispatch(new AfterRegistrationMovedFromWaitlist($registration, $this));
+            $this->eventDispatcher->dispatch(new AfterRegistrationMovedFromWaitlist($registration, $this, $request));
 
             $freePlaces--;
             if ($freePlaces === 0) {

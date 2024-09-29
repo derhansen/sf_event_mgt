@@ -13,14 +13,18 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered when the event PID check failed
  */
-final class EventPidCheckFailedEvent
+final readonly class EventPidCheckFailedEvent
 {
-    public function __construct(private readonly Event $event, private readonly EventController $eventController)
-    {
+    public function __construct(
+        private Event $event,
+        private EventController $eventController,
+        private ServerRequestInterface $request
+    ) {
     }
 
     public function getEvent(): Event
@@ -31,5 +35,10 @@ final class EventPidCheckFailedEvent
     public function getEventController(): EventController
     {
         return $this->eventController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

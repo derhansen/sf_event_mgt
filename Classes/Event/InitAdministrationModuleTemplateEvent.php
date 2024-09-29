@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
 
@@ -19,12 +20,13 @@ use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
  * This event is triggered when the module template of the administration module is initialized.
  * The event can be used to e.g. add custom menus, buttons or JavaScript.
  */
-final class InitAdministrationModuleTemplateEvent
+final readonly class InitAdministrationModuleTemplateEvent
 {
     public function __construct(
-        private readonly ModuleTemplate $moduleTemplate,
-        private readonly UriBuilder $uriBuilder,
-        private readonly AdministrationController $administrationController
+        private ModuleTemplate $moduleTemplate,
+        private UriBuilder $uriBuilder,
+        private AdministrationController $administrationController,
+        private ServerRequestInterface $request
     ) {
     }
 
@@ -41,5 +43,10 @@ final class InitAdministrationModuleTemplateEvent
     public function getAdministrationController(): AdministrationController
     {
         return $this->administrationController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

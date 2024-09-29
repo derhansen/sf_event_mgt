@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered after a registration has been cancelled
@@ -22,6 +23,7 @@ final class WaitlistMoveUpEvent
     public function __construct(
         private readonly Event $event,
         private readonly EventController $eventController,
+        private readonly ServerRequestInterface $request,
         private bool $processDefaultMoveUp = true
     ) {
     }
@@ -44,5 +46,10 @@ final class WaitlistMoveUpEvent
     public function setProcessDefaultMoveUp(bool $processDefaultMoveUp): void
     {
         $this->processDefaultMoveUp = $processDefaultMoveUp;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

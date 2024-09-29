@@ -190,7 +190,8 @@ class AdministrationController extends AbstractController
         $initAdministrationModuleTemplateEvent = new InitAdministrationModuleTemplateEvent(
             $moduleTemplate,
             $this->uriBuilder,
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($initAdministrationModuleTemplateEvent);
 
@@ -283,7 +284,8 @@ class AdministrationController extends AbstractController
                 'overwriteDemand' => $overwriteDemand,
                 'pagination' => $pagination,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyAdministrationListViewVariablesEvent);
         $variables = $modifyAdministrationListViewVariablesEvent->getVariables();
@@ -354,7 +356,8 @@ class AdministrationController extends AbstractController
                 'customNotifications' => $customNotifications,
                 'logEntries' => $logEntries,
             ],
-            $this
+            $this,
+            $this->request
         );
         $this->eventDispatcher->dispatch($modifyAdministrationIndexNotifyViewVariablesEvent);
         $variables = $modifyAdministrationIndexNotifyViewVariablesEvent->getVariables();

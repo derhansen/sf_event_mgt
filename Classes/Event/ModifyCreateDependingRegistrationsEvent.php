@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before depending registrations are created. Use setCreateDependingRegistrations to
@@ -23,7 +24,8 @@ final class ModifyCreateDependingRegistrationsEvent
     public function __construct(
         private readonly Registration $registration,
         private bool $createDependingRegistrations,
-        private readonly EventController $eventController
+        private readonly EventController $eventController,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -45,5 +47,10 @@ final class ModifyCreateDependingRegistrationsEvent
     public function setCreateDependingRegistrations(bool $createDependingRegistrations): void
     {
         $this->createDependingRegistrations = $createDependingRegistrations;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

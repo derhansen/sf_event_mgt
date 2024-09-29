@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the depending registrations are cancelled. Event listeners can use this
@@ -21,7 +22,8 @@ final class ProcessCancelDependingRegistrationsEvent
 {
     public function __construct(
         private readonly Registration $registration,
-        private bool $processCancellation
+        private bool $processCancellation,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -38,5 +40,10 @@ final class ProcessCancelDependingRegistrationsEvent
     public function setProcessCancellation(bool $processCancellation): void
     {
         $this->processCancellation = $processCancellation;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

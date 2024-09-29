@@ -12,14 +12,18 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\AdministrationController;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the administration index notify view is rendered
  */
 final class ModifyAdministrationIndexNotifyViewVariablesEvent
 {
-    public function __construct(private array $variables, private readonly AdministrationController $administrationController)
-    {
+    public function __construct(
+        private array $variables,
+        private readonly AdministrationController $administrationController,
+        private readonly ServerRequestInterface $request
+    ) {
     }
 
     public function getVariables(): array
@@ -35,5 +39,10 @@ final class ModifyAdministrationIndexNotifyViewVariablesEvent
     public function getAdministrationController(): AdministrationController
     {
         return $this->administrationController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

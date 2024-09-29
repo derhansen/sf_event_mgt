@@ -13,21 +13,23 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered after a user message has been sent
  */
-final class AfterUserMessageSentEvent
+final readonly class AfterUserMessageSentEvent
 {
     public function __construct(
-        private readonly Registration $registration,
-        private readonly string $body,
-        private readonly string $subject,
-        private readonly array $attachments,
-        private readonly string $senderName,
-        private readonly string $senderEmail,
-        private readonly string $replyToEmail,
-        private readonly NotificationService $notificationService
+        private Registration $registration,
+        private string $body,
+        private string $subject,
+        private array $attachments,
+        private string $senderName,
+        private string $senderEmail,
+        private string $replyToEmail,
+        private NotificationService $notificationService,
+        private ServerRequestInterface $request
     ) {
     }
 
@@ -69,5 +71,10 @@ final class AfterUserMessageSentEvent
     public function getNotificationService(): NotificationService
     {
         return $this->notificationService;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

@@ -13,6 +13,7 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered before the payment cancel view is rendered. This event must be used to handle the
@@ -27,7 +28,8 @@ final class ProcessPaymentCancelEvent
         private bool $removeRegistration,
         private readonly Registration $registration,
         private readonly array $getVariables,
-        private readonly PaymentController $paymentController
+        private readonly PaymentController $paymentController,
+        private readonly ServerRequestInterface $request
     ) {
     }
 
@@ -79,5 +81,10 @@ final class ProcessPaymentCancelEvent
     public function setRemoveRegistration(bool $removeRegistration): void
     {
         $this->removeRegistration = $removeRegistration;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

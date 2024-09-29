@@ -81,7 +81,8 @@ class RegistrationValidator extends AbstractValidator
         $event = new ModifyRegistrationValidatorResultEvent(
             $value,
             $this->settings,
-            $this->result
+            $this->result,
+            $this->getRequest()
         );
         $this->eventDispatcher->dispatch($event);
     }

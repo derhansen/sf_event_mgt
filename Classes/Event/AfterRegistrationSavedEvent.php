@@ -13,15 +13,17 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered after a registration has been persisted
  */
-final class AfterRegistrationSavedEvent
+final readonly class AfterRegistrationSavedEvent
 {
     public function __construct(
-        private readonly Registration $registration,
-        private readonly EventController $eventController
+        private Registration $registration,
+        private EventController $eventController,
+        private ServerRequestInterface $request
     ) {
     }
 
@@ -33,5 +35,10 @@ final class AfterRegistrationSavedEvent
     public function getEventController(): EventController
     {
         return $this->eventController;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }

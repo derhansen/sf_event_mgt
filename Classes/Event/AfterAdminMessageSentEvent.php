@@ -13,21 +13,23 @@ namespace DERHANSEN\SfEventMgt\Event;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * This event is triggered after a admin message has been sent
  */
-final class AfterAdminMessageSentEvent
+final readonly class AfterAdminMessageSentEvent
 {
     public function __construct(
-        private readonly Registration $registration,
-        private readonly string $body,
-        private readonly string $subject,
-        private readonly array $attachments,
-        private readonly string $senderName,
-        private readonly string $senderEmail,
-        private readonly int $messageType,
-        private readonly NotificationService $notificationService
+        private Registration $registration,
+        private string $body,
+        private string $subject,
+        private array $attachments,
+        private string $senderName,
+        private string $senderEmail,
+        private int $messageType,
+        private NotificationService $notificationService,
+        private ServerRequestInterface $request
     ) {
     }
 
@@ -69,5 +71,10 @@ final class AfterAdminMessageSentEvent
     public function getMessageType(): int
     {
         return $this->messageType;
+    }
+
+    public function getRequest(): ServerRequestInterface
+    {
+        return $this->request;
     }
 }
