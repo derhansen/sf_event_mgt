@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Tests\Functional\Validation\Validator;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use PHPUnit\Framework\Attributes\Test;
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
@@ -22,13 +23,15 @@ use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class RegistrationValidatorTest extends FunctionalTestCase
 {
+    protected ServerRequestInterface $request;
+
     protected function setUp(): void
     {
         parent::setUp();
         $GLOBALS['LANG'] = $this->getContainer()->get(LanguageServiceFactory::class)->create('default');
 
-        $request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
-        $GLOBALS['TYPO3_REQUEST'] = $request;
+        $this->request = (new ServerRequest())->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_BE);
+        $GLOBALS['TYPO3_REQUEST'] = $this->request;
     }
 
     #[Test]
@@ -37,6 +40,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration = new Registration();
 
         $subject = new RegistrationValidator();
+        $subject->setRequest($this->request);
         $result = $subject->validate($registration);
         self::assertTrue($result->hasErrors());
         $errors = $result->getSubResults();
@@ -55,6 +59,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setEmail('derhansen@gmail.com');
 
         $subject = new RegistrationValidator();
+        $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
         self::assertFalse($result->hasErrors());
@@ -82,6 +87,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setEmail('derhansen@gmail.com');
 
         $subject = new RegistrationValidator();
+        $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
         self::assertTrue($result->hasErrors());
@@ -113,6 +119,7 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setEmail('derhansen@gmail.com');
 
         $subject = new RegistrationValidator();
+        $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
         self::assertFalse($result->hasErrors());
