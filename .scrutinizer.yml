@@ -6,7 +6,7 @@ build:
     analysis:
       environment:
         php:
-          version: 8.1
+          version: 8.2
           pecl_extensions:
             - zip
       tests:
