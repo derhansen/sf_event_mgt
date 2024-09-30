@@ -1,0 +1,5 @@
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","title","hidden"
+,1,1,"Event with UID 1",0
+,2,1,"Event with UID 2",0
+,3,1,"Hidden event with UID 3",1

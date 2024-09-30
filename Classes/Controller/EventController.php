@@ -22,7 +22,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationCancelledEvent;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationConfirmedEvent;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationSavedEvent;
-use DERHANSEN\SfEventMgt\Event\EventPidCheckFailedEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyCalendarViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyCancelRegistrationViewVariablesEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyConfirmRegistrationViewVariablesEvent;
@@ -37,12 +36,11 @@ use DERHANSEN\SfEventMgt\Event\WaitlistMoveUpEvent;
 use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Security\HashScope;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
+use DERHANSEN\SfEventMgt\Service\EventEvaluationService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
-use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Cache\CacheTag;
-use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
@@ -60,6 +58,7 @@ class EventController extends AbstractController
 {
     protected EventCacheService $eventCacheService;
     protected ViewFactoryInterface $viewFactory;
+    protected EventEvaluationService $eventEvaluationService;
 
     public function injectEventCacheService(EventCacheService $cacheService): void
     {
@@ -69,6 +68,11 @@ class EventController extends AbstractController
     public function injectViewFactoryInterface(ViewFactoryInterface $viewFactory): void
     {
         $this->viewFactory = $viewFactory;
+    }
+
+    public function injectEventEvaluationService(EventEvaluationService $eventEvaluationService): void
+    {
+        $this->eventEvaluationService = $eventEvaluationService;
     }
 
     /**
@@ -261,13 +265,7 @@ class EventController extends AbstractController
      */
     public function detailAction(?Event $event = null)
     {
-        $event = $this->evaluateSingleEventSetting($event);
-        $event = $this->evaluateIsShortcutSetting($event);
-        $event = $this->evaluateEventPreviewSetting($event);
-        if (is_a($event, Event::class) && ($this->settings['detail']['checkPidOfEventRecord'] ?? false)) {
-            $event = $this->checkPidOfEventRecord($event);
-        }
-
+        $event = $this->eventEvaluationService->evaluateForDetailAction($this->request, $this->settings, $event);
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -343,9 +341,7 @@ class EventController extends AbstractController
      */
     public function icalDownloadAction(?Event $event = null)
     {
-        if (is_a($event, Event::class) && ($this->settings['detail']['checkPidOfEventRecord'] ?? false)) {
-            $event = $this->checkPidOfEventRecord($event);
-        }
+        $event = $this->eventEvaluationService->evaluateForIcalDownloadAction($this->request, $this->settings, $event);
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -358,10 +354,7 @@ class EventController extends AbstractController
      */
     public function registrationAction(?Event $event = null): ResponseInterface
     {
-        $event = $this->evaluateSingleEventSetting($event);
-        if (is_a($event, Event::class) && ($this->settings['registration']['checkPidOfEventRecord'] ?? false)) {
-            $event = $this->checkPidOfEventRecord($event);
-        }
+        $event = $this->eventEvaluationService->evaluateForRegistrationAction($this->request, $this->settings, $event);
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -527,9 +520,11 @@ class EventController extends AbstractController
      */
     public function saveRegistrationAction(Registration $registration, Event $event): ResponseInterface
     {
-        if (is_a($event, Event::class) && ($this->settings['registration']['checkPidOfEventRecord'] ?? false)) {
-            $event = $this->checkPidOfEventRecord($event);
-        }
+        $event = $this->eventEvaluationService->evaluateForSaveRegistrationAction(
+            $this->request,
+            $this->settings,
+            $event
+        );
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
             return $this->handleEventNotFoundError($this->settings);
         }
@@ -725,7 +720,8 @@ class EventController extends AbstractController
     }
 
     /**
-     * Shows the verify confirmation registration view, where the user has to submit a form to finally confirm the registration
+     * Shows the verify confirmation registration view, where the user has to submit a form to finally
+     * confirm the registration
      */
     public function verifyConfirmRegistrationAction(int $reguid, string $hmac): ResponseInterface
     {
@@ -985,7 +981,7 @@ class EventController extends AbstractController
      */
     public function initializeSearchAction(): void
     {
-        if ($this->settings !== null && ($this->settings['search']['dateFormat'] ?? false)) {
+        if ($this->settings !== [] && ($this->settings['search']['dateFormat'] ?? false)) {
             $this->arguments->getArgument('searchDemand')
                 ->getPropertyMappingConfiguration()->forProperty('startDate')
                 ->setTypeConverterOption(
@@ -1073,75 +1069,6 @@ class EventController extends AbstractController
     protected function isOverwriteDemand(array $overwriteDemand): bool
     {
         return (int)($this->settings['disableOverrideDemand'] ?? 0) !== 1 && $overwriteDemand !== [];
-    }
-
-    /**
-     * If no event is given and the singleEvent setting is set, the configured single event is returned
-     */
-    protected function evaluateSingleEventSetting(?Event $event): ?Event
-    {
-        if ($event === null && (int)($this->settings['singleEvent'] ?? 0) > 0) {
-            $event = $this->eventRepository->findByUid((int)$this->settings['singleEvent']);
-        }
-
-        return $event;
-    }
-
-    /**
-     * If no event is given and the isShortcut setting is set, the event is displayed using the "Insert Record"
-     * content element and should be loaded from contect object data
-     */
-    protected function evaluateIsShortcutSetting(?Event $event): ?Event
-    {
-        if ($event === null && (bool)($this->settings['detail']['isShortcut'] ?? false)) {
-            $eventRawData = $this->request->getAttribute('currentContentObject')->data;
-            $event = $this->eventRepository->findByUid($eventRawData['uid']);
-        }
-
-        return $event;
-    }
-
-    /**
-     * If no event is given and the the `event_preview` argument is set, the event is displayed for preview
-     */
-    protected function evaluateEventPreviewSetting(?Event $event): ?Event
-    {
-        if ($event === null && $this->request->hasArgument('event_preview')) {
-            $context = GeneralUtility::makeInstance(Context::class);
-            $hasBackendUser = $context->getPropertyFromAspect('backend.user', 'isLoggedIn');
-            $previewEventId = (int)$this->request->getArgument('event_preview');
-            if ($previewEventId > 0 && $hasBackendUser) {
-                if ($this->settings['previewHiddenRecords'] ?? false) {
-                    $event = $this->eventRepository->findByUidIncludeHidden($previewEventId);
-                } else {
-                    $event = $this->eventRepository->findByUid($previewEventId);
-                }
-            }
-        }
-
-        return $event;
-    }
-
-    /**
-     * Checks if the event pid could be found in the storagePage settings of the detail plugin and
-     * if the pid could not be found it return null instead of the event object.
-     */
-    protected function checkPidOfEventRecord(Event $event): ?Event
-    {
-        $allowedStoragePages = GeneralUtility::trimExplode(
-            ',',
-            PageUtility::extendPidListByChildren(
-                $this->settings['storagePage'] ?? '',
-                (int)($this->settings['recursive'] ?? 0)
-            ),
-            true
-        );
-        if (count($allowedStoragePages) > 0 && !in_array($event->getPid(), $allowedStoragePages)) {
-            $this->eventDispatcher->dispatch(new EventPidCheckFailedEvent($event, $this, $this->request));
-            $event = null;
-        }
-
-        return $event;
     }
 
     /**

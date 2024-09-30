@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Event;
 
-use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -22,7 +21,6 @@ final readonly class EventPidCheckFailedEvent
 {
     public function __construct(
         private Event $event,
-        private EventController $eventController,
         private ServerRequestInterface $request
     ) {
     }
@@ -30,11 +28,6 @@ final readonly class EventPidCheckFailedEvent
     public function getEvent(): Event
     {
         return $this->event;
-    }
-
-    public function getEventController(): EventController
-    {
-        return $this->eventController;
     }
 
     public function getRequest(): ServerRequestInterface

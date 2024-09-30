@@ -24,6 +24,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 use UnexpectedValueException;
 
+/**
+ * @extends Repository<Event>
+ */
 class EventRepository extends Repository
 {
     protected $defaultOrderings = [
