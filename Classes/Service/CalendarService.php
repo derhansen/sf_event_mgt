@@ -20,16 +20,14 @@ class CalendarService
 {
     /**
      * Returns an array with weeks/days for the calendar view
-     *
-     * @param int $month
-     * @param int $year
-     * @param int $today
-     * @param int $firstDayOfWeek
-     * @param array|QueryResultInterface $events
-     * @return array
      */
-    public function getCalendarArray(int $month, int $year, int $today, int $firstDayOfWeek = 0, $events = null): array
-    {
+    public function getCalendarArray(
+        int $month,
+        int $year,
+        int $today,
+        int $firstDayOfWeek = 0,
+        array|QueryResultInterface|null $events = null
+    ): array {
         $weeks = [];
         $dateRange = $this->getCalendarDateRange($month, $year, $firstDayOfWeek);
         $currentDay = $dateRange['firstDayOfCalendar'];

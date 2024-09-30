@@ -106,7 +106,7 @@ class EventEvaluationService
      * If no event is given and the isShortcut setting is set, the event is displayed using the "Insert Record"
      * content element and should be loaded from contect object data
      */
-    private function evaluateIsShortcutSetting(RequestInterface $request, array $settings, ?Event $event): ?Event
+    private function evaluateIsShortcutSetting(RequestInterface $request, array $settings, ?Event $event = null): ?Event
     {
         if ($event === null && (bool)($settings['detail']['isShortcut'] ?? false)) {
             $eventRawData = $request->getAttribute('currentContentObject')->data;
@@ -119,7 +119,7 @@ class EventEvaluationService
     /**
      * If no event is given and the the `event_preview` argument is set, the event is displayed for preview
      */
-    private function evaluateEventPreviewSetting(RequestInterface $request, array $settings, ?Event $event): ?Event
+    private function evaluateEventPreviewSetting(RequestInterface $request, array $settings, ?Event $event = null): ?Event
     {
         if ($event === null && $request->hasArgument('event_preview')) {
             $hasBackendUser = $this->context->getPropertyFromAspect('backend.user', 'isLoggedIn');

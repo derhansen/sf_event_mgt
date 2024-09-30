@@ -1012,7 +1012,7 @@ class EventController extends AbstractController
     /**
      * Search view
      */
-    public function searchAction(SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
+    public function searchAction(?SearchDemand $searchDemand = null, array $overwriteDemand = []): ResponseInterface
     {
         $eventDemand = EventDemand::createFromSettings($this->settings);
         $eventDemand->setSearchDemand($searchDemand);
