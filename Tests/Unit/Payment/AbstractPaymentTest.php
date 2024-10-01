@@ -21,7 +21,7 @@ class AbstractPaymentTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = $this->getAccessibleMockForAbstractClass(AbstractPayment::class);
+        $this->subject = $this->getAccessibleMock(AbstractPayment::class);
     }
 
     protected function tearDown(): void

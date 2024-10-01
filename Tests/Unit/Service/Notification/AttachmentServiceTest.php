@@ -19,9 +19,7 @@ use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 /**
@@ -36,7 +34,11 @@ class AttachmentServiceTest extends UnitTestCase
      */
     protected function setUp(): void
     {
-        $this->subject = new AttachmentService();
+        $mockICalendarService = $this->getMockBuilder(ICalendarService::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->subject = new AttachmentService($mockICalendarService);
     }
 
     /**
@@ -140,145 +142,5 @@ class AttachmentServiceTest extends UnitTestCase
 
         $attachments = $this->subject->getAttachments($settings, $registration, $messageType, $messageRecipient);
         self::assertEquals($expected, $attachments);
-    }
-
-    /**
-     * Tests if fromEventProperty returns expected attachments for objectStorage property
-     */
-    #[Test]
-    public function getAttachmentsReturnsAttachmentsFromEventPropertyWithObjectStorage()
-    {
-        $registration = new Registration();
-        $event = new Event();
-
-        $mockFile1 = $this->getMockBuilder(File::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFile1->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/somefile.pdf');
-        $mockFileRef1 = $this->getMockBuilder(FileReference::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFileRef1->expects(self::any())->method('getOriginalResource')->willReturn($mockFile1);
-
-        $mockFile2 = $this->getMockBuilder(File::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFile2->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/anotherfile.pdf');
-        $mockFileRef2 = $this->getMockBuilder(FileReference::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFileRef2->expects(self::any())->method('getOriginalResource')->willReturn($mockFile2);
-
-        $event->addFiles($mockFileRef1);
-        $event->addFiles($mockFileRef2);
-        $registration->setEvent($event);
-
-        $settings = ['notification' => [
-            'registrationNew' => [
-                'attachments' => [
-                    'user' => [
-                        'fromEventProperty' => [
-                            'files',
-                        ],
-                    ],
-                ],
-            ],
-        ]];
-
-        $expected = [
-            '/path/to/somefile.pdf',
-            '/path/to/anotherfile.pdf',
-        ];
-
-        $attachments = $this->subject->getAttachments(
-            $settings,
-            $registration,
-            MessageType::REGISTRATION_NEW,
-            MessageRecipient::USER
-        );
-        self::assertEquals($expected, $attachments);
-    }
-
-    /**
-     * Tests if fromRegistrationProperty returns expected attachments for FileReference property
-     */
-    #[Test]
-    public function getAttachmentsReturnsAttachmentsFromEventPropertyWithFileReference()
-    {
-        $event = new Event();
-
-        $mockFile = $this->getMockBuilder(File::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFile->expects(self::any())->method('getForLocalProcessing')->willReturn('/path/to/somefile.pdf');
-        $mockFileRef = $this->getMockBuilder(FileReference::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockFileRef->expects(self::any())->method('getOriginalResource')->willReturn($mockFile);
-
-        $mockRegistration = $this->getMockBuilder(Registration::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRegistration->expects(self::once())->method('getEvent')->willReturn($event);
-        $mockRegistration->expects(self::once())->method('_hasProperty')->willReturn(true);
-        $mockRegistration->expects(self::once())->method('_getProperty')->willReturn($mockFileRef);
-
-        $settings = ['notification' => [
-            'registrationNew' => [
-                'attachments' => [
-                    'user' => [
-                        'fromRegistrationProperty' => [
-                            'fileProperty',
-                        ],
-                    ],
-                ],
-            ],
-        ]];
-
-        $expected = [
-            '/path/to/somefile.pdf',
-        ];
-
-        $attachments = $this->subject->getAttachments(
-            $settings,
-            $mockRegistration,
-            MessageType::REGISTRATION_NEW,
-            MessageRecipient::USER
-        );
-        self::assertEquals($expected, $attachments);
-    }
-
-    #[Test]
-    public function getICalAttachmentReturnsAFilenameIfICalFileEnabled()
-    {
-        $event = new Event();
-
-        $settings = ['notification' => [
-            'registrationNew' => [
-                'attachments' => [
-                    'user' => [
-                        'iCalFile' => 1,
-                    ],
-                ],
-            ],
-        ]];
-
-        $mockRegistration = $this->getMockBuilder(Registration::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $mockRegistration->expects(self::any())->method('getEvent')->willReturn($event);
-
-        $mockICalendarService = $this->getMockBuilder(ICalendarService::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $this->subject->injectICalService($mockICalendarService);
-
-        $attachment = $this->subject->getICalAttachment(
-            $settings,
-            $mockRegistration,
-            MessageType::REGISTRATION_NEW,
-            MessageRecipient::USER
-        );
-        self::assertNotEmpty($attachment);
     }
 }

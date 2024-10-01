@@ -19,6 +19,8 @@ use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class ChallengeResponseSpamCheckTest extends UnitTestCase
 {
+    protected bool $resetSingletonInstances = true;
+
     public function setUp(): void
     {
         parent::setUp();

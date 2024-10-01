@@ -16,7 +16,6 @@ use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use DERHANSEN\SfEventMgt\Service\CalendarService;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
-use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class CalendarServiceTest extends UnitTestCase
@@ -92,10 +91,7 @@ class CalendarServiceTest extends UnitTestCase
             DateTime::createFromFormat('d.m.Y', sprintf('2.%s.%s', 1, 2017))->setTime(12, 0, 0)
         );
 
-        $events = new ObjectStorage();
-        $events->attach($mockEvent);
-
-        $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
+        $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, [$mockEvent]);
         self::assertCount(1, $calendarArray[1][0]['events']);
     }
 
@@ -113,10 +109,7 @@ class CalendarServiceTest extends UnitTestCase
             DateTime::createFromFormat('d.m.Y', sprintf('4.%s.%s', 1, 2017))->setTime(12, 0, 0)
         );
 
-        $events = new ObjectStorage();
-        $events->attach($mockEvent);
-
-        $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, $events);
+        $calendarArray = $this->subject->getCalendarArray(1, 2017, mktime(0, 0, 0, 1, 1, 2017), 1, [$mockEvent]);
         self::assertCount(1, $calendarArray[1][0]['events']);
         self::assertCount(1, $calendarArray[1][1]['events']);
         self::assertCount(1, $calendarArray[1][2]['events']);

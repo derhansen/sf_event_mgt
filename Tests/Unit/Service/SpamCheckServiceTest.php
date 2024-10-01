@@ -23,7 +23,7 @@ class SpamCheckServiceTest extends UnitTestCase
     protected bool $resetSingletonInstances = true;
 
     #[Test]
-    public function spamCheckServiceWorksForEmptySettingsAndArguments(): void
+    public function isSpamCheckFailedReturnsFalseForEmptySettingsAndArguments(): void
     {
         $registration = new Registration();
         $settings = [];
