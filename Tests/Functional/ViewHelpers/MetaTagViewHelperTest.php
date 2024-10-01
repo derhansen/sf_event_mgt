@@ -39,10 +39,10 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     #[Test]
     public function metaTagForNameIsSetByViewHelper(): void
     {
-        $GLOBALS['TSFE'] = new TypoScriptFrontendController();
         $extbaseRequestParameters = new ExtbaseRequestParameters();
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('frontend.controller', new TypoScriptFrontendController())
             ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         $extbaseRequest = (new Request($serverRequest));
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
@@ -57,10 +57,10 @@ class MetaTagViewHelperTest extends FunctionalTestCase
     #[Test]
     public function metaTagForPropertyIsSetByViewHelper(): void
     {
-        $GLOBALS['TSFE'] = new TypoScriptFrontendController();
         $extbaseRequestParameters = new ExtbaseRequestParameters();
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('frontend.controller', new TypoScriptFrontendController())
             ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         $extbaseRequest = (new Request($serverRequest));
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);

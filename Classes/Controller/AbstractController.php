@@ -30,7 +30,7 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Pagination\QueryResultPaginator;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\Page\PageInformation;
 
 abstract class AbstractController extends ActionController
 {
@@ -169,8 +169,8 @@ abstract class AbstractController extends ActionController
         return $demand;
     }
 
-    protected function getTypoScriptFrontendController(): ?TypoScriptFrontendController
+    protected function getFrontendPageInformation(): PageInformation
     {
-        return $GLOBALS['TSFE'] ?? null;
+        return $this->request->getAttribute('frontend.page.information');
     }
 }

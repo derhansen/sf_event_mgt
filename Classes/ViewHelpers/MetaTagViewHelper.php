@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
+use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
@@ -55,6 +56,7 @@ class MetaTagViewHelper extends AbstractViewHelper
 
     private function getTypoScriptFrontendController(): TypoScriptFrontendController
     {
-        return $GLOBALS['TSFE'];
+        return $this->renderingContext->getAttribute(ServerRequestInterface::class)
+            ->getAttribute('frontend.controller');
     }
 }

@@ -81,9 +81,7 @@ class EventController extends AbstractController
     protected function initializeView(): void
     {
         $this->view->assign('contentObjectData', $this->request->getAttribute('currentContentObject')->data ?? null);
-        if ($this->getTypoScriptFrontendController()) {
-            $this->view->assign('pageData', $this->getTypoScriptFrontendController()->page);
-        }
+        $this->view->assign('pageData', $this->getFrontendPageInformation()->getPageRecord());
     }
 
     /**
@@ -209,7 +207,7 @@ class EventController extends AbstractController
                 'organisators' => $this->organisatorRepository->findDemanded($foreignRecordDemand),
                 'eventDemand' => $eventDemand,
                 'overwriteDemand' => $overwriteDemand,
-                'currentPageId' => $this->getTypoScriptFrontendController()->id,
+                'currentPageId' => $this->getFrontendPageInformation()->getId(),
                 'firstDayOfMonth' => DateTime::createFromFormat(
                     'd.m.Y',
                     sprintf('1.%s.%s', $currentMonth, $currentYear)
