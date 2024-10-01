@@ -139,3 +139,4 @@ Records
    Registrations/Index
    Registrationfield/Index
    Registrationfieldvalue/Index
+   PriceOption/Index

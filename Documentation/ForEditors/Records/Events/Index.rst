@@ -120,8 +120,8 @@ program/schedule.
 
          Special getters:
 
-         * {event.activePriceOptions} - returns all valid price options
-         * {event.priceOptions} - returns all price options. Use {priceOption.isValid} to
+         * :php:`{event.activePriceOptions}` - returns all valid price options
+         * :php:`{event.priceOptions}` - returns all price options. Use {priceOption.isValid} to
            decide, if the price option is selectable or not.
 
          See :ref:`Price option <priceoption>` chapter for more details.
