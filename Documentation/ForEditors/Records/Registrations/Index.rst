@@ -33,8 +33,14 @@ Default fields in the registration form are:
 * Notes
 * Accept terms and conditions
 
-If you need additional field in the registration form, you can add individual fields on event basis.
-For more information, see :ref:`registrationfield`
+Additionally, the following fields are only shown under certain conditions:
+
+* Amount of registrations (if Max. simultaneous registrations per user > 1)
+* Price option (only if event has price options)
+* Payment method (only if event has enabled payment)
+
+If you need additional field in the registration form, you can add individual
+fields on event basis. For more information, see :ref:`registrationfield`
 
 
 .. figure:: /Images/registration.png
@@ -245,6 +251,20 @@ The payment tab contains information about payment of the registration
 
    :Description:
          Administration field used to set if the user has paid for the event
+
+ - :Field:
+         Price (when registered)
+
+   :Description:
+         The price of the registration when the user registered to the event.
+         This is either the field "price" from the event record or the
+         price of the selected price option, if the event has price options.
+
+ - :Field:
+         Price Option
+
+   :Description:
+         The price option the user selected on registration
 
  - :Field:
          Payment method

@@ -69,6 +69,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.price_options">
 				<source>Price options</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.price_options.description">
+				<source>If registration is active for the event and price options are defined, the user must select one price option in order to complete the registration.</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.currency">
 				<source>Currency</source>
 			</trans-unit>
@@ -225,6 +228,12 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.paid">
 				<source>Paid</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.price">
+				<source>Price (when registered)</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption">
+				<source>Price option</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
 				<source>Notes</source>
 			</trans-unit>
@@ -359,6 +368,12 @@
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_priceoption">
 				<source>Price option</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_priceoption.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_priceoption.description">
+				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_priceoption.price">
 				<source>Price</source>

@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Event\ModifyRegistrationValidatorResultEvent;
 use DERHANSEN\SfEventMgt\Service\SpamCheckService;
@@ -19,6 +21,8 @@ use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use TYPO3\CMS\Extbase\Validation\Error;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
@@ -64,6 +68,7 @@ class RegistrationValidator extends AbstractValidator
         }
 
         $this->validateDefaultFields($value);
+        $this->validatePriceOption($value);
 
         $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields'] ?? ''));
         foreach ($requiredFields as $requiredField) {
@@ -164,5 +169,50 @@ class RegistrationValidator extends AbstractValidator
         }
 
         return $validator;
+    }
+
+    protected function validatePriceOption(Registration $registration): void
+    {
+        $event = $registration->getEvent();
+        if ($event === null || $event->getActivePriceOptions() === []) {
+            // No price option check, since event has no price options
+            return;
+        }
+
+        $validator = new NotEmptyValidator();
+        $validationResult = $validator->validate($registration->getPriceOption());
+        if ($validationResult->hasErrors()) {
+            foreach ($validationResult->getErrors() as $error) {
+                $this->result->forProperty('priceOption')->addError($error);
+            }
+
+            // No further checks required, since the price option is empty
+            return;
+        }
+
+        if ($this->isInvalidPriceOption($registration->getPriceOption(), $event)) {
+            $message = LocalizationUtility::translate('validation.invalid_priceoption', 'SfEventMgt');
+            $error = new Error(
+                $message ?? 'Invalid price option selected.',
+                1727776820
+            );
+            $this->result->forProperty('priceOption')->addError($error);
+        }
+    }
+
+    /**
+     * Checks, if the given price option is an active price option of the event. Returns
+     * true, if the price option is valid, else false is returned.
+     */
+    protected function isInvalidPriceOption(PriceOption $priceOption, Event $event): bool
+    {
+        foreach ($event->getActivePriceOptions() as $eventPriceOption) {
+            if ($eventPriceOption->getUid() === $priceOption->getUid()) {
+                // The price option is valid
+                return false;
+            }
+        }
+
+        return true;
     }
 }

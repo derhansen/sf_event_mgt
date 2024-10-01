@@ -65,7 +65,14 @@
                     <f:translate key="event.freeofcharge" />
                 </f:then>
                 <f:else>
-                    {event.currentPrice} {event.currency}
+                    <f:if condition="{event.priceOptions}">
+                        <f:then>
+                            <f:translate key="startingAt" /> {event.currentPrice} {event.currency}
+                        </f:then>
+                        <f:else>
+                            {event.currentPrice -> f:format.number()} {event.currency}
+                        </f:else>
+                    </f:if>
                 </f:else>
             </f:if>
         </div>

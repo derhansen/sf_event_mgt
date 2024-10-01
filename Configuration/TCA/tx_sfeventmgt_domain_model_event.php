@@ -876,11 +876,12 @@ return [
         'price_options' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price_options',
+            'description' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price_options.description',
             'config' => [
                 'type' => 'inline',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_priceoption',
                 'foreign_field' => 'event',
-                'foreign_default_sortby' => 'valid_until DESC',
+                'foreign_sortby' => 'sorting',
                 'maxitems' => 100,
                 'appearance' => [
                     'expandSingle' => 1,

@@ -516,3 +516,28 @@ The TypoScript settings :php:`settings.confirmation.additionalVerificationStep` 
 :php:`settings.cancellation.additionalVerificationStep` can be activated to avoid this problem. When active,
 links in emails will refer to a page, where an confirmation- or cancellation-link has to be clicked manually
 by the user.
+
+The registration form does not submit
+=====================================
+
+If the registration form does not submit, it is likely, that a validation error
+occured. It is recommended to check all validation errors by adding the
+following fluid code to the registration template.
+
+.. code-block:: php
+
+    <f:form.validationResults>
+      <f:if condition="{validationResults.flattenedErrors}">
+        <ul class="errors">
+          <f:for each="{validationResults.flattenedErrors}" as="errors" key="propertyPath">
+            <li>{propertyPath}
+              <ul>
+              <f:for each="{errors}" as="error">
+                <li>{error.code}: {error}</li>
+              </f:for>
+              </ul>
+            </li>
+          </f:for>
+        </ul>
+      </f:if>
+    </f:form.validationResults>

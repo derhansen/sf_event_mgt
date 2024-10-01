@@ -73,7 +73,9 @@ Notification Service
 
 Registration Service
 --------------------
+* :php:`ModifyCheckRegistrationSuccessEvent`
 * :php:`AfterRegistrationMovedFromWaitlist`
+* :php:`ModifyRegistrationPriceEvent`
 
 Export Service
 --------------

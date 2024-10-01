@@ -19,6 +19,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterRegistrationMovedFromWaitlist;
 use DERHANSEN\SfEventMgt\Event\ModifyCheckRegistrationSuccessEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyRegistrationPriceEvent;
 use DERHANSEN\SfEventMgt\Payment\AbstractPayment;
 use DERHANSEN\SfEventMgt\Security\HashScope;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
@@ -408,5 +409,24 @@ class RegistrationService
             );
             throw new PropagateResponseException($response, 1671627320);
         }
+    }
+
+    /**
+     * Evaluates and returns the price for the given registration to the given event.
+     */
+    public function evaluateRegistrationPrice(
+        Event $event,
+        Registration $registration,
+        ServerRequestInterface $request
+    ): float {
+        $price = $event->getPrice();
+        if ($registration->getPriceOption()) {
+            $price = $registration->getPriceOption()->getPrice();
+        }
+
+        $modifyRegistrationPriceEvent = new ModifyRegistrationPriceEvent($price, $event, $registration, $request);
+        $this->eventDispatcher->dispatch($modifyRegistrationPriceEvent);
+
+        return $modifyRegistrationPriceEvent->getPrice();
     }
 }

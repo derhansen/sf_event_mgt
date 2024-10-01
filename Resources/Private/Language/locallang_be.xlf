@@ -459,6 +459,9 @@
 			<trans-unit id="tabs.language">
 				<source>Language</source>
 			</trans-unit>
+			<trans-unit id="tabs.additional">
+				<source>Additional</source>
+			</trans-unit>
 			<trans-unit id="administration.message-1.title">
 				<source>Information</source>
 			</trans-unit>

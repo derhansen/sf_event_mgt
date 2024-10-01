@@ -782,36 +782,32 @@ class Event extends AbstractEntity
     }
 
     /**
-     * Returns all active price options sorted by date ASC
+     * Returns all active price options sorted by price ASC
      *
-     * @return array
+     * @return array<PriceOption>
      */
     public function getActivePriceOptions(): array
     {
         $activePriceOptions = [];
         if ($this->getPriceOptions()) {
-            $compareDate = new DateTime('today midnight');
             foreach ($this->getPriceOptions() as $priceOption) {
-                if ($priceOption->getValidUntil() >= $compareDate) {
-                    $activePriceOptions[$priceOption->getValidUntil()->getTimestamp()] = $priceOption;
+                if ($priceOption->getIsValid()) {
+                    $activePriceOptions[(int)$priceOption->getPrice()] = $priceOption;
                 }
             }
         }
-        ksort($activePriceOptions);
 
         return $activePriceOptions;
     }
 
     /**
      * Returns the current price of the event respecting possible price options
-     *
-     * @return float
      */
     public function getCurrentPrice(): float
     {
         $activePriceOptions = $this->getActivePriceOptions();
         if (count($activePriceOptions) >= 1) {
-            // Sort active price options and return first element
+            // Sort active price options and return first element (which is the lowest price)
             return reset($activePriceOptions)->getPrice();
         }
         // Just return the price field

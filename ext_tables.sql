@@ -126,6 +126,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	payment_reference varchar(255) DEFAULT '' NOT NULL,
 	waitlist tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	field_values int(11) unsigned DEFAULT '0' NOT NULL,
+	price double(11,2) DEFAULT '0.00' NOT NULL,
+	price_option int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY event (event, waitlist)
 );
@@ -134,6 +136,8 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 # Table structure for table 'tx_sfeventmgt_domain_model_priceoption'
 #
 CREATE TABLE tx_sfeventmgt_domain_model_priceoption (
+	title varchar(255) DEFAULT '' NOT NULL,
+	description text,
 	price double(11,2) DEFAULT '0.00' NOT NULL,
 	valid_until int(11) DEFAULT '0' NOT NULL,
 	event int(11) unsigned DEFAULT '0' NOT NULL,

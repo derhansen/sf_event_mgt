@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Validation\Validator;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use PHPUnit\Framework\Attributes\Test;
@@ -18,7 +20,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class RegistrationValidatorTest extends FunctionalTestCase
@@ -123,5 +128,62 @@ class RegistrationValidatorTest extends FunctionalTestCase
 
         $result = $subject->validate($registration);
         self::assertFalse($result->hasErrors());
+    }
+
+    #[Test]
+    public function registrationInvalidWhenPriceOptionIsRequired(): void
+    {
+        $priceOption = new PriceOption();
+        $priceOption->setPrice(10.00);
+
+        $event = new Event();
+        $event->addPriceOptions($priceOption);
+
+        $registration = new Registration();
+        $registration->setFirstname('Torben');
+        $registration->setLastname('Hansen');
+        $registration->setEmail('derhansen@gmail.com');
+        $registration->setEvent($event);
+
+        $subject = new RegistrationValidator();
+        $subject->setRequest($this->request);
+
+        $result = $subject->validate($registration);
+        self::assertTrue($result->hasErrors());
+        $errors = $result->getSubResults();
+        self::assertCount(1, $errors);
+        self::assertTrue(isset($errors['priceOption']));
+    }
+
+    #[Test]
+    public function registrationInvalidWhenPriceOptionDoesNotBelongToEvent(): void
+    {
+        $priceOption = new PriceOption();
+        $priceOption->_setProperty('uid', 1);
+        $priceOption->setPrice(10.00);
+
+        $event = new Event();
+        $event->addPriceOptions($priceOption);
+
+        $invalidPriceOption = new PriceOption();
+        $invalidPriceOption->_setProperty('uid', 2);
+        $invalidPriceOption->setPrice(20.00);
+
+        $registration = new Registration();
+        $registration->setPriceOption($invalidPriceOption);
+        $registration->setFirstname('Torben');
+        $registration->setLastname('Hansen');
+        $registration->setEmail('derhansen@gmail.com');
+        $registration->setEvent($event);
+
+        $subject = new RegistrationValidator();
+        $subject->setRequest($this->request);
+
+        $result = $subject->validate($registration);
+        self::assertTrue($result->hasErrors());
+        $errors = $result->getSubResults();
+        self::assertCount(1, $errors);
+        self::assertTrue(isset($errors['priceOption']));
+        self::assertEquals(1727776820, $errors['priceOption']->getFirstError()->getCode());
     }
 }

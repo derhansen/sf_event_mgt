@@ -41,7 +41,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Download of iCal file for events
 * Add event to online calendar (Google, Outlook, Office 365 and Yahoo)
 * Uses TYPO3 system categories to structure events by category
-* Price options valid until selected dates (e.g. for early bird prices)
+* Price options (e.g. for early bird prices)
 * Payment processing after successful registration
 * Configurable payment methods
 * Show events using the "Insert Record" Content Element

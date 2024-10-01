@@ -16,9 +16,31 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 
 class PriceOption extends AbstractEntity
 {
+    protected string $title = '';
+    protected string $description = '';
     protected float $price = 0.0;
     protected ?DateTime $validUntil = null;
     protected ?Event $event = null;
+
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): void
+    {
+        $this->title = $title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
 
     public function getPrice(): float
     {
@@ -48,5 +70,18 @@ class PriceOption extends AbstractEntity
     public function setEvent(?Event $event): void
     {
         $this->event = $event;
+    }
+
+    /**
+     * Returns, if the current price option is valid (valid until date not expired)
+     */
+    public function getIsValid(): bool
+    {
+        if (!$this->getValidUntil()) {
+            return true;
+        }
+
+        $compareDate = new DateTime('today midnight');
+        return $this->getValidUntil() >= $compareDate;
     }
 }

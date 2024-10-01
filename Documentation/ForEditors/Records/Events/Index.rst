@@ -106,13 +106,30 @@ program/schedule.
          Price options
 
    :Description:
-         If the event has prices based on a selected date (e.g. early bird price), you can define one or multiple
-         price options. The following fields are availabe for price options.
+         If the event has multiple prices of which the user must choose of while
+         registering, you can define one or multiple price options. The following
+         fields are availabe for price options.
 
+         * Title
+         * Desciption
          * Price
          * Date until the price is valid (selected date is included)
 
-         The event management will automatically output the current price if the :php:`{event.currentPrice}` getter is used.
+         The event management will automatically output the current price if
+         the :php:`{event.currentPrice}` getter is used.
+
+         Special getters:
+
+         * {event.activePriceOptions} - returns all valid price options
+         * {event.priceOptions} - returns all price options. Use {priceOption.isValid} to
+           decide, if the price option is selectable or not.
+
+         See :ref:`Price option <priceoption>` chapter for more details.
+
+        .. note::
+           If an event has price options defined and registration is enabled, the user
+           must chose one of the available price options in the registration
+           process.
 
  - :Field:
          Link

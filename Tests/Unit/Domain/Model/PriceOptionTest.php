@@ -31,9 +31,32 @@ class PriceOptionTest extends UnitTestCase
         unset($this->subject);
     }
 
-    /**
-     * Test if initial value for price is returned
-     */
+    #[Test]
+    public function getTitleReturnsInitialValue(): void
+    {
+        self::assertSame('', $this->subject->getTitle());
+    }
+
+    #[Test]
+    public function setTitleSetsTitle(): void
+    {
+        $this->subject->setTitle('Title');
+        self::assertSame('Title', $this->subject->getTitle());
+    }
+
+    #[Test]
+    public function getDescriptionReturnsInitialValue(): void
+    {
+        self::assertSame('', $this->subject->getDescription());
+    }
+
+    #[Test]
+    public function setDescriptionSetsDescription(): void
+    {
+        $this->subject->setDescription('Description');
+        self::assertSame('Description', $this->subject->getDescription());
+    }
+
     #[Test]
     public function getPriceReturnsInitialValueForFloat(): void
     {
@@ -43,9 +66,6 @@ class PriceOptionTest extends UnitTestCase
         );
     }
 
-    /**
-     * Test if price can be set
-     */
     #[Test]
     public function setPriceForFloatSetsPrice(): void
     {
@@ -53,18 +73,12 @@ class PriceOptionTest extends UnitTestCase
         self::assertSame(12.99, $this->subject->getPrice());
     }
 
-    /**
-     * Test if validUntil date returns intitial value
-     */
     #[Test]
     public function getValidUntilReturnsInitialValueForDate(): void
     {
         self::assertNull($this->subject->getValidUntil());
     }
 
-    /**
-     * Test if validUntil date can be set
-     */
     #[Test]
     public function setValidUntilForDateSetsValidUntil(): void
     {

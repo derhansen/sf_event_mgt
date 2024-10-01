@@ -1058,8 +1058,8 @@ class EventTest extends UnitTestCase
         $this->subject->addPriceOptions($priceOption3);
 
         $expected = [];
-        $expected[$dateToday->getTimestamp()] = $priceOption2;
-        $expected[$dateTomorrow->getTimestamp()] = $priceOption3;
+        $expected[12] = $priceOption2;
+        $expected[14] = $priceOption3;
 
         self::assertEquals($expected, $this->subject->getActivePriceOptions());
     }

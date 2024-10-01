@@ -48,6 +48,8 @@ class Registration extends AbstractEntity
     protected string $paymentmethod = '';
     protected string $paymentReference = '';
     protected bool $waitlist = false;
+    protected float $price = 0.0;
+    protected ?PriceOption $priceOption = null;
 
     /**
      * @var ObjectStorage<FieldValue>
@@ -393,5 +395,25 @@ class Registration extends AbstractEntity
     public function getFullname(): string
     {
         return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): void
+    {
+        $this->price = $price;
+    }
+
+    public function getPriceOption(): ?PriceOption
+    {
+        return $this->priceOption;
+    }
+
+    public function setPriceOption(?PriceOption $priceOption): void
+    {
+        $this->priceOption = $priceOption;
     }
 }

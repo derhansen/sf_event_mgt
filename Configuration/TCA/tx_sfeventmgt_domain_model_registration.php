@@ -42,7 +42,7 @@ return [
                 field_values,
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration.tabs.payment,
-                paid, paymentmethod, payment_reference,
+                paid, price, price_option, paymentmethod, payment_reference,
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 hidden',
@@ -277,6 +277,28 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.paid',
             'config' => [
                 'type' => 'check',
+                'default' => 0,
+            ],
+        ],
+        'price' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.price',
+            'config' => [
+                'type' => 'number',
+                'format' => 'decimal',
+                'size' => 5,
+            ],
+        ],
+        'price_option' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.priceOption',
+            'config' => [
+                'type' => 'group',
+                'allowed' => 'tx_sfeventmgt_domain_model_priceoption',
+                'foreign_table' => 'tx_sfeventmgt_domain_model_priceoption',
+                'size' => 1,
+                'minitems' => 0,
+                'maxitems' => 1,
                 'default' => 0,
             ],
         ],

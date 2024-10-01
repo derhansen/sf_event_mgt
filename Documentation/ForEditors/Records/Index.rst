@@ -113,6 +113,19 @@ Records
             A registration field value contains the field value of each
             registration field a user submitted during registration.
 
+   .. container:: col-12 col-md-6 pl-0 pr-3 py-3 m-0
+
+      .. container:: card px-0 h-100
+
+         .. rst-class:: card-header h3
+
+            .. rubric:: :ref:`Price option <priceoption>`
+
+         .. container:: card-body
+
+            A price option can be added to an event record to allow the user
+            to select a price during the registration process.
+
 .. toctree::
    :maxdepth: 5
    :titlesonly:

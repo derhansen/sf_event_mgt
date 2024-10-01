@@ -202,12 +202,35 @@
 						<f:translate key="event.freeofcharge" />
 					</f:then>
 					<f:else>
-						{event.currentPrice} {event.currency}
+                        <f:if condition="{event.priceOptions}">
+                            <f:then>
+                                <f:translate key="startingAt" /> {event.currentPrice} {event.currency}
+                            </f:then>
+                            <f:else>
+                                {event.currentPrice -> f:format.number()} {event.currency}
+                            </f:else>
+                        </f:if>
 					</f:else>
 				</f:if>
 			</div>
 			<div class="clear"></div>
 		</div>
+
+        <f:if condition="{event.priceOptions}">
+            <div class="event-detail-row">
+                <div class="event-detail-label">
+                    <f:translate key="tx_sfeventmgt_domain_model_event.priceOptions" />
+                </div>
+                <div class="event-detail-value event-price-options">
+                    <ul>
+                        <f:for each="{event.priceOptions}" as="priceOption">
+                            <li>{priceOption.title}: {priceOption.price -> f:format.number()} {event.currency}</li>
+                        </f:for>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </f:if>
 
 		<div class="event-detail-row">
 			<div class="event-detail-label">

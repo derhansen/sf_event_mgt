@@ -1,13 +1,18 @@
 <?php
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+
+$rteImageSoftref = ExtensionManagementUtility::isLoaded('rte_ckeditor_image') ? ',rtehtmlarea_images' : '';
+
 return [
     'ctrl' => [
         'title' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption',
-        'label' => 'price',
-        'label_alt' => 'valid_until',
+        'label' => 'title',
+        'label_alt' => 'price, valid_until',
         'label_alt_force' => 1,
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
+        'sortby' => 'sorting',
         'versioningWS' => true,
         'hideTable' => true,
         'origUid' => 't3_origuid',
@@ -31,7 +36,9 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'price, valid_until,
+            'showitem' => 'title, price, valid_until,
+                --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.additional,
+                    description,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
                     --palette--;;language,
                 --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
@@ -140,6 +147,30 @@ return [
             ],
         ],
 
+        'title' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption.title',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'required' => true,
+            ],
+        ],
+        'description' => [
+            'exclude' => true,
+            'l10n_mode' => 'prefixLangTitle',
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption.description',
+            'config' => [
+                'type' => 'text',
+                'enableRichtext' => true,
+                'cols' => 40,
+                'rows' => 15,
+                'eval' => 'trim',
+                'softref' => 'typolink_tag,email[subst],url' . $rteImageSoftref,
+            ],
+        ],
         'price' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption.price',
@@ -157,7 +188,7 @@ return [
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption.valid_until',
             'config' => [
                 'type' => 'datetime',
-                'default' => time(),
+                'default' => 0,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],

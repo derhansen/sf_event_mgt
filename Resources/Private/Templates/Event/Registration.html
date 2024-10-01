@@ -246,6 +246,25 @@
                         </div>
                     </f:if>
 
+                    <f:if condition="{event.activePriceOptions}">
+                        <div class="event-registration-row {e:validation.errorClass(fieldname: 'priceOption')}">
+                            <label for="priceOption">
+                                <f:translate key="tx_sfeventmgt_domain_model_registration.priceOption" />
+                                <e:registration.isRequiredField settings="{settings}" fieldname="priceOption">
+                                    <span class="event-required">*</span>
+                                </e:registration.isRequiredField>
+                            </label>
+
+                            <f:for each="{event.activePriceOptions}" as="priceOption" iteration="i">
+                                <label>
+                                    <f:form.radio name="priceOption" property="priceOption" value="{priceOption.uid}" /> {priceOption.title} - {priceOption.price -> f:format.number()} {event.currency}
+                                </label>
+                            </f:for>
+
+                            <f:render partial="FormErrors" arguments="{field: 'registration.priceOption'}"/>
+                        </div>
+                    </f:if>
+
                     <f:if condition="{event.enablePayment}">
                         <br/>
                         <div class="event-registration-row">
