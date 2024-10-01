@@ -124,12 +124,11 @@ program/schedule.
          * :php:`{event.priceOptions}` - returns all price options. Use {priceOption.isValid} to
            decide, if the price option is selectable or not.
 
-         See :ref:`Price option <priceoption>` chapter for more details.
+         If an event has price options defined and registration is enabled, the user
+         must chose one of the available price options in the registration
+         process.
 
-        .. note::
-           If an event has price options defined and registration is enabled, the user
-           must chose one of the available price options in the registration
-           process.
+         See :ref:`Price option <priceoption>` chapter for more details.
 
  - :Field:
          Link
