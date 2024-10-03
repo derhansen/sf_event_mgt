@@ -1,7 +1,6 @@
 <?php
 
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
-use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 $slugBehaviour = GeneralUtility::makeInstance(ExtensionConfiguration::class)
