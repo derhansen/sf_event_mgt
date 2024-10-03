@@ -180,15 +180,6 @@ return [
                 'type' => 'file',
                 'maxitems' => 1,
                 'allowed' => 'common-image-types',
-                'overrideChildTca' => [
-                    'types' => [
-                        File::FILETYPE_IMAGE => [
-                            'showitem' => '
-                                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                        --palette--;;filePalette',
-                        ],
-                    ],
-                ],
             ],
         ],
     ],
