@@ -28,6 +28,7 @@ use DERHANSEN\SfEventMgt\Utility\MessageRecipient;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use RuntimeException;
+use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -42,7 +43,8 @@ class NotificationService
         protected readonly FluidRenderingService $fluidRenderingService,
         protected readonly CustomNotificationLogRepository $customNotificationLogRepository,
         protected readonly AttachmentService $attachmentService,
-        protected readonly EventDispatcherInterface $eventDispatcher
+        protected readonly EventDispatcherInterface $eventDispatcher,
+        protected readonly Context $context
     ) {
     }
 
@@ -111,7 +113,7 @@ class NotificationService
         $notificationlogEntry->setEvent($event);
         $notificationlogEntry->setDetails($details);
         $notificationlogEntry->setEmailsSent($emailsSent);
-        $notificationlogEntry->setCruserId($GLOBALS['BE_USER']->user['uid'] ?? 0); // @todo Use User Aspect
+        $notificationlogEntry->setCruserId($this->context->getPropertyFromAspect('backend.user', 'id'));
 
         $modifyCustomNotificationLogEntry = new ModifyCustomNotificationLogEvent(
             $notificationlogEntry,
