@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Hooks;
 
 use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Localization\LanguageService;
 
 /**
  * Hook for Template Layouts
@@ -27,7 +28,7 @@ class TemplateLayouts
         $templateLayouts = $this->getTemplateLayoutsFromTsConfig($pid);
         foreach ($templateLayouts as $index => $layout) {
             $additionalLayout = [
-                $GLOBALS['LANG']->sL($layout),
+                $this->getLanguageService()->sL($layout),
                 $index,
             ];
             $config['items'][] = $additionalLayout;
@@ -48,5 +49,10 @@ class TemplateLayouts
         }
 
         return $templateLayouts;
+    }
+
+    protected function getLanguageService(): LanguageService
+    {
+        return $GLOBALS['LANG'];
     }
 }

@@ -101,8 +101,8 @@ class EventPlausabilityService
         $defaultFlashMessageQueue->enqueue($flashMessage);
     }
 
-    protected function getLanguageService(): ?LanguageService
+    protected function getLanguageService(): LanguageService
     {
-        return $GLOBALS['LANG'] ?? null;
+        return $GLOBALS['LANG'];
     }
 }

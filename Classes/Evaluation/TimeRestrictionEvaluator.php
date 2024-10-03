@@ -60,7 +60,7 @@ class TimeRestrictionEvaluator
         return $value;
     }
 
-    protected function getLanguageService(): ?LanguageService
+    protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }
