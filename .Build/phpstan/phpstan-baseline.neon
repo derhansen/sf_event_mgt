@@ -49,8 +49,3 @@ parameters:
 			message: "#^Cannot access offset string on array\\|object\\.$#"
 			count: 1
 			path: ../../Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
-
-		-
-			message: "#^There is no request attribute \"route\" configured so we can't figure out the exact type to return when calling Psr\\\\Http\\\\Message\\\\ServerRequestInterface\\:\\:getAttribute$#"
-			count: 1
-			path: ../../Classes/ViewHelpers/Uri/PageViewHelper.php
