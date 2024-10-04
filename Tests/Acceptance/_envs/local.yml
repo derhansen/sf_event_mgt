@@ -1,11 +1,11 @@
 modules:
   config:
       WebDriver:
-        url: http://sf-event-mgt-acceptance-v12.typo3.local/
+        url: http://sf-event-mgt-acceptance-v13.typo3.local/
       Mailpit:
         url: http://127.0.0.1
         port: 8025
       Db:
-        dsn: 'mysql:host=localhost;dbname=typo3_sfeventmgt_acceptance_v12'
+        dsn: 'mysql:host=127.0.0.1;port=3406;dbname=typo3_sfeventmgt_acceptance_v13'
         user: '%DB_USERNAME%'
-        password: '%DB_PASSWORD%'
+        password: '%DB_PASSWORD_V8%'
