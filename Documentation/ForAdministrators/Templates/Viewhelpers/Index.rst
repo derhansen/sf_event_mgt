@@ -70,16 +70,21 @@ This viewhelper prefills fields in the registration form with values from fe_use
 Uri.PageViewhelper
 ~~~~~~~~~~~~~~~~~~
 
-This viewhelper does exactly the same as f:uri.page, but this viewhelper
-builds frontend links with buildFrontendUri(), so links to FE pages can get
-generated in the TYPO3 backend.
+This viewhelper does generates a link to the given page with the given
+arguments.
 
 This viewhelper can be used in email templates for custom notifications, when you want to link to a
 given page in you TYPO3 website.
 
+.. note::
+
+   This ViewHelper is not aware of any extbase context, so arguments must be
+   fully resolved (e.g. use :php:`{event.uid}` if an action required the
+   :php:`event` argument)
+
 **Example 1**::
 
-  <e:uri.page pageUid="4" additionalParams="{tx_sfeventmgt_pieventdetail:{event: registration.event, action: 'detail', controller: 'Event'}}" absolute="1"/>
+  <e:uri.page pageUid="22" additionalParams="{tx_sfeventmgt_pieventdetail:{event: registration.event.uid, action: 'detail', controller: 'Event'}}" />
 
 **Example 2**::
 
