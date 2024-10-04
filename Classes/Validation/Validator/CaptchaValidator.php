@@ -65,7 +65,7 @@ class CaptchaValidator extends AbstractValidator
         $captchaFormFieldValue = $parsedBody[$configurationService->getResponseField()] ?? null;
         if ($captchaFormFieldValue === null) {
             $this->addError(
-                LocalizationUtility::translate('validation.missing_captcha', 'SfEventMgt'),
+                LocalizationUtility::translate('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:validation.missing_captcha'),
                 1631943016
             );
             return;
@@ -90,7 +90,7 @@ class CaptchaValidator extends AbstractValidator
         $responseArray = json_decode($body, true);
         if (!is_array($responseArray) || empty($responseArray) || $responseArray['success'] === false) {
             $this->addError(
-                $this->translateErrorMessage('validation.possible_robot', 'SfEventMgt'),
+                $this->translateErrorMessage('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:validation.possible_robot'),
                 1631940277
             );
         }

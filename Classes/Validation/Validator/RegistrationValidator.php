@@ -61,7 +61,7 @@ class RegistrationValidator extends AbstractValidator
     {
         $spamSettings = $this->settings['registration']['spamCheck'] ?? [];
         if ((bool)($spamSettings['enabled'] ?? false) && $this->isSpamCheckFailed($value, $spamSettings)) {
-            $message = $this->translateErrorMessage('registration.spamCheckFailed', 'SfEventMgt');
+            $message = $this->translateErrorMessage('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:registration.spamCheckFailed');
             $this->addErrorForProperty('spamCheck', $message, 1578855253);
 
             return;
