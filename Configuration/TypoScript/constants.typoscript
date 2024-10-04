@@ -156,13 +156,5 @@ module.tx_sfeventmgt {
             # cat=module.tx_sfeventmgt/search; type=string; label=Search fields
             fields = title, teaser
         }
-        notification {
-            # cat=module.tx_sfeventmgt/notification; type=string; label=Email address for emails sent to user
-            senderEmail =
-            # cat=module.tx_sfeventmgt/notification; type=string; label=Sender name for emails sent to user
-            senderName =
-            # cat=module.tx_sfeventmgt/notification; type=string; label=Signature shown in emails sent to user
-            senderSignature =
-        }
     }
 }
