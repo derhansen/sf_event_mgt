@@ -352,7 +352,7 @@
 				<source>TypoScript settings missing</source>
 			</trans-unit>
 			<trans-unit id="administration.settingsError.description">
-				<source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
+				<source>Unable to find TypoScript settings for module. Please make sure, required TypoScript settings have been included. If you use a TypoScript template for your website, include the static TypoScript of sf_event_mgt. If you use site sets and have included the extensions site set, make sure that the templates does not clear constants/setup (which overrides site set includes).</source>
 			</trans-unit>
 			<trans-unit id="administration.notify.description">
 				<source>Please select an email template that will be used to notify participants of the event.</source>

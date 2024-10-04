@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+	<file source-language="en" datatype="plaintext" original="EXT:sf_event_mgt/Configuration/Sets/labels.xlf" date="2024-10-03T15:42:00Z" product-name="sf_event_mgt">
+		<header/>
+		<body>
+			<trans-unit id="label" resname="label">
+				<source>Event management and registration</source>
+			</trans-unit>
+
+			<trans-unit id="categories.sf_event_mgt" resname="categories.sf_event_mgt">
+				<source>Event Management</source>
+			</trans-unit>
+			<trans-unit id="categories.sf_event_mgt.templates" resname="categories.sf_event_mgt.templates">
+				<source>Templates</source>
+			</trans-unit>
+			<trans-unit id="categories.sf_event_mgt.settings" resname="categories.sf_event_mgt.settings">
+				<source>Settings</source>
+			</trans-unit>
+
+			<trans-unit id="settings.sf_event_mgt.view.templateRootPath" resname="settings.sf_event_mgt.view.templateRootPath">
+				<source>Path of custom Fluid Templates for the extension</source>
+			</trans-unit>
+			<trans-unit id="settings.sf_event_mgt.view.partialRootPath" resname="settings.sf_event_mgt.view.partialRootPath">
+				<source>Path of custom Fluid Partials for the extension</source>
+			</trans-unit>
+			<trans-unit id="settings.sf_event_mgt.view.layoutRootPath" resname="settings.sf_event_mgt.view.layoutRootPath">
+				<source>Path of custom Fluid Layouts for the extension</source>
+			</trans-unit>
+
+			<trans-unit id="settings.sf_event_mgt.notification.senderEmail" resname="settings.sf_event_mgt.notification.senderEmail">
+				<source>Sender email address</source>
+			</trans-unit>
+			<trans-unit id="settings.description.sf_event_mgt.notification.senderEmail" resname="settings.description.sf_event_mgt.notification.senderEmail">
+				<source>Email address for emails sent by the extension</source>
+			</trans-unit>
+			<trans-unit id="settings.sf_event_mgt.notification.senderName" resname="settings.sf_event_mgt.notification.senderName">
+				<source>Sender name</source>
+			</trans-unit>
+			<trans-unit id="settings.description.sf_event_mgt.notification.senderName" resname="settings.description.sf_event_mgt.notification.senderName">
+				<source>Name of the sender for emails sent by the extension</source>
+			</trans-unit>
+			<trans-unit id="settings.sf_event_mgt.notification.replyToEmail" resname="settings.sf_event_mgt.notification.replyToEmail">
+				<source>Reply-to email address</source>
+			</trans-unit>
+			<trans-unit id="settings.description.sf_event_mgt.notification.replyToEmail" resname="settings.description.sf_event_mgt.notification.replyToEmail">
+				<source>If defined, all outgoing emails to the user will include the given reply-to email address</source>
+			</trans-unit>
+			<trans-unit id="settings.sf_event_mgt.notification.adminEmail" resname="settings.sf_event_mgt.notification.adminEmail">
+				<source>Admin email address</source>
+			</trans-unit>
+			<trans-unit id="settings.description.sf_event_mgt.notification.adminEmail" resname="settings.description.sf_event_mgt.notification.adminEmail">
+				<source>Email address of the website/event administrator</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

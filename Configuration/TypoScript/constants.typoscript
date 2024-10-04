@@ -55,15 +55,15 @@ plugin.tx_sfeventmgt {
             additionalVerificationStep = 0
         }
         notification {
-            # cat=plugin.tx_sfeventmgt/notification; type=string; label=E-mail address for emails sent to user
+            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Email address for emails sent by the extension
             senderEmail =
-            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Sender name for emails sent to user
+            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Sender name for emails sent by the extension
             senderName =
-            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Signature shown in emails sent to user
+            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Signature for emails
             senderSignature =
-            # cat=plugin.tx_sfeventmgt/notification; type=string; label=E-mail address for reply-to in emails sent to user
+            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Email address for reply-to in emails sent to user
             replyToEmail =
-            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Admin E-mail address
+            # cat=plugin.tx_sfeventmgt/notification; type=string; label=Admin email address
             adminEmail =
             # cat=plugin.tx_sfeventmgt/notification; type=boolean; label=Override the sender for admin emails with email/name of the registration
             registrationDataAsSenderForAdminEmails = 0
@@ -157,7 +157,7 @@ module.tx_sfeventmgt {
             fields = title, teaser
         }
         notification {
-            # cat=module.tx_sfeventmgt/notification; type=string; label=E-mail address for emails sent to user
+            # cat=module.tx_sfeventmgt/notification; type=string; label=Email address for emails sent to user
             senderEmail =
             # cat=module.tx_sfeventmgt/notification; type=string; label=Sender name for emails sent to user
             senderName =

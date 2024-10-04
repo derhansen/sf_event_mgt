@@ -1,5 +1,5 @@
 #==============================================
-# FE-Plugin configuration
+# FE-Plugin configuration for EXT:sf_event_mgt
 #==============================================
 plugin.tx_sfeventmgt {
     mvc.callDefaultActionIfActionCantBeResolved = 1
@@ -7,15 +7,15 @@ plugin.tx_sfeventmgt {
     view {
         templateRootPaths {
             0 = EXT:sf_event_mgt/Resources/Private/Templates/
-            1 = {$plugin.tx_sfeventmgt.view.templateRootPath}
+            1 = {$plugin.tx_sfeventmgt.view.templateRootPath ?? $sf_event_mgt.view.templateRootPath}
         }
         partialRootPaths {
             0 = EXT:sf_event_mgt/Resources/Private/Partials/
-            1 = {$plugin.tx_sfeventmgt.view.partialRootPath}
+            1 = {$plugin.tx_sfeventmgt.view.partialRootPath ?? sf_event_mgt.view.partialRootPath}
         }
         layoutRootPaths {
             0 = EXT:sf_event_mgt/Resources/Private/Layouts/
-            1 = {$plugin.tx_sfeventmgt.view.layoutRootPath}
+            1 = {$plugin.tx_sfeventmgt.view.layoutRootPath ?? sf_event_mgt.view.layoutRootPath}
         }
     }
     settings {
@@ -131,11 +131,11 @@ plugin.tx_sfeventmgt {
             errorHandling = showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
         }
         notification {
-            senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail}
-            senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName}
+            senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail ?? $sf_event_mgt.notification.senderEmail}
+            senderName = {$plugin.tx_sfeventmgt.settings.notification.senderName ?? $sf_event_mgt.notification.senderName}
             senderSignature = {$plugin.tx_sfeventmgt.settings.notification.senderSignature}
-            replyToEmail = {$plugin.tx_sfeventmgt.settings.notification.replyToEmail}
-            adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail}
+            replyToEmail = {$plugin.tx_sfeventmgt.settings.notification.replyToEmail ?? $sf_event_mgt.notification.replyToEmail}
+            adminEmail = {$plugin.tx_sfeventmgt.settings.notification.adminEmail ?? $sf_event_mgt.notification.adminEmail}
             registrationDataAsSenderForAdminEmails = {$plugin.tx_sfeventmgt.settings.notification.registrationDataAsSenderForAdminEmails}
             disabled = {$plugin.tx_sfeventmgt.settings.notification.disabled}
             registrationNew {

@@ -1,0 +1,35 @@
+categories:
+  sf_event_mgt: ~
+  sf_event_mgt.templates:
+    parent: sf_event_mgt
+  sf_event_mgt.settings:
+    parent: sf_event_mgt
+settings:
+  sf_event_mgt.view.templateRootPath:
+    default: ''
+    type: string
+    category: sf_event_mgt.templates
+  sf_event_mgt.view.partialRootPath:
+    default: ''
+    type: string
+    category: sf_event_mgt.templates
+  sf_event_mgt.view.layoutRootPath:
+    default: ''
+    type: string
+    category: sf_event_mgt.templates
+  sf_event_mgt.notification.senderEmail:
+    default: ''
+    type: string
+    category: sf_event_mgt.settings
+  sf_event_mgt.notification.senderName:
+    default: ''
+    type: string
+    category: sf_event_mgt.settings
+  sf_event_mgt.notification.replyToEmail:
+    default: ''
+    type: string
+    category: sf_event_mgt.settings
+  sf_event_mgt.notification.adminEmail:
+    default: ''
+    type: string
+    category: sf_event_mgt.settings
