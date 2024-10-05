@@ -1,0 +1,8 @@
+tx_sfeventmgt_domain_model_registration,,,,,,,,,
+,uid,hidden,event,confirmed,confirmation_until,paid,notes,waitlist,email
+,1,0,50,1,1402740000,0,Confirmed registration 1,0,reg1@domain.tld
+,2,0,50,1,1402740000,0,Confirmed registration 2,0,reg2@domain.tld
+,3,0,50,0,1402740000,0,Unconfirmed registration 1,0,reg3@domain.tld
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","startdate","enddate","rowDescription"
+,50,6,1401444000,1401451200,"findRecordsByStartDate: 30.05.2014 10:00 - 30.05.2014 12:00"

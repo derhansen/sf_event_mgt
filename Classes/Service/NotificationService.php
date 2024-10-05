@@ -53,7 +53,7 @@ class NotificationService
      * to users of the event. Returns the number of notifications sent.
      */
     public function sendCustomNotification(
-        RequestInterface $request, // @todo: This is a backend Request!
+        RequestInterface $request,
         Event $event,
         CustomNotification $customNotification,
         array $settings = []
@@ -289,7 +289,7 @@ class NotificationService
             case MessageType::CUSTOM_NOTIFICATION:
                 $customNotificationSettings = $settings['notification']['customNotifications'] ?? [];
                 $templateKey = $customNotification->getTemplate();
-                $template = 'Notification/User/Custom/' . $customNotificationSettings[$templateKey]['template'] ?? '';
+                $template = 'Notification/User/Custom/' . ($customNotificationSettings[$templateKey]['template'] ?? '');
                 $subject = $customNotificationSettings[$templateKey]['subject'] ?? '';
                 if ($customNotification->getOverwriteSubject() !== '') {
                     $subject = $customNotification->getOverwriteSubject();
