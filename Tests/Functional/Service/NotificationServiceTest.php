@@ -67,6 +67,10 @@ class NotificationServiceTest extends FunctionalTestCase
             $eventDispatcher,
             $context
         );
+
+        // Ensure emails are not sent via SMTP
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport'] = 'mbox';
+        $GLOBALS['TYPO3_CONF_VARS']['MAIL']['transport_mbox_file'] = '/tmp/mbox';
     }
 
     #[Test]
