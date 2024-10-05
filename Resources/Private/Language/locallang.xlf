@@ -276,7 +276,7 @@
 			<trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled">
 				<source>Cancellation failed, registration not found or already cancelled.</source>
 			</trans-unit>
-			<trans-unit id="event.message.confirmation_failed_cancel_disabled">
+			<trans-unit id="event.message.cancel_failed_cancel_disabled">
 				<source>Cancellation failed, cancel option for this event is not enabled.</source>
 			</trans-unit>
 			<trans-unit id="event.message.cancel_failed_deadline_expired">

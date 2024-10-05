@@ -1,0 +1,13 @@
+tx_sfeventmgt_domain_model_registration
+,uid,hidden,event,confirmed,confirmation_until,notes,email,waitlist
+,1,0,50,1,1402740000,Confirmed registration,reg1@domain.tld,0
+,2,0,99,1,1402740000,Confirmed registration with invalid event,reg1@domain.tld,0
+,3,0,51,1,1402740000,Confirmed registration - event no cancellation,reg2@domain.tld,0
+,4,0,52,1,1402740000,Confirmed registration - event cancel deadline expired,reg2@domain.tld,0
+,5,0,53,1,1402740000,Confirmed registration - event started,reg1@domain.tld,0
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","startdate","enddate","rowDescription","cancel_deadline","enable_cancel"
+,50,6,2043654941,2043654941,non expired cancel deadline,2043654941,1
+,51,6,1401444000,1401451200,cancel not enabled,1402740000,0
+,52,6,1401444000,1401451200,expired cancel deadline,1402740000,1
+,53,6,1401444000,1401451200,non expired cancel deadline but event started,2043654941,1

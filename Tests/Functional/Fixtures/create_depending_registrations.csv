@@ -1,0 +1,6 @@
+tx_sfeventmgt_domain_model_registration,,,,,,
+,uid,hidden,event,confirmed,notes,email
+,1,0,50,1,Confirmed registration,reg1@domain.tld
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","startdate","enddate"
+,50,6,1401444000,1401451200

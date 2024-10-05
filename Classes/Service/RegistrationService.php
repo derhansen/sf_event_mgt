@@ -115,7 +115,7 @@ class RegistrationService
             $titleKey = 'confirmRegistration.title.failed';
         }
 
-        if (!$failed && $registration->getConfirmationUntil() < new DateTime()) {
+        if (!$failed && !$registration->getConfirmed() && $registration->getConfirmationUntil() < new DateTime()) {
             $failed = true;
             $messageKey = 'event.message.confirmation_failed_confirmation_until_expired';
             $titleKey = 'confirmRegistration.title.failed';
@@ -177,7 +177,7 @@ class RegistrationService
             $titleKey = 'cancelRegistration.title.failed';
         }
 
-        if (!$failed && !is_a($registration->getEvent(), Event::class)) {
+        if (!$failed && !$registration->getEvent()) {
             $failed = true;
             $messageKey = 'event.message.cancel_failed_event_not_found';
             $titleKey = 'cancelRegistration.title.failed';
@@ -185,7 +185,7 @@ class RegistrationService
 
         if (!$failed && $registration->getEvent()->getEnableCancel() === false) {
             $failed = true;
-            $messageKey = 'event.message.confirmation_failed_cancel_disabled';
+            $messageKey = 'event.message.cancel_failed_cancel_disabled';
             $titleKey = 'cancelRegistration.title.failed';
         }
 

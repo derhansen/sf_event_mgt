@@ -1,0 +1,5 @@
+tx_sfeventmgt_domain_model_registration,,,,,,,,
+,uid,hidden,event,confirmed,notes,email,main_registration,confirmed
+,1,0,50,1,Confirmed registration,reg1@domain.tld,0,1
+,2,0,50,1,Confirmed registration,reg1@domain.tld,1,0
+,3,0,50,1,Confirmed registration,reg1@domain.tld,1,0

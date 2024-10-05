@@ -1,0 +1,10 @@
+tx_sfeventmgt_domain_model_registration,,,,,,,
+,uid,hidden,event,confirmed,confirmation_until,notes,email,waitlist
+,1,0,50,1,1402740000,Confirmed registration,reg1@domain.tld,0
+,2,0,51,1,1402740000,Confirmed registration with invalid event,reg1@domain.tld,0
+,3,0,50,0,1402740000,Unconfirmed registration with expired confirmation deadline,reg2@domain.tld,0
+,4,0,50,0,2043654941,Unconfirmed registration on waitlist (Thu Oct 05 2034 11:55:41),reg2@domain.tld,1
+,5,0,50,0,2043654941,Unconfirmed registration not on waitlist (Thu Oct 05 2034 11:55:41),reg2@domain.tld,0
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","startdate","enddate"
+,50,6,1401444000,1401451200
