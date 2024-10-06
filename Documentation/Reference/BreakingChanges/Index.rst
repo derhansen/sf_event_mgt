@@ -12,6 +12,23 @@
 Breaking Changes
 ================
 
+8.0.0
+~~~~~
+This version contains several breaking changes. The most relevant changes are:
+
+* All existing links sent via email to registered users (e.g. confirmation- or
+  cancellation links) have become **invalid**.
+
+* A price option must now be submitted on registration, if at least one price
+  options has been defined in the event record.
+
+* Default CSV export format has changed
+
+* :php:`PageViewHelper` (optionally used in backend context for custom
+  notifications) has now different arguments.
+
+Make sure, you read the release notes with instructions at https://github.com/derhansen/sf_event_mgt/releases/tag/8.0.0
+
 7.0.0
 ~~~~~
 This version contains some minor breaking changes. The most relevant is a change
