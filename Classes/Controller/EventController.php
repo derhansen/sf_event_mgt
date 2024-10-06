@@ -528,8 +528,7 @@ class EventController extends AbstractController
         }
         $autoConfirmation = (bool)($this->settings['registration']['autoConfirmation'] ?? false) ||
             $event->getEnableAutoconfirm();
-        $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
-        [$success, $result] = $this->registrationService->checkRegistrationSuccess($event, $registration, $result);
+        [$success, $result] = $this->registrationService->checkRegistrationSuccess($event, $registration);
 
         // Save registration if no errors
         $registrationUid = 0;

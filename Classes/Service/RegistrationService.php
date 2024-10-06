@@ -230,8 +230,9 @@ class RegistrationService
     /**
      * Checks, if the registration can successfully be created.
      */
-    public function checkRegistrationSuccess(Event $event, Registration $registration, int $result): array
+    public function checkRegistrationSuccess(Event $event, Registration $registration): array
     {
+        $result = RegistrationResult::REGISTRATION_SUCCESSFUL;
         $success = true;
         if ($event->getEnableRegistration() === false) {
             $success = false;

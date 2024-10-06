@@ -11,21 +11,27 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Functional\Service;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\FrontendUser;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Domain\Repository\FrontendUserRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Service\NotificationService;
 use DERHANSEN\SfEventMgt\Service\PaymentService;
 use DERHANSEN\SfEventMgt\Service\RegistrationService;
+use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use PHPUnit\Framework\Attributes\Test;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Crypto\HashService;
 use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
 class RegistrationServiceTest extends FunctionalTestCase
@@ -356,5 +362,242 @@ class RegistrationServiceTest extends FunctionalTestCase
 
         $result = $this->subject->checkCancelRegistration(1, '824c574f7a593ccf46aa17ae72caec5de8f98a96');
         self::assertEquals($expected, $result);
+    }
+
+    #[Test]
+    public function getCurrentFeUserObjectReturnsNullIfNoFrontendUser(): void
+    {
+        self::assertNull($this->subject->getCurrentFeUserObject());
+    }
+
+    #[Test]
+    public function getCurrentFeUserObjectReturnsFrontendUserObject(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/get_current_fe_user_object.csv');
+
+        $user = new FrontendUserAuthentication();
+        $user->user['uid'] = 1;
+
+        $this->get(Context::class)->setAspect(
+            'frontend.user',
+            GeneralUtility::makeInstance(UserAspect::class, $user)
+        );
+
+        $result = $this->subject->getCurrentFeUserObject();
+        self::assertInstanceOf(FrontendUser::class, $result);
+        self::assertEquals('testuser', $result->getUsername());
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfRegistrationNotEnabled(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(false);
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_NOT_ENABLED,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfRegistrationDeadlineExpired(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setRegistrationDeadline((new \DateTime())->modify('-1 day'));
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_DEADLINE_EXPIRED,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfEventStartedAndRegistrationAfterStartIsDisabled(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate((new \DateTime())->modify('-1 day'));
+        $event->setEnddate((new \DateTime())->modify('+1 day'));
+        $event->setAllowRegistrationUntilEnddate(false);
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_EVENT_EXPIRED,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfEventEndedAndRegistrationAfterStartIsEnabled(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate((new \DateTime())->modify('-2 day'));
+        $event->setEnddate((new \DateTime())->modify('-1 day'));
+        $event->setAllowRegistrationUntilEnddate(true);
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_EVENT_ENDED,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfMaxParticipantsExpiredAndNoWaitlist(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate((new \DateTime())->modify('+2 day'));
+        $event->setEnddate((new \DateTime())->modify('+3 day'));
+        $event->setEnableWaitlist(false);
+        $event->setMaxParticipants(1);
+        $event->addRegistration(new Registration());
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_MAX_PARTICIPANTS,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfAmountOfRegistrationExceedsFreePlaces(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate((new \DateTime())->modify('+2 day'));
+        $event->setEnddate((new \DateTime())->modify('+3 day'));
+        $event->setEnableWaitlist(false);
+        $event->setMaxParticipants(3);
+        $event->addRegistration(new Registration());
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+        $registration->setAmountOfRegistrations(3);
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_NOT_ENOUGH_FREE_PLACES,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfAmountOfRegistrationExceedsMaxAmountOfRegistrationsPerUser(): void
+    {
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate((new \DateTime())->modify('+2 day'));
+        $event->setEnddate((new \DateTime())->modify('+3 day'));
+        $event->setEnableWaitlist(false);
+        $event->setMaxParticipants(3);
+        $event->setMaxRegistrationsPerUser(1);
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('email@domain.tld');
+        $registration->setAmountOfRegistrations(2);
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_MAX_AMOUNT_REGISTRATIONS_EXCEEDED,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsFalseIfUniqueEmailCheckActiveAndEmailAlreadyRegistered(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_success.csv');
+
+        /** @var Registration $existingRegistration */
+        $existingRegistration = $this->registrationRepository->findByUid(1);
+        $event = $existingRegistration->getEvent();
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('reg1@domain.tld');
+
+        $expected = [
+            false,
+            RegistrationResult::REGISTRATION_FAILED_EMAIL_NOT_UNIQUE,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsTrueIfRegistrationOnWaitlistSuccessful(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_success.csv');
+
+        /** @var Registration $existingRegistration */
+        $existingRegistration = $this->registrationRepository->findByUid(2);
+        $event = $existingRegistration->getEvent();
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('reg1@domain.tld');
+
+        $expected = [
+            true,
+            RegistrationResult::REGISTRATION_SUCCESSFUL_WAITLIST,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
+    }
+
+    #[Test]
+    public function checkRegistrationSuccessReturnsTrueIfRegistrationSuccessful(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_success.csv');
+
+        /** @var Registration $existingRegistration */
+        $existingRegistration = $this->registrationRepository->findByUid(1);
+        $event = $existingRegistration->getEvent();
+
+        $registration = new Registration();
+        $registration->setFirstname('Firstname');
+        $registration->setLastname('Lastname');
+        $registration->setEmail('reg2@domain.tld');
+
+        $expected = [
+            true,
+            RegistrationResult::REGISTRATION_SUCCESSFUL,
+        ];
+        self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
     }
 }
