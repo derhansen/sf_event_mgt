@@ -600,4 +600,133 @@ class RegistrationServiceTest extends FunctionalTestCase
         ];
         self::assertEquals($expected, $this->subject->checkRegistrationSuccess($event, $registration));
     }
+
+    #[Test]
+    public function redirectPaymentEnabledReturnsFalseIfPaymentNotEnabledforEvent(): void
+    {
+        $event = new Event();
+        $registration = new Registration();
+        $registration->setEvent($event);
+
+        self::assertFalse($this->subject->redirectPaymentEnabled($registration));
+    }
+
+    #[Test]
+    public function isWaitlistRegistrationReturnsFalseIfWaitlistNotEnabled(): void
+    {
+        $event = new Event();
+        $event->setEnableWaitlist(false);
+
+        self::assertFalse($this->subject->isWaitlistRegistration($event, 1));
+    }
+
+    #[Test]
+    public function isWaitlistRegistrationReturnsTrueIfEventNotFullyBookedAndNotEnoughFreePlaces(): void
+    {
+        $event = new Event();
+        $event->setEnableWaitlist(true);
+        $event->setMaxParticipants(2);
+        $event->addRegistration(new Registration());
+
+        self::assertTrue($this->subject->isWaitlistRegistration($event, 2));
+    }
+
+    #[Test]
+    public function isWaitlistRegistrationReturnsTrueIfEventFullyBookedAndNotEnoughFreePlaces(): void
+    {
+        $event = new Event();
+        $event->setEnableWaitlist(true);
+        $event->setMaxParticipants(1);
+        $event->addRegistration(new Registration());
+
+        self::assertTrue($this->subject->isWaitlistRegistration($event, 1));
+    }
+
+    #[Test]
+    public function isWaitlistRegistrationReturnsFalseIfWaitlistEnabledButEnoughFreePlaces(): void
+    {
+        $event = new Event();
+        $event->setEnableWaitlist(true);
+        $event->setMaxParticipants(3);
+        $event->addRegistration(new Registration());
+
+        self::assertFalse($this->subject->isWaitlistRegistration($event, 2));
+    }
+
+    #[Test]
+    public function checkRegistrationAccessThrowsExceptionIfNoUserLoggedIn(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
+        $this->expectExceptionCode(1671627320);
+
+        /** @var Registration $existingRegistration */
+        $registration = $this->registrationRepository->findByUid(1);
+
+        $serverRequest = new ServerRequest();
+        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+    }
+
+    #[Test]
+    public function checkRegistrationAccessThrowsExceptionIfRegistrationHasNoFeUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
+        $this->expectExceptionCode(1671627320);
+
+        $user = new FrontendUserAuthentication();
+        $user->user['uid'] = 1;
+
+        $this->get(Context::class)->setAspect(
+            'frontend.user',
+            GeneralUtility::makeInstance(UserAspect::class, $user)
+        );
+
+        /** @var Registration $existingRegistration */
+        $registration = $this->registrationRepository->findByUid(1);
+
+        $serverRequest = new ServerRequest();
+        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+    }
+
+    #[Test]
+    public function checkRegistrationAccessThrowsExceptionIfFeUserNotEqualToRegistrationFeUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
+        $this->expectExceptionCode(1671627320);
+
+        $user = new FrontendUserAuthentication();
+        $user->user['uid'] = 1;
+
+        $this->get(Context::class)->setAspect(
+            'frontend.user',
+            GeneralUtility::makeInstance(UserAspect::class, $user)
+        );
+
+        /** @var Registration $existingRegistration */
+        $registration = $this->registrationRepository->findByUid(3);
+
+        $serverRequest = new ServerRequest();
+        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+    }
+
+    #[Test]
+    public function checkRegistrationAccessThrowsNoExceptionIfFeUserEqualToRegistrationFeUser(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
+
+        $user = new FrontendUserAuthentication();
+        $user->user['uid'] = 1;
+
+        $this->get(Context::class)->setAspect(
+            'frontend.user',
+            GeneralUtility::makeInstance(UserAspect::class, $user)
+        );
+
+        /** @var Registration $existingRegistration */
+        $registration = $this->registrationRepository->findByUid(2);
+
+        $serverRequest = new ServerRequest();
+        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+
+        self::assertTrue(true);
+    }
 }

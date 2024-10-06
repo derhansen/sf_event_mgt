@@ -1,0 +1,9 @@
+"tx_sfeventmgt_domain_model_registration"
+,"uid","fe_user","notes"
+,1,0,registration with no frontend user
+,2,1,registration with frontend user uid 1
+,3,2,registration with frontend user uid 2
+"fe_users"
+,"uid","username"
+,1,"testuser1"
+,2,"testuser2"
