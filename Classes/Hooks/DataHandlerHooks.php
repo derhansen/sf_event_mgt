@@ -50,21 +50,19 @@ class DataHandlerHooks
      * Structure of the checkFields array:
      *
      * array('sheet' => array('field1', 'field2'));
-     *
-     * @param string $status
-     * @param string $table
-     * @param string $id
-     * @param array $fieldArray
-     * @param DataHandler $dataHandler
      */
-    public function processDatamap_postProcessFieldArray($status, $table, $id, &$fieldArray, &$dataHandler): void
-    {
+    public function processDatamap_postProcessFieldArray(
+        string $status,
+        string $table,
+        string|int $id,
+        array &$fieldArray,
+        DataHandler $dataHandler
+    ): void {
         if ($table === 'tt_content' &&
             ($status === 'update' || $status === 'new') &&
             isset($fieldArray['pi_flexform']) &&
-            $dataHandler->checkValue_currentRecord['CType'] === 'list' &&
             in_array(
-                $dataHandler->checkValue_currentRecord['list_type'],
+                $dataHandler->checkValue_currentRecord['CType'],
                 [
                     'sfeventmgt_pieventlist',
                     'sfeventmgt_pieventdetail',
@@ -73,7 +71,8 @@ class DataHandlerHooks
                     'sfeventmgt_pieventcalendar',
                     'sfeventmgt_piuserreg',
                     'sfeventmgt_pipayment',
-                ]
+                ],
+                true
             )
         ) {
             $checkFields = [

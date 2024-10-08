@@ -21,8 +21,7 @@ final class PiuserregContentPreview extends AbstractPluginPreview
     public function __invoke(PageContentPreviewRenderingEvent $event): void
     {
         if ($event->getTable() !== 'tt_content' ||
-            $event->getRecordType() !== 'list' ||
-            $event->getRecord()['list_type'] !== 'sfeventmgt_piuserreg'
+            $event->getRecordType() !== 'sfeventmgt_piuserreg'
         ) {
             return;
         }

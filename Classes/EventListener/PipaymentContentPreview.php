@@ -21,8 +21,7 @@ final class PipaymentContentPreview extends AbstractPluginPreview
     public function __invoke(PageContentPreviewRenderingEvent $event): void
     {
         if ($event->getTable() !== 'tt_content' ||
-            $event->getRecordType() !== 'list' ||
-            $event->getRecord()['list_type'] !== 'sfeventmgt_pipayment'
+            $event->getRecordType() !== 'sfeventmgt_pipayment'
         ) {
             return;
         }

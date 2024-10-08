@@ -16,6 +16,10 @@ Breaking Changes
 ~~~~~
 This version contains several breaking changes. The most relevant changes are:
 
+* All plugins have been migrated to content elements. It is required to execute
+  the included update wizard. Possible content element restrictions in backend
+  layouts or container elements must be adapted manually.
+
 * All existing links sent via email to registered users (e.g. confirmation- or
   cancellation links) have become **invalid**.
 

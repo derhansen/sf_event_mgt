@@ -7,8 +7,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventlist.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventlist.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_pieventlist
+                CType = sfeventmgt_pieventlist
             }
         }
         pieventdetail {
@@ -16,8 +15,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventdetail.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventdetail.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_pieventdetail
+                CType = sfeventmgt_pieventdetail
             }
         }
         pieventregistration {
@@ -25,8 +23,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventregistration.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventregistration.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_pieventregistration
+                CType = sfeventmgt_pieventregistration
             }
         }
         pieventcalendar {
@@ -34,8 +31,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventcalendar.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventcalendar.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_pieventcalendar
+                CType = sfeventmgt_pieventcalendar
             }
         }
         pieventsearch {
@@ -43,8 +39,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventsearch.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pieventsearch.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_pieventsearch
+                CType = sfeventmgt_pieventsearch
             }
         }
         pipayment {
@@ -52,8 +47,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pipayment.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.pipayment.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_pipayment
+                CType = sfeventmgt_pipayment
             }
         }
         piuserreg {
@@ -61,8 +55,7 @@ mod.wizards.newContentElement.wizardItems.ext-sfeventmgt {
             title = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.piuserreg.title
             description = LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.piuserreg.description
             tt_content_defValues {
-                CType = list
-                list_type = sfeventmgt_piuserreg
+                CType = sfeventmgt_piuserreg
             }
         }
     }

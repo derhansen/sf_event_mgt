@@ -30,8 +30,7 @@ final class PieventContentPreview extends AbstractPluginPreview
     public function __invoke(PageContentPreviewRenderingEvent $event): void
     {
         if ($event->getTable() !== 'tt_content' ||
-            $event->getRecordType() !== 'list' ||
-            !in_array($event->getRecord()['list_type'], $this->configuredPlugins, true)
+            !in_array($event->getRecordType(), $this->configuredPlugins, true)
         ) {
             return;
         }

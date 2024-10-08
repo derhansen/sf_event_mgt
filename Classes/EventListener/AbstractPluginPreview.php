@@ -38,7 +38,7 @@ abstract class AbstractPluginPreview
      */
     protected function getPluginName(array $record): string
     {
-        $pluginId = str_replace('sfeventmgt_', '', $record['list_type']);
+        $pluginId = str_replace('sfeventmgt_', '', $record['CType']);
         return htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'plugin.' . $pluginId . '.title'));
     }
 
@@ -138,7 +138,7 @@ abstract class AbstractPluginPreview
             $text = '';
 
             // Check if plugin action is "calendar" and if so, show warning that calendar action will not work
-            if ($record['list_type'] === 'sfeventmgt_pieventcalendar') {
+            if ($record['CType'] === 'sfeventmgt_pieventcalendar') {
                 $text .= ' <span class="badge badge-danger ms-1">' .
                     htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.pluginCalendarMisonfiguration')) . '</span>';
             }

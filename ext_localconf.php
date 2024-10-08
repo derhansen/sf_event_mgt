@@ -28,7 +28,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             EventController::class => '',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -40,7 +41,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             EventController::class => 'icalDownload',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -52,7 +54,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, verifyConfirmRegistration, cancelRegistration, verifyCancelRegistration',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -64,7 +67,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             EventController::class => 'search',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -76,7 +80,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             EventController::class => '',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -88,7 +93,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             UserRegistrationController::class => 'list, detail',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     ExtensionUtility::configurePlugin(
@@ -100,7 +106,8 @@ call_user_func(function () {
         // non-cacheable actions
         [
             PaymentController::class => 'redirect, success, failure, cancel, notify',
-        ]
+        ],
+        ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
     );
 
     // DataHandler hooks
