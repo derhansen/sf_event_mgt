@@ -58,7 +58,7 @@
                 <div class="input-group">
                     <f:form.textfield
                         name="endDate"
-                        value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.endDate}')}\")}"
+                        value="{f:if(condition: searchDemand.endDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.endDate}')}\")}"
                         id="endDate"
                         additionalAttributes="{'autocomplete': 'off'}"
                         class="form-control t3js-datetimepicker t3js-clearable"
