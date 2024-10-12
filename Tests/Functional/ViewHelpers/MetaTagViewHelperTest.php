@@ -19,7 +19,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextFactory;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 use TYPO3Fluid\Fluid\View\TemplateView;
 
@@ -42,7 +42,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
         $extbaseRequestParameters = new ExtbaseRequestParameters();
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
-            ->withAttribute('frontend.controller', new TypoScriptFrontendController())
+            ->withAttribute('currentContentObject', new ContentObjectRenderer())
             ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         $extbaseRequest = (new Request($serverRequest));
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
@@ -60,7 +60,7 @@ class MetaTagViewHelperTest extends FunctionalTestCase
         $extbaseRequestParameters = new ExtbaseRequestParameters();
         $serverRequest = new ServerRequest();
         $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
-            ->withAttribute('frontend.controller', new TypoScriptFrontendController())
+            ->withAttribute('currentContentObject', new ContentObjectRenderer())
             ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
         $extbaseRequest = (new Request($serverRequest));
         $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
@@ -70,5 +70,31 @@ class MetaTagViewHelperTest extends FunctionalTestCase
 
         $metaTag = $this->pageRenderer->getMetaTag('property', 'og:title');
         self::assertEquals('The og:title', $metaTag['content']);
+    }
+
+    #[Test]
+    public function metaTagIsNotRenderedWhenViewHelperUsedInShortcutRecord(): void
+    {
+        $contentObjectRenderer = new ContentObjectRenderer();
+        $contentObjectRenderer->parentRecord = [
+            'currentRecord' => 'tt_content:123',
+            'data' => [
+                'CType' => 'shortcut',
+            ],
+        ];
+
+        $extbaseRequestParameters = new ExtbaseRequestParameters();
+        $serverRequest = new ServerRequest();
+        $serverRequest = $serverRequest->withAttribute('extbase', $extbaseRequestParameters)
+            ->withAttribute('currentContentObject', $contentObjectRenderer)
+            ->withAttribute('applicationType', SystemEnvironmentBuilder::REQUESTTYPE_FE);
+        $extbaseRequest = (new Request($serverRequest));
+        $context = $this->get(RenderingContextFactory::class)->create([], $extbaseRequest);
+        $context->getViewHelperResolver()->addNamespace('e', 'DERHANSEN\\SfEventMgt\\ViewHelpers');
+        $context->getTemplatePaths()->setTemplateSource('<e:metaTag property="og:title" content="The og:title" />');
+        self::assertEquals('', (new TemplateView($context))->render());
+
+        $metaTag = $this->pageRenderer->getMetaTag('property', 'og:title');
+        self::assertEmpty($metaTag);
     }
 }

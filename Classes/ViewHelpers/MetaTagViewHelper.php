@@ -12,9 +12,9 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\ViewHelpers;
 
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Page\PageRenderer;
+use TYPO3\CMS\Core\MetaTag\MetaTagManagerRegistry;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -27,36 +27,44 @@ class MetaTagViewHelper extends AbstractViewHelper
         $this->registerArgument('property', 'string', 'Property of meta tag', false, '', false);
         $this->registerArgument('name', 'string', 'Content of meta tag using the name attribute', false, '', false);
         $this->registerArgument('content', 'string', 'Content of meta tag', true, null, false);
+        $this->registerArgument('replace', 'boolean', 'Replace potential existing tag', false, false);
     }
 
     public function render(): void
     {
-        $tsfe = $this->getTypoScriptFrontendController();
-
-        // Skip if current record is part of tt_content CType shortcut
-        if (!empty($tsfe->recordRegister)
-            && !empty($tsfe->currentRecord)
-            && str_contains($tsfe->currentRecord, 'tx_sfeventmgt_domain_model_event:')
-            && str_contains(array_keys($tsfe->recordRegister)[0], 'tt_content:')
-        ) {
+        // Skip if current record is rendered via tt_content CType shortcut
+        if ($this->isParentRecordShortcut()) {
             return;
         }
 
         $content = (string)$this->arguments['content'];
 
         if ($content !== '') {
-            $pageRenderer = GeneralUtility::makeInstance(PageRenderer::class);
+            $registry = GeneralUtility::makeInstance(MetaTagManagerRegistry::class);
             if ($this->arguments['property']) {
-                $pageRenderer->setMetaTag('property', $this->arguments['property'], $content);
+                $manager = $registry->getManagerForProperty($this->arguments['property']);
+                $manager->addProperty($this->arguments['property'], $content, [], $this->arguments['replace'], 'property');
             } elseif ($this->arguments['name']) {
-                $pageRenderer->setMetaTag('property', $this->arguments['name'], $content);
+                $manager = $registry->getManagerForProperty($this->arguments['name']);
+                $manager->addProperty($this->arguments['name'], $content, [], $this->arguments['replace'], 'name');
             }
         }
     }
 
-    private function getTypoScriptFrontendController(): TypoScriptFrontendController
+    private function isParentRecordShortcut(): bool
+    {
+        $contentObjectRenderer = $this->getContentObjectRenderer();
+
+        return $contentObjectRenderer->parentRecord !== [] &&
+            isset($contentObjectRenderer->parentRecord['currentRecord']) &&
+            isset($contentObjectRenderer->parentRecord['data']['CType']) &&
+            str_starts_with($contentObjectRenderer->parentRecord['currentRecord'], 'tt_content:') &&
+            $contentObjectRenderer->parentRecord['data']['CType'] === 'shortcut';
+    }
+
+    private function getContentObjectRenderer(): ContentObjectRenderer
     {
         return $this->renderingContext->getAttribute(ServerRequestInterface::class)
-            ->getAttribute('frontend.controller');
+            ->getAttribute('currentContentObject');
     }
 }
