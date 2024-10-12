@@ -26,28 +26,17 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 class CaptchaValidator extends AbstractValidator
 {
     /**
-     * This validator always needs to be executed even if the given value is empty.
-     * See AbstractValidator::validate()
-     *
-     * @var bool
+     * This validator always needs to be executed even if the given value is empty, because else
+     * the captcha can be bypassed.
      */
     protected $acceptsEmptyValues = false;
 
-    protected ConfigurationManagerInterface $configurationManager;
     protected RequestFactory $requestFactory;
 
-    protected array $settings;
-
-    public function __construct()
-    {
-        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
+    public function __construct(
+        protected readonly ConfigurationManagerInterface $configurationManager
+    ) {
         $this->requestFactory = GeneralUtility::makeInstance(RequestFactory::class);
-
-        $this->settings = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'SfEventMgt',
-            'Pieventregistration'
-        );
     }
 
     /**
@@ -55,7 +44,13 @@ class CaptchaValidator extends AbstractValidator
      */
     protected function isValid(mixed $value): void
     {
-        $configurationService = new CaptchaConfigurationService($this->settings['registration']['captcha'] ?? []);
+        $settings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'SfEventMgt',
+            'Pieventregistration'
+        );
+
+        $configurationService = new CaptchaConfigurationService($settings['registration']['captcha'] ?? []);
 
         if (!$configurationService->getEnabled()) {
             return;

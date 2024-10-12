@@ -19,7 +19,6 @@ use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
@@ -28,26 +27,12 @@ use TYPO3\CMS\Extbase\Validation\Validator\BooleanValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\EmailAddressValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
 
-/**
- * RegistrationValidator
- */
 class RegistrationValidator extends AbstractValidator
 {
-    protected ConfigurationManagerInterface $configurationManager;
-    protected EventDispatcherInterface $eventDispatcher;
-    protected array $settings;
-
-    public function __construct()
-    {
-        // @todo Use CPP in sf_event_mgt v8 (breaking change)
-        $this->configurationManager = GeneralUtility::makeInstance(ConfigurationManagerInterface::class);
-        $this->eventDispatcher = GeneralUtility::makeInstance(EventDispatcherInterface::class);
-
-        $this->settings = $this->configurationManager->getConfiguration(
-            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
-            'SfEventMgt',
-            'Pieventregistration'
-        );
+    public function __construct(
+        protected readonly ConfigurationManagerInterface $configurationManager,
+        protected readonly EventDispatcherInterface $eventDispatcher
+    ) {
     }
 
     /**
@@ -59,7 +44,13 @@ class RegistrationValidator extends AbstractValidator
      */
     protected function isValid(mixed $value): void
     {
-        $spamSettings = $this->settings['registration']['spamCheck'] ?? [];
+        $settings = $this->configurationManager->getConfiguration(
+            ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS,
+            'SfEventMgt',
+            'Pieventregistration'
+        );
+
+        $spamSettings = $settings['registration']['spamCheck'] ?? [];
         if ((bool)($spamSettings['enabled'] ?? false) && $this->isSpamCheckFailed($value, $spamSettings)) {
             $message = $this->translateErrorMessage('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:registration.spamCheckFailed');
             $this->addErrorForProperty('spamCheck', $message, 1578855253);
@@ -70,7 +61,7 @@ class RegistrationValidator extends AbstractValidator
         $this->validateDefaultFields($value);
         $this->validatePriceOption($value);
 
-        $requiredFields = array_map('trim', explode(',', $this->settings['registration']['requiredFields'] ?? ''));
+        $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields'] ?? ''));
         foreach ($requiredFields as $requiredField) {
             if ($requiredField !== '' && $value->_hasProperty($requiredField)) {
                 $validator = $this->getValidator(gettype($value->_getProperty($requiredField)), $requiredField);
@@ -85,7 +76,7 @@ class RegistrationValidator extends AbstractValidator
 
         $event = new ModifyRegistrationValidatorResultEvent(
             $value,
-            $this->settings,
+            $settings,
             $this->result,
             $this->getRequest()
         );
@@ -102,10 +93,8 @@ class RegistrationValidator extends AbstractValidator
      * - lastname: NotEmpty
      * - email: NotEmpty, EmailAddress
      */
-    protected function validateDefaultFields(Registration $value): bool
+    protected function validateDefaultFields(Registration $value): void
     {
-        $result = true;
-
         $defaultFields = ['firstname', 'lastname', 'email'];
         foreach ($defaultFields as $defaultField) {
             $validator = new NotEmptyValidator();
@@ -126,8 +115,6 @@ class RegistrationValidator extends AbstractValidator
                 $this->result->forProperty('email')->addError($error);
             }
         }
-
-        return $result;
     }
 
     /**
@@ -162,7 +149,8 @@ class RegistrationValidator extends AbstractValidator
                 break;
             default:
                 if ($field === 'captcha') {
-                    $validator = new CaptchaValidator();
+                    $validator = new CaptchaValidator($this->configurationManager);
+                    $validator->setRequest($this->getRequest());
                 } else {
                     $validator = new NotEmptyValidator();
                 }

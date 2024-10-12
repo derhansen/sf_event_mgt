@@ -56,7 +56,6 @@ class RegistrationFieldValidator extends AbstractValidator
         $fieldValue = $this->getFieldValue($registrationField, $fieldValues);
         $validationResult = $validator->validate($fieldValue);
         if ($validationResult->hasErrors()) {
-            $result = false;
             foreach ($validationResult->getErrors() as $error) {
                 $this->result->forProperty('fields.' . $registrationField->getUid())->addError($error);
             }

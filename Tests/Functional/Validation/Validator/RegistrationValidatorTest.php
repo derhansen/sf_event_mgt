@@ -16,6 +16,7 @@ use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use PHPUnit\Framework\Attributes\Test;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Core\SystemEnvironmentBuilder;
 use TYPO3\CMS\Core\Http\ServerRequest;
@@ -41,7 +42,10 @@ class RegistrationValidatorTest extends FunctionalTestCase
     {
         $registration = new Registration();
 
-        $subject = new RegistrationValidator();
+        $subject = new RegistrationValidator(
+            $this->get(ConfigurationManager::class),
+            $this->get(EventDispatcherInterface::class)
+        );
         $subject->setRequest($this->request);
         $result = $subject->validate($registration);
         self::assertTrue($result->hasErrors());
@@ -60,7 +64,10 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setLastname('Hansen');
         $registration->setEmail('derhansen@gmail.com');
 
-        $subject = new RegistrationValidator();
+        $subject = new RegistrationValidator(
+            $this->get(ConfigurationManager::class),
+            $this->get(EventDispatcherInterface::class)
+        );
         $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
@@ -88,7 +95,10 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setLastname('Hansen');
         $registration->setEmail('derhansen@gmail.com');
 
-        $subject = new RegistrationValidator();
+        $subject = new RegistrationValidator(
+            $configurationManager,
+            $this->get(EventDispatcherInterface::class)
+        );
         $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
@@ -120,7 +130,10 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setLastname('Hansen');
         $registration->setEmail('derhansen@gmail.com');
 
-        $subject = new RegistrationValidator();
+        $subject = new RegistrationValidator(
+            $configurationManager,
+            $this->get(EventDispatcherInterface::class)
+        );
         $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
@@ -142,7 +155,10 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setEmail('derhansen@gmail.com');
         $registration->setEvent($event);
 
-        $subject = new RegistrationValidator();
+        $subject = new RegistrationValidator(
+            $this->get(ConfigurationManager::class),
+            $this->get(EventDispatcherInterface::class)
+        );
         $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
@@ -173,7 +189,10 @@ class RegistrationValidatorTest extends FunctionalTestCase
         $registration->setEmail('derhansen@gmail.com');
         $registration->setEvent($event);
 
-        $subject = new RegistrationValidator();
+        $subject = new RegistrationValidator(
+            $this->get(ConfigurationManager::class),
+            $this->get(EventDispatcherInterface::class)
+        );
         $subject->setRequest($this->request);
 
         $result = $subject->validate($registration);
