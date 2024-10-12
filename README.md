@@ -53,7 +53,7 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 **Background**
 
 * Based on Extbase and Fluid
-* Covered with unit and functional tests
+* Covered with unit, functional and acceptance tests
 * Actively maintained
 
 ## Documentation
