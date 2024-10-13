@@ -36,7 +36,7 @@ return [
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.additional,
                 fe_user, confirmation_until, confirmed, ignore_notifications, amount_of_registrations,
-                waitlist, main_registration,
+                waitlist, main_registration, language,
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:event.tabs.registration_fields,
                 field_values,
@@ -54,27 +54,13 @@ return [
         'paletteGenderTitle' => ['showitem' => 'gender, title,'],
     ],
     'columns' => [
-        'hidden' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-                'renderType' => 'checkboxToggle',
-                'default' => 0,
-                'items' => [
-                    [
-                        'label' => '',
-                        'invertStateDisplay' => false,
-                    ],
-                ],
-            ],
-        ],
-
         'language' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.language',
             'config' => [
                 'type' => 'input',
+                'size' => 5,
+                'readOnly' => true,
             ],
         ],
         'firstname' => [

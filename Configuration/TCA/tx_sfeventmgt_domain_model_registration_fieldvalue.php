@@ -29,21 +29,6 @@ return [
     ],
     'palettes' => [],
     'columns' => [
-        'hidden' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.hidden',
-            'config' => [
-                'type' => 'check',
-                'renderType' => 'checkboxToggle',
-                'default' => 0,
-                'items' => [
-                    [
-                        'label' => '',
-                        'invertStateDisplay' => false,
-                    ],
-                ],
-            ],
-        ],
         'value' => [
             'exclude' => true,
             'label' => $lll . 'tx_sfeventmgt_domain_model_registration_fieldvalue.value',
