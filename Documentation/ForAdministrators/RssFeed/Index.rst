@@ -44,7 +44,7 @@ needs:
        additionalHeaders.10.header = Content-Type:application/rss+xml;charset=utf-8
        absRefPrefix = {$plugin.tx_sfeventmgt.rss.channel.link}
      }
-     10 < tt_content.list.20.sfeventmgt_pieventlist
+     10 < tt_content.sfeventmgt_pieventlist
      10 {
        settings < plugin.tx_sfeventmgt.settings
        settings {
@@ -93,8 +93,8 @@ Next, add a new TypoScript template to the page and insert the following TypoScr
    tt_content.stdWrap.editPanel = 0
 
 **Important**
-If the sf_event_mgt plugin is located in different column than default (0), then you extend the TypoScript as
-following:
+If the sf_event_mgt plugin is located in different column than default (0), you
+need to extend the TypoScript as following:
 
 .. code-block:: typoscript
 
