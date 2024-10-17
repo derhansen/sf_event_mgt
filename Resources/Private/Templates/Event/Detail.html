@@ -168,7 +168,7 @@
 				<f:translate key="tx_sfeventmgt_domain_model_event.registrations" />
 			</div>
 			<div class="event-detail-value event-registrations">
-				{event.registrations->f:count()}
+				{event.registrations -> f:count()}
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -269,7 +269,7 @@
 				</div>
 				<div class="event-detail-value event-image">
 					<f:for each="{event.image}" as="image">
-						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.detail.imageWidth}" height="{settings.detail.imageHeight}" />
+						<f:image src="{image.uid}" treatIdAsReference="TRUE" width="{settings.detail.imageWidth}" height="{settings.detail.imageHeight}" />
 					</f:for>
 				</div>
 				<div class="clear"></div>
@@ -283,7 +283,7 @@
 				</div>
 				<div class="event-detail-value event-additional-image">
 					<f:for each="{event.additionalImage}" as="image">
-						<f:image src="{image.uid}" alt="" treatIdAsReference="TRUE" width="{settings.detail.imageWidth}" height="{settings.detail.imageHeight}"/>
+						<f:image src="{image.uid}" treatIdAsReference="TRUE" width="{settings.detail.imageWidth}" height="{settings.detail.imageHeight}"/>
 					</f:for>
 				</div>
 				<div class="clear"></div>
