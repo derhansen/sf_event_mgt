@@ -24,6 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class DataHandlerHooks
 {
     public const EVENT_TABLE = 'tx_sfeventmgt_domain_model_event';
+    public const REGISTRATION_TABLE = 'tx_sfeventmgt_domain_model_registration';
     public const CUSTOMNOTIFICATIONLOG_TABLE = 'tx_sfeventmgt_domain_model_customnotificationlog';
 
     /**
@@ -157,8 +158,11 @@ class DataHandlerHooks
     }
 
     /**
-     * Sets the TCA type of the fields 'registration' and 'registration_waitlist' to 'none' for copy and localize,
-     * so field values will not be duplicated in the copy of the object.
+     * Hides non deleted event registrations before copy and localize in order to prevent registrations from being
+     * copied or localized.
+     *
+     * @todo: Try to extend TYPO3 core to allow 3rd party extension to modifying `$excludeFields` in
+     *        `DataHandler->copyRecord()` function.
      *
      * @param string $command
      * @param string $table
@@ -169,14 +173,13 @@ class DataHandlerHooks
      */
     public function processCmdmap_preProcess($command, $table, $id, $value, $pObj, $pasteUpdate): void
     {
-        if (in_array($command, ['copy', 'localize']) && $table === self::EVENT_TABLE) {
-            $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration']['config']['type'] = 'none';
-            $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration_waitlist']['config']['type'] = 'none';
+        if ($table === self::EVENT_TABLE && in_array($command, ['copy', 'localize'])) {
+            $this->hideRegistrationsBeforeCopyAndLocalize($id);
         }
     }
 
     /**
-     * (1) Sets the TCA type of certain fields back to their original state after a copy or move command
+     * (1) Unhides non deleted event registrations after copy and localize
      * (2) Handles deletion of custom notifications when deleting an event
      *
      * @param string $command
@@ -189,10 +192,13 @@ class DataHandlerHooks
      */
     public function processCmdmap_postProcess($command, $table, $id, $value, $pObj, $pasteUpdate, $pasteDatamap): void
     {
-        if (in_array($command, ['copy', 'localize']) && $table === self::EVENT_TABLE) {
-            $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration']['config']['type'] = 'inline';
-            $GLOBALS['TCA'][self::EVENT_TABLE]['columns']['registration_waitlist']['config']['type'] = 'inline';
-        } elseif ($command === 'delete' && $table === self::EVENT_TABLE) {
+        if ($table !== self::EVENT_TABLE) {
+            return;
+        }
+
+        if (in_array($command, ['copy', 'localize'])) {
+            $this->unhideRegistrationsAfterCopyAndLocalize($id);
+        } elseif ($command === 'delete') {
             $this->deleteCustomNotificationsByEvent($id);
         }
     }
@@ -208,6 +214,35 @@ class DataHandlerHooks
             ->delete(self::CUSTOMNOTIFICATIONLOG_TABLE)
             ->where(
                 $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
+            )
+            ->executeStatement();
+    }
+
+    protected function hideRegistrationsBeforeCopyAndLocalize(int $eventUid): void
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable(self::CUSTOMNOTIFICATIONLOG_TABLE);
+        $queryBuilder
+            ->update(self::REGISTRATION_TABLE)
+            ->set('deleted', 1)
+            ->set('temp_event_uid', $eventUid)
+            ->where(
+                $queryBuilder->expr()->eq('event', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT)),
+                $queryBuilder->expr()->eq('deleted', $queryBuilder->createNamedParameter(0, Connection::PARAM_INT))
+            )
+            ->executeStatement();
+    }
+
+    protected function unhideRegistrationsAfterCopyAndLocalize(int $eventUid): void
+    {
+        $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable(self::CUSTOMNOTIFICATIONLOG_TABLE);
+        $queryBuilder
+            ->update(self::REGISTRATION_TABLE)
+            ->set('deleted', 0)
+            ->set('temp_event_uid', 0)
+            ->where(
+                $queryBuilder->expr()->eq('temp_event_uid', $queryBuilder->createNamedParameter($eventUid, Connection::PARAM_INT))
             )
             ->executeStatement();
     }
