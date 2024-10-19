@@ -69,5 +69,10 @@ return [
                 ],
             ],
         ],
+        'registration' => [
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
     ],
 ];
