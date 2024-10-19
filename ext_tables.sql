@@ -47,7 +47,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	meta_keywords text,
 	meta_description text,
 	alternative_title tinytext,
-	slug varchar(2048)
+	slug text
 );
 
 
@@ -61,7 +61,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_organisator (
 	phone varchar(255) DEFAULT '' NOT NULL,
 	link varchar(255) DEFAULT '' NOT NULL,
 	image varchar(255) DEFAULT '' NOT NULL,
-	slug varchar(2048)
+	slug text
 );
 
 #
@@ -90,7 +90,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_location (
 	link tinytext,
 	longitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
 	latitude decimal(9,6) DEFAULT '0.000000' NOT NULL,
-	slug varchar(2048)
+	slug text
 );
 
 #
@@ -153,7 +153,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_speaker (
 	job_title varchar(255) DEFAULT '' NOT NULL,
 	description text,
 	image int(11) unsigned DEFAULT '0' NOT NULL,
-	slug varchar(2048),
+	slug text
 );
 
 #
@@ -190,7 +190,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration_fieldvalue (
 # Extend table structure of table 'sys_category'
 #
 CREATE TABLE sys_category (
-    slug varchar(2048)
+    slug text
 );
 
 #
