@@ -41,7 +41,6 @@ use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Cache\CacheTag;
-use TYPO3\CMS\Core\Error\Http\PageNotFoundException;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
@@ -258,10 +257,8 @@ class EventController extends AbstractController
 
     /**
      * Detail view for an event
-     *
-     * @return mixed
      */
-    public function detailAction(?Event $event = null)
+    public function detailAction(?Event $event = null): ResponseInterface
     {
         $event = $this->eventEvaluationService->evaluateForDetailAction($this->request, $this->settings, $event);
         if (is_null($event) && isset($this->settings['event']['errorHandling'])) {
@@ -290,12 +287,6 @@ class EventController extends AbstractController
 
     /**
      * Error handling if event is not found
-     *
-     * @param array $settings
-     * @return ResponseInterface
-     * @throws Exception
-     * @throws PropagateResponseException
-     * @throws PageNotFoundException
      */
     protected function handleEventNotFoundError(array $settings): ResponseInterface
     {
