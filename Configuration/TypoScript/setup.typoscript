@@ -2,7 +2,11 @@
 # FE-Plugin configuration for EXT:sf_event_mgt
 #==============================================
 plugin.tx_sfeventmgt {
-    mvc.callDefaultActionIfActionCantBeResolved = 1
+    mvc {
+        callDefaultActionIfActionCantBeResolved = 1
+        showPageNotFoundIfTargetNotFoundException = 1
+        showPageNotFoundIfRequiredArgumentIsMissingException = 1
+    }
     persistence.updateReferenceIndex = 1
     view {
         templateRootPaths {
