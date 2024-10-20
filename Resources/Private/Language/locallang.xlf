@@ -369,6 +369,9 @@
 			<trans-unit id="validation.missing_captcha">
 				<source>Captcha field is missing or invalid.</source>
 			</trans-unit>
+			<trans-unit id="validation.required_field">
+				<source>This field is required.</source>
+			</trans-unit>
 			<trans-unit id="validation.invalid_priceoption">
 				<source>Invalid price option selected.</source>
 			</trans-unit>

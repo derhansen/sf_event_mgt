@@ -97,10 +97,9 @@ class RegistrationValidator extends AbstractValidator
     {
         $defaultFields = ['firstname', 'lastname', 'email'];
         foreach ($defaultFields as $defaultField) {
-            $validator = new NotEmptyValidator();
+            $validator = $this->getNotEmptyValidator();
             $validationResult = $validator->validate($value->_getProperty($defaultField));
             if ($validationResult->hasErrors()) {
-                $result = false;
                 foreach ($validationResult->getErrors() as $error) {
                     $this->result->forProperty($defaultField)->addError($error);
                 }
@@ -110,7 +109,6 @@ class RegistrationValidator extends AbstractValidator
         $validator = new EmailAddressValidator();
         $validationResult = $validator->validate($value->_getProperty('email'));
         if ($validationResult->hasErrors()) {
-            $result = false;
             foreach ($validationResult->getErrors() as $error) {
                 $this->result->forProperty('email')->addError($error);
             }
@@ -152,9 +150,20 @@ class RegistrationValidator extends AbstractValidator
                     $validator = new CaptchaValidator($this->configurationManager);
                     $validator->setRequest($this->getRequest());
                 } else {
-                    $validator = new NotEmptyValidator();
+                    $validator = $this->getNotEmptyValidator();
                 }
         }
+
+        return $validator;
+    }
+
+    protected function getNotEmptyValidator(): NotEmptyValidator
+    {
+        $validator = new NotEmptyValidator();
+        $validator->setOptions([
+            'nullMessage' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:validation.required_field',
+            'emptyMessage' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:validation.required_field',
+        ]);
 
         return $validator;
     }
@@ -167,7 +176,7 @@ class RegistrationValidator extends AbstractValidator
             return;
         }
 
-        $validator = new NotEmptyValidator();
+        $validator = $this->getNotEmptyValidator();
         $validationResult = $validator->validate($registration->getPriceOption());
         if ($validationResult->hasErrors()) {
             foreach ($validationResult->getErrors() as $error) {

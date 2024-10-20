@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Validation\Validator;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 use TYPO3\CMS\Extbase\Validation\Validator\NotEmptyValidator;
@@ -64,14 +63,18 @@ class RegistrationFieldValidator extends AbstractValidator
 
     protected function getNotEmptyValidator(): NotEmptyValidator
     {
-        return GeneralUtility::makeInstance(NotEmptyValidator::class);
+        $validator = new NotEmptyValidator();
+        $validator->setOptions([
+            'nullMessage' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:validation.required_field',
+            'emptyMessage' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang.xlf:validation.required_field',
+        ]);
+
+        return $validator;
     }
 
     /**
      * Returns the value for the given registrationField from the given fieldValues
      *
-     * @param Registration\Field $registrationField
-     * @param ObjectStorage $fieldValues
      * @return string|array
      */
     protected function getFieldValue(Registration\Field $registrationField, ObjectStorage $fieldValues)
