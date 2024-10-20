@@ -78,10 +78,10 @@ class AbstractEventsTests
         $I->click('Registration');
         $I->click('Send registration');
         // Firstname (2), Lastname (3), Company (5) and Email (10)
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.company"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.email"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.firstname"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.lastname"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.company"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.email"]/span');
 
         $I->fillField(['id' => 'firstname'], 'John');
         $I->fillField(['id' => 'lastname'], 'Doe');
@@ -127,11 +127,11 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.company"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.email"]/span');
-        $I->see('The given subject was empty.', '//*[@id="field-errors-registration.fields.2"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.firstname"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.lastname"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.company"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.email"]/span');
+        $I->see('This field is required.', '//*[@id="field-errors-registration.fields.2"]/span');
     }
 
     public function registrationWorksForEventWithRegFields(AcceptanceTester $I)
