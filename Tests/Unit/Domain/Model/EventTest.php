@@ -1588,4 +1588,64 @@ class EventTest extends UnitTestCase
         self::assertEquals($extbaseFileReference1, $this->subject->getFirstListViewImage());
         self::assertEquals($extbaseFileReference2, $this->subject->getFirstDetailViewImage());
     }
+
+    #[Test]
+    public function getCacheTagLifetimeRespectsRegistrationStartdateIfNotReached(): void
+    {
+        $dateNow = new DateTime('01.10.2024 10:00');
+
+        $eventStartdate = new DateTime('10.10.2024 10:00');
+        $registrationStartdate = new DateTime('01.10.2024 12:00');
+
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate($eventStartdate);
+        $event->setRegistrationStartdate($registrationStartdate);
+
+        self::assertEquals(7201, $event->getCacheTagLifetime($dateNow));
+    }
+
+    #[Test]
+    public function getCacheTagLifetimeRespectsRegistrationDeadlineIfNotReached(): void
+    {
+        $dateNow = new DateTime('01.10.2024 10:00');
+
+        $eventStartdate = new DateTime('10.10.2024 10:00');
+        $registrationStartdate = new DateTime('01.10.2024 08:00');
+        $registrationDeadline = new DateTime('01.10.2024 16:00');
+
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate($eventStartdate);
+        $event->setRegistrationStartdate($registrationStartdate);
+        $event->setRegistrationDeadline($registrationDeadline);
+
+        self::assertEquals(21601, $event->getCacheTagLifetime($dateNow));
+    }
+
+    #[Test]
+    public function getCacheTagLifetimeRespectsEventStartdateIfNotReached(): void
+    {
+        $dateNow = new DateTime('01.10.2024 10:00');
+        $eventStartdate = new DateTime('02.10.2024 10:00');
+
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate($eventStartdate);
+
+        self::assertEquals(86401, $event->getCacheTagLifetime($dateNow));
+    }
+
+    #[Test]
+    public function getCacheTagLifetimeReturnsMaxLifetimeIfEventStarted(): void
+    {
+        $dateNow = new DateTime('01.10.2024 10:00');
+        $eventStartdate = new DateTime('01.10.2024 08:00');
+
+        $event = new Event();
+        $event->setEnableRegistration(true);
+        $event->setStartdate($eventStartdate);
+
+        self::assertEquals(PHP_INT_MAX, $event->getCacheTagLifetime($dateNow));
+    }
 }

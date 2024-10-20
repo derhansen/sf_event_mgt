@@ -980,8 +980,6 @@ class Event extends AbstractEntity
 
     /**
      * Returns a string to be used as overlay value for the <core:icon> ViewHelper in the Backend Modules
-     *
-     * @return string
      */
     public function getBackendIconOverlay(): string
     {
@@ -998,5 +996,39 @@ class Event extends AbstractEntity
         }
 
         return $overlay;
+    }
+
+    /**
+     * Calculates and returns the cache tag lifetime for the event based on several date fields
+     */
+    public function getCacheTagLifetime(DateTime $dateNow): int
+    {
+        if (!$this->getEnableRegistration() ||
+            !$this->getStartdate() ||
+            $this->getStartdate() < $dateNow
+        ) {
+            return PHP_INT_MAX;
+        }
+
+        // If registration startdate is not reached, consider it for cache lifetime
+        if ($this->getRegistrationStartdate() &&
+            $this->getRegistrationStartdate() > $dateNow
+        ) {
+            return $this->getRegistrationStartdate()->getTimestamp() - $dateNow->getTimestamp() + 1;
+        }
+
+        // If registration deadline is not reached, consider it for cache lifetime
+        if ($this->getRegistrationDeadline() &&
+            $this->getRegistrationDeadline() > $dateNow
+        ) {
+            return $this->getRegistrationDeadline()->getTimestamp() - $dateNow->getTimestamp() + 1;
+        }
+
+        // If event has not started yet, consider startdate for cache lifetime
+        if ($this->getStartdate() > $dateNow) {
+            return $this->getStartdate()->getTimestamp() - $dateNow->getTimestamp() + 1;
+        }
+
+        return PHP_INT_MAX;
     }
 }

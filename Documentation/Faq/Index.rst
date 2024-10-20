@@ -430,12 +430,6 @@ domain model of ext:news
 
 .. rst-class:: panel panel-default
 
-Why is a registration link shown even if the registration dealine expired?
-==========================================================================
-Make sure that you configured the page cache settings as described in :ref:`pagecache`
-
-.. rst-class:: panel panel-default
-
 Editing events is very slow having a huge amount of registrations. Can this be fixed?
 =====================================================================================
 Short answer: No, not really. For TCA inline fields, TYPO3 will load all data before opening the records
