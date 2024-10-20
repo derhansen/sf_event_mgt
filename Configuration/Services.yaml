@@ -21,8 +21,3 @@ services:
         command: 'sf_event_mgt:cleanup:gdpr'
         description: 'Delete registrations of expired events (registrations for events with no enddate will be ignored)'
         schedulable: true
-
-  DERHANSEN\SfEventMgt\EventListener\ChangeCacheTimeout:
-    tags:
-      - name: event.listener
-        identifier: 'derhansen/sf_event_mgt/cache-timeout'
