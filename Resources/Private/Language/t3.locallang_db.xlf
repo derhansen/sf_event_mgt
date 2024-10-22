@@ -91,6 +91,10 @@
         <source>Price options</source>
         <target>crwdns300828:0crwdne300828:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options.description">
+        <source>If registration is active for the event and price options are defined, the user must select one price option in order to complete the registration.</source>
+        <target>crwdns342208:0crwdne342208:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.currency">
         <source>Currency</source>
         <target>crwdns300830:0crwdne300830:0</target>
@@ -299,6 +303,14 @@
         <source>Paid</source>
         <target>crwdns300932:0crwdne300932:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.price">
+        <source>Price (when registered)</source>
+        <target>crwdns342210:0crwdne342210:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption">
+        <source>Price option</source>
+        <target>crwdns342212:0crwdne342212:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
         <source>Notes</source>
         <target>crwdns300934:0crwdne300934:0</target>
@@ -478,6 +490,14 @@
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption">
         <source>Price option</source>
         <target>crwdns301022:0crwdne301022:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.title">
+        <source>Title</source>
+        <target>crwdns342214:0crwdne342214:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.description">
+        <source>Description</source>
+        <target>crwdns342216:0crwdne342216:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price">
         <source>Price</source>
