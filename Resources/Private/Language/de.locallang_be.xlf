@@ -453,10 +453,6 @@
         <source>TypoScript settings missing</source>
         <target state="final">TypoScript Einstellungen fehlen</target>
       </trans-unit>
-      <trans-unit id="administration.settingsError.description" approved="yes">
-        <source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
-        <target state="final">TypoScript Einstellungen für Modul nicht gefunden. Bitte stellen Sie sicher, dass das statische TypoScript der Extension ins TypoScript Template eingefügt wurde.</target>
-      </trans-unit>
       <trans-unit id="administration.notify.description" approved="yes">
         <source>Please select an email template that will be used to notify participants of the event.</source>
         <target state="final">Bitte wählen Sie eine E-Mail-Vorlage, welche benutzt werden soll um die Veranstaltungsteilnehmer zu benachrichtigen. Um eine eigene E-Mail-Vorlage zu erstellen, lesen Sie bitte die Dokumentation.</target>
