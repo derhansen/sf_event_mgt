@@ -339,10 +339,6 @@
         <source>Cancellation failed, registration not found or already cancelled.</source>
         <target state="final">Stornierung fehlgeschlagen, Registrierung nicht gefunden oder Stornierung bereits durchgeführt.</target>
       </trans-unit>
-      <trans-unit id="event.message.confirmation_failed_cancel_disabled" approved="yes">
-        <source>Cancellation failed, cancel option for this event is not enabled.</source>
-        <target state="final">Stornierung fehlgeschlagen, weil die Stornierungs-Option für diese Veranstaltung nicht aktiviert ist.</target>
-      </trans-unit>
       <trans-unit id="event.message.cancel_failed_deadline_expired" approved="yes">
         <source>Cancellation failed, cancellation date has expired.</source>
         <target state="final">Bestätigung fehlgeschlagen, weil das Bestätigungsdatum abgelaufen ist.</target>
