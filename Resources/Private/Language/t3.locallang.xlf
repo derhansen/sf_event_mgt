@@ -67,6 +67,10 @@
         <source>Price</source>
         <target>crwdns300190:0crwdne300190:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.priceOptions">
+        <source>Price options</source>
+        <target>crwdns342196:0crwdne342196:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.currency">
         <source>Currency</source>
         <target>crwdns300192:0crwdne300192:0</target>
@@ -215,6 +219,10 @@
         <source>Paid</source>
         <target>crwdns300264:0crwdne300264:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption">
+        <source>Price option</source>
+        <target>crwdns342198:0crwdne342198:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
         <source>Notes</source>
         <target>crwdns300266:0crwdne300266:0</target>
@@ -359,9 +367,9 @@
         <source>Cancellation failed, registration not found or already cancelled.</source>
         <target>crwdns300334:0crwdne300334:0</target>
       </trans-unit>
-      <trans-unit id="event.message.confirmation_failed_cancel_disabled">
+      <trans-unit id="event.message.cancel_failed_cancel_disabled">
         <source>Cancellation failed, cancel option for this event is not enabled.</source>
-        <target>crwdns300336:0crwdne300336:0</target>
+        <target>crwdns342200:0crwdne342200:0</target>
       </trans-unit>
       <trans-unit id="event.message.cancel_failed_deadline_expired">
         <source>Cancellation failed, cancellation date has expired.</source>
@@ -483,6 +491,14 @@
         <source>Captcha field is missing or invalid.</source>
         <target>crwdns300396:0crwdne300396:0</target>
       </trans-unit>
+      <trans-unit id="validation.required_field">
+        <source>This field is required.</source>
+        <target>crwdns342202:0crwdne342202:0</target>
+      </trans-unit>
+      <trans-unit id="validation.invalid_priceoption">
+        <source>Invalid price option selected.</source>
+        <target>crwdns342204:0crwdne342204:0</target>
+      </trans-unit>
       <trans-unit id="error.no_secret">
         <source>No secret set in TypoScript for captcha.</source>
         <target>crwdns300398:0crwdne300398:0</target>
@@ -562,6 +578,10 @@
       <trans-unit id="insufficientAccessToTemp">
         <source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
         <target>crwdns300436:0crwdne300436:0</target>
+      </trans-unit>
+      <trans-unit id="startingAt">
+        <source>Starting at</source>
+        <target>crwdns342206:0crwdne342206:0</target>
       </trans-unit>
       <trans-unit id="pagination.first">
         <source>First page</source>
