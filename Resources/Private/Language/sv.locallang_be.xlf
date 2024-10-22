@@ -155,10 +155,6 @@
         <source>TypoScript settings missing</source>
         <target state="final">Inställningar för TypoScript saknas</target>
       </trans-unit>
-      <trans-unit id="administration.settingsError.description" approved="yes">
-        <source>Unable to find TypoScript settings for module. Please make sure, you have included the static TypoScript for the extension.</source>
-        <target state="final">Det går inte att hitta TypoScript-inställningar för modulen. Vänligen, se till att har du inkluderat statiskt TypoScript för tilläggsmodulen.</target>
-      </trans-unit>
       <trans-unit id="administration.notify.event" approved="yes">
         <source>Event:</source>
         <target state="final">Evenemang:</target>
