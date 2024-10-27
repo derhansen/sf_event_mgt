@@ -123,7 +123,7 @@ class RegistrationValidator extends AbstractValidator
     protected function isSpamCheckFailed(Registration $registration, array $settings): bool
     {
         $pluginKey = 'tx_sfeventmgt_pieventregistration';
-        $getMergedWithPost = $this->getRequest()->getQueryParams()[$pluginKey];
+        $getMergedWithPost = $this->getRequest()->getQueryParams()[$pluginKey] ?? [];
         ArrayUtility::mergeRecursiveWithOverrule($getMergedWithPost, $this->getRequest()->getParsedBody()[$pluginKey] ?? []);
 
         $spamCheckService = new SpamCheckService(
