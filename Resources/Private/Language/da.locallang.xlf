@@ -67,6 +67,10 @@
         <source>Price</source>
         <target state="final">Pris</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.priceOptions" approved="yes">
+        <source>Price options</source>
+        <target state="final">Prisegenskaber</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
         <source>Currency</source>
         <target state="final">Valuta</target>
@@ -215,6 +219,10 @@
         <source>Paid</source>
         <target state="final">Betalt</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Prisegenskab</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
         <source>Notes</source>
         <target state="final">Noter</target>
@@ -359,6 +367,10 @@
         <source>Cancellation failed, registration not found or already cancelled.</source>
         <target state="final">Annullering gik galt, tilmelding ikke fundet eller allerede annulleret.</target>
       </trans-unit>
+      <trans-unit id="event.message.cancel_failed_cancel_disabled" approved="yes">
+        <source>Cancellation failed, cancel option for this event is not enabled.</source>
+        <target state="final">Annullering gik galt, mulighed for annullering er ikke aktiveret for denne begivenhed.</target>
+      </trans-unit>
       <trans-unit id="event.message.cancel_failed_deadline_expired" approved="yes">
         <source>Cancellation failed, cancellation date has expired.</source>
         <target state="final">Annullering gik galt, annulleringsdato er udløbet.</target>
@@ -479,6 +491,14 @@
         <source>Captcha field is missing or invalid.</source>
         <target state="final">Captcha feltet mangler eller er ugyldigt.</target>
       </trans-unit>
+      <trans-unit id="validation.required_field" approved="yes">
+        <source>This field is required.</source>
+        <target state="final">Dette felt er påkrævet.</target>
+      </trans-unit>
+      <trans-unit id="validation.invalid_priceoption" approved="yes">
+        <source>Invalid price option selected.</source>
+        <target state="final">Ugyldig prisegenskab valgt.</target>
+      </trans-unit>
       <trans-unit id="error.no_secret" approved="yes">
         <source>No secret set in TypoScript for captcha.</source>
         <target state="final">Ingen secret angivet i TypoScript for captcha.</target>
@@ -558,6 +578,10 @@
       <trans-unit id="insufficientAccessToTemp" approved="yes">
         <source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
         <target state="final">Utilstrækkelig adgang til temp-mappe eller standard lager. CSV eksport for tilmeldinger er deaktiveret!</target>
+      </trans-unit>
+      <trans-unit id="startingAt" approved="yes">
+        <source>Starting at</source>
+        <target state="final">Starter fra</target>
       </trans-unit>
       <trans-unit id="pagination.first" approved="yes">
         <source>First page</source>
