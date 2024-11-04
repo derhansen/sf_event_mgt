@@ -91,6 +91,10 @@
         <source>Price options</source>
         <target state="final">Pris egenskaber</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options.description" approved="yes">
+        <source>If registration is active for the event and price options are defined, the user must select one price option in order to complete the registration.</source>
+        <target state="final">Hvis registrering er aktiv for begivenheden og prisegenskaber er defineret, skal brugeren vælge en prisegenskab for at fuldføre registreringen.</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
         <source>Currency</source>
         <target state="final">Valuta</target>
@@ -299,6 +303,14 @@
         <source>Paid</source>
         <target state="final">Betalt</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.price" approved="yes">
+        <source>Price (when registered)</source>
+        <target state="final">Pris (når registreret)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Prisegenskab</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
         <source>Notes</source>
         <target state="final">Noter</target>
@@ -478,6 +490,14 @@
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption" approved="yes">
         <source>Price option</source>
         <target state="final">Prisegenskab</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivelse</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price" approved="yes">
         <source>Price</source>
