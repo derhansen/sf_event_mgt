@@ -47,6 +47,10 @@
         <source>Registration enabled</source>
         <target state="final">Anmeldung möglich</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate" approved="yes">
+        <source>Registration until the end date and time possible</source>
+        <target state="final">Registrierung bis zum Enddatum und -zeit möglich</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
         <source>Registrations</source>
         <target state="final">Anmeldungen</target>
@@ -62,6 +66,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.price" approved="yes">
         <source>Price</source>
         <target state="final">Preis</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.priceOptions" approved="yes">
+        <source>Price options</source>
+        <target state="final">Preisoptionen</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
         <source>Currency</source>
@@ -211,6 +219,10 @@
         <source>Paid</source>
         <target state="final">Bezahlt</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Preisoption</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
         <source>Notes</source>
         <target state="final">Bemerkungen</target>
@@ -263,9 +275,25 @@
         <source>Send registration</source>
         <target state="final">Anmeldung absenden</target>
       </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventexpired" approved="yes">
+        <source>Registration is not possible anymore, because the event startdate is reached.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil das Start-Datum der Veranstaltung bereits erreicht wurde.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventended" approved="yes">
+        <source>Registration is not possible anymore, because the event has ended.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil die Veranstaltung bereits beendet ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfaileddeadlineexpired" approved="yes">
+        <source>Registration is not possible anymore, because the registration deadline is reached.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil die Anmeldefrist verstrichen ist.</target>
+      </trans-unit>
       <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
         <source>Registration failed, because registration is disabled.</source>
         <target state="final">Die Anmeldung ist nicht möglich, weil für diese Veranstaltung keine Anmeldung erlaubt ist.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxparticipants" approved="yes">
+        <source>Registration is not possible anymore, because the max. participants reached.</source>
+        <target state="final">Die Anmeldung ist nicht mehr möglich, weil die max. Teilnehmeranzahl erreicht wurde.</target>
       </trans-unit>
       <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
         <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
@@ -338,6 +366,10 @@
       <trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled" approved="yes">
         <source>Cancellation failed, registration not found or already cancelled.</source>
         <target state="final">Stornierung fehlgeschlagen, Registrierung nicht gefunden oder Stornierung bereits durchgeführt.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_cancel_disabled" approved="yes">
+        <source>Cancellation failed, cancel option for this event is not enabled.</source>
+        <target state="final">Stornierung fehlgeschlagen, weil die Stornierungs-Option für diese Veranstaltung nicht aktiviert ist.</target>
       </trans-unit>
       <trans-unit id="event.message.cancel_failed_deadline_expired" approved="yes">
         <source>Cancellation failed, cancellation date has expired.</source>
@@ -459,6 +491,14 @@
         <source>Captcha field is missing or invalid.</source>
         <target state="final">Captcha-Feld fehlt oder ist ungültig.</target>
       </trans-unit>
+      <trans-unit id="validation.required_field" approved="yes">
+        <source>This field is required.</source>
+        <target state="final">Dies ist ein Pflichtfeld.</target>
+      </trans-unit>
+      <trans-unit id="validation.invalid_priceoption" approved="yes">
+        <source>Invalid price option selected.</source>
+        <target state="final">Ungültige Preisoption ausgewählt.</target>
+      </trans-unit>
       <trans-unit id="error.no_secret" approved="yes">
         <source>No secret set in TypoScript for captcha.</source>
         <target state="final">Kein Geheimer Schlüssel in TypoScript für Captcha.</target>
@@ -539,6 +579,10 @@
         <source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
         <target state="final">Ungenügende Berechtigungen um auf den Temp-Ordner im Fileadmin zuzugreifen. Der CSV Export für Anmeldungen wurde deaktiviert.</target>
       </trans-unit>
+      <trans-unit id="startingAt" approved="yes">
+        <source>Starting at</source>
+        <target state="final">Beginnend ab</target>
+      </trans-unit>
       <trans-unit id="pagination.first" approved="yes">
         <source>First page</source>
         <target state="final">Erste Seite</target>
@@ -554,6 +598,14 @@
       <trans-unit id="pagination.last" approved="yes">
         <source>Last page</source>
         <target state="final">Letzte Seite</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration" approved="yes">
+        <source>Confirm registration</source>
+        <target state="final">Anmeldung bestätigen</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration" approved="yes">
+        <source>Cancel registration</source>
+        <target state="final">Anmeldung stornieren</target>
       </trans-unit>
     </body>
   </file>
