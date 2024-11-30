@@ -91,6 +91,7 @@ class AdministrationControllerTest extends UnitTestCase
                 'orderDirection' => 'asc',
             ],
             'pagination' => null,
+            'recursiveLevels' => $this->subject->getRecursiveLevels(),
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
@@ -137,6 +138,7 @@ class AdministrationControllerTest extends UnitTestCase
                 'orderDirection' => 'asc',
             ],
             'pagination' => null,
+            'recursiveLevels' => $this->subject->getRecursiveLevels(),
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
@@ -191,6 +193,7 @@ class AdministrationControllerTest extends UnitTestCase
                 'orderDirection' => 'asc',
             ],
             'pagination' => [],
+            'recursiveLevels' => $this->subject->getRecursiveLevels(),
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
@@ -242,6 +245,7 @@ class AdministrationControllerTest extends UnitTestCase
             'orderDirections' => $this->subject->getOrderDirections(),
             'overwriteDemand' => ['orderDirection' => 'desc'],
             'pagination' => [],
+            'recursiveLevels' => $this->subject->getRecursiveLevels(),
         ];
         $this->subject->expects(self::once())->method('initModuleTemplateAndReturnResponse')
             ->with('Administration/List', $variables);
