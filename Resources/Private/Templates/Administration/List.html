@@ -11,26 +11,26 @@
     </h1>
 
     <f:form name="searchDemand" object="{searchDemand}" action="list">
-        <div class="row row-cols-auto align-items-end g-3 mb-3">
-            <div class="col">
+        <div class="form-row g-3 mb-3">
+            <div class="form-group">
                 <label for="search" class="form-label">
                     <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search" />
                 </label>
 
                 <div class="input-group">
                     <f:form.textfield property="search" id="search" class="form-control t3js-clearable"/>
-
-                    <label class="mb-0 btn btn-default" for="search">
+                    <f:form.select id="recursiveLevel" name="overwriteDemand[recursive]" options="{recursiveLevels}" class="form-select recursiveLevel" value="{overwriteDemand.recursive}"/>
+                    <button class="mb-0 btn btn-default" for="search">
                         <core:icon identifier="actions-search" />
-                    </label>
+                    </button>
                 </div>
             </div>
 
-            <div class="col">
+            <div class="form-group">
                 <label for="startDate" class="form-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
                 </label>
-                <div class="input-group">
+                <div class="input-group date-field">
                     <f:form.textfield
                         name="startDate"
                         value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.startDate}')}\")}"
@@ -50,12 +50,12 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="form-group">
                 <label for="endDate" class="form-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
                 </label>
 
-                <div class="input-group">
+                <div class="input-group date-field">
                     <f:form.textfield
                         name="endDate"
                         value="{f:if(condition: searchDemand.endDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.endDate}')}\")}"
@@ -75,17 +75,17 @@
                 </div>
             </div>
 
-            <div class="col">
+            <div class="form-group">
                 <label for="orderField" class="form-label">
                     <f:translate key="admin.sorting"/>
                 </label>
-                <f:form.select id="orderField" name="overwriteDemand[orderField]" options="{orderByFields}" class="form-select" value="{overwriteDemand.orderField}"/>
-            </div>
-            <div class="col">
-                <f:form.select id="orderDirection" name="overwriteDemand[orderDirection]" options="{orderDirections}" class="form-select" value="{overwriteDemand.orderDirection}"/>
+                <div class="input-group">
+                    <f:form.select id="orderField" name="overwriteDemand[orderField]" options="{orderByFields}" class="form-select" value="{overwriteDemand.orderField}"/>
+                    <f:form.select id="orderDirection" name="overwriteDemand[orderDirection]" options="{orderDirections}" class="form-select" value="{overwriteDemand.orderDirection}"/>
+                </div>
             </div>
 
-            <div class="col">
+            <div class="form-group align-self-end">
                 <f:form.button type="submit" name="operation" value="search" class="btn btn-default">{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search')}</f:form.button>
                 <f:form.button type="submit" name="operation" value="reset-filters" class="btn btn-link">Reset</f:form.button>
             </div>

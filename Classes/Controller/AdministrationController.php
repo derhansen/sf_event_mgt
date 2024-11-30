@@ -23,6 +23,7 @@ use DERHANSEN\SfEventMgt\Service\BeUserSessionService;
 use DERHANSEN\SfEventMgt\Service\ExportService;
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
 use DERHANSEN\SfEventMgt\Service\SettingsService;
+use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
@@ -258,18 +259,19 @@ class AdministrationController extends AbstractController
             ];
         }
 
-        $eventDemand = GeneralUtility::makeInstance(EventDemand::class);
-        $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
-        $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
-        $eventDemand->setSearchDemand($searchDemand);
-        $eventDemand->setStoragePage((string)$this->pid);
-        $eventDemand->setIgnoreEnableFields(true);
-
         $events = [];
         $pagination = null;
-        if ($this->getBackendUser()->isInWebMount($this->pid) &&
+        $pageUids = $this->resolveSearchPageUids((int)($overwriteDemand['recursive'] ?? 0));
+        if ($pageUids !== '' &&
             $this->getBackendUser()->check('tables_select', 'tx_sfeventmgt_domain_model_event')
         ) {
+            $eventDemand = GeneralUtility::makeInstance(EventDemand::class);
+            $eventDemand = $this->overwriteEventDemandObject($eventDemand, $overwriteDemand);
+            $eventDemand->setOrderFieldAllowed($this->settings['orderFieldAllowed'] ?? '');
+            $eventDemand->setSearchDemand($searchDemand);
+            $eventDemand->setIgnoreEnableFields(true);
+            $eventDemand->setStoragePage($pageUids);
+
             $events = $this->eventRepository->findDemanded($eventDemand);
             $pagination = $this->getPagination($events, $this->settings['pagination'] ?? []);
         }
@@ -281,6 +283,7 @@ class AdministrationController extends AbstractController
                 'searchDemand' => $searchDemand,
                 'orderByFields' => $this->getOrderByFields(),
                 'orderDirections' => $this->getOrderDirections(),
+                'recursiveLevels' => $this->getRecursiveLevels(),
                 'overwriteDemand' => $overwriteDemand,
                 'pagination' => $pagination,
             ],
@@ -291,6 +294,30 @@ class AdministrationController extends AbstractController
         $variables = $modifyAdministrationListViewVariablesEvent->getVariables();
 
         return $this->initModuleTemplateAndReturnResponse('Administration/List', $variables);
+    }
+
+    /**
+     * Resolves the page UIDs to search in respecting the given recursive option and additionally checking, if
+     * the current backend user is allowed to affected pages
+     */
+    private function resolveSearchPageUids(int $recursive): string
+    {
+        $extendedPageUids = PageUtility::extendPidListByChildren(
+            (string)$this->pid,
+            $recursive
+        );
+        $extendedPageUids = GeneralUtility::intExplode(',', $extendedPageUids, true);
+
+        $pageUids = [];
+        foreach ($extendedPageUids as $extendedPageUid) {
+            if (!in_array($extendedPageUid, $pageUids, true) &&
+                $this->getBackendUser()->isInWebMount($extendedPageUid)
+            ) {
+                $pageUids[] = $extendedPageUid;
+            }
+        }
+
+        return implode(',', $pageUids);
     }
 
     /**
@@ -475,6 +502,21 @@ class AdministrationController extends AbstractController
         return [
             'asc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.asc'),
             'desc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.desc'),
+        ];
+    }
+
+    /**
+     * Returns an array with possible recursive levels
+     */
+    public function getRecursiveLevels(): array
+    {
+        return [
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.current'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level1'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level2'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level3'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level4'),
+            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level5'),
         ];
     }
 

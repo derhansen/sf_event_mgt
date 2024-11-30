@@ -498,6 +498,25 @@
 			<trans-unit id="administration.pagination.records">
 				<source>Records</source>
 			</trans-unit>
+			<trans-unit id="administration.recursiveLevel.current">
+				<source>Current folder</source>
+			</trans-unit>
+			<trans-unit id="administration.recursiveLevel.level1">
+				<source>1 level down</source>
+			</trans-unit>
+			<trans-unit id="administration.recursiveLevel.level2">
+				<source>2 levels down</source>
+			</trans-unit>
+			<trans-unit id="administration.recursiveLevel.level3">
+				<source>3 levels down</source>
+			</trans-unit>
+			<trans-unit id="administration.recursiveLevel.level4">
+				<source>4 levels down</source>
+			</trans-unit>
+			<trans-unit id="administration.recursiveLevel.level5">
+				<source>5 levels down</source>
+			</trans-unit>
+
 			<trans-unit id="evaluation.timeRestriction.header">
 				<source>Time Restriction</source>
 			</trans-unit>

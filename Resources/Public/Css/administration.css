@@ -27,6 +27,14 @@ tr.db_list_normal td.logdate {
     text-decoration: none;
 }
 
+select.recursiveLevel {
+    max-width: 140px;
+}
+
+.date-field {
+    max-width: 200px;
+}
+
 /**
  * Action Buttons
  */
