@@ -165,15 +165,15 @@ class CalendarService
         return [
             'previous' => [
                 'weeknumber' => (int)$firstDayPreviousWeek->format('W'),
-                'year' => (int)$firstDayPreviousWeek->format('Y'),
+                'year' => (int)$firstDayPreviousWeek->format('o'),
             ],
             'current' => [
                 'weeknumber' => (int)$firstDayOfCurrentWeek->format('W'),
-                'year' => (int)$firstDayOfCurrentWeek->format('Y'),
+                'year' => (int)$firstDayOfCurrentWeek->format('o'),
             ],
             'next' => [
                 'weeknumber' => (int)$firstDayNextWeek->format('W'),
-                'year' => (int)$firstDayNextWeek->format('Y'),
+                'year' => (int)$firstDayNextWeek->format('o'),
             ],
         ];
     }
