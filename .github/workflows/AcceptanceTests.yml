@@ -90,21 +90,21 @@ jobs:
 
       - name: Upload Codeception output
         if: ${{ always() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: codeception-results
           path: Tests/Acceptance/_output/
 
       - name: Upload PHP log
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: php-log
           path: php.log.txt
 
       - name: Upload TYPO3 log
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: typo3-log
           path: .Build/var/log/
