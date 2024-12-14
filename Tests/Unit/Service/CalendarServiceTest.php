@@ -261,7 +261,7 @@ class CalendarServiceTest extends UnitTestCase
                         'weeknumber' => 2,
                         'year' => 2022,
                     ],
-                ]
+                ],
             ],
             '30.12.2024' => [
                 '30.12.2024',
@@ -278,7 +278,7 @@ class CalendarServiceTest extends UnitTestCase
                         'weeknumber' => 2,
                         'year' => 2025,
                     ],
-                ]
+                ],
             ],
         ];
     }
