@@ -92,19 +92,19 @@ jobs:
         if: ${{ always() }}
         uses: actions/upload-artifact@v4
         with:
-          name: codeception-results
+          name: codeception-results-${{ matrix.env.php }}
           path: Tests/Acceptance/_output/
 
       - name: Upload PHP log
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
-          name: php-log
+          name: php-log-${{ matrix.env.php }}
           path: php.log.txt
 
       - name: Upload TYPO3 log
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
-          name: typo3-log
+          name: typo3-log-${{ matrix.env.php }}
           path: .Build/var/log/
