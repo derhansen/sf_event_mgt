@@ -657,6 +657,30 @@
         <source>Records</source>
         <target>crwdns300748:0crwdne300748:0</target>
       </trans-unit>
+      <trans-unit id="administration.recursiveLevel.current">
+        <source>Current folder</source>
+        <target>crwdns367190:0crwdne367190:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level1">
+        <source>1 level down</source>
+        <target>crwdns367192:0crwdne367192:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level2">
+        <source>2 levels down</source>
+        <target>crwdns367194:0crwdne367194:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level3">
+        <source>3 levels down</source>
+        <target>crwdns367196:0crwdne367196:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level4">
+        <source>4 levels down</source>
+        <target>crwdns367198:0crwdne367198:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level5">
+        <source>5 levels down</source>
+        <target>crwdns367200:0crwdne367200:0</target>
+      </trans-unit>
       <trans-unit id="evaluation.timeRestriction.header">
         <source>Time Restriction</source>
         <target>crwdns300750:0crwdne300750:0</target>
