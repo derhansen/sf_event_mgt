@@ -659,6 +659,30 @@
         <source>Records</source>
         <target state="final">Elementer</target>
       </trans-unit>
+      <trans-unit id="administration.recursiveLevel.current" approved="yes">
+        <source>Current folder</source>
+        <target state="final">Aktuel mappe</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level1" approved="yes">
+        <source>1 level down</source>
+        <target state="final">1 niveau ned</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level2" approved="yes">
+        <source>2 levels down</source>
+        <target state="final">2 niveauer ned</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level3" approved="yes">
+        <source>3 levels down</source>
+        <target state="final">3 niveauer ned</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level4" approved="yes">
+        <source>4 levels down</source>
+        <target state="final">4 niveauer ned</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level5" approved="yes">
+        <source>5 levels down</source>
+        <target state="final">5 niveauer ned</target>
+      </trans-unit>
       <trans-unit id="evaluation.timeRestriction.header" approved="yes">
         <source>Time Restriction</source>
         <target state="final">Tidsbegrænsning</target>
