@@ -59,6 +59,10 @@
         <source>Enable registration</source>
         <target state="final">Anmeldung aktivieren</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate" approved="yes">
+        <source>Allow registration until end date and time</source>
+        <target state="final">Registrierung bis zum Enddatum und -zeit erlauben</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist" approved="yes">
         <source>Enable waitlist</source>
         <target state="final">Warteliste aktivieren</target>
@@ -86,6 +90,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.price_options" approved="yes">
         <source>Price options</source>
         <target state="final">Preisoptionen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options.description" approved="yes">
+        <source>If registration is active for the event and price options are defined, the user must select one price option in order to complete the registration.</source>
+        <target state="final">Wenn die Registrierung für die Veranstaltung aktiv ist und Preisoptionen definiert sind, muss der Nutzer eine Preisoption wählen, um die Registrierung abzuschließen.</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
         <source>Currency</source>
@@ -295,6 +303,14 @@
         <source>Paid</source>
         <target state="final">Bezahlt</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.price" approved="yes">
+        <source>Price (when registered)</source>
+        <target state="final">Preis (zum Zeitpunkt der Anmeldung)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Preisoptionen</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
         <source>Notes</source>
         <target state="final">Anmerkungen</target>
@@ -474,6 +490,14 @@
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption" approved="yes">
         <source>Price option</source>
         <target state="final">Preisoption</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price" approved="yes">
         <source>Price</source>
