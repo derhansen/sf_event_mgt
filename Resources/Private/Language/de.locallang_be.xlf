@@ -67,6 +67,10 @@
         <source>Frontend user registrations</source>
         <target state="final">Benutzeranmeldungen</target>
       </trans-unit>
+      <trans-unit id="plugin.piuserreg.description" approved="yes">
+        <source>Display event registrations for the current logged in frontend user.</source>
+        <target state="final">Veranstaltungs-Anmeldungen von angemeldeten Frontend-Benutzer an zeigen.</target>
+      </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
         <target state="final">Einstellungen</target>
@@ -337,6 +341,14 @@
         <source>Include events that start before and end after time from</source>
         <target state="final">Veranstaltungen einbeziehen, welche vor "Zeit von" beginnen und nach "Zeit von" enden</target>
       </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords" approved="yes">
+        <source>Allow preview of hidden event records</source>
+        <target state="final">Vorschau auf verborgene Datensätze erlauben</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords.description" approved="yes">
+        <source>If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone using any event record uid to see its content. Note, that this functionality requires a valid backend user session.</source>
+        <target state="final">Wenn aktiviert, werden ausgeblendete Veranstaltungs-Datensätze angezeigt. Achten Sie darauf, die Seite zu sichern (z.B. setze die Sichtbarkeit der Seite auf "versteckt"), da diese Seite von jedem aufgerufen werden könnte, der einen Ereignis-Eintrag uid benutzt, um dessen Inhalt zu sehen. Beachten Sie, dass diese Funktionalität eine gültige Backend-Benutzersitzung erfordert.</target>
+      </trans-unit>
       <trans-unit id="flexforms_notification.sender_email" approved="yes">
         <source>Email address of emails sent to the user</source>
         <target state="final">Absende-E-Mail Adresse für E-Mails an den Benutzer</target>
@@ -453,6 +465,10 @@
         <source>TypoScript settings missing</source>
         <target state="final">TypoScript Einstellungen fehlen</target>
       </trans-unit>
+      <trans-unit id="administration.settingsError.description" approved="yes">
+        <source>Unable to find TypoScript settings for module. Please make sure, required TypoScript settings have been included. If you use a TypoScript template for your website, include the static TypoScript of sf_event_mgt. If you use site sets and have included the extensions site set, make sure that the templates does not clear constants/setup (which overrides site set includes).</source>
+        <target state="final">TypoScript Einstellungen für das Modul konnten nicht gefunden werden. Bitte stellen Sie sicher, dass benötigte TypoScript Einstellungen aufgenommen wurden. Wenn Sie eine TypoScript-Vorlage für Ihre Website verwenden, fügen Sie das statische TypoScript von sf_event_mgt. Wenn Sie Site-Sets verwenden und die Erweiterung-Site enthalten haben stellen Sie sicher, dass die Vorlagen Konstanten/Setup nicht löschen (was die Site-Set überschreibt).</target>
+      </trans-unit>
       <trans-unit id="administration.notify.description" approved="yes">
         <source>Please select an email template that will be used to notify participants of the event.</source>
         <target state="final">Bitte wählen Sie eine E-Mail-Vorlage, welche benutzt werden soll um die Veranstaltungsteilnehmer zu benachrichtigen. Um eine eigene E-Mail-Vorlage zu erstellen, lesen Sie bitte die Dokumentation.</target>
@@ -476,6 +492,14 @@
       <trans-unit id="administration.notify.recipients.2" approved="yes">
         <source>Unconfirmed participants</source>
         <target state="final">Unbestätigte Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.3" approved="yes">
+        <source>Confirmed waitlist participants</source>
+        <target state="final">Bestätigte Teilnehmer auf der Warteliste</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.4" approved="yes">
+        <source>Unconfirmed waitlist participants</source>
+        <target state="final">Nicht bestätigte Teilnehmer auf der Warteliste</target>
       </trans-unit>
       <trans-unit id="administration.notify.label.template" approved="yes">
         <source>Template:</source>
@@ -566,6 +590,9 @@
       <trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve" approved="yes">
 				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
 			<target state="final">Maximale Anzahl an Registrierungen, die im Ereigniseintrag im TYPO3 Backend angezeigt werden.</target></trans-unit>
+      <trans-unit id="extmng.useFluidEmail" xml:space="preserve" approved="yes">
+				<source>Use FluidEmail for email notifications: If active, all notifications generated by the extension will be sent using FluidEmail.</source>
+			<target state="final">FluidEmail für E-Mail-Benachrichtigungen verwenden: Wenn aktiv, werden alle Benachrichtigungen von der Erweiterung mit FluidEmail versendet.</target></trans-unit>
       <trans-unit id="backend.hideInlineRegistrations.title" approved="yes">
         <source>Event registrations hidden</source>
         <target state="final">Event-Registrierungen versteckt</target>
@@ -577,6 +604,10 @@
       <trans-unit id="tabs.language" approved="yes">
         <source>Language</source>
         <target state="final">Sprache</target>
+      </trans-unit>
+      <trans-unit id="tabs.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">Zusätzliches</target>
       </trans-unit>
       <trans-unit id="administration.message-1.title" approved="yes">
         <source>Information</source>
@@ -625,6 +656,30 @@
       <trans-unit id="administration.pagination.records" approved="yes">
         <source>Records</source>
         <target state="final">Datensätze</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.current" approved="yes">
+        <source>Current folder</source>
+        <target state="final">Aktueller Ordner</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level1" approved="yes">
+        <source>1 level down</source>
+        <target state="final">1 Ebene nach unten</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level2" approved="yes">
+        <source>2 levels down</source>
+        <target state="final">2 Ebenen nach unten</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level3" approved="yes">
+        <source>3 levels down</source>
+        <target state="final">3 Ebenen nach unten</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level4" approved="yes">
+        <source>4 levels down</source>
+        <target state="final">4 Ebenen nach unten</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level5" approved="yes">
+        <source>5 levels down</source>
+        <target state="final">5 Ebenen nach unten</target>
       </trans-unit>
       <trans-unit id="evaluation.timeRestriction.header" approved="yes">
         <source>Time Restriction</source>
