@@ -22,6 +22,8 @@ in the extension or by implementing a custom logic using the PSR-14 event :php:`
    waitlist move up process. If the move up process does not fulfill your needs, you have to implement an
    own process.
 
+   Additionally note, that the default waitlist move up process works in **frontend context** only.
+
 How does the waitlist move up process work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
