@@ -33,6 +33,7 @@ class ICalendarService
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: no-cache');
+        header('X-Robots-Tag: noindex');
         echo $content;
     }
 
