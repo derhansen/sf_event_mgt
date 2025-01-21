@@ -15,11 +15,11 @@ plugin.tx_sfeventmgt {
         }
         partialRootPaths {
             0 = EXT:sf_event_mgt/Resources/Private/Partials/
-            1 = {$plugin.tx_sfeventmgt.view.partialRootPath ?? sf_event_mgt.view.partialRootPath}
+            1 = {$plugin.tx_sfeventmgt.view.partialRootPath ?? $sf_event_mgt.view.partialRootPath}
         }
         layoutRootPaths {
             0 = EXT:sf_event_mgt/Resources/Private/Layouts/
-            1 = {$plugin.tx_sfeventmgt.view.layoutRootPath ?? sf_event_mgt.view.layoutRootPath}
+            1 = {$plugin.tx_sfeventmgt.view.layoutRootPath ?? $sf_event_mgt.view.layoutRootPath}
         }
     }
     settings {
