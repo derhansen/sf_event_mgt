@@ -9,7 +9,7 @@ declare(strict_types=1);
  * LICENSE.txt file that was distributed with this source code.
  */
 
-namespace DERHANSEN\SfEventMgt\Tests\Unit\Form\formDataProvider;
+namespace DERHANSEN\SfEventMgt\Tests\Unit\Form\FormDataProvider;
 
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
 use PHPUnit\Framework\Attributes\Test;
