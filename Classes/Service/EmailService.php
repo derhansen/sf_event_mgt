@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Mail\FluidEmail;
@@ -73,8 +74,13 @@ class EmailService
         }
 
         $mailer = GeneralUtility::makeInstance(MailerInterface::class);
-        $mailer->send($email);
-        return $mailer->getSentMessage() !== null;
+
+        try {
+            $mailer->send($email);
+            return $mailer->getSentMessage() !== null;
+        } catch (TransportExceptionInterface $e) {
+            return false;
+        }
     }
 
     private function getEmailObject(bool $useFluidEmail): MailMessage|FluidEmail
