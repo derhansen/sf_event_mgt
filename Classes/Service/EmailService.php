@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -56,7 +57,10 @@ class EmailService
                 $email->attachFromPath($attachment);
             }
         }
-
-        return $email->send();
+        try {
+            return $email->send();
+        } catch (TransportExceptionInterface $e) {
+            return false;
+        }
     }
 }
