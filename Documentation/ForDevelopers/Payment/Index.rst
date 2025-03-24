@@ -169,4 +169,4 @@ the :php:`ProcessPaymentInitializeEvent` PSR-14 event.
 --------------------------
 
 Make sure that your rendered Fluid standlone views do not contain sensitive data or possibilities
-for Cross Site Scripting (XSS) (:php:`values['html']` is rendered with :php:`f:render.raw`).
+for Cross Site Scripting (XSS) (:php:`values['html']` is rendered with :php:`f:format.raw`).
