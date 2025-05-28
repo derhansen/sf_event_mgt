@@ -373,7 +373,7 @@ return [
         'event' => [
             'config' => [
                 'type' => 'group',
-                'allowed' => 'tx_sfeventmgt_domain_model_location',
+                'allowed' => 'tx_sfeventmgt_domain_model_event',
                 'foreign_table' => 'tx_sfeventmgt_domain_model_event',
                 'size' => 1,
                 'minitems' => 0,
