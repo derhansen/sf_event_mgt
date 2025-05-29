@@ -77,7 +77,8 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
-        // Firstname (2), Lastname (3), Company (5) and Email (10)
+        $I->waitForElementVisible('#registration-submit', 1);
+
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.company"]/span');
@@ -88,6 +89,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'company'], 'TYPO3');
         $I->fillField(['id' => 'email'], 'invalid-email');
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 2);
         $I->see('The given subject was not a valid email address.', '//*[@id="field-errors-registration.email"]/span');
     }
 
@@ -107,6 +109,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->fetchEmails();
@@ -127,6 +130,8 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
+
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.company"]/span');
@@ -151,6 +156,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->fetchEmails();
@@ -188,6 +194,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration on the waitlist successful', 5);
         $I->see('Registration on the waitlist successful');
 
         $I->fetchEmails();
@@ -217,6 +224,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration confirmed', 5);
         $I->see('Registration confirmed');
 
         $I->fetchEmails();
@@ -249,6 +257,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration confirmed', 5);
         $I->see('Registration confirmed');
 
         $I->amOnPage($this->basePath . 'event-list-all');
@@ -263,6 +272,7 @@ class AbstractEventsTests
         $I->fillField(['name' => 'pass'], '123456');
         $I->click('Login');
 
+        $I->waitForText('My event registrations', 5);
         $I->see('My event registrations');
         $I->see('Expired Event (cat1, fe_user: user1) ' . $this->lang);
         $I->see('Expired Event (location: 1, fe_user: user1) ' . $this->lang);
@@ -279,6 +289,7 @@ class AbstractEventsTests
         $I->see('0', '//*[@id="c2"]/div/div[12]/div[2]');
         $I->see('Registration', 'a');
         $I->click('Registration');
+        $I->waitForText('Send registration', 5);
 
         $I->fillField(['id' => 'firstname'], 'John');
         $I->fillField(['id' => 'lastname'], 'Doe');
@@ -288,6 +299,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->amOnPage($this->basePath . 'event-list-all');
@@ -311,6 +323,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Your form submission has been classified as spam.', 5);
         $I->see('Your form submission has been classified as spam.');
     }
 
@@ -334,6 +347,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->seeInDatabase('tx_sfeventmgt_domain_model_registration', ['email' => $email, 'event' => $expectedEventUid]);
