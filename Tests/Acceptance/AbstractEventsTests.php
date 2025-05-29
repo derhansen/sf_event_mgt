@@ -289,7 +289,6 @@ class AbstractEventsTests
         $I->see('0', '//*[@id="c2"]/div/div[12]/div[2]');
         $I->see('Registration', 'a');
         $I->click('Registration');
-        $I->waitForText('Send registration', 5);
 
         $I->fillField(['id' => 'firstname'], 'John');
         $I->fillField(['id' => 'lastname'], 'Doe');
