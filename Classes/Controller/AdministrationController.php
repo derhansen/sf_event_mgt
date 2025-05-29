@@ -135,6 +135,10 @@ class AdministrationController extends AbstractController
                 ],
             ];
             foreach ($buttons as $tableConfiguration) {
+                if ($this->isButtonDisabledBySetting($tableConfiguration['label'])) {
+                    continue;
+                }
+
                 $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
                 $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], IconSize::SMALL);
                 $viewButton = $buttonBar->makeLinkButton()
@@ -149,6 +153,16 @@ class AdministrationController extends AbstractController
                 $buttonBar->addButton($viewButton, ButtonBar::BUTTON_POSITION_LEFT, $tableConfiguration['group']);
             }
         }
+    }
+
+    /**
+     * Returns, if the given button is disabled by the setting
+     */
+    private function isButtonDisabledBySetting(string $buttonLabel): bool
+    {
+        $disabledButtons = $this->settings['disableButtons'] ?? [];
+        $buttonIdentifier = str_replace('administration.', '', $buttonLabel);
+        return isset($disabledButtons[$buttonIdentifier]) && (int)($disabledButtons[$buttonIdentifier]) === 1;
     }
 
     /**

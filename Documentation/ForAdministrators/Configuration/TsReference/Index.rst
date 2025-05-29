@@ -813,6 +813,56 @@ settings.enabledActions.export
 
    If set to "1", the Export-Action / Icon is shown for events with registration enabled.
 
+settings.disableButtons.newEvent
+--------------------------------
+
+.. confval:: settings.disableButtons.newEvent
+
+   :Type: int
+   :Default: 0
+
+   If set to "1", the "Create new event" button is disabled in the administration module.
+
+settings.disableButtons.newLocation
+-----------------------------------
+
+.. confval:: settings.disableButtons.newLocation
+
+   :Type: int
+   :Default: 0
+
+   If set to "1", the "Create new location" button is disabled in the administration module.
+
+settings.disableButtons.newOrganisator
+--------------------------------------
+
+.. confval:: settings.disableButtons.newOrganisator
+
+   :Type: int
+   :Default: 0
+
+   If set to "1", the "Create new organisator" button is disabled in the administration module.
+
+settings.disableButtons.newSpeaker
+----------------------------------
+
+.. confval:: settings.disableButtons.newSpeaker
+
+   :Type: int
+   :Default: 0
+
+   If set to "1", the "Create new speaker" button is disabled in the administration module.
+
+settings.disableButtons.handleExpiredRegistrations
+--------------------------------------------------
+
+.. confval:: settings.disableButtons.handleExpiredRegistrations
+
+   :Type: int
+   :Default: 0
+
+   If set to "1", the "Hide/delete expired registrations" button is disabled in the administration module.
+
 settings.defaultSorting.orderField
 ------------------------------
 
