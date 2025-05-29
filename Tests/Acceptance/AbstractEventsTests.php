@@ -77,7 +77,8 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
-        // Firstname (2), Lastname (3), Company (5) and Email (10)
+        $I->waitForElementVisible('#registration-submit', 1);
+
         $I->see('This field is required.', '//*[@id="field-errors-registration.firstname"]/span');
         $I->see('This field is required.', '//*[@id="field-errors-registration.lastname"]/span');
         $I->see('This field is required.', '//*[@id="field-errors-registration.company"]/span');
@@ -88,6 +89,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'company'], 'TYPO3');
         $I->fillField(['id' => 'email'], 'invalid-email');
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 2);
         $I->see('The given subject was not a valid email address.', '//*[@id="field-errors-registration.email"]/span');
     }
 
@@ -106,6 +108,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration successful');
 
@@ -127,6 +130,8 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
+
         $I->see('This field is required.', '//*[@id="field-errors-registration.firstname"]/span');
         $I->see('This field is required.', '//*[@id="field-errors-registration.lastname"]/span');
         $I->see('This field is required.', '//*[@id="field-errors-registration.company"]/span');
@@ -150,6 +155,7 @@ class AbstractEventsTests
         $I->fillField(['name' => 'tx_sfeventmgt_pieventregistration[registration][fields][2]'], 'Field Value ' . $this->lang);
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration successful');
 
@@ -187,6 +193,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration on the waitlist successful');
 
@@ -216,6 +223,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration confirmed');
 
@@ -248,6 +256,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration confirmed');
 
@@ -287,6 +296,7 @@ class AbstractEventsTests
         $I->selectOption(['id' => 'amountOfRegistrations'], '3');
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration successful');
 
@@ -310,6 +320,7 @@ class AbstractEventsTests
         $I->executeJS('document.getElementsByName("tx_sfeventmgt_pieventregistration[registration][hp2]")[0].value = "spam";');
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Your form submission has been classified as spam.');
     }
@@ -333,6 +344,7 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], $email);
 
         $I->click('Send registration');
+        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration successful');
 

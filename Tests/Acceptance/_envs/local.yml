@@ -6,6 +6,6 @@ modules:
         url: http://127.0.0.1
         port: 8025
       Db:
-        dsn: 'mysql:host=127.0.0.1;port=3406;dbname=typo3_sfeventmgt_acceptance_v13'
+        dsn: 'mysql:host=127.0.0.1;port=33066;dbname=typo3_sfeventmgt_acceptance_v13'
         user: '%DB_USERNAME%'
-        password: '%DB_PASSWORD_V8%'
+        password: '%DB_PASSWORD%'
