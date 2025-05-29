@@ -108,7 +108,6 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
         $I->see('Registration successful');
 
