@@ -303,6 +303,8 @@ class AbstractEventsTests
 
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event (reg, cat1, multireg) ' . $this->lang);
+        $I->waitForText('Back to listview', 5);
+
         $I->see('3', '//*[@id="c2"]/div/div[12]/div[2]');
     }
 
