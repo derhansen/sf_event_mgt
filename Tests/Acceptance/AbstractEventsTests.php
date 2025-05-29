@@ -109,6 +109,7 @@ class AbstractEventsTests
 
         $I->click('Send registration');
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->fetchEmails();
@@ -154,8 +155,8 @@ class AbstractEventsTests
         $I->fillField(['name' => 'tx_sfeventmgt_pieventregistration[registration][fields][2]'], 'Field Value ' . $this->lang);
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->fetchEmails();
@@ -192,8 +193,8 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Registration on the waitlist successful', 5);
         $I->see('Registration on the waitlist successful');
 
         $I->fetchEmails();
@@ -222,8 +223,8 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Registration confirmed', 5);
         $I->see('Registration confirmed');
 
         $I->fetchEmails();
@@ -255,8 +256,8 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], 'johndoe@sfeventmgt.local');
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Registration confirmed', 5);
         $I->see('Registration confirmed');
 
         $I->amOnPage($this->basePath . 'event-list-all');
@@ -271,6 +272,7 @@ class AbstractEventsTests
         $I->fillField(['name' => 'pass'], '123456');
         $I->click('Login');
 
+        $I->waitForText('My event registrations', 5);
         $I->see('My event registrations');
         $I->see('Expired Event (cat1, fe_user: user1) ' . $this->lang);
         $I->see('Expired Event (location: 1, fe_user: user1) ' . $this->lang);
@@ -295,8 +297,8 @@ class AbstractEventsTests
         $I->selectOption(['id' => 'amountOfRegistrations'], '3');
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->amOnPage($this->basePath . 'event-list-all');
@@ -319,8 +321,8 @@ class AbstractEventsTests
         $I->executeJS('document.getElementsByName("tx_sfeventmgt_pieventregistration[registration][hp2]")[0].value = "spam";');
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Your form submission has been classified as spam.', 5);
         $I->see('Your form submission has been classified as spam.');
     }
 
@@ -343,8 +345,8 @@ class AbstractEventsTests
         $I->fillField(['id' => 'email'], $email);
 
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
 
+        $I->waitForText('Registration successful', 5);
         $I->see('Registration successful');
 
         $I->seeInDatabase('tx_sfeventmgt_domain_model_registration', ['email' => $email, 'event' => $expectedEventUid]);
