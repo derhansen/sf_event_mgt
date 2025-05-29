@@ -214,6 +214,13 @@ module.tx_sfeventmgt {
             notify = 1
             export = 1
         }
+        disableButtons {
+            newEvent = 0
+            newLocation = 0
+            newOrganisator = 0
+            newSpeaker = 0
+            handleExpiredRegistrations = 0
+        }
         defaultSorting {
           orderField = title
           orderDirection = asc
