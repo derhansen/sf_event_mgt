@@ -240,7 +240,6 @@ class AbstractEventsTests
 
     public function registrationIncreasesRegistrationCount(AcceptanceTester $I)
     {
-        $I->deleteAllEventRegistrations();
         $I->deleteAllEmails();
 
         $I->amOnPage($this->basePath . 'event-list-all');
