@@ -282,7 +282,6 @@ class AbstractEventsTests
     public function registrationWorksForEventWithMultiReg(AcceptanceTester $I)
     {
         $I->deleteAllEmails();
-        $I->deleteAllEventRegistrations();
 
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event (reg, cat1, multireg) ' . $this->lang);
