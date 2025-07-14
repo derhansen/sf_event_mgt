@@ -16,7 +16,7 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * This event is triggered after a admin message has been sent
+ * This event is triggered after an admin message has been sent
  */
 final readonly class AfterAdminMessageSentEvent
 {
@@ -29,7 +29,8 @@ final readonly class AfterAdminMessageSentEvent
         private string $senderEmail,
         private int $messageType,
         private NotificationService $notificationService,
-        private ServerRequestInterface $request
+        private ServerRequestInterface $request,
+        private string $replyToEmail
     ) {
     }
 
@@ -76,5 +77,10 @@ final readonly class AfterAdminMessageSentEvent
     public function getRequest(): ServerRequestInterface
     {
         return $this->request;
+    }
+
+    public function getReplyToEmail(): string
+    {
+        return $this->replyToEmail;
     }
 }

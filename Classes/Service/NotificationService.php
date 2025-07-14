@@ -348,6 +348,26 @@ class NotificationService
             $senderEmail = $registration->getEmail();
         }
 
+
+        $modifyAdminMessageSenderEvent = new ModifyAdminMessageSenderEvent(
+            $senderName,
+            $senderEmail,
+            $senderEmail,
+            $subject,
+            $body,
+            $registration,
+            $type,
+            $this,
+            $request
+        );
+        $this->eventDispatcher->dispatch($modifyAdminMessageSenderEvent);
+        $subject = $modifyAdminMessageSenderEvent->getSubject();
+        $body = $modifyAdminMessageSenderEvent->getBody();
+
+        $senderName = $modifyAdminMessageSenderEvent->getSenderName();
+        $senderEmail = $modifyAdminMessageSenderEvent->getSenderEmail();
+        $replyToEmail = $modifyAdminMessageSenderEvent->getReplyToEmail();
+
         if ($event->getNotifyAdmin()) {
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'] ?? '', true);
             foreach ($adminEmailArr as $adminEmail) {
@@ -357,7 +377,8 @@ class NotificationService
                     $subject,
                     $body,
                     $senderName,
-                    $attachments
+                    $attachments,
+                    $replyToEmail
                 );
             }
         }
@@ -369,7 +390,8 @@ class NotificationService
                 $subject,
                 $body,
                 $senderName,
-                $attachments
+                $attachments,
+                $replyToEmail
             );
         }
 
@@ -382,7 +404,8 @@ class NotificationService
             $senderEmail,
             $type,
             $this,
-            $request
+            $request,
+            $replyToEmail
         );
         $this->eventDispatcher->dispatch($afterAdminMessageSentEvent);
 
