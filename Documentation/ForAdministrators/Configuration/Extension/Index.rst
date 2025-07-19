@@ -17,12 +17,6 @@ Some general settings can be configured in the Extension Configuration.
 #. Go to :guilabel:`Admin Tools > Settings > Extension Configuration`
 #. Choose :guilabel:`sf_event_mgt`
 
-.. only:: html
-
-   .. contents:: Properties
-      :depth: 1
-      :local:
-
 Records
 =======
 
