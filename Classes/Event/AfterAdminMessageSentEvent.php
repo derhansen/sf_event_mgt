@@ -28,9 +28,9 @@ final readonly class AfterAdminMessageSentEvent
         private string $senderName,
         private string $senderEmail,
         private int $messageType,
+        private string $replyToEmail,
         private NotificationService $notificationService,
-        private ServerRequestInterface $request,
-        private string $replyToEmail
+        private ServerRequestInterface $request
     ) {
     }
 

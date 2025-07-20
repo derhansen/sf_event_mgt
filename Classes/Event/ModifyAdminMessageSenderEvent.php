@@ -16,7 +16,7 @@ use DERHANSEN\SfEventMgt\Service\NotificationService;
 use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * This event should be used to modify the sender data of aa admin message. Use the $type variable to distinguish
+ * This event should be used to modify the sender data of an admin message. Use the $type variable to distinguish
  * between the different types of messages
  */
 final class ModifyAdminMessageSenderEvent

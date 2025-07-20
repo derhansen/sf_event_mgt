@@ -19,6 +19,7 @@ use DERHANSEN\SfEventMgt\Domain\Repository\CustomNotificationLogRepository;
 use DERHANSEN\SfEventMgt\Domain\Repository\RegistrationRepository;
 use DERHANSEN\SfEventMgt\Event\AfterAdminMessageSentEvent;
 use DERHANSEN\SfEventMgt\Event\AfterUserMessageSentEvent;
+use DERHANSEN\SfEventMgt\Event\ModifyAdminMessageSenderEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyCustomNotificationLogEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageAttachmentsEvent;
 use DERHANSEN\SfEventMgt\Event\ModifyUserMessageSenderEvent;
@@ -348,7 +349,6 @@ class NotificationService
             $senderEmail = $registration->getEmail();
         }
 
-
         $modifyAdminMessageSenderEvent = new ModifyAdminMessageSenderEvent(
             $senderName,
             $senderEmail,
@@ -403,9 +403,9 @@ class NotificationService
             $senderName,
             $senderEmail,
             $type,
+            $replyToEmail,
             $this,
-            $request,
-            $replyToEmail
+            $request
         );
         $this->eventDispatcher->dispatch($afterAdminMessageSentEvent);
 

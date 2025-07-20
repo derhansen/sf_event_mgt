@@ -68,6 +68,7 @@ Notification Service
 * :php:`ModifyUserMessageSenderEvent`
 * :php:`ModifyUserMessageAttachmentsEvent`
 * :php:`AfterUserMessageSentEvent`
+* :php:`ModifyAdminMessageSenderEvent`
 * :php:`AfterAdminMessageSentEvent`
 * :php:`ModifyCustomNotificationLogEvent`
 
