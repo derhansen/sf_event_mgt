@@ -284,6 +284,7 @@ class AbstractEventsTests
         $I->deleteAllEventRegistrations();
 
         $I->amOnPage($this->basePath . 'event-list-all');
+        $I->waitForText('Event (reg, cat1, multireg) ' . $this->lang, 10);
         $I->see('Event (reg, cat1, multireg) ' . $this->lang);
         $I->click('Event (reg, cat1, multireg) ' . $this->lang);
         $I->waitForText('Back to listview', 10);
