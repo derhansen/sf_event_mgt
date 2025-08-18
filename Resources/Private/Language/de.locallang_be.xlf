@@ -77,11 +77,11 @@
       </trans-unit>
       <trans-unit id="flexforms_tab.notification" approved="yes">
         <source>Notification settings</source>
-        <target state="final">Benachrichtungseinstellungen</target>
+        <target state="final">Benachrichtigungseinstellungen</target>
       </trans-unit>
       <trans-unit id="flexforms_tab.categoryMenu" approved="yes">
         <source>Category menu</source>
-        <target state="final">Kategorie Menu</target>
+        <target state="final">Kategorie Menü</target>
       </trans-unit>
       <trans-unit id="flexforms_tab.template" approved="yes">
         <source>Template</source>
