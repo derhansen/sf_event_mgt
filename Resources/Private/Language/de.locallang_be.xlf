@@ -415,7 +415,7 @@
       </trans-unit>
       <trans-unit id="flexforms_categorymenu.categories" approved="yes">
         <source>Categories (if empty, all categories will be shown in the category menu)</source>
-        <target state="final">Kategorien (wenn leer, werden alle Kategorien im Kategorie Menu angezeigt)</target>
+        <target state="final">Kategorien (wenn leer, werden alle Kategorien im Kategorie Menü angezeigt)</target>
       </trans-unit>
       <trans-unit id="flexforms_categorymenu.includeSubcategories" approved="yes">
         <source>Include subcategories</source>
