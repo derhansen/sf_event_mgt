@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
@@ -53,10 +54,20 @@ class FluidRenderingService
      *
      * Note, the result of this function must never be used as raw/direct output in HTML/frontend context.
      */
-    public function parseString(RequestInterface $request, string $string, array $variables = []): string
-    {
+    public function parseString(
+        RequestInterface $request,
+        string $string,
+        array $variables = [],
+        string $language = 'default'
+    ): string {
         if ($string === '') {
             return '';
+        }
+
+        $isBackendRequest = ApplicationType::fromRequest($request)->isBackend();
+        if ($isBackendRequest) {
+            // Temporary set language of current BE user to given language
+            $GLOBALS['BE_USER']->user['lang'] = $language;
         }
 
         $viewFactoryData = new ViewFactoryData(

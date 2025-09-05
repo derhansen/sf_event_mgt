@@ -161,7 +161,8 @@ class NotificationService
                 [
                     'event' => $event,
                     'registration' => $registration,
-                ]
+                ],
+                $registration->getLanguage()
             );
             $attachments = $this->attachmentService->getAttachments(
                 $settings,
@@ -333,7 +334,8 @@ class NotificationService
             [
                 'event' => $event,
                 'registration' => $registration,
-            ]
+            ],
+            $registration->getLanguage()
         );
         $attachments = $this->attachmentService->getAttachments(
             $settings,
@@ -459,8 +461,8 @@ class NotificationService
         $isBackendRequest = ApplicationType::fromRequest($request)->isBackend();
 
         if ($isBackendRequest && $registration->getLanguage() !== '') {
-            // Temporary set Language of current BE user to given language
-            $GLOBALS['BE_USER']->uc['lang'] = $registration->getLanguage();
+            // Temporary set language of current BE user to given language
+            $GLOBALS['BE_USER']->user['lang'] = $registration->getLanguage();
         }
         $defaultVariables = [
             'event' => $event,
