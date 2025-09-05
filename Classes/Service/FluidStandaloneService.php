@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
@@ -106,7 +107,7 @@ class FluidStandaloneService
      *
      * Note, the result of this function must never be used as raw/direct output in HTML/frontend context.
      */
-    public function parseStringFluid(string $string, array $variables = []): string
+    public function parseStringFluid(string $string, array $variables = [], string $language = 'default'): string
     {
         if ($string === '') {
             return '';
@@ -114,6 +115,12 @@ class FluidStandaloneService
 
         /** @var ServerRequest $serverRequest */
         $serverRequest = $GLOBALS['TYPO3_REQUEST'];
+
+        $isBackendRequest = ApplicationType::fromRequest($serverRequest)->isBackend();
+        if ($isBackendRequest) {
+            // Temporary set language of current BE user to given language
+            $GLOBALS['BE_USER']->user['lang'] = $language;
+        }
 
         $standaloneView = GeneralUtility::makeInstance(StandaloneView::class);
         $standaloneView->setTemplateSource($string);
