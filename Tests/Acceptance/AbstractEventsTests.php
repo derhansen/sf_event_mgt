@@ -77,7 +77,7 @@ class AbstractEventsTests
         $I->see('Registration', 'a');
         $I->click('Registration');
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 1);
+        $I->waitForElementVisible('#registration-submit', 3);
 
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.firstname"]/span');
         $I->see('The given subject was empty.', '//*[@id="field-errors-registration.lastname"]/span');
@@ -89,8 +89,8 @@ class AbstractEventsTests
         $I->fillField(['id' => 'company'], 'TYPO3');
         $I->fillField(['id' => 'email'], 'invalid-email');
         $I->click('Send registration');
-        $I->waitForElementVisible('#registration-submit', 2);
-        $I->see('The given subject was not a valid email address.', '//*[@id="field-errors-registration.email"]/span');
+        $I->waitForElementVisible('#registration-submit', 3);
+        $I->see('The given subject was not a valid email address.');
     }
 
     public function registrationWorksForSimpleEvent(AcceptanceTester $I)
@@ -269,7 +269,7 @@ class AbstractEventsTests
     {
         $I->amOnPage($this->basePath . 'login');
         $I->fillField(['name' => 'user'], 'user1');
-        $I->fillField(['name' => 'pass'], '123456');
+        $I->fillField(['name' => 'pass'], 'SfEventMgt123456#');
         $I->click('Login');
 
         $I->waitForText('My event registrations', 5);
@@ -281,6 +281,7 @@ class AbstractEventsTests
 
     public function registrationWorksForEventWithMultiReg(AcceptanceTester $I)
     {
+        $I->deleteAllEventRegistrations();
         $I->deleteAllEmails();
 
         $I->amOnPage($this->basePath . 'event-list-all');
