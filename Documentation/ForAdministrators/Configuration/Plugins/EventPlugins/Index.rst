@@ -19,12 +19,6 @@ for the following plugins:
 Nearly all important settings can be made through the plugins, which override the
 settings made with TypoScript.
 
-.. only:: html
-
-   .. contents:: Properties
-      :depth: 1
-      :local:
-
 Tab settings
 ~~~~~~~~~~~~
 

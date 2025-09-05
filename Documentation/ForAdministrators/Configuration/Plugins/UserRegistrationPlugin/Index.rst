@@ -23,12 +23,6 @@ settings made with TypoScript. All plugin settings can also be configured with T
    the plugin output for logged in users and/or users belonging to a user group. Anyway, the plugin will only output
    content if there is an active frontend user session.
 
-.. only:: html
-
-   .. contents:: Properties
-      :depth: 1
-      :local:
-
 Tab settings
 ~~~~~~~~~~~~
 

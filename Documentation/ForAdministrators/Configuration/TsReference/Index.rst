@@ -10,12 +10,6 @@ TypoScript reference
 More TypoScript settings are available on the :ref:`eventplugin-settings` page. Also make sure to check the included
 :php:`setup.typoscript` file for available/default TypoScript settings.
 
-.. only:: html
-
-   .. contents:: Properties
-      :depth: 1
-      :local:
-
 plugin.tx_sfeventmgt
 ====================
 
