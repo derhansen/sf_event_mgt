@@ -268,7 +268,7 @@ class AbstractEventsTests
     {
         $I->amOnPage($this->basePath . 'login');
         $I->fillField(['name' => 'user'], 'user1');
-        $I->fillField(['name' => 'pass'], '123456');
+        $I->fillField(['name' => 'pass'], 'SfEventMgt123456#');
         $I->click('Login');
 
         $I->waitForText('My event registrations', 5);
