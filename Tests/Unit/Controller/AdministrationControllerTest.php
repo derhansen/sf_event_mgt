@@ -57,7 +57,7 @@ class AdministrationControllerTest extends UnitTestCase
         $this->subject->_set('settings', $settings);
         $this->subject->initializeListAction();
 
-        self::assertEquals('H:i d-m-Y', $this->subject->_get('settings')['search']['dateFormat']);
+        self::assertEquals('Y-m-d\TH:i:s\Z', $this->subject->_get('settings')['search']['dateFormat']);
     }
 
     #[Test]
