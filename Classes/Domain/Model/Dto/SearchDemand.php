@@ -21,65 +21,41 @@ class SearchDemand
     protected ?DateTime $startDate = null;
     protected ?DateTime $endDate = null;
 
-    /**
-     * @return string
-     */
     public function getSearch(): string
     {
         return $this->search;
     }
 
-    /**
-     * @param string $search
-     */
     public function setSearch(string $search): void
     {
         $this->search = $search;
     }
 
-    /**
-     * @return string
-     */
     public function getFields(): string
     {
         return $this->fields;
     }
 
-    /**
-     * @param string $fields
-     */
     public function setFields(string $fields): void
     {
         $this->fields = $fields;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getStartDate(): ?DateTime
     {
         return $this->startDate;
     }
 
-    /**
-     * @param DateTime|null $startDate
-     */
     public function setStartDate(?DateTime $startDate): void
     {
         $this->startDate = $startDate;
     }
 
-    /**
-     * @return DateTime|null
-     */
     public function getEndDate(): ?DateTime
     {
         return $this->endDate;
     }
 
-    /**
-     * @param DateTime|null $endDate
-     */
     public function setEndDate(?DateTime $endDate): void
     {
         $this->endDate = $endDate;
@@ -87,8 +63,6 @@ class SearchDemand
 
     /**
      * Returns if the demand object has at least one search property set
-     *
-     * @return bool
      */
     public function getHasQuery(): bool
     {
