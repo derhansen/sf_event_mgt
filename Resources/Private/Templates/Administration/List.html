@@ -32,18 +32,14 @@
                 </label>
                 <div class="input-group date-field">
                     <f:form.textfield
-                        name="startDate"
+                        property="startDate"
+                        id="startDate"
                         value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.startDate}')}\")}"
                         id="startDate"
                         additionalAttributes="{'autocomplete': 'off'}"
                         class="form-control t3js-datetimepicker t3js-clearable"
                         data="{date-type: 'datetime'}"
                     />
-                    <f:form.hidden
-                        property="startDate"
-                        value="{f:if(condition: searchDemand.startDate, then: \"{f:format.date(format:'c', date: '{searchDemand.startDate}')}\")}"
-                    />
-
                     <label class="mb-0 btn btn-default" for="startDate">
                         <core:icon identifier="actions-calendar" />
                     </label>
@@ -57,18 +53,14 @@
 
                 <div class="input-group date-field">
                     <f:form.textfield
-                        name="endDate"
+                        property="endDate"
+                        id="endDate"
                         value="{f:if(condition: searchDemand.endDate, then: \"{f:format.date(format:'{settings.search.dateFormat}', date: '{searchDemand.endDate}')}\")}"
                         id="endDate"
                         additionalAttributes="{'autocomplete': 'off'}"
                         class="form-control t3js-datetimepicker t3js-clearable"
                         data="{date-type: 'datetime'}"
                     />
-                    <f:form.hidden
-                        property="endDate"
-                        value="{f:if(condition: searchDemand.endDate, then: \"{f:format.date(format:'c', date: '{searchDemand.endDate}')}\")}"
-                    />
-
                     <label class="mb-0 btn btn-default" for="endDate">
                         <core:icon identifier="actions-calendar" />
                     </label>

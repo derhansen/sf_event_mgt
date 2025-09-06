@@ -226,9 +226,9 @@ class AdministrationController extends AbstractController
      */
     public function initializeListAction(): void
     {
-        // Static format needed for date picker (flatpickr), see BackendController::generateJavascript() and #91606
+        // Static format needed for date picker (flatpickr) - see ext:belog
         if (!empty($this->settings)) {
-            $this->settings['search']['dateFormat'] = 'H:i d-m-Y';
+            $this->settings['search']['dateFormat'] = 'Y-m-d\TH:i:s\Z';
         }
     }
 
