@@ -349,7 +349,7 @@
 				<source>Registration failed</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
-				<source>Organisator</source>
+				<source>Organiser</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
 				<source>Name</source>
