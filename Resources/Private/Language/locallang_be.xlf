@@ -197,7 +197,7 @@
 				<source>Location</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.organisator">
-				<source>Organisator</source>
+				<source>Organiser</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.speaker">
 				<source>Speaker</source>
@@ -206,7 +206,7 @@
 				<source>Record storage page</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage">
-				<source>Restrict categories, locations, organisators and speakers to storagePage setting (including recursive option)</source>
+				<source>Restrict categories, locations, organisers and speakers to storagePage setting (including recursive option)</source>
 			</trans-unit>
 			<trans-unit id="flexforms_general.displayMode.all">
 				<source>Show all events</source>
@@ -331,7 +331,7 @@
 				<source>Create new location</source>
 			</trans-unit>
 			<trans-unit id="administration.newOrganisator">
-				<source>Create new organisator</source>
+				<source>Create new organiser</source>
 			</trans-unit>
 			<trans-unit id="administration.newSpeaker">
 				<source>Create new speaker</source>
@@ -530,16 +530,16 @@
 				<source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
 			</trans-unit>
 			<trans-unit id="event.noOrganisator.title">
-				<source>No organisator</source>
+				<source>No organiser</source>
 			</trans-unit>
 			<trans-unit id="event.noOrganisator.message">
-				<source>The event is configured to notify the organisator, but no organisator is set. Please select an organisator or change the notification settings.</source>
+				<source>The event is configured to notify the organiser, but no organiser is set. Please select an organiser or change the notification settings.</source>
 			</trans-unit>
 			<trans-unit id="event.noOrganisatorEmail.title">
-				<source>Organisator has no email</source>
+				<source>Organiser has no email</source>
 			</trans-unit>
 			<trans-unit id="event.noOrganisatorEmail.message">
-				<source>The event is configured to notify the organisator, but the organisator has no email address. Please set an email address for the organisator or change the notification settings.</source>
+				<source>The event is configured to notify the organiser, but the organiser has no email address. Please set an email address for the organiser or change the notification settings.</source>
 			</trans-unit>
 
 			<trans-unit id="constants.subcategory.registration">
