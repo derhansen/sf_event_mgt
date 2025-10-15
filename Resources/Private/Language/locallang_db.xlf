@@ -94,7 +94,7 @@
 				<source>Speaker</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
-				<source>Organisator</source>
+				<source>Organiser</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.image">
 				<source>Images</source>
@@ -127,7 +127,7 @@
 				<source>Admin</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
-				<source>Organisator</source>
+				<source>Organiser</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords">
 				<source>Keywords (,)</source>
@@ -334,10 +334,10 @@
 				<source>Timestamp</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
-				<source>Organisator</source>
+				<source>Organiser</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator">
-				<source>Event - Organisator</source>
+				<source>Event - Organiser</source>
 			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
 				<source>Name</source>
