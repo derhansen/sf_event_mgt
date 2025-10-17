@@ -18,7 +18,8 @@ use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -66,64 +67,64 @@ class Event extends AbstractEntity
 
     /**
      * @var ObjectStorage<Category>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $category;
 
     /**
      * @var ObjectStorage<Event>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $related;
 
     /**
      * @var ObjectStorage<Registration>
-     * @Extbase\ORM\Cascade("remove")
-     * @Extbase\ORM\Lazy
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected ObjectStorage $registration;
 
     /**
      * @var ObjectStorage<Registration>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $registrationWaitlist;
 
     /**
      * @var ObjectStorage<Field>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $registrationFields;
 
     /**
      * @var ObjectStorage<FileReference>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $image;
 
     /**
      * @var ObjectStorage<FileReference>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $files;
 
     /**
      * @var ObjectStorage<FileReference>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $additionalImage;
 
     /**
      * @var ObjectStorage<PriceOption>
-     * @Extbase\ORM\Cascade("remove")
-     * @Extbase\ORM\Lazy
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected ObjectStorage $priceOptions;
 
     /**
      * @var ObjectStorage<Speaker>
-     * @Extbase\ORM\Lazy
      */
+    #[Lazy]
     protected ObjectStorage $speaker;
 
     public function __construct()

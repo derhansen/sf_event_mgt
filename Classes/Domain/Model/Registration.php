@@ -13,7 +13,8 @@ namespace DERHANSEN\SfEventMgt\Domain\Model;
 
 use DateTime;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration\FieldValue;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -53,9 +54,9 @@ class Registration extends AbstractEntity
 
     /**
      * @var ObjectStorage<FieldValue>
-     * @Extbase\ORM\Cascade("remove")
-     * @Extbase\ORM\Lazy
      */
+    #[Cascade(['value' => 'remove'])]
+    #[Lazy]
     protected ObjectStorage $fieldValues;
 
     /**

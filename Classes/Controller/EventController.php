@@ -39,6 +39,8 @@ use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Service\EventEvaluationService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
+use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator;
+use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
@@ -503,10 +505,15 @@ class EventController extends AbstractController
 
     /**
      * Saves the registration
-     *
-     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator", param="registration")
-     * @Extbase\Validate("DERHANSEN\SfEventMgt\Validation\Validator\RegistrationValidator", param="registration")
      */
+    #[Extbase\Validate([
+        'validator' => RegistrationFieldValidator::class,
+        'param' => 'registration',
+    ])]
+    #[Extbase\Validate([
+        'validator' => RegistrationValidator::class,
+        'param' => 'registration',
+    ])]
     public function saveRegistrationAction(Registration $registration, Event $event): ResponseInterface
     {
         $event = $this->eventEvaluationService->evaluateForSaveRegistrationAction(
