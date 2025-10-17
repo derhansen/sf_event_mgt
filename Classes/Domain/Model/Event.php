@@ -510,8 +510,8 @@ class Event extends AbstractEntity
         }
 
         return $allowedByEventDate &&
-        ($maxParticipantsNotReached || $this->enableWaitlist) &&
-        $this->getEnableRegistration() && $deadlineNotReached && $registrationStartReached;
+            ($maxParticipantsNotReached || $this->enableWaitlist) &&
+            $this->getEnableRegistration() && $deadlineNotReached && $registrationStartReached;
     }
 
     /**
@@ -1031,5 +1031,22 @@ class Event extends AbstractEntity
         }
 
         return PHP_INT_MAX;
+    }
+
+    public function getIsStarted(): bool
+    {
+        return $this->startdate !== null && $this->startdate < new \DateTime();
+    }
+
+    public function getIsEnded(): bool
+    {
+        return $this->enddate !== null && $this->enddate < new \DateTime();
+    }
+
+    public function getIsInProgress(): bool
+    {
+        return $this->startdate !== null && $this->enddate !== null
+            && $this->startdate < new \DateTime()
+            && $this->enddate > new \DateTime();
     }
 }

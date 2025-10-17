@@ -1648,4 +1648,91 @@ class EventTest extends UnitTestCase
 
         self::assertEquals(PHP_INT_MAX, $event->getCacheTagLifetime($dateNow));
     }
+
+    public static function eventGetIsStartedDataProvider(): array
+    {
+        return [
+            'no startdate set' => [
+                null,
+                false,
+            ],
+            'startdate in future' => [
+                (new DateTime('now'))->modify('+1 day'),
+                false,
+            ],
+            'startdate in past' => [
+                (new DateTime('now'))->modify('-1 day'),
+                true,
+            ],
+        ];
+    }
+
+    #[DataProvider('eventGetIsStartedDataProvider')]
+    #[Test]
+    public function getIsStartedReturnsExpectedValue(?DateTime $startdate, bool $expected): void
+    {
+        $this->subject->setStartdate($startdate);
+        self::assertEquals($expected, $this->subject->getIsStarted());
+    }
+
+    public static function eventGetIsEndedDataProvider(): array
+    {
+        return [
+            'no enddate set' => [
+                null,
+                false,
+            ],
+            'enddate in future' => [
+                (new DateTime('now'))->modify('+1 day'),
+                false,
+            ],
+            'enddate in past' => [
+                (new DateTime('now'))->modify('-1 day'),
+                true,
+            ],
+        ];
+    }
+
+    #[DataProvider('eventGetIsEndedDataProvider')]
+    #[Test]
+    public function getIsEndedReturnsExpectedValue(?DateTime $enddate, bool $expected): void
+    {
+        $this->subject->setEnddate($enddate);
+        self::assertEquals($expected, $this->subject->getIsEnded());
+    }
+
+    public static function eventGetIsInProgressDataProvider(): array
+    {
+        return [
+            'no dates set' => [
+                null,
+                null,
+                false,
+            ],
+            'startdate in past and no enddate' => [
+                (new DateTime('now'))->modify('-1 day'),
+                null,
+                false,
+            ],
+            'startdate in past and enddate in past' => [
+                (new DateTime('now'))->modify('-2 day'),
+                (new DateTime('now'))->modify('-1 day'),
+                false,
+            ],
+            'startdate in past and enddate in future' => [
+                (new DateTime('now'))->modify('-1 day'),
+                (new DateTime('now'))->modify('+1 day'),
+                true,
+            ],
+        ];
+    }
+
+    #[DataProvider('eventGetIsInProgressDataProvider')]
+    #[Test]
+    public function getIsInProgressReturnsExpectedValue(?DateTime $startdate, ?DateTime $enddate, bool $expected): void
+    {
+        $this->subject->setStartdate($startdate);
+        $this->subject->setEnddate($enddate);
+        self::assertEquals($expected, $this->subject->getIsInProgress());
+    }
 }
