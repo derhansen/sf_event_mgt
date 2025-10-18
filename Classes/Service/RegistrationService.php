@@ -63,11 +63,11 @@ class RegistrationService
             foreach ($properties as $propertyName => $propertyValue) {
                 ObjectAccess::setProperty($newReg, $propertyName, $propertyValue);
             }
+
+            /** @var Registration $newReg */
             $newReg->setMainRegistration($registration);
             $newReg->setAmountOfRegistrations(1);
             $newReg->setIgnoreNotifications(true);
-
-            /** @var Registration $newReg */
             $this->registrationRepository->add($newReg);
         }
     }
