@@ -59,13 +59,14 @@ class RegistrationService
         $registrations = $registration->getAmountOfRegistrations();
         for ($i = 1; $i <= $registrations - 1; $i++) {
             $newReg = GeneralUtility::makeInstance(Registration::class);
-            $newReg->setMainRegistration($registration);
-            $newReg->setAmountOfRegistrations(1);
-            $newReg->setIgnoreNotifications(true);
             $properties = ObjectAccess::getGettableProperties($registration);
             foreach ($properties as $propertyName => $propertyValue) {
                 ObjectAccess::setProperty($newReg, $propertyName, $propertyValue);
             }
+            $newReg->setMainRegistration($registration);
+            $newReg->setAmountOfRegistrations(1);
+            $newReg->setIgnoreNotifications(true);
+
             /** @var Registration $newReg */
             $this->registrationRepository->add($newReg);
         }
