@@ -26,11 +26,6 @@ parameters:
 			path: ../../Classes/Validation/Validator/CaptchaValidator.php
 
 		-
-			message: "#^Cannot access offset 'tx_sfeventmgt…' on array\\|object\\.$#"
-			count: 1
-			path: ../../Classes/Validation/Validator/RegistrationValidator.php
-
-		-
 			message: "#^Cannot access offset string on array\\|object\\.$#"
 			count: 1
 			path: ../../Classes/ViewHelpers/PrefillViewHelper.php
@@ -44,3 +39,33 @@ parameters:
 			message: "#^Cannot access offset string on array\\|object\\.$#"
 			count: 1
 			path: ../../Classes/ViewHelpers/Registration/Field/PrefillMultiValueFieldViewHelper.php
+
+		-
+			message: '#^Method DERHANSEN\\SfEventMgt\\Controller\\AbstractController\:\:overwriteEventDemandObject\(\) should return DERHANSEN\\SfEventMgt\\Domain\\Model\\Dto\\EventDemand but returns array\|object\.$#'
+			identifier: return.type
+			count: 1
+			path: ../../Classes/Controller/AbstractController.php
+
+		-
+			message: '#^Comparison operation "\<\=" between \*NEVER\* and 90 results in an error\.$#'
+			identifier: smallerOrEqual.invalid
+			count: 1
+			path: ../../Classes/Evaluation/LatitudeEvaluator.php
+
+		-
+			message: '#^Comparison operation "\>\=" between \*NEVER\* and \-90 results in an error\.$#'
+			identifier: greaterOrEqual.invalid
+			count: 1
+			path: ../../Classes/Evaluation/LatitudeEvaluator.php
+
+		-
+			message: '#^Comparison operation "\<\=" between \*NEVER\* and 180 results in an error\.$#'
+			identifier: smallerOrEqual.invalid
+			count: 1
+			path: ../../Classes/Evaluation/LongitudeEvaluator.php
+
+		-
+			message: '#^Comparison operation "\>\=" between \*NEVER\* and \-180 results in an error\.$#'
+			identifier: greaterOrEqual.invalid
+			count: 1
+			path: ../../Classes/Evaluation/LongitudeEvaluator.php
