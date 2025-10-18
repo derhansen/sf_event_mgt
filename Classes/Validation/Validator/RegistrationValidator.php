@@ -124,7 +124,8 @@ class RegistrationValidator extends AbstractValidator
     {
         $pluginKey = 'tx_sfeventmgt_pieventregistration';
         $getMergedWithPost = $this->getRequest()->getQueryParams()[$pluginKey] ?? [];
-        ArrayUtility::mergeRecursiveWithOverrule($getMergedWithPost, $this->getRequest()->getParsedBody()[$pluginKey] ?? []);
+        $parsedBody = (array)$this->getRequest()->getParsedBody();
+        ArrayUtility::mergeRecursiveWithOverrule($getMergedWithPost, $parsedBody[$pluginKey] ?? []);
 
         $spamCheckService = new SpamCheckService(
             $registration,

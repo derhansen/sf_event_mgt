@@ -352,7 +352,7 @@ class AdministrationController extends AbstractController
      */
     public function exportAction(int $eventUid): void
     {
-        /** @var Event $event */
+        /** @var Event|null $event */
         $event = $this->eventRepository->findByUidIncludeHidden($eventUid);
         if ($event !== null && $this->checkEventAccess($event)) {
             $this->exportService->downloadRegistrationsCsv($eventUid, $this->settings['csvExport'] ?? []);

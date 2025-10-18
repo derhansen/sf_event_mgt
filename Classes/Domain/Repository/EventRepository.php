@@ -273,7 +273,7 @@ class EventRepository extends Repository
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getLocationCity() !== null && $eventDemand->getLocationCity() !== '') {
+        if ($eventDemand->getLocationCity() !== '') {
             $constraints['locationCity'] = $query->equals('location.city', $eventDemand->getLocationCity());
         }
     }
@@ -286,7 +286,7 @@ class EventRepository extends Repository
         EventDemand $eventDemand,
         array &$constraints
     ): void {
-        if ($eventDemand->getLocationCountry() !== null && $eventDemand->getLocationCountry() !== '') {
+        if ($eventDemand->getLocationCountry() !== '') {
             $constraints['locationCountry'] = $query->equals('location.country', $eventDemand->getLocationCountry());
         }
     }
@@ -351,7 +351,6 @@ class EventRepository extends Repository
     protected function setSearchConstraint(QueryInterface $query, EventDemand $eventDemand, array &$constraints): void
     {
         if ($eventDemand->getSearchDemand() &&
-            $eventDemand->getSearchDemand()->getSearch() !== null &&
             $eventDemand->getSearchDemand()->getSearch() !== ''
         ) {
             $searchFields = GeneralUtility::trimExplode(',', $eventDemand->getSearchDemand()->getFields(), true);

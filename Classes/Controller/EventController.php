@@ -405,7 +405,7 @@ class EventController extends AbstractController
             return;
         }
 
-        /** @var Event $event */
+        /** @var Event|null $event */
         $event = $this->eventRepository->findByUid((int)$this->request->getArgument('event'));
         if (!is_a($event, Event::class)) {
             return;

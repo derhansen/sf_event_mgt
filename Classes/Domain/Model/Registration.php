@@ -72,7 +72,7 @@ class Registration extends AbstractEntity
      */
     public function initializeObject(): void
     {
-        $this->fieldValues = $this->fieldValues ?? new ObjectStorage();
+        $this->fieldValues = new ObjectStorage();
     }
 
     public function getFirstname(): string

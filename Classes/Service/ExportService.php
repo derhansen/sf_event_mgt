@@ -136,7 +136,7 @@ class ExportService
     protected function getRegistrationFieldData(int $eventUid): array
     {
         $result = [];
-        /** @var Event $event */
+        /** @var Event|null $event */
         $event = $this->eventRepository->findByUid($eventUid);
         if ($event !== null) {
             $result = $event->getRegistrationFieldUidsWithTitle();

@@ -39,7 +39,6 @@ class HmacViewHelper extends AbstractViewHelper
      */
     public function render(): string
     {
-        /** @var Registration $registration */
         $registration = $this->arguments['registration'];
         $result = '';
         if (is_a($registration, Registration::class)) {

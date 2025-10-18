@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Category;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CategoryDemand;
 use DERHANSEN\SfEventMgt\Service\CategoryService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -19,6 +20,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Category>
+ */
 class CategoryRepository extends Repository
 {
     public function initializeObject(): void
@@ -35,7 +39,7 @@ class CategoryRepository extends Repository
         $constraints = [];
         $query = $this->createQuery();
 
-        if ($demand->getCategories() !== null && $demand->getCategories() !== '') {
+        if ($demand->getCategories() !== '') {
             $query->getQuerySettings()->setRespectSysLanguage(false);
         }
 

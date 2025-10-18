@@ -59,13 +59,14 @@ class RegistrationService
         $registrations = $registration->getAmountOfRegistrations();
         for ($i = 1; $i <= $registrations - 1; $i++) {
             $newReg = GeneralUtility::makeInstance(Registration::class);
+            $newReg->setMainRegistration($registration);
+            $newReg->setAmountOfRegistrations(1);
+            $newReg->setIgnoreNotifications(true);
             $properties = ObjectAccess::getGettableProperties($registration);
             foreach ($properties as $propertyName => $propertyValue) {
                 ObjectAccess::setProperty($newReg, $propertyName, $propertyValue);
             }
-            $newReg->setMainRegistration($registration);
-            $newReg->setAmountOfRegistrations(1);
-            $newReg->setIgnoreNotifications(true);
+            /** @var Registration $newReg */
             $this->registrationRepository->add($newReg);
         }
     }
@@ -156,7 +157,7 @@ class RegistrationService
      */
     public function checkCancelRegistration(int $regUid, string $hmac): array
     {
-        /* @var $registration Registration */
+        /* @var $registration Registration|null */
         $registration = null;
         $failed = false;
         $messageKey = 'event.message.cancel_successful';
@@ -315,7 +316,7 @@ class RegistrationService
             return false;
         }
 
-        /** @var AbstractPayment $paymentInstance */
+        /** @var AbstractPayment|null $paymentInstance */
         $paymentInstance = $this->paymentService->getPaymentInstance($registration->getPaymentmethod());
 
         return $paymentInstance !== null && $paymentInstance->isRedirectEnabled();

@@ -37,7 +37,7 @@ class EventEvaluationService
         $event = $this->evaluateSingleEventSetting($settings, $event);
         $event = $this->evaluateIsShortcutSetting($request, $settings, $event);
         $event = $this->evaluateEventPreviewSetting($request, $settings, $event);
-        if ($event && is_a($event, Event::class) && ($settings['detail']['checkPidOfEventRecord'] ?? false)) {
+        if ($event && ($settings['detail']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($request, $settings, $event);
         }
 
@@ -52,7 +52,7 @@ class EventEvaluationService
         array $settings,
         ?Event $event = null
     ): ?Event {
-        if ($event && is_a($event, Event::class) && ($settings['detail']['checkPidOfEventRecord'] ?? false)) {
+        if ($event && ($settings['detail']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($request, $settings, $event);
         }
 
@@ -68,7 +68,7 @@ class EventEvaluationService
         ?Event $event = null
     ): ?Event {
         $event = $this->evaluateSingleEventSetting($settings, $event);
-        if ($event && is_a($event, Event::class) && ($settings['registration']['checkPidOfEventRecord'] ?? false)) {
+        if ($event && ($settings['registration']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($request, $settings, $event);
         }
 
@@ -83,7 +83,7 @@ class EventEvaluationService
         array $settings,
         ?Event $event = null
     ): ?Event {
-        if ($event && is_a($event, Event::class) && ($settings['registration']['checkPidOfEventRecord'] ?? false)) {
+        if ($event && ($settings['registration']['checkPidOfEventRecord'] ?? false)) {
             $event = $this->checkPidOfEventRecord($request, $settings, $event);
         }
 

@@ -11,8 +11,12 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use DERHANSEN\SfEventMgt\Domain\Model\PriceOption;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<PriceOption>
+ */
 class PriceOptionRepository extends Repository
 {
 }

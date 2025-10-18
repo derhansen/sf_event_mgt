@@ -11,9 +11,13 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository;
 
+use DERHANSEN\SfEventMgt\Domain\Model\CustomNotificationLog;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<CustomNotificationLog>
+ */
 class CustomNotificationLogRepository extends Repository
 {
     protected $defaultOrderings = [

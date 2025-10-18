@@ -51,7 +51,7 @@ class FrontendUser extends AbstractEntity
      */
     public function initializeObject(): void
     {
-        $this->image = $this->image ?? new ObjectStorage();
+        $this->image = new ObjectStorage();
     }
 
     public function setUsername(string $username): void

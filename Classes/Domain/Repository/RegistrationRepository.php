@@ -14,6 +14,7 @@ namespace DERHANSEN\SfEventMgt\Domain\Repository;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\CustomNotification;
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
+use DERHANSEN\SfEventMgt\Domain\Model\Registration;
 use InvalidArgumentException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
@@ -21,6 +22,9 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Registration>
+ */
 class RegistrationRepository extends Repository
 {
     /**
@@ -67,7 +71,7 @@ class RegistrationRepository extends Repository
             default:
         }
 
-        if (!is_array($findConstraints) || count($findConstraints) === 0) {
+        if (count($findConstraints) === 0) {
             return $query->matching($query->logicalAnd(...$constraints))->execute();
         }
 

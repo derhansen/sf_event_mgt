@@ -11,8 +11,12 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Domain\Repository\Registration;
 
+use DERHANSEN\SfEventMgt\Domain\Model\Registration\Field;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
+/**
+ * @extends Repository<Field>
+ */
 class FieldRepository extends Repository
 {
 }

@@ -441,9 +441,8 @@ class Event extends AbstractEntity
         $result = new ObjectStorage();
 
         foreach ($this->image as $image) {
-            /** @var \TYPO3\CMS\Core\Resource\FileReference $fileReference */
             $fileReference = $image->getOriginalResource();
-            if ($fileReference !== null && $fileReference->hasProperty('show_in_views') &&
+            if ($fileReference->hasProperty('show_in_views') &&
                 in_array($fileReference->getProperty('show_in_views'), [$type, ShowInPreviews::ALL_VIEWS])
             ) {
                 $result->attach($image);
