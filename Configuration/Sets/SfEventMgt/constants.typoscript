@@ -1,1 +1,7 @@
 @import 'EXT:sf_event_mgt/Configuration/TypoScript/constants.typoscript'
+
+plugin.tx_sfeventmgt.view >
+plugin.tx_sfeventmgt.settings.notification.senderEmail >
+plugin.tx_sfeventmgt.settings.notification.senderName >
+plugin.tx_sfeventmgt.settings.notification.replyToEmail >
+plugin.tx_sfeventmgt.settings.notification.adminEmail >
