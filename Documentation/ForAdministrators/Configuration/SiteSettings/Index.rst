@@ -6,19 +6,10 @@
 .. include:: /Includes.rst.txt
 
 
-.. _configuration:
+.. _site_settings:
 
-Configuration
+Site settings
 =============
 
-.. toctree::
-   :maxdepth: 5
-   :titlesonly:
-   :glob:
-
-   Extension/Index
-   Plugins/Index
-   TsReference/Index
-   PageTSConfig/Index
-   RouteEnhancers/Index
-   SiteSettings/Index
+..  typo3:site-set-settings:: PROJECT:/Configuration/Sets/SfEventMgt/settings.definitions.yaml
+    :name: sf_event_mgt
