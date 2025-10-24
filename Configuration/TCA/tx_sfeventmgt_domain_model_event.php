@@ -623,6 +623,16 @@ return [
                 'type' => 'file',
                 'maxitems' => 999,
                 'allowed' => 'common-image-types',
+                'overrideChildTca' => [
+                    'types' => [
+                        \TYPO3\CMS\Core\Resource\FileType::IMAGE->value => [
+                            'showitem' => '
+                                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
+                                        --palette--;;imageoverlayPalette,
+                                        --palette--;;filePalette',
+                        ],
+                    ],
+                ],
             ],
         ],
         'files' => [
@@ -655,6 +665,16 @@ return [
                 'type' => 'file',
                 'maxitems' => 999,
                 'allowed' => 'common-image-types',
+                'overrideChildTca' => [
+                    'types' => [
+                        \TYPO3\CMS\Core\Resource\FileType::IMAGE->value => [
+                            'showitem' => '
+                                        --palette--;LLL:EXT:core/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;eventPalette,
+                                        --palette--;;imageoverlayPalette,
+                                        --palette--;;filePalette',
+                        ],
+                    ],
+                ],
             ],
         ],
         'registration' => [
