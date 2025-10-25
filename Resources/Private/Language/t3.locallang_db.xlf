@@ -128,8 +128,8 @@
         <target>crwdns300844:0crwdne300844:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
-        <source>Organisator</source>
-        <target>crwdns300846:0crwdne300846:0</target>
+        <source>Organizer</source>
+        <target>crwdns378140:0crwdne378140:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.image">
         <source>Images</source>
@@ -172,8 +172,8 @@
         <target>crwdns300866:0crwdne300866:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator">
-        <source>Organisator</source>
-        <target>crwdns300868:0crwdne300868:0</target>
+        <source>Organizer</source>
+        <target>crwdns378142:0crwdne378142:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords">
         <source>Keywords (,)</source>
@@ -456,12 +456,12 @@
         <target>crwdns301004:0crwdne301004:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
-        <source>Organisator</source>
-        <target>crwdns300846:0crwdne300846:0</target>
+        <source>Organizer</source>
+        <target>crwdns378140:0crwdne378140:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator">
-        <source>Event - Organisator</source>
-        <target>crwdns301008:0crwdne301008:0</target>
+        <source>Event - Organizer</source>
+        <target>crwdns378146:0crwdne378146:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
         <source>Name</source>
