@@ -55,10 +55,6 @@
         <source>Location</source>
         <target state="final">Lokalizacja</target>
       </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organizator</target>
-      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
         <source>Files</source>
         <target state="final">Pliki</target>
@@ -78,10 +74,6 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin" approved="yes">
         <source>Admin</source>
         <target state="final">Administrator</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organizator</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
         <source>Event - Registration</source>
@@ -230,14 +222,6 @@
       <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details" approved="yes">
         <source>Details</source>
         <target state="final">Szczegóły</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organizator</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_organisator" approved="yes">
-        <source>Event - Organisator</source>
-        <target state="final">Organizatorzy wydarzeń</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
         <source>Name</source>
