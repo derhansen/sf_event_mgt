@@ -259,10 +259,6 @@
         <source>Location</source>
         <target state="final">Ort</target>
       </trans-unit>
-      <trans-unit id="flexforms_general.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisator/Ansprechpartner</target>
-      </trans-unit>
       <trans-unit id="flexforms_general.speaker" approved="yes">
         <source>Speaker</source>
         <target state="final">Referent</target>
@@ -270,10 +266,6 @@
       <trans-unit id="flexforms_general.storagePage" approved="yes">
         <source>Record storage page</source>
         <target state="final">Seite/Ordner mit Datensätzen</target>
-      </trans-unit>
-      <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage" approved="yes">
-        <source>Restrict categories, locations, organisators and speakers to storagePage setting (including recursive option)</source>
-        <target state="final">Kategorien, Orte und Organisatoren auf storagePage beschränken (inkl. Rekursiv-Option)</target>
       </trans-unit>
       <trans-unit id="flexforms_general.displayMode.all" approved="yes">
         <source>Show all events</source>
@@ -436,10 +428,6 @@
       <trans-unit id="administration.newLocation" approved="yes">
         <source>Create new location</source>
         <target state="final">Neuen Ort erstellen</target>
-      </trans-unit>
-      <trans-unit id="administration.newOrganisator" approved="yes">
-        <source>Create new organisator</source>
-        <target state="final">Neuen Organisator erstellen</target>
       </trans-unit>
       <trans-unit id="administration.newSpeaker" approved="yes">
         <source>Create new speaker</source>
@@ -704,22 +692,6 @@
       <trans-unit id="event.startdateNotBeforeEnddate.message" approved="yes">
         <source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
         <target state="final">Das Enddatum der Veranstaltung liegt vor dem Startdatum. Bitte korrigieren Sie die Datumswerte, so dass das Startdatum vor dem Enddatum liegt.</target>
-      </trans-unit>
-      <trans-unit id="event.noOrganisator.title" approved="yes">
-        <source>No organisator</source>
-        <target state="final">Kein Organisator</target>
-      </trans-unit>
-      <trans-unit id="event.noOrganisator.message" approved="yes">
-        <source>The event is configured to notify the organisator, but no organisator is set. Please select an organisator or change the notification settings.</source>
-        <target state="final">Das Ereignis ist so konfiguriert, dass es den Organisator benachrichtigt, aber es ist kein Organisator festgelegt. Bitte wählen Sie einen Organisator oder ändern Sie die Benachrichtigungseinstellungen.</target>
-      </trans-unit>
-      <trans-unit id="event.noOrganisatorEmail.title" approved="yes">
-        <source>Organisator has no email</source>
-        <target state="final">Organisator hat keine E-Mail</target>
-      </trans-unit>
-      <trans-unit id="event.noOrganisatorEmail.message" approved="yes">
-        <source>The event is configured to notify the organisator, but the organisator has no email address. Please set an email address for the organisator or change the notification settings.</source>
-        <target state="final">Das Ereignis ist so konfiguriert, dass es den Organisator benachrichtigt, aber es ist kein Organisator festgelegt. Bitte wählen Sie einen Organisator oder ändern Sie die Benachrichtigungseinstellungen.</target>
       </trans-unit>
       <trans-unit id="constants.subcategory.registration" approved="yes">
         <source>Registration</source>
