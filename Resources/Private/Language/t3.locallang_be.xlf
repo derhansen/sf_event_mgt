@@ -260,8 +260,8 @@
         <target>crwdns300560:0crwdne300560:0</target>
       </trans-unit>
       <trans-unit id="flexforms_general.organisator">
-        <source>Organisator</source>
-        <target>crwdns300562:0crwdne300562:0</target>
+        <source>Organizer</source>
+        <target>crwdns378126:0crwdne378126:0</target>
       </trans-unit>
       <trans-unit id="flexforms_general.speaker">
         <source>Speaker</source>
@@ -272,8 +272,8 @@
         <target>crwdns300566:0crwdne300566:0</target>
       </trans-unit>
       <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage">
-        <source>Restrict categories, locations, organisators and speakers to storagePage setting (including recursive option)</source>
-        <target>crwdns300568:0crwdne300568:0</target>
+        <source>Restrict categories, locations, organizers and speakers to storagePage setting (including recursive option)</source>
+        <target>crwdns378128:0crwdne378128:0</target>
       </trans-unit>
       <trans-unit id="flexforms_general.displayMode.all">
         <source>Show all events</source>
@@ -438,8 +438,8 @@
         <target>crwdns300644:0crwdne300644:0</target>
       </trans-unit>
       <trans-unit id="administration.newOrganisator">
-        <source>Create new organisator</source>
-        <target>crwdns300646:0crwdne300646:0</target>
+        <source>Create new organizer</source>
+        <target>crwdns378130:0crwdne378130:0</target>
       </trans-unit>
       <trans-unit id="administration.newSpeaker">
         <source>Create new speaker</source>
@@ -706,20 +706,20 @@
         <target>crwdns300760:0crwdne300760:0</target>
       </trans-unit>
       <trans-unit id="event.noOrganisator.title">
-        <source>No organisator</source>
-        <target>crwdns300762:0crwdne300762:0</target>
+        <source>No organizer</source>
+        <target>crwdns378132:0crwdne378132:0</target>
       </trans-unit>
       <trans-unit id="event.noOrganisator.message">
-        <source>The event is configured to notify the organisator, but no organisator is set. Please select an organisator or change the notification settings.</source>
-        <target>crwdns300764:0crwdne300764:0</target>
+        <source>The event is configured to notify the organizer, but no organizer is set. Please select an organizer or change the notification settings.</source>
+        <target>crwdns378134:0crwdne378134:0</target>
       </trans-unit>
       <trans-unit id="event.noOrganisatorEmail.title">
-        <source>Organisator has no email</source>
-        <target>crwdns300766:0crwdne300766:0</target>
+        <source>Organizer has no email</source>
+        <target>crwdns378136:0crwdne378136:0</target>
       </trans-unit>
       <trans-unit id="event.noOrganisatorEmail.message">
-        <source>The event is configured to notify the organisator, but the organisator has no email address. Please set an email address for the organisator or change the notification settings.</source>
-        <target>crwdns300768:0crwdne300768:0</target>
+        <source>The event is configured to notify the organizer, but the organizer has no email address. Please set an email address for the organizer or change the notification settings.</source>
+        <target>crwdns378138:0crwdne378138:0</target>
       </trans-unit>
       <trans-unit id="constants.subcategory.registration">
         <source>Registration</source>
