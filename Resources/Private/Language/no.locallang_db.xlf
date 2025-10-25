@@ -275,10 +275,6 @@
         <source>Details</source>
         <target state="final">Detaljer</target>
       </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_organisator" approved="yes">
-        <source>Event - Organisator</source>
-        <target state="final">Arrangement - organisator</target>
-      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
         <source>Name</source>
         <target state="final">Navn</target>
