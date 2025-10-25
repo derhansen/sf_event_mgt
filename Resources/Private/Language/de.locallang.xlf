@@ -463,10 +463,6 @@
         <source>Registration failed</source>
         <target state="final">Anmeldung fehlgeschlagen</target>
       </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisator/Ansprechpartner</target>
-      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
         <source>Name</source>
         <target state="final">Name</target>
