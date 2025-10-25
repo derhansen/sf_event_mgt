@@ -464,8 +464,8 @@
         <target>crwdns300382:0crwdne300382:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
-        <source>Organisator</source>
-        <target>crwdns300384:0crwdne300384:0</target>
+        <source>Organizer</source>
+        <target>crwdns378124:0crwdne378124:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
         <source>Name</source>
