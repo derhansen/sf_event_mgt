@@ -111,10 +111,6 @@
         <source>Speaker</source>
         <target state="final">Conférencier</target>
       </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisateur</target>
-      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
         <source>Images</source>
         <target state="final">Images</target>
@@ -150,10 +146,6 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.cancel_deadline" approved="yes">
         <source>Cancellation deadline</source>
         <target state="final">Date limite d’annulation</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisateur</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords" approved="yes">
         <source>Keywords (,)</source>
@@ -386,14 +378,6 @@
       <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent" approved="yes">
         <source>Emails sent</source>
         <target state="final">Emails envoyés</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisateur</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_organisator" approved="yes">
-        <source>Event - Organisator</source>
-        <target state="final">Événement - Organisateur</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
         <source>Name</source>
