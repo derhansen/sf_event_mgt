@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Command;
 
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,6 +21,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+#[AsCommand(
+    'sf_event_mgt:cleanup:gdpr',
+    'Delete registrations of expired events (registrations for events with no enddate will be ignored).'
+)]
 class CleanupGdprCommand extends Command
 {
     public function configure(): void

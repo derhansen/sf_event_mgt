@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Command;
 
 use DERHANSEN\SfEventMgt\Service\MaintenanceService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -19,6 +20,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+#[AsCommand(
+    'sf_event_mgt:cleanup:expired',
+    'Cleanup registrations which are not confirmed and where the confirmation date is expired.'
+)]
 class CleanupExpiredCommand extends Command
 {
     public function configure(): void
