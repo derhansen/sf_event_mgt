@@ -259,6 +259,10 @@
         <source>Location</source>
         <target state="final">Placering</target>
       </trans-unit>
+      <trans-unit id="flexforms_general.organisator" approved="yes">
+        <source>Organizer</source>
+        <target state="final">Arrangør</target>
+      </trans-unit>
       <trans-unit id="flexforms_general.speaker" approved="yes">
         <source>Speaker</source>
         <target state="final">Taler</target>
@@ -266,6 +270,10 @@
       <trans-unit id="flexforms_general.storagePage" approved="yes">
         <source>Record storage page</source>
         <target state="final">Opbevaringsside for elementer</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage" approved="yes">
+        <source>Restrict categories, locations, organizers and speakers to storagePage setting (including recursive option)</source>
+        <target state="final">Begræns kategorier, placeringer, arrangører og talere til lagerside -ndstillinger (inklusiv rekursivt valg)</target>
       </trans-unit>
       <trans-unit id="flexforms_general.displayMode.all" approved="yes">
         <source>Show all events</source>
@@ -430,6 +438,10 @@
       <trans-unit id="administration.newLocation" approved="yes">
         <source>Create new location</source>
         <target state="final">Opret ny placering</target>
+      </trans-unit>
+      <trans-unit id="administration.newOrganisator" approved="yes">
+        <source>Create new organizer</source>
+        <target state="final">Opret ny arrangør</target>
       </trans-unit>
       <trans-unit id="administration.newSpeaker" approved="yes">
         <source>Create new speaker</source>
@@ -694,6 +706,22 @@
       <trans-unit id="event.startdateNotBeforeEnddate.message" approved="yes">
         <source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
         <target state="final">Slutdato på begivenhed ligger før startdato. Justér venligst datoerne, så startdato er før slutdato.</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.title" approved="yes">
+        <source>No organizer</source>
+        <target state="final">Ingen arrangør</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.message" approved="yes">
+        <source>The event is configured to notify the organizer, but no organizer is set. Please select an organizer or change the notification settings.</source>
+        <target state="final">Arrangementet er konfigureret til at underrette arrangøren, men ingen arrangør er angivet. Vælg en arrangør eller skift notifikationsindstillingerne.</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.title" approved="yes">
+        <source>Organizer has no email</source>
+        <target state="final">Arrangøren har ingen e-mail</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.message" approved="yes">
+        <source>The event is configured to notify the organizer, but the organizer has no email address. Please set an email address for the organizer or change the notification settings.</source>
+        <target state="final">Arrangementet er konfigureret til at underrette arrangøren, men arrangøren har ingen e-mailadresse. Angiv venligst en e-mailadresse til arrangøren eller skift indstillingerne for notifikationer.</target>
       </trans-unit>
       <trans-unit id="constants.subcategory.registration" approved="yes">
         <source>Registration</source>
