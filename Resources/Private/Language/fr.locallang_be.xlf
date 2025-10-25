@@ -195,10 +195,6 @@
         <source>Create new location</source>
         <target state="final">Créer un nouveau lieu</target>
       </trans-unit>
-      <trans-unit id="administration.newOrganisator" approved="yes">
-        <source>Create new organisator</source>
-        <target state="final">Ajouter un nouvel organisateur</target>
-      </trans-unit>
       <trans-unit id="administration.newSpeaker" approved="yes">
         <source>Create new speaker</source>
         <target state="final">Créer un nouvel orateur</target>
