@@ -79,10 +79,6 @@
         <source>Location</source>
         <target state="final">Plats</target>
       </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisatör</target>
-      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
         <source>Images</source>
         <target state="final">Bilder</target>
@@ -110,10 +106,6 @@
       <trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin" approved="yes">
         <source>Admin</source>
         <target state="final">Administratör</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisatör</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
         <source>Event - Registration</source>
@@ -286,14 +278,6 @@
       <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details" approved="yes">
         <source>Details</source>
         <target state="final">Detaljer</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
-        <source>Organisator</source>
-        <target state="final">Organisatör</target>
-      </trans-unit>
-      <trans-unit id="tx_sfeventmgt_domain_model_organisator" approved="yes">
-        <source>Event - Organisator</source>
-        <target state="final">Evenemang - Organisatör</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
         <source>Name</source>
