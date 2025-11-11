@@ -22,12 +22,10 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Pieventlist',
     [
-        EventController::class => 'list',
+        EventController::class => ['list'],
     ],
     // non-cacheable actions
-    [
-        EventController::class => '',
-    ],
+    [],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
@@ -35,11 +33,11 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Pieventdetail',
     [
-        EventController::class => 'detail, icalDownload',
+        EventController::class => ['detail', 'icalDownload'],
     ],
     // non-cacheable actions
     [
-        EventController::class => 'icalDownload',
+        EventController::class => ['icalDownload'],
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
@@ -48,11 +46,11 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Pieventregistration',
     [
-        EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, verifyConfirmRegistration, cancelRegistration, verifyCancelRegistration',
+        EventController::class => ['registration', 'saveRegistration', 'saveRegistrationResult', 'confirmRegistration', 'verifyConfirmRegistration', 'cancelRegistration', 'verifyCancelRegistration'],
     ],
     // non-cacheable actions
     [
-        EventController::class => 'registration, saveRegistration, saveRegistrationResult, confirmRegistration, verifyConfirmRegistration, cancelRegistration, verifyCancelRegistration',
+        EventController::class => ['registration', 'saveRegistration', 'saveRegistrationResult', 'confirmRegistration', 'verifyConfirmRegistration', 'cancelRegistration', 'verifyCancelRegistration'],
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
@@ -61,11 +59,11 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Pieventsearch',
     [
-        EventController::class => 'search',
+        EventController::class => ['search'],
     ],
     // non-cacheable actions
     [
-        EventController::class => 'search',
+        EventController::class => ['search'],
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
@@ -74,12 +72,10 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Pieventcalendar',
     [
-        EventController::class => 'calendar',
+        EventController::class => ['calendar'],
     ],
     // non-cacheable actions
-    [
-        EventController::class => '',
-    ],
+    [],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
 
@@ -87,11 +83,11 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Piuserreg',
     [
-        UserRegistrationController::class => 'list, detail',
+        UserRegistrationController::class => ['list', 'detail'],
     ],
     // non-cacheable actions
     [
-        UserRegistrationController::class => 'list, detail',
+        UserRegistrationController::class => ['list', 'detail'],
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
@@ -100,11 +96,11 @@ ExtensionUtility::configurePlugin(
     'SfEventMgt',
     'Pipayment',
     [
-        PaymentController::class => 'redirect, success, failure, cancel, notify',
+        PaymentController::class => ['redirect', 'success', 'failure', 'cancel', 'notify'],
     ],
     // non-cacheable actions
     [
-        PaymentController::class => 'redirect, success, failure, cancel, notify',
+        PaymentController::class => ['redirect', 'success', 'failure', 'cancel', 'notify'],
     ],
     ExtensionUtility::PLUGIN_TYPE_CONTENT_ELEMENT
 );
