@@ -104,6 +104,10 @@ You can ask questions at https://stackoverflow.com and tag your question with `T
 
 Please refer to the [contributing](CONTRIBUTING.md) document included in this repository.
 
+## Reporting a Vulnerability
+
+Please report vulnerabilities to [security@typo3.org](mailto:security@typo3.org).
+
 ## Screenshot
 
 ### Event backend form
