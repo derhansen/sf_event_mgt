@@ -14,46 +14,46 @@
 				<source>Event Management</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventlist.title">
-				<source>List view</source>
+				<source>Event list</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventlist.description">
 				<source>Display of events chosen by various optional properties like storage page, categories,...</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventdetail.title">
-				<source>Detail view</source>
+				<source>Event details</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventdetail.description">
-				<source>Display the detail view for events.</source>
+				<source>Display the detail page for events.</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventregistration.title">
-				<source>Registration view</source>
+				<source>Event registration form</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventregistration.description">
-				<source>Display the registration view for events.</source>
+				<source>Display the registration form for events.</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventsearch.title">
-				<source>Search view</source>
+				<source>Event search (Form and Results)</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventsearch.description">
-				<source>Display a search view for events with various filter options.</source>
+				<source>Display a search form for events with various filter options.</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventcalendar.title">
-				<source>Calendar view</source>
+				<source>Event calendar</source>
 			</trans-unit>
 			<trans-unit id="plugin.pieventcalendar.description">
-				<source>Display a calendar view of events chosen by various optional properties.</source>
+				<source>Display a calendar of events chosen by various optional properties.</source>
 			</trans-unit>
 			<trans-unit id="plugin.pipayment.title">
-				<source>Payment</source>
+				<source>Event payment</source>
 			</trans-unit>
 			<trans-unit id="plugin.pipayment.description">
-				<source>Display the payment view for events.</source>
+				<source>Display the payment process for events.</source>
 			</trans-unit>
 			<trans-unit id="plugin.piuserreg.title">
-				<source>Frontend user registrations</source>
+				<source>Event registrations (frontend user)</source>
 			</trans-unit>
 			<trans-unit id="plugin.piuserreg.description">
-				<source>Display event registrations for the current logged in frontend user.</source>
+				<source>Display event registrations for the current logged-in frontend user.</source>
 			</trans-unit>
 			<trans-unit id="flexforms_tab.settings">
 				<source>Settings</source>
