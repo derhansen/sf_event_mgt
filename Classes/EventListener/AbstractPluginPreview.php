@@ -34,15 +34,6 @@ abstract class AbstractPluginPreview
     }
 
     /**
-     * Returns the plugin name
-     */
-    protected function getPluginName(array $record): string
-    {
-        $pluginId = str_replace('sfeventmgt_', '', $record['CType']);
-        return htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'plugin.' . $pluginId . '.title'));
-    }
-
-    /**
      * Returns the records flexform as array
      */
     protected function getFlexFormData(string $flexform): array
@@ -57,7 +48,7 @@ abstract class AbstractPluginPreview
     /**
      * Renders the given data and action as HTML table for plugin preview
      */
-    protected function renderAsTable(ServerRequestInterface $request, array $data, string $pluginName = ''): string
+    protected function renderAsTable(ServerRequestInterface $request, array $data): string
     {
         $template = GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Backend/PageLayoutView.html');
         $viewFactoryData = new ViewFactoryData(
@@ -67,7 +58,6 @@ abstract class AbstractPluginPreview
         $view = $this->viewFactory->create($viewFactoryData);
         $view->assignMultiple([
             'data' => $data,
-            'pluginName' => $pluginName,
         ]);
 
         return $view->render();

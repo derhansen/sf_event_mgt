@@ -35,8 +35,6 @@ final class PipaymentContentPreview extends AbstractPluginPreview
 
     private function renderPreviewContent(array $record, ServerRequestInterface $request): string
     {
-        $pluginName = $this->getPluginName($record);
-
-        return $this->renderAsTable($request, [], $pluginName);
+        return $this->renderAsTable($request, []);
     }
 }

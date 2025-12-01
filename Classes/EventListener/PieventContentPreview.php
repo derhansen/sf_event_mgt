@@ -46,7 +46,6 @@ final class PieventContentPreview extends AbstractPluginPreview
     {
         $data = [];
         $flexFormData = $this->getFlexFormData($record['pi_flexform']);
-        $pluginName = $this->getPluginName($record);
 
         $this->setPluginPidConfig($data, $flexFormData, 'listPid', 'additional');
         $this->setPluginPidConfig($data, $flexFormData, 'detailPid', 'additional');
@@ -61,7 +60,7 @@ final class PieventContentPreview extends AbstractPluginPreview
         $this->setCategoryConjuction($data, $flexFormData);
         $this->setCategorySettings($data, $flexFormData);
 
-        return $this->renderAsTable($request, $data, $pluginName);
+        return $this->renderAsTable($request, $data);
     }
 
     /**

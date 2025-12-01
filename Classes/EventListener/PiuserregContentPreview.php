@@ -37,7 +37,6 @@ final class PiuserregContentPreview extends AbstractPluginPreview
     {
         $data = [];
         $flexFormData = $this->getFlexFormData($record['pi_flexform']);
-        $pluginName = $this->getPluginName($record);
 
         $this->setPluginPidConfig($data, $flexFormData, 'registrationPid', 'sDEF');
         $this->setStoragePage($data, $flexFormData, 'settings.userRegistration.storagePage');
@@ -48,6 +47,6 @@ final class PiuserregContentPreview extends AbstractPluginPreview
             'settings.userRegistration.orderDirection'
         );
 
-        return $this->renderAsTable($request, $data, $pluginName);
+        return $this->renderAsTable($request, $data);
     }
 }
