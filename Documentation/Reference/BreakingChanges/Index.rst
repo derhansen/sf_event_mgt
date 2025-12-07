@@ -12,6 +12,17 @@
 Breaking Changes
 ================
 
+8.5.0
+~~~~~
+
+In this version, to `PiEventPluginUpdater` introduced in version 6.0.0 has been
+removed, because it is not compatible with TYPO3 13.4. User of the extension
+updating to version 8.x must ensure to update from at **least version 6.0.0 or above**.
+
+Updating from version 5.x or below to version 8.x is not supported due to several changes
+in the TYPO3 plugin structure. Make sure to update to at least version 6.x of the extension
+before updating to version 8.x.
+
 8.0.0
 ~~~~~
 This version contains several breaking changes. The most relevant changes are:
