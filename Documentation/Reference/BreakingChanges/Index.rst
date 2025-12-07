@@ -23,6 +23,11 @@ Updating from version 5.x or below to version 8.x is not supported due to severa
 in the TYPO3 plugin structure. Make sure to update to at least version 6.x of the extension
 before updating to version 8.x.
 
+Additionally, the database type for price fields has changed. Make sure to apply database
+changes. Note, that due to field change from "double" to "numeric", rounding errors may
+accur in very rare scenarios, where the price contains many digits after the comma.
+This change is however optional, but it is recommended to apply it.
+
 8.0.0
 ~~~~~
 This version contains several breaking changes. The most relevant changes are:
