@@ -11,34 +11,6 @@
         <source>Events and event-registration</source>
         <target state="final">Événements et inscriptions à des événements</target>
       </trans-unit>
-      <trans-unit id="plugin.pieventlist.title" approved="yes">
-        <source>List view</source>
-        <target state="final">Vue Liste</target>
-      </trans-unit>
-      <trans-unit id="plugin.pieventdetail.title" approved="yes">
-        <source>Detail view</source>
-        <target state="final">Vue de détail</target>
-      </trans-unit>
-      <trans-unit id="plugin.pieventregistration.title" approved="yes">
-        <source>Registration view</source>
-        <target state="final">Vue "inscription"</target>
-      </trans-unit>
-      <trans-unit id="plugin.pieventsearch.title" approved="yes">
-        <source>Search view</source>
-        <target state="final">Vue recherche</target>
-      </trans-unit>
-      <trans-unit id="plugin.pieventcalendar.title" approved="yes">
-        <source>Calendar view</source>
-        <target state="final">Vue calendrier</target>
-      </trans-unit>
-      <trans-unit id="plugin.pipayment.title" approved="yes">
-        <source>Payment</source>
-        <target state="final">Paiement</target>
-      </trans-unit>
-      <trans-unit id="plugin.piuserreg.title" approved="yes">
-        <source>Frontend user registrations</source>
-        <target state="final">Inscriptions des utilisateurs Frontend</target>
-      </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
         <target state="final">Paramètres</target>
