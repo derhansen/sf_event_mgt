@@ -359,7 +359,7 @@
       </trans-unit>
       <trans-unit id="flexforms_notification.registration_waitlist_move_up_admin_subject" approved="yes">
         <source>Subject of email sent to admin when a registration moved up from the waitlist</source>
-        <target state="final">Betreff der E-Mail, welche der Webseiten Administrator erhält, wenn ein Benutzer die Anmeldung abgeschlossen hat</target>
+        <target state="final">Betreff der E-Mail an den Webseiten Administrator, wenn eine Registrierung von der Warteliste nach oben verschoben wurde</target>
       </trans-unit>
       <trans-unit id="flexforms_categorymenu.categories" approved="yes">
         <source>Categories (if empty, all categories will be shown in the category menu)</source>
