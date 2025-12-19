@@ -56,7 +56,6 @@ class RegistrationFieldValidator extends AbstractValidator
         $fieldValue = $this->getFieldValue($registrationField, $fieldValues);
         $validationResult = $validator->validate($fieldValue);
         if ($validationResult->hasErrors()) {
-            $result = false;
             foreach ($validationResult->getErrors() as $error) {
                 $this->result->forProperty('fields.' . $registrationField->getUid())->addError($error);
             }
@@ -86,10 +85,24 @@ class RegistrationFieldValidator extends AbstractValidator
         }
 
         // If field value is an array, then treat one single element with an empty string as an empty value
-        if (is_array($result) && $result === [0 => '']) {
+        if (is_array($result) && $this->isArrayWithEmptyValues($result)) {
             $result = '';
         }
 
         return $result;
+    }
+
+    /**
+     * Returns, if the given array contains only empty values
+     */
+    private function isArrayWithEmptyValues(array $array): bool
+    {
+        foreach ($array as $value) {
+            if ($value !== '') {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

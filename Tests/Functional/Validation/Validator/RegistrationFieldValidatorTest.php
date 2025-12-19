@@ -48,9 +48,27 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
         return [
             'required string field with no value' => [
                 true,
-                FieldType::CHECK,
+                FieldType::TEXT,
                 '',
                 true,
+            ],
+            'required string field with value' => [
+                true,
+                FieldType::TEXT,
+                'foo',
+                false,
+            ],
+            'non required string field with no value' => [
+                false,
+                FieldType::TEXT,
+                '',
+                false,
+            ],
+            'non required string field with value' => [
+                false,
+                FieldType::TEXT,
+                'foo',
+                false,
             ],
             'required check field with no value' => [
                 true,
@@ -58,16 +76,94 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
                 '',
                 true,
             ],
-            'non required string field with no value and' => [
+            'required check field with no value (empty array)' => [
+                true,
+                FieldType::CHECK,
+                json_encode(['']),
+                true,
+            ],
+            'required check field with value (non empty array)' => [
+                true,
+                FieldType::CHECK,
+                json_encode(['foo']),
+                false,
+            ],
+            'required check field with value (non empty multi value array)' => [
+                true,
+                FieldType::CHECK,
+                json_encode(['foo', 'bar']),
+                false,
+            ],
+            'required check field with value (non empty multi value array - first item empty)' => [
+                true,
+                FieldType::CHECK,
+                json_encode(['', 'bar']),
+                false,
+            ],
+            'non required check field with no value' => [
                 false,
                 FieldType::CHECK,
                 '',
                 false,
             ],
-            'required string field with value' => [
-                true,
+            'non required check field with no value (empty array)' => [
+                false,
                 FieldType::CHECK,
-                'a value',
+                json_encode(['']),
+                false,
+            ],
+            'required select field with no value' => [
+                true,
+                FieldType::SELECT,
+                '',
+                true,
+            ],
+            'required select field with no value (empty array)' => [
+                true,
+                FieldType::SELECT,
+                json_encode(['']),
+                true,
+            ],
+            'required select field with value (non empty array)' => [
+                true,
+                FieldType::SELECT,
+                json_encode(['foo']),
+                false,
+            ],
+            'required select field with value (non empty multi value array)' => [
+                true,
+                FieldType::SELECT,
+                json_encode(['foo', 'bar']),
+                false,
+            ],
+            'required select field with value (non empty multi value array - first item empty)' => [
+                true,
+                FieldType::SELECT,
+                json_encode(['', 'bar']),
+                false,
+            ],
+            'required radio field with no value' => [
+                true,
+                FieldType::RADIO,
+                '',
+                true,
+            ],
+            'required radio field with value' => [
+                true,
+                FieldType::RADIO,
+                'foo',
+                false,
+            ],
+            'non required radio field with no value' => [
+                false,
+                FieldType::RADIO,
+                '',
+                false,
+            ],
+            'non required radio field with value' => [
+                false,
+                FieldType::RADIO,
+                'foo',
                 false,
             ],
         ];
@@ -84,7 +180,7 @@ class RegistrationFieldValidatorTest extends FunctionalTestCase
         bool $expectedResult
     ): void {
         $registrationField = new Registration\Field();
-        $registrationField->setText($fieldType);
+        $registrationField->setType($fieldType);
         $registrationField->setRequired($required);
 
         $event = new Event();
