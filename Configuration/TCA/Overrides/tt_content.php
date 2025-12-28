@@ -56,20 +56,21 @@ foreach ($plugins as $pluginName => $pluginConfig) {
     );
 
     // Register flexform if required
-    if (($pluginConfig['flexForm'] ?? null)) {
+    $flexFormTab = '';
+    if ($pluginConfig['flexForm'] ?? null) {
         ExtensionManagementUtility::addPiFlexFormValue(
             '*',
             'FILE:EXT:sf_event_mgt/Configuration/FlexForms/' . $pluginConfig['flexForm'],
             $contentTypeName
         );
+        $flexFormTab = '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.plugin,pi_flexform,';
     }
 
     $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['showitem'] = '
         --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
             --palette--;;general,
             --palette--;;headers,
-        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.plugin,
-            pi_flexform,
+        ' . $flexFormTab . '
         --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
             --palette--;;frames,
             --palette--;;appearanceLinks,
