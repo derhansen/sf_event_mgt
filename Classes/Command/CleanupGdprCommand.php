@@ -19,6 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 #[AsCommand(
@@ -58,6 +59,11 @@ class CleanupGdprCommand extends Command
         $softDelete = (bool)$input->getOption('softDelete');
         $ignoreEventRestriction = (bool)$input->getOption('ignoreEventRestriction');
         $amountDeleted = $maintenanceService->processGdprCleanup($days, $softDelete, $ignoreEventRestriction);
+
+        // Flush page cache for "tx_sfeventmgt" tag
+        $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
+        $cacheManager->flushCachesInGroupByTag('pages', 'tx_sfeventmgt');
+
         $io->success($amountDeleted . ' registrations deleted.');
 
         return Command::SUCCESS;
