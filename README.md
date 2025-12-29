@@ -2,7 +2,6 @@
 [![Unit tests](https://github.com/derhansen/sf_event_mgt/actions/workflows/UnitTests.yml/badge.svg)](https://github.com/derhansen/sf_event_mgt/actions/workflows/UnitTests.yml)
 [![Functional tests](https://github.com/derhansen/sf_event_mgt/actions/workflows/FunctionalTests.yml/badge.svg)](https://github.com/derhansen/sf_event_mgt/actions/workflows/FunctionalTests.yml)
 [![Acceptance Tests](https://github.com/derhansen/sf_event_mgt/actions/workflows/AcceptanceTests.yml/badge.svg)](https://github.com/derhansen/sf_event_mgt/actions/workflows/AcceptanceTests.yml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=main)
 [![Monthly Downloads](https://poser.pugx.org/derhansen/sf_event_mgt/d/monthly)](https://packagist.org/packages/derhansen/sf_event_mgt)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
