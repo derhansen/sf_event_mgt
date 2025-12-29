@@ -10,6 +10,8 @@ use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventPlausability;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\EventRowInitializeNew;
 use DERHANSEN\SfEventMgt\Form\FormDataProvider\HideInlineRegistrations;
 use DERHANSEN\SfEventMgt\Hooks\DataHandlerHooks;
+use DERHANSEN\SfEventMgt\Payment\Invoice;
+use DERHANSEN\SfEventMgt\Payment\Transfer;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowDateTimeFields;
 use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
@@ -119,32 +121,24 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clea
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['livesearch']['event'] = 'tx_sfeventmgt_domain_model_event';
 
 // Register longitude- and latitude-evaluator for TCA
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
-LongitudeEvaluator::class
-] = '';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
-LatitudeEvaluator::class
-] = '';
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][
-TimeRestrictionEvaluator::class
-] = '';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][LongitudeEvaluator::class] = '';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][LatitudeEvaluator::class] = '';
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tce']['formevals'][TimeRestrictionEvaluator::class] = '';
 
 // Register default payment methods
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
     'invoice' => [
-        'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Invoice',
+        'class' => Invoice::class,
         'extkey' => 'sf_event_mgt',
     ],
     'transfer' => [
-        'class' => 'DERHANSEN\\SfEventMgt\\Payment\\Transfer',
+        'class' => Transfer::class,
         'extkey' => 'sf_event_mgt',
     ],
 ];
 
 // Custom FormDataProvider to hide TCA inline fields for registrations on given conditions
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
-HideInlineRegistrations::class
-] = [
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][HideInlineRegistrations::class] = [
     'depends' => [
         InitializeProcessedTca::class,
     ],
@@ -154,18 +148,14 @@ HideInlineRegistrations::class
 ];
 
 // Custom FormDataProvider for event plausability checks
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
-EventPlausability::class
-] = [
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][EventPlausability::class] = [
     'depends' => [
         DatabaseRowDateTimeFields::class,
     ],
 ];
 
 // Custom FormDataProvider for default value of datetime fields
-$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][
-EventRowInitializeNew::class
-] = [
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][EventRowInitializeNew::class] = [
     'depends' => [
         DatabaseRowInitializeNew::class,
     ],
