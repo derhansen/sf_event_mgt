@@ -202,4 +202,62 @@ class RegistrationValidatorTest extends FunctionalTestCase
         self::assertTrue(isset($errors['priceOption']));
         self::assertEquals(1727776820, $errors['priceOption']->getFirstError()->getCode());
     }
+
+    #[Test]
+    public function registrationInvalidWhenPaymentMethodIsRequired(): void
+    {
+        $priceOption = new PriceOption();
+        $priceOption->setPrice(10.00);
+
+        $event = new Event();
+        $event->setEnablePayment(true);
+        $event->addPriceOptions($priceOption);
+
+        $registration = new Registration();
+        $registration->setFirstname('Torben');
+        $registration->setLastname('Hansen');
+        $registration->setEmail('derhansen@gmail.com');
+        $registration->setEvent($event);
+        $registration->setPriceOption($priceOption);
+
+        $subject = new RegistrationValidator(
+            $this->get(ConfigurationManager::class),
+            $this->get(EventDispatcherInterface::class)
+        );
+        $subject->setRequest($this->request);
+
+        $result = $subject->validate($registration);
+        self::assertTrue($result->hasErrors());
+        $errors = $result->getSubResults();
+        self::assertCount(1, $errors);
+        self::assertTrue(isset($errors['paymentmethod']));
+    }
+
+    #[Test]
+    public function registrationValidWhenPaymentMethodIsRequiredAndProvided(): void
+    {
+        $priceOption = new PriceOption();
+        $priceOption->setPrice(10.00);
+
+        $event = new Event();
+        $event->setEnablePayment(true);
+        $event->addPriceOptions($priceOption);
+
+        $registration = new Registration();
+        $registration->setFirstname('Torben');
+        $registration->setLastname('Hansen');
+        $registration->setEmail('derhansen@gmail.com');
+        $registration->setEvent($event);
+        $registration->setPriceOption($priceOption);
+        $registration->setPaymentMethod('invoice');
+
+        $subject = new RegistrationValidator(
+            $this->get(ConfigurationManager::class),
+            $this->get(EventDispatcherInterface::class)
+        );
+        $subject->setRequest($this->request);
+
+        $result = $subject->validate($registration);
+        self::assertFalse($result->hasErrors());
+    }
 }

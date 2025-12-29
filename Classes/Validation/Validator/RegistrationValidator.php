@@ -59,6 +59,7 @@ class RegistrationValidator extends AbstractValidator
         }
 
         $this->validateDefaultFields($value);
+        $this->validatePaymentMethod($value);
         $this->validatePriceOption($value);
 
         $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields'] ?? ''));
@@ -167,6 +168,23 @@ class RegistrationValidator extends AbstractValidator
         ]);
 
         return $validator;
+    }
+
+    protected function validatePaymentMethod(Registration $registration): void
+    {
+        $event = $registration->getEvent();
+        if ($event === null || $event->getEnablePayment() === false) {
+            // Payment is not enablled for event
+            return;
+        }
+
+        $validator = $this->getNotEmptyValidator();
+        $validationResult = $validator->validate($registration->getPaymentmethod());
+        if ($validationResult->hasErrors()) {
+            foreach ($validationResult->getErrors() as $error) {
+                $this->result->forProperty('paymentmethod')->addError($error);
+            }
+        }
     }
 
     protected function validatePriceOption(Registration $registration): void
