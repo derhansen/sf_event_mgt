@@ -792,10 +792,14 @@ class Event extends AbstractEntity
         if ($this->getPriceOptions()) {
             foreach ($this->getPriceOptions() as $priceOption) {
                 if ($priceOption->getIsValid()) {
-                    $activePriceOptions[(int)$priceOption->getPrice()] = $priceOption;
+                    $activePriceOptions[] = $priceOption;
                 }
             }
         }
+
+        usort($activePriceOptions, function (PriceOption $a, PriceOption $b) {
+            return $a->getPrice() <=> $b->getPrice();
+        });
 
         return $activePriceOptions;
     }

@@ -1058,8 +1058,51 @@ class EventTest extends UnitTestCase
         $this->subject->addPriceOptions($priceOption3);
 
         $expected = [];
-        $expected[12] = $priceOption2;
-        $expected[14] = $priceOption3;
+        $expected[] = $priceOption2;
+        $expected[] = $priceOption3;
+
+        self::assertEquals($expected, $this->subject->getActivePriceOptions());
+    }
+
+    #[Test]
+    public function getActivePriceOptionsReturnsExpectedAmountOfPriceOptions(): void
+    {
+        $priceOption1 = new PriceOption();
+        $priceOption1->setPrice(10.25);
+
+        $priceOption2 = new PriceOption();
+        $priceOption2->setPrice(10.50);
+
+        $priceOption3 = new PriceOption();
+        $priceOption3->setPrice(10.75);
+
+        $this->subject->addPriceOptions($priceOption1);
+        $this->subject->addPriceOptions($priceOption2);
+        $this->subject->addPriceOptions($priceOption3);
+
+        self::assertEquals(3, count($this->subject->getActivePriceOptions()));
+    }
+
+    #[Test]
+    public function getActivePriceOptionsAreReturnedSortedByPriceAsc(): void
+    {
+        $priceOption1 = new PriceOption();
+        $priceOption1->setPrice(10.75);
+
+        $priceOption2 = new PriceOption();
+        $priceOption2->setPrice(10.25);
+
+        $priceOption3 = new PriceOption();
+        $priceOption3->setPrice(10.50);
+
+        $this->subject->addPriceOptions($priceOption1);
+        $this->subject->addPriceOptions($priceOption2);
+        $this->subject->addPriceOptions($priceOption3);
+
+        $expected = [];
+        $expected[] = $priceOption2;
+        $expected[] = $priceOption3;
+        $expected[] = $priceOption1;
 
         self::assertEquals($expected, $this->subject->getActivePriceOptions());
     }
