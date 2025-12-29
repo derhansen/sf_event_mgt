@@ -258,28 +258,70 @@ class CalendarServiceTest extends UnitTestCase
         self::assertEquals($expected, $result);
     }
 
-    /**
-     * @test
-     */
-    public function getWeekConfigReturnsExpectedValue(): void
+    public static function weekConfigDataProvider(): array
     {
-        $firstDayOfWeek = DateTime::createFromFormat('d.m.Y', '3.1.2022')->setTime(0, 0);
-
-        $expected = [
-            'previous' => [
-                'weeknumber' => 52,
-                'year' => 2021,
+        return [
+            '3.1.2022' => [
+                '3.1.2022',
+                [
+                    'previous' => [
+                        'weeknumber' => 52,
+                        'year' => 2021,
+                    ],
+                    'current' => [
+                        'weeknumber' => 1,
+                        'year' => 2022,
+                    ],
+                    'next' => [
+                        'weeknumber' => 2,
+                        'year' => 2022,
+                    ],
+                ],
             ],
-            'current' => [
-                'weeknumber' => 1,
-                'year' => 2022,
+            '30.12.2024' => [
+                '30.12.2024',
+                [
+                    'previous' => [
+                        'weeknumber' => 52,
+                        'year' => 2024,
+                    ],
+                    'current' => [
+                        'weeknumber' => 1,
+                        'year' => 2025,
+                    ],
+                    'next' => [
+                        'weeknumber' => 2,
+                        'year' => 2025,
+                    ],
+                ],
             ],
-            'next' => [
-                'weeknumber' => 2,
-                'year' => 2022,
+            '29.12.2025' => [
+                '29.12.2025',
+                [
+                    'previous' => [
+                        'weeknumber' => 52,
+                        'year' => 2025,
+                    ],
+                    'current' => [
+                        'weeknumber' => 1,
+                        'year' => 2026,
+                    ],
+                    'next' => [
+                        'weeknumber' => 2,
+                        'year' => 2026,
+                    ],
+                ],
             ],
         ];
+    }
 
+    /**
+     * @test
+     * @dataProvider weekConfigDataProvider
+    */
+    public function getWeekConfigReturnsExpectedValue(string $date, array $expected): void
+    {
+        $firstDayOfWeek = DateTime::createFromFormat('d.m.Y', $date)->setTime(0, 0);
         self::assertEquals($expected, $this->subject->getWeekConfig($firstDayOfWeek));
     }
 }
