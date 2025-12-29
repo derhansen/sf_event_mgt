@@ -280,6 +280,23 @@ class CalendarServiceTest extends UnitTestCase
                     ],
                 ],
             ],
+            '29.12.2025' => [
+                '29.12.2025',
+                [
+                    'previous' => [
+                        'weeknumber' => 52,
+                        'year' => 2025,
+                    ],
+                    'current' => [
+                        'weeknumber' => 1,
+                        'year' => 2026,
+                    ],
+                    'next' => [
+                        'weeknumber' => 2,
+                        'year' => 2026,
+                    ],
+                ],
+            ],
         ];
     }
 

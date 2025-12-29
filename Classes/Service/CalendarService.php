@@ -70,18 +70,13 @@ class CalendarService
         }
 
         $dayOfWeekOfFirstDay = (int)date('w', $firstDayOfMonth);
-        $firstDayOfCalendarOffset = 1 - $dayOfWeekOfFirstDay + $firstDayOfWeek;
-        if ($firstDayOfCalendarOffset > 1) {
-            $firstDayOfCalendarOffset -= 7;
-        }
-        $firstDayOfCalendar = mktime(0, 0, 0, $month, 0 + $firstDayOfCalendarOffset, $year);
+        $distance = ($dayOfWeekOfFirstDay - $firstDayOfWeek + 7) % 7;
+        $firstDayOfCalendar = mktime(0, 0, 0, $month, 1 - $distance, $year);
 
         $dayOfWeekOfLastDay = (int)date('w', $lastDayOfMonth);
-        $lastDayOfCalendarOffset = 6 - $dayOfWeekOfLastDay + $firstDayOfWeek;
-        if ($dayOfWeekOfLastDay === 0 && $firstDayOfWeek === 1) {
-            $lastDayOfCalendarOffset = 0;
-        }
-        $lastDayOfCalendar = strtotime('+' . $lastDayOfCalendarOffset . ' days', $lastDayOfMonth);
+        $endOfWeek = ($firstDayOfWeek + 6) % 7;
+        $distance = ($endOfWeek - $dayOfWeekOfLastDay + 7) % 7;
+        $lastDayOfCalendar = mktime(0, 0, 0, $month + 1, $distance, $year);
 
         return [
             'firstDayOfMonth' => $firstDayOfMonth,
@@ -95,8 +90,6 @@ class CalendarService
      * Returns an array of events for the given day
      *
      * @param array|QueryResultInterface $events
-     * @param DateTime $currentDay
-     * @return array
      */
     protected function getEventsForDay($events, DateTime $currentDay): array
     {

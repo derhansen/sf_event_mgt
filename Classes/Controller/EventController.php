@@ -179,10 +179,12 @@ class EventController extends AbstractController
         // If a weeknumber is given in overwriteDemand['week'], we overwrite the current month
         if ($overwriteDemand['week'] ?? false) {
             $firstDayOfWeek = (new DateTime())->setISODate($currentYear, (int)$overwriteDemand['week']);
-            $currentMonth = (int)$firstDayOfWeek->format('m');
+            $currentMonth = (int)$firstDayOfWeek->format('n');
+            $currentYear = (int)$firstDayOfWeek->format('Y');
             $eventDemand->setMonth($currentMonth);
+            $eventDemand->setYear($currentYear);
         } else {
-            $firstDayOfWeek = (new DateTime())->setISODate($currentYear, (int)date('W'));
+            $firstDayOfWeek = (new DateTime())->setISODate((int)date('o'), (int)date('W'));
         }
 
         // Set demand from calendar date range instead of month / year
