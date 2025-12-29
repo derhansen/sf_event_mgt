@@ -1,7 +1,6 @@
 [![Latest Stable Version](https://poser.pugx.org/derhansen/sf_event_mgt/v/stable)](https://packagist.org/packages/derhansen/sf_event_mgt)
 [![Unit- and functional tests](https://github.com/derhansen/sf_event_mgt/actions/workflows/UnitFunctionalTests.yml/badge.svg)](https://github.com/derhansen/sf_event_mgt/actions/workflows/UnitFunctionalTests.yml)
 [![Unit- and functional tests](https://github.com/derhansen/sf_event_mgt/actions/workflows/UnitFunctionalTests.yml/badge.svg)](https://github.com/derhansen/sf_event_mgt/actions/workflows/UnitFunctionalTests.yml)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/derhansen/sf_event_mgt/?branch=main)
 [![Monthly Downloads](https://poser.pugx.org/derhansen/sf_event_mgt/d/monthly)](https://packagist.org/packages/derhansen/sf_event_mgt)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
