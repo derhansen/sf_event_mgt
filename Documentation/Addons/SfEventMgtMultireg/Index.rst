@@ -25,7 +25,7 @@ requires a bit of JavaScript to show or hide additional fields.
 Links
 -----
 
-* Demo: https://sf-event-mgt-demo.derhansen.com/list
+* Demo: https://sf-event-mgt-demo.derhansen.com/events/details/typo3-developer-conference
 
 Features
 --------
@@ -48,7 +48,7 @@ Pricing
 The price is for the development of a custom version of sf_event_mgt_multireg
 with an extension key and a PHP namespace of your choice.
 
-Please contact me by email at torben@derhansen.com for ordering, questions
+Please contact me by email at torben@derhansen.com for inquiry, questions
 and/or additional requirements.
 
 

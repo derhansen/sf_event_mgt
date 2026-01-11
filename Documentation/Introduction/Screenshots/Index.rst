@@ -29,7 +29,7 @@ Backend administration module
 
 Send configurable email notifications to event participants
 
-.. figure:: /Images/event-calendar.jpg
+.. figure:: /Images/event-calendar.png
    :alt: Event calendar view
    :class: with-shadow
 

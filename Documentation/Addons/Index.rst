@@ -20,3 +20,5 @@ Addons
    SfEventMgtContentelements/Index
    SfEventMgtIndexer/Index
    SfEventMgtMultireg/Index
+   SfEventMgtPaypal/Index
+   SfEventMgtStripe/Index

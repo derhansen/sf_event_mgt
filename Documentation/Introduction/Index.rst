@@ -19,5 +19,6 @@ Introduction
 
    WhatDoesItDo/Index
    Screenshots/Index
+   DemoWebsite/Index
    FeedbackUpdates/Index
    Thanks/Index

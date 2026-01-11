@@ -72,6 +72,10 @@ The recommended way to install the extension is by using [Composer](https://getc
 
 Download and install the extension with the TYPO3 extension manager module.
 
+## Demo website
+
+A demo website to demonstrate features for **sf_event_mgt** and addons: 👉 https://sf-event-mgt-demo.derhansen.com/
+
 ## Breaking changes
 
 This extension uses semantic versioning. You can expect, that each major version contains breaking changes

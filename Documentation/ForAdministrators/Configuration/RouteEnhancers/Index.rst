@@ -11,9 +11,6 @@
 Route Enhancers
 ===============
 
-Since TYPO3 9.5, the TYPO3 Core comes with speaking URLs out of the box. For Extbase Extensions, the administrator
-can configure route enhancers to create speaking URLs for extension parameters.
-
 The following example shows a basic configuration for routes of sf_event_mgt.
 
 .. note::
@@ -207,8 +204,8 @@ Note, that some requirements are too loose (e.g. eventuid, reguid) and can not b
 a `cHash` parameter will be added to the route automatically.
 
 The extension also extends sys_category with a slug field the same way as ext:news does. Please note, that
-the overwriteDemand/category argument is a string, which can contain *multiple* category UIDs. When you
+the :php:`overwriteDemand/category` argument is a string, which can contain *multiple* category UIDs. When you
 use the overwriteDemand for categories with only *one* category, the example configuration above will work.
-If you pass multipl, comma separated category UIDs to the overwriteDemand/category argument, you have to
+If you pass multiple, comma separated category UIDs to the :php:`overwriteDemand/category` argument, you have to
 implement you own routing aspect.
 

@@ -35,4 +35,4 @@ I also offer the following paid services:
 * Priority Bug fixes
 * Developing extensions, that extend sf_event_mgt with unique features/requirements
 
-Please contact me by `email <mailto:derhansen\@gmail.com>`__  and ask for prices.
+Please contact me by `email <mailto:torben\@derhansen.com>`__  and ask for prices.
