@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="fr">
+    <header/>
+    <body>
+      <trans-unit id="extension.title" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">Événements et inscriptions à des événements</target>
+      </trans-unit>
+      <trans-unit id="CType.div.plugingroup" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">Événements et inscriptions à des événements</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Paramètres</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.notification" approved="yes">
+        <source>Notification settings</source>
+        <target state="final">Paramètres de notificationf</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.categoryMenu" approved="yes">
+        <source>Category menu</source>
+        <target state="final">Mode de catégorie</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.template" approved="yes">
+        <source>Template</source>
+        <target state="final">Gabarit</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">Additionnel</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode" approved="yes">
+        <source>What to display</source>
+        <target state="final">Ce qu'il y a à afficher</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.singleEvent" approved="yes">
+        <source>Show a single event record</source>
+        <target state="final">Afficher un seul enregistrement d'événement</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.list" approved="yes">
+        <source>List</source>
+        <target state="final">Liste</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.detail" approved="yes">
+        <source>Detail</source>
+        <target state="final">Détail</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Inscription</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.search" approved="yes">
+        <source>Searchform</source>
+        <target state="final">Formulaire de recherche</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.calendar" approved="yes">
+        <source>Calendar</source>
+        <target state="final">Calendrier</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.detailPid" approved="yes">
+        <source>Detail Page</source>
+        <target state="final">Page de détail</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.listPid" approved="yes">
+        <source>List Page</source>
+        <target state="final">Page contenant la vue liste</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.registrationPid" approved="yes">
+        <source>Registration Page</source>
+        <target state="final">Page d’inscription</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.paymentPid" approved="yes">
+        <source>Payment Page</source>
+        <target state="final">Page de paiement</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.linkTermsAndConditions" approved="yes">
+        <source>Link to terms and conditions</source>
+        <target state="final">Lien vers les conditions</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.queryLimit" approved="yes">
+        <source>Max records displayed</source>
+        <target state="final">Nombre maximum d'éléments affichés</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.none" approved="yes">
+        <source>None</source>
+        <target state="final">Aucun</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.onlyTopEvents" approved="yes">
+        <source>Only top events</source>
+        <target state="final">Uniquement les événements principaux</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.exceptTopEvents" approved="yes">
+        <source>Except top events</source>
+        <target state="final">Exclure les événements principaux</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode" approved="yes">
+        <source>Display mode</source>
+        <target state="final">Mode Écran</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField" approved="yes">
+        <source>Sort by</source>
+        <target state="final">Trier par</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titre</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.uid" approved="yes">
+        <source>Record ID</source>
+        <target state="final">ID de l'enregistrement</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.sorting" approved="yes">
+        <source>Sorting in TYPO3</source>
+        <target state="final">Tri dans TYPO3</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">Date de début</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">Date de fin</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.title" approved="yes">
+        <source>Event title</source>
+        <target state="final">Titre de l'événement</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.startdate" approved="yes">
+        <source>Event startdate</source>
+        <target state="final">Début de l’événement</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.enddate" approved="yes">
+        <source>Event enddate</source>
+        <target state="final">Date de fin de l'événement</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection" approved="yes">
+        <source>Sorting direction</source>
+        <target state="final">Sens du tri</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.ascending" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Ascendant</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.descending" approved="yes">
+        <source>Descending</source>
+        <target state="final">Descendant</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction" approved="yes">
+        <source>Category mode</source>
+        <target state="final">Mode de catégorie</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.ignore" approved="yes">
+        <source>Ignore category selection</source>
+        <target state="final">Ignorer la sélection de catégorie</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.or" approved="yes">
+        <source>Show events with selected categories (OR)</source>
+        <target state="final">Montrer les évènements avec les catégories sélectionnées (OU)</target>
+      </trans-unit>
+      <trans-unit id="administration.newEvent" approved="yes">
+        <source>Create new event</source>
+        <target state="final">Créer un nouvel événement</target>
+      </trans-unit>
+      <trans-unit id="administration.newLocation" approved="yes">
+        <source>Create new location</source>
+        <target state="final">Créer un nouveau lieu</target>
+      </trans-unit>
+      <trans-unit id="administration.newSpeaker" approved="yes">
+        <source>Create new speaker</source>
+        <target state="final">Créer un nouvel orateur</target>
+      </trans-unit>
+      <trans-unit id="administration.handleExpiredRegistrations" approved="yes">
+        <source>Hide/delete expired registrations</source>
+        <target state="final">Masquer/supprimer les inscriptions expirées</target>
+      </trans-unit>
+      <trans-unit id="administration.export" approved="yes">
+        <source>Export participants</source>
+        <target state="final">Exporter les participants</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationHistory" approved="yes">
+        <source>Notification history</source>
+        <target state="final">Historique de notification</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.title" approved="yes">
+        <source>TypoScript settings missing</source>
+        <target state="final">Paramètres de TypoScript manquants</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description" approved="yes">
+        <source>Please select an email template that will be used to notify participants of the event.</source>
+        <target state="final">Veuillez sélectionner un modèle d'e-mail qui sera utilisé pour avertir les participants de l'événement. Pour ajouter ses propres modèles d'e-mail, veuillez vous référer à la documentation.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.event" approved="yes">
+        <source>Event:</source>
+        <target state="final">Évènement:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.recipients" approved="yes">
+        <source>Recipients:</source>
+        <target state="final">Destinataires:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.0" approved="yes">
+        <source>All participants</source>
+        <target state="final">Tous les participants</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.1" approved="yes">
+        <source>Confirmed participants</source>
+        <target state="final">Participants confirmés</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.2" approved="yes">
+        <source>Unconfirmed participants</source>
+        <target state="final">Participants non confirmés</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.template" approved="yes">
+        <source>Template:</source>
+        <target state="final">Gabarit:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.overwriteSubject" approved="yes">
+        <source>Overwrite subject:</source>
+        <target state="final">Écraser le sujet :</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.overwriteSubject" approved="yes">
+        <source>Overwrites the configured default email subject of the selected template</source>
+        <target state="final">Écrase le sujet de l'e-mail par défaut configuré pour le modèle sélectionné</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.additionalMessage" approved="yes">
+        <source>Additional message:</source>
+        <target state="final">Message supplémentaire :</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.additionalMessage" approved="yes">
+        <source>Optional additional message in notification</source>
+        <target state="final">Message supplémentaire optionnel dans la notification</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError.title" approved="yes">
+        <source>No sender email address</source>
+        <target state="final">Aucune adresse e-mail de l'expéditeur</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError" approved="yes">
+        <source>The sender email address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+        <target state="final">L'adresse e-mail de l'expéditeur n'a pas pu être déterminée. Veuillez vous assurer que vous avez configuré les paramètres de notification correctement dans l'extension tx_sfeventmgt et que le dossier contenant les événements a accès à ces paramètres.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sendNotifications" approved="yes">
+        <source>Send notifications</source>
+        <target state="final">Envoyer des notifications</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.cancelSendNotifications" approved="yes">
+        <source>Back to event listing</source>
+        <target state="final">Retour à la liste des événements</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Détails</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.emailsSent" approved="yes">
+        <source>Emails sent</source>
+        <target state="final">Emails envoyés</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sentBy" approved="yes">
+        <source>Sent by</source>
+        <target state="final">Envoyé par</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.notAvailable" approved="yes">
+        <source>N/A</source>
+        <target state="final">Non applicable</target>
+      </trans-unit>
+      <trans-unit id="administration.nopageselected" approved="yes">
+        <source>Please click the page title in the page tree to the left to show the records on that page.</source>
+        <target state="final">Cliquez sur le titre de la page dans l'arborescence afin de montrer les entrées sur cette page.</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.title" approved="yes">
+        <source>Notifications disabled</source>
+        <target state="final">Notifications désactivées</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.description" approved="yes">
+        <source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
+        <target state="final">Les notifications ont été désactivées dans l'ensemble du système pour l'extension dans la configuration de TypoScript.</target>
+      </trans-unit>
+      <trans-unit id="events-folder" approved="yes">
+        <source>Events</source>
+        <target state="final">Événements</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableInvoice" approved="yes">
+        <source>Enable payment method 'invoice'</source>
+        <target state="final">Activer le mode de paiement sur facture</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableTransfer" approved="yes">
+        <source>Enable payment method 'transfer'</source>
+        <target state="final">Activer le mode de paiement 'transfert'</target>
+      </trans-unit>
+      <trans-unit id="extmng.slugBehaviour" xml:space="preserve" approved="yes">
+				<source>Slug behaviour: uniqueInSite: The same slug can be used for events in different sites. Use this setting *only* if no event records are shared between sites. "unique" means that same event title will lead to different slug names.</source>
+			<target state="final">Comportement du slug : "uniqueInSite" : le même slug peut être utilisé pour des news dans différents sites. Utilisez ce paramètre *seulement* si aucune news n'est partagée entre les sites. "unique" signifie que le même titre de news génèrera slugs différents.</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrations" xml:space="preserve" approved="yes">
+				<source>Hide registrations in event record by limit: Hides the event fields "Registration" and "Registration Waitlist" if the configured limit in "backend.hideInlineRegistrationsLimit" is reached. This option is usefull, when you have events with a huge amount of registrations where the TYPO3 backend gets slow due to performance issues of the TCA inline field.</source>
+			<target state="final">Masquer les inscriptions dans l'enregistrement d'événements par limite : masque les champs "Inscription" et "Liste d'attente d'inscription" si la limite configurée dans "backend.hideInlineRegistrationsLimit" est atteinte. Cette option est utile, lorsque vous avez des événements avec une quantité énorme d'inscriptions où le backend de TYPO3 est lent en raison de problèmes de performance du champ en ligne TCA.</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve" approved="yes">
+				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
+			<target state="final">Nombre maximum d’inscriptions affichées dans un enregistrement de type "événement" dans le backend de TYPO3.</target></trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.title" approved="yes">
+        <source>Event registrations hidden</source>
+        <target state="final">Inscriptions d'événement masquées</target>
+      </trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.description" approved="yes">
+        <source>This event has %1$s registrations, but due to performance reasons all event registrations are not shown in this view.</source>
+        <target state="final">Cet événement a %1$s inscriptions, mais pour des raisons de performance, toutes les inscriptions à un événement ne sont pas affichées dans cette vue.</target>
+      </trans-unit>
+      <trans-unit id="tabs.language" approved="yes">
+        <source>Language</source>
+        <target state="final">Langue</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.content" approved="yes">
+        <source>All expired registrations have been marked as hidden/deleted.</source>
+        <target state="final">Toutes les inscriptions expirées ont été marquées comme masquées/supprimées.</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.content" approved="yes">
+        <source>The selected email has been sent to all participants of the event.</source>
+        <target state="final">L'e-mail sélectionné a été envoyé à tous les participants de l'événement.</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.asc" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Ascendant</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.desc" approved="yes">
+        <source>Descending</source>
+        <target state="final">Descendant</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titre</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.startdate" approved="yes">
+        <source>Startdate</source>
+        <target state="final">Date de début</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
