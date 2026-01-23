@@ -432,4 +432,17 @@ class RegistrationService
 
         return $modifyRegistrationPriceEvent->getPrice();
     }
+
+    /**
+     * Returns the tax rate for the given registration to the given event.
+     */
+    public function getRegistrationTaxRate(Event $event, Registration $registration): float
+    {
+        $taxRate = $event->getTaxRate();
+        if ($registration->getPriceOption()) {
+            $taxRate = $registration->getPriceOption()->getTaxRate();
+        }
+
+        return $taxRate;
+    }
 }

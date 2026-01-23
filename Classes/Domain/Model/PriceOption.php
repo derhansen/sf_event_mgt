@@ -19,6 +19,7 @@ class PriceOption extends AbstractEntity
     protected string $title = '';
     protected string $description = '';
     protected float $price = 0.0;
+    protected float $taxRate = 0.0;
     protected ?DateTime $validUntil = null;
     protected ?Event $event = null;
 
@@ -50,6 +51,16 @@ class PriceOption extends AbstractEntity
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function getTaxRate(): float
+    {
+        return $this->taxRate;
+    }
+
+    public function setTaxRate(float $taxRate): void
+    {
+        $this->taxRate = $taxRate;
     }
 
     public function getValidUntil(): ?DateTime

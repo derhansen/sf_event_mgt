@@ -30,7 +30,7 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group',
         ],
-        'searchFields' => 'title,description,startdate,enddate,max_participants,price,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker,meta_keywords,meta_description',
+        'searchFields' => 'title,description,startdate,enddate,max_participants,price,tax_rate,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker,meta_keywords,meta_description',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-event',
         ],
@@ -97,7 +97,7 @@ return [
             'showitem' => 'startdate, enddate',
         ],
         'palettePrice' => [
-            'showitem' => 'price, currency',
+            'showitem' => 'price, tax_rate, currency',
         ],
         'paletteNotification' => [
             'showitem' => 'notify_admin, notify_organisator',
@@ -454,6 +454,18 @@ return [
         'price' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.price',
+            'config' => [
+                'type' => 'number',
+                'format' => 'decimal',
+                'size' => 5,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
+        'tax_rate' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_event.tax_rate',
             'config' => [
                 'type' => 'number',
                 'format' => 'decimal',

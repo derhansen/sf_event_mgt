@@ -50,6 +50,7 @@ class Registration extends AbstractEntity
     protected string $paymentReference = '';
     protected bool $waitlist = false;
     protected float $price = 0.0;
+    protected float $taxRate = 0.0;
     protected ?PriceOption $priceOption = null;
 
     /**
@@ -406,6 +407,16 @@ class Registration extends AbstractEntity
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function getTaxRate(): float
+    {
+        return $this->taxRate;
+    }
+
+    public function setTaxRate(float $taxRate): void
+    {
+        $this->taxRate = $taxRate;
     }
 
     public function getPriceOption(): ?PriceOption

@@ -97,6 +97,12 @@ program/schedule.
          A price for the event.
 
  - :Field:
+         Tax Rate
+
+   :Description:
+         The tax rate in percent for the price.
+
+ - :Field:
          Currency
 
    :Description:

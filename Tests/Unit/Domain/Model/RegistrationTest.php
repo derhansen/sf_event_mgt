@@ -473,4 +473,36 @@ class RegistrationTest extends UnitTestCase
         $this->subject->setLastname('Hansen');
         self::assertEquals('Torben Hansen', $this->subject->getFullname());
     }
+
+    #[Test]
+    public function getPriceReturnsInitialValueForFloat(): void
+    {
+        self::assertSame(
+            0.0,
+            $this->subject->getPrice()
+        );
+    }
+
+    #[Test]
+    public function setPriceForFloatSetsPrice(): void
+    {
+        $this->subject->setPrice(12.99);
+        self::assertSame(12.99, $this->subject->getPrice());
+    }
+
+    #[Test]
+    public function getTaxRateReturnsInitialValueForFloat(): void
+    {
+        self::assertSame(
+            0.0,
+            $this->subject->getTaxRate()
+        );
+    }
+
+    #[Test]
+    public function setTaxRateForFloatSetsTaxRate(): void
+    {
+        $this->subject->setTaxRate(19.00);
+        self::assertEquals(19.00, $this->subject->getTaxRate());
+    }
 }

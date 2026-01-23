@@ -545,6 +545,7 @@ class EventController extends AbstractController
             $confirmationUntil = new DateTime();
             $confirmationUntil->add(new DateInterval('PT' . $linkValidity . 'S'));
             $price = $this->registrationService->evaluateRegistrationPrice($event, $registration, $this->request);
+            $taxRate = $this->registrationService->getRegistrationTaxRate($event, $registration);
 
             $registration->setEvent($event);
             $registration->setPid($event->getPid());
@@ -554,6 +555,7 @@ class EventController extends AbstractController
             $registration->setFeUser($this->registrationService->getCurrentFeUserObject());
             $registration->setWaitlist($isWaitlistRegistration);
             $registration->setPrice($price);
+            $registration->setTaxRate($taxRate);
 
             $this->registrationRepository->add($registration);
 

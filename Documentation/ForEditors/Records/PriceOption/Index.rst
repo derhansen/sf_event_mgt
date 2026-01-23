@@ -59,6 +59,12 @@ is saved to a dedicated field of the registration record.
          The price of the price option
 
  - :Field:
+         Tax Rate
+
+   :Description:
+         The tax rate in percent for the price.
+
+ - :Field:
          Date until the price is valid (includes selected date)
 
    :Description:

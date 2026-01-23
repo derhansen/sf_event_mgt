@@ -13,6 +13,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	max_participants int(11) DEFAULT '0' NOT NULL,
 	max_registrations_per_user int(11) DEFAULT '1' NOT NULL,
 	price numeric(10,2) DEFAULT '0.00' NOT NULL,
+	tax_rate numeric(10,2) DEFAULT '0.00' NOT NULL,
 	currency varchar(255) DEFAULT '' NOT NULL,
 	enable_payment tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	restrict_payment_methods tinyint(4) unsigned DEFAULT '0' NOT NULL,
@@ -127,6 +128,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_registration (
 	waitlist tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	field_values int(11) unsigned DEFAULT '0' NOT NULL,
 	price numeric(10,2) DEFAULT '0.00' NOT NULL,
+	tax_rate numeric(10,2) DEFAULT '0.00' NOT NULL,
 	price_option int(11) unsigned DEFAULT '0' NOT NULL,
 
 	KEY event (event, waitlist)
@@ -139,6 +141,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_priceoption (
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text,
 	price numeric(10,2) DEFAULT '0.00' NOT NULL,
+	tax_rate numeric(10,2) DEFAULT '0.00' NOT NULL,
 	valid_until int(11) DEFAULT '0' NOT NULL,
 	event int(11) unsigned DEFAULT '0' NOT NULL,
 

@@ -42,7 +42,7 @@ return [
                 field_values,
 
             --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:registration.tabs.payment,
-                paid, price, price_option, paymentmethod, payment_reference,
+                paid, --palette--;;palettePrice, price_option, paymentmethod, payment_reference,
 
             --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access,
                 hidden',
@@ -52,6 +52,7 @@ return [
         'paletteName' => ['showitem' => 'firstname, lastname,'],
         'paletteAddress' => ['showitem' => 'address, zip, city,'],
         'paletteGenderTitle' => ['showitem' => 'gender, title,'],
+        'palettePrice' => ['showitem' => 'price, tax_rate'],
     ],
     'columns' => [
         'language' => [
@@ -273,6 +274,18 @@ return [
                 'type' => 'number',
                 'format' => 'decimal',
                 'size' => 5,
+            ],
+        ],
+        'tax_rate' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_registration.tax_rate',
+            'config' => [
+                'type' => 'number',
+                'format' => 'decimal',
+                'size' => 5,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
             ],
         ],
         'price_option' => [

@@ -204,7 +204,7 @@
 					<f:else>
                         <f:if condition="{event.priceOptions}">
                             <f:then>
-                                <f:translate key="startingAt" /> {event.currentPrice} {event.currency}
+                                <f:translate key="startingAt" /> {event.currentPrice} {event.currency} <f:if condition="{event.taxRate} > 0">(incl. {event.taxRate}% VAT)</f:if>
                             </f:then>
                             <f:else>
                                 {event.currentPrice -> f:format.number()} {event.currency}
@@ -224,7 +224,7 @@
                 <div class="event-detail-value event-price-options">
                     <ul>
                         <f:for each="{event.priceOptions}" as="priceOption">
-                            <li>{priceOption.title}: {priceOption.price -> f:format.number()} {event.currency}</li>
+                            <li>{priceOption.title}: {priceOption.price -> f:format.number()} {event.currency} <f:if condition="{priceOption.taxRate} > 0">(incl. {priceOption.taxRate}% VAT)</f:if></li>
                         </f:for>
                     </ul>
                 </div>

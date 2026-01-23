@@ -36,7 +36,7 @@ return [
     ],
     'types' => [
         '1' => [
-            'showitem' => 'title, price, valid_until,
+            'showitem' => 'title, --palette--;;palettePrice, valid_until,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.additional,
                     description,
                 --div--;LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:tabs.language,
@@ -46,6 +46,7 @@ return [
         ],
     ],
     'palettes' => [
+        'palettePrice' => ['showitem' => 'price, tax_rate'],
         'timeRestriction' => ['showitem' => 'starttime, endtime'],
         'language' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource'],
     ],
@@ -77,6 +78,18 @@ return [
         'price' => [
             'exclude' => true,
             'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption.price',
+            'config' => [
+                'type' => 'number',
+                'format' => 'decimal',
+                'size' => 5,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
+        'tax_rate' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_db.xlf:tx_sfeventmgt_domain_model_priceoption.tax_rate',
             'config' => [
                 'type' => 'number',
                 'format' => 'decimal',

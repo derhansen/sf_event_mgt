@@ -40,6 +40,7 @@ class Event extends AbstractEntity
     protected int $maxParticipants = 0;
     protected int $maxRegistrationsPerUser = 1;
     protected float $price = 0.0;
+    protected float $taxRate = 0.0;
     protected string $currency = '';
     protected bool $enablePayment = false;
     protected bool $restrictPaymentMethods = false;
@@ -277,6 +278,16 @@ class Event extends AbstractEntity
     public function setPrice(float $price): void
     {
         $this->price = $price;
+    }
+
+    public function getTaxRate(): float
+    {
+        return $this->taxRate;
+    }
+
+    public function setTaxRate(float $taxRate): void
+    {
+        $this->taxRate = $taxRate;
     }
 
     public function getCurrency(): string
