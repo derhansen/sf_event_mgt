@@ -371,7 +371,7 @@
       </trans-unit>
       <trans-unit id="administration.title" approved="yes">
         <source>Event Administration</source>
-        <target state="final">Verwaltung for Veranstaltungen</target>
+        <target state="final">Verwaltung von Veranstaltungen</target>
       </trans-unit>
       <trans-unit id="administration.notify" approved="yes">
         <source>Notify participants</source>
