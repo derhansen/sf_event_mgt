@@ -56,7 +56,6 @@ foreach ($plugins as $pluginName => $pluginConfig) {
     );
 
     // Register flexform if required
-    $flexFormTab = '';
     if ($pluginConfig['flexForm'] ?? null) {
         ExtensionManagementUtility::addPiFlexFormValue(
             '*',
@@ -64,27 +63,14 @@ foreach ($plugins as $pluginName => $pluginConfig) {
             $contentTypeName
         );
         $flexFormTab = '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.plugin,pi_flexform,';
-    }
 
-    $GLOBALS['TCA']['tt_content']['types'][$contentTypeName]['showitem'] = '
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:general,
-            --palette--;;general,
-            --palette--;;headers,
-        ' . $flexFormTab . '
-        --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.appearance,
-            --palette--;;frames,
-            --palette--;;appearanceLinks,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
-            --palette--;;language,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
-            --palette--;;hidden,
-            --palette--;;access,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:categories,
-            categories,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:notes,
-            rowDescription,
-        --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:extended,
-    ';
+        ExtensionManagementUtility::addToAllTCAtypes(
+            'tt_content',
+            $flexFormTab,
+            $contentTypeName,
+            'after:subheader'
+        );
+    }
 }
 
 /**
