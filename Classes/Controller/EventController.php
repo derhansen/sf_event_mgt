@@ -212,11 +212,9 @@ class EventController extends AbstractController
             $this
         );
         $this->eventDispatcher->dispatch($modifyCalendarViewVariablesEvent);
-        $this->view->assignMultiple($modifyCalendarViewVariablesEvent->getVariables());
+        $variables = $modifyCalendarViewVariablesEvent->getVariables();
 
-        $cacheDataCollector = $this->request->getAttribute('frontend.cache.collector');
-        $this->eventCacheService->addPageCacheTagsByEventDemandObject($cacheDataCollector, $eventDemand);
-
+        $this->view->assignMultiple($variables);
         return $this->htmlResponse();
     }
 
