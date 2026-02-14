@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event">
+        <source>Event</source>
+        <target>crwdns300162:0crwdne300162:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title">
+        <source>Title</source>
+        <target>crwdns300164:0crwdne300164:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser">
+        <source>Teaser</source>
+        <target>crwdns300166:0crwdne300166:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description">
+        <source>Description</source>
+        <target>crwdns300168:0crwdne300168:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program">
+        <source>Program/Schedule</source>
+        <target>crwdns300170:0crwdne300170:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link">
+        <source>Link</source>
+        <target>crwdns300172:0crwdne300172:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event">
+        <source>Top event</source>
+        <target>crwdns300174:0crwdne300174:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.startdate">
+        <source>Start date</source>
+        <target>crwdns300176:0crwdne300176:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enddate">
+        <source>End date</source>
+        <target>crwdns300178:0crwdne300178:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants">
+        <source>Max. participants</source>
+        <target>crwdns300180:0crwdne300180:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration">
+        <source>Registration enabled</source>
+        <target>crwdns300182:0crwdne300182:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate">
+        <source>Registration until the end date and time possible</source>
+        <target>crwdns338150:0crwdne338150:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations">
+        <source>Registrations</source>
+        <target>crwdns300184:0crwdne300184:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.freePlaces">
+        <source>Free places</source>
+        <target>crwdns300186:0crwdne300186:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.hasWaitlist">
+        <source>There is a waitlist</source>
+        <target>crwdns300188:0crwdne300188:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price">
+        <source>Price</source>
+        <target>crwdns300190:0crwdne300190:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.priceOptions">
+        <source>Price options</source>
+        <target>crwdns342196:0crwdne342196:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency">
+        <source>Currency</source>
+        <target>crwdns300192:0crwdne300192:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category">
+        <source>Category</source>
+        <target>crwdns300194:0crwdne300194:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related">
+        <source>Related events</source>
+        <target>crwdns300196:0crwdne300196:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.speaker">
+        <source>Speaker</source>
+        <target>crwdns300198:0crwdne300198:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location">
+        <source>Location</source>
+        <target>crwdns300200:0crwdne300200:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.title">
+        <source>Title</source>
+        <target>crwdns300202:0crwdne300202:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.address">
+        <source>Address</source>
+        <target>crwdns300204:0crwdne300204:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.zip">
+        <source>Zip</source>
+        <target>crwdns300206:0crwdne300206:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.city">
+        <source>City</source>
+        <target>crwdns300208:0crwdne300208:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.country">
+        <source>Country</source>
+        <target>crwdns300210:0crwdne300210:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.room">
+        <source>Room</source>
+        <target>crwdns300212:0crwdne300212:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.description">
+        <source>Description</source>
+        <target>crwdns300214:0crwdne300214:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image">
+        <source>Images</source>
+        <target>crwdns300216:0crwdne300216:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files">
+        <source>Files</source>
+        <target>crwdns300218:0crwdne300218:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image">
+        <source>Additional Images</source>
+        <target>crwdns300220:0crwdne300220:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.booking">
+        <source>Booking</source>
+        <target>crwdns300222:0crwdne300222:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration">
+        <source>Registration</source>
+        <target>crwdns300224:0crwdne300224:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.firstname">
+        <source>First name</source>
+        <target>crwdns300226:0crwdne300226:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.lastname">
+        <source>Last name</source>
+        <target>crwdns300228:0crwdne300228:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title">
+        <source>Title</source>
+        <target>crwdns300230:0crwdne300230:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company">
+        <source>Company</source>
+        <target>crwdns300232:0crwdne300232:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address">
+        <source>Address</source>
+        <target>crwdns300234:0crwdne300234:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip">
+        <source>Zip</source>
+        <target>crwdns300236:0crwdne300236:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city">
+        <source>City</source>
+        <target>crwdns300238:0crwdne300238:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country">
+        <source>Country</source>
+        <target>crwdns300240:0crwdne300240:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone">
+        <source>Phone</source>
+        <target>crwdns300242:0crwdne300242:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email">
+        <source>Email</source>
+        <target>crwdns300244:0crwdne300244:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender">
+        <source>Gender</source>
+        <target>crwdns300246:0crwdne300246:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset">
+        <source>Not set</source>
+        <target>crwdns300248:0crwdne300248:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female">
+        <source>Female</source>
+        <target>crwdns300250:0crwdne300250:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male">
+        <source>Male</source>
+        <target>crwdns300252:0crwdne300252:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various">
+        <source>Various</source>
+        <target>crwdns300254:0crwdne300254:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth">
+        <source>Date of birth</source>
+        <target>crwdns300256:0crwdne300256:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod">
+        <source>Payment method</source>
+        <target>crwdns300258:0crwdne300258:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc">
+        <source>Accept terms and conditions</source>
+        <target>crwdns300260:0crwdne300260:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed">
+        <source>Confirmed</source>
+        <target>crwdns300262:0crwdne300262:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid">
+        <source>Paid</source>
+        <target>crwdns300264:0crwdne300264:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption">
+        <source>Price option</source>
+        <target>crwdns342198:0crwdne342198:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes">
+        <source>Notes</source>
+        <target>crwdns300266:0crwdne300266:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations">
+        <source>Amount of registrations</source>
+        <target>crwdns300268:0crwdne300268:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid">
+        <source>Paid</source>
+        <target>crwdns300270:0crwdne300270:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.yes">
+        <source>Yes</source>
+        <target>crwdns300272:0crwdne300272:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.no">
+        <source>No</source>
+        <target>crwdns300274:0crwdne300274:0</target>
+      </trans-unit>
+      <trans-unit id="event.registration">
+        <source>Registration</source>
+        <target>crwdns300276:0crwdne300276:0</target>
+      </trans-unit>
+      <trans-unit id="registration.form.header">
+        <source>Registration form</source>
+        <target>crwdns300278:0crwdne300278:0</target>
+      </trans-unit>
+      <trans-unit id="registration.form.waitlist">
+        <source>Please note, that the event is fully booked and you are registering to the waitlist</source>
+        <target>crwdns300280:0crwdne300280:0</target>
+      </trans-unit>
+      <trans-unit id="registration.spamCheckFailed">
+        <source>Your form submission has been classified as spam.</source>
+        <target>crwdns300282:0crwdne300282:0</target>
+      </trans-unit>
+      <trans-unit id="event.backtext">
+        <source>Back to listview</source>
+        <target>crwdns300284:0crwdne300284:0</target>
+      </trans-unit>
+      <trans-unit id="event.backDetailsText">
+        <source>Back to event details</source>
+        <target>crwdns300286:0crwdne300286:0</target>
+      </trans-unit>
+      <trans-unit id="event.allEvents">
+        <source>All events</source>
+        <target>crwdns300288:0crwdne300288:0</target>
+      </trans-unit>
+      <trans-unit id="event.submit-registration">
+        <source>Send registration</source>
+        <target>crwdns300290:0crwdne300290:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventexpired">
+        <source>Registration is not possible anymore, because the event startdate is reached.</source>
+        <target>crwdns338152:0crwdne338152:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventended">
+        <source>Registration is not possible anymore, because the event has ended.</source>
+        <target>crwdns338154:0crwdne338154:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfaileddeadlineexpired">
+        <source>Registration is not possible anymore, because the registration deadline is reached.</source>
+        <target>crwdns338156:0crwdne338156:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenabled">
+        <source>Registration failed, because registration is disabled.</source>
+        <target>crwdns300296:0crwdne300296:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxparticipants">
+        <source>Registration is not possible anymore, because the max. participants reached.</source>
+        <target>crwdns338158:0crwdne338158:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenoughfreeplaces">
+        <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+        <target>crwdns300300:0crwdne300300:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded">
+        <source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+        <target>crwdns300302:0crwdne300302:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedemailnotunique">
+        <source>Registration failed, the email address is already registered to the event.</source>
+        <target>crwdns300304:0crwdne300304:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationnotpossible">
+        <source>Unable to show registration form - possible reasons: Event expired, deadline or max. participants reached.</source>
+        <target>crwdns300306:0crwdne300306:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessful">
+        <source>Your registration was successful.</source>
+        <target>crwdns300308:0crwdne300308:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessfulwrongeventhmac">
+        <source>Your registration was successful, but the given event or HMAC is wrong!</source>
+        <target>crwdns300310:0crwdne300310:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationwaitlistsuccessful">
+        <source>Your registration on the waitlist was successful.</source>
+        <target>crwdns300312:0crwdne300312:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_successful">
+        <source>Your registration has been successfully confirmed.</source>
+        <target>crwdns300314:0crwdne300314:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_waitlist_successful">
+        <source>Your registration on the waitlist has been successfully confirmed.</source>
+        <target>crwdns300316:0crwdne300316:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_wrong_hmac">
+        <source>Confirmation failed, wrong HMAC.</source>
+        <target>crwdns300318:0crwdne300318:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_not_found">
+        <source>Confirmation failed, registration not found.</source>
+        <target>crwdns300320:0crwdne300320:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_event_not_found">
+        <source>Confirmation failed, event for registration either not found or access protected.</source>
+        <target>crwdns300322:0crwdne300322:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_event_not_found">
+        <source>Cancellation failed, event not found.</source>
+        <target>crwdns300324:0crwdne300324:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_confirmation_until_expired">
+        <source>Confirmation failed, confirmation date has expired.</source>
+        <target>crwdns300326:0crwdne300326:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_already_confirmed">
+        <source>Confirmation failed, because the registration already has been confirmed.</source>
+        <target>crwdns300328:0crwdne300328:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_successful">
+        <source>Your registration has been successfully cancelled.</source>
+        <target>crwdns300330:0crwdne300330:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_wrong_hmac">
+        <source>Cancellation failed, wrong HMAC.</source>
+        <target>crwdns300332:0crwdne300332:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled">
+        <source>Cancellation failed, registration not found or already cancelled.</source>
+        <target>crwdns300334:0crwdne300334:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_cancel_disabled">
+        <source>Cancellation failed, cancel option for this event is not enabled.</source>
+        <target>crwdns342200:0crwdne342200:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_deadline_expired">
+        <source>Cancellation failed, cancellation date has expired.</source>
+        <target>crwdns300338:0crwdne300338:0</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_event_started">
+        <source>Cancellation failed, because the event startdate passed.</source>
+        <target>crwdns300340:0crwdne300340:0</target>
+      </trans-unit>
+      <trans-unit id="event.icalDownload">
+        <source>Download iCal file</source>
+        <target>crwdns300342:0crwdne300342:0</target>
+      </trans-unit>
+      <trans-unit id="event.freeofcharge">
+        <source>Free of charge</source>
+        <target>crwdns300344:0crwdne300344:0</target>
+      </trans-unit>
+      <trans-unit id="label.false">
+        <source>False</source>
+        <target>crwdns300346:0crwdne300346:0</target>
+      </trans-unit>
+      <trans-unit id="label.true">
+        <source>True</source>
+        <target>crwdns300348:0crwdne300348:0</target>
+      </trans-unit>
+      <trans-unit id="admin.no_events_available">
+        <source>No events available</source>
+        <target>crwdns300350:0crwdne300350:0</target>
+      </trans-unit>
+      <trans-unit id="admin.sorting">
+        <source>Sorting</source>
+        <target>crwdns300352:0crwdne300352:0</target>
+      </trans-unit>
+      <trans-unit id="search.title">
+        <source>Search</source>
+        <target>crwdns300354:0crwdne300354:0</target>
+      </trans-unit>
+      <trans-unit id="list.title">
+        <source>Events</source>
+        <target>crwdns300356:0crwdne300356:0</target>
+      </trans-unit>
+      <trans-unit id="detail.title">
+        <source>Event details</source>
+        <target>crwdns300358:0crwdne300358:0</target>
+      </trans-unit>
+      <trans-unit id="calendar.title">
+        <source>Event calendar</source>
+        <target>crwdns300360:0crwdne300360:0</target>
+      </trans-unit>
+      <trans-unit id="calendar.week">
+        <source>Week</source>
+        <target>crwdns300362:0crwdne300362:0</target>
+      </trans-unit>
+      <trans-unit id="detail.download">
+        <source>Download</source>
+        <target>crwdns300364:0crwdne300364:0</target>
+      </trans-unit>
+      <trans-unit id="registration.title">
+        <source>Registration for event</source>
+        <target>crwdns300366:0crwdne300366:0</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.successful">
+        <source>Registration confirmed</source>
+        <target>crwdns300368:0crwdne300368:0</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistrationWaitlist.title.successful">
+        <source>Registration on the waitlist confirmed</source>
+        <target>crwdns300370:0crwdne300370:0</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.failed">
+        <source>Registration confirmation failed</source>
+        <target>crwdns300372:0crwdne300372:0</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.successful">
+        <source>Registration cancelled</source>
+        <target>crwdns300374:0crwdne300374:0</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.failed">
+        <source>Cancellation failed</source>
+        <target>crwdns300376:0crwdne300376:0</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.successful">
+        <source>Registration successful</source>
+        <target>crwdns300378:0crwdne300378:0</target>
+      </trans-unit>
+      <trans-unit id="registrationWaitlistResult.title.successful">
+        <source>Registration on the waitlist successful</source>
+        <target>crwdns300380:0crwdne300380:0</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.failed">
+        <source>Registration failed</source>
+        <target>crwdns300382:0crwdne300382:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator">
+        <source>Organizer</source>
+        <target>crwdns378124:0crwdne378124:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name">
+        <source>Name</source>
+        <target>crwdns300386:0crwdne300386:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email">
+        <source>Email</source>
+        <target>crwdns300388:0crwdne300388:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone">
+        <source>Phone number</source>
+        <target>crwdns300390:0crwdne300390:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image">
+        <source>Image</source>
+        <target>crwdns300392:0crwdne300392:0</target>
+      </trans-unit>
+      <trans-unit id="validation.possible_robot">
+        <source>Captcha field empty or possible robot detected.</source>
+        <target>crwdns300394:0crwdne300394:0</target>
+      </trans-unit>
+      <trans-unit id="validation.missing_captcha">
+        <source>Captcha field is missing or invalid.</source>
+        <target>crwdns300396:0crwdne300396:0</target>
+      </trans-unit>
+      <trans-unit id="validation.required_field">
+        <source>This field is required.</source>
+        <target>crwdns342202:0crwdne342202:0</target>
+      </trans-unit>
+      <trans-unit id="validation.invalid_priceoption">
+        <source>Invalid price option selected.</source>
+        <target>crwdns342204:0crwdne342204:0</target>
+      </trans-unit>
+      <trans-unit id="error.no_secret">
+        <source>No secret set in TypoScript for captcha.</source>
+        <target>crwdns300398:0crwdne300398:0</target>
+      </trans-unit>
+      <trans-unit id="search.searchFor">
+        <source>Search</source>
+        <target>crwdns300400:0crwdne300400:0</target>
+      </trans-unit>
+      <trans-unit id="search.startdate">
+        <source>Start date</source>
+        <target>crwdns300402:0crwdne300402:0</target>
+      </trans-unit>
+      <trans-unit id="search.enddate">
+        <source>End date</source>
+        <target>crwdns300404:0crwdne300404:0</target>
+      </trans-unit>
+      <trans-unit id="search.submit">
+        <source>Search</source>
+        <target>crwdns300406:0crwdne300406:0</target>
+      </trans-unit>
+      <trans-unit id="search.searchResult">
+        <source>Searchresult</source>
+        <target>crwdns300408:0crwdne300408:0</target>
+      </trans-unit>
+      <trans-unit id="search.noResultsFound">
+        <source>Your search did not match any events</source>
+        <target>crwdns300410:0crwdne300410:0</target>
+      </trans-unit>
+      <trans-unit id="payment.title.invoice">
+        <source>Invoice</source>
+        <target>crwdns300412:0crwdne300412:0</target>
+      </trans-unit>
+      <trans-unit id="payment.title.transfer">
+        <source>Transfer</source>
+        <target>crwdns300414:0crwdne300414:0</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.invalidHmac">
+        <source>Error: The given HMAC could not be validated. Possible data manipulation.</source>
+        <target>crwdns300416:0crwdne300416:0</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentNotEnabled">
+        <source>Error: Unable to process payment for this registration, since payment not enabled for the event.</source>
+        <target>crwdns300418:0crwdne300418:0</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.actionNotEnabled">
+        <source>Error: The requested action is not enabled for the payment method.</source>
+        <target>crwdns300420:0crwdne300420:0</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentAlreadyProcessed">
+        <source>Error: The payment for this registration has already been processed.</source>
+        <target>crwdns300422:0crwdne300422:0</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentMethodNotAvailable">
+        <source>Error: The payment method is not configured for the event.</source>
+        <target>crwdns300424:0crwdne300424:0</target>
+      </trans-unit>
+      <trans-unit id="userRegistrations.title">
+        <source>My event registrations</source>
+        <target>crwdns300426:0crwdne300426:0</target>
+      </trans-unit>
+      <trans-unit id="userRegistration.title">
+        <source>My registration</source>
+        <target>crwdns300428:0crwdne300428:0</target>
+      </trans-unit>
+      <trans-unit id="userRegistration.cancel">
+        <source>Cancel registration</source>
+        <target>crwdns300430:0crwdne300430:0</target>
+      </trans-unit>
+      <trans-unit id="eventNotFound">
+        <source>The event record is not available anymore.</source>
+        <target>crwdns300432:0crwdne300432:0</target>
+      </trans-unit>
+      <trans-unit id="csvExportDisabled">
+        <source>CSV export disabled</source>
+        <target>crwdns300434:0crwdne300434:0</target>
+      </trans-unit>
+      <trans-unit id="insufficientAccessToTemp">
+        <source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
+        <target>crwdns300436:0crwdne300436:0</target>
+      </trans-unit>
+      <trans-unit id="startingAt">
+        <source>Starting at</source>
+        <target>crwdns342206:0crwdne342206:0</target>
+      </trans-unit>
+      <trans-unit id="pagination.first">
+        <source>First page</source>
+        <target>crwdns300438:0crwdne300438:0</target>
+      </trans-unit>
+      <trans-unit id="pagination.previous">
+        <source>Previous</source>
+        <target>crwdns300440:0crwdne300440:0</target>
+      </trans-unit>
+      <trans-unit id="pagination.next">
+        <source>Next</source>
+        <target>crwdns300442:0crwdne300442:0</target>
+      </trans-unit>
+      <trans-unit id="pagination.last">
+        <source>Last page</source>
+        <target>crwdns300444:0crwdne300444:0</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration">
+        <source>Confirm registration</source>
+        <target>crwdns338160:0crwdne338160:0</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration">
+        <source>Cancel registration</source>
+        <target>crwdns338162:0crwdne338162:0</target>
+      </trans-unit>
+      <trans-unit id="rateLimiter.exceeded">
+        <source>Too many requests from your IP address. Please try again later.</source>
+        <target>crwdns392456:0crwdne392456:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
