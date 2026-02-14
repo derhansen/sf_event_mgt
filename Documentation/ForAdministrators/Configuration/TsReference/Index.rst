@@ -256,7 +256,7 @@ settings.registration.rateLimit.enabled
 settings.registration.rateLimit.limit
 -------------------------------------
 
-.. confval:: settings.registration.rateLimit.enabled
+.. confval:: settings.registration.rateLimit.limit
 
    :Type: int
    :Default: 5
