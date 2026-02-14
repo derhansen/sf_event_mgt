@@ -87,6 +87,10 @@
         <source>Price</source>
         <target>crwdns300826:0crwdne300826:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.tax_rate">
+        <source>Included Tax Rate (%)</source>
+        <target>crwdns392450:0crwdne392450:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.price_options">
         <source>Price options</source>
         <target>crwdns300828:0crwdne300828:0</target>
@@ -307,6 +311,10 @@
         <source>Price (when registered)</source>
         <target>crwdns342210:0crwdne342210:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.tax_rate">
+        <source>Included Tax Rate (%)</source>
+        <target>crwdns392452:0crwdne392452:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption">
         <source>Price option</source>
         <target>crwdns342212:0crwdne342212:0</target>
@@ -502,6 +510,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price">
         <source>Price</source>
         <target>crwdns301024:0crwdne301024:0</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.tax_rate">
+        <source>Included Tax Rate (%)</source>
+        <target>crwdns392454:0crwdne392454:0</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until">
         <source>Date until the price is valid (includes selected date)</source>
