@@ -87,6 +87,10 @@
         <source>Price</source>
         <target state="final">Pris</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.tax_rate" approved="yes">
+        <source>Included Tax Rate (%)</source>
+        <target state="final">Inkluderet moms (%)</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.price_options" approved="yes">
         <source>Price options</source>
         <target state="final">Pris egenskaber</target>
@@ -307,6 +311,10 @@
         <source>Price (when registered)</source>
         <target state="final">Pris (når registreret)</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.tax_rate" approved="yes">
+        <source>Included Tax Rate (%)</source>
+        <target state="final">Inkluderet moms (%)</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
         <source>Price option</source>
         <target state="final">Prisegenskab</target>
@@ -502,6 +510,10 @@
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price" approved="yes">
         <source>Price</source>
         <target state="final">Pris</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.tax_rate" approved="yes">
+        <source>Included Tax Rate (%)</source>
+        <target state="final">Inkluderet moms (%)</target>
       </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until" approved="yes">
         <source>Date until the price is valid (includes selected date)</source>
