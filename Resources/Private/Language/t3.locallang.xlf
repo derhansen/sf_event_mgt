@@ -607,6 +607,10 @@
         <source>Cancel registration</source>
         <target>crwdns338162:0crwdne338162:0</target>
       </trans-unit>
+      <trans-unit id="rateLimiter.exceeded">
+        <source>Too many requests from your IP address. Please try again later.</source>
+        <target>crwdns392456:0crwdne392456:0</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
