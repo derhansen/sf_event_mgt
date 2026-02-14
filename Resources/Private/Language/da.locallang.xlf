@@ -607,6 +607,10 @@
         <source>Cancel registration</source>
         <target state="final">Annullér tilmelding</target>
       </trans-unit>
+      <trans-unit id="rateLimiter.exceeded" approved="yes">
+        <source>Too many requests from your IP address. Please try again later.</source>
+        <target state="final">For mange anmodninger fra din IP-adresse. Prøv igen senere.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
