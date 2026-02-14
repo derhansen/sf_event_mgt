@@ -37,6 +37,7 @@ use DERHANSEN\SfEventMgt\Exception;
 use DERHANSEN\SfEventMgt\Security\HashScope;
 use DERHANSEN\SfEventMgt\Service\EventCacheService;
 use DERHANSEN\SfEventMgt\Service\EventEvaluationService;
+use DERHANSEN\SfEventMgt\Service\RateLimiterService;
 use DERHANSEN\SfEventMgt\Utility\MessageType;
 use DERHANSEN\SfEventMgt\Utility\RegistrationResult;
 use DERHANSEN\SfEventMgt\Validation\Validator\RegistrationFieldValidator;
@@ -45,6 +46,7 @@ use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Cache\CacheTag;
 use TYPO3\CMS\Core\Http\PropagateResponseException;
 use TYPO3\CMS\Core\Site\Entity\SiteLanguage;
+use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
@@ -53,6 +55,7 @@ use TYPO3\CMS\Extbase\Annotation as Extbase;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Frontend\Controller\ErrorController;
 
 class EventController extends AbstractController
@@ -60,6 +63,7 @@ class EventController extends AbstractController
     protected EventCacheService $eventCacheService;
     protected ViewFactoryInterface $viewFactory;
     protected EventEvaluationService $eventEvaluationService;
+    protected RateLimiterService $rateLimiterService;
 
     public function injectEventCacheService(EventCacheService $cacheService): void
     {
@@ -76,6 +80,11 @@ class EventController extends AbstractController
         $this->eventEvaluationService = $eventEvaluationService;
     }
 
+    public function injectRateLimiterService(RateLimiterService $rateLimiterService): void
+    {
+        $this->rateLimiterService = $rateLimiterService;
+    }
+
     /**
      * Assign contentObjectData and pageData view
      */
@@ -83,6 +92,14 @@ class EventController extends AbstractController
     {
         $this->view->assign('contentObjectData', $this->request->getAttribute('currentContentObject')->data ?? null);
         $this->view->assign('pageData', $this->getFrontendPageInformation()->getPageRecord());
+    }
+
+    /**
+     * Suppress default validation error message
+     */
+    protected function getErrorFlashMessage(): bool
+    {
+        return false;
     }
 
     /**
@@ -330,6 +347,32 @@ class EventController extends AbstractController
     }
 
     /**
+     * Handles a rate limit error by returning a response with the given handling method
+     */
+    protected function handleRateLimit(array $settings): ResponseInterface
+    {
+        $allowedHandlings = ['httpResponse429', 'flashMessage'];
+        $handling = $settings['handling'] ?? 'httpResponse429';
+        if (!in_array($handling, $allowedHandlings, true)) {
+            throw new Exception('Invalid setting "' . $handling . '" in Rate Limiter configuration' , 1771006529);
+        }
+
+        $exceededMessage = LocalizationUtility::translate('rateLimiter.exceeded', 'sf_event_mgt');
+        switch ($handling) {
+            case 'httpResponse429':
+                $response = $this->responseFactory->createResponse()
+                    ->withStatus(429)
+                    ->withBody($this->streamFactory->createStream($exceededMessage));
+                break;
+            default:
+                $this->addFlashMessage($exceededMessage, '', ContextualFeedbackSeverity::ERROR);
+                $response = $this->errorAction();
+        }
+
+        return $response;
+    }
+
+    /**
      * Initiates the iCalendar download for the given event
      *
      * @return mixed
@@ -520,6 +563,14 @@ class EventController extends AbstractController
     ])]
     public function saveRegistrationAction(Registration $registration, Event $event): ResponseInterface
     {
+        if ($this->rateLimiterService->isRequestRateLimited(
+            $this->request,
+            __FUNCTION__,
+            $this->settings['registration']['rateLimit'] ?? []
+        )) {
+            return $this->handleRateLimit($this->settings['registration']['rateLimit']);
+        }
+
         $event = $this->eventEvaluationService->evaluateForSaveRegistrationAction(
             $this->request,
             $this->settings,

@@ -43,6 +43,16 @@ plugin.tx_sfeventmgt {
                     secretKey =
                 }
             }
+            rateLimit {
+                # cat=plugin.tx_sfeventmgt/registration; type=boolean; label=Enable Rate Limiter
+                enabled = 0
+                # cat=plugin.tx_sfeventmgt/registration; type=int; label=Rate Limiter limit
+                limit = 5
+                # cat=plugin.tx_sfeventmgt/registration; type=string; label=Rate Limiter Interval
+                interval = 15 Minutes
+                # cat=plugin.tx_sfeventmgt/registration; type=options[flashMessage,httpResponse429]; label=Rate Limiter handling in case of rate limit
+                handling = flashMessage
+            }
         }
         confirmation {
             # cat=plugin.tx_sfeventmgt/confirmation; type=string; label=Validity of confirmation link in seconds

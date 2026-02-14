@@ -33,11 +33,12 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Extendable with own fields through own extension
 * Configurable template layouts for the listview
 * Configurable category menu
-* Searchview for events
+* Search view for events
 * Create multiple registrations at once by a single user
-* Optionally check email address of registrations for uniqueness per event
-* Optional Spam-Protection with hCaptcha and reCAPTCHA
+* Optionally, check the email address of registrations for uniqueness per event
 * Configurable and extendable spam checks (included honeypot, amount of links, challenge/response)
+* Optional Spam-Protection with hCaptcha and reCAPTCHA
+* Optional and configurable Rate Limit for the registration form
 * Download of iCal file for events
 * Add event to online calendar (Google, Outlook, Office 365 and Yahoo)
 * Uses TYPO3 system categories to structure events by category
@@ -45,12 +46,12 @@ Event management and registration is an extension for TYPO3 CMS to manage events
 * Payment processing after successful registration
 * Configurable payment methods
 * Show events using the "Insert Record" Content Element
-* Flag event images for either listview, detailview or both
-* Calendar view with possibility to navigate to next/previous month and week
+* Flag event images for either listview, detail view or both
+* Calendar view with the possibility to navigate to the next / previous month and week
 * Console command to delete registrations of expired registrations
-* Automatic cache invalidation when event has been changed in backend
+* Automatic cache invalidation when an event has been changed in the backend
 * Automatic page cache lifetime calculation based on several event properties
-* Lots of PSR-14 Events to extend the extension with own functionality
+* A lot of PSR-14 Events to extend the extension with own functionality
 
 **Background**
 

@@ -118,6 +118,12 @@ plugin.tx_sfeventmgt {
                     privateKey = {$plugin.tx_sfeventmgt.settings.registration.captcha.hCaptcha.privateKey}
                 }
             }
+            rateLimit {
+                enabled = {$plugin.tx_sfeventmgt.settings.registration.rateLimit.enabled}
+                limit = {$plugin.tx_sfeventmgt.settings.registration.rateLimit.limit}
+                interval = {$plugin.tx_sfeventmgt.settings.registration.rateLimit.interval}
+                handling = {$plugin.tx_sfeventmgt.settings.registration.rateLimit.handling}
+            }
         }
         waitlist {
             moveUp {

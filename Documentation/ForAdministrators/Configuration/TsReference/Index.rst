@@ -242,13 +242,65 @@ settings.registration.prefillFields.{fieldname}
    * phone = telephone
 
 
+settings.registration.rateLimit.enabled
+---------------------------------------
+
+.. confval:: settings.registration.rateLimit.enabled
+
+   :Type: int
+   :Default: 0
+
+   If set to `1`, the registration form will have a reate limit enabled.
+
+
+settings.registration.rateLimit.limit
+-------------------------------------
+
+.. confval:: settings.registration.rateLimit.enabled
+
+   :Type: int
+   :Default: 5
+
+   Amount of successful registrations allowed in the configured timeframe, before new successful registration
+   attempts are rate limited.
+
+
+settings.registration.rateLimit.interval
+----------------------------------------
+
+.. confval:: settings.registration.rateLimit.interval
+
+   :Type: string
+   :Default: 15 minutes
+
+   Defines the interval for which the configured `limit` applies.
+
+
+settings.registration.rateLimit.handling
+----------------------------------------
+
+.. confval:: settings.registration.rateLimit.handling
+
+   :Type: string
+   :Default: flashMessage
+
+   Defines how to handle a possible rate limit. Valid values are:
+
+   * `flashMessage`: Add a flash message to the message queue and forwards back to previous action.
+   * `httpResponse429`: Returns a 429 HTTP response with a message.
+
+The message is defined in `rateLimiter.exceeded` localization key.
+
+Note: If you use the setting `flashMessage`, you must output `<f:flashMessages />` in your registration template.
+
+
 settings.waitlist.moveUp.keepMainRegistrationDependency
 -------------------------------------------------------
 
 .. confval:: settings.waitlist.moveUp.keepMainRegistrationDependency
 
    :Type: int
-   :Default: false
+   :Default: 0
 
    If set to `1`, a registration will keep the dependency to the main registration if the registration
    has been submitted using the simultaneous registration process. Note, that it is recommended to set this

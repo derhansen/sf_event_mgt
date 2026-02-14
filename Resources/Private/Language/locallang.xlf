@@ -458,6 +458,10 @@
 			<trans-unit id="cancelRegistration">
 				<source>Cancel registration</source>
 			</trans-unit>
+
+			<trans-unit id="rateLimiter.exceeded">
+				<source>Too many requests from your IP address. Please try again later.</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

@@ -307,6 +307,9 @@
                         <f:render partial="Registration/Captcha/{settings.registration.captcha.type -> f:format.case(mode: 'capital')}" arguments="{_all}" />
                     </f:if>
                     <br/>
+
+                    <f:flashMessages />
+
                     <f:form.submit value="{f:translate(key:'event.submit-registration')}" class="submit" id="registration-submit"/>
                 </fieldset>
             </f:form>
