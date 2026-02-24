@@ -11,6 +11,10 @@
         <source>Events and event-registration</source>
         <target state="final">Événements et inscriptions à des événements</target>
       </trans-unit>
+      <trans-unit id="plugin.pieventlist.description" approved="yes">
+        <source>Display of events chosen by various optional properties like storage page, categories,...</source>
+        <target state="final">Affichage des événements choisis par diverses propriétés optionnelles telles que la page de stockage, les catégories, ...</target>
+      </trans-unit>
       <trans-unit id="flexforms_tab.settings" approved="yes">
         <source>Settings</source>
         <target state="final">Paramètres</target>
@@ -158,6 +162,44 @@
       <trans-unit id="flexforms_general.categoryConjunction.or" approved="yes">
         <source>Show events with selected categories (OR)</source>
         <target state="final">Montrer les évènements avec les catégories sélectionnées (OU)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.and" approved="yes">
+        <source>Show events with selected categories (AND)</source>
+        <target state="final">Montrer les évènements avec les catégories sélectionnées (ET)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notor" approved="yes">
+        <source>Do NOT show events with selected categories (OR)</source>
+        <target state="final">Ne PAS montrer les éléments avec les catégories sélectionnées (OU)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.requiredFields" approved="yes">
+        <source>Comma seperated list of fieldnames, which are required. The fields first name, last name and email
+					are always required and cannot be overridden
+				</source>
+        <target state="final">Liste des noms de champs requis, séparés par des virgules. Les champs prénom, nom et email sont toujours requis et ne peuvent pas être remplacés</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.disableOverrideDemand" approved="yes">
+        <source>Disable overwrite demand</source>
+        <target state="final">Désactiver la surcharge des paramètres de la demande</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionDescription" approved="yes">
+        <source>The values is passed to PHPs strtotime() function, so you can use expressions like "first day of this month midnight" and "last day of this month 23:59:59" to get events of the current month</source>
+        <target state="final">Les valeurs sont passées à la fonction PHPs strtotime() , donc vous pouvez utiliser des expressions comme "first day of this month midnight" et "last day of this month 23:59:59" pour obtenir des événements du mois en cours</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.replyto_email" approved="yes">
+        <source>Reply-to email address of emails sent to the user</source>
+        <target state="final">Adresse de retour (Reply-to) des courriels envoyés aux utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.admin_email" approved="yes">
+        <source>Email address(es) of website admin(s), who receives new/confirmed registrations. Multiple email addresses must be separated with a comma.</source>
+        <target state="final">Adresses courriel du ou des admins du site web, qui reçoivent les nouvelles inscriptions et les confirmations d'inscription. Les adresses multiples doivent être séparées par une virgule.</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_user_subject" approved="yes">
+        <source>Subject of email sent to user when a new registration is created</source>
+        <target state="final">Sujet du courriel envoyé à l'utilisateur lors d'une nouvelle inscription</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_user_subject" approved="yes">
+        <source>Subject of email sent to user when a new registration on the waitlist is created</source>
+        <target state="final">Sujet du courriel envoyé à l'utilisateur lors d'une nouvelle inscription à liste d'attente</target>
       </trans-unit>
       <trans-unit id="administration.newEvent" approved="yes">
         <source>Create new event</source>
