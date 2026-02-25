@@ -8,9 +8,9 @@
 
 	<f:if condition="{event}">
 		<e:title pageTitle="{event.metaTitle}" />
-		<e:metaTag property="og:title" content="{event.metaTitle}" />
-		<e:metaTag name="keywords" content="{event.metaKeywords}" />
-		<e:metaTag name="description" content="{event.metaDescription}" />
+        <f:page.meta property="og:title">{event.metaTitle}</f:page.meta>
+        <f:page.meta property="keywords">{event.metaKeywords}</f:page.meta>
+        <f:page.meta property="description">{event.metaDescription}</f:page.meta>
 
 		<h1><f:translate key="detail.title" /></h1>
 
