@@ -349,7 +349,7 @@ class EventController extends AbstractController
     /**
      * Handles a rate limit error by returning a response with the given handling method
      */
-    protected function handleRateLimit(array $settings): ResponseInterface
+    protected function handleActionRateLimit(array $settings): ResponseInterface
     {
         $allowedHandlings = ['httpResponse429', 'flashMessage'];
         $handling = $settings['handling'] ?? 'httpResponse429';
@@ -568,7 +568,7 @@ class EventController extends AbstractController
             __FUNCTION__,
             $this->settings['registration']['rateLimit'] ?? []
         )) {
-            return $this->handleRateLimit($this->settings['registration']['rateLimit']);
+            return $this->handleActionRateLimit($this->settings['registration']['rateLimit']);
         }
 
         $event = $this->eventEvaluationService->evaluateForSaveRegistrationAction(
