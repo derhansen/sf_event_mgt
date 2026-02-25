@@ -493,7 +493,7 @@ class EventController extends AbstractController
             }
 
             // allow subvalues in new property mapper
-            $propertyMapping->forProperty('fieldValues')->allowProperties($index);
+            $propertyMapping->forProperty('fieldValues')->allowProperties((string)$index);
             $propertyMapping->forProperty('fieldValues.' . $index)->allowAllProperties();
             $propertyMapping->allowCreationForSubProperty('fieldValues.' . $index);
             $propertyMapping->allowModificationForSubProperty('fieldValues.' . $index);
