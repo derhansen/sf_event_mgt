@@ -50,10 +50,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
         return $result;
     }
 
-    /**
-     * @return mixed
-     */
-    public function render()
+    public function render(): mixed
     {
         if (static::evaluateCondition($this->arguments)) {
             return $this->renderThenChild();
