@@ -27,7 +27,7 @@ final class PiuserregContentPreview extends AbstractPluginPreview
         }
 
         $previewContent = $this->renderPreviewContent(
-            $event->getRecord(),
+            $event->getRecord()->getRawRecord()->toArray(),
             $event->getPageLayoutContext()->getCurrentRequest()
         );
         $event->setPreviewContent($previewContent);

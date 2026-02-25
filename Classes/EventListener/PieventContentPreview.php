@@ -36,7 +36,7 @@ final class PieventContentPreview extends AbstractPluginPreview
         }
 
         $previewContent = $this->renderPreviewContent(
-            $event->getRecord(),
+            $event->getRecord()->getRawRecord()->toArray(),
             $event->getPageLayoutContext()->getCurrentRequest()
         );
         $event->setPreviewContent($previewContent);
