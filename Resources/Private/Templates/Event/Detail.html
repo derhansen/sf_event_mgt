@@ -7,7 +7,7 @@
 <f:section name="main">
 
 	<f:if condition="{event}">
-		<e:title pageTitle="{event.metaTitle}" />
+        <f:page.title>{event.metaTitle}</f:page.title>
         <f:page.meta property="og:title">{event.metaTitle}</f:page.meta>
         <f:page.meta property="keywords">{event.metaKeywords}</f:page.meta>
         <f:page.meta property="description">{event.metaDescription}</f:page.meta>

@@ -6,7 +6,7 @@
 <f:section name="main">
     <f:if condition="{event.registrationPossible}">
         <f:then>
-            <e:title pageTitle="{event.title}" />
+            <f:page.title>{event.metaTitle}</f:page.title>
 
             <h1><f:translate key="registration.title" /></h1>
 
