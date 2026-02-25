@@ -31,7 +31,7 @@ class OnlineCalendarViewHelper extends AbstractViewHelper
     public function initializeArguments(): void
     {
         parent::initializeArguments();
-        $this->registerArgument('type', 'string', 'The type of online calender', true, 'google');
+        $this->registerArgument('type', 'string', 'The type of online calender', true);
         $this->registerArgument('event', 'DERHANSEN\SfEventMgt\Domain\Model\Event', 'The event');
     }
 
