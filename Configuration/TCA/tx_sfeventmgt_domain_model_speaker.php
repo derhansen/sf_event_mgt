@@ -24,7 +24,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'name,job_title,description',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-speaker',
         ],

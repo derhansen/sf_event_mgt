@@ -13,7 +13,6 @@ return [
         'enablecolumns' => [
             'disabled' => 'hidden',
         ],
-        'searchFields' => 'value',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-registration-field',
         ],

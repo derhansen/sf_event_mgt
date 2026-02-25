@@ -24,7 +24,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'name, email, phone, email_signature,link,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-organisator',
         ],

@@ -26,7 +26,6 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group',
         ],
-        'searchFields' => 'price,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-priceoption',
         ],

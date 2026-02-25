@@ -30,7 +30,6 @@ return [
             'endtime' => 'endtime',
             'fe_group' => 'fe_group',
         ],
-        'searchFields' => 'title,description,startdate,enddate,max_participants,price,tax_rate,currency,category,image,registration,location,enable_registration,enable_waitlist,speaker,meta_keywords,meta_description',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-event',
         ],

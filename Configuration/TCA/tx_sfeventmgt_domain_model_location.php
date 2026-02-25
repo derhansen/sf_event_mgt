@@ -24,7 +24,6 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'title,',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-location',
         ],

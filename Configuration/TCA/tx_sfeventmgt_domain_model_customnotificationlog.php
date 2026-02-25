@@ -6,7 +6,6 @@ return [
         'label' => 'details',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'searchFields' => 'title,',
         'hideTable' => true,
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-logfile',
