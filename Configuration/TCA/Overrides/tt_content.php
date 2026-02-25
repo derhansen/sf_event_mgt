@@ -46,31 +46,21 @@ $plugins = [
 foreach ($plugins as $pluginName => $pluginConfig) {
     $contentTypeName = 'sfeventmgt_' . strtolower($pluginName);
 
+    $flexForm = '';
+    if ($pluginConfig['flexForm'] ?? null) {
+        $flexForm = 'FILE:EXT:sf_event_mgt/Configuration/FlexForms/' . $pluginConfig['flexForm'];
+    }
+
     // Register plugin
     ExtensionUtility::registerPlugin(
         'SfEventMgt',
         $pluginName,
         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.' . strtolower($pluginName) . '.title',
         'ext-sfeventmgt-default',
-        'sf_event_mgt'
+        'sf_event_mgt',
+        'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.' . strtolower($pluginName) . '.description',
+        $flexForm
     );
-
-    // Register flexform if required
-    if ($pluginConfig['flexForm'] ?? null) {
-        ExtensionManagementUtility::addPiFlexFormValue(
-            '*',
-            'FILE:EXT:sf_event_mgt/Configuration/FlexForms/' . $pluginConfig['flexForm'],
-            $contentTypeName
-        );
-        $flexFormTab = '--div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.plugin,pi_flexform,';
-
-        ExtensionManagementUtility::addToAllTCAtypes(
-            'tt_content',
-            $flexFormTab,
-            $contentTypeName,
-            'after:subheader'
-        );
-    }
 }
 
 /**
