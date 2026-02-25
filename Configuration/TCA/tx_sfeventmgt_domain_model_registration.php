@@ -9,6 +9,7 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'sortby' => 'sorting',
+        'versioningWS' => true,
         'typeicon_column' => 'confirmed',
         'typeicon_classes' => [
             'default' => 'ext-sfeventmgt-registration-unconfirmed',
