@@ -21,13 +21,11 @@ use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
-use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class EventControllerTest extends UnitTestCase
 {
     protected EventController&MockObject $subject;
-    protected TypoScriptFrontendController&MockObject $tsfe;
 
     /**
      * Setup
@@ -47,14 +45,6 @@ class EventControllerTest extends UnitTestCase
             '',
             false
         );
-        $this->tsfe = $this->getAccessibleMock(
-            TypoScriptFrontendController::class,
-            [],
-            [],
-            '',
-            false
-        );
-        $GLOBALS['TSFE'] = $this->tsfe;
     }
 
     /**
