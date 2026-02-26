@@ -28,6 +28,8 @@ class RegistrationValidatorTest extends FunctionalTestCase
 {
     protected ServerRequestInterface $request;
 
+    protected array $testExtensionsToLoad = ['sf_event_mgt'];
+
     protected function setUp(): void
     {
         parent::setUp();
