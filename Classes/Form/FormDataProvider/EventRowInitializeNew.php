@@ -25,10 +25,8 @@ class EventRowInitializeNew implements FormDataProviderInterface
 
         if ($result['command'] === 'new') {
             $timestamp = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
-            $startDate = new \DateTimeImmutable();
-            $startDate->setTimestamp($timestamp);
-            $endDate = new \DateTimeImmutable();
-            $endDate->setTimestamp($timestamp + 3600);
+            $startDate = (new \DateTimeImmutable())->setTimestamp($timestamp);
+            $endDate = (new \DateTimeImmutable())->setTimestamp($timestamp + 3600);
             $result['databaseRow']['startdate'] = $startDate;
             $result['databaseRow']['enddate'] = $endDate;
         }
