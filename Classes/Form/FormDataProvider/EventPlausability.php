@@ -28,8 +28,8 @@ class EventPlausability implements FormDataProviderInterface
 
         $eventPlausabilityService = GeneralUtility::makeInstance(EventPlausabilityService::class);
         $eventPlausabilityService->verifyEventStartAndEnddate(
-            (int)$result['databaseRow']['startdate'],
-            (int)$result['databaseRow']['enddate']
+            $result['databaseRow']['startdate'],
+            $result['databaseRow']['enddate']
         );
         $eventPlausabilityService->verifyOrganisatorConfiguration($result['databaseRow']);
 

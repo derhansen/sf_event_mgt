@@ -28,7 +28,7 @@ class EventPlausabilityService
     /**
      * Enqueues an error flash message, if the event startdate is not before the enddate
      */
-    public function verifyEventStartAndEnddate(int $startDate, int $endDate): void
+    public function verifyEventStartAndEnddate(?\DateTimeImmutable $startDate = null, ?\DateTimeImmutable $endDate = null): void
     {
         if (!$this->isStartDateBeforeEndDate($startDate, $endDate) && !($startDate === $endDate)) {
             $this->addMessageToFlashMessageQueue(
@@ -69,9 +69,11 @@ class EventPlausabilityService
         }
     }
 
-    protected function isStartDateBeforeEndDate(int $startDate, int $endDate): bool
-    {
-        if ($startDate === 0 || $endDate === 0) {
+    protected function isStartDateBeforeEndDate(
+        ?\DateTimeImmutable $startDate = null,
+        ?\DateTimeImmutable $endDate = null
+    ): bool {
+        if ($startDate === null || $endDate === null) {
             return true;
         }
 
