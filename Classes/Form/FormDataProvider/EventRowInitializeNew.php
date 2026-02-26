@@ -12,6 +12,8 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Form\FormDataProvider;
 
 use TYPO3\CMS\Backend\Form\FormDataProviderInterface;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EventRowInitializeNew implements FormDataProviderInterface
 {
@@ -22,8 +24,13 @@ class EventRowInitializeNew implements FormDataProviderInterface
         }
 
         if ($result['command'] === 'new') {
-            $result['databaseRow']['startdate'] = $GLOBALS['EXEC_TIME'];
-            $result['databaseRow']['enddate'] = $GLOBALS['EXEC_TIME'] + 3600;
+            $timestamp = GeneralUtility::makeInstance(Context::class)->getPropertyFromAspect('date', 'timestamp');
+            $startDate = new \DateTimeImmutable();
+            $startDate->setTimestamp($timestamp);
+            $endDate = new \DateTimeImmutable();
+            $endDate->setTimestamp($timestamp + 3600);
+            $result['databaseRow']['startdate'] = $startDate;
+            $result['databaseRow']['enddate'] = $endDate;
         }
 
         return $result;
