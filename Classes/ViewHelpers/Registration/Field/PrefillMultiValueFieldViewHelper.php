@@ -29,7 +29,7 @@ class PrefillMultiValueFieldViewHelper extends AbstractPrefillViewHelper
     {
         parent::initializeArguments();
         $this->registerArgument('registrationField', 'object', 'RegistrationField', true);
-        $this->registerArgument('currentValue', 'strong', 'Current value', true);
+        $this->registerArgument('currentValue', 'string', 'Current value', true);
     }
 
     /**
