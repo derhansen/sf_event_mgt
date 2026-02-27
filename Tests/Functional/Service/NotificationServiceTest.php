@@ -296,7 +296,7 @@ class NotificationServiceTest extends FunctionalTestCase
                 'customNotifications' => [
                     'thanksForParticipation' => [
                         'title' => 'Thank you message,',
-                        'template' => 'ThanksForParticipation.html',
+                        'template' => 'ThanksForParticipation.fluid.html',
                         'subject' => 'Thank you for participation in event "{event.title}"',
                     ],
                 ],
@@ -332,7 +332,7 @@ class NotificationServiceTest extends FunctionalTestCase
                 'customNotifications' => [
                     'thanksForParticipation' => [
                         'title' => 'Thank you message,',
-                        'template' => 'ThanksForParticipation.html',
+                        'template' => 'ThanksForParticipation.fluid.html',
                         'subject' => 'Thank you for participation in event "{event.title}"',
                     ],
                 ],
