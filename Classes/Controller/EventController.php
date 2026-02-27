@@ -51,7 +51,7 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
 use TYPO3\CMS\Core\View\ViewFactoryInterface;
-use TYPO3\CMS\Extbase\Annotation as Extbase;
+use TYPO3\CMS\Extbase\Attribute\Validate;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 use TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter;
@@ -553,16 +553,12 @@ class EventController extends AbstractController
     /**
      * Saves the registration
      */
-    #[Extbase\Validate([
-        'validator' => RegistrationFieldValidator::class,
-        'param' => 'registration',
-    ])]
-    #[Extbase\Validate([
-        'validator' => RegistrationValidator::class,
-        'param' => 'registration',
-    ])]
-    public function saveRegistrationAction(Registration $registration, Event $event): ResponseInterface
-    {
+    public function saveRegistrationAction(
+        #[Validate(validator: RegistrationFieldValidator::class)]
+        #[Validate(validator: RegistrationValidator::class)]
+        Registration $registration,
+        Event $event
+    ): ResponseInterface {
         if ($this->rateLimiterService->isRequestRateLimited(
             $this->request,
             __FUNCTION__,

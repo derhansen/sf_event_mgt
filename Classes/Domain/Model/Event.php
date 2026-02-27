@@ -18,8 +18,8 @@ use DERHANSEN\SfEventMgt\Utility\MiscUtility;
 use DERHANSEN\SfEventMgt\Utility\ShowInPreviews;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Annotation\ORM\Cascade;
-use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Attribute\ORM\Cascade;
+use TYPO3\CMS\Extbase\Attribute\ORM\Lazy;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -81,7 +81,7 @@ class Event extends AbstractEntity
     /**
      * @var ObjectStorage<Registration>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     #[Lazy]
     protected ObjectStorage $registration;
 
@@ -118,7 +118,7 @@ class Event extends AbstractEntity
     /**
      * @var ObjectStorage<PriceOption>
      */
-    #[Cascade(['value' => 'remove'])]
+    #[Cascade(value: 'remove')]
     #[Lazy]
     protected ObjectStorage $priceOptions;
 
