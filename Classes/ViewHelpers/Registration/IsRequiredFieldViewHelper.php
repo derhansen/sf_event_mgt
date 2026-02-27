@@ -11,11 +11,9 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\ViewHelpers\Registration;
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractConditionViewHelper;
 
-/**
- * Class IsRequiredFieldViewHelper
- */
 class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
 {
     public function initializeArguments(): void
@@ -26,12 +24,7 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
         parent::initializeArguments();
     }
 
-    /**
-     * Evaluates the condition
-     *
-     * @param array|null $arguments
-     */
-    protected static function evaluateCondition($arguments = null): bool
+    public static function verdict(array $arguments, RenderingContextInterface $renderingContext): bool
     {
         $result = false;
         if (isset($arguments['fieldname'], $arguments['settings'])) {
@@ -48,14 +41,5 @@ class IsRequiredFieldViewHelper extends AbstractConditionViewHelper
         }
 
         return $result;
-    }
-
-    public function render(): mixed
-    {
-        if (static::evaluateCondition($this->arguments)) {
-            return $this->renderThenChild();
-        }
-
-        return $this->renderElseChild();
     }
 }
