@@ -1,5 +1,7 @@
 <?php
 
+defined('TYPO3') or die();
+
 use DERHANSEN\SfEventMgt\Controller\EventController;
 use DERHANSEN\SfEventMgt\Controller\PaymentController;
 use DERHANSEN\SfEventMgt\Controller\UserRegistrationController;
@@ -17,9 +19,6 @@ use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
-use TYPO3\CMS\Scheduler\Task\TableGarbageCollectionTask;
-
-defined('TYPO3') or die();
 
 ExtensionUtility::configurePlugin(
     'SfEventMgt',
