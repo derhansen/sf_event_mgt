@@ -17,6 +17,7 @@ use TYPO3\CMS\Backend\Form\FormDataProvider\DatabaseRowInitializeNew;
 use TYPO3\CMS\Backend\Form\FormDataProvider\InitializeProcessedTca;
 use TYPO3\CMS\Backend\Form\FormDataProvider\TcaInline;
 use TYPO3\CMS\Extbase\Utility\ExtensionUtility;
+use TYPO3\CMS\Scheduler\Task\TableGarbageCollectionTask;
 
 defined('TYPO3') or die();
 
@@ -160,14 +161,6 @@ $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRe
         DatabaseRowInitializeNew::class,
     ],
 ];
-
-// Register tables for garbage collection task
-foreach (['tx_sfeventmgt_domain_model_registration', 'tx_sfeventmgt_domain_model_registration_fieldvalue'] as $table) {
-    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['scheduler']['tasks'][TYPO3\CMS\Scheduler\Task\TableGarbageCollectionTask::class]['options']['tables'][$table] = [
-        'dateField' => 'tstamp',
-        'expirePeriod' => 30,
-    ];
-}
 
 // Define template path for FluidEmail template
 $GLOBALS['TYPO3_CONF_VARS']['MAIL']['templateRootPaths'][1727540189] =
