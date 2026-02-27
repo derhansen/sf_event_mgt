@@ -50,7 +50,7 @@ abstract class AbstractPluginPreview
      */
     protected function renderAsTable(ServerRequestInterface $request, array $data): string
     {
-        $template = GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Backend/PageLayoutView.html');
+        $template = GeneralUtility::getFileAbsFileName('EXT:sf_event_mgt/Resources/Private/Backend/PageLayoutView.fluid.html');
         $viewFactoryData = new ViewFactoryData(
             templatePathAndFilename: $template,
             request: $request,

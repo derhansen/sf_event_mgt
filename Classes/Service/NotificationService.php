@@ -145,7 +145,7 @@ class NotificationService
             $customNotification
         );
 
-        if ((bool)($settings['notification']['disabled'] ?? false) || !str_ends_with($template, '.html')) {
+        if ((bool)($settings['notification']['disabled'] ?? false) || !str_ends_with($template, '.fluid.html')) {
             return false;
         }
 
@@ -265,27 +265,27 @@ class NotificationService
 
         switch ($type) {
             case MessageType::REGISTRATION_NEW:
-                $template = 'Notification/User/RegistrationNew.html';
+                $template = 'Notification/User/RegistrationNew.fluid.html';
                 $subject = $settings['notification']['registrationNew']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_NEW:
-                $template = 'Notification/User/RegistrationWaitlistNew.html';
+                $template = 'Notification/User/RegistrationWaitlistNew.fluid.html';
                 $subject = $settings['notification']['registrationWaitlistNew']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CONFIRMED:
-                $template = 'Notification/User/RegistrationConfirmed.html';
+                $template = 'Notification/User/RegistrationConfirmed.fluid.html';
                 $subject = $settings['notification']['registrationConfirmed']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
-                $template = 'Notification/User/RegistrationWaitlistConfirmed.html';
+                $template = 'Notification/User/RegistrationWaitlistConfirmed.fluid.html';
                 $subject = $settings['notification']['registrationWaitlistConfirmed']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CANCELLED:
-                $template = 'Notification/User/RegistrationCancelled.html';
+                $template = 'Notification/User/RegistrationCancelled.fluid.html';
                 $subject = $settings['notification']['registrationCancelled']['userSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_MOVE_UP:
-                $template = 'Notification/User/RegistrationWaitlistMoveUp.html';
+                $template = 'Notification/User/RegistrationWaitlistMoveUp.fluid.html';
                 $subject = $settings['notification']['registrationWaitlistMoveUp']['userSubject'] ?? '';
                 break;
             case MessageType::CUSTOM_NOTIFICATION:
@@ -419,27 +419,27 @@ class NotificationService
      */
     protected function getAdminMessageTemplateSubject(array $settings, int $type): array
     {
-        $template = 'Notification/Admin/RegistrationNew.html';
+        $template = 'Notification/Admin/RegistrationNew.fluid.html';
         $subject = $settings['notification']['registrationNew']['adminSubject'] ?? '';
         switch ($type) {
             case MessageType::REGISTRATION_WAITLIST_NEW:
-                $template = 'Notification/Admin/RegistrationWaitlistNew.html';
+                $template = 'Notification/Admin/RegistrationWaitlistNew.fluid.html';
                 $subject = $settings['notification']['registrationWaitlistNew']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CONFIRMED:
-                $template = 'Notification/Admin/RegistrationConfirmed.html';
+                $template = 'Notification/Admin/RegistrationConfirmed.fluid.html';
                 $subject = $settings['notification']['registrationConfirmed']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_CONFIRMED:
-                $template = 'Notification/Admin/RegistrationWaitlistConfirmed.html';
+                $template = 'Notification/Admin/RegistrationWaitlistConfirmed.fluid.html';
                 $subject = $settings['notification']['registrationWaitlistConfirmed']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_CANCELLED:
-                $template = 'Notification/Admin/RegistrationCancelled.html';
+                $template = 'Notification/Admin/RegistrationCancelled.fluid.html';
                 $subject = $settings['notification']['registrationCancelled']['adminSubject'] ?? '';
                 break;
             case MessageType::REGISTRATION_WAITLIST_MOVE_UP:
-                $template = 'Notification/Admin/RegistrationWaitlistMoveUp.html';
+                $template = 'Notification/Admin/RegistrationWaitlistMoveUp.fluid.html';
                 $subject = $settings['notification']['registrationWaitlistMoveUp']['adminSubject'] ?? '';
                 break;
         }
