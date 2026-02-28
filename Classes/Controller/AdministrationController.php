@@ -27,6 +27,7 @@ use DERHANSEN\SfEventMgt\Utility\PageUtility;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\Components\ButtonBar;
+use TYPO3\CMS\Backend\Template\Components\ComponentFactory;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
@@ -52,6 +53,7 @@ class AdministrationController extends AbstractController
     protected MaintenanceService $maintenanceService;
     protected IconFactory $iconFactory;
     protected PageRenderer $pageRenderer;
+    protected ComponentFactory $componentFactory;
     protected int $pid = 0;
 
     public function injectCustomNotificationLogRepository(
@@ -93,6 +95,11 @@ class AdministrationController extends AbstractController
     public function injectPageRenderer(PageRenderer $pageRenderer): void
     {
         $this->pageRenderer = $pageRenderer;
+    }
+
+    public function injectComponentFactory(ComponentFactory $componentFactory): void
+    {
+        $this->componentFactory = $componentFactory;
     }
 
     /**
@@ -143,7 +150,7 @@ class AdministrationController extends AbstractController
 
                 $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
                 $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], IconSize::SMALL);
-                $viewButton = $buttonBar->makeLinkButton()
+                $viewButton = $this->componentFactory->createLinkButton()
                     ->setHref($tableConfiguration['link'])
                     ->setDataAttributes([
                         'toggle' => 'tooltip',
