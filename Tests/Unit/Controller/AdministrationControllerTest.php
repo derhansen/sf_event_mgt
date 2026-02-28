@@ -15,6 +15,7 @@ use DERHANSEN\SfEventMgt\Controller\AdministrationController;
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Extbase\Mvc\Controller\Arguments;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -55,6 +56,7 @@ class AdministrationControllerTest extends UnitTestCase
         ];
 
         $this->subject->_set('settings', $settings);
+        $this->subject->_set('arguments', $this->createMock(Arguments::class));
         $this->subject->initializeListAction();
 
         self::assertEquals('Y-m-d\TH:i:s\Z', $this->subject->_get('settings')['search']['dateFormat']);
