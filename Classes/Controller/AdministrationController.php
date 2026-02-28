@@ -31,12 +31,14 @@ use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
+use TYPO3\CMS\Core\Domain\DateTimeFormat;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Type\ContextualFeedbackSeverity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 class AdministrationController extends AbstractController
 {
@@ -230,6 +232,17 @@ class AdministrationController extends AbstractController
         if (!empty($this->settings)) {
             $this->settings['search']['dateFormat'] = 'Y-m-d\TH:i:s\Z';
         }
+        $constraintConfiguration = $this->arguments->getArgument('searchDemand')->getPropertyMappingConfiguration();
+        $constraintConfiguration->forProperty('startDate')->setTypeConverterOption(
+            DateTimeConverter::class,
+            DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+            DateTimeFormat::ISO8601_LOCALTIME
+        );
+        $constraintConfiguration->forProperty('endDate')->setTypeConverterOption(
+            DateTimeConverter::class,
+            DateTimeConverter::CONFIGURATION_DATE_FORMAT,
+            DateTimeFormat::ISO8601_LOCALTIME
+        );
     }
 
     /**
