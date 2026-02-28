@@ -11,11 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Tests\Acceptance;
 
-/**
- * Class EventsGermanCest
- */
 class EventsGermanCest extends AbstractEventsTests
 {
-    protected $basePath = '/de/';
-    protected $lang = '[DE]';
+    protected string $basePath = '/de/';
+    protected string $lang = '[DE]';
 }

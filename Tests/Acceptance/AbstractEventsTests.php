@@ -13,15 +13,12 @@ namespace DERHANSEN\SfEventMgt\Tests\Acceptance;
 
 use AcceptanceTester;
 
-/**
- * Class AbstractEventsTests
- */
 class AbstractEventsTests
 {
-    protected $basePath = '';
-    protected $lang = '';
+    protected string $basePath = '';
+    protected string $lang = '';
 
-    public function listsAllEvents(AcceptanceTester $I)
+    public function listsAllEvents(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->see('Category 1 ' . $this->lang);
@@ -31,7 +28,7 @@ class AbstractEventsTests
         $I->see('Expired Event (reg, cat1) ' . $this->lang);
     }
 
-    public function categoryMenuForAllCategories(AcceptanceTester $I)
+    public function categoryMenuForAllCategories(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->see('Category 1 ' . $this->lang);
@@ -41,7 +38,7 @@ class AbstractEventsTests
         $I->canSeeNumberOfElementsInDOM('.button.button-outline', 4);
     }
 
-    public function categoryMenuForLimitedCategories(AcceptanceTester $I)
+    public function categoryMenuForLimitedCategories(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-category-menu');
         $I->see('Category 1 ' . $this->lang);
@@ -49,28 +46,28 @@ class AbstractEventsTests
         $I->canSeeNumberOfElementsInDOM('.button.button-outline', 2);
     }
 
-    public function category1FilterDoesNotShowCategory2Events(AcceptanceTester $I)
+    public function category1FilterDoesNotShowCategory2Events(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Category 1 ' . $this->lang);
         $I->dontSee('cat2');
     }
 
-    public function registrationForExpiredEventNotPossible(AcceptanceTester $I)
+    public function registrationForExpiredEventNotPossible(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Expired Event (reg, cat1) ' . $this->lang);
         $I->dontSee('Registration', 'a');
     }
 
-    public function eventTitleShownAsTitleTag(AcceptanceTester $I)
+    public function eventTitleShownAsTitleTag(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Expired Event (reg, cat1) ' . $this->lang);
         $I->seeInTitle('Expired Event (reg, cat1) ' . $this->lang);
     }
 
-    public function validationWorksForSimpleEvent(AcceptanceTester $I)
+    public function validationWorksForSimpleEvent(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event (reg, cat1) ' . $this->lang);
@@ -93,7 +90,7 @@ class AbstractEventsTests
         $I->see('The given subject was not a valid email address.', '//*[@id="field-errors-registration.email"]/span');
     }
 
-    public function registrationWorksForSimpleEvent(AcceptanceTester $I)
+    public function registrationWorksForSimpleEvent(AcceptanceTester $I): void
     {
         $I->deleteAllEmails();
 
@@ -123,7 +120,7 @@ class AbstractEventsTests
         $I->seeInOpenedEmailRecipients('johndoe@sfeventmgt.local');
     }
 
-    public function validationWorksForEventWithRegFields(AcceptanceTester $I)
+    public function validationWorksForEventWithRegFields(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event (reg, regfields, cat1) ' . $this->lang);
@@ -139,7 +136,7 @@ class AbstractEventsTests
         $I->see('This field is required.', '//*[@id="field-errors-registration.fields.2"]/span');
     }
 
-    public function registrationWorksForEventWithRegFields(AcceptanceTester $I)
+    public function registrationWorksForEventWithRegFields(AcceptanceTester $I): void
     {
         $I->deleteAllEmails();
 
@@ -172,14 +169,14 @@ class AbstractEventsTests
         $I->seeInOpenedEmailRecipients('johndoe@sfeventmgt.local');
     }
 
-    public function registrationForFullyBookedEventNotPossible(AcceptanceTester $I)
+    public function registrationForFullyBookedEventNotPossible(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event fully booked (reg, cat1) ' . $this->lang);
         $I->dontSee('Registration', 'a');
     }
 
-    public function registrationWorksForWaitlistEvent(AcceptanceTester $I)
+    public function registrationWorksForWaitlistEvent(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'event-list-all');
         $I->click('Event fully booked waitlist (reg, cat1) ' . $this->lang);
@@ -208,7 +205,7 @@ class AbstractEventsTests
         $I->seeInOpenedEmailRecipients('johndoe@sfeventmgt.local');
     }
 
-    public function registrationWorksForSimpleEventWithAutoConfirmation(AcceptanceTester $I)
+    public function registrationWorksForSimpleEventWithAutoConfirmation(AcceptanceTester $I): void
     {
         $I->deleteAllEmails();
 
@@ -238,7 +235,7 @@ class AbstractEventsTests
         $I->seeInOpenedEmailRecipients('johndoe@sfeventmgt.local');
     }
 
-    public function registrationIncreasesRegistrationCount(AcceptanceTester $I)
+    public function registrationIncreasesRegistrationCount(AcceptanceTester $I): void
     {
         $I->deleteAllEmails();
 
@@ -264,7 +261,7 @@ class AbstractEventsTests
         $I->see('1', '//*[@id="c2"]/div/div[12]/div[2]');
     }
 
-    public function eventTitleTranslatedInUserRegistration(AcceptanceTester $I)
+    public function eventTitleTranslatedInUserRegistration(AcceptanceTester $I): void
     {
         $I->amOnPage($this->basePath . 'login');
         $I->fillField(['name' => 'user'], 'user1');
@@ -278,7 +275,7 @@ class AbstractEventsTests
         $I->see('Event Location 1 ' . $this->lang);
     }
 
-    public function registrationWorksForEventWithMultiReg(AcceptanceTester $I)
+    public function registrationWorksForEventWithMultiReg(AcceptanceTester $I): void
     {
         $I->deleteAllEmails();
         $I->deleteAllEventRegistrations();
@@ -312,7 +309,7 @@ class AbstractEventsTests
         $I->see('3', '//*[@id="c2"]/div/div[12]/div[2]');
     }
 
-    public function honeypotSpamcheckActiveByDefaultAndWorking(AcceptanceTester $I)
+    public function honeypotSpamcheckActiveByDefaultAndWorking(AcceptanceTester $I): void
     {
         $I->deleteAllEmails();
 
@@ -332,7 +329,7 @@ class AbstractEventsTests
         $I->see('Your form submission has been classified as spam.');
     }
 
-    public function expectedEventUidIsSavedToRegistrationIndependentFromWebsiteLanguage(AcceptanceTester $I)
+    public function expectedEventUidIsSavedToRegistrationIndependentFromWebsiteLanguage(AcceptanceTester $I): void
     {
         $I->deleteAllEventRegistrations();
 
