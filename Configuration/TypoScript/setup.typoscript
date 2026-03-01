@@ -138,7 +138,7 @@ plugin.tx_sfeventmgt {
             additionalVerificationStep = {$plugin.tx_sfeventmgt.settings.cancellation.additionalVerificationStep}
         }
         event {
-            errorHandling = showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.html,404
+            errorHandling = showStandaloneTemplate,EXT:sf_event_mgt/Resources/Private/Templates/Event/EventNotFound.fluid.html,404
         }
         notification {
             senderEmail = {$plugin.tx_sfeventmgt.settings.notification.senderEmail ?? $sf_event_mgt.notification.senderEmail}
@@ -215,7 +215,7 @@ module.tx_sfeventmgt {
             customNotifications {
                 thanksForParticipation {
                     title = Thank you message
-                    template = ThanksForParticipation.html
+                    template = ThanksForParticipation.fluid.html
                     subject = Thank you for participation in event "{event.title}"
                 }
             }
