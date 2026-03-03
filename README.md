@@ -111,7 +111,7 @@ Please refer to the [contributing](CONTRIBUTING.md) document included in this re
 
 ## Reporting a Vulnerability
 
-Please report vulnerabilities to [security@typo3.org](mailto:security@typo3.org).
+Please report vulnerabilities to [security@typo3.org](mailto:security@typo3.org) only.
 
 ## Screenshot
 
