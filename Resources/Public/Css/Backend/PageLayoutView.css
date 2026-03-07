@@ -14,3 +14,11 @@
 .sfeventmgt-table > tfoot > tr > th {
     vertical-align: top;
 }
+
+.sfeventmgt-table > :not(caption) > * > * {
+    background-color: transparent;
+}
+
+.sfeventmgt-table td .btn {
+    padding-right: 4px;
+}
