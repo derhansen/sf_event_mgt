@@ -3,7 +3,7 @@
 return [
     'ext-sfeventmgt-default' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/events.svg',
+        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/default.svg',
     ],
     'ext-sfeventmgt-plugin' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
@@ -11,7 +11,7 @@ return [
     ],
     'ext-sfeventmgt-module' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/sf-event-mgt-module.svg',
+        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/module.svg',
     ],
     'apps-pagetree-folder-contains-events' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
