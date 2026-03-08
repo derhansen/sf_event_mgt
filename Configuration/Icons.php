@@ -5,6 +5,10 @@ return [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/events.svg',
     ],
+    'ext-sfeventmgt-plugin' => [
+        'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+        'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/plugin.svg',
+    ],
     'ext-sfeventmgt-module' => [
         'provider' => \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
         'source' => 'EXT:sf_event_mgt/Resources/Public/Icons/sf-event-mgt-module.svg',

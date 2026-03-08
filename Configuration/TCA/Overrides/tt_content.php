@@ -56,7 +56,7 @@ foreach ($plugins as $pluginName => $pluginConfig) {
         'SfEventMgt',
         $pluginName,
         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.' . strtolower($pluginName) . '.title',
-        'ext-sfeventmgt-default',
+        'ext-sfeventmgt-plugin',
         'sf_event_mgt',
         'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:plugin.' . strtolower($pluginName) . '.description',
         $flexForm
