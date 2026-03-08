@@ -226,6 +226,22 @@ class EventTest extends UnitTestCase
     }
 
     #[Test]
+    public function getCurrencyIsoReturnsInitialValueForString(): void
+    {
+        self::assertSame(
+            '',
+            $this->subject->getCurrencyIso()
+        );
+    }
+
+    #[Test]
+    public function setCurrencyIsoForStringSetsCurrency(): void
+    {
+        $this->subject->setCurrencyIso('EUR');
+        self::assertEquals('EUR', $this->subject->getCurrencyIso());
+    }
+
+    #[Test]
     public function getCategoryReturnsInitialValueForCategory(): void
     {
         $newObjectStorage = new ObjectStorage();

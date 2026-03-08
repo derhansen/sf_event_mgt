@@ -109,6 +109,16 @@ program/schedule.
          The currency for the price.
 
  - :Field:
+         Currency (ISO 4217)
+
+   :Description:
+         The currency for the price in ISO 4217 format. It is recommended
+         to use this field when working with payments for events.
+
+         You can use the :php:`<f:format.CurrencySymbol>` ViewHelper to
+         output the symbol for the currency.
+
+ - :Field:
          Price options
 
    :Description:

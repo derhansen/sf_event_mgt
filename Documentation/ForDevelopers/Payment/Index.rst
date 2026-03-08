@@ -170,3 +170,16 @@ the :php:`ProcessPaymentInitializeEvent` PSR-14 event.
 
 Make sure that your rendered Fluid standlone views do not contain sensitive data or possibilities
 for Cross Site Scripting (XSS) (:php:`values['html']` is rendered with :php:`f:format.raw`).
+
+
+Working with currencies
+-----------------------
+
+Since version 9.0 the extension allows to define the ISO 4217 currency code
+for the event price. The ISO 4217 currency code is saved to the event record
+and can be used when working with payment providers.
+
+The extension provides the following helpers for currencies:
+
+* :php:`\DERHANSEN\SfEventMgt\Utility\CurrencyUtility` class for currency data
+* :php:`<f:format.currencySymbol>` ViewHelper to get the currency symbol for a currency

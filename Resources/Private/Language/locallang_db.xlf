@@ -78,6 +78,9 @@
 			<trans-unit id="tx_sfeventmgt_domain_model_event.currency">
 				<source>Currency</source>
 			</trans-unit>
+			<trans-unit id="tx_sfeventmgt_domain_model_event.currency_iso">
+				<source>Currency (ISO 4217)</source>
+			</trans-unit>
 			<trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment">
 				<source>Enable payment</source>
 			</trans-unit>

@@ -15,6 +15,7 @@ CREATE TABLE tx_sfeventmgt_domain_model_event (
 	price numeric(10,2) DEFAULT '0.00' NOT NULL,
 	tax_rate numeric(10,2) DEFAULT '0.00' NOT NULL,
 	currency varchar(255) DEFAULT '' NOT NULL,
+	currency_iso varchar(3) DEFAULT '' NOT NULL,
 	enable_payment tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	restrict_payment_methods tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	selected_payment_methods text,

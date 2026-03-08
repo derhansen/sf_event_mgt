@@ -42,6 +42,7 @@ class Event extends AbstractEntity
     protected float $price = 0.0;
     protected float $taxRate = 0.0;
     protected string $currency = '';
+    protected string $currencyIso = '';
     protected bool $enablePayment = false;
     protected bool $restrictPaymentMethods = false;
     protected string $selectedPaymentMethods = '';
@@ -298,6 +299,16 @@ class Event extends AbstractEntity
     public function setCurrency(string $currency): void
     {
         $this->currency = $currency;
+    }
+
+    public function getCurrencyIso(): string
+    {
+        return $this->currencyIso;
+    }
+
+    public function setCurrencyIso(string $currencyIso): void
+    {
+        $this->currencyIso = $currencyIso;
     }
 
     public function getEnablePayment(): bool

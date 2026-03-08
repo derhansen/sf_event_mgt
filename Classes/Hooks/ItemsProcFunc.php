@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Hooks;
 
 use DERHANSEN\SfEventMgt\Service\PaymentService;
+use DERHANSEN\SfEventMgt\Utility\CurrencyUtility;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -35,6 +36,16 @@ class ItemsProcFunc
         $paymentMethods = $this->paymentService->getPaymentMethods();
         foreach ($paymentMethods as $value => $label) {
             $config['items'][] = [$label, $value];
+        }
+    }
+
+    /**
+     * Itemsproc function for currency_iso select field
+     */
+    public function getCurrencies(array &$config): void
+    {
+        foreach (CurrencyUtility::getAllIsoCodes() as $currency) {
+            $config['items'][] = [$currency, $currency];
         }
     }
 

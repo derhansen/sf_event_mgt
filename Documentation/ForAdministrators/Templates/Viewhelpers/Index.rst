@@ -138,6 +138,11 @@ Format.ICalendarDescriptionViewHelper
 
 Formats the given string according to rfc5545, so it can be used in the iCalendar view
 
+Format.Currency
+~~~~~~~~~~~~~~~
+
+Formats the given ISO 4217 Currency by returning an array
+
 Registration.Hmac
 ~~~~~~~~~~~~~~~~~
 
@@ -166,15 +171,6 @@ See usage in Registration template and registration field partials.
 
   <e:validation.errorClass fieldname="email" class="my-custom-class" />
 
-Title
-~~~~~
-
-Use this viewhelper to set the page title and indexed search title on event-detail and -registration pages.
-
-**Example**::
-
-  <e:title pageTitle="{event.title}" indexedDocTitle="A custom title for indexed search"/>
-
 Category.Count
 ~~~~~~~~~~~~~~
 
@@ -183,14 +179,3 @@ Can be used to get the amount of events per category.
 **Example**::
 
   <e:category.count categoryUid="{category.uid}" />
-
-MetaTag
-~~~~~~~
-
-Use this viewhelper to add various meta tags related to the event. The default template for the event
-detail view uses this viewhelper to output the meta tags "keyword", "description" and "og:title".
-
-**Example**::
-
-  <e:metaTag name="keywords" content="{event.metaKeywords}" />
-
