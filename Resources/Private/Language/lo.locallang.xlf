@@ -3,161 +3,614 @@
   <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="lo">
     <header/>
     <body>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-
-			
-			
-			
-			
-
-			
-			
-
-			
-		</body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event" approved="yes">
+        <source>Event</source>
+        <target state="final">ກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title" approved="yes">
+        <source>Title</source>
+        <target state="final">ຫົວຂໍ້</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser" approved="yes">
+        <source>Teaser</source>
+        <target state="final">ບົດສະຫຼຸບຫຍໍ້</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">ລາຍລະອຽດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
+        <source>Program/Schedule</source>
+        <target state="final">ແຜນງານ/ກຳນົດການ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link" approved="yes">
+        <source>Link</source>
+        <target state="final">ລິງກ໌</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
+        <source>Top event</source>
+        <target state="final">ກິດຈະກຳເດັ່ນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">ວັນທີເລີ່ມຕົ້ນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">ວັນທີສິ້ນສຸດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants" approved="yes">
+        <source>Max. participants</source>
+        <target state="final">ຈຳນວນຜູ້ເຂົ້າຮ່ວມສູງສຸດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration" approved="yes">
+        <source>Registration enabled</source>
+        <target state="final">ເປີດໃຊ້ການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate" approved="yes">
+        <source>Registration until the end date and time possible</source>
+        <target state="final">ສາມາດລົງທະບຽນໄດ້ຈົນເຖິງວັນທີ ແລະ ເວລາສິ້ນສຸດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">ການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.freePlaces" approved="yes">
+        <source>Free places</source>
+        <target state="final">ບ່ອນວ່າງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.hasWaitlist" approved="yes">
+        <source>There is a waitlist</source>
+        <target state="final">ມີລາຍຊື່ລໍຖ້າ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price" approved="yes">
+        <source>Price</source>
+        <target state="final">ລາຄາ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.priceOptions" approved="yes">
+        <source>Price options</source>
+        <target state="final">ຕົວເລືອກລາຄາ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
+        <source>Currency</source>
+        <target state="final">ສະກຸນເງິນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category" approved="yes">
+        <source>Category</source>
+        <target state="final">ໝວດໝູ່</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related" approved="yes">
+        <source>Related events</source>
+        <target state="final">ກິດຈະກຳທີ່ກ່ຽວຂ້ອງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.speaker" approved="yes">
+        <source>Speaker</source>
+        <target state="final">ວິທະຍາກອນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location" approved="yes">
+        <source>Location</source>
+        <target state="final">ສະຖານທີ່</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.title" approved="yes">
+        <source>Title</source>
+        <target state="final">ຫົວຂໍ້</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.address" approved="yes">
+        <source>Address</source>
+        <target state="final">ທີ່ຢູ່</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">ລະຫັດໄປສະນີ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.city" approved="yes">
+        <source>City</source>
+        <target state="final">ເມືອງ/ແຂວງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.country" approved="yes">
+        <source>Country</source>
+        <target state="final">ປະເທດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.room" approved="yes">
+        <source>Room</source>
+        <target state="final">ຫ້ອງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">ລາຍລະອຽດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">ຮູບພາບ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
+        <source>Files</source>
+        <target state="final">ໄຟລ໌</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image" approved="yes">
+        <source>Additional Images</source>
+        <target state="final">ຮູບພາບເພີ່ມເຕີມ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.booking" approved="yes">
+        <source>Booking</source>
+        <target state="final">ການຈອງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">ການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.firstname" approved="yes">
+        <source>First name</source>
+        <target state="final">ຊື່</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.lastname" approved="yes">
+        <source>Last name</source>
+        <target state="final">ນາມສະກຸນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title" approved="yes">
+        <source>Title</source>
+        <target state="final">ຫົວຂໍ້</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company" approved="yes">
+        <source>Company</source>
+        <target state="final">ບໍລິສັດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address" approved="yes">
+        <source>Address</source>
+        <target state="final">ທີ່ຢູ່</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">ລະຫັດໄປສະນີ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city" approved="yes">
+        <source>City</source>
+        <target state="final">ເມືອງ/ແຂວງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country" approved="yes">
+        <source>Country</source>
+        <target state="final">ປະເທດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">ເບີໂທລະສັບ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
+        <source>Email</source>
+        <target state="final">ອີເມລ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">ເພດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset" approved="yes">
+        <source>Not set</source>
+        <target state="final">ບໍ່ໄດ້ກຳນົດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female" approved="yes">
+        <source>Female</source>
+        <target state="final">ຍິງ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male" approved="yes">
+        <source>Male</source>
+        <target state="final">ຊາຍ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various" approved="yes">
+        <source>Various</source>
+        <target state="final">ອື່ນໆ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth" approved="yes">
+        <source>Date of birth</source>
+        <target state="final">ວັນເດືອນປີເກີດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod" approved="yes">
+        <source>Payment method</source>
+        <target state="final">ວິທີການຊຳລະເງິນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc" approved="yes">
+        <source>Accept terms and conditions</source>
+        <target state="final">ຍອມຮັບຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed" approved="yes">
+        <source>Confirmed</source>
+        <target state="final">ຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">ຊຳລະແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
+        <source>Price option</source>
+        <target state="final">ຕົວເລືອກລາຄາ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
+        <source>Notes</source>
+        <target state="final">ໝາຍເຫດ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" approved="yes">
+        <source>Amount of registrations</source>
+        <target state="final">ຈຳນວນການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">ຊຳລະແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.yes" approved="yes">
+        <source>Yes</source>
+        <target state="final">ແມ່ນ/ເຈົ້າ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment.paid.no" approved="yes">
+        <source>No</source>
+        <target state="final">ບໍ່</target>
+      </trans-unit>
+      <trans-unit id="event.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">ການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="registration.form.header" approved="yes">
+        <source>Registration form</source>
+        <target state="final">ແບບຟອມລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="registration.form.waitlist" approved="yes">
+        <source>Please note, that the event is fully booked and you are registering to the waitlist</source>
+        <target state="final">ກະລຸນາຮັບຊາບວ່າ ກິດຈະກຳນີ້ມີຜູ້ຈອງເຕັມແລ້ວ ແລະ ທ່ານກຳລັງລົງທະບຽນໃນລາຍຊື່ລໍຖ້າ</target>
+      </trans-unit>
+      <trans-unit id="registration.spamCheckFailed" approved="yes">
+        <source>Your form submission has been classified as spam.</source>
+        <target state="final">ການສົ່ງແບບຟອມຂອງທ່ານຖືກຈັດປະເພດເປັນສະແປມ.</target>
+      </trans-unit>
+      <trans-unit id="event.backtext" approved="yes">
+        <source>Back to listview</source>
+        <target state="final">ກັບໄປທີ່ລາຍການ</target>
+      </trans-unit>
+      <trans-unit id="event.backDetailsText" approved="yes">
+        <source>Back to event details</source>
+        <target state="final">ກັບໄປທີ່ລາຍລະອຽດກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="event.allEvents" approved="yes">
+        <source>All events</source>
+        <target state="final">ກິດຈະກຳທັງໝົດ</target>
+      </trans-unit>
+      <trans-unit id="event.submit-registration" approved="yes">
+        <source>Send registration</source>
+        <target state="final">ສົ່ງການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventexpired" approved="yes">
+        <source>Registration is not possible anymore, because the event startdate is reached.</source>
+        <target state="final">ບໍ່ສາມາດລົງທະບຽນໄດ້ອີກແລ້ວ ເນື່ອງຈາກຮອດວັນທີເລີ່ມຕົ້ນຂອງກິດຈະກຳແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedeventended" approved="yes">
+        <source>Registration is not possible anymore, because the event has ended.</source>
+        <target state="final">ບໍ່ສາມາດລົງທະບຽນໄດ້ອີກແລ້ວ ເນື່ອງຈາກກິດຈະກຳໄດ້ສິ້ນສຸດລົງແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfaileddeadlineexpired" approved="yes">
+        <source>Registration is not possible anymore, because the registration deadline is reached.</source>
+        <target state="final">ບໍ່ສາມາດລົງທະບຽນໄດ້ອີກແລ້ວ ເນື່ອງຈາກກາຍກຳນົດເວລາລົງທະບຽນແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
+        <source>Registration failed, because registration is disabled.</source>
+        <target state="final">ການລົງທະບຽນລົ້ມເຫຼວ ເນື່ອງຈາກການລົງທະບຽນຖືກປິດໄວ້.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxparticipants" approved="yes">
+        <source>Registration is not possible anymore, because the max. participants reached.</source>
+        <target state="final">ບໍ່ສາມາດລົງທະບຽນໄດ້ອີກແລ້ວ ເນື່ອງຈາກຈຳນວນຜູ້ເຂົ້າຮ່ວມເຕັມແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
+        <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+        <target state="final">ການລົງທະບຽນລົ້ມເຫຼວ ເນື່ອງຈາກຈຳນວນການລົງທະບຽນກາຍຈຳນວນບ່ອນວ່າງທີ່ຍັງເຫຼືອ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded" approved="yes">
+        <source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+        <target state="final">ການລົງທະບຽນລົ້ມເຫຼວ ເນື່ອງຈາກຈຳນວນການລົງທະບຽນກາຍຈຳນວນສູງສຸດທີ່ອະນຸຍາດ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedemailnotunique" approved="yes">
+        <source>Registration failed, the email address is already registered to the event.</source>
+        <target state="final">ການລົງທະບຽນລົ້ມເຫຼວ ເນື່ອງຈາກອີເມລນີ້ໄດ້ລົງທະບຽນໃນກິດຈະກຳນີ້ແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationnotpossible" approved="yes">
+        <source>Unable to show registration form - possible reasons: Event expired, deadline or max. participants reached.</source>
+        <target state="final">ບໍ່ສາມາດສະແດງແບບຟອມລົງທະບຽນໄດ້ - ສາເຫດທີ່ອາດເປັນໄປໄດ້: ກິດຈະກຳໝົດເວລາ, ກາຍກຳນົດ ຫຼື ຜູ້ເຂົ້າຮ່ວມເຕັມແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessful" approved="yes">
+        <source>Your registration was successful.</source>
+        <target state="final">ທ່ານລົງທະບຽນສຳເລັດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessfulwrongeventhmac" approved="yes">
+        <source>Your registration was successful, but the given event or HMAC is wrong!</source>
+        <target state="final">ທ່ານລົງທະບຽນສຳເລັດແລ້ວ ແຕ່ຂໍ້ມູນກິດຈະກຳ ຫຼື HMAC ບໍ່ຖືກຕ້ອງ!</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationwaitlistsuccessful" approved="yes">
+        <source>Your registration on the waitlist was successful.</source>
+        <target state="final">ທ່ານລົງທະບຽນໃນລາຍຊື່ລໍຖ້າສຳເລັດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_successful" approved="yes">
+        <source>Your registration has been successfully confirmed.</source>
+        <target state="final">ການລົງທະບຽນຂອງທ່ານໄດ້ຮັບການຢືນຢັນສຳເລັດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_waitlist_successful" approved="yes">
+        <source>Your registration on the waitlist has been successfully confirmed.</source>
+        <target state="final">ການລົງທະບຽນໃນລາຍຊື່ລໍຖ້າຂອງທ່ານໄດ້ຮັບການຢືນຢັນສຳເລັດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_wrong_hmac" approved="yes">
+        <source>Confirmation failed, wrong HMAC.</source>
+        <target state="final">ການຢືນຢັນລົ້ມເຫຼວ, HMAC ບໍ່ຖືກຕ້ອງ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_not_found" approved="yes">
+        <source>Confirmation failed, registration not found.</source>
+        <target state="final">ການຢືນຢັນລົ້ມເຫຼວ, ບໍ່ພົບຂໍ້ມູນການລົງທະບຽນ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_event_not_found" approved="yes">
+        <source>Confirmation failed, event for registration either not found or access protected.</source>
+        <target state="final">ການຢືນຢັນລົ້ມເຫຼວ, ບໍ່ພົບກິດຈະກຳ ຫຼື ບໍ່ມີສິດເຂົ້າເຖິງ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_event_not_found" approved="yes">
+        <source>Cancellation failed, event not found.</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ, ບໍ່ພົບກິດຈະກຳ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_confirmation_until_expired" approved="yes">
+        <source>Confirmation failed, confirmation date has expired.</source>
+        <target state="final">ການຢືນຢັນລົ້ມເຫຼວ, ວັນທີຢືນຢັນໝົດອາຍຸແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_already_confirmed" approved="yes">
+        <source>Confirmation failed, because the registration already has been confirmed.</source>
+        <target state="final">ການຢືນຢັນລົ້ມເຫຼວ ເນື່ອງຈາກການລົງທະບຽນນີ້ໄດ້ຮັບການຢືນຢັນແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_successful" approved="yes">
+        <source>Your registration has been successfully cancelled.</source>
+        <target state="final">ການລົງທະບຽນຂອງທ່ານຖືກຍົກເລີກສຳເລັດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_wrong_hmac" approved="yes">
+        <source>Cancellation failed, wrong HMAC.</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ, HMAC ບໍ່ຖືກຕ້ອງ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled" approved="yes">
+        <source>Cancellation failed, registration not found or already cancelled.</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ, ບໍ່ພົບການລົງທະບຽນ ຫຼື ຖືກຍົກເລີກໄປແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_cancel_disabled" approved="yes">
+        <source>Cancellation failed, cancel option for this event is not enabled.</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ, ຕົວເລືອກການຍົກເລີກສຳລັບກິດຈະກຳນີ້ບໍ່ໄດ້ເປີດໃຊ້.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_deadline_expired" approved="yes">
+        <source>Cancellation failed, cancellation date has expired.</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ, ວັນທີຍົກເລີກໝົດກຳນົດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_event_started" approved="yes">
+        <source>Cancellation failed, because the event startdate passed.</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ ເນື່ອງຈາກວັນທີເລີ່ມຕົ້ນຂອງກິດຈະກຳໄດ້ຜ່ານໄປແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="event.icalDownload" approved="yes">
+        <source>Download iCal file</source>
+        <target state="final">ດາວໂຫຼດໄຟລ໌ iCal</target>
+      </trans-unit>
+      <trans-unit id="event.freeofcharge" approved="yes">
+        <source>Free of charge</source>
+        <target state="final">ບໍ່ມີຄ່າໃຊ້ຈ່າຍ</target>
+      </trans-unit>
+      <trans-unit id="label.false" approved="yes">
+        <source>False</source>
+        <target state="final">ຜິດ/ບໍ່ແມ່ນ</target>
+      </trans-unit>
+      <trans-unit id="label.true" approved="yes">
+        <source>True</source>
+        <target state="final">ຖືກ/ແມ່ນ</target>
+      </trans-unit>
+      <trans-unit id="admin.no_events_available" approved="yes">
+        <source>No events available</source>
+        <target state="final">ບໍ່ມີກິດຈະກຳໃນຕອນນີ້</target>
+      </trans-unit>
+      <trans-unit id="admin.sorting" approved="yes">
+        <source>Sorting</source>
+        <target state="final">ການຈັດລຽງ</target>
+      </trans-unit>
+      <trans-unit id="search.title" approved="yes">
+        <source>Search</source>
+        <target state="final">ຄົ້ນຫາ</target>
+      </trans-unit>
+      <trans-unit id="list.title" approved="yes">
+        <source>Events</source>
+        <target state="final">ກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="detail.title" approved="yes">
+        <source>Event details</source>
+        <target state="final">ລາຍລະອຽດກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="calendar.title" approved="yes">
+        <source>Event calendar</source>
+        <target state="final">ປະຕິທິນກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="calendar.week" approved="yes">
+        <source>Week</source>
+        <target state="final">ອາທິດ</target>
+      </trans-unit>
+      <trans-unit id="detail.download" approved="yes">
+        <source>Download</source>
+        <target state="final">ດາວໂຫຼດ</target>
+      </trans-unit>
+      <trans-unit id="registration.title" approved="yes">
+        <source>Registration for event</source>
+        <target state="final">ລົງທະບຽນເຂົ້າຮ່ວມກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.successful" approved="yes">
+        <source>Registration confirmed</source>
+        <target state="final">ຢືນຢັນການລົງທະບຽນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistrationWaitlist.title.successful" approved="yes">
+        <source>Registration on the waitlist confirmed</source>
+        <target state="final">ຢືນຢັນການລົງທະບຽນໃນລາຍຊື່ລໍຖ້າແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.failed" approved="yes">
+        <source>Registration confirmation failed</source>
+        <target state="final">ການຢືນຢັນການລົງທະບຽນລົ້ມເຫຼວ</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.successful" approved="yes">
+        <source>Registration cancelled</source>
+        <target state="final">ຍົກເລີກການລົງທະບຽນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.failed" approved="yes">
+        <source>Cancellation failed</source>
+        <target state="final">ການຍົກເລີກລົ້ມເຫຼວ</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.successful" approved="yes">
+        <source>Registration successful</source>
+        <target state="final">ລົງທະບຽນສຳເລັດ</target>
+      </trans-unit>
+      <trans-unit id="registrationWaitlistResult.title.successful" approved="yes">
+        <source>Registration on the waitlist successful</source>
+        <target state="final">ລົງທະບຽນໃນລາຍຊື່ລໍຖ້າສຳເລັດ</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.failed" approved="yes">
+        <source>Registration failed</source>
+        <target state="final">ລົງທະບຽນລົ້ມເຫຼວ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
+        <source>Organizer</source>
+        <target state="final">ຜູ້ຈັດງານ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
+        <source>Name</source>
+        <target state="final">ຊື່</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
+        <source>Email</source>
+        <target state="final">ອີເມລ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
+        <source>Phone number</source>
+        <target state="final">ເບີໂທລະສັບ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">ຮູບພາບ</target>
+      </trans-unit>
+      <trans-unit id="validation.possible_robot" approved="yes">
+        <source>Captcha field empty or possible robot detected.</source>
+        <target state="final">ຊ່ອງ Captcha ຫວ່າງເປົ່າ ຫຼື ກວດພົບວ່າອາດເປັນໂຣບັອດ.</target>
+      </trans-unit>
+      <trans-unit id="validation.missing_captcha" approved="yes">
+        <source>Captcha field is missing or invalid.</source>
+        <target state="final">ບໍ່ມີຊ່ອງ Captcha ຫຼື ຂໍ້ມູນບໍ່ຖືກຕ້ອງ.</target>
+      </trans-unit>
+      <trans-unit id="validation.required_field" approved="yes">
+        <source>This field is required.</source>
+        <target state="final">ຈຳເປັນຕ້ອງປ້ອນຂໍ້ມູນໃນຊ່ອງນີ້.</target>
+      </trans-unit>
+      <trans-unit id="validation.invalid_priceoption" approved="yes">
+        <source>Invalid price option selected.</source>
+        <target state="final">ເລືອກຕົວເລືອກລາຄາບໍ່ຖືກຕ້ອງ.</target>
+      </trans-unit>
+      <trans-unit id="error.no_secret" approved="yes">
+        <source>No secret set in TypoScript for captcha.</source>
+        <target state="final">ບໍ່ໄດ້ຕັ້ງຄ່າ secret ໃນ TypoScript ສຳລັບ captcha.</target>
+      </trans-unit>
+      <trans-unit id="search.searchFor" approved="yes">
+        <source>Search</source>
+        <target state="final">ຄົ້ນຫາ</target>
+      </trans-unit>
+      <trans-unit id="search.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">ວັນທີເລີ່ມຕົ້ນ</target>
+      </trans-unit>
+      <trans-unit id="search.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">ວັນທີສິ້ນສຸດ</target>
+      </trans-unit>
+      <trans-unit id="search.submit" approved="yes">
+        <source>Search</source>
+        <target state="final">ຄົ້ນຫາ</target>
+      </trans-unit>
+      <trans-unit id="search.searchResult" approved="yes">
+        <source>Searchresult</source>
+        <target state="final">ຜົນການຄົ້ນຫາ</target>
+      </trans-unit>
+      <trans-unit id="search.noResultsFound" approved="yes">
+        <source>Your search did not match any events</source>
+        <target state="final">ບໍ່ພົບຂໍ້ມູນທີ່ກົງກັບການຄົ້ນຫາຂອງທ່ານ</target>
+      </trans-unit>
+      <trans-unit id="payment.title.invoice" approved="yes">
+        <source>Invoice</source>
+        <target state="final">ໃບບິນ/ໃບແຈ້ງໜີ້</target>
+      </trans-unit>
+      <trans-unit id="payment.title.transfer" approved="yes">
+        <source>Transfer</source>
+        <target state="final">ໂອນເງິນ</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.invalidHmac" approved="yes">
+        <source>Error: The given HMAC could not be validated. Possible data manipulation.</source>
+        <target state="final">ຂໍ້ຜິດພາດ: ບໍ່ສາມາດຢືນຢັນ HMAC ໄດ້. ອາດມີການດັດແກ້ຂໍ້ມູນ.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentNotEnabled" approved="yes">
+        <source>Error: Unable to process payment for this registration, since payment not enabled for the event.</source>
+        <target state="final">ຂໍ້ຜິດພາດ: ບໍ່ສາມາດດຳເນີນການຊຳລະເງິນໄດ້ ເນື່ອງຈາກກິດຈະກຳນີ້ບໍ່ໄດ້ເປີດໃຊ້ການຊຳລະເງິນ.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.actionNotEnabled" approved="yes">
+        <source>Error: The requested action is not enabled for the payment method.</source>
+        <target state="final">ຂໍ້ຜິດພາດ: ການດຳເນີນການທີ່ຮ້ອງຂໍບໍ່ໄດ້ຖືກເປີດໃຊ້ສຳລັບວິທີການຊຳລະເງິນນີ້.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentAlreadyProcessed" approved="yes">
+        <source>Error: The payment for this registration has already been processed.</source>
+        <target state="final">ຂໍ້ຜິດພາດ: ການຊຳລະເງິນສຳລັບການລົງທະບຽນນີ້ໄດ້ຮັບການດຳເນີນການແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentMethodNotAvailable" approved="yes">
+        <source>Error: The payment method is not configured for the event.</source>
+        <target state="final">ຂໍ້ຜິດພາດ: ບໍ່ໄດ້ກຳນົດຄ່າວິທີການຊຳລະເງິນສຳລັບກິດຈະກຳນີ້.</target>
+      </trans-unit>
+      <trans-unit id="userRegistrations.title" approved="yes">
+        <source>My event registrations</source>
+        <target state="final">ການລົງທະບຽນກິດຈະກຳຂອງຂ້ອຍ</target>
+      </trans-unit>
+      <trans-unit id="userRegistration.title" approved="yes">
+        <source>My registration</source>
+        <target state="final">ການລົງທະບຽນຂອງຂ້ອຍ</target>
+      </trans-unit>
+      <trans-unit id="userRegistration.cancel" approved="yes">
+        <source>Cancel registration</source>
+        <target state="final">ຍົກເລີກການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="eventNotFound" approved="yes">
+        <source>The event record is not available anymore.</source>
+        <target state="final">ບໍ່ມີຂໍ້ມູນກິດຈະກຳນີ້ແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="csvExportDisabled" approved="yes">
+        <source>CSV export disabled</source>
+        <target state="final">ປິດການສົ່ງອອກ CSV</target>
+      </trans-unit>
+      <trans-unit id="insufficientAccessToTemp" approved="yes">
+        <source>Insufficient access to temp folder of default storage. CSV export for registrations is disabled!</source>
+        <target state="final">ສິດເຂົ້າເຖິງໂຟນເດີຊົ່ວຄາວບໍ່ພຽງພໍ. ປິດການສົ່ງອອກ CSV ສຳລັບການລົງທະບຽນ!</target>
+      </trans-unit>
+      <trans-unit id="startingAt" approved="yes">
+        <source>Starting at</source>
+        <target state="final">ເລີ່ມຕົ້ນທີ່</target>
+      </trans-unit>
+      <trans-unit id="pagination.first" approved="yes">
+        <source>First page</source>
+        <target state="final">ໜ້າທຳອິດ</target>
+      </trans-unit>
+      <trans-unit id="pagination.previous" approved="yes">
+        <source>Previous</source>
+        <target state="final">ກ່ອນໜ້າ</target>
+      </trans-unit>
+      <trans-unit id="pagination.next" approved="yes">
+        <source>Next</source>
+        <target state="final">ຖັດໄປ</target>
+      </trans-unit>
+      <trans-unit id="pagination.last" approved="yes">
+        <source>Last page</source>
+        <target state="final">ໜ້າສຸດທ້າຍ</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration" approved="yes">
+        <source>Confirm registration</source>
+        <target state="final">ຢືນຢັນການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration" approved="yes">
+        <source>Cancel registration</source>
+        <target state="final">ຍົກເລີກການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="rateLimiter.exceeded" approved="yes">
+        <source>Too many requests from your IP address. Please try again later.</source>
+        <target state="final">ມີການຮ້ອງຂໍຫຼາຍເກີນໄປຈາກ IP ຂອງທ່ານ. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ.</target>
+      </trans-unit>
+    </body>
   </file>
 </xliff>
