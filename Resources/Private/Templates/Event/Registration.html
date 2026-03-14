@@ -21,47 +21,47 @@
             </div>
 
             <div class="event-registration-row">
-                <div class="event-list-label">
+                <div class="event-registration-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
                 </div>
-                <div class="event-list-value event-startdate">
+                <div class="event-registration-value event-startdate">
                     <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="event-registration-row">
-                <div class="event-list-label">
+                <div class="event-registration-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
                 </div>
-                <div class="event-list-value event-enddate">
+                <div class="event-registration-value event-enddate">
                     <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="event-registration-row">
-                <div class="event-list-label">
+                <div class="event-registration-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
                 </div>
-                <div class="event-list-value event-maxparticipants">
+                <div class="event-registration-value event-maxparticipants">
                     {event.maxParticipants}
                 </div>
                 <div class="clear"></div>
             </div>
             <div class="event-registration-row">
-                <div class="event-list-label">
+                <div class="event-registration-label">
                     <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
                 </div>
-                <div class="event-list-value event-registrations">
+                <div class="event-registration-value event-registrations">
                     {event.registrations->f:count()}
                 </div>
                 <div class="clear"></div>
             </div>
             <f:if condition="{event.currentPrice} > 0">
                 <div class="event-registration-row">
-                    <div class="event-list-label">
+                    <div class="event-registration-label">
                         <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
                     </div>
-                    <div class="event-list-value event-price">
+                    <div class="event-registration-value event-price">
                         {event.currentPrice} {event.currency} <f:if condition="{event.taxRate} > 0">(incl. {event.taxRate}% VAT)</f:if>
                     </div>
                     <div class="clear"></div>
@@ -69,10 +69,10 @@
             </f:if>
             <f:if condition="{event.location}">
                 <div class="event-registration-row">
-                    <div class="event-list-label">
+                    <div class="event-registration-label">
                         <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
                     </div>
-                    <div class="event-list-value event-price">
+                    <div class="event-registration-value event-location">
                         {event.location.title}
                     </div>
                     <div class="clear"></div>
