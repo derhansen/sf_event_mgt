@@ -1,0 +1,17 @@
+tx_sfeventmgt_domain_model_registration
+,uid,hidden,event,firstname,lastname,email,price,main_registration,amount_of_registrations,price_option
+,1,0,100,John,Doe,john@domain.tld,10.00,0,3,0
+,2,0,100,Jane,Doe,jane@domain.tld,10.00,1,1,0
+,3,0,100,Jack,Doe,jack@domain.tld,10.00,1,1,0
+,4,0,101,Alice,Smith,alice@domain.tld,25.50,0,1,0
+,5,0,102,Bob,Jones,bob@domain.tld,15.00,0,2,1
+,6,0,102,Betty,Jones,betty@domain.tld,20.00,5,1,2
+"tx_sfeventmgt_domain_model_event"
+,"uid","pid","startdate","enddate","title","price","tax_rate","enable_registration","enable_payment"
+,100,6,2043654941,2043654941,"Event with multiple registrations",10.00,19.00,1,1
+,101,6,2043654941,2043654941,"Event with single registration",25.50,7.00,1,1
+,102,6,2043654941,2043654941,"Event with price options",10.00,19.00,1,1
+"tx_sfeventmgt_domain_model_priceoption"
+,"uid","pid","event","price","tax_rate","title"
+,1,6,102,15.00,19.00,"Standard Price"
+,2,6,102,20.00,7.00,"Early Bird Price"

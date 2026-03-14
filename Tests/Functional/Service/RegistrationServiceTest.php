@@ -729,4 +729,126 @@ class RegistrationServiceTest extends FunctionalTestCase
 
         self::assertTrue(true);
     }
+
+    #[Test]
+    public function getRegistrationTotalPriceReturnsCorrectPriceForSingleRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(4);
+
+        $result = $this->subject->getRegistrationTotalPrice($registration);
+        self::assertEquals(25.50, $result);
+    }
+
+    #[Test]
+    public function getRegistrationTotalPriceReturnsCorrectPriceForMultipleRegistrations(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(1);
+
+        $result = $this->subject->getRegistrationTotalPrice($registration);
+        self::assertEquals(30.00, $result);
+    }
+
+    #[Test]
+    public function getRegistrationTotalPriceReturnsCorrectPriceWithPriceOptions(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(5);
+
+        $result = $this->subject->getRegistrationTotalPrice($registration);
+        self::assertEquals(35.00, $result);
+    }
+
+    #[Test]
+    public function getMainAndChildRegistrationsReturnsOnlyMainRegistrationForSingleRegistration(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(4);
+
+        $result = $this->subject->getMainAndChildRegistrations($registration);
+        self::assertCount(1, $result);
+        self::assertEquals(4, $result[0]->getUid());
+    }
+
+    #[Test]
+    public function getMainAndChildRegistrationsReturnsMainAndChildRegistrations(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(1);
+
+        $result = $this->subject->getMainAndChildRegistrations($registration);
+        self::assertCount(3, $result);
+        self::assertEquals(1, $result[0]->getUid());
+        self::assertEquals(2, $result[1]->getUid());
+        self::assertEquals(3, $result[2]->getUid());
+    }
+
+    #[Test]
+    public function evaluateRegistrationPriceReturnsEventPriceIfNoPriceOption(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(4);
+        $event = $registration->getEvent();
+
+        $serverRequest = new ServerRequest();
+        $result = $this->subject->evaluateRegistrationPrice($event, $registration, $serverRequest);
+
+        self::assertEquals(25.50, $result);
+    }
+
+    #[Test]
+    public function evaluateRegistrationPriceReturnsPriceOptionPriceIfSet(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(5);
+        $event = $registration->getEvent();
+
+        $serverRequest = new ServerRequest();
+        $result = $this->subject->evaluateRegistrationPrice($event, $registration, $serverRequest);
+
+        self::assertEquals(15.00, $result);
+    }
+
+    #[Test]
+    public function getRegistrationTaxRateReturnsEventTaxRateIfNoPriceOption(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(4);
+        $event = $registration->getEvent();
+
+        $result = $this->subject->getRegistrationTaxRate($event, $registration);
+
+        self::assertEquals(7.00, $result);
+    }
+
+    #[Test]
+    public function getRegistrationTaxRateReturnsPriceOptionTaxRateIfSet(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/../Fixtures/registration_price_calculations.csv');
+
+        /** @var Registration $registration */
+        $registration = $this->registrationRepository->findByUid(6);
+        $event = $registration->getEvent();
+
+        $result = $this->subject->getRegistrationTaxRate($event, $registration);
+
+        self::assertEquals(7.00, $result);
+    }
 }

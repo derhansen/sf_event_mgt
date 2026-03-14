@@ -445,4 +445,46 @@ class RegistrationService
 
         return $taxRate;
     }
+
+    /**
+     * Calculate total price for the given registration including the prices of all child registrations
+     */
+    public function getRegistrationTotalPrice(Registration $registration): float
+    {
+        $totalPrice = $registration->getPrice();
+
+        if ($registration->getAmountOfRegistrations() > 1) {
+            $childRegistrations = $this->registrationRepository->findBy([
+                'mainRegistration' => $registration,
+            ]);
+
+            foreach ($childRegistrations as $childRegistration) {
+                $totalPrice += $childRegistration->getPrice();
+            }
+        }
+
+        return $totalPrice;
+    }
+
+    /**
+     * Returns all registrations (main + children) for a registration
+     *
+     * @return Registration[]
+     */
+    public function getMainAndChildRegistrations(Registration $registration): array
+    {
+        $allRegistrations = [$registration];
+
+        if ($registration->getAmountOfRegistrations() > 1) {
+            $childRegistrations = $this->registrationRepository->findBy([
+                'mainRegistration' => $registration,
+            ]);
+
+            foreach ($childRegistrations as $childRegistration) {
+                $allRegistrations[] = $childRegistration;
+            }
+        }
+
+        return $allRegistrations;
+    }
 }
