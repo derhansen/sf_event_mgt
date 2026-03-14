@@ -82,7 +82,7 @@
             <h2><f:translate key="registration.form.header" /></h2>
 
             <f:if condition="{event.enableWaitlist}">
-                <f:if condition="{event.registrations->f:count()} >= {event.maxParticipants}">
+                <f:if condition="{event.maxParticipants} != 0 && {event.registrations->f:count()} >= {event.maxParticipants}">
                     <p>
                         <strong><f:translate key="registration.form.waitlist" /></strong>
                     </p>
