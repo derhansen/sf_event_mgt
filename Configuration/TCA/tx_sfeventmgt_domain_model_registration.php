@@ -399,7 +399,7 @@ return [
         ],
         'temp_event_uid' => [
             'exclude' => true,
-            'label' => 'Holds temporarily the event UID of an event copy/paste/localize process in TYPO3 backend.',
+            'label' => 'Internal temporary field.',
             'config' => [
                 'type' => 'number',
             ],
