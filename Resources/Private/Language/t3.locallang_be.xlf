@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="t3">
+    <header/>
+    <body>
+      <trans-unit id="extension.title">
+        <source>Events and event-registration</source>
+        <target>crwdns300446:0crwdne300446:0</target>
+      </trans-unit>
+      <trans-unit id="CType.div.plugingroup">
+        <source>Events and event-registration</source>
+        <target>crwdns300448:0crwdne300448:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.wizard.header">
+        <source>Event Management</source>
+        <target>crwdns305002:0crwdne305002:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.title">
+        <source>Event list</source>
+        <target>crwdns384120:0crwdne384120:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.description">
+        <source>Display of events chosen by various optional properties like storage page, categories,...</source>
+        <target>crwdns305004:0crwdne305004:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventdetail.title">
+        <source>Event details</source>
+        <target>crwdns384122:0crwdne384122:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventdetail.description">
+        <source>Display the detail page for events.</source>
+        <target>crwdns384124:0crwdne384124:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.title">
+        <source>Event registration form</source>
+        <target>crwdns384126:0crwdne384126:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.description">
+        <source>Display the registration form for events.</source>
+        <target>crwdns384128:0crwdne384128:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventsearch.title">
+        <source>Event search (Form and Results)</source>
+        <target>crwdns384130:0crwdne384130:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventsearch.description">
+        <source>Display a search form for events with various filter options.</source>
+        <target>crwdns384132:0crwdne384132:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.title">
+        <source>Event calendar</source>
+        <target>crwdns384134:0crwdne384134:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.description">
+        <source>Display a calendar of events chosen by various optional properties.</source>
+        <target>crwdns384136:0crwdne384136:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pipayment.title">
+        <source>Event payment</source>
+        <target>crwdns384138:0crwdne384138:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.pipayment.description">
+        <source>Display the payment process for events.</source>
+        <target>crwdns384140:0crwdne384140:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.piuserreg.title">
+        <source>Event registrations (frontend user)</source>
+        <target>crwdns384142:0crwdne384142:0</target>
+      </trans-unit>
+      <trans-unit id="plugin.piuserreg.description">
+        <source>Display event registrations for the current logged-in frontend user.</source>
+        <target>crwdns384144:0crwdne384144:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.settings">
+        <source>Settings</source>
+        <target>crwdns300468:0crwdne300468:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.notification">
+        <source>Notification settings</source>
+        <target>crwdns300470:0crwdne300470:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.categoryMenu">
+        <source>Category menu</source>
+        <target>crwdns300472:0crwdne300472:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.template">
+        <source>Template</source>
+        <target>crwdns300474:0crwdne300474:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.additional">
+        <source>Additional</source>
+        <target>crwdns300476:0crwdne300476:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.pagination">
+        <source>Pagination</source>
+        <target>crwdns300478:0crwdne300478:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode">
+        <source>What to display</source>
+        <target>crwdns300480:0crwdne300480:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.singleEvent">
+        <source>Show a single event record</source>
+        <target>crwdns300482:0crwdne300482:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.list">
+        <source>List</source>
+        <target>crwdns300484:0crwdne300484:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.detail">
+        <source>Detail</source>
+        <target>crwdns300486:0crwdne300486:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.registration">
+        <source>Registration</source>
+        <target>crwdns300488:0crwdne300488:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.search">
+        <source>Searchform</source>
+        <target>crwdns300490:0crwdne300490:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.calendar">
+        <source>Calendar</source>
+        <target>crwdns300492:0crwdne300492:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.detailPid">
+        <source>Detail Page</source>
+        <target>crwdns300494:0crwdne300494:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.listPid">
+        <source>List Page</source>
+        <target>crwdns300496:0crwdne300496:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.registrationPid">
+        <source>Registration Page</source>
+        <target>crwdns300498:0crwdne300498:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.paymentPid">
+        <source>Payment Page</source>
+        <target>crwdns300500:0crwdne300500:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.linkTermsAndConditions">
+        <source>Link to terms and conditions</source>
+        <target>crwdns300502:0crwdne300502:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.queryLimit">
+        <source>Max records displayed</source>
+        <target>crwdns300504:0crwdne300504:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.topEventRestriction">
+        <source>Top event restriction</source>
+        <target>crwdns300506:0crwdne300506:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.none">
+        <source>None</source>
+        <target>crwdns300508:0crwdne300508:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.onlyTopEvents">
+        <source>Only top events</source>
+        <target>crwdns300510:0crwdne300510:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.exceptTopEvents">
+        <source>Except top events</source>
+        <target>crwdns300512:0crwdne300512:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode">
+        <source>Display mode</source>
+        <target>crwdns300514:0crwdne300514:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField">
+        <source>Sort by</source>
+        <target>crwdns300516:0crwdne300516:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.title">
+        <source>Title</source>
+        <target>crwdns300518:0crwdne300518:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.uid">
+        <source>Record ID</source>
+        <target>crwdns300520:0crwdne300520:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.sorting">
+        <source>Sorting in TYPO3</source>
+        <target>crwdns300522:0crwdne300522:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.startdate">
+        <source>Start date</source>
+        <target>crwdns300524:0crwdne300524:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.enddate">
+        <source>End date</source>
+        <target>crwdns300526:0crwdne300526:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.title">
+        <source>Event title</source>
+        <target>crwdns300528:0crwdne300528:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.startdate">
+        <source>Event startdate</source>
+        <target>crwdns300530:0crwdne300530:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.enddate">
+        <source>Event enddate</source>
+        <target>crwdns300532:0crwdne300532:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection">
+        <source>Sorting direction</source>
+        <target>crwdns300534:0crwdne300534:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.ascending">
+        <source>Ascending</source>
+        <target>crwdns300536:0crwdne300536:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.descending">
+        <source>Descending</source>
+        <target>crwdns300538:0crwdne300538:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction">
+        <source>Category mode</source>
+        <target>crwdns300540:0crwdne300540:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.ignore">
+        <source>Ignore category selection</source>
+        <target>crwdns300542:0crwdne300542:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.or">
+        <source>Show events with selected categories (OR)</source>
+        <target>crwdns300544:0crwdne300544:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.and">
+        <source>Show events with selected categories (AND)</source>
+        <target>crwdns300546:0crwdne300546:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notand">
+        <source>Do NOT show events with selected categories (AND)</source>
+        <target>crwdns300548:0crwdne300548:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notor">
+        <source>Do NOT show events with selected categories (OR)</source>
+        <target>crwdns300550:0crwdne300550:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.possibleMisconfiguration">
+        <source>Possible misconfiguration!</source>
+        <target>crwdns300552:0crwdne300552:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.pluginCalendarMisonfiguration">
+        <source>Plugin misconfigured: This setting must be disabled for "Calendar" to work properly!</source>
+        <target>crwdns300554:0crwdne300554:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.category">
+        <source>Category</source>
+        <target>crwdns300556:0crwdne300556:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeSubcategories">
+        <source>Include subcategories</source>
+        <target>crwdns300558:0crwdne300558:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.location">
+        <source>Location</source>
+        <target>crwdns300560:0crwdne300560:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.organisator">
+        <source>Organizer</source>
+        <target>crwdns378126:0crwdne378126:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.speaker">
+        <source>Speaker</source>
+        <target>crwdns300564:0crwdne300564:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.storagePage">
+        <source>Record storage page</source>
+        <target>crwdns300566:0crwdne300566:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage">
+        <source>Restrict categories, locations, organizers and speakers to storagePage setting (including recursive option)</source>
+        <target>crwdns378128:0crwdne378128:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.all">
+        <source>Show all events</source>
+        <target>crwdns300570:0crwdne300570:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.future">
+        <source>Show only future events</source>
+        <target>crwdns300572:0crwdne300572:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.past">
+        <source>Show only past events</source>
+        <target>crwdns300574:0crwdne300574:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.current_future">
+        <source>Show only current and future events</source>
+        <target>crwdns300576:0crwdne300576:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.time_restriction">
+        <source>Show events by a given time restriction</source>
+        <target>crwdns300578:0crwdne300578:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.all">
+        <source>Show registrations for all events</source>
+        <target>crwdns300580:0crwdne300580:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.future">
+        <source>Show registrations for future events</source>
+        <target>crwdns300582:0crwdne300582:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.past">
+        <source>Show registrations for past events</source>
+        <target>crwdns300584:0crwdne300584:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.requiredFields">
+        <source>Comma seperated list of fieldnames, which are required. The fields first name, last name and email
+					are always required and cannot be overridden
+				</source>
+        <target>crwdns300586:0crwdne300586:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.templateLayout">
+        <source>Template layout</source>
+        <target>crwdns300588:0crwdne300588:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.disableOverrideDemand">
+        <source>Disable overwrite demand</source>
+        <target>crwdns300590:0crwdne300590:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionDescription">
+        <source>The values is passed to PHPs strtotime() function, so you can use expressions like "first day of this month midnight" and "last day of this month 23:59:59" to get events of the current month</source>
+        <target>crwdns300592:0crwdne300592:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionLow">
+        <source>Time from</source>
+        <target>crwdns300594:0crwdne300594:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionHigh">
+        <source>Time to</source>
+        <target>crwdns300596:0crwdne300596:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeCurrent">
+        <source>Include current</source>
+        <target>crwdns300598:0crwdne300598:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeCurrent.description">
+        <source>Include events that start before and end after time from</source>
+        <target>crwdns300600:0crwdne300600:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords">
+        <source>Allow preview of hidden event records</source>
+        <target>crwdns338144:0crwdne338144:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords.description">
+        <source>If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone using any event record uid to see its content. Note, that this functionality requires a valid backend user session.</source>
+        <target>crwdns338146:0crwdne338146:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_email">
+        <source>Email address of emails sent to the user</source>
+        <target>crwdns300602:0crwdne300602:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_name">
+        <source>Name of the sender</source>
+        <target>crwdns300604:0crwdne300604:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.replyto_email">
+        <source>Reply-to email address of emails sent to the user</source>
+        <target>crwdns300606:0crwdne300606:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.admin_email">
+        <source>Email address(es) of website admin(s), who receives new/confirmed registrations. Multiple email addresses must be separated with a comma.</source>
+        <target>crwdns300608:0crwdne300608:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_user_subject">
+        <source>Subject of email sent to user when a new registration is created</source>
+        <target>crwdns300610:0crwdne300610:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_user_subject">
+        <source>Subject of email sent to user when a new registration on the waitlist is created</source>
+        <target>crwdns300612:0crwdne300612:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_admin_subject">
+        <source>Subject of email sent to admin when a new registration is created</source>
+        <target>crwdns300614:0crwdne300614:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_admin_subject">
+        <source>Subject of email sent to admin when a new registration on the waitlist is created</source>
+        <target>crwdns300616:0crwdne300616:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_confirmed_user_subject">
+        <source>Subject of email sent to user when a registration has been confirmed</source>
+        <target>crwdns300618:0crwdne300618:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_confirmed_user_subject">
+        <source>Subject of email sent to user when a registration on the waitlist has been confirmed</source>
+        <target>crwdns300620:0crwdne300620:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_confirmed_admin_subject">
+        <source>Subject of email sent to admin when a registration has been confirmed</source>
+        <target>crwdns300622:0crwdne300622:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_confirmed_admin_subject">
+        <source>Subject of email sent to admin when a registration on the waitlist has been confirmed</source>
+        <target>crwdns300624:0crwdne300624:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_cancelled_user_subject">
+        <source>Subject of email sent to user when a registration has been cancelled</source>
+        <target>crwdns300626:0crwdne300626:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_cancelled_admin_subject">
+        <source>Subject of email sent to admin when a registration has been cancelled</source>
+        <target>crwdns300628:0crwdne300628:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_move_up_user_subject">
+        <source>Subject of email sent to user when a registration moved up from the waitlist</source>
+        <target>crwdns300630:0crwdne300630:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_move_up_admin_subject">
+        <source>Subject of email sent to admin when a registration moved up from the waitlist</source>
+        <target>crwdns300632:0crwdne300632:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.categories">
+        <source>Categories (if empty, all categories will be shown in the category menu)</source>
+        <target>crwdns300634:0crwdne300634:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.includeSubcategories">
+        <source>Include subcategories</source>
+        <target>crwdns300636:0crwdne300636:0</target>
+      </trans-unit>
+      <trans-unit id="administration.title">
+        <source>Event Administration</source>
+        <target>crwdns300638:0crwdne300638:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify">
+        <source>Notify participants</source>
+        <target>crwdns300640:0crwdne300640:0</target>
+      </trans-unit>
+      <trans-unit id="administration.newEvent">
+        <source>Create new event</source>
+        <target>crwdns300642:0crwdne300642:0</target>
+      </trans-unit>
+      <trans-unit id="administration.newLocation">
+        <source>Create new location</source>
+        <target>crwdns300644:0crwdne300644:0</target>
+      </trans-unit>
+      <trans-unit id="administration.newOrganisator">
+        <source>Create new organizer</source>
+        <target>crwdns378130:0crwdne378130:0</target>
+      </trans-unit>
+      <trans-unit id="administration.newSpeaker">
+        <source>Create new speaker</source>
+        <target>crwdns300648:0crwdne300648:0</target>
+      </trans-unit>
+      <trans-unit id="administration.handleExpiredRegistrations">
+        <source>Hide/delete expired registrations</source>
+        <target>crwdns300650:0crwdne300650:0</target>
+      </trans-unit>
+      <trans-unit id="administration.export">
+        <source>Export participants</source>
+        <target>crwdns300652:0crwdne300652:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify">
+        <source>Notify participants</source>
+        <target>crwdns300640:0crwdne300640:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationHistory">
+        <source>Notification history</source>
+        <target>crwdns300656:0crwdne300656:0</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.title">
+        <source>TypoScript settings missing</source>
+        <target>crwdns300658:0crwdne300658:0</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.description">
+        <source>Unable to find TypoScript settings for module. Please make sure, required TypoScript settings have been included. If you use a TypoScript template for your website, include the static TypoScript of sf_event_mgt. If you use site sets and have included the extensions site set, make sure that the templates does not clear constants/setup (which overrides site set includes).</source>
+        <target>crwdns342190:0crwdne342190:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description">
+        <source>Please select an email template that will be used to notify participants of the event.</source>
+        <target>crwdns300662:0crwdne300662:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.event">
+        <source>Event:</source>
+        <target>crwdns300664:0crwdne300664:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.recipients">
+        <source>Recipients:</source>
+        <target>crwdns300666:0crwdne300666:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.0">
+        <source>All participants</source>
+        <target>crwdns300668:0crwdne300668:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.1">
+        <source>Confirmed participants</source>
+        <target>crwdns300670:0crwdne300670:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.2">
+        <source>Unconfirmed participants</source>
+        <target>crwdns300672:0crwdne300672:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.3">
+        <source>Confirmed waitlist participants</source>
+        <target>crwdns313650:0crwdne313650:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.4">
+        <source>Unconfirmed waitlist participants</source>
+        <target>crwdns313652:0crwdne313652:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.template">
+        <source>Template:</source>
+        <target>crwdns300674:0crwdne300674:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.overwriteSubject">
+        <source>Overwrite subject:</source>
+        <target>crwdns300676:0crwdne300676:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.overwriteSubject">
+        <source>Overwrites the configured default email subject of the selected template</source>
+        <target>crwdns300678:0crwdne300678:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.additionalMessage">
+        <source>Additional message:</source>
+        <target>crwdns300680:0crwdne300680:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.additionalMessage">
+        <source>Optional additional message in notification</source>
+        <target>crwdns300682:0crwdne300682:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError.title">
+        <source>No sender email address</source>
+        <target>crwdns300684:0crwdne300684:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError">
+        <source>The sender email address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+        <target>crwdns300686:0crwdne300686:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sendNotifications">
+        <source>Send notifications</source>
+        <target>crwdns300688:0crwdne300688:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.cancelSendNotifications">
+        <source>Back to event listing</source>
+        <target>crwdns300690:0crwdne300690:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.date">
+        <source>Date</source>
+        <target>crwdns300692:0crwdne300692:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.details">
+        <source>Details</source>
+        <target>crwdns300694:0crwdne300694:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.emailsSent">
+        <source>Emails sent</source>
+        <target>crwdns300696:0crwdne300696:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sentBy">
+        <source>Sent by</source>
+        <target>crwdns300698:0crwdne300698:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.notAvailable">
+        <source>N/A</source>
+        <target>crwdns300700:0crwdne300700:0</target>
+      </trans-unit>
+      <trans-unit id="administration.nopageselected">
+        <source>Please click the page title in the page tree to the left to show the records on that page.</source>
+        <target>crwdns300702:0crwdne300702:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.title">
+        <source>Notifications disabled</source>
+        <target>crwdns300704:0crwdne300704:0</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.description">
+        <source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
+        <target>crwdns300706:0crwdne300706:0</target>
+      </trans-unit>
+      <trans-unit id="events-folder">
+        <source>Events</source>
+        <target>crwdns300708:0crwdne300708:0</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableInvoice">
+        <source>Enable payment method 'invoice'</source>
+        <target>crwdns300710:0crwdne300710:0</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableTransfer">
+        <source>Enable payment method 'transfer'</source>
+        <target>crwdns300712:0crwdne300712:0</target>
+      </trans-unit>
+      <trans-unit id="extmng.slugBehaviour" xml:space="preserve">
+				<source>Slug behaviour: uniqueInSite: The same slug can be used for events in different sites. Use this setting *only* if no event records are shared between sites. "unique" means that same event title will lead to different slug names.</source>
+			<target>crwdns300714:0crwdne300714:0</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrations" xml:space="preserve">
+				<source>Hide registrations in event record by limit: Hides the event fields "Registration" and "Registration Waitlist" if the configured limit in "backend.hideInlineRegistrationsLimit" is reached. This option is usefull, when you have events with a huge amount of registrations where the TYPO3 backend gets slow due to performance issues of the TCA inline field.</source>
+			<target>crwdns300716:0crwdne300716:0</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve">
+				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
+			<target>crwdns300718:0crwdne300718:0</target></trans-unit>
+      <trans-unit id="extmng.useFluidEmail" xml:space="preserve">
+				<source>Use FluidEmail for email notifications: If active, all notifications generated by the extension will be sent using FluidEmail.</source>
+			<target>crwdns342192:0crwdne342192:0</target></trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.title">
+        <source>Event registrations hidden</source>
+        <target>crwdns300720:0crwdne300720:0</target>
+      </trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.description">
+        <source>This event has %1$s registrations, but due to performance reasons all event registrations are not shown in this view.</source>
+        <target>crwdns300722:0%1$scrwdne300722:0</target>
+      </trans-unit>
+      <trans-unit id="tabs.language">
+        <source>Language</source>
+        <target>crwdns300724:0crwdne300724:0</target>
+      </trans-unit>
+      <trans-unit id="tabs.additional">
+        <source>Additional</source>
+        <target>crwdns342194:0crwdne342194:0</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.title">
+        <source>Information</source>
+        <target>crwdns300726:0crwdne300726:0</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.content">
+        <source>All expired registrations have been marked as hidden/deleted.</source>
+        <target>crwdns300728:0crwdne300728:0</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.title">
+        <source>Information</source>
+        <target>crwdns300730:0crwdne300730:0</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.content">
+        <source>The selected email has been sent to all participants of the event.</source>
+        <target>crwdns300732:0crwdne300732:0</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.asc">
+        <source>Ascending</source>
+        <target>crwdns300734:0crwdne300734:0</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.desc">
+        <source>Descending</source>
+        <target>crwdns300736:0crwdne300736:0</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.title">
+        <source>Title</source>
+        <target>crwdns300738:0crwdne300738:0</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.startdate">
+        <source>Startdate</source>
+        <target>crwdns300740:0crwdne300740:0</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.enddate">
+        <source>Enddate</source>
+        <target>crwdns300742:0crwdne300742:0</target>
+      </trans-unit>
+      <trans-unit id="administration.accessdenied.title">
+        <source>Access Denied</source>
+        <target>crwdns300744:0crwdne300744:0</target>
+      </trans-unit>
+      <trans-unit id="administration.accessdenied.content">
+        <source>Access to the given event has been denied.</source>
+        <target>crwdns300746:0crwdne300746:0</target>
+      </trans-unit>
+      <trans-unit id="administration.pagination.records">
+        <source>Records</source>
+        <target>crwdns300748:0crwdne300748:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.current">
+        <source>Current folder</source>
+        <target>crwdns367190:0crwdne367190:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level1">
+        <source>1 level down</source>
+        <target>crwdns367192:0crwdne367192:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level2">
+        <source>2 levels down</source>
+        <target>crwdns367194:0crwdne367194:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level3">
+        <source>3 levels down</source>
+        <target>crwdns367196:0crwdne367196:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level4">
+        <source>4 levels down</source>
+        <target>crwdns367198:0crwdne367198:0</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level5">
+        <source>5 levels down</source>
+        <target>crwdns367200:0crwdne367200:0</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.header">
+        <source>Time Restriction</source>
+        <target>crwdns300750:0crwdne300750:0</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.error">
+        <source>The value '%s' can not be interpreted with strtotime()</source>
+        <target>crwdns300752:0%scrwdne300752:0</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.info">
+        <source>The value '%s' corresponds to %s</source>
+        <target>crwdns300754:0%scrwdnd300754:0%scrwdne300754:0</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.format">
+        <source>d.m.Y H:i:s</source>
+        <target>crwdns300756:0crwdne300756:0</target>
+      </trans-unit>
+      <trans-unit id="event.startdateNotBeforeEnddate.title">
+        <source>Invalid event configuration</source>
+        <target>crwdns300758:0crwdne300758:0</target>
+      </trans-unit>
+      <trans-unit id="event.startdateNotBeforeEnddate.message">
+        <source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
+        <target>crwdns300760:0crwdne300760:0</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.title">
+        <source>No organizer</source>
+        <target>crwdns378132:0crwdne378132:0</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.message">
+        <source>The event is configured to notify the organizer, but no organizer is set. Please select an organizer or change the notification settings.</source>
+        <target>crwdns378134:0crwdne378134:0</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.title">
+        <source>Organizer has no email</source>
+        <target>crwdns378136:0crwdne378136:0</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.message">
+        <source>The event is configured to notify the organizer, but the organizer has no email address. Please set an email address for the organizer or change the notification settings.</source>
+        <target>crwdns378138:0crwdne378138:0</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.registration">
+        <source>Registration</source>
+        <target>crwdns300770:0crwdne300770:0</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.confirmation">
+        <source>Confirmation</source>
+        <target>crwdns300772:0crwdne300772:0</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.notification">
+        <source>Notification</source>
+        <target>crwdns300774:0crwdne300774:0</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.search">
+        <source>Search</source>
+        <target>crwdns300776:0crwdne300776:0</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.rss">
+        <source>RSS feed</source>
+        <target>crwdns300778:0crwdne300778:0</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.csv">
+        <source>CSV export</source>
+        <target>crwdns300780:0crwdne300780:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.enablePagination">
+        <source>Enable pagination</source>
+        <target>crwdns300782:0crwdne300782:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.itemsPerPage">
+        <source>Items per page</source>
+        <target>crwdns300784:0crwdne300784:0</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.maxNumPages">
+        <source>Maximum number of pages</source>
+        <target>crwdns300786:0crwdne300786:0</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
