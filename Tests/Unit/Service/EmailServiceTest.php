@@ -15,7 +15,6 @@ use DERHANSEN\SfEventMgt\Service\EmailService;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Http\ServerRequest;
-use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\TemplatedEmailFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
@@ -25,10 +24,7 @@ class EmailServiceTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = new EmailService(
-            new TemplatedEmailFactory(),
-            $this->createMock(MailerInterface::class),
-        );
+        $this->subject = new EmailService(new TemplatedEmailFactory());
     }
 
     protected function tearDown(): void

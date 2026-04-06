@@ -23,10 +23,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EmailService
 {
-    public function __construct(
-        private readonly TemplatedEmailFactory $templatedEmailFactory,
-        private readonly MailerInterface $mailer,
-    ) {}
+    public function __construct(private readonly TemplatedEmailFactory $templatedEmailFactory) {}
 
     /**
      * Sends an email, if sender and recipient is an valid email address and if the subject is not empty
@@ -79,9 +76,10 @@ class EmailService
             ]);
         }
 
+        $mailer = GeneralUtility::makeInstance(MailerInterface::class);
         try {
-            $this->mailer->send($email);
-            return $this->mailer->getSentMessage() !== null;
+            $mailer->send($email);
+            return $mailer->getSentMessage() !== null;
         } catch (TransportExceptionInterface $e) {
             return false;
         }
