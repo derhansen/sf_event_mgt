@@ -24,8 +24,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class EmailService
 {
     public function __construct(
-        private readonly TemplatedEmailFactory $templatedEmailFactory,
-        private readonly MailerInterface $mailer,
+        private readonly TemplatedEmailFactory $templatedEmailFactory
     ) {}
 
     /**
@@ -80,8 +79,9 @@ class EmailService
         }
 
         try {
-            $this->mailer->send($email);
-            return $this->mailer->getSentMessage() !== null;
+            $mailer = GeneralUtility::makeInstance(MailerInterface::class);
+            $mailer->send($email);
+            return $mailer->getSentMessage() !== null;
         } catch (TransportExceptionInterface $e) {
             return false;
         }
