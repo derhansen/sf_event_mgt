@@ -218,7 +218,6 @@ class NotificationService
             $attachments = $modifyUserAttachmentsEvent->getAttachments();
 
             $result = $this->emailService->sendEmailMessage(
-                $request,
                 $senderEmail,
                 $registration->getEmail(),
                 $subject,
@@ -375,7 +374,6 @@ class NotificationService
             $adminEmailArr = GeneralUtility::trimExplode(',', $settings['notification']['adminEmail'] ?? '', true);
             foreach ($adminEmailArr as $adminEmail) {
                 $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                    $request,
                     $senderEmail,
                     $adminEmail,
                     $subject,
@@ -389,7 +387,6 @@ class NotificationService
 
         if ($event->getNotifyOrganisator() && $event->getOrganisator()) {
             $allEmailsSent = $allEmailsSent && $this->emailService->sendEmailMessage(
-                $request,
                 $senderEmail,
                 $event->getOrganisator()->getEmail(),
                 $subject,

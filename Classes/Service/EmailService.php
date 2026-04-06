@@ -11,27 +11,19 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use TYPO3\CMS\Core\Configuration\ExtensionConfiguration;
 use TYPO3\CMS\Core\Mail\FluidEmail;
 use TYPO3\CMS\Core\Mail\MailerInterface;
 use TYPO3\CMS\Core\Mail\MailMessage;
-use TYPO3\CMS\Core\Mail\TemplatedEmailFactory;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class EmailService
 {
-    public function __construct(
-        private readonly TemplatedEmailFactory $templatedEmailFactory,
-        private readonly MailerInterface $mailer,
-    ) {}
-
     /**
      * Sends an email, if sender and recipient is an valid email address and if the subject is not empty
      *
-     * @param ServerRequestInterface $request The current request
      * @param string $sender The sender
      * @param string $recipient The recipient
      * @param string $subject The subject
@@ -43,7 +35,6 @@ class EmailService
      * @return bool true/false if message is sent
      */
     public function sendEmailMessage(
-        ServerRequestInterface $request,
         string $sender,
         string $recipient,
         string $subject,
@@ -56,7 +47,10 @@ class EmailService
             return false;
         }
 
-        $email = $this->getEmailObject($request);
+        $useFluidEmail = (bool)(GeneralUtility::makeInstance(ExtensionConfiguration::class)
+            ->get('sf_event_mgt', 'useFluidEmail'));
+
+        $email = $this->getEmailObject($useFluidEmail);
         $email->from(new Address($sender, $name));
         $email->to($recipient);
         $email->subject($subject);
@@ -79,21 +73,21 @@ class EmailService
             ]);
         }
 
+        $mailer = GeneralUtility::makeInstance(MailerInterface::class);
+
         try {
-            $this->mailer->send($email);
-            return $this->mailer->getSentMessage() !== null;
+            $mailer->send($email);
+            return $mailer->getSentMessage() !== null;
         } catch (TransportExceptionInterface $e) {
             return false;
         }
     }
 
-    private function getEmailObject(ServerRequestInterface $request): MailMessage|FluidEmail
+    private function getEmailObject(bool $useFluidEmail): MailMessage|FluidEmail
     {
-        $useFluidEmail = (bool)(GeneralUtility::makeInstance(ExtensionConfiguration::class)
-            ->get('sf_event_mgt', 'useFluidEmail'));
-
         if ($useFluidEmail) {
-            $email = $this->templatedEmailFactory->createFromRequest($request);
+            /** @var FluidEmail $email */
+            $email = GeneralUtility::makeInstance(FluidEmail::class);
         } else {
             /** @var MailMessage $email */
             $email = GeneralUtility::makeInstance(MailMessage::class);
