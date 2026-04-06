@@ -14,6 +14,9 @@ namespace DERHANSEN\SfEventMgt\Tests\Unit\Service;
 use DERHANSEN\SfEventMgt\Service\EmailService;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
+use TYPO3\CMS\Core\Http\ServerRequest;
+use TYPO3\CMS\Core\Mail\MailerInterface;
+use TYPO3\CMS\Core\Mail\TemplatedEmailFactory;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
 class EmailServiceTest extends UnitTestCase
@@ -22,7 +25,10 @@ class EmailServiceTest extends UnitTestCase
 
     protected function setUp(): void
     {
-        $this->subject = new EmailService();
+        $this->subject = new EmailService(
+            new TemplatedEmailFactory(),
+            $this->createMock(MailerInterface::class),
+        );
     }
 
     protected function tearDown(): void
@@ -60,7 +66,8 @@ class EmailServiceTest extends UnitTestCase
     {
         $body = 'A body';
         $senderName = 'Sender name';
-        $result = $this->subject->sendEmailMessage($sender, $recipient, $subject, $body, $senderName);
+        $request = new ServerRequest();
+        $result = $this->subject->sendEmailMessage($request, $recipient, $subject, $body, $senderName);
         self::assertFalse($result);
     }
 }
