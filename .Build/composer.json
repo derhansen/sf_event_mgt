@@ -1,50 +1,50 @@
 {
-  "name": "derhansen/sf_event_mgt_build",
-  "description": "composer.json for builds",
-  "repositories": [
-    {
-      "type": "path",
-      "url": "../"
-    }
-  ],
-  "require": {
-    "derhansen/sf_event_mgt": "@dev",
-    "typo3/cms-core": "~14.2.0 || dev-main",
-    "php": ">=8.2"
-  },
-  "require-dev": {
-    "typo3/cms-composer-installers": "^5.0",
-    "typo3/cms-backend": "~14.2.0 || dev-main",
-    "typo3/cms-frontend": "~14.2.0 || dev-main",
-    "typo3/cms-extbase": "~14.2.0 || dev-main",
-    "typo3/cms-felogin": "~14.2.0 || dev-main",
-    "typo3/cms-fluid-styled-content": "~14.2.0 || dev-main",
-    "typo3/cms-fluid": "~14.2.0 || dev-main",
-    "typo3/cms-tstemplate": "~14.2.0 || dev-main",
-    "typo3/cms-install": "~14.2.0 || dev-main",
-    "typo3/cms-extensionmanager": "~14.2.0 || dev-main",
-    "typo3/cms-scheduler": "~14.2.0 || dev-main",
-    "typo3/testing-framework": "^9.0",
-    "phpunit/phpunit": "^11.5.50",
-    "friendsofphp/php-cs-fixer": "^3.12.0",
-    "saschaegerer/phpstan-typo3": "^3.0",
-    "phpstan/extension-installer": "^1.1",
-    "codeception/codeception": "^5.0",
-    "codeception/module-webdriver": "^4.0",
-    "koehnlein/codeception-email-mailpit": "^0.3.0",
-    "codeception/module-db": "^3.1"
-  },
-  "config": {
-    "lock": false,
-    "allow-plugins": {
-      "typo3/class-alias-loader": true,
-      "typo3/cms-composer-installers": true,
-      "phpstan/extension-installer": true
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "DERHANSEN\\SfEventMgt\\Tests\\": "../Tests"
-    }
-  }
+	"name": "derhansen/sf_event_mgt_build",
+	"description": "composer.json for builds",
+	"repositories": [
+		{
+			"type": "path",
+			"url": "../"
+		}
+	],
+	"require": {
+		"derhansen/sf_event_mgt": "@dev",
+		"typo3/cms-core": "~14.2.0 || dev-main",
+		"php": ">=8.2"
+	},
+	"require-dev": {
+		"typo3/cms-composer-installers": "^5.0",
+		"typo3/cms-backend": "~14.2.0 || dev-main",
+		"typo3/cms-frontend": "~14.2.0 || dev-main",
+		"typo3/cms-extbase": "~14.2.0 || dev-main",
+		"typo3/cms-felogin": "~14.2.0 || dev-main",
+		"typo3/cms-fluid-styled-content": "~14.2.0 || dev-main",
+		"typo3/cms-fluid": "~14.2.0 || dev-main",
+		"typo3/cms-tstemplate": "~14.2.0 || dev-main",
+		"typo3/cms-install": "~14.2.0 || dev-main",
+		"typo3/cms-extensionmanager": "~14.2.0 || dev-main",
+		"typo3/cms-scheduler": "~14.2.0 || dev-main",
+		"typo3/testing-framework": "^9.0",
+		"phpunit/phpunit": "^11.5.50",
+		"friendsofphp/php-cs-fixer": "^3.12.0",
+		"saschaegerer/phpstan-typo3": "^3.0",
+		"phpstan/extension-installer": "^1.1",
+		"codeception/codeception": "^5.0",
+		"codeception/module-webdriver": "^4.0",
+		"koehnlein/codeception-email-mailpit": "^0.3.0",
+		"codeception/module-db": "^3.1"
+	},
+	"config": {
+		"lock": false,
+		"allow-plugins": {
+			"typo3/class-alias-loader": true,
+			"typo3/cms-composer-installers": true,
+			"phpstan/extension-installer": true
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"DERHANSEN\\SfEventMgt\\Tests\\": "../Tests"
+		}
+	}
 }

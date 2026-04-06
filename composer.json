@@ -1,39 +1,49 @@
 {
-  "name": "derhansen/sf_event_mgt",
-  "type": "typo3-cms-extension",
-  "description": "Configurable event management and registration extension based on ExtBase and Fluid",
-  "homepage": "https://github.com/derhansen/sf_event_mgt",
-  "support": {
-    "issues": "https://github.com/derhansen/sf_event_mgt/issues"
-  },
-  "authors": [
-    {
-      "name": "Torben Hansen",
-      "email": "derhansen@gmail.com",
-      "homepage": "https://www.derhansen.com",
-      "role": "Developer"
-    }
-  ],
-  "keywords": ["TYPO3 CMS", "event management", "event registration", "fluid", "extbase"],
-  "license": [
-    "GPL-2.0-or-later"
-  ],
-  "require": {
-    "typo3/cms-core": "~14.2.0 || dev-main"
-  },
-  "autoload": {
-    "psr-4": {
-      "DERHANSEN\\SfEventMgt\\": "Classes"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "DERHANSEN\\SfEventMgt\\Tests\\": "Tests"
-    }
-  },
-  "extra": {
-    "typo3/cms": {
-      "extension-key": "sf_event_mgt"
-    }
-  }
+	"name": "derhansen/sf_event_mgt",
+	"type": "typo3-cms-extension",
+	"description": "Configurable event management and registration extension based on ExtBase and Fluid",
+	"version": "9.0.0-dev",
+	"homepage": "https://github.com/derhansen/sf_event_mgt",
+	"support": {
+		"issues": "https://github.com/derhansen/sf_event_mgt/issues"
+	},
+	"authors": [
+		{
+			"name": "Torben Hansen",
+			"email": "derhansen@gmail.com",
+			"homepage": "https://www.derhansen.com",
+			"role": "Developer"
+		}
+	],
+	"keywords": [
+		"TYPO3 CMS",
+		"event management",
+		"event registration",
+		"fluid",
+		"extbase"
+	],
+	"license": [
+		"GPL-2.0-or-later"
+	],
+	"require": {
+		"typo3/cms-core": "~14.2.0 || dev-main"
+	},
+	"autoload": {
+		"psr-4": {
+			"DERHANSEN\\SfEventMgt\\": "Classes"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"DERHANSEN\\SfEventMgt\\Tests\\": "Tests"
+		}
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "sf_event_mgt",
+			"Package": {
+				"providesPackages": {}
+			}
+		}
+	}
 }
