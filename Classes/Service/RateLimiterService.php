@@ -13,13 +13,11 @@ namespace DERHANSEN\SfEventMgt\Service;
 
 use Psr\Http\Message\ServerRequestInterface;
 use Symfony\Component\RateLimiter\LimiterInterface;
-use Symfony\Component\RateLimiter\RateLimiterFactory;
-use TYPO3\CMS\Core\Http\NormalizedParams;
-use TYPO3\CMS\Core\RateLimiter\Storage\CachingFrameworkStorage;
+use TYPO3\CMS\Core\RateLimiter\RateLimiterFactoryInterface;
 
 readonly class RateLimiterService
 {
-    public function __construct(public CachingFrameworkStorage $cachingFrameworkStorage) {}
+    public function __construct(private readonly RateLimiterFactoryInterface $rateLimiterFactory) {}
 
     public function isRequestRateLimited(
         ServerRequestInterface $request,
@@ -54,13 +52,6 @@ readonly class RateLimiterService
             'interval' => $interval,
         ];
 
-        $normalizedParams = $request->getAttribute('normalizedParams') ?? NormalizedParams::createFromRequest($request);
-        $remoteIp = $normalizedParams->getRemoteAddress();
-
-        $limiterFactory = new RateLimiterFactory(
-            $config,
-            $this->cachingFrameworkStorage
-        );
-        return $limiterFactory->create($remoteIp);
+        return $this->rateLimiterFactory->createRequestBasedLimiter($request, $config);
     }
 }
