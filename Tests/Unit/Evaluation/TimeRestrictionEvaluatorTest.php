@@ -17,9 +17,6 @@ use PHPUnit\Framework\Attributes\Test;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Evaluation\TimeRestrictionEvaluator
- */
 class TimeRestrictionEvaluatorTest extends UnitTestCase
 {
     protected TimeRestrictionEvaluator $subject;
@@ -27,11 +24,10 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
     protected function setUp(): void
     {
         $this->subject = new TimeRestrictionEvaluator();
-        $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
-            ->disableOriginalConstructor()
-            ->onlyMethods(['sL'])
-            ->getMock();
-        $GLOBALS['LANG']->expects(self::any())->method('sL')->willReturn('test');
+
+        $languageService = $this->createMock(LanguageService::class);
+        $languageService->expects(self::any())->method('translate')->willReturn('test');
+        $GLOBALS['LANG'] = $languageService;
     }
 
     protected function tearDown(): void
@@ -58,13 +54,9 @@ class TimeRestrictionEvaluatorTest extends UnitTestCase
         ];
     }
 
-    /**
-     * @param string $value
-     * @param string $expected
-     */
     #[DataProvider('timeRestrictionEvaluatorDataProvider')]
     #[Test]
-    public function timeRestrictionEvaluatorTest($value, $expected)
+    public function timeRestrictionEvaluatorTest(string $value, bool $expected)
     {
         $set = true;
         $returnValue = $this->subject->evaluateFieldValue($value, '', $set);

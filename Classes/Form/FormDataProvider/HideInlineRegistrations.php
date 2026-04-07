@@ -39,14 +39,14 @@ class HideInlineRegistrations implements FormDataProviderInterface
 
         if ($amountOfRegistrations > (int)$extConfig['hideInlineRegistrationsLimit']) {
             $message = sprintf(
-                $this->getLanguageService()->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.description'),
+                (string)$this->getLanguageService()->translate('backend.hideInlineRegistrations.description', 'sf_event_mgt.be'),
                 (string)$amountOfRegistrations
             );
 
             $flashMessage = GeneralUtility::makeInstance(
                 FlashMessage::class,
                 $message,
-                $this->getLanguageService()->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:backend.hideInlineRegistrations.title'),
+                (string)$this->getLanguageService()->translate('backend.hideInlineRegistrations.title', 'sf_event_mgt.be'),
                 ContextualFeedbackSeverity::INFO,
                 true
             );

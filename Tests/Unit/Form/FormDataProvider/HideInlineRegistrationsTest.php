@@ -83,7 +83,7 @@ class HideInlineRegistrationsTest extends UnitTestCase
 
         $GLOBALS['LANG'] = $this->getMockBuilder(LanguageService::class)
             ->disableOriginalConstructor()
-            ->onlyMethods(['sL'])
+            ->onlyMethods(['translate'])
             ->getMock();
 
         $GLOBALS['BE_USER'] = $this->getMockBuilder(BackendUserAuthentication::class)

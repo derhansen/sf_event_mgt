@@ -13,7 +13,7 @@
     </div>
     <div class="event-list-row">
         <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.teaser"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.teaser" />
         </div>
         <div class="event-list-value event-teaser">
             {event.teaser}
@@ -21,7 +21,7 @@
     </div>
     <div class="event-list-row">
         <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.startdate" />
         </div>
         <div class="event-list-value event-startdate">
             <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
@@ -29,7 +29,7 @@
     </div>
     <div class="event-list-row">
         <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.enddate" />
         </div>
         <div class="event-list-value event-enddate">
             <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
@@ -38,7 +38,7 @@
     <f:if condition="{event.maxParticipants} > 0">
         <div class="event-list-row">
             <div class="event-list-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.maxParticipants" />
             </div>
             <div class="event-list-value event-maxparticipants">
                 {event.maxParticipants}
@@ -48,7 +48,7 @@
     <f:if condition="{event.enableRegistration}">
         <div class="event-list-row">
             <div class="event-list-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.registrations" />
             </div>
             <div class="event-list-value event-registrations">
                 {event.registrations->f:count()}
@@ -57,17 +57,17 @@
     </f:if>
     <div class="event-list-row">
         <div class="event-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.price" />
         </div>
         <div class="event-list-value event-price">
             <f:if condition="{event.currentPrice} == 0">
                 <f:then>
-                    <f:translate key="event.freeofcharge" />
+                    <f:translate domain="sf_event_mgt.messages" key="event.freeofcharge" />
                 </f:then>
                 <f:else>
                     <f:if condition="{event.priceOptions}">
                         <f:then>
-                            <f:translate key="startingAt" /> {event.currentPrice} {event.currency}
+                            <f:translate domain="sf_event_mgt.messages" key="startingAt" /> {event.currentPrice} {event.currency}
                         </f:then>
                         <f:else>
                             {event.currentPrice -> f:format.number()} {event.currency}
@@ -81,7 +81,7 @@
     <f:if condition="{event.location.title}">
         <div class="event-list-row">
             <div class="event-list-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+                <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.location" />
             </div>
             <div class="event-list-value event-location">
                 {event.location.title}
@@ -94,7 +94,7 @@
         <div class="event-list-value event-registration">
             <f:if condition="{event.registrationPossible}">
                 <f:if condition="{settings.registrationPid} !=''">
-                    <f:link.action action="registration" arguments="{event : event}" pageUid="{settings.registrationPid}" class="button"><f:translate key="event.registration" /></f:link.action>
+                    <f:link.action action="registration" arguments="{event : event}" class="button" pageUid="{settings.registrationPid}"><f:translate domain="sf_event_mgt.messages" key="event.registration" /></f:link.action>
                 </f:if>
             </f:if>
         </div>

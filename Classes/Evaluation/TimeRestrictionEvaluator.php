@@ -31,14 +31,14 @@ class TimeRestrictionEvaluator
             if ($set) {
                 $severity = ContextualFeedbackSeverity::INFO;
                 $message = sprintf(
-                    $languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.info'),
+                    $languageService->translate('evaluation.timeRestriction.info', 'sf_event_mgt.be'),
                     $value,
-                    date($languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.format'), $timestamp)
+                    date($languageService->translate('evaluation.timeRestriction.format', 'sf_event_mgt.be'), $timestamp)
                 );
             } else {
                 $severity = ContextualFeedbackSeverity::ERROR;
                 $message = sprintf(
-                    $languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.error'),
+                    $languageService->translate('evaluation.timeRestriction.error', 'sf_event_mgt.be'),
                     $value
                 );
             }
@@ -47,7 +47,7 @@ class TimeRestrictionEvaluator
             $message = GeneralUtility::makeInstance(
                 FlashMessage::class,
                 $message,
-                $languageService->sL('LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:evaluation.timeRestriction.header'),
+                $languageService->translate('evaluation.timeRestriction.header', 'sf_event_mgt.be'),
                 $severity,
                 false
             );

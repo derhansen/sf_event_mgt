@@ -80,19 +80,21 @@ final class PieventContentPreview extends AbstractPluginPreview
             case 'and':
             case 'notor':
             case 'notand':
-                $text = htmlspecialchars($this->getLanguageService()->sL(
-                    self::LLPATH . 'flexforms_general.categoryConjunction.' . $categoryConjunction
+                $text = htmlspecialchars((string)$this->getLanguageService()->translate(
+                    'flexforms_general.categoryConjunction.' . $categoryConjunction,
+                    'sf_event_mgt.be'
                 ));
                 break;
             default:
-                $text = htmlspecialchars($this->getLanguageService()->sL(
-                    self::LLPATH . 'flexforms_general.categoryConjunction.ignore'
+                $text = htmlspecialchars((string)$this->getLanguageService()->translate(
+                    'flexforms_general.categoryConjunction.ignore',
+                    'sf_event_mgt.be'
                 ));
-                $text .= ' <span class="badge badge-warning">' . htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.possibleMisconfiguration')) . '</span>';
+                $text .= ' <span class="badge badge-warning">' . htmlspecialchars((string)$this->getLanguageService()->translate('flexforms_general.possibleMisconfiguration', 'sf_event_mgt.be')) . '</span>';
         }
 
         $data[] = [
-            'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.categoryConjunction'),
+            'title' => (string)$this->getLanguageService()->translate('flexforms_general.categoryConjunction', 'sf_event_mgt.be'),
             'value' => $text,
         ];
     }
@@ -110,14 +112,14 @@ final class PieventContentPreview extends AbstractPluginPreview
             }
 
             $data[] = [
-                'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.category'),
+                'title' => (string)$this->getLanguageService()->translate('flexforms_general.category', 'sf_event_mgt.be'),
                 'value' => implode(', ', $categoriesOut),
             ];
 
             $includeSubcategories = $this->getFlexFormFieldValue($flexFormData, 'settings.includeSubcategories');
             if ((int)$includeSubcategories === 1) {
                 $data[] = [
-                    'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.includeSubcategories'),
+                    'title' => (string)$this->getLanguageService()->translate('flexforms_general.includeSubcategories', 'sf_event_mgt.be'),
                     'value' => '',
                     'icon' => 'actions-check-square',
                 ];

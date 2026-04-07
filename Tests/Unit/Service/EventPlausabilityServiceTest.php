@@ -62,7 +62,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
     public function verifyOrganisatorConfigurationWithNoOrganisatorAndDisabledRegistrationAddsNoFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::never())->method('sL');
+        $languageService->expects(self::never())->method('translate');
         $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
@@ -78,7 +78,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
     public function verifyOrganisatorConfigurationWithNoOrganisatorAddsFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::atLeastOnce())->method('sL');
+        $languageService->expects(self::atLeastOnce())->method('translate');
         $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
@@ -94,7 +94,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
     public function verifyOrganisatorConfigurationWithOrganisatorAndNoEmailAddsFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::atLeastOnce())->method('sL');
+        $languageService->expects(self::atLeastOnce())->method('translate');
         $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [
@@ -117,7 +117,7 @@ class EventPlausabilityServiceTest extends UnitTestCase
     public function verifyOrganisatorConfigurationWithOrganisatorAndValidEmailAddsNoFlashMessage(): void
     {
         $languageService = $this->createMock(LanguageService::class);
-        $languageService->expects(self::never())->method('sL');
+        $languageService->expects(self::never())->method('translate');
         $GLOBALS['LANG'] = $languageService;
 
         $databaseRow = [

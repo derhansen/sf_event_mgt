@@ -23,8 +23,6 @@ use TYPO3\CMS\Core\View\ViewFactoryInterface;
 
 abstract class AbstractPluginPreview
 {
-    protected const LLPATH = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
-
     public function __construct(
         protected readonly IconFactory $iconFactory,
         protected readonly PageRenderer $pageRenderer,
@@ -75,7 +73,7 @@ abstract class AbstractPluginPreview
         $pid = (int)$this->getFlexFormFieldValue($flexFormData, 'settings.' . $pidSetting, $sheet);
         if ($pid > 0) {
             $data[] = [
-                'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.' . $pidSetting),
+                'title' => (string)$this->getLanguageService()->translate('flexforms_general.' . $pidSetting, 'sf_event_mgt.be'),
                 'value' => $this->getRecordData($pid),
             ];
         }
@@ -97,21 +95,21 @@ abstract class AbstractPluginPreview
             }
 
             $recursiveLevel = (int)$this->getFlexFormFieldValue($flexFormData, 'settings.recursive');
-            $recursiveLevelText = '';
+            $recursiveLevelText = null;
             if ($recursiveLevel === 250) {
-                $recursiveLevelText = $this->getLanguageService()->sL('LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:recursive.I.5');
+                $recursiveLevelText = $this->getLanguageService()->translate('recursive.I.5', 'frontend.ttc');
             } elseif ($recursiveLevel > 0) {
-                $recursiveLevelText = $this->getLanguageService()->sL('LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:recursive.I.' . $recursiveLevel);
+                $recursiveLevelText = $this->getLanguageService()->translate('recursive.I.' . $recursiveLevel, 'frontend.ttc');
             }
 
-            if (!empty($recursiveLevelText)) {
+            if ($recursiveLevelText) {
                 $recursiveLevelText = ' <em>(' .
-                    htmlspecialchars($this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.recursive')) . ' ' .
+                    htmlspecialchars((string)$this->getLanguageService()->translate('LGL.recursive', 'core.general')) . ' ' .
                     $recursiveLevelText . ')</em>';
             }
 
             $data[] = [
-                'title' => $this->getLanguageService()->sL('LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:LGL.startingpoint'),
+                'title' => $this->getLanguageService()->translate('LGL.startingpoint', 'core.general'),
                 'value' => implode(', ', $pagesOut) . $recursiveLevelText,
             ];
         }
@@ -130,11 +128,11 @@ abstract class AbstractPluginPreview
             // Check if plugin action is "calendar" and if so, show warning that calendar action will not work
             if ($record['CType'] === 'sfeventmgt_pieventcalendar') {
                 $text .= ' <span class="badge badge-danger ms-1">' .
-                    htmlspecialchars($this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.pluginCalendarMisonfiguration')) . '</span>';
+                    htmlspecialchars((string)$this->getLanguageService()->translate('flexforms_general.pluginCalendarMisonfiguration', 'sf_event_mgt.be')) . '</span>';
             }
 
             $data[] = [
-                'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.disableOverrideDemand'),
+                'title' => (string)$this->getLanguageService()->translate('flexforms_general.disableOverrideDemand', 'sf_event_mgt.be'),
                 'value' => $text,
                 'icon' => 'actions-check-square',
             ];
@@ -152,7 +150,7 @@ abstract class AbstractPluginPreview
     ): void {
         $orderField = $this->getFlexFormFieldValue($flexFormData, $orderByField);
         if (!empty($orderField)) {
-            $text = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.orderField.' . $orderField);
+            $text = (string)$this->getLanguageService()->translate('flexforms_general.orderField.' . $orderField, 'sf_event_mgt.be');
 
             // Order direction (asc, desc)
             $orderDirection = $this->getOrderDirectionSetting($flexFormData, $orderDirectionField);
@@ -161,7 +159,7 @@ abstract class AbstractPluginPreview
             }
 
             $data[] = [
-                'title' => $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.orderField'),
+                'title' => (string)$this->getLanguageService()->translate('flexforms_general.orderField', 'sf_event_mgt.be'),
                 'value' => $text,
             ];
         }
@@ -205,7 +203,10 @@ abstract class AbstractPluginPreview
 
         $orderDirection = $this->getFlexFormFieldValue($flexFormData, $orderDirectionField);
         if (!empty($orderDirection)) {
-            $text = $this->getLanguageService()->sL(self::LLPATH . 'flexforms_general.orderDirection.' . $orderDirection . 'ending');
+            $text = (string)$this->getLanguageService()->translate(
+                'flexforms_general.orderDirection.' . $orderDirection . 'ending',
+                'sf_event_mgt.be'
+            );
         }
 
         return $text;

@@ -8,11 +8,11 @@
         <f:then>
             <f:page.title>{event.metaTitle}</f:page.title>
 
-            <h1><f:translate key="registration.title" /></h1>
+            <h1><f:translate domain="sf_event_mgt.messages" key="registration.title" /></h1>
 
             <div class="event-registration-row">
                 <div class="event-registration-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.title" />
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.title" />
                 </div>
                 <div class="event-registration-value event-title">
                     {event.title}
@@ -22,7 +22,7 @@
 
             <div class="event-registration-row">
                 <div class="event-registration-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.startdate" />
                 </div>
                 <div class="event-registration-value event-startdate">
                     <f:format.date format="%d.%m.%Y - %H:%M">{event.startdate}</f:format.date>
@@ -31,7 +31,7 @@
             </div>
             <div class="event-registration-row">
                 <div class="event-registration-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.enddate" />
                 </div>
                 <div class="event-registration-value event-enddate">
                     <f:format.date format="%d.%m.%Y - %H:%M">{event.enddate}</f:format.date>
@@ -40,7 +40,7 @@
             </div>
             <div class="event-registration-row">
                 <div class="event-registration-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.maxParticipants" />
                 </div>
                 <div class="event-registration-value event-maxparticipants">
                     {event.maxParticipants}
@@ -49,7 +49,7 @@
             </div>
             <div class="event-registration-row">
                 <div class="event-registration-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.registrations" />
                 </div>
                 <div class="event-registration-value event-registrations">
                     {event.registrations -> f:count()}
@@ -59,7 +59,7 @@
             <f:if condition="{event.currentPrice} > 0">
                 <div class="event-registration-row">
                     <div class="event-registration-label">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.price"/>
+                        <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.price" />
                     </div>
                     <div class="event-registration-value event-price">
                         {event.currentPrice} {event.currency} <f:if condition="{event.taxRate} > 0">(incl. {event.taxRate}% VAT)</f:if>
@@ -70,7 +70,7 @@
             <f:if condition="{event.location}">
                 <div class="event-registration-row">
                     <div class="event-registration-label">
-                        <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+                        <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.location" />
                     </div>
                     <div class="event-registration-value event-location">
                         {event.location.title}
@@ -79,12 +79,12 @@
                 </div>
             </f:if>
 
-            <h2><f:translate key="registration.form.header" /></h2>
+            <h2><f:translate domain="sf_event_mgt.messages" key="registration.form.header" /></h2>
 
             <f:if condition="{event.enableWaitlist}">
                 <f:if condition="{event.maxParticipants} != 0 && {event.registrations -> f:count()} >= {event.maxParticipants}">
                     <p>
-                        <strong><f:translate key="registration.form.waitlist" /></strong>
+                        <strong><f:translate domain="sf_event_mgt.messages" key="registration.form.waitlist" /></strong>
                     </p>
                 </f:if>
             </f:if>
@@ -96,23 +96,23 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'gender')}">
                         <label for="gender">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.gender" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.gender" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="gender">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
                         </label>
 
                         <label>
-                            <f:form.radio name="gender" property="gender" value=""/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.notset" />
+                            <f:form.radio name="gender" property="gender" value=""/> <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.gender.notset" />
                         </label>
                         <label>
-                            <f:form.radio name="gender" property="gender" value="f"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.female" />
+                            <f:form.radio name="gender" property="gender" value="f"/> <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.gender.female" />
                         </label>
                         <label>
-                            <f:form.radio name="gender" property="gender" value="m"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.male" />
+                            <f:form.radio name="gender" property="gender" value="m"/> <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.gender.male" />
                         </label>
                         <label>
-                            <f:form.radio name="gender" property="gender" value="v"/> <f:translate key="tx_sfeventmgt_domain_model_registration.gender.various" />
+                            <f:form.radio name="gender" property="gender" value="v"/> <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.gender.various" />
                         </label>
 
                         <f:render partial="FormErrors" arguments="{field: 'registration.gender'}"/>
@@ -120,7 +120,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'firstname')}">
                         <label for="firstname">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.firstname" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.firstname" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="firstname">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -131,7 +131,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'lastname')}">
                         <label for="lastname">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.lastname" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.lastname" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="lastname">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -142,7 +142,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'title')}">
                         <label for="title">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.title" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.title" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="title">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -153,7 +153,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'company')}">
                         <label for="company">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.company" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.company" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="company">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -164,7 +164,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'address')}">
                         <label for="address">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.address" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.address" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="address">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -175,7 +175,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'zip')}">
                         <label for="zip">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.zip" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.zip" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="zip">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -186,7 +186,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'city')}">
                         <label for="city">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.city" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.city" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="city">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -197,7 +197,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'country')}">
                         <label for="country">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.country" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.country" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="country">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -208,7 +208,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'email')}">
                         <label for="email">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.email" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.email" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="email">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -219,7 +219,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'phone')}">
                         <label for="phone">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.phone" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.phone" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="phone">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -230,7 +230,7 @@
 
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'dateOfBirth')}">
                         <label for="dateOfBirth">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.date_of_birth" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.date_of_birth" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="dateOfBirth">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -241,7 +241,7 @@
 
                     <f:if condition="{event.maxRegistrationsPerUser} > 1">
                         <div class="event-registration-row">
-                            <label for="amountOfRegistrations"><f:translate key="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" /></label>
+                            <label for="amountOfRegistrations"><f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" /></label>
                             <f:form.select id="amountOfRegistrations" property="amountOfRegistrations" options="{e:event.simultaneousRegistrations(event: '{event}')}" />
                         </div>
                     </f:if>
@@ -249,7 +249,7 @@
                     <f:if condition="{event.activePriceOptions}">
                         <div class="event-registration-row {e:validation.errorClass(fieldname: 'priceOption')}">
                             <label for="priceOption">
-                                <f:translate key="tx_sfeventmgt_domain_model_registration.priceOption" />
+                                <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.priceOption" />
                                 <e:registration.isRequiredField settings="{settings}" fieldname="priceOption">
                                     <span class="event-required">*</span>
                                 </e:registration.isRequiredField>
@@ -268,7 +268,7 @@
                     <f:if condition="{event.enablePayment}">
                         <br/>
                         <div class="event-registration-row">
-                            <label for="paymentmethod"><f:translate key="tx_sfeventmgt_domain_model_registration.paymentmethod" /></label>
+                            <label for="paymentmethod"><f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.paymentmethod" /></label>
                             <f:form.select id="paymentmethod" property="paymentmethod" options="{paymentMethods}" />
                         </div>
                     </f:if>
@@ -276,7 +276,7 @@
                     <br/>
                     <div class="event-registration-row {e:validation.errorClass(fieldname: 'notes')}">
                         <label for="notes">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.notes" />
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.notes" />
                             <e:registration.isRequiredField settings="{settings}" fieldname="notes">
                                 <span class="event-required">*</span>
                             </e:registration.isRequiredField>
@@ -294,7 +294,7 @@
                     <div class="event-registration-row checkbox {e:validation.errorClass(fieldname: 'accepttc')}">
                         <label for="accepttc">
                             <f:form.checkbox id="accepttc" property="accepttc" value="1"/>
-                            <f:translate key="tx_sfeventmgt_domain_model_registration.accepttc"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.accepttc" />
                             <f:link.typolink parameter="{settings.registration.linkTermsAndConditions}"/>
                             <e:registration.isRequiredField settings="{settings}" fieldname="accepttc">
                                 <span class="event-required">*</span>
@@ -315,15 +315,15 @@
             </f:form>
 
             <f:if condition="{settings.detailPid}">
-                <f:link.action action="detail" pageUid="{settings.detailPid}" arguments="{event: event}" class="button"><f:translate key="event.backDetailsText" /></f:link.action>
+                <f:link.action action="detail" arguments="{event: event}" class="button" pageUid="{settings.detailPid}"><f:translate domain="sf_event_mgt.messages" key="event.backDetailsText" /></f:link.action>
             </f:if>
 
-            <f:link.action action="list" pageUid="{settings.listPid}" class="button"><f:translate key="event.backtext" /></f:link.action>
+            <f:link.action action="list" class="button" pageUid="{settings.listPid}"><f:translate domain="sf_event_mgt.messages" key="event.backtext" /></f:link.action>
 
         </f:then>
         <f:else>
 
-            <f:translate key="event.message.registrationnotpossible"/>
+            <f:translate domain="sf_event_mgt.messages" key="event.message.registrationnotpossible" />
 
         </f:else>
     </f:if>

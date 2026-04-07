@@ -429,6 +429,10 @@
 			<trans-unit id="administration.notificationsDisabled.description">
 				<source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
 			</trans-unit>
+			<trans-unit id="reset">
+				<source>Reset</source>
+			</trans-unit>
+
 			<trans-unit id="events-folder">
 				<source>Events</source>
 			</trans-unit>

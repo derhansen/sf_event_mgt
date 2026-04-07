@@ -23,8 +23,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class EventPlausabilityService
 {
-    private const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
-
     /**
      * Enqueues an error flash message, if the event startdate is not before the enddate
      */
@@ -32,8 +30,8 @@ class EventPlausabilityService
     {
         if (!$this->isStartDateBeforeEndDate($startDate, $endDate) && !($startDate === $endDate)) {
             $this->addMessageToFlashMessageQueue(
-                $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.message'),
-                $this->getLanguageService()->sL(self::LANG_FILE . 'event.startdateNotBeforeEnddate.title'),
+                (string)$this->getLanguageService()->translate('event.startdateNotBeforeEnddate.message', 'sf_event_mgt.be'),
+                (string)$this->getLanguageService()->translate('event.startdateNotBeforeEnddate.title', 'sf_event_mgt.be'),
                 ContextualFeedbackSeverity::ERROR
             );
         }
@@ -51,8 +49,8 @@ class EventPlausabilityService
 
         if (empty($databaseRow['organisator'])) {
             $this->addMessageToFlashMessageQueue(
-                $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.message'),
-                $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisator.title'),
+                (string)$this->getLanguageService()->translate('event.noOrganisator.message', 'sf_event_mgt.be'),
+                (string)$this->getLanguageService()->translate('event.noOrganisator.title', 'sf_event_mgt.be'),
                 ContextualFeedbackSeverity::WARNING
             );
             return;
@@ -61,8 +59,8 @@ class EventPlausabilityService
         foreach ($databaseRow['organisator'] as $organisator) {
             if (!GeneralUtility::validEmail($organisator['row']['email'])) {
                 $this->addMessageToFlashMessageQueue(
-                    $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.message'),
-                    $this->getLanguageService()->sL(self::LANG_FILE . 'event.noOrganisatorEmail.title'),
+                    (string)$this->getLanguageService()->translate('event.noOrganisatorEmail.message', 'sf_event_mgt.be'),
+                    (string)$this->getLanguageService()->translate('event.noOrganisatorEmail.title', 'sf_event_mgt.be'),
                     ContextualFeedbackSeverity::WARNING
                 );
             }

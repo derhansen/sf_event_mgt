@@ -43,8 +43,8 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 
 class AdministrationController extends AbstractController
 {
-    private const LANG_FILE = 'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:';
-
+    protected ModuleTemplateFactory $moduleTemplateFactory;
+    protected ModuleTemplateFactory $moduleTemplateFactory;
     protected ModuleTemplateFactory $moduleTemplateFactory;
     protected CustomNotificationLogRepository $customNotificationLogRepository;
     protected ExportService $exportService;
@@ -148,7 +148,7 @@ class AdministrationController extends AbstractController
                     continue;
                 }
 
-                $title = $this->getLanguageService()->sL(self::LANG_FILE . $tableConfiguration['label']);
+                $title = (string)$this->getLanguageService()->translate($tableConfiguration['label'], 'sf_event_mgt.be');
                 $icon = $this->iconFactory->getIcon($tableConfiguration['icon'], IconSize::SMALL);
                 $viewButton = $this->componentFactory->createLinkButton()
                     ->setHref($tableConfiguration['link'])
@@ -389,8 +389,8 @@ class AdministrationController extends AbstractController
         $this->maintenanceService->handleExpiredRegistrations($delete);
 
         $this->addFlashMessage(
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.content'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-1.title')
+            (string)$this->getLanguageService()->translate('administration.message-1.content', 'sf_event_mgt.be'),
+            (string)$this->getLanguageService()->translate('administration.message-1.title', 'sf_event_mgt.be')
         );
 
         return $this->redirect('list');
@@ -434,32 +434,37 @@ class AdministrationController extends AbstractController
         return [
             [
                 'value' => CustomNotification::RECIPIENTS_ALL,
-                'label' => $this->getLanguageService()->sL(
-                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_ALL
+                'label' => (string)$this->getLanguageService()->translate(
+                    'administration.notify.recipients.' . CustomNotification::RECIPIENTS_ALL,
+                    'sf_event_mgt.be'
                 ),
             ],
             [
                 'value' => CustomNotification::RECIPIENTS_CONFIRMED,
-                'label' => $this->getLanguageService()->sL(
-                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_CONFIRMED
+                'label' => (string)$this->getLanguageService()->translate(
+                    'administration.notify.recipients.' . CustomNotification::RECIPIENTS_CONFIRMED,
+                    'sf_event_mgt.be'
                 ),
             ],
             [
                 'value' => CustomNotification::RECIPIENTS_UNCONFIRMED,
-                'label' => $this->getLanguageService()->sL(
-                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_UNCONFIRMED
+                'label' => (string)$this->getLanguageService()->translate(
+                    'administration.notify.recipients.' . CustomNotification::RECIPIENTS_UNCONFIRMED,
+                    'sf_event_mgt.be'
                 ),
             ],
             [
                 'value' => CustomNotification::RECIPIENTS_WAITLIST_CONFIRMED,
-                'label' => $this->getLanguageService()->sL(
-                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_WAITLIST_CONFIRMED
+                'label' => (string)$this->getLanguageService()->translate(
+                    'administration.notify.recipients.' . CustomNotification::RECIPIENTS_WAITLIST_CONFIRMED,
+                    'sf_event_mgt.be'
                 ),
             ],
             [
                 'value' => CustomNotification::RECIPIENTS_WAITLIST_UNCONFIRMED,
-                'label' => $this->getLanguageService()->sL(
-                    self::LANG_FILE . 'administration.notify.recipients.' . CustomNotification::RECIPIENTS_WAITLIST_UNCONFIRMED
+                'label' => (string)$this->getLanguageService()->translate(
+                    'administration.notify.recipients.' . CustomNotification::RECIPIENTS_WAITLIST_UNCONFIRMED,
+                    'sf_event_mgt.be'
                 ),
             ],
         ];
@@ -488,8 +493,8 @@ class AdministrationController extends AbstractController
             $customNotification
         );
         $this->addFlashMessage(
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.content'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.message-2.title')
+            (string)$this->getLanguageService()->translate('administration.message-2.content', 'sf_event_mgt.be'),
+            (string)$this->getLanguageService()->translate('administration.message-2.title', 'sf_event_mgt.be')
         );
         return $this->redirect('list');
     }
@@ -502,8 +507,8 @@ class AdministrationController extends AbstractController
     {
         if ($this->getBackendUser()->isInWebMount($event->getPid()) === null) {
             $this->addFlashMessage(
-                $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.content'),
-                $this->getLanguageService()->sL(self::LANG_FILE . 'administration.accessdenied.title'),
+                (string)$this->getLanguageService()->translate('administration.accessdenied.content', 'sf_event_mgt.be'),
+                (string)$this->getLanguageService()->translate('administration.accessdenied.title', 'sf_event_mgt.be'),
                 ContextualFeedbackSeverity::ERROR
             );
             return false;
@@ -534,8 +539,8 @@ class AdministrationController extends AbstractController
     public function getOrderDirections(): array
     {
         return [
-            'asc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.asc'),
-            'desc' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.sortOrder.desc'),
+            'asc' => (string)$this->getLanguageService()->translate('administration.sortOrder.asc', 'sf_event_mgt.be'),
+            'desc' => (string)$this->getLanguageService()->translate('administration.sortOrder.desc', 'sf_event_mgt.be'),
         ];
     }
 
@@ -545,12 +550,12 @@ class AdministrationController extends AbstractController
     public function getRecursiveLevels(): array
     {
         return [
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.current'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level1'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level2'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level3'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level4'),
-            $this->getLanguageService()->sL(self::LANG_FILE . 'administration.recursiveLevel.level5'),
+            $this->getLanguageService()->translate('administration.recursiveLevel.current', 'sf_event_mgt.be') ?? '',
+            $this->getLanguageService()->translate('administration.recursiveLevel.level1', 'sf_event_mgt.be') ?? '',
+            $this->getLanguageService()->translate('administration.recursiveLevel.level2', 'sf_event_mgt.be') ?? '',
+            $this->getLanguageService()->translate('administration.recursiveLevel.level3', 'sf_event_mgt.be') ?? '',
+            $this->getLanguageService()->translate('administration.recursiveLevel.level4', 'sf_event_mgt.be') ?? '',
+            $this->getLanguageService()->translate('administration.recursiveLevel.level5', 'sf_event_mgt.be') ?? '',
         ];
     }
 
@@ -560,9 +565,9 @@ class AdministrationController extends AbstractController
     public function getOrderByFields(): array
     {
         return [
-            'title' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.title'),
-            'startdate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.startdate'),
-            'enddate' => $this->getLanguageService()->sL(self::LANG_FILE . 'administration.orderBy.enddate'),
+            'title' => $this->getLanguageService()->translate('administration.orderBy.title', 'sf_event_mgt.be') ?? '',
+            'startdate' => $this->getLanguageService()->translate('administration.orderBy.startdate', 'sf_event_mgt.be') ?? '',
+            'enddate' => $this->getLanguageService()->translate('administration.orderBy.enddate', 'sf_event_mgt.be') ?? '',
         ];
     }
 

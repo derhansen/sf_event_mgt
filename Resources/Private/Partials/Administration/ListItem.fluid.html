@@ -35,17 +35,17 @@
         </f:if>
     </td>
     <td class="registrations">
-        {event.registration->f:count()}
+        {event.registration -> f:count()}
     </td>
     <td>
         <div class="btn-group">
             <f:if condition="{event.enableRegistration} && !{event.hidden} && {e:be.isActionEnabled(action: 'notify', settings: settings)}">
-                <f:link.action action="indexNotify" arguments="{event: '{event}'}" class="btn btn-default btn-sm" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify')}">
+                <f:link.action action="indexNotify" arguments="{event: '{event}'}" class="btn btn-default btn-sm" title="{f:translate(key: 'administration.notify', domain: 'sf_event_mgt.be')}">
                     <core:icon identifier="actions-envelope" size="small" />
                 </f:link.action>
             </f:if>
             <f:if condition="{event.enableRegistration} && {e:be.isActionEnabled(action: 'export', settings: settings)}">
-                <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" class="btn btn-default btn-sm" title="{f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.export')}">
+                <f:link.action action="export" arguments="{eventUid: '{event.uid}'}" class="btn btn-default btn-sm" title="{f:translate(key: 'administration.export', domain: 'sf_event_mgt.be')}">
                     <core:icon identifier="actions-file-csv-download" size="small" />
                 </f:link.action>
             </f:if>

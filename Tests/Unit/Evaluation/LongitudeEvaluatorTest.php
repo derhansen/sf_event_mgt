@@ -16,9 +16,6 @@ use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Test;
 use TYPO3\TestingFramework\Core\Unit\UnitTestCase;
 
-/**
- * Test case for class DERHANSEN\SfEventMgt\Evaluation\LongitudeEvaluator
- */
 class LongitudeEvaluatorTest extends UnitTestCase
 {
     protected LongitudeEvaluator $subject;

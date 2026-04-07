@@ -4,10 +4,10 @@
 
 <f:section name="main">
 
-	<h1><f:translate key="list.title" /></h1>
+	<h1><f:translate domain="sf_event_mgt.messages" key="list.title" /></h1>
 
     <!-- The code below shows how you can filter events by categories. You can e.g. create an UL which acts like a select-box -->
-	<f:link.action action="list" controller="Event" class="{f:if(condition: overwriteDemand.category,then: 'button button-outline', else: 'button')}"><f:translate key="event.allEvents" /></f:link.action>
+	<f:link.action action="list" class="{f:if(condition: overwriteDemand.category,then: 'button button-outline', else: 'button')}" controller="Event"><f:translate domain="sf_event_mgt.messages" key="event.allEvents" /></f:link.action>
     <f:for each="{categories}" as="category">
 		<f:if condition="{overwriteDemand.category} == {category.uid}">
 			<f:then>

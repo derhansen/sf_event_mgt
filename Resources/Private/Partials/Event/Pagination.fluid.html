@@ -2,12 +2,12 @@
     <ul class="paginator">
         <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
             <li class="first">
-                <a href="{f:uri.action(action:actionName, arguments:{currentPage: 1, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.first')}">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: 1, overwriteDemand: overwriteDemand})}" title="{f:translate(key: 'pagination.first', domain: 'sf_event_mgt.messages')}">
                     {f:translate(key:'pagination.first')}
                 </a>
             </li>
             <li class="previous">
-                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.previous')}">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key: 'pagination.previous', domain: 'sf_event_mgt.messages')}">
                     {f:translate(key:'pagination.previous')}
                 </a>
             </li>
@@ -25,12 +25,12 @@
         </f:if>
         <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
             <li class="next">
-                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.next')}">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key: 'pagination.next', domain: 'sf_event_mgt.messages')}">
                     {f:translate(key:'pagination.next')}
                 </a>
             </li>
             <li class="last">
-                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.lastPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key:'pagination.last')}">
+                <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.lastPageNumber, overwriteDemand: overwriteDemand})}" title="{f:translate(key: 'pagination.last', domain: 'sf_event_mgt.messages')}">
                     {f:translate(key:'pagination.last')}
                 </a>
             </li>

@@ -3,12 +3,12 @@
       <f:if condition="{pagination.previousPageNumber} && {pagination.previousPageNumber} >= {pagination.firstPageNumber}">
           <f:then>
               <li class="page-item">
-                  <a href="{f:uri.action(action:actionName, arguments:{currentPage: 1})}" title="{f:translate(key:'pagination.first')}" class="page-link">
+                  <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: 1})}" title="{f:translate(key: 'pagination.first', domain: 'sf_event_mgt.messages')}">
                       <core:icon identifier="actions-view-paging-first" />
                   </a>
               </li>
               <li class="page-item">
-                  <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous')}" class="page-link">
+                  <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.previousPageNumber})}" title="{f:translate(key:'pagination.previous', domain: 'sf_event_mgt.messages')}">
                       <core:icon identifier="actions-view-paging-previous" />
                   </a>
               </li>
@@ -28,7 +28,7 @@
       </f:if>
       <li class="page-item">
         <span class="page-link">
-            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.pagination.records" /> {pagination.startRecordNumber} - {pagination.endRecordNumber}
+            <f:translate domain="sf_event_mgt.be" key="administration.pagination.records" /> {pagination.startRecordNumber} - {pagination.endRecordNumber}
         </span>
       </li>
       <f:for each="{pagination.allPageNumbers}" as="page">
@@ -44,12 +44,12 @@
       <f:if condition="{pagination.nextPageNumber} && {pagination.nextPageNumber} <= {pagination.lastPageNumber}">
           <f:then>
               <li class="page-item">
-                  <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key:'pagination.next')}" class="page-link">
+                  <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.nextPageNumber})}" title="{f:translate(key: 'pagination.next', domain: 'sf_event_mgt.be')}">
                       <core:icon identifier="actions-view-paging-next" />
                   </a>
               </li>
               <li class="page-item">
-                  <a href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.lastPageNumber})}" title="{f:translate(key:'pagination.last')}" class="page-link">
+                  <a class="page-link" href="{f:uri.action(action:actionName, arguments:{currentPage: pagination.lastPageNumber})}" title="{f:translate(key: 'pagination.last', domain: 'sf_event_mgt.be')}">
                       <core:icon identifier="actions-view-paging-last" />
                   </a>
               </li>

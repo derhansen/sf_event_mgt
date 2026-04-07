@@ -5,16 +5,16 @@
 <f:section name="main">
     <f:if condition="{cancellationPossible}">
         <f:then>
-            <p>To finally cancel you registration for the event "{event.title}", please click the "<f:translate key="cancelRegistration" />" button.</p>
+            <p>To finally cancel you registration for the event "{event.title}", please click the "<f:translate domain="sf_event_mgt.messages" key="cancelRegistration" />" button.</p>
 
             <f:link.action action="cancelRegistration" arguments="{reguid: '{registration.uid}', hmac: '{hmac}'}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration">
-                <f:translate key="cancelRegistration" />
+                <f:translate domain="sf_event_mgt.messages" key="cancelRegistration" />
             </f:link.action>
         </f:then>
         <f:else>
-            <h1><f:translate key="{titleKey}" /></h1>
+            <h1><f:translate domain="sf_event_mgt.messages" key="{titleKey}" /></h1>
             <p>
-                <f:translate key="{messageKey}" />
+                <f:translate domain="sf_event_mgt.messages" key="{messageKey}" />
             </p>
         </f:else>
     </f:if>

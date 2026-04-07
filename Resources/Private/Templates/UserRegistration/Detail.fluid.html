@@ -6,7 +6,7 @@
 
 <f:section name="main">
 
-    <h1><f:translate key="userRegistration.title" /></h1>
+    <h1><f:translate domain="sf_event_mgt.messages" key="userRegistration.title" /></h1>
 
     <div class="userregistration-detail-row">
         <h2 class="event-title">
@@ -16,7 +16,7 @@
 
     <div class="userregistration-detail-row">
         <div class="userregistration-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.startdate" />
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.startdate" />
         </div>
         <div class="userregistration-detail-value event-startdate">
             <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.startdate}</f:format.date>
@@ -26,7 +26,7 @@
 
     <div class="userregistration-detail-row">
         <div class="userregistration-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.enddate" />
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.enddate" />
         </div>
         <div class="userregistration-detail-value event-enddate">
             <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.enddate}</f:format.date>
@@ -36,7 +36,7 @@
 
     <div class="userregistration-detail-row">
         <div class="userregistration-detail-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.description" />
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.description" />
         </div>
         <div class="userregistration-detail-value event-description">
             <f:format.html>{registration.event.description}</f:format.html>
@@ -47,15 +47,15 @@
     <f:if condition="{registration.event.enablePayment}">
         <div class="userregistration-detail-row">
             <div class="userregistration-detail-label">
-                <f:translate key="tx_sfeventmgt_domain_model_registration.payment.paid" />
+                <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.payment.paid" />
             </div>
             <div class="userregistration-detail-value userregistration-payment-paid">
                 <f:if condition="{registration.event.paid}">
                     <f:then>
-                        <f:translate key="tx_sfeventmgt_domain_model_registration.payment.paid.yes" />
+                        <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.payment.paid.yes" />
                     </f:then>
                     <f:else>
-                        <f:translate key="tx_sfeventmgt_domain_model_registration.payment.paid.no" />
+                        <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration.payment.paid.no" />
                     </f:else>
 
                     <f:comment>
@@ -74,7 +74,7 @@
             <div class="userregistration-detail-value userregistration-cancel">
                 <f:variable name="hmac" value="{e:registration.hmac(registration: registration)}"/>
                 <f:link.action action="cancelRegistration" arguments="{reguid: registration.uid, hmac: hmac}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" pageUid="{settings.registrationPid}">
-                    <f:translate key="userRegistration.cancel" />
+                    <f:translate domain="sf_event_mgt.messages" key="userRegistration.cancel" />
                 </f:link.action>
             </div>
             <div class="clear"></div>
@@ -82,7 +82,7 @@
     </f:if>
 
 
-    <f:link.action action="list" controller="UserRegistration" pluginName="Piuserreg" class="button"><f:translate key="event.backtext" /></f:link.action>
+    <f:link.action action="list" class="button" controller="UserRegistration" pluginName="Piuserreg"><f:translate domain="sf_event_mgt.messages" key="event.backtext" /></f:link.action>
 
 </f:section>
 

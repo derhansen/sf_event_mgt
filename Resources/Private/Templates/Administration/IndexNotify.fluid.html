@@ -6,7 +6,7 @@
 
 <f:section name="Content">
     <h1>
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify" />
+        <f:translate domain="sf_event_mgt.be" key="administration.notify" />
     </h1>
 
     <f:if condition="{settings.notification.disabled}">
@@ -20,12 +20,12 @@
         <f:render partial="Administration/Event" arguments="{event: event}" />
 
         <div class="notifyhead">
-            <p><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.description" /></p>
+            <p><f:translate domain="sf_event_mgt.be" key="administration.notify.description" /></p>
 
             <f:form name="customNotification" object="{customNotification}" action="notify" arguments="{event: event}" class="form-horizontal">
                 <div class="form-group">
                     <label for="template" class="col-xs-2 control-label">
-                        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.template"/>
+                        <f:translate domain="sf_event_mgt.be" key="administration.notify.label.template" />
                     </label>
 
                     <div class="col-xs-10">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="form-group">
                     <label for="template" class="col-xs-2 control-label">
-                        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.recipients"/>
+                        <f:translate domain="sf_event_mgt.be" key="administration.notify.label.recipients" />
                     </label>
 
                     <div class="col-xs-10">
@@ -43,7 +43,7 @@
                 </div>
                 <div class="form-group">
                     <label for="overwriteSubject" class="col-xs-2 control-label">
-                        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.overwriteSubject"/>
+                        <f:translate domain="sf_event_mgt.be" key="administration.notify.label.overwriteSubject" />
                     </label>
 
                     <div class="col-xs-10">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="form-group">
                     <label for="additionalMessage" class="col-xs-2 control-label">
-                        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.label.additionalMessage"/>
+                        <f:translate domain="sf_event_mgt.be" key="administration.notify.label.additionalMessage" />
                     </label>
 
                     <div class="col-xs-10">
@@ -63,7 +63,7 @@
                 <div class="form-group">
                     <div class="col-xs-offset-2 col-xs-10">
                         <button type="submit" class="btn btn-default" name="search" title="Search">
-                            {f:translate(key:'LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sendNotifications')}
+                            <f:translate domain="sf_event_mgt.be" key="administration.notify.sendNotifications" />
                         </button>
                     </div>
                 </div>
@@ -72,16 +72,16 @@
     </f:if>
 
     <h3>
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notificationHistory" />
+        <f:translate domain="sf_event_mgt.be" key="administration.notificationHistory" />
     </h3>
 
     <table class="table table-striped table-hover">
         <thead>
         <tr>
-            <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.date"/></th>
-            <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.details"/></th>
-            <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.emailsSent"/></th>
-            <th><f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.sentBy"/></th>
+            <th><f:translate domain="sf_event_mgt.be" key="administration.notify.date" /></th>
+            <th><f:translate domain="sf_event_mgt.be" key="administration.notify.details" /></th>
+            <th><f:translate domain="sf_event_mgt.be" key="administration.notify.emailsSent" /></th>
+            <th><f:translate domain="sf_event_mgt.be" key="administration.notify.sentBy" /></th>
         </tr>
         </thead>
         <tbody>
@@ -97,7 +97,7 @@
                             {backendUser.username}
                         </f:then>
                         <f:else>
-                            <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.notAvailable"/>
+                            <f:translate domain="sf_event_mgt.be" key="administration.notify.notAvailable" />
                         </f:else>
                     </f:if>
                 </td>
@@ -107,7 +107,7 @@
     </table>
 
     <f:link.action action="list" class="btn btn-default">
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.notify.cancelSendNotifications" />
+        <f:translate domain="sf_event_mgt.be" key="administration.notify.cancelSendNotifications" />
     </f:link.action>
 
 </f:section>

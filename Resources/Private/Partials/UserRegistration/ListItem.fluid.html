@@ -6,7 +6,7 @@
 
     <div class="userregistration-list-row">
         <div class="userregistration-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.title" />
         </div>
         <div class="userregistration-list-value event-title">
             {registration.event.title}
@@ -16,7 +16,7 @@
 
     <div class="userregistration-list-row">
         <div class="userregistration-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.teaser"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.teaser" />
         </div>
         <div class="userregistration-list-value event-teaser">
             {registration.event.teaser}
@@ -26,7 +26,7 @@
 
     <div class="userregistration-list-row">
         <div class="userregistration-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.startdate" />
         </div>
         <div class="userregistration-list-value event-startdate">
             <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.startdate}</f:format.date>
@@ -36,7 +36,7 @@
 
     <div class="userregistration-list-row">
         <div class="userregistration-list-label">
-            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.enddate" />
         </div>
         <div class="userregistration-list-value event-startdate">
             <f:format.date format="%d.%m.%Y - %H:%M">{registration.event.enddate}</f:format.date>
@@ -47,7 +47,7 @@
     <f:if condition="{registration.event.location}">
         <div class="userregistration-list-row">
             <div class="userregistration-list-label">
-                <f:translate key="tx_sfeventmgt_domain_model_event.location"/>
+                <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.location" />
             </div>
             <div class="userregistration-list-value event-location">
                 {registration.event.location.title}
@@ -63,7 +63,7 @@
             <div class="userregistration-list-value userregistration-cancel">
                 <f:variable name="hmac" value="{e:registration.hmac(registration: registration)}"/>
                 <f:link.action action="cancelRegistration" arguments="{reguid: registration.uid, hmac: hmac}" absolute="TRUE" controller="Event" extensionName="sfeventmgt" pluginName="Pieventregistration" pageUid="{settings.registrationPid}">
-                    <f:translate key="userRegistration.cancel" />
+                    <f:translate domain="sf_event_mgt.messages" key="userRegistration.cancel" />
                 </f:link.action>
             </div>
             <div class="clear"></div>

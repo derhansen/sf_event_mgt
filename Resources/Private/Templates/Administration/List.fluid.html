@@ -7,14 +7,14 @@
 
 <f:section name="Content">
     <h1>
-        <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.title" />
+        <f:translate domain="sf_event_mgt.be" key="administration.title" />
     </h1>
 
     <f:form name="searchDemand" object="{searchDemand}" action="list">
         <div class="form-row g-3 mb-3">
             <div class="form-group">
                 <label for="search" class="form-label">
-                    <f:translate key="LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search" />
+                    <f:translate domain="core.common" key="search" />
                 </label>
 
                 <div class="input-group">
@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label for="startDate" class="form-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.startdate" />
                 </label>
                 <div class="input-group date-field">
                     <f:form.textfield
@@ -48,7 +48,7 @@
 
             <div class="form-group">
                 <label for="endDate" class="form-label">
-                    <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                    <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.enddate" />
                 </label>
 
                 <div class="input-group date-field">
@@ -69,7 +69,7 @@
 
             <div class="form-group">
                 <label for="orderField" class="form-label">
-                    <f:translate key="admin.sorting"/>
+                    <f:translate domain="sf_event_mgt.messages" key="admin.sorting" />
                 </label>
                 <div class="input-group">
                     <f:form.select id="orderField" name="overwriteDemand[orderField]" options="{orderByFields}" class="form-select" value="{overwriteDemand.orderField}"/>
@@ -78,8 +78,12 @@
             </div>
 
             <div class="form-group align-self-end">
-                <f:form.button type="submit" name="operation" value="search" class="btn btn-default">{f:translate(key:'LLL:EXT:core/Resources/Private/Language/locallang_common.xlf:search')}</f:form.button>
-                <f:form.button type="submit" name="operation" value="reset-filters" class="btn btn-link">Reset</f:form.button>
+                <f:form.button class="btn btn-default" name="operation" type="submit" value="search">
+                    <f:translate domain="core.common" key="search" />
+                </f:form.button>
+                <f:form.button class="btn btn-link" name="operation" type="submit" value="reset-filters">
+                    <f:translate domain="sf_event_mgt.be" key="reset" />
+                </f:form.button>
             </div>
         </div>
     </f:form>
@@ -87,7 +91,7 @@
     <f:if condition="{pid} == 0">
         <div class="alert alert-info">
             <div class="message-body">
-                <f:translate key="LLL:EXT:sf_event_mgt/Resources/Private/Language/locallang_be.xlf:administration.nopageselected" />
+                <f:translate domain="sf_event_mgt.be" key="administration.nopageselected" />
             </div>
         </div>
     </f:if>
@@ -100,22 +104,22 @@
                     <tr>
                         <th class="event-icon"></th>
                         <th class="title">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.title"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.title" />
                         </th>
                         <th class="startdate">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.startdate"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.startdate" />
                         </th>
                         <th class="enddate">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.enddate"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.enddate" />
                         </th>
                         <th class="registrationenabled">
-                            <f:translate key="tx_sfeventmgt_domain_model_registration"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_registration" />
                         </th>
                         <th class="maxparticipants">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.maxParticipants"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.maxParticipants" />
                         </th>
                         <th class="registrations">
-                            <f:translate key="tx_sfeventmgt_domain_model_event.registrations"/>
+                            <f:translate domain="sf_event_mgt.messages" key="tx_sfeventmgt_domain_model_event.registrations" />
                         </th>
                         <th class="actions">
                         </th>
@@ -152,7 +156,7 @@
                         </span>
                     </div>
                     <div class="media-body">
-                        <h4 class="callout-title"><f:translate key="admin.no_events_available"/></h4>
+                        <h4 class="callout-title"><f:translate domain="sf_event_mgt.messages" key="admin.no_events_available" /></h4>
                         <div class="callout-body"></div>
                     </div>
                 </div>

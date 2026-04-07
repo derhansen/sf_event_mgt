@@ -4,7 +4,7 @@
 
 <f:section name="main">
 
-	<h1><f:translate key="calendar.title" /></h1>
+	<h1><f:translate domain="sf_event_mgt.messages" key="calendar.title" /></h1>
 
 	<div class="event-calendar">
 
@@ -14,13 +14,13 @@
             <ul class="event-calendar__browser">
                 <li class="event-calendar__browser-prev">
                     <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{week: weekConfig.previous.weeknumber, year: weekConfig.previous.year}}">
-                        &larr; <f:translate key="calendar.week" /> {weekConfig.previous.weeknumber}
+                        &larr; <f:translate domain="sf_event_mgt.messages" key="calendar.week" /> {weekConfig.previous.weeknumber}
                     </f:link.action>
                 </li>
-                <li class="event-calendar__browser-current"><h3><f:translate key="calendar.week" /> {weekConfig.current.weeknumber}</h3></li>
+                <li class="event-calendar__browser-current"><h3><f:translate domain="sf_event_mgt.messages" key="calendar.week" /> {weekConfig.current.weeknumber}</h3></li>
                 <li class="event-calendar__browser-next">
                     <f:link.action rel="nofollow" action="calendar" controller="Event" arguments="{overwriteDemand:{week: weekConfig.next.weeknumber, year: weekConfig.next.year}}">
-                        <f:translate key="calendar.week" /> {weekConfig.next.weeknumber} &rarr;
+                        <f:translate domain="sf_event_mgt.messages" key="calendar.week" /> {weekConfig.next.weeknumber} &rarr;
                     </f:link.action>
                 </li>
             </ul>
