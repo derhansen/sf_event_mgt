@@ -44,8 +44,6 @@ use TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter;
 class AdministrationController extends AbstractController
 {
     protected ModuleTemplateFactory $moduleTemplateFactory;
-    protected ModuleTemplateFactory $moduleTemplateFactory;
-    protected ModuleTemplateFactory $moduleTemplateFactory;
     protected CustomNotificationLogRepository $customNotificationLogRepository;
     protected ExportService $exportService;
     protected SettingsService $settingsService;
