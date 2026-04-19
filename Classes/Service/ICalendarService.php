@@ -45,7 +45,7 @@ class ICalendarService
     {
         $variables = [
             'event' => $event,
-            'typo3Host' => GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY'),
+            'typo3Host' => $request->getAttribute('normalizedParams')->getHttpHost(),
         ];
 
         $icalContent = $this->fluidRenderingService->renderTemplate(

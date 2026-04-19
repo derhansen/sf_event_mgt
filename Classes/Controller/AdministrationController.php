@@ -190,7 +190,7 @@ class AdministrationController extends AbstractController
 
         return (string)$uriBuilder->buildUriFromRoute('record_edit', [
             'edit[' . $table . '][' . $pid . ']' => 'new',
-            'returnUrl' => GeneralUtility::getIndpEnv('REQUEST_URI'),
+            'returnUrl' => $this->request->getAttribute('normalizedParams')->getRequestUri(),
         ]);
     }
 
