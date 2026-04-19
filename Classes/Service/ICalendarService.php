@@ -12,7 +12,6 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Event;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 
 class ICalendarService
