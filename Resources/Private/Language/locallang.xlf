@@ -375,6 +375,9 @@
 			<trans-unit id="validation.invalid_priceoption">
 				<source>Invalid price option selected.</source>
 			</trans-unit>
+			<trans-unit id="validation.invalid_field_length">
+				<source>Invalid field length: %s exceeds maximum length of %s.</source>
+			</trans-unit>
 			<trans-unit id="error.no_secret">
 				<source>No secret set in TypoScript for captcha.</source>
 			</trans-unit>

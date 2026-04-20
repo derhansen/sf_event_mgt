@@ -19,6 +19,7 @@ use DERHANSEN\SfEventMgt\Service\SpamCheckService;
 use DERHANSEN\SfEventMgt\SpamChecks\Exceptions\SpamCheckNotFoundException;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use TYPO3\CMS\Core\Utility\ArrayUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use TYPO3\CMS\Extbase\Validation\Error;
@@ -61,6 +62,7 @@ class RegistrationValidator extends AbstractValidator
         $this->validateDefaultFields($value);
         $this->validatePaymentMethod($value);
         $this->validatePriceOption($value);
+        $this->validateTcaSchemaFieldLength($value);
 
         $requiredFields = array_map('trim', explode(',', $settings['registration']['requiredFields'] ?? ''));
         foreach ($requiredFields as $requiredField) {
@@ -213,6 +215,15 @@ class RegistrationValidator extends AbstractValidator
                 1727776820
             );
             $this->result->forProperty('priceOption')->addError($error);
+        }
+    }
+
+    protected function validateTcaSchemaFieldLength(Registration $registration): void
+    {
+        $validator = GeneralUtility::makeInstance(TcaSchemaFieldLengthValidator::class);
+        $result = $validator->validate($registration);
+        if ($result->hasErrors()) {
+            $this->result->merge($result);
         }
     }
 
