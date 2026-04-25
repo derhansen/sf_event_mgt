@@ -41,6 +41,7 @@
 	"extra": {
 		"typo3/cms": {
 			"extension-key": "sf_event_mgt",
+			"version": "9.0.0",
 			"Package": {
 				"providesPackages": []
 			}
