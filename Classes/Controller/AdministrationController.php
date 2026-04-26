@@ -33,6 +33,7 @@ use TYPO3\CMS\Backend\Template\ModuleTemplateFactory;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Domain\DateTimeFormat;
+use TYPO3\CMS\Core\Domain\Repository\PageRepository;
 use TYPO3\CMS\Core\Imaging\IconFactory;
 use TYPO3\CMS\Core\Imaging\IconSize;
 use TYPO3\CMS\Core\Localization\LanguageService;
@@ -52,6 +53,7 @@ class AdministrationController extends AbstractController
     protected IconFactory $iconFactory;
     protected PageRenderer $pageRenderer;
     protected ComponentFactory $componentFactory;
+    protected PageRepository $pageRepository;
     protected int $pid = 0;
 
     public function injectCustomNotificationLogRepository(
@@ -98,6 +100,11 @@ class AdministrationController extends AbstractController
     public function injectComponentFactory(ComponentFactory $componentFactory): void
     {
         $this->componentFactory = $componentFactory;
+    }
+
+    public function injectPageRepository(PageRepository $pageRepository): void
+    {
+        $this->pageRepository = $pageRepository;
     }
 
     /**
@@ -209,9 +216,9 @@ class AdministrationController extends AbstractController
 
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
 
-        $pageContext = $this->request->getAttribute('pageContext');
-        if ($pageContext->pageRecord) {
-            $moduleTemplate->getDocHeaderComponent()->setPageBreadcrumb($pageContext->pageRecord);
+        $pageRecord = $this->pageRepository->getPage($this->pid);
+        if ($pageRecord !== []) {
+            $moduleTemplate->getDocHeaderComponent()->setPageBreadcrumb($pageRecord);
         }
 
         $initAdministrationModuleTemplateEvent = new InitAdministrationModuleTemplateEvent(
