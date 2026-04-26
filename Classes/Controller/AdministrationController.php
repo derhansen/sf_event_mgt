@@ -209,6 +209,11 @@ class AdministrationController extends AbstractController
 
         $moduleTemplate->setFlashMessageQueue($this->getFlashMessageQueue());
 
+        $pageContext = $this->request->getAttribute('pageContext');
+        if ($pageContext->pageRecord) {
+            $moduleTemplate->getDocHeaderComponent()->setPageBreadcrumb($pageContext->pageRecord);
+        }
+
         $initAdministrationModuleTemplateEvent = new InitAdministrationModuleTemplateEvent(
             $moduleTemplate,
             $this->uriBuilder,
