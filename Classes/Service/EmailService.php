@@ -28,14 +28,7 @@ class EmailService
     /**
      * Sends an email, if sender and recipient is an valid email address and if the subject is not empty
      *
-     * @param ServerRequestInterface $request The current request
-     * @param string $sender The sender
-     * @param string $recipient The recipient
-     * @param string $subject The subject
-     * @param string $body E-Mail body
-     * @param string|null $name Optional sendername
      * @param array $attachments Array of files (e.g. ['/absolute/path/doc.pdf'])
-     * @param string|null $replyTo The reply-to mail
      *
      * @return bool true/false if message is sent
      */
