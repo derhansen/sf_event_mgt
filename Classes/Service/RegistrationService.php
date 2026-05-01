@@ -36,7 +36,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
-#[Autoconfigure(public:true)]
+#[Autoconfigure(public: true)]
 class RegistrationService
 {
     public function __construct(
