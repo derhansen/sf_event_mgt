@@ -13,8 +13,10 @@ namespace DERHANSEN\SfEventMgt\Controller;
 
 use DERHANSEN\SfEventMgt\Domain\Model\Dto\UserRegistrationDemand;
 use DERHANSEN\SfEventMgt\Domain\Model\Registration;
+use DERHANSEN\SfEventMgt\Service\RegistrationService;
 use Psr\Http\Message\ResponseInterface;
 use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Extbase\Attribute\Authorize;
 
 class UserRegistrationController extends AbstractController
 {
@@ -26,6 +28,7 @@ class UserRegistrationController extends AbstractController
     /**
      * Shows a list of all registration of the current frontend user
      */
+    #[Authorize(requireLogin: true)]
     public function listAction(): ResponseInterface
     {
         $demand = UserRegistrationDemand::createFromSettings($this->settings);
@@ -39,9 +42,12 @@ class UserRegistrationController extends AbstractController
     /**
      * Shows a detail page for the given registration
      */
+    #[Authorize(
+        callback: [RegistrationService::class, 'checkRegistrationAccess'],
+        requireLogin: true
+    )]
     public function detailAction(Registration $registration): ResponseInterface
     {
-        $this->registrationService->checkRegistrationAccess($this->request, $registration);
         $this->view->assign('registration', $registration);
 
         return $this->htmlResponse();

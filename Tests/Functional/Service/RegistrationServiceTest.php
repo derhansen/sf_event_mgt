@@ -654,23 +654,20 @@ class RegistrationServiceTest extends FunctionalTestCase
     }
 
     #[Test]
-    public function checkRegistrationAccessThrowsExceptionIfNoUserLoggedIn(): void
+    public function checkRegistrationAccessReturnsFalseIfNoUserLoggedIn(): void
     {
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
-        $this->expectExceptionCode(1671627320);
 
         /** @var Registration $existingRegistration */
         $registration = $this->registrationRepository->findByUid(1);
 
-        $serverRequest = new ServerRequest();
-        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+        self::assertFalse($this->subject->checkRegistrationAccess($registration));
     }
 
     #[Test]
-    public function checkRegistrationAccessThrowsExceptionIfRegistrationHasNoFeUser(): void
+    public function checkRegistrationAccessReturnsFalseIfRegistrationHasNoFeUser(): void
     {
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
-        $this->expectExceptionCode(1671627320);
 
         $user = new FrontendUserAuthentication();
         $user->user['uid'] = 1;
@@ -683,15 +680,13 @@ class RegistrationServiceTest extends FunctionalTestCase
         /** @var Registration $existingRegistration */
         $registration = $this->registrationRepository->findByUid(1);
 
-        $serverRequest = new ServerRequest();
-        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+        self::assertFalse($this->subject->checkRegistrationAccess($registration));
     }
 
     #[Test]
-    public function checkRegistrationAccessThrowsExceptionIfFeUserNotEqualToRegistrationFeUser(): void
+    public function checkRegistrationAccessReturnsFalseIfFeUserNotEqualToRegistrationFeUser(): void
     {
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
-        $this->expectExceptionCode(1671627320);
 
         $user = new FrontendUserAuthentication();
         $user->user['uid'] = 1;
@@ -704,12 +699,11 @@ class RegistrationServiceTest extends FunctionalTestCase
         /** @var Registration $existingRegistration */
         $registration = $this->registrationRepository->findByUid(3);
 
-        $serverRequest = new ServerRequest();
-        $this->subject->checkRegistrationAccess($serverRequest, $registration);
+        self::assertFalse($this->subject->checkRegistrationAccess($registration));
     }
 
     #[Test]
-    public function checkRegistrationAccessThrowsNoExceptionIfFeUserEqualToRegistrationFeUser(): void
+    public function checkRegistrationAccessReturnsTrueIfFeUserEqualToRegistrationFeUser(): void
     {
         $this->importCSVDataSet(__DIR__ . '/../Fixtures/check_registration_access.csv');
 
@@ -724,10 +718,7 @@ class RegistrationServiceTest extends FunctionalTestCase
         /** @var Registration $existingRegistration */
         $registration = $this->registrationRepository->findByUid(2);
 
-        $serverRequest = new ServerRequest();
-        $this->subject->checkRegistrationAccess($serverRequest, $registration);
-
-        self::assertTrue(true);
+        self::assertTrue($this->subject->checkRegistrationAccess($registration));
     }
 
     #[Test]
