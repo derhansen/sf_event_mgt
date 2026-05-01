@@ -7,6 +7,3 @@ services:
   DERHANSEN\SfEventMgt\:
     resource: '../Classes/*'
     exclude: '../Classes/Domain/Model/*'
-
-  DERHANSEN\SfEventMgt\Service\RegistrationService:
-    public: true
