@@ -569,6 +569,10 @@
         <source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
         <target>crwdns300706:0crwdne300706:0</target>
       </trans-unit>
+      <trans-unit id="reset">
+        <source>Reset</source>
+        <target>crwdns409470:0crwdne409470:0</target>
+      </trans-unit>
       <trans-unit id="events-folder">
         <source>Events</source>
         <target>crwdns300708:0crwdne300708:0</target>
