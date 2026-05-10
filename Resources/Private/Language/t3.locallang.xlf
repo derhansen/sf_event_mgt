@@ -499,6 +499,10 @@
         <source>Invalid price option selected.</source>
         <target>crwdns342204:0crwdne342204:0</target>
       </trans-unit>
+      <trans-unit id="validation.invalid_field_length">
+        <source>Invalid field length: %s exceeds maximum length of %s.</source>
+        <target>crwdns409472:0%scrwdnd409472:0%scrwdne409472:0</target>
+      </trans-unit>
       <trans-unit id="error.no_secret">
         <source>No secret set in TypoScript for captcha.</source>
         <target>crwdns300398:0crwdne300398:0</target>
