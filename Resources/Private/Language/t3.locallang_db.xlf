@@ -103,6 +103,10 @@
         <source>Currency</source>
         <target>crwdns300830:0crwdne300830:0</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency_iso">
+        <source>Currency (ISO 4217)</source>
+        <target>crwdns409468:0crwdne409468:0</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment">
         <source>Enable payment</source>
         <target>crwdns300832:0crwdne300832:0</target>
