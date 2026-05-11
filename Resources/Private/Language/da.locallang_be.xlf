@@ -571,6 +571,10 @@
         <source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
         <target state="final">Notifikationer er deaktiveret på hele løsningen for udvidelsen via TypoScript konfigurationen.</target>
       </trans-unit>
+      <trans-unit id="reset" approved="yes">
+        <source>Reset</source>
+        <target state="final">Nulstil</target>
+      </trans-unit>
       <trans-unit id="events-folder" approved="yes">
         <source>Events</source>
         <target state="final">Begivenheder</target>
