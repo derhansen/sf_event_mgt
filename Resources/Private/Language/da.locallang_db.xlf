@@ -103,6 +103,10 @@
         <source>Currency</source>
         <target state="final">Valuta</target>
       </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency_iso" approved="yes">
+        <source>Currency (ISO 4217)</source>
+        <target state="final">Valuta (ISO 4217)</target>
+      </trans-unit>
       <trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment" approved="yes">
         <source>Enable payment</source>
         <target state="final">Aktivér betaling</target>
