@@ -499,6 +499,10 @@
         <source>Invalid price option selected.</source>
         <target state="final">Ugyldig prisegenskab valgt.</target>
       </trans-unit>
+      <trans-unit id="validation.invalid_field_length" approved="yes">
+        <source>Invalid field length: %s exceeds maximum length of %s.</source>
+        <target state="final">Ugyldig feltlængde: %s overstiger den maksimale længde på %s.</target>
+      </trans-unit>
       <trans-unit id="error.no_secret" approved="yes">
         <source>No secret set in TypoScript for captcha.</source>
         <target state="final">Ingen secret angivet i TypoScript for captcha.</target>
