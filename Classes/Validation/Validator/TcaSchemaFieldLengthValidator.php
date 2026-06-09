@@ -20,20 +20,16 @@ use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
-use TYPO3\CMS\Extbase\Validation\Validator\ObjectValidatorInterface;
 
 /**
- * Validates that all string properties of a domain model (and its nested relations) do not exceed
- * the maximum field length defined in the database schema.
+ * Validates that all string properties of a domain model and its nested relations
+ * do not exceed the maximum field length defined in the database schema.
  *
- * Recursively traverses 1:1 relations (AbstractDomainObject properties) and 1:n / m:n relations
- * (Traversable properties, e.g. ObjectStorage) and validates each related model as well.
- * Circular references are detected via a shared SplObjectStorage and skipped to prevent infinite loops.
- *
- * Implements ObjectValidatorInterface so that TYPO3's validation chain can inject the shared
- * validatedInstancesContainer when this validator is used with other object validators.
+ * Recursively traverses related domain objects and validates each entity only once.
+ * Processed entities are tracked using a stable identifier based on class name and uid
+ * to prevent endless recursion caused by cyclic relations and lazy-loading proxies.
  */
-final class TcaSchemaFieldLengthValidator extends AbstractValidator implements ObjectValidatorInterface
+final class TcaSchemaFieldLengthValidator extends AbstractValidator
 {
     private const SUPPORTED_TYPES = [
         TableColumnType::INPUT->value,
@@ -45,7 +41,7 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator implements O
         TableColumnType::TEXT->value,
     ];
 
-    private ?\SplObjectStorage $validatedInstancesContainer = null;
+    private array $processedEntityIdentifiers = [];
     private array $columnCache = [];
 
     public function __construct(
@@ -55,19 +51,12 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator implements O
     ) {
     }
 
-    public function setValidatedInstancesContainer(\SplObjectStorage $validatedInstancesContainer): void
-    {
-        $this->validatedInstancesContainer = $validatedInstancesContainer;
-    }
-
     public function isValid(mixed $value): void
     {
+        $this->processedEntityIdentifiers = [];
+
         if (!($value instanceof AbstractDomainObject)) {
             return;
-        }
-
-        if ($this->validatedInstancesContainer === null) {
-            $this->validatedInstancesContainer = new \SplObjectStorage();
         }
 
         $this->result->merge($this->validateDomainObject($value));
@@ -77,10 +66,11 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator implements O
     {
         $result = new Result();
 
-        if ($this->validatedInstancesContainer->contains($value)) {
+        $identifier = $this->getValidationIdentifier($value);
+        if (isset($this->processedEntityIdentifiers[$identifier])) {
             return $result;
         }
-        $this->validatedInstancesContainer->attach($value);
+        $this->processedEntityIdentifiers[$identifier] = true;
 
         $dataMap = $this->dataMapFactory->buildDataMap(get_class($value));
         $tableName = $dataMap->getTableName();
@@ -138,5 +128,17 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator implements O
         }
 
         return $result;
+    }
+
+    private function getValidationIdentifier(AbstractDomainObject $object): string
+    {
+        $className = get_parent_class($object) ?: $object::class;
+        $uid = $object->getUid();
+
+        if ($uid > 0) {
+            return sprintf('%s:%s', $className, $uid);
+        }
+
+        return sprintf('%s:%s', $className, spl_object_id($object));
     }
 }
