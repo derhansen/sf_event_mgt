@@ -132,7 +132,7 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator
 
     private function getValidationIdentifier(AbstractDomainObject $object): string
     {
-        $className = get_parent_class($object) ?: $object::class;
+        $className = get_parent_class($object);
         $uid = $object->getUid();
 
         if ($uid > 0) {
