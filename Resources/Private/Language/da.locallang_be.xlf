@@ -273,7 +273,7 @@
       </trans-unit>
       <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage" approved="yes">
         <source>Restrict categories, locations, organizers and speakers to storagePage setting (including recursive option)</source>
-        <target state="final">Begræns kategorier, placeringer, arrangører og talere til lagerside -ndstillinger (inklusiv rekursivt valg)</target>
+        <target state="final">Begræns kategorier, placeringer, arrangører og talere til indstillinger under lagerside (herunder rekursiv indstilling)</target>
       </trans-unit>
       <trans-unit id="flexforms_general.displayMode.all" approved="yes">
         <source>Show all events</source>
