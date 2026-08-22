@@ -137,6 +137,10 @@ $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['paymentMethods'] = [
     ],
 ];
 
+// Register array for additional allowed ViewHelpers used in AllowedViewHelperInvoker. Additional ViewHelpers must
+// be added as class names to the initialized array.
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['parseStringFluid']['additionalAllowedViewHelpers'] = [];
+
 // Custom FormDataProvider to hide TCA inline fields for registrations on given conditions
 $GLOBALS['TYPO3_CONF_VARS']['SYS']['formEngine']['formDataGroup']['tcaDatabaseRecord'][HideInlineRegistrations::class] = [
     'depends' => [

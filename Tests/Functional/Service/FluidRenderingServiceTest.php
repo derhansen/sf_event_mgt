@@ -23,9 +23,11 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
+use TYPO3\CMS\Fluid\ViewHelpers\CObjectViewHelper;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
+use TYPO3Fluid\Fluid\ViewHelpers\ConstantViewHelper;
 
-class FluidStandaloneServiceTest extends FunctionalTestCase
+class FluidRenderingServiceTest extends FunctionalTestCase
 {
     protected array $testExtensionsToLoad = ['typo3conf/ext/sf_event_mgt'];
 
@@ -64,6 +66,72 @@ class FluidStandaloneServiceTest extends FunctionalTestCase
             $expected,
             $subject->parseString($this->getExtbaseRequest(), $fluidString, ['registration' => $registration])
         );
+    }
+
+    #[Test]
+    public function parseStringExecutesAllowedViewHelper(): void
+    {
+        $configurationManager = $this->get(ConfigurationManager::class);
+        $viewFactory = $this->get(ViewFactoryInterface::class);
+        $subject = new FluidRenderingService($configurationManager, $viewFactory);
+
+        $fluidString = 'Date: {date -> f:format.date(format: \'d.m.Y\')}';
+
+        $result = $subject->parseString(
+            $this->getExtbaseRequest(),
+            $fluidString,
+            ['date' => new \DateTime('2026-07-14')]
+        );
+
+        self::assertStringContainsString('Date: 14.07.2026', $result);
+        self::assertStringNotContainsString('not allowed', $result);
+    }
+
+    #[Test]
+    public function parseStringBlocksDisallowedConstantViewHelper(): void
+    {
+        $configurationManager = $this->get(ConfigurationManager::class);
+        $viewFactory = $this->get(ViewFactoryInterface::class);
+        $subject = new FluidRenderingService($configurationManager, $viewFactory);
+
+        $fluidString = 'Value: {f:constant(name: \'PHP_INT_MAX\')}';
+
+        $result = $subject->parseString($this->getExtbaseRequest(), $fluidString);
+
+        self::assertStringNotContainsString((string)PHP_INT_MAX, $result);
+        self::assertStringNotContainsString('f:constant', $result);
+    }
+
+    #[Test]
+    public function parseStringBlocksDisallowedCObjectViewHelper(): void
+    {
+        $configurationManager = $this->get(ConfigurationManager::class);
+        $viewFactory = $this->get(ViewFactoryInterface::class);
+        $subject = new FluidRenderingService($configurationManager, $viewFactory);
+
+        $fluidString = '{f:cObject(typoscriptObjectPath: \'lib.test\')}';
+
+        $result = $subject->parseString($this->getExtbaseRequest(), $fluidString);
+        self::assertStringNotContainsString('f:cObject', $result);
+    }
+
+    #[Test]
+    public function parseStringExecutesAdditionallyAllowedViewHelper(): void
+    {
+        $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['sf_event_mgt']['parseStringFluid']['additionalAllowedViewHelpers'] = [
+            ConstantViewHelper::class,
+        ];
+
+        $configurationManager = $this->get(ConfigurationManager::class);
+        $viewFactory = $this->get(ViewFactoryInterface::class);
+        $subject = new FluidRenderingService($configurationManager, $viewFactory);
+
+        $fluidString = 'Value: {f:constant(name: \'PHP_INT_MAX\')}';
+
+        $result = $subject->parseString($this->getExtbaseRequest(), $fluidString);
+
+        self::assertStringContainsString('Value: ' . PHP_INT_MAX, $result);
+        self::assertStringNotContainsString('f:constant', $result);
     }
 
     public static function templateFoldersDataProvider(): array

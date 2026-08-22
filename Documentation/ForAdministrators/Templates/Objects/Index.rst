@@ -389,6 +389,10 @@ The following objects can be used in email subjects for event registration and c
    :Description:
          An object holding the registration
 
+Email subjects are parsed with Fluid, but only a restricted set of ViewHelpers is allowed. By default,
+:html:`f:format.date` and :html:`f:translate` can be used. All other ViewHelpers are not executed and
+are rendered as an empty string. See :ref:`allowed-viewhelpers` on how to allow additional ViewHelpers.
+
 Registration message views
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 

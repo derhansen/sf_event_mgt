@@ -60,6 +60,12 @@ in the TypoScript settings of the **admin module**.::
 After configuring the new notification to the TypoScript settings, you can use it to
 notifiy participants of the event.
 
+.. note::
+   The **subject** is parsed with Fluid, so it can contain :php:`{event}` and :php:`{registration}`.
+   Only a restricted set of ViewHelpers (by default :html:`f:format.date` and :html:`f:translate`) is
+   allowed in the subject. See :ref:`allowed-viewhelpers` for more information. This restriction does
+   not apply to the notification template.
+
 Selecting the recipients of custom notifications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

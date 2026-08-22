@@ -12,6 +12,16 @@
 Breaking Changes
 ================
 
+9.0.2
+~~~~~
+
+Strings parsed with Fluid (email subjects of registration- and custom notifications) now only allow
+a restricted set of ViewHelpers. By default, only :html:`f:format.date` and :html:`f:translate` are
+allowed, all other ViewHelpers are rendered as an empty string.
+
+If you use other ViewHelpers in email subjects, you must allow them as described in
+:ref:`allowed-viewhelpers`.
+
 9.0.0
 ~~~~~
 This version contains several breaking changes. The most relevant changes are:
