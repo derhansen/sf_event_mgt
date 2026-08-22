@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace DERHANSEN\SfEventMgt\Service;
 
 use DERHANSEN\SfEventMgt\Security\AllowedViewHelperInvoker;
+use DERHANSEN\SfEventMgt\Security\NullFluidCache;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
@@ -83,6 +84,7 @@ class FluidRenderingService
                 1727434457
             );
         }
+        $view->getRenderingContext()->setCache(new NullFluidCache());
         $view->getRenderingContext()->setViewHelperInvoker(new AllowedViewHelperInvoker());
         $view->getRenderingContext()->setTemplateProcessors([
             new NamespaceDetectionTemplateProcessor(),
