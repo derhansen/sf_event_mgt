@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Security\NullFluidCache;
+use DERHANSEN\SfEventMgt\Security\AllowedViewHelperInvoker;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Http\ServerRequest;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -18,6 +20,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\ExtbaseRequestParameters;
 use TYPO3\CMS\Extbase\Mvc\Request;
 use TYPO3\CMS\Fluid\View\StandaloneView;
+use TYPO3Fluid\Fluid\Core\Parser\TemplateProcessor\NamespaceDetectionTemplateProcessor;
 
 class FluidStandaloneService
 {
@@ -126,6 +129,11 @@ class FluidStandaloneService
         $standaloneView->setTemplateSource($string);
         $standaloneView->assignMultiple($variables);
         $standaloneView->setRequest($serverRequest);
+        $standaloneView->getRenderingContext()->setCache(new NullFluidCache());
+        $standaloneView->getRenderingContext()->setViewHelperInvoker(new AllowedViewHelperInvoker());
+        $standaloneView->getRenderingContext()->setTemplateProcessors([
+            new NamespaceDetectionTemplateProcessor(),
+        ]);
         $result = $standaloneView->render() ?? '';
 
         return html_entity_decode($result);

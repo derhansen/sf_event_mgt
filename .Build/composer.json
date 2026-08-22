@@ -39,6 +39,9 @@
       "typo3/class-alias-loader": true,
       "typo3/cms-composer-installers": true,
       "phpstan/extension-installer": true
+    },
+    "audit": {
+      "block-insecure": false
     }
   },
   "autoload-dev": {
