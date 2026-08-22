@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace DERHANSEN\SfEventMgt\Service;
 
+use DERHANSEN\SfEventMgt\Security\AllowedViewHelperInvoker;
 use TYPO3\CMS\Core\Http\ApplicationType;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\View\ViewFactoryData;
@@ -18,6 +19,8 @@ use TYPO3\CMS\Core\View\ViewFactoryInterface;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Mvc\RequestInterface;
 use TYPO3\CMS\Fluid\View\FluidViewAdapter;
+use TYPO3Fluid\Fluid\Core\Parser\TemplateProcessor\NamespaceDetectionTemplateProcessor;
+use TYPO3Fluid\Fluid\Core\Parser\TemplateProcessor\RemoveCommentsTemplateProcessor;
 
 class FluidRenderingService
 {
@@ -80,6 +83,11 @@ class FluidRenderingService
                 1727434457
             );
         }
+        $view->getRenderingContext()->setViewHelperInvoker(new AllowedViewHelperInvoker());
+        $view->getRenderingContext()->setTemplateProcessors([
+            new NamespaceDetectionTemplateProcessor(),
+            new RemoveCommentsTemplateProcessor(),
+        ]);
         $view->getRenderingContext()->getTemplatePaths()->setTemplateSource($string);
         $view->assignMultiple($variables);
 
