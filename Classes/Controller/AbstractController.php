@@ -22,7 +22,7 @@ abstract class AbstractController extends ActionController
      *
      * @var array
      */
-    protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
+    protected $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed', 'ignoreenablefields'];
 
     /**
      * EventRepository
