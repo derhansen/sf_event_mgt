@@ -34,7 +34,7 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 abstract class AbstractController extends ActionController
 {
-    protected array $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
+    protected array $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed', 'ignoreenablefields'];
 
     protected EventRepository $eventRepository;
     protected RegistrationRepository $registrationRepository;
