@@ -22,7 +22,7 @@ use TYPO3\CMS\Frontend\Page\PageInformation;
 
 abstract class AbstractController extends ActionController
 {
-    protected array $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed'];
+    protected array $ignoredSettingsForOverwriteDemand = ['storagepage', 'orderfieldallowed', 'ignoreenablefields'];
 
     /**
      * Public getter for extbase arguments. Can be used by extending extensions in e.g. event listeners to
