@@ -283,9 +283,6 @@ return [
                 'type' => 'number',
                 'format' => 'decimal',
                 'size' => 5,
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true,
-                ],
             ],
         ],
         'price_option' => [
@@ -392,9 +389,6 @@ return [
                 'minitems' => 0,
                 'maxitems' => 1,
                 'default' => 0,
-                'behaviour' => [
-                    'allowLanguageSynchronization' => true,
-                ],
             ],
         ],
         'temp_event_uid' => [
