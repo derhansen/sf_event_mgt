@@ -277,6 +277,37 @@ Note, that you have to set the pageUid to a page with the detail view plugin.
 
 .. rst-class:: panel panel-default
 
+Event times in iCalendar (ICS) files are wrong
+==============================================
+
+Event dates are stored as UTC timestamps in the database. When an editor saves an event in the backend or
+when an event date is rendered in the frontend, TYPO3 interprets the timestamp in the timezone configured in
+:php:`$GLOBALS['TYPO3_CONF_VARS']['SYS']['phpTimeZone']`. Since the same timezone is used in both cases, the
+frontend always shows the time an editor has entered - no matter which timezone is configured.
+
+iCalendar files contain event dates as UTC time, as required by
+`RFC 5545 <https://datatracker.ietf.org/doc/html/rfc5545#section-3.3.5>`__. Those files are the only place,
+where event dates leave TYPO3 and are shown by an application (the calendar of the user), that uses its own
+timezone. Therefore, if the timezone configured for your TYPO3 installation does not match the timezone your
+events take place in, event times in calendar applications will be shifted by the difference of both timezones.
+
+To fix this, configure the timezone your events take place in. This can either be done in the TYPO3 backend in
+:guilabel:`Admin Tools > Settings > Configure Installation-Wide Options` or in :php:`config/system/additional.php`
+
+.. code-block:: php
+
+   $GLOBALS['TYPO3_CONF_VARS']['SYS']['phpTimeZone'] = 'Europe/Berlin';
+
+Note, that :php:`phpTimeZone` is empty by default, in which case TYPO3 uses the timezone of the server, which
+often is UTC. Also note, that changing the setting does not modify existing event records, since those
+timestamps have been saved using the previously configured timezone. You may therefore have to correct the
+dates of existing events.
+
+Events taking place in a timezone other than the one configured for the TYPO3 installation are not supported,
+since event records do not have a timezone field.
+
+.. rst-class:: panel panel-default
+
 Why does the next/previous month links not work for the calendar view?
 =======================================================================
 
