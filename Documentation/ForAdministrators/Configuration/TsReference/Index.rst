@@ -13,9 +13,6 @@ More TypoScript settings are available on the :ref:`eventplugin-settings` page. 
 plugin.tx_sfeventmgt
 ====================
 
-.. t3-field-list-table::
- :header-rows: 1
-
 view.templateRootPath
 ---------------------
 
