@@ -111,30 +111,21 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator
         }
 
         foreach ($value->_getProperties() as $propertyName => $propertyValue) {
+            if ($propertyValue instanceof LazyLoadingProxy) {
+                $propertyValue = $propertyValue->_loadRealInstance();
+            }
+
             if ($propertyValue instanceof AbstractDomainObject) {
                 $subResult = $this->validateDomainObject($propertyValue);
                 if ($subResult->hasMessages()) {
                     $result->forProperty($propertyName)->merge($subResult);
                 }
             } elseif ($propertyValue instanceof \Traversable) {
-                if ($propertyValue instanceof LazyLoadingProxy) {
-                    $propertyValue = $propertyValue->_loadRealInstance();
-                    if ($propertyValue === null) {
-                        continue;
-                    }
-                }
-                if ($propertyValue instanceof AbstractDomainObject) {
-                    $subResult = $this->validateDomainObject($propertyValue);
-                    if ($subResult->hasMessages()) {
-                        $result->forProperty($propertyName)->merge($subResult);
-                    }
-                } else {
-                    foreach ($propertyValue as $index => $element) {
-                        if ($element instanceof AbstractDomainObject) {
-                            $subResult = $this->validateDomainObject($element);
-                            if ($subResult->hasMessages()) {
-                                $result->forProperty($propertyName)->forProperty((string)$index)->merge($subResult);
-                            }
+                foreach ($propertyValue as $index => $element) {
+                    if ($element instanceof AbstractDomainObject) {
+                        $subResult = $this->validateDomainObject($element);
+                        if ($subResult->hasMessages()) {
+                            $result->forProperty($propertyName)->forProperty((string)$index)->merge($subResult);
                         }
                     }
                 }
