@@ -18,6 +18,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -116,11 +117,24 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator
                     $result->forProperty($propertyName)->merge($subResult);
                 }
             } elseif ($propertyValue instanceof \Traversable) {
-                foreach ($propertyValue as $index => $element) {
-                    if ($element instanceof AbstractDomainObject) {
-                        $subResult = $this->validateDomainObject($element);
-                        if ($subResult->hasMessages()) {
-                            $result->forProperty($propertyName)->forProperty((string)$index)->merge($subResult);
+                if ($propertyValue instanceof LazyLoadingProxy) {
+                    $propertyValue = $propertyValue->_loadRealInstance();
+                    if ($propertyValue === null) {
+                        continue;
+                    }
+                }
+                if ($propertyValue instanceof AbstractDomainObject) {
+                    $subResult = $this->validateDomainObject($propertyValue);
+                    if ($subResult->hasMessages()) {
+                        $result->forProperty($propertyName)->merge($subResult);
+                    }
+                } else {
+                    foreach ($propertyValue as $index => $element) {
+                        if ($element instanceof AbstractDomainObject) {
+                            $subResult = $this->validateDomainObject($element);
+                            if ($subResult->hasMessages()) {
+                                $result->forProperty($propertyName)->forProperty((string)$index)->merge($subResult);
+                            }
                         }
                     }
                 }
