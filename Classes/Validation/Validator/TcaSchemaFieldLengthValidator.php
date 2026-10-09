@@ -19,6 +19,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Extbase\Error\Error;
 use TYPO3\CMS\Extbase\Error\Result;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapFactory;
 use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
 
@@ -29,6 +30,10 @@ use TYPO3\CMS\Extbase\Validation\Validator\AbstractValidator;
  * Recursively traverses related domain objects and validates each entity only once.
  * Processed entities are tracked using a stable identifier based on class name and uid
  * to prevent endless recursion caused by cyclic relations and lazy-loading proxies.
+ *
+ * Only new and changed entities are validated. Relations, which are not loaded yet, are
+ * skipped, since they contain unchanged records of the database only. Loading them would
+ * traverse large parts of the database (e.g. all registrations of the event).
  */
 final class TcaSchemaFieldLengthValidator extends AbstractValidator
 {
@@ -73,6 +78,41 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator
         }
         $this->processedEntityIdentifiers[$identifier] = true;
 
+        if ($value->_isNew() || $value->_isDirty()) {
+            $result->merge($this->validateFieldLengths($value));
+        }
+
+        foreach ($value->_getProperties() as $propertyName => $propertyValue) {
+            if ($propertyValue instanceof LazyLoadingProxy
+                || ($propertyValue instanceof LazyObjectStorage && !$propertyValue->isInitialized())
+            ) {
+                continue;
+            }
+
+            if ($propertyValue instanceof AbstractDomainObject) {
+                $subResult = $this->validateDomainObject($propertyValue);
+                if ($subResult->hasMessages()) {
+                    $result->forProperty($propertyName)->merge($subResult);
+                }
+            } elseif ($propertyValue instanceof \Traversable) {
+                foreach ($propertyValue as $index => $element) {
+                    if ($element instanceof AbstractDomainObject) {
+                        $subResult = $this->validateDomainObject($element);
+                        if ($subResult->hasMessages()) {
+                            $result->forProperty($propertyName)->forProperty((string)$index)->merge($subResult);
+                        }
+                    }
+                }
+            }
+        }
+
+        return $result;
+    }
+
+    private function validateFieldLengths(AbstractDomainObject $value): Result
+    {
+        $result = new Result();
+
         $dataMap = $this->dataMapFactory->buildDataMap(get_class($value));
         $tableName = $dataMap->getTableName();
         $schema = $this->tcaSchemaFactory->get($tableName);
@@ -107,28 +147,6 @@ final class TcaSchemaFieldLengthValidator extends AbstractValidator
             if ($currentLength > $maxLength) {
                 $message = $this->translateErrorMessage('validation.invalid_field_length', 'sf_event_mgt', [$currentLength, $maxLength]);
                 $result->forProperty($fieldName)->addError(new Error($message, 1773493263));
-            }
-        }
-
-        foreach ($value->_getProperties() as $propertyName => $propertyValue) {
-            if ($propertyValue instanceof LazyLoadingProxy) {
-                $propertyValue = $propertyValue->_loadRealInstance();
-            }
-
-            if ($propertyValue instanceof AbstractDomainObject) {
-                $subResult = $this->validateDomainObject($propertyValue);
-                if ($subResult->hasMessages()) {
-                    $result->forProperty($propertyName)->merge($subResult);
-                }
-            } elseif ($propertyValue instanceof \Traversable) {
-                foreach ($propertyValue as $index => $element) {
-                    if ($element instanceof AbstractDomainObject) {
-                        $subResult = $this->validateDomainObject($element);
-                        if ($subResult->hasMessages()) {
-                            $result->forProperty($propertyName)->forProperty((string)$index)->merge($subResult);
-                        }
-                    }
-                }
             }
         }
 
