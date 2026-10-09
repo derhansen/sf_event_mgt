@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="sv-SE">
+    <header/>
+    <body>
+      <trans-unit id="flexforms_tab.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Inställningar</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.notification" approved="yes">
+        <source>Notification settings</source>
+        <target state="final">Notifieringsinställningar</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.categoryMenu" approved="yes">
+        <source>Category menu</source>
+        <target state="final">Kategorimeny</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode" approved="yes">
+        <source>What to display</source>
+        <target state="final">Att visa</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.list" approved="yes">
+        <source>List</source>
+        <target state="final">Lista</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.detail" approved="yes">
+        <source>Detail</source>
+        <target state="final">Detalj</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.search" approved="yes">
+        <source>Searchform</source>
+        <target state="final">Sökformulär</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.queryLimit" approved="yes">
+        <source>Max records displayed</source>
+        <target state="final">Max antal visas</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.topEventRestriction" approved="yes">
+        <source>Top event restriction</source>
+        <target state="final">Begränsning för huvudevenemang</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.none" approved="yes">
+        <source>None</source>
+        <target state="final">Ingen</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.onlyTopEvents" approved="yes">
+        <source>Only top events</source>
+        <target state="final">Endast huvudevenemang</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.exceptTopEvents" approved="yes">
+        <source>Except top events</source>
+        <target state="final">Exkludera huvudevenemang</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode" approved="yes">
+        <source>Display mode</source>
+        <target state="final">Visningsläge</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField" approved="yes">
+        <source>Sort by</source>
+        <target state="final">Sortera efter</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection" approved="yes">
+        <source>Sorting direction</source>
+        <target state="final">Sorteringsriktning</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.ascending" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Stigande</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.descending" approved="yes">
+        <source>Descending</source>
+        <target state="final">Fallande</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.category" approved="yes">
+        <source>Category</source>
+        <target state="final">Kategori</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeSubcategories" approved="yes">
+        <source>Include subcategories</source>
+        <target state="final">Inkludera underkategorier</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Plats</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.storagePage" approved="yes">
+        <source>Record storage page</source>
+        <target state="final">Lagringssida för poster</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.all" approved="yes">
+        <source>Show all events</source>
+        <target state="final">Visa alla evenemang</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.future" approved="yes">
+        <source>Show only future events</source>
+        <target state="final">Visa endast framtida evenemang</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.past" approved="yes">
+        <source>Show only past events</source>
+        <target state="final">Visa endast tidigare evenemang</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.templateLayout" approved="yes">
+        <source>Template layout</source>
+        <target state="final">Mall-layout</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_name" approved="yes">
+        <source>Name of the sender</source>
+        <target state="final">Användarens namn</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.categories" approved="yes">
+        <source>Categories (if empty, all categories will be shown in the category menu)</source>
+        <target state="final">Kategorier (om tom, alla kategorier kommer att visas i kategorimenyn)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.includeSubcategories" approved="yes">
+        <source>Include subcategories</source>
+        <target state="final">Inkludera underkategorier</target>
+      </trans-unit>
+      <trans-unit id="administration.title" approved="yes">
+        <source>Event Administration</source>
+        <target state="final">Evenemangsadministration</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">Avisera deltagare</target>
+      </trans-unit>
+      <trans-unit id="administration.newEvent" approved="yes">
+        <source>Create new event</source>
+        <target state="final">Skapa nytt evenemang</target>
+      </trans-unit>
+      <trans-unit id="administration.handleExpiredRegistrations" approved="yes">
+        <source>Hide/delete expired registrations</source>
+        <target state="final">Dölj/ta bort utgångna registreringar</target>
+      </trans-unit>
+      <trans-unit id="administration.export" approved="yes">
+        <source>Export participants</source>
+        <target state="final">Exportera deltagare</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">Avisera deltagare</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationHistory" approved="yes">
+        <source>Notification history</source>
+        <target state="final">Aviseringshistorik</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.title" approved="yes">
+        <source>TypoScript settings missing</source>
+        <target state="final">Inställningar för TypoScript saknas</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.event" approved="yes">
+        <source>Event:</source>
+        <target state="final">Evenemang:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.template" approved="yes">
+        <source>Template:</source>
+        <target state="final">Mall:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sendNotifications" approved="yes">
+        <source>Send notifications</source>
+        <target state="final">Skicka notifieringar</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.cancelSendNotifications" approved="yes">
+        <source>Back to event listing</source>
+        <target state="final">Tillbaka till evenemangsöversikten</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.date" approved="yes">
+        <source>Date</source>
+        <target state="final">Datum</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Detaljer</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sentBy" approved="yes">
+        <source>Sent by</source>
+        <target state="final">Skickat av</target>
+      </trans-unit>
+      <trans-unit id="events-folder" approved="yes">
+        <source>Events</source>
+        <target state="final">Evenemang</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableInvoice" approved="yes">
+        <source>Enable payment method 'invoice'</source>
+        <target state="final">Aktivera betalningsmetod 'faktura'</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableTransfer" approved="yes">
+        <source>Enable payment method 'transfer'</source>
+        <target state="final">Aktivera betalningsmetod 'överföring'</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.asc" approved="yes">
+        <source>Ascending</source>
+        <target state="final">Stigande</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.desc" approved="yes">
+        <source>Descending</source>
+        <target state="final">Fallande</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

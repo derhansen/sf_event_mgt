@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="sv-SE">
+    <header/>
+    <body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event" approved="yes">
+        <source>Event</source>
+        <target state="final">Evenemang</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser" approved="yes">
+        <source>Teaser</source>
+        <target state="final">Ingress</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivning</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
+        <source>Program/Schedule</source>
+        <target state="final">Program/Schema</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Länk</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
+        <source>Top event</source>
+        <target state="final">Huvudevenemang</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants" approved="yes">
+        <source>Max. participants</source>
+        <target state="final">Max antal deltagare</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration" approved="yes">
+        <source>Registration enabled</source>
+        <target state="final">Registrering aktiverad</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Registreringar</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.freePlaces" approved="yes">
+        <source>Free places</source>
+        <target state="final">Lediga platser</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price" approved="yes">
+        <source>Price</source>
+        <target state="final">Pris</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
+        <source>Currency</source>
+        <target state="final">Valuta</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category" approved="yes">
+        <source>Category</source>
+        <target state="final">Kategori</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related" approved="yes">
+        <source>Related events</source>
+        <target state="final">Relaterade evenemang</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Plats</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adress</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Postnummer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.city" approved="yes">
+        <source>City</source>
+        <target state="final">Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beskrivning</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">Bilder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
+        <source>Files</source>
+        <target state="final">Filer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image" approved="yes">
+        <source>Additional Images</source>
+        <target state="final">Ytterligare bilder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.booking" approved="yes">
+        <source>Booking</source>
+        <target state="final">Bokning</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Företag</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Adress</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Postnummer:</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city" approved="yes">
+        <source>City</source>
+        <target state="final">Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-post</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Kön</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset" approved="yes">
+        <source>Not set</source>
+        <target state="final">Ej angivet</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female" approved="yes">
+        <source>Female</source>
+        <target state="final">Kvinna</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male" approved="yes">
+        <source>Male</source>
+        <target state="final">Man</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth" approved="yes">
+        <source>Date of birth</source>
+        <target state="final">Födelsedatum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod" approved="yes">
+        <source>Payment method</source>
+        <target state="final">Betalningsmetod</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc" approved="yes">
+        <source>Accept terms and conditions</source>
+        <target state="final">Acceptera villkoren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed" approved="yes">
+        <source>Confirmed</source>
+        <target state="final">Bekräftad</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">Betald</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
+        <source>Notes</source>
+        <target state="final">Anteckningar</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" approved="yes">
+        <source>Amount of registrations</source>
+        <target state="final">Mängd registreringar</target>
+      </trans-unit>
+      <trans-unit id="event.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">Registrering</target>
+      </trans-unit>
+      <trans-unit id="registration.form.header" approved="yes">
+        <source>Registration form</source>
+        <target state="final">Registreringsformulär</target>
+      </trans-unit>
+      <trans-unit id="event.backtext" approved="yes">
+        <source>Back to listview</source>
+        <target state="final">Tillbaka till översikten</target>
+      </trans-unit>
+      <trans-unit id="event.backDetailsText" approved="yes">
+        <source>Back to event details</source>
+        <target state="final">Tillbaka till evenemangsdetaljer</target>
+      </trans-unit>
+      <trans-unit id="event.allEvents" approved="yes">
+        <source>All events</source>
+        <target state="final">Alla evenemang</target>
+      </trans-unit>
+      <trans-unit id="event.submit-registration" approved="yes">
+        <source>Send registration</source>
+        <target state="final">Skickat registrering</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenabled" approved="yes">
+        <source>Registration failed, because registration is disabled.</source>
+        <target state="final">Registreringen misslyckades, eftersom att registreringsmöjlighet är inaktiverat.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailednotenoughfreeplaces" approved="yes">
+        <source>Registration failed, because the amount of given registrations exceeds the amount of remaining registrations.</source>
+        <target state="final">Registreringen misslyckades, eftersom att antalet registreringar överstiger antalet kvarvarande registreringar.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationfailedmaxamountregistrationsexceeded" approved="yes">
+        <source>Registration failed, because the amount of given registrations exceeds the max amount of simultaneous registrations.</source>
+        <target state="final">Registreringen misslyckades, eftersom att antalet registreringar överstiger max antal samtidiga registreringar.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationnotpossible" approved="yes">
+        <source>Unable to show registration form - possible reasons: Event expired, deadline or max. participants reached.</source>
+        <target state="final">Det går inte att visa registreringsformuläret - möjliga orsaker: Evenemang löpt ut, deadline eller max antal deltagare uppnåtts.</target>
+      </trans-unit>
+      <trans-unit id="event.message.registrationsuccessful" approved="yes">
+        <source>Your registration was successful.</source>
+        <target state="final">Registreringen lyckades</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_successful" approved="yes">
+        <source>Your registration has been successfully confirmed.</source>
+        <target state="final">Din registrering har bekräftats.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_wrong_hmac" approved="yes">
+        <source>Confirmation failed, wrong HMAC.</source>
+        <target state="final">Bekräftelsen misslyckades, fel HMAC.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_registration_not_found" approved="yes">
+        <source>Confirmation failed, registration not found.</source>
+        <target state="final">Bekräftelsen misslyckades, ingen registrering kunde hittas.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_confirmation_until_expired" approved="yes">
+        <source>Confirmation failed, confirmation date has expired.</source>
+        <target state="final">Bekräftelsen misslyckades, bekräftelsedatum har löpt ut.</target>
+      </trans-unit>
+      <trans-unit id="event.message.confirmation_failed_already_confirmed" approved="yes">
+        <source>Confirmation failed, because the registration already has been confirmed.</source>
+        <target state="final">Bekräftelsen misslyckades, eftersom att registreringen redan bekräftats.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_successful" approved="yes">
+        <source>Your registration has been successfully cancelled.</source>
+        <target state="final">Din registrering har avbokats.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_wrong_hmac" approved="yes">
+        <source>Cancellation failed, wrong HMAC.</source>
+        <target state="final">Avbokning misslyckades, fel HMAC.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_registration_not_found_or_cancelled" approved="yes">
+        <source>Cancellation failed, registration not found or already cancelled.</source>
+        <target state="final">Avbokning misslyckades, registreringen kunde ej hittas eller redan avbokats.</target>
+      </trans-unit>
+      <trans-unit id="event.message.cancel_failed_deadline_expired" approved="yes">
+        <source>Cancellation failed, cancellation date has expired.</source>
+        <target state="final">Avbokning misslyckades, senast datum för att avregistrera sig har passerat.</target>
+      </trans-unit>
+      <trans-unit id="event.icalDownload" approved="yes">
+        <source>Download iCal file</source>
+        <target state="final">Hämta iCal-fil</target>
+      </trans-unit>
+      <trans-unit id="event.freeofcharge" approved="yes">
+        <source>Free of charge</source>
+        <target state="final">Gratis</target>
+      </trans-unit>
+      <trans-unit id="label.false" approved="yes">
+        <source>False</source>
+        <target state="final">Falskt</target>
+      </trans-unit>
+      <trans-unit id="label.true" approved="yes">
+        <source>True</source>
+        <target state="final">Sant</target>
+      </trans-unit>
+      <trans-unit id="admin.no_events_available" approved="yes">
+        <source>No events available</source>
+        <target state="final">Inga evenemang tillgängliga</target>
+      </trans-unit>
+      <trans-unit id="search.title" approved="yes">
+        <source>Search</source>
+        <target state="final">Sök</target>
+      </trans-unit>
+      <trans-unit id="list.title" approved="yes">
+        <source>Events</source>
+        <target state="final">Evenemang</target>
+      </trans-unit>
+      <trans-unit id="detail.title" approved="yes">
+        <source>Event details</source>
+        <target state="final">Evenemangsdetaljer</target>
+      </trans-unit>
+      <trans-unit id="detail.download" approved="yes">
+        <source>Download</source>
+        <target state="final">Ladda ner</target>
+      </trans-unit>
+      <trans-unit id="registration.title" approved="yes">
+        <source>Registration for event</source>
+        <target state="final">Registrering för evenemang</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.successful" approved="yes">
+        <source>Registration confirmed</source>
+        <target state="final">Registrering bekräftad</target>
+      </trans-unit>
+      <trans-unit id="confirmRegistration.title.failed" approved="yes">
+        <source>Registration confirmation failed</source>
+        <target state="final">Bekräftelse av registreringen misslyckades</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.successful" approved="yes">
+        <source>Registration cancelled</source>
+        <target state="final">Registreringen avbröts</target>
+      </trans-unit>
+      <trans-unit id="cancelRegistration.title.failed" approved="yes">
+        <source>Cancellation failed</source>
+        <target state="final">Avbokning misslyckades</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.successful" approved="yes">
+        <source>Registration successful</source>
+        <target state="final">Registreringen lyckades</target>
+      </trans-unit>
+      <trans-unit id="registrationResult.title.failed" approved="yes">
+        <source>Registration failed</source>
+        <target state="final">Registreringen misslyckades</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Namn</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
+        <source>Phone number</source>
+        <target state="final">Telefonnummer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Bild</target>
+      </trans-unit>
+      <trans-unit id="search.searchFor" approved="yes">
+        <source>Search</source>
+        <target state="final">Sök</target>
+      </trans-unit>
+      <trans-unit id="search.submit" approved="yes">
+        <source>Search</source>
+        <target state="final">Sök</target>
+      </trans-unit>
+      <trans-unit id="search.searchResult" approved="yes">
+        <source>Searchresult</source>
+        <target state="final">Sökresultat</target>
+      </trans-unit>
+      <trans-unit id="search.noResultsFound" approved="yes">
+        <source>Your search did not match any events</source>
+        <target state="final">Din sökning matchade inga evenemang</target>
+      </trans-unit>
+      <trans-unit id="payment.title.invoice" approved="yes">
+        <source>Invoice</source>
+        <target state="final">Faktura</target>
+      </trans-unit>
+      <trans-unit id="payment.title.transfer" approved="yes">
+        <source>Transfer</source>
+        <target state="final">Överföring</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.invalidHmac" approved="yes">
+        <source>Error: The given HMAC could not be validated. Possible data manipulation.</source>
+        <target state="final">Fel: Det angivna HMAC kune ej valideras. Trolig datamanipulation.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentNotEnabled" approved="yes">
+        <source>Error: Unable to process payment for this registration, since payment not enabled for the event.</source>
+        <target state="final">Fel: Kunde ej behandla betalningen för detta evenemang, då betalning ej är aktiverat för evenemanget.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.actionNotEnabled" approved="yes">
+        <source>Error: The requested action is not enabled for the payment method.</source>
+        <target state="final">Fel: Den begärda åtgärden är ej aktiverat för betalningssättet.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentAlreadyProcessed" approved="yes">
+        <source>Error: The payment for this registration has already been processed.</source>
+        <target state="final">Fel: Betalningen för denna registreringen har redan behandlats.</target>
+      </trans-unit>
+      <trans-unit id="payment.messages.paymentMethodNotAvailable" approved="yes">
+        <source>Error: The payment method is not configured for the event.</source>
+        <target state="final">Fel: Betalningsmetoden är ej konfigurerad för evenemanget.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

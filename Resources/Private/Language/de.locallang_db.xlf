@@ -1,0 +1,664 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="de">
+    <header/>
+    <body>
+      <trans-unit id="tx_sfeventmgt_domain_model_event" approved="yes">
+        <source>Event</source>
+        <target state="final">Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.category" approved="yes">
+        <source>Categories</source>
+        <target state="final">Kategorien</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.teaser" approved="yes">
+        <source>Teaser</source>
+        <target state="final">Kurzbeschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.program" approved="yes">
+        <source>Program/Schedule</source>
+        <target state="final">Programm/Ablauf</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.custom_text" approved="yes">
+        <source>Custom text</source>
+        <target state="final">Eigener Text</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.top_event" approved="yes">
+        <source>Top event</source>
+        <target state="final">Top Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.startdate" approved="yes">
+        <source>Start date and time</source>
+        <target state="final">Startdatum und -zeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enddate" approved="yes">
+        <source>End date and time</source>
+        <target state="final">Enddatum und -zeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxParticipants" approved="yes">
+        <source>Max. participants</source>
+        <target state="final">Max. Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.maxRegistrationsPerUser" approved="yes">
+        <source>Max. simultaneous registrations per user</source>
+        <target state="final">Max. Anzahl gleichzeitiger Anmeldungen pro Benutzer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_registration" approved="yes">
+        <source>Enable registration</source>
+        <target state="final">Anmeldung aktivieren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.allow_registration_until_enddate" approved="yes">
+        <source>Allow registration until end date and time</source>
+        <target state="final">Registrierung bis zum Enddatum und -zeit erlauben</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist" approved="yes">
+        <source>Enable waitlist</source>
+        <target state="final">Warteliste aktivieren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_waitlist_moveup" approved="yes">
+        <source>Automatic waitlist move up</source>
+        <target state="final">Verschiebe Anmeldungen auf der Warteliste automatisch nach oben</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_cancel" approved="yes">
+        <source>Enable cancellation</source>
+        <target state="final">Stornierung aktivieren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.unique_email_check" approved="yes">
+        <source>Enable unique email check for registration</source>
+        <target state="final">Eindeutige E-Mail-Prüfung für Registrierung aktivieren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_autoconfirm" approved="yes">
+        <source>Enable automatic confirmation of event registrations</source>
+        <target state="final">Automatische Bestätigung der Veranstaltungs-Anmeldung aktivieren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price" approved="yes">
+        <source>Price</source>
+        <target state="final">Preis</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options" approved="yes">
+        <source>Price options</source>
+        <target state="final">Preisoptionen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.price_options.description" approved="yes">
+        <source>If registration is active for the event and price options are defined, the user must select one price option in order to complete the registration.</source>
+        <target state="final">Wenn die Registrierung für die Veranstaltung aktiv ist und Preisoptionen definiert sind, muss der Nutzer eine Preisoption wählen, um die Registrierung abzuschließen.</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.currency" approved="yes">
+        <source>Currency</source>
+        <target state="final">Währung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.enable_payment" approved="yes">
+        <source>Enable payment</source>
+        <target state="final">Zahlung aktivieren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.restrict_payment_methods" approved="yes">
+        <source>Restrict available payment methods</source>
+        <target state="final">Bezahlverfahren einschränken</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.selected_payment_methods" approved="yes">
+        <source>Selected payment methods</source>
+        <target state="final">Ausgewählte Bezahlverfahren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.related" approved="yes">
+        <source>Related events</source>
+        <target state="final">Darauf bezogene Veranstaltungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.location" approved="yes">
+        <source>Location</source>
+        <target state="final">Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.room" approved="yes">
+        <source>Room</source>
+        <target state="final">Raum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.speaker" approved="yes">
+        <source>Speaker</source>
+        <target state="final">Redner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
+        <source>Organizer</source>
+        <target state="final">Veranstalter</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.image" approved="yes">
+        <source>Images</source>
+        <target state="final">Bilder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.files" approved="yes">
+        <source>Files</source>
+        <target state="final">Dateien</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.additional_image" approved="yes">
+        <source>Additional images (e.g. images from the event)</source>
+        <target state="final">Zusätzliche Bilder (z.B. Bilder von der Veranstaltung)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_waitlist" approved="yes">
+        <source>Registrations on the waitlist</source>
+        <target state="final">Anmeldungen auf der Warteliste</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_fields" approved="yes">
+        <source>Additional registration fields (e.g. "Hotel room needed?")</source>
+        <target state="final">Zusätzliche Felder für die Anmeldung (z.B. "Hotelzimmer benötigt?")</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_startdate" approved="yes">
+        <source>Registration start date</source>
+        <target state="final">Anmeldestart</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.registration_deadline" approved="yes">
+        <source>Registration deadline</source>
+        <target state="final">Anmeldefrist</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.cancel_deadline" approved="yes">
+        <source>Cancellation deadline</source>
+        <target state="final">Frist für Stornierung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_admin" approved="yes">
+        <source>Admin</source>
+        <target state="final">Administrator</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.notify_organisator" approved="yes">
+        <source>Organizer</source>
+        <target state="final">Veranstalter</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_keywords" approved="yes">
+        <source>Keywords (,)</source>
+        <target state="final">Schlüsselwörter (,)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.meta_description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.alternative_title" approved="yes">
+        <source>Alternative title</source>
+        <target state="final">Alternativer Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration" approved="yes">
+        <source>Event - Registration</source>
+        <target state="final">Veranstaltung - Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.language" approved="yes">
+        <source>Language</source>
+        <target state="final">Sprache</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.firstname" approved="yes">
+        <source>First name</source>
+        <target state="final">Vorname</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.lastname" approved="yes">
+        <source>Last name</source>
+        <target state="final">Nachname</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.company" approved="yes">
+        <source>Company</source>
+        <target state="final">Firma</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Anschrift</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Plz.</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.city" approved="yes">
+        <source>City</source>
+        <target state="final">Stadt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.phone" approved="yes">
+        <source>Phone</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.ignoreNotifications" approved="yes">
+        <source>No email notifications</source>
+        <target state="final">Keine E-Mail Benachrichtigungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.mainRegistration" approved="yes">
+        <source>Parent registration</source>
+        <target state="final">Übergeordnete Anmeldung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender" approved="yes">
+        <source>Gender</source>
+        <target state="final">Geschlecht</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.notset" approved="yes">
+        <source>Not set</source>
+        <target state="final">Nicht angegeben</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.female" approved="yes">
+        <source>Female</source>
+        <target state="final">Weiblich</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.male" approved="yes">
+        <source>Male</source>
+        <target state="final">Männlich</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.gender.various" approved="yes">
+        <source>Various</source>
+        <target state="final">Divers</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.date_of_birth" approved="yes">
+        <source>Date of birth</source>
+        <target state="final">Geburtsdatum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmationUntil" approved="yes">
+        <source>Confirmation until</source>
+        <target state="final">Bestätigung bis</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.registration_date" approved="yes">
+        <source>Registration date</source>
+        <target state="final">Registrierungsdatum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.accepttc" approved="yes">
+        <source>Accepted terms and conditions</source>
+        <target state="final">AGB bestätigt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.waitlist" approved="yes">
+        <source>Waitlist registration</source>
+        <target state="final">Anmeldung auf Warteliste</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.confirmed" approved="yes">
+        <source>Confirmed</source>
+        <target state="final">Bestätigt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod" approved="yes">
+        <source>Payment method</source>
+        <target state="final">Bezahlverfahren</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paymentmethod.notSet" approved="yes">
+        <source>Not set</source>
+        <target state="final">Nicht angegeben</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.payment_reference" approved="yes">
+        <source>Payment reference</source>
+        <target state="final">Zahlungs-Referenz</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.paid" approved="yes">
+        <source>Paid</source>
+        <target state="final">Bezahlt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.price" approved="yes">
+        <source>Price (when registered)</source>
+        <target state="final">Preis (zum Zeitpunkt der Anmeldung)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.priceOption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Preisoptionen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.notes" approved="yes">
+        <source>Notes</source>
+        <target state="final">Anmerkungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.fe_user" approved="yes">
+        <source>Frontend User</source>
+        <target state="final">Frontend Benutzer</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.fieldvalues" approved="yes">
+        <source>Registration field values</source>
+        <target state="final">Registrierungsfeld Werte</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration.amountOfRegistrations" approved="yes">
+        <source>Amount of registrations (if user created multiple registrations at the same time)</source>
+        <target state="final">Anzahl Anmeldungen (falls der Benutzer mehrere Anmeldungen gleichzeitig vorgenommen hat)</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">Zusätzlich</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.categories" approved="yes">
+        <source>Categories</source>
+        <target state="final">Kategorien</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.relations" approved="yes">
+        <source>Relations</source>
+        <target state="final">Relationen</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.media" approved="yes">
+        <source>Media</source>
+        <target state="final">Medien</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.metadata" approved="yes">
+        <source>Metadata</source>
+        <target state="final">Metadaten</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registration_options" approved="yes">
+        <source>Registration options</source>
+        <target state="final">Registrierungsoptionen</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registration_fields" approved="yes">
+        <source>Registration fields</source>
+        <target state="final">Registrierungsfelder</target>
+      </trans-unit>
+      <trans-unit id="event.tabs.registrations" approved="yes">
+        <source>Registrations</source>
+        <target state="final">Teilnehmer</target>
+      </trans-unit>
+      <trans-unit id="registration.tabs.payment" approved="yes">
+        <source>Payment</source>
+        <target state="final">Bezahlung</target>
+      </trans-unit>
+      <trans-unit id="event.sections.payment" approved="yes">
+        <source>Payment</source>
+        <target state="final">Bezahlung</target>
+      </trans-unit>
+      <trans-unit id="location.tabs.geodata" approved="yes">
+        <source>Geodata</source>
+        <target state="final">Geodaten</target>
+      </trans-unit>
+      <trans-unit id="event.sections.notification" approved="yes">
+        <source>When a registration is created, confirmed, cancelled or moved from the waitlist, send a notification email to:</source>
+        <target state="final">Wenn eine Registrierung erstellt wurde, bestätigt wurde oder nachgerückt ist, versende eine Benachrichtigungsmail an:</target>
+      </trans-unit>
+      <trans-unit id="event.sections.registrationPeriod" approved="yes">
+        <source>Period</source>
+        <target state="final">Registrierungszeitraum</target>
+      </trans-unit>
+      <trans-unit id="event.sections.cancellation" approved="yes">
+        <source>Cancellation options:</source>
+        <target state="final">Stornierungsoptionen</target>
+      </trans-unit>
+      <trans-unit id="event.sections.waitlist" approved="yes">
+        <source>Waitlist</source>
+        <target state="final">Warteliste</target>
+      </trans-unit>
+      <trans-unit id="event.sections.metatags" approved="yes">
+        <source>Meta Tags</source>
+        <target state="final">Meta-Tags</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location" approved="yes">
+        <source>Event - Location</source>
+        <target state="final">Veranstaltung - Ort</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.address" approved="yes">
+        <source>Address</source>
+        <target state="final">Anschrift</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.zip" approved="yes">
+        <source>Zip</source>
+        <target state="final">Plz.</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.city" approved="yes">
+        <source>City</source>
+        <target state="final">Stadt</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.country" approved="yes">
+        <source>Country</source>
+        <target state="final">Land</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.longitude" approved="yes">
+        <source>Longitude</source>
+        <target state="final">Längengrad</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_location.latitude" approved="yes">
+        <source>Latitude</source>
+        <target state="final">Breitengrad</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog" approved="yes">
+        <source>Event - Notificationlog</source>
+        <target state="final">Veranstaltung - Benachrichtigungsverlauf</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.event" approved="yes">
+        <source>Event</source>
+        <target state="final">Veranstaltung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.details" approved="yes">
+        <source>Details</source>
+        <target state="final">Details</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.message" approved="yes">
+        <source>Message</source>
+        <target state="final">Nachricht</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.emailsSent" approved="yes">
+        <source>Emails sent</source>
+        <target state="final">E-Mails gesendet</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_customnotificationlog.tstamp" approved="yes">
+        <source>Timestamp</source>
+        <target state="final">Zeitstempel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_event.organisator" approved="yes">
+        <source>Organizer</source>
+        <target state="final">Veranstalter</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator" approved="yes">
+        <source>Event - Organizer</source>
+        <target state="final">Veranstaltung - Veranstalter/Ansprechpartner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email" approved="yes">
+        <source>Email</source>
+        <target state="final">E-Mail</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.email_signature" approved="yes">
+        <source>Email signature</source>
+        <target state="final">E-Mail-Signatur</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.phone" approved="yes">
+        <source>Phone number</source>
+        <target state="final">Telefon</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.link" approved="yes">
+        <source>Link</source>
+        <target state="final">Link</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_organisator.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Bild</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption" approved="yes">
+        <source>Price option</source>
+        <target state="final">Preisoption</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.price" approved="yes">
+        <source>Price</source>
+        <target state="final">Preis</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_priceoption.valid_until" approved="yes">
+        <source>Date until the price is valid (includes selected date)</source>
+        <target state="final">Datum bis wann der Preis gültig ist (inkl. des ausgewählten Datums)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker" approved="yes">
+        <source>Event - Speaker</source>
+        <target state="final">Veranstaltung - Redner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.name" approved="yes">
+        <source>Name</source>
+        <target state="final">Name</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.job_title" approved="yes">
+        <source>Job title</source>
+        <target state="final">Position</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.description" approved="yes">
+        <source>Description</source>
+        <target state="final">Beschreibung</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_speaker.image" approved="yes">
+        <source>Image</source>
+        <target state="final">Bild</target>
+      </trans-unit>
+      <trans-unit id="registration_field.tabs.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">Einstellungen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field" approved="yes">
+        <source>Event - Registrationfield</source>
+        <target state="final">Veranstaltung - Anmeldungsfelder</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.title" approved="yes">
+        <source>Title</source>
+        <target state="final">Titel</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.settings" approved="yes">
+        <source>Options</source>
+        <target state="final">Optionen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type" approved="yes">
+        <source>Type</source>
+        <target state="final">Typ</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.0" approved="yes">
+        <source>Textfield (input)</source>
+        <target state="final">Textfeld</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.1" approved="yes">
+        <source>Radiobutton</source>
+        <target state="final">Optionsfeld</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.2" approved="yes">
+        <source>Checkbox</source>
+        <target state="final">Ankreuzfeld</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.3" approved="yes">
+        <source>Textarea</source>
+        <target state="final">Textbereich</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.4" approved="yes">
+        <source>Text</source>
+        <target state="final">Text</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.5" approved="yes">
+        <source>Divider</source>
+        <target state="final">Trenner</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.6" approved="yes">
+        <source>Select</source>
+        <target state="final">Auswahlfeld</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.type.7" approved="yes">
+        <source>Date/Time</source>
+        <target state="final">Datum/Zeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.required" approved="yes">
+        <source>Required (field must be filled out)</source>
+        <target state="final">Benötigt (Feld muss ausgefüllt werden)</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.placeholder" approved="yes">
+        <source>Placeholder</source>
+        <target state="final">Platzhalter</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.default_value" approved="yes">
+        <source>Default value</source>
+        <target state="final">Standardwert</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.text" approved="yes">
+        <source>Text</source>
+        <target state="final">Text</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode" approved="yes">
+        <source>Date input mode</source>
+        <target state="final">Datum Eingabeformat</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value" approved="yes">
+        <source>Prefill with frontend user data</source>
+        <target state="final">Vor-ausgefüllt mit Benutzerdaten</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.feuser_value.select" approved="yes">
+        <source>Select value</source>
+        <target state="final">Wert wählen</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.0" approved="yes">
+        <source>Date</source>
+        <target state="final">Datum</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.1" approved="yes">
+        <source>Date and time</source>
+        <target state="final">Datum und Zeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_field.datepickermode.mode.2" approved="yes">
+        <source>Time</source>
+        <target state="final">Uhrzeit</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue" approved="yes">
+        <source>Event - Registrationfield value</source>
+        <target state="final">Veranstaltung - Registrierungsfeld Wert</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.value" approved="yes">
+        <source>Value</source>
+        <target state="final">Wert</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.field" approved="yes">
+        <source>Field</source>
+        <target state="final">Feld</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType" approved="yes">
+        <source>Value Datatype</source>
+        <target state="final">Wert Datentyp</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type0" approved="yes">
+        <source>Text</source>
+        <target state="final">Text</target>
+      </trans-unit>
+      <trans-unit id="tx_sfeventmgt_domain_model_registration_fieldvalue.valueType.type1" approved="yes">
+        <source>Array</source>
+        <target state="final">Array</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views" approved="yes">
+        <source>Show in views</source>
+        <target state="final">Zeige in Ansichten</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.0" approved="yes">
+        <source>Show in all views</source>
+        <target state="final">In allen Ansichten anzeigen</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.1" approved="yes">
+        <source>Show only in detail views</source>
+        <target state="final">Nur in Detailansichten anzeigen</target>
+      </trans-unit>
+      <trans-unit id="sys_file_reference.show_in_views.2" approved="yes">
+        <source>Show only in list views</source>
+        <target state="final">Nur in Listenansichten anzeigen</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

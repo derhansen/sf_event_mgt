@@ -1,0 +1,762 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+  <file source-language="en" datatype="plaintext" original="messages" date="2014-05-17T12:48:01Z" product-name="sf_event_mgt" target-language="lo">
+    <header/>
+    <body>
+      <trans-unit id="extension.title" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">ກິດຈະກຳ ແລະ ການລົງທະບຽນກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="CType.div.plugingroup" approved="yes">
+        <source>Events and event-registration</source>
+        <target state="final">ກິດຈະກຳ ແລະ ການລົງທະບຽນກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.wizard.header" approved="yes">
+        <source>Event Management</source>
+        <target state="final">ການຈັດການກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.title" approved="yes">
+        <source>Event list</source>
+        <target state="final">ລາຍການກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventlist.description" approved="yes">
+        <source>Display of events chosen by various optional properties like storage page, categories,...</source>
+        <target state="final">ສະແດງກິດຈະກຳທີ່ເລືອກໂດຍຄຸນສົມບັດຕ່າງໆ ເຊັ່ນ: ໜ້າຈັດເກັບ, ໝວດໝູ່,...</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventdetail.title" approved="yes">
+        <source>Event details</source>
+        <target state="final">ລາຍລະອຽດກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventdetail.description" approved="yes">
+        <source>Display the detail page for events.</source>
+        <target state="final">ສະແດງໜ້າລາຍລະອຽດສຳລັບກິດຈະກຳ.</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.title" approved="yes">
+        <source>Event registration form</source>
+        <target state="final">ແບບຟອມລົງທະບຽນກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventregistration.description" approved="yes">
+        <source>Display the registration form for events.</source>
+        <target state="final">ສະແດງແບບຟອມລົງທະບຽນສຳລັບກິດຈະກຳ.</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventsearch.title" approved="yes">
+        <source>Event search (Form and Results)</source>
+        <target state="final">ຄົ້ນຫາກິດຈະກຳ (ແບບຟອມ ແລະ ຜົນການຄົ້ນຫາ)</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventsearch.description" approved="yes">
+        <source>Display a search form for events with various filter options.</source>
+        <target state="final">ສະແດງແບບຟອມຄົ້ນຫາກິດຈະກຳດ້ວຍຕົວເລືອກການກັ່ນຕອງຕ່າງໆ.</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.title" approved="yes">
+        <source>Event calendar</source>
+        <target state="final">ປະຕິທິນກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.pieventcalendar.description" approved="yes">
+        <source>Display a calendar of events chosen by various optional properties.</source>
+        <target state="final">ສະແດງປະຕິທິນຂອງກິດຈະກຳທີ່ເລືອກໂດຍຄຸນສົມບັດຕ່າງໆ.</target>
+      </trans-unit>
+      <trans-unit id="plugin.pipayment.title" approved="yes">
+        <source>Event payment</source>
+        <target state="final">ການຊຳລະເງິນກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="plugin.pipayment.description" approved="yes">
+        <source>Display the payment process for events.</source>
+        <target state="final">ສະແດງຂັ້ນຕອນການຊຳລະເງິນສຳລັບກິດຈະກຳ.</target>
+      </trans-unit>
+      <trans-unit id="plugin.piuserreg.title" approved="yes">
+        <source>Event registrations (frontend user)</source>
+        <target state="final">ການລົງທະບຽນກິດຈະກຳ (ຜູ້ໃຊ້ທົ່ວໄປ)</target>
+      </trans-unit>
+      <trans-unit id="plugin.piuserreg.description" approved="yes">
+        <source>Display event registrations for the current logged-in frontend user.</source>
+        <target state="final">ສະແດງການລົງທະບຽນກິດຈະກຳສຳລັບຜູ້ໃຊ້ທີ່ເຂົ້າສູ່ລະບົບຢູ່ໃນປັດຈຸບັນ.</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.settings" approved="yes">
+        <source>Settings</source>
+        <target state="final">ການຕັ້ງຄ່າ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.notification" approved="yes">
+        <source>Notification settings</source>
+        <target state="final">ການຕັ້ງຄ່າການແຈ້ງເຕືອນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.categoryMenu" approved="yes">
+        <source>Category menu</source>
+        <target state="final">ເມນູໝວດໝູ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.template" approved="yes">
+        <source>Template</source>
+        <target state="final">ເທັມເພຼດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">ເພີ່ມເຕີມ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_tab.pagination" approved="yes">
+        <source>Pagination</source>
+        <target state="final">ການແບ່ງໜ້າ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode" approved="yes">
+        <source>What to display</source>
+        <target state="final">ສິ່ງທີ່ຈະສະແດງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.singleEvent" approved="yes">
+        <source>Show a single event record</source>
+        <target state="final">ສະແດງຂໍ້ມູນກິດຈະກຳດຽວ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.list" approved="yes">
+        <source>List</source>
+        <target state="final">ລາຍການ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.detail" approved="yes">
+        <source>Detail</source>
+        <target state="final">ລາຍລະອຽດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">ການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.search" approved="yes">
+        <source>Searchform</source>
+        <target state="final">ແບບຟອມຄົ້ນຫາ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.mode.calendar" approved="yes">
+        <source>Calendar</source>
+        <target state="final">ປະຕິທິນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.detailPid" approved="yes">
+        <source>Detail Page</source>
+        <target state="final">ໜ້າລາຍລະອຽດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.listPid" approved="yes">
+        <source>List Page</source>
+        <target state="final">ໜ້າລາຍການ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.registrationPid" approved="yes">
+        <source>Registration Page</source>
+        <target state="final">ໜ້າລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.paymentPid" approved="yes">
+        <source>Payment Page</source>
+        <target state="final">ໜ້າຊຳລະເງິນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.linkTermsAndConditions" approved="yes">
+        <source>Link to terms and conditions</source>
+        <target state="final">ລິ້ງໄປຫາຂໍ້ກຳນົດ ແລະ ເງື່ອນໄຂ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.queryLimit" approved="yes">
+        <source>Max records displayed</source>
+        <target state="final">ຈຳນວນຂໍ້ມູນສູງສຸດທີ່ຈະສະແດງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.topEventRestriction" approved="yes">
+        <source>Top event restriction</source>
+        <target state="final">ການຈຳກັດກິດຈະກຳເດັ່ນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.none" approved="yes">
+        <source>None</source>
+        <target state="final">ບໍ່ມີ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.onlyTopEvents" approved="yes">
+        <source>Only top events</source>
+        <target state="final">ສະເພາະກິດຈະກຳເດັ່ນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.exceptTopEvents" approved="yes">
+        <source>Except top events</source>
+        <target state="final">ຍົກເວັ້ນກິດຈະກຳເດັ່ນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode" approved="yes">
+        <source>Display mode</source>
+        <target state="final">ໂໝດການສະແດງຜົນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField" approved="yes">
+        <source>Sort by</source>
+        <target state="final">ຈັດລຽງຕາມ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.title" approved="yes">
+        <source>Title</source>
+        <target state="final">ຫົວຂໍ້</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.uid" approved="yes">
+        <source>Record ID</source>
+        <target state="final">ໄອດີຂໍ້ມູນ (UID)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.sorting" approved="yes">
+        <source>Sorting in TYPO3</source>
+        <target state="final">ການຈັດລຽງໃນ TYPO3</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.startdate" approved="yes">
+        <source>Start date</source>
+        <target state="final">ວັນທີເລີ່ມຕົ້ນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.enddate" approved="yes">
+        <source>End date</source>
+        <target state="final">ວັນທີສິ້ນສຸດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.title" approved="yes">
+        <source>Event title</source>
+        <target state="final">ຊື່ກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.startdate" approved="yes">
+        <source>Event startdate</source>
+        <target state="final">ວັນທີເລີ່ມກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderField.event.enddate" approved="yes">
+        <source>Event enddate</source>
+        <target state="final">ວັນທີສິ້ນສຸດກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection" approved="yes">
+        <source>Sorting direction</source>
+        <target state="final">ທິດທາງການຈັດລຽງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.ascending" approved="yes">
+        <source>Ascending</source>
+        <target state="final">ຈາກນ້ອຍຫາໃຫຍ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.orderDirection.descending" approved="yes">
+        <source>Descending</source>
+        <target state="final">ຈາກໃຫຍ່ຫານ້ອຍ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction" approved="yes">
+        <source>Category mode</source>
+        <target state="final">ໂໝດໝວດໝູ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.ignore" approved="yes">
+        <source>Ignore category selection</source>
+        <target state="final">ລະເວັ້ນການເລືອກໝວດໝູ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.or" approved="yes">
+        <source>Show events with selected categories (OR)</source>
+        <target state="final">ສະແດງກິດຈະກຳທີ່ມີໝວດໝູ່ທີ່ເລືອກ (ຫຼື)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.and" approved="yes">
+        <source>Show events with selected categories (AND)</source>
+        <target state="final">ສະແດງກິດຈະກຳທີ່ມີໝວດໝູ່ທີ່ເລືອກ (ແລະ)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notand" approved="yes">
+        <source>Do NOT show events with selected categories (AND)</source>
+        <target state="final">ບໍ່ສະແດງກິດຈະກຳທີ່ມີໝວດໝູ່ທີ່ເລືອກ (ແລະ)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.categoryConjunction.notor" approved="yes">
+        <source>Do NOT show events with selected categories (OR)</source>
+        <target state="final">ບໍ່ສະແດງກິດຈະກຳທີ່ມີໝວດໝູ່ທີ່ເລືອກ (ຫຼື)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.possibleMisconfiguration" approved="yes">
+        <source>Possible misconfiguration!</source>
+        <target state="final">ອາດມີການຕັ້ງຄ່າທີ່ບໍ່ຖືກຕ້ອງ!</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.pluginCalendarMisonfiguration" approved="yes">
+        <source>Plugin misconfigured: This setting must be disabled for "Calendar" to work properly!</source>
+        <target state="final">ປລັກອິນຕັ້ງຄ່າບໍ່ຖືກຕ້ອງ: ການຕັ້ງຄ່ານີ້ຕ້ອງຖືກປິດເພື່ອໃຫ້ "ປະຕິທິນ" ເຮັດວຽກໄດ້ຢ່າງຖືກຕ້ອງ!</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.category" approved="yes">
+        <source>Category</source>
+        <target state="final">ໝວດໝູ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeSubcategories" approved="yes">
+        <source>Include subcategories</source>
+        <target state="final">ລວມໝວດໝູ່ຍ່ອຍ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.location" approved="yes">
+        <source>Location</source>
+        <target state="final">ສະຖານທີ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.organisator" approved="yes">
+        <source>Organizer</source>
+        <target state="final">ຜູ້ຈັດງານ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.speaker" approved="yes">
+        <source>Speaker</source>
+        <target state="final">ວິທະຍາກອນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.storagePage" approved="yes">
+        <source>Record storage page</source>
+        <target state="final">ໜ້າຈັດເກັບຂໍ້ມູນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.restrictForeignRecordsToStoragePage" approved="yes">
+        <source>Restrict categories, locations, organizers and speakers to storagePage setting (including recursive option)</source>
+        <target state="final">ຈຳກັດໝວດໝູ່, ສະຖານທີ່, ຜູ້ຈັດງານ ແລະ ວິທະຍາກອນ ຕາມການຕັ້ງຄ່າໜ້າຈັດເກັບ (ລວມທັງຕົວເລືອກແບບແຕກຍ່ອຍ)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.all" approved="yes">
+        <source>Show all events</source>
+        <target state="final">ສະແດງທຸກກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.future" approved="yes">
+        <source>Show only future events</source>
+        <target state="final">ສະແດງສະເພາະກິດຈະກຳໃນອະນາຄົດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.past" approved="yes">
+        <source>Show only past events</source>
+        <target state="final">ສະແດງສະເພາະກິດຈະກຳທີ່ຜ່ານມາ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.current_future" approved="yes">
+        <source>Show only current and future events</source>
+        <target state="final">ສະແດງສະເພາະກິດຈະກຳປັດຈຸບັນ ແລະ ໃນອະນາຄົດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.displayMode.time_restriction" approved="yes">
+        <source>Show events by a given time restriction</source>
+        <target state="final">ສະແດງກິດຈະກຳຕາມການຈຳກັດເວລາທີ່ກຳນົດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.all" approved="yes">
+        <source>Show registrations for all events</source>
+        <target state="final">ສະແດງການລົງທະບຽນສຳລັບທຸກກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.future" approved="yes">
+        <source>Show registrations for future events</source>
+        <target state="final">ສະແດງການລົງທະບຽນສຳລັບກິດຈະກຳໃນອະນາຄົດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.userRegistration.displayMode.past" approved="yes">
+        <source>Show registrations for past events</source>
+        <target state="final">ສະແດງການລົງທະບຽນສຳລັບກິດຈະກຳທີ່ຜ່ານມາ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.requiredFields" approved="yes">
+        <source>Comma seperated list of fieldnames, which are required. The fields first name, last name and email
+					are always required and cannot be overridden
+				</source>
+        <target state="final">ລາຍຊື່ຟິວຂໍ້ມູນທີ່ຈຳເປັນ (ແຍກດ້ວຍຈຸດ). ຟິວ ຊື່, ນາມສະກຸນ ແລະ ອີເມວ ແມ່ນຈຳເປັນສະເໝີ ແລະ ບໍ່ສາມາດປ່ຽນແປງໄດ້</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.templateLayout" approved="yes">
+        <source>Template layout</source>
+        <target state="final">ຮູບແບບເທັມເພຼດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.disableOverrideDemand" approved="yes">
+        <source>Disable overwrite demand</source>
+        <target state="final">ປິດການຂຽນທັບຄວາມຕ້ອງການ (Demand)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionDescription" approved="yes">
+        <source>The values is passed to PHPs strtotime() function, so you can use expressions like "first day of this month midnight" and "last day of this month 23:59:59" to get events of the current month</source>
+        <target state="final">ຄ່ານີ້ຈະຖືກສົ່ງໄປຫາຟັງຊັນ strtotime() ຂອງ PHP, ທ່ານສາມາດໃຊ້ຄຳສັ່ງເຊັ່ນ "first day of this month midnight" ເພື່ອດຶງຂໍ້ມູນກິດຈະກຳໃນເດືອນນີ້</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionLow" approved="yes">
+        <source>Time from</source>
+        <target state="final">ເວລາເລີ່ມຈາກ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.timeRestrictionHigh" approved="yes">
+        <source>Time to</source>
+        <target state="final">ເວລາສິ້ນສຸດເຖິງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeCurrent" approved="yes">
+        <source>Include current</source>
+        <target state="final">ລວມຂໍ້ມູນປັດຈຸບັນ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.includeCurrent.description" approved="yes">
+        <source>Include events that start before and end after time from</source>
+        <target state="final">ລວມກິດຈະກຳທີ່ເລີ່ມຕົ້ນກ່ອນ ແລະ ສິ້ນສຸດຫຼັງຈາກເວລາທີ່ກຳນົດ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords" approved="yes">
+        <source>Allow preview of hidden event records</source>
+        <target state="final">ອະນຸຍາດໃຫ້ເບິ່ງຕົວຢ່າງຂໍ້ມູນກິດຈະກຳທີ່ຖືກເຊື່ອງໄວ້</target>
+      </trans-unit>
+      <trans-unit id="flexforms_general.previewHiddenRecords.description" approved="yes">
+        <source>If set, hidden event records are displayed. Be aware to secure the page (e.g. set page visibility to "hidden") as this page could be called by anyone using any event record uid to see its content. Note, that this functionality requires a valid backend user session.</source>
+        <target state="final">ຖ້າຕັ້ງຄ່ານີ້, ຂໍ້ມູນທີ່ຖືກເຊື່ອງຈະສະແດງໃຫ້ເຫັນ. ກະລຸນາລະວັງເລື່ອງຄວາມປອດໄພຂອງໜ້າເວັບ ເພາະທຸກຄົນທີ່ມີ UID ອາດຈະເຂົ້າເບິ່ງເນື້ອຫາໄດ້. ໝາຍເຫດ: ຟັງຊັນນີ້ຕ້ອງມີການເຂົ້າສູ່ລະບົບຫຼັງບ້ານ (Backend user) ທີ່ຍັງໃຊ້ງານໄດ້ຢູ່.</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_email" approved="yes">
+        <source>Email address of emails sent to the user</source>
+        <target state="final">ທີ່ຢູ່ອີເມວຂອງຜູ້ສົ່ງທີ່ຈະສົ່ງຫາຜູ້ໃຊ້</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.sender_name" approved="yes">
+        <source>Name of the sender</source>
+        <target state="final">ຊື່ຜູ້ສົ່ງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.replyto_email" approved="yes">
+        <source>Reply-to email address of emails sent to the user</source>
+        <target state="final">ທີ່ຢູ່ອີເມວສຳລັບຕອບກັບ (Reply-to)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.admin_email" approved="yes">
+        <source>Email address(es) of website admin(s), who receives new/confirmed registrations. Multiple email addresses must be separated with a comma.</source>
+        <target state="final">ອີເມວຂອງຜູ້ເບິ່ງແຍງລະບົບທີ່ຈະໄດ້ຮັບການແຈ້ງເຕືອນການລົງທະບຽນໃໝ່/ຢືນຢັນ. ຖ້າມີຫຼາຍອີເມວໃຫ້ແຍກດ້ວຍຈຸດ.</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_user_subject" approved="yes">
+        <source>Subject of email sent to user when a new registration is created</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ໃຊ້ເມື່ອມີການລົງທະບຽນໃໝ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_user_subject" approved="yes">
+        <source>Subject of email sent to user when a new registration on the waitlist is created</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ໃຊ້ເມື່ອມີການລົງທະບຽນໃນລາຍຊື່ສຳຮອງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_new_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a new registration is created</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ເບິ່ງແຍງເມື່ອມີການລົງທະບຽນໃໝ່</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_new_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a new registration on the waitlist is created</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ເບິ່ງແຍງເມື່ອມີການລົງທະບຽນໃນລາຍຊື່ສຳຮອງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_confirmed_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration has been confirmed</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ໃຊ້ເມື່ອການລົງທະບຽນຖືກຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_confirmed_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration on the waitlist has been confirmed</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ໃຊ້ເມື່ອລາຍຊື່ສຳຮອງຖືກຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_confirmed_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration has been confirmed</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ເບິ່ງແຍງເມື່ອການລົງທະບຽນຖືກຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_confirmed_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration on the waitlist has been confirmed</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ເບິ່ງແຍງເມື່ອລາຍຊື່ສຳຮອງຖືກຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_cancelled_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration has been cancelled</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ໃຊ້ເມື່ອການລົງທະບຽນຖືກຍົກເລີກ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_cancelled_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration has been cancelled</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ເບິ່ງແຍງເມື່ອການລົງທະບຽນຖືກຍົກເລີກ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_move_up_user_subject" approved="yes">
+        <source>Subject of email sent to user when a registration moved up from the waitlist</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ໃຊ້ເມື່ອຖືກເລື່ອນຂຶ້ນມາຈາກລາຍຊື່ສຳຮອງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_notification.registration_waitlist_move_up_admin_subject" approved="yes">
+        <source>Subject of email sent to admin when a registration moved up from the waitlist</source>
+        <target state="final">ຫົວຂໍ້ອີເມວທີ່ສົ່ງຫາຜູ້ເບິ່ງແຍງເມື່ອມີລາຍຊື່ຖືກເລື່ອນຂຶ້ນມາຈາກລາຍຊື່ສຳຮອງ</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.categories" approved="yes">
+        <source>Categories (if empty, all categories will be shown in the category menu)</source>
+        <target state="final">ໝວດໝູ່ (ຖ້າວ່າງໄວ້, ຈະສະແດງທຸກໝວດໝູ່ໃນເມນູ)</target>
+      </trans-unit>
+      <trans-unit id="flexforms_categorymenu.includeSubcategories" approved="yes">
+        <source>Include subcategories</source>
+        <target state="final">ລວມໝວດໝູ່ຍ່ອຍ</target>
+      </trans-unit>
+      <trans-unit id="administration.title" approved="yes">
+        <source>Event Administration</source>
+        <target state="final">ການບໍລິຫານຈັດການກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">ແຈ້ງເຕືອນຜູ້ເຂົ້າຮ່ວມ</target>
+      </trans-unit>
+      <trans-unit id="administration.newEvent" approved="yes">
+        <source>Create new event</source>
+        <target state="final">ສ້າງກິດຈະກຳໃໝ່</target>
+      </trans-unit>
+      <trans-unit id="administration.newLocation" approved="yes">
+        <source>Create new location</source>
+        <target state="final">ສ້າງສະຖານທີ່ໃໝ່</target>
+      </trans-unit>
+      <trans-unit id="administration.newOrganisator" approved="yes">
+        <source>Create new organizer</source>
+        <target state="final">ສ້າງຜູ້ຈັດງານໃໝ່</target>
+      </trans-unit>
+      <trans-unit id="administration.newSpeaker" approved="yes">
+        <source>Create new speaker</source>
+        <target state="final">ສ້າງວິທະຍາກອນໃໝ່</target>
+      </trans-unit>
+      <trans-unit id="administration.handleExpiredRegistrations" approved="yes">
+        <source>Hide/delete expired registrations</source>
+        <target state="final">ເຊື່ອງ/ລຶບ ການລົງທະບຽນທີ່ໝົດອາຍຸ</target>
+      </trans-unit>
+      <trans-unit id="administration.export" approved="yes">
+        <source>Export participants</source>
+        <target state="final">ສົ່ງອອກລາຍຊື່ຜູ້ເຂົ້າຮ່ວມ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify" approved="yes">
+        <source>Notify participants</source>
+        <target state="final">ແຈ້ງເຕືອນຜູ້ເຂົ້າຮ່ວມ</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationHistory" approved="yes">
+        <source>Notification history</source>
+        <target state="final">ປະຫວັດການແຈ້ງເຕືອນ</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.title" approved="yes">
+        <source>TypoScript settings missing</source>
+        <target state="final">ຂາດການຕັ້ງຄ່າ TypoScript</target>
+      </trans-unit>
+      <trans-unit id="administration.settingsError.description" approved="yes">
+        <source>Unable to find TypoScript settings for module. Please make sure, required TypoScript settings have been included. If you use a TypoScript template for your website, include the static TypoScript of sf_event_mgt. If you use site sets and have included the extensions site set, make sure that the templates does not clear constants/setup (which overrides site set includes).</source>
+        <target state="final">ບໍ່ພົບການຕັ້ງຄ່າ TypoScript ສຳລັບໂມດູນນີ້. ກະລຸນາກວດສອບວ່າໄດ້ລວມເອົາ TypoScript ທີ່ຈຳເປັນແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description" approved="yes">
+        <source>Please select an email template that will be used to notify participants of the event.</source>
+        <target state="final">ກະລຸນາເລືອກເທັມເພຼດອີເມວທີ່ຈະໃຊ້ແຈ້ງເຕືອນຜູ້ເຂົ້າຮ່ວມກິດຈະກຳ.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.event" approved="yes">
+        <source>Event:</source>
+        <target state="final">ກິດຈະກຳ:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.recipients" approved="yes">
+        <source>Recipients:</source>
+        <target state="final">ຜູ້ຮັບ:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.0" approved="yes">
+        <source>All participants</source>
+        <target state="final">ຜູ້ເຂົ້າຮ່ວມທັງໝົດ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.1" approved="yes">
+        <source>Confirmed participants</source>
+        <target state="final">ຜູ້ເຂົ້າຮ່ວມທີ່ຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.2" approved="yes">
+        <source>Unconfirmed participants</source>
+        <target state="final">ຜູ້ເຂົ້າຮ່ວມທີ່ຍັງບໍ່ທັນຢືນຢັນ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.3" approved="yes">
+        <source>Confirmed waitlist participants</source>
+        <target state="final">ຜູ້ເຂົ້າຮ່ວມໃນລາຍຊື່ສຳຮອງທີ່ຢືນຢັນແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.recipients.4" approved="yes">
+        <source>Unconfirmed waitlist participants</source>
+        <target state="final">ຜູ້ເຂົ້າຮ່ວມໃນລາຍຊື່ສຳຮອງທີ່ຍັງບໍ່ທັນຢືນຢັນ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.template" approved="yes">
+        <source>Template:</source>
+        <target state="final">ເທັມເພຼດ:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.overwriteSubject" approved="yes">
+        <source>Overwrite subject:</source>
+        <target state="final">ຂຽນທັບຫົວຂໍ້:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.overwriteSubject" approved="yes">
+        <source>Overwrites the configured default email subject of the selected template</source>
+        <target state="final">ຂຽນທັບຫົວຂໍ້ອີເມວເລີ່ມຕົ້ນຂອງເທັມເພຼດທີ່ເລືອກ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.label.additionalMessage" approved="yes">
+        <source>Additional message:</source>
+        <target state="final">ຂໍ້ຄວາມເພີ່ມເຕີມ:</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.description.additionalMessage" approved="yes">
+        <source>Optional additional message in notification</source>
+        <target state="final">ຂໍ້ຄວາມເພີ່ມເຕີມໃນການແຈ້ງເຕືອນ (ຖ້າມີ)</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError.title" approved="yes">
+        <source>No sender email address</source>
+        <target state="final">ບໍ່ມີທີ່ຢູ່ອີເມວຜູ້ສົ່ງ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.senderEmailError" approved="yes">
+        <source>The sender email address could not be determined. Please make sure, you have configured plugin.tx_sfeventmgt.notification settings properly and that the folder containing the events has access to those settings.</source>
+        <target state="final">ບໍ່ສາມາດລະບຸອີເມວຜູ້ສົ່ງໄດ້. ກະລຸນາກວດສອບການຕັ້ງຄ່າການແຈ້ງເຕືອນໃຫ້ຖືກຕ້ອງ.</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sendNotifications" approved="yes">
+        <source>Send notifications</source>
+        <target state="final">ສົ່ງການແຈ້ງເຕືອນ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.cancelSendNotifications" approved="yes">
+        <source>Back to event listing</source>
+        <target state="final">ກັບຄືນສູ່ລາຍການກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.date" approved="yes">
+        <source>Date</source>
+        <target state="final">ວັນທີ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.details" approved="yes">
+        <source>Details</source>
+        <target state="final">ລາຍລະອຽດ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.emailsSent" approved="yes">
+        <source>Emails sent</source>
+        <target state="final">ອີເມວທີ່ສົ່ງແລ້ວ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.sentBy" approved="yes">
+        <source>Sent by</source>
+        <target state="final">ສົ່ງໂດຍ</target>
+      </trans-unit>
+      <trans-unit id="administration.notify.notAvailable" approved="yes">
+        <source>N/A</source>
+        <target state="final">ບໍ່ມີຂໍ້ມູນ</target>
+      </trans-unit>
+      <trans-unit id="administration.nopageselected" approved="yes">
+        <source>Please click the page title in the page tree to the left to show the records on that page.</source>
+        <target state="final">ກະລຸນາຄລິກທີ່ຊື່ໜ້າໃນຕົ້ນໄມ້ໜ້າເວັບດ້ານຊ້າຍເພື່ອສະແດງຂໍ້ມູນໃນໜ້ານັ້ນ.</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.title" approved="yes">
+        <source>Notifications disabled</source>
+        <target state="final">ການແຈ້ງເຕືອນຖືກປິດໃຊ້ງານ</target>
+      </trans-unit>
+      <trans-unit id="administration.notificationsDisabled.description" approved="yes">
+        <source>Notifications have been disabled system wide for the Extension in TypoScript configuration.</source>
+        <target state="final">ການແຈ້ງເຕືອນຖືກປິດໃຊ້ງານທົ່ວທັງລະບົບໃນການຕັ້ງຄ່າ TypoScript.</target>
+      </trans-unit>
+      <trans-unit id="events-folder" approved="yes">
+        <source>Events</source>
+        <target state="final">ກິດຈະກຳ</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableInvoice" approved="yes">
+        <source>Enable payment method 'invoice'</source>
+        <target state="final">ເປີດໃຊ້ການຊຳລະເງິນແບບ 'ໃບແຈ້ງໜີ້'</target>
+      </trans-unit>
+      <trans-unit id="extmng.enableTransfer" approved="yes">
+        <source>Enable payment method 'transfer'</source>
+        <target state="final">ເປີດໃຊ້ການຊຳລະເງິນແບບ 'ໂອນເງິນ'</target>
+      </trans-unit>
+      <trans-unit id="extmng.slugBehaviour" xml:space="preserve" approved="yes">
+				<source>Slug behaviour: uniqueInSite: The same slug can be used for events in different sites. Use this setting *only* if no event records are shared between sites. "unique" means that same event title will lead to different slug names.</source>
+			<target state="final">ພຶດຕິກຳຂອງສະລັກ (Slug): uniqueInSite ໝາຍເຖິງສາມາດໃຊ້ສະລັກດຽວກັນໃນເວັບໄຊທີ່ຕ່າງກັນໄດ້.</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrations" xml:space="preserve" approved="yes">
+				<source>Hide registrations in event record by limit: Hides the event fields "Registration" and "Registration Waitlist" if the configured limit in "backend.hideInlineRegistrationsLimit" is reached. This option is usefull, when you have events with a huge amount of registrations where the TYPO3 backend gets slow due to performance issues of the TCA inline field.</source>
+			<target state="final">ເຊື່ອງການລົງທະບຽນໃນຂໍ້ມູນກິດຈະກຳຕາມຂີດຈຳກັດ: ເຊື່ອງຟິວ "ການລົງທະບຽນ" ແລະ "ລາຍຊື່ສຳຮອງ" ຖ້າຂໍ້ມູນຫຼາຍເກີນໄປ ເພື່ອປ້ອງກັນບໍ່ໃຫ້ລະບົບຫຼັງບ້ານຊ້າ.</target></trans-unit>
+      <trans-unit id="extmng.hideInlineRegistrationsLimit" xml:space="preserve" approved="yes">
+				<source>Maximum amount of registrations shown in a event record in the TYPO3 backend.</source>
+			<target state="final">ຈຳນວນການລົງທະບຽນສູງສຸດທີ່ຈະສະແດງໃນຂໍ້ມູນກິດຈະກຳຢູ່ຫຼັງບ້ານ TYPO3.</target></trans-unit>
+      <trans-unit id="extmng.useFluidEmail" xml:space="preserve" approved="yes">
+				<source>Use FluidEmail for email notifications: If active, all notifications generated by the extension will be sent using FluidEmail.</source>
+			<target state="final">ໃຊ້ FluidEmail ສຳລັບການແຈ້ງເຕືອນ: ຖ້າເປີດໃຊ້, ການແຈ້ງເຕືອນທັງໝົດຈະຖືກສົ່ງຜ່ານ FluidEmail.</target></trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.title" approved="yes">
+        <source>Event registrations hidden</source>
+        <target state="final">ການລົງທະບຽນກິດຈະກຳຖືກເຊື່ອງໄວ້</target>
+      </trans-unit>
+      <trans-unit id="backend.hideInlineRegistrations.description" approved="yes">
+        <source>This event has %1$s registrations, but due to performance reasons all event registrations are not shown in this view.</source>
+        <target state="final">ກິດຈະກຳນີ້ມີການລົງທະບຽນ %1$s ລາຍການ, ແຕ່ເນື່ອງຈາກເຫດຜົນດ້ານປະສິດທິພາບ ຈຶ່ງບໍ່ໄດ້ສະແດງທັງໝົດໃນໜ້ານີ້.</target>
+      </trans-unit>
+      <trans-unit id="tabs.language" approved="yes">
+        <source>Language</source>
+        <target state="final">ພາສາ</target>
+      </trans-unit>
+      <trans-unit id="tabs.additional" approved="yes">
+        <source>Additional</source>
+        <target state="final">ເພີ່ມເຕີມ</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.title" approved="yes">
+        <source>Information</source>
+        <target state="final">ຂໍ້ມູນ</target>
+      </trans-unit>
+      <trans-unit id="administration.message-1.content" approved="yes">
+        <source>All expired registrations have been marked as hidden/deleted.</source>
+        <target state="final">ການລົງທະບຽນທີ່ໝົດອາຍຸທັງໝົດຖືກໝາຍເປັນ ເຊື່ອງ/ລຶບ ແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.title" approved="yes">
+        <source>Information</source>
+        <target state="final">ຂໍ້ມູນ</target>
+      </trans-unit>
+      <trans-unit id="administration.message-2.content" approved="yes">
+        <source>The selected email has been sent to all participants of the event.</source>
+        <target state="final">ອີເມວທີ່ເລືອກໄດ້ຖືກສົ່ງຫາຜູ້ເຂົ້າຮ່ວມທັງໝົດແລ້ວ.</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.asc" approved="yes">
+        <source>Ascending</source>
+        <target state="final">ຈາກນ້ອຍຫາໃຫຍ່</target>
+      </trans-unit>
+      <trans-unit id="administration.sortOrder.desc" approved="yes">
+        <source>Descending</source>
+        <target state="final">ຈາກໃຫຍ່ຫານ້ອຍ</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.title" approved="yes">
+        <source>Title</source>
+        <target state="final">ຫົວຂໍ້</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.startdate" approved="yes">
+        <source>Startdate</source>
+        <target state="final">ວັນທີເລີ່ມຕົ້ນ</target>
+      </trans-unit>
+      <trans-unit id="administration.orderBy.enddate" approved="yes">
+        <source>Enddate</source>
+        <target state="final">ວັນທີສິ້ນສຸດ</target>
+      </trans-unit>
+      <trans-unit id="administration.accessdenied.title" approved="yes">
+        <source>Access Denied</source>
+        <target state="final">ການເຂົ້າເຖິງຖືກປະຕິເສດ</target>
+      </trans-unit>
+      <trans-unit id="administration.accessdenied.content" approved="yes">
+        <source>Access to the given event has been denied.</source>
+        <target state="final">ການເຂົ້າເຖິງກິດຈະກຳນີ້ຖືກປະຕິເສດ.</target>
+      </trans-unit>
+      <trans-unit id="administration.pagination.records" approved="yes">
+        <source>Records</source>
+        <target state="final">ລາຍການຂໍ້ມູນ</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.current" approved="yes">
+        <source>Current folder</source>
+        <target state="final">ໂຟນເດີປັດຈຸບັນ</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level1" approved="yes">
+        <source>1 level down</source>
+        <target state="final">ລົງໄປ 1 ຊັ້ນ</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level2" approved="yes">
+        <source>2 levels down</source>
+        <target state="final">ລົງໄປ 2 ຊັ້ນ</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level3" approved="yes">
+        <source>3 levels down</source>
+        <target state="final">ລົງໄປ 3 ຊັ້ນ</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level4" approved="yes">
+        <source>4 levels down</source>
+        <target state="final">ລົງໄປ 4 ຊັ້ນ</target>
+      </trans-unit>
+      <trans-unit id="administration.recursiveLevel.level5" approved="yes">
+        <source>5 levels down</source>
+        <target state="final">ລົງໄປ 5 ຊັ້ນ</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.header" approved="yes">
+        <source>Time Restriction</source>
+        <target state="final">ການຈຳກັດເວລາ</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.error" approved="yes">
+        <source>The value '%s' can not be interpreted with strtotime()</source>
+        <target state="final">ຄ່າ '%s' ບໍ່ສາມາດແປດ້ວຍ strtotime() ໄດ້</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.info" approved="yes">
+        <source>The value '%s' corresponds to %s</source>
+        <target state="final">ຄ່າ '%s' ກົງກັບ %s</target>
+      </trans-unit>
+      <trans-unit id="evaluation.timeRestriction.format" approved="yes">
+        <source>d.m.Y H:i:s</source>
+        <target state="final">ວວ.ດດ.ປປປປ ຊຊ:ນນ:ວວ</target>
+      </trans-unit>
+      <trans-unit id="event.startdateNotBeforeEnddate.title" approved="yes">
+        <source>Invalid event configuration</source>
+        <target state="final">ການຕັ້ງຄ່າກິດຈະກຳບໍ່ຖືກຕ້ອງ</target>
+      </trans-unit>
+      <trans-unit id="event.startdateNotBeforeEnddate.message" approved="yes">
+        <source>The event enddate is before the startdate. Please correct date values, so startdate is before the enddate.</source>
+        <target state="final">ວັນທີສິ້ນສຸດມາກ່ອນວັນທີເລີ່ມຕົ້ນ. ກະລຸນາແກ້ໄຂໃຫ້ຖືກຕ້ອງ.</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.title" approved="yes">
+        <source>No organizer</source>
+        <target state="final">ບໍ່ມີຜູ້ຈັດງານ</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisator.message" approved="yes">
+        <source>The event is configured to notify the organizer, but no organizer is set. Please select an organizer or change the notification settings.</source>
+        <target state="final">ກິດຈະກຳຖືກຕັ້ງຄ່າໃຫ້ແຈ້ງເຕືອນຜູ້ຈັດງານ ແຕ່ຍັງບໍ່ໄດ້ເລືອກຜູ້ຈັດງານເທື່ອ.</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.title" approved="yes">
+        <source>Organizer has no email</source>
+        <target state="final">ຜູ້ຈັດງານບໍ່ມີອີເມວ</target>
+      </trans-unit>
+      <trans-unit id="event.noOrganisatorEmail.message" approved="yes">
+        <source>The event is configured to notify the organizer, but the organizer has no email address. Please set an email address for the organizer or change the notification settings.</source>
+        <target state="final">ຜູ້ຈັດງານທີ່ເລືອກໄວ້ບໍ່ມີທີ່ຢູ່ອີເມວ.</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.registration" approved="yes">
+        <source>Registration</source>
+        <target state="final">ການລົງທະບຽນ</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.confirmation" approved="yes">
+        <source>Confirmation</source>
+        <target state="final">ການຢືນຢັນ</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.notification" approved="yes">
+        <source>Notification</source>
+        <target state="final">ການແຈ້ງເຕືອນ</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.search" approved="yes">
+        <source>Search</source>
+        <target state="final">ຄົ້ນຫາ</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.rss" approved="yes">
+        <source>RSS feed</source>
+        <target state="final">RSS feed</target>
+      </trans-unit>
+      <trans-unit id="constants.subcategory.csv" approved="yes">
+        <source>CSV export</source>
+        <target state="final">ການສົ່ງອອກ CSV</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.enablePagination" approved="yes">
+        <source>Enable pagination</source>
+        <target state="final">ເປີດໃຊ້ການແບ່ງໜ້າ</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.itemsPerPage" approved="yes">
+        <source>Items per page</source>
+        <target state="final">ຈຳນວນລາຍການຕໍ່ໜ້າ</target>
+      </trans-unit>
+      <trans-unit id="flexforms.plugin.field.maxNumPages" approved="yes">
+        <source>Maximum number of pages</source>
+        <target state="final">ຈຳນວນໜ້າສູງສຸດ</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
