@@ -90,6 +90,7 @@
             </f:if>
 
             <f:form object="{registration}" name="registration" action="saveRegistration" arguments="{event: event}" class="registration" enctype="multipart/form-data">
+                <f:asset.script identifier="sfeventmgt-prevent-double-submit" src="EXT:sf_event_mgt/Resources/Public/JavaScript/prevent-double-submit.js" />
                 <fieldset>
 
                     <f:render partial="Registration/SpamCheck" arguments="{spamSettings: settings.registration.spamCheck, event: event}" />

@@ -139,6 +139,30 @@ will not receive a confirmation email.
 
 .. rst-class:: panel panel-default
 
+How are multiple submissions of the registration form prevented?
+================================================================
+
+If a user submits the registration form multiple times (e.g. by double-clicking the submit button),
+multiple registrations are created, but the browser only shows the response of the last request.
+This can result in the following problems:
+
+* Duplicate registrations, which occupy places of the event until they are expired or removed
+* Multiple confirmation emails sent to the user
+* An error message shown to the user (e.g. if :php:`checkUniqueEmail` is enabled), although the
+  first registration has been saved successfully
+* With autoConfirmation enabled, only the last registration is confirmed, since the confirmation
+  is done by an HTTP redirect, which the browser only follows for the last request. All other
+  registrations remain unconfirmed and expire.
+
+The default registration template includes the JavaScript
+:php:`Resources/Public/JavaScript/prevent-double-submit.js`, which prevents multiple submissions of
+the registration form (form name :html:`registration`). If you use a custom registration template, make
+sure to include the JavaScript::
+
+   <f:asset.script identifier="sfeventmgt-prevent-double-submit" src="EXT:sf_event_mgt/Resources/Public/JavaScript/prevent-double-submit.js" />
+
+.. rst-class:: panel panel-default
+
 How does the simultaneous registration process work?
 ====================================================
 
